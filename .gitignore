@@ -1,0 +1,8 @@
+*.pyc
+*.pyo
+*.o
+*.bak
+*.swp
+*.log
+
+env
