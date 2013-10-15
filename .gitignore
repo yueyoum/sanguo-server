@@ -5,4 +5,7 @@
 *.swp
 *.log
 
+local_settings.py*
+test.db
+
 env
