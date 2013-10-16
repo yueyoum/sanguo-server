@@ -20,6 +20,7 @@ class LoginTest(TestCase):
     def test_anonymous_login(self):
         req = StartGameRequest()
         req.anonymous.device_token = '1234567890'
+        req.server_id = 1
         data = req.SerializeToString()
 
         url = 'http://127.0.0.1:8000/player/login/'
@@ -46,6 +47,7 @@ class LoginTest(TestCase):
         req = StartGameRequest()
         req.regular.email = '123@456.com'
         req.regular.password = '1234567890'
+        req.server_id = 1
         data = req.SerializeToString()
 
         url = 'http://127.0.0.1:8000/player/login/'
