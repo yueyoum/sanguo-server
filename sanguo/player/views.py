@@ -1,5 +1,4 @@
-import struct
-
+# -*- coding: utf-8 -*-
 from django.http import HttpResponse
 from django.utils import timezone
 
@@ -8,10 +7,13 @@ from models import User
 from msg.account_pb2 import (
         StartGameRequest,
         StartGameResponse,
+        Server,
+        GetServerListRequest,
+        GetServerListResponse,
         )
 
+from utils import pack_msg
 
-NUM_FIELD = struct.Struct('>i')
 
 def login(request):
     if request.method != 'POST':
@@ -56,15 +58,34 @@ def login(request):
     response.ret = 0
     response.session = "test!"
 
-    data = response.SerializeToString()
-    num_of_msgs = NUM_FIELD.pack(1)
-    id_of_msg = NUM_FIELD.pack(1001)
-    len_of_msg = NUM_FIELD.pack(len(data))
+    data = pack_msg(response)
 
-    data = '%s%s%s%s' % (num_of_msgs, id_of_msg, len_of_msg, data)
-    
+    return HttpResponse(data, content_type='text/plain')
+
+
+def get_server_list(request):
+    servers = [
+            (1, "第一服务器", Server.GOOD, False),
+            (1, "第二服务器", Server.GOOD, False),
+            (1, "第三服务器", Server.BUSY, False),
+            (1, "第四服务器", Server.MAINTAIN, False),
+            (1, "第五服务器", Server.GOOD, False),
+            ]
+
+    response = GetServerListResponse()
+    top = servers[0]
+
+    response.ret = 0
+    response.top.id, response.top.name, response.top.status, response.top.have_char =\
+            top
+
+    for server in servers:
+        s = response.servers.add()
+        s.id, s.name, s.status, s.have_char = server
+
     return HttpResponse(
-            data,
+            response.SerializeToString(),
             content_type='text/plain'
             )
+
 
