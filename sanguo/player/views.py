@@ -7,9 +7,6 @@ from models import User
 from msg.account_pb2 import (
         StartGameRequest,
         StartGameResponse,
-        Server,
-        GetServerListRequest,
-        GetServerListResponse,
         )
 
 from utils import pack_msg
@@ -61,31 +58,5 @@ def login(request):
     data = pack_msg(response)
 
     return HttpResponse(data, content_type='text/plain')
-
-
-def get_server_list(request):
-    servers = [
-            (1, "第一服务器", Server.GOOD, False),
-            (1, "第二服务器", Server.GOOD, False),
-            (1, "第三服务器", Server.BUSY, False),
-            (1, "第四服务器", Server.MAINTAIN, False),
-            (1, "第五服务器", Server.GOOD, False),
-            ]
-
-    response = GetServerListResponse()
-    top = servers[0]
-
-    response.ret = 0
-    response.top.id, response.top.name, response.top.status, response.top.have_char =\
-            top
-
-    for server in servers:
-        s = response.servers.add()
-        s.id, s.name, s.status, s.have_char = server
-
-    return HttpResponse(
-            response.SerializeToString(),
-            content_type='text/plain'
-            )
 
 

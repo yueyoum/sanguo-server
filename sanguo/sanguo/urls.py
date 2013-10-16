@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^player/', include('player.urls')),
+    url(r'^world/', include('world.urls')),
 )
