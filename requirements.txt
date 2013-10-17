@@ -1,4 +1,5 @@
 django==1.5.4
+pytz==2013.7
 mysql-python==1.2.4
 protobuf==2.5.0
 pycrypto==2.6

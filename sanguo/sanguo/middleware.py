@@ -7,6 +7,9 @@ NUM_FIELD = struct.Struct('>i')
 
 class PackMessageData(object):
     def process_response(self, request, response):
+        if request.path_info.startswith('/admin/'):
+            return response
+
         if response.status_code != 200:
             return response
 

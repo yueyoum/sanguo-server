@@ -4,7 +4,9 @@
     "pk": 1,
     "fields": {
         "name": "第一服务器",
-        "max_player_count": 1000
+        "max_player_count": 1000,
+        "active": 1,
+        "create_time": "2013-10-17T00:00:00+08:00"
     }
 },
 {
@@ -12,7 +14,9 @@
     "pk": 2,
     "fields": {
         "name": "第二服务器",
-        "max_player_count": 1000
+        "max_player_count": 1000,
+        "active": 1,
+        "create_time": "2013-10-17T00:00:00+08:00"
     }
 },
 {
@@ -20,7 +24,9 @@
     "pk": 3,
     "fields": {
         "name": "第三服务器",
-        "max_player_count": 1000
+        "max_player_count": 1000,
+        "active": 1,
+        "create_time": "2013-10-17T00:00:00+08:00"
     }
 },
 {
@@ -28,7 +34,9 @@
     "pk": 4,
     "fields": {
         "name": "第四服务器",
-        "max_player_count": 1000
+        "max_player_count": 1000,
+        "active": 1,
+        "create_time": "2013-10-17T00:00:00+08:00"
     }
 },
 {
@@ -36,7 +44,9 @@
     "pk": 5,
     "fields": {
         "name": "第五服务器",
-        "max_player_count": 1000
+        "max_player_count": 1000,
+        "active": 1,
+        "create_time": "2013-10-17T00:00:00+08:00"
     }
 },
 {
@@ -44,7 +54,9 @@
     "pk": 6,
     "fields": {
         "name": "第六服务器",
-        "max_player_count": 1000
+        "max_player_count": 1000,
+        "active": 1,
+        "create_time": "2013-10-17T00:00:00+08:00"
     }
 }
 ]
