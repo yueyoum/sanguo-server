@@ -5,7 +5,6 @@ from django.utils import timezone
 from models import User
 
 from msg.account_pb2 import (
-        StartGameRequest,
         StartGameResponse,
         )
 
@@ -13,14 +12,7 @@ from utils import pack_msg
 
 
 def login(request):
-    if request.method != 'POST':
-        return HttpResponse(status=403)
-
-    data = request.body
-
-    req = StartGameRequest()
-    req.ParseFromString(data)
-
+    req = request._proto
     print req
     
     if req.anonymous.device_token:

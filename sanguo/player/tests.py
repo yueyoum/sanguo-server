@@ -11,10 +11,13 @@ FMT = struct.Struct('>i')
 
 from django.test import TestCase
 
-from msg.account_pb2 import (
+from msg import (
+        RESPONSE_NOTIFY_TYPE,
+        REQUEST_TYPE_REV,
         StartGameRequest,
         StartGameResponse,
         )
+
 
 class LoginTest(TestCase):
     def test_anonymous_login(self):
@@ -22,6 +25,9 @@ class LoginTest(TestCase):
         req.anonymous.device_token = '1234567890'
         req.server_id = 1
         data = req.SerializeToString()
+
+        id_of_msg = REQUEST_TYPE_REV[req.DESCRIPTOR.name]
+        data = FMT.pack(id_of_msg) + data
 
         url = 'http://127.0.0.1:8000/player/login/'
         req = urllib2.Request(url, data=data)
@@ -33,7 +39,7 @@ class LoginTest(TestCase):
         self.assertEqual(num_of_msgs[0], 1)
         res = res[4:]
         id_of_msg = FMT.unpack(res[:4])
-        # self.assertEqual(id_of_msg[0], 1)
+        self.assertEqual(id_of_msg[0], RESPONSE_NOTIFY_TYPE["StartGameResponse"])
         res = res[4:]
         len_of_msg = FMT.unpack(res[:4])
         res = res[4:]
@@ -43,12 +49,16 @@ class LoginTest(TestCase):
         data.ParseFromString(res)
         self.assertEqual(data.ret, 0)
 
+
     def test_regular_login(self):
         req = StartGameRequest()
         req.regular.email = '123@456.com'
         req.regular.password = '1234567890'
         req.server_id = 1
         data = req.SerializeToString()
+
+        id_of_msg = REQUEST_TYPE_REV[req.DESCRIPTOR.name]
+        data = FMT.pack(id_of_msg) + data
 
         url = 'http://127.0.0.1:8000/player/login/'
         req = urllib2.Request(url, data=data)
@@ -60,7 +70,7 @@ class LoginTest(TestCase):
         self.assertEqual(num_of_msgs[0], 1)
         res = res[4:]
         id_of_msg = FMT.unpack(res[:4])
-        # self.assertEqual(id_of_msg[0], 1)
+        self.assertEqual(id_of_msg[0], RESPONSE_NOTIFY_TYPE["StartGameResponse"])
         res = res[4:]
         len_of_msg = FMT.unpack(res[:4])
         res = res[4:]

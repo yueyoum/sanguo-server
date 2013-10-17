@@ -11,7 +11,9 @@ FMT = struct.Struct('>i')
 
 from django.test import TestCase
 
-from msg.account_pb2 import (
+from msg import (
+        RESPONSE_NOTIFY_TYPE,
+        REQUEST_TYPE_REV,
         GetServerListRequest,
         GetServerListResponse,
         )
@@ -23,9 +25,12 @@ class ServerListTest(TestCase):
     def test_get_server_list(self):
         req = GetServerListRequest()
         req.anonymous.device_token = '111111'
+
+        id_of_msg = REQUEST_TYPE_REV[req.DESCRIPTOR.name]
+        data = FMT.pack(id_of_msg) + req.SerializeToString()
         
         url = 'http://127.0.0.1:8000/world/server-list/'
-        req = urllib2.Request(url, data=req.SerializeToString())
+        req = urllib2.Request(url, data=data)
         response = urllib2.urlopen(req)
 
         res = response.read()
@@ -33,8 +38,8 @@ class ServerListTest(TestCase):
         num_of_msgs = FMT.unpack(res[:4])
         self.assertEqual(num_of_msgs[0], 1)
         res = res[4:]
-        # id_of_msg = FMT.unpack(res[:4])
-        # self.assertEqual(id_of_msg[0], 1)
+        id_of_msg = FMT.unpack(res[:4])
+        self.assertEqual(id_of_msg[0], RESPONSE_NOTIFY_TYPE["GetServerListResponse"])
         res = res[4:]
         len_of_msg = FMT.unpack(res[:4])
         res = res[4:]

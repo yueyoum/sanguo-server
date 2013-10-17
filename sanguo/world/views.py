@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from models import Server
 
 from msg.account_pb2 import (
-        GetServerListRequest,
         GetServerListResponse,
         )
 from msg.world_pb2 import Server as ServerMsg
@@ -13,8 +12,8 @@ from utils import pack_msg
 
 
 def get_server_list(request):
-    if request.method != 'POST':
-        return HttpResponse(status=403)
+    req = request._proto
+    print req
 
     servers = Server.objects.all()
     response = GetServerListResponse()
