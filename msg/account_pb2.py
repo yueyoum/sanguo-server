@@ -14,7 +14,7 @@ import world_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='account.proto',
   package='Sanguo.protocol.account',
-  serialized_pb='\n\raccount.proto\x12\x17Sanguo.protocol.account\x1a\x0bworld.proto\"&\n\x0e\x41nonymousLogin\x12\x14\n\x0c\x64\x65vice_token\x18\x01 \x02(\t\"/\n\x0cRegularLogin\x12\r\n\x05\x65mail\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\"\x99\x01\n\x10StartGameRequest\x12:\n\tanonymous\x18\x01 \x01(\x0b\x32\'.Sanguo.protocol.account.AnonymousLogin\x12\x36\n\x07regular\x18\x02 \x01(\x0b\x32%.Sanguo.protocol.account.RegularLogin\x12\x11\n\tserver_id\x18\x03 \x02(\x05\"1\n\x11StartGameResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x01(\t\"\x8a\x01\n\x14GetServerListRequest\x12:\n\tanonymous\x18\x01 \x01(\x0b\x32\'.Sanguo.protocol.account.AnonymousLogin\x12\x36\n\x07regular\x18\x02 \x01(\x0b\x32%.Sanguo.protocol.account.RegularLogin\"\x80\x01\n\x15GetServerListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12*\n\x03top\x18\x02 \x01(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12.\n\x07servers\x18\x03 \x03(\x0b\x32\x1d.Sanguo.protocol.world.Server\"K\n\x12\x42indAccountRequest\x12\r\n\x05\x65mail\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\x12\x14\n\x0c\x64\x65vice_token\x18\x03 \x02(\t')
+  serialized_pb='\n\raccount.proto\x12\x17Sanguo.protocol.account\x1a\x0bworld.proto\"&\n\x0e\x41nonymousLogin\x12\x14\n\x0c\x64\x65vice_token\x18\x01 \x02(\t\"/\n\x0cRegularLogin\x12\r\n\x05\x65mail\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\"\x99\x01\n\x10StartGameRequest\x12:\n\tanonymous\x18\x01 \x01(\x0b\x32\'.Sanguo.protocol.account.AnonymousLogin\x12\x36\n\x07regular\x18\x02 \x01(\x0b\x32%.Sanguo.protocol.account.RegularLogin\x12\x11\n\tserver_id\x18\x03 \x02(\x05\"1\n\x11StartGameResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x01(\t\"\x8a\x01\n\x14GetServerListRequest\x12:\n\tanonymous\x18\x01 \x01(\x0b\x32\'.Sanguo.protocol.account.AnonymousLogin\x12\x36\n\x07regular\x18\x02 \x01(\x0b\x32%.Sanguo.protocol.account.RegularLogin\"\x80\x01\n\x15GetServerListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12*\n\x03top\x18\x02 \x01(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12.\n\x07servers\x18\x03 \x03(\x0b\x32\x1d.Sanguo.protocol.world.Server\"H\n\x0fRegisterRequest\x12\r\n\x05\x65mail\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\x12\x14\n\x0c\x64\x65vice_token\x18\x03 \x02(\t\"\x9c\x01\n\x10RegisterResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x10\n\x08password\x18\x03 \x01(\t\x12*\n\x03top\x18\x04 \x01(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12.\n\x07servers\x18\x05 \x03(\x0b\x32\x1d.Sanguo.protocol.world.Server')
 
 
 
@@ -236,29 +236,29 @@ _GETSERVERLISTRESPONSE = _descriptor.Descriptor(
 )
 
 
-_BINDACCOUNTREQUEST = _descriptor.Descriptor(
-  name='BindAccountRequest',
-  full_name='Sanguo.protocol.account.BindAccountRequest',
+_REGISTERREQUEST = _descriptor.Descriptor(
+  name='RegisterRequest',
+  full_name='Sanguo.protocol.account.RegisterRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='email', full_name='Sanguo.protocol.account.BindAccountRequest.email', index=0,
+      name='email', full_name='Sanguo.protocol.account.RegisterRequest.email', index=0,
       number=1, type=9, cpp_type=9, label=2,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='password', full_name='Sanguo.protocol.account.BindAccountRequest.password', index=1,
+      name='password', full_name='Sanguo.protocol.account.RegisterRequest.password', index=1,
       number=2, type=9, cpp_type=9, label=2,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='device_token', full_name='Sanguo.protocol.account.BindAccountRequest.device_token', index=2,
+      name='device_token', full_name='Sanguo.protocol.account.RegisterRequest.device_token', index=2,
       number=3, type=9, cpp_type=9, label=2,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
@@ -274,7 +274,63 @@ _BINDACCOUNTREQUEST = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=623,
-  serialized_end=698,
+  serialized_end=695,
+)
+
+
+_REGISTERRESPONSE = _descriptor.Descriptor(
+  name='RegisterResponse',
+  full_name='Sanguo.protocol.account.RegisterResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.account.RegisterResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='email', full_name='Sanguo.protocol.account.RegisterResponse.email', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='password', full_name='Sanguo.protocol.account.RegisterResponse.password', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='top', full_name='Sanguo.protocol.account.RegisterResponse.top', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='servers', full_name='Sanguo.protocol.account.RegisterResponse.servers', index=4,
+      number=5, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=698,
+  serialized_end=854,
 )
 
 _STARTGAMEREQUEST.fields_by_name['anonymous'].message_type = _ANONYMOUSLOGIN
@@ -283,13 +339,16 @@ _GETSERVERLISTREQUEST.fields_by_name['anonymous'].message_type = _ANONYMOUSLOGIN
 _GETSERVERLISTREQUEST.fields_by_name['regular'].message_type = _REGULARLOGIN
 _GETSERVERLISTRESPONSE.fields_by_name['top'].message_type = world_pb2._SERVER
 _GETSERVERLISTRESPONSE.fields_by_name['servers'].message_type = world_pb2._SERVER
+_REGISTERRESPONSE.fields_by_name['top'].message_type = world_pb2._SERVER
+_REGISTERRESPONSE.fields_by_name['servers'].message_type = world_pb2._SERVER
 DESCRIPTOR.message_types_by_name['AnonymousLogin'] = _ANONYMOUSLOGIN
 DESCRIPTOR.message_types_by_name['RegularLogin'] = _REGULARLOGIN
 DESCRIPTOR.message_types_by_name['StartGameRequest'] = _STARTGAMEREQUEST
 DESCRIPTOR.message_types_by_name['StartGameResponse'] = _STARTGAMERESPONSE
 DESCRIPTOR.message_types_by_name['GetServerListRequest'] = _GETSERVERLISTREQUEST
 DESCRIPTOR.message_types_by_name['GetServerListResponse'] = _GETSERVERLISTRESPONSE
-DESCRIPTOR.message_types_by_name['BindAccountRequest'] = _BINDACCOUNTREQUEST
+DESCRIPTOR.message_types_by_name['RegisterRequest'] = _REGISTERREQUEST
+DESCRIPTOR.message_types_by_name['RegisterResponse'] = _REGISTERRESPONSE
 
 class AnonymousLogin(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
@@ -327,11 +386,17 @@ class GetServerListResponse(_message.Message):
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.account.GetServerListResponse)
 
-class BindAccountRequest(_message.Message):
+class RegisterRequest(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _BINDACCOUNTREQUEST
+  DESCRIPTOR = _REGISTERREQUEST
 
-  # @@protoc_insertion_point(class_scope:Sanguo.protocol.account.BindAccountRequest)
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.account.RegisterRequest)
+
+class RegisterResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _REGISTERRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.account.RegisterResponse)
 
 
 # @@protoc_insertion_point(module_scope)

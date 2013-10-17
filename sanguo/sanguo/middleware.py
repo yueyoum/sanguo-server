@@ -14,15 +14,20 @@ class UnpackAndVerifyData(object):
             return None
 
         data = request.body
+        print repr(data)
+        print len(data)
         msg_id = NUM_FIELD.unpack(data[:4])
         msg_id = msg_id[0]
 
         msg_name, allowd_method = REQUEST_TYPE[msg_id]
+        print msg_id
+        print msg_name
         if request.method != allowd_method:
             return HttpResponse(status=403)
 
         proto = getattr(msg, msg_name)
         p = proto()
+        print p.DESCRIPTOR.name
         p.ParseFromString(data[4:])
         
         game_session = getattr(p, 'session', None)

@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse
 
-from models import Server
+# from models import Server
 
 from msg.account_pb2 import (
         GetServerListResponse,
         )
-from msg.world_pb2 import Server as ServerMsg
 
+from core.world import server_list
 from utils import pack_msg
 
 
@@ -15,18 +15,18 @@ def get_server_list(request):
     req = request._proto
     print req
 
-    servers = Server.objects.all()
+    top, all_servers = server_list()
+
     response = GetServerListResponse()
-    top = servers[0]
 
     response.ret = 0
     response.top.id, response.top.name, response.top.status, response.top.have_char =\
-            top.id, top.name, ServerMsg.GOOD, False
+            top.id, top.name, top.status, top.have_char
 
-    for server in servers:
+    for server in all_servers:
         s = response.servers.add()
         s.id, s.name, s.status, s.have_char = \
-                server.id, server.name, ServerMsg.GOOD, False
+                server.id, server.name, server.status, server.have_char
 
     data = pack_msg(response)
 

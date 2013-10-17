@@ -24,7 +24,9 @@ class ServerListTest(TestCase):
 
     def test_get_server_list(self):
         req = GetServerListRequest()
-        req.anonymous.device_token = '111111'
+        # req.anonymous.device_token = '111111'
+        req.regular.email = ""
+        req.regular.password = ""
 
         id_of_msg = REQUEST_TYPE_REV[req.DESCRIPTOR.name]
         data = FMT.pack(id_of_msg) + req.SerializeToString()
