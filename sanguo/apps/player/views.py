@@ -16,12 +16,25 @@ def register(request):
     req = request._proto
     print req
 
+    if not req.email or not req.password or not req.device_token:
+        raise Exception("bag message")
+
     ret = 0
     try:
         user = User.objects.get(device_token=req.device_token)
         if user.email:
-            print "Already Bind email"
-            ret = 2
+            if user.email == req.email:
+                print "Error: Already bind"
+                ret = 1
+            else:
+                print "Already Bind email, Create New User"
+                user = User.objects.create(
+                        email = req.email,
+                        passwd = req.password,
+                        # device_token = req.device_token,
+                        last_login = timezone.now(),
+                        game_session = ""
+                        )
         else:
             print "Bind"
             user.email = req.email
