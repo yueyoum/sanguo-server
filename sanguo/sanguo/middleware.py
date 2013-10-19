@@ -5,6 +5,9 @@ from django.http import HttpResponse
 import msg
 from msg import REQUEST_TYPE
 
+from core.exception import SanguoViewException
+from utils import pack_msg
+
 NUM_FIELD = struct.Struct('>i')
 
 
@@ -14,20 +17,15 @@ class UnpackAndVerifyData(object):
             return None
 
         data = request.body
-        print repr(data)
-        print len(data)
         msg_id = NUM_FIELD.unpack(data[:4])
         msg_id = msg_id[0]
 
         msg_name, allowd_method = REQUEST_TYPE[msg_id]
-        print msg_id
-        print msg_name
         if request.method != allowd_method:
             return HttpResponse(status=403)
 
         proto = getattr(msg, msg_name)
         p = proto()
-        print p.DESCRIPTOR.name
         p.ParseFromString(data[4:])
         
         game_session = getattr(p, 'session', None)
@@ -58,5 +56,18 @@ class PackMessageData(object):
                 )
 
         return HttpResponse(data, content_type='text/plain')
+
+
+class ViewExceptionHandler(object):
+    def process_exception(self, request, exception):
+        if isinstance(exception, SanguoViewException):
+            Msg = getattr(msg, exception.response_msg_name)
+            m = Msg()
+            m.ret = exception.error_id
+
+            data = pack_msg(m)
+            return HttpResponse(data, content_type='text/plain')
+        
+        raise exception
 
 

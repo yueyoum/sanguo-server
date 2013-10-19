@@ -4,13 +4,8 @@ when you run "manage.py test".
 
 Replace this with more appropriate tests for your application.
 """
-import urllib2
-import struct
 
-FMT = struct.Struct('>i')
-
-from django.test import TestCase
-from django_nose import FastFixtureTestCase
+from django.test import TestCase, TransactionTestCase
 
 from msg import (
         RESPONSE_NOTIFY_TYPE,
@@ -20,7 +15,7 @@ from msg import (
 
 from utils import tests
 
-class ServerListTest(FastFixtureTestCase):
+class ServerListTest(TransactionTestCase):
     fixtures = ['server_list.json',]
 
     def test_get_server_list(self):

@@ -5,8 +5,7 @@ when you run "manage.py test".
 Replace this with more appropriate tests for your application.
 """
 
-from django.test import TestCase
-from django_nose import FastFixtureTestCase
+from django.test import TestCase, TransactionTestCase
 
 from msg import (
         RESPONSE_NOTIFY_TYPE,
@@ -16,16 +15,28 @@ from msg import (
         RegisterResponse,
         )
 from utils import tests
+from models import User
 
 
-class RegisterTest(FastFixtureTestCase):
+class RegisterTest(TransactionTestCase):
     fixtures = ['server_list.json']
+    
+    def setUp(self):
+        User.objects.create(
+                email = '123@456.com',
+                passwd = '123456'
+                )
+        User.objects.create(
+                email = 'aaa@bbb.ccc',
+                passwd = '123456',
+                device_token = '123456'
+                )
 
-    def test_register(self):
+    def _register(self, email, password, device_token, ret):
         req = RegisterRequest()
-        req.email = 'aaa@bbb.ccc'
-        req.password = '1111111'
-        req.device_token = '1234567890'
+        req.email = email
+        req.password = password
+        req.device_token = device_token
         
         data =  tests.pack_data(req)
         res = tests.make_request('/player/register/', data)
@@ -38,10 +49,29 @@ class RegisterTest(FastFixtureTestCase):
 
         data = RegisterResponse()
         data.ParseFromString(msg)
-        # self.assertEqual(data.ret, 0)
+        self.assertEqual(data.ret, ret)
+
+    def test_normal_register(self):
+        self._register("000@00.000", "123456", "abcd", 0)
+
+    def test_register_with_already_registed(self):
+        self._register("aaa@bbb.ccc", "123456", "123456", 100)
+
+    def test_register_with_already_bind(self):
+        self._register("aaa@aaa.aaa", "123456", "123456", 0)
+
+    def test_register_with_email_has_been_taken(self):
+        self._register("123@456.com", "123456", "0987654321", 101)
 
 
-class LoginTest(TestCase):
+
+class LoginTest(TransactionTestCase):
+    def setUp(self):
+        User.objects.create(
+                email = '123@456.com',
+                passwd = '123456'
+                )
+
     def test_anonymous_login(self):
         req = StartGameRequest()
         req.anonymous.device_token = '1234567890'
@@ -60,11 +90,10 @@ class LoginTest(TestCase):
         data.ParseFromString(msg)
         self.assertEqual(data.ret, 0)
 
-
-    def test_regular_login(self):
+    def _regular_login(self, email, password, ret):
         req = StartGameRequest()
-        req.regular.email = '123@456.com'
-        req.regular.password = '1234567890'
+        req.regular.email = email
+        req.regular.password = password
         req.server_id = 1
 
         data = tests.pack_data(req)
@@ -78,4 +107,15 @@ class LoginTest(TestCase):
 
         data = StartGameResponse()
         data.ParseFromString(msg)
-        self.assertEqual(data.ret, 0)
+        self.assertEqual(data.ret, ret)
+
+
+    def test_regular_login_with_non_exists(self):
+        self._regular_login('aaa@bbb.ccc', '123456', 103)
+
+    def test_regular_login_with_exists(self):
+        self._regular_login('123@456.com', '123456', 0)
+
+    def test_regular_login_with_wrong_password(self):
+        self._regular_login('123@456.com', 'abcd', 102)
+
