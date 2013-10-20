@@ -3,7 +3,12 @@
 from Crypto.Cipher import AES
 from Crypto import Random
 
+import time
+
 class BadEncryptedText(Exception):
+    pass
+
+class ExpiredText(Exception):
     pass
 
 BLOCK_SIZE = 16
@@ -39,8 +44,17 @@ def decrypt(text, key=KEY, prefix=PREFIX):
     p, real_text = head.split('|', 1)
     return real_text
 
-if __name__ == '__main__':
-    text = 'abcd:893s'
-    result = encrypt(text)
-    assert decrypt(result) == text
+
+def encrypt_with_expire(text, key=KEY, prefix=PREFIX):
+    expire = int(time.time())
+    return encrypt('%s|%d' % (text, expire), key=key, prefix=prefix)
+
+def decrypt_with_expire(text, expire_in, key=KEY, prefix=PREFIX):
+    result = decrypt(text, key=key, prefix=prefix)
+    real_text, start_at = result.rsplit('|', 1)
+    if int(time.time()) > int(start_at) + expire_in:
+        raise ExpiredText()
+
+    return real_text
+
 
