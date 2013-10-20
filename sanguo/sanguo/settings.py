@@ -166,10 +166,6 @@ LOGGING = {
 
 DATETIME_FORMAT = "Y-m-d H:i:s"
 
-SANGUO_CRYPTO_KEY = 'aie89&^3'
-SANGUO_CRYPTO_PREFIX = 'san.guo'
-
-
 try:
     from local_settings import *
 except:

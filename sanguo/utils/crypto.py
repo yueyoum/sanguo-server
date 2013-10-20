@@ -1,30 +1,34 @@
-from Crypto.Cipher import DES
+# about Crypto module: https://www.dlitz.net/software/pycrypto/doc/
 
-from django.conf import settings
+from Crypto.Cipher import AES
+from Crypto import Random
 
 class BadEncryptedText(Exception):
     pass
 
+BLOCK_SIZE = 16
+KEY = Random.get_random_bytes(BLOCK_SIZE)
+PREFIX = Random.get_random_bytes(4)
 
 
-def encrypt(text, key=settings.SANGUO_CRYPTO_KEY, prefix=settings.SANGUO_CRYPTO_PREFIX):
+def encrypt(text, key=KEY, prefix=PREFIX):
     prefix = prefix.replace('|', '_')
     text = '%s|%s|' % (prefix, text) 
     length = len(text)
-    a, b = divmod(length, 8)
-    rest = (a + 1) * 8 - length
+    a, b = divmod(length, BLOCK_SIZE)
+    rest = (a + 1) * BLOCK_SIZE - length
 
     text = '%s%s' % (text, rest * ' ')
 
-    obj = DES.new(key, DES.MODE_ECB)
+    obj = AES.new(key, AES.MODE_ECB)
     return obj.encrypt(text)
 
 
-def decrypt(text, key=settings.SANGUO_CRYPTO_KEY, prefix=settings.SANGUO_CRYPTO_PREFIX):
-    if len(text) % 8 != 0:
+def decrypt(text, key=KEY, prefix=PREFIX):
+    if len(text) % BLOCK_SIZE != 0:
         raise BadEncryptedText()
 
-    obj = DES.new(key, DES.MODE_ECB)
+    obj = AES.new(key, AES.MODE_ECB)
     result = obj.decrypt(text)
 
     prefix = prefix.replace('|', '_')
@@ -34,4 +38,9 @@ def decrypt(text, key=settings.SANGUO_CRYPTO_KEY, prefix=settings.SANGUO_CRYPTO_
     head, tail = result.rsplit('|', 1)
     p, real_text = head.split('|', 1)
     return real_text
+
+if __name__ == '__main__':
+    text = 'abcd:893s'
+    result = encrypt(text)
+    assert decrypt(result) == text
 
