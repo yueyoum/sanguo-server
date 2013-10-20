@@ -13,7 +13,7 @@ from msg import (
         GetServerListResponse,
         )
 
-from utils import tests
+from utils import app_test_helper as tests
 
 class ServerListTest(TransactionTestCase):
     fixtures = ['server_list.json',]

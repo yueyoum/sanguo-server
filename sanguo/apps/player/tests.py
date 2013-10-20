@@ -14,7 +14,7 @@ from msg import (
         RegisterRequest,
         RegisterResponse,
         )
-from utils import tests
+from utils import app_test_helper as tests
 from models import User
 
 
