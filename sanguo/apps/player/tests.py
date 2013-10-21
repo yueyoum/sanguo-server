@@ -61,7 +61,7 @@ class RegisterTest(TransactionTestCase):
         self._register("aaa@aaa.aaa", "123456", "123456", 0)
 
     def test_register_with_email_has_been_taken(self):
-        self._register("123@456.com", "123456", "0987654321", 101)
+        self._register("123@456.com", "123456", "0987654321", 100)
 
 
 

@@ -37,19 +37,18 @@ def register(request):
     if not req.email or not req.password or not req.device_token:
         return HttpResponse(status=403)
 
+    if User.objects.filter(email=req.email).exists():
+        raise SanguoViewException("RegisterResponse", 100)
+
     try:
         user = User.objects.get(device_token=req.device_token)
         if user.email:
-            if user.email == req.email:
-                print "Error: Already bind"
-                raise SanguoViewException("RegisterResponse", 100)
-            else:
-                print "Already Bind email, Create New User"
-                user = create_new_user(
-                        email = req.email,
-                        password = req.password,
-                        device_token = req.device_token
-                        )
+            print "Already Bind email, Create New User"
+            user = create_new_user(
+                    email = req.email,
+                    password = req.password,
+                    device_token = req.device_token
+                    )
         else:
             print "Bind"
             user.email = req.email
@@ -57,14 +56,11 @@ def register(request):
             user.save()
     except User.DoesNotExist:
         print "New User"
-        if User.objects.filter(email=req.email).exists():
-            raise SanguoViewException("RegisterResponse", 101)
-        else:
-            user = create_new_user(
-                    email = req.email,
-                    password = req.password,
-                    device_token = req.device_token
-                    )
+        user = create_new_user(
+                email = req.email,
+                password = req.password,
+                device_token = req.device_token
+                )
 
     response = RegisterResponse()
     response.ret = 0
@@ -79,7 +75,6 @@ def register(request):
 
     data = pack_msg(response)
     return HttpResponse(data, content_type='text/plain')
-
 
 
 
