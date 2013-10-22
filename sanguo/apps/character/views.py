@@ -10,7 +10,9 @@ def create_character(request):
     req = request._proto
     print req
 
-    # TODO check name lenght
+    if len(req.name) > 7:
+        raise SanguoViewException(202, req.session)
+
     session = req.session
     account_id, server_id = request._decrypted_session.split(':')
     account_id, server_id = int(account_id), int(server_id)
@@ -18,7 +20,7 @@ def create_character(request):
     if Character.objects.filter(account_id=account_id, server_id=server_id).exists():
         raise SanguoViewException(200, session)
 
-    if Character.objects.filter(name=req.name).exists():
+    if Character.objects.filter( server_id=server_id,name=req.name).exists():
         raise SanguoViewException(201, session)
 
 

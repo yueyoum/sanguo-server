@@ -46,6 +46,7 @@ class CreateCharacterTest(TransactionTestCase):
             self.assertEqual(data.ret, ret)
             self.assertEqual(data.session, session)
         else:
+            self.assertEqual(id_of_msg, RESPONSE_NOTIFY_TYPE["CharacterNotify"])
             data = CharacterNotify()
             data.ParseFromString(msg)
             self.assertEqual(data.session, session)
@@ -57,5 +58,8 @@ class CreateCharacterTest(TransactionTestCase):
         self._create(1, 1, "123", 200)
 
     def test_name_has_been_taken(self):
-        self._create(1, 2, "abcd", 201)
+        self._create(2, 1, "abcd", 201)
+
+    def test_invalid_name_length(self):
+        self._create(2, 2, "12345678", 202)
 

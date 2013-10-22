@@ -33,7 +33,6 @@ class UnpackAndVerifyData(object):
         p.ParseFromString(data[4:])
         
         game_session = p.session
-        print "game_session =", game_session
         decrypted_session = ""
         if msg_id not in EMPTY_SESSION_MSG_TYPE:
             if not game_session:
@@ -58,11 +57,12 @@ class PackMessageData(object):
         if request.path.startswith('/admin/'):
             return response
 
-        # TODO get other messages
         key = request._decrypted_session
         if key:
-            other_msgs = redis_client.lrange(key, 0, -1)
-            redis_client.delete(key)
+            pipeline = redis_client.pipeline()
+            pipeline.lrange(key, 0, -1)
+            pipeline.delete(key)
+            other_msgs, _ = pipeline.execute()
         else:
             other_msgs = []
 
