@@ -1,10 +1,12 @@
 # about Crypto module: https://www.dlitz.net/software/pycrypto/doc/
 from base64 import b64encode, b64decode
+import time
 
 from Crypto.Cipher import AES
 from Crypto import Random
 
-import time
+from django.conf import settings
+
 
 class BadEncryptedText(Exception):
     pass
@@ -13,8 +15,8 @@ class ExpiredText(Exception):
     pass
 
 BLOCK_SIZE = 16
-KEY = Random.get_random_bytes(BLOCK_SIZE)
-PREFIX = Random.get_random_bytes(4)
+KEY = settings.CRYPTO_KEY or Random.get_random_bytes(BLOCK_SIZE)
+PREFIX = settings.CRYPTO_PREFIX or Random.get_random_bytes(4)
 
 
 def encrypt(text, key=KEY, prefix=PREFIX):
@@ -32,7 +34,11 @@ def encrypt(text, key=KEY, prefix=PREFIX):
 
 
 def decrypt(text, key=KEY, prefix=PREFIX):
-    text = b64decode(text)
+    try:
+        text = b64decode(text)
+    except TypeError:
+        raise BadEncryptedText()
+
     if len(text) % BLOCK_SIZE != 0:
         raise BadEncryptedText()
 

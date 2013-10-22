@@ -1,4 +1,6 @@
 # Django settings for sanguo project.
+import sys
+TESTING = sys.argv[1] == 'test'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -130,6 +132,7 @@ INSTALLED_APPS = (
     'django_nose',
     'apps.player',
     'apps.world',
+    'apps.character',
 )
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
@@ -165,6 +168,17 @@ LOGGING = {
 }
 
 DATETIME_FORMAT = "Y-m-d H:i:s"
+
+REDIS_HOST = "127.0.0.1"
+REDIS_PORT = 6380
+REDIS_DB = 0
+
+if TESTING:
+    CRYPTO_KEY = '1234567890abcdef'
+    CRYPTO_PREFIX= 'ok'
+else:
+    CRYPTO_KEY = None
+    CRYPTO_PREFIX = None
 
 try:
     from local_settings import *

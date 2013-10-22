@@ -17,4 +17,5 @@ urlpatterns = patterns('',
 
     url(r'^player/', include('apps.player.urls')),
     url(r'^world/', include('apps.world.urls')),
+    url(r'^char/', include('apps.character.urls')),
 )

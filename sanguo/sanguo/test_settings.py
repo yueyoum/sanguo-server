@@ -1,5 +1,9 @@
 from settings import *
 
+
+CRYPTO_KEY = '1234567890abcdef'
+CRYPTO_PREFIX= 'ok'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

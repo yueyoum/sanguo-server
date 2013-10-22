@@ -6,9 +6,12 @@ import msg
 from msg import REQUEST_TYPE
 
 from core.exception import SanguoViewException
+from core import redis_client
+from utils import crypto
 from utils import pack_msg
 
 NUM_FIELD = struct.Struct('>i')
+EMPTY_SESSION_MSG_TYPE = set([100, 102, 105])
 
 
 class UnpackAndVerifyData(object):
@@ -16,44 +19,66 @@ class UnpackAndVerifyData(object):
         if request.path.startswith('/admin/'):
             return None
 
+        if request.method != "POST":
+            return HttpResponse(status=403)
+
         data = request.body
         msg_id = NUM_FIELD.unpack(data[:4])
         msg_id = msg_id[0]
 
         msg_name, allowd_method = REQUEST_TYPE[msg_id]
-        if request.method != allowd_method:
-            return HttpResponse(status=403)
 
         proto = getattr(msg, msg_name)
         p = proto()
         p.ParseFromString(data[4:])
         
-        game_session = getattr(p, 'session', None)
-        if game_session:
-            # TODO
-            pass
+        game_session = p.session
+        print "game_session =", game_session
+        decrypted_session = ""
+        if msg_id not in EMPTY_SESSION_MSG_TYPE:
+            if not game_session:
+                print "NO SESSION"
+                return HttpResponse(status=403)
+            try:
+                decrypted_session = crypto.decrypt(game_session)
+            except crypto.BadEncryptedText:
+                print "BAD SESSION"
+                return HttpResponse(status=403)
 
         request._proto = p
+        request._decrypted_session = decrypted_session
 
 
 
 class PackMessageData(object):
     def process_response(self, request, response):
-        if request.path.startswith('/admin/'):
-            return response
-
         if response.status_code != 200:
             return response
 
-        # TODO get other messages
-        other_msgs = []
-        num_of_msgs = len(other_msgs) + 1
+        if request.path.startswith('/admin/'):
+            return response
 
-        data = '%s%s%s' % (
-                NUM_FIELD.pack(num_of_msgs),
-                response.content,
-                ''.join(other_msgs)
-                )
+        # TODO get other messages
+        key = request._decrypted_session
+        if key:
+            other_msgs = redis_client.lrange(key, 0, -1)
+            redis_client.delete(key)
+        else:
+            other_msgs = []
+
+        if not response.content:
+            num_of_msgs = len(other_msgs)
+            data = '%s%s' % (
+                    NUM_FIELD.pack(num_of_msgs),
+                    ''.join(other_msgs)
+                    )
+        else:
+            num_of_msgs = len(other_msgs) + 1
+            data = '%s%s%s' % (
+                    NUM_FIELD.pack(num_of_msgs),
+                    response.content,
+                    ''.join(other_msgs)
+                    )
 
         return HttpResponse(data, content_type='text/plain')
 
@@ -65,7 +90,7 @@ class ViewExceptionHandler(object):
             m = Msg()
             m.ret = exception.error_id
 
-            data = pack_msg(m)
+            data = pack_msg(m, exception.session)
             return HttpResponse(data, content_type='text/plain')
         
         raise exception

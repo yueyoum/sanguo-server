@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.utils import timezone
 
 from models import User
+from apps.character.models import Character
+from utils import crypto
 
 from msg.account_pb2 import (
         StartGameResponse,
@@ -38,7 +40,7 @@ def register(request):
         return HttpResponse(status=403)
 
     if User.objects.filter(email=req.email).exists():
-        raise SanguoViewException("RegisterResponse", 100)
+        raise SanguoViewException(100, req.session, "RegisterResponse")
 
     try:
         user = User.objects.get(device_token=req.device_token)
@@ -82,29 +84,43 @@ def login(request):
     req = request._proto
     print req
     
+    need_create_char = None
     if req.anonymous.device_token:
         try:
             user = User.objects.get(device_token=req.anonymous.device_token)
         except User.DoesNotExist:
             user = create_new_user(device_token=req.anonymous.device_token)
+            need_create_char = True
     else:
         if not req.regular.email or not req.regular.password:
             return HttpResponse(status=403)
         try:
             user = User.objects.get(email = req.regular.email)
             if user.passwd != req.regular.password:
-                raise SanguoViewException("StartGameResponse", 102)
+                raise SanguoViewException(102, req.session, "StartGameResponse")
         except User.DoesNotExist:
-            raise SanguoViewException("StartGameResponse", 103)
+            raise SanguoViewException(103, req.session, "StartGameResponse")
 
     user.last_login = timezone.now()
     user.save()
 
+    if need_create_char is None:
+        need_create_char = Character.objects.filter(
+                account_id=user.id,
+                server_id = req.server_id
+                ).exists()
+
+    if not need_create_char:
+        # TODO send notify
+        pass
+
+    session = crypto.encrypt("%d:%d" % (user.id, req.server_id))
+
     response = StartGameResponse()
     response.ret = 0
-    response.session = "test!"
+    response.need_create_new_char = need_create_char
 
-    data = pack_msg(response)
+    data = pack_msg(response, session)
     return HttpResponse(data, content_type='text/plain')
 
 
