@@ -34,6 +34,7 @@ class RegisterTest(TransactionTestCase):
 
     def _register(self, email, password, device_token, ret):
         req = RegisterRequest()
+        req.session = ""
         req.email = email
         req.password = password
         req.device_token = device_token
@@ -74,6 +75,7 @@ class LoginTest(TransactionTestCase):
 
     def test_anonymous_login(self):
         req = StartGameRequest()
+        req.session = ""
         req.anonymous.device_token = '1234567890'
         req.server_id = 1
 
@@ -92,6 +94,7 @@ class LoginTest(TransactionTestCase):
 
     def _regular_login(self, email, password, ret):
         req = StartGameRequest()
+        req.session = ""
         req.regular.email = email
         req.regular.password = password
         req.server_id = 1

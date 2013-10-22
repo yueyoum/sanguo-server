@@ -20,6 +20,7 @@ class ServerListTest(TransactionTestCase):
 
     def test_get_server_list(self):
         req = GetServerListRequest()
+        req.session = ""
         req.anonymous.device_token = '111111'
 
         data = tests.pack_data(req)
