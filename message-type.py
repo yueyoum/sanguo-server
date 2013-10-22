@@ -38,7 +38,8 @@ def set_response_notify_type(xml_src, des):
 
 
 def set_request_type(xml_src, des):
-    PATTERN = re.compile('\<protocol\s+name="([a-zA-Z]+Request)"\s+type="(\d+)".+?method="((?:0|1))".+\>')
+    # PATTERN = re.compile('\<protocol\s+name="([a-zA-Z]+Request)"\s+type="(\d+)".+?method="((?:0|1))".+\>')
+    PATTERN = re.compile('\<protocol\s+name="([a-zA-Z]+Request)"\s+type="(\d+)".+\>')
 
     msg_type = []
     msg_type.append("REQUEST_TYPE = {\n")
@@ -51,10 +52,9 @@ def set_request_type(xml_src, des):
         if not x:
             continue
 
-        _msg, _type, _method = x.groups()
-        _method = "POST" if _method == "1" else "GET"
+        _msg, _type  = x.groups()
         msg_type.append(
-                '    {0}: ["{1}", "{2}"],\n'.format(_type, _msg, _method)
+                '    {0}: "{1}",\n'.format(_type, _msg)
                 )
         msg_type_rev.append(
                 '    "{0}": {1},\n'.format(_msg, _type)
@@ -72,7 +72,7 @@ if __name__ == '__main__':
     self_path = os.path.dirname(os.path.realpath(__file__))
 
     xml_src = os.path.join(self_path, 'protobuf', 'define.xml')
-    msg_path = os.path.join(self_path, 'msg')
+    msg_path = os.path.join(self_path, 'protomsg')
     des = os.path.join(msg_path, '__init__.py')
 
     with open(des, 'w'):

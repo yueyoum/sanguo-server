@@ -7,7 +7,7 @@ Replace this with more appropriate tests for your application.
 
 from django.test import TestCase, TransactionTestCase
 
-from msg import (
+from protomsg import (
         RESPONSE_NOTIFY_TYPE,
         GetServerListRequest,
         GetServerListResponse,

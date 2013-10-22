@@ -1,9 +1,9 @@
 from core import redis_client
 from utils import pack_msg
-import msg
+import protomsg
 
 def character_notify(key, obj, session):
-    data = msg.CharacterNotify()
+    data = protomsg.CharacterNotify()
     data.char.id = obj.id
     data.char.name = obj.name
     data.char.gold = obj.gold
@@ -13,7 +13,7 @@ def character_notify(key, obj, session):
     redis_client.rpush(key, pack_msg(data, session))
 
 def general_notify(key, objs, session):
-    data = msg.GeneralNotify()
+    data = protomsg.GeneralNotify()
 
     for obj in objs:
         g = data.general.add()

@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 # from models import Server
 
-from msg.account_pb2 import (
+from protomsg import (
         GetServerListResponse,
         )
 

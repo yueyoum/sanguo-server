@@ -16,10 +16,10 @@ RESPONSE_NOTIFY_TYPE = {
 }
 
 REQUEST_TYPE = {
-    100: ["StartGameRequest", "POST"],
-    102: ["GetServerListRequest", "POST"],
-    105: ["RegisterRequest", "POST"],
-    200: ["CreateCharacterRequest", "POST"],
+    100: "StartGameRequest",
+    102: "GetServerListRequest",
+    105: "RegisterRequest",
+    200: "CreateCharacterRequest",
 }
 
 REQUEST_TYPE_REV = {

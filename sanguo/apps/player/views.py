@@ -6,7 +6,7 @@ from models import User
 from apps.character.models import Character
 from utils import crypto
 
-from msg.account_pb2 import (
+from protomsg import (
         StartGameResponse,
         RegisterResponse,
         )

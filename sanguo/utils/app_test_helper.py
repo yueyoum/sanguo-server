@@ -2,7 +2,7 @@ import urllib2
 import struct
 import base64
 
-from msg import REQUEST_TYPE_REV
+from protomsg import REQUEST_TYPE_REV
 
 __all__ = [
         'pack_data',

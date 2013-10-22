@@ -2,8 +2,8 @@ import struct
 
 from django.http import HttpResponse
 
-import msg
-from msg import REQUEST_TYPE
+import protomsg
+from protomsg import REQUEST_TYPE
 
 from core.exception import SanguoViewException
 from core import redis_client
@@ -26,9 +26,9 @@ class UnpackAndVerifyData(object):
         msg_id = NUM_FIELD.unpack(data[:4])
         msg_id = msg_id[0]
 
-        msg_name, allowd_method = REQUEST_TYPE[msg_id]
+        msg_name = REQUEST_TYPE[msg_id]
 
-        proto = getattr(msg, msg_name)
+        proto = getattr(protomsg, msg_name)
         p = proto()
         p.ParseFromString(data[4:])
         
@@ -86,8 +86,8 @@ class PackMessageData(object):
 class ViewExceptionHandler(object):
     def process_exception(self, request, exception):
         if isinstance(exception, SanguoViewException):
-            Msg = getattr(msg, exception.response_msg_name)
-            m = Msg()
+            proto = getattr(protomsg, exception.response_msg_name)
+            m = proto()
             m.ret = exception.error_id
 
             data = pack_msg(m, exception.session)

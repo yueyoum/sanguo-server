@@ -1,6 +1,6 @@
 import struct
 
-from msg import RESPONSE_NOTIFY_TYPE
+from protomsg import RESPONSE_NOTIFY_TYPE
 
 NUM_FIELD = struct.Struct('>i')
 

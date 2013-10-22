@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from apps.world.models import Server
 
-from msg.world_pb2 import Server as ServerMsg
+from protomsg import Server as ServerMsg
 
 
 
