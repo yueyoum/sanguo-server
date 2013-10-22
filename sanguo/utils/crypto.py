@@ -1,4 +1,5 @@
 # about Crypto module: https://www.dlitz.net/software/pycrypto/doc/
+from base64 import b64encode, b64decode
 
 from Crypto.Cipher import AES
 from Crypto import Random
@@ -26,10 +27,12 @@ def encrypt(text, key=KEY, prefix=PREFIX):
     text = '%s%s' % (text, rest * ' ')
 
     obj = AES.new(key, AES.MODE_ECB)
-    return obj.encrypt(text)
+    res = obj.encrypt(text)
+    return b64encode(res)
 
 
 def decrypt(text, key=KEY, prefix=PREFIX):
+    text = b64decode(text)
     if len(text) % BLOCK_SIZE != 0:
         raise BadEncryptedText()
 
