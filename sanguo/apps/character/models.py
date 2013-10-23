@@ -28,8 +28,3 @@ class CharHero(models.Model):
     def __unicode__(self):
         return u'<CharHero %d %d:%d>' % (self.id, self.char_id, self.hero_id)
 
-    class Meta:
-        unique_together = (
-                ('char_id', 'hero_id'),
-                )
-
