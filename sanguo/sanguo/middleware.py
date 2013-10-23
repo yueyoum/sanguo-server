@@ -15,6 +15,11 @@ NUM_FIELD = struct.Struct('>i')
 EMPTY_SESSION_MSG_TYPE = set([100, 102, 105])
 
 
+### FOR DEBUG
+from utils import app_test_helper
+RESPONSE_NOTIFY_TYPE_REV = {v: k for k, v in protomsg.RESPONSE_NOTIFY_TYPE.items()}
+
+
 class UnpackAndVerifyData(object):
     def process_request(self, request):
         if request.path.startswith('/admin/'):
@@ -81,7 +86,11 @@ class PackMessageData(object):
                     ''.join(other_msgs)
                     )
 
-        print repr(data)
+        # FOR DEBUG
+        # print repr(data)
+        _unpakced_data = app_test_helper.unpack_data(data)
+        _msg_type = [RESPONSE_NOTIFY_TYPE_REV[a] for a, b, c in _unpakced_data]
+        print _msg_type
         return HttpResponse(data, content_type='text/plain')
 
 
