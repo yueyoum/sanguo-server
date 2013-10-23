@@ -8,6 +8,7 @@ RESPONSE_NOTIFY_TYPE = {
     "StartGameResponse": 101,
     "GetServerListResponse": 104,
     "RegisterResponse": 106,
+    "CreateCharacterResponse": 201,
     "CharacterNotify": 202,
     "HeroNotify": 300,
     "AddHeroNotify": 301,
