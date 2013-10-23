@@ -20,6 +20,8 @@ from utils import crypto
 
 
 class CreateCharacterTest(TransactionTestCase):
+    fixtures = ['hero.json', ]
+
     def setUp(self):
         Character.objects.create(
                 account_id = 1,
@@ -36,20 +38,20 @@ class CreateCharacterTest(TransactionTestCase):
         data = app_test_helper.pack_data(req)
         res = app_test_helper.make_request('/char/create/', data)
 
-        num_of_msgs, id_of_msg, len_of_msg, msg = app_test_helper.unpack_data(res)
+        msgs = app_test_helper.unpack_data(res)
+        if len(msgs) == 1:
+            id_of_msg, len_of_msg, msg = msgs[0]
+            self.assertEqual(id_of_msg, RESPONSE_NOTIFY_TYPE["CommandResponse"])
 
-        self.assertEqual(num_of_msgs, 1)
-        self.assertEqual(len_of_msg, len(msg))
-        if id_of_msg == RESPONSE_NOTIFY_TYPE["CommandResponse"]:
             data = CommandResponse()
             data.ParseFromString(msg)
             self.assertEqual(data.ret, ret)
             self.assertEqual(data.session, session)
         else:
-            self.assertEqual(id_of_msg, RESPONSE_NOTIFY_TYPE["CharacterNotify"])
-            data = CharacterNotify()
-            data.ParseFromString(msg)
-            self.assertEqual(data.session, session)
+            for id_of_msg, len_of_msg, msg in msgs:
+                self.assertTrue(
+                        id_of_msg in [RESPONSE_NOTIFY_TYPE["CharacterNotify"], RESPONSE_NOTIFY_TYPE["HeroNotify"]]
+                        )
 
     def test_normal_create(self):
         self._create(1, 2, "123", 0)

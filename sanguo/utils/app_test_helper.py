@@ -21,13 +21,23 @@ def pack_data(req):
 
 
 def unpack_data(res):
-    num_of_msgs = FMT.unpack(res[:4])
+    num_of_msgs = FMT.unpack(res[:4])[0]
     res = res[4:]
-    id_of_msg = FMT.unpack(res[:4])
-    res = res[4:]
-    len_of_msg = FMT.unpack(res[:4])
-    res = res[4:]
-    return num_of_msgs[0], id_of_msg[0], len_of_msg[0], res
+
+    def _unpack(res):
+        id_of_msg = FMT.unpack(res[:4])[0]
+        res = res[4:]
+        len_of_msg = FMT.unpack(res[:4])[0]
+        res = res[4:]
+        return id_of_msg, len_of_msg, res[:len_of_msg], res[len_of_msg:]
+
+    msgs = []
+    for i in range(num_of_msgs):
+        id_of_msg, len_of_msg, msg, res = _unpack(res)
+        msgs.append((id_of_msg, len_of_msg, msg))
+
+    assert num_of_msgs == len(msgs)
+    return msgs
 
 def make_request(path, data, method="POST"):
     if method == "POST":
