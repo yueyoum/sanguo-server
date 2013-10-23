@@ -42,9 +42,14 @@ def register(request):
     if User.objects.filter(email=req.email).exists():
         raise SanguoViewException(100, req.session, "RegisterResponse")
 
-    try:
-        user = User.objects.get(device_token=req.device_token)
-        if user.email:
+    users = User.objects.filter(device_token=req.device_token)
+    if users.exists():
+        _bind = False
+        for user in users:
+            if user.email:
+                _bind = True
+                break
+        if _bind:
             print "Already Bind email, Create New User"
             user = create_new_user(
                     email = req.email,
@@ -56,13 +61,14 @@ def register(request):
             user.email = req.email
             user.passwd = req.password
             user.save()
-    except User.DoesNotExist:
+    else:
         print "New User"
         user = create_new_user(
                 email = req.email,
                 password = req.password,
                 device_token = req.device_token
                 )
+
 
     response = RegisterResponse()
     response.ret = 0
