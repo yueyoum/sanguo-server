@@ -11,6 +11,7 @@ from protomsg import (
         RESPONSE_NOTIFY_TYPE,
         CommandResponse,
         CreateCharacterRequest,
+        CreateCharacterResponse,
         CharacterNotify,
         )
 
@@ -50,7 +51,7 @@ class CreateCharacterTest(TransactionTestCase):
         else:
             for id_of_msg, len_of_msg, msg in msgs:
                 self.assertTrue(
-                        id_of_msg in [RESPONSE_NOTIFY_TYPE["CharacterNotify"], RESPONSE_NOTIFY_TYPE["HeroNotify"]]
+                        id_of_msg in [RESPONSE_NOTIFY_TYPE["CharacterNotify"], RESPONSE_NOTIFY_TYPE["HeroNotify"], RESPONSE_NOTIFY_TYPE["CreateCharacterResponse"]]
                         )
 
     def test_normal_create(self):

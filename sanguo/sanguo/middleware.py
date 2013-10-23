@@ -81,6 +81,7 @@ class PackMessageData(object):
                     ''.join(other_msgs)
                     )
 
+        print repr(data)
         return HttpResponse(data, content_type='text/plain')
 
 

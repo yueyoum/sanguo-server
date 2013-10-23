@@ -6,6 +6,8 @@ from core.exception import SanguoViewException
 from core import notify
 
 from apps.hero.models import Hero
+from protomsg import CreateCharacterResponse
+from utils import pack_msg
 
 
 def create_character(request):
@@ -40,8 +42,12 @@ def create_character(request):
             CharHero.objects.create(char_id=char.id, hero_id=hero.id)
             )
 
+    response = CreateCharacterResponse()
+    response.ret = 0
+    data = pack_msg(response, session)
+
     notify.character_notify(request._decrypted_session, char, session)
     notify.hero_notify(request._decrypted_session, char_heros, session)
-    return HttpResponse("", content_type="text/plain")
+    return HttpResponse(data, content_type="text/plain")
 
 
