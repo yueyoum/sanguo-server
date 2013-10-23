@@ -114,11 +114,11 @@ class LoginTest(TransactionTestCase):
 
 
     def test_regular_login_with_non_exists(self):
-        self._regular_login('aaa@bbb.ccc', '123456', 103)
+        self._regular_login('aaa@bbb.ccc', '123456', 151)
 
     def test_regular_login_with_exists(self):
         self._regular_login('123@456.com', '123456', 0)
 
     def test_regular_login_with_wrong_password(self):
-        self._regular_login('123@456.com', 'abcd', 102)
+        self._regular_login('123@456.com', 'abcd', 150)
 

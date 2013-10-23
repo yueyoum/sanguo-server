@@ -97,9 +97,9 @@ def login(request):
         try:
             user = User.objects.get(email = req.regular.email)
             if user.passwd != req.regular.password:
-                raise SanguoViewException(102, req.session, "StartGameResponse")
+                raise SanguoViewException(150, req.session, "StartGameResponse")
         except User.DoesNotExist:
-            raise SanguoViewException(103, req.session, "StartGameResponse")
+            raise SanguoViewException(151, req.session, "StartGameResponse")
 
     user.last_login = timezone.now()
     user.save()
