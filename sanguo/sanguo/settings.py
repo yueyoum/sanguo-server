@@ -157,6 +157,10 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
+            'level': 'DEBUG'
         }
     },
     'loggers': {
@@ -167,6 +171,12 @@ LOGGING = {
         },
     }
 }
+
+if DEBUG:
+    LOGGING['loggers']['django.db.backends'] = {
+            'handlers': ['console'],
+            'level': 'DEBUG'
+            }
 
 DATETIME_FORMAT = "Y-m-d H:i:s"
 
