@@ -11,7 +11,7 @@ class CharacterAdmin(admin.ModelAdmin):
     list_filter = ('account_id', 'server_id', )
 
 class CharHeroAdmin(admin.ModelAdmin):
-    list_display = ('id', 'char_id', 'char_name', 'hero_id', 'hero_name',
+    list_display = ('id', 'char_id', 'char_name', 'hero_id',
             'level', 'exp',
             )
 
@@ -19,9 +19,6 @@ class CharHeroAdmin(admin.ModelAdmin):
 
     def char_name(self, obj):
         return Character.objects.get(id=obj.char_id).name
-
-    def hero_name(self, obj):
-        return Hero.objects.get(id=obj.hero_id).name
 
 
 
