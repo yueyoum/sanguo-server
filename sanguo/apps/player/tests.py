@@ -22,15 +22,17 @@ class RegisterTest(TransactionTestCase):
     fixtures = ['server_list.json']
     
     def setUp(self):
-        User.objects.create(
-                email = '123@456.com',
-                passwd = '123456'
+        users = (
+                ('123@456.com', '123456', ''),
+                ('aaa@bbb.ccc', '123456', '123456'),
+                ('aaa@bbb.ddd', '123456', '123456'),
                 )
-        User.objects.create(
-                email = 'aaa@bbb.ccc',
-                passwd = '123456',
-                device_token = '123456'
-                )
+        for email, passwd, token in users:
+            User.objects.create(
+                    email = email,
+                    passwd = passwd,
+                    device_token = token
+                    )
 
     def _register(self, email, password, device_token, ret):
         req = RegisterRequest()
@@ -56,9 +58,6 @@ class RegisterTest(TransactionTestCase):
     def test_normal_register(self):
         self._register("000@00.000", "123456", "abcd", 0)
 
-    def test_register_with_already_registed(self):
-        self._register("aaa@bbb.ccc", "123456", "123456", 100)
-
     def test_register_with_already_bind(self):
         self._register("aaa@aaa.aaa", "123456", "123456", 0)
 
@@ -69,15 +68,22 @@ class RegisterTest(TransactionTestCase):
 
 class LoginTest(TransactionTestCase):
     def setUp(self):
-        User.objects.create(
-                email = '123@456.com',
-                passwd = '123456'
+        users = (
+                ('123@456.com', '123456', ''),
+                ('aaa@bbb.ccc', '123456', '123456'),
+                ('aaa@bbb.ddd', '123456', '123456'),
                 )
+        for email, passwd, token in users:
+            User.objects.create(
+                    email = email,
+                    passwd = passwd,
+                    device_token = token
+                    )
 
     def test_anonymous_login(self):
         req = StartGameRequest()
         req.session = ""
-        req.anonymous.device_token = '1234567890'
+        req.anonymous.device_token = '123456'
         req.server_id = 1
 
         data = tests.pack_data(req)
@@ -121,7 +127,7 @@ class LoginTest(TransactionTestCase):
 
 
     def test_regular_login_with_non_exists(self):
-        self._regular_login('aaa@bbb.ccc', '123456', 151)
+        self._regular_login('123456', '123456', 151)
 
     def test_regular_login_with_exists(self):
         self._regular_login('123@456.com', '123456', 0)

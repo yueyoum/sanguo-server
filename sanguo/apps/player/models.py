@@ -8,12 +8,18 @@ class User(models.Model):
 
     last_login = models.DateTimeField(default=timezone.now())
 
-    
-    def is_bind(self):
-        return True if self.email else False
-
 
     def __unicode__(self):
         return u'<User %d>' % self.id
 
+    @classmethod
+    def is_bind(cls, device_token, queryset=None):
+        if queryset is None:
+            queryset = cls.objects.filter(device_token=device_token)
+
+        for user in queryset:
+            if user.email:
+                return True
+
+        return False
 

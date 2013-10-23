@@ -43,13 +43,18 @@ def register(request):
         raise SanguoViewException(100, req.session, "RegisterResponse")
 
     users = User.objects.filter(device_token=req.device_token)
-    if users.exists():
-        _bind = False
-        for user in users:
-            if user.email:
-                _bind = True
-                break
-        if _bind:
+    users_count = users.count()
+
+    if users_count == 0:
+        print "New User"
+        user = create_new_user(
+                email = req.email,
+                password = req.password,
+                device_token = req.device_token
+                )
+    elif users_count == 1:
+        user  = users[0]
+        if user.email:
             print "Already Bind email, Create New User"
             user = create_new_user(
                     email = req.email,
@@ -62,7 +67,7 @@ def register(request):
             user.passwd = req.password
             user.save()
     else:
-        print "New User"
+        print "Registed multi times, create new user"
         user = create_new_user(
                 email = req.email,
                 password = req.password,
@@ -90,13 +95,22 @@ def login(request):
     req = request._proto
     print req
     
-    need_create_char = None
+    need_create_new_char = None
     if req.anonymous.device_token:
-        try:
-            user = User.objects.get(device_token=req.anonymous.device_token)
-        except User.DoesNotExist:
+        users = User.objects.filter(device_token=req.anonymous.device_token)
+        users_count = users.count()
+
+        if users_count == 0:
             user = create_new_user(device_token=req.anonymous.device_token)
-            need_create_char = True
+            need_create_new_char = True
+        elif users_count == 1:
+            user = users[0]
+            if user.email:
+                user = create_new_user(device_token=req.anonymous.device_token)
+                need_create_new_char = True
+        else:
+            user = create_new_user(device_token=req.anonymous.device_token)
+            need_create_new_char = True
     else:
         if not req.regular.email or not req.regular.password:
             return HttpResponse(status=403)
@@ -110,14 +124,14 @@ def login(request):
     user.last_login = timezone.now()
     user.save()
 
-    if need_create_char is None:
+    if need_create_new_char is None:
         _exists = Character.objects.filter(
                 account_id=user.id,
                 server_id = req.server_id
                 ).exists()
-        need_create_char = not _exists
+        need_create_new_char = not _exists
 
-    if not need_create_char:
+    if not need_create_new_char:
         # TODO send notify
         pass
 
@@ -125,7 +139,7 @@ def login(request):
 
     response = StartGameResponse()
     response.ret = 0
-    response.need_create_new_char = need_create_char
+    response.need_create_new_char = need_create_new_char 
 
     data = pack_msg(response, session)
     return HttpResponse(data, content_type='text/plain')
