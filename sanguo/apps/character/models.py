@@ -7,7 +7,7 @@ class Character(models.Model):
     gold = models.IntegerField(default=0)
     gem = models.IntegerField(default=0)
     level = models.IntegerField(default=1)
-    exp = models.IntegerField(default=0)
+    honor = models.IntegerField(default=0)
 
     def __unicode__(self):
         return u'<Character %d>' % self.id
@@ -16,5 +16,20 @@ class Character(models.Model):
         unique_together = (
                 ('account_id', 'server_id'),
                 ('server_id', 'name'),
+                )
+
+
+class CharHero(models.Model):
+    char_id = models.IntegerField(db_index=True)
+    hero_id = models.IntegerField()
+    level = models.IntegerField(default=1)
+    exp = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return u'<CharHero %d %d:%d>' % (self.id, self.char_id, self.hero_id)
+
+    class Meta:
+        unique_together = (
+                ('char_id', 'hero_id'),
                 )
 

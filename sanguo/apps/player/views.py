@@ -105,10 +105,11 @@ def login(request):
     user.save()
 
     if need_create_char is None:
-        need_create_char = Character.objects.filter(
+        _exists = Character.objects.filter(
                 account_id=user.id,
                 server_id = req.server_id
                 ).exists()
+        need_create_char = not _exists
 
     if not need_create_char:
         # TODO send notify

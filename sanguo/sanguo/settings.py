@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'apps.player',
     'apps.world',
     'apps.character',
+    'apps.hero',
 )
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

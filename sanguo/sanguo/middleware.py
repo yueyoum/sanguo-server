@@ -1,4 +1,5 @@
 import struct
+import traceback
 
 from django.http import HttpResponse
 
@@ -93,6 +94,7 @@ class ViewExceptionHandler(object):
             data = pack_msg(m, exception.session)
             return HttpResponse(data, content_type='text/plain')
         
+        traceback.print_exc()
         raise exception
 
 

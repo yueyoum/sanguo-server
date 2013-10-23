@@ -9,16 +9,17 @@ def character_notify(key, obj, session):
     data.char.gold = obj.gold
     data.char.gem = obj.gem
     data.char.level = obj.level
-    data.char.exp = obj.exp
+    data.char.honor = obj.honor
     redis_client.rpush(key, pack_msg(data, session))
 
-def general_notify(key, objs, session):
-    data = protomsg.GeneralNotify()
+def hero_notify(key, objs, session, message_name="HeroNotify"):
+    Msg = getattr(protomsg, message_name)
+    data = Msg()
 
     for obj in objs:
-        g = data.general.add()
+        g = data.heros.add()
         g.id = obj.id
-        g.original_id = obj.original_id
+        g.original_id = obj.hero_id
         g.level = obj.level
         g.exp = obj.exp
 
@@ -35,8 +36,4 @@ def general_notify(key, objs, session):
         g.dodge = 100
 
     redis_client.rpush(key, pack_msg(data, session))
-
-def login_notify(key, char_obj, general_objs):
-    character_notify(key, char_obj)
-    general_notify(key, general_objs)
 
