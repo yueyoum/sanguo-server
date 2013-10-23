@@ -39,7 +39,7 @@ def create_character(request):
     char_heros = []
     for hero in init_heros:
         char_heros.append(
-            CharHero.objects.create(char_id=char.id, hero_id=hero.id)
+            CharHero.objects.create(char=char, hero_id=hero.id)
             )
 
     response = CreateCharacterResponse()
