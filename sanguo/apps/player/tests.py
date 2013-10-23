@@ -69,12 +69,13 @@ class RegisterTest(TransactionTestCase):
 class LoginTest(TransactionTestCase):
     def setUp(self):
         users = (
-                ('123@456.com', '123456', ''),
-                ('aaa@bbb.ccc', '123456', '123456'),
-                ('aaa@bbb.ddd', '123456', '123456'),
+                (1, '123@456.com', '123456', ''),
+                (2, 'aaa@bbb.ccc', '123456', '123456'),
+                (3, 'aaa@bbb.ddd', '123456', '123456'),
                 )
-        for email, passwd, token in users:
+        for id, email, passwd, token in users:
             User.objects.create(
+                    id = id,
                     email = email,
                     passwd = passwd,
                     device_token = token
@@ -109,7 +110,6 @@ class LoginTest(TransactionTestCase):
         data = tests.pack_data(req)
         res = tests.make_request('/player/login/', data)
 
-        # num_of_msgs, id_of_msg, len_of_msg, msg = tests.unpack_data(res)
         msgs = tests.unpack_data(res)
 
         if len(msgs) == 1:
@@ -123,7 +123,13 @@ class LoginTest(TransactionTestCase):
             if data.ret == 0:
                 self.assertTrue(data.need_create_new_char)
         else:
-            pass
+            for id_of_msg, len_of_msg, msg in msgs:
+                self.assertTrue(
+                        id_of_msg in [RESPONSE_NOTIFY_TYPE["StartGameResponse"],
+                            RESPONSE_NOTIFY_TYPE["CharacterNotify"],
+                            RESPONSE_NOTIFY_TYPE["HeroNotify"],
+                            ]
+                        )
 
 
     def test_regular_login_with_non_exists(self):
@@ -134,4 +140,20 @@ class LoginTest(TransactionTestCase):
 
     def test_regular_login_with_wrong_password(self):
         self._regular_login('123@456.com', 'abcd', 150)
+
+    def test_login_with_notify(self):
+        from apps.character.models import Character, CharHero
+        char = Character.objects.create(
+                account_id = 1,
+                server_id = 1,
+                name = "abcd"
+                )
+
+        CharHero.objects.create(
+                char = char,
+                hero_id = 1
+                )
+
+        self._regular_login('123@456.com', '123456', 0)
+
 

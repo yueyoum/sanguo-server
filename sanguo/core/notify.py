@@ -39,3 +39,10 @@ def hero_notify(key, objs, session, message_name="HeroNotify"):
 
     redis_client.rpush(key, pack_msg(data, session))
 
+def login_notify(key, char_obj, session, hero_objs=None):
+    if not hero_objs:
+        hero_objs = char_obj.char_heros.all()
+
+    character_notify(key, char_obj, session)
+    hero_notify(key, hero_objs, session)
+

@@ -46,8 +46,7 @@ def create_character(request):
     response.ret = 0
     data = pack_msg(response, session)
 
-    notify.character_notify(request._decrypted_session, char, session)
-    notify.hero_notify(request._decrypted_session, char_heros, session)
+    notify.login_notify(request._decrypted_session, char, session, hero_objs=char_heros)
     return HttpResponse(data, content_type="text/plain")
 
 

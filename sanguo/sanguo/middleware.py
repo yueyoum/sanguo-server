@@ -63,7 +63,7 @@ class PackMessageData(object):
         if request.path.startswith('/admin/'):
             return response
 
-        key = request._decrypted_session
+        key = getattr(request, '_decrypted_session', None) or response._redis_key
         if key:
             pipeline = redis_client.pipeline()
             pipeline.lrange(key, 0, -1)

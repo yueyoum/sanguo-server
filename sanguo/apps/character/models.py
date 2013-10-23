@@ -20,7 +20,7 @@ class Character(models.Model):
 
 
 class CharHero(models.Model):
-    char = models.ForeignKey(Character)
+    char = models.ForeignKey(Character, related_name='char_heros')
     hero_id = models.IntegerField()
     level = models.IntegerField(default=1)
     exp = models.IntegerField(default=0)
