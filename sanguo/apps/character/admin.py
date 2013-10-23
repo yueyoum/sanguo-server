@@ -11,14 +11,11 @@ class CharacterAdmin(admin.ModelAdmin):
     list_filter = ('account_id', 'server_id', )
 
 class CharHeroAdmin(admin.ModelAdmin):
-    list_display = ('id', 'char_id', 'char_name', 'hero_id',
+    list_display = ('id', 'char', 'hero_id',
             'level', 'exp',
             )
 
-    list_filter = ('char_id',)
-
-    def char_name(self, obj):
-        return Character.objects.get(id=obj.char_id).name
+    list_filter = ('char',)
 
 
 
