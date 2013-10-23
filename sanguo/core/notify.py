@@ -9,7 +9,9 @@ def character_notify(key, obj, session):
     data.char.gold = obj.gold
     data.char.gem = obj.gem
     data.char.level = obj.level
-    data.char.honor = obj.honor
+    data.char.current_honor = obj.honor
+    # FIXME
+    data.char.max_honor = 1000
     redis_client.rpush(key, pack_msg(data, session))
 
 def hero_notify(key, objs, session, message_name="HeroNotify"):
