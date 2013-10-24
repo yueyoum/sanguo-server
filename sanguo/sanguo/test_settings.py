@@ -1,5 +1,6 @@
 from settings import *
 
+TESTING = True
 
 CRYPTO_KEY = '1234567890abcdef'
 CRYPTO_PREFIX= 'ok'
