@@ -141,7 +141,7 @@ def login(request):
 
     session = crypto.encrypt(key)
     if not need_create_new_char:
-        login_notify(key, char, session)
+        login_notify(key, char)
 
     response = StartGameResponse()
     response.ret = 0

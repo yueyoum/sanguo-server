@@ -18,6 +18,11 @@ from utils import app_test_helper as tests
 from models import User
 
 
+def teardown():
+    from core import redis_client
+    redis_client.flushdb()
+
+
 class RegisterTest(TransactionTestCase):
     fixtures = ['server_list.json']
     

@@ -20,6 +20,11 @@ from models import Character
 from utils import crypto
 
 
+def teardown():
+    from core import redis_client
+    redis_client.flushdb()
+
+
 class CreateCharacterTest(TransactionTestCase):
     fixtures = ['hero.json', ]
 
