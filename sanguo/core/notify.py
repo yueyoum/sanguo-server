@@ -2,7 +2,7 @@ from core import redis_client
 from utils import pack_msg
 import protomsg
 
-def character_notify(key, obj, session):
+def character_notify(key, obj):
     data = protomsg.CharacterNotify()
     data.char.id = obj.id
     data.char.name = obj.name
@@ -12,9 +12,9 @@ def character_notify(key, obj, session):
     data.char.current_honor = obj.honor
     # FIXME
     data.char.max_honor = 1000
-    redis_client.rpush(key, pack_msg(data, session))
+    redis_client.rpush(key, pack_msg(data))
 
-def hero_notify(key, objs, session, message_name="HeroNotify"):
+def hero_notify(key, objs, message_name="HeroNotify"):
     Msg = getattr(protomsg, message_name)
     data = Msg()
 
@@ -37,12 +37,26 @@ def hero_notify(key, objs, session, message_name="HeroNotify"):
         g.cirt = 100
         g.dodge = 100
 
-    redis_client.rpush(key, pack_msg(data, session))
+    redis_client.rpush(key, pack_msg(data))
 
-def login_notify(key, char_obj, session, hero_objs=None):
+def add_hero_notify(key, objs):
+    hero_notify(key, objs, "AddHeroNotify")
+
+def remove_hero_notify(key, ids):
+    data = protomsg.RemoveHeroNotify()
+    data.ids.extend(ids)
+    redis_client.rpush(key, pack_msg(data))
+
+
+def update_hero_notify(key, objs):
+    hero_notify(key, objs, "UpdateHeroNotify")
+
+
+def login_notify(key, char_obj, hero_objs=None):
     if not hero_objs:
         hero_objs = char_obj.char_heros.all()
 
-    character_notify(key, char_obj, session)
-    hero_notify(key, hero_objs, session)
+    character_notify(key, char_obj)
+    hero_notify(key, hero_objs)
+
 
