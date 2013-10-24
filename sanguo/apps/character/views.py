@@ -35,18 +35,16 @@ def create_character(request):
             )
 
     init_heros = [i for i in Hero.random_items(3)]
-
-    char_heros = []
-    for hero in init_heros:
-        char_heros.append(
-            CharHero.objects.create(char=char, hero_id=hero.id)
-            )
+    char_heros_list = [
+            CharHero(char=char, hero_id=hero.id) for hero in init_heros
+            ]
+    char_heros = CharHero.multi_create(char_heros_list)
 
     response = CreateCharacterResponse()
     response.ret = 0
     data = pack_msg(response, session)
 
-    notify.login_notify(request._decrypted_session, char, session, hero_objs=char_heros)
+    notify.login_notify(request._decrypted_session, char, hero_objs=char_heros)
     return HttpResponse(data, content_type="text/plain")
 
 
