@@ -130,10 +130,10 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'django_nose',
+    'apps.constant',
     'apps.player',
     'apps.world',
     'apps.character',
-    'apps.hero',
 )
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

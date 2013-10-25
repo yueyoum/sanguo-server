@@ -1,6 +1,5 @@
 from django.contrib import admin
 from models import Character, CharHero
-from apps.hero.models import Hero
 
 
 class CharacterAdmin(admin.ModelAdmin):

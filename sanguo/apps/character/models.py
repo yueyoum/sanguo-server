@@ -14,9 +14,12 @@ class Character(models.Model):
     honor = models.IntegerField(default=0)
 
     def __unicode__(self):
-        return u'<Character %d>' % self.id
+        return u'<Character %d:%d:%d, %s>' % (
+                self.account_id, self.server_id, self.id, self.name
+                )
 
     class Meta:
+        db_table = 'character'
         unique_together = (
                 ('account_id', 'server_id'),
                 ('server_id', 'name'),
@@ -48,9 +51,16 @@ class CharHero(models.Model):
         objs = cls.objects.bulk_create(items)
         return objs
 
+    class Meta:
+        db_table = 'char_hero'
+
 
 def _save_charhero_max_id_in_redis():
-    max_id = CharHero.objects.aggregate(Max('id'))['id__max']
+    try:
+        max_id = CharHero.objects.aggregate(Max('id'))['id__max']
+    except:
+        max_id = 100
+
     if max_id is None:
         max_id = 100
     redis_client.set('charhero_id', max_id)

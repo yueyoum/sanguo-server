@@ -103,7 +103,7 @@ class ViewExceptionHandler(object):
             m = proto()
             m.ret = exception.error_id
 
-            data = pack_msg(m, exception.session)
+            data = pack_msg(m)
             return HttpResponse(data, content_type='text/plain')
         
         traceback.print_exc()

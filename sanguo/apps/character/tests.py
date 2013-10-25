@@ -24,7 +24,7 @@ from utils import app_test_helper
 from models import Character, CharHero
 from utils import crypto
 
-from apps.hero.models import Hero
+from apps.constant.models import Hero
 
 def teardown():
     from core.drives import redis_client
@@ -88,7 +88,7 @@ class GetHeroTest(TransactionTestCase):
         req.ten = ten
 
         data = app_test_helper.pack_data(req)
-        res = app_test_helper.make_request('/char/hero/get/', data)
+        res = app_test_helper.make_request('/hero/get/', data)
         msgs = app_test_helper.unpack_data(res)
 
         possible_ids = [
@@ -134,7 +134,7 @@ class MergeHeroTest(TransactionTestCase):
         req.using_hero_ids.extend(using_hero_ids)
 
         data = app_test_helper.pack_data(req)
-        res = app_test_helper.make_request('/char/hero/merge/', data)
+        res = app_test_helper.make_request('/hero/merge/', data)
         msgs = app_test_helper.unpack_data(res)
 
         possible_ids = [

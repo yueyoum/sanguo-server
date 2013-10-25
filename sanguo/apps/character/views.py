@@ -7,8 +7,8 @@ from models import Character, CharHero
 from core.exception import SanguoViewException
 from core import notify
 from core import GLOBAL
+from core import services
 
-from apps.hero.models import Hero
 from protomsg import (
         CreateCharacterResponse,
         GetHeroResponse,
@@ -24,17 +24,16 @@ def create_character(request):
     print req
 
     if len(req.name) > 7:
-        raise SanguoViewException(202, req.session)
+        raise SanguoViewException(202, "CreateCharacterResponse")
 
-    session = req.session
     account_id, server_id = request._decrypted_session.split(':')
     account_id, server_id = int(account_id), int(server_id)
 
     if Character.objects.filter(account_id=account_id, server_id=server_id).exists():
-        raise SanguoViewException(200, session)
+        raise SanguoViewException(200, "CreateCharacterResponse")
 
     if Character.objects.filter( server_id=server_id,name=req.name).exists():
-        raise SanguoViewException(201, session)
+        raise SanguoViewException(201, "CreateCharacterResponse")
 
 
     char = Character.objects.create(
@@ -43,9 +42,9 @@ def create_character(request):
             name = req.name
             )
 
-    init_heros = [i for i in Hero.random_items(3)]
+    init_heros = services.get_random_heros(3)
     char_heros_list = [
-            CharHero(char=char, hero_id=hero.id) for hero in init_heros
+            CharHero(char=char, hero_id=hero["id"]) for hero in init_heros
             ]
     char_heros = CharHero.multi_create(char_heros_list)
 
@@ -79,7 +78,7 @@ def get_hero(request):
 
     print "prob =", prob, "target_quality =", target_quality
 
-    hero_list = Hero.objects.filter(quality_id=target_quality)
+    hero_list = services.get_hero_by_quality(target_quality)
 
     if req.ten:
         heros = [random.choice(hero_list) for i in range(10)]
@@ -87,7 +86,7 @@ def get_hero(request):
         heros = [random.choice(hero_list)]
     
     char_heros_list = [
-            CharHero(char_id=char_id, hero_id=hero.id) for hero in heros
+            CharHero(char_id=char_id, hero_id=hero["id"]) for hero in heros
             ]
 
     char_heros = CharHero.multi_create(char_heros_list)
@@ -117,24 +116,24 @@ def merge_hero(request):
     if len(original_ids) != len(using_hero_ids):
         hero_objs = CharHero.objects.filter(char__id=char_id)
         notify.hero_notify(request._decrypted_session, hero_objs)
-        raise SanguoViewException(300, req.session, "MergeHeroResponse")
+        raise SanguoViewException(300, "MergeHeroResponse")
 
-    original_quality = [GLOBAL.HERO[hid]['quality_id'] for hid in original_ids]
+    original_quality = [GLOBAL.HEROS[hid]['quality_id'] for hid in original_ids]
 
     if len(set(original_quality)) != 1:
-        raise SanguoViewException(301, req.session, "MergeHeroResponse")
+        raise SanguoViewException(301, "MergeHeroResponse")
 
     if len(using_hero_ids) == 2:
         if original_quality[0] != 1:
-            raise SanguoViewException(302, req.session, "MergeHeroResponse")
+            raise SanguoViewException(302, "MergeHeroResponse")
     elif len(using_hero_ids) == 8:
         if original_quality[0] == 1:
-            raise SanguoViewException(302, req.session, "MergeHeroResponse")
+            raise SanguoViewException(302, "MergeHeroResponse")
     else:
-        raise SanguoViewException(302, req.session, "MergeHeroResponse")
+        raise SanguoViewException(302, "MergeHeroResponse")
 
 
-    all_hero_ids = GLOBAL.HERO.keys()
+    all_hero_ids = GLOBAL.HEROS.keys()
     if original_quality[0] == 1:
         while True:
             choosing_id = random.choice(all_hero_ids)

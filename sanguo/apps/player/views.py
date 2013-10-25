@@ -41,7 +41,7 @@ def register(request):
         return HttpResponse(status=403)
 
     if User.objects.filter(email=req.email).exists():
-        raise SanguoViewException(100, req.session, "RegisterResponse")
+        raise SanguoViewException(100, "RegisterResponse")
 
     users = User.objects.filter(device_token=req.device_token)
     users_count = users.count()
@@ -118,9 +118,9 @@ def login(request):
         try:
             user = User.objects.get(email = req.regular.email)
             if user.passwd != req.regular.password:
-                raise SanguoViewException(150, req.session, "StartGameResponse")
+                raise SanguoViewException(150, "StartGameResponse")
         except User.DoesNotExist:
-            raise SanguoViewException(151, req.session, "StartGameResponse")
+            raise SanguoViewException(151, "StartGameResponse")
 
     user.last_login = timezone.now()
     user.save()

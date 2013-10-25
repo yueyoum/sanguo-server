@@ -1,1337 +1,1337 @@
 [
     {
         "pk": 1, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 100, 
             "defense_grow": 20, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 80
+            "hp_grow": 80, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 2, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 97, 
             "defense_grow": 18, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 73
+            "hp_grow": 73, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 3, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 96, 
             "defense_grow": 18, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 73
+            "hp_grow": 73, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 4, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 96, 
             "defense_grow": 18, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 73
+            "hp_grow": 73, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 5, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 95, 
             "defense_grow": 18, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 72
+            "hp_grow": 72, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 6, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 96, 
             "defense_grow": 18, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 70
+            "hp_grow": 70, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 7, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 91, 
             "defense_grow": 18, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 73
+            "hp_grow": 73, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 8, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 92, 
             "defense_grow": 18, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 72
+            "hp_grow": 72, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 9, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 89, 
             "defense_grow": 19, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 74
+            "hp_grow": 74, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 10, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 100, 
             "defense_grow": 16, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 65
+            "hp_grow": 65, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 11, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 90, 
             "defense_grow": 18, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 72
+            "hp_grow": 72, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 12, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 92, 
             "defense_grow": 17, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 70
+            "hp_grow": 70, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 13, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 90, 
             "defense_grow": 18, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 71
+            "hp_grow": 71, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 14, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 89, 
             "defense_grow": 18, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 71
+            "hp_grow": 71, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 15, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 94, 
             "defense_grow": 17, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 67
+            "hp_grow": 67, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 16, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 97, 
             "defense_grow": 16, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 63
+            "hp_grow": 63, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 17, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 97, 
             "defense_grow": 16, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 63
+            "hp_grow": 63, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 18, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 90, 
             "defense_grow": 17, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 68
+            "hp_grow": 68, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 19, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 89, 
             "defense_grow": 17, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 69
+            "hp_grow": 69, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 20, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 100, 
             "defense_grow": 15, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 60
+            "hp_grow": 60, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 21, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 93, 
             "defense_grow": 16, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 65
+            "hp_grow": 65, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 22, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 93, 
             "defense_grow": 16, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 64
+            "hp_grow": 64, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 23, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 1, 
             "skills": "", 
             "attack_grow": 90, 
             "defense_grow": 17, 
-            "gold_worth": 400000, 
             "gem_worth": 100, 
             "crit": 0, 
-            "hp_grow": 66
+            "hp_grow": 66, 
+            "gold_worth": 400000
         }
     }, 
     {
         "pk": 24, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 86, 
             "defense_grow": 16, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 66
+            "hp_grow": 66, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 25, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 92, 
             "defense_grow": 15, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 61
+            "hp_grow": 61, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 26, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 86, 
             "defense_grow": 16, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 65
+            "hp_grow": 65, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 27, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 92, 
             "defense_grow": 15, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 60
+            "hp_grow": 60, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 28, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 91, 
             "defense_grow": 15, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 61
+            "hp_grow": 61, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 29, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 81, 
             "defense_grow": 17, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 68
+            "hp_grow": 68, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 30, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 81, 
             "defense_grow": 17, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 68
+            "hp_grow": 68, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 31, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 97, 
             "defense_grow": 14, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 55
+            "hp_grow": 55, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 32, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 79, 
             "defense_grow": 17, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 69
+            "hp_grow": 69, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 33, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 84, 
             "defense_grow": 16, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 65
+            "hp_grow": 65, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 34, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 86, 
             "defense_grow": 16, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 63
+            "hp_grow": 63, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 35, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 88, 
             "defense_grow": 15, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 61
+            "hp_grow": 61, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 36, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 93, 
             "defense_grow": 14, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 57
+            "hp_grow": 57, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 37, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 83, 
             "defense_grow": 16, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 65
+            "hp_grow": 65, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 38, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 82, 
             "defense_grow": 16, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 66
+            "hp_grow": 66, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 39, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 82, 
             "defense_grow": 16, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 65
+            "hp_grow": 65, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 40, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 91, 
             "defense_grow": 15, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 58
+            "hp_grow": 58, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 41, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 90, 
             "defense_grow": 15, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 59
+            "hp_grow": 59, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 42, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 82, 
             "defense_grow": 16, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 65
+            "hp_grow": 65, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 43, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 84, 
             "defense_grow": 16, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 63
+            "hp_grow": 63, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 44, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 2, 
             "skills": "", 
             "attack_grow": 89, 
             "defense_grow": 15, 
-            "gold_worth": 50000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 59
+            "hp_grow": 59, 
+            "gold_worth": 50000
         }
     }, 
     {
         "pk": 45, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 82, 
             "defense_grow": 14, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 56
+            "hp_grow": 56, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 46, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 84, 
             "defense_grow": 14, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 54
+            "hp_grow": 54, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 47, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 83, 
             "defense_grow": 14, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 55
+            "hp_grow": 55, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 48, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 74, 
             "defense_grow": 16, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 62
+            "hp_grow": 62, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 49, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 74, 
             "defense_grow": 16, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 62
+            "hp_grow": 62, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 50, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 76, 
             "defense_grow": 15, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 60
+            "hp_grow": 60, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 51, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 76, 
             "defense_grow": 15, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 60
+            "hp_grow": 60, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 52, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 79, 
             "defense_grow": 14, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 58
+            "hp_grow": 58, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 53, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 72, 
             "defense_grow": 16, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 63
+            "hp_grow": 63, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 54, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 81, 
             "defense_grow": 14, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 56
+            "hp_grow": 56, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 55, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 83, 
             "defense_grow": 14, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 54
+            "hp_grow": 54, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 56, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 77, 
             "defense_grow": 15, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 59
+            "hp_grow": 59, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 57, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 83, 
             "defense_grow": 14, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 54
+            "hp_grow": 54, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 58, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 75, 
             "defense_grow": 15, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 60
+            "hp_grow": 60, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 59, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 75, 
             "defense_grow": 15, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 60
+            "hp_grow": 60, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 60, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 71, 
             "defense_grow": 16, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 64
+            "hp_grow": 64, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 61, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 73, 
             "defense_grow": 15, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 62
+            "hp_grow": 62, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 62, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 75, 
             "defense_grow": 15, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 60
+            "hp_grow": 60, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 63, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 82, 
             "defense_grow": 14, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 54
+            "hp_grow": 54, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 64, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 3, 
             "skills": "", 
             "attack_grow": 85, 
             "defense_grow": 13, 
-            "gold_worth": 5000, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 52
+            "hp_grow": 52, 
+            "gold_worth": 5000
         }
     }, 
     {
         "pk": 65, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 66, 
             "defense_grow": 13, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 51
+            "hp_grow": 51, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 66, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 64, 
             "defense_grow": 13, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 52
+            "hp_grow": 52, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 67, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 62, 
             "defense_grow": 13, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 54
+            "hp_grow": 54, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 68, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 68, 
             "defense_grow": 12, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 49
+            "hp_grow": 49, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 69, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 68, 
             "defense_grow": 12, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 49
+            "hp_grow": 49, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 70, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 71, 
             "defense_grow": 12, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 46
+            "hp_grow": 46, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 71, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 69, 
             "defense_grow": 12, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 48
+            "hp_grow": 48, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 72, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 66, 
             "defense_grow": 12, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 50
+            "hp_grow": 50, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 73, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 74, 
             "defense_grow": 11, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 44
+            "hp_grow": 44, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 74, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 70, 
             "defense_grow": 12, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 47
+            "hp_grow": 47, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 75, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 77, 
             "defense_grow": 10, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 41
+            "hp_grow": 41, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 76, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 69, 
             "defense_grow": 12, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 47
+            "hp_grow": 47, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 77, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 71, 
             "defense_grow": 11, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 45
+            "hp_grow": 45, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 78, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 92, 
             "defense_grow": 7, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 28
+            "hp_grow": 28, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 79, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 83, 
             "defense_grow": 9, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 35
+            "hp_grow": 35, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 80, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 70, 
             "defense_grow": 11, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 46
+            "hp_grow": 46, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 81, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 66, 
             "defense_grow": 12, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 49
+            "hp_grow": 49, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 82, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 76, 
             "defense_grow": 10, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 41
+            "hp_grow": 41, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 83, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 75, 
             "defense_grow": 10, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 41
+            "hp_grow": 41, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 84, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 70, 
             "defense_grow": 11, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 45
+            "hp_grow": 45, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 85, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 70, 
             "defense_grow": 11, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 45
+            "hp_grow": 45, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 86, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 85, 
             "defense_grow": 8, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 33
+            "hp_grow": 33, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 87, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 74, 
             "defense_grow": 10, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 42
+            "hp_grow": 42, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 88, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 58, 
             "defense_grow": 14, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 55
+            "hp_grow": 55, 
+            "gold_worth": 500
         }
     }, 
     {
         "pk": 89, 
-        "model": "hero.Hero", 
+        "model": "constant.Hero", 
         "fields": {
             "dodge": 0, 
             "quality_id": 4, 
             "skills": "", 
             "attack_grow": 75, 
             "defense_grow": 10, 
-            "gold_worth": 500, 
             "gem_worth": 0, 
             "crit": 0, 
-            "hp_grow": 41
+            "hp_grow": 41, 
+            "gold_worth": 500
         }
     }
 ]

@@ -23,3 +23,6 @@ class User(models.Model):
 
         return False
 
+    class Meta:
+        db_table = 'user'
+

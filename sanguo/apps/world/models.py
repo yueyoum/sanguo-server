@@ -17,4 +17,6 @@ class Server(models.Model):
             self.create_time = timezone.now()
         super(Server, self).save(*args, **kwargs)
 
+    class Meta:
+        db_table = 'sanguo_server'
 

@@ -1,9 +1,5 @@
 # -*- coding:utf-8 -*-
-from random import choice
-
 from django.db import models
-# from django.db.models.signals import post_delete
-# from django.dispatch import receiver
 
  
 class Quality(models.Model):
@@ -13,6 +9,9 @@ class Quality(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    class Meta:
+        db_table = 'c_hero_quality'
 
 
 
@@ -34,19 +33,6 @@ class Hero(models.Model):
     def __unicode__(self):
         return u'<Hero %d>' % self.id
 
-    @classmethod
-    def random_items(cls, nums):
-        max_id = cls.objects.aggregate(models.Max('id'))['id__max']
-        id_range = range(1, max_id+1)
-
-        i = 0
-        while i < nums:
-            this_id = choice(id_range)
-            id_range.remove(this_id)
-
-            try:
-                yield cls.objects.get(id=this_id)
-                i += 1
-            except cls.DoesNotExist:
-                pass
+    class Meta:
+        db_table = 'c_hero'
 

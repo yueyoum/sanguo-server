@@ -5,7 +5,7 @@ from utils.decorate import LazyDict
 
 @LazyDict()
 def _all_heros():
-    from apps.hero.models import Hero
+    from apps.constant.models import Hero
     heros = Hero.objects.all().values()
     data = {item['id']: item for item in heros}
     return data
@@ -39,6 +39,6 @@ class _Global(object):
 
 
 GLOBAL = _Global()
-GLOBAL.HERO = _all_heros()
+GLOBAL.HEROS = _all_heros()
 GLOBAL.GET_HERO = GET_HERO
 

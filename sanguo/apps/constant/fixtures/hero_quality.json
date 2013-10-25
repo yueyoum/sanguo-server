@@ -1,7 +1,7 @@
 [
     {
         "pk": 1, 
-        "model": "hero.Quality", 
+        "model": "constant.Quality", 
         "fields": {
             "defense_base": 150, 
             "attack_base": 50, 
@@ -10,7 +10,7 @@
     }, 
     {
         "pk": 2, 
-        "model": "hero.Quality", 
+        "model": "constant.Quality", 
         "fields": {
             "defense_base": 150, 
             "attack_base": 50, 
@@ -19,7 +19,7 @@
     }, 
     {
         "pk": 3, 
-        "model": "hero.Quality", 
+        "model": "constant.Quality", 
         "fields": {
             "defense_base": 150, 
             "attack_base": 50, 
@@ -28,7 +28,7 @@
     }, 
     {
         "pk": 4, 
-        "model": "hero.Quality", 
+        "model": "constant.Quality", 
         "fields": {
             "defense_base": 150, 
             "attack_base": 50, 
