@@ -32,7 +32,7 @@ class Hero(models.Model):
     skills = models.CharField(max_length=128, blank=True)
 
     def __unicode__(self):
-        return self.name
+        return u'<Hero %d>' % self.id
 
     @classmethod
     def random_items(cls, nums):
