@@ -7,6 +7,7 @@ Replace this with more appropriate tests for your application.
 
 from django.test import TestCase, TransactionTestCase
 
+import protomsg
 from protomsg import (
         RESPONSE_NOTIFY_TYPE,
         CommandResponse,
@@ -18,6 +19,9 @@ from protomsg import (
         GetHeroResponse,
         MergeHeroRequest,
         MergeHeroResponse,
+
+        SetFormationRequest,
+        SetFormationResponse,
         )
 
 from utils import app_test_helper
@@ -221,4 +225,47 @@ class MergeHeroTest(TransactionTestCase):
         using_hero_ids = [c.id for c in char_heros]
 
         self._merge_hero(using_hero_ids, 301)
+
+
+class FormationTest(TransactionTestCase):
+    def setUp(self):
+        Character.objects.create(account_id=1, server_id=1)
+        self.position = (
+                (1, True, 0), (2, True, 0), (3, False, 0),
+                (4, True, 0), (5, True, 0), (6, False, 0),
+                (7, True, 0), (8, True, 0), (9, False, 0),
+                )
+
+    def _set_formation(self, ret=0):
+        session = crypto.encrypt('1:1:1')
+        req = SetFormationRequest()
+        req.session = session
+        for pos in self.position:
+            p = req.positions.add()
+            p.pos, _, p.hero_id = pos
+
+        data = app_test_helper.pack_data(req)
+        res = app_test_helper.make_request('/formation/set/', data)
+        msgs = app_test_helper.unpack_data(res)
+
+        possible_ids = [
+                RESPONSE_NOTIFY_TYPE["SetFormationResponse"],
+                RESPONSE_NOTIFY_TYPE["FormationNotify"],
+                ]
+
+        for id_of_msg, len_of_msg, msg in msgs:
+            self.assertTrue(id_of_msg in possible_ids)
+            if id_of_msg == RESPONSE_NOTIFY_TYPE["SetFormationResponse"]:
+                data = MergeHeroResponse()
+                data.ParseFromString(msg)
+                self.assertEqual(data.ret, ret)
+
+            elif id_of_msg == RESPONSE_NOTIFY_TYPE["FormationNotify"]:
+                data = getattr(protomsg, "FormationNotify")()
+                data.ParseFromString(msg)
+                self.assertEqual(len(data.formation.positions), 9)
+
+    def test_set_formation(self):
+        self._set_formation()
+
 

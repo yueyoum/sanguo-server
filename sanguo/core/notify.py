@@ -1,5 +1,8 @@
+import base64
+
 from drives import redis_client
 from utils import pack_msg
+from core import DEFAULT
 import protomsg
 
 def character_notify(key, obj):
@@ -67,6 +70,18 @@ def get_hero_panel_notify(key, char_obj):
 
     redis_client.rpush(key, pack_msg(msg))
 
+
+def formation_notify(key, char_obj=None, formation=None):
+    msg = protomsg.FormationNotify()
+    if not formation:
+        formation = char_obj.formation
+        if not formation:
+            formation = DEFAULT.FORMATION
+
+    msg.formation.MergeFromString(base64.b64decode(formation))
+    redis_client.rpush(key, pack_msg(msg))
+
+
 def login_notify(key, char_obj, hero_objs=None):
     if not hero_objs:
         hero_objs = char_obj.char_heros.all()
@@ -74,5 +89,6 @@ def login_notify(key, char_obj, hero_objs=None):
     character_notify(key, char_obj)
     hero_notify(key, hero_objs)
     get_hero_panel_notify(key, char_obj)
+    formation_notify(key, char_obj=char_obj)
 
 

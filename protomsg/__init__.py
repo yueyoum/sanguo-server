@@ -2,6 +2,7 @@ from account_pb2 import *
 from hero_pb2 import *
 from world_pb2 import *
 from character_pb2 import *
+from formation_pb2 import *
 
 RESPONSE_NOTIFY_TYPE = {
     "CommandResponse": 50,
@@ -17,6 +18,8 @@ RESPONSE_NOTIFY_TYPE = {
     "GetHeroPanelNotify": 305,
     "GetHeroResponse": 321,
     "MergeHeroResponse": 323,
+    "SetFormationResponse": 401,
+    "FormationNotify": 402,
 }
 
 REQUEST_TYPE = {
@@ -26,6 +29,7 @@ REQUEST_TYPE = {
     200: "CreateCharacterRequest",
     320: "GetHeroRequest",
     322: "MergeHeroRequest",
+    400: "SetFormationRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -35,5 +39,6 @@ REQUEST_TYPE_REV = {
     "CreateCharacterRequest": 200,
     "GetHeroRequest": 320,
     "MergeHeroRequest": 322,
+    "SetFormationRequest": 400,
 }
 

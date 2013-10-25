@@ -1,4 +1,5 @@
 import random
+import base64
 
 from django.http import HttpResponse
 
@@ -9,10 +10,12 @@ from core import notify
 from core import GLOBAL
 from core import services
 
+import protomsg
 from protomsg import (
         CreateCharacterResponse,
         GetHeroResponse,
         MergeHeroResponse,
+        SetFormationResponse,
         )
 
 from utils import pack_msg
@@ -155,6 +158,28 @@ def merge_hero(request):
     notify.add_hero_notify(request._decrypted_session, [new_char_hero])
 
     response = MergeHeroResponse()
+    response.ret = 0
+
+    data = pack_msg(response)
+    return HttpResponse(data, content_type="text/plain")
+
+
+def set_formation(request):
+    req = request._proto
+    print req
+    _, _, char_id = request._decrypted_session.split(':')
+    char_id = int(char_id)
+
+    positions = req.positions
+    # TODO check positions
+
+    formation_msg = getattr(protomsg, "Formation")()
+    formation_msg.positions.MergeFrom(positions)
+    encoded_position = base64.b64encode(formation_msg.SerializeToString())
+    Character.objects.filter(id=char_id).update(formation=encoded_position)
+    notify.formation_notify(request._decrypted_session, formation=encoded_position)
+
+    response = SetFormationResponse()
     response.ret = 0
 
     data = pack_msg(response)
