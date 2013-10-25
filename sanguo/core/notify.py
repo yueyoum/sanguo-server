@@ -1,4 +1,4 @@
-from core import redis_client
+from drives import redis_client
 from utils import pack_msg
 import protomsg
 

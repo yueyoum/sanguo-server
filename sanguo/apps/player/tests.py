@@ -19,7 +19,7 @@ from models import User
 
 
 def teardown():
-    from core import redis_client
+    from core.drives import redis_client
     redis_client.flushdb()
 
 

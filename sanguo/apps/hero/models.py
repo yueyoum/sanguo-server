@@ -17,7 +17,7 @@ class Quality(models.Model):
 
 
 class Hero(models.Model):
-    quality_id = models.IntegerField()
+    quality_id = models.IntegerField(db_index=True)
 
     gem_worth = models.IntegerField(blank=True, null=True)
     gold_worth = models.IntegerField(blank=True, null=True)

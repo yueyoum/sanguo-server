@@ -7,7 +7,7 @@ import protomsg
 from protomsg import REQUEST_TYPE
 
 from core.exception import SanguoViewException
-from core import redis_client
+from core.drives import redis_client
 from utils import crypto
 from utils import pack_msg
 

@@ -17,7 +17,7 @@ from utils import app_test_helper as tests
 
 
 def teardown():
-    from core import redis_client
+    from core.drives import redis_client
     redis_client.flushdb()
 
 

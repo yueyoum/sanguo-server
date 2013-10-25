@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models import Max
 from django.conf import settings
 
-from core import redis_client
+from core.drives import redis_client
 
 class Character(models.Model):
     account_id = models.IntegerField(db_index=True)

@@ -1,6 +1,6 @@
 
 def _check_valid():
-    from core import redis_client
+    from core.drives import redis_client
     redis_client.ping()
 
 
