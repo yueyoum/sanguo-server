@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='hero.proto',
   package='Sanguo.protocol.hero',
-  serialized_pb='\n\nhero.proto\x12\x14Sanguo.protocol.hero\"\xc9\x01\n\x04Hero\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x13\n\x0boriginal_id\x18\x02 \x02(\x05\x12\r\n\x05level\x18\x03 \x02(\x05\x12\x0b\n\x03\x65xp\x18\x04 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x05 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x06 \x02(\x05\x12\n\n\x02hp\x18\x07 \x02(\x05\x12\x13\n\x0b\x61ttack_grow\x18\x08 \x02(\x05\x12\x14\n\x0c\x64\x65\x66\x65nse_grow\x18\t \x02(\x05\x12\x0f\n\x07hp_grow\x18\n \x02(\x05\x12\x0c\n\x04\x63irt\x18\x0b \x02(\x05\x12\r\n\x05\x64odge\x18\x0c \x02(\x05\"H\n\nHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\t\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"K\n\rAddHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\t\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"0\n\x10RemoveHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\t\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"N\n\x10UpdateHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\t\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero')
+  serialized_pb='\n\nhero.proto\x12\x14Sanguo.protocol.hero\"\xc9\x01\n\x04Hero\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x13\n\x0boriginal_id\x18\x02 \x02(\x05\x12\r\n\x05level\x18\x03 \x02(\x05\x12\x0b\n\x03\x65xp\x18\x04 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x05 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x06 \x02(\x05\x12\n\n\x02hp\x18\x07 \x02(\x05\x12\x13\n\x0b\x61ttack_grow\x18\x08 \x02(\x05\x12\x14\n\x0c\x64\x65\x66\x65nse_grow\x18\t \x02(\x05\x12\x0f\n\x07hp_grow\x18\n \x02(\x05\x12\x0c\n\x04\x63irt\x18\x0b \x02(\x05\x12\r\n\x05\x64odge\x18\x0c \x02(\x05\"H\n\nHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\t\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"K\n\rAddHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\t\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"0\n\x10RemoveHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\t\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"N\n\x10UpdateHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\t\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"\xbd\x01\n\x12GetHeroPanelNotify\x12\x0f\n\x07session\x18\x01 \x02(\t\x12\x43\n\tget_heros\x18\x02 \x03(\x0b\x32\x30.Sanguo.protocol.hero.GetHeroPanelNotify.GetHero\x1aQ\n\x07GetHero\x12\x0c\n\x04mode\x18\x01 \x02(\x05\x12\x0c\n\x04\x63ost\x18\x03 \x02(\x05\x12\x12\n\nfree_times\x18\x04 \x02(\x05\x12\x16\n\x0emax_free_times\x18\x05 \x02(\x05\"<\n\x0eGetHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\t\x12\x0c\n\x04mode\x18\x02 \x02(\x05\x12\x0b\n\x03ten\x18\x03 \x02(\x08\"Q\n\x0fGetHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\t\x12\x0c\n\x04mode\x18\x03 \x01(\x05\x12\x12\n\nfree_times\x18\x04 \x01(\x05\";\n\x10MergeHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\t\x12\x16\n\x0eusing_hero_ids\x18\x02 \x03(\x05\"1\n\x11MergeHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\t')
 
 
 
@@ -262,14 +262,265 @@ _UPDATEHERONOTIFY = _descriptor.Descriptor(
   serialized_end=519,
 )
 
+
+_GETHEROPANELNOTIFY_GETHERO = _descriptor.Descriptor(
+  name='GetHero',
+  full_name='Sanguo.protocol.hero.GetHeroPanelNotify.GetHero',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mode', full_name='Sanguo.protocol.hero.GetHeroPanelNotify.GetHero.mode', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='cost', full_name='Sanguo.protocol.hero.GetHeroPanelNotify.GetHero.cost', index=1,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='free_times', full_name='Sanguo.protocol.hero.GetHeroPanelNotify.GetHero.free_times', index=2,
+      number=4, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='max_free_times', full_name='Sanguo.protocol.hero.GetHeroPanelNotify.GetHero.max_free_times', index=3,
+      number=5, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=630,
+  serialized_end=711,
+)
+
+_GETHEROPANELNOTIFY = _descriptor.Descriptor(
+  name='GetHeroPanelNotify',
+  full_name='Sanguo.protocol.hero.GetHeroPanelNotify',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.hero.GetHeroPanelNotify.session', index=0,
+      number=1, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='get_heros', full_name='Sanguo.protocol.hero.GetHeroPanelNotify.get_heros', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_GETHEROPANELNOTIFY_GETHERO, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=522,
+  serialized_end=711,
+)
+
+
+_GETHEROREQUEST = _descriptor.Descriptor(
+  name='GetHeroRequest',
+  full_name='Sanguo.protocol.hero.GetHeroRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.hero.GetHeroRequest.session', index=0,
+      number=1, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='mode', full_name='Sanguo.protocol.hero.GetHeroRequest.mode', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='ten', full_name='Sanguo.protocol.hero.GetHeroRequest.ten', index=2,
+      number=3, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=713,
+  serialized_end=773,
+)
+
+
+_GETHERORESPONSE = _descriptor.Descriptor(
+  name='GetHeroResponse',
+  full_name='Sanguo.protocol.hero.GetHeroResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.hero.GetHeroResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.hero.GetHeroResponse.session', index=1,
+      number=2, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='mode', full_name='Sanguo.protocol.hero.GetHeroResponse.mode', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='free_times', full_name='Sanguo.protocol.hero.GetHeroResponse.free_times', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=775,
+  serialized_end=856,
+)
+
+
+_MERGEHEROREQUEST = _descriptor.Descriptor(
+  name='MergeHeroRequest',
+  full_name='Sanguo.protocol.hero.MergeHeroRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.hero.MergeHeroRequest.session', index=0,
+      number=1, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='using_hero_ids', full_name='Sanguo.protocol.hero.MergeHeroRequest.using_hero_ids', index=1,
+      number=2, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=858,
+  serialized_end=917,
+)
+
+
+_MERGEHERORESPONSE = _descriptor.Descriptor(
+  name='MergeHeroResponse',
+  full_name='Sanguo.protocol.hero.MergeHeroResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.hero.MergeHeroResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.hero.MergeHeroResponse.session', index=1,
+      number=2, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=919,
+  serialized_end=968,
+)
+
 _HERONOTIFY.fields_by_name['heros'].message_type = _HERO
 _ADDHERONOTIFY.fields_by_name['heros'].message_type = _HERO
 _UPDATEHERONOTIFY.fields_by_name['heros'].message_type = _HERO
+_GETHEROPANELNOTIFY_GETHERO.containing_type = _GETHEROPANELNOTIFY;
+_GETHEROPANELNOTIFY.fields_by_name['get_heros'].message_type = _GETHEROPANELNOTIFY_GETHERO
 DESCRIPTOR.message_types_by_name['Hero'] = _HERO
 DESCRIPTOR.message_types_by_name['HeroNotify'] = _HERONOTIFY
 DESCRIPTOR.message_types_by_name['AddHeroNotify'] = _ADDHERONOTIFY
 DESCRIPTOR.message_types_by_name['RemoveHeroNotify'] = _REMOVEHERONOTIFY
 DESCRIPTOR.message_types_by_name['UpdateHeroNotify'] = _UPDATEHERONOTIFY
+DESCRIPTOR.message_types_by_name['GetHeroPanelNotify'] = _GETHEROPANELNOTIFY
+DESCRIPTOR.message_types_by_name['GetHeroRequest'] = _GETHEROREQUEST
+DESCRIPTOR.message_types_by_name['GetHeroResponse'] = _GETHERORESPONSE
+DESCRIPTOR.message_types_by_name['MergeHeroRequest'] = _MERGEHEROREQUEST
+DESCRIPTOR.message_types_by_name['MergeHeroResponse'] = _MERGEHERORESPONSE
 
 class Hero(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
@@ -300,6 +551,42 @@ class UpdateHeroNotify(_message.Message):
   DESCRIPTOR = _UPDATEHERONOTIFY
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.hero.UpdateHeroNotify)
+
+class GetHeroPanelNotify(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+
+  class GetHero(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+    DESCRIPTOR = _GETHEROPANELNOTIFY_GETHERO
+
+    # @@protoc_insertion_point(class_scope:Sanguo.protocol.hero.GetHeroPanelNotify.GetHero)
+  DESCRIPTOR = _GETHEROPANELNOTIFY
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.hero.GetHeroPanelNotify)
+
+class GetHeroRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _GETHEROREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.hero.GetHeroRequest)
+
+class GetHeroResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _GETHERORESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.hero.GetHeroResponse)
+
+class MergeHeroRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _MERGEHEROREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.hero.MergeHeroRequest)
+
+class MergeHeroResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _MERGEHERORESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.hero.MergeHeroResponse)
 
 
 # @@protoc_insertion_point(module_scope)

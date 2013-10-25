@@ -14,6 +14,9 @@ RESPONSE_NOTIFY_TYPE = {
     "AddHeroNotify": 301,
     "RemoveHeroNotify": 303,
     "UpdateHeroNotify": 304,
+    "GetHeroPanelNotify": 305,
+    "GetHeroResponse": 321,
+    "MergeHeroResponse": 323,
 }
 
 REQUEST_TYPE = {
@@ -21,6 +24,8 @@ REQUEST_TYPE = {
     102: "GetServerListRequest",
     105: "RegisterRequest",
     200: "CreateCharacterRequest",
+    320: "GetHeroRequest",
+    322: "MergeHeroRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -28,5 +33,7 @@ REQUEST_TYPE_REV = {
     "GetServerListRequest": 102,
     "RegisterRequest": 105,
     "CreateCharacterRequest": 200,
+    "GetHeroRequest": 320,
+    "MergeHeroRequest": 322,
 }
 
