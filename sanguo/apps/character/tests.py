@@ -51,19 +51,11 @@ class CreateCharacterTest(TransactionTestCase):
         res = app_test_helper.make_request('/char/create/', data)
 
         msgs = app_test_helper.unpack_data(res)
-        if len(msgs) == 1:
-            id_of_msg, len_of_msg, msg = msgs[0]
-            self.assertEqual(id_of_msg, RESPONSE_NOTIFY_TYPE["CommandResponse"])
-
-            data = CommandResponse()
-            data.ParseFromString(msg)
-            self.assertEqual(data.ret, ret)
-            self.assertEqual(data.session, session)
-        else:
-            for id_of_msg, len_of_msg, msg in msgs:
-                self.assertTrue(
-                        id_of_msg in [RESPONSE_NOTIFY_TYPE["CharacterNotify"], RESPONSE_NOTIFY_TYPE["HeroNotify"], RESPONSE_NOTIFY_TYPE["CreateCharacterResponse"]]
-                        )
+        for id_of_msg, len_of_msg, msg in msgs:
+            if id_of_msg == RESPONSE_NOTIFY_TYPE["CommandResponse"]:
+                data = CommandResponse()
+                data.ParseFromString(msg)
+                self.assertEqual(data.ret, ret)
 
     def test_normal_create(self):
         self._create(1, 2, "123", 0)

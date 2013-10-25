@@ -117,24 +117,11 @@ class LoginTest(TransactionTestCase):
 
         msgs = tests.unpack_data(res)
 
-        if len(msgs) == 1:
-            id_of_msg, len_of_msg, msg = msgs[0]
-            self.assertEqual(id_of_msg, RESPONSE_NOTIFY_TYPE["StartGameResponse"])
-            self.assertEqual(len_of_msg, len(msg))
-
-            data = StartGameResponse()
-            data.ParseFromString(msg)
-            self.assertEqual(data.ret, ret)
-            if data.ret == 0:
-                self.assertTrue(data.need_create_new_char)
-        else:
-            for id_of_msg, len_of_msg, msg in msgs:
-                self.assertTrue(
-                        id_of_msg in [RESPONSE_NOTIFY_TYPE["StartGameResponse"],
-                            RESPONSE_NOTIFY_TYPE["CharacterNotify"],
-                            RESPONSE_NOTIFY_TYPE["HeroNotify"],
-                            ]
-                        )
+        for id_of_msg, len_of_msg, msg in msgs:
+            if id_of_msg == RESPONSE_NOTIFY_TYPE["StartGameResponse"]:
+                data = StartGameResponse()
+                data.ParseFromString(msg)
+                self.assertEqual(data.ret, ret)
 
 
     def test_regular_login_with_non_exists(self):

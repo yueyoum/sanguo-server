@@ -52,11 +52,27 @@ def update_hero_notify(key, objs):
     hero_notify(key, objs, "UpdateHeroNotify")
 
 
+def get_hero_panel_notify(key, char_obj):
+    msg = protomsg.GetHeroPanelNotify()
+    # FIXME
+    data = [
+            (1, 100, 0, 0),
+            (2, 100, 5, 10),
+            (3, 100, 10, 10),
+            ]
+
+    for d in data:
+        m = msg.get_heros.add()
+        m.mode, m.cost, m.free_times, m.max_free_times = d
+
+    redis_client.rpush(key, pack_msg(msg))
+
 def login_notify(key, char_obj, hero_objs=None):
     if not hero_objs:
         hero_objs = char_obj.char_heros.all()
 
     character_notify(key, char_obj)
     hero_notify(key, hero_objs)
+    get_hero_panel_notify(key, char_obj)
 
 
