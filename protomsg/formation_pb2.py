@@ -13,51 +13,9 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='formation.proto',
   package='Sanguo.protocol.formation',
-  serialized_pb='\n\x0f\x66ormation.proto\x12\x19Sanguo.protocol.formation\"8\n\x08Position\x12\x0b\n\x03pos\x18\x01 \x02(\x05\x12\x0e\n\x06\x65nable\x18\x02 \x01(\x08\x12\x0f\n\x07hero_id\x18\x03 \x01(\x05\"C\n\tFormation\x12\x36\n\tpositions\x18\x01 \x03(\x0b\x32#.Sanguo.protocol.formation.Position\"^\n\x13SetFormationRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x36\n\tpositions\x18\x02 \x03(\x0b\x32#.Sanguo.protocol.formation.Position\"4\n\x14SetFormationResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"[\n\x0f\x46ormationNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x37\n\tformation\x18\x02 \x02(\x0b\x32$.Sanguo.protocol.formation.Formation')
+  serialized_pb='\n\x0f\x66ormation.proto\x12\x19Sanguo.protocol.formation\".\n\tFormation\x12\x0f\n\x07\x61\x63\x63ount\x18\x01 \x02(\x05\x12\x10\n\x08hero_ids\x18\x02 \x03(\x05\"8\n\x13SetFormationRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08hero_ids\x18\x02 \x03(\x05\"4\n\x14SetFormationResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"[\n\x0f\x46ormationNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x37\n\tformation\x18\x02 \x02(\x0b\x32$.Sanguo.protocol.formation.Formation')
 
 
-
-
-_POSITION = _descriptor.Descriptor(
-  name='Position',
-  full_name='Sanguo.protocol.formation.Position',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='pos', full_name='Sanguo.protocol.formation.Position.pos', index=0,
-      number=1, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='enable', full_name='Sanguo.protocol.formation.Position.enable', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='hero_id', full_name='Sanguo.protocol.formation.Position.hero_id', index=2,
-      number=3, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=46,
-  serialized_end=102,
-)
 
 
 _FORMATION = _descriptor.Descriptor(
@@ -68,8 +26,15 @@ _FORMATION = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='positions', full_name='Sanguo.protocol.formation.Formation.positions', index=0,
-      number=1, type=11, cpp_type=10, label=3,
+      name='account', full_name='Sanguo.protocol.formation.Formation.account', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='hero_ids', full_name='Sanguo.protocol.formation.Formation.hero_ids', index=1,
+      number=2, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -83,8 +48,8 @@ _FORMATION = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=104,
-  serialized_end=171,
+  serialized_start=46,
+  serialized_end=92,
 )
 
 
@@ -103,8 +68,8 @@ _SETFORMATIONREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='positions', full_name='Sanguo.protocol.formation.SetFormationRequest.positions', index=1,
-      number=2, type=11, cpp_type=10, label=3,
+      name='hero_ids', full_name='Sanguo.protocol.formation.SetFormationRequest.hero_ids', index=1,
+      number=2, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -118,8 +83,8 @@ _SETFORMATIONREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=173,
-  serialized_end=267,
+  serialized_start=94,
+  serialized_end=150,
 )
 
 
@@ -153,8 +118,8 @@ _SETFORMATIONRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=269,
-  serialized_end=321,
+  serialized_start=152,
+  serialized_end=204,
 )
 
 
@@ -188,24 +153,15 @@ _FORMATIONNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=323,
-  serialized_end=414,
+  serialized_start=206,
+  serialized_end=297,
 )
 
-_FORMATION.fields_by_name['positions'].message_type = _POSITION
-_SETFORMATIONREQUEST.fields_by_name['positions'].message_type = _POSITION
 _FORMATIONNOTIFY.fields_by_name['formation'].message_type = _FORMATION
-DESCRIPTOR.message_types_by_name['Position'] = _POSITION
 DESCRIPTOR.message_types_by_name['Formation'] = _FORMATION
 DESCRIPTOR.message_types_by_name['SetFormationRequest'] = _SETFORMATIONREQUEST
 DESCRIPTOR.message_types_by_name['SetFormationResponse'] = _SETFORMATIONRESPONSE
 DESCRIPTOR.message_types_by_name['FormationNotify'] = _FORMATIONNOTIFY
-
-class Position(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _POSITION
-
-  # @@protoc_insertion_point(class_scope:Sanguo.protocol.formation.Position)
 
 class Formation(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType

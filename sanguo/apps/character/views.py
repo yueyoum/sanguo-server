@@ -170,14 +170,20 @@ def set_formation(request):
     _, _, char_id = request._decrypted_session.split(':')
     char_id = int(char_id)
 
-    positions = req.positions
+    hero_ids = req.hero_ids
     # TODO check positions
 
+    char_obj = Character.objects.only('formation').filter(id=char_id)
+    old_formation = char_obj[0].formation
+
     formation_msg = getattr(protomsg, "Formation")()
-    formation_msg.positions.MergeFrom(positions)
-    encoded_position = base64.b64encode(formation_msg.SerializeToString())
-    Character.objects.filter(id=char_id).update(formation=encoded_position)
-    notify.formation_notify(request._decrypted_session, formation=encoded_position)
+    formation_msg.ParseFromString(base64.b64decode(old_formation))
+
+    formation_msg.ClearField('hero_ids')
+    formation_msg.hero_ids.MergeFrom(hero_ids)
+    encoded_formation = base64.b64encode(formation_msg.SerializeToString())
+    Character.objects.filter(id=char_id).update(formation=encoded_formation)
+    notify.formation_notify(request._decrypted_session, formation=encoded_formation)
 
     response = SetFormationResponse()
     response.ret = 0
