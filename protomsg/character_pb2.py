@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='character.proto',
   package='Sanguo.protocol.character',
-  serialized_pb='\n\x0f\x63haracter.proto\x12\x19Sanguo.protocol.character\"y\n\tCharacter\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x0c\n\x04gold\x18\x03 \x02(\x05\x12\x0b\n\x03gem\x18\x04 \x02(\x05\x12\r\n\x05level\x18\x05 \x02(\x05\x12\x15\n\rcurrent_honor\x18\x06 \x02(\x05\x12\x11\n\tmax_honor\x18\x07 \x02(\x05\"V\n\x0f\x43haracterNotify\x12\x0f\n\x07session\x18\x01 \x02(\t\x12\x32\n\x04\x63har\x18\x02 \x02(\x0b\x32$.Sanguo.protocol.character.Character\"7\n\x16\x43reateCharacterRequest\x12\x0f\n\x07session\x18\x01 \x02(\t\x12\x0c\n\x04name\x18\x02 \x02(\t\"7\n\x17\x43reateCharacterResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\t')
+  serialized_pb='\n\x0f\x63haracter.proto\x12\x19Sanguo.protocol.character\"y\n\tCharacter\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x0c\n\x04gold\x18\x03 \x02(\x05\x12\x0b\n\x03gem\x18\x04 \x02(\x05\x12\r\n\x05level\x18\x05 \x02(\x05\x12\x15\n\rcurrent_honor\x18\x06 \x02(\x05\x12\x11\n\tmax_honor\x18\x07 \x02(\x05\"V\n\x0f\x43haracterNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x04\x63har\x18\x02 \x02(\x0b\x32$.Sanguo.protocol.character.Character\"7\n\x16\x43reateCharacterRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0c\n\x04name\x18\x02 \x02(\t\"7\n\x17\x43reateCharacterResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
 
 
 
@@ -97,8 +97,8 @@ _CHARACTERNOTIFY = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='session', full_name='Sanguo.protocol.character.CharacterNotify.session', index=0,
-      number=1, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -132,8 +132,8 @@ _CREATECHARACTERREQUEST = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='session', full_name='Sanguo.protocol.character.CreateCharacterRequest.session', index=0,
-      number=1, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -174,8 +174,8 @@ _CREATECHARACTERRESPONSE = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='session', full_name='Sanguo.protocol.character.CreateCharacterResponse.session', index=1,
-      number=2, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),

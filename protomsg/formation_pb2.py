@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='formation.proto',
   package='Sanguo.protocol.formation',
-  serialized_pb='\n\x0f\x66ormation.proto\x12\x19Sanguo.protocol.formation\"8\n\x08Position\x12\x0b\n\x03pos\x18\x01 \x02(\x05\x12\x0e\n\x06\x65nable\x18\x02 \x01(\x08\x12\x0f\n\x07hero_id\x18\x03 \x01(\x05\"C\n\tFormation\x12\x36\n\tpositions\x18\x01 \x03(\x0b\x32#.Sanguo.protocol.formation.Position\"^\n\x13SetFormationRequest\x12\x0f\n\x07session\x18\x01 \x02(\t\x12\x36\n\tpositions\x18\x02 \x03(\x0b\x32#.Sanguo.protocol.formation.Position\"4\n\x14SetFormationResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\t\"[\n\x0f\x46ormationNotify\x12\x0f\n\x07session\x18\x01 \x02(\t\x12\x37\n\tformation\x18\x02 \x02(\x0b\x32$.Sanguo.protocol.formation.Formation')
+  serialized_pb='\n\x0f\x66ormation.proto\x12\x19Sanguo.protocol.formation\"8\n\x08Position\x12\x0b\n\x03pos\x18\x01 \x02(\x05\x12\x0e\n\x06\x65nable\x18\x02 \x01(\x08\x12\x0f\n\x07hero_id\x18\x03 \x01(\x05\"C\n\tFormation\x12\x36\n\tpositions\x18\x01 \x03(\x0b\x32#.Sanguo.protocol.formation.Position\"^\n\x13SetFormationRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x36\n\tpositions\x18\x02 \x03(\x0b\x32#.Sanguo.protocol.formation.Position\"4\n\x14SetFormationResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"[\n\x0f\x46ormationNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x37\n\tformation\x18\x02 \x02(\x0b\x32$.Sanguo.protocol.formation.Formation')
 
 
 
@@ -97,8 +97,8 @@ _SETFORMATIONREQUEST = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='session', full_name='Sanguo.protocol.formation.SetFormationRequest.session', index=0,
-      number=1, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -139,8 +139,8 @@ _SETFORMATIONRESPONSE = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='session', full_name='Sanguo.protocol.formation.SetFormationResponse.session', index=1,
-      number=2, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -167,8 +167,8 @@ _FORMATIONNOTIFY = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='session', full_name='Sanguo.protocol.formation.FormationNotify.session', index=0,
-      number=1, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
