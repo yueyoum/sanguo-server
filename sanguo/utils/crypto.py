@@ -1,5 +1,4 @@
 # about Crypto module: https://www.dlitz.net/software/pycrypto/doc/
-from base64 import b64encode, b64decode
 import time
 
 from Crypto.Cipher import AES
@@ -29,16 +28,10 @@ def encrypt(text, key=KEY, prefix=PREFIX):
     text = '%s%s' % (text, rest * ' ')
 
     obj = AES.new(key, AES.MODE_ECB)
-    res = obj.encrypt(text)
-    return b64encode(res)
+    return obj.encrypt(text)
 
 
 def decrypt(text, key=KEY, prefix=PREFIX):
-    try:
-        text = b64decode(text)
-    except TypeError:
-        raise BadEncryptedText()
-
     if len(text) % BLOCK_SIZE != 0:
         raise BadEncryptedText()
 
@@ -65,5 +58,4 @@ def decrypt_with_expire(text, expire_in, key=KEY, prefix=PREFIX):
         raise ExpiredText()
 
     return real_text
-
 
