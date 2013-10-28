@@ -75,7 +75,7 @@ class CreateCharacterTest(TransactionTestCase):
 
 
 class GetHeroTest(TransactionTestCase):
-    fixtures = ['hero.json']
+    fixtures = ['hero_quality.json', 'hero.json', 'get_hero.json']
 
     def setUp(self):
         Character.objects.create(

@@ -2,7 +2,8 @@
 
 data="server_list.json
       hero_quality.json
-      hero.json"
+      hero.json
+      get_hero.json"
 
 for d in $data
 do

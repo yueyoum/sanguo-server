@@ -72,10 +72,8 @@ def get_hero(request):
     # TODO check cost
 
     prob = random.randint(1, 100)
-    get_probs = info['prob'].items()
-    get_probs.sort(key=lambda item: item[1])
 
-    for target_quality, target_prob in get_probs:
+    for target_quality, target_prob in info['prob']:
         if target_prob >= prob:
             break
 

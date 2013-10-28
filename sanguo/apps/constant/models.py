@@ -1,4 +1,3 @@
-# -*- coding:utf-8 -*-
 from django.db import models
 
  
@@ -16,7 +15,7 @@ class Quality(models.Model):
 
 
 class Hero(models.Model):
-    quality_id = models.IntegerField(db_index=True)
+    quality_id = models.IntegerField()
 
     gem_worth = models.IntegerField(blank=True, null=True)
     gold_worth = models.IntegerField(blank=True, null=True)
@@ -35,4 +34,13 @@ class Hero(models.Model):
 
     class Meta:
         db_table = 'c_hero'
+
+
+class GetHero(models.Model):
+    mode = models.IntegerField()
+    gem = models.IntegerField()
+    quality_and_prob = models.TextField()
+
+    class Meta:
+        db_table = 'c_get_hero'
 

@@ -1,3 +1,3 @@
-from _global import GLOBAL
+import _global as GLOBAL
 import default as DEFAULT
 
