@@ -1,5 +1,6 @@
 from django.contrib import admin
 from models import Character, CharHero
+from core import GLOBAL
 
 
 class CharacterAdmin(admin.ModelAdmin):
@@ -11,8 +12,12 @@ class CharacterAdmin(admin.ModelAdmin):
 
 class CharHeroAdmin(admin.ModelAdmin):
     list_display = ('id', 'char', 'hero_id',
-            'level', 'exp',
+            'Level', 'exp',
             )
+
+    def Level(self, obj):
+        l, e, m = GLOBAL.LEVEL_TOTALEXP[obj.exp]
+        return l
 
     list_filter = ('char',)
 

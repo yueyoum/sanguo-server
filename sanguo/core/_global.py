@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from utils.decorate import LazyDict
+from definition import LEVEL_TOTALEXP
 
 LINE_SEP = "\r\n"
 

@@ -3,6 +3,7 @@ import base64
 from drives import redis_client
 from utils import pack_msg
 from core import DEFAULT
+from core.hero import Hero
 import protomsg
 
 def character_notify(key, obj):
@@ -21,17 +22,19 @@ def hero_notify(key, objs, message_name="HeroNotify"):
     Msg = getattr(protomsg, message_name)
     data = Msg()
 
+    objs = [Hero(charhero_obj=o) for o in objs]
+
     for obj in objs:
         g = data.heros.add()
         g.id = obj.id
-        g.original_id = obj.hero_id
+        g.original_id = obj.original_id
         g.level = obj.level
-        g.exp = obj.exp
+        g.exp = obj.current_exp
 
         # FIXME
-        g.attack = 100
-        g.defense = 100
-        g.hp = 100
+        g.attack = obj.attack
+        g.defense = obj.defense
+        g.hp = obj.hp
 
         g.attack_grow = 100
         g.defense_grow = 100
