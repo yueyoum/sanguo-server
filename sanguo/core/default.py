@@ -4,12 +4,12 @@ from protomsg import Formation
 
 
 def _default_formation():
-    account = 3
+    count = 3
     hero_ids = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
     f = Formation()
-    f.account = account
+    f.count = count
     f.hero_ids.extend(hero_ids)
 
     data = f.SerializeToString()

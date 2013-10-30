@@ -27,8 +27,8 @@ from protomsg import (
 from utils import app_test_helper
 from models import Character, CharHero
 from utils import crypto
+from core import GLOBAL
 
-from apps.constant.models import Hero
 
 def teardown():
     from core.drives import redis_client
@@ -36,8 +36,6 @@ def teardown():
 
 
 class CreateCharacterTest(TransactionTestCase):
-    fixtures = ['hero.json', ]
-
     def setUp(self):
         Character.objects.create(
                 account_id = 1,
@@ -75,7 +73,7 @@ class CreateCharacterTest(TransactionTestCase):
 
 
 class GetHeroTest(TransactionTestCase):
-    fixtures = ['hero_quality.json', 'hero.json', 'get_hero.json']
+    fixtures = ['get_hero.json']
 
     def setUp(self):
         Character.objects.create(
@@ -122,8 +120,6 @@ class GetHeroTest(TransactionTestCase):
 
 
 class MergeHeroTest(TransactionTestCase):
-    fixtures = ['hero.json']
-
     def setUp(self):
         Character.objects.create(
                 account_id = 1,
@@ -156,7 +152,7 @@ class MergeHeroTest(TransactionTestCase):
                 self.assertEqual(data.ret, ret)
 
     def test_normal_two_merge(self):
-        one_heros = Hero.objects.filter(quality_id=1)[:2].values_list('id', flat=True)
+        one_heros = GLOBAL.HEROS.get_hero_ids_by_quality(1)[:2]
         char_heros_list = [
                 CharHero(char_id=1, hero_id=h) for h in one_heros
                 ]
@@ -171,7 +167,7 @@ class MergeHeroTest(TransactionTestCase):
                 )
 
     def test_normal_eight_merge(self):
-        two_heros = Hero.objects.filter(quality_id=2)[:8].values_list('id', flat=True)
+        two_heros = GLOBAL.HEROS.get_hero_ids_by_quality(2)[:8]
         char_heros_list = [
                 CharHero(char_id=1, hero_id=h) for h in two_heros
                 ]
@@ -186,7 +182,7 @@ class MergeHeroTest(TransactionTestCase):
                 )
 
     def test_error_eight_merge(self):
-        two_heros = Hero.objects.filter(quality_id=1)[:8].values_list('id', flat=True)
+        two_heros = GLOBAL.HEROS.get_hero_ids_by_quality(1)[:8]
         char_heros_list = [
                 CharHero(char_id=1, hero_id=h) for h in two_heros
                 ]
@@ -201,7 +197,7 @@ class MergeHeroTest(TransactionTestCase):
         self._merge_hero([100, 101], 300)
 
     def test_merge_with_three_one(self):
-        one_heros = Hero.objects.filter(quality_id=1)[:3].values_list('id', flat=True)
+        one_heros = GLOBAL.HEROS.get_hero_ids_by_quality(1)[:3]
         char_heros_list = [
                 CharHero(char_id=1, hero_id=h) for h in one_heros
                 ]
@@ -211,8 +207,8 @@ class MergeHeroTest(TransactionTestCase):
         self._merge_hero(using_hero_ids, 302)
 
     def test_merge_with_different_quality(self):
-        one_heros = Hero.objects.filter(quality_id=1)[:3].values_list('id', flat=True)
-        two_heros = Hero.objects.filter(quality_id=2)[:5].values_list('id', flat=True)
+        one_heros = GLOBAL.HEROS.get_hero_ids_by_quality(1)[:3]
+        two_heros = GLOBAL.HEROS.get_hero_ids_by_quality(2)[:5]
         one_heros = list(one_heros)
         one_heros.extend(two_heros)
 

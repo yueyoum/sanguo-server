@@ -31,7 +31,7 @@ class Character(models.Model):
 
 class CharHero(models.Model):
     char = models.ForeignKey(Character, related_name='char_heros')
-    hero_id = models.IntegerField()
+    hero_id = models.CharField(max_length=64)
     exp = models.IntegerField(default=0)
 
     def __unicode__(self):

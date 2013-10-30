@@ -8,7 +8,6 @@ from models import Character, CharHero
 from core.exception import SanguoViewException
 from core import notify
 from core import GLOBAL
-from core import services
 
 import protomsg
 from protomsg import (
@@ -45,9 +44,9 @@ def create_character(request):
             name = req.name
             )
 
-    init_heros = services.get_random_heros(3)
+    init_hero_ids = GLOBAL.HEROS.get_random_hero_ids(3)
     char_heros_list = [
-            CharHero(char=char, hero_id=hero["id"]) for hero in init_heros
+            CharHero(char=char, hero_id=hid) for hid in init_hero_ids
             ]
     char_heros = CharHero.multi_create(char_heros_list)
 
@@ -79,15 +78,15 @@ def get_hero(request):
 
     print "prob =", prob, "target_quality =", target_quality
 
-    hero_list = services.get_hero_by_quality(target_quality)
+    hero_id_list = GLOBAL.HEROS.get_hero_ids_by_quality(target_quality)
 
     if req.ten:
-        heros = [random.choice(hero_list) for i in range(10)]
+        heros = [random.choice(hero_id_list) for i in range(10)]
     else:
-        heros = [random.choice(hero_list)]
+        heros = [random.choice(hero_id_list)]
     
     char_heros_list = [
-            CharHero(char_id=char_id, hero_id=hero["id"]) for hero in heros
+            CharHero(char_id=char_id, hero_id=hid) for hid in heros
             ]
 
     char_heros = CharHero.multi_create(char_heros_list)
@@ -119,7 +118,7 @@ def merge_hero(request):
         notify.hero_notify(request._decrypted_session, hero_objs)
         raise SanguoViewException(300, "MergeHeroResponse")
 
-    original_quality = [GLOBAL.HEROS[hid]['quality_id'] for hid in original_ids]
+    original_quality = [GLOBAL.HEROS[hid]['quality'] for hid in original_ids]
 
     if len(set(original_quality)) != 1:
         raise SanguoViewException(301, "MergeHeroResponse")
@@ -134,7 +133,7 @@ def merge_hero(request):
         raise SanguoViewException(302, "MergeHeroResponse")
 
 
-    all_hero_ids = GLOBAL.HEROS.keys()
+    all_hero_ids = GLOBAL.HEROS.all_ids()
     if original_quality[0] == 1:
         while True:
             choosing_id = random.choice(all_hero_ids)

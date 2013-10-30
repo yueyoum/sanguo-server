@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='formation.proto',
   package='Sanguo.protocol.formation',
-  serialized_pb='\n\x0f\x66ormation.proto\x12\x19Sanguo.protocol.formation\".\n\tFormation\x12\x0f\n\x07\x61\x63\x63ount\x18\x01 \x02(\x05\x12\x10\n\x08hero_ids\x18\x02 \x03(\x05\"8\n\x13SetFormationRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08hero_ids\x18\x02 \x03(\x05\"4\n\x14SetFormationResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"[\n\x0f\x46ormationNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x37\n\tformation\x18\x02 \x02(\x0b\x32$.Sanguo.protocol.formation.Formation')
+  serialized_pb='\n\x0f\x66ormation.proto\x12\x19Sanguo.protocol.formation\",\n\tFormation\x12\r\n\x05\x63ount\x18\x01 \x02(\x05\x12\x10\n\x08hero_ids\x18\x02 \x03(\x05\"8\n\x13SetFormationRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08hero_ids\x18\x02 \x03(\x05\"4\n\x14SetFormationResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"[\n\x0f\x46ormationNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x37\n\tformation\x18\x02 \x02(\x0b\x32$.Sanguo.protocol.formation.Formation')
 
 
 
@@ -26,7 +26,7 @@ _FORMATION = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='account', full_name='Sanguo.protocol.formation.Formation.account', index=0,
+      name='count', full_name='Sanguo.protocol.formation.Formation.count', index=0,
       number=1, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -49,7 +49,7 @@ _FORMATION = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=46,
-  serialized_end=92,
+  serialized_end=90,
 )
 
 
@@ -83,8 +83,8 @@ _SETFORMATIONREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=94,
-  serialized_end=150,
+  serialized_start=92,
+  serialized_end=148,
 )
 
 
@@ -118,8 +118,8 @@ _SETFORMATIONRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=152,
-  serialized_end=204,
+  serialized_start=150,
+  serialized_end=202,
 )
 
 
@@ -153,8 +153,8 @@ _FORMATIONNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=206,
-  serialized_end=297,
+  serialized_start=204,
+  serialized_end=295,
 )
 
 _FORMATIONNOTIFY.fields_by_name['formation'].message_type = _FORMATION

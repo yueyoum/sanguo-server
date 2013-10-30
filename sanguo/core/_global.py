@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from utils.decorate import LazyDict
-from definition import LEVEL_TOTALEXP
+from preset import *
 
 LINE_SEP = "\r\n"
 
@@ -42,7 +42,7 @@ def _get_heros():
 
 
 
-HEROS = _all_heros()
+# HEROS = _all_heros()
 GET_HERO = _get_heros()
 
 

@@ -1,4 +1,4 @@
-from definition import LEVEL_TOTALEXP
+from preset import LEVEL_TOTALEXP
 
 def test_level_totalexp():
     level, current_exp, max_exp = LEVEL_TOTALEXP[1]

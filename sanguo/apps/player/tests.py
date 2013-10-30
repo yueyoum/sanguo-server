@@ -16,6 +16,7 @@ from protomsg import (
         )
 from utils import app_test_helper as tests
 from models import User
+from core import GLOBAL
 
 
 def teardown():
@@ -143,7 +144,7 @@ class LoginTest(TransactionTestCase):
 
         CharHero.objects.create(
                 char = char,
-                hero_id = 1
+                hero_id = GLOBAL.HEROS.all_ids()[0]
                 )
 
         self._regular_login('123@456.com', '123456', 0)

@@ -30,6 +30,7 @@ def hero_notify(key, objs, message_name="HeroNotify"):
         g.original_id = obj.original_id
         g.level = obj.level
         g.exp = obj.current_exp
+        g.next_level_exp = obj.next_level_exp
 
         # FIXME
         g.attack = obj.attack

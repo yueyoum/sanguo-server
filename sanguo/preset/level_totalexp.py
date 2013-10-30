@@ -1,9 +1,20 @@
-from level_totalexp import level_totalexp_dict
+import os
+import csv
 
-class _LevelTotalExp(object):
+from preset._base import CURRENT_PATH
+
+def load_data():
+    with open(os.path.join(CURRENT_PATH, 'level_totalexp.csv'), 'r') as f:
+        reader = csv.reader(f)
+        data = {int(level): int(exp) for level, exp in reader}
+
+    return data
+
+
+class _Level_TotalExp(object):
     def __init__(self):
-        self.level_totalexp_dict = level_totalexp_dict
-        self.level_totalexp_tuple = level_totalexp_dict.items()
+        self.level_totalexp_dict = load_data()
+        self.level_totalexp_tuple = self.level_totalexp_dict.items()
         self.level_totalexp_tuple.sort(key=lambda item: item[0])
         self.max_level = self.level_totalexp_tuple[-1][0]
 
@@ -27,6 +38,6 @@ class _LevelTotalExp(object):
                         self.level_totalexp_dict[level+1] - totalexp
                         )
 
-LEVEL_TOTALEXP = _LevelTotalExp()
+LEVEL_TOTALEXP = _Level_TotalExp()
 
 

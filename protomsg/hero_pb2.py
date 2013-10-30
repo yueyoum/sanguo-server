@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='hero.proto',
   package='Sanguo.protocol.hero',
-  serialized_pb='\n\nhero.proto\x12\x14Sanguo.protocol.hero\"\xc9\x01\n\x04Hero\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x13\n\x0boriginal_id\x18\x02 \x02(\x05\x12\r\n\x05level\x18\x03 \x02(\x05\x12\x0b\n\x03\x65xp\x18\x04 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x05 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x06 \x02(\x05\x12\n\n\x02hp\x18\x07 \x02(\x05\x12\x13\n\x0b\x61ttack_grow\x18\x08 \x02(\x05\x12\x14\n\x0c\x64\x65\x66\x65nse_grow\x18\t \x02(\x05\x12\x0f\n\x07hp_grow\x18\n \x02(\x05\x12\x0c\n\x04\x63irt\x18\x0b \x02(\x05\x12\r\n\x05\x64odge\x18\x0c \x02(\x05\"H\n\nHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"K\n\rAddHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"0\n\x10RemoveHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"N\n\x10UpdateHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"\xbd\x01\n\x12GetHeroPanelNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x43\n\tget_heros\x18\x02 \x03(\x0b\x32\x30.Sanguo.protocol.hero.GetHeroPanelNotify.GetHero\x1aQ\n\x07GetHero\x12\x0c\n\x04mode\x18\x01 \x02(\x05\x12\x0c\n\x04\x63ost\x18\x03 \x02(\x05\x12\x12\n\nfree_times\x18\x04 \x02(\x05\x12\x16\n\x0emax_free_times\x18\x05 \x02(\x05\"<\n\x0eGetHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0c\n\x04mode\x18\x02 \x02(\x05\x12\x0b\n\x03ten\x18\x03 \x02(\x08\"Q\n\x0fGetHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x0c\n\x04mode\x18\x03 \x01(\x05\x12\x12\n\nfree_times\x18\x04 \x01(\x05\";\n\x10MergeHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x16\n\x0eusing_hero_ids\x18\x02 \x03(\x05\"1\n\x11MergeHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\nhero.proto\x12\x14Sanguo.protocol.hero\"\xe1\x01\n\x04Hero\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x13\n\x0boriginal_id\x18\x02 \x02(\t\x12\r\n\x05level\x18\x03 \x02(\x05\x12\x0b\n\x03\x65xp\x18\x04 \x02(\x05\x12\x16\n\x0enext_level_exp\x18\x05 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x06 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x07 \x02(\x05\x12\n\n\x02hp\x18\x08 \x02(\x05\x12\x13\n\x0b\x61ttack_grow\x18\t \x02(\x05\x12\x14\n\x0c\x64\x65\x66\x65nse_grow\x18\n \x02(\x05\x12\x0f\n\x07hp_grow\x18\x0b \x02(\x05\x12\x0c\n\x04\x63irt\x18\x0c \x02(\x05\x12\r\n\x05\x64odge\x18\r \x02(\x05\"H\n\nHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"K\n\rAddHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"0\n\x10RemoveHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"N\n\x10UpdateHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"\xbd\x01\n\x12GetHeroPanelNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x43\n\tget_heros\x18\x02 \x03(\x0b\x32\x30.Sanguo.protocol.hero.GetHeroPanelNotify.GetHero\x1aQ\n\x07GetHero\x12\x0c\n\x04mode\x18\x01 \x02(\x05\x12\x0c\n\x04\x63ost\x18\x03 \x02(\x05\x12\x12\n\nfree_times\x18\x04 \x02(\x05\x12\x16\n\x0emax_free_times\x18\x05 \x02(\x05\"<\n\x0eGetHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0c\n\x04mode\x18\x02 \x02(\x05\x12\x0b\n\x03ten\x18\x03 \x02(\x08\"Q\n\x0fGetHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x0c\n\x04mode\x18\x03 \x01(\x05\x12\x12\n\nfree_times\x18\x04 \x01(\x05\";\n\x10MergeHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x16\n\x0eusing_hero_ids\x18\x02 \x03(\x05\"1\n\x11MergeHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
 
 
 
@@ -34,8 +34,8 @@ _HERO = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='original_id', full_name='Sanguo.protocol.hero.Hero.original_id', index=1,
-      number=2, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
+      number=2, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -54,57 +54,64 @@ _HERO = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='attack', full_name='Sanguo.protocol.hero.Hero.attack', index=4,
+      name='next_level_exp', full_name='Sanguo.protocol.hero.Hero.next_level_exp', index=4,
       number=5, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='defense', full_name='Sanguo.protocol.hero.Hero.defense', index=5,
+      name='attack', full_name='Sanguo.protocol.hero.Hero.attack', index=5,
       number=6, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='hp', full_name='Sanguo.protocol.hero.Hero.hp', index=6,
+      name='defense', full_name='Sanguo.protocol.hero.Hero.defense', index=6,
       number=7, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='attack_grow', full_name='Sanguo.protocol.hero.Hero.attack_grow', index=7,
+      name='hp', full_name='Sanguo.protocol.hero.Hero.hp', index=7,
       number=8, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='defense_grow', full_name='Sanguo.protocol.hero.Hero.defense_grow', index=8,
+      name='attack_grow', full_name='Sanguo.protocol.hero.Hero.attack_grow', index=8,
       number=9, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='hp_grow', full_name='Sanguo.protocol.hero.Hero.hp_grow', index=9,
+      name='defense_grow', full_name='Sanguo.protocol.hero.Hero.defense_grow', index=9,
       number=10, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='cirt', full_name='Sanguo.protocol.hero.Hero.cirt', index=10,
+      name='hp_grow', full_name='Sanguo.protocol.hero.Hero.hp_grow', index=10,
       number=11, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='dodge', full_name='Sanguo.protocol.hero.Hero.dodge', index=11,
+      name='cirt', full_name='Sanguo.protocol.hero.Hero.cirt', index=11,
       number=12, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='dodge', full_name='Sanguo.protocol.hero.Hero.dodge', index=12,
+      number=13, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -119,7 +126,7 @@ _HERO = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=37,
-  serialized_end=238,
+  serialized_end=262,
 )
 
 
@@ -153,8 +160,8 @@ _HERONOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=240,
-  serialized_end=312,
+  serialized_start=264,
+  serialized_end=336,
 )
 
 
@@ -188,8 +195,8 @@ _ADDHERONOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=314,
-  serialized_end=389,
+  serialized_start=338,
+  serialized_end=413,
 )
 
 
@@ -223,8 +230,8 @@ _REMOVEHERONOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=391,
-  serialized_end=439,
+  serialized_start=415,
+  serialized_end=463,
 )
 
 
@@ -258,8 +265,8 @@ _UPDATEHERONOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=441,
-  serialized_end=519,
+  serialized_start=465,
+  serialized_end=543,
 )
 
 
@@ -307,8 +314,8 @@ _GETHEROPANELNOTIFY_GETHERO = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=630,
-  serialized_end=711,
+  serialized_start=654,
+  serialized_end=735,
 )
 
 _GETHEROPANELNOTIFY = _descriptor.Descriptor(
@@ -341,8 +348,8 @@ _GETHEROPANELNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=522,
-  serialized_end=711,
+  serialized_start=546,
+  serialized_end=735,
 )
 
 
@@ -383,8 +390,8 @@ _GETHEROREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=713,
-  serialized_end=773,
+  serialized_start=737,
+  serialized_end=797,
 )
 
 
@@ -432,8 +439,8 @@ _GETHERORESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=775,
-  serialized_end=856,
+  serialized_start=799,
+  serialized_end=880,
 )
 
 
@@ -467,8 +474,8 @@ _MERGEHEROREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=858,
-  serialized_end=917,
+  serialized_start=882,
+  serialized_end=941,
 )
 
 
@@ -502,8 +509,8 @@ _MERGEHERORESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=919,
-  serialized_end=968,
+  serialized_start=943,
+  serialized_end=992,
 )
 
 _HERONOTIFY.fields_by_name['heros'].message_type = _HERO
