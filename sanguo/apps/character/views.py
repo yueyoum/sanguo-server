@@ -9,6 +9,11 @@ from core.exception import SanguoViewException
 from core import notify
 from core import GLOBAL
 
+from core.functional import (
+        decode_formation,
+        encode_formation,
+        )
+
 import protomsg
 from protomsg import (
         CreateCharacterResponse,
@@ -173,12 +178,12 @@ def set_formation(request):
     char_obj = Character.objects.only('formation').filter(id=char_id)
     old_formation = char_obj[0].formation
 
-    formation_msg = getattr(protomsg, "Formation")()
-    formation_msg.ParseFromString(base64.b64decode(old_formation))
+
+    formation_msg = decode_formation(old_formation)
 
     formation_msg.ClearField('hero_ids')
     formation_msg.hero_ids.MergeFrom(hero_ids)
-    encoded_formation = base64.b64encode(formation_msg.SerializeToString())
+    encoded_formation = encode_formation(formation_msg)
     Character.objects.filter(id=char_id).update(formation=encoded_formation)
     notify.formation_notify(request._decrypted_session, formation=encoded_formation)
 

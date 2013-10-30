@@ -1,9 +1,7 @@
-import base64
-
 from drives import redis_client
 from utils import pack_msg
-from core import DEFAULT
 from core.hero import Hero
+from core.functional import decode_formation
 import protomsg
 
 def character_notify(key, obj):
@@ -79,10 +77,8 @@ def formation_notify(key, char_obj=None, formation=None):
     msg = protomsg.FormationNotify()
     if not formation:
         formation = char_obj.formation
-        if not formation:
-            formation = DEFAULT.FORMATION
 
-    msg.formation.MergeFromString(base64.b64decode(formation))
+    msg.formation.MergeFrom(decode_formation(formation))
     redis_client.rpush(key, pack_msg(msg))
 
 

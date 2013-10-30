@@ -6,13 +6,6 @@ from preset import *
 LINE_SEP = "\r\n"
 
 @LazyDict()
-def _all_heros():
-    from apps.constant.models import Hero
-    heros = Hero.objects.values()
-    data = {item['id']: item for item in heros}
-    return data
-
-@LazyDict()
 def _get_heros():
     from apps.constant.models import GetHero
     info = GetHero.objects.values()
@@ -41,8 +34,6 @@ def _get_heros():
     return data
 
 
-
-# HEROS = _all_heros()
 GET_HERO = _get_heros()
 
 
