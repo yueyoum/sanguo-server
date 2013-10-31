@@ -12,11 +12,8 @@ def cal_hero_property(original_id, level):
 
 
 class Hero(object):
-    def __init__(self, charhero_obj=None, charhero_id=None):
-        if charhero_obj is None:
-            self.hero = CharHero.objects.deffer('char').filter(id=charhero_id)[0]
-        else:
-            self.hero = charhero_obj
+    def __init__(self, charhero_obj):
+        self.hero = charhero_obj
 
         self.id = self.hero.id
         self.original_id = self.hero.hero_id

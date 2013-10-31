@@ -20,7 +20,7 @@ def hero_notify(key, objs, message_name="HeroNotify"):
     Msg = getattr(protomsg, message_name)
     data = Msg()
 
-    objs = [Hero(charhero_obj=o) for o in objs]
+    objs = [Hero(o) for o in objs]
 
     for obj in objs:
         g = data.heros.add()
