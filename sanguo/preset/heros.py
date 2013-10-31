@@ -5,13 +5,13 @@ import random
 from preset._base import CURRENT_PATH
 
 def load_data():
-    with open(os.path.join(CURRENT_PATH, 'heros.json'), 'r') as f:
+    with open(os.path.join(CURRENT_PATH, 'hero.json'), 'r') as f:
         content = json.loads(f.read())
 
     data = {}
     for c in content:
+        _id = c["pk"]
         fields = c["fields"]
-        _id = fields.pop("type_id")
         fields.pop("name")
         fields.pop("avatar")
         fields.pop("image")
