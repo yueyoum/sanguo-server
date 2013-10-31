@@ -20,6 +20,14 @@ from utils import app_test_helper
 RESPONSE_NOTIFY_TYPE_REV = {v: k for k, v in protomsg.RESPONSE_NOTIFY_TYPE.items()}
 
 
+def _unpack(res):
+    msg_id = NUM_FIELD.unpack(res[:4])[0]
+    res = res[4:]
+    len_of_msg = NUM_FIELD.unpack(res[:4])[0]
+    res = res[4:]
+    return msg_id, res[:len_of_msg], res[len_of_msg:]
+
+
 class UnpackAndVerifyData(object):
     def process_request(self, request):
         if request.path.startswith('/admin/'):
@@ -29,29 +37,37 @@ class UnpackAndVerifyData(object):
             return HttpResponse(status=403)
 
         data = request.body
-        msg_id = NUM_FIELD.unpack(data[:4])
-        msg_id = msg_id[0]
 
-        msg_name = REQUEST_TYPE[msg_id]
+        num_of_msgs = NUM_FIELD.unpack(data[:4])[0]
+        data = data[4:]
 
-        proto = getattr(protomsg, msg_name)
-        p = proto()
-        p.ParseFromString(data[4:])
-        
-        game_session = p.session
-        decrypted_session = ""
-        if msg_id not in EMPTY_SESSION_MSG_TYPE:
-            if not game_session:
-                print "NO SESSION"
-                return HttpResponse(status=403)
-            try:
-                decrypted_session = crypto.decrypt(game_session)
-            except crypto.BadEncryptedText:
-                print "BAD SESSION"
-                return HttpResponse(status=403)
 
-        request._proto = p
-        request._decrypted_session = decrypted_session
+        for i in range(num_of_msgs):
+            msg_id, msg, data = _unpack(data)
+            if msg_id == 51:
+                # TODO Check Version
+                pass
+            else:
+                msg_name = REQUEST_TYPE[msg_id]
+
+                proto = getattr(protomsg, msg_name)
+                p = proto()
+                p.ParseFromString(msg)
+                
+                game_session = p.session
+                decrypted_session = ""
+                if msg_id not in EMPTY_SESSION_MSG_TYPE:
+                    if not game_session:
+                        print "NO SESSION"
+                        return HttpResponse(status=403)
+                    try:
+                        decrypted_session = crypto.decrypt(game_session)
+                    except crypto.BadEncryptedText:
+                        print "BAD SESSION"
+                        return HttpResponse(status=403)
+
+                request._proto = p
+                request._decrypted_session = decrypted_session
 
 
 

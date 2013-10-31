@@ -16,7 +16,10 @@ URL = "http://127.0.0.1:8000"
 
 def pack_data(req):
     id_of_msg = REQUEST_TYPE_REV[req.DESCRIPTOR.name]
-    data = FMT.pack(id_of_msg) + req.SerializeToString()
+    data = req.SerializeToString()
+    data = '{0}{1}{2}{3}'.format(
+            FMT.pack(1), FMT.pack(id_of_msg), FMT.pack(len(data)), data
+            )
     return data
 
 

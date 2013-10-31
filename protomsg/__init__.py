@@ -6,6 +6,7 @@ from formation_pb2 import *
 
 RESPONSE_NOTIFY_TYPE = {
     "CommandResponse": 50,
+    "VersionCheckResponse": 52,
     "StartGameResponse": 101,
     "GetServerListResponse": 104,
     "RegisterResponse": 106,
@@ -23,6 +24,7 @@ RESPONSE_NOTIFY_TYPE = {
 }
 
 REQUEST_TYPE = {
+    51: "VersionCheckRequest",
     100: "StartGameRequest",
     102: "GetServerListRequest",
     105: "RegisterRequest",
@@ -33,6 +35,7 @@ REQUEST_TYPE = {
 }
 
 REQUEST_TYPE_REV = {
+    "VersionCheckRequest": 51,
     "StartGameRequest": 100,
     "GetServerListRequest": 102,
     "RegisterRequest": 105,
