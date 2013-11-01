@@ -82,6 +82,27 @@ def formation_notify(key, char_obj=None, formation=None):
     redis_client.rpush(key, pack_msg(msg))
 
 
+def already_stage_notify(key, char_id):
+    data = [(2, True)]
+    msg = protomsg.AlreadyStageNotify()
+    for d in data:
+        stage = msg.stages.add()
+        stage.id, stage.star = d
+
+    redis_client.rpush(key, pack_msg(msg))
+
+
+def current_stage_notify(key, sid, star):
+    msg = protomsg.CurrentStageNotify()
+    msg.stage.id, msg.stage.star = sid, star
+    redis_client.rpush(key, pack_msg(msg))
+
+def new_stage_notify(key, sid):
+    msg = protomsg.NewStageNotify()
+    msg.stage.id, msg.stage.star = sid, False
+    redis_client.rpush(key, pack_msg(msg))
+
+
 def login_notify(key, char_obj, hero_objs=None):
     if not hero_objs:
         hero_objs = char_obj.char_heros.all()
@@ -90,5 +111,7 @@ def login_notify(key, char_obj, hero_objs=None):
     hero_notify(key, hero_objs)
     get_hero_panel_notify(key, char_obj)
     formation_notify(key, char_obj=char_obj)
+    already_stage_notify(key, char_obj.id)
+    new_stage_notify(key, 3)
 
 
