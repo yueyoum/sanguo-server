@@ -3,7 +3,7 @@ from django.db.models import Max
 from django.conf import settings
 
 from core.drives import redis_client
-from core import GLOBAL
+# from core import GLOBAL
 
 class Character(models.Model):
     account_id = models.IntegerField(db_index=True)
@@ -14,7 +14,7 @@ class Character(models.Model):
     level = models.IntegerField(default=1)
     honor = models.IntegerField(default=0)
 
-    formation = models.CharField(max_length=255, default=GLOBAL.DEFAULT_FORMATION)
+    # formation = models.CharField(max_length=255, default=GLOBAL.DEFAULT_FORMATION)
 
     def __unicode__(self):
         return u'<Character %d:%d:%d, %s>' % (

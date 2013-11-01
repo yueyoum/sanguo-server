@@ -1,7 +1,8 @@
 from drives import redis_client
 from utils import pack_msg
 from core.hero import Hero
-from core.functional import decode_formation
+from core.formation import decode_formation
+from core.character import get_char_formation
 import protomsg
 
 def character_notify(key, obj):
@@ -73,10 +74,10 @@ def get_hero_panel_notify(key, char_obj):
     redis_client.rpush(key, pack_msg(msg))
 
 
-def formation_notify(key, char_obj=None, formation=None):
+def formation_notify(key, char_id=None, formation=None):
     msg = protomsg.FormationNotify()
     if not formation:
-        formation = char_obj.formation
+        formation = get_char_formation(char_id)
 
     msg.formation.MergeFrom(decode_formation(formation))
     redis_client.rpush(key, pack_msg(msg))
@@ -110,7 +111,7 @@ def login_notify(key, char_obj, hero_objs=None):
     character_notify(key, char_obj)
     hero_notify(key, hero_objs)
     get_hero_panel_notify(key, char_obj)
-    formation_notify(key, char_obj=char_obj)
+    formation_notify(key, char_id=char_obj.id)
     already_stage_notify(key, char_obj.id)
     new_stage_notify(key, 3)
 

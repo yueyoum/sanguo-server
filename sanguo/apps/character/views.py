@@ -1,5 +1,4 @@
 import random
-import base64
 
 from django.http import HttpResponse
 
@@ -8,13 +7,15 @@ from models import Character, CharHero
 from core.exception import SanguoViewException
 from core import notify
 from core import GLOBAL
+from core.drives import mongodb_client_db
 
-from core.functional import (
+from core.formation import (
         decode_formation,
         encode_formation,
         )
 
-import protomsg
+from core.character import get_char_formation
+
 from protomsg import (
         CreateCharacterResponse,
         GetHeroResponse,
@@ -173,18 +174,21 @@ def set_formation(request):
     char_id = int(char_id)
 
     hero_ids = req.hero_ids
-    # TODO check positions
 
-    char_obj = Character.objects.only('formation').filter(id=char_id)
-    old_formation = char_obj[0].formation
-
+    old_formation = get_char_formation(char_id)
 
     formation_msg = decode_formation(old_formation)
 
     formation_msg.ClearField('hero_ids')
     formation_msg.hero_ids.MergeFrom(hero_ids)
     encoded_formation = encode_formation(formation_msg)
-    Character.objects.filter(id=char_id).update(formation=encoded_formation)
+
+    mongodb_client_db.char_formaton.update(
+            {'_id': char_id},
+            {'$set': {'data': encoded_formation}},
+            upsert=True
+            )
+
     notify.formation_notify(request._decrypted_session, formation=encoded_formation)
 
     response = SetFormationResponse()

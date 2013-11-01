@@ -31,8 +31,9 @@ from core import GLOBAL
 
 
 def teardown():
-    from core.drives import redis_client
+    from core.drives import redis_client, mongodb_client, mongodb_client_db
     redis_client.flushdb()
+    mongodb_client.drop_database(mongodb_client_db)
 
 
 class CreateCharacterTest(TransactionTestCase):
@@ -237,6 +238,7 @@ class FormationTest(TransactionTestCase):
         data = app_test_helper.pack_data(req)
         res = app_test_helper.make_request('/formation/set/', data)
         msgs = app_test_helper.unpack_data(res)
+        print msgs
 
         possible_ids = [
                 RESPONSE_NOTIFY_TYPE["SetFormationResponse"],

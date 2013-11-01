@@ -20,8 +20,9 @@ from core import GLOBAL
 
 
 def teardown():
-    from core.drives import redis_client
+    from core.drives import redis_client, mongodb_client, mongodb_client_db
     redis_client.flushdb()
+    mongodb_client.drop_database(mongodb_client_db)
 
 
 class RegisterTest(TransactionTestCase):

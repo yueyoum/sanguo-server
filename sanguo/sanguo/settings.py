@@ -183,14 +183,20 @@ DATETIME_FORMAT = "Y-m-d H:i:s"
 REDIS_HOST = "127.0.0.1"
 REDIS_PORT = 6380
 REDIS_DB = 0
-REDIS_TEST_DB = 1
+
+MONGODB_HOST = "127.0.0.1"
+MONGODB_PORT = 27017
+MONGODB_DB = 'sanguo'
+
+CRYPTO_KEY = None
+CRYPTO_PREFIX = None
 
 if TESTING:
     CRYPTO_KEY = '1234567890abcdef'
     CRYPTO_PREFIX= 'ok'
-else:
-    CRYPTO_KEY = None
-    CRYPTO_PREFIX = None
+
+    REDIS_DB = 1
+    MONGODB_DB = 'test_sanguo'
 
 try:
     from local_settings import *

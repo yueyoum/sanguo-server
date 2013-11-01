@@ -3,7 +3,6 @@ from base64 import b64decode, b64encode
 import protomsg
 
 
-
 def decode_formation(text):
     msg = getattr(protomsg, "Formation")()
     msg.ParseFromString(b64decode(text))

@@ -1,4 +1,4 @@
-from core.functional import encode_formation_with_raw_data
+from core.formation import encode_formation_with_raw_data
 
 def _default_formation():
     count = 3
