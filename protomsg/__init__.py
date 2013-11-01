@@ -3,6 +3,7 @@ from hero_pb2 import *
 from world_pb2 import *
 from character_pb2 import *
 from formation_pb2 import *
+from battle_pb2 import *
 
 RESPONSE_NOTIFY_TYPE = {
     "CommandResponse": 50,
@@ -21,6 +22,9 @@ RESPONSE_NOTIFY_TYPE = {
     "MergeHeroResponse": 323,
     "SetFormationResponse": 401,
     "FormationNotify": 402,
+    "AlreadyStageNotify": 500,
+    "CurrentStageNotify": 501,
+    "NewStageNotify": 502,
 }
 
 REQUEST_TYPE = {
