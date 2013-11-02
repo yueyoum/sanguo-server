@@ -1,10 +1,10 @@
 import os
 import csv
 
-from preset._base import CURRENT_PATH
+from preset._base import DATA_PATH
 
 def load_data():
-    with open(os.path.join(CURRENT_PATH, 'level_totalexp.csv'), 'r') as f:
+    with open(os.path.join(DATA_PATH, 'level_totalexp.csv'), 'r') as f:
         reader = csv.reader(f)
         data = {int(level): int(exp) for level, exp in reader}
 
