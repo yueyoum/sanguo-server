@@ -1,11 +1,10 @@
-import os
 import json
 import random
 
-from preset._base import DATA_PATH
+from preset._base import data_path
 
 def load_data():
-    with open(os.path.join(DATA_PATH, 'hero.json'), 'r') as f:
+    with open(data_path('hero.json'), 'r') as f:
         content = json.loads(f.read())
 
     data = {}

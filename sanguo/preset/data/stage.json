@@ -1,0 +1,21 @@
+[
+{
+    "pk": 2, 
+    "model": "stage.stage", 
+    "fields": {
+        "normal_drop": "", 
+        "star_gold": 100, 
+        "before_stage": null, 
+        "first_drop": "", 
+        "name": "\u9ec4\u5dfe\u8d3c\u8ba8\u4f10\u6218", 
+        "star_exp": 100, 
+        "warriors": "0,2,0\r\n2,2,2\r\n0,3,0", 
+        "first_gold": 100, 
+        "star_drop": "", 
+        "first_exp": 100, 
+        "battle": 2, 
+        "normal_exp": 100, 
+        "normal_gold": 100
+    }
+}
+]

@@ -1,0 +1,67 @@
+[
+{
+    "pk": 2, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u7eaf\u653b\u51fb", 
+        "des": "\u6d4b\u8bd5\u6280\u80fd,150%\u4f24\u5bb3", 
+        "special_id": 1, 
+        "buff_icon": "", 
+        "mode": 1, 
+        "trig_condition": 1, 
+        "trig_prob": 50
+    }
+},
+{
+    "pk": 3, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u589e\u52a0\u9632\u5fa1", 
+        "des": "\u6d4b\u8bd5\u6280\u80fd\uff0c\u589e\u52a0100%\u9632\u5fa1", 
+        "special_id": 1, 
+        "buff_icon": "", 
+        "mode": 3, 
+        "trig_condition": 1, 
+        "trig_prob": 100
+    }
+},
+{
+    "pk": 4, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u589e\u52a0\u653b\u51fb", 
+        "des": "\u6d4b\u8bd5\u6280\u80fd\uff0c\u589e\u52a0100%\u653b\u51fb", 
+        "special_id": 1, 
+        "buff_icon": "", 
+        "mode": 3, 
+        "trig_condition": 1, 
+        "trig_prob": 100
+    }
+},
+{
+    "pk": 5, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u964d\u4f4e\u653b\u51fb", 
+        "des": "\u6d4b\u8bd5\u6280\u80fd\uff0c\u964d\u4f4e\u76ee\u6807\u653b\u51fb20%", 
+        "special_id": 1, 
+        "buff_icon": "", 
+        "mode": 1, 
+        "trig_condition": 1, 
+        "trig_prob": 80
+    }
+},
+{
+    "pk": 6, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u964d\u4f4e\u9632\u5fa1", 
+        "des": "\u6d4b\u8bd5\u6280\u80fd\uff0c\u964d\u4f4e\u76ee\u6807\u9632\u5fa120%", 
+        "special_id": 1, 
+        "buff_icon": "", 
+        "mode": 1, 
+        "trig_condition": 1, 
+        "trig_prob": 80
+    }
+}
+]

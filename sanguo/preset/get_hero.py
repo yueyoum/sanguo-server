@@ -1,11 +1,10 @@
-import os
 import json
 
-from preset._base import DATA_PATH, LINE_SEP
+from preset._base import data_path, LINE_SEP
 
 
 def load_data():
-    with open(os.path.join(DATA_PATH, 'get_hero.json'), 'r') as f:
+    with open(data_path('get_hero.json'), 'r') as f:
         content = json.loads(f.read())
 
     def _parse_prob(text):

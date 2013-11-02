@@ -1,0 +1,57 @@
+[
+{
+    "pk": 1, 
+    "model": "skill.effect", 
+    "fields": {
+        "skill": 2, 
+        "rounds": 0, 
+        "target": 1, 
+        "value": 150, 
+        "mode": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "skill.effect", 
+    "fields": {
+        "skill": 3, 
+        "rounds": 2, 
+        "target": 2, 
+        "value": 100, 
+        "mode": 3
+    }
+},
+{
+    "pk": 3, 
+    "model": "skill.effect", 
+    "fields": {
+        "skill": 4, 
+        "rounds": 2, 
+        "target": 2, 
+        "value": 100, 
+        "mode": 2
+    }
+},
+{
+    "pk": 4, 
+    "model": "skill.effect", 
+    "fields": {
+        "skill": 5, 
+        "rounds": 2, 
+        "target": 1, 
+        "value": -20, 
+        "mode": 2
+    }
+},
+{
+    "pk": 5, 
+    "model": "skill.effect", 
+    "fields": {
+        "skill": 6, 
+        "rounds": 2, 
+        "target": 1, 
+        "value": -20, 
+        "mode": 3
+    }
+}
+]

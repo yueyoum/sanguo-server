@@ -1,0 +1,77 @@
+[
+{
+    "pk": 2, 
+    "model": "main.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9ec4\u5dfe\u4e71\u8d3c", 
+        "skills": "S3", 
+        "image": "", 
+        "attack": 100, 
+        "defense": 50, 
+        "avatar": "", 
+        "crit": 0, 
+        "hp": 80
+    }
+},
+{
+    "pk": 3, 
+    "model": "main.monster", 
+    "fields": {
+        "dodge": 10, 
+        "name": "\u9a6c\u4e49\u5143", 
+        "skills": "S2", 
+        "image": "", 
+        "attack": 200, 
+        "defense": 100, 
+        "avatar": "", 
+        "crit": 10, 
+        "hp": 120
+    }
+},
+{
+    "pk": 4, 
+    "model": "main.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9ec4\u5dfe\u4e71\u8d3c", 
+        "skills": "S4", 
+        "image": "", 
+        "attack": 100, 
+        "defense": 50, 
+        "avatar": "", 
+        "crit": 0, 
+        "hp": 80
+    }
+},
+{
+    "pk": 5, 
+    "model": "main.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9ec4\u5dfe\u4e71\u8d3c", 
+        "skills": "S5", 
+        "image": "", 
+        "attack": 100, 
+        "defense": 50, 
+        "avatar": "", 
+        "crit": 0, 
+        "hp": 80
+    }
+},
+{
+    "pk": 6, 
+    "model": "main.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9ec4\u5dfe\u4e71\u8d3c", 
+        "skills": "S6", 
+        "image": "", 
+        "attack": 100, 
+        "defense": 50, 
+        "avatar": "", 
+        "crit": 0, 
+        "hp": 80
+    }
+}
+]
