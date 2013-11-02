@@ -12,12 +12,10 @@ def cal_hero_property(original_id, level):
 
 
 class Hero(object):
-    def __init__(self, charhero_obj):
-        self.hero = charhero_obj
-
-        self.id = self.hero.id
-        self.original_id = self.hero.hero_id
-        self.exp = self.hero.exp
+    def __init__(self, hid, original_id, exp):
+        self.id = hid
+        self.original_id = original_id 
+        self.exp = exp
 
         self.level, self.current_exp, self.next_level_exp = \
                 GLOBAL.LEVEL_TOTALEXP[self.exp]
