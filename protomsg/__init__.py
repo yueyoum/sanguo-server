@@ -25,6 +25,7 @@ RESPONSE_NOTIFY_TYPE = {
     "AlreadyStageNotify": 500,
     "CurrentStageNotify": 501,
     "NewStageNotify": 502,
+    "PVEResponse": 601,
 }
 
 REQUEST_TYPE = {
@@ -36,6 +37,7 @@ REQUEST_TYPE = {
     320: "GetHeroRequest",
     322: "MergeHeroRequest",
     400: "SetFormationRequest",
+    600: "PVERequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -47,5 +49,6 @@ REQUEST_TYPE_REV = {
     "GetHeroRequest": 320,
     "MergeHeroRequest": 322,
     "SetFormationRequest": 400,
+    "PVERequest": 600,
 }
 

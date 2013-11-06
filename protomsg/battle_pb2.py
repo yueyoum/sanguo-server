@@ -13,9 +13,30 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='battle.proto',
   package='Sanguo.protocol.battle',
-  serialized_pb='\n\x0c\x62\x61ttle.proto\x12\x16Sanguo.protocol.battle\"!\n\x05Stage\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04star\x18\x02 \x02(\x08\"T\n\x12\x41lreadyStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12-\n\x06stages\x18\x02 \x03(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"S\n\x12\x43urrentStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x05stage\x18\x02 \x02(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"O\n\x0eNewStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x05stage\x18\x02 \x02(\x0b\x32\x1d.Sanguo.protocol.battle.Stage')
+  serialized_pb='\n\x0c\x62\x61ttle.proto\x12\x16Sanguo.protocol.battle\"!\n\x05Stage\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04star\x18\x02 \x02(\x08\"T\n\x12\x41lreadyStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12-\n\x06stages\x18\x02 \x03(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"S\n\x12\x43urrentStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x05stage\x18\x02 \x02(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"O\n\x0eNewStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x05stage\x18\x02 \x02(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"\x95\x01\n\nBattleHero\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x13\n\x0boriginal_id\x18\x02 \x02(\x05\x12\n\n\x02hp\x18\x03 \x02(\x05\x12\x37\n\x02ht\x18\x04 \x02(\x0e\x32+.Sanguo.protocol.battle.BattleHero.HeroType\"!\n\x08HeroType\x12\x08\n\x04HERO\x10\x01\x12\x0b\n\x07MONSTER\x10\x02\"\x82\x03\n\x06\x41\x63tion\x12\x0f\n\x07\x66rom_id\x18\x01 \x02(\x05\x12\x10\n\x08skill_id\x18\x02 \x01(\x05\x12\x41\n\rskill_targets\x18\x03 \x03(\x0b\x32*.Sanguo.protocol.battle.Action.SkillTarget\x12>\n\x0bhero_notify\x18\x04 \x03(\x0b\x32).Sanguo.protocol.battle.Action.HeroNotify\x12\x35\n\rpassiveaction\x18\x05 \x03(\x0b\x32\x1e.Sanguo.protocol.battle.Action\x1a\x43\n\x0bSkillTarget\x12\x11\n\ttarget_id\x18\x01 \x02(\x05\x12\x0f\n\x07is_crit\x18\x02 \x02(\x08\x12\x10\n\x08is_dodge\x18\x03 \x02(\x08\x1aV\n\nHeroNotify\x12\x11\n\ttarget_id\x18\x01 \x02(\x05\x12\n\n\x02hp\x18\x02 \x02(\x05\x12\x0b\n\x03\x65\x66\x66\x18\x03 \x01(\x05\x12\r\n\x05\x62uffs\x18\x04 \x03(\x05\x12\r\n\x05value\x18\x05 \x01(\x05\"\xbc\x01\n\x06Ground\x12\x36\n\nself_heros\x18\x01 \x03(\x0b\x32\".Sanguo.protocol.battle.BattleHero\x12\x37\n\x0brival_heros\x18\x02 \x03(\x0b\x32\".Sanguo.protocol.battle.BattleHero\x12\x10\n\x08self_win\x18\x03 \x02(\x08\x12/\n\x07\x61\x63tions\x18\x04 \x03(\x0b\x32\x1e.Sanguo.protocol.battle.Action\"\x8d\x02\n\x06\x42\x61ttle\x12\x12\n\nself_power\x18\x01 \x02(\x05\x12\x13\n\x0brival_power\x18\x02 \x02(\x05\x12\x11\n\tself_name\x18\x03 \x02(\t\x12\x12\n\nrival_name\x18\x04 \x02(\t\x12\x34\n\x0c\x66irst_ground\x18\x05 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x35\n\rsecond_ground\x18\x06 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x34\n\x0cthird_ground\x18\x07 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x10\n\x08self_win\x18\x08 \x02(\x08\"/\n\nPVERequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08stage_id\x18\x02 \x02(\x05\"m\n\x0bPVEResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08stage_id\x18\x03 \x02(\x05\x12.\n\x06\x62\x61ttle\x18\x04 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Battle')
 
 
+
+_BATTLEHERO_HEROTYPE = _descriptor.EnumDescriptor(
+  name='HeroType',
+  full_name='Sanguo.protocol.battle.BattleHero.HeroType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='HERO', index=0, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MONSTER', index=1, number=2,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=444,
+  serialized_end=477,
+)
 
 
 _STAGE = _descriptor.Descriptor(
@@ -157,13 +178,445 @@ _NEWSTAGENOTIFY = _descriptor.Descriptor(
   serialized_end=325,
 )
 
+
+_BATTLEHERO = _descriptor.Descriptor(
+  name='BattleHero',
+  full_name='Sanguo.protocol.battle.BattleHero',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='Sanguo.protocol.battle.BattleHero.id', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='original_id', full_name='Sanguo.protocol.battle.BattleHero.original_id', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='hp', full_name='Sanguo.protocol.battle.BattleHero.hp', index=2,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='ht', full_name='Sanguo.protocol.battle.BattleHero.ht', index=3,
+      number=4, type=14, cpp_type=8, label=2,
+      has_default_value=False, default_value=1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _BATTLEHERO_HEROTYPE,
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=328,
+  serialized_end=477,
+)
+
+
+_ACTION_SKILLTARGET = _descriptor.Descriptor(
+  name='SkillTarget',
+  full_name='Sanguo.protocol.battle.Action.SkillTarget',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='target_id', full_name='Sanguo.protocol.battle.Action.SkillTarget.target_id', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='is_crit', full_name='Sanguo.protocol.battle.Action.SkillTarget.is_crit', index=1,
+      number=2, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='is_dodge', full_name='Sanguo.protocol.battle.Action.SkillTarget.is_dodge', index=2,
+      number=3, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=711,
+  serialized_end=778,
+)
+
+_ACTION_HERONOTIFY = _descriptor.Descriptor(
+  name='HeroNotify',
+  full_name='Sanguo.protocol.battle.Action.HeroNotify',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='target_id', full_name='Sanguo.protocol.battle.Action.HeroNotify.target_id', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='hp', full_name='Sanguo.protocol.battle.Action.HeroNotify.hp', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='eff', full_name='Sanguo.protocol.battle.Action.HeroNotify.eff', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='buffs', full_name='Sanguo.protocol.battle.Action.HeroNotify.buffs', index=3,
+      number=4, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='Sanguo.protocol.battle.Action.HeroNotify.value', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=780,
+  serialized_end=866,
+)
+
+_ACTION = _descriptor.Descriptor(
+  name='Action',
+  full_name='Sanguo.protocol.battle.Action',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='from_id', full_name='Sanguo.protocol.battle.Action.from_id', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='skill_id', full_name='Sanguo.protocol.battle.Action.skill_id', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='skill_targets', full_name='Sanguo.protocol.battle.Action.skill_targets', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='hero_notify', full_name='Sanguo.protocol.battle.Action.hero_notify', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='passiveaction', full_name='Sanguo.protocol.battle.Action.passiveaction', index=4,
+      number=5, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_ACTION_SKILLTARGET, _ACTION_HERONOTIFY, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=480,
+  serialized_end=866,
+)
+
+
+_GROUND = _descriptor.Descriptor(
+  name='Ground',
+  full_name='Sanguo.protocol.battle.Ground',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='self_heros', full_name='Sanguo.protocol.battle.Ground.self_heros', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='rival_heros', full_name='Sanguo.protocol.battle.Ground.rival_heros', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='self_win', full_name='Sanguo.protocol.battle.Ground.self_win', index=2,
+      number=3, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='actions', full_name='Sanguo.protocol.battle.Ground.actions', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=869,
+  serialized_end=1057,
+)
+
+
+_BATTLE = _descriptor.Descriptor(
+  name='Battle',
+  full_name='Sanguo.protocol.battle.Battle',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='self_power', full_name='Sanguo.protocol.battle.Battle.self_power', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='rival_power', full_name='Sanguo.protocol.battle.Battle.rival_power', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='self_name', full_name='Sanguo.protocol.battle.Battle.self_name', index=2,
+      number=3, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='rival_name', full_name='Sanguo.protocol.battle.Battle.rival_name', index=3,
+      number=4, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='first_ground', full_name='Sanguo.protocol.battle.Battle.first_ground', index=4,
+      number=5, type=11, cpp_type=10, label=2,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='second_ground', full_name='Sanguo.protocol.battle.Battle.second_ground', index=5,
+      number=6, type=11, cpp_type=10, label=2,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='third_ground', full_name='Sanguo.protocol.battle.Battle.third_ground', index=6,
+      number=7, type=11, cpp_type=10, label=2,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='self_win', full_name='Sanguo.protocol.battle.Battle.self_win', index=7,
+      number=8, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1060,
+  serialized_end=1329,
+)
+
+
+_PVEREQUEST = _descriptor.Descriptor(
+  name='PVERequest',
+  full_name='Sanguo.protocol.battle.PVERequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.battle.PVERequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='stage_id', full_name='Sanguo.protocol.battle.PVERequest.stage_id', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1331,
+  serialized_end=1378,
+)
+
+
+_PVERESPONSE = _descriptor.Descriptor(
+  name='PVEResponse',
+  full_name='Sanguo.protocol.battle.PVEResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.battle.PVEResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.battle.PVEResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='stage_id', full_name='Sanguo.protocol.battle.PVEResponse.stage_id', index=2,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='battle', full_name='Sanguo.protocol.battle.PVEResponse.battle', index=3,
+      number=4, type=11, cpp_type=10, label=2,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1380,
+  serialized_end=1489,
+)
+
 _ALREADYSTAGENOTIFY.fields_by_name['stages'].message_type = _STAGE
 _CURRENTSTAGENOTIFY.fields_by_name['stage'].message_type = _STAGE
 _NEWSTAGENOTIFY.fields_by_name['stage'].message_type = _STAGE
+_BATTLEHERO.fields_by_name['ht'].enum_type = _BATTLEHERO_HEROTYPE
+_BATTLEHERO_HEROTYPE.containing_type = _BATTLEHERO;
+_ACTION_SKILLTARGET.containing_type = _ACTION;
+_ACTION_HERONOTIFY.containing_type = _ACTION;
+_ACTION.fields_by_name['skill_targets'].message_type = _ACTION_SKILLTARGET
+_ACTION.fields_by_name['hero_notify'].message_type = _ACTION_HERONOTIFY
+_ACTION.fields_by_name['passiveaction'].message_type = _ACTION
+_GROUND.fields_by_name['self_heros'].message_type = _BATTLEHERO
+_GROUND.fields_by_name['rival_heros'].message_type = _BATTLEHERO
+_GROUND.fields_by_name['actions'].message_type = _ACTION
+_BATTLE.fields_by_name['first_ground'].message_type = _GROUND
+_BATTLE.fields_by_name['second_ground'].message_type = _GROUND
+_BATTLE.fields_by_name['third_ground'].message_type = _GROUND
+_PVERESPONSE.fields_by_name['battle'].message_type = _BATTLE
 DESCRIPTOR.message_types_by_name['Stage'] = _STAGE
 DESCRIPTOR.message_types_by_name['AlreadyStageNotify'] = _ALREADYSTAGENOTIFY
 DESCRIPTOR.message_types_by_name['CurrentStageNotify'] = _CURRENTSTAGENOTIFY
 DESCRIPTOR.message_types_by_name['NewStageNotify'] = _NEWSTAGENOTIFY
+DESCRIPTOR.message_types_by_name['BattleHero'] = _BATTLEHERO
+DESCRIPTOR.message_types_by_name['Action'] = _ACTION
+DESCRIPTOR.message_types_by_name['Ground'] = _GROUND
+DESCRIPTOR.message_types_by_name['Battle'] = _BATTLE
+DESCRIPTOR.message_types_by_name['PVERequest'] = _PVEREQUEST
+DESCRIPTOR.message_types_by_name['PVEResponse'] = _PVERESPONSE
 
 class Stage(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
@@ -188,6 +641,54 @@ class NewStageNotify(_message.Message):
   DESCRIPTOR = _NEWSTAGENOTIFY
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.NewStageNotify)
+
+class BattleHero(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _BATTLEHERO
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.BattleHero)
+
+class Action(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+
+  class SkillTarget(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+    DESCRIPTOR = _ACTION_SKILLTARGET
+
+    # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.Action.SkillTarget)
+
+  class HeroNotify(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+    DESCRIPTOR = _ACTION_HERONOTIFY
+
+    # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.Action.HeroNotify)
+  DESCRIPTOR = _ACTION
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.Action)
+
+class Ground(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _GROUND
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.Ground)
+
+class Battle(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _BATTLE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.Battle)
+
+class PVERequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _PVEREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.PVERequest)
+
+class PVEResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _PVERESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.PVEResponse)
 
 
 # @@protoc_insertion_point(module_scope)
