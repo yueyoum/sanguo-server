@@ -15,7 +15,9 @@ from core.formation import (
         )
 
 from core.character import get_char_formation
+from core.battle.tests import _PVE
 
+import protomsg
 from protomsg import (
         CreateCharacterResponse,
         GetHeroResponse,
@@ -197,4 +199,13 @@ def set_formation(request):
     data = pack_msg(response)
     return HttpResponse(data, content_type="text/plain")
 
+
+
+def pve(request):
+    msg = protomsg.Battle()
+    b = _PVE(0, 0, msg)
+    b.start()
+
+    data = pack_msg(msg)
+    return HttpResponse(data, content_type='text/plain')
 
