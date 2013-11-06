@@ -29,6 +29,19 @@ from utils import pack_msg
 from utils import crypto
 
 
+def setUp(self):
+    monster = GLOBAL.MONSTERS.values()[0]
+    new_monsters = {}
+    for i in range(9):
+        # monster['skills'] = _random_skill_ids(random.randint(1, 3))
+        monster['skills'] = [2]
+        new_monsters[i] = monster
+
+    GLOBAL.MONSTERS = new_monsters
+
+setUp()
+
+
 def create_character(request):
     req = request._proto
     print req
