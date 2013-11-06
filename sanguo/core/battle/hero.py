@@ -115,11 +115,14 @@ class BattleMixIn(object):
         if self.using_crit >= randint(1, 100):
             damage *= 2
             msg_target.is_crit = True
+        else:
+            msg_target.is_crit = False
 
         if target.using_dodge >= randint(1, 100):
             msg_target.is_dodge = True
             return
 
+        msg_target.is_dodge = False
         hero_notify = msg.hero_notify.add()
         hero_notify.target_id = target.id
 
