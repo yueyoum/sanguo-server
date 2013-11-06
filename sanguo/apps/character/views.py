@@ -29,7 +29,7 @@ from utils import pack_msg
 from utils import crypto
 
 
-def setUp(self):
+def setUp():
     monster = GLOBAL.MONSTERS.values()[0]
     new_monsters = {}
     for i in range(9):
@@ -219,6 +219,11 @@ def pve(request):
     b = _PVE(0, 0, msg)
     b.start()
 
-    data = pack_msg(msg)
+    response = protomsg.PVEResponse()
+    response.ret = 0
+    response.stage_id = 1
+    response.battle.MergeFrom(msg)
+
+    data = pack_msg(response)
     return HttpResponse(data, content_type='text/plain')
 
