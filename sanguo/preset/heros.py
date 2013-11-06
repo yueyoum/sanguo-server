@@ -54,6 +54,12 @@ class _Heros(object):
     def all_ids(self):
         return self.heros.keys()
 
+    def keys(self):
+        return self.heros.keys()
+
+    def values(self):
+        return self.heros.values()
+
 
 HEROS = _Heros()
 

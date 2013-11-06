@@ -12,6 +12,7 @@ def load_data():
     for c in content:
         fields = c["fields"]
         skill_pk = fields.pop("skill")
+        fields["type_id"] = fields.pop("effect_type")
         effects[skill_pk].append(Effect(**fields))
 
     with open(data_path('skill.json'), 'r') as f:
@@ -23,8 +24,6 @@ def load_data():
         fields = c["fields"]
         fields.pop("name")
         fields.pop("des")
-        fields.pop("special_id")
-        fields.pop("buff_icon")
 
         fields["sid"] = sid
         fields["effects"] = effects[sid]
