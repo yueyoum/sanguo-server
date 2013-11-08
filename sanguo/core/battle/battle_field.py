@@ -1,9 +1,12 @@
+import logging
+
 TARGET_RULE = {
         0: [0, 1, 2],
         1: [1, 0, 2],
         2: [2, 1, 0],
         }
 
+logger = logging.getLogger('battle')
 
 class BattleField(object):
     def __init__(self, team_one, team_two, msg):
@@ -31,18 +34,14 @@ class BattleField(object):
 
     def action(self):
         hero_pairs = self.find_hero_pairs()
+
         _p = []
         for a, b in hero_pairs:
             _p.append((a.id, b.id))
-        print "hero_pairs =", _p
+        logger.debug(str(_p))
+
         for a, b in hero_pairs:
-            print "BattleField, ", a.id, b.id
-            print a.id, "die =", a.die
             a.action(b)
-            print b.id, "die =", b.die
-            # b.action(a)
-            # print a.id, "die =", a.die
-            # print
 
 
     def find_hero_pairs(self):

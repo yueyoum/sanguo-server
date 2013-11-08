@@ -59,9 +59,5 @@ class TestBattle(object):
         msg = protomsg.Battle()
         b = _PVE(0, 0, msg)
         b.start()
-        with open('/tmp/xx.log', 'w') as f:
-            f.write(msg.__str__())
-
-        assert 1 == 2
 
 

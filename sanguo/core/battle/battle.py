@@ -1,3 +1,4 @@
+import logging
 from collections import defaultdict
 
 from apps.character.models import CharHero
@@ -9,6 +10,7 @@ from core.character import get_char_formation
 
 from protomsg import BattleHero as BattleHeroMsg
 
+logger = logging.getLogger('battle')
 
 class Ground(object):
     def __init__(self, my_heros, rival_heros, msg):
@@ -86,6 +88,29 @@ class Ground(object):
 
 
     def start(self):
+        #### LOG START
+        logger.debug("#### Start Ground %d ####" % self.index)
+        line_upper = []
+        for h in self.rival_heros:
+            if h is None:
+                line_upper.append("    ")
+            else:
+                line_upper.append("%4s" % str(h.id))
+        line_upper = ''.join(line_upper)
+
+        line_bottom = []
+        for h in self.my_heros:
+            if h is None:
+                line_bottom.append("    ")
+            else:
+                line_bottom.append("%4s" % str(h.id))
+        line_bottom = ''.join(line_bottom)
+
+        logger.debug(line_upper)
+        logger.debug(line_bottom)
+        ### LOG END
+
+
         my_power = self.cal_fighting_power(self.my_heros)
         rival_power = self.cal_fighting_power(self.rival_heros)
 
@@ -109,6 +134,7 @@ class Ground(object):
         if i == 30:
             self.msg.self_win = self.my_team_hp() >= self.rival_team_hp()
 
+        logger.debug("Win = %s" % self.msg.self_win)
         return self.msg.self_win
 
 
@@ -116,7 +142,7 @@ class Ground(object):
 class Battle(object):
     def __init__(self, my_id, rival_id, msg):
         self.my_id = my_id
-        self.reval_id = rival_id
+        self.rival_id = rival_id
 
         self.load_my_heros()
         self.load_rival_heros()
@@ -177,13 +203,20 @@ class Battle(object):
 
 
     def start(self):
+        logger.debug("###### Start Battle: %d VS %d ######" % (self.my_id, self.rival_id))
+        heros_list = [str(h) for h in self.my_heros]
+        logger.debug("My Heros: %s" % str(heros_list))
+        heros_list = [str(h) for h in self.rival_heros]
+        logger.debug("Rival Heros: %s" % str(heros_list))
+
+
         grounds = []
         msgs = [self.msg.first_ground, self.msg.second_ground, self.msg.third_ground]
         index = 0
         for i in range(0, 9, 3):
-            grounds.append(
-                    Ground(self.my_heros[i:i+3], self.rival_heros[i:i+3], msgs[index])
-                    )
+            g = Ground(self.my_heros[i:i+3], self.rival_heros[i:i+3], msgs[index])
+            g.index = index + 1
+            grounds.append(g)
             index += 1
 
         win_count = 0
@@ -196,6 +229,8 @@ class Battle(object):
             self.msg.self_win = True
         else:
             self.msg.self_win = False
+
+        logger.debug("Battle Win: %s" % self.msg.self_win)
 
 
 

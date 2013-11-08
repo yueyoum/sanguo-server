@@ -1,23 +1,42 @@
-# -*- coding: utf-8 -*-
-
-from collections import defaultdict
+import logging
 from random import randint
 from core.hero import Hero
 from core import GLOBAL
 
+logger = logging.getLogger('battle')
 
-# def _find_hero_in_msg(msg, target_id):
-#     for t in msg.hero_notify:
-#         if t.target_id == target_id:
-#             return t
-# 
-#     t = msg.hero_notify.add()
-#     t.target_id = target_id
-#     return t
+def _logger_one_action(func):
+    def deco(self, target, *args, **kwargs):
+        msg_target, hero_notify = func(self, target, *args, **kwargs)
+        text = "%d => %d, Crit: %s, Dodge: %s" % (
+                self.id,
+                target.id,
+                msg_target.is_crit,
+                msg_target.is_dodge
+                )
+        if not msg_target.is_dodge:
+            text = '%s. Damage: %d, Hp: %d, Eff: %s' % (
+                    text,
+                    hero_notify.value,
+                    target.hp,
+                    str(hero_notify.eff) if hero_notify.eff else 'None'
+                    )
 
+        text = '%s. Target Buffs: %s' % (
+                text,
+                str(target.current_buff_list())
+                )
+
+        logger.debug(text)
+        return msg_target, hero_notify
+    return deco
 
 
 class BattleMixIn(object):
+    def __str__(self):
+        return '<%d, %d>' % (self.id, self.original_id)
+
+
     def cal_fighting_power(self):
         return 100
 
@@ -25,10 +44,17 @@ class BattleMixIn(object):
         return [eff.type_id for eff in self.effects]
 
     def remove_outdated_effects(self):
+        x = []
+
         for eff in self.effects[:]:
             eff.rounds -= 1
             if eff.rounds == 0:
                 self.effects.remove(eff)
+                x.append(eff.type_id)
+
+        logger.debug("%d: remove effs %s, current effs %s" % (
+            self.id, str(x), str(self.current_buff_list())))
+
 
 
     def using_effects(self):
@@ -77,6 +103,7 @@ class BattleMixIn(object):
 
     def action(self, target):
         if self.die:
+            logger.debug("%d: die, return" % self.id)
             return
 
         msg = self.ground_msg.actions.add()
@@ -92,16 +119,16 @@ class BattleMixIn(object):
 
         for eff in self.effects:
             if eff.type_id == 11:
+                logger.debug("%d: dizziness, return" % self.id)
                 return
 
-        target.using_effects()
         skill = self.find_prob(self.attack_skills)
 
         if skill is None:
-            print "B"
+            logger.debug("%d: normal action" % self.id)
             self.normal_action(target, msg)
         else:
-            print "C"
+            logger.debug("%d: skill action %d" % (self.id, skill.id))
             self.skill_action(target, skill, msg)
 
 
@@ -109,7 +136,9 @@ class BattleMixIn(object):
         self._one_action(target, self.using_attack, msg)
 
 
+    @_logger_one_action
     def _one_action(self, target, damage, msg, eff=None):
+
         msg_target = msg.skill_targets.add()
         msg_target.target_id = target.id
         if self.using_crit >= randint(1, 100):
@@ -118,6 +147,7 @@ class BattleMixIn(object):
         else:
             msg_target.is_crit = False
 
+        target.using_effects()
         if target.using_dodge >= randint(1, 100):
             msg_target.is_dodge = True
             return
@@ -131,7 +161,7 @@ class BattleMixIn(object):
             damage = 0
         else:
             target.hp -= damage
-            if target.hp < 0:
+            if target.hp <= 0:
                 target.hp = 0
                 target.die = True
 
@@ -140,6 +170,8 @@ class BattleMixIn(object):
 
         if eff:
             hero_notify.eff = eff
+
+        return msg_target, hero_notify
 
 
         # target_defense_skill = self.find_prob(target.defense_skills)
@@ -179,6 +211,7 @@ class BattleMixIn(object):
                 hero_notify.target_id = t.id
                 hero_notify.hp = t.hp
                 hero_notify.eff = eff.type_id
+                hero_notify.buffs.extend(t.current_buff_list())
 
 
         damage_eff = None
@@ -194,7 +227,7 @@ class BattleMixIn(object):
                 damage_target = [t for t in target._team if t is not None]
 
             for t in damage_target:
-                self._one_action(t, damage_eff.value, msg, 2)
+                self._one_action(t, damage_eff.value * self.using_attack / 100, msg, 2)
 
 
         for eff in effects[:]:
@@ -204,17 +237,25 @@ class BattleMixIn(object):
 
         for eff in effects:
             if eff.target == 1:
-                target.effects.append(eff)
+                if not target.die:
+                    target.effects.append(eff)
+                    logger.debug("Target %d, add eff %d" % (target.id, eff.type_id))
             elif eff.target == 2:
-                self.effects.append(eff)
+                if not target.die:
+                    self.effects.append(eff)
+                    logger.debug("Target %d, add eff %d" % (target.id, eff.type_id))
             elif eff.target == 3:
                 for _h in target._team:
-                    if _h is not None:
-                        _h.effects.append(eff)
+                    if _h is None or _h.die:
+                        continue
+                    _h.effects.append(eff)
+                    logger.debug("Target %d, add eff %d" % (_h.id, eff.type_id))
             elif eff.target == 4:
                 for _h in self._team:
-                    if _h is not None:
-                        _h.effects.append(eff)
+                    if _h is None or _h.die:
+                        continue
+                    _h.effects.append(eff)
+                    logger.debug("Target %d, add eff %d" % (_h.id, eff.type_id))
 
 
 

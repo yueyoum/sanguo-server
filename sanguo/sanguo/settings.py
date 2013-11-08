@@ -1,6 +1,11 @@
 # Django settings for sanguo project.
+import os
 import sys
 TESTING = sys.argv[1] == 'test'
+
+CURRENT_PATH = os.path.dirname(os.path.realpath(__file__))
+TMP_PATH = os.path.normpath(os.path.join(CURRENT_PATH, '../../tmp'))
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
