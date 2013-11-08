@@ -1,7 +1,6 @@
 import logging
 from collections import defaultdict
 
-from apps.character.models import CharHero
 from core.battle.hero import BattleHero, MonsterHero
 from core.formation import decode_formation
 from core import GLOBAL
@@ -171,6 +170,7 @@ class Battle(object):
 
 
     def load_my_heros(self):
+        from apps.character.models import CharHero
         formation = get_char_formation(self.my_id)
         msg = decode_formation(formation)
 

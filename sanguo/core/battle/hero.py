@@ -150,7 +150,7 @@ class BattleMixIn(object):
         target.using_effects()
         if target.using_dodge >= randint(1, 100):
             msg_target.is_dodge = True
-            return
+            return msg_target, None
 
         msg_target.is_dodge = False
         hero_notify = msg.hero_notify.add()
