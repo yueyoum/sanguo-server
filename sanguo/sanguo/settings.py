@@ -1,7 +1,11 @@
 # Django settings for sanguo project.
 import os
 import sys
-TESTING = sys.argv[1] == 'test'
+
+try:
+    TESTING = sys.argv[1] == 'test'
+except IndexError:
+    TESTING = False
 
 CURRENT_PATH = os.path.dirname(os.path.realpath(__file__))
 TMP_PATH = os.path.normpath(os.path.join(CURRENT_PATH, '../../tmp'))
