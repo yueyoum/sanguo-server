@@ -30,8 +30,8 @@ def _unpack(res):
 
 class UnpackAndVerifyData(object):
     def process_request(self, request):
-        if request.path.startswith('/admin/'):
-            return None
+        # if request.path.startswith('/admin/'):
+        #     return None
 
         if request.method != "POST":
             return HttpResponse(status=403)
@@ -76,8 +76,8 @@ class PackMessageData(object):
         if response.status_code != 200:
             return response
 
-        if request.path.startswith('/admin/'):
-            return response
+        # if request.path.startswith('/admin/'):
+        #     return response
 
         key = getattr(request, '_decrypted_session', None) or getattr(
                 response, '_redis_key', None

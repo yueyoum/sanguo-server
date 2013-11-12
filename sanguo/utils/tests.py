@@ -28,17 +28,17 @@ def test_decrypt_expire_with_invalid_text():
         raise Exception("Decrypt a random string with NO error")
 
 
-def test_crypto_expire_with_expired():
-    import time
-
-    original = 'abcd:1234:)()xxx'
-    text = crypto.encrypt_with_expire(original)
-    time.sleep(2)
-    
-    try:
-        crypto.decrypt_with_expire(text, 1)
-    except crypto.ExpiredText:
-        pass
-    else:
-        raise Exception("Decrypt an expired text with NO error")
-
+# def test_crypto_expire_with_expired():
+#     import time
+# 
+#     original = 'abcd:1234:)()xxx'
+#     text = crypto.encrypt_with_expire(original)
+#     time.sleep(2)
+#     
+#     try:
+#         crypto.decrypt_with_expire(text, 1)
+#     except crypto.ExpiredText:
+#         pass
+#     else:
+#         raise Exception("Decrypt an expired text with NO error")
+# 
