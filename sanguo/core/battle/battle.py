@@ -1,17 +1,17 @@
 import logging
-from collections import defaultdict
 
-from core.battle.hero import BattleHero, MonsterHero
-from core.formation import decode_formation
+from core.battle.hero import MonsterHero
 from core import GLOBAL
 from core.battle.battle_field import BattleField
-from core.character import get_char_formation
 
 from protomsg import BattleHero as BattleHeroMsg
 
 logger = logging.getLogger('battle')
 
+
 class Ground(object):
+    __slots__ = ['my_heros', 'rival_heros', 'msg', 'index']
+
     def __init__(self, my_heros, rival_heros, msg):
         self.my_heros = my_heros
         self.rival_heros = rival_heros
@@ -38,22 +38,8 @@ class Ground(object):
         _fill_up_heros(self.rival_heros, msg.rival_heros)
 
         self.msg = msg
-        self.find_combine_skills()
 
 
-    def find_combine_skills(self):
-        combine_skills = defaultdict(lambda: 0)
-        for hero in self.my_heros:
-            if hero is None:
-                continue
-
-            for s in hero.combine_skills:
-                combine_skills[s] += 1
-
-        avtive_combine_skills = []
-        for s, count in combine_skills.iteritems():
-            if count >= s.trig_condition:
-                avtive_combine_skills.append(s)
 
     def cal_fighting_power(self, heros):
         return 100
@@ -139,6 +125,8 @@ class Ground(object):
 
 
 class Battle(object):
+    __slots__  = ['my_id', 'rival_id', 'my_heros', 'rival_heros', 'msg']
+
     def __init__(self, my_id, rival_id, msg):
         self.my_id = my_id
         self.rival_id = rival_id
@@ -170,32 +158,7 @@ class Battle(object):
 
 
     def load_my_heros(self):
-        from apps.character.models import CharHero
-        formation = get_char_formation(self.my_id)
-        msg = decode_formation(formation)
-
-        formation_hero_ids = [i for i in msg.hero_ids if i > 0]
-        my_hero_objs = CharHero.objects.defer('char').filter(
-                id__in=formation_hero_ids
-                )
-        id_hero_dict = dict(zip(formation_hero_ids, my_hero_objs))
-
-        self.my_heros = []
-        for hid in msg.hero_ids:
-            if hid == 0:
-                self.my_heros.append(None)
-            else:
-                this_hero = id_hero_dict[hid]
-                h = BattleHero(
-                    this_hero.id,
-                    this_hero.hero_id,
-                    this_hero.exp
-                    )
-                h._hero_type = 1
-                self.my_heros.append(
-                        h
-                        )
-
+        raise NotImplementedError()
 
     def load_rival_heros(self):
         raise NotImplementedError()
@@ -224,6 +187,7 @@ class Battle(object):
             win = g.start()
             if win:
                 win_count += 1
+
 
         if win_count >= 2:
             self.msg.self_win = True

@@ -33,11 +33,15 @@ Effect
 
 
 class Effect(object):
+    __slots__ = ['target', 'type_id', 'value', 'rounds', 'active_value']
     def __init__(self, target, type_id, value, rounds):
         self.target = target
         self.type_id = type_id
         self.value = value
         self.rounds = rounds
+        self.active_value = None
+        # active_value 的作用是对于 持续伤害 或者 持续加血，
+        # 它们后续作用的值，是第一次这些效果作用时的值
 
 
     def copy(self):
@@ -46,6 +50,7 @@ class Effect(object):
 
 
 class Skill(object):
+    __slots__ = ['id', 'mode', 'trig_condition', 'trig_prob', 'effects']
     def __init__(self, sid, mode, trig_condition, trig_prob, effects):
         self.id = sid
         self.mode = mode
