@@ -104,14 +104,14 @@ def new_stage_notify(key, sid):
     redis_client.rpush(key, pack_msg(msg))
 
 
-def login_notify(key, char_obj, hero_objs=None):
+def login_notify(key, char_obj, hero_objs=None, formation=None):
     if not hero_objs:
         hero_objs = char_obj.char_heros.all()
 
     character_notify(key, char_obj)
     hero_notify(key, hero_objs)
     get_hero_panel_notify(key, char_obj)
-    formation_notify(key, char_id=char_obj.id)
+    formation_notify(key, char_id=char_obj.id, formation=formation)
     already_stage_notify(key, char_obj.id)
     new_stage_notify(key, 3)
 

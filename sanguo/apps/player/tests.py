@@ -18,6 +18,9 @@ from utils import app_test_helper as tests
 from models import User
 from core import GLOBAL
 
+from core.drives import mongodb_client_db
+from core.formation import encode_formation_with_raw_data
+
 
 def teardown():
     from core.drives import redis_client, mongodb_client, mongodb_client_db
@@ -147,6 +150,17 @@ class LoginTest(TransactionTestCase):
                 char = char,
                 hero_id = GLOBAL.HEROS.all_ids()[0]
                 )
+
+        formation = encode_formation_with_raw_data(
+                9,
+                [0] * 9
+                )
+        mongodb_client_db.char_formation.update(
+                {'_id': char.id},
+                {'$set': {'data': formation}},
+                upsert=True
+                )
+
 
         self._regular_login('123@456.com', '123456', 0)
 

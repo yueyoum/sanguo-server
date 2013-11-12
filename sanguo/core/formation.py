@@ -18,4 +18,3 @@ def encode_formation_with_raw_data(count, ids):
     msg.hero_ids.extend(ids)
     return b64encode(msg.SerializeToString())
 
-

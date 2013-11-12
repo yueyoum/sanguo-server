@@ -258,6 +258,7 @@ class FormationTest(TransactionTestCase):
                 self.assertEqual(len(data.formation.hero_ids), 9)
 
     def test_set_formation(self):
-        self._set_formation()
+        self._set_formation(ret=400)
+
 
 

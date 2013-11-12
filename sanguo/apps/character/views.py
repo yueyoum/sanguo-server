@@ -12,6 +12,7 @@ from core.drives import mongodb_client_db
 from core.formation import (
         decode_formation,
         encode_formation,
+        encode_formation_with_raw_data,
         )
 
 from core.character import get_char_formation
@@ -71,6 +72,21 @@ def create_character(request):
             ]
     char_heros = CharHero.multi_create(char_heros_list)
 
+    encoded_formation = encode_formation_with_raw_data(
+            9,
+            [
+                char_heros[0].id, 0, 0,
+                char_heros[1].id, 0, 0,
+                char_heros[2].id, 0, 0,
+            ]
+            )
+
+    mongodb_client_db.char_formaton.update(
+            {'_id': char.id},
+            {'$set': {'data': encoded_formation}},
+            upsert=True
+            )
+
     new_session = '%s:%d' % (request._decrypted_session, char.id)
     new_session = crypto.encrypt(new_session)
 
@@ -78,7 +94,13 @@ def create_character(request):
     response.ret = 0
     data = pack_msg(response, new_session)
 
-    notify.login_notify(request._decrypted_session, char, hero_objs=char_heros)
+    notify.login_notify(
+            request._decrypted_session,
+            char,
+            hero_objs=char_heros,
+            formation=encoded_formation,
+            )
+
     return HttpResponse(data, content_type="text/plain")
 
 
@@ -189,6 +211,13 @@ def set_formation(request):
     char_id = int(char_id)
 
     hero_ids = req.hero_ids
+
+    if len(hero_ids) != 9:
+        raise SanguoViewException(400, "SetFormationResponse")
+
+    for i in range(0, 9, 3):
+        if hero_ids[i] == hero_ids[i+1] == hero_ids[i+2] == 0:
+            raise SanguoViewException(400, "SetFormationResponse")
 
     old_formation = get_char_formation(char_id)
 
