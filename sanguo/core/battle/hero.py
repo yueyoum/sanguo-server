@@ -32,13 +32,6 @@ class EffectManager(object):
                 e.rounds -= 1
                 if e.rounds <= 0:
                     self.effect_targets[h].remove(e)
-                    # try:
-                    #     # 同类型效果会把以前的效果冲掉，
-                    #     # 所以这里需要try
-                    #     h.effect_manager.effects.remove(e)
-                    #     cleaned_effs[h.id].append(e.type_id)
-                    # except ValueError:
-                    #     pass
                     h.effect_manager.effects.remove(e)
                     cleaned_effs[h.id].append(e.type_id)
 
@@ -46,22 +39,6 @@ class EffectManager(object):
 
 
     def add_effect_to_target(self, target, eff, msg):
-        # same_type_eff = None
-        # for e in target.effect_manager.effects:
-        #     if e.type_id == eff.type_id:
-        #         same_type_eff = e
-        #         break
-        # 
-        # if same_type_eff:
-        #     if same_type_eff.type_id == 11 and \
-        #         same_type_eff.rounds > eff.rounds:
-        #         return
-
-        #     # FIXME 
-        #     # 同类型效果只保留一个，现在只是简单的处理：
-        #     # 除过眩晕效果外，其他的直接冲掉
-        #     target.effect_manager.effects.remove(same_type_eff)
-
         self.effect_targets[target].append(eff)
         target.effect_manager.add_effect(target, eff, msg)
 
@@ -112,8 +89,9 @@ def _logger_one_action(func):
 
 class InBattleHero(object):
     def __init__(self):
-        self.max_hp = self.hp
         self.die = False
+        self.max_hp = self.hp
+        self.damage_value = 0
         self.effect_manager = EffectManager()
 
         self.skills = [GLOBAL.SKILLS[sid] for sid in self.skills]
@@ -137,6 +115,19 @@ class InBattleHero(object):
         return '<%d, %d>' % (self.id, self.original_id)
 
 
+    def set_hp(self, value):
+        self.damage_value = value
+        self.hp -= value
+        if self.hp <= 0:
+            self.hp = 0
+            self.die = True
+
+            return
+
+        if self.hp > self.max_hp:
+            self.hp = self.max_hp
+
+
     def cal_fighting_power(self):
         return 100
 
@@ -153,9 +144,7 @@ class InBattleHero(object):
             if eff.type_id == 1:
                 # 持续加血
                 value = int(eff.active_value)
-                self.hp += value
-                if self.hp > self.max_hp:
-                    self.hp = self.max_hp
+                self.set_hp(-value)
 
                 hero_notify = msg.hero_notify.add()
                 hero_notify.target_id = self.id
@@ -170,10 +159,7 @@ class InBattleHero(object):
             elif eff.type_id == 2:
                 # 持续伤害
                 value = int(eff.active_value)
-                self.hp -= value
-                if self.hp <= 0:
-                    self.hp = 0
-                    self.die = True
+                self.set_hp(value)
 
                 hero_notify = msg.hero_notify.add()
                 hero_notify.target_id = self.id
@@ -185,7 +171,7 @@ class InBattleHero(object):
                     value, self.id, self.hp)
                     )
 
-                if self.hp == 0:
+                if self.hp <= 0:
                     raise DieEvent()
 
         if in_dizziness:
@@ -297,13 +283,13 @@ class InBattleHero(object):
             _defense_action_msg.from_id = who.id
             _defense_action_msg.skill_id = skill.id
             logger.debug("Start Defense Skill %d, %d => %d" % (skill.id, who.id, to.id))
-            # self.skill_action(to, skill, _defense_action_msg)
-            # FIXME
-            pass
+            who.active_initiative_effects(_defense_action_msg)
+            who.skill_action(to, skill, _defense_action_msg)
 
 
     def normal_action(self, target, msg):
-        self._one_action(target, self.using_attack, msg)
+        target.active_property_effects()
+        self._one_action(target, self.using_attack - target.using_defense, msg)
 
 
     @_logger_one_action
@@ -317,33 +303,27 @@ class InBattleHero(object):
         else:
             msg_target.is_crit = False
 
-        target.active_property_effects()
-        if target.using_dodge >= randint(1, 100):
-            msg_target.is_dodge = True
-            return msg_target, None
+        # target.active_property_effects()
+        if not eff or eff not in [1, 12, 13]:
+            # 加血，反伤，吸血不能闪避
+            if target.using_dodge >= randint(1, 100):
+                msg_target.is_dodge = True
+                return msg_target, None
 
         msg_target.is_dodge = False
         hero_notify = msg.hero_notify.add()
         hero_notify.target_id = target.id
 
+        value = int(value)
         if eff:
-            if eff == 1:
-                # 加血效果
-                # FIXME
-                value = -int(value)
-            elif eff == 2:
-                # 伤害效果
-                value = int(value - target.using_defense)
+            if eff == 1 or eff == 13:
+                value = -value
+            else:
                 if value < 0:
                     value = 0
-        else:
-            value = int(value - target.using_defense)
 
     
-        target.hp -= value
-        if target.hp <= 0:
-            target.hp = 0
-            target.die = True
+        target.set_hp(value)
 
         hero_notify.hp = target.hp
         hero_notify.value = value
@@ -425,14 +405,17 @@ class InBattleHero(object):
                 eff_target = [t for t in self._team if t is not None and not t.die]
 
             for t in eff_target:
+                t.active_property_effects()
                 if eff.type_id == 1:
-                    self._one_action(t, -eff.value, msg, 1)
+                    self._one_action(t, eff.value * t.hp / 100, msg, 1)
                 elif eff.type_id == 2:
                     self._one_action(t, eff.value * self.using_attack / 100, msg, 2)
+                elif eff.type_id == 12:
+                    self._one_action(t, eff.value * self.damage_value / 100, msg, 12)
                 elif eff.type_id == 13:
                     value = eff.value * self.using_attack / 100
                     self._one_action(t, value, msg, 13)
-                    self._one_action(self, -value, msg, 13)
+                    t._one_action(self, value, msg, 13)
                 else:
                     raise TypeError("UnSupported Effect Type: %d" % eff.type_id)
 
@@ -442,15 +425,16 @@ class InBattleHero(object):
 
 
 class BattleHero(Hero, InBattleHero):
+    _hero_type = 1
     def __init__(self, *args, **kwargs):
         Hero.__init__(self, *args, **kwargs)
         InBattleHero.__init__(self)
 
-        self._hero_type = 1
-
 
 
 class MonsterHero(InBattleHero):
+    _hero_type = 2
+
     def __init__(self, mid):
         info = GLOBAL.MONSTERS[mid]
         self.id = mid
@@ -461,8 +445,6 @@ class MonsterHero(InBattleHero):
         self.crit = info['crit']
         self.dodge = info['dodge']
         self.skills = info['skills']
-
-        self._hero_type = 2
 
         InBattleHero.__init__(self)
 

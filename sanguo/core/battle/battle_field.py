@@ -232,8 +232,8 @@ class BattleField(object):
     def find_hero_pairs(self):
         while True:
             hero = self.team_one[self.current_pos]
+            opposite = self.team_two[self.current_pos]
             if hero is None or hero.die:
-                opposite = self.team_two[self.current_pos]
                 if opposite is None or opposite.die:
                     self.change_current_pos()
                     continue
@@ -242,11 +242,13 @@ class BattleField(object):
                 self.change_current_pos()
                 return ((opposite, hero),)
 
-
-            target = self.choose_target(self.team_two, self.current_pos)
-            target_target = self.choose_target(self.team_one, target._index)
+            if opposite is None or opposite.die:
+                target = self.choose_target(self.team_two, self.current_pos)
+                self.change_current_pos()
+                return ((hero, target),)
+            
             self.change_current_pos()
-            return ((hero, target), (target, target_target),)
+            return ((hero, opposite), (opposite, hero),)
 
                 
 
