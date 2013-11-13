@@ -81,7 +81,7 @@ def create_character(request):
             ]
             )
 
-    mongodb_client_db.char_formaton.update(
+    mongodb_client_db.char_formation.update(
             {'_id': char.id},
             {'$set': {'data': encoded_formation}},
             upsert=True
@@ -227,7 +227,7 @@ def set_formation(request):
     formation_msg.hero_ids.MergeFrom(hero_ids)
     encoded_formation = encode_formation(formation_msg)
 
-    mongodb_client_db.char_formaton.update(
+    mongodb_client_db.char_formation.update(
             {'_id': char_id},
             {'$set': {'data': encoded_formation}},
             upsert=True
