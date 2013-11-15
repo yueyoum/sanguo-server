@@ -7,7 +7,7 @@ from models import Character, CharHero
 from core.exception import SanguoViewException
 from core import notify
 from core import GLOBAL
-from core.drives import mongodb_client_db
+from core.drives import document_char
 
 from core.formation import (
         decode_formation,
@@ -81,11 +81,7 @@ def create_character(request):
             ]
             )
 
-    mongodb_client_db.char_formation.update(
-            {'_id': char.id},
-            {'$set': {'data': encoded_formation}},
-            upsert=True
-            )
+    document_char.set(char.id, formation=encoded_formation)
 
     new_session = '%s:%d' % (request._decrypted_session, char.id)
     new_session = crypto.encrypt(new_session)
@@ -227,11 +223,7 @@ def set_formation(request):
     formation_msg.hero_ids.MergeFrom(hero_ids)
     encoded_formation = encode_formation(formation_msg)
 
-    mongodb_client_db.char_formation.update(
-            {'_id': char_id},
-            {'$set': {'data': encoded_formation}},
-            upsert=True
-            )
+    document_char.set(char_id, formation=encoded_formation)
 
     notify.formation_notify(request._decrypted_session, formation=encoded_formation)
 

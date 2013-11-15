@@ -18,13 +18,65 @@ mongodb_client = pymongo.MongoClient(
 
 mongodb_client_db = mongodb_client[settings.MONGODB_DB]
 
+
+
+class _Document(object):
+    def __init__(self, db, document):
+        self.document = db[document]
+
+    def get(self, key, **extra):
+        if extra:
+            return self.document.find_one(
+                    {'_id': key},
+                    extra
+                    )
+
+        return self.document.find_one(
+                {'_id': key}
+                )
+
+    def set(self, key, **kwargs):
+        self.document.update(
+                {'_id': key},
+                {'$set': kwargs},
+                upsert=True
+                )
+
+    def remove(self, key):
+        self.document.remove({'_id': key})
+
+    def add_to_list(self, key, field, value):
+        if not isinstance(value, (list, tuple)):
+            value = [value]
+
+        self.document.update(
+                {'_id': key},
+                {'$push': {field: {'$each': value}}},
+                )
+
+    def remove_from_list(self, key, field, value):
+        if not isinstance(value, (list, tuple)):
+            value = [value]
+
+        self.document.update(
+                {'_id': key},
+                {'$pullAll': {field: value}},
+                upsert=True
+                )
+
+
+
+document_char = _Document(mongodb_client_db, 'char')
+
+
+
 # mongodb scheme
 #
 # collection          document
 #
-# char_formation      {
+# char               {
 #                       _id: char_id,
-#                       data: proto_binary,
+#                       formation: proto_binary,
 #                     }
 #       
 # char_stage         {

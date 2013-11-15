@@ -18,7 +18,7 @@ from utils import app_test_helper as tests
 from models import User
 from core import GLOBAL
 
-from core.drives import mongodb_client_db
+from core.drives import mongodb_client_db, document_char
 from core.formation import encode_formation_with_raw_data
 
 
@@ -155,11 +155,7 @@ class LoginTest(TransactionTestCase):
                 9,
                 [0] * 9
                 )
-        mongodb_client_db.char_formation.update(
-                {'_id': char.id},
-                {'$set': {'data': formation}},
-                upsert=True
-                )
+        document_char.set(char.id, formation=formation)
 
 
         self._regular_login('123@456.com', '123456', 0)
