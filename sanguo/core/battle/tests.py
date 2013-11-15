@@ -1,4 +1,5 @@
 import random
+import logging
 from core import GLOBAL
 from core.battle.battle import PVE
 from core.battle.hero import BattleHero, MonsterHero
@@ -46,6 +47,10 @@ def _random_skill_ids(num):
 
 class TestBattle(object):
     def setUp(self):
+        logger = logging.getLogger('battle')
+        for h in logger.handlers[:]:
+            logger.removeHandler(h)
+
         monster = GLOBAL.MONSTERS.values()[0]
         new_monsters = {}
         for i in range(9):
