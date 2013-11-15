@@ -145,6 +145,8 @@ def login(request):
 
     response = StartGameResponse()
     response.ret = 0
+    response.anonymous.MergeFrom(req.anonymous)
+    response.regular.MergeFrom(req.regular)
     response.need_create_new_char = need_create_new_char 
 
     data = pack_msg(response, session)
