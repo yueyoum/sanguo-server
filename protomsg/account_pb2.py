@@ -14,7 +14,7 @@ import world_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='account.proto',
   package='Sanguo.protocol.account',
-  serialized_pb='\n\raccount.proto\x12\x17Sanguo.protocol.account\x1a\x0bworld.proto\"&\n\x0e\x41nonymousLogin\x12\x14\n\x0c\x64\x65vice_token\x18\x01 \x02(\t\"/\n\x0cRegularLogin\x12\r\n\x05\x65mail\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\"\xaa\x01\n\x10StartGameRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12:\n\tanonymous\x18\x02 \x01(\x0b\x32\'.Sanguo.protocol.account.AnonymousLogin\x12\x36\n\x07regular\x18\x03 \x01(\x0b\x32%.Sanguo.protocol.account.RegularLogin\x12\x11\n\tserver_id\x18\x04 \x02(\x05\"O\n\x11StartGameResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x01(\x0c\x12\x1c\n\x14need_create_new_char\x18\x03 \x01(\x08\"\x9b\x01\n\x14GetServerListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12:\n\tanonymous\x18\x02 \x01(\x0b\x32\'.Sanguo.protocol.account.AnonymousLogin\x12\x36\n\x07regular\x18\x03 \x01(\x0b\x32%.Sanguo.protocol.account.RegularLogin\"\x91\x01\n\x15GetServerListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12*\n\x03top\x18\x02 \x01(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12.\n\x07servers\x18\x03 \x03(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12\x0f\n\x07session\x18\x04 \x02(\x0c\"Y\n\x0fRegisterRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\r\n\x05\x65mail\x18\x02 \x02(\t\x12\x10\n\x08password\x18\x03 \x02(\t\x12\x14\n\x0c\x64\x65vice_token\x18\x04 \x02(\t\"\xad\x01\n\x10RegisterResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x10\n\x08password\x18\x03 \x01(\t\x12*\n\x03top\x18\x04 \x01(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12.\n\x07servers\x18\x05 \x03(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12\x0f\n\x07session\x18\x06 \x02(\x0c')
+  serialized_pb='\n\raccount.proto\x12\x17Sanguo.protocol.account\x1a\x0bworld.proto\"&\n\x0e\x41nonymousLogin\x12\x14\n\x0c\x64\x65vice_token\x18\x01 \x02(\t\"/\n\x0cRegularLogin\x12\r\n\x05\x65mail\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\"\xaa\x01\n\x10StartGameRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12:\n\tanonymous\x18\x02 \x01(\x0b\x32\'.Sanguo.protocol.account.AnonymousLogin\x12\x36\n\x07regular\x18\x03 \x01(\x0b\x32%.Sanguo.protocol.account.RegularLogin\x12\x11\n\tserver_id\x18\x04 \x02(\x05\"\xc3\x01\n\x11StartGameResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x01(\x0c\x12:\n\tanonymous\x18\x03 \x01(\x0b\x32\'.Sanguo.protocol.account.AnonymousLogin\x12\x36\n\x07regular\x18\x04 \x01(\x0b\x32%.Sanguo.protocol.account.RegularLogin\x12\x1c\n\x14need_create_new_char\x18\x05 \x01(\x08\"\x9b\x01\n\x14GetServerListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12:\n\tanonymous\x18\x02 \x01(\x0b\x32\'.Sanguo.protocol.account.AnonymousLogin\x12\x36\n\x07regular\x18\x03 \x01(\x0b\x32%.Sanguo.protocol.account.RegularLogin\"\x91\x01\n\x15GetServerListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12*\n\x03top\x18\x02 \x01(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12.\n\x07servers\x18\x03 \x03(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12\x0f\n\x07session\x18\x04 \x02(\x0c\"Y\n\x0fRegisterRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\r\n\x05\x65mail\x18\x02 \x02(\t\x12\x10\n\x08password\x18\x03 \x02(\t\x12\x14\n\x0c\x64\x65vice_token\x18\x04 \x02(\t\"\xad\x01\n\x10RegisterResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x10\n\x08password\x18\x03 \x01(\t\x12*\n\x03top\x18\x04 \x01(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12.\n\x07servers\x18\x05 \x03(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12\x0f\n\x07session\x18\x06 \x02(\x0c')
 
 
 
@@ -153,8 +153,22 @@ _STARTGAMERESPONSE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='need_create_new_char', full_name='Sanguo.protocol.account.StartGameResponse.need_create_new_char', index=2,
-      number=3, type=8, cpp_type=7, label=1,
+      name='anonymous', full_name='Sanguo.protocol.account.StartGameResponse.anonymous', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='regular', full_name='Sanguo.protocol.account.StartGameResponse.regular', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='need_create_new_char', full_name='Sanguo.protocol.account.StartGameResponse.need_create_new_char', index=4,
+      number=5, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -168,8 +182,8 @@ _STARTGAMERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=317,
-  serialized_end=396,
+  serialized_start=318,
+  serialized_end=513,
 )
 
 
@@ -210,8 +224,8 @@ _GETSERVERLISTREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=399,
-  serialized_end=554,
+  serialized_start=516,
+  serialized_end=671,
 )
 
 
@@ -259,8 +273,8 @@ _GETSERVERLISTRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=557,
-  serialized_end=702,
+  serialized_start=674,
+  serialized_end=819,
 )
 
 
@@ -308,8 +322,8 @@ _REGISTERREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=704,
-  serialized_end=793,
+  serialized_start=821,
+  serialized_end=910,
 )
 
 
@@ -371,12 +385,14 @@ _REGISTERRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=796,
-  serialized_end=969,
+  serialized_start=913,
+  serialized_end=1086,
 )
 
 _STARTGAMEREQUEST.fields_by_name['anonymous'].message_type = _ANONYMOUSLOGIN
 _STARTGAMEREQUEST.fields_by_name['regular'].message_type = _REGULARLOGIN
+_STARTGAMERESPONSE.fields_by_name['anonymous'].message_type = _ANONYMOUSLOGIN
+_STARTGAMERESPONSE.fields_by_name['regular'].message_type = _REGULARLOGIN
 _GETSERVERLISTREQUEST.fields_by_name['anonymous'].message_type = _ANONYMOUSLOGIN
 _GETSERVERLISTREQUEST.fields_by_name['regular'].message_type = _REGULARLOGIN
 _GETSERVERLISTRESPONSE.fields_by_name['top'].message_type = world_pb2._SERVER
