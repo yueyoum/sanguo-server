@@ -3,9 +3,12 @@ import os
 import sys
 
 try:
-    TESTING = sys.argv[1] == 'test'
-except IndexError:
-    TESTING = False
+    TESTING = int(os.environ['TEST']) == 1
+except (KeyError, ValueError):
+    try:
+        TESTING = sys.argv[1] == 'test'
+    except IndexError:
+        TESTING = False
 
 CURRENT_PATH = os.path.dirname(os.path.realpath(__file__))
 TMP_PATH = os.path.normpath(os.path.join(CURRENT_PATH, '../../tmp'))
