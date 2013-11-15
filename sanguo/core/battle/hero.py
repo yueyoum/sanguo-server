@@ -287,9 +287,16 @@ class InBattleHero(object):
             who.skill_action(to, skill, _defense_action_msg)
 
 
+    def real_damage_value(self, damage, target_defense):
+        xx = min(0.024 * target_defense / (self.level + 9), 0.75)
+        value = damage * (1 - xx)
+        return value
+        
+
+
     def normal_action(self, target, msg):
         target.active_property_effects()
-        self._one_action(target, self.using_attack - target.using_defense, msg)
+        self._one_action(target, self.using_attack, msg)
 
 
     @_logger_one_action
@@ -302,6 +309,10 @@ class InBattleHero(object):
             msg_target.is_crit = True
         else:
             msg_target.is_crit = False
+
+        # FIXME
+        if not eff or eff == 2:
+            value = self.real_damage_value(value, target.using_defense)
 
         # target.active_property_effects()
         if not eff or eff not in [1, 12, 13]:
