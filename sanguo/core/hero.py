@@ -2,9 +2,9 @@ from core import GLOBAL
 
 
 def cal_hero_property(original_id, level):
-    attack = 20 + level * (7 + GLOBAL.HEROS[original_id]['attack_grow'])
-    defense = 15 + level * (6 + GLOBAL.HEROS[original_id]['defense_grow'])
-    hp = 45 + level * (15 + GLOBAL.HEROS[original_id]['hp_grow'])
+    attack = 20 + level * GLOBAL.HEROS[original_id]['attack_grow']
+    defense = 15 + level * GLOBAL.HEROS[original_id]['defense_grow']
+    hp = 45 + level * GLOBAL.HEROS[original_id]['hp_grow']
 
     return attack, defense, hp
 
