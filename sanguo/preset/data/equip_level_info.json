@@ -1,0 +1,1883 @@
+[
+{
+    "pk": 1, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 8333, 
+        "white_gold": 200, 
+        "green_exp": 150, 
+        "white_exp": 100, 
+        "attack": 19, 
+        "cost": 100, 
+        "green_gold": 360, 
+        "exp": 200, 
+        "purple_exp": 370, 
+        "blue_gold": 5000, 
+        "blue_exp": 320, 
+        "hp": 22, 
+        "defense": 8
+    }
+},
+{
+    "pk": 2, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 10404, 
+        "white_gold": 241, 
+        "green_exp": 300, 
+        "white_exp": 200, 
+        "attack": 26, 
+        "cost": 200, 
+        "green_gold": 434, 
+        "exp": 500, 
+        "purple_exp": 625, 
+        "blue_gold": 6242, 
+        "blue_exp": 500, 
+        "hp": 29, 
+        "defense": 10
+    }
+},
+{
+    "pk": 3, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 11993, 
+        "white_gold": 273, 
+        "green_exp": 450, 
+        "white_exp": 300, 
+        "attack": 32, 
+        "cost": 300, 
+        "green_gold": 491, 
+        "exp": 900, 
+        "purple_exp": 965, 
+        "blue_gold": 7196, 
+        "blue_exp": 740, 
+        "hp": 36, 
+        "defense": 12
+    }
+},
+{
+    "pk": 4, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 13333, 
+        "white_gold": 300, 
+        "green_exp": 600, 
+        "white_exp": 400, 
+        "attack": 39, 
+        "cost": 400, 
+        "green_gold": 540, 
+        "exp": 1400, 
+        "purple_exp": 1390, 
+        "blue_gold": 8000, 
+        "blue_exp": 1040, 
+        "hp": 43, 
+        "defense": 15
+    }
+},
+{
+    "pk": 5, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 14513, 
+        "white_gold": 323, 
+        "green_exp": 750, 
+        "white_exp": 500, 
+        "attack": 45, 
+        "cost": 500, 
+        "green_gold": 582, 
+        "exp": 2000, 
+        "purple_exp": 1900, 
+        "blue_gold": 8708, 
+        "blue_exp": 1400, 
+        "hp": 51, 
+        "defense": 17
+    }
+},
+{
+    "pk": 6, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 15580, 
+        "white_gold": 344, 
+        "green_exp": 900, 
+        "white_exp": 600, 
+        "attack": 52, 
+        "cost": 600, 
+        "green_gold": 620, 
+        "exp": 2700, 
+        "purple_exp": 2495, 
+        "blue_gold": 9348, 
+        "blue_exp": 1820, 
+        "hp": 58, 
+        "defense": 20
+    }
+},
+{
+    "pk": 7, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 16562, 
+        "white_gold": 364, 
+        "green_exp": 1050, 
+        "white_exp": 700, 
+        "attack": 58, 
+        "cost": 700, 
+        "green_gold": 656, 
+        "exp": 3600, 
+        "purple_exp": 3260, 
+        "blue_gold": 9937, 
+        "blue_exp": 2360, 
+        "hp": 66, 
+        "defense": 22
+    }
+},
+{
+    "pk": 8, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 17475, 
+        "white_gold": 382, 
+        "green_exp": 1200, 
+        "white_exp": 800, 
+        "attack": 65, 
+        "cost": 800, 
+        "green_gold": 689, 
+        "exp": 4600, 
+        "purple_exp": 4110, 
+        "blue_gold": 10485, 
+        "blue_exp": 2960, 
+        "hp": 73, 
+        "defense": 25
+    }
+},
+{
+    "pk": 9, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 18333, 
+        "white_gold": 400, 
+        "green_exp": 1350, 
+        "white_exp": 900, 
+        "attack": 71, 
+        "cost": 900, 
+        "green_gold": 720, 
+        "exp": 5800, 
+        "purple_exp": 5130, 
+        "blue_gold": 11000, 
+        "blue_exp": 3680, 
+        "hp": 80, 
+        "defense": 27
+    }
+},
+{
+    "pk": 10, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 19144, 
+        "white_gold": 416, 
+        "green_exp": 1500, 
+        "white_exp": 1000, 
+        "attack": 78, 
+        "cost": 1000, 
+        "green_gold": 749, 
+        "exp": 7200, 
+        "purple_exp": 6320, 
+        "blue_gold": 11486, 
+        "blue_exp": 4520, 
+        "hp": 87, 
+        "defense": 29
+    }
+},
+{
+    "pk": 11, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 19916, 
+        "white_gold": 431, 
+        "green_exp": 1650, 
+        "white_exp": 1100, 
+        "attack": 84, 
+        "cost": 1100, 
+        "green_gold": 776, 
+        "exp": 8800, 
+        "purple_exp": 7680, 
+        "blue_gold": 11949, 
+        "blue_exp": 5480, 
+        "hp": 95, 
+        "defense": 32
+    }
+},
+{
+    "pk": 12, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 20653, 
+        "white_gold": 446, 
+        "green_exp": 1800, 
+        "white_exp": 1200, 
+        "attack": 91, 
+        "cost": 1200, 
+        "green_gold": 803, 
+        "exp": 10500, 
+        "purple_exp": 9125, 
+        "blue_gold": 12392, 
+        "blue_exp": 6500, 
+        "hp": 102, 
+        "defense": 34
+    }
+},
+{
+    "pk": 13, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 21361, 
+        "white_gold": 460, 
+        "green_exp": 1950, 
+        "white_exp": 1300, 
+        "attack": 98, 
+        "cost": 1300, 
+        "green_gold": 829, 
+        "exp": 12500, 
+        "purple_exp": 10825, 
+        "blue_gold": 12816, 
+        "blue_exp": 7700, 
+        "hp": 110, 
+        "defense": 37
+    }
+},
+{
+    "pk": 14, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 22041, 
+        "white_gold": 474, 
+        "green_exp": 2100, 
+        "white_exp": 1400, 
+        "attack": 104, 
+        "cost": 1400, 
+        "green_gold": 853, 
+        "exp": 14700, 
+        "purple_exp": 12695, 
+        "blue_gold": 13224, 
+        "blue_exp": 9020, 
+        "hp": 117, 
+        "defense": 39
+    }
+},
+{
+    "pk": 15, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 22698, 
+        "white_gold": 487, 
+        "green_exp": 2250, 
+        "white_exp": 1500, 
+        "attack": 111, 
+        "cost": 1500, 
+        "green_gold": 877, 
+        "exp": 17100, 
+        "purple_exp": 14735, 
+        "blue_gold": 13618, 
+        "blue_exp": 10460, 
+        "hp": 124, 
+        "defense": 42
+    }
+},
+{
+    "pk": 16, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 23333, 
+        "white_gold": 500, 
+        "green_exp": 2400, 
+        "white_exp": 1600, 
+        "attack": 117, 
+        "cost": 1600, 
+        "green_gold": 900, 
+        "exp": 19800, 
+        "purple_exp": 17030, 
+        "blue_gold": 14000, 
+        "blue_exp": 12080, 
+        "hp": 131, 
+        "defense": 44
+    }
+},
+{
+    "pk": 17, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 23948, 
+        "white_gold": 512, 
+        "green_exp": 2550, 
+        "white_exp": 1700, 
+        "attack": 124, 
+        "cost": 1700, 
+        "green_gold": 922, 
+        "exp": 22700, 
+        "purple_exp": 19495, 
+        "blue_gold": 14369, 
+        "blue_exp": 13820, 
+        "hp": 139, 
+        "defense": 47
+    }
+},
+{
+    "pk": 18, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 24546, 
+        "white_gold": 524, 
+        "green_exp": 2700, 
+        "white_exp": 1800, 
+        "attack": 130, 
+        "cost": 1800, 
+        "green_gold": 943, 
+        "exp": 25900, 
+        "purple_exp": 22215, 
+        "blue_gold": 14727, 
+        "blue_exp": 15740, 
+        "hp": 146, 
+        "defense": 49
+    }
+},
+{
+    "pk": 19, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 25127, 
+        "white_gold": 535, 
+        "green_exp": 2850, 
+        "white_exp": 1900, 
+        "attack": 137, 
+        "cost": 1900, 
+        "green_gold": 964, 
+        "exp": 29400, 
+        "purple_exp": 25190, 
+        "blue_gold": 15076, 
+        "blue_exp": 17840, 
+        "hp": 154, 
+        "defense": 52
+    }
+},
+{
+    "pk": 20, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 25694, 
+        "white_gold": 547, 
+        "green_exp": 3000, 
+        "white_exp": 2000, 
+        "attack": 143, 
+        "cost": 2000, 
+        "green_gold": 984, 
+        "exp": 33200, 
+        "purple_exp": 28420, 
+        "blue_gold": 15416, 
+        "blue_exp": 20120, 
+        "hp": 161, 
+        "defense": 54
+    }
+},
+{
+    "pk": 21, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 26246, 
+        "white_gold": 558, 
+        "green_exp": 3150, 
+        "white_exp": 2100, 
+        "attack": 150, 
+        "cost": 2100, 
+        "green_gold": 1004, 
+        "exp": 37400, 
+        "purple_exp": 31990, 
+        "blue_gold": 15747, 
+        "blue_exp": 22640, 
+        "hp": 168, 
+        "defense": 56
+    }
+},
+{
+    "pk": 22, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 26785, 
+        "white_gold": 569, 
+        "green_exp": 3300, 
+        "white_exp": 2200, 
+        "attack": 156, 
+        "cost": 2200, 
+        "green_gold": 1024, 
+        "exp": 41900, 
+        "purple_exp": 35815, 
+        "blue_gold": 16071, 
+        "blue_exp": 25340, 
+        "hp": 175, 
+        "defense": 59
+    }
+},
+{
+    "pk": 23, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 27312, 
+        "white_gold": 579, 
+        "green_exp": 3450, 
+        "white_exp": 2300, 
+        "attack": 163, 
+        "cost": 2300, 
+        "green_gold": 1043, 
+        "exp": 46800, 
+        "purple_exp": 39980, 
+        "blue_gold": 16387, 
+        "blue_exp": 28280, 
+        "hp": 183, 
+        "defense": 61
+    }
+},
+{
+    "pk": 24, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 27828, 
+        "white_gold": 589, 
+        "green_exp": 3600, 
+        "white_exp": 2400, 
+        "attack": 169, 
+        "cost": 2400, 
+        "green_gold": 1061, 
+        "exp": 52100, 
+        "purple_exp": 44485, 
+        "blue_gold": 16696, 
+        "blue_exp": 31460, 
+        "hp": 190, 
+        "defense": 64
+    }
+},
+{
+    "pk": 25, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 28333, 
+        "white_gold": 600, 
+        "green_exp": 3750, 
+        "white_exp": 2500, 
+        "attack": 176, 
+        "cost": 2500, 
+        "green_gold": 1080, 
+        "exp": 57800, 
+        "purple_exp": 49330, 
+        "blue_gold": 17000, 
+        "blue_exp": 34880, 
+        "hp": 198, 
+        "defense": 66
+    }
+},
+{
+    "pk": 26, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 28828, 
+        "white_gold": 609, 
+        "green_exp": 3900, 
+        "white_exp": 2600, 
+        "attack": 182, 
+        "cost": 2600, 
+        "green_gold": 1097, 
+        "exp": 63900, 
+        "purple_exp": 54515, 
+        "blue_gold": 17297, 
+        "blue_exp": 38540, 
+        "hp": 205, 
+        "defense": 69
+    }
+},
+{
+    "pk": 27, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 29314, 
+        "white_gold": 619, 
+        "green_exp": 4050, 
+        "white_exp": 2700, 
+        "attack": 189, 
+        "cost": 2700, 
+        "green_gold": 1115, 
+        "exp": 70400, 
+        "purple_exp": 60040, 
+        "blue_gold": 17588, 
+        "blue_exp": 42440, 
+        "hp": 212, 
+        "defense": 71
+    }
+},
+{
+    "pk": 28, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 29790, 
+        "white_gold": 629, 
+        "green_exp": 4200, 
+        "white_exp": 2800, 
+        "attack": 195, 
+        "cost": 2800, 
+        "green_gold": 1132, 
+        "exp": 77400, 
+        "purple_exp": 65990, 
+        "blue_gold": 17874, 
+        "blue_exp": 46640, 
+        "hp": 220, 
+        "defense": 74
+    }
+},
+{
+    "pk": 29, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 30259, 
+        "white_gold": 638, 
+        "green_exp": 4350, 
+        "white_exp": 2900, 
+        "attack": 202, 
+        "cost": 2900, 
+        "green_gold": 1149, 
+        "exp": 84900, 
+        "purple_exp": 72365, 
+        "blue_gold": 18155, 
+        "blue_exp": 51140, 
+        "hp": 227, 
+        "defense": 76
+    }
+},
+{
+    "pk": 30, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 30719, 
+        "white_gold": 647, 
+        "green_exp": 4500, 
+        "white_exp": 3000, 
+        "attack": 208, 
+        "cost": 3000, 
+        "green_gold": 1165, 
+        "exp": 92900, 
+        "purple_exp": 79165, 
+        "blue_gold": 18431, 
+        "blue_exp": 55940, 
+        "hp": 234, 
+        "defense": 78
+    }
+},
+{
+    "pk": 31, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 31172, 
+        "white_gold": 656, 
+        "green_exp": 4650, 
+        "white_exp": 3100, 
+        "attack": 237, 
+        "cost": 3100, 
+        "green_gold": 1182, 
+        "exp": 101400, 
+        "purple_exp": 86390, 
+        "blue_gold": 18703, 
+        "blue_exp": 61040, 
+        "hp": 267, 
+        "defense": 89
+    }
+},
+{
+    "pk": 32, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 31617, 
+        "white_gold": 665, 
+        "green_exp": 4800, 
+        "white_exp": 3200, 
+        "attack": 245, 
+        "cost": 3200, 
+        "green_gold": 1198, 
+        "exp": 110400, 
+        "purple_exp": 94040, 
+        "blue_gold": 18970, 
+        "blue_exp": 66440, 
+        "hp": 275, 
+        "defense": 92
+    }
+},
+{
+    "pk": 33, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 32056, 
+        "white_gold": 674, 
+        "green_exp": 4950, 
+        "white_exp": 3300, 
+        "attack": 252, 
+        "cost": 3300, 
+        "green_gold": 1214, 
+        "exp": 120000, 
+        "purple_exp": 102200, 
+        "blue_gold": 19233, 
+        "blue_exp": 72200, 
+        "hp": 283, 
+        "defense": 95
+    }
+},
+{
+    "pk": 34, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 32488, 
+        "white_gold": 683, 
+        "green_exp": 5100, 
+        "white_exp": 3400, 
+        "attack": 259, 
+        "cost": 3400, 
+        "green_gold": 1229, 
+        "exp": 130200, 
+        "purple_exp": 110870, 
+        "blue_gold": 19492, 
+        "blue_exp": 78320, 
+        "hp": 292, 
+        "defense": 98
+    }
+},
+{
+    "pk": 35, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 32913, 
+        "white_gold": 691, 
+        "green_exp": 5250, 
+        "white_exp": 3500, 
+        "attack": 266, 
+        "cost": 3500, 
+        "green_gold": 1244, 
+        "exp": 141000, 
+        "purple_exp": 120050, 
+        "blue_gold": 19748, 
+        "blue_exp": 84800, 
+        "hp": 300, 
+        "defense": 100
+    }
+},
+{
+    "pk": 36, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 33333, 
+        "white_gold": 700, 
+        "green_exp": 5400, 
+        "white_exp": 3600, 
+        "attack": 273, 
+        "cost": 3600, 
+        "green_gold": 1260, 
+        "exp": 152400, 
+        "purple_exp": 129740, 
+        "blue_gold": 20000, 
+        "blue_exp": 91640, 
+        "hp": 308, 
+        "defense": 103
+    }
+},
+{
+    "pk": 37, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 33747, 
+        "white_gold": 708, 
+        "green_exp": 5550, 
+        "white_exp": 3700, 
+        "attack": 281, 
+        "cost": 3700, 
+        "green_gold": 1274, 
+        "exp": 164500, 
+        "purple_exp": 140025, 
+        "blue_gold": 20248, 
+        "blue_exp": 98900, 
+        "hp": 316, 
+        "defense": 106
+    }
+},
+{
+    "pk": 38, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 34155, 
+        "white_gold": 716, 
+        "green_exp": 5700, 
+        "white_exp": 3800, 
+        "attack": 288, 
+        "cost": 3800, 
+        "green_gold": 1289, 
+        "exp": 177300, 
+        "purple_exp": 150905, 
+        "blue_gold": 20493, 
+        "blue_exp": 106580, 
+        "hp": 324, 
+        "defense": 108
+    }
+},
+{
+    "pk": 39, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 34558, 
+        "white_gold": 724, 
+        "green_exp": 5850, 
+        "white_exp": 3900, 
+        "attack": 295, 
+        "cost": 3900, 
+        "green_gold": 1304, 
+        "exp": 190700, 
+        "purple_exp": 162295, 
+        "blue_gold": 20734, 
+        "blue_exp": 114620, 
+        "hp": 332, 
+        "defense": 111
+    }
+},
+{
+    "pk": 40, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 34956, 
+        "white_gold": 732, 
+        "green_exp": 6000, 
+        "white_exp": 4000, 
+        "attack": 302, 
+        "cost": 4000, 
+        "green_gold": 1318, 
+        "exp": 204900, 
+        "purple_exp": 174365, 
+        "blue_gold": 20973, 
+        "blue_exp": 123140, 
+        "hp": 340, 
+        "defense": 114
+    }
+},
+{
+    "pk": 41, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 35348, 
+        "white_gold": 740, 
+        "green_exp": 6150, 
+        "white_exp": 4100, 
+        "attack": 310, 
+        "cost": 4100, 
+        "green_gold": 1332, 
+        "exp": 219800, 
+        "purple_exp": 187030, 
+        "blue_gold": 21209, 
+        "blue_exp": 132080, 
+        "hp": 348, 
+        "defense": 116
+    }
+},
+{
+    "pk": 42, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 35737, 
+        "white_gold": 748, 
+        "green_exp": 6300, 
+        "white_exp": 4200, 
+        "attack": 317, 
+        "cost": 4200, 
+        "green_gold": 1346, 
+        "exp": 235500, 
+        "purple_exp": 200375, 
+        "blue_gold": 21442, 
+        "blue_exp": 141500, 
+        "hp": 356, 
+        "defense": 119
+    }
+},
+{
+    "pk": 43, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 36120, 
+        "white_gold": 755, 
+        "green_exp": 6450, 
+        "white_exp": 4300, 
+        "attack": 324, 
+        "cost": 4300, 
+        "green_gold": 1360, 
+        "exp": 252000, 
+        "purple_exp": 214400, 
+        "blue_gold": 21672, 
+        "blue_exp": 151400, 
+        "hp": 365, 
+        "defense": 122
+    }
+},
+{
+    "pk": 44, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 36499, 
+        "white_gold": 763, 
+        "green_exp": 6600, 
+        "white_exp": 4400, 
+        "attack": 332, 
+        "cost": 4400, 
+        "green_gold": 1373, 
+        "exp": 269300, 
+        "purple_exp": 229105, 
+        "blue_gold": 21899, 
+        "blue_exp": 161780, 
+        "hp": 373, 
+        "defense": 125
+    }
+},
+{
+    "pk": 45, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 36874, 
+        "white_gold": 770, 
+        "green_exp": 6750, 
+        "white_exp": 4500, 
+        "attack": 339, 
+        "cost": 4500, 
+        "green_gold": 1387, 
+        "exp": 287400, 
+        "purple_exp": 244490, 
+        "blue_gold": 22124, 
+        "blue_exp": 172640, 
+        "hp": 381, 
+        "defense": 127
+    }
+},
+{
+    "pk": 46, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 37244, 
+        "white_gold": 778, 
+        "green_exp": 6900, 
+        "white_exp": 4600, 
+        "attack": 346, 
+        "cost": 4600, 
+        "green_gold": 1400, 
+        "exp": 306400, 
+        "purple_exp": 260640, 
+        "blue_gold": 22346, 
+        "blue_exp": 184040, 
+        "hp": 389, 
+        "defense": 130
+    }
+},
+{
+    "pk": 47, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 37611, 
+        "white_gold": 785, 
+        "green_exp": 7050, 
+        "white_exp": 4700, 
+        "attack": 353, 
+        "cost": 4700, 
+        "green_gold": 1414, 
+        "exp": 326300, 
+        "purple_exp": 277555, 
+        "blue_gold": 22566, 
+        "blue_exp": 195980, 
+        "hp": 397, 
+        "defense": 133
+    }
+},
+{
+    "pk": 48, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 37974, 
+        "white_gold": 792, 
+        "green_exp": 7200, 
+        "white_exp": 4800, 
+        "attack": 360, 
+        "cost": 4800, 
+        "green_gold": 1427, 
+        "exp": 347100, 
+        "purple_exp": 295235, 
+        "blue_gold": 22784, 
+        "blue_exp": 208460, 
+        "hp": 405, 
+        "defense": 135
+    }
+},
+{
+    "pk": 49, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 38333, 
+        "white_gold": 800, 
+        "green_exp": 7350, 
+        "white_exp": 4900, 
+        "attack": 368, 
+        "cost": 4900, 
+        "green_gold": 1440, 
+        "exp": 368900, 
+        "purple_exp": 313765, 
+        "blue_gold": 23000, 
+        "blue_exp": 221540, 
+        "hp": 413, 
+        "defense": 138
+    }
+},
+{
+    "pk": 50, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 38688, 
+        "white_gold": 807, 
+        "green_exp": 7500, 
+        "white_exp": 5000, 
+        "attack": 375, 
+        "cost": 5000, 
+        "green_gold": 1452, 
+        "exp": 391600, 
+        "purple_exp": 333060, 
+        "blue_gold": 23213, 
+        "blue_exp": 235160, 
+        "hp": 422, 
+        "defense": 141
+    }
+},
+{
+    "pk": 51, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 39040, 
+        "white_gold": 814, 
+        "green_exp": 7650, 
+        "white_exp": 5100, 
+        "attack": 382, 
+        "cost": 5100, 
+        "green_gold": 1465, 
+        "exp": 415300, 
+        "purple_exp": 353205, 
+        "blue_gold": 23424, 
+        "blue_exp": 249380, 
+        "hp": 430, 
+        "defense": 144
+    }
+},
+{
+    "pk": 52, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 39388, 
+        "white_gold": 821, 
+        "green_exp": 7800, 
+        "white_exp": 5200, 
+        "attack": 389, 
+        "cost": 5200, 
+        "green_gold": 1478, 
+        "exp": 440000, 
+        "purple_exp": 374200, 
+        "blue_gold": 23633, 
+        "blue_exp": 264200, 
+        "hp": 438, 
+        "defense": 146
+    }
+},
+{
+    "pk": 53, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 39733, 
+        "white_gold": 828, 
+        "green_exp": 7950, 
+        "white_exp": 5300, 
+        "attack": 397, 
+        "cost": 5300, 
+        "green_gold": 1490, 
+        "exp": 465800, 
+        "purple_exp": 396130, 
+        "blue_gold": 23840, 
+        "blue_exp": 279680, 
+        "hp": 446, 
+        "defense": 149
+    }
+},
+{
+    "pk": 54, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 40075, 
+        "white_gold": 834, 
+        "green_exp": 8100, 
+        "white_exp": 5400, 
+        "attack": 404, 
+        "cost": 5400, 
+        "green_gold": 1502, 
+        "exp": 492700, 
+        "purple_exp": 418995, 
+        "blue_gold": 24045, 
+        "blue_exp": 295820, 
+        "hp": 454, 
+        "defense": 152
+    }
+},
+{
+    "pk": 55, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 40414, 
+        "white_gold": 841, 
+        "green_exp": 8250, 
+        "white_exp": 5500, 
+        "attack": 411, 
+        "cost": 5500, 
+        "green_gold": 1514, 
+        "exp": 520700, 
+        "purple_exp": 442795, 
+        "blue_gold": 24248, 
+        "blue_exp": 312620, 
+        "hp": 462, 
+        "defense": 154
+    }
+},
+{
+    "pk": 56, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 40749, 
+        "white_gold": 848, 
+        "green_exp": 8400, 
+        "white_exp": 5600, 
+        "attack": 418, 
+        "cost": 5600, 
+        "green_gold": 1527, 
+        "exp": 549800, 
+        "purple_exp": 467530, 
+        "blue_gold": 24449, 
+        "blue_exp": 330080, 
+        "hp": 471, 
+        "defense": 157
+    }
+},
+{
+    "pk": 57, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 41082, 
+        "white_gold": 854, 
+        "green_exp": 8550, 
+        "white_exp": 5700, 
+        "attack": 426, 
+        "cost": 5700, 
+        "green_gold": 1538, 
+        "exp": 580100, 
+        "purple_exp": 493285, 
+        "blue_gold": 24649, 
+        "blue_exp": 348260, 
+        "hp": 479, 
+        "defense": 160
+    }
+},
+{
+    "pk": 58, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 41412, 
+        "white_gold": 861, 
+        "green_exp": 8700, 
+        "white_exp": 5800, 
+        "attack": 433, 
+        "cost": 5800, 
+        "green_gold": 1550, 
+        "exp": 611600, 
+        "purple_exp": 520060, 
+        "blue_gold": 24847, 
+        "blue_exp": 367160, 
+        "hp": 487, 
+        "defense": 163
+    }
+},
+{
+    "pk": 59, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 41739, 
+        "white_gold": 868, 
+        "green_exp": 8850, 
+        "white_exp": 5900, 
+        "attack": 440, 
+        "cost": 5900, 
+        "green_gold": 1562, 
+        "exp": 644300, 
+        "purple_exp": 547855, 
+        "blue_gold": 25043, 
+        "blue_exp": 386780, 
+        "hp": 495, 
+        "defense": 165
+    }
+},
+{
+    "pk": 60, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 42063, 
+        "white_gold": 874, 
+        "green_exp": 9000, 
+        "white_exp": 6000, 
+        "attack": 447, 
+        "cost": 6000, 
+        "green_gold": 1574, 
+        "exp": 678200, 
+        "purple_exp": 576670, 
+        "blue_gold": 25237, 
+        "blue_exp": 407120, 
+        "hp": 503, 
+        "defense": 168
+    }
+},
+{
+    "pk": 61, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 42384, 
+        "white_gold": 881, 
+        "green_exp": 9150, 
+        "white_exp": 6100, 
+        "attack": 503, 
+        "cost": 6100, 
+        "green_gold": 1585, 
+        "exp": 713400, 
+        "purple_exp": 606590, 
+        "blue_gold": 25430, 
+        "blue_exp": 428240, 
+        "hp": 566, 
+        "defense": 189
+    }
+},
+{
+    "pk": 62, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 42703, 
+        "white_gold": 887, 
+        "green_exp": 9300, 
+        "white_exp": 6200, 
+        "attack": 511, 
+        "cost": 6200, 
+        "green_gold": 1597, 
+        "exp": 749900, 
+        "purple_exp": 637615, 
+        "blue_gold": 25622, 
+        "blue_exp": 450140, 
+        "hp": 575, 
+        "defense": 192
+    }
+},
+{
+    "pk": 63, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 43019, 
+        "white_gold": 893, 
+        "green_exp": 9450, 
+        "white_exp": 6300, 
+        "attack": 519, 
+        "cost": 6300, 
+        "green_gold": 1608, 
+        "exp": 787800, 
+        "purple_exp": 669830, 
+        "blue_gold": 25811, 
+        "blue_exp": 472880, 
+        "hp": 584, 
+        "defense": 195
+    }
+},
+{
+    "pk": 64, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 43333, 
+        "white_gold": 900, 
+        "green_exp": 9600, 
+        "white_exp": 6400, 
+        "attack": 527, 
+        "cost": 6400, 
+        "green_gold": 1620, 
+        "exp": 827000, 
+        "purple_exp": 703150, 
+        "blue_gold": 26000, 
+        "blue_exp": 496400, 
+        "hp": 593, 
+        "defense": 198
+    }
+},
+{
+    "pk": 65, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 43644, 
+        "white_gold": 906, 
+        "green_exp": 9750, 
+        "white_exp": 6500, 
+        "attack": 535, 
+        "cost": 6500, 
+        "green_gold": 1631, 
+        "exp": 867600, 
+        "purple_exp": 737660, 
+        "blue_gold": 26186, 
+        "blue_exp": 520760, 
+        "hp": 602, 
+        "defense": 201
+    }
+},
+{
+    "pk": 66, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 43953, 
+        "white_gold": 912, 
+        "green_exp": 9900, 
+        "white_exp": 6600, 
+        "attack": 543, 
+        "cost": 6600, 
+        "green_gold": 1642, 
+        "exp": 909600, 
+        "purple_exp": 773360, 
+        "blue_gold": 26372, 
+        "blue_exp": 545960, 
+        "hp": 611, 
+        "defense": 204
+    }
+},
+{
+    "pk": 67, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 44260, 
+        "white_gold": 918, 
+        "green_exp": 10050, 
+        "white_exp": 6700, 
+        "attack": 551, 
+        "cost": 6700, 
+        "green_gold": 1653, 
+        "exp": 953100, 
+        "purple_exp": 810335, 
+        "blue_gold": 26556, 
+        "blue_exp": 572060, 
+        "hp": 620, 
+        "defense": 207
+    }
+},
+{
+    "pk": 68, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 44564, 
+        "white_gold": 924, 
+        "green_exp": 10200, 
+        "white_exp": 6800, 
+        "attack": 559, 
+        "cost": 6800, 
+        "green_gold": 1664, 
+        "exp": 998100, 
+        "purple_exp": 848585, 
+        "blue_gold": 26738, 
+        "blue_exp": 599060, 
+        "hp": 629, 
+        "defense": 210
+    }
+},
+{
+    "pk": 69, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 44866, 
+        "white_gold": 930, 
+        "green_exp": 10350, 
+        "white_exp": 6900, 
+        "attack": 567, 
+        "cost": 6900, 
+        "green_gold": 1675, 
+        "exp": 1044600, 
+        "purple_exp": 888110, 
+        "blue_gold": 26919, 
+        "blue_exp": 626960, 
+        "hp": 638, 
+        "defense": 213
+    }
+},
+{
+    "pk": 70, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 45166, 
+        "white_gold": 936, 
+        "green_exp": 10500, 
+        "white_exp": 7000, 
+        "attack": 575, 
+        "cost": 7000, 
+        "green_gold": 1685, 
+        "exp": 1092600, 
+        "purple_exp": 928910, 
+        "blue_gold": 27099, 
+        "blue_exp": 655760, 
+        "hp": 647, 
+        "defense": 216
+    }
+},
+{
+    "pk": 71, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 45464, 
+        "white_gold": 942, 
+        "green_exp": 10650, 
+        "white_exp": 7100, 
+        "attack": 584, 
+        "cost": 7100, 
+        "green_gold": 1696, 
+        "exp": 1142200, 
+        "purple_exp": 971070, 
+        "blue_gold": 27278, 
+        "blue_exp": 685520, 
+        "hp": 657, 
+        "defense": 219
+    }
+},
+{
+    "pk": 72, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 45759, 
+        "white_gold": 948, 
+        "green_exp": 10800, 
+        "white_exp": 7200, 
+        "attack": 592, 
+        "cost": 7200, 
+        "green_gold": 1707, 
+        "exp": 1193400, 
+        "purple_exp": 1014590, 
+        "blue_gold": 27455, 
+        "blue_exp": 716240, 
+        "hp": 666, 
+        "defense": 222
+    }
+},
+{
+    "pk": 73, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 46053, 
+        "white_gold": 954, 
+        "green_exp": 10950, 
+        "white_exp": 7300, 
+        "attack": 600, 
+        "cost": 7300, 
+        "green_gold": 1717, 
+        "exp": 1246300, 
+        "purple_exp": 1059555, 
+        "blue_gold": 27632, 
+        "blue_exp": 747980, 
+        "hp": 675, 
+        "defense": 225
+    }
+},
+{
+    "pk": 74, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 46344, 
+        "white_gold": 960, 
+        "green_exp": 11100, 
+        "white_exp": 7400, 
+        "attack": 608, 
+        "cost": 7400, 
+        "green_gold": 1728, 
+        "exp": 1300900, 
+        "purple_exp": 1105965, 
+        "blue_gold": 27806, 
+        "blue_exp": 780740, 
+        "hp": 684, 
+        "defense": 228
+    }
+},
+{
+    "pk": 75, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 46634, 
+        "white_gold": 966, 
+        "green_exp": 11250, 
+        "white_exp": 7500, 
+        "attack": 616, 
+        "cost": 7500, 
+        "green_gold": 1738, 
+        "exp": 1357200, 
+        "purple_exp": 1153820, 
+        "blue_gold": 27980, 
+        "blue_exp": 814520, 
+        "hp": 693, 
+        "defense": 231
+    }
+},
+{
+    "pk": 76, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 46922, 
+        "white_gold": 971, 
+        "green_exp": 11400, 
+        "white_exp": 7600, 
+        "attack": 624, 
+        "cost": 7600, 
+        "green_gold": 1749, 
+        "exp": 1415200, 
+        "purple_exp": 1203120, 
+        "blue_gold": 28153, 
+        "blue_exp": 849320, 
+        "hp": 702, 
+        "defense": 234
+    }
+},
+{
+    "pk": 77, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 47208, 
+        "white_gold": 977, 
+        "green_exp": 11550, 
+        "white_exp": 7700, 
+        "attack": 632, 
+        "cost": 7700, 
+        "green_gold": 1759, 
+        "exp": 1475000, 
+        "purple_exp": 1253950, 
+        "blue_gold": 28324, 
+        "blue_exp": 885200, 
+        "hp": 711, 
+        "defense": 237
+    }
+},
+{
+    "pk": 78, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 47492, 
+        "white_gold": 983, 
+        "green_exp": 11700, 
+        "white_exp": 7800, 
+        "attack": 640, 
+        "cost": 7800, 
+        "green_gold": 1769, 
+        "exp": 1536600, 
+        "purple_exp": 1306310, 
+        "blue_gold": 28495, 
+        "blue_exp": 922160, 
+        "hp": 720, 
+        "defense": 240
+    }
+},
+{
+    "pk": 79, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 47774, 
+        "white_gold": 988, 
+        "green_exp": 11850, 
+        "white_exp": 7900, 
+        "attack": 648, 
+        "cost": 7900, 
+        "green_gold": 1779, 
+        "exp": 1600000, 
+        "purple_exp": 1360200, 
+        "blue_gold": 28664, 
+        "blue_exp": 960200, 
+        "hp": 729, 
+        "defense": 243
+    }
+},
+{
+    "pk": 80, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 48054, 
+        "white_gold": 994, 
+        "green_exp": 12000, 
+        "white_exp": 8000, 
+        "attack": 656, 
+        "cost": 8000, 
+        "green_gold": 1789, 
+        "exp": 1665300, 
+        "purple_exp": 1415705, 
+        "blue_gold": 28832, 
+        "blue_exp": 999380, 
+        "hp": 738, 
+        "defense": 246
+    }
+},
+{
+    "pk": 81, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 48333, 
+        "white_gold": 1000, 
+        "green_exp": 12150, 
+        "white_exp": 8100, 
+        "attack": 664, 
+        "cost": 8100, 
+        "green_gold": 1800, 
+        "exp": 1732500, 
+        "purple_exp": 1472825, 
+        "blue_gold": 29000, 
+        "blue_exp": 1039700, 
+        "hp": 747, 
+        "defense": 249
+    }
+},
+{
+    "pk": 82, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 48610, 
+        "white_gold": 1005, 
+        "green_exp": 12300, 
+        "white_exp": 8200, 
+        "attack": 672, 
+        "cost": 8200, 
+        "green_gold": 1809, 
+        "exp": 1801600, 
+        "purple_exp": 1531560, 
+        "blue_gold": 29166, 
+        "blue_exp": 1081160, 
+        "hp": 756, 
+        "defense": 252
+    }
+},
+{
+    "pk": 83, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 48885, 
+        "white_gold": 1011, 
+        "green_exp": 12450, 
+        "white_exp": 8300, 
+        "attack": 680, 
+        "cost": 8300, 
+        "green_gold": 1819, 
+        "exp": 1872700, 
+        "purple_exp": 1591995, 
+        "blue_gold": 29331, 
+        "blue_exp": 1123820, 
+        "hp": 765, 
+        "defense": 255
+    }
+},
+{
+    "pk": 84, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 49159, 
+        "white_gold": 1016, 
+        "green_exp": 12600, 
+        "white_exp": 8400, 
+        "attack": 688, 
+        "cost": 8400, 
+        "green_gold": 1829, 
+        "exp": 1945800, 
+        "purple_exp": 1654130, 
+        "blue_gold": 29495, 
+        "blue_exp": 1167680, 
+        "hp": 774, 
+        "defense": 258
+    }
+},
+{
+    "pk": 85, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 49431, 
+        "white_gold": 1021, 
+        "green_exp": 12750, 
+        "white_exp": 8500, 
+        "attack": 696, 
+        "cost": 8500, 
+        "green_gold": 1839, 
+        "exp": 2021000, 
+        "purple_exp": 1718050, 
+        "blue_gold": 29658, 
+        "blue_exp": 1212800, 
+        "hp": 783, 
+        "defense": 261
+    }
+},
+{
+    "pk": 86, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 49701, 
+        "white_gold": 1027, 
+        "green_exp": 12900, 
+        "white_exp": 8600, 
+        "attack": 704, 
+        "cost": 8600, 
+        "green_gold": 1849, 
+        "exp": 2098200, 
+        "purple_exp": 1783670, 
+        "blue_gold": 29820, 
+        "blue_exp": 1259120, 
+        "hp": 792, 
+        "defense": 264
+    }
+},
+{
+    "pk": 87, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 49970, 
+        "white_gold": 1032, 
+        "green_exp": 13050, 
+        "white_exp": 8700, 
+        "attack": 712, 
+        "cost": 8700, 
+        "green_gold": 1858, 
+        "exp": 2177500, 
+        "purple_exp": 1851075, 
+        "blue_gold": 29982, 
+        "blue_exp": 1306700, 
+        "hp": 801, 
+        "defense": 267
+    }
+},
+{
+    "pk": 88, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 50237, 
+        "white_gold": 1038, 
+        "green_exp": 13200, 
+        "white_exp": 8800, 
+        "attack": 720, 
+        "cost": 8800, 
+        "green_gold": 1868, 
+        "exp": 2259000, 
+        "purple_exp": 1920350, 
+        "blue_gold": 30142, 
+        "blue_exp": 1355600, 
+        "hp": 810, 
+        "defense": 270
+    }
+},
+{
+    "pk": 89, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 50503, 
+        "white_gold": 1043, 
+        "green_exp": 13350, 
+        "white_exp": 8900, 
+        "attack": 728, 
+        "cost": 8900, 
+        "green_gold": 1878, 
+        "exp": 2342700, 
+        "purple_exp": 1991495, 
+        "blue_gold": 30301, 
+        "blue_exp": 1405820, 
+        "hp": 819, 
+        "defense": 273
+    }
+},
+{
+    "pk": 90, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 50767, 
+        "white_gold": 1048, 
+        "green_exp": 13500, 
+        "white_exp": 9000, 
+        "attack": 736, 
+        "cost": 9000, 
+        "green_gold": 1887, 
+        "exp": 2428600, 
+        "purple_exp": 2064510, 
+        "blue_gold": 30460, 
+        "blue_exp": 1457360, 
+        "hp": 828, 
+        "defense": 276
+    }
+},
+{
+    "pk": 91, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 51030, 
+        "white_gold": 1053, 
+        "green_exp": 13650, 
+        "white_exp": 9100, 
+        "attack": 825, 
+        "cost": 9100, 
+        "green_gold": 1897, 
+        "exp": 2516700, 
+        "purple_exp": 2139395, 
+        "blue_gold": 30618, 
+        "blue_exp": 1510220, 
+        "hp": 928, 
+        "defense": 310
+    }
+},
+{
+    "pk": 92, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 51291, 
+        "white_gold": 1059, 
+        "green_exp": 13800, 
+        "white_exp": 9200, 
+        "attack": 834, 
+        "cost": 9200, 
+        "green_gold": 1906, 
+        "exp": 2607100, 
+        "purple_exp": 2216235, 
+        "blue_gold": 30774, 
+        "blue_exp": 1564460, 
+        "hp": 938, 
+        "defense": 313
+    }
+},
+{
+    "pk": 93, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 51551, 
+        "white_gold": 1064, 
+        "green_exp": 13950, 
+        "white_exp": 9300, 
+        "attack": 843, 
+        "cost": 9300, 
+        "green_gold": 1915, 
+        "exp": 2699900, 
+        "purple_exp": 2295115, 
+        "blue_gold": 30930, 
+        "blue_exp": 1620140, 
+        "hp": 948, 
+        "defense": 316
+    }
+},
+{
+    "pk": 94, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 51810, 
+        "white_gold": 1069, 
+        "green_exp": 14100, 
+        "white_exp": 9400, 
+        "attack": 852, 
+        "cost": 9400, 
+        "green_gold": 1925, 
+        "exp": 2795000, 
+        "purple_exp": 2375950, 
+        "blue_gold": 31086, 
+        "blue_exp": 1677200, 
+        "hp": 958, 
+        "defense": 320
+    }
+},
+{
+    "pk": 95, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 52067, 
+        "white_gold": 1074, 
+        "green_exp": 14250, 
+        "white_exp": 9500, 
+        "attack": 860, 
+        "cost": 9500, 
+        "green_gold": 1934, 
+        "exp": 2892500, 
+        "purple_exp": 2458825, 
+        "blue_gold": 31240, 
+        "blue_exp": 1735700, 
+        "hp": 968, 
+        "defense": 323
+    }
+},
+{
+    "pk": 96, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 52323, 
+        "white_gold": 1079, 
+        "green_exp": 14400, 
+        "white_exp": 9600, 
+        "attack": 869, 
+        "cost": 9600, 
+        "green_gold": 1943, 
+        "exp": 2992400, 
+        "purple_exp": 2543740, 
+        "blue_gold": 31393, 
+        "blue_exp": 1795640, 
+        "hp": 978, 
+        "defense": 326
+    }
+},
+{
+    "pk": 97, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 52577, 
+        "white_gold": 1084, 
+        "green_exp": 14550, 
+        "white_exp": 9700, 
+        "attack": 878, 
+        "cost": 9700, 
+        "green_gold": 1952, 
+        "exp": 3094800, 
+        "purple_exp": 2630780, 
+        "blue_gold": 31546, 
+        "blue_exp": 1857080, 
+        "hp": 988, 
+        "defense": 330
+    }
+},
+{
+    "pk": 98, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 52830, 
+        "white_gold": 1089, 
+        "green_exp": 14700, 
+        "white_exp": 9800, 
+        "attack": 887, 
+        "cost": 9800, 
+        "green_gold": 1961, 
+        "exp": 3199700, 
+        "purple_exp": 2719945, 
+        "blue_gold": 31698, 
+        "blue_exp": 1920020, 
+        "hp": 998, 
+        "defense": 333
+    }
+},
+{
+    "pk": 99, 
+    "model": "items.equipmentinfo", 
+    "fields": {
+        "purple_gold": 53082, 
+        "white_gold": 1094, 
+        "green_exp": 14850, 
+        "white_exp": 9900, 
+        "attack": 896, 
+        "cost": 9900, 
+        "green_gold": 1970, 
+        "exp": 3307200, 
+        "purple_exp": 2811320, 
+        "blue_gold": 31849, 
+        "blue_exp": 1984520, 
+        "hp": 1008, 
+        "defense": 336
+    }
+}
+]

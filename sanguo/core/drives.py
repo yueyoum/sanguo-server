@@ -65,14 +65,34 @@ class _Document(object):
                 )
 
 
+class _DocumentIds(object):
+    def __init__(self, db):
+        self.document = db['ids']
+
+    def inc(self, name, value=1):
+        res = self.document.find_and_modify(
+                query={'_id', name},
+                update={'$inc': {'id': value}},
+                fields={'_id': 0},
+                upsert=True,
+                new=True
+                )
+        return res['id']
 
 document_char = _Document(mongodb_client_db, 'char')
+document_ids = _DocumentIds(mongodb_client_db)
 
+document_equip = _Document(mongodb_client_db, 'equip')
 
 
 # mongodb scheme
 #
 # collection          document
+#
+# ids                {
+#                       _id: type_name,
+#                       id: integer,
+#                    }
 #
 # char               {
 #                       _id: char_id,
@@ -85,4 +105,12 @@ document_char = _Document(mongodb_client_db, 'char')
 #                       stage_id: True of False,
 #                       ...
 #                     }
+
+# equip              {
+#                       _id: id from ids `equip`,
+#                       oid: integer,
+#                       level: integer,
+#                       exp: integer,
+#                       extra: {attrid: {value:, is_percent:}}
+#                    }
 

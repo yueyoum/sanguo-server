@@ -1,0 +1,34 @@
+[
+{
+    "pk": 1, 
+    "model": "items.equipmentrandomattribute", 
+    "fields": {
+        "change_value": 30, 
+        "is_percent": false, 
+        "name": "\u56fa\u5b9a\u4f24\u5bb3", 
+        "level_three": 186.63, 
+        "level_one": 43.28, 
+        "used_for": 1, 
+        "change_value_is_percent": true, 
+        "level_zero": 13.38, 
+        "level_two": 93.08, 
+        "name_prefix": "\u950b\u5229"
+    }
+},
+{
+    "pk": 2, 
+    "model": "items.equipmentrandomattribute", 
+    "fields": {
+        "change_value": 3, 
+        "is_percent": true, 
+        "name": "\u57fa\u7840\u6bd4\u4f8b\u52a0\u6210", 
+        "level_three": 12.0, 
+        "level_one": 12.0, 
+        "used_for": 1, 
+        "change_value_is_percent": true, 
+        "level_zero": 12.0, 
+        "level_two": 12.0, 
+        "name_prefix": "\u6b8b\u66b4"
+    }
+}
+]

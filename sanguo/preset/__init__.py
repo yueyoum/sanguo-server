@@ -4,4 +4,5 @@ from preset.get_hero import GET_HERO
 from preset.skills import SKILLS
 from preset.monsters import MONSTERS
 from preset.stage import STAGE
+from preset import equip as EQUIP
 

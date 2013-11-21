@@ -1,0 +1,62 @@
+[
+{
+    "pk": 1, 
+    "model": "items.equipmentlevelrangeinfo", 
+    "fields": {
+        "level": 0, 
+        "hp": "0,3", 
+        "white_modulus": 0.7, 
+        "green_modulus": 1.0, 
+        "attack": "0,2", 
+        "defense": "0,2", 
+        "purple_modulus": 1.6, 
+        "modulus": 1.0, 
+        "blue_modulus": 1.3
+    }
+},
+{
+    "pk": 2, 
+    "model": "items.equipmentlevelrangeinfo", 
+    "fields": {
+        "level": 30, 
+        "hp": "1,3", 
+        "white_modulus": 0.7, 
+        "green_modulus": 1.0, 
+        "attack": "1,2", 
+        "defense": "1,2", 
+        "purple_modulus": 1.6, 
+        "modulus": 1.1, 
+        "blue_modulus": 1.3
+    }
+},
+{
+    "pk": 3, 
+    "model": "items.equipmentlevelrangeinfo", 
+    "fields": {
+        "level": 60, 
+        "hp": "1,4", 
+        "white_modulus": 0.7, 
+        "green_modulus": 1.0, 
+        "attack": "1,3", 
+        "defense": "1,3", 
+        "purple_modulus": 1.6, 
+        "modulus": 1.15, 
+        "blue_modulus": 1.3
+    }
+},
+{
+    "pk": 4, 
+    "model": "items.equipmentlevelrangeinfo", 
+    "fields": {
+        "level": 90, 
+        "hp": "2,5", 
+        "white_modulus": 0.7, 
+        "green_modulus": 1.0, 
+        "attack": "2,4", 
+        "defense": "2,4", 
+        "purple_modulus": 1.6, 
+        "modulus": 1.2, 
+        "blue_modulus": 1.3
+    }
+}
+]
