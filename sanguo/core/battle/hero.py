@@ -456,6 +456,7 @@ class MonsterHero(InBattleHero):
         self.crit = info['crit']
         self.dodge = info['dodge']
         self.skills = info['skills']
+        self.level = info['level']
 
         InBattleHero.__init__(self)
 

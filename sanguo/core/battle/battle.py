@@ -78,7 +78,7 @@ class Ground(object):
         line_upper = []
         for h in self.rival_heros:
             if h is None:
-                line_upper.append("    ")
+                line_upper.append("   .")
             else:
                 line_upper.append("%4s" % str(h.id))
         line_upper = ''.join(line_upper)
@@ -86,7 +86,7 @@ class Ground(object):
         line_bottom = []
         for h in self.my_heros:
             if h is None:
-                line_bottom.append("    ")
+                line_bottom.append("   .")
             else:
                 line_bottom.append("%4s" % str(h.id))
         line_bottom = ''.join(line_bottom)
@@ -197,19 +197,5 @@ class Battle(object):
         logger.debug("Battle Win: %s" % self.msg.self_win)
 
 
-
-
-
-class PVE(Battle):
-    def load_rival_heros(self):
-        monster_ids = GLOBAL.STAGE[self.rival_id]['monsters']
-        self.rival_heros = []
-        for mid in monster_ids:
-            if mid == 0:
-                self.rival_heros.append(None)
-            else:
-                h = MonsterHero(mid)
-                h._hero_type = 2
-                self.rival_heros.append(h)
 
 
