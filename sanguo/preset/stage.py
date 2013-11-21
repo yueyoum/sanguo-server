@@ -1,5 +1,7 @@
 import json
-from preset._base import data_path, LINE_SEP
+from preset._base import data_path
+
+LINE_SEP = "\n"
 
 def load_data():
     with open(data_path('stage.json'), 'r') as f:
