@@ -14,7 +14,7 @@ def load_data():
         for line in text.split(LINE_SEP):
             line.strip(',')
             row = [int(i) for i in line.split(',')]
-            res.append(row)
+            res.extend(row)
 
         return res
 
