@@ -7,6 +7,5 @@ urlpatterns = patterns('',
     url(r'^hero/get/$', views.get_hero),
     url(r'^hero/merge/$', views.merge_hero),
     url(r'^formation/set/$', views.set_formation),
-    url(r'^pve/$', views.pve),
 )
 

@@ -4,6 +4,7 @@ from django.conf.urls import patterns, include, url
 # from django.contrib import admin
 # admin.autodiscover()
 
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'sanguo.views.home', name='home'),
@@ -18,4 +19,6 @@ urlpatterns = patterns('',
     url(r'', include('apps.player.urls')),
     url(r'', include('apps.world.urls')),
     url(r'', include('apps.character.urls')),
+
+    url(r'^pve/$', 'views.battle.pve'),
 )

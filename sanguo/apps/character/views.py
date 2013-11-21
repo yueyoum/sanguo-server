@@ -15,9 +15,7 @@ from core.formation import (
         )
 
 from core.character import get_char_formation, char_initialize
-from core.battle.tests import _PVE
 
-import protomsg
 from protomsg import (
         CreateCharacterResponse,
         GetHeroResponse,
@@ -28,18 +26,6 @@ from protomsg import (
 from utils import pack_msg
 from utils import crypto
 
-
-def setUp():
-    monster = GLOBAL.MONSTERS.values()[0]
-    new_monsters = {}
-    for i in range(9):
-        # monster['skills'] = _random_skill_ids(random.randint(1, 3))
-        monster['skills'] = [2]
-        new_monsters[i] = monster
-
-    GLOBAL.MONSTERS = new_monsters
-
-setUp()
 
 
 def create_character(request):
@@ -218,18 +204,4 @@ def set_formation(request):
     data = pack_msg(response)
     return HttpResponse(data, content_type="text/plain")
 
-
-
-def pve(request):
-    msg = protomsg.Battle()
-    b = _PVE(0, 0, msg)
-    b.start()
-
-    response = protomsg.PVEResponse()
-    response.ret = 0
-    response.stage_id = 1
-    response.battle.MergeFrom(msg)
-
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
 

@@ -2,7 +2,7 @@
 
 from core.drives import document_char, document_stage
 from core import GLOBAL
-from core.formation import encode_formation_with_raw_data
+from core.formation import encode_formation_with_raw_data, decode_formation
 from apps.character.models import CharHero
 
 def char_initialize(char_id):
@@ -33,4 +33,8 @@ def char_initialize(char_id):
 def get_char_formation(char_id):
     char_formation = document_char.get(char_id, formation=1)
     return char_formation['formation']
+
+def get_decoded_char_formation(char_id):
+    formation = get_char_formation(char_id)
+    return decode_formation(formation)
 
