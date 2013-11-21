@@ -2,6 +2,7 @@ from account_pb2 import *
 from hero_pb2 import *
 from world_pb2 import *
 from character_pb2 import *
+from item_pb2 import *
 from formation_pb2 import *
 from battle_pb2 import *
 
@@ -26,6 +27,12 @@ RESPONSE_NOTIFY_TYPE = {
     "CurrentStageNotify": 501,
     "NewStageNotify": 502,
     "PVEResponse": 601,
+    "EquipNotify": 700,
+    "AddEquipNotify": 701,
+    "RemoveEquipNotify": 702,
+    "UpdateEquipNotify": 703,
+    "StrengthEquipResponse": 705,
+    "SellEquipResponse": 707,
 }
 
 REQUEST_TYPE = {
@@ -38,6 +45,8 @@ REQUEST_TYPE = {
     322: "MergeHeroRequest",
     400: "SetFormationRequest",
     600: "PVERequest",
+    704: "StrengthEquipRequest",
+    706: "SellEquipRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -50,5 +59,7 @@ REQUEST_TYPE_REV = {
     "MergeHeroRequest": 322,
     "SetFormationRequest": 400,
     "PVERequest": 600,
+    "StrengthEquipRequest": 704,
+    "SellEquipRequest": 706,
 }
 
