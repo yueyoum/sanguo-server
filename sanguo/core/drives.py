@@ -79,9 +79,9 @@ class _DocumentIds(object):
                 )
         return res['id']
 
-document_char = _Document(mongodb_client_db, 'char')
 document_ids = _DocumentIds(mongodb_client_db)
-
+document_char = _Document(mongodb_client_db, 'char')
+document_stage = _Document(mongodb_client_db, 'stage')
 document_equip = _Document(mongodb_client_db, 'equip')
 
 
@@ -99,12 +99,13 @@ document_equip = _Document(mongodb_client_db, 'equip')
 #                       formation: proto_binary,
 #                     }
 #       
-# char_stage         {
+# stage              {
 #                       _id: char_id,
 #                       stage_id: True of False,
 #                       stage_id: True of False,
 #                       ...
-#                     }
+#                       new:
+#                    }
 
 # equip              {
 #                       _id: id from ids `equip`,

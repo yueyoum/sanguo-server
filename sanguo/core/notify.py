@@ -3,6 +3,7 @@ from utils import pack_msg
 from core.hero import Hero
 from core.formation import decode_formation
 from core.character import get_char_formation
+from core.stage import get_already_stage, get_new_stage
 import protomsg
 
 def character_notify(key, obj):
@@ -84,13 +85,14 @@ def formation_notify(key, char_id=None, formation=None):
 
 
 def already_stage_notify(key, char_id):
-    data = [(2, True)]
-    msg = protomsg.AlreadyStageNotify()
-    for d in data:
-        stage = msg.stages.add()
-        stage.id, stage.star = d
+    data = get_already_stage(char_id)
+    if data:
+        msg = protomsg.AlreadyStageNotify()
+        for d in data:
+            stage = msg.stages.add()
+            stage.id, stage.star = d
 
-    redis_client.rpush(key, pack_msg(msg))
+        redis_client.rpush(key, pack_msg(msg))
 
 
 def current_stage_notify(key, sid, star):
@@ -113,6 +115,9 @@ def login_notify(key, char_obj, hero_objs=None, formation=None):
     get_hero_panel_notify(key, char_obj)
     formation_notify(key, char_id=char_obj.id, formation=formation)
     already_stage_notify(key, char_obj.id)
-    new_stage_notify(key, 3)
+
+    new_stages = get_new_stage(char_obj.id)
+    if new_stages:
+        new_stage_notify(key, new_stages)
 
 

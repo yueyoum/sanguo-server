@@ -128,7 +128,7 @@ def load_equip_level_range_info():
                     1: m * fields['white_modulus'],
                     2: m * fields['green_modulus'],
                     3: m * fields['blue_modulus'],
-                    4: m * fields['purple_modules'],
+                    4: m * fields['purple_modulus'],
                     }
                 }
     return data

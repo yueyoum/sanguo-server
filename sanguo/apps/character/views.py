@@ -12,10 +12,9 @@ from core.drives import document_char
 from core.formation import (
         decode_formation,
         encode_formation,
-        encode_formation_with_raw_data,
         )
 
-from core.character import get_char_formation
+from core.character import get_char_formation, char_initialize
 from core.battle.tests import _PVE
 
 import protomsg
@@ -66,22 +65,8 @@ def create_character(request):
             name = req.name
             )
 
-    init_hero_ids = GLOBAL.HEROS.get_random_hero_ids(3)
-    char_heros_list = [
-            CharHero(char=char, hero_id=hid) for hid in init_hero_ids
-            ]
-    char_heros = CharHero.multi_create(char_heros_list)
+    char_heros, encoded_formation = char_initialize(char.id)
 
-    encoded_formation = encode_formation_with_raw_data(
-            9,
-            [
-                char_heros[0].id, 0, 0,
-                char_heros[1].id, 0, 0,
-                char_heros[2].id, 0, 0,
-            ]
-            )
-
-    document_char.set(char.id, formation=encoded_formation)
 
     new_session = '%s:%d' % (request._decrypted_session, char.id)
     new_session = crypto.encrypt(new_session)
