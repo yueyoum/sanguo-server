@@ -9,10 +9,6 @@ from core import notify
 from core import GLOBAL
 from core.drives import document_char
 
-from core.formation import (
-        decode_formation,
-        encode_formation,
-        )
 
 from core.character import get_char_formation, char_initialize
 
@@ -51,7 +47,7 @@ def create_character(request):
             name = req.name
             )
 
-    char_heros, encoded_formation = char_initialize(char.id)
+    char_initialize(char.id)
 
 
     new_session = '%s:%d' % (request._decrypted_session, char.id)
@@ -64,8 +60,6 @@ def create_character(request):
     notify.login_notify(
             request._decrypted_session,
             char,
-            hero_objs=char_heros,
-            formation=encoded_formation,
             )
 
     return HttpResponse(data, content_type="text/plain")
@@ -165,40 +159,6 @@ def merge_hero(request):
     notify.add_hero_notify(request._decrypted_session, [new_char_hero])
 
     response = MergeHeroResponse()
-    response.ret = 0
-
-    data = pack_msg(response)
-    return HttpResponse(data, content_type="text/plain")
-
-
-def set_formation(request):
-    req = request._proto
-    print req
-    _, _, char_id = request._decrypted_session.split(':')
-    char_id = int(char_id)
-
-    hero_ids = req.hero_ids
-
-    if len(hero_ids) != 9:
-        raise SanguoViewException(400, "SetFormationResponse")
-
-    for i in range(0, 9, 3):
-        if hero_ids[i] == hero_ids[i+1] == hero_ids[i+2] == 0:
-            raise SanguoViewException(400, "SetFormationResponse")
-
-    old_formation = get_char_formation(char_id)
-
-    formation_msg = decode_formation(old_formation)
-
-    formation_msg.ClearField('hero_ids')
-    formation_msg.hero_ids.MergeFrom(hero_ids)
-    encoded_formation = encode_formation(formation_msg)
-
-    document_char.set(char_id, formation=encoded_formation)
-
-    notify.formation_notify(request._decrypted_session, formation=encoded_formation)
-
-    response = SetFormationResponse()
     response.ret = 0
 
     data = pack_msg(response)

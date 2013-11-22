@@ -227,13 +227,13 @@ class MergeHeroTest(TransactionTestCase):
 class FormationTest(TransactionTestCase):
     def setUp(self):
         Character.objects.create(account_id=1, server_id=1)
-        self.hero_ids = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+        self.socket_ids = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     def _set_formation(self, ret=0):
         session = crypto.encrypt('1:1:1')
         req = SetFormationRequest()
         req.session = session
-        req.hero_ids.extend(self.hero_ids)
+        req.socket_ids.extend(self.socket_ids)
 
         data = app_test_helper.pack_data(req)
         res = app_test_helper.make_request('/formation/set/', data)
@@ -255,10 +255,10 @@ class FormationTest(TransactionTestCase):
             elif id_of_msg == RESPONSE_NOTIFY_TYPE["FormationNotify"]:
                 data = getattr(protomsg, "FormationNotify")()
                 data.ParseFromString(msg)
-                self.assertEqual(len(data.formation.hero_ids), 9)
+                self.assertEqual(len(data.socket_ids), 9)
 
     def test_set_formation(self):
-        self._set_formation(ret=400)
+        self._set_formation()
 
 
 

@@ -1,7 +1,6 @@
-from drives import redis_client
+from core.drives import redis_client, document_char
 from utils import pack_msg
 from core.hero import Hero
-from core.formation import decode_formation
 from core.character import get_char_formation
 from core.stage import get_already_stage, get_new_stage
 import protomsg
@@ -74,13 +73,31 @@ def get_hero_panel_notify(key, char_obj):
 
     redis_client.rpush(key, pack_msg(msg))
 
+def socket_notify(key, char_id):
+    msg = protomsg.SocketNotify()
+    data = document_char.get(char_id, socket=1, _id=0)
+    if not data:
+        return
 
-def formation_notify(key, char_id=None, formation=None):
+    sockets = data.get('socket', {})
+    for k, v in sockets.iteritems():
+        s = msg.sockets.add()
+        s.id = int(k)
+        s.hero_id = v.get('hero', 0)
+        s.weapon_id = v.get('weapon', 0)
+        s.armor_id = v.get('armor', 0)
+        s.jewelry_id = v.get('jewelry', 0)
+
+    redis_client.rpush(key, pack_msg(msg))
+
+
+
+def formation_notify(key, char_id, formation=None):
     msg = protomsg.FormationNotify()
     if not formation:
         formation = get_char_formation(char_id)
 
-    msg.formation.MergeFrom(decode_formation(formation))
+    msg.socket_ids.extend(formation)
     redis_client.rpush(key, pack_msg(msg))
 
 
@@ -106,14 +123,14 @@ def new_stage_notify(key, sid):
     redis_client.rpush(key, pack_msg(msg))
 
 
-def login_notify(key, char_obj, hero_objs=None, formation=None):
-    if not hero_objs:
-        hero_objs = char_obj.char_heros.all()
+def login_notify(key, char_obj):
+    hero_objs = char_obj.char_heros.all()
 
     character_notify(key, char_obj)
     hero_notify(key, hero_objs)
     get_hero_panel_notify(key, char_obj)
-    formation_notify(key, char_id=char_obj.id, formation=formation)
+    socket_notify(key, char_obj.id)
+    formation_notify(key, char_id=char_obj.id)
     already_stage_notify(key, char_obj.id)
 
     new_stages = get_new_stage(char_obj.id)

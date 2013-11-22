@@ -96,7 +96,15 @@ document_equip = _Document(mongodb_client_db, 'equip')
 #
 # char               {
 #                       _id: char_id,
-#                       formation: proto_binary,
+#                       socket: {
+#                           1: {
+#                                   hero:,
+#                                   waepon:,
+#                                   armor:,
+#                                   jewelry:,
+#                               }
+#                       }
+#                       formation: [socket_id, ...],
 #                     }
 #       
 # stage              {

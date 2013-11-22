@@ -2,7 +2,7 @@
 
 from core.drives import document_char, document_stage
 from core import GLOBAL
-from core.formation import encode_formation_with_raw_data, decode_formation
+from core.formation import save_socket, save_formation
 from apps.character.models import CharHero
 
 def char_initialize(char_id):
@@ -13,28 +13,22 @@ def char_initialize(char_id):
             ]
     char_heros = CharHero.multi_create(char_heros_list)
 
-    encoded_formation = encode_formation_with_raw_data(
-            9,
-            [
-                char_heros[0].id, 0, 0,
-                char_heros[1].id, 0, 0,
-                char_heros[2].id, 0, 0,
+    for index, h in enumerate(char_heros):
+        save_socket(char_id, socket_id=index+1, hero=h.id)
+
+    socket_ids = [
+            1, 0, 0,
+            2, 0, 0,
+            3, 0, 0,
             ]
-            )
-    document_char.set(char_id, formation=encoded_formation)
+
+    save_formation(char_id, socket_ids)
+
 
     # 将关卡1设置为new 可进入
     document_stage.set(char_id, new=1)
 
-    return char_heros, encoded_formation
-
-
-
 def get_char_formation(char_id):
     char_formation = document_char.get(char_id, formation=1)
     return char_formation['formation']
-
-def get_decoded_char_formation(char_id):
-    formation = get_char_formation(char_id)
-    return decode_formation(formation)
 

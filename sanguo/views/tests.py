@@ -6,6 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase, TransactionTestCase
+import protomsg
 
 from protomsg import (
         RESPONSE_NOTIFY_TYPE,
@@ -43,4 +44,29 @@ class BattleTest(TransactionTestCase):
                 data = PVEResponse()
                 data.ParseFromString(msg)
                 self.assertEqual(data.stage_id, 1)
+
+class SocketTest(TestCase):
+    def test_set_socket(self):
+        session = crypto.encrypt('1:1:1')
+        req = protomsg.SetSocketRequest()
+        req.session = session
+        req.socket.id = 1
+        req.socket.hero_id = 1
+        req.socket.weapon_id = 1
+        req.socket.armor_id = 1
+        req.socket.jewelry_id = 1
+
+        data = tests.pack_data(req)
+        res = tests.make_request('/socket/set/', data)
+        msgs = tests.unpack_data(res)
+
+        for id_of_msg, len_of_msg, msg in msgs:
+            if id_of_msg == RESPONSE_NOTIFY_TYPE["SetSocketResponse"]:
+                data = protomsg.SetSocketResponse()
+                data.ParseFromString(msg)
+                self.assertEqual(data.ret, 0)
+                self.assertEqual(data.socket.id, 1)
+                self.assertEqual(data.socket.hero_id, 1)
+
+
 

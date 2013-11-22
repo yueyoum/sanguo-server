@@ -5,7 +5,7 @@ from apps.character.models import CharHero
 from core import GLOBAL
 from core.battle.hero import BattleHero, MonsterHero
 from core.battle.battle import Battle
-from core.character import get_decoded_char_formation
+from core.drives import document_char
 
 from utils import pack_msg
 
@@ -14,16 +14,24 @@ import protomsg
 
 class PVE(Battle):
     def load_my_heros(self):
-        formation = get_decoded_char_formation(self.my_id)
+        char_data = document_char.get(self.my_id, formation=1, socket=1)
+        socket_ids = char_data['formation']
+        sockets = char_data['socket']
+
         self.my_heros = []
-        for hid in formation.hero_ids:
+        for hid in socket_ids:
             if hid == 0:
                 self.my_heros.append(None)
             else:
-                hero_obj = CharHero.objects.get(id=hid)
-                # FIXME
-                h = BattleHero(hid, hero_obj.hero_id, hero_obj.exp, [])
-                self.my_heros.append(h)
+                sock = sockets[str(hid)]
+                hid = sock.get('hero', 0)
+                if hid == 0:
+                    self.my_heros.append(None)
+                else:
+                    hero_obj = CharHero.objects.get(id=hid)
+                    # FIXME
+                    h = BattleHero(hid, hero_obj.hero_id, hero_obj.exp, [])
+                    self.my_heros.append(h)
 
 
 

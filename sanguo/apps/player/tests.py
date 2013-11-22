@@ -19,7 +19,7 @@ from models import User
 from core import GLOBAL
 
 from core.drives import mongodb_client_db, document_char
-from core.formation import encode_formation_with_raw_data
+from core.formation import save_formation
 
 
 def teardown():
@@ -151,11 +151,13 @@ class LoginTest(TransactionTestCase):
                 hero_id = GLOBAL.HEROS.all_ids()[0]
                 )
 
-        formation = encode_formation_with_raw_data(
-                9,
-                [0] * 9
-                )
-        document_char.set(char.id, formation=formation)
+        # formation = encode_formation_with_raw_data(
+        #         9,
+        #         [0] * 9
+        #         )
+        # document_char.set(char.id, formation=formation)
+        save_formation(char.id, [0] * 9)
+
 
 
         self._regular_login('123@456.com', '123456', 0)
