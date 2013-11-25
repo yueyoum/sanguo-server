@@ -7,10 +7,14 @@ from core.drives import redis_client
 class Character(models.Model):
     account_id = models.IntegerField(db_index=True)
     server_id = models.IntegerField(db_index=True)
+    
     name = models.CharField(max_length=10)
     gold = models.IntegerField(default=0)
     gem = models.IntegerField(default=0)
+    
     level = models.IntegerField(default=1)
+    exp = models.IntegerField(default=0)
+    official = models.IntegerField(default=0)
     honor = models.IntegerField(default=0)
 
 

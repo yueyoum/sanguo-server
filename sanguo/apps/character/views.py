@@ -7,10 +7,9 @@ from models import Character, CharHero
 from core.exception import SanguoViewException
 from core import notify
 from core import GLOBAL
-from core.drives import document_char
 
 
-from core.character import get_char_formation, char_initialize
+from core.character import char_initialize
 
 from protomsg import (
         CreateCharacterResponse,
@@ -37,7 +36,7 @@ def create_character(request):
     if Character.objects.filter(account_id=account_id, server_id=server_id).exists():
         raise SanguoViewException(200, "CreateCharacterResponse")
 
-    if Character.objects.filter( server_id=server_id,name=req.name).exists():
+    if Character.objects.filter(server_id=server_id,name=req.name).exists():
         raise SanguoViewException(201, "CreateCharacterResponse")
 
 

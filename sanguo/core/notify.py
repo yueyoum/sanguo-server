@@ -3,6 +3,7 @@ from utils import pack_msg
 from core.hero import Hero
 from core.character import get_char_formation
 from core.stage import get_already_stage, get_new_stage
+from core import GLOBAL
 import protomsg
 
 def character_notify(key, obj):
@@ -12,9 +13,12 @@ def character_notify(key, obj):
     data.char.gold = obj.gold
     data.char.gem = obj.gem
     data.char.level = obj.level
-    data.char.current_honor = obj.honor
-    # FIXME
-    data.char.max_honor = 1000
+    
+    _ ,current_exp, next_level_exp = GLOBAL.LEVEL_TOTALEXP[obj.exp]
+    data.char.current_exp = current_exp
+    data.char.next_level_exp = next_level_exp
+    
+    data.char.official = obj.official
     redis_client.rpush(key, pack_msg(data))
 
 def hero_notify(key, objs, message_name="HeroNotify"):
@@ -27,9 +31,6 @@ def hero_notify(key, objs, message_name="HeroNotify"):
         g = data.heros.add()
         g.id = obj.id
         g.original_id = obj.original_id
-        g.level = obj.level
-        g.exp = obj.current_exp
-        g.next_level_exp = obj.next_level_exp
 
         # FIXME
         g.attack = obj.attack
