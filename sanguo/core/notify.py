@@ -1,7 +1,7 @@
 from core.drives import redis_client, document_char
 from utils import pack_msg
 from core.hero import Hero
-from core.character import get_char_formation
+from core.character import get_char_formation, get_char_hero_objs
 from core.stage import get_already_stage, get_new_stage
 from core import GLOBAL
 import protomsg
@@ -25,7 +25,7 @@ def hero_notify(key, objs, message_name="HeroNotify"):
     Msg = getattr(protomsg, message_name)
     data = Msg()
 
-    objs = [Hero(o.id, o.hero_id, o.exp, []) for o in objs]
+    objs = [Hero(o.id, o.original_id, o.level, []) for o in objs]
 
     for obj in objs:
         g = data.heros.add()
@@ -125,7 +125,7 @@ def new_stage_notify(key, sid):
 
 
 def login_notify(key, char_obj):
-    hero_objs = char_obj.char_heros.all()
+    hero_objs = get_char_hero_objs(char_obj.id)
 
     character_notify(key, char_obj)
     hero_notify(key, hero_objs)

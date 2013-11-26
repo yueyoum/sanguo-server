@@ -6,6 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase, TransactionTestCase
+from nose import with_setup
 
 import protomsg
 from protomsg import (
@@ -25,9 +26,11 @@ from protomsg import (
         )
 
 from utils import app_test_helper
-from models import Character, CharHero
+from models import Character
 from utils import crypto
 from core import GLOBAL
+from core.hero import save_hero
+from core.drives import document_char
 
 
 def teardown():
@@ -107,17 +110,15 @@ class GetHeroTest(TransactionTestCase):
 
     def test_get_one_hero(self):
         self._get_hero(False)
-        self.assertEqual(
-                CharHero.objects.filter(char_id=1).count(),
-                1
-                )
+        count = len(document_char.get(1, hero=1)['hero'])
+        self.assertEqual(count, 1)
+        app_test_helper._mongo_teardown_func()
 
     def test_get_ten_hero(self):
         self._get_hero(True)
-        self.assertEqual(
-                CharHero.objects.filter(char_id=1).count(),
-                10
-                )
+        count = len(document_char.get(1, hero=1)['hero'])
+        self.assertEqual(count ,10)
+        app_test_helper._mongo_teardown_func()
 
 
 class MergeHeroTest(TransactionTestCase):
@@ -133,6 +134,7 @@ class MergeHeroTest(TransactionTestCase):
         req = MergeHeroRequest()
         req.session = session
         req.using_hero_ids.extend(using_hero_ids)
+        print "req =", req
 
         data = app_test_helper.pack_data(req)
         res = app_test_helper.make_request('/hero/merge/', data)
@@ -152,60 +154,42 @@ class MergeHeroTest(TransactionTestCase):
                 data.ParseFromString(msg)
                 self.assertEqual(data.ret, ret)
 
+    
     def test_normal_two_merge(self):
         one_heros = GLOBAL.HEROS.get_hero_ids_by_quality(1)[:2]
-        char_heros_list = [
-                CharHero(char_id=1, hero_id=h) for h in one_heros
-                ]
-
-        char_heros = CharHero.multi_create(char_heros_list)
-        using_hero_ids = [c.id for c in char_heros]
+        using_hero_ids = save_hero(1, one_heros)
 
         self._merge_hero(using_hero_ids)
-        self.assertEqual(
-                CharHero.objects.filter(char_id=1).count(),
-                1
-                )
+        count = len(document_char.get(1, hero=1)['hero'])
+        self.assertEqual(count, 1)
+        app_test_helper._mongo_teardown_func()
 
     def test_normal_eight_merge(self):
         two_heros = GLOBAL.HEROS.get_hero_ids_by_quality(2)[:8]
-        char_heros_list = [
-                CharHero(char_id=1, hero_id=h) for h in two_heros
-                ]
-
-        char_heros = CharHero.multi_create(char_heros_list)
-        using_hero_ids = [c.id for c in char_heros]
+        using_hero_ids = save_hero(1, two_heros)
 
         self._merge_hero(using_hero_ids)
-        self.assertEqual(
-                CharHero.objects.filter(char_id=1).count(),
-                1
-                )
+        count = len(document_char.get(1, hero=1)['hero'])
+        self.assertEqual(count, 1)
+        app_test_helper._mongo_teardown_func()
 
     def test_error_eight_merge(self):
         two_heros = GLOBAL.HEROS.get_hero_ids_by_quality(1)[:8]
-        char_heros_list = [
-                CharHero(char_id=1, hero_id=h) for h in two_heros
-                ]
-
-        char_heros = CharHero.multi_create(char_heros_list)
-        using_hero_ids = [c.id for c in char_heros]
+        using_hero_ids = save_hero(1, two_heros)
 
         self._merge_hero(using_hero_ids, 302)
+        app_test_helper._mongo_teardown_func()
 
 
     def test_merge_with_non_exits(self):
         self._merge_hero([100, 101], 300)
+        app_test_helper._mongo_teardown_func()
 
     def test_merge_with_three_one(self):
         one_heros = GLOBAL.HEROS.get_hero_ids_by_quality(1)[:3]
-        char_heros_list = [
-                CharHero(char_id=1, hero_id=h) for h in one_heros
-                ]
-
-        char_heros = CharHero.multi_create(char_heros_list)
-        using_hero_ids = [c.id for c in char_heros]
+        using_hero_ids = save_hero(1, one_heros)
         self._merge_hero(using_hero_ids, 302)
+        app_test_helper._mongo_teardown_func()
 
     def test_merge_with_different_quality(self):
         one_heros = GLOBAL.HEROS.get_hero_ids_by_quality(1)[:3]
@@ -213,15 +197,10 @@ class MergeHeroTest(TransactionTestCase):
         one_heros = list(one_heros)
         one_heros.extend(two_heros)
 
-        char_heros_list = [
-                CharHero(char_id=1, hero_id=h) for h in one_heros
-                ]
-
-        char_heros = CharHero.multi_create(char_heros_list)
-
-        using_hero_ids = [c.id for c in char_heros]
+        using_hero_ids = save_hero(1, one_heros)
 
         self._merge_hero(using_hero_ids, 301)
+        app_test_helper._mongo_teardown_func()
 
 
 class FormationTest(TransactionTestCase):

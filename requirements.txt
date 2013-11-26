@@ -8,3 +8,4 @@ pycrypto==2.6
 pymongo==2.6.3
 pytz==2013.7
 redis==2.8.0
+redisco==0.1.4

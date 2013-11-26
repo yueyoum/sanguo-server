@@ -4,6 +4,8 @@ import base64
 
 from protomsg import REQUEST_TYPE_REV
 
+from core.drives import mongodb_client, mongodb_client_db
+
 __all__ = [
         'pack_data',
         'unpack_data',
@@ -13,6 +15,15 @@ __all__ = [
 
 FMT = struct.Struct('>i')
 URL = "http://127.0.0.1:8000"
+
+def _setup_func():
+    pass
+
+def _mongo_teardown_func():
+    mongodb_client.drop_database(mongodb_client_db)
+    
+
+
 
 def pack_data(req):
     id_of_msg = REQUEST_TYPE_REV[req.DESCRIPTOR.name]

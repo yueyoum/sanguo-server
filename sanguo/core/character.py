@@ -2,19 +2,18 @@
 
 from core.drives import document_char, document_stage
 from core import GLOBAL
+from core.hero import save_hero
 from core.formation import save_socket, save_formation
-from apps.character.models import CharHero
+from core.hero import Hero
+from apps.character.cache import get_cache_character
 
 def char_initialize(char_id):
     # 随机三个武将，并上阵
     init_hero_ids = GLOBAL.HEROS.get_random_hero_ids(3)
-    char_heros_list = [
-            CharHero(char_id=char_id, hero_id=hid) for hid in init_hero_ids
-            ]
-    char_heros = CharHero.multi_create(char_heros_list)
-
-    for index, h in enumerate(char_heros):
-        save_socket(char_id, socket_id=index+1, hero=h.id)
+    
+    hero_ids = save_hero(char_id, init_hero_ids)
+    for index, _id in enumerate(hero_ids):
+        save_socket(char_id, socket_id=index+1, hero=_id)
 
     socket_ids = [
             1, 0, 0,
@@ -32,3 +31,18 @@ def get_char_formation(char_id):
     char_formation = document_char.get(char_id, formation=1)
     return char_formation['formation']
 
+
+
+def get_char_heros(char_id):
+    data = document_char.get(char_id, hero=1)
+    if not data:
+        return {}
+    
+    heros = data['hero']
+    return {int(k): v for k, v in heros.iteritems()}
+    
+def get_char_hero_objs(char_id):
+    data = get_char_heros(char_id)
+    char_obj = get_cache_character(char_id)
+    return [Hero(k, v, char_obj.level, []) for k, v in data.iteritems()]
+    

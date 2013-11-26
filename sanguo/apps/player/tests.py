@@ -139,17 +139,19 @@ class LoginTest(TransactionTestCase):
         self._regular_login('123@456.com', 'abcd', 150)
 
     def test_login_with_notify(self):
-        from apps.character.models import Character, CharHero
+        from apps.character.models import Character
+        from core.hero import save_hero
         char = Character.objects.create(
                 account_id = 1,
                 server_id = 1,
                 name = "abcd"
                 )
 
-        CharHero.objects.create(
-                char = char,
-                hero_id = GLOBAL.HEROS.all_ids()[0]
-                )
+        #CharHero.objects.create(
+        #        char = char,
+        #        hero_id = GLOBAL.HEROS.all_ids()[0]
+        #        )
+        save_hero(char.id, GLOBAL.HEROS.all_ids()[0])
 
         # formation = encode_formation_with_raw_data(
         #         9,

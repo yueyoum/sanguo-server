@@ -41,6 +41,16 @@ class _Document(object):
                 {'$set': kwargs},
                 upsert=True
                 )
+    
+    def unset(self, key, fields):
+        if not isinstance(fields, (list, tuple)):
+            fields = [fields]
+        
+        data = {k: 1 for k in fields}
+        self.document.update(
+            {'_id': key},
+            {'$unset': data}
+        )
 
     def remove(self, key):
         self.document.remove({'_id': key})
@@ -71,7 +81,7 @@ class _DocumentIds(object):
 
     def inc(self, name, value=1):
         res = self.document.find_and_modify(
-                query={'_id', name},
+                query={'_id': name},
                 update={'$inc': {'id': value}},
                 fields={'_id': 0},
                 upsert=True,
@@ -81,6 +91,7 @@ class _DocumentIds(object):
 
 document_ids = _DocumentIds(mongodb_client_db)
 document_char = _Document(mongodb_client_db, 'char')
+document_hero = _Document(mongodb_client_db, 'hero')
 document_stage = _Document(mongodb_client_db, 'stage')
 document_equip = _Document(mongodb_client_db, 'equip')
 
@@ -106,7 +117,12 @@ document_equip = _Document(mongodb_client_db, 'equip')
 #                       }
 #                       formation: [socket_id, ...],
 #                     }
-#       
+#
+# hero              {
+#                       _id: hero_id,
+#                       char: char_id
+#                   }
+#
 # stage              {
 #                       _id: char_id,
 #                       stage_id: True of False,

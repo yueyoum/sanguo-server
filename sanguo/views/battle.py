@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 
-from apps.character.models import CharHero
+#from apps.character.models import CharHero
+from core.hero import get_hero
 
 from core import GLOBAL
 from core.battle.hero import BattleHero, MonsterHero
@@ -28,9 +29,11 @@ class PVE(Battle):
                 if hid == 0:
                     self.my_heros.append(None)
                 else:
-                    hero_obj = CharHero.objects.get(id=hid)
-                    # FIXME
-                    h = BattleHero(hid, hero_obj.hero_id, hero_obj.exp, [])
+                    #hero_obj = CharHero.objects.get(id=hid)
+                    ## FIXME
+                    #h = BattleHero(hid, hero_obj.hero_id, hero_obj.exp, [])
+                    _, original_id, level = get_hero(hid)
+                    h = BattleHero(hid, original_id, level, [])
                     self.my_heros.append(h)
 
 

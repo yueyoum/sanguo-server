@@ -1,9 +1,13 @@
+import redisco
 
-def _check_valid():
-    from core.drives import redis_client
-    redis_client.ping()
+from django.conf import settings
 
+from core.drives import redis_client
+redis_client.ping()
 
-_check_valid()
-del _check_valid
+redisco.connection_setup(
+    host = settings.REDIS_HOST,
+    port = settings.REDIS_PORT,
+    db = settings.REDIS_DB
+)
 
