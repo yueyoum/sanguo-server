@@ -1,5 +1,4 @@
 from core import GLOBAL
-#from core.drives import document_ids, document_char, document_hero
 from core.drives import document_ids
 from core.mongoscheme import MongoHero
 from apps.character.cache import get_cache_character
@@ -42,21 +41,14 @@ def save_hero(char_id, hero_original_ids):
     new_max_id = document_ids.inc('charhero', length)
     
     id_range = range(new_max_id-length+1, new_max_id+1)
-    #data = {}
     for i, _id in enumerate(id_range):
-        #document_hero.set(_id, char=char_id)
-        #data['hero.%d' % _id] = hero_original_ids[i]
         MongoHero(id=_id, char=char_id, oid=hero_original_ids[i]).save()
 
-    #document_char.set(char_id, **data)
     print "id_range =", id_range
     return id_range
 
 
-def get_hero(_id, char_id=None):
-    #if not char_id:
-    #    char_id = document_hero.get(_id)['char']
-    #original_id = document_char.get(char_id, hero=1)['hero'][str(_id)]
+def get_hero(_id):
     hero = MongoHero.objects.get(id=_id)
     original_id = hero.oid
     char_obj = get_cache_character(hero.char)
@@ -64,9 +56,5 @@ def get_hero(_id, char_id=None):
 
 
 
-def delete_hero(_id, char_id=None):
-    #if not char_id:
-    #    char_id = document_hero.get(_id)['char_id']
-    #document_hero.remove(_id)
-    #document_char.unset(char_id, 'hero.%d' % _id)
+def delete_hero(_id):
     MongoHero.objects(id=_id).delete()

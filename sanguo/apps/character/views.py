@@ -32,16 +32,7 @@ def create_character(request):
     if Character.objects.filter(server_id=server_id,name=req.name).exists():
         raise SanguoViewException(201, "CreateCharacterResponse")
 
-
-    #char = Character.objects.create(
-    #        account_id = account_id,
-    #        server_id = server_id,
-    #        name = req.name
-    #        )
-    #
-    #char_initialize(char.id)
     char = char_initialize(account_id, server_id, req.name)
-
 
     new_session = '%s:%d' % (request._decrypted_session, char.id)
     new_session = crypto.encrypt(new_session)

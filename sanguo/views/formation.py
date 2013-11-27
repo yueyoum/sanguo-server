@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 
 from core.exception import SanguoViewException
-from core.formation import get_char_formation, save_socket, save_formation
+from core.formation import save_socket, save_formation
 from core import notify
 
 from protomsg import (
@@ -46,10 +46,6 @@ def set_formation(request):
 
     if len(socket_ids) != 9:
         raise SanguoViewException(400, "SetFormationResponse")
-
-    # for i in range(0, 9, 3):
-    #     if hero_ids[i] == hero_ids[i+1] == hero_ids[i+2] == 0:
-    #         raise SanguoViewException(400, "SetFormationResponse")
 
     save_formation(char_id, [int(s) for s in socket_ids])
     notify.formation_notify(request._decrypted_session, char_id, formation=socket_ids)

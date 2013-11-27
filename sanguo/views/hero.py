@@ -103,7 +103,7 @@ def merge_hero(request):
     print "choosing_id =", choosing_id
 
     for _id in using_hero_ids:
-        delete_hero(_id, char_id)
+        delete_hero(_id)
 
     new_hero_id = save_hero(char_id, choosing_id)[0]
     

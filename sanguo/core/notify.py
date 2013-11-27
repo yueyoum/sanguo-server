@@ -77,12 +77,10 @@ def get_hero_panel_notify(key, char_obj):
 
 def socket_notify(key, char_id):
     msg = protomsg.SocketNotify()
-    #data = document_char.get(char_id, socket=1, _id=0)
     data = MongoChar.objects.only('sockets').get(id=char_id)
     if not data:
         return
 
-    #sockets = data.get('socket', {})
     sockets = data.sockets
     for k, v in sockets.iteritems():
         s = msg.sockets.add()
