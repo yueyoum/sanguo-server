@@ -1,9 +1,10 @@
-from core.drives import redis_client, document_char
+from core.drives import redis_client
 from utils import pack_msg
 from core.hero import Hero
 from core.character import get_char_formation, get_char_hero_objs
 from core.stage import get_already_stage, get_new_stage
 from core import GLOBAL
+from core.mongoscheme import MongoChar
 import protomsg
 
 def character_notify(key, obj):
@@ -76,18 +77,20 @@ def get_hero_panel_notify(key, char_obj):
 
 def socket_notify(key, char_id):
     msg = protomsg.SocketNotify()
-    data = document_char.get(char_id, socket=1, _id=0)
+    #data = document_char.get(char_id, socket=1, _id=0)
+    data = MongoChar.objects.only('sockets').get(id=char_id)
     if not data:
         return
 
-    sockets = data.get('socket', {})
+    #sockets = data.get('socket', {})
+    sockets = data.sockets
     for k, v in sockets.iteritems():
         s = msg.sockets.add()
         s.id = int(k)
-        s.hero_id = v.get('hero', 0)
-        s.weapon_id = v.get('weapon', 0)
-        s.armor_id = v.get('armor', 0)
-        s.jewelry_id = v.get('jewelry', 0)
+        s.hero_id = v.hero or 0
+        s.weapon_id = v.weapon or 0
+        s.armor_id = v.armor or 0
+        s.jewelry_id = v.jewelry or 0
 
     redis_client.rpush(key, pack_msg(msg))
 

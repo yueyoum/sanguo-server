@@ -13,22 +13,21 @@ from protomsg import (
         PVERequest,
         PVEResponse,
         )
-from apps.character.models import Character
 from core.character import char_initialize
 from utils import crypto
 from utils import app_test_helper as tests
 
 
 def teardown():
-    from core.drives import redis_client, mongodb_client, mongodb_client_db
-    redis_client.flushdb()
-    mongodb_client.drop_database(mongodb_client_db)
+    tests._teardown()
 
 
 class BattleTest(TransactionTestCase):
     def setUp(self):
-        char = Character.objects.create(account_id=1, server_id=1)
-        char_initialize(char.id)
+        char_initialize(1, 1, 'a')
+        
+    def tearDown(self):
+        tests._teardown()
 
     def test_pve(self):
         req = PVERequest()
@@ -46,6 +45,12 @@ class BattleTest(TransactionTestCase):
                 self.assertEqual(data.stage_id, 1)
 
 class SocketTest(TestCase):
+    def setUp(self):
+        char_initialize(1, 1, 'a')
+        
+    def tearDown(self):
+        tests._teardown()
+
     def test_set_socket(self):
         session = crypto.encrypt('1:1:1')
         req = protomsg.SetSocketRequest()
@@ -67,6 +72,5 @@ class SocketTest(TestCase):
                 self.assertEqual(data.ret, 0)
                 self.assertEqual(data.socket.id, 1)
                 self.assertEqual(data.socket.hero_id, 1)
-
 
 

@@ -1,4 +1,4 @@
-from core.drives import mongodb_client_db, document_ids, document_equip
+from core.drives import  document_ids
 from core import GLOBAL
 
 EQUIP = GLOBAL.EQUIP.EQUIP
@@ -42,15 +42,15 @@ def _calculate(level, quality, tp, extra):
 
     return attrs
 
-def calculate(_id):
-    equip = document_equip.get(_id)
-    meta_data = EQUIP[equip['oid']]
-
-    return _calculate(
-            equip['level'],
-            meta_data['quality'],
-            meta_data['tp'],
-            equip['extra']
-            )
-    
+#def calculate(_id):
+#    equip = document_equip.get(_id)
+#    meta_data = EQUIP[equip['oid']]
+#
+#    return _calculate(
+#            equip['level'],
+#            meta_data['quality'],
+#            meta_data['tp'],
+#            equip['extra']
+#            )
+#    
 

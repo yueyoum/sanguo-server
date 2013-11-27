@@ -1,5 +1,6 @@
 import redis
 import pymongo
+from mongoengine import connect
 
 from django.conf import settings
 
@@ -18,6 +19,10 @@ mongodb_client = pymongo.MongoClient(
 
 mongodb_client_db = mongodb_client[settings.MONGODB_DB]
 
+connect(settings.MONGODB_DB,
+        host = settings.MONGODB_HOST,
+        port = settings.MONGODB_PORT
+        )
 
 
 class _Document(object):
@@ -90,10 +95,10 @@ class _DocumentIds(object):
         return res['id']
 
 document_ids = _DocumentIds(mongodb_client_db)
-document_char = _Document(mongodb_client_db, 'char')
-document_hero = _Document(mongodb_client_db, 'hero')
-document_stage = _Document(mongodb_client_db, 'stage')
-document_equip = _Document(mongodb_client_db, 'equip')
+#document_char = _Document(mongodb_client_db, 'char')
+#document_hero = _Document(mongodb_client_db, 'hero')
+#document_stage = _Document(mongodb_client_db, 'stage')
+#document_equip = _Document(mongodb_client_db, 'equip')
 
 
 # mongodb scheme

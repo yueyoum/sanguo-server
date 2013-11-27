@@ -26,26 +26,32 @@ from protomsg import (
         )
 
 from utils import app_test_helper
-from models import Character
+#from models import Character
+from core.character import char_initialize
 from utils import crypto
 from core import GLOBAL
 from core.hero import save_hero
-from core.drives import document_char
+#from core.drives import document_char
+from core.mongoscheme import MongoChar, MongoHero
 
 
 def teardown():
-    from core.drives import redis_client, mongodb_client, mongodb_client_db
-    redis_client.flushdb()
-    mongodb_client.drop_database(mongodb_client_db)
+    app_test_helper._teardown()
 
 
 class CreateCharacterTest(TransactionTestCase):
     def setUp(self):
-        Character.objects.create(
-                account_id = 1,
-                server_id = 1,
-                name = "abcd"
-                )
+        #Character.objects.create(
+        #        account_id = 1,
+        #        server_id = 1,
+        #        name = "abcd"
+        #        )
+        char_initialize(1, 1, 'a')
+        
+    def tearDown(self):
+        app_test_helper._teardown()
+    
+    
 
     def _create(self, account_id, server_id, name, ret):
         session = crypto.encrypt("{0}:{1}".format(account_id, server_id))
@@ -77,14 +83,18 @@ class CreateCharacterTest(TransactionTestCase):
 
 
 class GetHeroTest(TransactionTestCase):
-    fixtures = ['get_hero.json']
+    #fixtures = ['get_hero.json']
 
     def setUp(self):
-        Character.objects.create(
-                account_id = 1,
-                server_id = 1,
-                name = "abcd"
-                )
+        #Character.objects.create(
+        #        account_id = 1,
+        #        server_id = 1,
+        #        name = "abcd"
+        #        )
+        char_initialize(1, 1, 'a')
+        
+    def tearDown(self):
+        app_test_helper._teardown()
 
     def _get_hero(self, ten, ret=0):
         session = crypto.encrypt('1:1:1')
@@ -110,24 +120,30 @@ class GetHeroTest(TransactionTestCase):
 
     def test_get_one_hero(self):
         self._get_hero(False)
-        count = len(document_char.get(1, hero=1)['hero'])
-        self.assertEqual(count, 1)
+        #count = len(document_char.get(1, hero=1)['hero'])
+        count = len( MongoHero.objects(char=1) )
+        self.assertEqual(count, 1 + 3)
         app_test_helper._mongo_teardown_func()
 
     def test_get_ten_hero(self):
         self._get_hero(True)
-        count = len(document_char.get(1, hero=1)['hero'])
-        self.assertEqual(count ,10)
+        #count = len(document_char.get(1, hero=1)['hero'])
+        count = len( MongoHero.objects(char=1) )
+        self.assertEqual(count ,10 + 3)
         app_test_helper._mongo_teardown_func()
 
 
 class MergeHeroTest(TransactionTestCase):
     def setUp(self):
-        Character.objects.create(
-                account_id = 1,
-                server_id = 1,
-                name = "abcd"
-                )
+        #Character.objects.create(
+        #        account_id = 1,
+        #        server_id = 1,
+        #        name = "abcd"
+        #        )
+        char_initialize(1, 1, 'a')
+        
+    def tearDown(self):
+        app_test_helper._teardown()
 
     def _merge_hero(self, using_hero_ids, ret=0):
         session = crypto.encrypt('1:1:1')
@@ -160,8 +176,9 @@ class MergeHeroTest(TransactionTestCase):
         using_hero_ids = save_hero(1, one_heros)
 
         self._merge_hero(using_hero_ids)
-        count = len(document_char.get(1, hero=1)['hero'])
-        self.assertEqual(count, 1)
+        #count = len(document_char.get(1, hero=1)['hero'])
+        count = len( MongoHero.objects(char=1) )
+        self.assertEqual(count, 1 + 3)
         app_test_helper._mongo_teardown_func()
 
     def test_normal_eight_merge(self):
@@ -169,8 +186,9 @@ class MergeHeroTest(TransactionTestCase):
         using_hero_ids = save_hero(1, two_heros)
 
         self._merge_hero(using_hero_ids)
-        count = len(document_char.get(1, hero=1)['hero'])
-        self.assertEqual(count, 1)
+        #count = len(document_char.get(1, hero=1)['hero'])
+        count = len( MongoHero.objects(char=1) )
+        self.assertEqual(count, 1 + 3)
         app_test_helper._mongo_teardown_func()
 
     def test_error_eight_merge(self):
@@ -205,8 +223,12 @@ class MergeHeroTest(TransactionTestCase):
 
 class FormationTest(TransactionTestCase):
     def setUp(self):
-        Character.objects.create(account_id=1, server_id=1)
+        #Character.objects.create(account_id=1, server_id=1)
+        char_initialize(1, 1, 'a')
         self.socket_ids = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+        
+    def tearDown(self):
+        app_test_helper._teardown()
 
     def _set_formation(self, ret=0):
         session = crypto.encrypt('1:1:1')

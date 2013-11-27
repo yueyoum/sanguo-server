@@ -33,13 +33,14 @@ def create_character(request):
         raise SanguoViewException(201, "CreateCharacterResponse")
 
 
-    char = Character.objects.create(
-            account_id = account_id,
-            server_id = server_id,
-            name = req.name
-            )
-
-    char_initialize(char.id)
+    #char = Character.objects.create(
+    #        account_id = account_id,
+    #        server_id = server_id,
+    #        name = req.name
+    #        )
+    #
+    #char_initialize(char.id)
+    char = char_initialize(account_id, server_id, req.name)
 
 
     new_session = '%s:%d' % (request._decrypted_session, char.id)

@@ -18,14 +18,11 @@ from utils import app_test_helper as tests
 from models import User
 from core import GLOBAL
 
-from core.drives import mongodb_client_db, document_char
 from core.formation import save_formation
 
 
 def teardown():
-    from core.drives import redis_client, mongodb_client, mongodb_client_db
-    redis_client.flushdb()
-    mongodb_client.drop_database(mongodb_client_db)
+        tests._teardown()
 
 
 class RegisterTest(TransactionTestCase):
@@ -91,6 +88,10 @@ class LoginTest(TransactionTestCase):
                     device_token = token
                     )
 
+    def tearDown(self):
+        tests._teardown()
+    
+
     def test_anonymous_login(self):
         req = StartGameRequest()
         req.session = ""
@@ -139,13 +140,16 @@ class LoginTest(TransactionTestCase):
         self._regular_login('123@456.com', 'abcd', 150)
 
     def test_login_with_notify(self):
-        from apps.character.models import Character
+        #from apps.character.models import Character
+        from core.character import char_initialize
         from core.hero import save_hero
-        char = Character.objects.create(
-                account_id = 1,
-                server_id = 1,
-                name = "abcd"
-                )
+        #char = Character.objects.create(
+        #        account_id = 1,
+        #        server_id = 1,
+        #        name = "abcd"
+        #        )
+        
+        char = char_initialize(1, 1, 'a')
 
         #CharHero.objects.create(
         #        char = char,

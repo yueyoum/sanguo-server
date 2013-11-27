@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from core.exception import SanguoViewException
 from core.formation import get_char_formation, save_socket, save_formation
 from core import notify
-from core.drives import document_char
 
 from protomsg import (
         SetFormationResponse,

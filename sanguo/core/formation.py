@@ -1,33 +1,32 @@
-from base64 import b64decode, b64encode
-from core.drives import document_char
+from core.mongoscheme import MongoChar, MongoSocket
 
-import protomsg
-
-def save_socket(char_id, socket_id=None, hero=None, weapon=None, armor=None, jewelry=None):
+def save_socket(char_id, socket_id=None, hero=0, weapon=0, armor=0, jewelry=0):
+    c = MongoChar.objects.only('sockets').get(id=char_id)
     if not socket_id:
-        data = document_char.get(char_id, socket=1)
-        socket = data.get('socket', {})
-        socket_id = len(socket) + 1
-
-
-    data = {}
+        socket_id = len(c.socket) + 1
+    
+    socket =  c.sockets.get(str(socket_id), MongoSocket())
+    
     if hero:
-        data['socket.%d.hero' % socket_id] = hero
+        socket.hero = hero
     if weapon:
-        data['socket.%d.weapon' % socket_id] = weapon
+        socket.weapon = weapon
     if armor:
-        data['socket.%d.armor' % socket_id] = armor
+        socket.armor = armor
     if jewelry:
-        data['socket.%d.jewelry' % socket_id] = jewelry
+        socket.jewelry = jewelry
 
-    document_char.set(char_id, **data)
+    c.sockets[str(socket_id)] = socket
+    c.save()
 
 
 def save_formation(char_id, socket_ids):
-    document_char.set(char_id, formation=socket_ids)
+    c = MongoChar.objects.only('id').get(id=char_id)
+    c.formation = socket_ids
+    c.save()
 
 
 def get_char_formation(char_id):
-    data = document_char.get(char_id, formation=1)
-    return data['formation']
+    c = MongoChar.objects.only('formation').get(id=char_id)
+    return c.formation
 

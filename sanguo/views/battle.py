@@ -6,7 +6,8 @@ from core.hero import get_hero
 from core import GLOBAL
 from core.battle.hero import BattleHero, MonsterHero
 from core.battle.battle import Battle
-from core.drives import document_char
+#from core.drives import document_char
+from core.mongoscheme import MongoChar
 
 from utils import pack_msg
 
@@ -15,9 +16,12 @@ import protomsg
 
 class PVE(Battle):
     def load_my_heros(self):
-        char_data = document_char.get(self.my_id, formation=1, socket=1)
-        socket_ids = char_data['formation']
-        sockets = char_data['socket']
+        #char_data = document_char.get(self.my_id, formation=1, socket=1)
+        #socket_ids = char_data['formation']
+        #sockets = char_data['socket']
+        char_data = MongoChar.objects.get(id=self.my_id)
+        socket_ids = char_data.formation
+        sockets = char_data.sockets
 
         self.my_heros = []
         for hid in socket_ids:
@@ -25,8 +29,9 @@ class PVE(Battle):
                 self.my_heros.append(None)
             else:
                 sock = sockets[str(hid)]
-                hid = sock.get('hero', 0)
-                if hid == 0:
+                #hid = sock.get('hero', 0)
+                hid = sock.hero
+                if not hid:
                     self.my_heros.append(None)
                 else:
                     #hero_obj = CharHero.objects.get(id=hid)

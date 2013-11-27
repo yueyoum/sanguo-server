@@ -4,6 +4,7 @@ import base64
 
 from protomsg import REQUEST_TYPE_REV
 
+from core.drives import redis_client
 from core.drives import mongodb_client, mongodb_client_db
 
 __all__ = [
@@ -22,8 +23,19 @@ def _setup_func():
 def _mongo_teardown_func():
     mongodb_client.drop_database(mongodb_client_db)
     
+def _redis_teardown_func():
+    redis_client.flushdb()
+
+def _teardown():
+    _redis_teardown_func()
+    _mongo_teardown_func()
 
 
+def _teardown_deco(func):
+    def deco(*args, **kwargs):
+        func(*args, **kwargs)
+        _teardown()
+    return deco
 
 def pack_data(req):
     id_of_msg = REQUEST_TYPE_REV[req.DESCRIPTOR.name]
