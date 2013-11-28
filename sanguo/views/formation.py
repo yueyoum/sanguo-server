@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from core.exception import SanguoViewException
 from core.formation import save_socket, save_formation
 from core import notify
+from core.signals import socket_changed_signal
 
 from protomsg import (
         SetFormationResponse,
@@ -27,6 +28,14 @@ def set_socket(request):
             armor=req.socket.armor_id,
             jewelry=req.socket.jewelry_id
             )
+    
+    socket_changed_signal.send(
+        sender = None,
+        hero = req.socket.hero_id,
+        weapon = req.socket.weapon_id,
+        armor = req.socket.armor_id,
+        jewelry = req.socket.jewelry_id
+    )
 
     response = SetSocketResponse()
     response.ret = 0

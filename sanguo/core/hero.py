@@ -14,10 +14,11 @@ def cal_hero_property(original_id, level):
 
 
 class Hero(object):
-    def __init__(self, hid, original_id, level, skills):
+    def __init__(self, hid, original_id, level, char_id, skills):
         self.id = hid
         self.original_id = original_id
         self.level = level
+        self.char_id = char_id
         self.skills = skills
 
         self.attack, self.defense, self.hp = \
@@ -52,8 +53,11 @@ def get_hero(_id):
     hero = MongoHero.objects.get(id=_id)
     original_id = hero.oid
     char_obj = get_cache_character(hero.char)
-    return _id, original_id, char_obj.level
+    return _id, original_id, char_obj.level, hero.char
 
+def get_hero_obj(_id):
+    _, oid, level, char_id = get_hero(_id)
+    return Hero(_id, oid, level, char_id, [])
 
 
 def delete_hero(_id):

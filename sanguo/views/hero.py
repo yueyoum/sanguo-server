@@ -4,8 +4,9 @@ from django.http import HttpResponse
 from core.exception import SanguoViewException
 from core import notify
 from core import GLOBAL
-from core.hero import save_hero, get_hero, delete_hero, Hero
+from core.hero import save_hero, delete_hero, Hero
 from core.character import get_char_heros
+from core.cache import get_cache_hero
 
 from protomsg import (
     GetHeroResponse,
@@ -44,8 +45,9 @@ def pick_hero(request):
     heros = save_hero(char_id, heros)
     char_heros = []
     for i in heros:
-        hid, oid, level = get_hero(i)
-        char_heros.append( Hero(hid, oid, level, []) )
+        #hid, oid, level = get_hero(i)
+        #char_heros.append( Hero(hid, oid, level, []) )
+        char_heros.append( get_cache_hero(i) )
     
     notify.add_hero_notify(request._decrypted_session, char_heros)
 
@@ -111,7 +113,8 @@ def merge_hero(request):
     notify.remove_hero_notify(request._decrypted_session, using_hero_ids)
     notify.add_hero_notify(
         request._decrypted_session,
-        [Hero(new_hero_id, choosing_id, 1, [])]
+        #[Hero(new_hero_id, choosing_id, 1, [])]
+        [ get_cache_hero(new_hero_id) ]
     )
 
     response = MergeHeroResponse()

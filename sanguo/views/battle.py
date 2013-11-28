@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 
-from core.hero import get_hero
+#from core.hero import get_hero
 
 from core import GLOBAL
 from core.battle.hero import BattleHero, MonsterHero
@@ -28,8 +28,9 @@ class PVE(Battle):
                 if not hid:
                     self.my_heros.append(None)
                 else:
-                    _, original_id, level = get_hero(hid)
-                    h = BattleHero(hid, original_id, level, [])
+                    #_, original_id, level = get_hero(hid)
+                    #h = BattleHero(hid, original_id, level, [])
+                    h = BattleHero(hid)
                     self.my_heros.append(h)
 
 

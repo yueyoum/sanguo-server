@@ -9,6 +9,8 @@ from apps.character.cache import get_cache_character
 from apps.character.models import Character
 from apps.item.cache import get_cache_equipment
 
+from core.cache import get_cache_hero
+
 def char_initialize(account_id, server_id, name):
     # 随机三个武将，并上阵
     char = Character.objects.create(
@@ -62,8 +64,9 @@ def get_char_heros(char_id):
     
 def get_char_hero_objs(char_id):
     data = get_char_heros(char_id)
-    char_obj = get_cache_character(char_id)
-    return [Hero(k, v, char_obj.level, []) for k, v in data.iteritems()]
+    return [get_cache_hero(k) for k in data.keys()]
+    #char_obj = get_cache_character(char_id)
+    #return [Hero(k, v, char_obj.level, []) for k, v in data.iteritems()]
     
 
 def get_char_equipments(char_id):

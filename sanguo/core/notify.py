@@ -31,12 +31,12 @@ def hero_notify(key, objs, message_name="HeroNotify"):
     Msg = getattr(protomsg, message_name)
     data = Msg()
 
-    objs = [Hero(o.id, o.original_id, o.level, []) for o in objs]
+    #objs = [Hero(o.id, o.original_id, o.level, []) for o in objs]
 
     for obj in objs:
         g = data.heros.add()
-        g.id = obj.id
-        g.original_id = obj.original_id
+        g.id = int(obj.id)
+        g.original_id = obj.oid
 
         # FIXME
         g.attack = obj.attack

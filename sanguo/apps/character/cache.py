@@ -1,6 +1,9 @@
 from redisco import models
 
 class CacheCharacter(models.Model):
+    account_id = models.IntegerField(indexed=False, required=True)
+    server_id = models.IntegerField(indexed=False, required=True)
+    
     name = models.CharField(indexed=False, required=True)
     gold = models.IntegerField(indexed=False, required=True)
     gem = models.IntegerField(indexed=False, required=True)
@@ -9,6 +12,11 @@ class CacheCharacter(models.Model):
     official = models.IntegerField(indexed=False, required=True)
     honor = models.IntegerField(indexed=False, required=True)
 
+    @property
+    def notify_key(self):
+        return '{0}:{1}:{2}'.format(
+            self.account_id, self.server_id, self.id
+        )
 
 
 def save_cache_character(model_obj):

@@ -7,6 +7,9 @@ from collections import defaultdict
 from core.hero import Hero
 from core import GLOBAL
 
+from core.cache import get_cache_hero
+from apps.character.cache import get_cache_character
+
 
 logger = logging.getLogger('battle')
 
@@ -47,11 +50,11 @@ class EffectManager(object):
 
     def add_effect(self, me, eff, msg):
         self.effects.append(eff)
-        hero_notify = msg.hero_notify.add()
-        hero_notify.target_id = me.id
-        hero_notify.hp = me.hp
-        hero_notify.eff = eff.type_id
-        hero_notify.buffs.extend(self.effect_ids())
+        hero_noti = msg.hero_notify.add()
+        hero_noti.target_id = me.id
+        hero_noti.hp = me.hp
+        hero_noti.eff = eff.type_id
+        hero_noti.buffs.extend(self.effect_ids())
 
 
     def effect_ids(self):
@@ -62,7 +65,7 @@ class EffectManager(object):
 
 def _logger_one_action(func):
     def deco(self, target, *args, **kwargs):
-        msg_target, hero_notify = func(self, target, *args, **kwargs)
+        msg_target, hero_noti = func(self, target, *args, **kwargs)
         text = "%d => %d, Crit: %s, Dodge: %s" % (
                 self.id,
                 target.id,
@@ -72,9 +75,9 @@ def _logger_one_action(func):
         if not msg_target.is_dodge:
             text = '%s. Damage: %d, Hp: %d, Eff: %s' % (
                     text,
-                    hero_notify.value,
+                    hero_noti.value,
                     target.hp,
-                    str(hero_notify.eff) if hero_notify.eff else 'None'
+                    str(hero_noti.eff) if hero_noti.eff else 'None'
                     )
 
         text = '%s. Target effects: %s' % (
@@ -83,7 +86,7 @@ def _logger_one_action(func):
                 )
 
         logger.debug(text)
-        return msg_target, hero_notify
+        return msg_target, hero_noti
     return deco
 
 
@@ -146,11 +149,11 @@ class InBattleHero(object):
                 value = int(eff.active_value)
                 self.set_hp(-value)
 
-                hero_notify = msg.hero_notify.add()
-                hero_notify.target_id = self.id
-                hero_notify.hp = self.hp
-                hero_notify.eff = 1
-                hero_notify.value = value
+                hero_noti = msg.hero_notify.add()
+                hero_noti.target_id = self.id
+                hero_noti.hp = self.hp
+                hero_noti.eff = 1
+                hero_noti.value = value
 
                 logger.debug("Dot Add hp %d to Target %d. Hp %d" % (
                     value, self.id, self.hp)
@@ -161,11 +164,11 @@ class InBattleHero(object):
                 value = int(eff.active_value)
                 self.set_hp(value)
 
-                hero_notify = msg.hero_notify.add()
-                hero_notify.target_id = self.id
-                hero_notify.hp = self.hp
-                hero_notify.eff = 2
-                hero_notify.value = value
+                hero_noti = msg.hero_notify.add()
+                hero_noti.target_id = self.id
+                hero_noti.hp = self.hp
+                hero_noti.eff = 2
+                hero_noti.value = value
 
                 logger.debug("Dot Damage %d to Target %d. Hp %d" % (
                     value, self.id, self.hp)
@@ -256,10 +259,10 @@ class InBattleHero(object):
             return
 
         
-        hero_notify = msg.hero_notify.add()
-        hero_notify.target_id = self.id
-        hero_notify.hp = self.hp
-        hero_notify.buffs.extend(self.effect_manager.effect_ids())
+        hero_noti = msg.hero_notify.add()
+        hero_noti.target_id = self.id
+        hero_noti.hp = self.hp
+        hero_noti.buffs.extend(self.effect_manager.effect_ids())
 
 
         skill = self.find_prob(self.attack_skills)
@@ -322,8 +325,8 @@ class InBattleHero(object):
                 return msg_target, None
 
         msg_target.is_dodge = False
-        hero_notify = msg.hero_notify.add()
-        hero_notify.target_id = target.id
+        hero_noti = msg.hero_notify.add()
+        hero_noti.target_id = target.id
 
         value = int(value)
         if eff:
@@ -336,13 +339,13 @@ class InBattleHero(object):
     
         target.set_hp(value)
 
-        hero_notify.hp = target.hp
-        hero_notify.value = value
+        hero_noti.hp = target.hp
+        hero_noti.value = value
 
         if eff:
-            hero_notify.eff = eff
+            hero_noti.eff = eff
 
-        return msg_target, hero_notify
+        return msg_target, hero_noti
 
 
 
@@ -435,10 +438,21 @@ class InBattleHero(object):
 
 
 
-class BattleHero(Hero, InBattleHero):
+class BattleHero(InBattleHero):
     _hero_type = 1
-    def __init__(self, *args, **kwargs):
-        Hero.__init__(self, *args, **kwargs)
+    def __init__(self, _id):
+        hero = get_cache_hero(_id)
+        self.id = _id
+        self.original_id = hero.oid
+        self.attack = hero.attack
+        self.defense = hero.defense
+        self.hp = hero.hp
+        self.crit = hero.crit
+        self.dodge = hero.dodge
+        self.skills = []
+        
+        char = get_cache_character(hero.char_id)
+        self.level = char.level
         InBattleHero.__init__(self)
 
 
