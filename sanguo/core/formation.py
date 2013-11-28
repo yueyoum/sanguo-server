@@ -3,7 +3,7 @@ from core.mongoscheme import MongoChar, MongoSocket
 def save_socket(char_id, socket_id=None, hero=0, weapon=0, armor=0, jewelry=0):
     c = MongoChar.objects.only('sockets').get(id=char_id)
     if not socket_id:
-        socket_id = len(c.socket) + 1
+        socket_id = len(c.sockets) + 1
     
     socket =  c.sockets.get(str(socket_id), MongoSocket())
     

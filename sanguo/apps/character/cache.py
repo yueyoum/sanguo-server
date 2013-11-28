@@ -20,7 +20,9 @@ def save_cache_character(model_obj):
     for attr in c.attributes_dict:
         setattr(c, attr, getattr(model_obj, attr))
     
-    c.save()
+    res = c.save()
+    if res is not True:
+        raise Exception(str(res))
     return c
 
 
