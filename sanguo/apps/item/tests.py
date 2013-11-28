@@ -82,7 +82,7 @@ class StrengthEquipmentTest(TransactionTestCase):
         req.cost_ids.extend(cost_ids)
         
         data = app_test_helper.pack_data(req)
-        res = app_test_helper.make_request('/equipment/strengthen/', data)
+        res = app_test_helper.make_request('/equip/strengthen/', data)
         msgs = app_test_helper.unpack_data(res)
         
         for id_of_msg, _, msg in msgs:
@@ -144,7 +144,7 @@ class SellEquipmentTest(TransactionTestCase):
         req.ids.extend(ids)
         
         data = app_test_helper.pack_data(req)
-        res = app_test_helper.make_request('/equipment/sell/', data)
+        res = app_test_helper.make_request('/equip/sell/', data)
         msgs = app_test_helper.unpack_data(res)
         
         for id_of_msg, _, msg in msgs:
