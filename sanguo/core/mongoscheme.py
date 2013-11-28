@@ -2,9 +2,6 @@
 
 from mongoengine import *
 
-
-
-
 class MongoSocket(EmbeddedDocument):
     # 阵法插槽
     hero = IntField()
@@ -12,7 +9,6 @@ class MongoSocket(EmbeddedDocument):
     armor = IntField()
     jewelry = IntField()
     
-
 
 class MongoChar(Document):
     id = IntField(primary_key=True)
@@ -25,6 +21,10 @@ class MongoChar(Document):
     stages = DictField()
     # 新的可以打的关卡
     stage_new = IntField()
+    
+    # 装备列表
+    # 装备存储在mysql总，使用post, delete信号来更新这里的数据
+    equips = ListField(IntField())
     
     meta = {
         'collection': 'char'
@@ -41,3 +41,5 @@ class MongoHero(Document):
     }
 
 MongoHero.ensure_indexes()
+
+

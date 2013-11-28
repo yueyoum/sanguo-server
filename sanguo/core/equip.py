@@ -1,48 +1,72 @@
-from core.drives import  document_ids
 from core import GLOBAL
+from apps.item.cache import encode_random_attrs, get_cache_equipment
+from apps.item.models import Equipment
 
-EQUIP = GLOBAL.EQUIP.EQUIP
 EQUIP_LEVEL_INFO = GLOBAL.EQUIP.EQUIP_LEVEL_INFO
 EQUIP_LEVEL_RANGE_INFO = GLOBAL.EQUIP.EQUIP_LEVEL_RANGE_INFO
 
 get_equip_level_step = GLOBAL.EQUIP.get_equip_level_step
 get_level_by_exp = GLOBAL.EQUIP.get_level_by_exp
+generate_equip = GLOBAL.EQUIP.generate_equip
+
+_TP_NAME = GLOBAL.EQUIP._TP_NAME
+
+_LEVEL_LIST = EQUIP_LEVEL_INFO.keys()
+_LEVEL_LIST.sort()
+_LEVEL_EXP_LIST = [(l, EQUIP_LEVEL_INFO[l]['exp']) for l in _LEVEL_LIST]
 
 
-_TP_NAME = {
-        1: 'attack',
-        2: 'hp',
-        3: 'defense',
-        }
+def generate_and_save_equip(tid, level, char_id):
+    data = generate_equip(tid, level)
+    data['random_attrs'] = encode_random_attrs(data['random_attrs'])
+    data['char_id'] = char_id
+    
+    equip = Equipment.objects.create(**data)
+    return get_cache_equipment(equip.id)
+    
 
-def save_equip(data, char_id, equip_id=None):
-    if not equip_id:
-        equip_id = document_ids.inc('equip')
-    pass
+def delete_equip(_id):
+    if isinstance(_id, (list, tuple)):
+        ids = _id
+    else:
+        ids = [_id]
+    Equipment.objects.filter(id__in=ids).delete()
 
 
 
-def _calculate(level, quality, tp, extra):
-    tp_name = _TP_NAME[tp]
+def get_equip_level_by_whole_exp(exp):
+    if exp < EQUIP_LEVEL_INFO[ _LEVEL_LIST[0] ]['exp']:
+        return _LEVEL_LIST[0]
+    if exp >= EQUIP_LEVEL_INFO[ _LEVEL_LIST[-2] ]['exp']:
+        return _LEVEL_LIST[-1]
 
-    attrs = {
-            'attack': 0,
-            'hp': 0,
-            'defense': 0,
-            }
+    for level, wexp in _LEVEL_EXP_LIST:
+        if wexp > exp:
+            return level
+    
 
-    value = EQUIP_LEVEL_INFO[level][tp_name]
-    level_step = get_equip_level_step(level)
-    modulus = EQUIP_LEVEL_RANGE_INFO[level_step]['modulus'][quality]
 
-    value *= modulus
-
-    attrs[tp_name] = value
-    attrs['extra'] = extra
-
-    return attrs
-
-#def calculate(_id):
+#def _calculate(level, quality, tp, extra):
+#    tp_name = _TP_NAME[tp]
+#
+#    attrs = {
+#            'attack': 0,
+#            'hp': 0,
+#            'defense': 0,
+#            }
+#
+#    value = EQUIP_LEVEL_INFO[level][tp_name]
+#    level_step = get_equip_level_step(level)
+#    modulus = EQUIP_LEVEL_RANGE_INFO[level_step]['modulus'][quality]
+#
+#    value *= modulus
+#
+#    attrs[tp_name] = value
+#    attrs['extra'] = extra
+#
+#    return attrs
+#
+#def equip_calculate(_id):
 #    equip = document_equip.get(_id)
 #    meta_data = EQUIP[equip['oid']]
 #
@@ -53,4 +77,4 @@ def _calculate(level, quality, tp, extra):
 #            equip['extra']
 #            )
 #    
-
+#

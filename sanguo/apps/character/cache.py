@@ -1,7 +1,7 @@
 from redisco import models
 
 class CacheCharacter(models.Model):
-    name = models.Attribute(indexed=False, required=True)
+    name = models.CharField(indexed=False, required=True)
     gold = models.IntegerField(indexed=False, required=True)
     gem = models.IntegerField(indexed=False, required=True)
     level = models.IntegerField(indexed=False, required=True)
@@ -15,11 +15,11 @@ def save_cache_character(model_obj):
     c = CacheCharacter.objects.get_by_id(model_obj.id)
     if c is None:
         c = CacheCharacter()
+        c.id = model_obj.id
     
     for attr in c.attributes_dict:
         setattr(c, attr, getattr(model_obj, attr))
     
-    c.id = model_obj.id
     c.save()
     return c
 

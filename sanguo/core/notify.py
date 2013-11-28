@@ -1,7 +1,12 @@
 from core.drives import redis_client
 from utils import pack_msg
 from core.hero import Hero
-from core.character import get_char_formation, get_char_hero_objs
+from core.character import (
+    get_char_formation,
+    get_char_hero_objs,
+    get_char_equipment_objs,
+    )
+
 from core.stage import get_already_stage, get_new_stage
 from core import GLOBAL
 from core.mongoscheme import MongoChar
@@ -125,6 +130,59 @@ def new_stage_notify(key, sid):
     redis_client.rpush(key, pack_msg(msg))
 
 
+
+def equipment_notify(key, char_id=None, objs=None, message="EquipNotify"):
+    if not objs:
+        if not char_id:
+            raise Exception("equipment_notify: bad arguments")
+        
+        objs = get_char_equipment_objs(char_id)
+
+    msg = getattr(protomsg, message)()
+    for obj in objs:
+        e = msg.equips.add()
+        e.id = int(obj.id)
+        e.oid = obj.tid
+        e.name = obj.name
+        e.level = obj.level
+        e.exp = obj.exp
+        e.value = obj.value
+        
+        for attr in obj.decoded_random_attrs:
+            k, v = attr.items()[0]
+            a = e.attrs.add()
+            a.id = k
+            a.value = v['value']
+    
+    redis_client.rpush(key, pack_msg(msg))
+
+
+def add_equipment_notify(key, obj):
+    if isinstance(obj, (list, tuple)):
+        objs = obj
+    else:
+        objs = [obj]
+    equipment_notify(key, objs=objs, message="AddEquipNotify")
+    
+def update_equipment_notify(key, obj):
+    if isinstance(obj, (list, tuple)):
+        objs = obj
+    else:
+        objs = [obj]
+    equipment_notify(key, objs=objs, message="UpdateEquipNotify")
+
+def remove_equipment_notify(key, _id):
+    if isinstance(_id, (list, tuple)):
+        ids = _id
+    else:
+        ids = [_id]
+    
+    msg = protomsg.RemoveEquipNotify()
+    msg.ids.extend(ids)
+    
+    redis_client.rpush(key, pack_msg(msg))
+        
+
 def login_notify(key, char_obj):
     hero_objs = get_char_hero_objs(char_obj.id)
 
@@ -138,5 +196,7 @@ def login_notify(key, char_obj):
     new_stages = get_new_stage(char_obj.id)
     if new_stages:
         new_stage_notify(key, new_stages)
+    
+    equipment_notify(key, char_id=char_obj.id)
 
 

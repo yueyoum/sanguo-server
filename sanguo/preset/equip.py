@@ -2,10 +2,17 @@
 
 import random
 import json
-from preset._base import data_path
+from _base import data_path
 
 # 1 武器， 2 饰品， 3 防具
 # 1 白 2 绿 3 蓝 4 紫
+
+_TP_NAME = {
+        1: 'attack',
+        2: 'hp',
+        3: 'defense',
+        }
+
 
 def get_equip_level_step(level):
     if level < 30:
@@ -17,18 +24,20 @@ def get_equip_level_step(level):
     return 90
 
 
-def load_equip():
+def load_equip_template():
     # {
-    #     id: {tp: , quality: }
+    #     id: {tp: , quality: name;,  fixed:}
     # }
 
-    with open(data_path('equip.json'), 'r') as f:
+    with open(data_path('equip_template.json'), 'r') as f:
         content = json.loads(f.read())
 
     data = {}
     for c in content:
         fields = c['fields']
-        fields.pop('name')
+        fields.pop('des')
+        name = fields.pop('name')
+        fields['name'] = [n.strip() for n in name.split(',')]
 
         data[c['pk']] = fields
 
@@ -169,7 +178,7 @@ def load_random_attribute():
 
 
 
-EQUIP = load_equip()
+EQUIP_TEMPLATE = load_equip_template()
 EQUIP_LEVEL_INFO = load_equip_level_info()
 EQUIP_LEVEL_RANGE_INFO = load_equip_level_range_info()
 EQUIP_RANDOM_ATTRIBUTE = load_random_attribute()
@@ -201,10 +210,12 @@ def get_random_attributes(tp, level):
     number_of_attrs = random.choice(range(*number_range))
 
     base_attr_ids = _RANDOM_ATTRS[tp][:]
+    if not base_attr_ids:
+        return []
 
     res = []
     while True:
-        if len(res) >= number_of_attrs:
+        if len(res) >= number_of_attrs or not base_attr_ids:
             break
 
         attr_id = random.choice(base_attr_ids)
@@ -214,7 +225,7 @@ def get_random_attributes(tp, level):
             res.append(attr_id)
 
     # 再根据等级范围确定选出的每个属性的数值
-    final = {}
+    final = []
     for attr_id in res:
         base_value = EQUIP_RANDOM_ATTRIBUTE[attr_id][level_step]
         is_percent = EQUIP_RANDOM_ATTRIBUTE[attr_id]['is_percent']
@@ -232,25 +243,39 @@ def get_random_attributes(tp, level):
             else:
                 value = base_value + random.randint(0, change_value)
 
-        final[attr_id] = {'value': value, 'is_percent': is_percent}
+        final.append( {attr_id: {'value': value, 'is_percent': is_percent}} )
 
     return final
 
 
 
-def generate_equip(_id, level):
+def generate_equip(tid, level):
     if level == 1:
         exp = 0
     else:
-        exp = EQUIP_LEVEL_INFO[level-1]['whole_exp']
+        exp = EQUIP_LEVEL_INFO[level-1]['exp']
 
-    tp = EQUIP[_id]['tp']
+    template = EQUIP_TEMPLATE[tid]
+    tp = template['tp']
+    quality = template['quality']
+    name = random.choice(template['name'])
+
     extra = get_random_attributes(tp, level)
 
+    base_value = EQUIP_LEVEL_INFO[level][_TP_NAME[tp]]
+    hole_amount = len(extra)
+
+    level_step = get_equip_level_step(level)
+    modulus = EQUIP_LEVEL_RANGE_INFO[level_step]['modulus'][quality]
+
     return {
-            'id': _id,
+            'tid': tid,
+            'name': name,
             'level': level,
             'exp': exp,
-            'extra': extra
+            'base_value': base_value,
+            'modulus': modulus,
+            'hole_amount': hole_amount,
+            'random_attrs': extra
             }
 

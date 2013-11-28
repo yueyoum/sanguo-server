@@ -6,7 +6,6 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase, TransactionTestCase
-from nose import with_setup
 
 import protomsg
 from protomsg import (

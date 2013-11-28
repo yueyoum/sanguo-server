@@ -52,8 +52,9 @@ def pve(request):
     print req
 
     _, _, char_id = request._decrypted_session.split(':')
+    char_id = int(char_id)
 
-    b = PVE(int(char_id), req.stage_id, msg)
+    b = PVE(char_id, req.stage_id, msg)
     b.start()
 
     response = protomsg.PVEResponse()

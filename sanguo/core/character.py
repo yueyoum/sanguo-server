@@ -7,6 +7,7 @@ from core.formation import save_socket, save_formation
 from core.hero import Hero
 from apps.character.cache import get_cache_character
 from apps.character.models import Character
+from apps.item.cache import get_cache_equipment
 
 def char_initialize(account_id, server_id, name):
     # 随机三个武将，并上阵
@@ -53,3 +54,12 @@ def get_char_hero_objs(char_id):
     char_obj = get_cache_character(char_id)
     return [Hero(k, v, char_obj.level, []) for k, v in data.iteritems()]
     
+
+def get_char_equipments(char_id):
+    char = MongoChar.objects.only('equips').get(id=char_id)
+    return char.equips
+
+def get_char_equipment_objs(char_id):
+    equip_ids = get_char_equipments(char_id)
+    objs = [get_cache_equipment(eid) for eid in equip_ids]
+    return objs
