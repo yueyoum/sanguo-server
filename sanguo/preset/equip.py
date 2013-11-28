@@ -154,6 +154,7 @@ def load_random_attribute():
     #             change_value_is_percent:
     #             change_value:,
     #             used_for:,
+    #             effect:
     #         }        
     # }
 
@@ -164,8 +165,6 @@ def load_random_attribute():
     data = {}
     for c in content:
         fields = c['fields']
-        fields.pop('name')
-        fields.pop('name_prefix')
 
         fields[0]  = fields.pop('level_zero')
         fields[30] = fields.pop('level_one')
