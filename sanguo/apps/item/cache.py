@@ -48,7 +48,6 @@ class CacheEquipment(models.Model):
     base_value = models.IntegerField(indexed=False, required=True)
     modulus = models.FloatField(indexed=False, required=True)
     hole_amount = models.IntegerField(indexed=False, required=True)
-    hole_opened = models.IntegerField(indexed=False, required=True)
     gem_ids = models.CharField(indexed=False, required=False)
     random_attrs = models.CharField(indexed=False, required=False)
     
@@ -63,6 +62,12 @@ class CacheEquipment(models.Model):
     @property
     def value(self):
         return int(self.base_value * self.modulus)
+    
+    @property
+    def hole_opened(self):
+        if not self.gem_ids:
+            return 0
+        return len(self.gem_ids.split(','))
     
     @property
     def gems(self):

@@ -22,7 +22,6 @@ def generate_and_save_equip(tid, level, char_id):
     data['char_id'] = char_id
     
     # FIXME
-    data['hole_opened'] = 0
     data['gem_ids'] = ''
     
     equip = Equipment.objects.create(**data)
