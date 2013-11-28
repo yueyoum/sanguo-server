@@ -16,13 +16,9 @@ from core.character import char_initialize
 from core.equip import generate_and_save_equip, delete_equip
 from core.mongoscheme import MongoChar
 
-from apps.item.cache import CacheEquipment
-
-
 
 def teardown():
     app_test_helper._teardown()
-    #app_test_helper._mongo_teardown_func()
 
 
 class SaveAndDeleteEquipmentTest(TransactionTestCase):
@@ -32,7 +28,6 @@ class SaveAndDeleteEquipmentTest(TransactionTestCase):
     
     def tearDown(self):
         app_test_helper._teardown()
-        #app_test_helper._mongo_teardown_func()
 
     def test_save_equip(self):
         equip = generate_and_save_equip(1, 1, self.char_id)
@@ -75,10 +70,6 @@ class StrengthEquipmentTest(TransactionTestCase):
             e = generate_and_save_equip(1, 1, self.char_id)
             self.equip_ids.append(int(e.id))
         
-        #for _id in self.equip_ids:
-        #    e = CacheEquipment.objects.get_by_id(_id)
-        #    self.assertEqual(int(e.id), _id)
-    
     def _strength(self, _id, cost_ids, ret=0):
         req = protomsg.StrengthEquipRequest()
         req.session = self.session

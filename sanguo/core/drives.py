@@ -1,4 +1,5 @@
 import redis
+import redisco
 import pymongo
 from mongoengine import connect
 
@@ -11,6 +12,14 @@ _redis_pool = redis.ConnectionPool(
         )
 
 redis_client = redis.Redis(connection_pool=_redis_pool)
+
+
+redisco.connection_setup(
+    host = settings.REDIS_HOST,
+    port = settings.REDIS_PORT,
+    db = settings.REDIS_DB
+)
+
 
 mongodb_client = pymongo.MongoClient(
         host=settings.MONGODB_HOST,
@@ -40,3 +49,4 @@ class _DocumentIds(object):
         return res['id']
 
 document_ids = _DocumentIds(mongodb_client_db)
+

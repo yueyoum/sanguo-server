@@ -46,9 +46,9 @@ class CacheEquipment(models.Model):
     exp = models.IntegerField(indexed=False, required=True)
     
     base_value = models.IntegerField(indexed=False, required=True)
-    modulus = models.IntegerField(indexed=False, required=True)
+    modulus = models.FloatField(indexed=False, required=True)
     hole_amount = models.IntegerField(indexed=False, required=True)
-    random_attrs = models.CharField(indexed=False, required=True)
+    random_attrs = models.CharField(indexed=False, required=False)
     
     
     @property
@@ -66,9 +66,18 @@ class CacheEquipment(models.Model):
 
 
 def save_cache_equipment(model_obj):
+    print "save_cache_equipment"
     MongoChar.objects(id=model_obj.char_id).update_one(
         add_to_set__equips = model_obj.id
     )
+    #try:
+    #    mc = MongoChar.objects.only('equips').get(id=model_obj.char_id)
+    #except DoesNotExist:
+    #    mc = MongoChar()
+    #    mc.id = model_obj.char_id
+    #if model_obj.id not in mc.equips:
+    #    mc.equips.append(model_obj.id)
+    #    mc.save()
     
     e = CacheEquipment.objects.get_by_id(model_obj.id)
     if e is None:
@@ -78,9 +87,9 @@ def save_cache_equipment(model_obj):
     for attr in e.attributes_dict:
         setattr(e, attr, getattr(model_obj, attr))
     
-    e.save()
-    with open('/tmp/save_cache_equipment', 'a') as f:
-        f.write('save {0}\n'.format(e.id))
+    res = e.save()
+    if res is not True:
+        raise Exception(str(res))
     return e
     
     
@@ -98,7 +107,6 @@ def delete_cache_equipment(model_obj):
 
 def get_cache_equipment(_id):
     e = CacheEquipment.objects.get_by_id(_id)
-    print 'get_cache_equipment, e =', e
     if e:
         print "CacheEquipment, cahce hit!!!"
         return e
