@@ -21,6 +21,10 @@ def generate_and_save_equip(tid, level, char_id):
     data['random_attrs'] = encode_random_attrs(data['random_attrs'])
     data['char_id'] = char_id
     
+    # FIXME
+    data['hole_opened'] = 0
+    data['gem_ids'] = ''
+    
     equip = Equipment.objects.create(**data)
     return get_cache_equipment(equip.id)
     

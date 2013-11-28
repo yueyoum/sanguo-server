@@ -148,6 +148,10 @@ def equipment_notify(key, char_id=None, objs=None, message="EquipNotify"):
         e.exp = obj.exp
         e.value = obj.value
         
+        e.whole_hole = obj.hole_amount
+        e.opened_hole = obj.hole_opened
+        e.gem_ids.extend(obj.gems)
+        
         for attr in obj.decoded_random_attrs:
             k, v = attr.items()[0]
             a = e.attrs.add()

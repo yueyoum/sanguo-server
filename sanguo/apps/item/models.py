@@ -14,6 +14,8 @@ class Equipment(models.Model):
     base_value = models.IntegerField()
     modulus = models.FloatField()
     hole_amount = models.IntegerField()
+    hole_opened = models.IntegerField()
+    gem_ids = models.CharField(max_length=255)
     
     random_attrs = models.CharField(max_length=255)
 

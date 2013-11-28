@@ -48,8 +48,9 @@ class CacheEquipment(models.Model):
     base_value = models.IntegerField(indexed=False, required=True)
     modulus = models.FloatField(indexed=False, required=True)
     hole_amount = models.IntegerField(indexed=False, required=True)
+    hole_opened = models.IntegerField(indexed=False, required=True)
+    gem_ids = models.CharField(indexed=False, required=False)
     random_attrs = models.CharField(indexed=False, required=False)
-    
     
     @property
     def decoded_random_attrs(self):
@@ -63,10 +64,14 @@ class CacheEquipment(models.Model):
     def value(self):
         return int(self.base_value * self.modulus)
     
+    @property
+    def gems(self):
+        if not self.gem_ids:
+            return []
+        return [int(i) for i in self.gem_ids.split(',')]
 
 
 def save_cache_equipment(model_obj):
-    print "save_cache_equipment"
     MongoChar.objects(id=model_obj.char_id).update_one(
         add_to_set__equips = model_obj.id
     )
