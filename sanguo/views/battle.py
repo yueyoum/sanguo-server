@@ -1,11 +1,12 @@
 from django.http import HttpResponse
 
-#from core.hero import get_hero
 
 from core import GLOBAL
 from core.battle.hero import BattleHero, MonsterHero
 from core.battle.battle import Battle
 from core.mongoscheme import MongoChar
+from core.signals import pve_finished_signal
+from core.stage import get_stage_drop
 
 from utils import pack_msg
 
@@ -28,8 +29,6 @@ class PVE(Battle):
                 if not hid:
                     self.my_heros.append(None)
                 else:
-                    #_, original_id, level = get_hero(hid)
-                    #h = BattleHero(hid, original_id, level, [])
                     h = BattleHero(hid)
                     self.my_heros.append(h)
 
@@ -57,11 +56,31 @@ def pve(request):
 
     b = PVE(char_id, req.stage_id, msg)
     b.start()
+    
+    star = False
+    if msg.first_ground.self_win and msg.second_ground.self_win and msg.third_ground.self_win:
+        star = True
+    
+    pve_finished_signal.send(
+        sender = None,
+        char_id = char_id,
+        stage_id = req.stage_id,
+        win = msg.self_win,
+        star = star
+    )
+    
+    drop_exp, drop_gold, drop_equips, drop_gems = get_stage_drop(char_id, req.stage_id)
+    
 
     response = protomsg.PVEResponse()
     response.ret = 0
     response.stage_id = req.stage_id
     response.battle.MergeFrom(msg)
+    
+    response.drop.gold = drop_gold
+    response.drop.exp = drop_exp
+    response.drop.equips.extend( [_id for _id, _l, _a in drop_equips] )
+    response.drop.gems.extend( [_id for _id, _a in drop_gems] )
 
     data = pack_msg(response)
     return HttpResponse(data, content_type='text/plain')

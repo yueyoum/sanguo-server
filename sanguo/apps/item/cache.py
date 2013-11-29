@@ -1,6 +1,7 @@
 from redisco import models
 
 from core.mongoscheme import MongoChar
+from apps.character.cache import get_cache_character
 
 def encode_random_attrs(attrs):
     # attrs: [{1: {value: x, is_percent: y}}, ...]
@@ -77,6 +78,7 @@ class CacheEquipment(models.Model):
 
 
 def save_cache_equipment(model_obj):
+    from core.notify import add_equipment_notify
     MongoChar.objects(id=model_obj.char_id).update_one(
         add_to_set__equips = model_obj.id
     )
@@ -100,25 +102,36 @@ def save_cache_equipment(model_obj):
     res = e.save()
     if res is not True:
         raise Exception(str(res))
+    
+    
+    cache_char = get_cache_character(model_obj.char_id)
+    notify_key = cache_char.notify_key
+    add_equipment_notify(notify_key, e)
     return e
     
     
 
 def delete_cache_equipment(model_obj):
+    from core.notify import remove_equipment_notify
     MongoChar.objects(id=model_obj.char_id).update_one(
         pull__equips = model_obj.id
     )
     
+    cache_char = get_cache_character(model_obj.char_id)
+    notify_key = cache_char.notify_key
+    remove_equipment_notify(notify_key, model_obj.id)
+    
+    
     e = CacheEquipment.objects.get_by_id(model_obj.id)
     if e:
-        print "CacheEquipment, cahce delete!!!"
+        print "CacheEquipment, cache delete!!!"
         e.delete()
 
 
 def get_cache_equipment(_id):
     e = CacheEquipment.objects.get_by_id(_id)
     if e:
-        print "CacheEquipment, cahce hit!!!"
+        print "CacheEquipment, cache hit!!!"
         return e
 
     from apps.item.models import Equipment

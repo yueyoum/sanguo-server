@@ -38,7 +38,7 @@ class _Gem(object):
         return self.data[key]
     
     def get_ids_by_level(self, level):
-        return self.level_data[level]
+        return self.level_data[level][:]
 
 
 GEM = _Gem()

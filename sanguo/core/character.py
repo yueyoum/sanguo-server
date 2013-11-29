@@ -77,3 +77,24 @@ def get_char_equipment_objs(char_id):
     equip_ids = get_char_equipments(char_id)
     objs = [get_cache_equipment(eid) for eid in equip_ids]
     return objs
+
+
+
+def model_character_change(char_id, exp=0, honor=0, gold=0, gem=0):
+    from core.notify import character_notify
+    char = Character.objects.get(id=char_id)
+    char.gold += gold
+    char.honor += honor
+    
+    if exp:
+        new_exp = char.exp + exp
+        level, _, _ = GLOBAL.LEVEL_TOTALEXP[new_exp]
+        char.level = level
+        char.exp = new_exp
+        
+    # TODO honor
+    char.save()
+    
+    notify_key = char.notify_key
+    character_notify(notify_key, char)
+    

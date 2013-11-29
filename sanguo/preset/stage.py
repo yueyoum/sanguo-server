@@ -55,6 +55,9 @@ def load_drop_data():
         this_group_id_data = data.get(group_id, {})
                     
         tp = fields['tp']
+        if tp not in [4, 5]:
+            raise Exception("load_drop_data, Unkown tp: %d" % tp)
+        
         this_group_tp_data = this_group_id_data.get(tp, [])
         if tp == 4:
             this_group_tp_data.append(
