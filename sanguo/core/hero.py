@@ -24,8 +24,8 @@ class Hero(object):
         self.attack, self.defense, self.hp = \
                 cal_hero_property(self.original_id, self.level)
 
-        self.crit = 20
-        self.dodge = 20
+        self.crit = 0
+        self.dodge = 0
 
         self.additional_attributes()
 
