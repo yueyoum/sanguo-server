@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='battle.proto',
   package='Sanguo.protocol.battle',
-  serialized_pb='\n\x0c\x62\x61ttle.proto\x12\x16Sanguo.protocol.battle\"!\n\x05Stage\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04star\x18\x02 \x02(\x08\"T\n\x12\x41lreadyStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12-\n\x06stages\x18\x02 \x03(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"S\n\x12\x43urrentStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x05stage\x18\x02 \x02(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"O\n\x0eNewStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x05stage\x18\x02 \x02(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"\x95\x01\n\nBattleHero\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x13\n\x0boriginal_id\x18\x02 \x02(\x05\x12\n\n\x02hp\x18\x03 \x02(\x05\x12\x37\n\x02ht\x18\x04 \x02(\x0e\x32+.Sanguo.protocol.battle.BattleHero.HeroType\"!\n\x08HeroType\x12\x08\n\x04HERO\x10\x01\x12\x0b\n\x07MONSTER\x10\x02\"\x82\x03\n\x06\x41\x63tion\x12\x0f\n\x07\x66rom_id\x18\x01 \x02(\x05\x12\x10\n\x08skill_id\x18\x02 \x01(\x05\x12\x41\n\rskill_targets\x18\x03 \x03(\x0b\x32*.Sanguo.protocol.battle.Action.SkillTarget\x12>\n\x0bhero_notify\x18\x04 \x03(\x0b\x32).Sanguo.protocol.battle.Action.HeroNotify\x12\x35\n\rpassiveaction\x18\x05 \x03(\x0b\x32\x1e.Sanguo.protocol.battle.Action\x1a\x43\n\x0bSkillTarget\x12\x11\n\ttarget_id\x18\x01 \x02(\x05\x12\x0f\n\x07is_crit\x18\x02 \x02(\x08\x12\x10\n\x08is_dodge\x18\x03 \x02(\x08\x1aV\n\nHeroNotify\x12\x11\n\ttarget_id\x18\x01 \x02(\x05\x12\n\n\x02hp\x18\x02 \x02(\x05\x12\x0b\n\x03\x65\x66\x66\x18\x03 \x01(\x05\x12\r\n\x05\x62uffs\x18\x04 \x03(\x05\x12\r\n\x05value\x18\x05 \x01(\x05\"\xbc\x01\n\x06Ground\x12\x36\n\nself_heros\x18\x01 \x03(\x0b\x32\".Sanguo.protocol.battle.BattleHero\x12\x37\n\x0brival_heros\x18\x02 \x03(\x0b\x32\".Sanguo.protocol.battle.BattleHero\x12\x10\n\x08self_win\x18\x03 \x02(\x08\x12/\n\x07\x61\x63tions\x18\x04 \x03(\x0b\x32\x1e.Sanguo.protocol.battle.Action\"\x8d\x02\n\x06\x42\x61ttle\x12\x12\n\nself_power\x18\x01 \x02(\x05\x12\x13\n\x0brival_power\x18\x02 \x02(\x05\x12\x11\n\tself_name\x18\x03 \x02(\t\x12\x12\n\nrival_name\x18\x04 \x02(\t\x12\x34\n\x0c\x66irst_ground\x18\x05 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x35\n\rsecond_ground\x18\x06 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x34\n\x0cthird_ground\x18\x07 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x10\n\x08self_win\x18\x08 \x02(\x08\"/\n\nPVERequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08stage_id\x18\x02 \x02(\x05\"m\n\x0bPVEResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08stage_id\x18\x03 \x02(\x05\x12.\n\x06\x62\x61ttle\x18\x04 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Battle')
+  serialized_pb='\n\x0c\x62\x61ttle.proto\x12\x16Sanguo.protocol.battle\"!\n\x05Stage\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04star\x18\x02 \x02(\x08\"T\n\x12\x41lreadyStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12-\n\x06stages\x18\x02 \x03(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"S\n\x12\x43urrentStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x05stage\x18\x02 \x02(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"O\n\x0eNewStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x05stage\x18\x02 \x02(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"\x95\x01\n\nBattleHero\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x13\n\x0boriginal_id\x18\x02 \x02(\x05\x12\n\n\x02hp\x18\x03 \x02(\x05\x12\x37\n\x02ht\x18\x04 \x02(\x0e\x32+.Sanguo.protocol.battle.BattleHero.HeroType\"!\n\x08HeroType\x12\x08\n\x04HERO\x10\x01\x12\x0b\n\x07MONSTER\x10\x02\"\x82\x03\n\x06\x41\x63tion\x12\x0f\n\x07\x66rom_id\x18\x01 \x02(\x05\x12\x10\n\x08skill_id\x18\x02 \x01(\x05\x12\x41\n\rskill_targets\x18\x03 \x03(\x0b\x32*.Sanguo.protocol.battle.Action.SkillTarget\x12>\n\x0bhero_notify\x18\x04 \x03(\x0b\x32).Sanguo.protocol.battle.Action.HeroNotify\x12\x35\n\rpassiveaction\x18\x05 \x03(\x0b\x32\x1e.Sanguo.protocol.battle.Action\x1a\x43\n\x0bSkillTarget\x12\x11\n\ttarget_id\x18\x01 \x02(\x05\x12\x0f\n\x07is_crit\x18\x02 \x02(\x08\x12\x10\n\x08is_dodge\x18\x03 \x02(\x08\x1aV\n\nHeroNotify\x12\x11\n\ttarget_id\x18\x01 \x02(\x05\x12\n\n\x02hp\x18\x02 \x02(\x05\x12\x0b\n\x03\x65\x66\x66\x18\x03 \x01(\x05\x12\r\n\x05\x62uffs\x18\x04 \x03(\x05\x12\r\n\x05value\x18\x05 \x01(\x05\"\xbc\x01\n\x06Ground\x12\x36\n\nself_heros\x18\x01 \x03(\x0b\x32\".Sanguo.protocol.battle.BattleHero\x12\x37\n\x0brival_heros\x18\x02 \x03(\x0b\x32\".Sanguo.protocol.battle.BattleHero\x12\x10\n\x08self_win\x18\x03 \x02(\x08\x12/\n\x07\x61\x63tions\x18\x04 \x03(\x0b\x32\x1e.Sanguo.protocol.battle.Action\"\x8d\x02\n\x06\x42\x61ttle\x12\x12\n\nself_power\x18\x01 \x02(\x05\x12\x13\n\x0brival_power\x18\x02 \x02(\x05\x12\x11\n\tself_name\x18\x03 \x02(\t\x12\x12\n\nrival_name\x18\x04 \x02(\t\x12\x34\n\x0c\x66irst_ground\x18\x05 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x35\n\rsecond_ground\x18\x06 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x34\n\x0cthird_ground\x18\x07 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x10\n\x08self_win\x18\x08 \x02(\x08\"/\n\nPVERequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08stage_id\x18\x02 \x02(\x05\"\x99\x01\n\x0bPVEResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08stage_id\x18\x03 \x02(\x05\x12.\n\x06\x62\x61ttle\x18\x04 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\x12*\n\x04\x64rop\x18\x05 \x02(\x0b\x32\x1c.Sanguo.protocol.battle.Drop\"?\n\x04\x44rop\x12\x0c\n\x04gold\x18\x01 \x02(\x05\x12\x0b\n\x03\x65xp\x18\x02 \x02(\x05\x12\x0e\n\x06\x65quips\x18\x03 \x03(\x05\x12\x0c\n\x04gems\x18\x04 \x03(\x05')
 
 
 
@@ -577,6 +577,13 @@ _PVERESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='drop', full_name='Sanguo.protocol.battle.PVEResponse.drop', index=4,
+      number=5, type=11, cpp_type=10, label=2,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -586,8 +593,57 @@ _PVERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1380,
-  serialized_end=1489,
+  serialized_start=1381,
+  serialized_end=1534,
+)
+
+
+_DROP = _descriptor.Descriptor(
+  name='Drop',
+  full_name='Sanguo.protocol.battle.Drop',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='gold', full_name='Sanguo.protocol.battle.Drop.gold', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='exp', full_name='Sanguo.protocol.battle.Drop.exp', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='equips', full_name='Sanguo.protocol.battle.Drop.equips', index=2,
+      number=3, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='gems', full_name='Sanguo.protocol.battle.Drop.gems', index=3,
+      number=4, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1536,
+  serialized_end=1599,
 )
 
 _ALREADYSTAGENOTIFY.fields_by_name['stages'].message_type = _STAGE
@@ -607,6 +663,7 @@ _BATTLE.fields_by_name['first_ground'].message_type = _GROUND
 _BATTLE.fields_by_name['second_ground'].message_type = _GROUND
 _BATTLE.fields_by_name['third_ground'].message_type = _GROUND
 _PVERESPONSE.fields_by_name['battle'].message_type = _BATTLE
+_PVERESPONSE.fields_by_name['drop'].message_type = _DROP
 DESCRIPTOR.message_types_by_name['Stage'] = _STAGE
 DESCRIPTOR.message_types_by_name['AlreadyStageNotify'] = _ALREADYSTAGENOTIFY
 DESCRIPTOR.message_types_by_name['CurrentStageNotify'] = _CURRENTSTAGENOTIFY
@@ -617,6 +674,7 @@ DESCRIPTOR.message_types_by_name['Ground'] = _GROUND
 DESCRIPTOR.message_types_by_name['Battle'] = _BATTLE
 DESCRIPTOR.message_types_by_name['PVERequest'] = _PVEREQUEST
 DESCRIPTOR.message_types_by_name['PVEResponse'] = _PVERESPONSE
+DESCRIPTOR.message_types_by_name['Drop'] = _DROP
 
 class Stage(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
@@ -689,6 +747,12 @@ class PVEResponse(_message.Message):
   DESCRIPTOR = _PVERESPONSE
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.PVEResponse)
+
+class Drop(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _DROP
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.Drop)
 
 
 # @@protoc_insertion_point(module_scope)
