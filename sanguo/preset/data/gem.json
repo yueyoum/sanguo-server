@@ -1,0 +1,552 @@
+[
+{
+    "pk": 1, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 3, 
+        "is_percent": false, 
+        "name": "1\u7ea7\u7ea2\u5b9d\u77f3", 
+        "value": 16, 
+        "level": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 3, 
+        "is_percent": false, 
+        "name": "2\u7ea7\u7ea2\u5b9d\u77f3", 
+        "value": 21, 
+        "level": 2
+    }
+},
+{
+    "pk": 3, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 3, 
+        "is_percent": false, 
+        "name": "3\u7ea7\u7ea2\u5b9d\u77f3", 
+        "value": 28, 
+        "level": 3
+    }
+},
+{
+    "pk": 4, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 3, 
+        "is_percent": false, 
+        "name": "4\u7ea7\u7ea2\u5b9d\u77f3", 
+        "value": 36, 
+        "level": 4
+    }
+},
+{
+    "pk": 5, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 3, 
+        "is_percent": false, 
+        "name": "5\u7ea7\u7ea2\u5b9d\u77f3", 
+        "value": 46, 
+        "level": 5
+    }
+},
+{
+    "pk": 6, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 3, 
+        "is_percent": false, 
+        "name": "6\u7ea7\u7ea2\u5b9d\u77f3", 
+        "value": 60, 
+        "level": 6
+    }
+},
+{
+    "pk": 7, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 3, 
+        "is_percent": false, 
+        "name": "7\u7ea7\u7ea2\u5b9d\u77f3", 
+        "value": 80, 
+        "level": 7
+    }
+},
+{
+    "pk": 8, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 3, 
+        "is_percent": false, 
+        "name": "8\u7ea7\u7ea2\u5b9d\u77f3", 
+        "value": 105, 
+        "level": 8
+    }
+},
+{
+    "pk": 9, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 3, 
+        "is_percent": false, 
+        "name": "9\u7ea7\u7ea2\u5b9d\u77f3", 
+        "value": 140, 
+        "level": 9
+    }
+},
+{
+    "pk": 10, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 3, 
+        "is_percent": false, 
+        "name": "10\u7ea7\u7ea2\u5b9d\u77f3", 
+        "value": 170, 
+        "level": 10
+    }
+},
+{
+    "pk": 11, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 14, 
+        "is_percent": false, 
+        "name": "1\u7ea7\u9ec4\u5b9d\u77f3", 
+        "value": 40, 
+        "level": 1
+    }
+},
+{
+    "pk": 12, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 14, 
+        "is_percent": false, 
+        "name": "2\u7ea7\u9ec4\u5b9d\u77f3", 
+        "value": 52, 
+        "level": 2
+    }
+},
+{
+    "pk": 13, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 14, 
+        "is_percent": false, 
+        "name": "3\u7ea7\u9ec4\u5b9d\u77f3", 
+        "value": 68, 
+        "level": 3
+    }
+},
+{
+    "pk": 14, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 14, 
+        "is_percent": false, 
+        "name": "4\u7ea7\u9ec4\u5b9d\u77f3", 
+        "value": 88, 
+        "level": 4
+    }
+},
+{
+    "pk": 15, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 14, 
+        "is_percent": false, 
+        "name": "5\u7ea7\u9ec4\u5b9d\u77f3", 
+        "value": 115, 
+        "level": 5
+    }
+},
+{
+    "pk": 16, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 14, 
+        "is_percent": false, 
+        "name": "6\u7ea7\u9ec4\u5b9d\u77f3", 
+        "value": 149, 
+        "level": 6
+    }
+},
+{
+    "pk": 17, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 14, 
+        "is_percent": false, 
+        "name": "7\u7ea7\u9ec4\u5b9d\u77f3", 
+        "value": 195, 
+        "level": 7
+    }
+},
+{
+    "pk": 18, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 14, 
+        "is_percent": false, 
+        "name": "8\u7ea7\u9ec4\u5b9d\u77f3", 
+        "value": 255, 
+        "level": 8
+    }
+},
+{
+    "pk": 19, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 14, 
+        "is_percent": false, 
+        "name": "9\u7ea7\u9ec4\u5b9d\u77f3", 
+        "value": 330, 
+        "level": 9
+    }
+},
+{
+    "pk": 20, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 14, 
+        "is_percent": false, 
+        "name": "10\u7ea7\u9ec4\u5b9d\u77f3", 
+        "value": 430, 
+        "level": 10
+    }
+},
+{
+    "pk": 21, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 5, 
+        "is_percent": false, 
+        "name": "1\u7ea7\u84dd\u5b9d\u77f3", 
+        "value": 8, 
+        "level": 1
+    }
+},
+{
+    "pk": 22, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 5, 
+        "is_percent": false, 
+        "name": "2\u7ea7\u84dd\u5b9d\u77f3", 
+        "value": 11, 
+        "level": 2
+    }
+},
+{
+    "pk": 23, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 5, 
+        "is_percent": false, 
+        "name": "3\u7ea7\u84dd\u5b9d\u77f3", 
+        "value": 14, 
+        "level": 3
+    }
+},
+{
+    "pk": 24, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 5, 
+        "is_percent": false, 
+        "name": "4\u7ea7\u84dd\u5b9d\u77f3", 
+        "value": 18, 
+        "level": 4
+    }
+},
+{
+    "pk": 25, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 5, 
+        "is_percent": false, 
+        "name": "5\u7ea7\u84dd\u5b9d\u77f3", 
+        "value": 23, 
+        "level": 5
+    }
+},
+{
+    "pk": 26, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 5, 
+        "is_percent": false, 
+        "name": "6\u7ea7\u84dd\u5b9d\u77f3", 
+        "value": 30, 
+        "level": 6
+    }
+},
+{
+    "pk": 27, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 5, 
+        "is_percent": false, 
+        "name": "7\u7ea7\u84dd\u5b9d\u77f3", 
+        "value": 40, 
+        "level": 7
+    }
+},
+{
+    "pk": 28, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 5, 
+        "is_percent": false, 
+        "name": "8\u7ea7\u84dd\u5b9d\u77f3", 
+        "value": 55, 
+        "level": 8
+    }
+},
+{
+    "pk": 29, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 5, 
+        "is_percent": false, 
+        "name": "9\u7ea7\u84dd\u5b9d\u77f3", 
+        "value": 70, 
+        "level": 9
+    }
+},
+{
+    "pk": 30, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 5, 
+        "is_percent": false, 
+        "name": "10\u7ea7\u84dd\u5b9d\u77f3", 
+        "value": 90, 
+        "level": 10
+    }
+},
+{
+    "pk": 31, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 9, 
+        "is_percent": false, 
+        "name": "1\u7ea7\u6a59\u5b9d\u77f3", 
+        "value": 15, 
+        "level": 1
+    }
+},
+{
+    "pk": 32, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 9, 
+        "is_percent": false, 
+        "name": "2\u7ea7\u6a59\u5b9d\u77f3", 
+        "value": 20, 
+        "level": 2
+    }
+},
+{
+    "pk": 33, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 9, 
+        "is_percent": false, 
+        "name": "3\u7ea7\u6a59\u5b9d\u77f3", 
+        "value": 25, 
+        "level": 3
+    }
+},
+{
+    "pk": 34, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 9, 
+        "is_percent": false, 
+        "name": "4\u7ea7\u6a59\u5b9d\u77f3", 
+        "value": 35, 
+        "level": 4
+    }
+},
+{
+    "pk": 35, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 9, 
+        "is_percent": false, 
+        "name": "5\u7ea7\u6a59\u5b9d\u77f3", 
+        "value": 45, 
+        "level": 5
+    }
+},
+{
+    "pk": 36, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 9, 
+        "is_percent": false, 
+        "name": "6\u7ea7\u6a59\u5b9d\u77f3", 
+        "value": 55, 
+        "level": 6
+    }
+},
+{
+    "pk": 37, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 9, 
+        "is_percent": false, 
+        "name": "7\u7ea7\u6a59\u5b9d\u77f3", 
+        "value": 75, 
+        "level": 7
+    }
+},
+{
+    "pk": 38, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 9, 
+        "is_percent": false, 
+        "name": "8\u7ea7\u6a59\u5b9d\u77f3", 
+        "value": 95, 
+        "level": 8
+    }
+},
+{
+    "pk": 39, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 9, 
+        "is_percent": false, 
+        "name": "9\u7ea7\u6a59\u5b9d\u77f3", 
+        "value": 120, 
+        "level": 9
+    }
+},
+{
+    "pk": 40, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 9, 
+        "is_percent": false, 
+        "name": "10\u7ea7\u6a59\u5b9d\u77f3", 
+        "value": 155, 
+        "level": 10
+    }
+},
+{
+    "pk": 41, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 7, 
+        "is_percent": false, 
+        "name": "1\u7ea7\u7d2b\u5b9d\u77f3", 
+        "value": 15, 
+        "level": 1
+    }
+},
+{
+    "pk": 42, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 7, 
+        "is_percent": false, 
+        "name": "2\u7ea7\u7d2b\u5b9d\u77f3", 
+        "value": 20, 
+        "level": 2
+    }
+},
+{
+    "pk": 43, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 7, 
+        "is_percent": false, 
+        "name": "3\u7ea7\u7d2b\u5b9d\u77f3", 
+        "value": 25, 
+        "level": 3
+    }
+},
+{
+    "pk": 44, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 7, 
+        "is_percent": false, 
+        "name": "4\u7ea7\u7d2b\u5b9d\u77f3", 
+        "value": 35, 
+        "level": 4
+    }
+},
+{
+    "pk": 45, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 7, 
+        "is_percent": false, 
+        "name": "5\u7ea7\u7d2b\u5b9d\u77f3", 
+        "value": 45, 
+        "level": 5
+    }
+},
+{
+    "pk": 46, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 7, 
+        "is_percent": false, 
+        "name": "6\u7ea7\u7d2b\u5b9d\u77f3", 
+        "value": 55, 
+        "level": 6
+    }
+},
+{
+    "pk": 47, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 7, 
+        "is_percent": false, 
+        "name": "7\u7ea7\u7d2b\u5b9d\u77f3", 
+        "value": 75, 
+        "level": 7
+    }
+},
+{
+    "pk": 48, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 7, 
+        "is_percent": false, 
+        "name": "8\u7ea7\u7d2b\u5b9d\u77f3", 
+        "value": 95, 
+        "level": 8
+    }
+},
+{
+    "pk": 49, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 7, 
+        "is_percent": false, 
+        "name": "9\u7ea7\u7d2b\u5b9d\u77f3", 
+        "value": 120, 
+        "level": 9
+    }
+},
+{
+    "pk": 50, 
+    "model": "items.gem", 
+    "fields": {
+        "used_for": 7, 
+        "is_percent": false, 
+        "name": "10\u7ea7\u7d2b\u5b9d\u77f3", 
+        "value": 155, 
+        "level": 10
+    }
+}
+]
