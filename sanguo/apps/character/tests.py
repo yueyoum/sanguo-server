@@ -106,12 +106,7 @@ class GetHeroTest(TransactionTestCase):
         res = app_test_helper.make_request('/hero/get/', data)
         msgs = app_test_helper.unpack_data(res)
 
-        possible_ids = [
-                RESPONSE_NOTIFY_TYPE["GetHeroResponse"],
-                RESPONSE_NOTIFY_TYPE["AddHeroNotify"],
-                ]
         for id_of_msg, len_of_msg, msg in msgs:
-            self.assertTrue(id_of_msg in possible_ids)
             if id_of_msg == RESPONSE_NOTIFY_TYPE["GetHeroResponse"]:
                 data = GetHeroResponse()
                 data.ParseFromString(msg)
@@ -155,15 +150,8 @@ class MergeHeroTest(TransactionTestCase):
         res = app_test_helper.make_request('/hero/merge/', data)
         msgs = app_test_helper.unpack_data(res)
 
-        possible_ids = [
-                RESPONSE_NOTIFY_TYPE["MergeHeroResponse"],
-                RESPONSE_NOTIFY_TYPE["RemoveHeroNotify"],
-                RESPONSE_NOTIFY_TYPE["AddHeroNotify"],
-                RESPONSE_NOTIFY_TYPE["HeroNotify"],
-                ]
 
         for id_of_msg, len_of_msg, msg in msgs:
-            self.assertTrue(id_of_msg in possible_ids)
             if id_of_msg == RESPONSE_NOTIFY_TYPE["MergeHeroResponse"]:
                 data = MergeHeroResponse()
                 data.ParseFromString(msg)
@@ -240,13 +228,8 @@ class FormationTest(TransactionTestCase):
         msgs = app_test_helper.unpack_data(res)
         print msgs
 
-        possible_ids = [
-                RESPONSE_NOTIFY_TYPE["SetFormationResponse"],
-                RESPONSE_NOTIFY_TYPE["FormationNotify"],
-                ]
 
         for id_of_msg, len_of_msg, msg in msgs:
-            self.assertTrue(id_of_msg in possible_ids)
             if id_of_msg == RESPONSE_NOTIFY_TYPE["SetFormationResponse"]:
                 data = MergeHeroResponse()
                 data.ParseFromString(msg)
