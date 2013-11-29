@@ -91,16 +91,17 @@ def _pve_finished(sender, char_id, stage_id, win, star, **kwargs):
     
     current_stage_notify(notify_key, stage_id, star)
     
-    char = MongoChar.objects.only('stages').get(id=char_id)
+    char = MongoChar.objects.only('stages', 'stage_new').get(id=char_id)
     stages = char.stages
     if win:
         # FIXME
+        char.stages[str(stage_id)] = star
         new_stage_id = stage_id + 1
-        char.stage_new = new_stage_id
-        
-        if str(new_stage_id) not in stages.keys():
-            new_stage_notify(notify_key, new_stage_id)
-            char.stages[str(stage_id)] = star
+        if char.stage_new != new_stage_id:
+            char.stage_new = new_stage_id
+            
+            if str(new_stage_id) not in stages.keys():
+                new_stage_notify(notify_key, new_stage_id)
         
         char.save()
         

@@ -112,7 +112,7 @@ def already_stage_notify(key, char_id):
     data = get_already_stage(char_id)
     if data:
         msg = protomsg.AlreadyStageNotify()
-        for d in data:
+        for d in data.items():
             stage = msg.stages.add()
             stage.id, stage.star = d
 
