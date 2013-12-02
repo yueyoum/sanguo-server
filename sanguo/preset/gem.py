@@ -11,6 +11,11 @@ def load_data():
     for c in content:
         fields = c['fields']
         fields.pop('name')
+        merge_condition = fields['merge_condition']
+        if merge_condition:
+            fields['merge_condition'] = [int(i) for i in merge_condition.split(',')]
+        else:
+            fields['merge_condition'] = []
         
         data[c['pk']] = fields
     

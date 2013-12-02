@@ -22,7 +22,7 @@ def generate_and_save_equip(tid, level, char_id):
     data['char_id'] = char_id
     
     # FIXME
-    data['gem_ids'] = ''
+    data['gem_ids'] = ','.join(['0'] * data['hole_amount'])
     
     equip = Equipment.objects.create(**data)
     return get_cache_equipment(equip.id)

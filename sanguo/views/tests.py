@@ -14,6 +14,8 @@ from protomsg import (
         PVEResponse,
         )
 from core.character import char_initialize
+from core.gem import save_gem
+from core.equip import generate_and_save_equip
 from utils import crypto
 from utils import app_test_helper as tests
 
@@ -44,22 +46,23 @@ class BattleTest(TransactionTestCase):
                 data.ParseFromString(msg)
                 self.assertEqual(data.stage_id, 1)
 
-class SocketTest(TestCase):
+class SocketTest(TransactionTestCase):
     def setUp(self):
-        char_initialize(1, 1, 'a')
+        char = char_initialize(1, 1, 'a')
+        self.session = crypto.encrypt('1:1:{0}'.format(char.id))
+        generate_and_save_equip(1, 1, char.id)
         
     def tearDown(self):
         tests._teardown()
 
     def test_set_socket(self):
-        session = crypto.encrypt('1:1:1')
         req = protomsg.SetSocketRequest()
-        req.session = session
+        req.session = self.session
         req.socket.id = 1
         req.socket.hero_id = 1
         req.socket.weapon_id = 1
-        req.socket.armor_id = 1
-        req.socket.jewelry_id = 1
+        req.socket.armor_id = 0
+        req.socket.jewelry_id = 0
 
         data = tests.pack_data(req)
         res = tests.make_request('/socket/set/', data)
@@ -74,3 +77,41 @@ class SocketTest(TestCase):
                 self.assertEqual(data.socket.hero_id, 1)
 
 
+
+class GemTest(TransactionTestCase):
+    def setUp(self):
+        char = char_initialize(1, 1, 'a')
+        gems = (
+            (49, 4),
+        )
+        save_gem(gems, char.id)
+        self.session = crypto.encrypt('1:1:{0}'.format(char.id))
+    
+    def tearDown(self):
+        tests._teardown()
+    
+    
+    def _merge(self, _id, _amount, using_sycee, ret=0):
+        req = protomsg.MergeGemRequest()
+        req.session = self.session
+        req.id = _id
+        req.amount = _amount
+        req.using_sycee = using_sycee
+        
+        
+        data = tests.pack_data(req)
+        res = tests.make_request('/gem/merge/', data)
+        msgs = tests.unpack_data(res)
+        
+        for id_of_msg, len_of_msg, msg in msgs:
+            if id_of_msg == RESPONSE_NOTIFY_TYPE["MergeGemResponse"]:
+                data = protomsg.MergeGemResponse()
+                data.ParseFromString(msg)
+                self.assertEqual(data.ret, ret)
+        
+    
+    def test_normal_merge(self):
+        self._merge(50, 1, False)
+    
+    def test_error_merge(self):
+        self._merge(49, 1, False, ret=600)

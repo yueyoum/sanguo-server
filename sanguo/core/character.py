@@ -41,14 +41,14 @@ def char_initialize(account_id, server_id, name):
     MongoChar.objects(id=char_id).update_one(set__stage_new=1)
     
     # FIXME just for test
-    import random
-    from core.equip import generate_and_save_equip
-    for i in range(10):
-        generate_and_save_equip(
-            random.randint(1, 12),
-            random.randint(1, 99),
-            char_id
-        )
+    #import random
+    #from core.equip import generate_and_save_equip
+    #for i in range(10):
+    #    generate_and_save_equip(
+    #        random.randint(1, 12),
+    #        random.randint(1, 99),
+    #        char_id
+    #    )
    # TEST END
     return char
 

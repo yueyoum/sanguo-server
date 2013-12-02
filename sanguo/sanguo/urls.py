@@ -26,4 +26,6 @@ urlpatterns = patterns('',
     url(r'^socket/set/$', 'views.formation.set_socket'),
     url(r'^hero/get/$', 'views.hero.pick_hero'),
     url(r'^hero/merge/$', 'views.hero.merge_hero'),
+    
+    url(r'^gem/merge/$', 'views.gem.merge'),
 )

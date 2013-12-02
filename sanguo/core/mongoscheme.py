@@ -23,8 +23,11 @@ class MongoChar(Document):
     stage_new = IntField()
     
     # 装备列表
-    # 装备存储在mysql总，使用post, delete信号来更新这里的数据
+    # 装备存储在mysql中，使用post, delete信号来更新这里的数据
     equips = ListField(IntField())
+    
+    # 宝石, key 为宝石ID， value为数量
+    gems = DictField()
     
     meta = {
         'collection': 'char'

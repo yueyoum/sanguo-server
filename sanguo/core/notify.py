@@ -184,7 +184,41 @@ def remove_equipment_notify(key, _id):
     msg.ids.extend(ids)
     
     redis_client.rpush(key, pack_msg(msg))
+
+
+def gem_notify(key, char_id=None, gems=None, message="GemNotify"):
+    if gems is None:
+        if char_id is None:
+            raise Exception("gem_notify: bad arguments")
         
+        mongo_char = MongoChar.objects.only('gems').get(id=char_id)
+        gems = [(int(k), v) for k, v in mongo_char.gems.iteritems()]
+    
+    msg = getattr(protomsg, message)()
+    for k, v in gems:
+        g = msg.gems.add()
+        g.id, g.amount = k, v
+    
+    redis_client.rpush(key, pack_msg(msg))
+
+
+def add_gem_notify(key, gems):
+    gem_notify(key, gems=gems, message="AddGemNotify")
+
+def update_gem_notify(key, gems):
+    gem_notify(key, gems=gems, message="UpdateGemNotify")
+
+def remove_gem_notify(key, _id):
+    if isinstance(_id, (list, tuple)):
+        ids = _id
+    else:
+        ids = [_id]
+    
+    msg = protomsg.RemoveGemNotify()
+    msg.ids.extend(ids)
+    
+    redis_client.rpush(key, pack_msg(msg))
+
 
 def login_notify(key, char_obj):
     hero_objs = get_char_hero_objs(char_obj.id)
@@ -201,5 +235,6 @@ def login_notify(key, char_obj):
         new_stage_notify(key, new_stages)
     
     equipment_notify(key, char_id=char_obj.id)
+    gem_notify(key, char_id=char_obj.id)
 
 

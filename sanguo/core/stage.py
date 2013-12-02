@@ -5,6 +5,7 @@ from core.mongoscheme import MongoChar
 from apps.character.cache import get_cache_character
 from core.signals import pve_finished_signal
 from core.equip import generate_and_save_equip
+from core.gem import save_gem
 from core import GLOBAL
 from core.character import model_character_change
 
@@ -74,12 +75,14 @@ def save_drop(char_id, exp, gold, equips, gems):
     print "save drop:", exp, gold, equips, gems
     model_character_change(char_id, exp=exp, gold=gold)
     
+    # equips
     # FIXME bulk create
     for tid, level, amount in equips:
         for i in range(amount):
             generate_and_save_equip(tid, level, char_id)
     
-    # TODO gems
+    # gems
+    save_gem(gems, char_id)
     
 
 
