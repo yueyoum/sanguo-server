@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='item.proto',
   package='Sanguo.protocol.item',
-  serialized_pb='\n\nitem.proto\x12\x14Sanguo.protocol.item\"\xdc\x01\n\x05\x45quip\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0b\n\x03oid\x18\x02 \x02(\x05\x12\x0c\n\x04name\x18\x03 \x02(\t\x12\r\n\x05level\x18\x04 \x02(\x05\x12\x0b\n\x03\x65xp\x18\x05 \x02(\x05\x12\r\n\x05value\x18\x06 \x02(\x05\x12\x12\n\nwhole_hole\x18\x07 \x02(\x05\x12\x0f\n\x07gem_ids\x18\x08 \x03(\x05\x12\x34\n\x05\x61ttrs\x18\t \x03(\x0b\x32%.Sanguo.protocol.item.Equip.ExtraAttr\x1a&\n\tExtraAttr\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05value\x18\x02 \x02(\x05\"K\n\x0b\x45quipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"N\n\x0e\x41\x64\x64\x45quipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"1\n\x11RemoveEquipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"Q\n\x11UpdateEquipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"E\n\x14StrengthEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x10\n\x08\x63ost_ids\x18\x03 \x03(\x05\"5\n\x15StrengthEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x10SellEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"1\n\x11SellEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\nitem.proto\x12\x14Sanguo.protocol.item\"\xdc\x01\n\x05\x45quip\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0b\n\x03oid\x18\x02 \x02(\x05\x12\x0c\n\x04name\x18\x03 \x02(\t\x12\r\n\x05level\x18\x04 \x02(\x05\x12\x0b\n\x03\x65xp\x18\x05 \x02(\x05\x12\r\n\x05value\x18\x06 \x02(\x05\x12\x12\n\nwhole_hole\x18\x07 \x02(\x05\x12\x0f\n\x07gem_ids\x18\x08 \x03(\x05\x12\x34\n\x05\x61ttrs\x18\t \x03(\x0b\x32%.Sanguo.protocol.item.Equip.ExtraAttr\x1a&\n\tExtraAttr\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05value\x18\x02 \x02(\x05\"!\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"E\n\tGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"H\n\x0c\x41\x64\x64GemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"K\n\x0fUpdateGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"/\n\x0fRemoveGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"S\n\x0fMergeGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x03 \x02(\x05\x12\x13\n\x0busing_sycee\x18\x04 \x02(\x08\"0\n\x10MergeGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"U\n\x0f\x45mbedGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08\x65quip_id\x18\x02 \x02(\x05\x12\x0f\n\x07hole_id\x18\x03 \x02(\x05\x12\x0e\n\x06gem_id\x18\x04 \x02(\x05\"0\n\x10\x45mbedGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"G\n\x11UnEmbedGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08\x65quip_id\x18\x02 \x02(\x05\x12\x0f\n\x07hole_id\x18\x03 \x02(\x05\"2\n\x12UnEmbedGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"K\n\x0b\x45quipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"N\n\x0e\x41\x64\x64\x45quipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"1\n\x11RemoveEquipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"Q\n\x11UpdateEquipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"E\n\x14StrengthEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x10\n\x08\x63ost_ids\x18\x03 \x03(\x05\"5\n\x15StrengthEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x10SellEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"1\n\x11SellEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
 
 
 
@@ -136,6 +136,426 @@ _EQUIP = _descriptor.Descriptor(
 )
 
 
+_GEM = _descriptor.Descriptor(
+  name='Gem',
+  full_name='Sanguo.protocol.item.Gem',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='Sanguo.protocol.item.Gem.id', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='amount', full_name='Sanguo.protocol.item.Gem.amount', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=259,
+  serialized_end=292,
+)
+
+
+_GEMNOTIFY = _descriptor.Descriptor(
+  name='GemNotify',
+  full_name='Sanguo.protocol.item.GemNotify',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.item.GemNotify.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='gems', full_name='Sanguo.protocol.item.GemNotify.gems', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=294,
+  serialized_end=363,
+)
+
+
+_ADDGEMNOTIFY = _descriptor.Descriptor(
+  name='AddGemNotify',
+  full_name='Sanguo.protocol.item.AddGemNotify',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.item.AddGemNotify.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='gems', full_name='Sanguo.protocol.item.AddGemNotify.gems', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=365,
+  serialized_end=437,
+)
+
+
+_UPDATEGEMNOTIFY = _descriptor.Descriptor(
+  name='UpdateGemNotify',
+  full_name='Sanguo.protocol.item.UpdateGemNotify',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.item.UpdateGemNotify.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='gems', full_name='Sanguo.protocol.item.UpdateGemNotify.gems', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=439,
+  serialized_end=514,
+)
+
+
+_REMOVEGEMNOTIFY = _descriptor.Descriptor(
+  name='RemoveGemNotify',
+  full_name='Sanguo.protocol.item.RemoveGemNotify',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.item.RemoveGemNotify.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='ids', full_name='Sanguo.protocol.item.RemoveGemNotify.ids', index=1,
+      number=2, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=516,
+  serialized_end=563,
+)
+
+
+_MERGEGEMREQUEST = _descriptor.Descriptor(
+  name='MergeGemRequest',
+  full_name='Sanguo.protocol.item.MergeGemRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.item.MergeGemRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='Sanguo.protocol.item.MergeGemRequest.id', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='amount', full_name='Sanguo.protocol.item.MergeGemRequest.amount', index=2,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='using_sycee', full_name='Sanguo.protocol.item.MergeGemRequest.using_sycee', index=3,
+      number=4, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=565,
+  serialized_end=648,
+)
+
+
+_MERGEGEMRESPONSE = _descriptor.Descriptor(
+  name='MergeGemResponse',
+  full_name='Sanguo.protocol.item.MergeGemResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.item.MergeGemResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.item.MergeGemResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=650,
+  serialized_end=698,
+)
+
+
+_EMBEDGEMREQUEST = _descriptor.Descriptor(
+  name='EmbedGemRequest',
+  full_name='Sanguo.protocol.item.EmbedGemRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.item.EmbedGemRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='equip_id', full_name='Sanguo.protocol.item.EmbedGemRequest.equip_id', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='hole_id', full_name='Sanguo.protocol.item.EmbedGemRequest.hole_id', index=2,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='gem_id', full_name='Sanguo.protocol.item.EmbedGemRequest.gem_id', index=3,
+      number=4, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=700,
+  serialized_end=785,
+)
+
+
+_EMBEDGEMRESPONSE = _descriptor.Descriptor(
+  name='EmbedGemResponse',
+  full_name='Sanguo.protocol.item.EmbedGemResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.item.EmbedGemResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.item.EmbedGemResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=787,
+  serialized_end=835,
+)
+
+
+_UNEMBEDGEMREQUEST = _descriptor.Descriptor(
+  name='UnEmbedGemRequest',
+  full_name='Sanguo.protocol.item.UnEmbedGemRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.item.UnEmbedGemRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='equip_id', full_name='Sanguo.protocol.item.UnEmbedGemRequest.equip_id', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='hole_id', full_name='Sanguo.protocol.item.UnEmbedGemRequest.hole_id', index=2,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=837,
+  serialized_end=908,
+)
+
+
+_UNEMBEDGEMRESPONSE = _descriptor.Descriptor(
+  name='UnEmbedGemResponse',
+  full_name='Sanguo.protocol.item.UnEmbedGemResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.item.UnEmbedGemResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.item.UnEmbedGemResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=910,
+  serialized_end=960,
+)
+
+
 _EQUIPNOTIFY = _descriptor.Descriptor(
   name='EquipNotify',
   full_name='Sanguo.protocol.item.EquipNotify',
@@ -166,8 +586,8 @@ _EQUIPNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=259,
-  serialized_end=334,
+  serialized_start=962,
+  serialized_end=1037,
 )
 
 
@@ -201,8 +621,8 @@ _ADDEQUIPNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=336,
-  serialized_end=414,
+  serialized_start=1039,
+  serialized_end=1117,
 )
 
 
@@ -236,8 +656,8 @@ _REMOVEEQUIPNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=416,
-  serialized_end=465,
+  serialized_start=1119,
+  serialized_end=1168,
 )
 
 
@@ -271,8 +691,8 @@ _UPDATEEQUIPNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=467,
-  serialized_end=548,
+  serialized_start=1170,
+  serialized_end=1251,
 )
 
 
@@ -313,8 +733,8 @@ _STRENGTHEQUIPREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=550,
-  serialized_end=619,
+  serialized_start=1253,
+  serialized_end=1322,
 )
 
 
@@ -348,8 +768,8 @@ _STRENGTHEQUIPRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=621,
-  serialized_end=674,
+  serialized_start=1324,
+  serialized_end=1377,
 )
 
 
@@ -383,8 +803,8 @@ _SELLEQUIPREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=676,
-  serialized_end=724,
+  serialized_start=1379,
+  serialized_end=1427,
 )
 
 
@@ -418,16 +838,30 @@ _SELLEQUIPRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=726,
-  serialized_end=775,
+  serialized_start=1429,
+  serialized_end=1478,
 )
 
 _EQUIP_EXTRAATTR.containing_type = _EQUIP;
 _EQUIP.fields_by_name['attrs'].message_type = _EQUIP_EXTRAATTR
+_GEMNOTIFY.fields_by_name['gems'].message_type = _GEM
+_ADDGEMNOTIFY.fields_by_name['gems'].message_type = _GEM
+_UPDATEGEMNOTIFY.fields_by_name['gems'].message_type = _GEM
 _EQUIPNOTIFY.fields_by_name['equips'].message_type = _EQUIP
 _ADDEQUIPNOTIFY.fields_by_name['equips'].message_type = _EQUIP
 _UPDATEEQUIPNOTIFY.fields_by_name['equips'].message_type = _EQUIP
 DESCRIPTOR.message_types_by_name['Equip'] = _EQUIP
+DESCRIPTOR.message_types_by_name['Gem'] = _GEM
+DESCRIPTOR.message_types_by_name['GemNotify'] = _GEMNOTIFY
+DESCRIPTOR.message_types_by_name['AddGemNotify'] = _ADDGEMNOTIFY
+DESCRIPTOR.message_types_by_name['UpdateGemNotify'] = _UPDATEGEMNOTIFY
+DESCRIPTOR.message_types_by_name['RemoveGemNotify'] = _REMOVEGEMNOTIFY
+DESCRIPTOR.message_types_by_name['MergeGemRequest'] = _MERGEGEMREQUEST
+DESCRIPTOR.message_types_by_name['MergeGemResponse'] = _MERGEGEMRESPONSE
+DESCRIPTOR.message_types_by_name['EmbedGemRequest'] = _EMBEDGEMREQUEST
+DESCRIPTOR.message_types_by_name['EmbedGemResponse'] = _EMBEDGEMRESPONSE
+DESCRIPTOR.message_types_by_name['UnEmbedGemRequest'] = _UNEMBEDGEMREQUEST
+DESCRIPTOR.message_types_by_name['UnEmbedGemResponse'] = _UNEMBEDGEMRESPONSE
 DESCRIPTOR.message_types_by_name['EquipNotify'] = _EQUIPNOTIFY
 DESCRIPTOR.message_types_by_name['AddEquipNotify'] = _ADDEQUIPNOTIFY
 DESCRIPTOR.message_types_by_name['RemoveEquipNotify'] = _REMOVEEQUIPNOTIFY
@@ -448,6 +882,72 @@ class Equip(_message.Message):
   DESCRIPTOR = _EQUIP
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.Equip)
+
+class Gem(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _GEM
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.Gem)
+
+class GemNotify(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _GEMNOTIFY
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.GemNotify)
+
+class AddGemNotify(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _ADDGEMNOTIFY
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.AddGemNotify)
+
+class UpdateGemNotify(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _UPDATEGEMNOTIFY
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.UpdateGemNotify)
+
+class RemoveGemNotify(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _REMOVEGEMNOTIFY
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.RemoveGemNotify)
+
+class MergeGemRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _MERGEGEMREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.MergeGemRequest)
+
+class MergeGemResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _MERGEGEMRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.MergeGemResponse)
+
+class EmbedGemRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _EMBEDGEMREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.EmbedGemRequest)
+
+class EmbedGemResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _EMBEDGEMRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.EmbedGemResponse)
+
+class UnEmbedGemRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _UNEMBEDGEMREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.UnEmbedGemRequest)
+
+class UnEmbedGemResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _UNEMBEDGEMRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.UnEmbedGemResponse)
 
 class EquipNotify(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
