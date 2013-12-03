@@ -15,6 +15,7 @@ from utils import crypto
 from core.character import char_initialize
 from core.equip import generate_and_save_equip, delete_equip
 from core.mongoscheme import MongoChar
+from core.gem import save_gem
 
 
 def teardown():
@@ -169,3 +170,52 @@ class SellEquipmentTest(TransactionTestCase):
         app_test_helper._mongo_teardown_func()
         
 
+
+class EmbedGemTest(TransactionTestCase):
+    def setUp(self):
+        char = char_initialize(1, 1, 'a')
+        self.char_id = char.id
+        self.session = crypto.encrypt('1:1:{0}'.format(self.char_id))
+        
+        e = generate_and_save_equip(1, 99, self.char_id)
+        self.equip_id = int(e.id)
+        
+        gems = [(1, 10), (2, 1)]
+        save_gem(gems, self.char_id)
+        
+    def tearDown(self):
+        app_test_helper._teardown()
+
+
+    def _embed(self, equip_id, hole_id, gem_id, ret=0):
+        if gem_id == 0:
+            req = protomsg.UnEmbedGemRequest()
+            url = '/equip/unembed/'
+            response_name = "UnEmbedGemResponse"
+        else:
+            req = protomsg.EmbedGemRequest()
+            req.gem_id = gem_id
+            url = '/equip/embed/'
+            response_name = "EmbedGemResponse"
+        
+        req.session = self.session
+        req.equip_id = equip_id
+        req.hole_id = hole_id
+        
+        data = app_test_helper.pack_data(req)
+        res = app_test_helper.make_request(url, data)
+        msgs = app_test_helper.unpack_data(res)
+        
+        for id_of_msg, _, msg in msgs:
+            if id_of_msg == RESPONSE_NOTIFY_TYPE[response_name]:
+                data = getattr(protomsg, response_name)()
+                data.ParseFromString(msg)
+                self.assertEqual(data.ret, ret)
+
+    def test_normal_embed(self):
+        self._embed(self.equip_id, 1, 1)
+    
+    def test_normal_unembed(self):
+        self._embed(self.equip_id, 1, 1)
+        self._embed(self.equip_id, 1, 0)
+        

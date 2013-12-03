@@ -5,13 +5,18 @@ from models import Equipment
 from core import GLOBAL
 from core import notify
 from core.exception import SanguoViewException
-from core.equip import get_equip_level_by_whole_exp, delete_equip
+from core.equip import get_equip_level_by_whole_exp, delete_equip, embed_gem
 from core.mongoscheme import MongoChar
 from utils import pack_msg
 
 from apps.item.cache import get_cache_equipment
 
-from protomsg import StrengthEquipResponse, SellEquipResponse
+from protomsg import (
+    StrengthEquipResponse,
+    SellEquipResponse,
+    EmbedGemResponse,
+    UnEmbedGemResponse,
+    )
 
 
 EQUIP_TEMPLATE = GLOBAL.EQUIP.EQUIP_TEMPLATE
@@ -111,6 +116,36 @@ def sell_equip(request):
     )
     
     response = SellEquipResponse()
+    response.ret = 0
+    data = pack_msg(response)
+    return HttpResponse(data, content_type='text/plain')
+
+
+
+def embed(request):
+    req = request._proto
+    print req
+    
+    _, _, char_id = request._decrypted_session.split(':')
+    char_id = int(char_id)
+
+    embed_gem(char_id, req.equip_id, req.hole_id, req.gem_id)
+    
+    response = EmbedGemResponse()
+    response.ret = 0
+    data = pack_msg(response)
+    return HttpResponse(data, content_type='text/plain')
+
+def unembed(request):
+    req = request._proto
+    print req
+    
+    _, _, char_id = request._decrypted_session.split(':')
+    char_id = int(char_id)
+
+    embed_gem(char_id, req.equip_id, req.hole_id, 0)
+    
+    response = UnEmbedGemResponse()
     response.ret = 0
     data = pack_msg(response)
     return HttpResponse(data, content_type='text/plain')
