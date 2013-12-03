@@ -4,7 +4,10 @@ from core import GLOBAL
 from apps.item.cache import encode_random_attrs, get_cache_equipment
 from apps.item.models import Equipment
 from core.gem import save_gem
+from core.formation import find_socket_by_equip
+from core.signals import socket_changed_signal
 
+EQUIP_TEMPLATE = GLOBAL.EQUIP.EQUIP_TEMPLATE
 EQUIP_LEVEL_INFO = GLOBAL.EQUIP.EQUIP_LEVEL_INFO
 EQUIP_LEVEL_RANGE_INFO = GLOBAL.EQUIP.EQUIP_LEVEL_RANGE_INFO
 
@@ -84,6 +87,26 @@ def embed_gem(char_id, equip_id, hole_id, gem_id):
     cache_char = get_cache_character(char_id)
     notify_key = cache_char.notify_key
     update_equipment_notify(notify_key, cache_equip)
+    
+    socket = find_socket_by_equip(char_id, equip_id)
+    print socket
+    if socket and socket.hero:
+        tp = EQUIP_TEMPLATE[cache_equip.tid]['tp']
+        kwargs = {
+            'hero': socket.hero,
+            'weapon': 0,
+            'armor': 0,
+            'jewelry': 0
+        }
+        if tp == 1:
+            kwargs['weapon'] = equip_id
+        elif tp == 2:
+            kwargs['jewelry'] = equip_id
+        else:
+            kwargs['armor'] = equip_id
+        
+        socket_changed_signal.send(sender=None, **kwargs)
+        
     
     
 

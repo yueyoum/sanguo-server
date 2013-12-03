@@ -30,3 +30,22 @@ def get_char_formation(char_id):
     c = MongoChar.objects.only('formation').get(id=char_id)
     return c.formation
 
+
+def find_socket_by_hero(char_id, hero_id):
+    c = MongoChar.objects.only('sockets').get(id=char_id)
+    for k, v in c.sockets.iteritems():
+        if v.hero == hero_id:
+            return v
+    
+    return None
+
+
+def find_socket_by_equip(char_id, equip_id):
+    c = MongoChar.objects.only('sockets').get(id=char_id)
+    for k, v in c.sockets.iteritems():
+        if v.weapon == equip_id or v.armor == equip_id or v.jewelry == equip_id:
+            return v
+    
+    return None
+
+
