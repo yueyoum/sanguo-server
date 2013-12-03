@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from core.equip import generate_and_save_equip, delete_equip
 from core.gem import save_gem, delete_gem
 from core.character import model_character_change
+from core.hero import save_hero
+
 
 def cmd(request):
     req = request._proto
@@ -25,6 +27,8 @@ def cmd(request):
             generate_and_save_equip(req.param, 1, char_id)
         elif req.tp == 6:
             save_gem([(req.param, 1)], char_id)
+        elif req.tp == 7:
+            save_hero(char_id, req.param)
     elif req.action == 2:
         if req.tp == 5:
             delete_equip(req.param)

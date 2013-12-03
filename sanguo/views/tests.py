@@ -43,6 +43,9 @@ class CmdTest(TransactionTestCase):
         res = tests.make_request('/test/', data)
         msgs = tests.unpack_data(res)
     
+    def test_add_hero(self):
+        self._cmd(1, 7, 10)
+    
     def test_add_exp(self):
         self._cmd(1, 1, 1000)
     
