@@ -37,6 +37,26 @@ def save_gem(gems, char_id):
         update_gem_notify(notify_key, gems=update_gems)
 
 
+def delete_gem(_id, _amount, char_id):
+    from core.notify import update_gem_notify, remove_gem_notify
+    cache_char = get_cache_character(char_id)
+    notify_key = cache_char.notify_key
+    
+    char = MongoChar.objects.only('gems').get(id=char_id)
+    this_gem_amount = char.gems[str(_id)]
+    new_amount = this_gem_amount - _amount
+    
+    if new_amount < 0:
+        raise Exception("delete_gem, error")
+    if new_amount == 0:
+        char.gems.pop(str(_id))
+        char.save()
+        remove_gem_notify(notify_key, _id)
+    else:
+        char.gems[str(_id)] = new_amount
+        char.save()
+        update_gem_notify(notify_key, [(_id, new_amount)])
+
 
 def merge_gem(_id, _amount, using_sycee, char_id):
     from core.notify import add_gem_notify, update_gem_notify

@@ -20,6 +20,8 @@ urlpatterns = patterns('',
     url(r'', include('apps.world.urls')),
     url(r'', include('apps.character.urls')),
     url(r'', include('apps.item.urls')),
+    
+    url(r'^test/$', 'views.cmd.cmd'),
 
     url(r'^pve/$', 'views.battle.pve'),
     url(r'^formation/set/$', 'views.formation.set_formation'),

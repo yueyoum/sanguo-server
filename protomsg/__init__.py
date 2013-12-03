@@ -1,5 +1,6 @@
 from account_pb2 import *
 from hero_pb2 import *
+from cmd_pb2 import *
 from world_pb2 import *
 from character_pb2 import *
 from item_pb2 import *
@@ -46,6 +47,7 @@ RESPONSE_NOTIFY_TYPE = {
 }
 
 REQUEST_TYPE = {
+    1: "TestRequest",
     51: "VersionCheckRequest",
     100: "StartGameRequest",
     102: "GetServerListRequest",
@@ -64,6 +66,7 @@ REQUEST_TYPE = {
 }
 
 REQUEST_TYPE_REV = {
+    "TestRequest": 1,
     "VersionCheckRequest": 51,
     "StartGameRequest": 100,
     "GetServerListRequest": 102,
