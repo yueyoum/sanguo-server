@@ -34,7 +34,7 @@ class Hero(object):
 
 
 
-def save_hero(char_id, hero_original_ids):
+def save_hero(char_id, hero_original_ids, add_notify=True):
     if not isinstance(hero_original_ids, (list, tuple)):
         hero_original_ids = [hero_original_ids]
     
@@ -46,6 +46,15 @@ def save_hero(char_id, hero_original_ids):
         MongoHero(id=_id, char=char_id, oid=hero_original_ids[i]).save()
 
     print "id_range =", id_range
+    
+    if add_notify:
+        cache_char = get_cache_character(char_id)
+        notify_key = cache_char.notify_key
+        from core.notify import add_hero_notify
+        from core.cache import get_cache_hero
+        heros = [get_cache_hero(hid) for hid in id_range]
+        add_hero_notify(notify_key, heros)
+    
     return id_range
 
 

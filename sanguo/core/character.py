@@ -24,7 +24,7 @@ def char_initialize(account_id, server_id, name):
     
     init_hero_ids = GLOBAL.HEROS.get_random_hero_ids(3)
     
-    hero_ids = save_hero(char_id, init_hero_ids)
+    hero_ids = save_hero(char_id, init_hero_ids, add_notify=False)
     for index, _id in enumerate(hero_ids):
         save_socket(char_id, socket_id=index+1, hero=_id)
 
