@@ -19,9 +19,7 @@ from utils import pack_msg
 
 def pick_hero(request):
     req = request._proto
-    print req
-    _, _, char_id = request._decrypted_session.split(':')
-    char_id = int(char_id)
+    char_id = request._char_id
 
     info = GLOBAL.GET_HERO[req.mode]
     # TODO check cost
@@ -64,9 +62,7 @@ def pick_hero(request):
 
 def merge_hero(request):
     req = request._proto
-    print req
-    _, _, char_id = request._decrypted_session.split(':')
-    char_id = int(char_id)
+    char_id = request._char_id
 
     using_hero_ids = req.using_hero_ids
 
@@ -110,7 +106,7 @@ def merge_hero(request):
     new_hero_id = save_hero(char_id, choosing_id)[0]
     
 
-    notify.remove_hero_notify(request._decrypted_session, using_hero_ids)
+    notify.remove_hero_notify('noti:{0}'.format(char_id), using_hero_ids)
     #notify.add_hero_notify(
     #    request._decrypted_session,
     #    #[Hero(new_hero_id, choosing_id, 1, [])]

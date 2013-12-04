@@ -14,10 +14,7 @@ from utils import pack_msg
 
 def merge(request):
     req = request._proto
-    print req
-    
-    _, _, char_id = request._decrypted_session.split(':')
-    char_id = int(char_id)
+    char_id = request._char_id
     
     merge_gem(
         req.id,

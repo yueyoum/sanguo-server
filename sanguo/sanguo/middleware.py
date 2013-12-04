@@ -48,11 +48,15 @@ class UnpackAndVerifyData(object):
                 # TODO Check Version
                 pass
             else:
-                msg_name = REQUEST_TYPE[msg_id]
+                if getattr(request, '_proto', None) is not None:
+                    continue
 
+                msg_name = REQUEST_TYPE[msg_id]
                 proto = getattr(protomsg, msg_name)
                 p = proto()
                 p.ParseFromString(msg)
+                
+                print p
                 
                 game_session = p.session
                 decrypted_session = ""
@@ -67,7 +71,22 @@ class UnpackAndVerifyData(object):
                         return HttpResponse(status=403)
 
                 request._proto = p
-                request._decrypted_session = decrypted_session
+                request._session = decrypted_session
+                
+                splited_session = decrypted_session.split(':')
+                len_of_splited_session = len(splited_session)
+                if len_of_splited_session == 1:
+                    request._account_id = None
+                    request._server_id = None
+                    request._char_id = None
+                elif len_of_splited_session == 2:
+                    request._account_id = int(splited_session[0])
+                    request._server_id = int(splited_session[1])
+                    request._char_id = None
+                else:
+                    request._account_id = int(splited_session[0])
+                    request._server_id = int(splited_session[1])
+                    request._char_id = int(splited_session[2])
 
 
 
@@ -78,10 +97,16 @@ class PackMessageData(object):
 
         # if request.path.startswith('/admin/'):
         #     return response
+        
+        char_id = getattr(request, '_char_id', None)
+        if char_id:
+            key = 'noti:{0}'.format(char_id)
+        else:
+            key = getattr(response, '_redis_key', None)
 
-        key = getattr(request, '_decrypted_session', None) or getattr(
-                response, '_redis_key', None
-                )
+        #key = getattr(request, '_decrypted_session', None) or getattr(
+        #        response, '_redis_key', None
+        #        )
         if key:
             pipeline = redis_client.pipeline()
             pipeline.lrange(key, 0, -1)
@@ -109,6 +134,7 @@ class PackMessageData(object):
         _unpakced_data = app_test_helper.unpack_data(data)
         _msg_type = [RESPONSE_NOTIFY_TYPE_REV[a] for a, b, c in _unpakced_data]
         print _msg_type
+        # DEBUG END
         return HttpResponse(data, content_type='text/plain')
 
 

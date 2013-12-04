@@ -1,7 +1,6 @@
 from core import GLOBAL
 from core.mongoscheme import MongoChar
 from core.exception import SanguoViewException
-from apps.character.cache import get_cache_character
 
 def save_gem(gems, char_id):
     from core.notify import add_gem_notify, update_gem_notify
@@ -29,18 +28,14 @@ def save_gem(gems, char_id):
     char.gems = old_gems
     char.save()
     
-    cache_char = get_cache_character(char_id)
-    notify_key = cache_char.notify_key
     if new_gems:
-        add_gem_notify(notify_key, new_gems)
+        add_gem_notify('noti:{0}'.format(char_id), new_gems)
     if update_gems:
-        update_gem_notify(notify_key, gems=update_gems)
+        update_gem_notify('noti:{0}'.format(char_id), gems=update_gems)
 
 
 def delete_gem(_id, _amount, char_id):
     from core.notify import update_gem_notify, remove_gem_notify
-    cache_char = get_cache_character(char_id)
-    notify_key = cache_char.notify_key
     
     char = MongoChar.objects.only('gems').get(id=char_id)
     this_gem_amount = char.gems[str(_id)]
@@ -51,11 +46,11 @@ def delete_gem(_id, _amount, char_id):
     if new_amount == 0:
         char.gems.pop(str(_id))
         char.save()
-        remove_gem_notify(notify_key, _id)
+        remove_gem_notify('noti:{0}'.format(char_id), _id)
     else:
         char.gems[str(_id)] = new_amount
         char.save()
-        update_gem_notify(notify_key, [(_id, new_amount)])
+        update_gem_notify('noti:{0}'.format(char_id), [(_id, new_amount)])
 
 
 def merge_gem(_id, _amount, using_sycee, char_id):
@@ -89,7 +84,5 @@ def merge_gem(_id, _amount, using_sycee, char_id):
     
     char.save()
     
-    cache_char = get_cache_character(char_id)
-    notify_key = cache_char.notify_key
-    notify_method(notify_key, [(_id, _amount)])
+    notify_method('noti:{0}'.format(char_id), [(_id, _amount)])
     

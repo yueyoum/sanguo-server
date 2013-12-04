@@ -14,10 +14,7 @@ from utils import pack_msg
 
 def set_socket(request):
     req = request._proto
-    print req
-
-    _, _, char_id = request._decrypted_session.split(':')
-    char_id = int(char_id)
+    char_id = request._char_id
 
     # FIXME request check
     save_socket(
@@ -47,9 +44,7 @@ def set_socket(request):
 
 def set_formation(request):
     req = request._proto
-    print req
-    _, _, char_id = request._decrypted_session.split(':')
-    char_id = int(char_id)
+    char_id = request._char_id
 
     socket_ids = req.socket_ids
 
@@ -57,7 +52,7 @@ def set_formation(request):
         raise SanguoViewException(400, "SetFormationResponse")
 
     save_formation(char_id, [int(s) for s in socket_ids])
-    notify.formation_notify(request._decrypted_session, char_id, formation=socket_ids)
+    notify.formation_notify('noti:{0}'.format(char_id), char_id, formation=socket_ids)
 
     response = SetFormationResponse()
     response.ret = 0

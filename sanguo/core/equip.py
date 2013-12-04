@@ -57,7 +57,6 @@ def get_equip_level_by_whole_exp(exp):
 def embed_gem(char_id, equip_id, hole_id, gem_id):
     # gem_id = 0 表示取下hole_id对应的宝石
     from core.notify import update_equipment_notify
-    from apps.character.cache import get_cache_character
     cache_equip = get_cache_equipment(equip_id)
     gems = cache_equip.gems
     
@@ -84,9 +83,7 @@ def embed_gem(char_id, equip_id, hole_id, gem_id):
     equip.save()
     
     cache_equip = get_cache_equipment(equip_id)
-    cache_char = get_cache_character(char_id)
-    notify_key = cache_char.notify_key
-    update_equipment_notify(notify_key, cache_equip)
+    update_equipment_notify('noti:{0}'.format(char_id), cache_equip)
     
     socket = find_socket_by_equip(char_id, equip_id)
     print socket

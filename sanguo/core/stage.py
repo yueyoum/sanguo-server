@@ -89,10 +89,7 @@ def save_drop(char_id, exp, gold, equips, gems):
 def _pve_finished(sender, char_id, stage_id, win, star, **kwargs):
     print "_pve_finished", char_id, stage_id, win, star
     from core.notify import current_stage_notify, new_stage_notify
-    cache_char = get_cache_character(char_id)
-    notify_key = cache_char.notify_key
-    
-    current_stage_notify(notify_key, stage_id, star)
+    current_stage_notify('noti:{0}'.format(char_id), stage_id, star)
     
     char = MongoChar.objects.only('stages', 'stage_new').get(id=char_id)
     stages = char.stages
@@ -104,7 +101,7 @@ def _pve_finished(sender, char_id, stage_id, win, star, **kwargs):
             char.stage_new = new_stage_id
             
             if str(new_stage_id) not in stages.keys():
-                new_stage_notify(notify_key, new_stage_id)
+                new_stage_notify('noti:{0}'.format(char_id), new_stage_id)
         
         char.save()
         

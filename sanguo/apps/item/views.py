@@ -24,10 +24,7 @@ EQUIP_LEVEL_INFO = GLOBAL.EQUIP.EQUIP_LEVEL_INFO
 
 def strengthen_equip(request):
     req = request._proto
-    print req
-    
-    _, _, char_id = request._decrypted_session.split(':')
-    char_id = int(char_id)
+    char_id = request._char_id
     
     char = MongoChar.objects.only('equips').get(id=char_id)
     char_equips = char.equips
@@ -66,12 +63,12 @@ def strengthen_equip(request):
     target_model_obj.save()
     
     target = get_cache_equipment(req.id)
-    notify.update_equipment_notify(request._decrypted_session, target)
+    notify.update_equipment_notify('noti:{0}'.format(char_id), target)
     
     
     delete_equip([_id for _id in req.cost_ids])
     notify.remove_equipment_notify(
-        request._decrypted_session,
+        'noti:{0}'.format(char_id),
         [_id for _id in req.cost_ids]
         )
 
@@ -83,10 +80,7 @@ def strengthen_equip(request):
 
 def sell_equip(request):
     req = request._proto
-    print req
-    
-    _, _, char_id = request._decrypted_session.split(':')
-    char_id = int(char_id)
+    char_id = request._char_id
     
     char = MongoChar.objects.only('equips').get(id=char_id)
     char_equips = char.equips
@@ -111,7 +105,7 @@ def sell_equip(request):
     removed_ids = [_id for _id in req.ids]
     delete_equip(removed_ids)
     notify.remove_equipment_notify(
-        request._decrypted_session,
+        'noti:{0}'.format(char_id),
         removed_ids
     )
     
@@ -124,10 +118,7 @@ def sell_equip(request):
 
 def embed(request):
     req = request._proto
-    print req
-    
-    _, _, char_id = request._decrypted_session.split(':')
-    char_id = int(char_id)
+    char_id = request._char_id
 
     embed_gem(char_id, req.equip_id, req.hole_id, req.gem_id)
     
@@ -138,10 +129,7 @@ def embed(request):
 
 def unembed(request):
     req = request._proto
-    print req
-    
-    _, _, char_id = request._decrypted_session.split(':')
-    char_id = int(char_id)
+    char_id = request._char_id
 
     embed_gem(char_id, req.equip_id, req.hole_id, 0)
     

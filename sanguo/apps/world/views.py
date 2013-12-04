@@ -13,8 +13,6 @@ from utils import pack_msg
 
 def get_server_list(request):
     req = request._proto
-    print req
-
     top, all_servers = server_list()
 
     response = GetServerListResponse()

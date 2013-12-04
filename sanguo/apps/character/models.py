@@ -22,12 +22,6 @@ class Character(models.Model):
                 self.account_id, self.server_id, self.id, self.name
                 )
     
-    @property
-    def notify_key(self):
-        return '{0}:{1}:{2}'.format(
-            self.account_id, self.server_id, self.id
-        )
-
     class Meta:
         db_table = 'char_'
         unique_together = (

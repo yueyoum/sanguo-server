@@ -48,12 +48,10 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
     print "id_range =", id_range
     
     if add_notify:
-        cache_char = get_cache_character(char_id)
-        notify_key = cache_char.notify_key
         from core.notify import add_hero_notify
         from core.cache import get_cache_hero
         heros = [get_cache_hero(hid) for hid in id_range]
-        add_hero_notify(notify_key, heros)
+        add_hero_notify('noti:{0}'.format(char_id), heros)
     
     return id_range
 

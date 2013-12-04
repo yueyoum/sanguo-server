@@ -12,10 +12,7 @@ from utils import pack_msg
 
 def prize_get(request):
     req = request._proto
-    print req
-
-    _, _, char_id = request._decrypted_session.split(':')
-    char_id = int(char_id)
+    char_id = request._char_id
     
     prize_id = req.prize_id
     

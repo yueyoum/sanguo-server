@@ -1,7 +1,6 @@
 from redisco import models
 
 from core.mongoscheme import MongoChar
-from apps.character.cache import get_cache_character
 
 def encode_random_attrs(attrs):
     # attrs: [{1: {value: x, is_percent: y}}, ...]
@@ -103,10 +102,7 @@ def save_cache_equipment(model_obj):
     if res is not True:
         raise Exception(str(res))
     
-    
-    cache_char = get_cache_character(model_obj.char_id)
-    notify_key = cache_char.notify_key
-    add_equipment_notify(notify_key, e)
+    add_equipment_notify('noti:{0}'.format(model_obj.char_id), e)
     return e
     
     
@@ -117,9 +113,7 @@ def delete_cache_equipment(model_obj):
         pull__equips = model_obj.id
     )
     
-    cache_char = get_cache_character(model_obj.char_id)
-    notify_key = cache_char.notify_key
-    remove_equipment_notify(notify_key, model_obj.id)
+    remove_equipment_notify('noti:{0}'.format(model_obj.char_id), model_obj.id)
     
     
     e = CacheEquipment.objects.get_by_id(model_obj.id)

@@ -56,10 +56,7 @@ def pve(request):
     msg = protomsg.Battle()
 
     req = request._proto
-    print req
-
-    _, _, char_id = request._decrypted_session.split(':')
-    char_id = int(char_id)
+    char_id = request._char_id
 
     b = PVE(char_id, req.stage_id, msg)
     b.start()
@@ -96,10 +93,7 @@ def pve(request):
 
 def hang(request):
     req = request._proto
-    print req
-
-    _, _, char_id = request._decrypted_session.split(':')
-    char_id = int(char_id)
+    char_id = request._char_id
     
     mongo_char = MongoChar.objects.only('hang_hours').get(id=char_id)
     # FIXME
@@ -128,9 +122,7 @@ def hang(request):
     mongo_char.hang_hours = hang_hours - req.hours
     mongo_char.save()
     
-    cache_char = get_cache_character(char_id)
-    notify_key = cache_char.notify_key
-    notify.hang_notify_with_data(notify_key, mongo_char.hang_hours, hang)
+    notify.hang_notify_with_data('noti:{0}'.format(char_id), mongo_char.hang_hours, hang)
     
     response = protomsg.HangResponse()
     response.ret = 0
@@ -140,10 +132,7 @@ def hang(request):
 
 def hang_cancel(request):
     req = request._proto
-    print req
-
-    _, _, char_id = request._decrypted_session.split(':')
-    char_id = int(char_id)
+    char_id = request._char_id
     
     try:
         hang = Hang.objects.get(id=char_id)
@@ -174,7 +163,7 @@ def hang_cancel(request):
     pn.prize_ids.append(1)
     
     redis_client.rpush(
-        request._decrypted_session,
+        'noti:{0}'.format(char_id),
         pack_msg(pn)
     )
     

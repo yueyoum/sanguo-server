@@ -12,12 +12,6 @@ class CacheCharacter(models.Model):
     official = models.IntegerField(indexed=False, required=True)
     honor = models.IntegerField(indexed=False, required=True)
 
-    @property
-    def notify_key(self):
-        return '{0}:{1}:{2}'.format(
-            self.account_id, self.server_id, self.id
-        )
-
 
 def save_cache_character(model_obj):
     c = CacheCharacter.objects.get_by_id(model_obj.id)

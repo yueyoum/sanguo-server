@@ -4,8 +4,6 @@ from core.mongoscheme import MongoChar, MongoHero
 from core import GLOBAL
 from core.hero import save_hero
 from core.formation import save_socket, save_formation
-from core.hero import Hero
-from apps.character.cache import get_cache_character
 from apps.character.models import Character
 from apps.item.cache import get_cache_equipment
 
@@ -96,6 +94,5 @@ def model_character_change(char_id, exp=0, honor=0, gold=0, gem=0):
     # TODO honor
     char.save()
     
-    notify_key = char.notify_key
-    character_notify(notify_key, char)
+    character_notify('noti:{0}'.format(char_id), char)
     

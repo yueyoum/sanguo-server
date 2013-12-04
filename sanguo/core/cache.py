@@ -1,7 +1,6 @@
 from redisco import models
 from core.signals import socket_changed_signal
 from apps.item.cache import get_cache_equipment
-from apps.character.cache import get_cache_character
 
 from core.mongoscheme import MongoChar
 
@@ -88,9 +87,7 @@ def _hero_attribute_change(sender, hero, weapon, armor, jewelry, **kwargs):
     
     this_hero.save()
     
-    char = get_cache_character(this_hero.char_id)
-    key = char.notify_key
-    update_hero_notify(key, [this_hero])
+    update_hero_notify('noti:{0}'.format(this_hero.char_id), [this_hero])
         
 
 socket_changed_signal.connect(

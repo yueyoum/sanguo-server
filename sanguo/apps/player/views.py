@@ -35,7 +35,6 @@ def create_new_user(**kwargs):
 
 def register(request):
     req = request._proto
-    print req
 
     if not req.email or not req.password or not req.device_token:
         return HttpResponse(status=403)
@@ -94,7 +93,6 @@ def register(request):
 
 def login(request):
     req = request._proto
-    print req
     
     need_create_new_char = None
     if req.anonymous.device_token:
@@ -125,7 +123,7 @@ def login(request):
     user.last_login = timezone.now()
     user.save()
 
-    key = "%d:%d" % (user.id, req.server_id)
+    key = "noti:%d-%d" % (user.id, req.server_id)
     if need_create_new_char is None:
         try:
             char = Character.objects.get(
@@ -133,7 +131,7 @@ def login(request):
                     server_id = req.server_id
                     )
             need_create_new_char = False
-            key = "%d:%d:%d" % (user.id, req.server_id, char.id)
+            key = "noti:%d" % char.id
         except Character.DoesNotExist:
             need_create_new_char = True
 
