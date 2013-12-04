@@ -6,6 +6,7 @@ from character_pb2 import *
 from item_pb2 import *
 from formation_pb2 import *
 from battle_pb2 import *
+from prize_pb2 import *
 
 RESPONSE_NOTIFY_TYPE = {
     "CommandResponse": 50,
@@ -30,6 +31,7 @@ RESPONSE_NOTIFY_TYPE = {
     "AlreadyStageNotify": 500,
     "CurrentStageNotify": 501,
     "NewStageNotify": 502,
+    "HangNotify": 510,
     "HangResponse": 512,
     "HangCancelResponse": 514,
     "PVEResponse": 601,
@@ -46,6 +48,8 @@ RESPONSE_NOTIFY_TYPE = {
     "MergeGemResponse": 755,
     "EmbedGemResponse": 757,
     "UnEmbedGemResponse": 759,
+    "PrizeNotify": 800,
+    "PrizeResponse": 802,
 }
 
 REQUEST_TYPE = {
@@ -67,6 +71,7 @@ REQUEST_TYPE = {
     754: "MergeGemRequest",
     756: "EmbedGemRequest",
     758: "UnEmbedGemRequest",
+    801: "PrizeRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -88,5 +93,6 @@ REQUEST_TYPE_REV = {
     "MergeGemRequest": 754,
     "EmbedGemRequest": 756,
     "UnEmbedGemRequest": 758,
+    "PrizeRequest": 801,
 }
 
