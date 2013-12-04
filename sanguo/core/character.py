@@ -85,6 +85,7 @@ def model_character_change(char_id, exp=0, honor=0, gold=0, gem=0):
     char = Character.objects.get(id=char_id)
     char.gold += gold
     char.honor += honor
+    char.gem += gem
     
     if exp:
         new_exp = char.exp + exp
