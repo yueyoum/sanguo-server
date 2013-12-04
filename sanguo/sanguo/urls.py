@@ -30,4 +30,9 @@ urlpatterns = patterns('',
     url(r'^hero/merge/$', 'views.hero.merge_hero'),
     
     url(r'^gem/merge/$', 'views.gem.merge'),
+    
+    url(r'^hang/$', 'views.battle.hang'),
+    url(r'^hang/cancel/$', 'views.battle.hang_cancel'),
+    
+    url(r'^prize/$', 'views.prize.prize_get'),
 )

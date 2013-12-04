@@ -148,3 +148,110 @@ class GemTest(TransactionTestCase):
     
     def test_error_merge(self):
         self._merge(49, 1, False, ret=600)
+
+
+
+
+class HangTest(TransactionTestCase):
+    def setUp(self):
+        char = char_initialize(1, 1, 'a')
+        self.session = crypto.encrypt('1:1:{0}'.format(char.id))
+    
+    def tearDown(self):
+        tests._teardown()
+    
+    
+    def _hang(self):
+        req = protomsg.HangRequest()
+        req.session = self.session
+        req.stage_id = 1
+        req.hours = 8
+        
+        data = tests.pack_data(req)
+        res = tests.make_request('/hang/', data)
+        msgs = tests.unpack_data(res)
+    
+        return msgs
+    
+    def _cancel(self):
+        req = protomsg.HangCancelRequest()
+        req.session = self.session
+        
+        data = tests.pack_data(req)
+        res = tests.make_request('/hang/cancel/', data)
+        msgs = tests.unpack_data(res)
+        
+        return msgs
+        
+    
+    
+    def test_normal_hang(self):
+        msgs = self._hang()
+        
+        for id_of_msg, len_of_msg, msg in msgs:
+            if id_of_msg == RESPONSE_NOTIFY_TYPE["HangResponse"]:
+                data = protomsg.HangResponse()
+                data.ParseFromString(msg)
+                self.assertEqual(data.ret, 0)
+        
+        msgs = self._cancel()
+        
+        for id_of_msg, len_of_msg, msg in msgs:
+            if id_of_msg == RESPONSE_NOTIFY_TYPE["HangCancelResponse"]:
+                data = protomsg.HangCancelResponse()
+                data.ParseFromString(msg)
+                self.assertEqual(data.ret, 0)
+        
+        
+    
+    def test_error_hang_cancel(self):
+        msgs = self._cancel()
+        
+        for id_of_msg, len_of_msg, msg in msgs:
+            if id_of_msg == RESPONSE_NOTIFY_TYPE["HangCancelResponse"]:
+                data = protomsg.HangCancelResponse()
+                data.ParseFromString(msg)
+                self.assertEqual(data.ret, 702)
+        
+    
+
+class PrizeTest(TransactionTestCase):
+    def setUp(self):
+        char = char_initialize(1, 1, 'a')
+        self.char_id = char.id
+        self.session = crypto.encrypt('1:1:{0}'.format(char.id))
+    
+    def tearDown(self):
+        tests._teardown()
+    
+    
+    def _prize_get(self, pid):
+        req = protomsg.PrizeRequest()
+        req.session = self.session
+        req.prize_id = pid
+    
+        data = tests.pack_data(req)
+        res = tests.make_request('/prize/', data)
+        msgs = tests.unpack_data(res)
+    
+        return msgs
+
+    
+    def test_error_prize(self):
+        msgs = self._prize_get(1)
+    
+    
+    def test_normal_prize(self):
+        from core.mongoscheme import Hang
+        h = Hang(
+            id = self.char_id,
+            stage_id = 1,
+            hours = 8,
+            start = 100,
+            finished = True
+        )
+        
+        h.save()
+        
+        msgs = self._prize_get(1)
+    

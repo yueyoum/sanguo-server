@@ -9,7 +9,7 @@ from core.character import (
 
 from core.stage import get_already_stage, get_new_stage
 from core import GLOBAL
-from core.mongoscheme import MongoChar
+from core.mongoscheme import MongoChar, Hang, DoesNotExist
 import protomsg
 
 def character_notify(key, obj):
@@ -220,6 +220,31 @@ def remove_gem_notify(key, _id):
     redis_client.rpush(key, pack_msg(msg))
 
 
+
+def hang_notify(key, char_id):
+    char = MongoChar.objects.only('hang_hours').get(id=char_id)
+    try:
+        hang = Hang.objects.get(id=char_id)
+    except DoesNotExist:
+        hang = None
+    
+    hang_notify_with_data(key, char.hang_hours, hang)
+
+def hang_notify_with_data(key, hours, hang):
+    msg = protomsg.HangNotify()
+    # FIXME
+    msg.hours = hours or 8
+    if hang is not None:
+        msg.hang.stage_id = hang.stage_id
+        msg.hang.whole_hours = hang.hours
+        msg.hang.start_time = hang.start
+        # FIXME
+        msg.hang.finished = hang.finished
+
+    
+
+
+
 def login_notify(key, char_obj):
     hero_objs = get_char_hero_objs(char_obj.id)
 
@@ -237,4 +262,5 @@ def login_notify(key, char_obj):
     equipment_notify(key, char_id=char_obj.id)
     gem_notify(key, char_id=char_obj.id)
 
+    hang_notify(key, char_obj.id)
 

@@ -1,17 +1,24 @@
 from django.http import HttpResponse
 
+from mongoengine import DoesNotExist
 
 from core import GLOBAL
 from core.battle.hero import BattleHero, MonsterHero
 from core.battle.battle import Battle
-from core.mongoscheme import MongoChar
+from core.mongoscheme import MongoChar, Hang
 from core.signals import pve_finished_signal
 from core.stage import get_stage_drop
+from core.exception import SanguoViewException
+from core import notify
+
+from apps.character.cache import get_cache_character
 
 from utils import pack_msg
+from utils import timezone
 
 import protomsg
 
+from core.drives import redis_client
 
 class PVE(Battle):
     def load_my_heros(self):
@@ -85,4 +92,96 @@ def pve(request):
     data = pack_msg(response)
     return HttpResponse(data, content_type='text/plain')
 
+
+
+def hang(request):
+    req = request._proto
+    print req
+
+    _, _, char_id = request._decrypted_session.split(':')
+    char_id = int(char_id)
+    
+    mongo_char = MongoChar.objects.only('hang_hours').get(id=char_id)
+    # FIXME
+    hang_hours = mongo_char.hang_hours or 8
+    if req.hours > hang_hours:
+        raise SanguoViewException(701, "HangResponse")
+    
+    try:
+        hang = Hang.objects.get(id=char_id)
+    except DoesNotExist:
+        hang = None
+    
+    if hang is not None:
+        raise SanguoViewException(700, "HangResponse")
+    
+    hang = Hang(
+        id = char_id,
+        stage_id = req.stage_id,
+        hours = req.hours,
+        start = timezone.utc_timestamp(),
+        finished = False
+    )
+    
+    hang.save()
+    
+    mongo_char.hang_hours = hang_hours - req.hours
+    mongo_char.save()
+    
+    cache_char = get_cache_character(char_id)
+    notify_key = cache_char.notify_key
+    notify.hang_notify_with_data(notify_key, mongo_char.hang_hours, hang)
+    
+    response = protomsg.HangResponse()
+    response.ret = 0
+    data = pack_msg(response)
+    return HttpResponse(data, content_type='text/plain')
+    
+
+def hang_cancel(request):
+    req = request._proto
+    print req
+
+    _, _, char_id = request._decrypted_session.split(':')
+    char_id = int(char_id)
+    
+    try:
+        hang = Hang.objects.get(id=char_id)
+    except DoesNotExist:
+        hang = None
+        
+    if hang is None or hang.finished:
+        raise SanguoViewException(702, "HangCancelResponse")
+    
+    utc_now_timestamp = timezone.utc_timestamp()
+    
+    original_h = hang.hours
+    h, s = divmod((utc_now_timestamp - hang.start), 3600)
+    if s:
+        h += 1
+    print 'original_h =', original_h, 'h =', h
+    
+    mongo_char = MongoChar.objects.only('hang_hours').get(id=char_id)
+    mongo_char.hang_hours += original_h - h
+    
+    mongo_char.save()
+    
+    hang.finished = True
+    hang.save()
+    
+    # TODO send prize notify
+    pn = protomsg.PrizeNotify()
+    pn.prize_ids.append(1)
+    
+    redis_client.rpush(
+        request._decrypted_session,
+        pack_msg(pn)
+    )
+    
+    
+    
+    response = protomsg.HangCancelResponse()
+    response.ret = 0
+    data = pack_msg(response)
+    return HttpResponse(data, content_type='text/plain')
 
