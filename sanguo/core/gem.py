@@ -75,7 +75,7 @@ def merge_gem(_id, _amount, using_sycee, char_id):
     
     update_gems = []
     for gid, amount in condition_dict.iteritems():
-        char.gems[str(gid)] -= _amount
+        char.gems[str(gid)] -= amount
         
         update_gems.append( (gid, char.gems[str(gid)]) )
     
