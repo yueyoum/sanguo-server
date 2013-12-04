@@ -87,6 +87,8 @@ def merge_gem(_id, _amount, using_sycee, char_id):
     char.gems[str(_id)] = char.gems.get(str(_id), 0) + _amount
     _amount = char.gems[str(_id)]
     
+    char.save()
+    
     cache_char = get_cache_character(char_id)
     notify_key = cache_char.notify_key
     notify_method(notify_key, [(_id, _amount)])
