@@ -26,10 +26,10 @@ def save_cache_hero(hero_obj):
     h.char_id = hero_obj.char_id
     h.oid = hero_obj.original_id
     h.attack = hero_obj.attack
-    h.defense = hero_obj.original_id
-    h.hp = hero_obj.attack
-    h.crit = hero_obj.original_id
-    h.dodge = hero_obj.attack
+    h.defense = hero_obj.defense
+    h.hp = hero_obj.hp
+    h.crit = hero_obj.crit
+    h.dodge = hero_obj.dodge
 
     res = h.save()
     if res is not True:
