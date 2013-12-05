@@ -152,13 +152,13 @@ def login(request):
     )
     
     if char_id:
-        session_str = '{0}:{1}'.format(request._account_id, request._server_id)
-    else:
         session_str = '{0}:{1}:{2}'.format(
             request._account_id,
             request._server_id,
             request._char_id
         )
+    else:
+        session_str = '{0}:{1}'.format(request._account_id, request._server_id)
 
     session = crypto.encrypt(session_str)
     #if not need_create_new_char:
