@@ -240,12 +240,15 @@ def hang_notify_with_data(key, hours, hang):
         msg.hang.start_time = hang.start
         # FIXME
         msg.hang.finished = hang.finished
+        
+        if hang.finished:
+            prize_notify(key, 1)
     
     redis_client.rpush(key, pack_msg(msg))
 
     
 
-def prize_notify(key, char_id, prize_id):
+def prize_notify(key, prize_id):
     if isinstance(prize_id, (list, tuple)):
         ids = prize_id
     else:

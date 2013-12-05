@@ -38,7 +38,7 @@ def hang_finish(char_id, **kwargs):
     print "hang_finish", char_id
     Hang.objects(id=char_id).update_one(set__finished=True)
     notify.hang_notify('noti:{0}'.format(char_id), char_id)
-    notify.prize_notify('noti:{0}'.format(char_id), char_id, 1)
+    notify.prize_notify('noti:{0}'.format(char_id), 1)
 
 
 

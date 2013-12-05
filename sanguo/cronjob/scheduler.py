@@ -26,8 +26,11 @@ def add_hang_job(char_id, hours):
     print "add_hang_job:", job
 
 def cancel_hang_job(char_id):
-    job = HANG_JOB[char_id]
-    sched.unschedule_job(job)
-    print "cancel_hang_job:", job
+    try:
+        job = HANG_JOB[char_id]
+        sched.unschedule_job(job)
+        print "cancel_hang_job:", job
+    except KeyError:
+        pass
 
     

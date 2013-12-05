@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from core.mongoscheme import Hang
 
 from core.exception import SanguoViewException
+from core.notify import hang_notify
 
 from mongoengine import DoesNotExist
 
@@ -29,6 +30,8 @@ def prize_get(request):
     
     # FIXME , real prize
     hang.delete()
+    
+    hang_notify('noti:{0}'.format(char_id), char_id)
     
     response = protomsg.PrizeResponse()
     response.ret = 0
