@@ -1,12 +1,13 @@
 from django.dispatch import Signal
 
 register_signal = Signal(providing_args=['account_id'])
-login_signal = Signal(providing_args=['char_id'])
+login_signal = Signal(providing_args=['account_id', 'server_id', 'char_obj'])
 
 socket_changed_signal = Signal(providing_args=['hero', 'weapon', 'armor', 'jewelry'])
 pve_finished_signal = Signal(providing_args=['stage_id', 'win', 'star'])
 
 
+char_created_signal = Signal(providing_args=['account_id', 'server_id', 'char_obj'])
 char_changed_signal = Signal(providing_args=['cache_char_obj'])
 
 hero_changed_signal = Signal(providing_args=['cache_hero_obj'])

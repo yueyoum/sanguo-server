@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from models import Character
 
 from core.exception import SanguoViewException
-from core import notify
+from core.signals import login_signal, char_created_signal
 
 
 from core.character import char_initialize
@@ -32,6 +32,20 @@ def create_character(request):
 
     char = char_initialize(account_id, server_id, req.name)
     
+    login_signal.send(
+        sender = None,
+        account_id = account_id,
+        server_id = server_id,
+        char_obj = char
+    )
+    
+    char_created_signal.send(
+        sender = None,
+        account_id = account_id,
+        server_id = server_id,
+        char_obj = char
+    )
+    
     request._char_id = char.id
 
     new_session = '%s:%d' % (request._session, char.id)
@@ -40,13 +54,6 @@ def create_character(request):
     response = CreateCharacterResponse()
     response.ret = 0
     data = pack_msg(response, new_session)
-
-    #notify.login_notify(
-    #        request._decrypted_session,
-    #        char,
-    #        )
-    
-    notify.login_notify('noti:{0}'.format(char.id), char)
 
     return HttpResponse(data, content_type="text/plain")
 

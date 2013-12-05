@@ -13,7 +13,7 @@ from protomsg import (
 
 from core.world import server_list
 from core.exception import SanguoViewException
-from core.notify import login_notify
+from core.signals import login_signal
 from utils import pack_msg
 
 def create_new_user(**kwargs):
@@ -122,8 +122,10 @@ def login(request):
 
     user.last_login = timezone.now()
     user.save()
+    
+    request._account_id = user.id
+    request._server_id = req.server_id
 
-    key = "noti:%d-%d" % (user.id, req.server_id)
     if need_create_new_char is None:
         try:
             char = Character.objects.get(
@@ -131,15 +133,36 @@ def login(request):
                     server_id = req.server_id
                     )
             need_create_new_char = False
-            key = "noti:%d" % char.id
         except Character.DoesNotExist:
             need_create_new_char = True
 
 
+    if need_create_new_char:
+        char_id = None
+    else:
+        char_id = char.id
+        
+    request._char_id = char_id
 
-    session = crypto.encrypt(key)
-    if not need_create_new_char:
-        login_notify(key, char)
+    login_signal.send(
+        sender = None,
+        account_id = request._account_id,
+        server_id = request._server_id,
+        char_obj = char if char_id else None
+    )
+    
+    if char_id:
+        session_str = '{0}:{1}'.format(request._account_id, request._server_id)
+    else:
+        session_str = '{0}:{1}:{2}'.format(
+            request._account_id,
+            request._server_id,
+            request._char_id
+        )
+
+    session = crypto.encrypt(session_str)
+    #if not need_create_new_char:
+    #    login_notify(key, char)
 
     response = StartGameResponse()
     response.ret = 0
@@ -150,8 +173,6 @@ def login(request):
     response.need_create_new_char = need_create_new_char 
 
     data = pack_msg(response, session)
-    obj = HttpResponse(data, content_type='text/plain')
-    obj._redis_key = key
-    return obj
+    return HttpResponse(data, content_type='text/plain')
 
 

@@ -102,11 +102,15 @@ class PackMessageData(object):
         if char_id:
             key = 'noti:{0}'.format(char_id)
         else:
-            key = getattr(response, '_redis_key', None)
+            account_id = getattr(request, '_account_id', None)
+            if account_id:
+                key = 'noti:{0}-{1}'.format(
+                    account_id,
+                    request._server_id
+                )
+            else:
+                key = None
 
-        #key = getattr(request, '_decrypted_session', None) or getattr(
-        #        response, '_redis_key', None
-        #        )
         if key:
             pipeline = redis_client.pipeline()
             pipeline.lrange(key, 0, -1)
