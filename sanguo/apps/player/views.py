@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.utils import timezone
 
-from models import User
+from apps.player.models import User
 from apps.character.models import Character
 from utils import crypto
 
@@ -13,7 +13,7 @@ from protomsg import (
 
 from core.world import server_list
 from core.exception import SanguoViewException
-from core.signals import login_signal
+from core.signals import register_signal, login_signal
 from utils import pack_msg
 
 def create_new_user(**kwargs):
@@ -74,6 +74,10 @@ def register(request):
                 device_token = req.device_token
                 )
 
+    register_signal.send(
+        sender = None,
+        account_id = user.id
+    )
 
     response = RegisterResponse()
     response.ret = 0
@@ -161,8 +165,6 @@ def login(request):
         session_str = '{0}:{1}'.format(request._account_id, request._server_id)
 
     session = crypto.encrypt(session_str)
-    #if not need_create_new_char:
-    #    login_notify(key, char)
 
     response = StartGameResponse()
     response.ret = 0

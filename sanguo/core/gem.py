@@ -2,8 +2,13 @@ from core import GLOBAL
 from core.mongoscheme import MongoChar
 from core.exception import SanguoViewException
 
+from core.signals import (
+    gem_changed_signal,
+    gem_add_signal,
+    gem_del_signal,
+)
+
 def save_gem(gems, char_id):
-    from core.notify import add_gem_notify, update_gem_notify
     char = MongoChar.objects.only('gems').get(id=char_id)
     old_gems = char.gems
     
@@ -29,14 +34,20 @@ def save_gem(gems, char_id):
     char.save()
     
     if new_gems:
-        add_gem_notify('noti:{0}'.format(char_id), new_gems)
+        gem_add_signal.send(
+            sender = None,
+            char_id = char_id,
+            gems = new_gems
+        )
     if update_gems:
-        update_gem_notify('noti:{0}'.format(char_id), gems=update_gems)
+        gem_changed_signal.send(
+            sender = None,
+            char_id = char_id,
+            gems = update_gems
+        )
 
 
 def delete_gem(_id, _amount, char_id):
-    from core.notify import update_gem_notify, remove_gem_notify
-    
     char = MongoChar.objects.only('gems').get(id=char_id)
     this_gem_amount = char.gems[str(_id)]
     new_amount = this_gem_amount - _amount
@@ -46,18 +57,26 @@ def delete_gem(_id, _amount, char_id):
     if new_amount == 0:
         char.gems.pop(str(_id))
         char.save()
-        remove_gem_notify('noti:{0}'.format(char_id), _id)
+        gem_del_signal.send(
+            sender = None,
+            char_id = char_id,
+            gid = _id
+        )
     else:
         char.gems[str(_id)] = new_amount
         char.save()
-        update_gem_notify('noti:{0}'.format(char_id), [(_id, new_amount)])
+        gem_changed_signal.send(
+            sender = None,
+            char_id = char_id,
+            gems = [(_id, new_amount)]
+        )
 
 
 def merge_gem(_id, _amount, using_sycee, char_id):
-    from core.notify import add_gem_notify, update_gem_notify
     condition = GLOBAL.GEM[_id]['merge_condition']
     print "merge_gem,", _id, _amount, condition
     # FIXME
+    # TODO using_sycee
     
     condition_dict = {}
     for gid in condition:
@@ -69,20 +88,40 @@ def merge_gem(_id, _amount, using_sycee, char_id):
             raise SanguoViewException(600)
     
     update_gems = []
+    remove_gems = []
+    new_gem = []
     for gid, amount in condition_dict.iteritems():
-        char.gems[str(gid)] -= amount
+        char.gems[str(gid)] -= amount * _amount
         
-        update_gems.append( (gid, char.gems[str(gid)]) )
+        if char.gems[str(gid)] == 0:
+            char.gems.pop(str(gid))
+            remove_gems.append(gid)
+        else:
+            update_gems.append( (gid, char.gems[str(gid)]) )
     
     if str(_id) in char.gems:
-        notify_method = update_gem_notify
+        char.gems[str(_id)] += 1
+        update_gems.append( (_id, char.gems[str(_id)]) )
     else:
-        notify_method = add_gem_notify
-    
-    char.gems[str(_id)] = char.gems.get(str(_id), 0) + _amount
-    _amount = char.gems[str(_id)]
+        char.gems[str(_id)] = _amount
+        new_gem = [(_id, _amount)]
     
     char.save()
     
-    notify_method('noti:{0}'.format(char_id), [(_id, _amount)])
+    gem_changed_signal.send(
+        sender = None,
+        char_id = char_id,
+        gems = update_gems
+    )
     
+    gem_add_signal.send(
+        sender = None,
+        char_id = char_id,
+        gems = new_gem
+    )
+    
+    gem_del_signal.send(
+        sender = None,
+        char_id = char_id,
+        gid = remove_gems
+    )

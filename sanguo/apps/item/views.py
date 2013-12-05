@@ -3,11 +3,14 @@ from django.http import HttpResponse
 from models import Equipment
 
 from core import GLOBAL
-from core import notify
 from core.exception import SanguoViewException
 from core.equip import get_equip_level_by_whole_exp, delete_equip, embed_gem
 from core.mongoscheme import MongoChar
 from utils import pack_msg
+
+from core.signals import (
+    equip_changed_signal,
+)
 
 from apps.item.cache import get_cache_equipment
 
@@ -39,7 +42,6 @@ def strengthen_equip(request):
     all_exp = 0
     all_gold = 0
     for _id in req.cost_ids:
-        print 'get equip, ', _id
         equip = get_cache_equipment(_id)
         level = equip.level
         tid = equip.tid
@@ -52,25 +54,22 @@ def strengthen_equip(request):
         all_exp += exp
         all_gold += gold
     
-    target = get_cache_equipment(req.id)
-    final_exp = target.exp + all_exp
+    target_model_obj = Equipment.objects.get(id=req.id)
+    final_exp = target_model_obj.exp + all_exp
     
     new_level = get_equip_level_by_whole_exp(final_exp)
     
-    target_model_obj = Equipment.objects.get(id=req.id)
     target_model_obj.exp = final_exp
     target_model_obj.level = new_level
     target_model_obj.save()
     
-    target = get_cache_equipment(req.id)
-    notify.update_equipment_notify('noti:{0}'.format(char_id), target)
+    equip_changed_signal.send(
+        sender = None,
+        cache_equip_obj = get_cache_equipment(req.id)
+    )
     
     
     delete_equip([_id for _id in req.cost_ids])
-    notify.remove_equipment_notify(
-        'noti:{0}'.format(char_id),
-        [_id for _id in req.cost_ids]
-        )
 
     response = StrengthEquipResponse()
     response.ret = 0
@@ -102,12 +101,7 @@ def sell_equip(request):
     
     print 'all_gold =', all_gold
     
-    removed_ids = [_id for _id in req.ids]
-    delete_equip(removed_ids)
-    notify.remove_equipment_notify(
-        'noti:{0}'.format(char_id),
-        removed_ids
-    )
+    delete_equip([_id for _id in req.ids])
     
     response = SellEquipResponse()
     response.ret = 0

@@ -1,5 +1,5 @@
 from redisco import models
-from core.signals import socket_changed_signal
+from core.signals import socket_changed_signal, hero_changed_signal
 from apps.item.cache import get_cache_equipment
 
 from core.mongoscheme import MongoChar
@@ -44,7 +44,6 @@ def delete_cache_hero(_id):
 def get_cache_hero(_id):
     h = CacheHero.objects.get_by_id(_id)
     if h:
-        print "CacheHero, hit !!!"
         return h
     
     from core.hero import get_hero_obj
@@ -80,15 +79,14 @@ def _add_extra_attr_to_hero(hero_obj, weapon, armor, jewelry):
 
 
 def _hero_attribute_change(sender, hero, weapon, armor, jewelry, **kwargs):
-    from core.notify import update_hero_notify
-    print "_hero_attribute_change", hero, weapon, armor, jewelry
     this_hero = get_cache_hero(hero)
     _add_extra_attr_to_hero(this_hero, weapon, armor, jewelry)
-    
     this_hero.save()
     
-    update_hero_notify('noti:{0}'.format(this_hero.char_id), [this_hero])
-        
+    hero_changed_signal.send(
+        sender = None,
+        cache_hero_obj = this_hero
+    )
 
 socket_changed_signal.connect(
     _hero_attribute_change,

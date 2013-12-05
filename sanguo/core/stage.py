@@ -1,12 +1,14 @@
+# -*- coding: utf-8 -*-
 import random
 from collections import defaultdict
 
 from core.mongoscheme import MongoChar, Hang
-from core.signals import pve_finished_signal
 from core.equip import generate_and_save_equip
 from core.gem import save_gem
 from core import GLOBAL
-from core.character import model_character_change
+from core.character import character_change
+
+from utils import timezone
 
 STAGE = GLOBAL.STAGE
 STAGE_DROP = GLOBAL.STAGE_DROP
@@ -72,7 +74,7 @@ def get_stage_drop(char_id, stage_id):
 
 def save_drop(char_id, exp, gold, equips, gems):
     print "save drop:", exp, gold, equips, gems
-    model_character_change(char_id, exp=exp, gold=gold)
+    character_change(char_id, exp=exp, gold=gold)
     
     # equips
     # FIXME bulk create
@@ -86,28 +88,45 @@ def save_drop(char_id, exp, gold, equips, gems):
 
 
 
-def _pve_finished(sender, char_id, stage_id, win, star, **kwargs):
-    print "_pve_finished", char_id, stage_id, win, star
-    from core.notify import current_stage_notify, new_stage_notify
-    current_stage_notify('noti:{0}'.format(char_id), stage_id, star)
-    
-    char = MongoChar.objects.only('stages', 'stage_new').get(id=char_id)
-    stages = char.stages
-    if win:
-        # FIXME
-        char.stages[str(stage_id)] = star
-        new_stage_id = stage_id + 1
-        if char.stage_new != new_stage_id:
-            char.stage_new = new_stage_id
-            
-            if str(new_stage_id) not in stages.keys():
-                new_stage_notify('noti:{0}'.format(char_id), new_stage_id)
-        
-        char.save()
-        
+#def get_plunder_list(char_id):
+#    mongo_char = MongoChar.objects.only('stages').get(id=char_id)
+#    stages = mongo_char.stages
+#    
+#    # FIXME 高效的最后一个三星关卡找取
+#    stages_items = [int(k) for k, v in stages.iteritems() if v]
+#    stages_items.sort()
+#    
+#    def _hang_list_filter(h):
+#        total_seconds = h.hours * 3600
+#        passed_seconds = timezone.utc_timestamp() - h.start
+#        if passed_seconds * 5 >= total_seconds:
+#            return True
+#        return False
+#    
+#    def _find_hang(stage_id):
+#        hang_list = Hang.objects(stage_id=stage_id)
+#        hang_list = filter(_hang_list_filter, hang_list)
+#        return [h.id for h in hang_list]
+#    
+#    plunder_list = []
+#    needs_npc_amount = 0
+#    if not stages_items:
+#        print "get npc"
+#        needs_npc_amount = 10
+#    else:
+#        max_star_stage_id = stages_items[-1]
+#        
+#        for i in range(5):
+#            this_stage_id = max_star_stage_id - i
+#            plunder_list.extend(_find_hang(this_stage_id))
+#            
+#            if len(plunder_list) >= 10:
+#                break
+#        
+#        if len(plunder_list) >= 10:
+#            plunder_list = plunder_list[:10]
+#        else:
+#            needs_npc_amount = 10 - len(plunder_list)
+#    
+#    
 
-
-pve_finished_signal.connect(
-    _pve_finished,
-    dispatch_uid = 'core.stage._pve_finished'
-)

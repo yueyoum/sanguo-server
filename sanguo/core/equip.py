@@ -4,8 +4,9 @@ from core import GLOBAL
 from apps.item.cache import encode_random_attrs, get_cache_equipment
 from apps.item.models import Equipment
 from core.gem import save_gem
-from core.formation import find_socket_by_equip
-from core.signals import socket_changed_signal
+from core.signals import (
+    equip_changed_signal,
+    )
 
 EQUIP_TEMPLATE = GLOBAL.EQUIP.EQUIP_TEMPLATE
 EQUIP_LEVEL_INFO = GLOBAL.EQUIP.EQUIP_LEVEL_INFO
@@ -56,7 +57,6 @@ def get_equip_level_by_whole_exp(exp):
 
 def embed_gem(char_id, equip_id, hole_id, gem_id):
     # gem_id = 0 表示取下hole_id对应的宝石
-    from core.notify import update_equipment_notify
     cache_equip = get_cache_equipment(equip_id)
     gems = cache_equip.gems
     
@@ -83,59 +83,9 @@ def embed_gem(char_id, equip_id, hole_id, gem_id):
     equip.save()
     
     cache_equip = get_cache_equipment(equip_id)
-    update_equipment_notify('noti:{0}'.format(char_id), cache_equip)
     
-    socket = find_socket_by_equip(char_id, equip_id)
-    print socket
-    if socket and socket.hero:
-        tp = EQUIP_TEMPLATE[cache_equip.tid]['tp']
-        kwargs = {
-            'hero': socket.hero,
-            'weapon': 0,
-            'armor': 0,
-            'jewelry': 0
-        }
-        if tp == 1:
-            kwargs['weapon'] = equip_id
-        elif tp == 2:
-            kwargs['jewelry'] = equip_id
-        else:
-            kwargs['armor'] = equip_id
-        
-        socket_changed_signal.send(sender=None, **kwargs)
-        
+    equip_changed_signal.send(
+        sender = None,
+        cache_equip_obj = cache_equip
+    )
     
-    
-
-#def _calculate(level, quality, tp, extra):
-#    tp_name = _TP_NAME[tp]
-#
-#    attrs = {
-#            'attack': 0,
-#            'hp': 0,
-#            'defense': 0,
-#            }
-#
-#    value = EQUIP_LEVEL_INFO[level][tp_name]
-#    level_step = get_equip_level_step(level)
-#    modulus = EQUIP_LEVEL_RANGE_INFO[level_step]['modulus'][quality]
-#
-#    value *= modulus
-#
-#    attrs[tp_name] = value
-#    attrs['extra'] = extra
-#
-#    return attrs
-#
-#def equip_calculate(_id):
-#    equip = document_equip.get(_id)
-#    meta_data = EQUIP[equip['oid']]
-#
-#    return _calculate(
-#            equip['level'],
-#            meta_data['quality'],
-#            meta_data['tp'],
-#            equip['extra']
-#            )
-#    
-#

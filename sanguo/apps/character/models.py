@@ -9,7 +9,7 @@ class Character(models.Model):
     
     name = models.CharField(max_length=10)
     gold = models.IntegerField(default=0)
-    gem = models.IntegerField(default=0)
+    sycee = models.IntegerField(default=0)
     
     level = models.IntegerField(default=1)
     exp = models.IntegerField(default=0)

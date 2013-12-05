@@ -1,6 +1,5 @@
 from core.drives import redis_client
 from utils import pack_msg
-from core.hero import Hero
 from core.character import (
     get_char_formation,
     get_char_hero_objs,
@@ -17,7 +16,7 @@ def character_notify(key, obj):
     data.char.id = obj.id
     data.char.name = obj.name
     data.char.gold = obj.gold
-    data.char.gem = obj.gem
+    data.char.gem = obj.sycee
     data.char.level = obj.level
     
     _ ,current_exp, next_level_exp = GLOBAL.LEVEL_TOTALEXP[obj.exp]
@@ -229,6 +228,7 @@ def hang_notify(key, char_id):
         hang = None
     
     hang_notify_with_data(key, char.hang_hours, hang)
+    return hang
 
 def hang_notify_with_data(key, hours, hang):
     msg = protomsg.HangNotify()
@@ -240,9 +240,6 @@ def hang_notify_with_data(key, hours, hang):
         msg.hang.start_time = hang.start
         # FIXME
         msg.hang.finished = hang.finished
-        
-        if hang.finished:
-            prize_notify(key, 1)
     
     redis_client.rpush(key, pack_msg(msg))
 
@@ -277,5 +274,7 @@ def login_notify(key, char_obj):
     equipment_notify(key, char_id=char_obj.id)
     gem_notify(key, char_id=char_obj.id)
 
-    hang_notify(key, char_obj.id)
+    hang = hang_notify(key, char_obj.id)
+    if hang and hang.finished:
+        prize_notify(key, 1)
 

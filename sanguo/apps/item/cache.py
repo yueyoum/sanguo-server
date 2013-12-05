@@ -1,7 +1,5 @@
 from redisco import models
 
-from core.mongoscheme import MongoChar
-
 def encode_random_attrs(attrs):
     # attrs: [{1: {value: x, is_percent: y}}, ...]
     # serialize to: '1,x,y|2,x,y...'
@@ -77,18 +75,6 @@ class CacheEquipment(models.Model):
 
 
 def save_cache_equipment(model_obj):
-    from core.notify import add_equipment_notify
-    MongoChar.objects(id=model_obj.char_id).update_one(
-        add_to_set__equips = model_obj.id
-    )
-    #try:
-    #    mc = MongoChar.objects.only('equips').get(id=model_obj.char_id)
-    #except DoesNotExist:
-    #    mc = MongoChar()
-    #    mc.id = model_obj.char_id
-    #if model_obj.id not in mc.equips:
-    #    mc.equips.append(model_obj.id)
-    #    mc.save()
     
     e = CacheEquipment.objects.get_by_id(model_obj.id)
     if e is None:
@@ -102,20 +88,11 @@ def save_cache_equipment(model_obj):
     if res is not True:
         raise Exception(str(res))
     
-    add_equipment_notify('noti:{0}'.format(model_obj.char_id), e)
     return e
     
     
 
 def delete_cache_equipment(model_obj):
-    from core.notify import remove_equipment_notify
-    MongoChar.objects(id=model_obj.char_id).update_one(
-        pull__equips = model_obj.id
-    )
-    
-    remove_equipment_notify('noti:{0}'.format(model_obj.char_id), model_obj.id)
-    
-    
     e = CacheEquipment.objects.get_by_id(model_obj.id)
     if e:
         print "CacheEquipment, cache delete!!!"
@@ -125,7 +102,6 @@ def delete_cache_equipment(model_obj):
 def get_cache_equipment(_id):
     e = CacheEquipment.objects.get_by_id(_id)
     if e:
-        print "CacheEquipment, cache hit!!!"
         return e
 
     from apps.item.models import Equipment
@@ -133,5 +109,4 @@ def get_cache_equipment(_id):
     
     e = save_cache_equipment(model_obj)
     return e
-    
     

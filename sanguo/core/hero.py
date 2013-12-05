@@ -1,7 +1,9 @@
 from core import GLOBAL
 from core.drives import document_ids
 from core.mongoscheme import MongoHero
+from core.signals import hero_add_signal, hero_del_signal
 from apps.character.cache import get_cache_character
+from core.cache import delete_cache_hero
 
 
 def cal_hero_property(original_id, level):
@@ -45,13 +47,12 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
     for i, _id in enumerate(id_range):
         MongoHero(id=_id, char=char_id, oid=hero_original_ids[i]).save()
 
-    print "id_range =", id_range
-    
     if add_notify:
-        from core.notify import add_hero_notify
-        from core.cache import get_cache_hero
-        heros = [get_cache_hero(hid) for hid in id_range]
-        add_hero_notify('noti:{0}'.format(char_id), heros)
+        hero_add_signal.send(
+            sender = None,
+            char_id = char_id,
+            hero_ids = id_range
+        )
     
     return id_range
 
@@ -67,5 +68,13 @@ def get_hero_obj(_id):
     return Hero(_id, oid, level, char_id, [])
 
 
-def delete_hero(_id):
-    MongoHero.objects(id=_id).delete()
+def delete_hero(char_id, ids):
+    for i in ids:
+        MongoHero.objects(id=i).delete()
+        delete_cache_hero(i)
+
+    hero_del_signal.send(
+        sender = None,
+        char_id = char_id,
+        hero_ids = ids
+    )

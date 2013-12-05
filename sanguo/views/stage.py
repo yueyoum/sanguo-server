@@ -9,7 +9,6 @@ from core.mongoscheme import MongoChar, Hang
 from core.signals import pve_finished_signal
 from core.stage import get_stage_drop
 from core.exception import SanguoViewException
-from core import notify
 
 from core.signals import hang_add_signal, hang_cancel_signal
 
@@ -111,10 +110,21 @@ def hang(request):
     if hang is not None:
         raise SanguoViewException(700, "HangResponse")
     
+    hang = Hang(
+        id = char_id,
+        stage_id = req.stage_id,
+        hours = req.hours,
+        start = timezone.utc_timestamp(),
+        finished = False
+    )
+    
+    hang.save()
+    mongo_char.hang_hours = hang_hours - req.hours
+    mongo_char.save()
+    
     hang_add_signal.send(
         sender = None,
         char_id = char_id,
-        stage_id = req.stage_id,
         hours = req.hours
     )
     
@@ -135,6 +145,18 @@ def hang_cancel(request):
         
     if hang is None or hang.finished:
         raise SanguoViewException(702, "HangCancelResponse")
+
+    mongo_char = MongoChar.objects.only('hang_hours').get(id=char_id)
+    utc_now_timestamp = timezone.utc_timestamp()
+    
+    original_h = hang.hours
+    h, s = divmod((utc_now_timestamp - hang.start), 3600)
+    if s:
+        h += 1
+    print 'original_h =', original_h, 'h =', h
+    
+    mongo_char.hang_hours += original_h - h
+    mongo_char.save()
     
     hang_cancel_signal.send(
         sender = None,

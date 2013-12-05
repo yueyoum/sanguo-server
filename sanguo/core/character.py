@@ -4,6 +4,9 @@ from core.mongoscheme import MongoChar, MongoHero
 from core import GLOBAL
 from core.hero import save_hero
 from core.formation import save_socket, save_formation
+
+from core.signals import char_changed_signal
+
 from apps.character.models import Character
 from apps.item.cache import get_cache_equipment
 
@@ -32,7 +35,7 @@ def char_initialize(account_id, server_id, name):
             3, 0, 0,
             ]
 
-    save_formation(char_id, socket_ids)
+    save_formation(char_id, socket_ids, send_notify=False)
 
 
     # 将关卡1设置为new 可进入
@@ -78,12 +81,11 @@ def get_char_equipment_objs(char_id):
 
 
 
-def model_character_change(char_id, exp=0, honor=0, gold=0, gem=0):
-    from core.notify import character_notify
+def character_change(char_id, exp=0, honor=0, gold=0, sycee=0):
     char = Character.objects.get(id=char_id)
     char.gold += gold
     char.honor += honor
-    char.gem += gem
+    char.sycee += sycee
     
     if exp:
         new_exp = char.exp + exp
@@ -94,5 +96,8 @@ def model_character_change(char_id, exp=0, honor=0, gold=0, gem=0):
     # TODO honor
     char.save()
     
-    character_notify('noti:{0}'.format(char_id), char)
+    char_changed_signal.send(
+        sender = None,
+        char_obj = char
+    )
     

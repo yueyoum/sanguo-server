@@ -2,7 +2,6 @@ from django.http import HttpResponse
 
 from core.exception import SanguoViewException
 from core.formation import save_socket, save_formation
-from core import notify
 from core.signals import socket_changed_signal
 
 from protomsg import (
@@ -52,7 +51,6 @@ def set_formation(request):
         raise SanguoViewException(400, "SetFormationResponse")
 
     save_formation(char_id, [int(s) for s in socket_ids])
-    notify.formation_notify('noti:{0}'.format(char_id), char_id, formation=socket_ids)
 
     response = SetFormationResponse()
     response.ret = 0

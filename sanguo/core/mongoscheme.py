@@ -57,8 +57,12 @@ class Hang(Document):
     finished = BooleanField()
 
     meta = {
-        'collection': 'hang'
+        'collection': 'hang',
+        'indexes': ['stage_id',]
     }
+
+
+Hang.ensure_indexes()
 
 
 

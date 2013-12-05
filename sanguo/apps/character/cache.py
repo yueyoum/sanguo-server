@@ -6,7 +6,7 @@ class CacheCharacter(models.Model):
     
     name = models.CharField(indexed=False, required=True)
     gold = models.IntegerField(indexed=False, required=True)
-    gem = models.IntegerField(indexed=False, required=True)
+    sycee = models.IntegerField(indexed=False, required=True)
     level = models.IntegerField(indexed=False, required=True)
     exp = models.IntegerField(indexed=False, required=True)
     official = models.IntegerField(indexed=False, required=True)
