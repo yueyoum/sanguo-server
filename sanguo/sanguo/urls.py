@@ -23,7 +23,7 @@ urlpatterns = patterns('',
     
     url(r'^test/$', 'views.cmd.cmd'),
 
-    url(r'^pve/$', 'views.battle.pve'),
+    url(r'^pve/$', 'views.stage.pve'),
     url(r'^formation/set/$', 'views.formation.set_formation'),
     url(r'^socket/set/$', 'views.formation.set_socket'),
     url(r'^hero/get/$', 'views.hero.pick_hero'),
@@ -31,8 +31,8 @@ urlpatterns = patterns('',
     
     url(r'^gem/merge/$', 'views.gem.merge'),
     
-    url(r'^hang/$', 'views.battle.hang'),
-    url(r'^hang/cancel/$', 'views.battle.hang_cancel'),
+    url(r'^hang/$', 'views.stage.hang'),
+    url(r'^hang/cancel/$', 'views.stage.hang_cancel'),
     
     url(r'^prize/$', 'views.prize.prize_get'),
 )

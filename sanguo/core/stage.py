@@ -1,8 +1,7 @@
 import random
 from collections import defaultdict
 
-from core.mongoscheme import MongoChar
-from apps.character.cache import get_cache_character
+from core.mongoscheme import MongoChar, Hang
 from core.signals import pve_finished_signal
 from core.equip import generate_and_save_equip
 from core.gem import save_gem
@@ -84,6 +83,7 @@ def save_drop(char_id, exp, gold, equips, gems):
     # gems
     save_gem(gems, char_id)
     
+
 
 
 def _pve_finished(sender, char_id, stage_id, win, star, **kwargs):

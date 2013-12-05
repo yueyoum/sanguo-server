@@ -11,6 +11,8 @@ from core.stage import get_stage_drop
 from core.exception import SanguoViewException
 from core import notify
 
+from core.signals import hang_add_signal, hang_cancel_signal
+
 from apps.character.cache import get_cache_character
 
 from utils import pack_msg
@@ -109,20 +111,12 @@ def hang(request):
     if hang is not None:
         raise SanguoViewException(700, "HangResponse")
     
-    hang = Hang(
-        id = char_id,
+    hang_add_signal.send(
+        sender = None,
+        char_id = char_id,
         stage_id = req.stage_id,
-        hours = req.hours,
-        start = timezone.utc_timestamp(),
-        finished = False
+        hours = req.hours
     )
-    
-    hang.save()
-    
-    mongo_char.hang_hours = hang_hours - req.hours
-    mongo_char.save()
-    
-    notify.hang_notify_with_data('noti:{0}'.format(char_id), mongo_char.hang_hours, hang)
     
     response = protomsg.HangResponse()
     response.ret = 0
@@ -142,32 +136,10 @@ def hang_cancel(request):
     if hang is None or hang.finished:
         raise SanguoViewException(702, "HangCancelResponse")
     
-    utc_now_timestamp = timezone.utc_timestamp()
-    
-    original_h = hang.hours
-    h, s = divmod((utc_now_timestamp - hang.start), 3600)
-    if s:
-        h += 1
-    print 'original_h =', original_h, 'h =', h
-    
-    mongo_char = MongoChar.objects.only('hang_hours').get(id=char_id)
-    mongo_char.hang_hours += original_h - h
-    
-    mongo_char.save()
-    
-    hang.finished = True
-    hang.save()
-    
-    # TODO send prize notify
-    pn = protomsg.PrizeNotify()
-    pn.prize_ids.append(1)
-    
-    redis_client.rpush(
-        'noti:{0}'.format(char_id),
-        pack_msg(pn)
+    hang_cancel_signal.send(
+        sender = None,
+        char_id = char_id
     )
-    
-    
     
     response = protomsg.HangCancelResponse()
     response.ret = 0
