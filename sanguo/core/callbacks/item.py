@@ -86,10 +86,11 @@ def _gem_add(char_id, gems, **kwargs):
 
 
 def _gem_del(char_id, gid, **kwargs):
-    remove_gem_notify(
-        'noti:{0}'.format(char_id),
-        gid
-    )
+    if gid:
+        remove_gem_notify(
+            'noti:{0}'.format(char_id),
+            gid
+        )
     
 
 
