@@ -4,11 +4,12 @@ import logging
 from random import randint
 from collections import defaultdict
 
-from core.hero import Hero
 from core import GLOBAL
 
 from core.cache import get_cache_hero
 from apps.character.cache import get_cache_character
+
+from mixins import ActiveEffectMixin
 
 
 logger = logging.getLogger('battle')
@@ -90,7 +91,7 @@ def _logger_one_action(func):
     return deco
 
 
-class InBattleHero(object):
+class InBattleHero(ActiveEffectMixin):
     def __init__(self):
         self.die = False
         self.max_hp = self.hp
@@ -111,12 +112,9 @@ class InBattleHero(object):
                 self.defense_skills.append(s)
             elif s.mode == 3:
                 self.passive_skills.append(s)
-            elif s.mode == 4:
-                self.combine_skills.append(s)
 
     def __str__(self):
         return '<%d, %d>' % (self.id, self.original_id)
-
 
     def set_hp(self, value):
         self.damage_value = value
@@ -134,6 +132,21 @@ class InBattleHero(object):
     def cal_fighting_power(self):
         return 100
 
+    def _dot_effects(self, eff, msg):
+        value = eff.value
+        if eff.type_id == 1:
+            value = -value
+        self.set_hp(value)
+
+        hero_noti = msg.hero_notify.add()
+        hero_noti.target_id = self.id
+        hero_noti.hp = self.hp
+        hero_noti.eff = eff.type_id
+        hero_noti.value = value
+        
+        logger.debug("Dot %d, hp %d to Target %d. Hp %d" % (
+            eff.type_id, value, self.id, self.hp)
+            )
 
     def active_initiative_effects(self, msg):
         # 当英雄行动时，需要主动激活的效果
@@ -146,34 +159,10 @@ class InBattleHero(object):
 
             if eff.type_id == 1:
                 # 持续加血
-                value = int(eff.active_value)
-                self.set_hp(-value)
-
-                hero_noti = msg.hero_notify.add()
-                hero_noti.target_id = self.id
-                hero_noti.hp = self.hp
-                hero_noti.eff = 1
-                hero_noti.value = value
-
-                logger.debug("Dot Add hp %d to Target %d. Hp %d" % (
-                    value, self.id, self.hp)
-                    )
-
+                self._dot_effects(eff, msg)
             elif eff.type_id == 2:
                 # 持续伤害
-                value = int(eff.active_value)
-                self.set_hp(value)
-
-                hero_noti = msg.hero_notify.add()
-                hero_noti.target_id = self.id
-                hero_noti.hp = self.hp
-                hero_noti.eff = 2
-                hero_noti.value = value
-
-                logger.debug("Dot Damage %d to Target %d. Hp %d" % (
-                    value, self.id, self.hp)
-                    )
-
+                self._dot_effects(eff, msg)
                 if self.hp <= 0:
                     raise DieEvent()
 
@@ -183,8 +172,6 @@ class InBattleHero(object):
         self.active_property_effects()
 
     
-
-
     def active_property_effects(self):
         # 效果所引起的属性变化
         # 当英雄被攻击时，需要先激活自身的效果
@@ -195,47 +182,41 @@ class InBattleHero(object):
         self.using_dodge = self.dodge
 
         for eff in self.effect_manager.effects:
-            if eff.type_id == 1 or eff.type_id == 2 or eff.type_id == 11:
-                pass
-
-            elif eff.type_id == 3:
-                self.using_attack += eff.value / 100.0 * self.using_attack
-            elif eff.type_id == 4:
-                self.using_attack -= eff.value / 100.0 * self.using_attack
-            elif eff.type_id == 5:
-                self.using_defense += eff.value / 100.0 * self.using_defense
-            elif eff.type_id == 6:
-                self.using_defense -= eff.value / 100.0 * self.using_defense
-            elif eff.type_id == 7:
-                self.using_dodge += eff.value / 100.0 * self.using_dodge
-            elif eff.type_id == 8:
-                self.using_dodge -= eff.value / 100.0 * self.using_dodge
-            elif eff.type_id == 9:
-                self.using_crit += eff.value / 100.0 * self.using_crit
-            elif eff.type_id == 10:
-                self.using_crit -= eff.value / 100.0 * self.using_crit
-            else:
+            if eff.type_id in [1, 2, 11]:
+                continue
+            
+            if eff.type_id in [12, 13, 14]:
                 raise TypeError("using_effects, Unsupported eff: %d" % eff.type_id)
+            
+            self._active_effect(self, eff)
 
 
-    def find_prob(self, skills, base=70):
+    def find_skill(self, skills):
         # 计算是否触发技能
         if not skills:
             return None
 
-        skill_probs = [[s.trig_prob, s] for s in skills]
-        skill_probs.sort(key=lambda item: item[0])
-        skill_probs[0][0] += base
-        for i in range(1, len(skill_probs)):
-            skill_probs[i][0] += skill_probs[i-1][0]
-
-        prob = randint(1, skill_probs[-1][0])
-        if prob <= base:
-            return None
-
-        for _p, skill in skill_probs:
-            if prob <= _p:
-                return skill
+        #skill_probs = [[s.trig_prob, s] for s in skills]
+        #
+        #for i in range(1, len(skill_probs)):
+        #    skill_probs[i][0] += skill_probs[i-1][0]
+        #
+        #if skill_probs[-1][0] > 100:
+        #    raise Exception("find_skill, {0}".format(skill_probs))
+        #
+        #
+        #prob = randint(1, 100)
+        #for _p, skill in skill_probs:
+        #    if prob <= _p:
+        #        return skill
+        #return None
+        
+        for s in skills:
+            if s.trig_prob >= randint(1, 100):
+                return s
+        
+        return None
+        
 
 
     def action(self, target):
@@ -265,7 +246,7 @@ class InBattleHero(object):
         hero_noti.buffs.extend(self.effect_manager.effect_ids())
 
 
-        skill = self.find_prob(self.attack_skills)
+        skill = self.find_skill(self.attack_skills)
 
         if skill is None:
             logger.debug("%d: normal action" % self.id)
@@ -275,19 +256,19 @@ class InBattleHero(object):
             logger.debug("%d: skill action %d" % (self.id, skill.id))
             rival_targets = self.skill_action(target, skill, msg)
 
-        logger.debug("rival targets = %s" % str([rt.id for rt in rival_targets]))
-        for rt in rival_targets:
-            self.start_defense_skills(rt, self, msg)
-
-    def start_defense_skills(self, who, to, msg):
-        skill = self.find_prob(who.defense_skills, base=0)
-        if skill:
-            _defense_action_msg = msg.passiveaction.add()
-            _defense_action_msg.from_id = who.id
-            _defense_action_msg.skill_id = skill.id
-            logger.debug("Start Defense Skill %d, %d => %d" % (skill.id, who.id, to.id))
-            who.active_initiative_effects(_defense_action_msg)
-            who.skill_action(to, skill, _defense_action_msg)
+    #    logger.debug("rival targets = %s" % str([rt.id for rt in rival_targets]))
+    #    for rt in rival_targets:
+    #        self.start_defense_skills(rt, self, msg)
+    #
+    #def start_defense_skills(self, who, to, msg):
+    #    skill = self.find_skill(who.defense_skills, base=0)
+    #    if skill:
+    #        _defense_action_msg = msg.passiveaction.add()
+    #        _defense_action_msg.from_id = who.id
+    #        _defense_action_msg.skill_id = skill.id
+    #        logger.debug("Start Defense Skill %d, %d => %d" % (skill.id, who.id, to.id))
+    #        who.active_initiative_effects(_defense_action_msg)
+    #        who.skill_action(to, skill, _defense_action_msg)
 
 
     def real_damage_value(self, damage, target_defense):
@@ -299,43 +280,50 @@ class InBattleHero(object):
 
     def normal_action(self, target, msg):
         target.active_property_effects()
-        self._one_action(target, self.using_attack, msg)
-
-
-    @_logger_one_action
-    def _one_action(self, target, value, msg, eff=None):
-
+        
         msg_target = msg.skill_targets.add()
         msg_target.target_id = target.id
+        msg_target.is_dodge = False
+        msg_target.is_crit = False
         if self.using_crit >= randint(1, 100):
-            value *= 2
             msg_target.is_crit = True
-        else:
-            msg_target.is_crit = False
+            
+        if target.using_dodge >= randint(1, 100):
+            msg_target.is_dodge = True
+            
+            
+        text = "%d => %d, Crit: %s, Dodge: %s" % (
+                self.id,
+                target.id,
+                msg_target.is_crit,
+                msg_target.is_dodge
+                )
+        
+        logger.debug(text)
 
+        if  msg_target.is_dodge:
+            return
+        
+        value = self.using_attack
+        if msg_target.is_crit:
+            value *= 2
+        
+        value -= target.using_defense
+        if value < 0:
+            value = 0
+        
+        self._one_action(target, value, msg)
+
+
+    def _one_action(self, target, value, msg, eff=None):
         # FIXME
         if not eff or eff == 2:
             value = self.real_damage_value(value, target.using_defense)
 
-        # target.active_property_effects()
-        if not eff or eff not in [1, 12, 13]:
-            # 加血，反伤，吸血不能闪避
-            if target.using_dodge >= randint(1, 100):
-                msg_target.is_dodge = True
-                return msg_target, None
-
-        msg_target.is_dodge = False
         hero_noti = msg.hero_notify.add()
         hero_noti.target_id = target.id
 
         value = int(value)
-        if eff:
-            if eff == 1 or eff == 13:
-                value = -value
-            else:
-                if value < 0:
-                    value = 0
-
     
         target.set_hp(value)
 
@@ -344,98 +332,114 @@ class InBattleHero(object):
 
         if eff:
             hero_noti.eff = eff
+            
+        text = 'Value: %d, Hp: %d, Eff: %s' % (
+                value,
+                target.hp,
+                str(eff) if eff else 'None'
+                )
+        logger.debug(text)
 
-        return msg_target, hero_noti
 
+
+    def effect_on(self, eff, target, msg, surely_hit=False):
+        msg_target = msg.skill_targets.add()
+        msg_target.target_id = target.id
+        msg_target.is_dodge = False
+        msg_target.is_crit = False
+        if self.using_crit >= randint(1, 100):
+            msg_target.is_crit = True
+
+        target.active_property_effects()
+        if target not in self._team:
+            # 敌人
+            if not surely_hit:
+                if target.using_dodge >= randint(1, 100):
+                    msg_target.is_dodge = True
+                
+        text = "%d => %d, Crit: %s, Dodge: %s" % (
+                self.id,
+                target.id,
+                msg_target.is_crit,
+                msg_target.is_dodge
+                )
+        
+        logger.debug(text)
+        
+        if msg_target.is_dodge:
+            return
+
+
+        if eff.rounds == 0:
+            if eff.type_id == 1:
+                value = self._cal_eff_value(eff, target, 'hp')
+                if msg_target.is_crit:
+                    value *= 2
+                self._one_action(target, -value, msg, 1)
+            elif eff.type_id == 2:
+                value = self._cal_eff_value(eff, self, 'using_attack')
+                if msg_target.is_crit:
+                    value *= 2
+                value -= target.using_defense
+                if value < 0:
+                    value = 0
+                self._one_action(target, value, msg, 2)
+            elif eff.type_id == 12:
+                raise NotImplementedError("eff.type_id = 12")
+            elif eff.type_id == 13:
+                value = self._cal_eff_value(eff, self, 'using_attack')
+                if msg_target.is_crit:
+                    value *= 2
+                value -= target.using_defense
+                if value < 0:
+                    value = 0
+                self._one_action(target, value, msg, 13)
+                self._one_action(self, -value, msg, 13)
+            else:
+                raise Exception("eff.rounds = 0, but type_id = %d" % eff.type_id)
+        else:
+            self.effect_manager.add_effect_to_target(target, eff, msg)
+            
+        return True
+
+
+    def get_effect_target(self, eff, target):
+        if eff.target == 1:
+            return [target]
+        if eff.target == 2:
+            return [self]
+        if eff.target == 3:
+            return [h for h in target._team if h is not None and not h.die]
+        return [h for h in self._team if h is not None and not h.die]
 
 
     def skill_action(self, target, skill, msg):
         msg.skill_id = skill.id
-        effects = [eff.copy() for eff in skill.effects]
-
-        immediately_effs = []
-
-        rival_targets = set()
-
-        for eff in effects[:]:
-            if eff.rounds == 0:
-                immediately_effs.append(eff)
-                effects.remove(eff)
-
-        _rival_targets = self.effect_influence(target, immediately_effs, msg)
-
-        for eff in effects:
-            if eff.type_id == 1:
-                eff.active_value = eff.value
-            elif eff.type_id == 2:
-                eff.active_value = eff.value * self.using_attack / 100
-            # FIXME 上面两种计算active_value 错误
-
-            if eff.target == 1:
-                if not target.die:
-                    self.effect_manager.add_effect_to_target(target, eff, msg)
-                    rival_targets.add(target)
-            elif eff.target == 2:
-                if not self.die:
-                    self.effect_manager.add_effect_to_target(self, eff, msg)
-            elif eff.target == 3:
-                for _h in target._team:
-                    if _h is None or _h.die:
-                        continue
-
-                    self.effect_manager.add_effect_to_target(_h, eff, msg)
-                    rival_targets.add(_h)
-            elif eff.target == 4:
-                for _h in self._team:
-                    if _h is None or _h.die:
-                        continue
-
-                    self.effect_manager.add_effect_to_target(_h, eff, msg)
-
-        for _rt in _rival_targets:
-            rival_targets.add(_rt)
-
-        return rival_targets
-
-
-
-    def effect_influence(self, target, immediately_effs, msg):
-        rival_targets = set()
-
-        for eff in immediately_effs:
-            eff_target = []
-            if eff.target == 1:
-                if not target.die:
-                    eff_target = [target]
-                    rival_targets.add(target)
-            elif eff.target == 2:
-                if not self.die:
-                    eff_target = [self]
-            elif eff.target == 3:
-                eff_target = [t for t in target._team if t is not None and not t.die]
-                for t in eff_target:
-                    rival_targets.add(t)
-            else:
-                eff_target = [t for t in self._team if t is not None and not t.die]
-
-            for t in eff_target:
-                t.active_property_effects()
-                if eff.type_id == 1:
-                    self._one_action(t, eff.value * t.hp / 100, msg, 1)
-                elif eff.type_id == 2:
-                    self._one_action(t, eff.value * self.using_attack / 100, msg, 2)
-                elif eff.type_id == 12:
-                    self._one_action(t, eff.value * self.damage_value / 100, msg, 12)
-                elif eff.type_id == 13:
-                    value = eff.value * self.using_attack / 100
-                    self._one_action(t, value, msg, 13)
-                    t._one_action(self, value, msg, 13)
-                else:
-                    raise TypeError("UnSupported Effect Type: %d" % eff.type_id)
-
-        return [rt for rt in rival_targets if not rt.die]
-
-
+        
+        effects = []
+        for group_effs in skill.effects:
+            new_group_effs = [eff.copy() for eff in group_effs]
+            effects.append(new_group_effs)
+        
+        def _group_effs_action(effs):
+            head_eff = effs[0]
+            rest_eff = effs[1:]
+            
+            # 只要同一组中，第一个效果命中，同组的其他效果全部命中
+            head_targets = self.get_effect_target(head_eff, target)
+            hit = False
+            for t in head_targets:
+                hit = self.effect_on(head_eff, t, msg)
+            
+            for eff in rest_eff:
+                targets = self.get_effect_target(eff, target)
+                for t in targets:
+                    self.effect_on(eff, t, msg, hit)
+            
+        
+        for group_eff in effects:
+            _group_effs_action(group_eff)
+        
 
 
 class BattleHero(InBattleHero):
@@ -449,7 +453,8 @@ class BattleHero(InBattleHero):
         self.hp = hero.hp
         self.crit = hero.crit
         self.dodge = hero.dodge
-        self.skills = []
+        
+        self.skills = GLOBAL.HEROS[self.original_id]['skills']
         
         char = get_cache_character(hero.char_id)
         self.level = char.level

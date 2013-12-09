@@ -1,11 +1,19 @@
 import json
 import random
 
-from preset._base import data_path
+from _base import data_path
 
 def load_data():
     with open(data_path('hero.json'), 'r') as f:
         content = json.loads(f.read())
+
+    def _parse_skills(text):
+        if not text:
+            return []
+        skills = [int(s) for s in text.split(',')]
+        if len(skills) == 1 and skills[0] == 0:
+            return []
+        return skills
 
     data = {}
     for c in content:
@@ -15,6 +23,7 @@ def load_data():
         fields.pop("avatar")
         fields.pop("image")
         fields["id"] = _id
+        fields["skills"] = _parse_skills(fields['skills'])
         data[_id] = fields
 
     return data

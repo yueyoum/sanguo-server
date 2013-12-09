@@ -3,8 +3,8 @@
 """
 Skill
     MODE = (
-            (1, "攻击"), (2, "防御"),
-            (3, "被动"), (4, "组合"),
+            (1, "主动"), (2, "防御"),
+            (3, "被动"),
             )
 
 Effect
@@ -26,6 +26,8 @@ Effect
             (10, "降低暴击"),
             (11, "击晕"),
             (12, "反伤"),
+            (13, "吸血"),
+            (14, "生命上限")
             )
 """
 
@@ -33,28 +35,33 @@ Effect
 
 
 class Effect(object):
-    __slots__ = ['target', 'type_id', 'value', 'rounds', 'active_value']
-    def __init__(self, target, type_id, value, rounds):
+    __slots__ = ['group_id', 'target', 'type_id', 'value', 'rounds', 'is_percent']
+    def __init__(self, group_id, target, type_id, value, is_percent, rounds):
+        self.group_id = group_id
         self.target = target
         self.type_id = type_id
         self.value = value
+        self.is_percent = is_percent
         self.rounds = rounds
-        self.active_value = None
-        # active_value 的作用是对于 持续伤害 或者 持续加血，
-        # 它们后续作用的值，是第一次这些效果作用时的值
 
 
     def copy(self):
-        return Effect(self.target, self.type_id, self.value, self.rounds)
+        return Effect(
+                self.group_id,
+                self.target,
+                self.type_id,
+                self.value,
+                self.is_percent,
+                self.rounds
+                )
 
 
 
 class Skill(object):
-    __slots__ = ['id', 'mode', 'trig_condition', 'trig_prob', 'effects']
-    def __init__(self, sid, mode, trig_condition, trig_prob, effects):
+    __slots__ = ['id', 'mode', 'trig_prob', 'effects']
+    def __init__(self, sid, mode, trig_prob, effects):
         self.id = sid
         self.mode = mode
-        self.trig_condition = trig_condition
         self.trig_prob = trig_prob
         self.effects = effects
 

@@ -2,6 +2,8 @@
 import logging
 from collections import defaultdict
 
+from mixins import ActiveEffectMixin
+
 TARGET_RULE = {
         0: [0, 1, 2],
         1: [1, 0, 2],
@@ -49,7 +51,7 @@ class TargetEffects(object):
 
 
 
-class BattleField(object):
+class BattleField(ActiveEffectMixin):
     __slots__ = ['team_one', 'team_two', 'current_pos', 'msg']
 
     def __init__(self, team_one, team_two, msg):
@@ -57,13 +59,13 @@ class BattleField(object):
         self.team_two = team_two
 
         passive_skills = self.active_passive_effects()
-        combine_skills = self.active_combine_skills()
+        #combine_skills = self.active_combine_skills()
 
-        passive_skills += combine_skills
+        #passive_skills += combine_skills
 
         for h, effs in passive_skills.items():
             for e in effs:
-                self._active_effect(h, e)
+                self._active_effect(h, e, using_attr=False)
         
 
         for index, h in enumerate(self.team_one):
@@ -89,30 +91,6 @@ class BattleField(object):
                         )
 
         self.current_pos = 0
-
-
-
-    def _active_effect(self, target, eff):
-        if eff.type_id == 3:
-            target.attack += eff.value / 100.0 * target.attack
-        elif eff.type_id == 4:
-            target.attack -= eff.value / 100.0 * target.attack
-        elif eff.type_id == 5:
-            target.defense += eff.value / 100.0 * target.defense
-        elif eff.type_id == 6:
-            target.defense -= eff.value / 100.0 * target.defense
-        elif eff.type_id == 7:
-            target.dodge += eff.value / 100.0 * target.dodge
-        elif eff.type_id == 8:
-            target.dodge -= eff.value / 100.0 * target.dodge
-        elif eff.type_id == 9:
-            target.crit += eff.value / 100.0 * target.crit
-        elif eff.type_id == 10:
-            target.crit -= eff.value / 100.0 * target.crit
-        else:
-            raise TypeError("using_effects, Unsupported eff: %d" % eff.type_id)
-
-
 
 
     def active_passive_effects(self):
@@ -146,9 +124,6 @@ class BattleField(object):
         _active_all(self.team_one, self.team_two)
         _active_all(self.team_two, self.team_one)
 
-        # for h, effs in target_effect.items():
-        #     for e in effs:
-        #         self._active_effect(h, e)
 
         logger.debug("Active Passive Effects: %s" % str(target_effect))
         return target_effect
@@ -157,58 +132,58 @@ class BattleField(object):
 
 
 
-    def active_combine_skills(self):
-        # 组合技能效果
-        # FIXME
-        # 目前也认为是光环效果
-
-        target_effect = TargetEffects()
-        def _active(team):
-            combine_skills = defaultdict(lambda: 0)
-            for h in team:
-                if h is None:
-                    continue
-
-                for s in h.combine_skills:
-                    combine_skills[s] += 1
-
-            active_combine_skills = []
-            for s, count in combine_skills.iteritems():
-                if count >= s.trig_condition:
-                    active_combine_skills.append(s)
-
-            if active_combine_skills:
-                logger.debug("Active Combine skills %s for %s" % (
-                    str([s.id for s in active_combine_skills]),
-                    str([h.id for h in team if h is not None])
-                    ))
-
-            return active_combine_skills
-
-        def _active_all(team_one, team_two):
-            skills = _active(team_one)
-            for sk in skills:
-                for eff in sk.effects:
-                    if eff.target == 1:
-                        raise TypeError("UnSupported Passive Skill Effect, Target: 1")
-                    if eff.target == 2:
-                        raise TypeError("UnSupported Passive Skill Effect, Target: 2")
-                    elif eff.target == 3:
-                        for h in team_two:
-                            if h:
-                                target_effect.add(h, eff)
-                    elif eff.target == 4:
-                        for h in team_one:
-                            if h:
-                                target_effect.add(h, eff)
-
-                    # for t in eff_target:
-                    #     self._active_effect(t, eff)
-
-        _active_all(self.team_one, self.team_two)
-        _active_all(self.team_two, self.team_one)
-
-        return target_effect
+    #def active_combine_skills(self):
+    #    # 组合技能效果
+    #    # FIXME
+    #    # 目前也认为是光环效果
+    #
+    #    target_effect = TargetEffects()
+    #    def _active(team):
+    #        combine_skills = defaultdict(lambda: 0)
+    #        for h in team:
+    #            if h is None:
+    #                continue
+    #
+    #            for s in h.combine_skills:
+    #                combine_skills[s] += 1
+    #
+    #        active_combine_skills = []
+    #        for s, count in combine_skills.iteritems():
+    #            if count >= s.trig_condition:
+    #                active_combine_skills.append(s)
+    #
+    #        if active_combine_skills:
+    #            logger.debug("Active Combine skills %s for %s" % (
+    #                str([s.id for s in active_combine_skills]),
+    #                str([h.id for h in team if h is not None])
+    #                ))
+    #
+    #        return active_combine_skills
+    #
+    #    def _active_all(team_one, team_two):
+    #        skills = _active(team_one)
+    #        for sk in skills:
+    #            for eff in sk.effects:
+    #                if eff.target == 1:
+    #                    raise TypeError("UnSupported Passive Skill Effect, Target: 1")
+    #                if eff.target == 2:
+    #                    raise TypeError("UnSupported Passive Skill Effect, Target: 2")
+    #                elif eff.target == 3:
+    #                    for h in team_two:
+    #                        if h:
+    #                            target_effect.add(h, eff)
+    #                elif eff.target == 4:
+    #                    for h in team_one:
+    #                        if h:
+    #                            target_effect.add(h, eff)
+    #
+    #                # for t in eff_target:
+    #                #     self._active_effect(t, eff)
+    #
+    #    _active_all(self.team_one, self.team_two)
+    #    _active_all(self.team_two, self.team_one)
+    #
+    #    return target_effect
 
 
 

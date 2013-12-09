@@ -8,11 +8,13 @@ Replace this with more appropriate tests for your application.
 from django.test import TestCase, TransactionTestCase
 import protomsg
 
+
 from protomsg import (
         RESPONSE_NOTIFY_TYPE,
         PVERequest,
         PVEResponse,
         )
+from core import GLOBAL
 from core.character import char_initialize
 from core.gem import save_gem
 from core.equip import generate_and_save_equip
@@ -59,15 +61,16 @@ class CmdTest(TransactionTestCase):
 
 class BattleTest(TransactionTestCase):
     def setUp(self):
-        char_initialize(1, 1, 'a')
+        char = char_initialize(1, 1, 'a')
+        self.session = crypto.encrypt('1:1:{0}'.format(char.id))
         
     def tearDown(self):
         tests._teardown()
 
-    def test_pve(self):
+    def _pve(self, stage_id):
         req = PVERequest()
-        req.session = crypto.encrypt('1:1:1')
-        req.stage_id = 1
+        req.session = self.session
+        req.stage_id = stage_id
 
         data = tests.pack_data(req)
         res = tests.make_request('/pve/', data)
@@ -77,7 +80,13 @@ class BattleTest(TransactionTestCase):
             if id_of_msg == RESPONSE_NOTIFY_TYPE["PVEResponse"]:
                 data = PVEResponse()
                 data.ParseFromString(msg)
-                self.assertEqual(data.stage_id, 1)
+                self.assertEqual(data.stage_id, stage_id)
+    
+    def test_pve(self):
+        #stages = GLOBAL.STAGE
+        #for sid in stages.keys():
+        #    self._pve(sid)
+        self._pve(1)
 
 class SocketTest(TransactionTestCase):
     def setUp(self):

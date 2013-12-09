@@ -11,17 +11,16 @@ def cal_hero_property(original_id, level):
     defense = 15 + level * GLOBAL.HEROS[original_id]['defense_grow']
     hp = 45 + level * GLOBAL.HEROS[original_id]['hp_grow']
 
-    return attack, defense, hp
+    return int(attack), int(defense), int(hp)
 
 
 
 class Hero(object):
-    def __init__(self, hid, original_id, level, char_id, skills):
+    def __init__(self, hid, original_id, level, char_id):
         self.id = hid
         self.original_id = original_id
         self.level = level
         self.char_id = char_id
-        self.skills = skills
 
         self.attack, self.defense, self.hp = \
                 cal_hero_property(self.original_id, self.level)
@@ -29,10 +28,6 @@ class Hero(object):
         self.crit = 0
         self.dodge = 0
 
-        self.additional_attributes()
-
-    def additional_attributes(self):
-        pass
 
 
 
@@ -65,7 +60,7 @@ def get_hero(_id):
 
 def get_hero_obj(_id):
     _, oid, level, char_id = get_hero(_id)
-    return Hero(_id, oid, level, char_id, [])
+    return Hero(_id, oid, level, char_id)
 
 
 def delete_hero(char_id, ids):

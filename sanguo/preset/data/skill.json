@@ -3,10 +3,10 @@
     "pk": 1, 
     "model": "skill.skill", 
     "fields": {
-        "trig_prob": 80, 
-        "des": "\u6d4b\u8bd5\u52a0\u8840\uff0c\u6062\u590d\u76ee\u680750%\u751f\u547d", 
-        "name": "\u6cbb\u7597", 
-        "trig_condition": 1, 
+        "trig_prob": 100, 
+        "special_id": 1, 
+        "des": "\u9ed8\u8ba4\u666e\u901a\u653b\u51fb", 
+        "name": "\u666e\u901a\u653b\u51fb", 
         "mode": 1
     }
 },
@@ -14,10 +14,10 @@
     "pk": 2, 
     "model": "skill.skill", 
     "fields": {
-        "trig_prob": 80, 
-        "des": "\u6d4b\u8bd5\u4f24\u5bb3\uff0c\u5bf9\u76ee\u6807\u9020\u6210150%\u4f24\u5bb3", 
-        "name": "\u653b\u51fb", 
-        "trig_condition": 1, 
+        "trig_prob": 30, 
+        "special_id": 1, 
+        "des": "\u5355\u4f53\u4f24\u5bb3\u6280\u80fd", 
+        "name": "\u5355\u4f53\u4f24\u5bb3\u6280\u80fd", 
         "mode": 1
     }
 },
@@ -25,10 +25,10 @@
     "pk": 3, 
     "model": "skill.skill", 
     "fields": {
-        "trig_prob": 80, 
-        "des": "\u6d4b\u8bd5\u589e\u52a0\u653b\u51fb\uff0c\u589e\u52a0\u76ee\u680750%\u653b\u51fb", 
-        "name": "\u653b\u51fb\u5f3a\u5316", 
-        "trig_condition": 1, 
+        "trig_prob": 30, 
+        "special_id": 1, 
+        "des": "\u5355\u4f53\u4f24\u5bb3\u6280\u80fd+", 
+        "name": "\u5355\u4f53\u4f24\u5bb3\u6280\u80fd+", 
         "mode": 1
     }
 },
@@ -36,10 +36,10 @@
     "pk": 4, 
     "model": "skill.skill", 
     "fields": {
-        "trig_prob": 80, 
-        "des": "\u6d4b\u8bd5\u964d\u4f4e\u653b\u51fb\uff0c\u964d\u4f4e\u76ee\u680750%\u653b\u51fb", 
-        "name": "\u653b\u51fb\u5f31\u5316", 
-        "trig_condition": 1, 
+        "trig_prob": 30, 
+        "special_id": 1, 
+        "des": "\u5355\u4f53\u4f24\u5bb3\u6280\u80fd++", 
+        "name": "\u5355\u4f53\u4f24\u5bb3\u6280\u80fd++", 
         "mode": 1
     }
 },
@@ -47,10 +47,10 @@
     "pk": 5, 
     "model": "skill.skill", 
     "fields": {
-        "trig_prob": 80, 
-        "des": "\u6d4b\u8bd5\u589e\u52a0\u9632\u5fa1\uff0c\u589e\u52a0\u76ee\u680750%\u9632\u5fa1", 
-        "name": "\u9632\u5fa1\u5f3a\u5316", 
-        "trig_condition": 1, 
+        "trig_prob": 24, 
+        "special_id": 1, 
+        "des": "\u7fa4\u4f53\u4f24\u5bb3", 
+        "name": "\u7fa4\u4f53\u4f24\u5bb3", 
         "mode": 1
     }
 },
@@ -58,10 +58,10 @@
     "pk": 6, 
     "model": "skill.skill", 
     "fields": {
-        "trig_prob": 80, 
-        "des": "\u6d4b\u8bd5\u964d\u4f4e\u9632\u5fa1\uff0c\u964d\u4f4e\u76ee\u680750%\u9632\u5fa1", 
-        "name": "\u9632\u5fa1\u5f31\u5316", 
-        "trig_condition": 1, 
+        "trig_prob": 24, 
+        "special_id": 1, 
+        "des": "\u7fa4\u4f53\u4f24\u5bb3+", 
+        "name": "\u7fa4\u4f53\u4f24\u5bb3+", 
         "mode": 1
     }
 },
@@ -69,10 +69,10 @@
     "pk": 7, 
     "model": "skill.skill", 
     "fields": {
-        "trig_prob": 80, 
-        "des": "\u6d4b\u8bd5\u589e\u52a0\u95ea\u907f\uff0c\u589e\u52a0\u76ee\u680750%\u95ea\u907f", 
-        "name": "\u95ea\u907f\u5f3a\u5316", 
-        "trig_condition": 1, 
+        "trig_prob": 24, 
+        "special_id": 1, 
+        "des": "\u7fa4\u4f53\u4f24\u5bb3++", 
+        "name": "\u7fa4\u4f53\u4f24\u5bb3++", 
         "mode": 1
     }
 },
@@ -80,10 +80,10 @@
     "pk": 8, 
     "model": "skill.skill", 
     "fields": {
-        "trig_prob": 80, 
-        "des": "\u6d4b\u8bd5\u964d\u4f4e\u95ea\u907f\uff0c\u964d\u4f4e\u76ee\u680750%\u95ea\u907f", 
-        "name": "\u95ea\u907f\u5f31\u5316", 
-        "trig_condition": 1, 
+        "trig_prob": 30, 
+        "special_id": 1, 
+        "des": "\u5355\u4f53\u653b\u51fb\u63d0\u5347\u5e76\u653b\u51fb\r\n", 
+        "name": "\u6fc0\u6012\uff08\u653b\uff09", 
         "mode": 1
     }
 },
@@ -91,10 +91,10 @@
     "pk": 9, 
     "model": "skill.skill", 
     "fields": {
-        "trig_prob": 80, 
-        "des": "\u6d4b\u8bd5\u589e\u52a0\u66b4\u51fb\uff0c\u589e\u52a0\u76ee\u680750%\u66b4\u51fb", 
-        "name": "\u66b4\u51fb\u5f3a\u5316", 
-        "trig_condition": 1, 
+        "trig_prob": 35, 
+        "special_id": 1, 
+        "des": "\u7fa4\u4f53\u653b\u51fb\u4e0a\u5347", 
+        "name": "\u7fa4\u4f53\u653b\u51fb\u4e0a\u5347", 
         "mode": 1
     }
 },
@@ -102,10 +102,10 @@
     "pk": 10, 
     "model": "skill.skill", 
     "fields": {
-        "trig_prob": 80, 
-        "des": "\u6d4b\u8bd5\u964d\u4f4e\u66b4\u51fb\uff0c\u964d\u4f4e\u76ee\u680750%\u66b4\u51fb", 
-        "name": "\u66b4\u51fb\u5f31\u5316", 
-        "trig_condition": 1, 
+        "trig_prob": 40, 
+        "special_id": 1, 
+        "des": "\u4e3b\u5766\u7528\u5355\u4f53\u9632\u5fa1\u4e3b\u52a8\u6280\u80fd\uff0c\u4e0d\u653b\u51fb", 
+        "name": "\u4e3b\u52a8\u9632\u5fa1", 
         "mode": 1
     }
 },
@@ -113,10 +113,10 @@
     "pk": 11, 
     "model": "skill.skill", 
     "fields": {
-        "trig_prob": 80, 
-        "des": "\u6d4b\u8bd5\u51fb\u6655\uff0c\u51fb\u6655\u76ee\u68072\u56de\u5408", 
-        "name": "\u51fb\u6655", 
-        "trig_condition": 1, 
+        "trig_prob": 30, 
+        "special_id": 1, 
+        "des": "\u526f\u5766\u4f7f\u7528\u6280\u80fd\uff0c\u653b\u51fb\u5e76\u589e\u52a0\u9632\u5fa1", 
+        "name": "\u6fc0\u6012\uff08\u9632\uff09", 
         "mode": 1
     }
 },
@@ -124,54 +124,32 @@
     "pk": 12, 
     "model": "skill.skill", 
     "fields": {
-        "trig_prob": 80, 
-        "des": "\u6d4b\u8bd5\u53cd\u4f24\uff0c\u53cd\u5f3950%\u6240\u53d7\u4f24\u5bb3", 
-        "name": "\u53cd\u4f24", 
-        "trig_condition": 1, 
-        "mode": 2
+        "trig_prob": 35, 
+        "special_id": 1, 
+        "des": "\u7fa4\u4f53\u9632\u5fa1", 
+        "name": "\u7fa4\u4f53\u9632\u5fa1", 
+        "mode": 1
     }
 },
 {
     "pk": 13, 
     "model": "skill.skill", 
     "fields": {
-        "trig_prob": 100, 
-        "des": "\u6d4b\u8bd5\u88ab\u52a8\u6280\u80fd\uff0c\u589e\u52a0\u6211\u519b\u6240\u6709\u80fd\u529b100%", 
-        "name": "\u5c5e\u6027\u5f3a\u5316", 
-        "trig_condition": 1, 
-        "mode": 3
+        "trig_prob": 35, 
+        "special_id": 1, 
+        "des": "\u7fa4\u4f53\u66b4\u51fb", 
+        "name": "\u7fa4\u4f53\u66b4\u51fb", 
+        "mode": 1
     }
 },
 {
     "pk": 14, 
     "model": "skill.skill", 
     "fields": {
-        "trig_prob": 100, 
-        "des": "\u6d4b\u8bd5\u88ab\u52a8\u6280\u80fd\uff0c\u964d\u4f4e\u654c\u65b9\u5168\u519b\u80fd\u529b50%", 
-        "name": "\u5c5e\u6027\u5f31\u5316", 
-        "trig_condition": 1, 
-        "mode": 3
-    }
-},
-{
-    "pk": 15, 
-    "model": "skill.skill", 
-    "fields": {
-        "trig_prob": 80, 
-        "des": "\u6d4b\u8bd5AOE\uff0c\u5bf9\u654c\u6240\u6709\u76ee\u6807\u9020\u6210150%\u4f24\u5bb3", 
-        "name": "\u5168\u4f53\u653b\u51fb", 
-        "trig_condition": 1, 
-        "mode": 1
-    }
-},
-{
-    "pk": 16, 
-    "model": "skill.skill", 
-    "fields": {
-        "trig_prob": 80, 
-        "des": "\u6d4b\u8bd5AOE\u4f24\u5bb3+\u6548\u679c", 
-        "name": "\u5168\u4f53\u4f24\u5bb3\u5e76\u51fb\u6655", 
-        "trig_condition": 1, 
+        "trig_prob": 35, 
+        "special_id": 1, 
+        "des": "\u7fa4\u4f53\u95ea\u907f", 
+        "name": "\u7fa4\u4f53\u95ea\u907f", 
         "mode": 1
     }
 }

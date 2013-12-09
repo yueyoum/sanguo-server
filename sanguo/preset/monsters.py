@@ -8,7 +8,7 @@ def load_data():
     def _parse_skills(text):
         if not text:
             return []
-        skills = [int(s) for s in field["skills"].split(',')]
+        skills = [int(s) for s in text.split(',')]
         if len(skills) == 1 and skills[0] == 0:
             return []
         return skills

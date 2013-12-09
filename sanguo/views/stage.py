@@ -62,6 +62,10 @@ def pve(request):
     b = PVE(char_id, req.stage_id, msg)
     b.start()
     
+    # XXX
+    with open('/tmp/battle.proto', 'w') as f:
+        f.write(msg.__str__())
+    
     star = False
     if msg.first_ground.self_win and msg.second_ground.self_win and msg.third_ground.self_win:
         star = True

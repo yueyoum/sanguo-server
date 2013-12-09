@@ -1,7 +1,5 @@
 import logging
 
-from core.battle.hero import MonsterHero
-from core import GLOBAL
 from core.battle.battle_field import BattleField
 
 from protomsg import BattleHero as BattleHeroMsg
