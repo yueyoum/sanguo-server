@@ -112,8 +112,17 @@ def login(request):
                 user = create_new_user(device_token=req.anonymous.device_token)
                 need_create_new_char = True
         else:
-            user = create_new_user(device_token=req.anonymous.device_token)
-            need_create_new_char = True
+            anonymous_user = None
+            for user in users:
+                if not user.email:
+                    anonymous_user = user
+                    break
+            
+            if anonymous_user:
+                user = anonymous_user
+            else:
+                user = create_new_user(device_token=req.anonymous.device_token)
+                need_create_new_char = True
     else:
         if not req.regular.email or not req.regular.password:
             return HttpResponse(status=403)
