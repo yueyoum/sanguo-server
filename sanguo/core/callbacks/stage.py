@@ -87,8 +87,8 @@ pve_finished_signal.connect(
 )
 
 
-def prisoner_add(char_id, obj, **kwargs):
-    new_prisoner_notify('noti:{0}'.format(char_id), obj)
+def prisoner_add(char_id, mongo_prisoner_obj, **kwargs):
+    new_prisoner_notify('noti:{0}'.format(char_id), mongo_prisoner_obj)
 
 prisoner_add_signal.connect(
     prisoner_add,

@@ -65,4 +65,20 @@ class Hang(Document):
 Hang.ensure_indexes()
 
 
+class Prisoner(EmbeddedDocument):
+    id = IntField()
+    oid = IntField()
+    start_time = IntField()
+    status = IntField()
+
+    
+class Prison(Document):
+    id = IntField(primary_key=True)
+    amount = IntField()
+    prisoners = MapField( EmbeddedDocumentField(Prisoner) )
+    
+    meta = {
+        'collection': 'prison'
+    }
+
 

@@ -8,6 +8,8 @@ from core.gem import save_gem
 from core import GLOBAL
 from core.character import character_change
 
+from apps.character.cache import get_cache_character
+
 from utils import timezone
 
 STAGE = GLOBAL.STAGE
@@ -86,47 +88,55 @@ def save_drop(char_id, exp, gold, equips, gems):
     save_gem(gems, char_id)
     
 
+def get_npc_list(level, amount):
+    return []
 
 
-#def get_plunder_list(char_id):
-#    mongo_char = MongoChar.objects.only('stages').get(id=char_id)
-#    stages = mongo_char.stages
-#    
-#    # FIXME 高效的最后一个三星关卡找取
-#    stages_items = [int(k) for k, v in stages.iteritems() if v]
-#    stages_items.sort()
-#    
-#    def _hang_list_filter(h):
-#        total_seconds = h.hours * 3600
-#        passed_seconds = timezone.utc_timestamp() - h.start
-#        if passed_seconds * 5 >= total_seconds:
-#            return True
-#        return False
-#    
-#    def _find_hang(stage_id):
-#        hang_list = Hang.objects(stage_id=stage_id)
-#        hang_list = filter(_hang_list_filter, hang_list)
-#        return [h.id for h in hang_list]
-#    
-#    plunder_list = []
-#    needs_npc_amount = 0
-#    if not stages_items:
-#        print "get npc"
-#        needs_npc_amount = 10
-#    else:
-#        max_star_stage_id = stages_items[-1]
-#        
-#        for i in range(5):
-#            this_stage_id = max_star_stage_id - i
-#            plunder_list.extend(_find_hang(this_stage_id))
-#            
-#            if len(plunder_list) >= 10:
-#                break
-#        
-#        if len(plunder_list) >= 10:
-#            plunder_list = plunder_list[:10]
-#        else:
-#            needs_npc_amount = 10 - len(plunder_list)
-#    
-#    
+def get_plunder_list(char_id):
+    mongo_char = MongoChar.objects.only('stages').get(id=char_id)
+    stages = mongo_char.stages
+    
+    # FIXME 高效的最后一个三星关卡找取
+    stages_items = [int(k) for k, v in stages.iteritems() if v]
+    stages_items.sort()
+    
+    def _find_hang(stage_id):
+        hang_list = Hang.objects(stage_id=stage_id)
+        res = []
+        for h in hang_list:
+            total_seconds = h.hours * 3600
+            passed_seconds = timezone.utc_timestamp() - h.start
+            if passed_seconds * 5 >= total_seconds:
+                res.append((h.id, False, h.hours))
+        
+        return res
+        
+    
+    plunder_list = []
+    needs_npc_amount = 0
+    if not stages_items:
+        print "get npc"
+        needs_npc_amount = 10
+    else:
+        max_star_stage_id = stages_items[-1]
+        
+        for i in range(5):
+            this_stage_id = max_star_stage_id - i
+            plunder_list.extend(_find_hang(this_stage_id))
+            
+            if len(plunder_list) >= 10:
+                break
+        
+        if len(plunder_list) >= 10:
+            plunder_list = plunder_list[:10]
+        else:
+            needs_npc_amount = 10 - len(plunder_list)
+    
+    cache_char = get_cache_character(char_id)
+    if needs_npc_amount:
+        npcs = get_npc_list(cache_char.level, needs_npc_amount)
+        plunder_list.extend(npcs)
+    
+    return plunder_list
+    
 

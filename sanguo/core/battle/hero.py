@@ -5,6 +5,7 @@ from random import randint
 from collections import defaultdict
 
 from core import GLOBAL
+from core.hero import Hero
 
 from core.cache import get_cache_hero
 from apps.character.cache import get_cache_character
@@ -477,5 +478,25 @@ class MonsterHero(InBattleHero):
         self.skills = info['skills']
         self.level = info['level']
 
+        InBattleHero.__init__(self)
+
+
+class NPCHero(InBattleHero):
+    _hero_type = 1
+    
+    def __init__(self, oid, level):
+        hero = Hero(0, oid, level, 0)
+        self.id = 0
+        self.original_id = oid
+        self.level = level
+        self.attack = hero.attack
+        self.defense = hero.defense
+        self.hp = hero.hp
+        self.crit = hero.crit
+        self.dodge = hero.dodge
+        
+        # FIXME
+        self.skills = []
+        
         InBattleHero.__init__(self)
 

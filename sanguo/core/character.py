@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from core.mongoscheme import MongoChar, MongoHero
+from core.mongoscheme import MongoChar, MongoHero, Prison
 from core import GLOBAL
 from core.hero import save_hero
 from core.formation import save_socket, save_formation
@@ -23,7 +23,7 @@ def char_initialize(account_id, server_id, name):
     
     MongoChar(id=char_id).save()
     # FIXME
-    #Prison(id=char_id, amount=3).save()
+    Prison(id=char_id, amount=3).save()
     
     #init_hero_ids = GLOBAL.HEROS.get_random_hero_ids(3)
     init_hero_ids = [1, 2, 3]

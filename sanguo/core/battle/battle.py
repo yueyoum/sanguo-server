@@ -129,8 +129,8 @@ class Battle(object):
         self.my_id = my_id
         self.rival_id = rival_id
 
-        self.load_my_heros()
-        self.load_rival_heros()
+        self.my_heros = self.load_my_heros()
+        self.rival_heros = self.load_rival_heros()
 
         index = 0
 

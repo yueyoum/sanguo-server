@@ -8,7 +8,7 @@ from core.character import (
 
 from core.stage import get_already_stage, get_new_stage
 from core import GLOBAL
-from core.mongoscheme import MongoChar, Hang, DoesNotExist
+from core.mongoscheme import MongoChar, Hang, DoesNotExist, Prison
 import protomsg
 
 def character_notify(key, obj):
@@ -255,6 +255,47 @@ def prize_notify(key, prize_id):
     msg.prize_ids.extend(ids)
     redis_client.rpush(key, pack_msg(msg))
     
+def plunder_notify(key, amount):
+    msg = protomsg.PlunderNotify()
+    msg.amount = amount
+    redis_client.rpush(key, pack_msg(msg))
+
+
+def prisoner_notify(key, char_id=None, objs=None, message_name="PrisonerListNotify"):
+    if not objs:
+        if not char_id:
+            raise Exception("prisoner_notify, bad arguments")
+        
+        prison = Prison.objects.get(id=char_id)
+        objs = prison.prisoners.values()
+    msg = getattr(protomsg, message_name)()
+    for o in objs:
+        p = msg.prisoner.add()
+        p.id = o.id
+        p.oid = o.oid
+        p.start_time = o.start_time
+        p.status = o.status
+        
+        # FIXME
+        p.value = 5
+    
+    redis_client.rpush(key, pack_msg(msg))
+    
+def update_prisoner_notify(key, mongo_prisoner_obj):
+    prisoner_notify(key, objs=[mongo_prisoner_obj], message_name="UpdatePrisonerNotify")
+
+def new_prisoner_notify(key, mongo_prisoner_obj):
+    prisoner_notify(key, objs=[mongo_prisoner_obj], message_name="NewPrisonerNotify")
+
+def remove_prisoner_notify(key, _id):
+    if isinstance(_id, (list, tuple)):
+        ids = _id
+    else:
+        ids = [_id]
+    
+    msg = protomsg.RemovePrisonerNotify()
+    msg.ids.extend(ids)
+    redis_client.rpush(key, pack_msg(msg))
 
 
 def login_notify(key, char_obj):
@@ -277,4 +318,9 @@ def login_notify(key, char_obj):
     hang = hang_notify(key, char_obj.id)
     if hang and hang.finished:
         prize_notify(key, 1)
+    
+    # FIXME
+    plunder_notify(key, 10)
+    prisoner_notify(key, char_obj.id)
+    
 

@@ -35,4 +35,7 @@ urlpatterns = patterns('',
     url(r'^hang/cancel/$', 'views.stage.hang_cancel'),
     
     url(r'^prize/$', 'views.prize.prize_get'),
+    
+    url(r'^plunder/list/$', 'views.stage.plunder_list'),
+    url(r'^plunder/$', 'views.stage.plunder'),
 )
