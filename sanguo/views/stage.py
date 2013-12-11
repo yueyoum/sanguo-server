@@ -219,7 +219,8 @@ def plunder_list(request):
     # XXX just for test
     if not res:
         from apps.character.models import Character
-        ids = Character.objects.all().values_list('id', flat=True)
+        ids = Character.objects.order_by('-id').values_list('id', flat=True)
+        ids = ids[:10]
         res = [(i, False, 8) for i in ids if i != char_id]
     # END test
     print res
