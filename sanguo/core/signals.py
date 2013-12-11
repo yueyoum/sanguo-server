@@ -4,7 +4,9 @@ register_signal = Signal(providing_args=['account_id'])
 login_signal = Signal(providing_args=['account_id', 'server_id', 'char_obj'])
 
 socket_changed_signal = Signal(providing_args=['hero', 'weapon', 'armor', 'jewelry'])
-pve_finished_signal = Signal(providing_args=['stage_id', 'win', 'star'])
+pve_finished_signal = Signal(providing_args=['char_id', 'stage_id', 'win', 'star'])
+plunder_finished_signal = Signal(providing_args=['from_char_id', 'to_char_id', 'is_npc', 'is_crit'])
+prisoner_add_signal = Signal(providing_args=['char_id', 'mongo_prisoner_obj'])
 
 hang_add_signal = Signal(providing_args=['char_id', 'hours'])
 hang_cancel_signal = Signal(providing_args=['char_id'])

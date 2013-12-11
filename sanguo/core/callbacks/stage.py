@@ -3,6 +3,8 @@ from core.signals import (
     hang_add_signal,
     hang_cancel_signal,
     pve_finished_signal,
+    
+    prisoner_add_signal,
     )
 
 
@@ -13,6 +15,8 @@ from core.notify import (
     
     current_stage_notify,
     new_stage_notify,
+    
+    new_prisoner_notify,
 )
 
 from cronjob.scheduler import add_hang_job, cancel_hang_job
@@ -56,7 +60,7 @@ hang_cancel_signal.connect(
 
 
 
-def _pve_finished(sender, char_id, stage_id, win, star, **kwargs):
+def _pve_finished(char_id, stage_id, win, star, **kwargs):
     from core.mongoscheme import MongoChar
     print "_pve_finished", char_id, stage_id, win, star
     current_stage_notify('noti:{0}'.format(char_id), stage_id, star)
@@ -80,5 +84,14 @@ def _pve_finished(sender, char_id, stage_id, win, star, **kwargs):
 pve_finished_signal.connect(
     _pve_finished,
     dispatch_uid = 'core.stage._pve_finished'
+)
+
+
+def prisoner_add(char_id, obj, **kwargs):
+    new_prisoner_notify('noti:{0}'.format(char_id), obj)
+
+prisoner_add_signal.connect(
+    prisoner_add,
+    dispatch_uid = 'core.callbacks.stage.prisoner_add'
 )
 

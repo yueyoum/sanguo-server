@@ -22,8 +22,11 @@ def char_initialize(account_id, server_id, name):
     char_id = char.id
     
     MongoChar(id=char_id).save()
+    # FIXME
+    #Prison(id=char_id, amount=3).save()
     
-    init_hero_ids = GLOBAL.HEROS.get_random_hero_ids(3)
+    #init_hero_ids = GLOBAL.HEROS.get_random_hero_ids(3)
+    init_hero_ids = [1, 2, 3]
     
     hero_ids = save_hero(char_id, init_hero_ids, add_notify=False)
     for index, _id in enumerate(hero_ids):
