@@ -55,6 +55,7 @@ class Hang(Document):
     hours = IntField()
     start = IntField()
     finished = BooleanField()
+    jobid = StringField()
 
     meta = {
         'collection': 'hang',

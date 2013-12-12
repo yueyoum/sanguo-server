@@ -203,6 +203,16 @@ MONGODB_DB = 'sanguo'
 CRYPTO_KEY = None
 CRYPTO_PREFIX = None
 
+BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+CELERY_IMPORTS = ('timer.tasks', 'callbacks.timers',)
+CELERY_ENABLE_UTC = True
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+
+
+
+
 if TESTING:
     CRYPTO_KEY = '1234567890abcdef'
     CRYPTO_PREFIX= 'ok'

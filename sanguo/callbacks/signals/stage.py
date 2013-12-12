@@ -19,11 +19,9 @@ from core.notify import (
     new_prisoner_notify,
 )
 
-from cronjob.scheduler import add_hang_job, cancel_hang_job
 
 
 def hang_add(char_id, hours, **kwargs):
-    add_hang_job(char_id, hours)
     hang_notify('noti:{0}'.format(char_id), char_id)
 
 
@@ -38,7 +36,6 @@ def hang_finish(char_id, **kwargs):
 
 def hang_cancel(char_id, **kwargs):
     print "hang_cancel", char_id
-    cancel_hang_job(char_id)
     hang_finish(char_id)
 
 

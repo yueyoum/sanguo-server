@@ -26,6 +26,9 @@ from protomsg import Prisoner as PrisonerProtoMsg
 
 from core.drives import redis_client
 
+from timer.tasks import sched, cancel_job
+from callbacks.timers import hang_job
+
 class PVE(Battle):
     def load_my_heros(self, my_id=None):
         if my_id is None:
@@ -153,12 +156,15 @@ def hang(request):
     if hang is not None:
         raise SanguoViewException(700, "HangResponse")
     
+    job = sched.apply_async((hang_job, char_id), countdown=req.hours*3600)
+    
     hang = Hang(
         id = char_id,
         stage_id = req.stage_id,
         hours = req.hours,
         start = timezone.utc_timestamp(),
-        finished = False
+        finished = False,
+        jobid = job.id
     )
     
     hang.save()
@@ -188,6 +194,8 @@ def hang_cancel(request):
         
     if hang is None or hang.finished:
         raise SanguoViewException(702, "HangCancelResponse")
+    
+    cancel_job(hang.jobid)
 
     mongo_char = MongoChar.objects.only('hang_hours').get(id=char_id)
     utc_now_timestamp = timezone.utc_timestamp()
