@@ -71,6 +71,7 @@ class Prisoner(EmbeddedDocument):
     oid = IntField()
     start_time = IntField()
     status = IntField()
+    jobid = StringField()
 
     
 class Prison(Document):

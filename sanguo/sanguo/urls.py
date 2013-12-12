@@ -38,4 +38,7 @@ urlpatterns = patterns('',
     
     url(r'^plunder/list/$', 'views.stage.plunder_list'),
     url(r'^plunder/$', 'views.stage.plunder'),
+    
+    url(r'^prisoner/train/$', 'views.prison.train'),
+    url(r'^prisoner/get/$', 'views.prison.get'),
 )

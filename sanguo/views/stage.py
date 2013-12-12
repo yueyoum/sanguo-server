@@ -29,6 +29,8 @@ from core.drives import redis_client
 from timer.tasks import sched, cancel_job
 from callbacks.timers import hang_job
 
+from core.prison import save_prisoner
+
 class PVE(Battle):
     def load_my_heros(self, my_id=None):
         if my_id is None:
@@ -156,7 +158,9 @@ def hang(request):
     if hang is not None:
         raise SanguoViewException(700, "HangResponse")
     
-    job = sched.apply_async((hang_job, char_id), countdown=req.hours*3600)
+    #job = sched.apply_async((hang_job, char_id), countdown=req.hours*3600)
+    # FIXME
+    job = sched.apply_async((hang_job, char_id), countdown=10)
     
     hang = Hang(
         id = char_id,
@@ -301,33 +305,7 @@ def plunder(request):
         drop_hero_id = random.choice(rival_hero_oids)
     
     if drop_hero_id:
-        prison = Prison.objects.only('prisoners').get(id=char_id)
-        prisoner_ids = [int(i) for i in prison.prisoners.keys()]
-        
-        new_persioner_id = 1
-        while True:
-            if new_persioner_id not in prisoner_ids:
-                break
-            new_persioner_id += 1
-        
-        
-        p = Prisoner()
-        p.id = new_persioner_id
-        p.oid = drop_hero_id
-        p.start_time = timezone.utc_timestamp()
-        p.status = PrisonerProtoMsg.NOT
-        
-        
-        prison.prisoners[str(new_persioner_id)] = p
-        prison.save()
-        
-        prisoner_add_signal.send(
-            sender = None,
-            char_id = char_id,
-            mongo_prisoner_obj = p
-        )
-        
-        
+        save_prisoner(char_id, drop_hero_id)
     
     response = protomsg.PlunderResponse()
     response.ret = 0

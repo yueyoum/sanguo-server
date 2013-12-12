@@ -11,6 +11,9 @@ from core import GLOBAL
 from core.mongoscheme import MongoChar, Hang, DoesNotExist, Prison
 import protomsg
 
+from apps.character.cache import get_cache_character
+from core.hero import cal_hero_property
+
 def character_notify(key, obj):
     data = protomsg.CharacterNotify()
     data.char.id = obj.id
@@ -261,13 +264,14 @@ def plunder_notify(key, amount):
     redis_client.rpush(key, pack_msg(msg))
 
 
-def prisoner_notify(key, char_id=None, objs=None, message_name="PrisonerListNotify"):
+def prisoner_notify(key, char_id, objs=None, message_name="PrisonerListNotify"):
     if not objs:
-        if not char_id:
-            raise Exception("prisoner_notify, bad arguments")
-        
         prison = Prison.objects.get(id=char_id)
         objs = prison.prisoners.values()
+    
+    cache_char = get_cache_character(char_id)
+    level = cache_char.level
+    
     msg = getattr(protomsg, message_name)()
     for o in objs:
         p = msg.prisoner.add()
@@ -278,14 +282,17 @@ def prisoner_notify(key, char_id=None, objs=None, message_name="PrisonerListNoti
         
         # FIXME
         p.value = 5
+        
+        p.attack, p.defense, p.hp = cal_hero_property(o.oid, level)
+        p.crit, p.dodge = 0, 0
     
     redis_client.rpush(key, pack_msg(msg))
     
-def update_prisoner_notify(key, mongo_prisoner_obj):
-    prisoner_notify(key, objs=[mongo_prisoner_obj], message_name="UpdatePrisonerNotify")
+def update_prisoner_notify(key, char_id, mongo_prisoner_obj):
+    prisoner_notify(key, char_id, objs=[mongo_prisoner_obj], message_name="UpdatePrisonerNotify")
 
-def new_prisoner_notify(key, mongo_prisoner_obj):
-    prisoner_notify(key, objs=[mongo_prisoner_obj], message_name="NewPrisonerNotify")
+def new_prisoner_notify(key, char_id, mongo_prisoner_obj):
+    prisoner_notify(key, char_id, objs=[mongo_prisoner_obj], message_name="NewPrisonerNotify")
 
 def remove_prisoner_notify(key, _id):
     if isinstance(_id, (list, tuple)):
@@ -295,6 +302,13 @@ def remove_prisoner_notify(key, _id):
     
     msg = protomsg.RemovePrisonerNotify()
     msg.ids.extend(ids)
+    redis_client.rpush(key, pack_msg(msg))
+
+
+
+def prison_notify(key, slots):
+    msg = protomsg.PrisonNotify()
+    msg.slots = slots
     redis_client.rpush(key, pack_msg(msg))
 
 
@@ -322,5 +336,7 @@ def login_notify(key, char_obj):
     # FIXME
     plunder_notify(key, 10)
     prisoner_notify(key, char_obj.id)
+    # FIXME
+    prison_notify(key, 3)
     
 

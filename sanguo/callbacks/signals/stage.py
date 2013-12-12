@@ -4,7 +4,6 @@ from core.signals import (
     hang_cancel_signal,
     pve_finished_signal,
     
-    prisoner_add_signal,
     )
 
 
@@ -16,7 +15,6 @@ from core.notify import (
     current_stage_notify,
     new_stage_notify,
     
-    new_prisoner_notify,
 )
 
 
@@ -83,12 +81,4 @@ pve_finished_signal.connect(
     dispatch_uid = 'core.stage._pve_finished'
 )
 
-
-def prisoner_add(char_id, mongo_prisoner_obj, **kwargs):
-    new_prisoner_notify('noti:{0}'.format(char_id), mongo_prisoner_obj)
-
-prisoner_add_signal.connect(
-    prisoner_add,
-    dispatch_uid = 'core.callbacks.stage.prisoner_add'
-)
 
