@@ -20,7 +20,7 @@ def save_prisoner(char_id, oid):
     # FIXME
     job = sched.apply_async(
         [timers.prisoner_job, char_id, new_persioner_id, PrisonerProtoMsg.NOT],
-        countdown = 10
+        countdown = 60
     )
     
     
