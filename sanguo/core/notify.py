@@ -27,6 +27,8 @@ def character_notify(key, obj):
     data.char.next_level_exp = next_level_exp
     
     data.char.official = obj.official
+    # FIXME
+    data.char.power = 100
     redis_client.rpush(key, pack_msg(data))
 
 def hero_notify(key, objs, message_name="HeroNotify"):

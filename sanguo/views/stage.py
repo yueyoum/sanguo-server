@@ -55,8 +55,6 @@ class PVE(Battle):
         
         return my_heros
 
-
-
     def load_rival_heros(self):
         monster_ids = GLOBAL.STAGE[self.rival_id]['monsters']
         rival_heros = []
@@ -68,6 +66,17 @@ class PVE(Battle):
                 rival_heros.append(h)
         
         return rival_heros
+    
+    def get_my_name(self, my_id=None):
+        if my_id is None:
+            my_id = self.my_id
+        cache_char = get_cache_character(my_id)
+        return cache_char.name
+    
+    
+    def get_rival_name(self):
+        return GLOBAL.STAGE[self.rival_id]['name']
+        
 
 
 class Plunder(PVE):
@@ -94,6 +103,12 @@ class Plunder(PVE):
                 heros.append( NPCHero(h, level) )
         
         return heros
+    
+    def get_rival_name(self):
+        if self.is_npc:
+            # FIXME
+            return 'NPC'
+        return self.get_my_name(my_id=self.rival_id)
 
 
 

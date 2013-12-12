@@ -23,7 +23,6 @@ def load_data():
     data = {}
     for c in content:
         fields = c["fields"]
-        fields.pop("name")
         fields["monsters"] = _parse_warriors(fields.pop("warriors"))
         data[c["pk"]] = fields
 

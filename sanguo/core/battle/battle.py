@@ -150,16 +150,24 @@ class Battle(object):
 
         msg.self_power = self_power
         msg.rival_power = rival_power
-        msg.self_name = "self_name"
-        msg.rival_name = "rival_name"
+        msg.self_name = self.get_my_name()
+        msg.rival_name = self.get_rival_name()
         self.msg = msg
 
 
-    def load_my_heros(self):
+    def load_my_heros(self, *args):
         raise NotImplementedError()
 
-    def load_rival_heros(self):
+    def load_rival_heros(self, *args):
         raise NotImplementedError()
+    
+    def get_my_name(self, *args):
+        raise NotImplementedError()
+    
+    def get_rival_name(self, *args):
+        raise NotImplementedError()
+    
+    
 
 
 
