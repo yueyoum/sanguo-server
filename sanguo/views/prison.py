@@ -88,12 +88,22 @@ def get(request):
     this_prisoner = prisoners[str(req.hero)]
     if this_prisoner.status == PrisonerProtoMsg.IN:
         raise SanguoViewException(803, "TrainResponse")
-        
-    if this_prisoner.status != PrisonerProtoMsg.FINISH:
+    
+    if this_prisoner.status == PrisonerProtoMsg.NOT:
         # 直接招降
-        # FIXME 扣除元宝
-        # FIXME 检查武将包裹是否满了
         pass
+    elif this_prisoner.status == PrisonerProtoMsg.IN:
+        # 加速
+        pass
+    elif this_prisoner.status == PrisonerProtoMsg.OUT:
+        # 直接招降
+        pass
+    else:
+        # 已经完成
+        pass
+        
+    # FIXME 扣除元宝
+    # FIXME 检查武将包裹是否满了
     
     save_hero(char_id, this_prisoner.oid)
     cancel_job(this_prisoner.jobid)
