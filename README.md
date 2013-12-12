@@ -2,7 +2,7 @@
 
 ## 部署
 
-1.  确保系统中已安装Nginx, Mysql, Redis, Mongodb
+1.  确保系统中已安装Nginx, Mysql, Redis, Mongodb, Erlang, RabbitMQ
 
 2.  安装依赖
     
@@ -27,8 +27,15 @@
     ./compile-protobufs.sh
     ```
 
+5.  启动timer服务
 
-5.  编辑配置文件，并启动程序
+    ```
+    cd sanguo
+    celery worker --app timer -l info
+    ```
+
+
+6.  编辑配置文件，并启动程序
 
     ```
     cd sanguo
@@ -40,7 +47,7 @@
     正式: start_production_server.sh
     ```
 
-6.  测试
+7.  测试
 
     ```
     ./start_test_server 启动测试服务，然后在另一个shell中执行：
