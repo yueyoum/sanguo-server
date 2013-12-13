@@ -314,6 +314,27 @@ def prison_notify(key, slots):
     redis_client.rpush(key, pack_msg(msg))
 
 
+def arena_notify(key, char_id):
+    # FIXME
+    msg = protomsg.ArenaNotify()
+    msg.week_rank = 1
+    msg.week_score = 2
+    msg.day_rank = 3
+    msg.day_score = 4
+    msg.remained_amount = 5
+    
+    nb = [
+        (1, 1, 'aaa'),
+        (2, 2, 'bbb'),
+        (3, 3, 'ccc'),
+    ]
+    for x in nb:
+        n = msg.chars.add()
+        n.rank, n.id, n.name = x
+    
+    redis_client.rpush(key, pack_msg(msg))
+
+
 def login_notify(key, char_obj):
     hero_objs = get_char_hero_objs(char_obj.id)
 
@@ -340,5 +361,7 @@ def login_notify(key, char_obj):
     prisoner_notify(key, char_obj.id)
     # FIXME
     prison_notify(key, 3)
+    
+    arena_notify(key, char_obj.id)
     
 

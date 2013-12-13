@@ -91,6 +91,28 @@ class BattleTest(TransactionTestCase):
         #    self._pve(sid)
         self._pve(1)
 
+
+class PVPTest(TransactionTestCase):
+    def setUp(self):
+        char = char_initialize(1, 1, 'a')
+        self.session = crypto.encrypt('1:1:{0}'.format(char.id))
+        
+        char = char_initialize(2, 1, 'b')
+        self.other_char_id = char.id
+        
+    def tearDown(self):
+        tests._teardown()
+
+
+    def test_pvp(self):
+        req = protomsg.ArenaRequest()
+        req.session = self.session
+        
+        data = tests.pack_data(req)
+        res = tests.make_request('/pvp/', data)
+        msgs = tests.unpack_data(res)
+
+
 class SocketTest(TransactionTestCase):
     def setUp(self):
         char = char_initialize(1, 1, 'a')

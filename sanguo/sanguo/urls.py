@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     url(r'^test/$', 'views.cmd.cmd'),
 
     url(r'^pve/$', 'views.stage.pve'),
+    url(r'^pvp/$', 'views.stage.pvp'),
     url(r'^formation/set/$', 'views.formation.set_formation'),
     url(r'^socket/set/$', 'views.formation.set_socket'),
     url(r'^hero/get/$', 'views.hero.pick_hero'),

@@ -32,3 +32,6 @@ gem_del_signal = Signal(providing_args=['char_id', 'gid'])
 
 
 formation_changed_signal = Signal(providing_args=['char_id', 'socket_ids'])
+
+
+pvp_finished_signal = Signal(providing_args=['char_id', 'rival_id', 'win'])

@@ -3,6 +3,7 @@ from core.signals import (
     hang_add_signal,
     hang_cancel_signal,
     pve_finished_signal,
+    pvp_finished_signal,
     
     )
 
@@ -14,6 +15,8 @@ from core.notify import (
     
     current_stage_notify,
     new_stage_notify,
+    
+    arena_notify,
     
 )
 
@@ -82,3 +85,13 @@ pve_finished_signal.connect(
 )
 
 
+
+def _pvp_finished(char_id, rival_id, win, **kwargs):
+    # FIXME
+    arena_notify('noti:{0}'.format(char_id), char_id)
+
+
+pvp_finished_signal.connect(
+    _pvp_finished,
+    dispatch_uid = 'callbacks.signals.stage._pvp_finished'
+)

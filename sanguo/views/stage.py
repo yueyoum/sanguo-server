@@ -13,7 +13,7 @@ from core.signals import pve_finished_signal
 from core.stage import get_stage_drop, get_plunder_list
 from core.exception import SanguoViewException
 
-from core.signals import hang_add_signal, hang_cancel_signal, plunder_finished_signal, prisoner_add_signal
+from core.signals import hang_add_signal, hang_cancel_signal, plunder_finished_signal, prisoner_add_signal, pvp_finished_signal
 from core.cache import get_cache_hero
 
 from apps.character.cache import get_cache_character
@@ -76,6 +76,15 @@ class PVE(Battle):
     
     def get_rival_name(self):
         return GLOBAL.STAGE[self.rival_id]['name']
+
+
+
+class PVP(PVE):
+    def load_rival_heros(self):
+        return self.load_my_heros(my_id=self.rival_id)
+    
+    def get_rival_name(self):
+        return self.get_my_name(my_id=self.rival_id)
         
 
 
@@ -333,6 +342,38 @@ def plunder(request):
     return HttpResponse(data, content_type='text/plain')
         
         
-        
-        
-        
+
+
+def pvp(request):
+    req = request._proto
+    char_id = request._char_id
+    
+    # FIXME
+    from apps.character.models import Character
+    char_ids = Character.objects.values_list('id', flat=True)
+    rival_id = random.choice(char_ids)
+    
+
+    msg = protomsg.Battle()
+    b = PVP(char_id, rival_id, msg)
+    b.start()
+    
+    # FIXME
+    score = 0
+    if msg.self_win:
+        score = 100
+    
+    pvp_finished_signal.send(
+        sender = None,
+        char_id = char_id,
+        rival_id = rival_id,
+        win = msg.self_win
+    )
+    
+    response = protomsg.ArenaResponse()
+    response.ret = 0
+    response.battle.MergeFrom(msg)
+    response.score = score
+    
+    data = pack_msg(response)
+    return HttpResponse(data, content_type='text/plain')
