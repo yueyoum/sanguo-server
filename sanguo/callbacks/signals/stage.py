@@ -65,9 +65,10 @@ def _pve_finished(char_id, stage_id, win, star, **kwargs):
     
     char = MongoChar.objects.only('stages', 'stage_new').get(id=char_id)
     stages = char.stages
+    char.stages[str(stage_id)] = star
+    char.stage_new = 0
     if win:
         # FIXME
-        char.stages[str(stage_id)] = star
         new_stage_id = stage_id + 1
         if char.stage_new != new_stage_id:
             char.stage_new = new_stage_id
@@ -75,7 +76,7 @@ def _pve_finished(char_id, stage_id, win, star, **kwargs):
             if str(new_stage_id) not in stages.keys():
                 new_stage_notify('noti:{0}'.format(char_id), new_stage_id)
         
-        char.save()
+    char.save()
         
 
 
