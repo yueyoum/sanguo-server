@@ -3,7 +3,7 @@ from core.signals import char_changed_signal
 from core.notify import character_notify
 
 def _char_changed(char_obj, **kwargs):
-    character_notify('noti:{0}'.format(char_obj.id), char_obj)
+    character_notify(char_obj)
 
 
 char_changed_signal.connect(

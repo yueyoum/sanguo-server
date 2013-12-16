@@ -4,7 +4,6 @@ from core.notify import formation_notify
 
 def _formation_changed(char_id, socket_ids, **kwargs):
     formation_notify(
-        'noti:{0}'.format(char_id),
         char_id,
         formation = socket_ids
     )

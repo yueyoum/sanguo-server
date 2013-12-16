@@ -7,7 +7,7 @@ import protomsg
 from protomsg import REQUEST_TYPE
 
 from core.exception import SanguoViewException
-from core.drives import redis_client
+from core import rabbit
 from utils import crypto
 from utils import pack_msg
 
@@ -90,6 +90,9 @@ class UnpackAndVerifyData(object):
 
 
 
+
+_BIND = set()
+
 class PackMessageData(object):
     def process_response(self, request, response):
         if response.status_code != 200:
@@ -100,25 +103,14 @@ class PackMessageData(object):
         
         char_id = getattr(request, '_char_id', None)
         if char_id:
-            key = 'noti:{0}'.format(char_id)
-        else:
-            account_id = getattr(request, '_account_id', None)
-            if account_id:
-                key = 'noti:{0}-{1}'.format(
-                    account_id,
-                    request._server_id
-                )
-            else:
-                key = None
+            if char_id not in _BIND:
+                rabbit.bind(char_id, request._server_id)
+                _BIND.add(char_id)
 
-        if key:
-            pipeline = redis_client.pipeline()
-            pipeline.lrange(key, 0, -1)
-            pipeline.delete(key)
-            other_msgs, _ = pipeline.execute()
+            other_msgs = rabbit.message_get_all(char_id)
         else:
             other_msgs = []
-
+        
         if not response.content:
             num_of_msgs = len(other_msgs)
             data = '%s%s' % (

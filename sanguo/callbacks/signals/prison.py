@@ -11,16 +11,16 @@ from core.notify import (
 )
 
 def prisoner_add(char_id, mongo_prisoner_obj, **kwargs):
-    new_prisoner_notify('noti:{0}'.format(char_id), char_id, mongo_prisoner_obj)
+    new_prisoner_notify(char_id, mongo_prisoner_obj)
 
 def prisoner_change(char_id, mongo_prisoner_obj, **kwargs):
     print "prisoner_change,", char_id, mongo_prisoner_obj
-    update_prisoner_notify('noti:{0}'.format(char_id), char_id, mongo_prisoner_obj)
+    update_prisoner_notify(char_id, mongo_prisoner_obj)
 
 
 def prisoner_del(char_id, prisoner_id, **kwargs):
     print 'prisoner_del,', char_id, prisoner_id
-    remove_prisoner_notify('noti:{0}'.format(char_id), prisoner_id)
+    remove_prisoner_notify(char_id, prisoner_id)
 
 
 

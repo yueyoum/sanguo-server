@@ -24,7 +24,6 @@ from utils import timezone
 import protomsg
 from protomsg import Prisoner as PrisonerProtoMsg
 
-from core.drives import redis_client
 
 from timer.tasks import sched, cancel_job
 from callbacks.timers import hang_job

@@ -9,7 +9,6 @@ from core.signals import (
 
 
 from core.notify import (
-    #hang_notify_with_data,
     hang_notify,
     prize_notify,
     
@@ -23,15 +22,15 @@ from core.notify import (
 
 
 def hang_add(char_id, hours, **kwargs):
-    hang_notify('noti:{0}'.format(char_id), char_id)
+    hang_notify(char_id)
 
 
 def hang_finish(char_id, **kwargs):
     from core.mongoscheme import Hang
     print "hang_finish", char_id
     Hang.objects(id=char_id).update_one(set__finished=True)
-    hang_notify('noti:{0}'.format(char_id), char_id)
-    prize_notify('noti:{0}'.format(char_id), 1)
+    hang_notify(char_id)
+    prize_notify(char_id, 1)
 
 
 
@@ -61,7 +60,7 @@ hang_cancel_signal.connect(
 def _pve_finished(char_id, stage_id, win, star, **kwargs):
     from core.mongoscheme import MongoChar
     print "_pve_finished", char_id, stage_id, win, star
-    current_stage_notify('noti:{0}'.format(char_id), stage_id, star)
+    current_stage_notify(char_id, stage_id, star)
     
     char = MongoChar.objects.only('stages', 'stage_new').get(id=char_id)
     stages = char.stages
@@ -74,7 +73,7 @@ def _pve_finished(char_id, stage_id, win, star, **kwargs):
             char.stage_new = new_stage_id
             
             if str(new_stage_id) not in stages.keys():
-                new_stage_notify('noti:{0}'.format(char_id), new_stage_id)
+                new_stage_notify(char_id, new_stage_id)
         
     char.save()
         
@@ -89,7 +88,7 @@ pve_finished_signal.connect(
 
 def _pvp_finished(char_id, rival_id, win, **kwargs):
     # FIXME
-    arena_notify('noti:{0}'.format(char_id), char_id)
+    arena_notify(char_id)
 
 
 pvp_finished_signal.connect(

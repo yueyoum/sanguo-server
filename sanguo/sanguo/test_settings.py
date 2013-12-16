@@ -2,6 +2,8 @@ from settings import *
 
 TESTING = True
 
+BROKER_URL = 'amqp://guest:guest@localhost:5672/sanguo_test'
+
 CRYPTO_KEY = '1234567890abcdef'
 CRYPTO_PREFIX= 'ok'
 

@@ -5,15 +5,15 @@ from core.cache import get_cache_hero
 
 def _hero_add(char_id, hero_ids, **kwargs):
     heros = [get_cache_hero(i) for i in hero_ids]
-    add_hero_notify('noti:{0}'.format(char_id), heros)
+    add_hero_notify(char_id, heros)
 
 def _hero_del(char_id, hero_ids, **kwargs):
-    remove_hero_notify('noti:{0}'.format(char_id), hero_ids)
+    remove_hero_notify(char_id, hero_ids)
     
 
 def _hero_change(cache_hero_obj, **kwargs):
     update_hero_notify(
-        'noti:{0}'.format(cache_hero_obj.char_id),
+        cache_hero_obj.char_id,
         [cache_hero_obj]
         )
     

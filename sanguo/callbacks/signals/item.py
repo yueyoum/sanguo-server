@@ -28,14 +28,14 @@ EQUIP_TEMPLATE = GLOBAL.EQUIP.EQUIP_TEMPLATE
 
 def _equip_add(cache_equip_obj, **kwargs):
     add_equipment_notify(
-        'noti:{0}'.format(cache_equip_obj.char_id),
+        cache_equip_obj.char_id,
         cache_equip_obj
     )
 
 
 def _equip_changed(cache_equip_obj, **kwargs):
     update_equipment_notify(
-        'noti:{0}'.format(cache_equip_obj.char_id),
+        cache_equip_obj.char_id,
         cache_equip_obj
     )
     
@@ -67,20 +67,20 @@ def _equip_changed(cache_equip_obj, **kwargs):
 
 def _equip_del(char_id, equip_id, **kwargs):
     remove_equipment_notify(
-        'noti:{0}'.format(char_id),
+        char_id,
         equip_id
     )
 
 
 def _gem_changed(char_id, gems, **kwargs):
     update_gem_notify(
-        'noti:{0}'.format(char_id),
+        char_id,
         gems
     )
 
 def _gem_add(char_id, gems, **kwargs):
     add_gem_notify(
-        'noti:{0}'.format(char_id),
+        char_id,
         gems
     )
 
@@ -88,7 +88,7 @@ def _gem_add(char_id, gems, **kwargs):
 def _gem_del(char_id, gid, **kwargs):
     if gid:
         remove_gem_notify(
-            'noti:{0}'.format(char_id),
+            char_id,
             gid
         )
     

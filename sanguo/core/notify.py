@@ -1,4 +1,4 @@
-from core.drives import redis_client
+from core.rabbit import publish_to_char
 from utils import pack_msg
 from core.character import (
     get_char_formation,
@@ -14,7 +14,7 @@ import protomsg
 from apps.character.cache import get_cache_character
 from core.hero import cal_hero_property
 
-def character_notify(key, obj):
+def character_notify(obj):
     data = protomsg.CharacterNotify()
     data.char.id = obj.id
     data.char.name = obj.name
@@ -29,13 +29,11 @@ def character_notify(key, obj):
     data.char.official = obj.official
     # FIXME
     data.char.power = 100
-    redis_client.rpush(key, pack_msg(data))
+    publish_to_char(obj.id, pack_msg(data))
 
-def hero_notify(key, objs, message_name="HeroNotify"):
+def hero_notify(char_id, objs, message_name="HeroNotify"):
     Msg = getattr(protomsg, message_name)
     data = Msg()
-
-    #objs = [Hero(o.id, o.original_id, o.level, []) for o in objs]
 
     for obj in objs:
         g = data.heros.add()
@@ -54,22 +52,22 @@ def hero_notify(key, objs, message_name="HeroNotify"):
         g.cirt = 100
         g.dodge = 100
 
-    redis_client.rpush(key, pack_msg(data))
+    publish_to_char(char_id, pack_msg(data))
 
-def add_hero_notify(key, objs):
-    hero_notify(key, objs, "AddHeroNotify")
+def add_hero_notify(char_id, objs):
+    hero_notify(char_id, objs, "AddHeroNotify")
 
-def remove_hero_notify(key, ids):
+def remove_hero_notify(char_id, ids):
     data = protomsg.RemoveHeroNotify()
     data.ids.extend(ids)
-    redis_client.rpush(key, pack_msg(data))
+    publish_to_char(char_id, pack_msg(data))
 
 
-def update_hero_notify(key, objs):
-    hero_notify(key, objs, "UpdateHeroNotify")
+def update_hero_notify(char_id, objs):
+    hero_notify(char_id, objs, "UpdateHeroNotify")
 
 
-def get_hero_panel_notify(key, char_obj):
+def get_hero_panel_notify(char_obj):
     msg = protomsg.GetHeroPanelNotify()
     # FIXME
     data = [
@@ -82,9 +80,9 @@ def get_hero_panel_notify(key, char_obj):
         m = msg.get_heros.add()
         m.mode, m.cost, m.free_times, m.max_free_times = d
 
-    redis_client.rpush(key, pack_msg(msg))
+    publish_to_char(char_obj.id, pack_msg(msg))
 
-def socket_notify(key, char_id):
+def socket_notify(char_id):
     msg = protomsg.SocketNotify()
     data = MongoChar.objects.only('sockets').get(id=char_id)
     if not data:
@@ -99,20 +97,20 @@ def socket_notify(key, char_id):
         s.armor_id = v.armor or 0
         s.jewelry_id = v.jewelry or 0
 
-    redis_client.rpush(key, pack_msg(msg))
+    publish_to_char(char_id, pack_msg(msg))
 
 
 
-def formation_notify(key, char_id, formation=None):
+def formation_notify(char_id, formation=None):
     msg = protomsg.FormationNotify()
     if not formation:
         formation = get_char_formation(char_id)
 
     msg.socket_ids.extend(formation)
-    redis_client.rpush(key, pack_msg(msg))
+    publish_to_char(char_id, pack_msg(msg))
 
 
-def already_stage_notify(key, char_id):
+def already_stage_notify(char_id):
     data = get_already_stage(char_id)
     if data:
         msg = protomsg.AlreadyStageNotify()
@@ -120,26 +118,23 @@ def already_stage_notify(key, char_id):
             stage = msg.stages.add()
             stage.id, stage.star = d
 
-        redis_client.rpush(key, pack_msg(msg))
+        publish_to_char(char_id, pack_msg(msg))
 
 
-def current_stage_notify(key, sid, star):
+def current_stage_notify(char_id, sid, star):
     msg = protomsg.CurrentStageNotify()
     msg.stage.id, msg.stage.star = sid, star
-    redis_client.rpush(key, pack_msg(msg))
+    publish_to_char(char_id, pack_msg(msg))
 
-def new_stage_notify(key, sid):
+def new_stage_notify(char_id, sid):
     msg = protomsg.NewStageNotify()
     msg.stage.id, msg.stage.star = sid, False
-    redis_client.rpush(key, pack_msg(msg))
+    publish_to_char(char_id, pack_msg(msg))
 
 
 
-def equipment_notify(key, char_id=None, objs=None, message="EquipNotify"):
+def equipment_notify(char_id, objs=None, message="EquipNotify"):
     if not objs:
-        if not char_id:
-            raise Exception("equipment_notify: bad arguments")
-        
         objs = get_char_equipment_objs(char_id)
 
     msg = getattr(protomsg, message)()
@@ -161,24 +156,24 @@ def equipment_notify(key, char_id=None, objs=None, message="EquipNotify"):
             a.id = k
             a.value = v['value']
     
-    redis_client.rpush(key, pack_msg(msg))
+    publish_to_char(char_id, pack_msg(msg))
 
 
-def add_equipment_notify(key, obj):
+def add_equipment_notify(char_id, obj):
     if isinstance(obj, (list, tuple)):
         objs = obj
     else:
         objs = [obj]
-    equipment_notify(key, objs=objs, message="AddEquipNotify")
+    equipment_notify(char_id, objs=objs, message="AddEquipNotify")
     
-def update_equipment_notify(key, obj):
+def update_equipment_notify(char_id, obj):
     if isinstance(obj, (list, tuple)):
         objs = obj
     else:
         objs = [obj]
-    equipment_notify(key, objs=objs, message="UpdateEquipNotify")
+    equipment_notify(char_id, objs=objs, message="UpdateEquipNotify")
 
-def remove_equipment_notify(key, _id):
+def remove_equipment_notify(char_id, _id):
     if isinstance(_id, (list, tuple)):
         ids = _id
     else:
@@ -187,14 +182,11 @@ def remove_equipment_notify(key, _id):
     msg = protomsg.RemoveEquipNotify()
     msg.ids.extend(ids)
     
-    redis_client.rpush(key, pack_msg(msg))
+    publish_to_char(char_id, pack_msg(msg))
 
 
-def gem_notify(key, char_id=None, gems=None, message="GemNotify"):
+def gem_notify(char_id, gems=None, message="GemNotify"):
     if gems is None:
-        if char_id is None:
-            raise Exception("gem_notify: bad arguments")
-        
         mongo_char = MongoChar.objects.only('gems').get(id=char_id)
         gems = [(int(k), v) for k, v in mongo_char.gems.iteritems()]
     
@@ -203,16 +195,16 @@ def gem_notify(key, char_id=None, gems=None, message="GemNotify"):
         g = msg.gems.add()
         g.id, g.amount = k, v
     
-    redis_client.rpush(key, pack_msg(msg))
+    publish_to_char(char_id, pack_msg(msg))
 
 
-def add_gem_notify(key, gems):
-    gem_notify(key, gems=gems, message="AddGemNotify")
+def add_gem_notify(char_id, gems):
+    gem_notify(char_id, gems=gems, message="AddGemNotify")
 
-def update_gem_notify(key, gems):
-    gem_notify(key, gems=gems, message="UpdateGemNotify")
+def update_gem_notify(char_id, gems):
+    gem_notify(char_id, gems=gems, message="UpdateGemNotify")
 
-def remove_gem_notify(key, _id):
+def remove_gem_notify(char_id, _id):
     if isinstance(_id, (list, tuple)):
         ids = _id
     else:
@@ -221,21 +213,21 @@ def remove_gem_notify(key, _id):
     msg = protomsg.RemoveGemNotify()
     msg.ids.extend(ids)
     
-    redis_client.rpush(key, pack_msg(msg))
+    publish_to_char(char_id, pack_msg(msg))
 
 
 
-def hang_notify(key, char_id):
+def hang_notify(char_id):
     char = MongoChar.objects.only('hang_hours').get(id=char_id)
     try:
         hang = Hang.objects.get(id=char_id)
     except DoesNotExist:
         hang = None
     
-    hang_notify_with_data(key, char.hang_hours, hang)
+    hang_notify_with_data(char_id, char.hang_hours, hang)
     return hang
 
-def hang_notify_with_data(key, hours, hang):
+def hang_notify_with_data(char_id, hours, hang):
     msg = protomsg.HangNotify()
     # FIXME
     msg.hours = hours or 8
@@ -246,11 +238,11 @@ def hang_notify_with_data(key, hours, hang):
         # FIXME
         msg.hang.finished = hang.finished
     
-    redis_client.rpush(key, pack_msg(msg))
+    publish_to_char(char_id, pack_msg(msg))
 
     
 
-def prize_notify(key, prize_id):
+def prize_notify(char_id, prize_id):
     if isinstance(prize_id, (list, tuple)):
         ids = prize_id
     else:
@@ -258,15 +250,15 @@ def prize_notify(key, prize_id):
     
     msg = protomsg.PrizeNotify()
     msg.prize_ids.extend(ids)
-    redis_client.rpush(key, pack_msg(msg))
+    publish_to_char(char_id, pack_msg(msg))
     
-def plunder_notify(key, amount):
+def plunder_notify(char_id, amount):
     msg = protomsg.PlunderNotify()
     msg.amount = amount
-    redis_client.rpush(key, pack_msg(msg))
+    publish_to_char(char_id, pack_msg(msg))
 
 
-def prisoner_notify(key, char_id, objs=None, message_name="PrisonerListNotify"):
+def prisoner_notify(char_id, objs=None, message_name="PrisonerListNotify"):
     if not objs:
         prison = Prison.objects.get(id=char_id)
         objs = prison.prisoners.values()
@@ -288,15 +280,15 @@ def prisoner_notify(key, char_id, objs=None, message_name="PrisonerListNotify"):
         p.attack, p.defense, p.hp = cal_hero_property(o.oid, level)
         p.crit, p.dodge = 0, 0
     
-    redis_client.rpush(key, pack_msg(msg))
+    publish_to_char(char_id, pack_msg(msg))
     
-def update_prisoner_notify(key, char_id, mongo_prisoner_obj):
-    prisoner_notify(key, char_id, objs=[mongo_prisoner_obj], message_name="UpdatePrisonerNotify")
+def update_prisoner_notify(char_id, mongo_prisoner_obj):
+    prisoner_notify(char_id, objs=[mongo_prisoner_obj], message_name="UpdatePrisonerNotify")
 
-def new_prisoner_notify(key, char_id, mongo_prisoner_obj):
-    prisoner_notify(key, char_id, objs=[mongo_prisoner_obj], message_name="NewPrisonerNotify")
+def new_prisoner_notify(char_id, mongo_prisoner_obj):
+    prisoner_notify(char_id, objs=[mongo_prisoner_obj], message_name="NewPrisonerNotify")
 
-def remove_prisoner_notify(key, _id):
+def remove_prisoner_notify(char_id, _id):
     if isinstance(_id, (list, tuple)):
         ids = _id
     else:
@@ -304,17 +296,17 @@ def remove_prisoner_notify(key, _id):
     
     msg = protomsg.RemovePrisonerNotify()
     msg.ids.extend(ids)
-    redis_client.rpush(key, pack_msg(msg))
+    publish_to_char(char_id, pack_msg(msg))
 
 
 
-def prison_notify(key, slots):
+def prison_notify(char_id, slots):
     msg = protomsg.PrisonNotify()
     msg.slots = slots
-    redis_client.rpush(key, pack_msg(msg))
+    publish_to_char(char_id, pack_msg(msg))
 
 
-def arena_notify(key, char_id):
+def arena_notify(char_id):
     # FIXME
     msg = protomsg.ArenaNotify()
     msg.week_rank = 1
@@ -332,36 +324,36 @@ def arena_notify(key, char_id):
         n = msg.chars.add()
         n.rank, n.id, n.name = x
     
-    redis_client.rpush(key, pack_msg(msg))
+    publish_to_char(char_id, pack_msg(msg))
 
 
-def login_notify(key, char_obj):
+def login_notify(char_obj):
     hero_objs = get_char_hero_objs(char_obj.id)
 
-    character_notify(key, char_obj)
-    hero_notify(key, hero_objs)
-    get_hero_panel_notify(key, char_obj)
-    socket_notify(key, char_obj.id)
-    formation_notify(key, char_id=char_obj.id)
-    already_stage_notify(key, char_obj.id)
+    character_notify(char_obj)
+    hero_notify(char_obj.id, hero_objs)
+    get_hero_panel_notify(char_obj)
+    socket_notify(char_obj.id)
+    formation_notify(char_obj.id)
+    already_stage_notify(char_obj.id)
 
     new_stages = get_new_stage(char_obj.id)
     if new_stages:
-        new_stage_notify(key, new_stages)
+        new_stage_notify(char_obj.id, new_stages)
     
-    equipment_notify(key, char_id=char_obj.id)
-    gem_notify(key, char_id=char_obj.id)
+    equipment_notify(char_obj.id)
+    gem_notify(char_obj.id)
 
-    hang = hang_notify(key, char_obj.id)
+    hang = hang_notify(char_obj.id)
     if hang and hang.finished:
-        prize_notify(key, 1)
+        prize_notify(char_obj.id, 1)
     
     # FIXME
-    plunder_notify(key, 10)
-    prisoner_notify(key, char_obj.id)
+    plunder_notify(char_obj.id, 10)
+    prisoner_notify(char_obj.id)
     # FIXME
-    prison_notify(key, 3)
+    prison_notify(char_obj.id, 3)
     
-    arena_notify(key, char_obj.id)
+    arena_notify(char_obj.id)
     
 

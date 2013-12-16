@@ -31,7 +31,7 @@ def prize_get(request):
     # FIXME , real prize
     hang.delete()
     
-    hang_notify('noti:{0}'.format(char_id), char_id)
+    hang_notify(char_id)
     
     response = protomsg.PrizeResponse()
     response.ret = 0
