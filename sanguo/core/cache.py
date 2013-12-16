@@ -1,26 +1,26 @@
-from redisco import models
-from core.signals import socket_changed_signal, hero_changed_signal
+from core.signals import (
+    socket_changed_signal,
+    hero_changed_signal
+    )
+
 from apps.item.cache import get_cache_equipment
-
 from core.mongoscheme import MongoChar
+from utils import cache
 
 
 
-class CacheHero(models.Model):
-    char_id = models.IntegerField(indexed=False, required=True)
-    oid = models.IntegerField(indexed=False, required=True)
-    attack = models.IntegerField(indexed=False, required=True)
-    defense = models.IntegerField(indexed=False, required=True)
-    hp = models.IntegerField(indexed=False, required=True)
-    crit = models.IntegerField(indexed=False, required=True)
-    dodge = models.IntegerField(indexed=False, required=True)
+class CacheHero(object):
+    __slots__ = [
+        'id', 'char_id', 'oid',
+        'attack', 'defense', 'hp',
+        'crit', 'dodge'
+    ]
+    
     
 
 def save_cache_hero(hero_obj):
-    h = CacheHero.objects.get_by_id(hero_obj.id)
-    if h is None:
-        h = CacheHero()
-        h.id = hero_obj.id
+    h = CacheHero()
+    h.id = hero_obj.id
     
     h.char_id = hero_obj.char_id
     h.oid = hero_obj.original_id
@@ -29,20 +29,16 @@ def save_cache_hero(hero_obj):
     h.hp = hero_obj.hp
     h.crit = hero_obj.crit
     h.dodge = hero_obj.dodge
-
-    res = h.save()
-    if res is not True:
-        raise Exception(str(res))
+    
+    cache.set('hero:{0}'.format(h.id), h)
     return h
 
 
 def delete_cache_hero(_id):
-    h = CacheHero.objects.get_by_id(_id)
-    if h:
-        h.delete()
+    cache.delete('hero:{0}'.format(_id))
 
 def get_cache_hero(_id):
-    h = CacheHero.objects.get_by_id(_id)
+    h = cache.get('hero:{0}'.format(_id))
     if h:
         return h
     
@@ -81,7 +77,8 @@ def _add_extra_attr_to_hero(hero_obj, weapon, armor, jewelry):
 def _hero_attribute_change(sender, hero, weapon, armor, jewelry, **kwargs):
     this_hero = get_cache_hero(hero)
     _add_extra_attr_to_hero(this_hero, weapon, armor, jewelry)
-    this_hero.save()
+    
+    cache.set('hero:{0}'.format(this_hero.id), this_hero)
     
     hero_changed_signal.send(
         sender = None,

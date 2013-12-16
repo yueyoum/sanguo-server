@@ -203,6 +203,9 @@ MONGODB_DB = 'sanguo'
 CRYPTO_KEY = None
 CRYPTO_PREFIX = None
 
+CACHE_HOURS = 1
+
+
 if TESTING:
     BROKER_URL = 'amqp://guest:guest@localhost:5672/sanguo_test'
 else:

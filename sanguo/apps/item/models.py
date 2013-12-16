@@ -1,7 +1,12 @@
 from django.db import models
 from django.db.models.signals import post_delete, post_save
 
-from apps.item.cache import save_cache_equipment, delete_cache_equipment
+from apps.item.cache import (
+    save_cache_equipment,
+    delete_cache_equipment,
+    decode_random_attr,
+    )
+
 from core.signals import (
     equip_add_signal,
     equip_changed_signal,
@@ -33,6 +38,33 @@ class Equipment(models.Model):
     
     class Meta:
         db_table = 'equipment'
+        
+        
+        
+    @property
+    def decoded_random_attrs(self):
+        attrs = getattr(self, '_decoded_random_attrs', None)
+        if not attrs:
+            attrs = decode_random_attr(self.random_attrs)
+            self._decoded_random_attrs = attrs
+        return attrs
+    
+    @property
+    def value(self):
+        return int(self.base_value * self.modulus)
+    
+    @property
+    def hole_opened(self):
+        if not self.gem_ids:
+            return 0
+        return len(self.gem_ids.split(','))
+    
+    @property
+    def gems(self):
+        if not self.gem_ids:
+            return []
+        return [int(i) for i in self.gem_ids.split(',')]
+        
 
 
 def equipment_save_callback(sender, instance, created, **kwargs):

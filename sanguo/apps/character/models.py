@@ -1,20 +1,41 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
 from django.db.models.signals import post_delete, post_save
 
-from apps.character.cache import save_cache_character, delete_cache_character
+from apps.character.cache import (
+    save_cache_character,
+    delete_cache_character,
+    )
+
 
 class Character(models.Model):
     account_id = models.IntegerField(db_index=True)
     server_id = models.IntegerField(db_index=True)
     
     name = models.CharField(max_length=10)
-    gold = models.IntegerField(default=0)
-    sycee = models.IntegerField(default=0)
     
-    level = models.IntegerField(default=1)
-    exp = models.IntegerField(default=0)
-    official = models.IntegerField(default=0)
-    honor = models.IntegerField(default=0)
+    # 金币
+    gold = models.PositiveIntegerField(default=0)
+    # 元宝
+    sycee = models.PositiveIntegerField(default=0)
+    
+    # 等级
+    level = models.PositiveIntegerField(default=1)
+    # 等级经验 这里存的是总经验
+    exp = models.PositiveIntegerField(default=0)
+    
+    # 官职
+    official = models.PositiveIntegerField(default=1)
+    # 官职经验，荣誉
+    honor = models.PositiveIntegerField(default=0)
+    
+    # 声望  来自比武日/周奖励， 用于商城购买
+    renown = models.PositiveIntegerField(default=0)
+    
+    # 积分  来自每场比武奖励， 用于比武排名
+    score = models.PositiveIntegerField(default=0)
+    
 
 
     def __unicode__(self):

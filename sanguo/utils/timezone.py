@@ -24,3 +24,6 @@ def localnow():
 def local_timestamp():
     return calendar.timegm( localnow().timetuple() )
 
+def hours_delta(h):
+    now = datetime.datetime.now()
+    return now + datetime.timedelta(hours=h)
