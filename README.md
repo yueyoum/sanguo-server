@@ -27,7 +27,20 @@
     ./compile-protobufs.sh
     ```
 
-5.  启动timer服务
+
+5.  设置rabbitmq
+
+    ```
+    如果有必要，就先设置local_settings.py
+
+    rabbitmqctl add_vhost sanguo
+    rabbitmqctl add_vhost sanguo_test
+    rabbitmqctl set_permissions -p sanguo guest ".*" ".*" ".*"
+    rabbitmqctl set_permissions -p sanguo_test guest ".*" ".*" ".*"
+    ```
+
+
+6.  启动timer服务
 
     ```
     cd sanguo
@@ -35,7 +48,8 @@
     ```
 
 
-6.  编辑配置文件，并启动程序
+
+7.  编辑配置文件，并启动程序
 
     ```
     cd sanguo
@@ -47,7 +61,7 @@
     正式: start_production_server.sh
     ```
 
-7.  测试
+8.  测试
 
     ```
     ./start_test_server 启动测试服务，然后在另一个shell中执行：
