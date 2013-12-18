@@ -309,10 +309,6 @@ class InBattleHero(ActiveEffectMixin):
         if msg_target.is_crit:
             value *= 2
         
-        value -= target.using_defense
-        if value < 0:
-            value = 0
-        
         self._one_action(target, value, msg)
 
 
@@ -381,21 +377,18 @@ class InBattleHero(ActiveEffectMixin):
                 value = self._cal_eff_value(eff, self, 'using_attack')
                 if msg_target.is_crit:
                     value *= 2
-                value -= target.using_defense
-                if value < 0:
-                    value = 0
                 self._one_action(target, value, msg, 2)
             elif eff.type_id == 12:
                 raise NotImplementedError("eff.type_id = 12")
-            elif eff.type_id == 13:
-                value = self._cal_eff_value(eff, self, 'using_attack')
-                if msg_target.is_crit:
-                    value *= 2
-                value -= target.using_defense
-                if value < 0:
-                    value = 0
-                self._one_action(target, value, msg, 13)
-                self._one_action(self, -value, msg, 13)
+            #elif eff.type_id == 13:
+            #    value = self._cal_eff_value(eff, self, 'using_attack')
+            #    if msg_target.is_crit:
+            #        value *= 2
+            #    value -= target.using_defense
+            #    if value < 0:
+            #        value = 0
+            #    self._one_action(target, value, msg, 13)
+            #    self._one_action(self, -value, msg, 13)
             else:
                 raise Exception("eff.rounds = 0, but type_id = %d" % eff.type_id)
         else:
