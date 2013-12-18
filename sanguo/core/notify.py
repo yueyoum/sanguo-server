@@ -1,4 +1,4 @@
-from core.rabbit import publish_to_char
+from core.rabbit import rabbit
 from utils import pack_msg
 from core.character import (
     get_char_formation,
@@ -9,10 +9,13 @@ from core.character import (
 from core.stage import get_already_stage, get_new_stage
 from core import GLOBAL
 from core.mongoscheme import MongoChar, Hang, DoesNotExist, Prison
+#from core.counter import Counter
 import protomsg
 
 from apps.character.cache import get_cache_character
 from core.hero import cal_hero_property
+
+publish_to_char = rabbit.publish_to_char
 
 def character_notify(obj):
     data = protomsg.CharacterNotify()

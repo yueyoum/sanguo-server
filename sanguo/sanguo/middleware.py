@@ -7,7 +7,7 @@ import protomsg
 from protomsg import REQUEST_TYPE
 
 from core.exception import SanguoViewException
-from core import rabbit
+from core.rabbit import rabbit
 from utils import crypto
 from utils import pack_msg
 
