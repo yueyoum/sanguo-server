@@ -26,7 +26,7 @@ def get_equip_level_step(level):
 
 def load_equip_template():
     # {
-    #     id: {tp: , quality: name;,  fixed:}
+    #     id: {id:, tp: , quality: name;,  std:}
     # }
 
     with open(data_path('equip_template.json'), 'r') as f:
@@ -38,6 +38,7 @@ def load_equip_template():
         fields.pop('des')
         name = fields.pop('name')
         fields['name'] = [n.strip() for n in name.split(',')]
+        fields['id'] = c['pk']
 
         data[c['pk']] = fields
 
@@ -182,6 +183,32 @@ EQUIP_LEVEL_INFO = load_equip_level_info()
 EQUIP_LEVEL_RANGE_INFO = load_equip_level_range_info()
 EQUIP_RANDOM_ATTRIBUTE = load_random_attribute()
 
+_EQUIP_IDS_BY_QUALITY_ALL = {}
+_EQUIP_IDS_BY_QUALITY_STD = {}
+
+def EQUIP_IDS_BY_QUALITY(quality, only_std=False):
+    global _EQUIP_IDS_BY_QUALITY_ALL
+    global _EQUIP_IDS_BY_QUALITY_STD
+
+    def _filter(e):
+        _id, x = e
+        if only_std:
+            return x['std'] and x['quality'] == quality
+        return x['quality'] == quality
+    
+    if only_std:
+        if quality not in _EQUIP_IDS_BY_QUALITY_STD:
+            filter_list = filter(_filter, EQUIP_TEMPLATE.items())
+            _EQUIP_IDS_BY_QUALITY_STD[quality] = [k for k, v in filter_list]
+        return _EQUIP_IDS_BY_QUALITY_STD[quality]
+    
+    if quality not in _EQUIP_IDS_BY_QUALITY_ALL:
+        filter_list = filter(_filter, EQUIP_TEMPLATE.items())
+        _EQUIP_IDS_BY_QUALITY_ALL[quality] = [k for k, v in filter_list]
+    
+    return _EQUIP_IDS_BY_QUALITY_ALL[quality]
+        
+
 _EXP_LEVEL = [(v['exp'], k) for k, v in EQUIP_LEVEL_INFO.iteritems()]
 _EXP_LEVEL.sort(key=lambda item: item[0])
 
@@ -266,6 +293,7 @@ def generate_equip(tid, level):
 
     level_step = get_equip_level_step(level)
     modulus = EQUIP_LEVEL_RANGE_INFO[level_step]['modulus'][quality]
+    modulus *= random.uniform(1, 1.08)
 
     return {
             'tid': tid,

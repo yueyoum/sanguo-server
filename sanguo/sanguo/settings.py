@@ -12,6 +12,7 @@ except (KeyError, ValueError):
 
 CURRENT_PATH = os.path.dirname(os.path.realpath(__file__))
 TMP_PATH = os.path.normpath(os.path.join(CURRENT_PATH, '../../tmp'))
+LOG_PATH = os.path.normpath(os.path.join(CURRENT_PATH, '../logs'))
 
 
 DEBUG = True

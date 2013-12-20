@@ -29,9 +29,6 @@ class MongoChar(Document):
     # 宝石, key 为宝石ID， value为数量
     gems = DictField()
 
-    # 当天挂机总时间
-    hang_hours = IntField()
-    
     meta = {
         'collection': 'char'
     }
@@ -52,9 +49,14 @@ MongoHero.ensure_indexes()
 class Hang(Document):
     id = IntField(primary_key=True)
     stage_id = IntField()
+    # 选择的总时间
     hours = IntField()
+    # 开始的UTC 时间戳
     start = IntField()
+    # 是否完成
     finished = BooleanField()
+    # 实际挂的时间
+    actual_hours = IntField()
     jobid = StringField()
 
     meta = {
@@ -83,4 +85,14 @@ class Prison(Document):
         'collection': 'prison'
     }
 
+
+
+class MongoCounter(Document):
+    id = StringField(primary_key=True)
+    max_value = IntField()
+    cur_value = IntField()
+    
+    meta = {
+        'collection': 'counter'
+    }
 

@@ -221,17 +221,18 @@ def remove_gem_notify(char_id, _id):
 
 
 
-def hang_notify(char_id):
-    char = MongoChar.objects.only('hang_hours').get(id=char_id)
-    try:
-        hang = Hang.objects.get(id=char_id)
-    except DoesNotExist:
-        hang = None
+def hang_notify(char_id, hang=None):
+    counter = Counter(char_id, 'hang')
+    if not hang:
+        try:
+            hang = Hang.objects.get(id=char_id)
+        except DoesNotExist:
+            hang = None
     
-    hang_notify_with_data(char_id, char.hang_hours, hang)
+    hang_notify_with_data(char_id, counter.cur_value, counter.max_value, hang)
     return hang
 
-def hang_notify_with_data(char_id, hours, hang):
+def hang_notify_with_data(char_id, hours, max_hours, hang):
     msg = protomsg.HangNotify()
     # FIXME
     msg.hours = hours or 8

@@ -6,6 +6,8 @@ from core.hero import save_hero
 from core.formation import save_socket, save_formation
 
 from core.signals import char_changed_signal
+from core.settings import COUNTER
+from core.counter import Counter
 
 from apps.character.models import Character
 from apps.item.cache import get_cache_equipment
@@ -24,6 +26,9 @@ def char_initialize(account_id, server_id, name):
     MongoChar(id=char_id).save()
     # FIXME
     Prison(id=char_id, amount=3).save()
+    
+    for func_name in COUNTER.keys():
+        Counter(char_id, func_name)
     
     #init_hero_ids = GLOBAL.HEROS.get_random_hero_ids(3)
     init_hero_ids = [1, 2, 3]
@@ -44,16 +49,6 @@ def char_initialize(account_id, server_id, name):
     # 将关卡1设置为new 可进入
     MongoChar.objects(id=char_id).update_one(set__stage_new=1)
     
-    # FIXME just for test
-    #import random
-    #from core.equip import generate_and_save_equip
-    #for i in range(10):
-    #    generate_and_save_equip(
-    #        random.randint(1, 12),
-    #        random.randint(1, 99),
-    #        char_id
-    #    )
-   # TEST END
     return char
 
 def get_char_formation(char_id):

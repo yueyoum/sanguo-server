@@ -9,9 +9,18 @@ from core import GLOBAL
 from core.battle.hero import BattleHero, MonsterHero, NPCHero
 from core.battle.battle import Battle
 from core.mongoscheme import MongoChar, Hang, Prison, Prisoner
+from core.counter import Counter
+
 from core.signals import pve_finished_signal
-from core.stage import get_stage_drop, get_plunder_list
-from core.exception import SanguoViewException
+from core.stage import (
+    get_plunder_list,
+    get_stage_fixed_drop,
+    get_stage_standard_drop,
+    get_stage_hang_drop,
+    save_drop,
+    )
+from core.exception import SanguoViewException, CounterOverFlow
+
 
 from core.signals import hang_add_signal, hang_cancel_signal, plunder_finished_signal, prisoner_add_signal, pvp_finished_signal
 from core.cache import get_cache_hero
@@ -129,10 +138,6 @@ def pve(request):
     b = PVE(char_id, req.stage_id, msg)
     b.start()
     
-    # XXX
-    with open('/tmp/battle.proto', 'w') as f:
-        f.write(msg.__str__())
-    
     star = False
     if msg.first_ground.self_win and msg.second_ground.self_win and msg.third_ground.self_win:
         star = True
@@ -145,7 +150,25 @@ def pve(request):
         star = star
     )
     
-    drop_exp, drop_gold, drop_equips, drop_gems = get_stage_drop(char_id, req.stage_id)
+    if msg.self_win:
+        drop_exp, drop_gold, drop_equips, drop_gems = get_stage_standard_drop(req.stage_id)
+        fixed_exp, fixed_gold, fixed_equips, fixed_gems = get_stage_fixed_drop(req.stage_id)
+        drop_exp += fixed_exp
+        drop_gold += fixed_gold
+        drop_equips.extend(fixed_equips)
+        drop_gems.extend(fixed_gems)
+        save_drop(
+            char_id,
+            drop_exp,
+            drop_gold,
+            drop_equips,
+            drop_gems
+        )
+    else:
+        drop_gold = 0
+        drop_exp = 0
+        drop_equips = []
+        drop_gems = []
     
 
     response = protomsg.PVEResponse()
@@ -167,12 +190,6 @@ def hang(request):
     req = request._proto
     char_id = request._char_id
     
-    mongo_char = MongoChar.objects.only('hang_hours').get(id=char_id)
-    # FIXME
-    hang_hours = mongo_char.hang_hours or 8
-    if req.hours > hang_hours:
-        raise SanguoViewException(701, "HangResponse")
-    
     try:
         hang = Hang.objects.get(id=char_id)
     except DoesNotExist:
@@ -181,8 +198,14 @@ def hang(request):
     if hang is not None:
         raise SanguoViewException(700, "HangResponse")
     
-    #job = sched.apply_async((hang_job, char_id), countdown=req.hours*3600)
-    # FIXME
+    counter = Counter(char_id, 'hang')
+    try:
+        counter.incr(req.hours)
+    except CounterOverFlow:
+        raise SanguoViewException(701, "HangResponse")
+        
+    
+    # FIXME countdown
     job = sched.apply_async((hang_job, char_id), countdown=10)
     
     hang = Hang(
@@ -191,12 +214,11 @@ def hang(request):
         hours = req.hours,
         start = timezone.utc_timestamp(),
         finished = False,
-        jobid = job.id
+        jobid = job.id,
+        actual_hours = 0,
     )
     
     hang.save()
-    mongo_char.hang_hours = hang_hours - req.hours
-    mongo_char.save()
     
     hang_add_signal.send(
         sender = None,
@@ -224,21 +246,23 @@ def hang_cancel(request):
     
     cancel_job(hang.jobid)
 
-    mongo_char = MongoChar.objects.only('hang_hours').get(id=char_id)
     utc_now_timestamp = timezone.utc_timestamp()
     
     original_h = hang.hours
     h, s = divmod((utc_now_timestamp - hang.start), 3600)
+    actual_hours = h
     if s:
         h += 1
     print 'original_h =', original_h, 'h =', h
     
-    mongo_char.hang_hours += original_h - h
-    mongo_char.save()
+    
+    counter = Counter(char_id, 'hang')
+    counter.incr(-(original_h-h))
     
     hang_cancel_signal.send(
         sender = None,
-        char_id = char_id
+        char_id = char_id,
+        actual_hours = actual_hours
     )
     
     response = protomsg.HangCancelResponse()

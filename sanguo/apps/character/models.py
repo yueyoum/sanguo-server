@@ -34,7 +34,9 @@ class Character(models.Model):
     renown = models.PositiveIntegerField(default=0)
     
     # 积分  来自每场比武奖励， 用于比武排名
-    score = models.PositiveIntegerField(default=0)
+    score_day = models.PositiveIntegerField(default=0)
+    score_week = models.PositiveIntegerField(default=0)
+    
     
 
 

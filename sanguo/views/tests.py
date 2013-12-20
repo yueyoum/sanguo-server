@@ -282,7 +282,8 @@ class PrizeTest(TransactionTestCase):
             stage_id = 1,
             hours = 8,
             start = 100,
-            finished = True
+            finished = True,
+            actual_hours = 8
         )
         
         h.save()

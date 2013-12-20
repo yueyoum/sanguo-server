@@ -93,3 +93,18 @@
 [1]: http://stackoverflow.com/questions/3513773/change-mysql-default-character-set-to-utf8-in-my-cnf
 
 
+# 问题
+
+## uWSGI 报错
+
+ubuntu 系统上 uWSGI 在 enable-thread 后可能会报这样的错误
+
+`libgcc_s.so.1 must be installed for pthread_cancel to work`
+
+解决办法:
+
+
+    ```
+
+    ```
+

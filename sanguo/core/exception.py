@@ -4,3 +4,5 @@ class SanguoViewException(Exception):
         self.response_msg_name = response_msg_name
         Exception.__init__(self)
 
+class CounterOverFlow(Exception):
+    pass
