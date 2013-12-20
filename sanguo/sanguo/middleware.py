@@ -7,9 +7,10 @@ import protomsg
 from protomsg import REQUEST_TYPE
 
 from core.exception import SanguoViewException
-from core.rabbit import rabbit
+#from core.rabbit import rabbit
 from utils import crypto
 from utils import pack_msg
+from core.msgpipe import message_get
 
 NUM_FIELD = struct.Struct('>i')
 EMPTY_SESSION_MSG_TYPE = set([100, 102, 105])
@@ -103,11 +104,12 @@ class PackMessageData(object):
         
         char_id = getattr(request, '_char_id', None)
         if char_id:
-            if char_id not in _BIND:
-                rabbit.bind(char_id, request._server_id)
-                _BIND.add(char_id)
+            #if char_id not in _BIND:
+            #    rabbit.bind(char_id, request._server_id)
+            #    _BIND.add(char_id)
 
-            other_msgs = rabbit.message_get_all(char_id)
+            #other_msgs = rabbit.message_get_all(char_id)
+            other_msgs = message_get(char_id)
         else:
             other_msgs = []
         

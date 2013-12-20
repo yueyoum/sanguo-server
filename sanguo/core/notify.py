@@ -1,4 +1,4 @@
-from core.rabbit import rabbit
+#from core.rabbit import rabbit
 from utils import pack_msg
 from core.character import (
     get_char_formation,
@@ -15,7 +15,8 @@ import protomsg
 from apps.character.cache import get_cache_character
 from core.hero import cal_hero_property
 
-publish_to_char = rabbit.publish_to_char
+#publish_to_char = rabbit.publish_to_char
+from core.msgpipe import publish_to_char
 
 def character_notify(obj):
     data = protomsg.CharacterNotify()
