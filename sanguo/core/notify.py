@@ -9,7 +9,7 @@ from core.character import (
 from core.stage import get_already_stage, get_new_stage
 from core import GLOBAL
 from core.mongoscheme import MongoChar, Hang, DoesNotExist, Prison
-#from core.counter import Counter
+from core.counter import Counter
 import protomsg
 
 from apps.character.cache import get_cache_character
