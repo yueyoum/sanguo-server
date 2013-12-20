@@ -2,7 +2,6 @@
 import random
 from collections import defaultdict
 
-from scipy.stats import norm
 
 from core.mongoscheme import MongoChar, Hang
 from core.equip import generate_and_save_equip
@@ -13,6 +12,7 @@ from core.character import character_change
 from apps.character.cache import get_cache_character
 
 from utils import timezone
+from utils.math import GAUSSIAN_TABLE
 
 STAGE = GLOBAL.STAGE
 STAGE_DROP = GLOBAL.STAGE_DROP
@@ -206,8 +206,9 @@ def get_stage_hang_drop(stage_id, hours):
     gold = drop_gold * hours * 240
     
     
-    seed = random.uniform(0.5, 0.999999)
-    value = float(norm.ppf(seed))
+    seed = random.uniform(0.5, 0.99)
+    seed = round(seed, 2)
+    value = GAUSSIAN_TABLE[seed]
     r = 1 + value * static_var
     # FIXME
     #k = stage['level']
