@@ -11,6 +11,7 @@ from core.counter import Counter
 import protomsg
 
 from core.character import Char
+from core.equip import Equip
 
 from apps.character.cache import get_cache_character
 from core.hero import cal_hero_property
@@ -145,6 +146,8 @@ def equipment_notify(char_id, objs=None, message="EquipNotify"):
 
     msg = getattr(protomsg, message)()
     for obj in objs:
+        eobj = Equip(obj.level, obj.tp, obj.quality)
+        
         e = msg.equips.add()
         e.id = obj.id
         e.tp = obj.tp
@@ -152,6 +155,13 @@ def equipment_notify(char_id, objs=None, message="EquipNotify"):
         e.name = obj.name
         e.level = obj.level
         e.exp = obj.exp
+        e.max_exp = eobj.update_needs_exp(obj.level)
+        
+        e.eat_exp = eobj.worth_exp()
+        e.sell_gold = eobj.sell_value()
+        
+        
+        
         e.value = obj.value
         
         e.whole_hole = obj.hole_amount
