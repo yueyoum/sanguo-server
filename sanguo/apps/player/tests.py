@@ -26,8 +26,6 @@ def teardown():
 
 
 class RegisterTest(TransactionTestCase):
-    fixtures = ['server_list.json']
-    
     def setUp(self):
         users = (
                 ('123@456.com', '123456', ''),
