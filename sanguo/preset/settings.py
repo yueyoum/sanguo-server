@@ -24,6 +24,19 @@ SERVERS = {
 
 
 
+# 创建角色的初始化数据
+CHAR_INITIALIZE = {
+    'gold': 0,                  # 金币
+    'sycee': 0,                 # 元宝
+    'level': 1,                 # 等级
+    'official': 1,              # 官职
+    
+    'heros': [1, 2, 3],         # 要给的英雄，不设置为随机3个
+    'equips': [],               # 要给的装备，格式为 [(tid, level), (tid, level)...]
+    'gems': [],                 # 要给的宝石，格式为 [(gid, amount), (gid, amount)...]
+}
+
+
 # 抽将
 #{
 #    类型， 1 金， 2 银， 3 铜： {

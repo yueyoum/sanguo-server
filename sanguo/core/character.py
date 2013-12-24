@@ -10,8 +10,9 @@ from core.counter import Counter
 from core.formation import save_formation, save_socket, get_char_formation
 from core.hero import save_hero, delete_hero
 from core.mongoscheme import Hang, MongoChar, MongoHero, Prison
-from preset.settings import COUNTER
+from preset.settings import COUNTER, CHAR_INITIALIZE
 from core.signals import char_changed_signal
+
 
 
 COUNTER_KEYS = COUNTER.keys()
@@ -159,11 +160,19 @@ class Char(object):
 
 
 def char_initialize(account_id, server_id, name):
-    # 随机三个武将，并上阵
+    init_gold = CHAR_INITIALIZE.get('gold', 0)
+    init_sycee = CHAR_INITIALIZE.get('sycee', 0)
+    init_level = CHAR_INITIALIZE.get('level', 1)
+    init_official = CHAR_INITIALIZE.get('official', 1)
+    
     char = Character.objects.create(
         account_id = account_id,
         server_id = server_id,
-        name = name
+        name = name,
+        gold = init_gold,
+        sycee = init_sycee,
+        level = init_level,
+        official = init_official,
     )
     char_id = char.id
     
@@ -174,8 +183,20 @@ def char_initialize(account_id, server_id, name):
     for func_name in COUNTER_KEYS:
         Counter(char_id, func_name)
     
-    #init_hero_ids = GLOBAL.HEROS.get_random_hero_ids(3)
-    init_hero_ids = [1, 2, 3]
+    init_hero_ids = CHAR_INITIALIZE.get('heros', [])
+    if not init_hero_ids:
+        init_hero_ids = GLOBAL.HEROS.get_random_hero_ids(3)
+    
+    init_equips = CHAR_INITIALIZE.get('equips', [])
+    if init_equips:
+        from core.equip import generate_and_save_equip
+        for tid, level in init_equips:
+            generate_and_save_equip(tid, level ,char_id)
+    
+    init_gems = CHAR_INITIALIZE.get('gems', [])
+    if init_gems:
+        from core.gem import save_gem
+        save_gem(init_gems, char_id)
     
     hero_ids = save_hero(char_id, init_hero_ids, add_notify=False)
     for index, _id in enumerate(hero_ids):
@@ -188,7 +209,6 @@ def char_initialize(account_id, server_id, name):
             ]
 
     save_formation(char_id, socket_ids, send_notify=False)
-
 
     # 将关卡1设置为new 可进入
     MongoChar.objects(id=char_id).update_one(set__stage_new=1)

@@ -25,7 +25,6 @@ def create_character(request):
     if Character.objects.filter(server_id=server_id,name=req.name).exists():
         raise SanguoViewException(201, "CreateCharacterResponse")
 
-    #char = char_initialize(account_id, server_id, req.name)
     char = Char(
         account_id = account_id,
         server_id = server_id,
