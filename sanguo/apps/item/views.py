@@ -66,6 +66,7 @@ def strengthen_equip(request):
     update_process = te.update_process(target_equip.exp, all_exp)
     
     new_level, new_exp = update_process.end
+    print "strength", req.id, new_level, new_exp
     
     target_equip.exp = new_exp
     target_equip.level = new_level

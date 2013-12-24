@@ -5,11 +5,12 @@ from django.http import HttpResponse
 
 from apps.character.models import Character
 from apps.player.models import User
-from core.exception import SanguoViewException
+from core.exception import SanguoViewException, BadMessage, InvalidOperate
 from core.signals import login_signal, register_signal
 from core.world import server_list
 from protomsg import RegisterResponse, StartGameResponse
 from utils import crypto, pack_msg
+from preset.settings import SERVERS
 
 logger = logging.getLogger('sanguo')
 
@@ -82,6 +83,8 @@ def register(request):
 
 def login(request):
     req = request._proto
+    if req.server_id not in SERVERS:
+        raise InvalidOperate("StartGameResponse")
     
     need_create_new_char = None
     if req.anonymous.device_token:
@@ -93,7 +96,7 @@ def login(request):
             need_create_new_char = True
     else:
         if not req.regular.email or not req.regular.password:
-            raise SanguoViewException(1, "StartGameResponse")
+            raise BadMessage("StartGameResponse")
         try:
             user = User.objects.get(email=req.regular.email)
             if user.passwd != req.regular.password:
@@ -101,6 +104,7 @@ def login(request):
         except User.DoesNotExist:
             raise SanguoViewException(121, "StartGameResponse")
 
+    user.last_server_id = req.server_id
     user.save()
     if not user.active:
         raise SanguoViewException(122, "StartGameResponse")

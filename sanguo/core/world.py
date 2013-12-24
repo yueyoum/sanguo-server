@@ -1,20 +1,34 @@
 # -*- coding: utf-8 -*-
-from apps.world.models import Server
-
 from protomsg import Server as ServerMsg
+from apps.character.models import Character
+from preset.settings import SERVERS
 
 
 
-def server_list(uid=None):
-    servers = Server.objects.all()
-
+def server_list(user=None):
+    user_servers = []
+    if user:
+        user_servers = Character.objects.only('server_id').filter(
+            account_id=user.id).values_list('server_id', flat=True)
+    
+    top = None
     all_servers = []
-    for s in servers:
+    for sid, sname in SERVERS.items():
         _s = ServerMsg()
-        _s.id, _s.name, _s.status, _s.have_char = \
-                s.id, s.name, ServerMsg.GOOD, False
+        _s.id = sid
+        _s.name = sname.decode('utf-8')
+        # FIXME status
+        _s.status = ServerMsg.GOOD
+        _s.have_char = sid in user_servers
+        
+        if user and user.last_server_id and user.last_server_id == sid:
+            top = _s
 
         all_servers.append(_s)
+    
+    if top is None:
+        top = all_servers[-1]
+    
 
-    return all_servers[0], all_servers
+    return top, all_servers
 

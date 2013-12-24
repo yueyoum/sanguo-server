@@ -144,7 +144,6 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'django_nose',
     'apps.player',
-    'apps.world',
     'apps.character',
     'apps.item',
 )
@@ -212,8 +211,8 @@ MONGODB_HOST = "127.0.0.1"
 MONGODB_PORT = 27017
 MONGODB_DB = 'sanguo'
 
-CRYPTO_KEY = None
-CRYPTO_PREFIX = None
+CRYPTO_KEY = '1234567890abcdef'
+CRYPTO_PREFIX= 'ok'
 
 CACHE_HOURS = 1
 
@@ -228,14 +227,7 @@ CELERY_ENABLE_UTC = True
 # CELERY_TASK_SERIALIZER = 'json'
 # CELERY_RESULT_SERIALIZER = 'json'
 
-
-CRYPTO_KEY = '1234567890abcdef'
-CRYPTO_PREFIX= 'ok'
-
-
 if TESTING:
-    CRYPTO_KEY = '1234567890abcdef'
-    CRYPTO_PREFIX= 'ok'
 
     REDIS_DB = 1
     MONGODB_DB = 'test_sanguo'

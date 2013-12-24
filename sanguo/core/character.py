@@ -10,7 +10,7 @@ from core.counter import Counter
 from core.formation import save_formation, save_socket, get_char_formation
 from core.hero import save_hero, delete_hero
 from core.mongoscheme import Hang, MongoChar, MongoHero, Prison
-from core.settings import COUNTER
+from preset.settings import COUNTER
 from core.signals import char_changed_signal
 
 

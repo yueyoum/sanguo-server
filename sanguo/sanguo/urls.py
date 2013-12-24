@@ -17,9 +17,10 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
 
     url(r'', include('apps.player.urls')),
-    url(r'', include('apps.world.urls')),
     url(r'', include('apps.character.urls')),
     url(r'', include('apps.item.urls')),
+    
+    url(r'^world/server-list/$', 'views.world.views.get_server_list'),
     
     url(r'^test/$', 'views.cmd.cmd'),
 
