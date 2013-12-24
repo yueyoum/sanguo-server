@@ -16,6 +16,7 @@ from core.character import char_initialize
 from core.equip import generate_and_save_equip, delete_equip
 from core.mongoscheme import MongoChar
 from core.gem import save_gem
+from apps.character.models import Character
 
 
 def teardown():
@@ -96,6 +97,10 @@ class StrengthEquipmentTest(TransactionTestCase):
         self._prepare_equip()
         _id = self.equip_ids[0]
         cost_ids = self.equip_ids[1:]
+        
+        c = Character.objects.get(id=self.char_id)
+        c.gold = 9999
+        c.save()
         self._strength(_id, cost_ids)
         
         char = MongoChar.objects.only('equips').get(id=self.char_id)
@@ -104,12 +109,18 @@ class StrengthEquipmentTest(TransactionTestCase):
         app_test_helper._mongo_teardown_func()
         
     
+    def test_not_enough_gold(self):
+        self._prepare_equip()
+        _id = self.equip_ids[0]
+        cost_ids = self.equip_ids[1:]
+        self._strength(_id, cost_ids, 10)
+    
     def test_none_exists_strength(self):
         self._prepare_equip()
         _id = self.equip_ids[0]
         cost_ids = self.equip_ids[1:]
         cost_ids.append(9999)
-        self._strength(_id, cost_ids, 500)
+        self._strength(_id, cost_ids, 2)
         
         char = MongoChar.objects.only('equips').get(id=self.char_id)
         self.assertEqual(len(char.equips), 3 + self.original_equip_amount)
@@ -165,7 +176,7 @@ class SellEquipmentTest(TransactionTestCase):
         
     
     def test_none_exists_strength(self):
-        self._sell([999], 500)
+        self._sell([999], 2)
         
         app_test_helper._mongo_teardown_func()
         
@@ -219,3 +230,7 @@ class EmbedGemTest(TransactionTestCase):
         self._embed(self.equip_id, 1, 1)
         self._embed(self.equip_id, 1, 0)
         
+    def test_error_embed(self):
+        self._embed(999, 999, 1, 2)
+        self._embed(999, 1, 1, 2)
+        self._embed(self.equip_id, 1, 999, 2)

@@ -3,19 +3,15 @@
 from django.http import HttpResponse
 from mongoengine import DoesNotExist
 
-from core.signals import prisoner_changed_signal, prisoner_del_signal
-from core.mongoscheme import Prison
-from core.hero import save_hero
-
-from utils import pack_msg, timezone
-
-from core.exception import SanguoViewException
-
-from timer.tasks import sched, cancel_job
-from callbacks import timers
-
-from protomsg import Prisoner as PrisonerProtoMsg
 import protomsg
+from callbacks import timers
+from core.exception import SanguoViewException, InvalidOperate
+from core.hero import save_hero
+from core.mongoscheme import Prison
+from core.signals import prisoner_changed_signal, prisoner_del_signal
+from protomsg import Prisoner as PrisonerProtoMsg
+from timer.tasks import cancel_job, sched
+from utils import pack_msg, timezone
 
 
 def train(request):
@@ -25,11 +21,11 @@ def train(request):
     try:
         prison = Prison.objects.get(id=char_id)
     except DoesNotExist:
-        raise SanguoViewException(800, "TrainResponse")
+        raise InvalidOperate("TrainResponse")
     
     prisoners = prison.prisoners
     if str(req.hero) not in prisoners:
-        raise SanguoViewException(800, "TrainResponse")
+        raise InvalidOperate("TrainResponse")
     
     this_prisoner = prisoners[str(req.hero)]
     if this_prisoner.status != PrisonerProtoMsg.NOT:
@@ -79,11 +75,11 @@ def get(request):
     try:
         prison = Prison.objects.get(id=char_id)
     except DoesNotExist:
-        raise SanguoViewException(800, "TrainResponse")
+        raise InvalidOperate("TrainResponse")
     
     prisoners = prison.prisoners
     if str(req.hero) not in prisoners:
-        raise SanguoViewException(800, "TrainResponse")
+        raise InvalidOperate("TrainResponse")
     
     this_prisoner = prisoners[str(req.hero)]
     if this_prisoner.status == PrisonerProtoMsg.IN:

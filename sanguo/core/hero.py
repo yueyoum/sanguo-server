@@ -1,9 +1,10 @@
+# -*- coding: utf-8 -*-
+
 from core import GLOBAL
 from core.drives import document_ids
 from core.mongoscheme import MongoHero
 from core.signals import hero_add_signal, hero_del_signal
 from apps.character.cache import get_cache_character
-from core.cache import delete_cache_hero
 
 
 def cal_hero_property(original_id, level):
@@ -54,19 +55,15 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
 
 def get_hero(_id):
     hero = MongoHero.objects.get(id=_id)
-    original_id = hero.oid
     char_obj = get_cache_character(hero.char)
-    return _id, original_id, char_obj.level, hero.char
-
-def get_hero_obj(_id):
-    _, oid, level, char_id = get_hero(_id)
-    return Hero(_id, oid, level, char_id)
+    return Hero(_id, hero.oid, char_obj.level, char_obj.id)
 
 
 def delete_hero(char_id, ids):
+    # XXX
+    # 之能删除背包中的英雄，不能删除在阵法中的。注意！
     for i in ids:
         MongoHero.objects(id=i).delete()
-        delete_cache_hero(i)
 
     hero_del_signal.send(
         sender = None,

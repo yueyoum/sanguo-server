@@ -31,8 +31,7 @@ class RegisterTest(TransactionTestCase):
     def setUp(self):
         users = (
                 ('123@456.com', '123456', ''),
-                ('aaa@bbb.ccc', '123456', '123456'),
-                ('aaa@bbb.ddd', '123456', '123456'),
+                ('', '', '123456'),
                 )
         for email, passwd, token in users:
             User.objects.create(
@@ -65,7 +64,7 @@ class RegisterTest(TransactionTestCase):
     def test_normal_register(self):
         self._register("000@00.000", "123456", "abcd", 0)
 
-    def test_register_with_already_bind(self):
+    def test_register_bind(self):
         self._register("aaa@aaa.aaa", "123456", "123456", 0)
 
     def test_register_with_email_has_been_taken(self):
@@ -77,8 +76,7 @@ class LoginTest(TransactionTestCase):
     def setUp(self):
         users = (
                 (1, '123@456.com', '123456', ''),
-                (2, 'aaa@bbb.ccc', '123456', '123456'),
-                (3, 'aaa@bbb.ddd', '123456', '123456'),
+                (2, '', '', '123456'),
                 )
         for id, email, passwd, token in users:
             User.objects.create(
@@ -103,14 +101,6 @@ class LoginTest(TransactionTestCase):
 
         msgs = tests.unpack_data(res)
 
-        # self.assertEqual(num_of_msgs, 1)
-        # self.assertEqual(id_of_msg, RESPONSE_NOTIFY_TYPE["StartGameResponse"])
-        # self.assertEqual(len_of_msg, len(msg))
-
-        # data = StartGameResponse()
-        # data.ParseFromString(msg)
-        # self.assertEqual(data.ret, 0)
-
     def _regular_login(self, email, password, ret):
         req = StartGameRequest()
         req.session = ""
@@ -131,41 +121,12 @@ class LoginTest(TransactionTestCase):
 
 
     def test_regular_login_with_non_exists(self):
-        self._regular_login('123456', '123456', 151)
+        self._regular_login('123456', '123456', 121)
 
     def test_regular_login_with_exists(self):
         self._regular_login('123@456.com', '123456', 0)
 
     def test_regular_login_with_wrong_password(self):
-        self._regular_login('123@456.com', 'abcd', 150)
-
-    def test_login_with_notify(self):
-        #from apps.character.models import Character
-        from core.character import char_initialize
-        from core.hero import save_hero
-        #char = Character.objects.create(
-        #        account_id = 1,
-        #        server_id = 1,
-        #        name = "abcd"
-        #        )
-        
-        char = char_initialize(1, 1, 'a')
-
-        #CharHero.objects.create(
-        #        char = char,
-        #        hero_id = GLOBAL.HEROS.all_ids()[0]
-        #        )
-        save_hero(char.id, GLOBAL.HEROS.all_ids()[0])
-
-        # formation = encode_formation_with_raw_data(
-        #         9,
-        #         [0] * 9
-        #         )
-        # document_char.set(char.id, formation=formation)
-        save_formation(char.id, [0] * 9)
-
-
-
-        self._regular_login('123@456.com', '123456', 0)
+        self._regular_login('123@456.com', 'abcd', 120)
 
 

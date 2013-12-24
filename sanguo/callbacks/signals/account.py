@@ -2,9 +2,9 @@ from core.signals import login_signal
 
 from core.notify import login_notify
 
-def login(account_id, server_id, char_obj, **kwargs):
-    if char_obj:
-        login_notify(char_obj)
+def login(account_id, server_id, char_id, **kwargs):
+    if char_id:
+        login_notify(char_id)
 
 
 login_signal.connect(

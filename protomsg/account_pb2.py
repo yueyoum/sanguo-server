@@ -14,7 +14,7 @@ import world_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='account.proto',
   package='Sanguo.protocol.account',
-  serialized_pb='\n\raccount.proto\x12\x17Sanguo.protocol.account\x1a\x0bworld.proto\"&\n\x0e\x41nonymousLogin\x12\x14\n\x0c\x64\x65vice_token\x18\x01 \x02(\t\"/\n\x0cRegularLogin\x12\r\n\x05\x65mail\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\"\xaa\x01\n\x10StartGameRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12:\n\tanonymous\x18\x02 \x01(\x0b\x32\'.Sanguo.protocol.account.AnonymousLogin\x12\x36\n\x07regular\x18\x03 \x01(\x0b\x32%.Sanguo.protocol.account.RegularLogin\x12\x11\n\tserver_id\x18\x04 \x02(\x05\"\xc3\x01\n\x11StartGameResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x01(\x0c\x12:\n\tanonymous\x18\x03 \x01(\x0b\x32\'.Sanguo.protocol.account.AnonymousLogin\x12\x36\n\x07regular\x18\x04 \x01(\x0b\x32%.Sanguo.protocol.account.RegularLogin\x12\x1c\n\x14need_create_new_char\x18\x05 \x01(\x08\"\x9b\x01\n\x14GetServerListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12:\n\tanonymous\x18\x02 \x01(\x0b\x32\'.Sanguo.protocol.account.AnonymousLogin\x12\x36\n\x07regular\x18\x03 \x01(\x0b\x32%.Sanguo.protocol.account.RegularLogin\"\x91\x01\n\x15GetServerListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12*\n\x03top\x18\x02 \x01(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12.\n\x07servers\x18\x03 \x03(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12\x0f\n\x07session\x18\x04 \x02(\x0c\"Y\n\x0fRegisterRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\r\n\x05\x65mail\x18\x02 \x02(\t\x12\x10\n\x08password\x18\x03 \x02(\t\x12\x14\n\x0c\x64\x65vice_token\x18\x04 \x02(\t\"\xad\x01\n\x10RegisterResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x10\n\x08password\x18\x03 \x01(\t\x12*\n\x03top\x18\x04 \x01(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12.\n\x07servers\x18\x05 \x03(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12\x0f\n\x07session\x18\x06 \x02(\x0c')
+  serialized_pb='\n\raccount.proto\x12\x17Sanguo.protocol.account\x1a\x0bworld.proto\"&\n\x0e\x41nonymousLogin\x12\x14\n\x0c\x64\x65vice_token\x18\x01 \x02(\t\"/\n\x0cRegularLogin\x12\r\n\x05\x65mail\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\"\xaa\x01\n\x10StartGameRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12:\n\tanonymous\x18\x02 \x01(\x0b\x32\'.Sanguo.protocol.account.AnonymousLogin\x12\x36\n\x07regular\x18\x03 \x01(\x0b\x32%.Sanguo.protocol.account.RegularLogin\x12\x11\n\tserver_id\x18\x04 \x02(\x05\"\xc3\x01\n\x11StartGameResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x01(\x0c\x12:\n\tanonymous\x18\x03 \x01(\x0b\x32\'.Sanguo.protocol.account.AnonymousLogin\x12\x36\n\x07regular\x18\x04 \x01(\x0b\x32%.Sanguo.protocol.account.RegularLogin\x12\x1c\n\x14need_create_new_char\x18\x05 \x01(\x08\"\x9b\x01\n\x14GetServerListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12:\n\tanonymous\x18\x02 \x01(\x0b\x32\'.Sanguo.protocol.account.AnonymousLogin\x12\x36\n\x07regular\x18\x03 \x01(\x0b\x32%.Sanguo.protocol.account.RegularLogin\"\x91\x01\n\x15GetServerListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12*\n\x03top\x18\x03 \x02(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12.\n\x07servers\x18\x04 \x03(\x0b\x32\x1d.Sanguo.protocol.world.Server\"Y\n\x0fRegisterRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\r\n\x05\x65mail\x18\x02 \x02(\t\x12\x10\n\x08password\x18\x03 \x02(\t\x12\x14\n\x0c\x64\x65vice_token\x18\x04 \x02(\t\"\xad\x01\n\x10RegisterResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x10\n\x08password\x18\x04 \x01(\t\x12*\n\x03top\x18\x05 \x01(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12.\n\x07servers\x18\x06 \x03(\x0b\x32\x1d.Sanguo.protocol.world.Server')
 
 
 
@@ -244,23 +244,23 @@ _GETSERVERLISTRESPONSE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='top', full_name='Sanguo.protocol.account.GetServerListResponse.top', index=1,
-      number=2, type=11, cpp_type=10, label=1,
+      name='session', full_name='Sanguo.protocol.account.GetServerListResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='top', full_name='Sanguo.protocol.account.GetServerListResponse.top', index=2,
+      number=3, type=11, cpp_type=10, label=2,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='servers', full_name='Sanguo.protocol.account.GetServerListResponse.servers', index=2,
-      number=3, type=11, cpp_type=10, label=3,
+      name='servers', full_name='Sanguo.protocol.account.GetServerListResponse.servers', index=3,
+      number=4, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='session', full_name='Sanguo.protocol.account.GetServerListResponse.session', index=3,
-      number=4, type=12, cpp_type=9, label=2,
-      has_default_value=False, default_value="",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -342,37 +342,37 @@ _REGISTERRESPONSE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='email', full_name='Sanguo.protocol.account.RegisterResponse.email', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      name='session', full_name='Sanguo.protocol.account.RegisterResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='password', full_name='Sanguo.protocol.account.RegisterResponse.password', index=2,
+      name='email', full_name='Sanguo.protocol.account.RegisterResponse.email', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='top', full_name='Sanguo.protocol.account.RegisterResponse.top', index=3,
-      number=4, type=11, cpp_type=10, label=1,
+      name='password', full_name='Sanguo.protocol.account.RegisterResponse.password', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='top', full_name='Sanguo.protocol.account.RegisterResponse.top', index=4,
+      number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='servers', full_name='Sanguo.protocol.account.RegisterResponse.servers', index=4,
-      number=5, type=11, cpp_type=10, label=3,
+      name='servers', full_name='Sanguo.protocol.account.RegisterResponse.servers', index=5,
+      number=6, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='session', full_name='Sanguo.protocol.account.RegisterResponse.session', index=5,
-      number=6, type=12, cpp_type=9, label=2,
-      has_default_value=False, default_value="",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),

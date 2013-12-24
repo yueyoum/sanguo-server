@@ -1,12 +1,9 @@
-from core.signals import (
-    socket_changed_signal,
-    hero_changed_signal
-    )
-
+# -*- coding: utf-8 -*-
 from apps.item.cache import get_cache_equipment
 from core.mongoscheme import MongoChar
+from core.signals import hero_changed_signal, socket_changed_signal
 from utils import cache
-
+from core.hero import get_hero
 
 
 class CacheHero(object):
@@ -34,16 +31,13 @@ def save_cache_hero(hero_obj):
     return h
 
 
-def delete_cache_hero(_id):
-    cache.delete('hero:{0}'.format(_id))
 
 def get_cache_hero(_id):
     h = cache.get('hero:{0}'.format(_id))
     if h:
         return h
     
-    from core.hero import get_hero_obj
-    obj = get_hero_obj(_id)
+    obj = get_hero(_id)
     
     mongo_char = MongoChar.objects.only('sockets').get(id=obj.char_id)
     sockets = mongo_char.sockets

@@ -1,24 +1,51 @@
 from django.db import models
 from django.db.models.signals import post_delete, post_save
 
-from apps.item.cache import (
-    save_cache_equipment,
-    delete_cache_equipment,
-    decode_random_attr,
-    )
-
-from core.signals import (
-    equip_add_signal,
-    equip_changed_signal,
-    equip_del_signal,
-    )
-
+from apps.item.cache import (delete_cache_equipment,
+                             save_cache_equipment)
 from core.mongoscheme import MongoChar
+from core.signals import (equip_add_signal, equip_changed_signal,
+                          equip_del_signal)
+
+def encode_random_attrs(attrs):
+    # attrs: [{1: {value: x, is_percent: y}}, ...]
+    # serialize to: '1,x,y|2,x,y...'
+    def _encode(attr):
+        if not attr:
+            return ''
+        
+        k, v = attr.items()[0]
+        return '{0},{1},{2}'.format(
+            k,
+            int(v['value']),
+            '1' if v['is_percent'] else '0'
+        )
+    
+    data = [_encode(attr) for attr in attrs]
+    return '|'.join(data)
+
+
+def decode_random_attr(text):
+    if not text:
+        return []
+    def _decode(t):
+        _id, value, is_percent = t.split(',')
+        data = {
+            int(_id): {
+                'value': int(value),
+                'is_percent': is_percent == '1'
+            }
+        }
+        return data
+    
+    res = [_decode(t) for t in text.split('|')]
+    return res
 
 
 class Equipment(models.Model):
     char_id = models.IntegerField()
-    tid = models.IntegerField()
+    tp = models.SmallIntegerField()
+    quality = models.SmallIntegerField()
     name = models.CharField(max_length=16)
     
     level = models.IntegerField(default=1)
@@ -38,7 +65,6 @@ class Equipment(models.Model):
     
     class Meta:
         db_table = 'equipment'
-        
         
         
     @property

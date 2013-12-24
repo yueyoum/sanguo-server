@@ -65,7 +65,8 @@ hang_cancel_signal.connect(
 def _pve_finished(char_id, stage_id, win, star, **kwargs):
     from core.mongoscheme import MongoChar
     print "_pve_finished", char_id, stage_id, win, star
-    current_stage_notify(char_id, stage_id, star)
+    if win:
+        current_stage_notify(char_id, stage_id, star)
     
     char = MongoChar.objects.only('stages', 'stage_new').get(id=char_id)
     stages = char.stages

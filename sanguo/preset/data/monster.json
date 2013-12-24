@@ -8,11 +8,11 @@
         "level": 1, 
         "skills": "2", 
         "image": "", 
-        "attack": 55, 
-        "defense": 24, 
+        "attack": 22, 
+        "defense": 9, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 292
+        "hp": 80
     }
 },
 {
@@ -24,11 +24,11 @@
         "level": 1, 
         "skills": "2", 
         "image": "", 
-        "attack": 62, 
-        "defense": 26, 
+        "attack": 33, 
+        "defense": 12, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 312
+        "hp": 109
     }
 },
 {
@@ -40,11 +40,11 @@
         "level": 2, 
         "skills": "2", 
         "image": "", 
-        "attack": 74, 
-        "defense": 31, 
+        "attack": 29, 
+        "defense": 11, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 426
+        "hp": 106
     }
 },
 {
@@ -56,11 +56,11 @@
         "level": 2, 
         "skills": "2", 
         "image": "", 
-        "attack": 92, 
-        "defense": 35, 
+        "attack": 52, 
+        "defense": 16, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 491
+        "hp": 172
     }
 },
 {
@@ -72,11 +72,11 @@
         "level": 3, 
         "skills": "2", 
         "image": "", 
-        "attack": 93, 
-        "defense": 37, 
+        "attack": 35, 
+        "defense": 12, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 561
+        "hp": 132
     }
 },
 {
@@ -88,11 +88,11 @@
         "level": 3, 
         "skills": "2", 
         "image": "", 
-        "attack": 95, 
-        "defense": 38, 
+        "attack": 36, 
+        "defense": 13, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 573
+        "hp": 137
     }
 },
 {
@@ -104,11 +104,11 @@
         "level": 4, 
         "skills": "2", 
         "image": "", 
-        "attack": 112, 
-        "defense": 44, 
+        "attack": 41, 
+        "defense": 14, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 695
+        "hp": 158
     }
 },
 {
@@ -120,11 +120,11 @@
         "level": 4, 
         "skills": "2", 
         "image": "", 
-        "attack": 144, 
-        "defense": 52, 
+        "attack": 74, 
+        "defense": 22, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 833
+        "hp": 260
     }
 },
 {
@@ -136,11 +136,11 @@
         "level": 5, 
         "skills": "2", 
         "image": "", 
-        "attack": 131, 
-        "defense": 50, 
+        "attack": 48, 
+        "defense": 16, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 830
+        "hp": 184
     }
 },
 {
@@ -152,11 +152,11 @@
         "level": 5, 
         "skills": "2", 
         "image": "", 
-        "attack": 167, 
-        "defense": 59, 
+        "attack": 86, 
+        "defense": 25, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 972
+        "hp": 295
     }
 },
 {
@@ -168,11 +168,11 @@
         "level": 6, 
         "skills": "2", 
         "image": "", 
-        "attack": 149, 
-        "defense": 57, 
+        "attack": 54, 
+        "defense": 17, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 964
+        "hp": 210
     }
 },
 {
@@ -184,11 +184,11 @@
         "level": 6, 
         "skills": "2", 
         "image": "", 
-        "attack": 198, 
-        "defense": 69, 
+        "attack": 102, 
+        "defense": 29, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 1171
+        "hp": 356
     }
 },
 {
@@ -200,11 +200,11 @@
         "level": 7, 
         "skills": "2", 
         "image": "", 
-        "attack": 168, 
-        "defense": 63, 
+        "attack": 60, 
+        "defense": 19, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 1098
+        "hp": 236
     }
 },
 {
@@ -216,11 +216,11 @@
         "level": 7, 
         "skills": "2", 
         "image": "", 
-        "attack": 220, 
-        "defense": 75, 
+        "attack": 112, 
+        "defense": 31, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 1298
+        "hp": 386
     }
 },
 {
@@ -232,11 +232,11 @@
         "level": 8, 
         "skills": "2", 
         "image": "", 
-        "attack": 187, 
-        "defense": 70, 
+        "attack": 67, 
+        "defense": 21, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 1233
+        "hp": 262
     }
 },
 {
@@ -248,11 +248,11 @@
         "level": 8, 
         "skills": "2", 
         "image": "", 
-        "attack": 233, 
-        "defense": 77, 
+        "attack": 115, 
+        "defense": 31, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 1366
+        "hp": 388
     }
 },
 {
@@ -264,11 +264,11 @@
         "level": 9, 
         "skills": "2", 
         "image": "", 
-        "attack": 206, 
-        "defense": 76, 
+        "attack": 73, 
+        "defense": 22, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 1367
+        "hp": 288
     }
 },
 {
@@ -280,11 +280,11 @@
         "level": 9, 
         "skills": "2", 
         "image": "", 
-        "attack": 239, 
-        "defense": 85, 
+        "attack": 114, 
+        "defense": 33, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 1518
+        "hp": 429
     }
 },
 {
@@ -296,11 +296,11 @@
         "level": 10, 
         "skills": "2", 
         "image": "", 
-        "attack": 225, 
-        "defense": 83, 
+        "attack": 79, 
+        "defense": 24, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 1502
+        "hp": 314
     }
 },
 {
@@ -312,11 +312,11 @@
         "level": 10, 
         "skills": "2", 
         "image": "", 
-        "attack": 261, 
-        "defense": 92, 
+        "attack": 124, 
+        "defense": 36, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 1670
+        "hp": 470
     }
 },
 {
@@ -328,11 +328,11 @@
         "level": 11, 
         "skills": "2", 
         "image": "", 
-        "attack": 254, 
-        "defense": 92, 
+        "attack": 91, 
+        "defense": 27, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 1682
+        "hp": 358
     }
 },
 {
@@ -344,11 +344,11 @@
         "level": 11, 
         "skills": "2", 
         "image": "", 
-        "attack": 303, 
-        "defense": 105, 
+        "attack": 119, 
+        "defense": 34, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 1913
+        "hp": 441
     }
 },
 {
@@ -360,11 +360,11 @@
         "level": 11, 
         "skills": "5", 
         "image": "", 
-        "attack": 359, 
-        "defense": 99, 
+        "attack": 206, 
+        "defense": 41, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 1811
+        "hp": 551
     }
 },
 {
@@ -376,11 +376,11 @@
         "level": 12, 
         "skills": "2", 
         "image": "", 
-        "attack": 274, 
-        "defense": 99, 
+        "attack": 98, 
+        "defense": 29, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 1821
+        "hp": 385
     }
 },
 {
@@ -392,11 +392,11 @@
         "level": 12, 
         "skills": "3", 
         "image": "", 
-        "attack": 386, 
-        "defense": 119, 
+        "attack": 220, 
+        "defense": 54, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2184
+        "hp": 707
     }
 },
 {
@@ -408,11 +408,11 @@
         "level": 12, 
         "skills": "2", 
         "image": "", 
-        "attack": 328, 
-        "defense": 113, 
+        "attack": 128, 
+        "defense": 36, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2073
+        "hp": 476
     }
 },
 {
@@ -424,11 +424,11 @@
         "level": 13, 
         "skills": "2", 
         "image": "", 
-        "attack": 293, 
-        "defense": 105, 
+        "attack": 104, 
+        "defense": 30, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 1959
+        "hp": 413
     }
 },
 {
@@ -440,11 +440,11 @@
         "level": 13, 
         "skills": "2", 
         "image": "", 
-        "attack": 352, 
-        "defense": 121, 
+        "attack": 172, 
+        "defense": 48, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2232
+        "hp": 639
     }
 },
 {
@@ -456,11 +456,11 @@
         "level": 13, 
         "skills": "3", 
         "image": "", 
-        "attack": 415, 
-        "defense": 128, 
+        "attack": 285, 
+        "defense": 69, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2352
+        "hp": 912
     }
 },
 {
@@ -472,11 +472,11 @@
         "level": 13, 
         "skills": "7", 
         "image": "", 
-        "attack": 434, 
-        "defense": 133, 
+        "attack": 394, 
+        "defense": 95, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2440
+        "hp": 1257
     }
 },
 {
@@ -488,11 +488,11 @@
         "level": 14, 
         "skills": "2", 
         "image": "", 
-        "attack": 313, 
-        "defense": 112, 
+        "attack": 111, 
+        "defense": 32, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2098
+        "hp": 440
     }
 },
 {
@@ -504,11 +504,11 @@
         "level": 14, 
         "skills": "7", 
         "image": "", 
-        "attack": 464, 
-        "defense": 142, 
+        "attack": 241, 
+        "defense": 58, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2615
+        "hp": 770
     }
 },
 {
@@ -520,11 +520,11 @@
         "level": 15, 
         "skills": "5", 
         "image": "", 
-        "attack": 430, 
-        "defense": 129, 
+        "attack": 173, 
+        "defense": 39, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2410
+        "hp": 531
     }
 },
 {
@@ -536,11 +536,11 @@
         "level": 15, 
         "skills": "2", 
         "image": "", 
-        "attack": 430, 
-        "defense": 144, 
+        "attack": 260, 
+        "defense": 70, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2683
+        "hp": 945
     }
 },
 {
@@ -552,11 +552,11 @@
         "level": 15, 
         "skills": "5", 
         "image": "", 
-        "attack": 476, 
-        "defense": 129, 
+        "attack": 274, 
+        "defense": 53, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2413
+        "hp": 727
     }
 },
 {
@@ -568,11 +568,11 @@
         "level": 15, 
         "skills": "14", 
         "image": "", 
-        "attack": 444, 
-        "defense": 129, 
+        "attack": 221, 
+        "defense": 48, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2413
+        "hp": 650
     }
 },
 {
@@ -584,11 +584,11 @@
         "level": 15, 
         "skills": "7", 
         "image": "", 
-        "attack": 495, 
-        "defense": 150, 
+        "attack": 450, 
+        "defense": 107, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2791
+        "hp": 1436
     }
 },
 {
@@ -600,11 +600,11 @@
         "level": 15, 
         "skills": "9", 
         "image": "", 
-        "attack": 460, 
-        "defense": 143, 
+        "attack": 312, 
+        "defense": 76, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2652
+        "hp": 1018
     }
 },
 {
@@ -616,11 +616,11 @@
         "level": 16, 
         "skills": "2", 
         "image": "", 
-        "attack": 353, 
-        "defense": 126, 
+        "attack": 187, 
+        "defense": 53, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2375
+        "hp": 743
     }
 },
 {
@@ -632,11 +632,11 @@
         "level": 16, 
         "skills": "2", 
         "image": "", 
-        "attack": 474, 
-        "defense": 128, 
+        "attack": 291, 
+        "defense": 56, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2415
+        "hp": 764
     }
 },
 {
@@ -648,11 +648,11 @@
         "level": 16, 
         "skills": "2", 
         "image": "", 
-        "attack": 459, 
-        "defense": 153, 
+        "attack": 277, 
+        "defense": 75, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2854
+        "hp": 1003
     }
 },
 {
@@ -664,11 +664,11 @@
         "level": 17, 
         "skills": "2", 
         "image": "", 
-        "attack": 373, 
-        "defense": 132, 
+        "attack": 197, 
+        "defense": 56, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2514
+        "hp": 785
     }
 },
 {
@@ -680,11 +680,11 @@
         "level": 17, 
         "skills": "2", 
         "image": "", 
-        "attack": 452, 
-        "defense": 157, 
+        "attack": 265, 
+        "defense": 76, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2939
+        "hp": 1014
     }
 },
 {
@@ -696,11 +696,11 @@
         "level": 18, 
         "skills": "2", 
         "image": "", 
-        "attack": 392, 
-        "defense": 139, 
+        "attack": 208, 
+        "defense": 59, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2652
+        "hp": 826
     }
 },
 {
@@ -712,11 +712,11 @@
         "level": 18, 
         "skills": "5", 
         "image": "", 
-        "attack": 473, 
-        "defense": 161, 
+        "attack": 277, 
+        "defense": 76, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3030
+        "hp": 1030
     }
 },
 {
@@ -728,11 +728,11 @@
         "level": 18, 
         "skills": "2", 
         "image": "", 
-        "attack": 473, 
-        "defense": 161, 
+        "attack": 277, 
+        "defense": 76, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3030
+        "hp": 1030
     }
 },
 {
@@ -744,11 +744,11 @@
         "level": 18, 
         "skills": "2", 
         "image": "", 
-        "attack": 477, 
-        "defense": 165, 
+        "attack": 279, 
+        "defense": 79, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3103
+        "hp": 1069
     }
 },
 {
@@ -760,11 +760,11 @@
         "level": 19, 
         "skills": "2", 
         "image": "", 
-        "attack": 412, 
-        "defense": 146, 
+        "attack": 218, 
+        "defense": 61, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2791
+        "hp": 868
     }
 },
 {
@@ -776,11 +776,11 @@
         "level": 19, 
         "skills": "2", 
         "image": "", 
-        "attack": 539, 
-        "defense": 178, 
+        "attack": 325, 
+        "defense": 87, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3359
+        "hp": 1175
     }
 },
 {
@@ -792,11 +792,11 @@
         "level": 19, 
         "skills": "2", 
         "image": "", 
-        "attack": 501, 
-        "defense": 173, 
+        "attack": 293, 
+        "defense": 83, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3267
+        "hp": 1124
     }
 },
 {
@@ -808,11 +808,11 @@
         "level": 19, 
         "skills": "2", 
         "image": "", 
-        "attack": 576, 
-        "defense": 165, 
+        "attack": 357, 
+        "defense": 76, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3126
+        "hp": 1049
     }
 },
 {
@@ -824,11 +824,11 @@
         "level": 20, 
         "skills": "2", 
         "image": "", 
-        "attack": 432, 
-        "defense": 152, 
+        "attack": 228, 
+        "defense": 64, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 2930
+        "hp": 909
     }
 },
 {
@@ -840,11 +840,11 @@
         "level": 20, 
         "skills": "2", 
         "image": "", 
-        "attack": 526, 
-        "defense": 181, 
+        "attack": 358, 
+        "defense": 102, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3430
+        "hp": 1376
     }
 },
 {
@@ -856,11 +856,11 @@
         "level": 20, 
         "skills": "2", 
         "image": "", 
-        "attack": 522, 
-        "defense": 176, 
+        "attack": 381, 
+        "defense": 104, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3350
+        "hp": 1420
     }
 },
 {
@@ -872,11 +872,11 @@
         "level": 20, 
         "skills": "2", 
         "image": "", 
-        "attack": 544, 
-        "defense": 157, 
+        "attack": 378, 
+        "defense": 80, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3007
+        "hp": 1107
     }
 },
 {
@@ -888,11 +888,11 @@
         "level": 21, 
         "skills": "2", 
         "image": "", 
-        "attack": 452, 
-        "defense": 159, 
+        "attack": 278, 
+        "defense": 78, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3068
+        "hp": 1109
     }
 },
 {
@@ -904,11 +904,11 @@
         "level": 21, 
         "skills": "2", 
         "image": "", 
-        "attack": 546, 
-        "defense": 184, 
+        "attack": 372, 
+        "defense": 101, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3509
+        "hp": 1387
     }
 },
 {
@@ -920,11 +920,11 @@
         "level": 22, 
         "skills": "2", 
         "image": "", 
-        "attack": 472, 
-        "defense": 166, 
+        "attack": 290, 
+        "defense": 81, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3207
+        "hp": 1157
     }
 },
 {
@@ -936,11 +936,11 @@
         "level": 22, 
         "skills": "7", 
         "image": "", 
-        "attack": 709, 
-        "defense": 212, 
+        "attack": 647, 
+        "defense": 151, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4020
+        "hp": 2063
     }
 },
 {
@@ -952,11 +952,11 @@
         "level": 22, 
         "skills": "2", 
         "image": "", 
-        "attack": 638, 
-        "defense": 154, 
+        "attack": 456, 
+        "defense": 72, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3003
+        "hp": 1023
     }
 },
 {
@@ -968,11 +968,11 @@
         "level": 23, 
         "skills": "2", 
         "image": "", 
-        "attack": 491, 
-        "defense": 173, 
+        "attack": 302, 
+        "defense": 84, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3345
+        "hp": 1205
     }
 },
 {
@@ -984,11 +984,11 @@
         "level": 23, 
         "skills": "7", 
         "image": "", 
-        "attack": 740, 
-        "defense": 221, 
+        "attack": 675, 
+        "defense": 158, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4195
+        "hp": 2152
     }
 },
 {
@@ -1000,11 +1000,11 @@
         "level": 23, 
         "skills": "2", 
         "image": "", 
-        "attack": 595, 
-        "defense": 200, 
+        "attack": 405, 
+        "defense": 109, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3828
+        "hp": 1510
     }
 },
 {
@@ -1016,11 +1016,11 @@
         "level": 23, 
         "skills": "2", 
         "image": "", 
-        "attack": 595, 
-        "defense": 200, 
+        "attack": 405, 
+        "defense": 109, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3828
+        "hp": 1510
     }
 },
 {
@@ -1032,11 +1032,11 @@
         "level": 24, 
         "skills": "2", 
         "image": "", 
-        "attack": 511, 
-        "defense": 179, 
+        "attack": 314, 
+        "defense": 87, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3484
+        "hp": 1254
     }
 },
 {
@@ -1048,11 +1048,11 @@
         "level": 24, 
         "skills": "7", 
         "image": "", 
-        "attack": 770, 
-        "defense": 230, 
+        "attack": 703, 
+        "defense": 164, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4371
+        "hp": 2242
     }
 },
 {
@@ -1064,11 +1064,11 @@
         "level": 24, 
         "skills": "2", 
         "image": "", 
-        "attack": 619, 
-        "defense": 208, 
+        "attack": 421, 
+        "defense": 113, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3988
+        "hp": 1571
     }
 },
 {
@@ -1080,11 +1080,11 @@
         "level": 24, 
         "skills": "2", 
         "image": "", 
-        "attack": 576, 
-        "defense": 197, 
+        "attack": 377, 
+        "defense": 103, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3786
+        "hp": 1445
     }
 },
 {
@@ -1096,11 +1096,11 @@
         "level": 24, 
         "skills": "2", 
         "image": "", 
-        "attack": 671, 
-        "defense": 231, 
+        "attack": 519, 
+        "defense": 148, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4395
+        "hp": 2015
     }
 },
 {
@@ -1112,11 +1112,11 @@
         "level": 25, 
         "skills": "2", 
         "image": "", 
-        "attack": 644, 
-        "defense": 216, 
+        "attack": 438, 
+        "defense": 118, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4148
+        "hp": 1633
     }
 },
 {
@@ -1128,11 +1128,11 @@
         "level": 25, 
         "skills": "2", 
         "image": "", 
-        "attack": 644, 
-        "defense": 216, 
+        "attack": 438, 
+        "defense": 118, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4148
+        "hp": 1633
     }
 },
 {
@@ -1144,11 +1144,11 @@
         "level": 25, 
         "skills": "2", 
         "image": "", 
-        "attack": 644, 
-        "defense": 216, 
+        "attack": 438, 
+        "defense": 118, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4148
+        "hp": 1633
     }
 },
 {
@@ -1160,11 +1160,11 @@
         "level": 25, 
         "skills": "8", 
         "image": "", 
-        "attack": 788, 
-        "defense": 233, 
+        "attack": 718, 
+        "defense": 164, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4446
+        "hp": 2252
     }
 },
 {
@@ -1176,11 +1176,11 @@
         "level": 25, 
         "skills": "2", 
         "image": "", 
-        "attack": 698, 
-        "defense": 240, 
+        "attack": 539, 
+        "defense": 153, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4572
+        "hp": 2095
     }
 },
 {
@@ -1192,11 +1192,11 @@
         "level": 25, 
         "skills": "2", 
         "image": "", 
-        "attack": 711, 
-        "defense": 229, 
+        "attack": 553, 
+        "defense": 143, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4374
+        "hp": 1958
     }
 },
 {
@@ -1208,11 +1208,11 @@
         "level": 26, 
         "skills": "2", 
         "image": "", 
-        "attack": 551, 
-        "defense": 193, 
+        "attack": 362, 
+        "defense": 100, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3761
+        "hp": 1447
     }
 },
 {
@@ -1224,11 +1224,11 @@
         "level": 26, 
         "skills": "2", 
         "image": "", 
-        "attack": 668, 
-        "defense": 224, 
+        "attack": 486, 
+        "defense": 131, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4307
+        "hp": 1815
     }
 },
 {
@@ -1240,11 +1240,11 @@
         "level": 26, 
         "skills": "2", 
         "image": "", 
-        "attack": 551, 
-        "defense": 193, 
+        "attack": 362, 
+        "defense": 100, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3761
+        "hp": 1447
     }
 },
 {
@@ -1256,11 +1256,11 @@
         "level": 26, 
         "skills": "3", 
         "image": "", 
-        "attack": 687, 
-        "defense": 205, 
+        "attack": 506, 
+        "defense": 112, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3971
+        "hp": 1587
     }
 },
 {
@@ -1272,11 +1272,11 @@
         "level": 27, 
         "skills": "2", 
         "image": "", 
-        "attack": 571, 
-        "defense": 199, 
+        "attack": 374, 
+        "defense": 103, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 3900
+        "hp": 1499
     }
 },
 {
@@ -1288,11 +1288,11 @@
         "level": 27, 
         "skills": "7", 
         "image": "", 
-        "attack": 852, 
-        "defense": 244, 
+        "attack": 832, 
+        "defense": 179, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4671
+        "hp": 2495
     }
 },
 {
@@ -1304,11 +1304,11 @@
         "level": 27, 
         "skills": "2", 
         "image": "", 
-        "attack": 595, 
-        "defense": 206, 
+        "attack": 399, 
+        "defense": 111, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4013
+        "hp": 1571
     }
 },
 {
@@ -1320,11 +1320,11 @@
         "level": 27, 
         "skills": "8", 
         "image": "", 
-        "attack": 823, 
-        "defense": 264, 
+        "attack": 848, 
+        "defense": 217, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5034
+        "hp": 2992
     }
 },
 {
@@ -1336,11 +1336,11 @@
         "level": 28, 
         "skills": "2", 
         "image": "", 
-        "attack": 726, 
-        "defense": 230, 
+        "attack": 530, 
+        "defense": 132, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4462
+        "hp": 1834
     }
 },
 {
@@ -1352,11 +1352,11 @@
         "level": 28, 
         "skills": "2", 
         "image": "", 
-        "attack": 716, 
-        "defense": 240, 
+        "attack": 521, 
+        "defense": 140, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4626
+        "hp": 1947
     }
 },
 {
@@ -1368,11 +1368,11 @@
         "level": 28, 
         "skills": "2", 
         "image": "", 
-        "attack": 777, 
-        "defense": 236, 
+        "attack": 584, 
+        "defense": 137, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4556
+        "hp": 1903
     }
 },
 {
@@ -1384,11 +1384,11 @@
         "level": 28, 
         "skills": "2", 
         "image": "", 
-        "attack": 767, 
-        "defense": 246, 
+        "attack": 576, 
+        "defense": 145, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4734
+        "hp": 2023
     }
 },
 {
@@ -1400,11 +1400,11 @@
         "level": 28, 
         "skills": "3", 
         "image": "", 
-        "attack": 822, 
-        "defense": 259, 
+        "attack": 698, 
+        "defense": 172, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4956
+        "hp": 2394
     }
 },
 {
@@ -1416,11 +1416,11 @@
         "level": 28, 
         "skills": "14", 
         "image": "", 
-        "attack": 716, 
-        "defense": 267, 
+        "attack": 572, 
+        "defense": 182, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5097
+        "hp": 2502
     }
 },
 {
@@ -1432,11 +1432,11 @@
         "level": 29, 
         "skills": "2", 
         "image": "", 
-        "attack": 636, 
-        "defense": 220, 
+        "attack": 426, 
+        "defense": 118, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4299
+        "hp": 1680
     }
 },
 {
@@ -1448,11 +1448,11 @@
         "level": 29, 
         "skills": "7", 
         "image": "", 
-        "attack": 923, 
-        "defense": 274, 
+        "attack": 1025, 
+        "defense": 237, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5249
+        "hp": 3265
     }
 },
 {
@@ -1464,11 +1464,11 @@
         "level": 29, 
         "skills": "2", 
         "image": "", 
-        "attack": 689, 
-        "defense": 234, 
+        "attack": 482, 
+        "defense": 131, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4542
+        "hp": 1850
     }
 },
 {
@@ -1480,11 +1480,11 @@
         "level": 29, 
         "skills": "2", 
         "image": "", 
-        "attack": 741, 
-        "defense": 248, 
+        "attack": 539, 
+        "defense": 144, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4786
+        "hp": 2013
     }
 },
 {
@@ -1496,11 +1496,11 @@
         "level": 30, 
         "skills": "2", 
         "image": "", 
-        "attack": 657, 
-        "defense": 227, 
+        "attack": 440, 
+        "defense": 122, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4442
+        "hp": 1735
     }
 },
 {
@@ -1512,11 +1512,11 @@
         "level": 30, 
         "skills": "2", 
         "image": "", 
-        "attack": 765, 
-        "defense": 256, 
+        "attack": 557, 
+        "defense": 149, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4946
+        "hp": 2079
     }
 },
 {
@@ -1528,11 +1528,11 @@
         "level": 30, 
         "skills": "14", 
         "image": "", 
-        "attack": 851, 
-        "defense": 240, 
+        "attack": 853, 
+        "defense": 176, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4668
+        "hp": 2491
     }
 },
 {
@@ -1544,11 +1544,11 @@
         "level": 30, 
         "skills": "9", 
         "image": "", 
-        "attack": 922, 
-        "defense": 283, 
+        "attack": 894, 
+        "defense": 216, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5424
+        "hp": 2977
     }
 },
 {
@@ -1560,11 +1560,11 @@
         "level": 30, 
         "skills": "14", 
         "image": "", 
-        "attack": 765, 
-        "defense": 284, 
+        "attack": 651, 
+        "defense": 207, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5450
+        "hp": 2851
     }
 },
 {
@@ -1576,11 +1576,11 @@
         "level": 31, 
         "skills": "2", 
         "image": "", 
-        "attack": 789, 
-        "defense": 264, 
+        "attack": 612, 
+        "defense": 163, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5105
+        "hp": 2288
     }
 },
 {
@@ -1592,11 +1592,11 @@
         "level": 31, 
         "skills": "13", 
         "image": "", 
-        "attack": 968, 
-        "defense": 283, 
+        "attack": 895, 
+        "defense": 202, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5454
+        "hp": 2801
     }
 },
 {
@@ -1608,11 +1608,11 @@
         "level": 31, 
         "skills": "2", 
         "image": "", 
-        "attack": 828, 
-        "defense": 256, 
+        "attack": 657, 
+        "defense": 157, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4975
+        "hp": 2199
     }
 },
 {
@@ -1624,11 +1624,11 @@
         "level": 31, 
         "skills": "2", 
         "image": "", 
-        "attack": 789, 
-        "defense": 264, 
+        "attack": 612, 
+        "defense": 163, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5105
+        "hp": 2288
     }
 },
 {
@@ -1640,11 +1640,11 @@
         "level": 31, 
         "skills": "2", 
         "image": "", 
-        "attack": 828, 
-        "defense": 256, 
+        "attack": 657, 
+        "defense": 157, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4975
+        "hp": 2199
     }
 },
 {
@@ -1656,11 +1656,11 @@
         "level": 32, 
         "skills": "2", 
         "image": "", 
-        "attack": 814, 
-        "defense": 271, 
+        "attack": 631, 
+        "defense": 168, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5265
+        "hp": 2358
     }
 },
 {
@@ -1672,11 +1672,11 @@
         "level": 32, 
         "skills": "2", 
         "image": "", 
-        "attack": 814, 
-        "defense": 271, 
+        "attack": 631, 
+        "defense": 168, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5265
+        "hp": 2358
     }
 },
 {
@@ -1688,11 +1688,11 @@
         "level": 32, 
         "skills": "5", 
         "image": "", 
-        "attack": 877, 
-        "defense": 254, 
+        "attack": 703, 
+        "defense": 150, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 4964
+        "hp": 2143
     }
 },
 {
@@ -1704,11 +1704,11 @@
         "level": 33, 
         "skills": "2", 
         "image": "", 
-        "attack": 838, 
-        "defense": 279, 
+        "attack": 650, 
+        "defense": 173, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5424
+        "hp": 2429
     }
 },
 {
@@ -1720,11 +1720,11 @@
         "level": 33, 
         "skills": "2", 
         "image": "", 
-        "attack": 879, 
-        "defense": 271, 
+        "attack": 697, 
+        "defense": 166, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5286
+        "hp": 2334
     }
 },
 {
@@ -1736,11 +1736,11 @@
         "level": 33, 
         "skills": "5", 
         "image": "", 
-        "attack": 903, 
-        "defense": 262, 
+        "attack": 724, 
+        "defense": 154, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5114
+        "hp": 2207
     }
 },
 {
@@ -1752,11 +1752,11 @@
         "level": 33, 
         "skills": "2", 
         "image": "", 
-        "attack": 844, 
-        "defense": 282, 
+        "attack": 655, 
+        "defense": 176, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5463
+        "hp": 2460
     }
 },
 {
@@ -1768,11 +1768,11 @@
         "level": 34, 
         "skills": "2", 
         "image": "", 
-        "attack": 868, 
-        "defense": 290, 
+        "attack": 674, 
+        "defense": 181, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5624
+        "hp": 2532
     }
 },
 {
@@ -1784,11 +1784,11 @@
         "level": 34, 
         "skills": "2", 
         "image": "", 
-        "attack": 905, 
-        "defense": 279, 
+        "attack": 717, 
+        "defense": 171, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5441
+        "hp": 2401
     }
 },
 {
@@ -1800,11 +1800,11 @@
         "level": 34, 
         "skills": "5", 
         "image": "", 
-        "attack": 930, 
-        "defense": 269, 
+        "attack": 745, 
+        "defense": 158, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5264
+        "hp": 2270
     }
 },
 {
@@ -1816,11 +1816,11 @@
         "level": 34, 
         "skills": "2", 
         "image": "", 
-        "attack": 862, 
-        "defense": 287, 
+        "attack": 668, 
+        "defense": 178, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5584
+        "hp": 2499
     }
 },
 {
@@ -1832,11 +1832,11 @@
         "level": 34, 
         "skills": "2", 
         "image": "", 
-        "attack": 862, 
-        "defense": 287, 
+        "attack": 668, 
+        "defense": 178, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5584
+        "hp": 2499
     }
 },
 {
@@ -1848,11 +1848,11 @@
         "level": 35, 
         "skills": "2", 
         "image": "", 
-        "attack": 893, 
-        "defense": 298, 
+        "attack": 693, 
+        "defense": 186, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5785
+        "hp": 2603
     }
 },
 {
@@ -1864,11 +1864,11 @@
         "level": 35, 
         "skills": "2", 
         "image": "", 
-        "attack": 887, 
-        "defense": 295, 
+        "attack": 687, 
+        "defense": 182, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5744
+        "hp": 2569
     }
 },
 {
@@ -1880,11 +1880,11 @@
         "level": 35, 
         "skills": "2", 
         "image": "", 
-        "attack": 931, 
-        "defense": 287, 
+        "attack": 738, 
+        "defense": 176, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5597
+        "hp": 2468
     }
 },
 {
@@ -1896,11 +1896,11 @@
         "level": 35, 
         "skills": "5", 
         "image": "", 
-        "attack": 956, 
-        "defense": 276, 
+        "attack": 766, 
+        "defense": 162, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5414
+        "hp": 2334
     }
 },
 {
@@ -1912,11 +1912,11 @@
         "level": 36, 
         "skills": "2", 
         "image": "", 
-        "attack": 749, 
-        "defense": 260, 
+        "attack": 587, 
+        "defense": 160, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5147
+        "hp": 2357
     }
 },
 {
@@ -1928,11 +1928,11 @@
         "level": 36, 
         "skills": "2", 
         "image": "", 
-        "attack": 969, 
-        "defense": 309, 
+        "attack": 865, 
+        "defense": 218, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6000
+        "hp": 3047
     }
 },
 {
@@ -1944,11 +1944,11 @@
         "level": 36, 
         "skills": "8", 
         "image": "", 
-        "attack": 1092, 
-        "defense": 327, 
+        "attack": 1267, 
+        "defense": 292, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6320
+        "hp": 4107
     }
 },
 {
@@ -1960,11 +1960,11 @@
         "level": 37, 
         "skills": "2", 
         "image": "", 
-        "attack": 769, 
-        "defense": 267, 
+        "attack": 602, 
+        "defense": 164, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5286
+        "hp": 2419
     }
 },
 {
@@ -1976,11 +1976,11 @@
         "level": 37, 
         "skills": "2", 
         "image": "", 
-        "attack": 935, 
-        "defense": 311, 
+        "attack": 815, 
+        "defense": 216, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6063
+        "hp": 3049
     }
 },
 {
@@ -1992,11 +1992,11 @@
         "level": 37, 
         "skills": "2", 
         "image": "", 
-        "attack": 935, 
-        "defense": 311, 
+        "attack": 815, 
+        "defense": 216, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6063
+        "hp": 3049
     }
 },
 {
@@ -2008,11 +2008,11 @@
         "level": 38, 
         "skills": "2", 
         "image": "", 
-        "attack": 959, 
-        "defense": 319, 
+        "attack": 836, 
+        "defense": 221, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6222
+        "hp": 3128
     }
 },
 {
@@ -2024,11 +2024,11 @@
         "level": 38, 
         "skills": "2", 
         "image": "", 
-        "attack": 987, 
-        "defense": 302, 
+        "attack": 870, 
+        "defense": 201, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5922
+        "hp": 2881
     }
 },
 {
@@ -2040,11 +2040,11 @@
         "level": 38, 
         "skills": "2", 
         "image": "", 
-        "attack": 973, 
-        "defense": 308, 
+        "attack": 850, 
+        "defense": 209, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6024
+        "hp": 2964
     }
 },
 {
@@ -2056,11 +2056,11 @@
         "level": 38, 
         "skills": "5", 
         "image": "", 
-        "attack": 946, 
-        "defense": 303, 
+        "attack": 816, 
+        "defense": 205, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5948
+        "hp": 2902
     }
 },
 {
@@ -2072,11 +2072,11 @@
         "level": 38, 
         "skills": "2", 
         "image": "", 
-        "attack": 1021, 
-        "defense": 325, 
+        "attack": 912, 
+        "defense": 230, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6324
+        "hp": 3210
     }
 },
 {
@@ -2088,11 +2088,11 @@
         "level": 38, 
         "skills": "2", 
         "image": "", 
-        "attack": 959, 
-        "defense": 319, 
+        "attack": 836, 
+        "defense": 221, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6222
+        "hp": 3128
     }
 },
 {
@@ -2104,11 +2104,11 @@
         "level": 39, 
         "skills": "2", 
         "image": "", 
-        "attack": 808, 
-        "defense": 280, 
+        "attack": 633, 
+        "defense": 172, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5563
+        "hp": 2543
     }
 },
 {
@@ -2120,11 +2120,11 @@
         "level": 39, 
         "skills": "8", 
         "image": "", 
-        "attack": 1180, 
-        "defense": 353, 
+        "attack": 1370, 
+        "defense": 315, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6834
+        "hp": 4439
     }
 },
 {
@@ -2136,11 +2136,11 @@
         "level": 39, 
         "skills": "2", 
         "image": "", 
-        "attack": 984, 
-        "defense": 327, 
+        "attack": 857, 
+        "defense": 227, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6382
+        "hp": 3207
     }
 },
 {
@@ -2152,11 +2152,11 @@
         "level": 39, 
         "skills": "3", 
         "image": "", 
-        "attack": 1019, 
-        "defense": 314, 
+        "attack": 899, 
+        "defense": 214, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6159
+        "hp": 3028
     }
 },
 {
@@ -2164,15 +2164,15 @@
     "model": "main.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u5468\u6615 ", 
+        "name": "\u5468\u6615", 
         "level": 40, 
         "skills": "2", 
         "image": "", 
-        "attack": 1008, 
-        "defense": 335, 
+        "attack": 878, 
+        "defense": 232, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6542
+        "hp": 3286
     }
 },
 {
@@ -2184,11 +2184,11 @@
         "level": 40, 
         "skills": "3", 
         "image": "", 
-        "attack": 1044, 
-        "defense": 322, 
+        "attack": 922, 
+        "defense": 219, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6313
+        "hp": 3102
     }
 },
 {
@@ -2200,11 +2200,11 @@
         "level": 40, 
         "skills": "2", 
         "image": "", 
-        "attack": 1109, 
-        "defense": 296, 
+        "attack": 1008, 
+        "defense": 189, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5856
+        "hp": 2724
     }
 },
 {
@@ -2216,11 +2216,11 @@
         "level": 40, 
         "skills": "2", 
         "image": "", 
-        "attack": 792, 
-        "defense": 277, 
+        "attack": 605, 
+        "defense": 167, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 5534
+        "hp": 2465
     }
 },
 {
@@ -2232,11 +2232,11 @@
         "level": 40, 
         "skills": "2", 
         "image": "", 
-        "attack": 1008, 
-        "defense": 335, 
+        "attack": 878, 
+        "defense": 232, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6542
+        "hp": 3286
     }
 },
 {
@@ -2248,11 +2248,11 @@
         "level": 41, 
         "skills": "2", 
         "image": "", 
-        "attack": 885, 
-        "defense": 303, 
+        "attack": 708, 
+        "defense": 193, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6012
+        "hp": 2800
     }
 },
 {
@@ -2264,11 +2264,11 @@
         "level": 41, 
         "skills": "2", 
         "image": "", 
-        "attack": 1032, 
-        "defense": 343, 
+        "attack": 899, 
+        "defense": 238, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6701
+        "hp": 3365
     }
 },
 {
@@ -2280,11 +2280,11 @@
         "level": 41, 
         "skills": "2", 
         "image": "", 
-        "attack": 1165, 
-        "defense": 358, 
+        "attack": 1069, 
+        "defense": 255, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6963
+        "hp": 3586
     }
 },
 {
@@ -2296,11 +2296,11 @@
         "level": 41, 
         "skills": "3", 
         "image": "", 
-        "attack": 1062, 
-        "defense": 312, 
+        "attack": 936, 
+        "defense": 202, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6171
+        "hp": 2933
     }
 },
 {
@@ -2312,11 +2312,11 @@
         "level": 41, 
         "skills": "14", 
         "image": "", 
-        "attack": 1032, 
-        "defense": 382, 
+        "attack": 988, 
+        "defense": 313, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7390
+        "hp": 4339
     }
 },
 {
@@ -2328,11 +2328,11 @@
         "level": 41, 
         "skills": "7", 
         "image": "", 
-        "attack": 1291, 
-        "defense": 380, 
+        "attack": 1519, 
+        "defense": 348, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7355
+        "hp": 4837
     }
 },
 {
@@ -2344,11 +2344,11 @@
         "level": 42, 
         "skills": "2", 
         "image": "", 
-        "attack": 905, 
-        "defense": 310, 
+        "attack": 724, 
+        "defense": 198, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6155
+        "hp": 2866
     }
 },
 {
@@ -2360,11 +2360,11 @@
         "level": 42, 
         "skills": "2", 
         "image": "", 
-        "attack": 1193, 
-        "defense": 366, 
+        "attack": 1094, 
+        "defense": 261, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7129
+        "hp": 3671
     }
 },
 {
@@ -2376,11 +2376,11 @@
         "level": 42, 
         "skills": "2", 
         "image": "", 
-        "attack": 1057, 
-        "defense": 315, 
+        "attack": 921, 
+        "defense": 202, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6240
+        "hp": 2934
     }
 },
 {
@@ -2392,11 +2392,11 @@
         "level": 42, 
         "skills": "2", 
         "image": "", 
-        "attack": 1155, 
-        "defense": 340, 
+        "attack": 1041, 
+        "defense": 229, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6677
+        "hp": 3297
     }
 },
 {
@@ -2408,11 +2408,11 @@
         "level": 42, 
         "skills": "2", 
         "image": "", 
-        "attack": 1147, 
-        "defense": 345, 
+        "attack": 1034, 
+        "defense": 238, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6755
+        "hp": 3365
     }
 },
 {
@@ -2424,11 +2424,11 @@
         "level": 42, 
         "skills": "8", 
         "image": "", 
-        "attack": 1261, 
-        "defense": 401, 
+        "attack": 1465, 
+        "defense": 370, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7743
+        "hp": 5168
     }
 },
 {
@@ -2440,11 +2440,11 @@
         "level": 43, 
         "skills": "2", 
         "image": "", 
-        "attack": 926, 
-        "defense": 317, 
+        "attack": 740, 
+        "defense": 202, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6298
+        "hp": 2931
     }
 },
 {
@@ -2456,11 +2456,11 @@
         "level": 43, 
         "skills": "8", 
         "image": "", 
-        "attack": 1290, 
-        "defense": 410, 
+        "attack": 1499, 
+        "defense": 378, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7923
+        "hp": 5288
     }
 },
 {
@@ -2472,11 +2472,11 @@
         "level": 43, 
         "skills": "2", 
         "image": "", 
-        "attack": 1081, 
-        "defense": 359, 
+        "attack": 942, 
+        "defense": 248, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7020
+        "hp": 3523
     }
 },
 {
@@ -2488,11 +2488,11 @@
         "level": 43, 
         "skills": "3", 
         "image": "", 
-        "attack": 1243, 
-        "defense": 387, 
+        "attack": 1267, 
+        "defense": 309, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7526
+        "hp": 4348
     }
 },
 {
@@ -2504,11 +2504,11 @@
         "level": 44, 
         "skills": "3", 
         "image": "", 
-        "attack": 1272, 
-        "defense": 396, 
+        "attack": 1295, 
+        "defense": 316, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7697
+        "hp": 4446
     }
 },
 {
@@ -2520,11 +2520,11 @@
         "level": 44, 
         "skills": "8", 
         "image": "", 
-        "attack": 1319, 
-        "defense": 419, 
+        "attack": 1533, 
+        "defense": 387, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8104
+        "hp": 5408
     }
 },
 {
@@ -2536,11 +2536,11 @@
         "level": 44, 
         "skills": "7", 
         "image": "", 
-        "attack": 1382, 
-        "defense": 407, 
+        "attack": 1628, 
+        "defense": 373, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7882
+        "hp": 5182
     }
 },
 {
@@ -2552,11 +2552,11 @@
         "level": 44, 
         "skills": "2", 
         "image": "", 
-        "attack": 947, 
-        "defense": 324, 
+        "attack": 757, 
+        "defense": 206, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6441
+        "hp": 2996
     }
 },
 {
@@ -2568,11 +2568,11 @@
         "level": 44, 
         "skills": "2", 
         "image": "", 
-        "attack": 1105, 
-        "defense": 366, 
+        "attack": 963, 
+        "defense": 254, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7180
+        "hp": 3602
     }
 },
 {
@@ -2584,11 +2584,11 @@
         "level": 45, 
         "skills": "2", 
         "image": "", 
-        "attack": 968, 
-        "defense": 331, 
+        "attack": 773, 
+        "defense": 211, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6584
+        "hp": 3062
     }
 },
 {
@@ -2600,11 +2600,11 @@
         "level": 45, 
         "skills": "3", 
         "image": "", 
-        "attack": 1300, 
-        "defense": 405, 
+        "attack": 1324, 
+        "defense": 322, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7869
+        "hp": 4544
     }
 },
 {
@@ -2616,11 +2616,11 @@
         "level": 45, 
         "skills": "9", 
         "image": "", 
-        "attack": 1364, 
-        "defense": 415, 
+        "attack": 1591, 
+        "defense": 381, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8058
+        "hp": 5297
     }
 },
 {
@@ -2632,11 +2632,11 @@
         "level": 45, 
         "skills": "8", 
         "image": "", 
-        "attack": 1348, 
-        "defense": 428, 
+        "attack": 1567, 
+        "defense": 395, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8285
+        "hp": 5528
     }
 },
 {
@@ -2648,11 +2648,11 @@
         "level": 45, 
         "skills": "14", 
         "image": "", 
-        "attack": 1130, 
-        "defense": 418, 
+        "attack": 1081, 
+        "defense": 342, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8096
+        "hp": 4751
     }
 },
 {
@@ -2664,11 +2664,11 @@
         "level": 45, 
         "skills": "7", 
         "image": "", 
-        "attack": 1413, 
-        "defense": 415, 
+        "attack": 1664, 
+        "defense": 381, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8058
+        "hp": 5297
     }
 },
 {
@@ -2680,11 +2680,11 @@
         "level": 46, 
         "skills": "2", 
         "image": "", 
-        "attack": 988, 
-        "defense": 338, 
+        "attack": 877, 
+        "defense": 239, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6726
+        "hp": 3475
     }
 },
 {
@@ -2696,11 +2696,11 @@
         "level": 46, 
         "skills": "2", 
         "image": "", 
-        "attack": 1303, 
-        "defense": 399, 
+        "attack": 1328, 
+        "defense": 316, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7793
+        "hp": 4454
     }
 },
 {
@@ -2712,11 +2712,11 @@
         "level": 46, 
         "skills": "2", 
         "image": "", 
-        "attack": 1154, 
-        "defense": 343, 
+        "attack": 1116, 
+        "defense": 244, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6819
+        "hp": 3557
     }
 },
 {
@@ -2728,11 +2728,11 @@
         "level": 46, 
         "skills": "2", 
         "image": "", 
-        "attack": 1030, 
-        "defense": 349, 
+        "attack": 942, 
+        "defense": 255, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 6920
+        "hp": 3654
     }
 },
 {
@@ -2744,11 +2744,11 @@
         "level": 46, 
         "skills": "2", 
         "image": "", 
-        "attack": 1286, 
-        "defense": 407, 
+        "attack": 1300, 
+        "defense": 327, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7924
+        "hp": 4565
     }
 },
 {
@@ -2760,11 +2760,11 @@
         "level": 47, 
         "skills": "2", 
         "image": "", 
-        "attack": 1051, 
-        "defense": 356, 
+        "attack": 961, 
+        "defense": 261, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7067
+        "hp": 3731
     }
 },
 {
@@ -2776,11 +2776,11 @@
         "level": 47, 
         "skills": "2", 
         "image": "", 
-        "attack": 1313, 
-        "defense": 415, 
+        "attack": 1328, 
+        "defense": 334, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8093
+        "hp": 4661
     }
 },
 {
@@ -2792,11 +2792,11 @@
         "level": 47, 
         "skills": "4", 
         "image": "", 
-        "attack": 1449, 
-        "defense": 449, 
+        "attack": 1892, 
+        "defense": 464, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8685
+        "hp": 6452
     }
 },
 {
@@ -2808,11 +2808,11 @@
         "level": 47, 
         "skills": "7", 
         "image": "", 
-        "attack": 1457, 
-        "defense": 411, 
+        "attack": 1901, 
+        "defense": 402, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8014
+        "hp": 5690
     }
 },
 {
@@ -2824,11 +2824,11 @@
         "level": 48, 
         "skills": "2", 
         "image": "", 
-        "attack": 1073, 
-        "defense": 364, 
+        "attack": 981, 
+        "defense": 266, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7214
+        "hp": 3807
     }
 },
 {
@@ -2840,11 +2840,11 @@
         "level": 48, 
         "skills": "7", 
         "image": "", 
-        "attack": 1488, 
-        "defense": 419, 
+        "attack": 1941, 
+        "defense": 410, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8181
+        "hp": 5809
     }
 },
 {
@@ -2856,11 +2856,11 @@
         "level": 48, 
         "skills": "9", 
         "image": "", 
-        "attack": 1280, 
-        "defense": 420, 
+        "attack": 1403, 
+        "defense": 369, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8205
+        "hp": 5189
     }
 },
 {
@@ -2872,11 +2872,11 @@
         "level": 48, 
         "skills": "4", 
         "image": "", 
-        "attack": 1479, 
-        "defense": 458, 
+        "attack": 1931, 
+        "defense": 473, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8867
+        "hp": 6586
     }
 },
 {
@@ -2888,11 +2888,11 @@
         "level": 49, 
         "skills": "2", 
         "image": "", 
-        "attack": 1094, 
-        "defense": 371, 
+        "attack": 1000, 
+        "defense": 271, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7361
+        "hp": 3884
     }
 },
 {
@@ -2904,11 +2904,11 @@
         "level": 49, 
         "skills": "8", 
         "image": "", 
-        "attack": 1474, 
-        "defense": 422, 
+        "attack": 1696, 
+        "defense": 365, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8250
+        "hp": 5177
     }
 },
 {
@@ -2920,11 +2920,11 @@
         "level": 49, 
         "skills": "9", 
         "image": "", 
-        "attack": 1306, 
-        "defense": 429, 
+        "attack": 1432, 
+        "defense": 377, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8373
+        "hp": 5295
     }
 },
 {
@@ -2936,11 +2936,11 @@
         "level": 49, 
         "skills": "8", 
         "image": "", 
-        "attack": 1482, 
-        "defense": 412, 
+        "attack": 1706, 
+        "defense": 353, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8077
+        "hp": 5001
     }
 },
 {
@@ -2952,11 +2952,11 @@
         "level": 50, 
         "skills": "2", 
         "image": "", 
-        "attack": 1404, 
-        "defense": 436, 
+        "attack": 1430, 
+        "defense": 348, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8516
+        "hp": 4875
     }
 },
 {
@@ -2968,11 +2968,11 @@
         "level": 50, 
         "skills": "2", 
         "image": "", 
-        "attack": 1404, 
-        "defense": 382, 
+        "attack": 1430, 
+        "defense": 276, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7575
+        "hp": 4020
     }
 },
 {
@@ -2984,11 +2984,11 @@
         "level": 50, 
         "skills": "14", 
         "image": "", 
-        "attack": 1467, 
-        "defense": 464, 
+        "attack": 1880, 
+        "defense": 474, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9011
+        "hp": 6615
     }
 },
 {
@@ -3000,11 +3000,11 @@
         "level": 50, 
         "skills": "2", 
         "image": "", 
-        "attack": 1251, 
-        "defense": 414, 
+        "attack": 1210, 
+        "defense": 318, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8138
+        "hp": 4530
     }
 },
 {
@@ -3016,11 +3016,11 @@
         "level": 50, 
         "skills": "2", 
         "image": "", 
-        "attack": 1305, 
-        "defense": 399, 
+        "attack": 1290, 
+        "defense": 300, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7877
+        "hp": 4290
     }
 },
 {
@@ -3032,11 +3032,11 @@
         "level": 50, 
         "skills": "6", 
         "image": "", 
-        "attack": 1296, 
-        "defense": 447, 
+        "attack": 1400, 
+        "defense": 396, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8709
+        "hp": 5580
     }
 },
 {
@@ -3048,11 +3048,11 @@
         "level": 51, 
         "skills": "2", 
         "image": "", 
-        "attack": 1138, 
-        "defense": 385, 
+        "attack": 1040, 
+        "defense": 281, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7655
+        "hp": 4037
     }
 },
 {
@@ -3064,11 +3064,11 @@
         "level": 51, 
         "skills": "8", 
         "image": "", 
-        "attack": 1523, 
-        "defense": 483, 
+        "attack": 1968, 
+        "defense": 495, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9368
+        "hp": 6944
     }
 },
 {
@@ -3080,11 +3080,11 @@
         "level": 51, 
         "skills": "2", 
         "image": "", 
-        "attack": 1275, 
-        "defense": 422, 
+        "attack": 1233, 
+        "defense": 324, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8297
+        "hp": 4618
     }
 },
 {
@@ -3096,11 +3096,11 @@
         "level": 52, 
         "skills": "2", 
         "image": "", 
-        "attack": 1159, 
-        "defense": 392, 
+        "attack": 1059, 
+        "defense": 286, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7802
+        "hp": 4113
     }
 },
 {
@@ -3112,11 +3112,11 @@
         "level": 52, 
         "skills": "11", 
         "image": "", 
-        "attack": 1590, 
-        "defense": 427, 
+        "attack": 2068, 
+        "defense": 405, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8413
+        "hp": 5798
     }
 },
 {
@@ -3128,11 +3128,11 @@
         "level": 52, 
         "skills": "2", 
         "image": "", 
-        "attack": 1300, 
-        "defense": 430, 
+        "attack": 1257, 
+        "defense": 330, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8457
+        "hp": 4706
     }
 },
 {
@@ -3144,11 +3144,11 @@
         "level": 53, 
         "skills": "2", 
         "image": "", 
-        "attack": 1181, 
-        "defense": 400, 
+        "attack": 1079, 
+        "defense": 291, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 7949
+        "hp": 4190
     }
 },
 {
@@ -3160,11 +3160,11 @@
         "level": 53, 
         "skills": "6", 
         "image": "", 
-        "attack": 1562, 
-        "defense": 489, 
+        "attack": 2012, 
+        "defense": 495, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9516
+        "hp": 6972
     }
 },
 {
@@ -3176,11 +3176,11 @@
         "level": 53, 
         "skills": "2", 
         "image": "", 
-        "attack": 1324, 
-        "defense": 438, 
+        "attack": 1280, 
+        "defense": 336, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8616
+        "hp": 4794
     }
 },
 {
@@ -3192,11 +3192,11 @@
         "level": 54, 
         "skills": "2", 
         "image": "", 
-        "attack": 1202, 
-        "defense": 407, 
+        "attack": 1098, 
+        "defense": 297, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8096
+        "hp": 4266
     }
 },
 {
@@ -3208,11 +3208,11 @@
         "level": 54, 
         "skills": "3", 
         "image": "", 
-        "attack": 1475, 
-        "defense": 464, 
+        "attack": 1638, 
+        "defense": 400, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9093
+        "hp": 5708
     }
 },
 {
@@ -3224,11 +3224,11 @@
         "level": 54, 
         "skills": "2", 
         "image": "", 
-        "attack": 1348, 
-        "defense": 446, 
+        "attack": 1304, 
+        "defense": 342, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8776
+        "hp": 4882
     }
 },
 {
@@ -3240,11 +3240,11 @@
         "level": 55, 
         "skills": "2", 
         "image": "", 
-        "attack": 1224, 
-        "defense": 414, 
+        "attack": 1118, 
+        "defense": 302, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8243
+        "hp": 4343
     }
 },
 {
@@ -3256,11 +3256,11 @@
         "level": 55, 
         "skills": "8", 
         "image": "", 
-        "attack": 1511, 
-        "defense": 509, 
+        "attack": 1679, 
+        "defense": 460, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9906
+        "hp": 6471
     }
 },
 {
@@ -3272,11 +3272,11 @@
         "level": 55, 
         "skills": "2", 
         "image": "", 
-        "attack": 1373, 
-        "defense": 454, 
+        "attack": 1327, 
+        "defense": 348, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8936
+        "hp": 4970
     }
 },
 {
@@ -3288,11 +3288,11 @@
         "level": 55, 
         "skills": "2", 
         "image": "", 
-        "attack": 1373, 
-        "defense": 454, 
+        "attack": 1327, 
+        "defense": 348, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8936
+        "hp": 4970
     }
 },
 {
@@ -3304,11 +3304,11 @@
         "level": 55, 
         "skills": "4", 
         "image": "", 
-        "attack": 1620, 
-        "defense": 501, 
+        "attack": 2086, 
+        "defense": 506, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9758
+        "hp": 7098
     }
 },
 {
@@ -3320,11 +3320,11 @@
         "level": 56, 
         "skills": "2", 
         "image": "", 
-        "attack": 1246, 
-        "defense": 421, 
+        "attack": 1138, 
+        "defense": 307, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8390
+        "hp": 4419
     }
 },
 {
@@ -3336,11 +3336,11 @@
         "level": 56, 
         "skills": "11", 
         "image": "", 
-        "attack": 1709, 
-        "defense": 459, 
+        "attack": 2224, 
+        "defense": 435, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9048
+        "hp": 6233
     }
 },
 {
@@ -3352,11 +3352,11 @@
         "level": 56, 
         "skills": "8", 
         "image": "", 
-        "attack": 1538, 
-        "defense": 518, 
+        "attack": 1709, 
+        "defense": 468, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10083
+        "hp": 6586
     }
 },
 {
@@ -3368,11 +3368,11 @@
         "level": 56, 
         "skills": "3", 
         "image": "", 
-        "attack": 1528, 
-        "defense": 480, 
+        "attack": 1698, 
+        "defense": 414, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9424
+        "hp": 5914
     }
 },
 {
@@ -3384,11 +3384,11 @@
         "level": 56, 
         "skills": "14", 
         "image": "", 
-        "attack": 1639, 
-        "defense": 517, 
+        "attack": 2101, 
+        "defense": 529, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10074
+        "hp": 7393
     }
 },
 {
@@ -3400,11 +3400,11 @@
         "level": 57, 
         "skills": "2", 
         "image": "", 
-        "attack": 1267, 
-        "defense": 428, 
+        "attack": 1157, 
+        "defense": 312, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8537
+        "hp": 4496
     }
 },
 {
@@ -3416,11 +3416,11 @@
         "level": 57, 
         "skills": "5", 
         "image": "", 
-        "attack": 1421, 
-        "defense": 469, 
+        "attack": 1374, 
+        "defense": 360, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9255
+        "hp": 5145
     }
 },
 {
@@ -3432,11 +3432,11 @@
         "level": 57, 
         "skills": "2", 
         "image": "", 
-        "attack": 1421, 
-        "defense": 469, 
+        "attack": 1374, 
+        "defense": 360, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9255
+        "hp": 5145
     }
 },
 {
@@ -3448,11 +3448,11 @@
         "level": 57, 
         "skills": "2", 
         "image": "", 
-        "attack": 1421, 
-        "defense": 469, 
+        "attack": 1374, 
+        "defense": 360, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9255
+        "hp": 5145
     }
 },
 {
@@ -3464,11 +3464,11 @@
         "level": 57, 
         "skills": "2", 
         "image": "", 
-        "attack": 1421, 
-        "defense": 469, 
+        "attack": 1374, 
+        "defense": 360, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9255
+        "hp": 5145
     }
 },
 {
@@ -3480,11 +3480,11 @@
         "level": 58, 
         "skills": "2", 
         "image": "", 
-        "attack": 1289, 
-        "defense": 436, 
+        "attack": 1177, 
+        "defense": 317, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8684
+        "hp": 4572
     }
 },
 {
@@ -3496,11 +3496,11 @@
         "level": 58, 
         "skills": "10", 
         "image": "", 
-        "attack": 1623, 
-        "defense": 553, 
+        "attack": 2047, 
+        "defense": 575, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10730
+        "hp": 8000
     }
 },
 {
@@ -3512,11 +3512,11 @@
         "level": 58, 
         "skills": "8", 
         "image": "", 
-        "attack": 1592, 
-        "defense": 536, 
+        "attack": 1768, 
+        "defense": 484, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10437
+        "hp": 6817
     }
 },
 {
@@ -3528,11 +3528,11 @@
         "level": 59, 
         "skills": "2", 
         "image": "", 
-        "attack": 1310, 
-        "defense": 443, 
+        "attack": 1196, 
+        "defense": 322, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8831
+        "hp": 4649
     }
 },
 {
@@ -3544,11 +3544,11 @@
         "level": 59, 
         "skills": "2", 
         "image": "", 
-        "attack": 1544, 
-        "defense": 496, 
+        "attack": 1527, 
+        "defense": 386, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9762
+        "hp": 5498
     }
 },
 {
@@ -3560,11 +3560,11 @@
         "level": 59, 
         "skills": "3", 
         "image": "", 
-        "attack": 1470, 
-        "defense": 485, 
+        "attack": 1421, 
+        "defense": 372, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9574
+        "hp": 5321
     }
 },
 {
@@ -3576,11 +3576,11 @@
         "level": 59, 
         "skills": "4", 
         "image": "", 
-        "attack": 1735, 
-        "defense": 536, 
+        "attack": 2235, 
+        "defense": 542, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10456
+        "hp": 7604
     }
 },
 {
@@ -3592,11 +3592,11 @@
         "level": 59, 
         "skills": "9", 
         "image": "", 
-        "attack": 1746, 
-        "defense": 559, 
+        "attack": 2235, 
+        "defense": 584, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10872
+        "hp": 8135
     }
 },
 {
@@ -3608,11 +3608,11 @@
         "level": 60, 
         "skills": "2", 
         "image": "", 
-        "attack": 1332, 
-        "defense": 450, 
+        "attack": 1216, 
+        "defense": 328, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8978
+        "hp": 4725
     }
 },
 {
@@ -3624,11 +3624,11 @@
         "level": 60, 
         "skills": "4", 
         "image": "", 
-        "attack": 1764, 
-        "defense": 544, 
+        "attack": 2272, 
+        "defense": 551, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10631
+        "hp": 7731
     }
 },
 {
@@ -3640,11 +3640,11 @@
         "level": 60, 
         "skills": "3", 
         "image": "", 
-        "attack": 1570, 
-        "defense": 513, 
+        "attack": 1708, 
+        "defense": 443, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10086
+        "hp": 6327
     }
 },
 {
@@ -3656,11 +3656,11 @@
         "level": 60, 
         "skills": "11", 
         "image": "", 
-        "attack": 1829, 
-        "defense": 490, 
+        "attack": 2380, 
+        "defense": 464, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9683
+        "hp": 6669
     }
 },
 {
@@ -3672,11 +3672,11 @@
         "level": 60, 
         "skills": "10", 
         "image": "", 
-        "attack": 1678, 
-        "defense": 571, 
+        "attack": 2116, 
+        "defense": 594, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 11094
+        "hp": 8271
     }
 },
 {
@@ -3688,11 +3688,11 @@
         "level": 61, 
         "skills": "2", 
         "image": "", 
-        "attack": 1354, 
-        "defense": 457, 
+        "attack": 1359, 
+        "defense": 366, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9125
+        "hp": 5282
     }
 },
 {
@@ -3704,11 +3704,11 @@
         "level": 61, 
         "skills": "3", 
         "image": "", 
-        "attack": 1705, 
-        "defense": 551, 
+        "attack": 2097, 
+        "defense": 543, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10764
+        "hp": 7637
     }
 },
 {
@@ -3720,11 +3720,11 @@
         "level": 61, 
         "skills": "2", 
         "image": "", 
-        "attack": 1650, 
-        "defense": 532, 
+        "attack": 1815, 
+        "defense": 471, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10436
+        "hp": 6590
     }
 },
 {
@@ -3736,11 +3736,11 @@
         "level": 61, 
         "skills": "3", 
         "image": "", 
-        "attack": 1595, 
-        "defense": 522, 
+        "attack": 1909, 
+        "defense": 495, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10252
+        "hp": 7073
     }
 },
 {
@@ -3752,11 +3752,11 @@
         "level": 62, 
         "skills": "2", 
         "image": "", 
-        "attack": 1543, 
-        "defense": 509, 
+        "attack": 1640, 
+        "defense": 429, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10053
+        "hp": 6143
     }
 },
 {
@@ -3768,11 +3768,11 @@
         "level": 62, 
         "skills": "3", 
         "image": "", 
-        "attack": 1732, 
-        "defense": 560, 
+        "attack": 2131, 
+        "defense": 552, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10938
+        "hp": 7760
     }
 },
 {
@@ -3784,11 +3784,11 @@
         "level": 62, 
         "skills": "14", 
         "image": "", 
-        "attack": 1810, 
-        "defense": 571, 
+        "attack": 2554, 
+        "defense": 642, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 11136
+        "hp": 8987
     }
 },
 {
@@ -3800,11 +3800,11 @@
         "level": 62, 
         "skills": "8", 
         "image": "", 
-        "attack": 1755, 
-        "defense": 537, 
+        "attack": 2172, 
+        "defense": 519, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10542
+        "hp": 7330
     }
 },
 {
@@ -3816,11 +3816,11 @@
         "level": 62, 
         "skills": "8", 
         "image": "", 
-        "attack": 1844, 
-        "defense": 583, 
+        "attack": 2622, 
+        "defense": 658, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 11355
+        "hp": 9253
     }
 },
 {
@@ -3832,11 +3832,11 @@
         "level": 62, 
         "skills": "11", 
         "image": "", 
-        "attack": 1889, 
-        "defense": 506, 
+        "attack": 2704, 
+        "defense": 527, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10001
+        "hp": 7575
     }
 },
 {
@@ -3848,11 +3848,11 @@
         "level": 63, 
         "skills": "2", 
         "image": "", 
-        "attack": 1397, 
-        "defense": 472, 
+        "attack": 1402, 
+        "defense": 377, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9419
+        "hp": 5450
     }
 },
 {
@@ -3864,11 +3864,11 @@
         "level": 63, 
         "skills": "3", 
         "image": "", 
-        "attack": 1760, 
-        "defense": 568, 
+        "attack": 2165, 
+        "defense": 560, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 11112
+        "hp": 7882
     }
 },
 {
@@ -3880,11 +3880,11 @@
         "level": 63, 
         "skills": "2", 
         "image": "", 
-        "attack": 1567, 
-        "defense": 517, 
+        "attack": 1666, 
+        "defense": 436, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10212
+        "hp": 6240
     }
 },
 {
@@ -3896,11 +3896,11 @@
         "level": 63, 
         "skills": "2", 
         "image": "", 
-        "attack": 1567, 
-        "defense": 517, 
+        "attack": 1666, 
+        "defense": 436, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10212
+        "hp": 6240
     }
 },
 {
@@ -3912,11 +3912,11 @@
         "level": 63, 
         "skills": "2", 
         "image": "", 
-        "attack": 1635, 
-        "defense": 486, 
+        "attack": 1777, 
+        "defense": 394, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9673
+        "hp": 5699
     }
 },
 {
@@ -3928,11 +3928,11 @@
         "level": 63, 
         "skills": "3", 
         "image": "", 
-        "attack": 1646, 
-        "defense": 504, 
+        "attack": 1790, 
+        "defense": 419, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9990
+        "hp": 6032
     }
 },
 {
@@ -3944,11 +3944,11 @@
         "level": 64, 
         "skills": "8", 
         "image": "", 
-        "attack": 1810, 
-        "defense": 554, 
+        "attack": 2240, 
+        "defense": 535, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10877
+        "hp": 7562
     }
 },
 {
@@ -3960,11 +3960,11 @@
         "level": 64, 
         "skills": "3", 
         "image": "", 
-        "attack": 1649, 
-        "defense": 540, 
+        "attack": 1776, 
+        "defense": 468, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10641
+        "hp": 6611
     }
 },
 {
@@ -3976,11 +3976,11 @@
         "level": 64, 
         "skills": "3", 
         "image": "", 
-        "attack": 1787, 
-        "defense": 577, 
+        "attack": 2198, 
+        "defense": 569, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 11286
+        "hp": 8005
     }
 },
 {
@@ -3992,11 +3992,11 @@
         "level": 64, 
         "skills": "11", 
         "image": "", 
-        "attack": 1948, 
-        "defense": 522, 
+        "attack": 2790, 
+        "defense": 544, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10318
+        "hp": 7815
     }
 },
 {
@@ -4008,11 +4008,11 @@
         "level": 64, 
         "skills": "8", 
         "image": "", 
-        "attack": 1902, 
-        "defense": 602, 
+        "attack": 2705, 
+        "defense": 679, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 11716
+        "hp": 9547
     }
 },
 {
@@ -4024,11 +4024,11 @@
         "level": 64, 
         "skills": "6", 
         "image": "", 
-        "attack": 1891, 
-        "defense": 572, 
+        "attack": 2381, 
+        "defense": 560, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 11200
+        "hp": 7921
     }
 },
 {
@@ -4040,11 +4040,11 @@
         "level": 65, 
         "skills": "4", 
         "image": "", 
-        "attack": 1908, 
-        "defense": 588, 
+        "attack": 2704, 
+        "defense": 655, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 11503
+        "hp": 9200
     }
 },
 {
@@ -4056,11 +4056,11 @@
         "level": 65, 
         "skills": "14", 
         "image": "", 
-        "attack": 1896, 
-        "defense": 598, 
+        "attack": 2675, 
+        "defense": 672, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 11667
+        "hp": 9415
     }
 },
 {
@@ -4072,11 +4072,11 @@
         "level": 65, 
         "skills": "8", 
         "image": "", 
-        "attack": 1931, 
-        "defense": 611, 
+        "attack": 2747, 
+        "defense": 689, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 11897
+        "hp": 9694
     }
 },
 {
@@ -4088,11 +4088,11 @@
         "level": 65, 
         "skills": "10", 
         "image": "", 
-        "attack": 1814, 
-        "defense": 617, 
+        "attack": 2518, 
+        "defense": 706, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 12006
+        "hp": 9844
     }
 },
 {
@@ -4104,11 +4104,11 @@
         "level": 65, 
         "skills": "9", 
         "image": "", 
-        "attack": 1920, 
-        "defense": 615, 
+        "attack": 2704, 
+        "defense": 706, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 11962
+        "hp": 9844
     }
 },
 {
@@ -4120,11 +4120,11 @@
         "level": 66, 
         "skills": "2", 
         "image": "", 
-        "attack": 1462, 
-        "defense": 493, 
+        "attack": 1467, 
+        "defense": 394, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9860
+        "hp": 5702
     }
 },
 {
@@ -4136,11 +4136,11 @@
         "level": 66, 
         "skills": "2", 
         "image": "", 
-        "attack": 1664, 
-        "defense": 544, 
+        "attack": 1772, 
+        "defense": 464, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10747
+        "hp": 6595
     }
 },
 {
@@ -4152,11 +4152,11 @@
         "level": 66, 
         "skills": "2", 
         "image": "", 
-        "attack": 1640, 
-        "defense": 541, 
+        "attack": 1743, 
+        "defense": 455, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10691
+        "hp": 6530
     }
 },
 {
@@ -4168,11 +4168,11 @@
         "level": 66, 
         "skills": "2", 
         "image": "", 
-        "attack": 1782, 
-        "defense": 574, 
+        "attack": 1961, 
+        "defense": 508, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 11279
+        "hp": 7118
     }
 },
 {
@@ -4184,11 +4184,11 @@
         "level": 66, 
         "skills": "2", 
         "image": "", 
-        "attack": 1664, 
-        "defense": 544, 
+        "attack": 1772, 
+        "defense": 464, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10747
+        "hp": 6595
     }
 },
 {
@@ -4200,11 +4200,11 @@
         "level": 67, 
         "skills": "2", 
         "image": "", 
-        "attack": 1483, 
-        "defense": 500, 
+        "attack": 1489, 
+        "defense": 400, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10007
+        "hp": 5787
     }
 },
 {
@@ -4216,11 +4216,11 @@
         "level": 67, 
         "skills": "5", 
         "image": "", 
-        "attack": 1749, 
-        "defense": 528, 
+        "attack": 1901, 
+        "defense": 435, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10491
+        "hp": 6273
     }
 },
 {
@@ -4232,11 +4232,11 @@
         "level": 67, 
         "skills": "2", 
         "image": "", 
-        "attack": 1736, 
-        "defense": 516, 
+        "attack": 1887, 
+        "defense": 418, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10277
+        "hp": 6052
     }
 },
 {
@@ -4248,11 +4248,11 @@
         "level": 67, 
         "skills": "3", 
         "image": "", 
-        "attack": 1869, 
-        "defense": 603, 
+        "attack": 2299, 
+        "defense": 595, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 11807
+        "hp": 8373
     }
 },
 {
@@ -4264,11 +4264,11 @@
         "level": 68, 
         "skills": "2", 
         "image": "", 
-        "attack": 1505, 
-        "defense": 508, 
+        "attack": 1510, 
+        "defense": 406, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10154
+        "hp": 5871
     }
 },
 {
@@ -4280,11 +4280,11 @@
         "level": 68, 
         "skills": "14", 
         "image": "", 
-        "attack": 1982, 
-        "defense": 624, 
+        "attack": 2797, 
+        "defense": 702, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 12198
+        "hp": 9843
     }
 },
 {
@@ -4296,11 +4296,11 @@
         "level": 68, 
         "skills": "6", 
         "image": "", 
-        "attack": 2007, 
-        "defense": 607, 
+        "attack": 2527, 
+        "defense": 594, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 11890
+        "hp": 8406
     }
 },
 {
@@ -4312,11 +4312,11 @@
         "level": 68, 
         "skills": "2", 
         "image": "", 
-        "attack": 1811, 
-        "defense": 581, 
+        "attack": 1989, 
+        "defense": 505, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 11433
+        "hp": 7150
     }
 },
 {
@@ -4328,11 +4328,11 @@
         "level": 68, 
         "skills": "2", 
         "image": "", 
-        "attack": 1774, 
-        "defense": 444, 
+        "attack": 1929, 
+        "defense": 316, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 9034
+        "hp": 4749
     }
 },
 {
@@ -4344,11 +4344,11 @@
         "level": 68, 
         "skills": "2", 
         "image": "", 
-        "attack": 1921, 
-        "defense": 433, 
+        "attack": 2153, 
+        "defense": 298, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 8840
+        "hp": 4547
     }
 },
 {
@@ -4360,11 +4360,11 @@
         "level": 69, 
         "skills": "2", 
         "image": "", 
-        "attack": 1526, 
-        "defense": 515, 
+        "attack": 1532, 
+        "defense": 411, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10301
+        "hp": 5955
     }
 },
 {
@@ -4376,11 +4376,11 @@
         "level": 69, 
         "skills": "6", 
         "image": "", 
-        "attack": 2023, 
-        "defense": 631, 
+        "attack": 2867, 
+        "defense": 703, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 12341
+        "hp": 9940
     }
 },
 {
@@ -4392,11 +4392,11 @@
         "level": 69, 
         "skills": "11", 
         "image": "", 
-        "attack": 2098, 
-        "defense": 561, 
+        "attack": 3004, 
+        "defense": 584, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 11112
+        "hp": 8414
     }
 },
 {
@@ -4408,11 +4408,11 @@
         "level": 70, 
         "skills": "2", 
         "image": "", 
-        "attack": 1548, 
-        "defense": 522, 
+        "attack": 1553, 
+        "defense": 417, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 10448
+        "hp": 6039
     }
 },
 {
@@ -4424,11 +4424,11 @@
         "level": 70, 
         "skills": "12", 
         "image": "", 
-        "attack": 2090, 
-        "defense": 623, 
+        "attack": 2647, 
+        "defense": 611, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 12212
+        "hp": 8626
     }
 },
 {
@@ -4440,11 +4440,11 @@
         "level": 70, 
         "skills": "4", 
         "image": "", 
-        "attack": 2052, 
-        "defense": 632, 
+        "attack": 2908, 
+        "defense": 704, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 12376
+        "hp": 9897
     }
 },
 {
@@ -4456,11 +4456,11 @@
         "level": 70, 
         "skills": "10", 
         "image": "", 
-        "attack": 1951, 
-        "defense": 663, 
+        "attack": 2708, 
+        "defense": 759, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 12917
+        "hp": 10590
     }
 },
 {
@@ -4472,11 +4472,11 @@
         "level": 70, 
         "skills": "9", 
         "image": "", 
-        "attack": 2065, 
-        "defense": 660, 
+        "attack": 2908, 
+        "defense": 759, 
         "avatar": "", 
         "crit": 0, 
-        "hp": 12870
+        "hp": 10590
     }
 }
 ]

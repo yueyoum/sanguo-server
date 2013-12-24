@@ -3,6 +3,7 @@
 import random
 import json
 from _base import data_path
+from settings import EQUIP_LEVEL_RANGE, EQUIP_QUALITY_MODULUS
 
 # 1 武器， 2 饰品， 3 防具
 # 1 白 2 绿 3 蓝 4 紫
@@ -44,104 +45,6 @@ def load_equip_template():
 
     return data
 
-def load_equip_level_info():
-    # {
-    #     level: {
-    #             attack: ,
-    #             hp: ,
-    #             defense: ,
-    #             cost: ,
-    #             exp: ,
-    #             quality: {
-    #                     1:  {
-    #                             exp:,
-    #                             gold:,
-    #                         },
-    #                     2:,
-    #                     3:,
-    #                     4:
-    #                 }
-    #         }
-    # }
-
-
-    with open(data_path('equip_level_info.json'), 'r') as f:
-        content = json.loads(f.read())
-
-    data = {}
-    for c in content:
-        fields = c['fields']
-        quality = {
-                1: {
-                    'exp':  fields['white_exp'],
-                    'gold': fields['white_gold']
-                    },
-                2: {
-                    'exp':  fields['green_exp'],
-                    'gold': fields['green_gold']
-                    },
-                3: {
-                    'exp':  fields['blue_exp'],
-                    'gold': fields['blue_gold']
-                    },
-                4: {
-                    'exp':  fields['purple_exp'],
-                    'gold': fields['purple_gold']
-                    },
-                }
-
-        data[c['pk']] = {
-                'attack': fields['attack'],
-                'hp': fields['hp'],
-                'defense': fields['defense'],
-                'cost': fields['cost'],
-                'exp': fields['exp'],
-                'quality': quality
-                }
-
-    return data
-
-
-def load_equip_level_range_info():
-    # {
-    #     level_step: {
-    #             1: [a, b],
-    #             2: ,
-    #             3: ,
-    #             modulus: {
-    #                     1: ,
-    #                     2: ,
-    #                     3: ,
-    #                     4: ,
-    #                 }
-    #         }        
-    # }
-
-
-    with open(data_path('equip_level_range_info.json'), 'r') as f:
-        content = json.loads(f.read())
-
-    def _parse(text):
-        a, b = text.split(',')
-        return int(a), int(b) + 1
-
-    data = {}
-    for c in content:
-        fields = c['fields']
-        m = fields['modulus']
-
-        data[fields['level']] = {
-                1: _parse(fields['attack']),
-                2: _parse(fields['hp']),
-                3: _parse(fields['defense']),
-                'modulus': {
-                    1: m * fields['white_modulus'],
-                    2: m * fields['green_modulus'],
-                    3: m * fields['blue_modulus'],
-                    4: m * fields['purple_modulus'],
-                    }
-                }
-    return data
 
 
 def load_random_attribute():
@@ -179,8 +82,6 @@ def load_random_attribute():
 
 
 EQUIP_TEMPLATE = load_equip_template()
-EQUIP_LEVEL_INFO = load_equip_level_info()
-EQUIP_LEVEL_RANGE_INFO = load_equip_level_range_info()
 EQUIP_RANDOM_ATTRIBUTE = load_random_attribute()
 
 _EQUIP_IDS_BY_QUALITY_ALL = {}
@@ -209,16 +110,6 @@ def EQUIP_IDS_BY_QUALITY(quality, only_std=False):
     return _EQUIP_IDS_BY_QUALITY_ALL[quality]
         
 
-_EXP_LEVEL = [(v['exp'], k) for k, v in EQUIP_LEVEL_INFO.iteritems()]
-_EXP_LEVEL.sort(key=lambda item: item[0])
-
-def get_level_by_exp(exp):
-    # FIXME 满级
-    for e, l in _EXP_LEVEL:
-        if e > exp:
-            return l
-
-
 
 _RANDOM_ATTRS = {
         1: [],
@@ -232,7 +123,8 @@ for k, v in EQUIP_RANDOM_ATTRIBUTE.iteritems():
 def get_random_attributes(tp, level):
     # 先根据类型和等级范围确定随机属性的数量
     level_step = get_equip_level_step(level)
-    number_range = EQUIP_LEVEL_RANGE_INFO[level_step][tp]
+    number_range = EQUIP_LEVEL_RANGE[level_step][tp]
+    number_range[-1] += 1
     number_of_attrs = random.choice(range(*number_range))
 
     base_attr_ids = _RANDOM_ATTRS[tp][:]
@@ -276,10 +168,7 @@ def get_random_attributes(tp, level):
 
 
 def generate_equip(tid, level):
-    if level == 1:
-        exp = 0
-    else:
-        exp = EQUIP_LEVEL_INFO[level-1]['exp']
+    from core.equip import Equip
 
     template = EQUIP_TEMPLATE[tid]
     tp = template['tp']
@@ -288,18 +177,19 @@ def generate_equip(tid, level):
 
     extra = get_random_attributes(tp, level)
 
-    base_value = EQUIP_LEVEL_INFO[level][_TP_NAME[tp]]
+    e = Equip(level, tp, quality)
+    base_value = e.value()
     hole_amount = len(extra)
 
     level_step = get_equip_level_step(level)
-    modulus = EQUIP_LEVEL_RANGE_INFO[level_step]['modulus'][quality]
+    modulus = EQUIP_LEVEL_RANGE[level_step]['modulus'] * EQUIP_QUALITY_MODULUS[quality]
     modulus *= random.uniform(1, 1.08)
 
     return {
-            'tid': tid,
+            'tp': tp,
+            'quality': quality,
             'name': name,
             'level': level,
-            'exp': exp,
             'base_value': base_value,
             'modulus': modulus,
             'hole_amount': hole_amount,

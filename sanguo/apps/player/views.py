@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
+import logging
+
 from django.http import HttpResponse
-from django.utils import timezone
 
-from apps.player.models import User
 from apps.character.models import Character
-from utils import crypto
-
-from protomsg import (
-        StartGameResponse,
-        RegisterResponse,
-        )
-
-from core.world import server_list
+from apps.player.models import User
 from core.exception import SanguoViewException
-from core.signals import register_signal, login_signal
-from utils import pack_msg
+from core.signals import login_signal, register_signal
+from core.world import server_list
+from protomsg import RegisterResponse, StartGameResponse
+from utils import crypto, pack_msg
+
+logger = logging.getLogger('sanguo')
 
 def create_new_user(**kwargs):
     email = kwargs.get('email', '')
@@ -22,12 +19,12 @@ def create_new_user(**kwargs):
     device_token = kwargs.get('device_token', '')
 
     if not email and not passwd and not device_token:
-        raise ValueError("Can not create user with Empty values")
+        raise ValueError("Can not create user with all Empty values")
 
     user = User.objects.create(
             email = email,
             passwd = passwd,
-            device_token = device_token
+            device_token = device_token,
             )
     return user
 
@@ -37,42 +34,30 @@ def register(request):
     req = request._proto
 
     if not req.email or not req.password or not req.device_token:
-        return HttpResponse(status=403)
+        logger.warning("Someone Register With Empty Arguments")
+        raise SanguoViewException(1, "RegisterResponse")
 
     if User.objects.filter(email=req.email).exists():
+        logger.warning("Someone Register With an Existed Email: %s" % req.email)
         raise SanguoViewException(100, "RegisterResponse")
 
-    users = User.objects.filter(device_token=req.device_token)
-    users_count = users.count()
-
-    if users_count == 0:
-        print "New User"
+    try:
+        user = User.objects.get(device_token=req.device_token)
+    except User.DoesNotExist:
+        logger.debug("Register, Create New User")
         user = create_new_user(
                 email = req.email,
                 password = req.password,
-                device_token = req.device_token
+                device_token = ''
                 )
-    elif users_count == 1:
-        user  = users[0]
-        if user.email:
-            print "Already Bind email, Create New User"
-            user = create_new_user(
-                    email = req.email,
-                    password = req.password,
-                    device_token = req.device_token
-                    )
-        else:
-            print "Bind"
-            user.email = req.email
-            user.passwd = req.password
-            user.save()
     else:
-        print "Registed multi times, create new user"
-        user = create_new_user(
-                email = req.email,
-                password = req.password,
-                device_token = req.device_token
-                )
+        # 这次注册相当于将device_token和帐号绑定。
+        # 删除device_token的记录，等下次再用device_token登录的时候，会新建用户
+        logger.debug("Register, replace device token with email account")
+        user.email = req.email
+        user.passwd = req.password
+        user.device_token = ''
+        user.save()
 
     register_signal.send(
         sender = None,
@@ -100,41 +85,25 @@ def login(request):
     
     need_create_new_char = None
     if req.anonymous.device_token:
-        users = User.objects.filter(device_token=req.anonymous.device_token)
-        users_count = users.count()
-
-        if users_count == 0:
+        try:
+            user = User.objects.get(device_token=req.anonymous.device_token)
+        except User.DoesNotExist:
+            logger.debug("Login With Anonymous. New User, Create New User")
             user = create_new_user(device_token=req.anonymous.device_token)
             need_create_new_char = True
-        elif users_count == 1:
-            user = users[0]
-            if user.email:
-                user = create_new_user(device_token=req.anonymous.device_token)
-                need_create_new_char = True
-        else:
-            anonymous_user = None
-            for user in users:
-                if not user.email:
-                    anonymous_user = user
-                    break
-            
-            if anonymous_user:
-                user = anonymous_user
-            else:
-                user = create_new_user(device_token=req.anonymous.device_token)
-                need_create_new_char = True
     else:
         if not req.regular.email or not req.regular.password:
-            return HttpResponse(status=403)
+            raise SanguoViewException(1, "StartGameResponse")
         try:
-            user = User.objects.get(email = req.regular.email)
+            user = User.objects.get(email=req.regular.email)
             if user.passwd != req.regular.password:
-                raise SanguoViewException(150, "StartGameResponse")
+                raise SanguoViewException(120, "StartGameResponse")
         except User.DoesNotExist:
-            raise SanguoViewException(151, "StartGameResponse")
+            raise SanguoViewException(121, "StartGameResponse")
 
-    user.last_login = timezone.now()
     user.save()
+    if not user.active:
+        raise SanguoViewException(122, "StartGameResponse")
     
     request._account_id = user.id
     request._server_id = req.server_id
@@ -161,7 +130,7 @@ def login(request):
         sender = None,
         account_id = request._account_id,
         server_id = request._server_id,
-        char_obj = char if char_id else None
+        char_id = char_id
     )
     
     if char_id:
@@ -185,5 +154,3 @@ def login(request):
 
     data = pack_msg(response, session)
     return HttpResponse(data, content_type='text/plain')
-
-

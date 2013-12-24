@@ -1,9 +1,7 @@
 #from core.rabbit import rabbit
 from utils import pack_msg
 from core.character import (
-    get_char_formation,
-    get_char_hero_objs,
-    get_char_equipment_objs,
+    update_needs_exp,
     )
 
 from core.stage import get_already_stage, get_new_stage
@@ -12,13 +10,16 @@ from core.mongoscheme import MongoChar, Hang, DoesNotExist, Prison
 from core.counter import Counter
 import protomsg
 
+from core.character import Char
+
 from apps.character.cache import get_cache_character
 from core.hero import cal_hero_property
 
 #publish_to_char = rabbit.publish_to_char
 from core.msgpipe import publish_to_char
 
-def character_notify(obj):
+def character_notify(char_id):
+    obj = get_cache_character(char_id)
     data = protomsg.CharacterNotify()
     data.char.id = obj.id
     data.char.name = obj.name
@@ -26,9 +27,8 @@ def character_notify(obj):
     data.char.gem = obj.sycee
     data.char.level = obj.level
     
-    _ ,current_exp, next_level_exp = GLOBAL.LEVEL_TOTALEXP[obj.exp]
-    data.char.current_exp = current_exp
-    data.char.next_level_exp = next_level_exp
+    data.char.current_exp = obj.exp
+    data.char.next_level_exp = update_needs_exp(obj.level)
     
     data.char.official = obj.official
     # FIXME
@@ -71,7 +71,7 @@ def update_hero_notify(char_id, objs):
     hero_notify(char_id, objs, "UpdateHeroNotify")
 
 
-def get_hero_panel_notify(char_obj):
+def get_hero_panel_notify(char_id):
     msg = protomsg.GetHeroPanelNotify()
     # FIXME
     data = [
@@ -84,7 +84,7 @@ def get_hero_panel_notify(char_obj):
         m = msg.get_heros.add()
         m.mode, m.cost, m.free_times, m.max_free_times = d
 
-    publish_to_char(char_obj.id, pack_msg(msg))
+    publish_to_char(char_id, pack_msg(msg))
 
 def socket_notify(char_id):
     msg = protomsg.SocketNotify()
@@ -108,7 +108,8 @@ def socket_notify(char_id):
 def formation_notify(char_id, formation=None):
     msg = protomsg.FormationNotify()
     if not formation:
-        formation = get_char_formation(char_id)
+        c = Char(char_id)
+        formation = c.formation
 
     msg.socket_ids.extend(formation)
     publish_to_char(char_id, pack_msg(msg))
@@ -139,13 +140,15 @@ def new_stage_notify(char_id, sid):
 
 def equipment_notify(char_id, objs=None, message="EquipNotify"):
     if not objs:
-        objs = get_char_equipment_objs(char_id)
+        c = Char(char_id)
+        objs = c.equipments
 
     msg = getattr(protomsg, message)()
     for obj in objs:
         e = msg.equips.add()
-        e.id = int(obj.id)
-        e.oid = obj.tid
+        e.id = obj.id
+        e.tp = obj.tp
+        e.quality = obj.quality
         e.name = obj.name
         e.level = obj.level
         e.exp = obj.exp
@@ -236,6 +239,7 @@ def hang_notify_with_data(char_id, hours, max_hours, hang):
     msg = protomsg.HangNotify()
     # FIXME
     msg.hours = hours or 8
+    msg.max_hours = max_hours
     if hang is not None:
         msg.hang.stage_id = hang.stage_id
         msg.hang.whole_hours = hang.hours
@@ -332,33 +336,34 @@ def arena_notify(char_id):
     publish_to_char(char_id, pack_msg(msg))
 
 
-def login_notify(char_obj):
-    hero_objs = get_char_hero_objs(char_obj.id)
+def login_notify(char_id):
+    c = Char(char_id)
+    hero_objs = c.heros
 
-    character_notify(char_obj)
-    hero_notify(char_obj.id, hero_objs)
-    get_hero_panel_notify(char_obj)
-    socket_notify(char_obj.id)
-    formation_notify(char_obj.id)
-    already_stage_notify(char_obj.id)
+    character_notify(char_id)
+    hero_notify(char_id, hero_objs)
+    get_hero_panel_notify(char_id)
+    socket_notify(char_id)
+    formation_notify(char_id)
+    already_stage_notify(char_id)
 
-    new_stages = get_new_stage(char_obj.id)
+    new_stages = get_new_stage(char_id)
     if new_stages:
-        new_stage_notify(char_obj.id, new_stages)
+        new_stage_notify(char_id, new_stages)
     
-    equipment_notify(char_obj.id)
-    gem_notify(char_obj.id)
+    equipment_notify(char_id)
+    gem_notify(char_id)
 
-    hang = hang_notify(char_obj.id)
+    hang = hang_notify(char_id)
     if hang and hang.finished:
-        prize_notify(char_obj.id, 1)
+        prize_notify(char_id, 1)
     
     # FIXME
-    plunder_notify(char_obj.id, 10)
-    prisoner_notify(char_obj.id)
+    plunder_notify(char_id, 10)
+    prisoner_notify(char_id)
     # FIXME
-    prison_notify(char_obj.id, 3)
+    prison_notify(char_id, 3)
     
-    arena_notify(char_obj.id)
+    arena_notify(char_id)
     
 

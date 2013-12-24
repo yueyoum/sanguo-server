@@ -1,7 +1,7 @@
 from core.mongoscheme import MongoChar, MongoSocket
-from core.signals import formation_changed_signal
+from core.signals import formation_changed_signal, socket_changed_signal
 
-def save_socket(char_id, socket_id=None, hero=0, weapon=0, armor=0, jewelry=0):
+def save_socket(char_id, socket_id=None, hero=0, weapon=0, armor=0, jewelry=0, send_notify=True):
     c = MongoChar.objects.only('sockets').get(id=char_id)
     if not socket_id:
         socket_id = len(c.sockets) + 1
@@ -19,6 +19,15 @@ def save_socket(char_id, socket_id=None, hero=0, weapon=0, armor=0, jewelry=0):
 
     c.sockets[str(socket_id)] = socket
     c.save()
+    
+    if send_notify:
+        socket_changed_signal.send(
+            sender = None,
+            hero = socket.hero,
+            weapon = socket.weapon,
+            armor = socket.armor,
+            jewelry = socket.jewelry
+        )
 
 
 def save_formation(char_id, socket_ids, send_notify=True):

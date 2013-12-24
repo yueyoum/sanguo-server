@@ -23,23 +23,24 @@ urlpatterns = patterns('',
     
     url(r'^test/$', 'views.cmd.cmd'),
 
-    url(r'^pve/$', 'views.stage.pve'),
-    url(r'^pvp/$', 'views.stage.pvp'),
-    url(r'^formation/set/$', 'views.formation.set_formation'),
-    url(r'^socket/set/$', 'views.formation.set_socket'),
-    url(r'^hero/get/$', 'views.hero.pick_hero'),
-    url(r'^hero/merge/$', 'views.hero.merge_hero'),
+    url(r'^pve/$', 'views.stage.views.pve'),
+    url(r'^pvp/$', 'views.stage.views.pvp'),
+
+    url(r'^formation/set/$', 'views.formation.views.set_formation'),
+    url(r'^socket/set/$', 'views.formation.views.set_socket'),
+    url(r'^hero/get/$', 'views.hero.views.pick_hero'),
+    url(r'^hero/merge/$', 'views.hero.views.merge_hero'),
     
-    url(r'^gem/merge/$', 'views.gem.merge'),
+    url(r'^gem/merge/$', 'views.gem.views.merge'),
     
-    url(r'^hang/$', 'views.stage.hang'),
-    url(r'^hang/cancel/$', 'views.stage.hang_cancel'),
+    url(r'^hang/$', 'views.stage.views.hang'),
+    url(r'^hang/cancel/$', 'views.stage.views.hang_cancel'),
     
-    url(r'^prize/$', 'views.prize.prize_get'),
+    url(r'^prize/$', 'views.prize.views.prize_get'),
     
-    url(r'^plunder/list/$', 'views.stage.plunder_list'),
-    url(r'^plunder/$', 'views.stage.plunder'),
+    url(r'^plunder/list/$', 'views.stage.views.plunder_list'),
+    url(r'^plunder/$', 'views.stage.views.plunder'),
     
-    url(r'^prisoner/train/$', 'views.prison.train'),
-    url(r'^prisoner/get/$', 'views.prison.get'),
+    url(r'^prisoner/train/$', 'views.prison.views.train'),
+    url(r'^prisoner/get/$', 'views.prison.views.get'),
 )

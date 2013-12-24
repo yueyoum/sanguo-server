@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
+import cPickle
 
 from django.db import models
-from django.db.models.signals import post_delete, post_save
+from django.db.models.signals import post_save
 
-from apps.character.cache import (
-    save_cache_character,
-    delete_cache_character,
-    )
+from apps.character.cache import save_cache_character
 
 
 class Character(models.Model):
@@ -38,8 +36,6 @@ class Character(models.Model):
     score_week = models.PositiveIntegerField(default=0)
     
     
-
-
     def __unicode__(self):
         return u'<Character %d:%d:%d, %s>' % (
                 self.account_id, self.server_id, self.id, self.name
@@ -55,21 +51,13 @@ class Character(models.Model):
     
 
 def character_save_callback(sender, instance, **kwargs):
+    # character其他数据直接在外部初始化完了。这里不用hook
     save_cache_character(instance)
 
-def character_delete_callback(sender, instance, **kwargs):
-    delete_cache_character(instance.id)
 
 post_save.connect(
     character_save_callback,
     sender = Character,
     dispatch_uid = 'apps.character.Character.post_save'
 )
-
-post_delete.connect(
-    character_delete_callback,
-    sender = Character,
-    dispatch_uid = 'apps.character.Character.post_delete'
-)
-
 

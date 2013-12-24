@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
+
 from core import GLOBAL
 from core.mongoscheme import MongoChar
-from core.exception import SanguoViewException
+from core.exception import SanguoViewException, InvalidOperate, SyceeNotEnough, GoldNotEnough
+from core.character import Char
 
 from core.signals import (
     gem_changed_signal,
@@ -72,56 +75,42 @@ def delete_gem(_id, _amount, char_id):
         )
 
 
+
 def merge_gem(_id, _amount, using_sycee, char_id):
     condition = GLOBAL.GEM[_id]['merge_condition']
-    print "merge_gem,", _id, _amount, condition
-    # FIXME
-    # TODO using_sycee
-    
-    condition_dict = {}
-    for gid in condition:
-        condition_dict[gid] = condition_dict.get(gid, 0) + 1
+    if not condition:
+        raise InvalidOperate("MergeGemResponse")
 
+    
+    need_buy_gem = []
+    con_gid, con_amount = condition[0], 4
     char = MongoChar.objects.only('gems').get(id=char_id)
-    for gid, amount in condition_dict.iteritems():
-        if char.gems.get(str(gid), 0) < amount * _amount:
-            raise SanguoViewException(600)
-    
-    update_gems = []
-    remove_gems = []
-    new_gem = []
-    for gid, amount in condition_dict.iteritems():
-        char.gems[str(gid)] -= amount * _amount
-        
-        if char.gems[str(gid)] == 0:
-            char.gems.pop(str(gid))
-            remove_gems.append(gid)
-        else:
-            update_gems.append( (gid, char.gems[str(gid)]) )
-    
-    if str(_id) in char.gems:
-        char.gems[str(_id)] += 1
-        update_gems.append( (_id, char.gems[str(_id)]) )
+    original_amount = char.gems.get(str(con_gid), 0)
+    diff_amount = original_amount - con_amount * _amount
+    if diff_amount < 0:
+        need_buy_gem = [con_gid, -diff_amount]
+        cost_gem = [con_gid, original_amount]
     else:
-        char.gems[str(_id)] = _amount
-        new_gem = [(_id, _amount)]
+        cost_gem = [con_gid, con_amount * _amount]
     
-    char.save()
     
-    gem_changed_signal.send(
-        sender = None,
-        char_id = char_id,
-        gems = update_gems
-    )
+    c = Char(char_id)
+    cache_char = c.cacheobj
+    if need_buy_gem:
+        if not using_sycee:
+            raise SanguoViewException(600, "MergeGemResponse")
+        # TODO cost
+        cost = GLOBAL.GEM[need_buy_gem[0]]['worth'] * need_buy_gem[1]
+        if cache_char.sycee < cost:
+            raise SyceeNotEnough("MergeGemResponse")
+        
+        c.update(sycee=-cost)
     
-    gem_add_signal.send(
-        sender = None,
-        char_id = char_id,
-        gems = new_gem
-    )
+    if not using_sycee:
+        gold_needs = GLOBAL.GEM[_id]['level'] * _amount
+        if cache_char.gold < gold_needs:
+            raise GoldNotEnough("MergeGemResponse")
     
-    gem_del_signal.send(
-        sender = None,
-        char_id = char_id,
-        gid = remove_gems
-    )
+    
+    delete_gem(cost_gem[0], cost_gem[1], char_id)
+    save_gem([(_id, _amount)], char_id)

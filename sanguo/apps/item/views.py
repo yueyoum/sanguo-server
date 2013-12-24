@@ -1,78 +1,85 @@
+# -*- coding: utf-8 -*-
+
+import logging
 from django.http import HttpResponse
 
-from models import Equipment
-
-from core import GLOBAL
-from core.exception import SanguoViewException
-from core.equip import get_equip_level_by_whole_exp, delete_equip, embed_gem
+from apps.item.cache import get_cache_equipment
+from core.equip import delete_equip, embed_gem
+from core.exception import SanguoViewException, InvalidOperate, GoldNotEnough
 from core.mongoscheme import MongoChar
+from core.signals import equip_changed_signal
+from models import Equipment
+from protomsg import (EmbedGemResponse, SellEquipResponse,
+                      StrengthEquipResponse, UnEmbedGemResponse)
 from utils import pack_msg
 
-from core.signals import (
-    equip_changed_signal,
-)
+from core.character import Char
+from core.equip import Equip
 
-from apps.item.cache import get_cache_equipment
-
-from protomsg import (
-    StrengthEquipResponse,
-    SellEquipResponse,
-    EmbedGemResponse,
-    UnEmbedGemResponse,
-    )
+from core.gem import save_gem
 
 
-EQUIP_TEMPLATE = GLOBAL.EQUIP.EQUIP_TEMPLATE
-EQUIP_LEVEL_INFO = GLOBAL.EQUIP.EQUIP_LEVEL_INFO
+logger = logging.getLogger('sanguo')
 
 def strengthen_equip(request):
     req = request._proto
     char_id = request._char_id
     
-    char = MongoChar.objects.only('equips').get(id=char_id)
-    char_equips = char.equips
+    char = Char(char_id)
+    char_equip_ids = char.equip_ids
     
-    if req.id not in char_equips:
-        raise SanguoViewException(500, "StrengthEquipResponse")
+    if req.id not in char_equip_ids:
+        logger.warning("Strengthen Equip. req.id: {0} NOT in Char: {1}. {2}".format(
+            req.id, char_id, char_equip_ids
+            ))
+        raise InvalidOperate("StrengthEquipResponse")
     
     for _id in req.cost_ids:
-        if _id not in char_equips:
-            raise SanguoViewException(500, "StrengthEquipResponse")
+        if _id not in char_equip_ids:
+            logger.warning("Strengthen Equip. req.cost_id: {0} NOT in Char: {1}. {2}".format(
+                _id, char_id, char_equip_ids
+                ))
+            raise InvalidOperate("StrengthEquipResponse")
+    
+    target_equip = Equipment.objects.get(id=req.id)
+    gold_needs = target_equip.level * 100
+    
+    cache_char = char.cacheobj
+    if gold_needs > cache_char.gold:
+        logger.debug("Strengthen Equip. Char {0} NOT enough gold. {1}, needs {2}".format(
+            char_id, cache_char.gold, gold_needs
+            ))
+        raise GoldNotEnough("StrengthEquipResponse")
+    
+    char.update(gold=-gold_needs)
     
     all_exp = 0
-    all_gold = 0
     for _id in req.cost_ids:
-        equip = get_cache_equipment(_id)
-        level = equip.level
-        tid = equip.tid
-        quality = EQUIP_TEMPLATE[tid]['quality']
-        
-        this_level_quality = EQUIP_LEVEL_INFO[level]['quality'][quality]
-        exp = this_level_quality['exp']
-        gold = EQUIP_LEVEL_INFO[level]['cost']
-        
-        all_exp += exp
-        all_gold += gold
+        cache_equip = get_cache_equipment(_id)
+        # FIXME 取下要被吞噬装备上的宝石
+        gems = [(gid, 1) for gid in cache_equip.gems]
+        save_gem(gems, char_id)
+        equip = Equip(cache_equip.level, cache_equip.tp, cache_equip.quality)
+        all_exp += equip.whole_exp()
     
-    target_model_obj = Equipment.objects.get(id=req.id)
-    final_exp = target_model_obj.exp + all_exp
+    te = Equip(target_equip.level, target_equip.tp, target_equip.quality)
+    update_process = te.update_process(target_equip.exp, all_exp)
     
-    new_level = get_equip_level_by_whole_exp(final_exp)
+    new_level, new_exp = update_process.end
     
-    target_model_obj.exp = final_exp
-    target_model_obj.level = new_level
-    target_model_obj.save()
-    
-    equip_changed_signal.send(
-        sender = None,
-        cache_equip_obj = get_cache_equipment(req.id)
-    )
-    
+    target_equip.exp = new_exp
+    target_equip.level = new_level
+    target_equip.save()
     
     delete_equip([_id for _id in req.cost_ids])
 
     response = StrengthEquipResponse()
     response.ret = 0
+    response.id = req.id
+    for p in update_process:
+        _p = response.processes.add()
+        _p.level, _p.cur_exp, _p.max_exp = p
+
     data = pack_msg(response)
     return HttpResponse(data, content_type='text/plain')
 
@@ -81,27 +88,28 @@ def sell_equip(request):
     req = request._proto
     char_id = request._char_id
     
-    char = MongoChar.objects.only('equips').get(id=char_id)
-    char_equips = char.equips
+    char = Char(char_id)
+    char_equip_ids = char.equip_ids
     
     for _id in req.ids:
-        if _id not in char_equips:
-            raise SanguoViewException(500, "StrengthEquipResponse")
+        if _id not in char_equip_ids:
+            logger.warning("Sell Equip. Equip {0} NOT in Char {1}, {2}".format(
+                _id, char_id, char_equip_ids
+                ))
+            raise InvalidOperate("SellEquipResponse")
     
     all_gold = 0
     for _id in req.ids:
-        equip = get_cache_equipment(_id)
-        level = equip.level
-        tid = equip.tid
-        quality = EQUIP_TEMPLATE[tid]['quality']
-        
-        this_level_quality = EQUIP_LEVEL_INFO[level]['quality'][quality]
-        gold = this_level_quality['gold']
-        all_gold += gold
+        cache_equip = get_cache_equipment(_id)
+        equip = Equip(cache_equip.level, cache_equip.tp, cache_equip.quality)
+        all_gold += equip.sell_value()
     
-    print 'all_gold =', all_gold
+    logger.debug("Sell Equip. Char {0} sell {1}, get gold {2}".format(
+        char_id, req.ids, all_gold
+        ))
     
     delete_equip([_id for _id in req.ids])
+    char.update(gold=all_gold)
     
     response = SellEquipResponse()
     response.ret = 0

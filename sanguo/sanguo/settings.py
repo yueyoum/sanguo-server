@@ -160,6 +160,11 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(message)s'
+        }
+    },
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
@@ -173,7 +178,8 @@ LOGGING = {
         },
         'console': {
             'class': 'logging.StreamHandler',
-            'level': 'DEBUG'
+            'level': 'DEBUG',
+            'formatter': 'verbose'
         }
     },
     'loggers': {
@@ -182,6 +188,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        
+        'sanguo': {
+            'handlers': ['console'],
+            'level': 'DEBUG'
+        }
     }
 }
 

@@ -1,36 +1,42 @@
 # -*- coding: utf-8 -*-
 
+from apps.item.cache import get_cache_equipment
+from apps.item.models import encode_random_attrs, Equipment
 from core import GLOBAL
-from apps.item.cache import encode_random_attrs, get_cache_equipment
-from apps.item.models import Equipment
-from core.gem import save_gem
-from core.signals import (
-    equip_changed_signal,
-    )
+from core.gem import save_gem, delete_gem
+from core.signals import equip_changed_signal
+from core.exception import InvalidOperate
+from core.character import Char
 
-EQUIP_TEMPLATE = GLOBAL.EQUIP.EQUIP_TEMPLATE
-EQUIP_LEVEL_INFO = GLOBAL.EQUIP.EQUIP_LEVEL_INFO
-EQUIP_LEVEL_RANGE_INFO = GLOBAL.EQUIP.EQUIP_LEVEL_RANGE_INFO
-
-get_equip_level_step = GLOBAL.EQUIP.get_equip_level_step
-get_level_by_exp = GLOBAL.EQUIP.get_level_by_exp
 generate_equip = GLOBAL.EQUIP.generate_equip
 
-_TP_NAME = GLOBAL.EQUIP._TP_NAME
 
-_LEVEL_LIST = EQUIP_LEVEL_INFO.keys()
-_LEVEL_LIST.sort()
-_LEVEL_EXP_LIST = [(l, EQUIP_LEVEL_INFO[l]['exp']) for l in _LEVEL_LIST]
+class EquipUpdateProcess(object):
+    __slots__ = ['processes', ]
+    def __init__(self):
+        self.processes = []
+    
+    def __iter__(self):
+        for p in self.processes:
+            yield p
+    
+    
+    def add(self, data):
+        self.processes.append(data)
+    
+    @property
+    def end(self):
+        end = self.processes[-1]
+        return end[0], end[1]
 
 
-class EquipAttr(object):
-    def __init__(self, tp, lv, quality):
+class Equip(object):
+    def __init__(self, lv, tp, quality):
         self.tp = tp
         self.lv = lv
         self.quality = quality
 
-
-    def main_attr(self):
+    def value(self):
         score_base_ratio = 0.7      # 基础属性比例
 
         # 类型区别
@@ -51,35 +57,41 @@ class EquipAttr(object):
         return value
 
 
-
-    def level_required_exp(self, lv):
+    def update_needs_exp(self, lv):
         exp = int(round(pow(lv, 2.5) + lv * 100, -2))
         return exp
 
     def whole_exp(self):
         _exp = 0
         for i in range(self.lv-1, 0, -1):
-            _exp += self.level_required_exp(i)
+            _exp += self.update_needs_exp(i)
         return _exp
 
-    def update(self, current_total_exp, input_exp):
-        whole_exp = self.whole_exp()
-        exp = current_total_exp - whole_exp + input_exp
+    def update_process(self, current_exp, input_exp):
+        # 并不是真正的升级，只是计算升级后的等级和经验
+        p = EquipUpdateProcess()
+        exp = current_exp + input_exp
+        start_lv = self.lv
         lv = self.lv
 
         while True:
-            need_exp = self.level_required_exp(lv)
-            if need_exp > exp:
+            need_exp = self.update_needs_exp(lv)
+            if exp < need_exp:
                 break
 
             lv += 1
             exp -= need_exp
 
-        return lv, current_total_exp + input_exp
+        p.add((start_lv, current_exp, self.update_needs_exp(start_lv)))
+        for i in range(start_lv+1, lv):
+            p.add((i, 0, self.update_needs_exp(i)))
 
-        
+        p.add((lv, exp, self.update_needs_exp(lv)))
+        return p
+
 
     def worth_exp(self):
+        # 此装备值多少经验，被吞噬，能提供多少经验
         if self.quality == 1:
             return self.lv * 100
         if self.quality == 2:
@@ -93,6 +105,7 @@ class EquipAttr(object):
         return int(_exp * 0.85)
 
     def sell_value(self):
+        # 能卖多少金币
         gold = 100 * pow(self.lv, 0.5) + 100
         if self.quality == 2:
             gold *= 1.8
@@ -129,36 +142,44 @@ def delete_equip(_id):
 
 
 
-def get_equip_level_by_whole_exp(exp):
-    if exp < EQUIP_LEVEL_INFO[ _LEVEL_LIST[0] ]['exp']:
-        return _LEVEL_LIST[0]
-    if exp >= EQUIP_LEVEL_INFO[ _LEVEL_LIST[-2] ]['exp']:
-        return _LEVEL_LIST[-1]
-
-    for level, wexp in _LEVEL_EXP_LIST:
-        if wexp > exp:
-            return level
-    
-
 def embed_gem(char_id, equip_id, hole_id, gem_id):
     # gem_id = 0 表示取下hole_id对应的宝石
+    if gem_id:
+        message_name = "EmbedGemResponse"
+    else:
+        message_name = "UnEmbedGemResponse"
+    
+    char = Char(char_id)
+    char_gems = char.gems
+    char_equip_ids = char.equip_ids
+    
+    if equip_id not in char_equip_ids:
+        raise InvalidOperate(message_name)
+    
+    if gem_id and gem_id not in char_gems:
+        raise InvalidOperate(message_name)
+
     cache_equip = get_cache_equipment(equip_id)
     gems = cache_equip.gems
     
     hole_index = hole_id - 1
     
-    off_gem = int(gems[hole_index])
-    gems[hole_index] = str(gem_id)
+    try:
+        off_gem = int(gems[hole_index])
+        gems[hole_index] = str(gem_id)
+    except KeyError:
+        raise InvalidOperate(message_name)
     
     
     if gem_id:
         # 镶嵌
+        delete_gem(gem_id, 1, char_id)
         if off_gem:
             save_gem([(off_gem, 1)], char_id)
     else:
         # 去下
         if not off_gem:
-            raise Exception("embed_gem, XXX")
+            raise InvalidOperate(message_name)
         
         save_gem([(off_gem, 1)], char_id)
 
@@ -166,11 +187,3 @@ def embed_gem(char_id, equip_id, hole_id, gem_id):
     equip = Equipment.objects.get(id=equip_id)
     equip.gem_ids = ','.join(gems)
     equip.save()
-    
-    cache_equip = get_cache_equipment(equip_id)
-    
-    equip_changed_signal.send(
-        sender = None,
-        cache_equip_obj = cache_equip
-    )
-    
