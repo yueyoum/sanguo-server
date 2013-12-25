@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from apps.item.cache import get_cache_equipment
 from core.character import Char
 from core.exception import InvalidOperate, SanguoViewException
+from core.mongoscheme import MongoChar
 from protomsg import SetFormationResponse, SetSocketResponse
 from utils import pack_msg
 
@@ -14,31 +15,41 @@ def set_socket(request):
     
     char = Char(char_id)
     char_eqiup_ids = char.equip_ids
-    char_sockets = char.sockets
+    #char_sockets = char.sockets
     char_heros = char.heros_dict
     
-    if req.socket.id not in char_sockets:
+    mc = MongoChar.objects.only('sockets').get(id=char_id)
+    char_sockets = mc.sockets
+    
+    if str(req.socket.id) not in char_sockets:
         # socket id 要存在
         raise InvalidOperate("SetSocketResponse")
     
     # 不能重复放置
-    for s in char_sockets.values():
+    for k, s in char_sockets.iteritems():
+        if int(k) == req.socket.id:
+            continue
+
         if req.socket.hero_id:
             if s.hero and s.hero == req.socket.hero_id:
                 raise SanguoViewException(401, "SetSocketResponse")
         
         if req.socket.weapon_id:
             if s.weapon and s.weapon == req.socket.weapon_id:
-                raise SanguoViewException(401, "SetSocketResponse")
+                #raise SanguoViewException(401, "SetSocketResponse")
+                char_sockets[k].weapon = 0
         
         if req.socket.armor_id:
             if s.armor and s.armor == req.socket.armor_id:
-                raise SanguoViewException(401, "SetSocketResponse")
-
+                #raise SanguoViewException(401, "SetSocketResponse")
+                char_sockets[k].armor = 0
+        
         if req.socket.jewelry_id:
             if s.jewelry and s.jewelry == req.socket.jewelry_id:
-                raise SanguoViewException(401, "SetSocketResponse")
-
+                #raise SanguoViewException(401, "SetSocketResponse")
+                char_sockets[k].jewelry = 0
+    
+    mc.save()
 
     if req.socket.hero_id:
         # hero 要属于这个char
