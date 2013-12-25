@@ -53,12 +53,12 @@ def hero_notify(char_id, objs, message_name="HeroNotify"):
         g.defense = obj.defense
         g.hp = obj.hp
 
-        g.attack_grow = 100
-        g.defense_grow = 100
-        g.hp_grow = 100
+        g.attack_grow = 0
+        g.defense_grow = 0
+        g.hp_grow = 0
 
-        g.cirt = 100
-        g.dodge = 100
+        g.cirt = obj.crit
+        g.dodge = obj.dodge
 
     publish_to_char(char_id, pack_msg(data))
 
