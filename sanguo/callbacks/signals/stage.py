@@ -72,7 +72,7 @@ def _pve_finished(char_id, stage_id, win, star, **kwargs):
     if win:
         # FIXME
         char.stages[str(stage_id)] = star
-        char.stage_new = 0
+        #char.stage_new = 0
         new_stage_id = stage_id + 1
         if char.stage_new != new_stage_id:
             char.stage_new = new_stage_id
