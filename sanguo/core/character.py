@@ -137,16 +137,15 @@ class Char(object):
             level = char.level
             while True:
                 need_exp = update_needs_exp(level)
-                if new_exp < update_needs_exp:
+                if new_exp < need_exp:
                     break
                 
                 level += 1
-                new_exp -= update_needs_exp
+                new_exp -= need_exp
             
             char.exp = new_exp
             char.level = level
             
-        print 'char.update,', char.exp, char.level
         # TODO honor
         char.save()
         
