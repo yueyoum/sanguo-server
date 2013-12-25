@@ -168,7 +168,7 @@ def get_random_attributes(tp, level):
 
 
 def generate_equip(tid, level):
-    from core.equip import Equip
+    #from core.equip import Equip
 
     template = EQUIP_TEMPLATE[tid]
     tp = template['tp']
@@ -177,20 +177,21 @@ def generate_equip(tid, level):
 
     extra = get_random_attributes(tp, level)
 
-    e = Equip(level, tp, quality)
-    base_value = e.value()
+    #e = Equip(level, tp, quality)
+    #base_value = e.value()
     hole_amount = len(extra)
 
     level_step = get_equip_level_step(level)
     modulus = EQUIP_LEVEL_RANGE[level_step]['modulus'] * EQUIP_QUALITY_MODULUS[quality]
     modulus *= random.uniform(1, 1.08)
 
+    #FIXME
     return {
             'tp': tp,
             'quality': quality,
             'name': name,
             'level': level,
-            'base_value': base_value,
+            'base_value': 0,
             'modulus': modulus,
             'hole_amount': hole_amount,
             'random_attrs': extra

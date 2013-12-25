@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.db.models.signals import post_delete, post_save
 
@@ -77,7 +78,24 @@ class Equipment(models.Model):
     
     @property
     def value(self):
-        return int(self.base_value * self.modulus)
+        score_base_ratio = 0.7      # 基础属性比例
+
+        # 类型区别
+        tp_base = {
+                1: 0.4,
+                2: 0.3,
+                3: 0.3
+                }
+        tp_adjust = {
+                1: 2.5,
+                2: 1,
+                3: 5
+                }
+
+        score = 70 * self.quality + self.level * 90        # 基础70, 成长90
+        value = score * score_base_ratio * tp_base[self.tp] / tp_adjust[self.tp]
+        value *= self.modulus
+        return int(round(value))
     
     @property
     def hole_opened(self):
