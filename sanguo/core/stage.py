@@ -74,7 +74,7 @@ def get_stage_fixed_drop(stage_id):
     return 0, 0, [], []
     
 
-def get_stage_standard_drop(stage_id):
+def get_stage_standard_drop(char_id, stage_id, star=False):
     stage = STAGE[stage_id]
     # FIXME
     #stage_level = stage['level']
@@ -82,6 +82,18 @@ def get_stage_standard_drop(stage_id):
     
     drop_exp = stage['normal_exp']
     drop_gold = stage['normal_gold']
+    
+    mc = MongoChar.objects.only('stages').get(id=char_id)
+    if str(stage_id) not in mc.stages:
+        # 首通
+        drop_exp += stage['first_exp']
+        drop_gold += stage['first_gold']
+    
+    if star:
+        # 三星
+        drop_exp += stage['star_exp']
+        drop_gold += stage['star_gold']
+    
     
     def _drop(prob_list):
         prob = random.uniform(0, 1)

@@ -108,16 +108,9 @@ def pve(request):
     if msg.first_ground.self_win and msg.second_ground.self_win and msg.third_ground.self_win:
         star = True
     
-    pve_finished_signal.send(
-        sender = None,
-        char_id = char_id,
-        stage_id = req.stage_id,
-        win = msg.self_win,
-        star = star
-    )
     
     if msg.self_win:
-        drop_exp, drop_gold, drop_equips, drop_gems = get_stage_standard_drop(req.stage_id)
+        drop_exp, drop_gold, drop_equips, drop_gems = get_stage_standard_drop(char_id, req.stage_id, star)
         fixed_exp, fixed_gold, fixed_equips, fixed_gems = get_stage_fixed_drop(req.stage_id)
         drop_exp += fixed_exp
         drop_gold += fixed_gold
@@ -135,6 +128,17 @@ def pve(request):
         drop_exp = 0
         drop_equips = []
         drop_gems = []
+
+
+    pve_finished_signal.send(
+        sender = None,
+        char_id = char_id,
+        stage_id = req.stage_id,
+        win = msg.self_win,
+        star = star
+    )
+
+
     
 
     response = protomsg.PVEResponse()
