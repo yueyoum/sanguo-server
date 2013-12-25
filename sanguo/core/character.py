@@ -9,7 +9,7 @@ from core.cache import get_cache_hero
 from core.counter import Counter
 from core.formation import save_formation, save_socket, get_char_formation
 from core.hero import save_hero, delete_hero
-from core.mongoscheme import Hang, MongoChar, MongoHero, Prison
+from core.mongoscheme import Hang, MongoChar, MongoHero, MongoPrison
 from preset.settings import COUNTER, CHAR_INITIALIZE
 from core.signals import char_changed_signal
 
@@ -43,7 +43,7 @@ class Char(object):
         MongoChar.objects.get(id=char_id).delete()
         MongoHero.objects.filter(char=char_id).delete()
         try:
-            Prison.objects.get(id=char_id).delete()
+            MongoPrison.objects.get(id=char_id).delete()
             Hang.objects.get(id=char_id).delete()
         except DoesNotExist:
             pass
@@ -102,7 +102,16 @@ class Char(object):
             if s.hero:
                 hero_ids.remove(s.hero)
         return hero_ids
-        
+    
+    
+    @property
+    def power(self):
+        heros = self.heros
+        p = 0
+        for h in heros:
+            p += h.power
+        return p
+    
         
     
     # 装备
@@ -160,6 +169,8 @@ class Char(object):
 
 
 def char_initialize(account_id, server_id, name):
+    from core.prison import Prison
+
     init_gold = CHAR_INITIALIZE.get('gold', 0)
     init_sycee = CHAR_INITIALIZE.get('sycee', 0)
     init_level = CHAR_INITIALIZE.get('level', 1)
@@ -177,8 +188,7 @@ def char_initialize(account_id, server_id, name):
     char_id = char.id
     
     MongoChar(id=char_id).save()
-    # FIXME
-    Prison(id=char_id, amount=3).save()
+    Prison(char_id)
     
     for func_name in COUNTER_KEYS:
         Counter(char_id, func_name)
@@ -223,7 +233,7 @@ def delete_char(char_id):
     MongoChar.objects.get(id=char_id).delete()
     MongoHero.objects.filter(char=char_id).delete()
     try:
-        Prison.objects.get(id=char_id).delete()
+        MongoPrison.objects.get(id=char_id).delete()
         Hang.objects.get(id=char_id).delete()
     except DoesNotExist:
         pass

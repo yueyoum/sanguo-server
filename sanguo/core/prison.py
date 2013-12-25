@@ -1,14 +1,66 @@
-from core.mongoscheme import Prison, Prisoner
+# -*- coding: utf-8 -*-
+from mongoengine import DoesNotExist
+
+from core.mongoscheme import MongoPrison, Prisoner
 from timer.tasks import sched
 from callbacks import timers
 from protomsg import Prisoner as PrisonerProtoMsg
+from core.exception import SyceeNotEnough, SanguoViewException
+from core.character import Char
 
 from utils import timezone
 
 from core.signals import prisoner_add_signal
+from preset.settings import COST_OPEN_PRISON_SLOT, MAX_PRISON_TRAIN_SLOT, MAX_PRISONERS_AMOUNT
+
+
+class Prison(object):
+    def __init__(self, char_id):
+        self.char_id = char_id
+        try:
+            self.p = MongoPrison.objects.get(id=self.char_id)
+        except DoesNotExist:
+            self.p = MongoPrison(id=self.char_id, amount=0)
+            self.p.save()
+        
+        self.slots = self.p.amount
+    
+    @property
+    def max_slots(self):
+        return MAX_PRISON_TRAIN_SLOT
+    
+    @property
+    def open_slot_cost(self):
+        return COST_OPEN_PRISON_SLOT
+    
+    def open_slot(self):
+        if self.slots >= self.max_slots:
+            raise SanguoViewException(804, "OpenTrainSlotResponse")
+
+        c = Char(self.char_id)
+        cache_char = c.cacheobj
+        if cache_char.sycee < self.open_slot_cost:
+            raise SyceeNotEnough("OpenTrainSlotResponse")
+        
+        self.p.amount += 1
+        self.p.save()
+        
+        c.update(sycee=-COST_OPEN_PRISON_SLOT)
+    
+    @property
+    def max_prisoner_amount(self):
+        return MAX_PRISONERS_AMOUNT
+    
+    def prisoner_full(self):
+        return len(self.p.prisoners) >= self.max_prisoner_amount
+    
+    
+    
+
+
 
 def save_prisoner(char_id, oid):
-    prison = Prison.objects.only('prisoners').get(id=char_id)
+    prison = MongoPrison.objects.only('prisoners').get(id=char_id)
     prisoner_ids = [int(i) for i in prison.prisoners.keys()]
     
     new_persioner_id = 1

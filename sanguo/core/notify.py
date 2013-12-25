@@ -6,7 +6,7 @@ from core.character import (
 
 from core.stage import get_already_stage, get_new_stage
 from core import GLOBAL
-from core.mongoscheme import MongoChar, Hang, DoesNotExist, Prison
+from core.mongoscheme import MongoChar, Hang, DoesNotExist, MongoPrison
 from core.counter import Counter
 import protomsg
 
@@ -18,6 +18,9 @@ from core.hero import cal_hero_property
 
 #publish_to_char = rabbit.publish_to_char
 from core.msgpipe import publish_to_char
+from preset.settings import MAX_PRISONERS_AMOUNT, PLUNDER_COST_SYCEE
+from core.counter import Counter
+from core.prison import Prison
 
 def character_notify(char_id):
     obj = get_cache_character(char_id)
@@ -271,15 +274,18 @@ def prize_notify(char_id, prize_id):
     msg.prize_ids.extend(ids)
     publish_to_char(char_id, pack_msg(msg))
     
-def plunder_notify(char_id, amount):
+def plunder_notify(char_id):
+    count = Counter(char_id, 'plunder')
     msg = protomsg.PlunderNotify()
-    msg.amount = amount
+    msg.amount = count.cur_value
+    msg.max_amount = count.max_value
+    msg.cost_sycee = PLUNDER_COST_SYCEE
     publish_to_char(char_id, pack_msg(msg))
 
 
 def prisoner_notify(char_id, objs=None, message_name="PrisonerListNotify"):
     if not objs:
-        prison = Prison.objects.get(id=char_id)
+        prison = MongoPrison.objects.get(id=char_id)
         objs = prison.prisoners.values()
     
     cache_char = get_cache_character(char_id)
@@ -319,9 +325,14 @@ def remove_prisoner_notify(char_id, _id):
 
 
 
-def prison_notify(char_id, slots):
+def prison_notify(char_id, prison=None):
+    if not prison:
+        prison = Prison(char_id)
     msg = protomsg.PrisonNotify()
-    msg.slots = slots
+    msg.slots = prison.slots
+    msg.max_slots = prison.max_slots
+    msg.max_prisoners_amount = prison.max_prisoner_amount
+    msg.open_slot_cost = prison.open_slot_cost
     publish_to_char(char_id, pack_msg(msg))
 
 
@@ -368,11 +379,9 @@ def login_notify(char_id):
     if hang and hang.finished:
         prize_notify(char_id, 1)
     
-    # FIXME
-    plunder_notify(char_id, 10)
+    plunder_notify(char_id)
     prisoner_notify(char_id)
-    # FIXME
-    prison_notify(char_id, 3)
+    prison_notify(char_id)
     
     arena_notify(char_id)
     

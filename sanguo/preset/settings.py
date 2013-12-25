@@ -118,8 +118,18 @@ EQUIP_LEVEL_RANGE = {
 # 次数限制，每天可以做多少次
 # 每天可以做多少次
 COUNTER = {
-    'hang': 8,
-    'fight': 8,
-    'plunder': 8
+    'hang': 8,          # 挂机时间
+    'pvp': 8,           # 比武次数
+    'plunder': 8        # 掠夺次数
 }
 
+
+# 战俘最多可以有多少个
+MAX_PRISONERS_AMOUNT = 10
+# 掠夺消耗元宝
+PLUNDER_COST_SYCEE = 1
+
+# 最大训练位数量
+MAX_PRISON_TRAIN_SLOT = 3
+# 开启训练位花费元宝
+COST_OPEN_PRISON_SLOT = 1

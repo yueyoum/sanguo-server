@@ -76,7 +76,7 @@ class Prisoner(EmbeddedDocument):
     jobid = StringField()
 
     
-class Prison(Document):
+class MongoPrison(Document):
     id = IntField(primary_key=True)
     amount = IntField()
     prisoners = MapField( EmbeddedDocumentField(Prisoner) )
@@ -89,7 +89,6 @@ class Prison(Document):
 
 class MongoCounter(Document):
     id = StringField(primary_key=True)
-    max_value = IntField()
     cur_value = IntField()
     
     meta = {

@@ -13,6 +13,12 @@ class CacheHero(object):
         'crit', 'dodge'
     ]
     
+    @property
+    def power(self):
+        a = self.attack * 2.5 * (1 + self.crit / 2.0)
+        b = (self.hp + self.defense * 5) * (1 + self.dodge / 2.0)
+        return int(a + b)
+    
     
 
 def save_cache_hero(hero_obj):

@@ -34,8 +34,7 @@ def hang_finish(char_id, actual_hours=None, **kwargs):
     hang.actual_hours = actual_hours
     hang.finished = True
     hang_notify(char_id, hang=hang)
-    if actual_hours:
-        prize_notify(char_id, 1)
+    prize_notify(char_id, 1)
 
 
 

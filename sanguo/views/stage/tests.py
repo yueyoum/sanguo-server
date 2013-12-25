@@ -118,7 +118,7 @@ class HangTest(TransactionTestCase):
             if id_of_msg == RESPONSE_NOTIFY_TYPE["HangCancelResponse"]:
                 data = protomsg.HangCancelResponse()
                 data.ParseFromString(msg)
-                self.assertEqual(data.ret, 702)
+                self.assertEqual(data.ret, 2)
         
     
 

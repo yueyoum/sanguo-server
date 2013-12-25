@@ -1,6 +1,6 @@
 
 from core.signals import hang_finished_signal, prisoner_changed_signal
-from core.mongoscheme import Prison
+from core.mongoscheme import MongoPrison
 
 from protomsg import Prisoner as PrisonerProtoMsg
 
@@ -19,7 +19,7 @@ def prisoner_job(char_id, prisoner_id, status):
     else:
         raise Exception("prisoner_job, bad status. {0}, {1}, {2}".format(char_id, prisoner_id, status))
 
-    prison = Prison.objects.get(id=char_id)
+    prison = MongoPrison.objects.get(id=char_id)
     prison.prisoners[str(prisoner_id)].status = new_status
     prison.save()
     
