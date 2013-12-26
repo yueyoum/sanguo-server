@@ -43,12 +43,8 @@ def _add_extra_attr_to_hero(hero_obj, eid):
         else:
             new_value = original_value + value
         
-        if name == 'hp':
-            new_value = int(new_value)
-        
+        new_value = int(new_value)
         setattr(hero_obj, name, new_value)
-
-
 
 
 def _hero_attribute_change(hero, equip_ids, **kwargs):
