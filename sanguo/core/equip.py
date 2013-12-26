@@ -4,7 +4,6 @@ from apps.item.cache import get_cache_equipment
 from apps.item.models import encode_random_attrs, Equipment
 from core import GLOBAL
 from core.gem import save_gem, delete_gem
-from core.signals import equip_changed_signal
 from core.exception import InvalidOperate
 from core.character import Char
 
@@ -35,27 +34,6 @@ class Equip(object):
         self.tp = tp
         self.lv = lv
         self.quality = quality
-
-    #def value(self):
-    #    score_base_ratio = 0.7      # 基础属性比例
-    #
-    #    # 类型区别
-    #    tp_base = {
-    #            1: 0.4,
-    #            2: 0.3,
-    #            3: 0.3
-    #            }
-    #    tp_adjust = {
-    #            1: 2.5,
-    #            2: 1,
-    #            3: 5
-    #            }
-    #
-    #    score = 70 * self.quality + self.lv * 90        # 基础70, 成长90
-    #    value = score * score_base_ratio * tp_base[self.tp] / tp_adjust[self.tp]
-    #    value = int(round(value))
-    #    return value
-
 
     def update_needs_exp(self, lv):
         exp = int(round(pow(lv, 2.5) + lv * 100, -2))

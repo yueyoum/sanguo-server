@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 from django.db import models
 from django.db.models.signals import post_delete, post_save
 
@@ -8,39 +9,33 @@ from core.mongoscheme import MongoChar
 from core.signals import (equip_add_signal, equip_changed_signal,
                           equip_del_signal)
 
+from core import GLOBAL
+
+
+TP_ATTR = {
+    1: 'attack',
+    2: 'hp',
+    3: 'defense'
+}
+
+EXTAR_ATTR = {
+    3: 'attack',
+    5: 'defense',
+    7: 'dodge',
+    9: 'crit',
+    14: 'hp'
+}
+
+
 def encode_random_attrs(attrs):
-    # attrs: [{1: {value: x, is_percent: y}}, ...]
-    # serialize to: '1,x,y|2,x,y...'
-    def _encode(attr):
-        if not attr:
-            return ''
-        
-        k, v = attr.items()[0]
-        return '{0},{1},{2}'.format(
-            k,
-            int(v['value']),
-            '1' if v['is_percent'] else '0'
-        )
-    
-    data = [_encode(attr) for attr in attrs]
-    return '|'.join(data)
+    # attrs: [(id, value, is_percent), ...]
+    return json.dumps(attrs)
 
 
 def decode_random_attr(text):
     if not text:
         return []
-    def _decode(t):
-        _id, value, is_percent = t.split(',')
-        data = {
-            int(_id): {
-                'value': int(value),
-                'is_percent': is_percent == '1'
-            }
-        }
-        return data
-    
-    res = [_decode(t) for t in text.split('|')]
-    return res
+    return json.loads(text)
 
 
 class Equipment(models.Model):
@@ -52,7 +47,6 @@ class Equipment(models.Model):
     level = models.IntegerField(default=1)
     exp = models.IntegerField(default=0)
     
-    base_value = models.IntegerField()
     modulus = models.FloatField()
     hole_amount = models.IntegerField()
     gem_ids = models.CharField(max_length=255)
@@ -108,7 +102,29 @@ class Equipment(models.Model):
         if not self.gem_ids:
             return []
         return [int(i) for i in self.gem_ids.split(',')]
+    
+    
+    def active_attrs(self):
+        attrs = [
+            (TP_ATTR[self.tp], self.value, False)
+        ]
+        random_attrs = self.decoded_random_attrs
+        for k, v, p in random_attrs:
+            e = GLOBAL.EQUIP.EQUIP_RANDOM_ATTRIBUTE[k]['effect']
+            attrs.append(
+                (EXTAR_ATTR[e], v, p)
+            )
         
+        gems = self.gems
+        for gid in gems:
+            if not gid:
+                continue
+            g = GLOBAL.GEM[gid]
+            attrs.append(
+                (EXTAR_ATTR[g['used_for']], g['value'], g['is_percent'])
+            )
+        
+        return attrs
 
 
 def equipment_save_callback(sender, instance, created, **kwargs):

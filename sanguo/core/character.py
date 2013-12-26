@@ -12,6 +12,7 @@ from core.hero import save_hero, delete_hero
 from core.mongoscheme import Hang, MongoChar, MongoHero, MongoPrison
 from preset.settings import COUNTER, CHAR_INITIALIZE
 from core.signals import char_changed_signal
+from utils import cache
 
 
 
@@ -145,6 +146,10 @@ class Char(object):
             
             char.exp = new_exp
             char.level = level
+            
+            heros_dict = self.heros_dict
+            for hid in heros_dict.keys():
+                cache.delete('hero:{0}'.format(hid))
             
         # TODO honor
         char.save()

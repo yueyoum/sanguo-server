@@ -76,9 +76,7 @@ def get_stage_fixed_drop(stage_id):
 
 def get_stage_standard_drop(char_id, stage_id, star=False):
     stage = STAGE[stage_id]
-    # FIXME
-    #stage_level = stage['level']
-    stage_level = 1
+    stage_level = stage['level']
     
     drop_exp = stage['normal_exp']
     drop_gold = stage['normal_gold']

@@ -4,6 +4,7 @@ from core.mongoscheme import MongoChar
 from core.signals import hero_changed_signal, socket_changed_signal
 from utils import cache
 from core.hero import get_hero
+from apps.item.cache import get_cache_equipment
 
 
 class CacheHero(object):
@@ -49,34 +50,37 @@ def get_cache_hero(_id):
     sockets = mongo_char.sockets
     for socket in sockets.values():
         if socket['hero'] == _id:
-            _add_extra_attr_to_hero(
-                obj,
-                socket['weapon'],
-                socket['armor'],
-                socket['jewelry']
-            )
+            for x in ['weapon', 'armor', 'jewelry']:
+                if socket[x]:
+                    _add_extra_attr_to_hero(obj, socket[x])
             break
     
     h = save_cache_hero(obj)
     return h
 
 
-def _add_extra_attr_to_hero(hero_obj, weapon, armor, jewelry):
-    if weapon:
-        this_equip = get_cache_equipment(weapon)
-        hero_obj.attack += this_equip.value
-    if armor:
-        this_equip = get_cache_equipment(armor)
-        hero_obj.defense += this_equip.value
-    if jewelry:
-        this_equip = get_cache_equipment(jewelry)
-        hero_obj.hp += this_equip.value
-    
+def _add_extra_attr_to_hero(hero_obj, eid):
+    equip = get_cache_equipment(eid)
+    attrs = equip.active_attrs()
+    for name, value, is_precent in attrs:
+        original_value = getattr(hero_obj, name)
+        if is_precent:
+            new_value = original_value * (1 + value / 100.0)
+        else:
+            new_value = original_value + value
+        
+        if name == 'hp':
+            new_value = int(new_value)
+        
+        setattr(hero_obj, name, new_value)
 
 
-def _hero_attribute_change(sender, hero, weapon, armor, jewelry, **kwargs):
+
+
+def _hero_attribute_change(hero, equip_ids, **kwargs):
     this_hero = get_cache_hero(hero)
-    _add_extra_attr_to_hero(this_hero, weapon, armor, jewelry)
+    for eid in equip_ids:
+        _add_extra_attr_to_hero(this_hero, eid)
     
     cache.set('hero:{0}'.format(this_hero.id), this_hero)
     

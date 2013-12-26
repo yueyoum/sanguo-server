@@ -7,7 +7,6 @@ from apps.item.cache import get_cache_equipment
 from core.equip import delete_equip, embed_gem
 from core.exception import SanguoViewException, InvalidOperate, GoldNotEnough
 from core.mongoscheme import MongoChar
-from core.signals import equip_changed_signal
 from models import Equipment
 from protomsg import (EmbedGemResponse, SellEquipResponse,
                       StrengthEquipResponse, UnEmbedGemResponse)

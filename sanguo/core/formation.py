@@ -8,26 +8,29 @@ def save_socket(char_id, socket_id=None, hero=0, weapon=0, armor=0, jewelry=0, s
     
     socket =  c.sockets.get(str(socket_id), MongoSocket())
     
-    if hero:
-        socket.hero = hero
-    if weapon:
-        socket.weapon = weapon
-    if armor:
-        socket.armor = armor
-    if jewelry:
-        socket.jewelry = jewelry
+    socket.hero = hero
+    socket.weapon = weapon
+    socket.armor = armor
+    socket.jewelry = jewelry
 
     c.sockets[str(socket_id)] = socket
     c.save()
     
-    if send_notify:
-        socket_changed_signal.send(
-            sender = None,
-            hero = socket.hero,
-            weapon = socket.weapon,
-            armor = socket.armor,
-            jewelry = socket.jewelry
-        )
+    if socket.hero and send_notify:
+        equip_ids = []
+        if socket.weapon:
+            equip_ids.append(socket.weapon)
+        if socket.armor:
+            equip_ids.append(socket.armor)
+        if socket.jewelry:
+            equip_ids.append(socket.jewelry)
+
+        if equip_ids:
+            socket_changed_signal.send(
+                sender = None,
+                hero = socket.hero,
+                equip_ids = equip_ids
+            )
 
 
 def save_formation(char_id, socket_ids, send_notify=True):

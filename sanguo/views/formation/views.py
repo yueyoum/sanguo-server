@@ -15,7 +15,6 @@ def set_socket(request):
     
     char = Char(char_id)
     char_eqiup_ids = char.equip_ids
-    #char_sockets = char.sockets
     char_heros = char.heros_dict
     
     mc = MongoChar.objects.only('sockets').get(id=char_id)
@@ -36,17 +35,14 @@ def set_socket(request):
         
         if req.socket.weapon_id:
             if s.weapon and s.weapon == req.socket.weapon_id:
-                #raise SanguoViewException(401, "SetSocketResponse")
                 char_sockets[k].weapon = 0
         
         if req.socket.armor_id:
             if s.armor and s.armor == req.socket.armor_id:
-                #raise SanguoViewException(401, "SetSocketResponse")
                 char_sockets[k].armor = 0
         
         if req.socket.jewelry_id:
             if s.jewelry and s.jewelry == req.socket.jewelry_id:
-                #raise SanguoViewException(401, "SetSocketResponse")
                 char_sockets[k].jewelry = 0
     
     mc.save()

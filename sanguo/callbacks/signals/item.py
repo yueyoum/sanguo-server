@@ -39,7 +39,7 @@ def _equip_changed(cache_equip_obj, **kwargs):
         cache_equip_obj
     )
     
-    equip_id = int(cache_equip_obj.id)
+    equip_id = cache_equip_obj.id
     
     socket = find_socket_by_equip(
         cache_equip_obj.char_id,
@@ -47,21 +47,11 @@ def _equip_changed(cache_equip_obj, **kwargs):
         )
 
     if socket and socket.hero:
-        tp = EQUIP_TEMPLATE[cache_equip_obj.tid]['tp']
-        kwargs = {
-            'hero': socket.hero,
-            'weapon': 0,
-            'armor': 0,
-            'jewelry': 0
-        }
-        if tp == 1:
-            kwargs['weapon'] = equip_id
-        elif tp == 2:
-            kwargs['jewelry'] = equip_id
-        else:
-            kwargs['armor'] = equip_id
-        
-        socket_changed_signal.send(sender=None, **kwargs)
+        socket_changed_signal.send(
+            sender = None,
+            hero = socket.hero,
+            equip_ids = [cache_equip_obj.id]
+            )
     
     
 

@@ -3,7 +3,7 @@ from django.dispatch import Signal
 register_signal = Signal(providing_args=['account_id'])
 login_signal = Signal(providing_args=['account_id', 'server_id', 'char_id'])
 
-socket_changed_signal = Signal(providing_args=['hero', 'weapon', 'armor', 'jewelry'])
+socket_changed_signal = Signal(providing_args=['hero', 'equip_ids'])
 pve_finished_signal = Signal(providing_args=['char_id', 'stage_id', 'win', 'star'])
 plunder_finished_signal = Signal(providing_args=['from_char_id', 'to_char_id', 'is_npc', 'is_crit'])
 

@@ -163,18 +163,17 @@ def equipment_notify(char_id, objs=None, message="EquipNotify"):
         e.eat_exp = eobj.worth_exp()
         e.sell_gold = eobj.sell_value()
         
-        
-        
         e.value = obj.value
         
         e.whole_hole = obj.hole_amount
         e.gem_ids.extend(obj.gems)
         
-        for attr in obj.decoded_random_attrs:
-            k, v = attr.items()[0]
+        
+        print obj.decoded_random_attrs
+        for k, v, _ in obj.decoded_random_attrs:
             a = e.attrs.add()
             a.id = k
-            a.value = v['value']
+            a.value = v
     
     publish_to_char(char_id, pack_msg(msg))
 

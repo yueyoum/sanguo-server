@@ -161,15 +161,14 @@ def get_random_attributes(tp, level):
             else:
                 value = base_value + random.randint(0, change_value)
 
-        final.append( {attr_id: {'value': value, 'is_percent': is_percent}} )
+        final.append((attr_id, value, is_percent))
+        print 'final =', final
 
     return final
 
 
 
 def generate_equip(tid, level):
-    #from core.equip import Equip
-
     template = EQUIP_TEMPLATE[tid]
     tp = template['tp']
     quality = template['quality']
@@ -177,8 +176,6 @@ def generate_equip(tid, level):
 
     extra = get_random_attributes(tp, level)
 
-    #e = Equip(level, tp, quality)
-    #base_value = e.value()
     hole_amount = len(extra)
 
     level_step = get_equip_level_step(level)
@@ -191,7 +188,6 @@ def generate_equip(tid, level):
             'quality': quality,
             'name': name,
             'level': level,
-            'base_value': 0,
             'modulus': modulus,
             'hole_amount': hole_amount,
             'random_attrs': extra
