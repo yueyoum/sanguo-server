@@ -31,6 +31,8 @@ def save_socket(char_id, socket_id=None, hero=0, weapon=0, armor=0, jewelry=0, s
                 hero = socket.hero,
                 equip_ids = equip_ids
             )
+    
+    return socket_id
 
 
 def save_formation(char_id, socket_ids, send_notify=True):

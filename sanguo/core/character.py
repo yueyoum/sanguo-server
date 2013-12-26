@@ -177,6 +177,7 @@ class Char(object):
 
 def char_initialize(account_id, server_id, name):
     from core.prison import Prison
+    from core.equip import generate_and_save_equip
 
     init_gold = CHAR_INITIALIZE.get('gold', 0)
     init_sycee = CHAR_INITIALIZE.get('sycee', 0)
@@ -201,12 +202,28 @@ def char_initialize(account_id, server_id, name):
         Counter(char_id, func_name)
     
     init_hero_ids = CHAR_INITIALIZE.get('heros', [])
+    equips_on = CHAR_INITIALIZE.get('equips_on', {})
     if not init_hero_ids:
+        equips_on = {}
         init_hero_ids = GLOBAL.HEROS.get_random_hero_ids(3)
+    
+    hero_init_eqiups = {}
+    for k, v in equips_on.iteritems():
+        for tid, level in v:
+            e = generate_and_save_equip(tid, level, char_id)
+            tp = GLOBAL.EQUIP.EQUIP_TEMPLATE[tid]['tp']
+            x = hero_init_eqiups.get(k, {})
+            if tp == 1:
+                x['weapon'] = e.id
+            elif tp == 2:
+                x['jewelry'] = e.id
+            else:
+                x['armor'] = e.id
+        hero_init_eqiups[k] = x
+    
     
     init_equips = CHAR_INITIALIZE.get('equips', [])
     if init_equips:
-        from core.equip import generate_and_save_equip
         for tid, level in init_equips:
             generate_and_save_equip(tid, level ,char_id)
     
@@ -216,13 +233,16 @@ def char_initialize(account_id, server_id, name):
         save_gem(init_gems, char_id)
     
     hero_ids = save_hero(char_id, init_hero_ids, add_notify=False)
+    socket_ids = []
     for index, _id in enumerate(hero_ids):
-        save_socket(char_id, socket_id=index+1, hero=_id, send_notify=False)
+        _equips = hero_init_eqiups.get(_id, {})
+        _sid = save_socket(char_id, socket_id=index+1, hero=_id, send_notify=False, **_equips)
+        socket_ids.append(_sid)
 
     socket_ids = [
-            1, 0, 0,
-            2, 0, 0,
-            3, 0, 0,
+            socket_ids[0], 0, 0,
+            socket_ids[1], 0, 0,
+            socket_ids[2], 0, 0,
             ]
 
     save_formation(char_id, socket_ids, send_notify=False)
