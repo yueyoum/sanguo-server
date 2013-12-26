@@ -11,7 +11,7 @@ from core.formation import save_formation, save_socket, get_char_formation
 from core.hero import save_hero, delete_hero
 from core.mongoscheme import Hang, MongoChar, MongoHero, MongoPrison
 from preset.settings import COUNTER, CHAR_INITIALIZE
-from core.signals import char_changed_signal
+from core.signals import char_changed_signal, char_updated_signal
 from utils import cache
 
 
@@ -136,6 +136,7 @@ class Char(object):
         if exp:
             new_exp = char.exp + exp
             level = char.level
+            old_level = char.level
             while True:
                 need_exp = update_needs_exp(level)
                 if new_exp < need_exp:
@@ -147,9 +148,11 @@ class Char(object):
             char.exp = new_exp
             char.level = level
             
-            heros_dict = self.heros_dict
-            for hid in heros_dict.keys():
-                cache.delete('hero:{0}'.format(hid))
+            if char.level != old_level:
+                char_updated_signal.send(
+                    sender = None,
+                    char_id = self.id
+                )
             
         # TODO honor
         char.save()

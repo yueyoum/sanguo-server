@@ -17,6 +17,7 @@ hang_finished_signal = Signal(providing_args=['char_id'])
 
 char_created_signal = Signal(providing_args=['account_id', 'server_id', 'char_obj'])
 char_changed_signal = Signal(providing_args=['char_obj'])
+char_updated_signal = Signal(providing_args=['char_id'])
 
 hero_changed_signal = Signal(providing_args=['cache_hero_obj'])
 hero_add_signal = Signal(providing_args=['char_id', 'hero_ids'])
