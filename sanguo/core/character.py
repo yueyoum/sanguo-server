@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collections import defaultdict
 from mongoengine import DoesNotExist
 
 from apps.character.models import Character
@@ -207,19 +208,18 @@ def char_initialize(account_id, server_id, name):
         equips_on = {}
         init_hero_ids = GLOBAL.HEROS.get_random_hero_ids(3)
     
-    hero_init_eqiups = {}
+    hero_init_eqiups = defaultdict(lambda: {})
     for k, v in equips_on.iteritems():
         for tid, level in v:
             e = generate_and_save_equip(tid, level, char_id)
             tp = GLOBAL.EQUIP.EQUIP_TEMPLATE[tid]['tp']
             x = hero_init_eqiups.get(k, {})
             if tp == 1:
-                x['weapon'] = e.id
+                hero_init_eqiups[k]['weapon'] = e.id
             elif tp == 2:
-                x['jewelry'] = e.id
+                hero_init_eqiups[k]['jewelry'] = e.id
             else:
-                x['armor'] = e.id
-        hero_init_eqiups[k] = x
+                hero_init_eqiups[k]['armor'] = e.id
     
     
     init_equips = CHAR_INITIALIZE.get('equips', [])
@@ -235,7 +235,8 @@ def char_initialize(account_id, server_id, name):
     hero_ids = save_hero(char_id, init_hero_ids, add_notify=False)
     socket_ids = []
     for index, _id in enumerate(hero_ids):
-        _equips = hero_init_eqiups.get(_id, {})
+        h = get_cache_hero(_id)
+        _equips = hero_init_eqiups.get(h.oid, {})
         _sid = save_socket(char_id, socket_id=index+1, hero=_id, send_notify=False, **_equips)
         socket_ids.append(_sid)
 
