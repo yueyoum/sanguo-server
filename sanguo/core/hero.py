@@ -15,16 +15,30 @@ def cal_hero_property(original_id, level):
     return int(attack), int(defense), int(hp)
 
 
+class FightPowerMixin(object):
+    @property
+    def power(self):
+        a = self.attack * 2.5 * (1 + self.crit / 2.0)
+        b = (self.hp + self.defense * 5) * (1 + self.dodge / 2.0)
+        return int(a + b)
+    
 
-class Hero(object):
-    def __init__(self, hid, original_id, level, char_id):
+
+
+class Hero(FightPowerMixin):
+    __slots__ = [
+        'id', 'char_id', 'oid',
+        'attack', 'defense', 'hp',
+        'crit', 'dodge'
+    ]
+    def __init__(self, hid, oid, level, char_id):
         self.id = hid
-        self.original_id = original_id
+        self.oid = oid
         self.level = level
         self.char_id = char_id
 
         self.attack, self.defense, self.hp = \
-                cal_hero_property(self.original_id, self.level)
+                cal_hero_property(self.oid, self.level)
 
         self.crit = 0
         self.dodge = 0

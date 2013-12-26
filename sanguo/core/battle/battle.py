@@ -39,8 +39,13 @@ class Ground(object):
 
 
 
-    def cal_fighting_power(self, heros):
-        return 100
+    def ground_power(self, heros):
+        p = 0
+        for h in heros:
+            if h:
+                p += h.power
+        return p
+        
     
     def my_team_hp(self):
         hp = 0
@@ -94,8 +99,8 @@ class Ground(object):
         ### LOG END
 
 
-        my_power = self.cal_fighting_power(self.my_heros)
-        rival_power = self.cal_fighting_power(self.rival_heros)
+        my_power = self.ground_power(self.my_heros)
+        rival_power = self.ground_power(self.rival_heros)
 
         if my_power >= rival_power:
             first_action_team = self.my_heros
@@ -139,14 +144,14 @@ class Battle(object):
             index += 1
             if h is not None:
                 h.id = index
-                self_power += h.cal_fighting_power()
+                self_power += h.power
 
         rival_power = 0
         for h in self.rival_heros:
             index += 1
             if h is not None:
                 h.id = index
-                rival_power += h.cal_fighting_power()
+                rival_power += h.power
 
         msg.self_power = self_power
         msg.rival_power = rival_power

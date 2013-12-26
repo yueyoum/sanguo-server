@@ -10,7 +10,7 @@ from apps.character.cache import get_cache_character
 from callbacks.timers import hang_job
 from core import GLOBAL
 from core.battle.battle import Battle
-from core.battle.hero import BattleHero, MonsterHero, NPCHero
+from core.battle.hero import BattleHero, MonsterHero
 from core.cache import get_cache_hero
 from core.counter import Counter
 from core.exception import SanguoViewException, InvalidOperate, CounterOverFlow, SyceeNotEnough

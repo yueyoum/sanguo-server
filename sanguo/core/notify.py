@@ -36,7 +36,9 @@ def character_notify(char_id):
     
     data.char.official = obj.official
     # FIXME
-    data.char.power = 100
+    
+    c = Char(char_id)
+    data.char.power = c.power
     publish_to_char(obj.id, pack_msg(data))
 
 def hero_notify(char_id, objs, message_name="HeroNotify"):

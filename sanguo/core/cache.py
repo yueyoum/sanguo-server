@@ -7,35 +7,9 @@ from core.hero import get_hero
 from apps.item.cache import get_cache_equipment
 
 
-class CacheHero(object):
-    __slots__ = [
-        'id', 'char_id', 'oid',
-        'attack', 'defense', 'hp',
-        'crit', 'dodge'
-    ]
-    
-    @property
-    def power(self):
-        a = self.attack * 2.5 * (1 + self.crit / 2.0)
-        b = (self.hp + self.defense * 5) * (1 + self.dodge / 2.0)
-        return int(a + b)
-    
-    
-
 def save_cache_hero(hero_obj):
-    h = CacheHero()
-    h.id = hero_obj.id
-    
-    h.char_id = hero_obj.char_id
-    h.oid = hero_obj.original_id
-    h.attack = hero_obj.attack
-    h.defense = hero_obj.defense
-    h.hp = hero_obj.hp
-    h.crit = hero_obj.crit
-    h.dodge = hero_obj.dodge
-    
-    cache.set('hero:{0}'.format(h.id), h)
-    return h
+    cache.set('hero:{0}'.format(hero_obj.id), hero_obj)
+    return hero_obj
 
 
 

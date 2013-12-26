@@ -5,7 +5,7 @@ from random import randint
 from collections import defaultdict
 
 from core import GLOBAL
-from core.hero import Hero
+from core.hero import FightPowerMixin
 
 from core.cache import get_cache_hero
 from apps.character.cache import get_cache_character
@@ -64,35 +64,7 @@ class EffectManager(object):
 
 
 
-
-def _logger_one_action(func):
-    def deco(self, target, *args, **kwargs):
-        msg_target, hero_noti = func(self, target, *args, **kwargs)
-        text = "%d => %d, Crit: %s, Dodge: %s" % (
-                self.id,
-                target.id,
-                msg_target.is_crit,
-                msg_target.is_dodge
-                )
-        if not msg_target.is_dodge:
-            text = '%s. Damage: %d, Hp: %d, Eff: %s' % (
-                    text,
-                    hero_noti.value,
-                    target.hp,
-                    str(hero_noti.eff) if hero_noti.eff else 'None'
-                    )
-
-        text = '%s. Target effects: %s' % (
-                text,
-                str(target.effect_manager.effect_ids())
-                )
-
-        logger.debug(text)
-        return msg_target, hero_noti
-    return deco
-
-
-class InBattleHero(ActiveEffectMixin):
+class InBattleHero(ActiveEffectMixin, FightPowerMixin):
     def __init__(self):
         self.die = False
         self.max_hp = self.hp
@@ -129,9 +101,6 @@ class InBattleHero(ActiveEffectMixin):
         if self.hp > self.max_hp:
             self.hp = self.max_hp
 
-
-    def cal_fighting_power(self):
-        return 100
 
     def _dot_effects(self, eff, msg):
         value = eff.value
@@ -471,25 +440,5 @@ class MonsterHero(InBattleHero):
         self.skills = info['skills']
         self.level = info['level']
 
-        InBattleHero.__init__(self)
-
-
-class NPCHero(InBattleHero):
-    _hero_type = 1
-    
-    def __init__(self, oid, level):
-        hero = Hero(0, oid, level, 0)
-        self.id = 0
-        self.original_id = oid
-        self.level = level
-        self.attack = hero.attack
-        self.defense = hero.defense
-        self.hp = hero.hp
-        self.crit = hero.crit
-        self.dodge = hero.dodge
-        
-        # FIXME
-        self.skills = []
-        
         InBattleHero.__init__(self)
 

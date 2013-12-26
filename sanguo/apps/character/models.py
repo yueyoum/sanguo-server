@@ -48,7 +48,6 @@ class Character(models.Model):
                 ('server_id', 'name'),
                 )
     
-    
 
 def character_save_callback(sender, instance, **kwargs):
     # character其他数据直接在外部初始化完了。这里不用hook
