@@ -35,7 +35,8 @@ class Equip(object):
         self.lv = lv
         self.quality = quality
 
-    def update_needs_exp(self, lv):
+    def update_needs_exp(self, lv=None):
+        lv = lv or self.lv
         exp = int(round(pow(lv, 2.5) + lv * 100, -2))
         return exp
 
@@ -67,7 +68,6 @@ class Equip(object):
         p.add((lv, exp, self.update_needs_exp(lv)))
         return p
 
-
     def worth_exp(self):
         # 此装备值多少经验，被吞噬，能提供多少经验
         if self.quality == 1:
@@ -75,7 +75,8 @@ class Equip(object):
         if self.quality == 2:
             return int(self.lv * 100 * 1.5)
 
-        _exp = self.whole_exp()
+        # FIXME
+        _exp = self.whole_exp() + self.quality * 500
 
         # 品质传承系数
         if self.quality == 3:
@@ -119,7 +120,6 @@ def delete_equip(_id):
     Equipment.objects.filter(id__in=ids).delete()
 
 
-
 def embed_gem(char_id, equip_id, hole_id, gem_id):
     # gem_id = 0 表示取下hole_id对应的宝石
     if gem_id:
@@ -148,7 +148,6 @@ def embed_gem(char_id, equip_id, hole_id, gem_id):
     except KeyError:
         raise InvalidOperate(message_name)
     
-    
     if gem_id:
         # 镶嵌
         delete_gem(gem_id, 1, char_id)
@@ -160,7 +159,6 @@ def embed_gem(char_id, equip_id, hole_id, gem_id):
             raise InvalidOperate(message_name)
         
         save_gem([(off_gem, 1)], char_id)
-
 
     equip = Equipment.objects.get(id=equip_id)
     equip.gem_ids = ','.join(gems)
