@@ -3,6 +3,10 @@ from django.conf.urls import patterns, include, url
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
+from core.drives import redis_client
+redis_client.ping()
+
+import callbacks.signals
 
 
 urlpatterns = patterns('',
