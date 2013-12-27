@@ -1,0 +1,2 @@
+0 0 * * * /PATH/reset_counter.sh
+
