@@ -5,8 +5,7 @@ from django.http import HttpResponse
 
 from apps.item.cache import get_cache_equipment
 from core.equip import delete_equip, embed_gem
-from core.exception import SanguoViewException, InvalidOperate, GoldNotEnough
-from core.mongoscheme import MongoChar
+from core.exception import InvalidOperate, GoldNotEnough
 from models import Equipment
 from protomsg import (EmbedGemResponse, SellEquipResponse,
                       StrengthEquipResponse, UnEmbedGemResponse)
@@ -55,9 +54,9 @@ def strengthen_equip(request):
     all_exp = 0
     for _id in req.cost_ids:
         cache_equip = get_cache_equipment(_id)
-        # FIXME 取下要被吞噬装备上的宝石
         gems = [(gid, 1) for gid in cache_equip.gems]
-        save_gem(gems, char_id)
+        if gems:
+            save_gem(gems, char_id)
         equip = Equip(cache_equip.level, cache_equip.tp, cache_equip.quality)
         all_exp += equip.whole_exp()
     

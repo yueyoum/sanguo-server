@@ -160,7 +160,7 @@ def equipment_notify(char_id, objs=None, message="EquipNotify"):
         e.name = obj.name
         e.level = obj.level
         e.exp = obj.exp
-        e.max_exp = eobj.update_needs_exp(obj.level)
+        e.max_exp = eobj.update_needs_exp()
         
         e.eat_exp = eobj.worth_exp()
         e.sell_gold = eobj.sell_value()
