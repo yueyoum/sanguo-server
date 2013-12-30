@@ -2,7 +2,6 @@
 import random
 from collections import defaultdict
 
-
 from core.mongoscheme import MongoChar, Hang
 from core.equip import generate_and_save_equip
 from core.gem import save_gem
@@ -18,11 +17,13 @@ STAGE = GLOBAL.STAGE
 STAGE_DROP = GLOBAL.STAGE_DROP
 GEM = GLOBAL.GEM
 
+
 def get_already_stage(char_id):
     stages = MongoChar.objects.only('stages').get(id=char_id).stages
     if not stages:
         return None
     return {int(k): v for k, v in stages.iteritems()}
+
 
 def get_new_stage(char_id):
     stage_new = MongoChar.objects.only('stage_new').get(id=char_id).stage_new
@@ -72,38 +73,38 @@ def get_stage_fixed_drop(stage_id):
     #
     #return drop_exp, drop_gold, equips, gems
     return 0, 0, [], []
-    
+
 
 def get_stage_standard_drop(char_id, stage_id, star=False):
     stage = STAGE[stage_id]
     stage_level = stage['level']
-    
+
     drop_exp = stage['normal_exp']
     drop_gold = stage['normal_gold']
-    
+
     mc = MongoChar.objects.only('stages').get(id=char_id)
     if str(stage_id) not in mc.stages:
         # 首通
         drop_exp += stage['first_exp']
         drop_gold += stage['first_gold']
-    
+
     if star:
         # 三星
         drop_exp += stage['star_exp']
         drop_gold += stage['star_gold']
-    
-    
+
+
     def _drop(prob_list):
         prob = random.uniform(0, 1)
         for sign, p in prob_list:
             if prob < p:
                 return sign
-            
+
             prob -= p
-        
+
         return None
-    
-    
+
+
     # FIXME
     k = 0.3
     gem_level_prob = (
@@ -114,17 +115,17 @@ def get_stage_standard_drop(char_id, stage_id, star=False):
         (5, 0.005 * 0.01 * k),
         (6, 0.001 * 0.01 * k),
     )
-    
+
     gems = []
     drop_gem_level = _drop(gem_level_prob)
     if drop_gem_level:
         gems = [
             (
-            random.choice(GEM.get_ids_by_level(drop_gem_level)),
-            1
+                random.choice(GEM.get_ids_by_level(drop_gem_level)),
+                1
             )
         ]
-    
+
     equip_k = k / 0.6
     equip_quality_prob = (
         (1, 20.0 / 4000 / equip_k),
@@ -132,7 +133,7 @@ def get_stage_standard_drop(char_id, stage_id, star=False):
         (3, 4.0 / 4000 * equip_k),
         (4, 0.3 / 4000 * equip_k),
     )
-    
+
     drop_equip_quality = _drop(equip_quality_prob)
     equips = []
     if drop_equip_quality:
@@ -140,30 +141,29 @@ def get_stage_standard_drop(char_id, stage_id, star=False):
         for k, v in GLOBAL.EQUIP.EQUIP_TEMPLATE.iteritems():
             if not v['std'] or v['quality'] != drop_equip_quality:
                 continue
-            
+
             selected_equip_ids.append(k)
-        
+
         equips = [
             (random.choice(selected_equip_ids), stage_level, 1)
         ]
-    
+
     return drop_exp, drop_gold, equips, gems
-    
-    
+
+
 def save_drop(char_id, exp, gold, equips, gems):
     print "save drop:", exp, gold, equips, gems
     char = Char(char_id)
     char.update(exp=exp, gold=gold)
-    
+
     # equips
     # FIXME bulk create
     for tid, level, amount in equips:
         for i in range(amount):
             generate_and_save_equip(tid, level, char_id)
-    
+
     # gems
     save_gem(gems, char_id)
-    
 
 
 static_day_hours = 18
@@ -179,12 +179,12 @@ static_e4 = 0.3
 
 static_z = 0.6
 
-
 GEM_LEVEL_SCORE = [
-        (1, 1), (2, 4), (3, 16), (4, 64),
-        ]
+    (1, 1), (2, 4), (3, 16), (4, 64),
+]
 
 GEM_LEVEL_SCORE.reverse()
+
 
 def _gem_list(gem_score):
     gem_score = int(gem_score)
@@ -196,6 +196,7 @@ def _gem_list(gem_score):
         gem_score = b
 
     return res
+
 
 def _prob_amount(prob):
     prob = int(prob)
@@ -210,11 +211,10 @@ def get_stage_hang_drop(stage_id, hours):
     stage = STAGE[stage_id]
     drop_exp = stage['normal_exp']
     drop_gold = stage['normal_gold']
-    
+
     exp = drop_exp * hours * 240
     gold = drop_gold * hours * 240
-    
-    
+
     seed = random.uniform(0.5, 0.99)
     seed = round(seed, 2)
     value = GAUSSIAN_TABLE[seed]
@@ -237,14 +237,14 @@ def get_stage_hang_drop(stage_id, hours):
     g6_amount = _prob_amount(g6)
     if g6_amount:
         gem_list.append((6, g6_amount))
-    
+
     gems = defaultdict(lambda: 0)
     for glv, gamount in gem_list:
         gids = GEM.get_ids_by_level(glv)
         for i in range(gamount):
             _id = random.choice(gids)
             gems[_id] += 1
-    
+
     gems = gems.items()
 
     e1 = static_e1 * k / static_z * r * hours / static_day_hours * 100
@@ -260,59 +260,57 @@ def get_stage_hang_drop(stage_id, hours):
         amount = _prob_amount(eprob)
         if amount:
             equip_list.append((quality, amount))
-    
+
     equips_dict = defaultdict(lambda: 0)
     for quality, amount in equip_list:
         eids = GLOBAL.EQUIP.EQUIP_IDS_BY_QUALITY(quality, only_std=True)
         for i in range(amount):
             _id = random.choice(eids)
             equips_dict[_id] += 1
-    
+
     equips = []
     for k, v in equips_dict.iteritems():
         equips.append((k, stage_id, v))
-    
-    
-    return exp, gold, equips, gems
 
+    return exp, gold, equips, gems
 
 
 def get_plunder_list(char_id):
     mongo_char = MongoChar.objects.only('stages').get(id=char_id)
     stages = mongo_char.stages
-    
+
     # FIXME 高效的最后一个三星关卡找取
     stages_items = [int(k) for k, v in stages.iteritems() if v]
     stages_items.sort()
-    
+
     def _find_hang(stage_id):
         hang_list = Hang.objects(stage_id=stage_id)
-        stage_gold = GLOBAL.STAGE[stage_id]['normal_gold'] * 240 
+        stage_gold = GLOBAL.STAGE[stage_id]['normal_gold'] * 240
         res = []
         for h in hang_list:
             total_seconds = h.hours * 3600
             passed_seconds = timezone.utc_timestamp() - h.start
             if passed_seconds * 5 >= total_seconds:
                 res.append((h.id, (stage_gold * h.hours / 5)))
-        
+
         return res
-        
-    
+
+
     plunder_list = []
     if stages_items:
         this_stage_id = stages_items[-1]
-        
+
         while True:
             if this_stage_id < 0:
                 break
             plunder_list.extend(_find_hang(this_stage_id))
-            
+
             if len(plunder_list) >= 10:
                 break
-        
+
         if len(plunder_list) >= 10:
             plunder_list = plunder_list[:10]
-    
+
     return plunder_list
     
 

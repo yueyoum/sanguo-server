@@ -14,12 +14,11 @@ CURRENT_PATH = os.path.dirname(os.path.realpath(__file__))
 TMP_PATH = os.path.normpath(os.path.join(CURRENT_PATH, '../../tmp'))
 LOG_PATH = os.path.normpath(os.path.join(CURRENT_PATH, '../logs'))
 
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+# ('Your Name', 'your_email@example.com'),
 )
 
 MANAGERS = ADMINS
@@ -27,12 +26,12 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'sanguo',                      # Or path to database file if using sqlite3.
+        'NAME': 'sanguo', # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '127.0.0.1',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '3306',                      # Set to empty string for default.
+        'HOST': '127.0.0.1', # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '3306', # Set to empty string for default.
         'CONN_MAX_AGE': 120,
     }
 }
@@ -85,9 +84,9 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+# Put strings here, like "/home/html/static" or "C:/www/django/static".
+# Always use forward slashes, even on Windows.
+# Don't forget to use absolute paths, not relative paths.
 )
 
 # List of finder classes that know how to find static files in
@@ -95,7 +94,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -105,7 +104,7 @@ SECRET_KEY = 'n9&fzaggb0d+ff+7!f@h9jlu%!0ybkrou2ut=#w!22(z_y2tfc'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    #     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -127,9 +126,9 @@ ROOT_URLCONF = 'sanguo.urls'
 WSGI_APPLICATION = 'sanguo.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+# Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+# Always use forward slashes, even on Windows.
+# Don't forget to use absolute paths, not relative paths.
 )
 
 INSTALLED_APPS = (
@@ -188,7 +187,7 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-        
+
         'sanguo': {
             'handlers': ['console'],
             'level': 'DEBUG'
@@ -198,9 +197,9 @@ LOGGING = {
 
 if DEBUG:
     LOGGING['loggers']['django.db.backends'] = {
-            'handlers': ['console'],
-            'level': 'DEBUG'
-            }
+        'handlers': ['console'],
+        'level': 'DEBUG'
+    }
 
 DATETIME_FORMAT = "Y-m-d H:i:s"
 
@@ -213,10 +212,9 @@ MONGODB_PORT = 27017
 MONGODB_DB = 'sanguo'
 
 CRYPTO_KEY = '1234567890abcdef'
-CRYPTO_PREFIX= 'ok'
+CRYPTO_PREFIX = 'ok'
 
 CACHE_HOURS = 1
-
 
 if TESTING:
     BROKER_URL = 'amqp://guest:guest@localhost:5672/sanguo_test'
@@ -229,7 +227,6 @@ CELERY_ENABLE_UTC = True
 # CELERY_RESULT_SERIALIZER = 'json'
 
 if TESTING:
-
     REDIS_DB = 1
     MONGODB_DB = 'test_sanguo'
 

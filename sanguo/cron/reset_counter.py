@@ -9,6 +9,7 @@ def reset():
     logger.write("MongoCounter Clean Done")
     logger.close()
 
+
 if __name__ == '__main__':
     reset()
 

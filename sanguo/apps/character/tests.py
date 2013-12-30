@@ -9,13 +9,13 @@ from django.test import TestCase, TransactionTestCase
 
 import protomsg
 from protomsg import (
-        RESPONSE_NOTIFY_TYPE,
-        CommandResponse,
-        CreateCharacterRequest,
-        CreateCharacterResponse,
-        CharacterNotify,
+    RESPONSE_NOTIFY_TYPE,
+    CommandResponse,
+    CreateCharacterRequest,
+    CreateCharacterResponse,
+    CharacterNotify,
 
-        )
+    )
 
 from utils import app_test_helper
 from core.character import char_initialize
@@ -30,11 +30,10 @@ def teardown():
 class CreateCharacterTest(TransactionTestCase):
     def setUp(self):
         char_initialize(1, 1, 'a')
-        
+
     def tearDown(self):
         app_test_helper._teardown()
-    
-    
+
 
     def _create(self, account_id, server_id, name, ret):
         session = crypto.encrypt("{0}:{1}".format(account_id, server_id))

@@ -15,7 +15,7 @@ DRAW_HERO = GLOBAL.SETTINGS.DRAW_HERO
 def pick_hero(request):
     req = request._proto
     char_id = request._char_id
-    
+
     char = Char(char_id)
     cache_char = char.cacheobj
 
@@ -23,16 +23,16 @@ def pick_hero(request):
         info = DRAW_HERO[req.mode]
     except KeyError:
         raise BadMessage("GetHeroResponse")
-    
+
     if req.ten:
         pick_times = 10
     else:
         pick_times = 1
-    
+
     using_sycee = pick_times * info['sycee']
     if using_sycee > cache_char.sycee:
         raise SyceeNotEnough("GetHeroResponse")
-    
+
     prob = random.randint(1, 100)
 
     for target_quality, target_prob in info['prob']:
@@ -47,10 +47,10 @@ def pick_hero(request):
         heros = [random.choice(hero_id_list) for i in range(10)]
     else:
         heros = [random.choice(hero_id_list)]
-    
+
     char.update(sycee=-using_sycee)
     char.save_hero(heros)
-    
+
     response = GetHeroResponse()
     response.ret = 0
     response.mode = req.mode
@@ -65,7 +65,7 @@ def pick_hero(request):
 def merge_hero(request):
     req = request._proto
     char_id = request._char_id
-    
+
     char = Char(char_id)
     in_bag_hero_ids = char.in_bag_hero_ids()
 
@@ -94,7 +94,6 @@ def merge_hero(request):
             raise SanguoViewException(302, "MergeHeroResponse")
     else:
         raise SanguoViewException(302, "MergeHeroResponse")
-
 
     all_hero_ids = GLOBAL.HEROS.get_hero_ids_by_quality(target_quality)
     if original_quality[0] == 1:

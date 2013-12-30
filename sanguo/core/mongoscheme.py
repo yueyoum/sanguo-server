@@ -2,17 +2,18 @@
 
 from mongoengine import *
 
+
 class MongoSocket(EmbeddedDocument):
     # 阵法插槽
     hero = IntField()
     weapon = IntField()
     armor = IntField()
     jewelry = IntField()
-    
+
 
 class MongoChar(Document):
     id = IntField(primary_key=True)
-    
+
     # 插槽信息
     sockets = MapField(EmbeddedDocumentField(MongoSocket))
     # 阵法列表，按顺序保存插槽id
@@ -21,11 +22,11 @@ class MongoChar(Document):
     stages = DictField()
     # 新的可以打的关卡
     stage_new = IntField()
-    
+
     # 装备列表
     # 装备存储在mysql中，使用post, delete信号来更新这里的数据
     equips = ListField(IntField())
-    
+
     # 宝石, key 为宝石ID， value为数量
     gems = DictField()
 
@@ -33,15 +34,17 @@ class MongoChar(Document):
         'collection': 'char'
     }
 
+
 class MongoHero(Document):
     id = IntField(primary_key=True)
     char = IntField(required=True)
     oid = IntField(required=True)
-    
+
     meta = {
         'collection': 'hero',
         'indexes': ['char', ]
     }
+
 
 MongoHero.ensure_indexes()
 
@@ -61,7 +64,7 @@ class Hang(Document):
 
     meta = {
         'collection': 'hang',
-        'indexes': ['stage_id',]
+        'indexes': ['stage_id', ]
     }
 
 
@@ -75,22 +78,21 @@ class Prisoner(EmbeddedDocument):
     status = IntField()
     jobid = StringField()
 
-    
+
 class MongoPrison(Document):
     id = IntField(primary_key=True)
     amount = IntField()
-    prisoners = MapField( EmbeddedDocumentField(Prisoner) )
-    
+    prisoners = MapField(EmbeddedDocumentField(Prisoner))
+
     meta = {
         'collection': 'prison'
     }
 
 
-
 class MongoCounter(Document):
     id = StringField(primary_key=True)
     cur_value = IntField()
-    
+
     meta = {
         'collection': 'counter'
     }

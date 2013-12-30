@@ -11,8 +11,8 @@ FUNC_RESPONSE = {
     'plunder': 'PlunderResponse',
 }
 
-
 logger = logging.getLogger('sanguo')
+
 
 class Counter(object):
     def __init__(self, char_id, func_name):
@@ -26,26 +26,26 @@ class Counter(object):
             self.c.id = self.key
             self.c.cur_value = 0
             self.c.save()
-    
+
     @property
     def max_value(self):
         return COUNTER[self.func_name]
-    
+
     @property
     def cur_value(self):
         return self.c.cur_value
-    
+
     @property
     def remained_value(self):
         return self.max_value - self.cur_value
-    
+
     def incr(self, value=1):
         if self.remained_value < value:
             logging.info("Counter. char {0}. {1}. MaxValue: {0}, CurValue: {1}, WannaValue: {2}".format(
                 self.char_id, self.func_name, self.max_value, self.cur_value, value
-                ))
+            ))
             raise CounterOverFlow(FUNC_RESPONSE[self.func_name])
-        
+
         self.c.cur_value += value
         self.c.save()
     

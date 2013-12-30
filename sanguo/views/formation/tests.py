@@ -9,7 +9,6 @@ from core.character import Char
 from core.equip import generate_and_save_equip
 
 
-
 class SocketTest(TransactionTestCase):
     def setUp(self):
         char = char_initialize(1, 1, 'a')
@@ -18,7 +17,7 @@ class SocketTest(TransactionTestCase):
         e = generate_and_save_equip(1, 1, char.id)
         self.e = e
         self.equip_id = e.id
-        
+
     def tearDown(self):
         app_test_helper._teardown()
 
@@ -46,26 +45,24 @@ class SocketTest(TransactionTestCase):
         hero = char.save_hero(1)
         hero_id = hero[0]
         self._set_socket(hero_id, self.equip_id, 0, 0, 0)
-    
+
     def test_error_tp(self):
         char = Char(self.char_id)
         hero = char.save_hero(1)
         hero_id = hero[0]
-        
+
         if self.e.tp == 1:
             args = [hero_id, 0, 0, self.e.id, 402]
         elif self.e.tp == 2:
             args = [hero_id, 0, self.e.id, 0, 402]
         else:
             args = [hero_id, self.e.id, 0, 0, 402]
-        
+
         self._set_socket(*args)
-        
-    
+
+
     def test_none_exists(self):
         self._set_socket(99999, 0, 0, 0, 2)
-    
-        
 
 
 class FormationTest(TransactionTestCase):
@@ -73,7 +70,7 @@ class FormationTest(TransactionTestCase):
         char = char_initialize(1, 1, 'a')
         self.session = crypto.encrypt('1:1:{0}'.format(char.id))
         self.socket_ids = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-        
+
     def tearDown(self):
         app_test_helper._teardown()
 
@@ -95,7 +92,7 @@ class FormationTest(TransactionTestCase):
 
     def test_set_formation(self):
         self._set_formation([1, 0, 0, 3, 0, 0, 2, 0, 0])
-    
+
     def test_error_set(self):
         self._set_formation([1, 0, 0, 3, 0, 0, 0, 0, 99], 2)
         self._set_formation([1, 0, 0, 3, 0, 0, 2, 0], 400)

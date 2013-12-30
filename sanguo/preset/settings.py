@@ -26,20 +26,20 @@ SERVERS = {
 
 # 创建角色的初始化数据
 CHAR_INITIALIZE = {
-    'gold': 0,                  # 金币
-    'sycee': 0,                 # 元宝
-    'level': 1,                 # 等级
-    'official': 1,              # 官职
-    
-    'heros': [1, 2, 3],         # 要给的英雄，不设置为随机3个
+    'gold': 0, # 金币
+    'sycee': 0, # 元宝
+    'level': 1, # 等级
+    'official': 1, # 官职
+
+    'heros': [1, 2, 3], # 要给的英雄，不设置为随机3个
     # 装备到英雄身上的装备
     'equips_on': {
         1: [(1, 1), (2, 1), (3, 1)],
         2: [(1, 1), (2, 1), (3, 1)],
         3: [(1, 1), (2, 1), (3, 1)],
     },
-    'equips': [],               # 要给的装备，格式为 [(tid, level), (tid, level)...]
-    'gems': [],                 # 要给的宝石，格式为 [(gid, amount), (gid, amount)...]
+    'equips': [], # 要给的装备，格式为 [(tid, level), (tid, level)...]
+    'gems': [], # 要给的宝石，格式为 [(gid, amount), (gid, amount)...]
 }
 
 
@@ -61,7 +61,7 @@ DRAW_HERO = {
             (2, 100),
         )
     },
-    
+
     2: {
         'sycee': 300,
         'prob': (
@@ -70,7 +70,7 @@ DRAW_HERO = {
             (3, 100),
         )
     },
-    
+
     3: {
         'sycee': 300,
         'prob': (
@@ -124,8 +124,8 @@ EQUIP_LEVEL_RANGE = {
 # 次数限制，每天可以做多少次
 # 每天可以做多少次
 COUNTER = {
-    'hang': 8,          # 挂机时间
-    'pvp': 8,           # 比武次数
+    'hang': 8, # 挂机时间
+    'pvp': 8, # 比武次数
     'plunder': 8        # 掠夺次数
 }
 

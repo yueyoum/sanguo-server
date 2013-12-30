@@ -8,9 +8,9 @@ from core.character import Char
 def cmd(request):
     req = request._proto
     char_id = request._char_id
-    
+
     char = Char(char_id)
-    
+
     if req.action == 1:
         if req.tp == 1:
             char.update(exp=req.param)
@@ -32,6 +32,5 @@ def cmd(request):
             delete_equip(req.param)
         elif req.tp == 6:
             delete_gem(req.param, 1, char_id)
-            
-    
+
     return HttpResponse('', content_type='text/plain')

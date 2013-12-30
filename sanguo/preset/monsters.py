@@ -1,6 +1,7 @@
 import json
 from preset._base import data_path
 
+
 def load_data():
     with open(data_path('monster.json'), 'r') as f:
         content = json.loads(f.read())
@@ -25,6 +26,7 @@ def load_data():
         data[c["pk"]] = field
 
     return data
+
 
 MONSTERS = load_data()
 

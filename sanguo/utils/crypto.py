@@ -10,8 +10,10 @@ from django.conf import settings
 class BadEncryptedText(Exception):
     pass
 
+
 class ExpiredText(Exception):
     pass
+
 
 BLOCK_SIZE = 16
 KEY = settings.CRYPTO_KEY or Random.get_random_bytes(BLOCK_SIZE)
@@ -20,7 +22,7 @@ PREFIX = settings.CRYPTO_PREFIX or Random.get_random_bytes(4)
 
 def encrypt(text, key=KEY, prefix=PREFIX):
     prefix = prefix.replace('|', '_')
-    text = '%s|%s|' % (prefix, text) 
+    text = '%s|%s|' % (prefix, text)
     length = len(text)
     a, b = divmod(length, BLOCK_SIZE)
     rest = (a + 1) * BLOCK_SIZE - length
@@ -50,6 +52,7 @@ def decrypt(text, key=KEY, prefix=PREFIX):
 def encrypt_with_expire(text, key=KEY, prefix=PREFIX):
     expire = int(time.time())
     return encrypt('%s|%d' % (text, expire), key=key, prefix=prefix)
+
 
 def decrypt_with_expire(text, expire_in, key=KEY, prefix=PREFIX):
     result = decrypt(text, key=key, prefix=prefix)

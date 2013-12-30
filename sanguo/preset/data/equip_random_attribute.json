@@ -1,17 +1,17 @@
 [
-{
-    "pk": 1, 
-    "model": "items.equipmentrandomattribute", 
-    "fields": {
-        "change_value": 6, 
-        "is_percent": true, 
-        "level_three": 9, 
-        "level_one": 9, 
-        "effect": 3, 
-        "used_for": 1, 
-        "change_value_is_percent": true, 
-        "level_zero": 9, 
-        "level_two": 9
+    {
+        "pk": 1,
+        "model": "items.equipmentrandomattribute",
+        "fields": {
+            "change_value": 6,
+            "is_percent": true,
+            "level_three": 9,
+            "level_one": 9,
+            "effect": 3,
+            "used_for": 1,
+            "change_value_is_percent": true,
+            "level_zero": 9,
+            "level_two": 9
+        }
     }
-}
 ]

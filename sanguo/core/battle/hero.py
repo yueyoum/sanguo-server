@@ -7,7 +7,7 @@ from collections import defaultdict
 from core import GLOBAL
 from core.hero import FightPowerMixin
 
-from core.cache import get_cache_hero
+from core.hero.cache import get_cache_hero
 from apps.character.cache import get_cache_character
 
 from mixins import ActiveEffectMixin
@@ -18,6 +18,7 @@ logger = logging.getLogger('battle')
 
 class DieEvent(Exception):
     pass
+
 
 class DizzinessEvent(Exception):
     pass
@@ -63,7 +64,6 @@ class EffectManager(object):
         return [e.type_id for e in self.effects]
 
 
-
 class InBattleHero(ActiveEffectMixin, FightPowerMixin):
     def __init__(self):
         self.die = False
@@ -76,7 +76,6 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin):
         self.defense_skills = []
         self.passive_skills = []
         self.combine_skills = []
-
 
         for s in self.skills:
             if s.mode == 1:
@@ -113,10 +112,10 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin):
         hero_noti.hp = self.hp
         hero_noti.eff = eff.type_id
         hero_noti.value = value
-        
+
         logger.debug("Dot %d, hp %d to Target %d. Hp %d" % (
             eff.type_id, value, self.id, self.hp)
-            )
+        )
 
     def active_initiative_effects(self, msg):
         # 当英雄行动时，需要主动激活的效果
@@ -141,7 +140,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin):
 
         self.active_property_effects()
 
-    
+
     def active_property_effects(self):
         # 效果所引起的属性变化
         # 当英雄被攻击时，需要先激活自身的效果
@@ -154,10 +153,10 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin):
         for eff in self.effect_manager.effects:
             if eff.type_id in [1, 2, 11]:
                 continue
-            
+
             if eff.type_id in [12, 13, 14]:
                 raise TypeError("using_effects, Unsupported eff: %d" % eff.type_id)
-            
+
             self._active_effect(self, eff)
 
 
@@ -180,13 +179,12 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin):
         #    if prob <= _p:
         #        return skill
         #return None
-        
+
         for s in skills:
             if s.trig_prob >= randint(1, 100):
                 return s
-        
+
         return None
-        
 
 
     def action(self, target):
@@ -209,12 +207,10 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin):
             logger.debug("%d: dizziness, return" % self.id)
             return
 
-        
         hero_noti = msg.hero_notify.add()
         hero_noti.target_id = self.id
         hero_noti.hp = self.hp
         hero_noti.buffs.extend(self.effect_manager.effect_ids())
-
 
         skill = self.find_skill(self.attack_skills)
 
@@ -245,39 +241,37 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin):
         xx = min(0.024 * target_defense / (self.level + 9), 0.75)
         value = damage * (1 - xx)
         return value
-        
 
 
     def normal_action(self, target, msg):
         target.active_property_effects()
-        
+
         msg_target = msg.skill_targets.add()
         msg_target.target_id = target.id
         msg_target.is_dodge = False
         msg_target.is_crit = False
         if self.using_crit >= randint(1, 100):
             msg_target.is_crit = True
-            
+
         if target.using_dodge >= randint(1, 100):
             msg_target.is_dodge = True
-            
-            
+
         text = "%d => %d, Crit: %s, Dodge: %s" % (
-                self.id,
-                target.id,
-                msg_target.is_crit,
-                msg_target.is_dodge
-                )
-        
+            self.id,
+            target.id,
+            msg_target.is_crit,
+            msg_target.is_dodge
+        )
+
         logger.debug(text)
 
-        if  msg_target.is_dodge:
+        if msg_target.is_dodge:
             return
-        
+
         value = self.using_attack
         if msg_target.is_crit:
             value *= 2
-        
+
         self._one_action(target, value, msg)
 
 
@@ -290,7 +284,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin):
         hero_noti.target_id = target.id
 
         value = int(value)
-    
+
         target.set_hp(value)
 
         hero_noti.hp = target.hp
@@ -298,14 +292,13 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin):
 
         if eff:
             hero_noti.eff = eff
-            
-        text = 'Value: %d, Hp: %d, Eff: %s' % (
-                value,
-                target.hp,
-                str(eff) if eff else 'None'
-                )
-        logger.debug(text)
 
+        text = 'Value: %d, Hp: %d, Eff: %s' % (
+            value,
+            target.hp,
+            str(eff) if eff else 'None'
+        )
+        logger.debug(text)
 
 
     def effect_on(self, eff, target, msg, surely_hit=False):
@@ -322,19 +315,18 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin):
             if not surely_hit:
                 if target.using_dodge >= randint(1, 100):
                     msg_target.is_dodge = True
-                
+
         text = "%d => %d, Crit: %s, Dodge: %s" % (
-                self.id,
-                target.id,
-                msg_target.is_crit,
-                msg_target.is_dodge
-                )
-        
+            self.id,
+            target.id,
+            msg_target.is_crit,
+            msg_target.is_dodge
+        )
+
         logger.debug(text)
-        
+
         if msg_target.is_dodge:
             return
-
 
         if eff.rounds == 0:
             if eff.type_id == 1:
@@ -362,7 +354,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin):
                 raise Exception("eff.rounds = 0, but type_id = %d" % eff.type_id)
         else:
             self.effect_manager.add_effect_to_target(target, eff, msg)
-            
+
         return True
 
 
@@ -378,35 +370,35 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin):
 
     def skill_action(self, target, skill, msg):
         msg.skill_id = skill.id
-        
+
         effects = []
         for group_effs in skill.effects:
             new_group_effs = [eff.copy() for eff in group_effs]
             effects.append(new_group_effs)
-        
+
         def _group_effs_action(effs):
             head_eff = effs[0]
             rest_eff = effs[1:]
-            
+
             # 只要同一组中，第一个效果命中，同组的其他效果全部命中
             head_targets = self.get_effect_target(head_eff, target)
             hit = False
             for t in head_targets:
                 hit = self.effect_on(head_eff, t, msg)
-            
+
             for eff in rest_eff:
                 targets = self.get_effect_target(eff, target)
                 for t in targets:
                     self.effect_on(eff, t, msg, hit)
-            
-        
+
+
         for group_eff in effects:
             _group_effs_action(group_eff)
-        
 
 
 class BattleHero(InBattleHero):
     _hero_type = 1
+
     def __init__(self, _id):
         hero = get_cache_hero(_id)
         self.id = _id
@@ -416,13 +408,12 @@ class BattleHero(InBattleHero):
         self.hp = hero.hp
         self.crit = hero.crit
         self.dodge = hero.dodge
-        
+
         self.skills = GLOBAL.HEROS[self.original_id]['skills']
-        
+
         char = get_cache_character(hero.char_id)
         self.level = char.level
         InBattleHero.__init__(self)
-
 
 
 class MonsterHero(InBattleHero):

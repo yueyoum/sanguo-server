@@ -1,26 +1,20 @@
 #from core.rabbit import rabbit
 from utils import pack_msg
-from core.character import (
-    update_needs_exp,
-    )
-
 from core.stage import get_already_stage, get_new_stage
-from core import GLOBAL
 from core.mongoscheme import MongoChar, Hang, DoesNotExist, MongoPrison
-from core.counter import Counter
 import protomsg
 
 from core.character import Char
-from core.equip import Equip
 
 from apps.character.cache import get_cache_character
 from core.hero import cal_hero_property
 
 #publish_to_char = rabbit.publish_to_char
 from core.msgpipe import publish_to_char
-from preset.settings import MAX_PRISONERS_AMOUNT, PLUNDER_COST_SYCEE
+from preset.settings import PLUNDER_COST_SYCEE
 from core.counter import Counter
 from core.prison import Prison
+
 
 def character_notify(char_id):
     obj = get_cache_character(char_id)
@@ -30,16 +24,17 @@ def character_notify(char_id):
     data.char.gold = obj.gold
     data.char.gem = obj.sycee
     data.char.level = obj.level
-    
+
     data.char.current_exp = obj.exp
-    data.char.next_level_exp = update_needs_exp(obj.level)
-    
+    data.char.next_level_exp = obj.update_needs_exp()
+
     data.char.official = obj.official
     # FIXME
-    
+
     c = Char(char_id)
     data.char.power = c.power
     publish_to_char(obj.id, pack_msg(data))
+
 
 def hero_notify(char_id, objs, message_name="HeroNotify"):
     Msg = getattr(protomsg, message_name)
@@ -64,8 +59,10 @@ def hero_notify(char_id, objs, message_name="HeroNotify"):
 
     publish_to_char(char_id, pack_msg(data))
 
+
 def add_hero_notify(char_id, objs):
     hero_notify(char_id, objs, "AddHeroNotify")
+
 
 def remove_hero_notify(char_id, ids):
     data = protomsg.RemoveHeroNotify()
@@ -81,16 +78,17 @@ def get_hero_panel_notify(char_id):
     msg = protomsg.GetHeroPanelNotify()
     # FIXME
     data = [
-            (1, 100, 0, 0),
-            (2, 100, 5, 10),
-            (3, 100, 10, 10),
-            ]
+        (1, 100, 0, 0),
+        (2, 100, 5, 10),
+        (3, 100, 10, 10),
+    ]
 
     for d in data:
         m = msg.get_heros.add()
         m.mode, m.cost, m.free_times, m.max_free_times = d
 
     publish_to_char(char_id, pack_msg(msg))
+
 
 def socket_notify(char_id):
     msg = protomsg.SocketNotify()
@@ -108,7 +106,6 @@ def socket_notify(char_id):
         s.jewelry_id = v.jewelry or 0
 
     publish_to_char(char_id, pack_msg(msg))
-
 
 
 def formation_notify(char_id, formation=None):
@@ -137,11 +134,11 @@ def current_stage_notify(char_id, sid, star):
     msg.stage.id, msg.stage.star = sid, star
     publish_to_char(char_id, pack_msg(msg))
 
+
 def new_stage_notify(char_id, sid):
     msg = protomsg.NewStageNotify()
     msg.stage.id, msg.stage.star = sid, False
     publish_to_char(char_id, pack_msg(msg))
-
 
 
 def equipment_notify(char_id, objs=None, message="EquipNotify"):
@@ -151,8 +148,6 @@ def equipment_notify(char_id, objs=None, message="EquipNotify"):
 
     msg = getattr(protomsg, message)()
     for obj in objs:
-        eobj = Equip(obj.level, obj.tp, obj.quality)
-        
         e = msg.equips.add()
         e.id = obj.id
         e.tp = obj.tp
@@ -160,23 +155,22 @@ def equipment_notify(char_id, objs=None, message="EquipNotify"):
         e.name = obj.name
         e.level = obj.level
         e.exp = obj.exp
-        e.max_exp = eobj.update_needs_exp()
-        
-        e.eat_exp = eobj.worth_exp()
-        e.sell_gold = eobj.sell_value()
-        
+        e.max_exp = obj.update_needs_exp()
+
+        e.eat_exp = obj.worth_exp()
+        e.sell_gold = obj.sell_value()
+
         e.value = obj.value
-        
+
         e.whole_hole = obj.hole_amount
         e.gem_ids.extend(obj.gems)
-        
-        
+
         print obj.decoded_random_attrs
         for k, v, _ in obj.decoded_random_attrs:
             a = e.attrs.add()
             a.id = k
             a.value = v
-    
+
     publish_to_char(char_id, pack_msg(msg))
 
 
@@ -186,7 +180,8 @@ def add_equipment_notify(char_id, obj):
     else:
         objs = [obj]
     equipment_notify(char_id, objs=objs, message="AddEquipNotify")
-    
+
+
 def update_equipment_notify(char_id, obj):
     if isinstance(obj, (list, tuple)):
         objs = obj
@@ -194,15 +189,16 @@ def update_equipment_notify(char_id, obj):
         objs = [obj]
     equipment_notify(char_id, objs=objs, message="UpdateEquipNotify")
 
+
 def remove_equipment_notify(char_id, _id):
     if isinstance(_id, (list, tuple)):
         ids = _id
     else:
         ids = [_id]
-    
+
     msg = protomsg.RemoveEquipNotify()
     msg.ids.extend(ids)
-    
+
     publish_to_char(char_id, pack_msg(msg))
 
 
@@ -210,32 +206,33 @@ def gem_notify(char_id, gems=None, message="GemNotify"):
     if gems is None:
         mongo_char = MongoChar.objects.only('gems').get(id=char_id)
         gems = [(int(k), v) for k, v in mongo_char.gems.iteritems()]
-    
+
     msg = getattr(protomsg, message)()
     for k, v in gems:
         g = msg.gems.add()
         g.id, g.amount = k, v
-    
+
     publish_to_char(char_id, pack_msg(msg))
 
 
 def add_gem_notify(char_id, gems):
     gem_notify(char_id, gems=gems, message="AddGemNotify")
 
+
 def update_gem_notify(char_id, gems):
     gem_notify(char_id, gems=gems, message="UpdateGemNotify")
+
 
 def remove_gem_notify(char_id, _id):
     if isinstance(_id, (list, tuple)):
         ids = _id
     else:
         ids = [_id]
-    
+
     msg = protomsg.RemoveGemNotify()
     msg.ids.extend(ids)
-    
-    publish_to_char(char_id, pack_msg(msg))
 
+    publish_to_char(char_id, pack_msg(msg))
 
 
 def hang_notify(char_id, hang=None):
@@ -245,9 +242,10 @@ def hang_notify(char_id, hang=None):
             hang = Hang.objects.get(id=char_id)
         except DoesNotExist:
             hang = None
-    
+
     hang_notify_with_data(char_id, counter.cur_value, counter.max_value, hang)
     return hang
+
 
 def hang_notify_with_data(char_id, hours, max_hours, hang):
     msg = protomsg.HangNotify()
@@ -260,21 +258,21 @@ def hang_notify_with_data(char_id, hours, max_hours, hang):
         msg.hang.start_time = hang.start
         # FIXME
         msg.hang.finished = hang.finished
-    
+
     publish_to_char(char_id, pack_msg(msg))
 
-    
 
 def prize_notify(char_id, prize_id):
     if isinstance(prize_id, (list, tuple)):
         ids = prize_id
     else:
         ids = [prize_id]
-    
+
     msg = protomsg.PrizeNotify()
     msg.prize_ids.extend(ids)
     publish_to_char(char_id, pack_msg(msg))
-    
+
+
 def plunder_notify(char_id):
     count = Counter(char_id, 'plunder')
     msg = protomsg.PlunderNotify()
@@ -288,10 +286,10 @@ def prisoner_notify(char_id, objs=None, message_name="PrisonerListNotify"):
     if not objs:
         prison = MongoPrison.objects.get(id=char_id)
         objs = prison.prisoners.values()
-    
+
     cache_char = get_cache_character(char_id)
     level = cache_char.level
-    
+
     msg = getattr(protomsg, message_name)()
     for o in objs:
         p = msg.prisoner.add()
@@ -299,31 +297,33 @@ def prisoner_notify(char_id, objs=None, message_name="PrisonerListNotify"):
         p.oid = o.oid
         p.start_time = o.start_time
         p.status = o.status
-        
+
         # FIXME
         p.value = 5
-        
+
         p.attack, p.defense, p.hp = cal_hero_property(o.oid, level)
         p.crit, p.dodge = 0, 0
-    
+
     publish_to_char(char_id, pack_msg(msg))
-    
+
+
 def update_prisoner_notify(char_id, mongo_prisoner_obj):
     prisoner_notify(char_id, objs=[mongo_prisoner_obj], message_name="UpdatePrisonerNotify")
 
+
 def new_prisoner_notify(char_id, mongo_prisoner_obj):
     prisoner_notify(char_id, objs=[mongo_prisoner_obj], message_name="NewPrisonerNotify")
+
 
 def remove_prisoner_notify(char_id, _id):
     if isinstance(_id, (list, tuple)):
         ids = _id
     else:
         ids = [_id]
-    
+
     msg = protomsg.RemovePrisonerNotify()
     msg.ids.extend(ids)
     publish_to_char(char_id, pack_msg(msg))
-
 
 
 def prison_notify(char_id, prison=None):
@@ -345,7 +345,7 @@ def arena_notify(char_id):
     msg.day_rank = 3
     msg.day_score = 4
     msg.remained_amount = 5
-    
+
     nb = [
         (1, 1, 'aaa'),
         (2, 2, 'bbb'),
@@ -354,7 +354,7 @@ def arena_notify(char_id):
     for x in nb:
         n = msg.chars.add()
         n.rank, n.id, n.name = x
-    
+
     publish_to_char(char_id, pack_msg(msg))
 
 
@@ -372,18 +372,18 @@ def login_notify(char_id):
     new_stages = get_new_stage(char_id)
     if new_stages:
         new_stage_notify(char_id, new_stages)
-    
+
     equipment_notify(char_id)
     gem_notify(char_id)
 
     hang = hang_notify(char_id)
     if hang and hang.finished:
         prize_notify(char_id, 1)
-    
+
     plunder_notify(char_id)
     prisoner_notify(char_id)
     prison_notify(char_id)
-    
+
     arena_notify(char_id)
     
 

@@ -6,7 +6,7 @@ from apps.character.models import Character
 from apps.character.cache import get_cache_character
 from apps.item.cache import get_cache_equipment
 from core import GLOBAL
-from core.cache import get_cache_hero
+from core.hero.cache import get_cache_hero
 from core.counter import Counter
 from core.formation import save_formation, save_socket, get_char_formation
 from core.hero import save_hero, delete_hero
@@ -16,11 +16,6 @@ from core.signals import char_changed_signal, char_updated_signal
 
 
 COUNTER_KEYS = COUNTER.keys()
-
-
-def update_needs_exp(level):
-    exp = pow(level, 2.5) + level * 20
-    return int(round(exp * 10, -1))
 
 
 class Char(object):
@@ -128,13 +123,14 @@ class Char(object):
         char = Character.objects.get(id=self.id)
         char.gold += gold
         char.sycee += sycee
+        char.renown += renown
 
         if exp:
             new_exp = char.exp + exp
             level = char.level
             old_level = char.level
             while True:
-                need_exp = update_needs_exp(level)
+                need_exp = char.update_needs_exp(level)
                 if new_exp < need_exp:
                     break
 
@@ -163,10 +159,6 @@ class Char(object):
     def gems(self):
         char = MongoChar.objects.only('gems').get(id=self.id)
         return {int(k): v for k, v in char.gems.iteritems()}
-
-
-    def _incr_exp(self, exp):
-        pass
 
 
 def char_initialize(account_id, server_id, name):

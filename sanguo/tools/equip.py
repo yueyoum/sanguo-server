@@ -5,7 +5,6 @@ import sys
 
 command = sys.argv[1]
 
-
 CURRENT_PATH = os.path.dirname(os.path.realpath(__file__))
 SANGUO_PATH = os.path.dirname(CURRENT_PATH)
 
@@ -29,9 +28,11 @@ def add():
     e = generate_and_save_equip(tid, level, char_id)
     print "add done. {0}".format(e.id)
 
+
 def delete():
     _id = int(sys.argv[2])
     delete_equip(_id)
+
 
 def show():
     place = sys.argv[2]
@@ -47,6 +48,7 @@ def show():
             equips.append(e.id)
 
     print equips
+
 
 if command == 'add':
     add()

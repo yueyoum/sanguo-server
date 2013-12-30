@@ -32,10 +32,9 @@ Effect
 """
 
 
-
-
 class Effect(object):
     __slots__ = ['group_id', 'target', 'type_id', 'value', 'rounds', 'is_percent']
+
     def __init__(self, group_id, target, type_id, value, is_percent, rounds):
         self.group_id = group_id
         self.target = target
@@ -47,18 +46,18 @@ class Effect(object):
 
     def copy(self):
         return Effect(
-                self.group_id,
-                self.target,
-                self.type_id,
-                self.value,
-                self.is_percent,
-                self.rounds
-                )
-
+            self.group_id,
+            self.target,
+            self.type_id,
+            self.value,
+            self.is_percent,
+            self.rounds
+        )
 
 
 class Skill(object):
     __slots__ = ['id', 'mode', 'trig_prob', 'effects']
+
     def __init__(self, sid, mode, trig_prob, effects):
         self.id = sid
         self.mode = mode

@@ -31,12 +31,11 @@ class Ground(object):
                     else:
                         msg_h.ht = BattleHeroMsg.MONSTER
 
-        
+
         _fill_up_heros(self.my_heros, msg.self_heros)
         _fill_up_heros(self.rival_heros, msg.rival_heros)
 
         self.msg = msg
-
 
 
     def ground_power(self, heros):
@@ -45,8 +44,8 @@ class Ground(object):
             if h:
                 p += h.power
         return p
-        
-    
+
+
     def my_team_hp(self):
         hp = 0
         for h in self.my_heros:
@@ -65,7 +64,7 @@ class Ground(object):
             hp += h.hp
         return hp
 
-    
+
     def is_team_dead(self):
         if self.my_team_hp() <= 0:
             return True, 1
@@ -109,7 +108,6 @@ class Ground(object):
             first_action_team = self.rival_heros
             second_action_team = self.my_heros
 
-
         battle_field = BattleField(first_action_team, second_action_team, self.msg)
         for i in range(30):
             _dead, _team = self.is_team_dead()
@@ -126,9 +124,8 @@ class Ground(object):
         return self.msg.self_win
 
 
-
 class Battle(object):
-    __slots__  = ['my_id', 'rival_id', 'my_heros', 'rival_heros', 'msg']
+    __slots__ = ['my_id', 'rival_id', 'my_heros', 'rival_heros', 'msg']
 
     def __init__(self, my_id, rival_id, msg):
         self.my_id = my_id
@@ -165,15 +162,12 @@ class Battle(object):
 
     def load_rival_heros(self, *args):
         raise NotImplementedError()
-    
+
     def get_my_name(self, *args):
         raise NotImplementedError()
-    
+
     def get_rival_name(self, *args):
         raise NotImplementedError()
-    
-    
-
 
 
     def start(self):
@@ -183,12 +177,11 @@ class Battle(object):
         heros_list = [str(h) for h in self.rival_heros]
         logger.debug("Rival Heros: %s" % str(heros_list))
 
-
         grounds = []
         msgs = [self.msg.first_ground, self.msg.second_ground, self.msg.third_ground]
         index = 0
         for i in range(0, 9, 3):
-            g = Ground(self.my_heros[i:i+3], self.rival_heros[i:i+3], msgs[index])
+            g = Ground(self.my_heros[i:i + 3], self.rival_heros[i:i + 3], msgs[index])
             g.index = index + 1
             grounds.append(g)
             index += 1
@@ -198,7 +191,6 @@ class Battle(object):
             win = g.start()
             if win:
                 win_count += 1
-
 
         if win_count >= 2:
             self.msg.self_win = True

@@ -8,12 +8,12 @@ Replace this with more appropriate tests for your application.
 from django.test import TestCase, TransactionTestCase
 
 from protomsg import (
-        RESPONSE_NOTIFY_TYPE,
-        StartGameRequest,
-        StartGameResponse,
-        RegisterRequest,
-        RegisterResponse,
-        )
+    RESPONSE_NOTIFY_TYPE,
+    StartGameRequest,
+    StartGameResponse,
+    RegisterRequest,
+    RegisterResponse,
+    )
 from utils import app_test_helper as tests
 from models import User
 from core import GLOBAL
@@ -22,21 +22,21 @@ from core.formation import save_formation
 
 
 def teardown():
-        tests._teardown()
+    tests._teardown()
 
 
 class RegisterTest(TransactionTestCase):
     def setUp(self):
         users = (
-                ('123@456.com', '123456', ''),
-                ('', '', '123456'),
-                )
+            ('123@456.com', '123456', ''),
+            ('', '', '123456'),
+        )
         for email, passwd, token in users:
             User.objects.create(
-                    email = email,
-                    passwd = passwd,
-                    device_token = token
-                    )
+                email=email,
+                passwd=passwd,
+                device_token=token
+            )
 
     def _register(self, email, password, device_token, ret):
         req = RegisterRequest()
@@ -44,8 +44,8 @@ class RegisterTest(TransactionTestCase):
         req.email = email
         req.password = password
         req.device_token = device_token
-        
-        data =  tests.pack_data(req)
+
+        data = tests.pack_data(req)
         res = tests.make_request('/player/register/', data)
 
         msgs = tests.unpack_data(res)
@@ -69,24 +69,23 @@ class RegisterTest(TransactionTestCase):
         self._register("123@456.com", "123456", "0987654321", 100)
 
 
-
 class LoginTest(TransactionTestCase):
     def setUp(self):
         users = (
-                (1, '123@456.com', '123456', ''),
-                (2, '', '', '123456'),
-                )
+            (1, '123@456.com', '123456', ''),
+            (2, '', '', '123456'),
+        )
         for id, email, passwd, token in users:
             User.objects.create(
-                    id = id,
-                    email = email,
-                    passwd = passwd,
-                    device_token = token
-                    )
+                id=id,
+                email=email,
+                passwd=passwd,
+                device_token=token
+            )
 
     def tearDown(self):
         tests._teardown()
-    
+
 
     def test_anonymous_login(self):
         req = StartGameRequest()

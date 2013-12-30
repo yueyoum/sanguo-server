@@ -10,14 +10,14 @@ from utils import pack_msg
 def merge(request):
     req = request._proto
     char_id = request._char_id
-    
+
     merge_gem(
         req.id,
         req.amount,
         req.using_sycee,
         char_id
     )
-    
+
     response = MergeGemResponse()
     response.ret = 0
     data = pack_msg(response)

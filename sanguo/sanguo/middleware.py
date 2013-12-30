@@ -18,6 +18,7 @@ EMPTY_SESSION_MSG_TYPE = set([100, 102, 105])
 
 ### FOR DEBUG
 from utils import app_test_helper
+
 RESPONSE_NOTIFY_TYPE_REV = {v: k for k, v in protomsg.RESPONSE_NOTIFY_TYPE.items()}
 
 
@@ -42,7 +43,6 @@ class UnpackAndVerifyData(object):
         num_of_msgs = NUM_FIELD.unpack(data[:4])[0]
         data = data[4:]
 
-
         for i in range(num_of_msgs):
             msg_id, msg, data = _unpack(data)
             if msg_id == 51:
@@ -56,9 +56,9 @@ class UnpackAndVerifyData(object):
                 proto = getattr(protomsg, msg_name)
                 p = proto()
                 p.ParseFromString(msg)
-                
+
                 print p
-                
+
                 game_session = p.session
                 decrypted_session = ""
                 if msg_id not in EMPTY_SESSION_MSG_TYPE:
@@ -73,7 +73,7 @@ class UnpackAndVerifyData(object):
 
                 request._proto = p
                 request._session = decrypted_session
-                
+
                 splited_session = decrypted_session.split(':')
                 len_of_splited_session = len(splited_session)
                 if len_of_splited_session == 1:
@@ -90,9 +90,8 @@ class UnpackAndVerifyData(object):
                     request._char_id = int(splited_session[2])
 
 
-
-
 _BIND = set()
+
 
 class PackMessageData(object):
     def process_response(self, request, response):
@@ -101,7 +100,7 @@ class PackMessageData(object):
 
         # if request.path.startswith('/admin/'):
         #     return response
-        
+
         char_id = getattr(request, '_char_id', None)
         if char_id:
             #if char_id not in _BIND:
@@ -112,20 +111,20 @@ class PackMessageData(object):
             other_msgs = message_get(char_id)
         else:
             other_msgs = []
-        
+
         if not response.content:
             num_of_msgs = len(other_msgs)
             data = '%s%s' % (
-                    NUM_FIELD.pack(num_of_msgs),
-                    ''.join(other_msgs)
-                    )
+                NUM_FIELD.pack(num_of_msgs),
+                ''.join(other_msgs)
+            )
         else:
             num_of_msgs = len(other_msgs) + 1
             data = '%s%s%s' % (
-                    NUM_FIELD.pack(num_of_msgs),
-                    response.content,
-                    ''.join(other_msgs)
-                    )
+                NUM_FIELD.pack(num_of_msgs),
+                response.content,
+                ''.join(other_msgs)
+            )
 
         # FOR DEBUG
         # print repr(data)
@@ -145,7 +144,7 @@ class ViewExceptionHandler(object):
 
             data = pack_msg(m)
             return HttpResponse(data, content_type='text/plain')
-        
+
         traceback.print_exc()
         raise exception
 

@@ -8,23 +8,26 @@ from core.drives import redis_client
 from core.drives import mongodb_client, mongodb_client_db
 
 __all__ = [
-        'pack_data',
-        'unpack_data',
-        'make_request',
-        ]
-
+    'pack_data',
+    'unpack_data',
+    'make_request',
+]
 
 FMT = struct.Struct('>i')
 URL = "http://127.0.0.1:8000"
 
+
 def _setup_func():
     pass
 
+
 def _mongo_teardown_func():
     mongodb_client.drop_database(mongodb_client_db)
-    
+
+
 def _redis_teardown_func():
     redis_client.flushdb()
+
 
 def _teardown():
     _redis_teardown_func()
@@ -35,14 +38,16 @@ def _teardown_deco(func):
     def deco(*args, **kwargs):
         func(*args, **kwargs)
         _teardown()
+
     return deco
+
 
 def pack_data(req):
     id_of_msg = REQUEST_TYPE_REV[req.DESCRIPTOR.name]
     data = req.SerializeToString()
     data = '{0}{1}{2}{3}'.format(
-            FMT.pack(1), FMT.pack(id_of_msg), FMT.pack(len(data)), data
-            )
+        FMT.pack(1), FMT.pack(id_of_msg), FMT.pack(len(data)), data
+    )
     return data
 
 
@@ -64,6 +69,7 @@ def unpack_data(res):
 
     assert num_of_msgs == len(msgs)
     return msgs
+
 
 def make_request(path, data, method="POST"):
     if method == "POST":

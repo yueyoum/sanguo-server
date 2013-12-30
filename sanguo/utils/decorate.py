@@ -1,7 +1,9 @@
 class DummyLazyObject(object):
     pass
 
+
 _dummy_lazy_object = DummyLazyObject()
+
 
 class LazyObject(object):
     def __init__(self):
@@ -13,6 +15,7 @@ class LazyObject(object):
             self.args = args
             self.kwargs = kwargs
             return self
+
         return deco
 
     def _setup(self):

@@ -7,11 +7,13 @@ from utils.timezone import hours_delta
 
 CACHE_HOURS = settings.CACHE_HOURS
 
+
 def set(key, obj, hours=CACHE_HOURS):
     value = cPickle.dumps(obj, HIGHEST_PROTOCOL)
     redis_client.set(key, value)
     redis_client.expireat(key, hours_delta(hours))
-    
+
+
 def get(key):
     value = redis_client.get(key)
     print "cache hit: ", key

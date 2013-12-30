@@ -11,6 +11,7 @@ import core.drives
 
 LOG_PATH = settings.LOG_PATH
 
+
 class Logger(object):
     def __init__(self, name):
         self.f = open(os.path.join(LOG_PATH, name), 'a')

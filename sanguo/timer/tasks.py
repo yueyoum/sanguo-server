@@ -3,6 +3,7 @@ from celery.task.control import revoke
 
 from timer.celery import app
 
+
 @app.task
 def sched(callback, *args):
     callback(*args)

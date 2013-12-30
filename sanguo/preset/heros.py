@@ -3,6 +3,7 @@ import random
 
 from _base import data_path
 
+
 def load_data():
     with open(data_path('hero.json'), 'r') as f:
         content = json.loads(f.read())
@@ -28,6 +29,7 @@ def load_data():
 
     return data
 
+
 class _Heros(object):
     def __init__(self):
         self.heros = load_data()
@@ -51,7 +53,7 @@ class _Heros(object):
         res = self.get_random_hero_ids(num)
         return [self.heros[i] for i in res]
 
-    def get_heros_by_quality(self,quality):
+    def get_heros_by_quality(self, quality):
         return [h for h in self.heros.values() if h["quality"] == quality]
 
     def get_hero_ids_by_quality(self, quality):

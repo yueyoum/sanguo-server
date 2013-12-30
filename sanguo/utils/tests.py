@@ -1,9 +1,11 @@
 import crypto
 
+
 def test_crypto_with_right_case():
     original = 'abcd:1234:)()xxx'
     text = crypto.encrypt(original)
     assert crypto.decrypt(text) == original
+
 
 def test_decrypt_with_invalid_text():
     try:
@@ -18,6 +20,7 @@ def test_crypto_expire_with_right_case():
     original = 'abcd:1234:)()xxx'
     text = crypto.encrypt_with_expire(original)
     assert crypto.decrypt_with_expire(text, 1) == original
+
 
 def test_decrypt_expire_with_invalid_text():
     try:

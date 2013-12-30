@@ -5,10 +5,10 @@ from collections import defaultdict
 from mixins import ActiveEffectMixin
 
 TARGET_RULE = {
-        0: [0, 1, 2],
-        1: [1, 0, 2],
-        2: [2, 1, 0],
-        }
+    0: [0, 1, 2],
+    1: [1, 0, 2],
+    2: [2, 1, 0],
+}
 
 logger = logging.getLogger('battle')
 
@@ -47,10 +47,6 @@ class TargetEffects(object):
         return self
 
 
-
-
-
-
 class BattleField(ActiveEffectMixin):
     __slots__ = ['team_one', 'team_two', 'current_pos', 'msg']
 
@@ -66,7 +62,6 @@ class BattleField(ActiveEffectMixin):
         for h, effs in passive_skills.items():
             for e in effs:
                 self._active_effect(h, e, using_attr=False)
-        
 
         for index, h in enumerate(self.team_one):
             if h is not None:
@@ -74,10 +69,10 @@ class BattleField(ActiveEffectMixin):
                 h._team = self.team_one
                 h.ground_msg = msg
                 logger.debug(
-                        "{0}: Attack {1}, Defense {2}, Hp {3}, Crit {4}, Dodge {5}".format(
-                            h.id, h.attack, h.defense, h.hp, h.crit, h.dodge
-                            )
-                        )
+                    "{0}: Attack {1}, Defense {2}, Hp {3}, Crit {4}, Dodge {5}".format(
+                        h.id, h.attack, h.defense, h.hp, h.crit, h.dodge
+                    )
+                )
 
         for index, h in enumerate(self.team_two):
             if h is not None:
@@ -85,10 +80,10 @@ class BattleField(ActiveEffectMixin):
                 h._team = self.team_two
                 h.ground_msg = msg
                 logger.debug(
-                        "{0}: Attack {1}, Defense {2}, Hp {3}, Crit {4}, Dodge {5}".format(
-                            h.id, h.attack, h.defense, h.hp, h.crit, h.dodge
-                            )
-                        )
+                    "{0}: Attack {1}, Defense {2}, Hp {3}, Crit {4}, Dodge {5}".format(
+                        h.id, h.attack, h.defense, h.hp, h.crit, h.dodge
+                    )
+                )
 
         self.current_pos = 0
 
@@ -98,8 +93,9 @@ class BattleField(ActiveEffectMixin):
         # FIXME
         # 目前默认被动技能效果像光环一样，一直存在
 
-        
+
         target_effect = TargetEffects()
+
         def _active_all(team_one, team_two):
             for h in team_one:
                 if h is None:
@@ -124,12 +120,8 @@ class BattleField(ActiveEffectMixin):
         _active_all(self.team_one, self.team_two)
         _active_all(self.team_two, self.team_one)
 
-
         logger.debug("Active Passive Effects: %s" % str(target_effect))
         return target_effect
-
-
-
 
 
     #def active_combine_skills(self):
@@ -221,18 +213,17 @@ class BattleField(ActiveEffectMixin):
                 target = self.choose_target(self.team_two, self.current_pos)
                 self.change_current_pos()
                 return ((hero, target),)
-            
+
             self.change_current_pos()
             return ((hero, opposite), (opposite, hero),)
 
-                
 
     def choose_target(self, base, index):
         for pos in TARGET_RULE[index]:
             h = base[pos]
             if h is None or h.die:
                 continue
-            
+
             return h
 
         raise Exception("choose_target error")

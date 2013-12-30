@@ -7,6 +7,7 @@ from itertools import groupby
 from preset._base import data_path
 from core.battle.skill import Skill, Effect
 
+
 def load_data():
     # {
     #     sid: SkillObj,        
@@ -63,11 +64,13 @@ def load_data():
         data[sid] = Skill(**fields)
     return data
 
+
 SKILLS = load_data()
 
 
 def load_combine_data():
     return {}
+
 
 COMBINE_SKILLS = load_combine_data()
 

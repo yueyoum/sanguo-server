@@ -4,6 +4,7 @@ class SanguoViewException(Exception):
         self.response_msg_name = response_msg_name
         Exception.__init__(self)
 
+
 class CounterOverFlow(SanguoViewException):
     def __init__(self, response_msg_name):
         SanguoViewException.__init__(self, 20, response_msg_name)
@@ -12,7 +13,7 @@ class CounterOverFlow(SanguoViewException):
 class BadMessage(SanguoViewException):
     def __init__(self, response_msg_name):
         SanguoViewException.__init__(self, 1, response_msg_name)
-    
+
 
 class InvalidOperate(SanguoViewException):
     def __init__(self, response_msg_name):

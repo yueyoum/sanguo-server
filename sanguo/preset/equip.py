@@ -9,10 +9,10 @@ from settings import EQUIP_LEVEL_RANGE, EQUIP_QUALITY_MODULUS
 # 1 白 2 绿 3 蓝 4 紫
 
 _TP_NAME = {
-        1: 'attack',
-        2: 'hp',
-        3: 'defense',
-        }
+    1: 'attack',
+    2: 'hp',
+    3: 'defense',
+}
 
 
 def get_equip_level_step(level):
@@ -46,7 +46,6 @@ def load_equip_template():
     return data
 
 
-
 def load_random_attribute():
     # {
     #     id: {
@@ -70,7 +69,7 @@ def load_random_attribute():
     for c in content:
         fields = c['fields']
 
-        fields[0]  = fields.pop('level_zero')
+        fields[0] = fields.pop('level_zero')
         fields[30] = fields.pop('level_one')
         fields[60] = fields.pop('level_two')
         fields[90] = fields.pop('level_three')
@@ -80,12 +79,12 @@ def load_random_attribute():
     return data
 
 
-
 EQUIP_TEMPLATE = load_equip_template()
 EQUIP_RANDOM_ATTRIBUTE = load_random_attribute()
 
 _EQUIP_IDS_BY_QUALITY_ALL = {}
 _EQUIP_IDS_BY_QUALITY_STD = {}
+
 
 def EQUIP_IDS_BY_QUALITY(quality, only_std=False):
     global _EQUIP_IDS_BY_QUALITY_ALL
@@ -96,29 +95,29 @@ def EQUIP_IDS_BY_QUALITY(quality, only_std=False):
         if only_std:
             return x['std'] and x['quality'] == quality
         return x['quality'] == quality
-    
+
     if only_std:
         if quality not in _EQUIP_IDS_BY_QUALITY_STD:
             filter_list = filter(_filter, EQUIP_TEMPLATE.items())
             _EQUIP_IDS_BY_QUALITY_STD[quality] = [k for k, v in filter_list]
         return _EQUIP_IDS_BY_QUALITY_STD[quality]
-    
+
     if quality not in _EQUIP_IDS_BY_QUALITY_ALL:
         filter_list = filter(_filter, EQUIP_TEMPLATE.items())
         _EQUIP_IDS_BY_QUALITY_ALL[quality] = [k for k, v in filter_list]
-    
+
     return _EQUIP_IDS_BY_QUALITY_ALL[quality]
-        
 
 
 _RANDOM_ATTRS = {
-        1: [],
-        2: [],
-        3: [],
-        }
+    1: [],
+    2: [],
+    3: [],
+}
 
 for k, v in EQUIP_RANDOM_ATTRIBUTE.iteritems():
     _RANDOM_ATTRS[v['used_for']].append(k)
+
 
 def get_random_attributes(tp, level):
     # 先根据类型和等级范围确定随机属性的数量
@@ -167,7 +166,6 @@ def get_random_attributes(tp, level):
     return final
 
 
-
 def generate_equip(tid, level):
     template = EQUIP_TEMPLATE[tid]
     tp = template['tp']
@@ -184,12 +182,12 @@ def generate_equip(tid, level):
 
     #FIXME
     return {
-            'tp': tp,
-            'quality': quality,
-            'name': name,
-            'level': level,
-            'modulus': modulus,
-            'hole_amount': hole_amount,
-            'random_attrs': extra
-            }
+        'tp': tp,
+        'quality': quality,
+        'name': name,
+        'level': level,
+        'modulus': modulus,
+        'hole_amount': hole_amount,
+        'random_attrs': extra
+    }
 

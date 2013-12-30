@@ -1,210 +1,210 @@
 [
-{
-    "pk": 24, 
-    "model": "skill.effect", 
-    "fields": {
-        "is_percent": true, 
-        "target": 1, 
-        "value": 100, 
-        "effect_type": 2, 
-        "skill": 1, 
-        "group_id": 1, 
-        "rounds": 0
+    {
+        "pk": 24,
+        "model": "skill.effect",
+        "fields": {
+            "is_percent": true,
+            "target": 1,
+            "value": 100,
+            "effect_type": 2,
+            "skill": 1,
+            "group_id": 1,
+            "rounds": 0
+        }
+    },
+    {
+        "pk": 25,
+        "model": "skill.effect",
+        "fields": {
+            "is_percent": true,
+            "target": 1,
+            "value": 140,
+            "effect_type": 2,
+            "skill": 2,
+            "group_id": 1,
+            "rounds": 0
+        }
+    },
+    {
+        "pk": 26,
+        "model": "skill.effect",
+        "fields": {
+            "is_percent": true,
+            "target": 1,
+            "value": 160,
+            "effect_type": 2,
+            "skill": 3,
+            "group_id": 1,
+            "rounds": 0
+        }
+    },
+    {
+        "pk": 27,
+        "model": "skill.effect",
+        "fields": {
+            "is_percent": true,
+            "target": 1,
+            "value": 180,
+            "effect_type": 2,
+            "skill": 4,
+            "group_id": 1,
+            "rounds": 0
+        }
+    },
+    {
+        "pk": 28,
+        "model": "skill.effect",
+        "fields": {
+            "is_percent": true,
+            "target": 3,
+            "value": 65,
+            "effect_type": 2,
+            "skill": 5,
+            "group_id": 1,
+            "rounds": 0
+        }
+    },
+    {
+        "pk": 29,
+        "model": "skill.effect",
+        "fields": {
+            "is_percent": true,
+            "target": 3,
+            "value": 85,
+            "effect_type": 2,
+            "skill": 6,
+            "group_id": 1,
+            "rounds": 0
+        }
+    },
+    {
+        "pk": 30,
+        "model": "skill.effect",
+        "fields": {
+            "is_percent": true,
+            "target": 3,
+            "value": 110,
+            "effect_type": 2,
+            "skill": 7,
+            "group_id": 1,
+            "rounds": 0
+        }
+    },
+    {
+        "pk": 31,
+        "model": "skill.effect",
+        "fields": {
+            "is_percent": true,
+            "target": 1,
+            "value": 100,
+            "effect_type": 2,
+            "skill": 8,
+            "group_id": 1,
+            "rounds": 0
+        }
+    },
+    {
+        "pk": 32,
+        "model": "skill.effect",
+        "fields": {
+            "is_percent": true,
+            "target": 2,
+            "value": 20,
+            "effect_type": 3,
+            "skill": 8,
+            "group_id": 1,
+            "rounds": 3
+        }
+    },
+    {
+        "pk": 33,
+        "model": "skill.effect",
+        "fields": {
+            "is_percent": true,
+            "target": 4,
+            "value": 25,
+            "effect_type": 3,
+            "skill": 9,
+            "group_id": 1,
+            "rounds": 3
+        }
+    },
+    {
+        "pk": 34,
+        "model": "skill.effect",
+        "fields": {
+            "is_percent": true,
+            "target": 2,
+            "value": 150,
+            "effect_type": 5,
+            "skill": 10,
+            "group_id": 1,
+            "rounds": 1
+        }
+    },
+    {
+        "pk": 35,
+        "model": "skill.effect",
+        "fields": {
+            "is_percent": true,
+            "target": 1,
+            "value": 100,
+            "effect_type": 2,
+            "skill": 11,
+            "group_id": 1,
+            "rounds": 0
+        }
+    },
+    {
+        "pk": 36,
+        "model": "skill.effect",
+        "fields": {
+            "is_percent": true,
+            "target": 2,
+            "value": 25,
+            "effect_type": 5,
+            "skill": 11,
+            "group_id": 1,
+            "rounds": 3
+        }
+    },
+    {
+        "pk": 37,
+        "model": "skill.effect",
+        "fields": {
+            "is_percent": true,
+            "target": 4,
+            "value": 30,
+            "effect_type": 5,
+            "skill": 12,
+            "group_id": 1,
+            "rounds": 3
+        }
+    },
+    {
+        "pk": 38,
+        "model": "skill.effect",
+        "fields": {
+            "is_percent": false,
+            "target": 4,
+            "value": 25,
+            "effect_type": 9,
+            "skill": 13,
+            "group_id": 1,
+            "rounds": 3
+        }
+    },
+    {
+        "pk": 39,
+        "model": "skill.effect",
+        "fields": {
+            "is_percent": false,
+            "target": 4,
+            "value": 20,
+            "effect_type": 7,
+            "skill": 14,
+            "group_id": 1,
+            "rounds": 3
+        }
     }
-},
-{
-    "pk": 25, 
-    "model": "skill.effect", 
-    "fields": {
-        "is_percent": true, 
-        "target": 1, 
-        "value": 140, 
-        "effect_type": 2, 
-        "skill": 2, 
-        "group_id": 1, 
-        "rounds": 0
-    }
-},
-{
-    "pk": 26, 
-    "model": "skill.effect", 
-    "fields": {
-        "is_percent": true, 
-        "target": 1, 
-        "value": 160, 
-        "effect_type": 2, 
-        "skill": 3, 
-        "group_id": 1, 
-        "rounds": 0
-    }
-},
-{
-    "pk": 27, 
-    "model": "skill.effect", 
-    "fields": {
-        "is_percent": true, 
-        "target": 1, 
-        "value": 180, 
-        "effect_type": 2, 
-        "skill": 4, 
-        "group_id": 1, 
-        "rounds": 0
-    }
-},
-{
-    "pk": 28, 
-    "model": "skill.effect", 
-    "fields": {
-        "is_percent": true, 
-        "target": 3, 
-        "value": 65, 
-        "effect_type": 2, 
-        "skill": 5, 
-        "group_id": 1, 
-        "rounds": 0
-    }
-},
-{
-    "pk": 29, 
-    "model": "skill.effect", 
-    "fields": {
-        "is_percent": true, 
-        "target": 3, 
-        "value": 85, 
-        "effect_type": 2, 
-        "skill": 6, 
-        "group_id": 1, 
-        "rounds": 0
-    }
-},
-{
-    "pk": 30, 
-    "model": "skill.effect", 
-    "fields": {
-        "is_percent": true, 
-        "target": 3, 
-        "value": 110, 
-        "effect_type": 2, 
-        "skill": 7, 
-        "group_id": 1, 
-        "rounds": 0
-    }
-},
-{
-    "pk": 31, 
-    "model": "skill.effect", 
-    "fields": {
-        "is_percent": true, 
-        "target": 1, 
-        "value": 100, 
-        "effect_type": 2, 
-        "skill": 8, 
-        "group_id": 1, 
-        "rounds": 0
-    }
-},
-{
-    "pk": 32, 
-    "model": "skill.effect", 
-    "fields": {
-        "is_percent": true, 
-        "target": 2, 
-        "value": 20, 
-        "effect_type": 3, 
-        "skill": 8, 
-        "group_id": 1, 
-        "rounds": 3
-    }
-},
-{
-    "pk": 33, 
-    "model": "skill.effect", 
-    "fields": {
-        "is_percent": true, 
-        "target": 4, 
-        "value": 25, 
-        "effect_type": 3, 
-        "skill": 9, 
-        "group_id": 1, 
-        "rounds": 3
-    }
-},
-{
-    "pk": 34, 
-    "model": "skill.effect", 
-    "fields": {
-        "is_percent": true, 
-        "target": 2, 
-        "value": 150, 
-        "effect_type": 5, 
-        "skill": 10, 
-        "group_id": 1, 
-        "rounds": 1
-    }
-},
-{
-    "pk": 35, 
-    "model": "skill.effect", 
-    "fields": {
-        "is_percent": true, 
-        "target": 1, 
-        "value": 100, 
-        "effect_type": 2, 
-        "skill": 11, 
-        "group_id": 1, 
-        "rounds": 0
-    }
-},
-{
-    "pk": 36, 
-    "model": "skill.effect", 
-    "fields": {
-        "is_percent": true, 
-        "target": 2, 
-        "value": 25, 
-        "effect_type": 5, 
-        "skill": 11, 
-        "group_id": 1, 
-        "rounds": 3
-    }
-},
-{
-    "pk": 37, 
-    "model": "skill.effect", 
-    "fields": {
-        "is_percent": true, 
-        "target": 4, 
-        "value": 30, 
-        "effect_type": 5, 
-        "skill": 12, 
-        "group_id": 1, 
-        "rounds": 3
-    }
-},
-{
-    "pk": 38, 
-    "model": "skill.effect", 
-    "fields": {
-        "is_percent": false, 
-        "target": 4, 
-        "value": 25, 
-        "effect_type": 9, 
-        "skill": 13, 
-        "group_id": 1, 
-        "rounds": 3
-    }
-},
-{
-    "pk": 39, 
-    "model": "skill.effect", 
-    "fields": {
-        "is_percent": false, 
-        "target": 4, 
-        "value": 20, 
-        "effect_type": 7, 
-        "skill": 14, 
-        "group_id": 1, 
-        "rounds": 3
-    }
-}
 ]
