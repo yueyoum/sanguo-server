@@ -57,6 +57,25 @@ class Char(object):
         c = MongoChar.objects.only('sockets').get(id=self.id)
         return {int(k): v for k, v in c.sockets.iteritems()}
 
+    @property
+    def hero_oid_list(self):
+        # 阵法中英雄按照排列顺序的原始ID列表
+        heros_dict = self.heros_dict
+        c = MongoChar.objects.only('sockets', 'formation').get(id=self.id)
+        res = []
+        for f in c.formation:
+            if f == 0:
+                res.append(0)
+                continue
+
+            s = c.sockets[str(f)]
+            if not s.hero:
+                continue
+
+            res.append(heros_dict[s.hero])
+        return res
+
+
     def save_formation(self, socket_ids, send_notify=True):
         save_formation(self.id, socket_ids, send_notify=send_notify)
 

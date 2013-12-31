@@ -20,6 +20,12 @@ class InvalidOperate(SanguoViewException):
         SanguoViewException.__init__(self, 2, response_msg_name)
 
 
+class CharNotFound(SanguoViewException):
+    def __init__(self, response_msg_name):
+        SanguoViewException.__init__(self, 3, response_msg_name)
+
+
+
 class GoldNotEnough(SanguoViewException):
     def __init__(self, response_msg_name):
         SanguoViewException.__init__(self, 10, response_msg_name)

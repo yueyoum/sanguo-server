@@ -5,6 +5,7 @@ from world_pb2 import *
 from character_pb2 import *
 from item_pb2 import *
 from formation_pb2 import *
+from friend_pb2 import *
 from battle_pb2 import *
 from prize_pb2 import *
 
@@ -63,6 +64,17 @@ RESPONSE_NOTIFY_TYPE = {
     "UnEmbedGemResponse": 1759,
     "PrizeNotify": 1800,
     "PrizeResponse": 1802,
+    "FriendsNotify": 2000,
+    "NewFriendNotify": 2001,
+    "RemoveFriendNotify": 2002,
+    "UpdateFriendNotify": 2020,
+    "FriendsAmountNotify": 2003,
+    "PlayerListResponse": 2005,
+    "FriendAddResponse": 2007,
+    "FriendTerminateResponse": 2009,
+    "FriendCancelResponse": 2011,
+    "FriendAcceptResponse": 2013,
+    "FriendRefuseResponse": 2015,
 }
 
 REQUEST_TYPE = {
@@ -91,6 +103,12 @@ REQUEST_TYPE = {
     1756: "EmbedGemRequest",
     1758: "UnEmbedGemRequest",
     1801: "PrizeRequest",
+    2004: "PlayerListRequest",
+    2006: "FriendAddRequest",
+    2008: "FriendTerminateRequest",
+    2010: "FriendCancelRequest",
+    2012: "FriendAcceptRequest",
+    2014: "FriendRefuseRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -119,5 +137,11 @@ REQUEST_TYPE_REV = {
     "EmbedGemRequest": 1756,
     "UnEmbedGemRequest": 1758,
     "PrizeRequest": 1801,
+    "PlayerListRequest": 2004,
+    "FriendAddRequest": 2006,
+    "FriendTerminateRequest": 2008,
+    "FriendCancelRequest": 2010,
+    "FriendAcceptRequest": 2012,
+    "FriendRefuseRequest": 2014,
 }
 

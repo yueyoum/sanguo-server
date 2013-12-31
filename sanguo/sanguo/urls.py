@@ -51,4 +51,11 @@ urlpatterns = patterns('',
 
                        url(r'^prisoner/train/$', 'views.prison.views.train'),
                        url(r'^prisoner/get/$', 'views.prison.views.get'),
+
+                       url(r'^friend/player-list/$', 'views.friend.views.player_list'),
+                       url(r'^friend/add/$', 'views.friend.views.add'),
+                       url(r'^friend/cancel/$', 'views.friend.views.cancel'),
+                       url(r'^friend/accept/$', 'views.friend.views.accept'),
+                       url(r'^friend/refuse/$', 'views.friend.views.refuse'),
+                       url(r'^friend/terminate/$', 'views.friend.views.terminate'),
 )

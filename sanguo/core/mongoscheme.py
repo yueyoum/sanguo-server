@@ -97,3 +97,14 @@ class MongoCounter(Document):
         'collection': 'counter'
     }
 
+
+class MongoFriend(Document):
+    id = IntField(primary_key=True)
+    # 已加好友和自己发出的申请
+    friends = DictField()
+    # 别人发来的申请需要我接受的
+    accepting = ListField(IntField())
+
+    meta = {
+        'collection': 'friend'
+    }
