@@ -104,7 +104,4 @@ ubuntu 系统上 uWSGI 在 enable-thread 后可能会报这样的错误
 解决办法:
 
 
-    ```
-
-    ```
 
