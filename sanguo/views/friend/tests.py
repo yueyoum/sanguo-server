@@ -26,6 +26,15 @@ class FriendTest(TransactionTestCase):
         app_test_helper._teardown()
 
 
+    def test_player_list(self):
+        req = protomsg.PlayerListRequest()
+        req.session = self.session
+        data = app_test_helper.pack_data(req)
+        res = app_test_helper.make_request('/friend/player-list/', data)
+        msgs = app_test_helper.unpack_data(res)
+
+
+
     def _add(self, _id=None, name=None, ret=0, session=None):
         if not session:
             session = self.session

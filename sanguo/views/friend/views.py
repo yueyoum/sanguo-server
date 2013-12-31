@@ -31,8 +31,9 @@ def player_list(request):
             break
 
     response = protomsg.PlayerListResponse()
+    response.ret = 0
     for r in res:
-        msg = response.friends.add()
+        msg = response.players.add()
         f._msg_friend(msg, r, FRIEND_NOT)
 
     data = pack_msg(response)
