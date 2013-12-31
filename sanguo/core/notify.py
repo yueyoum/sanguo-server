@@ -14,6 +14,7 @@ from core.msgpipe import publish_to_char
 from preset.settings import PLUNDER_COST_SYCEE
 from core.counter import Counter
 from core.prison import Prison
+from core.friend import Friend
 
 
 def character_notify(char_id):
@@ -385,5 +386,9 @@ def login_notify(char_id):
     prison_notify(char_id)
 
     arena_notify(char_id)
+
+    f = Friend(char_id)
+    f.send_friends_notify()
+    f.send_friends_amount_notify()
     
 
