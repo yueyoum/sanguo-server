@@ -88,6 +88,7 @@ class UnpackAndVerifyData(object):
                     request._account_id = int(splited_session[0])
                     request._server_id = int(splited_session[1])
                     request._char_id = int(splited_session[2])
+                    print "CHAR ID =", request._char_id
 
 
 _BIND = set()
