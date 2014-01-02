@@ -36,14 +36,20 @@ class Mail(object):
         """
 
         @param name: mail name
-        @type name: str
+        @type name: str | unicode
         @param content: mail content
-        @type content: str
+        @type content: str | unicode
         @param attachment: mail attachment
         @type attachment: Drop | None
         @return: new mail id
         @rtype: int
         """
+
+        if not isinstance(name, unicode):
+            name = name.decode('utf-8')
+
+        if not isinstance(content, unicode):
+            content = content.decode('utf-8')
 
         mail_id = document_ids.inc('mail')
         m = EmbededMail()
@@ -101,6 +107,7 @@ class Mail(object):
             m = msg.mails.add()
             m.id = int(k)
             m.name = v.name
+
             m.content = v.content
             m.has_read = v.has_read
             if v.attachment:
