@@ -100,8 +100,8 @@ class Mail(object):
         for k, v in self.mail.mails.iteritems():
             m = msg.mails.add()
             m.id = int(k)
-            m.name = v.name
-            m.content = v.content
+            m.name = v.name.decode('utf-8')
+            m.content = v.content.decode('utf-8')
             m.has_read = v.has_read
             if v.attachment:
                 m.attachment.MergeFromString(v.attachment)
