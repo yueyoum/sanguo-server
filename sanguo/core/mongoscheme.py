@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from mongoengine import *
+import core.drives
 
 
 class MongoSocket(EmbeddedDocument):
@@ -107,4 +108,21 @@ class MongoFriend(Document):
 
     meta = {
         'collection': 'friend'
+    }
+
+
+class EmbededMail(EmbeddedDocument):
+    name = StringField(required=True)
+    content = StringField(required=True)
+    attachment = BinaryField()
+    has_read = BooleanField(required=True)
+    # utc timestamp
+    create_at = IntField(required=True)
+
+class MongoMail(Document):
+    id = IntField(primary_key=True)
+    mails = MapField(EmbeddedDocumentField(EmbededMail))
+
+    meta = {
+        'collection': 'mail'
     }

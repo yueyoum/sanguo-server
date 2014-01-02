@@ -4,25 +4,11 @@ from mongoengine import connect
 
 from django.conf import settings
 
-_redis_pool = redis.ConnectionPool(
-    host=settings.REDIS_HOST,
-    port=settings.REDIS_PORT,
-    db=settings.REDIS_DB
-)
 
-redis_client = redis.Redis(connection_pool=_redis_pool)
-
-mongodb_client = pymongo.MongoClient(
-    host=settings.MONGODB_HOST,
-    port=settings.MONGODB_PORT
-)
-
-mongodb_client_db = mongodb_client[settings.MONGODB_DB]
-
-connect(settings.MONGODB_DB,
-        host=settings.MONGODB_HOST,
-        port=settings.MONGODB_PORT
-)
+redis_client = None
+mongodb_client = None
+mongodb_client_db = None
+document_ids = None
 
 
 class _DocumentIds(object):
@@ -40,5 +26,36 @@ class _DocumentIds(object):
         return res['id']
 
 
-document_ids = _DocumentIds(mongodb_client_db)
+def _init():
+    global redis_client
+    global mongodb_client
+    global mongodb_client_db
+    global document_ids
 
+    if redis_client is not None:
+        return
+
+    _redis_pool = redis.ConnectionPool(
+        host=settings.REDIS_HOST,
+        port=settings.REDIS_PORT,
+        db=settings.REDIS_DB
+    )
+
+    redis_client = redis.Redis(connection_pool=_redis_pool)
+
+    mongodb_client = pymongo.MongoClient(
+        host=settings.MONGODB_HOST,
+        port=settings.MONGODB_PORT
+    )
+
+    mongodb_client_db = mongodb_client[settings.MONGODB_DB]
+
+    connect(settings.MONGODB_DB,
+            host=settings.MONGODB_HOST,
+            port=settings.MONGODB_PORT
+    )
+
+    document_ids = _DocumentIds(mongodb_client_db)
+
+
+_init()

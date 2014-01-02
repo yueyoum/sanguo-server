@@ -143,3 +143,6 @@ COST_OPEN_PRISON_SLOT = 1
 
 # 基本好友最大数量
 MAX_FRIENDS_AMOUNT = 5
+
+# 邮件可以保存多少天
+MAIL_KEEP_DAYS = 1

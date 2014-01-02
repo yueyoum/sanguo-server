@@ -58,4 +58,8 @@ urlpatterns = patterns('',
                        url(r'^friend/accept/$', 'views.friend.views.accept'),
                        url(r'^friend/refuse/$', 'views.friend.views.refuse'),
                        url(r'^friend/terminate/$', 'views.friend.views.terminate'),
+
+                       url(r'^mail/open/$', 'views.mail.views.open'),
+                       url(r'^mail/delete/$', 'views.mail.views.delete'),
+                       url(r'^mail/getattachment/$', 'views.mail.views.get_attachment'),
 )

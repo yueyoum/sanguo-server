@@ -4,13 +4,15 @@ __author__ = 'Wang Chao'
 __date__ = '12/31/13'
 
 from django.test import TransactionTestCase
-import protomsg
-from protomsg import RESPONSE_NOTIFY_TYPE
+
 
 from core.friend import Friend
 from core.character import char_initialize
 from utils import app_test_helper
 from utils import crypto
+
+import protomsg
+from protomsg import RESPONSE_NOTIFY_TYPE
 
 class FriendTest(TransactionTestCase):
     def setUp(self):

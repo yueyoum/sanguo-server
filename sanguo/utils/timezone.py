@@ -9,7 +9,7 @@ LOCAL_TIMEZONE = pytz.timezone(settings.TIME_ZONE)
 
 
 def utcnow():
-    return datetime.datetime.utcnow()
+    return datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
 
 
 def utc_timestamp():

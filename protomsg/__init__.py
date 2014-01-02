@@ -2,6 +2,7 @@ from account_pb2 import *
 from hero_pb2 import *
 from cmd_pb2 import *
 from world_pb2 import *
+from mail_pb2 import *
 from character_pb2 import *
 from item_pb2 import *
 from formation_pb2 import *
@@ -75,6 +76,10 @@ RESPONSE_NOTIFY_TYPE = {
     "FriendCancelResponse": 2011,
     "FriendAcceptResponse": 2013,
     "FriendRefuseResponse": 2015,
+    "MailNotify": 2100,
+    "OpenMailResponse": 2102,
+    "DeleteMailResponse": 2104,
+    "GetAttachmentResponse": 2106,
 }
 
 REQUEST_TYPE = {
@@ -109,6 +114,9 @@ REQUEST_TYPE = {
     2010: "FriendCancelRequest",
     2012: "FriendAcceptRequest",
     2014: "FriendRefuseRequest",
+    2101: "OpenMailRequest",
+    2103: "DeleteMailRequest",
+    2105: "GetAttachmentRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -143,5 +151,8 @@ REQUEST_TYPE_REV = {
     "FriendCancelRequest": 2010,
     "FriendAcceptRequest": 2012,
     "FriendRefuseRequest": 2014,
+    "OpenMailRequest": 2101,
+    "DeleteMailRequest": 2103,
+    "GetAttachmentRequest": 2105,
 }
 
