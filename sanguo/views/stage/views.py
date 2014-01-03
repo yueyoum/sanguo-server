@@ -242,15 +242,6 @@ def hang_cancel(request):
 def plunder_list(request):
     char_id = request._char_id
     res = get_plunder_list(char_id)
-    # XXX just for test
-    if not res:
-        from apps.character.models import Character
-
-        ids = Character.objects.order_by('-id').values_list('id', flat=True)
-        ids = ids[:10]
-        res = [(i, 8) for i in ids if i != char_id]
-        # END test
-
 
     response = protomsg.PlunderListResponse()
     response.ret = 0
