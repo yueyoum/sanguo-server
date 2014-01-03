@@ -242,6 +242,15 @@ def hang_cancel(request):
 def plunder_list(request):
     char_id = request._char_id
     res = get_plunder_list(char_id)
+    # XXX just for test
+    if not res:
+        from apps.character.models import Character
+
+        ids = Character.objects.order_by('-id').values_list('id', flat=True)
+        ids = ids[:10]
+        res = [(i, 8) for i in ids if i != char_id]
+        # END test
+
 
     response = protomsg.PlunderListResponse()
     response.ret = 0
@@ -284,13 +293,18 @@ def plunder(request):
         ))
         raise InvalidOperate("PlunderResponse")
 
-    try:
-        hang = Hang.objects.get(id=req.id)
-    except DoesNotExist:
-        logger.warning("Plunder. Char {0} plunder with {1}, but {1} not in hang status".format(
-            char_id, req.id
-        ))
-        raise InvalidOperate("PlunderResponse")
+    # try:
+    #     hang = Hang.objects.get(id=req.id)
+    # except DoesNotExist:
+    #     logger.warning("Plunder. Char {0} plunder with {1}, but {1} not in hang status".format(
+    #         char_id, req.id
+    #     ))
+    #     raise InvalidOperate("PlunderResponse")
+    # XXX For test
+    hang = Hang(id=req.id)
+    hang.hours = 8
+    hang.stage = 1
+    # XXX End end
 
     b = PVP(char_id, req.id, msg)
     b.start()
