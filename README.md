@@ -97,11 +97,19 @@
 
 ## uWSGI 报错
 
-ubuntu 系统上 uWSGI 在 enable-thread 后可能会报这样的错误
+ubuntu x64 系统上 uWSGI 可能会报这样的错误
 
 `libgcc_s.so.1 must be installed for pthread_cancel to work`
 
 解决办法:
 
+**不要** 用pip 安装 uwsgi
+
+下载安装包，修改 `uwsgiconfig.py` 文件，将对应的位置修改为：
+
+```
+1460     add_cflags = ['-lpthread', '-lgcc_s']
+1461     add_ldflags = ['-lpthread', '-lgcc_s']
+```
 
 
