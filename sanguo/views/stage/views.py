@@ -14,14 +14,13 @@ from core.battle.hero import BattleHero, MonsterHero
 from core.hero.cache import get_cache_hero
 from core.counter import Counter
 from core.exception import SanguoViewException, InvalidOperate, CounterOverFlow, SyceeNotEnough
-from core.mongoscheme import Hang, MongoChar, MongoPrison, Prisoner
+from core.mongoscheme import Hang, MongoChar
 from core.prison import save_prisoner
 from core.signals import (hang_add_signal, hang_cancel_signal,
-                          plunder_finished_signal, prisoner_add_signal,
+                          plunder_finished_signal,
                           pve_finished_signal, pvp_finished_signal)
 from core.stage import (get_plunder_list, get_stage_fixed_drop,
-                        get_stage_hang_drop, get_stage_standard_drop, save_drop)
-from protomsg import Prisoner as PrisonerProtoMsg
+                        get_stage_standard_drop, save_drop)
 from timer.tasks import cancel_job, sched
 from utils import pack_msg, timezone
 
@@ -149,7 +148,7 @@ def pve(request):
     return HttpResponse(data, content_type='text/plain')
 
 
-def hang(request):
+def hang_start(request):
     req = request._proto
     char_id = request._char_id
 
@@ -295,7 +294,7 @@ def plunder(request):
         raise InvalidOperate("PlunderResponse")
 
     try:
-        Hang.objects.get(id=req.id)
+        hang = Hang.objects.get(id=req.id)
     except DoesNotExist:
         logger.warning("Plunder. Char {0} plunder with {1}, but {1} not in hang status".format(
             char_id, req.id
@@ -315,7 +314,6 @@ def plunder(request):
         sender=None,
         from_char_id=char_id,
         to_char_id=req.id,
-        is_npc=req.npc,
         is_crit=plunder_crit
     )
 

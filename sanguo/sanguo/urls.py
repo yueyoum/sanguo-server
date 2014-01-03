@@ -39,7 +39,7 @@ urlpatterns = patterns('',
 
                        url(r'^gem/merge/$', 'views.gem.views.merge'),
 
-                       url(r'^hang/$', 'views.stage.views.hang'),
+                       url(r'^hang/$', 'views.stage.views.hang_start'),
                        url(r'^hang/cancel/$', 'views.stage.views.hang_cancel'),
 
                        url(r'^prize/$', 'views.prize.views.prize_get'),
