@@ -1,15 +1,12 @@
 import struct
-import traceback
 
 from django.http import HttpResponse
 
 import protomsg
 from protomsg import REQUEST_TYPE
 
-from core.exception import SanguoViewException
 #from core.rabbit import rabbit
 from utils import crypto
-from utils import pack_msg
 from core.msgpipe import message_get
 
 NUM_FIELD = struct.Struct('>i')
@@ -135,18 +132,18 @@ class PackMessageData(object):
         # DEBUG END
         return HttpResponse(data, content_type='text/plain')
 
-
-class ViewExceptionHandler(object):
-    def process_exception(self, request, exception):
-        if isinstance(exception, SanguoViewException):
-            proto = getattr(protomsg, exception.response_msg_name)
-            m = proto()
-            m.ret = exception.error_id
-
-            data = pack_msg(m)
-            return HttpResponse(data, content_type='text/plain')
-
-        traceback.print_exc()
-        raise exception
-
+#
+# class ViewExceptionHandler(object):
+#     def process_exception(self, request, exception):
+#         if isinstance(exception, SanguoException):
+#             proto = getattr(protomsg, exception.response_msg_name)
+#             m = proto()
+#             m.ret = exception.error_id
+#
+#             data = pack_msg(m)
+#             return HttpResponse(data, content_type='text/plain')
+#
+#         traceback.print_exc()
+#         raise exception
+#
 

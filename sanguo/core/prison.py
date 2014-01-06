@@ -5,7 +5,7 @@ from core.mongoscheme import MongoPrison, Prisoner
 from timer.tasks import sched
 from callbacks import timers
 from protomsg import Prisoner as PrisonerProtoMsg
-from core.exception import SyceeNotEnough, SanguoViewException
+from core.exception import SyceeNotEnough, SanguoException
 from core.character import Char
 
 from utils import timezone
@@ -35,12 +35,12 @@ class Prison(object):
 
     def open_slot(self):
         if self.slots >= self.max_slots:
-            raise SanguoViewException(804, "OpenTrainSlotResponse")
+            raise SanguoException(804)
 
         c = Char(self.char_id)
         cache_char = c.cacheobj
         if cache_char.sycee < self.open_slot_cost:
-            raise SyceeNotEnough("OpenTrainSlotResponse")
+            raise SyceeNotEnough()
 
         self.p.amount += 1
         self.p.save()

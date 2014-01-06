@@ -3,16 +3,17 @@
 __author__ = 'Wang Chao'
 __date__ = '12/31/13'
 
-
-from django.http import HttpResponse
 from core.friend import Friend
 from core.character import Char
 from apps.character.models import Character
 from utils import pack_msg
+from utils.decorate import message_response
 
 import protomsg
 from protomsg import FRIEND_NOT
 
+
+@message_response("PlayerListResponse")
 def player_list(request):
     char_id = request._char_id
     char = Char(char_id)
@@ -36,60 +37,45 @@ def player_list(request):
         msg = response.players.add()
         f._msg_friend(msg, r, FRIEND_NOT)
 
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
+    return pack_msg(response)
 
 
-
-
-
-
+@message_response("FriendAddResponse")
 def add(request):
     req = request._proto
     f = Friend(request._char_id)
     f.add(req.id, req.name)
+    return None
 
-    response = protomsg.FriendAddResponse()
-    response.ret = 0
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
 
+@message_response("FriendTerminateResponse")
 def terminate(request):
     req = request._proto
     f = Friend(request._char_id)
     f.terminate(req.id)
+    return None
 
-    response = protomsg.FriendTerminateResponse()
-    response.ret = 0
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
 
+@message_response("FriendCancelResponse")
 def cancel(request):
     req = request._proto
     f = Friend(request._char_id)
     f.cancel(req.id)
+    return None
 
-    response = protomsg.FriendCancelResponse()
-    response.ret = 0
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
 
+@message_response("FriendAcceptResponse")
 def accept(request):
     req = request._proto
     f = Friend(request._char_id)
     f.accept(req.id)
+    return None
 
-    response = protomsg.FriendAcceptResponse()
-    response.ret = 0
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
 
+@message_response("FriendRefuseResponse")
 def refuse(request):
     req = request._proto
     f = Friend(request._char_id)
     f.refuse(req.id)
+    return None
 
-    response = protomsg.FriendRefuseResponse()
-    response.ret = 0
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')

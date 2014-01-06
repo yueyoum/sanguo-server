@@ -117,7 +117,6 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'sanguo.middleware.UnpackAndVerifyData',
     'sanguo.middleware.PackMessageData',
-    'sanguo.middleware.ViewExceptionHandler',
 )
 
 ROOT_URLCONF = 'sanguo.urls'
@@ -232,6 +231,6 @@ if TESTING:
 
 try:
     from local_settings import *
-except:
+except ImportError:
     pass
 

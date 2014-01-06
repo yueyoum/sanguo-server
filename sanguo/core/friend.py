@@ -10,7 +10,7 @@ from apps.character.models import Character
 from core.mongoscheme import MongoFriend
 from core.character import Char
 from core.msgpipe import publish_to_char
-from core.exception import InvalidOperate, BadMessage, CharNotFound, SanguoViewException
+from core.exception import InvalidOperate, BadMessage, CharNotFound, SanguoException
 
 import protomsg
 from protomsg import FRIEND_NOT, FRIEND_OK, FRIEND_ACK, FRIEND_APPLY
@@ -70,24 +70,24 @@ class Friend(object):
 
     def add(self, target_id=None, target_name=None):
         if not target_id and not target_name:
-            raise BadMessage("FriendAddResponse")
+            raise BadMessage()
 
         if self.cur_amount >= self.max_amount:
-            raise SanguoViewException(1001, "FriendAddResponse")
+            raise SanguoException(1001)
 
         if target_id:
             try:
                 c = Character.objects.get(id=target_id)
             except Character.DoesNotExist:
-                raise InvalidOperate("FriendAddResponse")
+                raise InvalidOperate()
         else:
             try:
                 c = Character.objects.get(server_id=self.cache_char.server_id, name=target_name)
             except Character.DoesNotExist:
-                raise CharNotFound("FriendAddResponse")
+                raise CharNotFound()
 
         if str(c.id) in self.mf.friends:
-            raise SanguoViewException(1000, "FriendAddResponse")
+            raise SanguoException(1000)
 
         self.mf.friends[str(c.id)] = FRIEND_ACK
         self.mf.save()
@@ -118,7 +118,7 @@ class Friend(object):
     def terminate(self, target_id):
         t = str(target_id)
         if t not in self.mf.friends or self.mf.friends[t] != FRIEND_OK:
-            raise InvalidOperate("FriendTerminateResponse")
+            raise InvalidOperate()
 
         self.mf.friends.pop(t)
         self.mf.save()
@@ -152,7 +152,7 @@ class Friend(object):
     def cancel(self, target_id):
         t = str(target_id)
         if t not in self.mf.friends or self.mf.friends[t] != FRIEND_ACK:
-            raise InvalidOperate("FriendCancelResponse")
+            raise InvalidOperate()
 
         self.mf.friends.pop(t)
         self.mf.save()
@@ -179,10 +179,10 @@ class Friend(object):
 
     def accept(self, target_id):
         if target_id not in self.mf.accepting:
-            raise InvalidOperate("FriendAcceptResponse")
+            raise InvalidOperate()
 
         if self.cur_amount > self.max_amount:
-            raise SanguoViewException(1001, "FriendAcceptResponse")
+            raise SanguoException(1001)
 
 
         self.mf.accepting.remove(target_id)
@@ -209,7 +209,7 @@ class Friend(object):
 
     def refuse(self, target_id):
         if target_id not in self.mf.accepting:
-            raise InvalidOperate("FriendRefuseResponse")
+            raise InvalidOperate()
 
         self.mf.accepting.remove(target_id)
         self.mf.save()

@@ -7,20 +7,15 @@ Replace this with more appropriate tests for your application.
 
 from django.test import TestCase, TransactionTestCase
 
-import protomsg
 from protomsg import (
     RESPONSE_NOTIFY_TYPE,
-    CommandResponse,
     CreateCharacterRequest,
     CreateCharacterResponse,
-    CharacterNotify,
-
     )
 
 from utils import app_test_helper
 from core.character import char_initialize
 from utils import crypto
-from core import GLOBAL
 
 
 def teardown():
@@ -46,8 +41,8 @@ class CreateCharacterTest(TransactionTestCase):
 
         msgs = app_test_helper.unpack_data(res)
         for id_of_msg, len_of_msg, msg in msgs:
-            if id_of_msg == RESPONSE_NOTIFY_TYPE["CommandResponse"]:
-                data = CommandResponse()
+            if id_of_msg == RESPONSE_NOTIFY_TYPE["CreateCharacterResponse"]:
+                data = CreateCharacterResponse()
                 data.ParseFromString(msg)
                 self.assertEqual(data.ret, ret)
 
@@ -58,7 +53,7 @@ class CreateCharacterTest(TransactionTestCase):
         self._create(1, 1, "123", 200)
 
     def test_name_has_been_taken(self):
-        self._create(2, 1, "abcd", 201)
+        self._create(2, 1, "a", 201)
 
     def test_invalid_name_length(self):
         self._create(2, 2, "12345678", 202)

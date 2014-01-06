@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from django.http import HttpResponse
-
 from apps.character.models import Character
 from apps.player.models import User
-from core.exception import SanguoViewException, BadMessage, InvalidOperate
+from core.exception import SanguoException, BadMessage, InvalidOperate
 from core.signals import login_signal, register_signal
 from core.world import server_list
 from protomsg import RegisterResponse, StartGameResponse
 from utils import crypto, pack_msg
+from utils.decorate import message_response
 from preset.settings import SERVERS
 
 logger = logging.getLogger('sanguo')
@@ -40,16 +39,17 @@ def create_new_user(email='', password='', device_token=''):
     return user
 
 
+@message_response("RegisterResponse")
 def register(request):
     req = request._proto
 
     if not req.email or not req.password or not req.device_token:
         logger.warning("Register: With Empty Arguments")
-        raise BadMessage("RegisterResponse")
+        raise BadMessage()
 
     if User.objects.filter(email=req.email).exists():
         logger.warning("Register: With an Existed Email: %s" % req.email)
-        raise SanguoViewException(100, "RegisterResponse")
+        raise SanguoException(100)
 
     try:
         user = User.objects.get(device_token=req.device_token)
@@ -85,14 +85,14 @@ def register(request):
         s = response.servers.add()
         s.MergeFrom(server)
 
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
+    return pack_msg(response)
 
 
+@message_response("StartGameResponse")
 def login(request):
     req = request._proto
     if req.server_id not in SERVERS:
-        raise InvalidOperate("StartGameResponse")
+        raise InvalidOperate()
 
     need_create_new_char = None
     if req.anonymous.device_token:
@@ -104,18 +104,18 @@ def login(request):
             need_create_new_char = True
     else:
         if not req.regular.email or not req.regular.password:
-            raise BadMessage("StartGameResponse")
+            raise BadMessage()
         try:
             user = User.objects.get(email=req.regular.email)
             if user.passwd != req.regular.password:
-                raise SanguoViewException(120, "StartGameResponse")
+                raise SanguoException(120)
         except User.DoesNotExist:
-            raise SanguoViewException(121, "StartGameResponse")
+            raise SanguoException(121)
 
     user.last_server_id = req.server_id
     user.save()
     if not user.active:
-        raise SanguoViewException(122, "StartGameResponse")
+        raise SanguoException(122)
 
     request._account_id = user.id
     request._server_id = req.server_id
@@ -160,5 +160,4 @@ def login(request):
         response.regular.MergeFrom(req.regular)
     response.need_create_new_char = need_create_new_char
 
-    data = pack_msg(response, session)
-    return HttpResponse(data, content_type='text/plain')
+    return pack_msg(response, session)

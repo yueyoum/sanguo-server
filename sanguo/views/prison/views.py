@@ -1,25 +1,23 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from django.http import HttpResponse
 from mongoengine import DoesNotExist
 
-import protomsg
 from callbacks import timers
-from core.exception import SanguoViewException, InvalidOperate
+from core.exception import SanguoException, InvalidOperate
 from core.hero import save_hero
 from core.mongoscheme import MongoPrison
 from core.signals import prisoner_changed_signal, prisoner_del_signal
 from protomsg import Prisoner as PrisonerProtoMsg
 from timer.tasks import cancel_job, sched
-from utils import pack_msg, timezone
+from utils.decorate import message_response
 
 from core.prison import Prison
 from core.notify import prison_notify
 
 logger = logging.getLogger('sanguo')
 
-
+@message_response("OpenTrainSlotResponse")
 def open_slot(request):
     req = request._proto
     char_id = request._char_id
@@ -28,13 +26,10 @@ def open_slot(request):
     p.open_slot()
 
     prison_notify(char_id, prison=p)
-
-    response = protomsg.OpenTrainSlotResponse()
-    response.ret = 0
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
+    return None
 
 
+@message_response("TrainResponse")
 def train(request):
     req = request._proto
     char_id = request._char_id
@@ -43,19 +38,19 @@ def train(request):
         prison = MongoPrison.objects.get(id=char_id)
     except DoesNotExist:
         logger.warning("Train. Char {0} has NO prison".format(char_id))
-        raise InvalidOperate("TrainResponse")
+        raise InvalidOperate()
 
     prisoners = prison.prisoners
     if str(req.hero) not in prisoners:
         logger.warning("Train. Char {0} wanna train a NONE exist prisoner".format(char_id))
-        raise InvalidOperate("TrainResponse")
+        raise InvalidOperate()
 
     this_prisoner = prisoners[str(req.hero)]
     if this_prisoner.status != PrisonerProtoMsg.NOT:
         logger.warning("Train. Char {0} wanna train a prisoner who can NOT train. {1}".format(
             char_id, this_prisoner.status
         ))
-        raise SanguoViewException(801, "TrainResponse")
+        raise SanguoException(801)
 
     in_train_amount = 0
     for p in prisoners.values():
@@ -65,7 +60,7 @@ def train(request):
     # FIXME
     if in_train_amount >= 3:
         logger.warning("Train. Char {0} train amount full, Cannot train".format(char_id))
-        raise SanguoViewException(802, "TrainResponse")
+        raise SanguoException(802)
 
 
 
@@ -92,13 +87,9 @@ def train(request):
     logger.debug("Train. Char {0} start a training. {1}".format(
         char_id, req.hero
     ))
+    return None
 
-    response = protomsg.TrainResponse()
-    response.ret = 0
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
-
-
+@message_response("GetPrisonerResponse")
 def get(request):
     req = request._proto
     char_id = request._char_id
@@ -106,15 +97,15 @@ def get(request):
     try:
         prison = MongoPrison.objects.get(id=char_id)
     except DoesNotExist:
-        raise InvalidOperate("TrainResponse")
+        raise InvalidOperate()
 
     prisoners = prison.prisoners
     if str(req.hero) not in prisoners:
-        raise InvalidOperate("TrainResponse")
+        raise InvalidOperate()
 
     this_prisoner = prisoners[str(req.hero)]
     if this_prisoner.status == PrisonerProtoMsg.IN:
-        raise SanguoViewException(803, "TrainResponse")
+        raise SanguoException(803)
 
     if this_prisoner.status == PrisonerProtoMsg.NOT:
         # 直接招降
@@ -143,8 +134,4 @@ def get(request):
         char_id=char_id,
         prisoner_id=req.hero
     )
-
-    response = protomsg.GetPrisonerResponse()
-    response.ret = 0
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
+    return None

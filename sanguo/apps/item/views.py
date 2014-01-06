@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from django.http import HttpResponse
 
 from apps.item.cache import get_cache_equipment
 from apps.item.models import Equipment
@@ -9,14 +8,14 @@ from core.equip import delete_equip, embed_gem
 from core.character import Char
 from core.gem import save_gem
 from core.exception import InvalidOperate, GoldNotEnough
-from protomsg import (EmbedGemResponse, SellEquipResponse,
-                      StrengthEquipResponse, UnEmbedGemResponse)
+from protomsg import StrengthEquipResponse
 from utils import pack_msg
+from utils.decorate import message_response
 
 
 logger = logging.getLogger('sanguo')
 
-
+@message_response("StrengthEquipResponse")
 def strengthen_equip(request):
     req = request._proto
     char_id = request._char_id
@@ -28,14 +27,14 @@ def strengthen_equip(request):
         logger.warning("Strengthen Equip. req.id: {0} NOT in Char: {1}. {2}".format(
             req.id, char_id, char_equip_ids
         ))
-        raise InvalidOperate("StrengthEquipResponse")
+        raise InvalidOperate()
 
     for _id in req.cost_ids:
         if _id not in char_equip_ids:
             logger.warning("Strengthen Equip. req.cost_id: {0} NOT in Char: {1}. {2}".format(
                 _id, char_id, char_equip_ids
             ))
-            raise InvalidOperate("StrengthEquipResponse")
+            raise InvalidOperate()
 
     target_equip = Equipment.objects.get(id=req.id)
     gold_needs = target_equip.level * 100
@@ -45,7 +44,7 @@ def strengthen_equip(request):
         logger.debug("Strengthen Equip. Char {0} NOT enough gold. {1}, needs {2}".format(
             char_id, cache_char.gold, gold_needs
         ))
-        raise GoldNotEnough("StrengthEquipResponse")
+        raise GoldNotEnough()
 
     char.update(gold=-gold_needs)
 
@@ -77,10 +76,9 @@ def strengthen_equip(request):
         _p = response.processes.add()
         _p.level, _p.cur_exp, _p.max_exp = p
 
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
+    return pack_msg(response)
 
-
+@message_response("SellEquipResponse")
 def sell_equip(request):
     req = request._proto
     char_id = request._char_id
@@ -93,7 +91,7 @@ def sell_equip(request):
             logger.warning("Sell Equip: Equip {0} NOT in Char {1}, {2}".format(
                 _id, char_id, char_equip_ids
             ))
-            raise InvalidOperate("SellEquipResponse")
+            raise InvalidOperate()
 
     all_gold = 0
     for _id in req.ids:
@@ -107,31 +105,21 @@ def sell_equip(request):
     delete_equip([_id for _id in req.ids])
     char.update(gold=all_gold)
 
-    response = SellEquipResponse()
-    response.ret = 0
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
+    return None
 
-
+@message_response("EmbedGemResponse")
 def embed(request):
     req = request._proto
     char_id = request._char_id
 
     embed_gem(char_id, req.equip_id, req.hole_id, req.gem_id)
-
-    response = EmbedGemResponse()
-    response.ret = 0
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
+    return None
 
 
+@message_response("UnEmbedGemResponse")
 def unembed(request):
     req = request._proto
     char_id = request._char_id
 
     embed_gem(char_id, req.equip_id, req.hole_id, 0)
-
-    response = UnEmbedGemResponse()
-    response.ret = 0
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
+    return None

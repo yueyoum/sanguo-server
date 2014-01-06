@@ -3,7 +3,7 @@
 from core import GLOBAL
 from core.mongoscheme import MongoChar
 from core.exception import (
-    SanguoViewException,
+    SanguoException,
     InvalidOperate,
     SyceeNotEnough,
     GoldNotEnough,
@@ -85,11 +85,11 @@ def delete_gem(_id, _amount, char_id):
 
 def merge_gem(_id, _amount, using_sycee, char_id):
     if _amount < 1:
-        raise BadMessage("MergeGemResponse")
+        raise BadMessage()
 
     condition = GLOBAL.GEM[_id]['merge_condition']
     if not condition:
-        raise InvalidOperate("MergeGemResponse")
+        raise InvalidOperate()
 
     need_buy_gem = []
     con_gid, con_amount = condition[0], 4
@@ -109,18 +109,18 @@ def merge_gem(_id, _amount, using_sycee, char_id):
     cache_char = c.cacheobj
     if need_buy_gem:
         if not using_sycee:
-            raise SanguoViewException(600, "MergeGemResponse")
+            raise SanguoException(600)
             # TODO cost
         cost = 1 * need_buy_gem[1]
         if cache_char.sycee < cost:
-            raise SyceeNotEnough("MergeGemResponse")
+            raise SyceeNotEnough()
 
         c.update(sycee=-cost)
 
     if not using_sycee:
         gold_needs = GLOBAL.GEM[_id]['level'] * _amount
         if cache_char.gold < gold_needs:
-            raise GoldNotEnough("MergeGemResponse")
+            raise GoldNotEnough()
 
     if cost_gem:
         delete_gem(cost_gem[0], cost_gem[1], char_id)

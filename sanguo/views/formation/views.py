@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-from django.http import HttpResponse
 
 from apps.item.cache import get_cache_equipment
 from core.character import Char
-from core.exception import InvalidOperate, SanguoViewException
+from core.exception import InvalidOperate, SanguoException
 from core.mongoscheme import MongoChar
-from protomsg import SetFormationResponse, SetSocketResponse
+from protomsg import SetSocketResponse
 from utils import pack_msg
+from utils.decorate import message_response
 
-
+@message_response("SetSocketResponse")
 def set_socket(request):
     req = request._proto
     char_id = request._char_id
@@ -22,7 +22,7 @@ def set_socket(request):
 
     if str(req.socket.id) not in char_sockets:
         # socket id 要存在
-        raise InvalidOperate("SetSocketResponse")
+        raise InvalidOperate()
 
     # 不能重复放置
     for k, s in char_sockets.iteritems():
@@ -31,7 +31,7 @@ def set_socket(request):
 
         if req.socket.hero_id:
             if s.hero and s.hero == req.socket.hero_id:
-                raise SanguoViewException(401, "SetSocketResponse")
+                raise SanguoException(401)
 
         if req.socket.weapon_id:
             if s.weapon and s.weapon == req.socket.weapon_id:
@@ -50,17 +50,17 @@ def set_socket(request):
     if req.socket.hero_id:
         # hero 要属于这个char
         if req.socket.hero_id not in char_heros:
-            raise InvalidOperate("SetSocketResponse")
+            raise InvalidOperate()
 
 
     def _equip_test(tp, e):
         if e:
             # 装备要有，类型不能放错
             if e not in char_eqiup_ids:
-                raise InvalidOperate("SetSocketResponse")
+                raise InvalidOperate()
             obj = get_cache_equipment(e)
             if obj.tp != tp:
-                raise SanguoViewException(402, "SetSocketResponse")
+                raise SanguoException(402)
 
     _equip_test(1, req.socket.weapon_id)
     _equip_test(2, req.socket.jewelry_id)
@@ -77,10 +77,10 @@ def set_socket(request):
     response = SetSocketResponse()
     response.ret = 0
     response.socket.MergeFrom(req.socket)
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
+    return pack_msg(response)
 
 
+@message_response("SetFormationResponse")
 def set_formation(request):
     req = request._proto
     char_id = request._char_id
@@ -90,18 +90,18 @@ def set_formation(request):
     socket_ids = [int(s) for s in req.socket_ids]
 
     if len(socket_ids) != 9:
-        raise SanguoViewException(400, "SetFormationResponse")
+        raise SanguoException(400)
 
     real_socket_ids = []
     for i in socket_ids:
         if i == 0:
             continue
         if i not in char_sockets:
-            raise InvalidOperate("SetFormationResponse")
+            raise InvalidOperate()
         real_socket_ids.append(i)
 
     if len(real_socket_ids) != len(char_sockets):
-        raise SanguoViewException(400, "SetFormationResponse")
+        raise SanguoException(400)
 
     for i in range(0, 9, 3):
         no_hero = True
@@ -115,11 +115,7 @@ def set_formation(request):
                 no_hero = False
                 break
         if no_hero:
-            raise SanguoViewException(403, "SetFormationResponse")
+            raise SanguoException(403)
 
     char.save_formation(socket_ids)
-
-    response = SetFormationResponse()
-    response.ret = 0
-    data = pack_msg(response)
-    return HttpResponse(data, content_type="text/plain")
+    return None

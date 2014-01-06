@@ -1,12 +1,11 @@
-from django.http import HttpResponse
-
 from apps.player.models import User
 from protomsg import GetServerListResponse
 from core.world import server_list
 from core.exception import BadMessage
 from utils import pack_msg
+from utils.decorate import message_response
 
-
+@message_response("GetServerListResponse")
 def get_server_list(request):
     req = request._proto
 
@@ -17,7 +16,7 @@ def get_server_list(request):
             user = None
     else:
         if not req.regular.email or not req.regular.password:
-            raise BadMessage("GetServerListResponse")
+            raise BadMessage()
         try:
             user = User.objects.get(email=req.regular.email)
             if user.passwd != req.regular.password:
@@ -38,6 +37,5 @@ def get_server_list(request):
         s.id, s.name, s.status, s.have_char = \
             server.id, server.name, server.status, server.have_char
 
-    data = pack_msg(res)
-    return HttpResponse(data, content_type='text/plain')
-    
+    return pack_msg(res)
+

@@ -5,11 +5,6 @@ from core.mongoscheme import MongoCounter
 from core.exception import CounterOverFlow
 from preset.settings import COUNTER
 
-FUNC_RESPONSE = {
-    'hang': 'HangResponse',
-    'pvp': 'PVPResponse',
-    'plunder': 'PlunderResponse',
-}
 
 logger = logging.getLogger('sanguo')
 
@@ -44,7 +39,7 @@ class Counter(object):
             logging.info("Counter. char {0}. {1}. MaxValue: {0}, CurValue: {1}, WannaValue: {2}".format(
                 self.char_id, self.func_name, self.max_value, self.cur_value, value
             ))
-            raise CounterOverFlow(FUNC_RESPONSE[self.func_name])
+            raise CounterOverFlow()
 
         self.c.cur_value += value
         self.c.save()

@@ -2,7 +2,6 @@
 import logging
 import random
 
-from django.http import HttpResponse
 from mongoengine import DoesNotExist
 
 import protomsg
@@ -13,7 +12,7 @@ from core.battle.battle import Battle
 from core.battle.hero import BattleHero, MonsterHero
 from core.hero.cache import get_cache_hero
 from core.counter import Counter
-from core.exception import SanguoViewException, InvalidOperate, CounterOverFlow, SyceeNotEnough
+from core.exception import SanguoException, InvalidOperate, CounterOverFlow, SyceeNotEnough
 from core.mongoscheme import Hang, MongoChar
 from core.prison import save_prisoner
 from core.signals import (hang_add_signal, hang_cancel_signal,
@@ -23,6 +22,7 @@ from core.stage import (get_plunder_list, get_stage_fixed_drop,
                         get_stage_standard_drop, save_drop)
 from timer.tasks import cancel_job, sched
 from utils import pack_msg, timezone
+from utils.decorate import message_response
 
 from core.character import Char
 from core.prison import Prison
@@ -86,7 +86,7 @@ class PVP(PVE):
     def get_rival_name(self):
         return self.get_my_name(my_id=self.rival_id)
 
-
+@message_response("PVEResponse")
 def pve(request):
     msg = protomsg.Battle()
 
@@ -97,7 +97,7 @@ def pve(request):
         logger.warning("PVE. Char {0} pve in a NONE exist stage {1}".format(
             char_id, req.stage_id
         ))
-        raise InvalidOperate("PVEResponse")
+        raise InvalidOperate()
 
     b = PVE(char_id, req.stage_id, msg)
     b.start()
@@ -144,10 +144,9 @@ def pve(request):
     response.drop.equips.extend([_id for _id, _l, _a in drop_equips])
     response.drop.gems.extend([_id for _id, _a in drop_gems])
 
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
+    return pack_msg(response)
 
-
+@message_response("HangResponse")
 def hang_start(request):
     req = request._proto
     char_id = request._char_id
@@ -159,7 +158,7 @@ def hang_start(request):
 
     if hang is not None:
         logger.warning("Hang. Char {0} Wanna a multi hang.".format(char_id))
-        raise SanguoViewException(700, "HangResponse")
+        raise SanguoException(700)
 
     counter = Counter(char_id, 'hang')
     counter.incr(req.hours)
@@ -189,13 +188,9 @@ def hang_start(request):
     logger.debug("Hang. Char {0} start hang with {1} hours at stage {2}".format(
         char_id, req.hours, req.stage_id
     ))
+    return None
 
-    response = protomsg.HangResponse()
-    response.ret = 0
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
-
-
+@message_response("HangCancelResponse")
 def hang_cancel(request):
     req = request._proto
     char_id = request._char_id
@@ -204,11 +199,11 @@ def hang_cancel(request):
         hang = Hang.objects.get(id=char_id)
     except DoesNotExist:
         logger.warning("Hang Cancel. Char {0} cancel a NONE exist hang".format(char_id))
-        raise InvalidOperate("HangCancelResponse")
+        raise InvalidOperate()
 
     if hang.finished:
         logger.warning("Hang Cancel. Char {0} cancel a FINISHED hang".format(char_id))
-        raise SanguoViewException(702, "HangCancelResponse")
+        raise SanguoException(702)
 
     cancel_job(hang.jobid)
 
@@ -232,13 +227,10 @@ def hang_cancel(request):
         char_id=char_id,
         actual_hours=actual_hours
     )
-
-    response = protomsg.HangCancelResponse()
-    response.ret = 0
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
+    return None
 
 
+@message_response("PlunderListResponse")
 def plunder_list(request):
     char_id = request._char_id
     res = get_plunder_list(char_id)
@@ -265,10 +257,9 @@ def plunder_list(request):
         c = Char(_id)
         plunder.power = c.power
 
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
+    return pack_msg(response)
 
-
+@message_response("PlunderResponse")
 def plunder(request):
     msg = protomsg.Battle()
 
@@ -283,7 +274,7 @@ def plunder(request):
         c = Char(char_id)
         cache_char = c.cacheobj
         if cache_char.sycee < PLUNDER_COST_SYCEE:
-            raise SyceeNotEnough("PlunderResponse")
+            raise SyceeNotEnough()
 
         c.update(sycee=-PLUNDER_COST_SYCEE)
 
@@ -291,7 +282,7 @@ def plunder(request):
         logger.warning("Plunder. Char {0} plunder with a NONE exist char {1}".format(
             char_id, req.id
         ))
-        raise InvalidOperate("PlunderResponse")
+        raise InvalidOperate()
 
     # try:
     #     hang = Hang.objects.get(id=req.id)
@@ -359,10 +350,9 @@ def plunder(request):
     response.drop.exp = 0
     response.drop.heros.append(drop_hero_id)
 
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
+    return pack_msg(response)
 
-
+@message_response("ArenaResponse")
 def pvp(request):
     req = request._proto
     char_id = request._char_id
@@ -401,5 +391,4 @@ def pvp(request):
     response.battle.MergeFrom(msg)
     response.score = score
 
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
+    return pack_msg(response)

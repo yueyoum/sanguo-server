@@ -1,38 +1,24 @@
-class DummyLazyObject(object):
-    pass
+from django.http import HttpResponse
+
+from core.exception import SanguoException
+from utils import pack_msg
+import protomsg
 
 
-_dummy_lazy_object = DummyLazyObject()
 
+def message_response(message_name):
+    def deco(func):
+        def wrap(request, *args, **kwargs):
+            m = getattr(protomsg, message_name)()
+            m.ret = 0
+            try:
+                res = func(request, *args, **kwargs)
+                if res is None:
+                    return HttpResponse(pack_msg(m), content_type='text/plain')
+                return HttpResponse(res, content_type='text/plain')
+            except SanguoException as e:
+                m.ret = e.error_id
+                return HttpResponse(pack_msg(m), content_type='text/plain')
 
-class LazyObject(object):
-    def __init__(self):
-        self.obj = _dummy_lazy_object
-
-    def __call__(self, func):
-        def deco(*args, **kwargs):
-            self.func = func
-            self.args = args
-            self.kwargs = kwargs
-            return self
-
-        return deco
-
-    def _setup(self):
-        self.obj = self.func(*self.args, **self.kwargs)
-
-
-class LazyDict(LazyObject):
-    def __getattr__(self, name):
-        if self.obj is _dummy_lazy_object:
-            self._setup()
-
-        return getattr(self.obj, name)
-
-    def __getitem__(self, key):
-        if self.obj is _dummy_lazy_object:
-            self._setup()
-
-        return self.obj[key]
-
-
+        return wrap
+    return deco

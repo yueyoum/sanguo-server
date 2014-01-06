@@ -32,20 +32,17 @@ def delete_equip(_id):
 
 def embed_gem(char_id, equip_id, hole_id, gem_id):
     # gem_id = 0 表示取下hole_id对应的宝石
-    if gem_id:
-        message_name = "EmbedGemResponse"
-    else:
-        message_name = "UnEmbedGemResponse"
+
 
     char = Char(char_id)
     char_gems = char.gems
     char_equip_ids = char.equip_ids
 
     if equip_id not in char_equip_ids:
-        raise InvalidOperate(message_name)
+        raise InvalidOperate()
 
     if gem_id and gem_id not in char_gems:
-        raise InvalidOperate(message_name)
+        raise InvalidOperate()
 
     cache_equip = get_cache_equipment(equip_id)
     gems = cache_equip.gems
@@ -56,7 +53,7 @@ def embed_gem(char_id, equip_id, hole_id, gem_id):
         off_gem = int(gems[hole_index])
         gems[hole_index] = str(gem_id)
     except KeyError:
-        raise InvalidOperate(message_name)
+        raise InvalidOperate()
 
     if gem_id:
         # 镶嵌
@@ -66,7 +63,7 @@ def embed_gem(char_id, equip_id, hole_id, gem_id):
     else:
         # 去下
         if not off_gem:
-            raise InvalidOperate(message_name)
+            raise InvalidOperate()
 
         save_gem([(off_gem, 1)], char_id)
 

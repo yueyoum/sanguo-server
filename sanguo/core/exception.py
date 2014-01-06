@@ -1,41 +1,40 @@
-class SanguoViewException(Exception):
-    def __init__(self, error_id, response_msg_name="CommandResponse"):
+class SanguoException(Exception):
+    def __init__(self, error_id):
         self.error_id = error_id
-        self.response_msg_name = response_msg_name
         Exception.__init__(self)
 
 
-class CounterOverFlow(SanguoViewException):
-    def __init__(self, response_msg_name):
-        SanguoViewException.__init__(self, 20, response_msg_name)
+class CounterOverFlow(SanguoException):
+    def __init__(self):
+        SanguoException.__init__(self, 20)
 
 
-class BadMessage(SanguoViewException):
-    def __init__(self, response_msg_name):
-        SanguoViewException.__init__(self, 1, response_msg_name)
+class BadMessage(SanguoException):
+    def __init__(self):
+        SanguoException.__init__(self, 1)
 
 
-class InvalidOperate(SanguoViewException):
-    def __init__(self, response_msg_name):
-        SanguoViewException.__init__(self, 2, response_msg_name)
+class InvalidOperate(SanguoException):
+    def __init__(self):
+        SanguoException.__init__(self, 2)
 
 
-class CharNotFound(SanguoViewException):
-    def __init__(self, response_msg_name):
-        SanguoViewException.__init__(self, 3, response_msg_name)
+class CharNotFound(SanguoException):
+    def __init__(self):
+        SanguoException.__init__(self, 3)
 
 
 
-class GoldNotEnough(SanguoViewException):
-    def __init__(self, response_msg_name):
-        SanguoViewException.__init__(self, 10, response_msg_name)
+class GoldNotEnough(SanguoException):
+    def __init__(self):
+        SanguoException.__init__(self, 10)
 
 
-class SyceeNotEnough(SanguoViewException):
-    def __init__(self, response_msg_name):
-        SanguoViewException.__init__(self, 11, response_msg_name)
+class SyceeNotEnough(SanguoException):
+    def __init__(self):
+        SanguoException.__init__(self, 11)
 
 
-class RenownNotEnough(SanguoViewException):
-    def __init__(self, response_msg_name):
-        SanguoViewException.__init__(self, 12, response_msg_name)
+class RenownNotEnough(SanguoException):
+    def __init__(self):
+        SanguoException.__init__(self, 12)

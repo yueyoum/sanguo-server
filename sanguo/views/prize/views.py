@@ -1,7 +1,6 @@
-from django.http import HttpResponse
 from core.mongoscheme import Hang
 
-from core.exception import SanguoViewException
+from core.exception import SanguoException
 from core.notify import hang_notify
 from core.stage import get_stage_hang_drop, save_drop
 
@@ -10,8 +9,9 @@ from mongoengine import DoesNotExist
 import protomsg
 
 from utils import pack_msg
+from utils.decorate import message_response
 
-
+@message_response("PrizeResponse")
 def prize_get(request):
     req = request._proto
     char_id = request._char_id
@@ -27,7 +27,7 @@ def prize_get(request):
         hang = None
 
     if hang is None or not hang.finished:
-        raise SanguoViewException(703, "PrizeResponse")
+        raise SanguoException(703)
 
     exp, gold, equips, gems = get_stage_hang_drop(hang.stage_id, hang.actual_hours)
     save_drop(char_id, exp, gold, equips, gems)
@@ -44,5 +44,4 @@ def prize_get(request):
     response.drop.equips.extend([i for i, _, _ in equips])
     response.drop.gems.extend([i for i, _ in gems])
 
-    data = pack_msg(response)
-    return HttpResponse(data, content_type='text/plain')
+    return pack_msg(response)

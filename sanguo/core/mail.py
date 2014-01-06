@@ -73,7 +73,7 @@ class Mail(object):
         try:
             self.mail.mails.pop(str(mail_id))
         except KeyError:
-            raise InvalidOperate("DeleteMailResponse")
+            raise InvalidOperate()
 
         self.mail.save()
         self.send_mail_notify()
@@ -82,17 +82,17 @@ class Mail(object):
         try:
             self.mail.mails[str(mail_id)].has_read = True
         except KeyError:
-            raise InvalidOperate("OpenMailResponse")
+            raise InvalidOperate()
 
         self.mail.save()
         self.send_mail_notify()
 
     def get_attachment(self, mail_id):
         if str(mail_id) not in self.mail.mails:
-            raise InvalidOperate("GetAttachmentResponse")
+            raise InvalidOperate()
 
         if not self.mail.mails[str(mail_id)].attachment:
-            raise InvalidOperate("GetAttachmentResponse")
+            raise InvalidOperate()
 
         # TODO send attachment
         self.mail.mails[str(mail_id)].attachment = ''
