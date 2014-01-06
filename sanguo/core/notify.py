@@ -16,6 +16,7 @@ from core.counter import Counter
 from core.prison import Prison
 from core.friend import Friend
 from core.mail import Mail
+from core.daily import CheckIn
 
 
 def character_notify(char_id):
@@ -394,5 +395,7 @@ def login_notify(char_id):
 
     m = Mail(char_id)
     m.send_mail_notify()
+
+    CheckIn(char_id).send_notify()
     
 

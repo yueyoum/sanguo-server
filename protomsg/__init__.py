@@ -3,6 +3,7 @@ from hero_pb2 import *
 from cmd_pb2 import *
 from world_pb2 import *
 from mail_pb2 import *
+from daily_pb2 import *
 from character_pb2 import *
 from item_pb2 import *
 from formation_pb2 import *
@@ -80,6 +81,9 @@ RESPONSE_NOTIFY_TYPE = {
     "OpenMailResponse": 2102,
     "DeleteMailResponse": 2104,
     "GetAttachmentResponse": 2106,
+    "CheckInNotify": 3000,
+    "CheckInResponse": 3002,
+    "GetCheckInRewardResponse": 3004,
 }
 
 REQUEST_TYPE = {
@@ -117,6 +121,8 @@ REQUEST_TYPE = {
     2101: "OpenMailRequest",
     2103: "DeleteMailRequest",
     2105: "GetAttachmentRequest",
+    3001: "CheckInRequest",
+    3003: "GetCheckInRewardRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -154,5 +160,7 @@ REQUEST_TYPE_REV = {
     "OpenMailRequest": 2101,
     "DeleteMailRequest": 2103,
     "GetAttachmentRequest": 2105,
+    "CheckInRequest": 3001,
+    "GetCheckInRewardRequest": 3003,
 }
 

@@ -126,3 +126,13 @@ class MongoMail(Document):
     meta = {
         'collection': 'mail'
     }
+
+
+class MongoCheckIn(Document):
+    id = IntField(primary_key=True)
+    days = ListField(IntField())
+    has_get = ListField(IntField())
+
+    meta = {
+        'collection': 'checkin'
+    }
