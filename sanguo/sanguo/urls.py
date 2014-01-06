@@ -62,4 +62,7 @@ urlpatterns = patterns('',
                        url(r'^mail/open/$', 'views.mail.views.open'),
                        url(r'^mail/delete/$', 'views.mail.views.delete'),
                        url(r'^mail/getattachment/$', 'views.mail.views.get_attachment'),
+
+                       url(r'daily/checkin/$', 'views.daily.views.checkin'),
+                       url(r'daily/checkin/get-reward/$', 'views.daily.views.get_checkin_reward'),
 )
