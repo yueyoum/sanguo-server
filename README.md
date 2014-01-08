@@ -7,6 +7,7 @@
 2.  安装依赖
     
     ```
+    apt-get install build-essential
     apt-get install python-dev libmysqld-dev
     ```
 
@@ -33,10 +34,18 @@
     ```
     如果有必要，就先设置local_settings.py
 
-    rabbitmqctl add_vhost sanguo
-    rabbitmqctl add_vhost sanguo_test
-    rabbitmqctl set_permissions -p sanguo guest ".*" ".*" ".*"
-    rabbitmqctl set_permissions -p sanguo_test guest ".*" ".*" ".*"
+    开启 rabbitmq 的管理界面:
+
+    rabbitmq-plugins enable rabbitmq_management
+
+    然后在管理界面中添加两个 vhost: sanguo, sanguo_test
+    并给予 guest .* .* .* 的权限
+
+    管理界面的端口是 55672
+
+    TODO:
+
+    安全设置，不能让其他人随意登录
     ```
 
 
@@ -45,6 +54,11 @@
     ```
     cd sanguo
     celery worker --app timer -l info
+
+    TODO:
+
+    1, 使用 supervisord 来让 celery worker 后台运行
+    2, log
     ```
 
 
@@ -58,7 +72,6 @@
 
     开发: start_dev_server.sh
     测试: start_test_server.sh
-    正式: start_production_server.sh
     ```
 
 8.  测试
@@ -111,5 +124,12 @@ ubuntu x64 系统上 uWSGI 可能会报这样的错误
 1460     add_cflags = ['-lpthread', '-lgcc_s']
 1461     add_ldflags = ['-lpthread', '-lgcc_s']
 ```
+
+
+# 注意
+
+# 重启rabbitmq
+
+当重启完 rabbitmq 后，已经要确保celery worker 进程没有挂掉
 
 

@@ -221,6 +221,7 @@ else:
     BROKER_URL = 'amqp://guest:guest@localhost:5672/sanguo'
 CELERY_IMPORTS = ('timer.tasks', 'callbacks.timers',)
 CELERY_ENABLE_UTC = True
+CELERY_TIMEZONE = TIME_ZONE
 # CELERY_ACCEPT_CONTENT = ['json']
 # CELERY_TASK_SERIALIZER = 'json'
 # CELERY_RESULT_SERIALIZER = 'json'
