@@ -1,2 +1,5 @@
+# 每天00:00点重置计数器
 0 0 * * * /PATH/reset_counter.sh
+# 每月1号00:00 重置签到
+0 0 1 * * /PATH/reset_checkin.sh
 
