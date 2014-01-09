@@ -4,7 +4,7 @@ from celery import Celery
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sanguo.settings')
 
-app = Celery('timer')
+app = Celery('worker')
 app.config_from_object('django.conf:settings')
 
 if __name__ == '__main__':

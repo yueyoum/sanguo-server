@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 
+from apps.server.models import Server
 from apps.character.models import Character
 from apps.player.models import User
 from core.exception import SanguoException, BadMessage, InvalidOperate
@@ -9,7 +10,8 @@ from core.world import server_list
 from protomsg import RegisterResponse, StartGameResponse
 from utils import crypto, pack_msg
 from utils.decorate import message_response
-from preset.settings import SERVERS
+
+from worker import tasks
 
 logger = logging.getLogger('sanguo')
 
@@ -91,7 +93,7 @@ def register(request):
 @message_response("StartGameResponse")
 def login(request):
     req = request._proto
-    if req.server_id not in SERVERS:
+    if req.server_id not in Server.servers():
         raise InvalidOperate()
 
     need_create_new_char = None
@@ -151,6 +153,8 @@ def login(request):
         session_str = '{0}:{1}'.format(request._account_id, request._server_id)
 
     session = crypto.encrypt(session_str)
+
+    tasks.update_server_status.apply_async(args=[req.server_id], kwargs={'login_times': 1})
 
     response = StartGameResponse()
     response.ret = 0
