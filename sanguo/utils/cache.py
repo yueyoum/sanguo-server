@@ -11,14 +11,16 @@ CACHE_HOURS = settings.CACHE_HOURS
 def set(key, obj, hours=CACHE_HOURS):
     value = cPickle.dumps(obj, HIGHEST_PROTOCOL)
     redis_client.set(key, value)
-    redis_client.expireat(key, hours_delta(hours))
+    if hours:
+        redis_client.expireat(key, hours_delta(hours))
 
 
-def get(key):
+def get(key, hours=CACHE_HOURS):
     value = redis_client.get(key)
     print "cache hit: ", key
     if value:
-        redis_client.expireat(key, hours_delta(CACHE_HOURS))
+        if hours:
+            redis_client.expireat(key, hours_delta(hours))
         return cPickle.loads(value)
     return None
 

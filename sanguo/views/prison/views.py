@@ -3,13 +3,12 @@ import logging
 
 from mongoengine import DoesNotExist
 
-from callbacks import timers
 from core.exception import SanguoException, InvalidOperate
 from core.hero import save_hero
 from core.mongoscheme import MongoPrison
 from core.signals import prisoner_changed_signal, prisoner_del_signal
 from protomsg import Prisoner as PrisonerProtoMsg
-from timer.tasks import cancel_job, sched
+from worker import tasks
 from utils.decorate import message_response
 
 from core.prison import Prison
@@ -67,11 +66,12 @@ def train(request):
     # 如果以前处于NOT状态，那么还有一个NOT转变为OUT的job
     # 先将其取消
     # FIXME , countdown
-    cancel_job(this_prisoner.jobid)
-    job = sched.apply_async(
-        (timers.prisoner_job, char_id, req.hero, PrisonerProtoMsg.IN),
-        countdown=10
-    )
+    tasks.cancel(this_prisoner.jobid)
+    # job = sched.apply_async(
+    #     (timers.prisoner_job, char_id, req.hero, PrisonerProtoMsg.IN),
+    #     countdown=10
+    # )
+    job = tasks.prisoner_change.apply_async((char_id, req.hero, PrisonerProtoMsg.IN), countdown=10)
 
     this_prisoner.status = PrisonerProtoMsg.IN
     this_prisoner.jobid = job.id
@@ -124,7 +124,7 @@ def get(request):
     # FIXME 检查武将包裹是否满了
 
     save_hero(char_id, this_prisoner.oid)
-    cancel_job(this_prisoner.jobid)
+    tasks.cancel(this_prisoner.jobid)
 
     del prison.prisoners[str(req.hero)]
     prison.save()

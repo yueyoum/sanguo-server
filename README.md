@@ -53,7 +53,7 @@
 
     ```
     cd sanguo
-    celery worker --app timer -l info
+    celery worker --app worker -l info
 
     TODO:
 

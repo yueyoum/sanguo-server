@@ -2,8 +2,7 @@
 from mongoengine import DoesNotExist
 
 from core.mongoscheme import MongoPrison, Prisoner
-from timer.tasks import sched
-from callbacks import timers
+from worker import tasks
 from protomsg import Prisoner as PrisonerProtoMsg
 from core.exception import SyceeNotEnough, SanguoException
 from core.character import Char
@@ -66,10 +65,7 @@ def save_prisoner(char_id, oid):
         new_persioner_id += 1
 
     # FIXME
-    job = sched.apply_async(
-        [timers.prisoner_job, char_id, new_persioner_id, PrisonerProtoMsg.NOT],
-        countdown=60
-    )
+    job = tasks.prisoner_change.apply_async((char_id, new_persioner_id, PrisonerProtoMsg.NOT), countdown=60)
 
     p = Prisoner()
     p.id = new_persioner_id

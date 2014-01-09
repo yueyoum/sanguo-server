@@ -6,7 +6,7 @@ from mongoengine import DoesNotExist
 
 import protomsg
 from apps.character.cache import get_cache_character
-from callbacks.timers import hang_job
+# from callbacks.timers import hang_job
 from core import GLOBAL
 from core.battle.battle import Battle
 from core.battle.hero import BattleHero, MonsterHero
@@ -20,7 +20,7 @@ from core.signals import (hang_add_signal, hang_cancel_signal,
                           pve_finished_signal, pvp_finished_signal)
 from core.stage import (get_plunder_list, get_stage_fixed_drop,
                         get_stage_standard_drop, save_drop)
-from timer.tasks import cancel_job, sched
+from worker import tasks
 from utils import pack_msg, timezone
 from utils.decorate import message_response
 
@@ -165,7 +165,8 @@ def hang_start(request):
 
 
     # FIXME countdown
-    job = sched.apply_async((hang_job, char_id), countdown=10)
+    # job = sched.apply_async((hang_job, char_id), countdown=10)
+    job = tasks.hang_finish.apply_async((char_id, ), countdown=10)
 
     hang = Hang(
         id=char_id,
@@ -205,7 +206,7 @@ def hang_cancel(request):
         logger.warning("Hang Cancel. Char {0} cancel a FINISHED hang".format(char_id))
         raise SanguoException(702)
 
-    cancel_job(hang.jobid)
+    tasks.cancel(hang.jobid)
 
     utc_now_timestamp = timezone.utc_timestamp()
 
