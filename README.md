@@ -55,6 +55,7 @@
     ```
     git checkout admin
     python manage.py syncdb
+    python manage.py collectstatic
     并用uwsgi启动
     ```
 
