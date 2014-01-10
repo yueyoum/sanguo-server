@@ -1,0 +1,17 @@
+[uwsgi]
+chdir = /PATH/server/sanguo
+pythonpath = ..
+virtualenv = ../env
+env = DJANGO_SETTINGS_MODULE=sanguo.settings
+module = django.core.handlers.wsgi:WSGIHandler()
+socket = 127.0.0.1:7998
+listen = 1024
+max-requests = 4096
+limit-as = 512
+master = true
+processes = 2
+theads = 2
+daemonize = /tmp/sanguo-uwsgi-admin.log
+pidfile = /tmp/sanguo-uwsgi-admin.pid
+
+

@@ -1,0 +1,30 @@
+server {
+  listen 8001;
+  server_name 192.168.1.100 work.mztimes.com;
+
+  access_log  /tmp/sanguo_nginx_access.log;
+  error_log   /tmp/sanguo_nginx_error.log;
+
+  location / {
+    uwsgi_pass 127.0.0.1:7999;
+    include uwsgi_params;
+  }
+}
+
+server {
+  listen 8002;
+  server_name 192.168.1.100 work.mztimes.com;
+
+  access_log  /tmp/sanguo_admin_nginx_access.log;
+  error_log   /tmp/sanguo_admin_nginx_error.log;
+
+  location ~/static/ {
+    root /PATH/sanguo/;
+  }
+
+  location / {
+    uwsgi_pass 127.0.0.1:7998;
+    include uwsgi_params;
+  }
+}
+
