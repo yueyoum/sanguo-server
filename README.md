@@ -49,7 +49,17 @@
     ```
 
 
-6.  启动timer服务
+
+6.  Admin
+
+    ```
+    git checkout admin
+    python manage.py syncdb
+    并用uwsgi启动
+    ```
+
+
+7.  启动worker
 
     ```
     cd sanguo
@@ -62,10 +72,12 @@
     ```
 
 
-
-7.  编辑配置文件，并启动程序
+8.  编辑配置文件，并启动程序
 
     ```
+    server 一定要 git checkout master
+    确保在master分支
+
     cd sanguo
     vim sanguo/local_settings.py
     ./start_*_server.sh
@@ -74,7 +86,7 @@
     测试: start_test_server.sh
     ```
 
-8.  测试
+9.  测试
 
     ```
     ./start_test_server 启动测试服务，然后在另一个shell中执行：
@@ -106,7 +118,7 @@
 [1]: http://stackoverflow.com/questions/3513773/change-mysql-default-character-set-to-utf8-in-my-cnf
 
 
-# 问题
+# 注意
 
 ## uWSGI 报错
 
@@ -125,11 +137,21 @@ ubuntu x64 系统上 uWSGI 可能会报这样的错误
 1461     add_ldflags = ['-lpthread', '-lgcc_s']
 ```
 
-
-# 注意
-
 # 重启rabbitmq
 
 当重启完 rabbitmq 后，已经要确保celery worker 进程没有挂掉
 
+
+# 系统设置
+
+## /etc/sysctl.cof
+
+添加
+
+```
+net.core.somaxconn = 32768
+net.ipv4.tcp_max_syn_backlog = 65536
+net.core.netdev_max_backlog = 32768
+```
+然后执行 sudo sysctl -p
 
