@@ -5,7 +5,7 @@ when you run "manage.py test".
 Replace this with more appropriate tests for your application.
 """
 
-from django.test import TestCase, TransactionTestCase
+from django.test import TransactionTestCase
 
 from protomsg import (
     RESPONSE_NOTIFY_TYPE,
@@ -16,9 +16,6 @@ from protomsg import (
     )
 from utils import app_test_helper as tests
 from models import User
-from core import GLOBAL
-
-from core.formation import save_formation
 
 
 def teardown():

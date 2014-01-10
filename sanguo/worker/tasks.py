@@ -53,16 +53,27 @@ def update_server_status(server_id, char_amount=0, login_times=0,
                          pve_times=0, pvp_times=0):
     transaction.set_autocommit(False)
     try:
-        s = ServerStatus.objects.select_for_update().get(id=server_id)
+        try:
+            s = ServerStatus.objects.select_for_update().get(server_id=server_id)
+        except ServerStatus.DoesNotExist:
+            ServerStatus.objects.create(
+                server_id=server_id,
+                char_amount=char_amount,
+                login_times=login_times,
+                pay_players_amount=pay_players_amount,
+                pay_total=pay_total,
+                pve_times=pve_times,
+                pvp_times=pvp_times
+            )
+        else:
+            s.char_amount += char_amount
+            s.login_times += login_times
+            s.pay_players_amount += pay_players_amount
+            s.pay_total += pay_total
+            s.pve_times += pve_times
+            s.pvp_times += pvp_times
+            s.save()
 
-        s.char_amount += char_amount
-        s.login_times += login_times
-        s.pay_players_amount += pay_players_amount
-        s.pay_total += pay_total
-        s.pve_times += pve_times
-        s.pvp_times += pvp_times
-        s.save()
-
-        logger.debug("Update Server Status Done. Server: {0}".format(server_id))
+        logger.info("Update Server Status Done. Server: {0}".format(server_id))
     finally:
         transaction.set_autocommit(True)
