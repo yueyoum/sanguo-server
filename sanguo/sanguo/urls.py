@@ -24,5 +24,6 @@ urlpatterns = patterns('',
                        url(r'', include('apps.player.urls')),
                        url(r'', include('apps.character.urls')),
                        url(r'', include('apps.item.urls')),
+                       url(r'', include('apps.server.urls')),
                        url(r'', include('views.urls')),
 )

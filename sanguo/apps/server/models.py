@@ -52,7 +52,7 @@ def _set_server_cache():
     for s in servers:
         data[s.id] = s
     cache.set(SERVER_CACHE_KEY, data, hours=None)
-    return servers
+    return data
 
 
 def _server_post_save_callback(sender, instance, created, **kwargs):

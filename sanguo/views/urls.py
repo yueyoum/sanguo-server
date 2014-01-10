@@ -1,7 +1,6 @@
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
-                       url(r'^world/server-list/$', 'views.world.views.get_server_list'),
 
                        url(r'^test/$', 'views.cmd.cmd'),
 
