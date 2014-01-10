@@ -11,4 +11,4 @@ local_settings.py*
 test.db
 
 env
-sanguo/admin
+sanguo/static

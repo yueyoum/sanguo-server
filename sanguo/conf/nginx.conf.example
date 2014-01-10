@@ -18,8 +18,8 @@ server {
   access_log  /tmp/sanguo_admin_nginx_access.log;
   error_log   /tmp/sanguo_admin_nginx_error.log;
 
-  location ~/static/ {
-    root /PATH/sanguo/;
+  location /static/ {
+    alias /PATH/sanguo/static/;
   }
 
   location / {
