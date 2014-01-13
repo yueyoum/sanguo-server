@@ -10,6 +10,8 @@ except (KeyError, ValueError):
     except IndexError:
         TESTING = False
 
+ENABLE_ADMIN = False
+
 CURRENT_PATH = os.path.dirname(os.path.realpath(__file__))
 PROJECT_PATH = os.path.dirname(CURRENT_PATH)
 TMP_PATH = os.path.normpath(os.path.join(PROJECT_PATH, '../tmp'))
@@ -233,7 +235,7 @@ if TESTING:
     MONGODB_DB = 'test_sanguo'
 
 try:
-    from local_settings import *
+    from settings_local import *
 except ImportError:
     pass
 

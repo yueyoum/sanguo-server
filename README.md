@@ -53,10 +53,9 @@
 6.  Admin
 
     ```
-    git checkout admin
     python manage.py syncdb
     python manage.py collectstatic
-    并用uwsgi启动
+    并用uwsgi-admin启动
     ```
 
 
@@ -76,9 +75,6 @@
 8.  编辑配置文件，并启动程序
 
     ```
-    server 一定要 git checkout master
-    确保在master分支
-
     cd sanguo
     vim sanguo/local_settings.py
     ./start_*_server.sh
