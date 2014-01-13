@@ -8,6 +8,9 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 
 ENABLE_ADMIN = True
 
+USE_I18N = True
+LANGUAGE_CODE = 'zh-CN'
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

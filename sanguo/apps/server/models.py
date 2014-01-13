@@ -10,14 +10,22 @@ SERVER_CACHE_KEY = 'servers'
 
 
 class Server(models.Model):
-    id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=32)
+    id = models.IntegerField("ID", primary_key=True)
+    name = models.CharField("名字", max_length=32)
 
-    create_at = models.DateTimeField(default=timezone.now())
-    active = models.BooleanField(default=True)
+    create_at = models.DateTimeField("创建于")
+    active = models.BooleanField("开启", default=True)
 
     class Meta:
         db_table = 'server'
+        verbose_name = "服务器"
+        verbose_name_plural = "服务器"
+
+
+    def save(self, *args, **kwargs):
+        if not self.create_at:
+            self.create_at = timezone.now()
+        super(Server, self).save(*args, **kwargs)
 
     @staticmethod
     def servers():
