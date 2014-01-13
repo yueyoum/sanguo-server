@@ -20,6 +20,12 @@ logger = get_task_logger(__name__)
 def cancel(jobid, terminate=False):
     revoke(jobid, terminate=terminate)
 
+
+@app.task
+def send_mail(mail_id, send_type, send_to):
+    # TODO
+    pass
+
 @app.task
 def hang_finish(char_id):
     hang_finished_signal.send(
