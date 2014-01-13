@@ -15,7 +15,7 @@ from protomsg import (
     RegisterResponse,
     )
 from utils import app_test_helper as tests
-from models import User
+from models import Account
 
 
 def teardown():
@@ -31,7 +31,7 @@ class RegisterTest(TransactionTestCase):
             ('', '', '123456'),
         )
         for email, passwd, token in users:
-            User.objects.create(
+            Account.objects.create(
                 email=email,
                 passwd=passwd,
                 device_token=token
@@ -77,7 +77,7 @@ class LoginTest(TransactionTestCase):
             (2, '', '', '123456'),
         )
         for id, email, passwd, token in users:
-            User.objects.create(
+            Account.objects.create(
                 id=id,
                 email=email,
                 passwd=passwd,

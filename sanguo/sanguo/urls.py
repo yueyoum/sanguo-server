@@ -28,7 +28,7 @@ else:
                            # Uncomment the next line to enable the admin:
                            # url(r'^admin/', include(admin.site.urls)),
 
-                           url(r'', include('apps.player.urls')),
+                           url(r'', include('apps.account.urls')),
                            url(r'', include('apps.character.urls')),
                            url(r'', include('apps.item.urls')),
                            url(r'', include('apps.server.urls')),

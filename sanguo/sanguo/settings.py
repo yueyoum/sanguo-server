@@ -146,7 +146,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'django_nose',
     'apps.server',
-    'apps.player',
+    'apps.account',
     'apps.character',
     'apps.item',
 )

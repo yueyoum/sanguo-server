@@ -1,4 +1,4 @@
-from apps.player.models import User
+from apps.account.models import Account
 from protomsg import GetServerListResponse
 from core.world import server_list
 from core.exception import BadMessage
@@ -11,17 +11,17 @@ def get_server_list(request):
 
     if req.anonymous.device_token:
         try:
-            user = User.objects.get(device_token=req.anonymous.device_token)
-        except User.DoesNotExist:
+            user = Account.objects.get(device_token=req.anonymous.device_token)
+        except Account.DoesNotExist:
             user = None
     else:
         if not req.regular.email or not req.regular.password:
             raise BadMessage()
         try:
-            user = User.objects.get(email=req.regular.email)
+            user = Account.objects.get(email=req.regular.email)
             if user.passwd != req.regular.password:
                 user = None
-        except User.DoesNotExist:
+        except Account.DoesNotExist:
             user = None
 
     top, all_servers = server_list(user)

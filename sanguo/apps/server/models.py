@@ -16,6 +16,9 @@ class Server(models.Model):
     create_at = models.DateTimeField("创建于")
     active = models.BooleanField("开启", default=True)
 
+    def __unicode__(self):
+        return u'%d - %s' % (self.id, self.name)
+
     class Meta:
         db_table = 'server'
         verbose_name = "服务器"

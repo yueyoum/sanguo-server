@@ -3,7 +3,7 @@ import logging
 
 from apps.server.models import Server
 from apps.character.models import Character
-from apps.player.models import User
+from apps.account.models import Account
 from core.exception import SanguoException, BadMessage, InvalidOperate
 from core.signals import login_signal, register_signal
 from core.world import server_list
@@ -33,7 +33,7 @@ def create_new_user(email='', password='', device_token=''):
     if not email and not passwd and not device_token:
         raise ValueError("Can not create user with all Empty values")
 
-    user = User.objects.create(
+    user = Account.objects.create(
         email=email,
         passwd=passwd,
         device_token=device_token,
@@ -49,13 +49,13 @@ def register(request):
         logger.warning("Register: With Empty Arguments")
         raise BadMessage()
 
-    if User.objects.filter(email=req.email).exists():
+    if Account.objects.filter(email=req.email).exists():
         logger.warning("Register: With an Existed Email: %s" % req.email)
         raise SanguoException(100)
 
     try:
-        user = User.objects.get(device_token=req.device_token)
-    except User.DoesNotExist:
+        user = Account.objects.get(device_token=req.device_token)
+    except Account.DoesNotExist:
         logger.debug("Register: Create New User")
         user = create_new_user(
             email=req.email,
@@ -99,8 +99,8 @@ def login(request):
     need_create_new_char = None
     if req.anonymous.device_token:
         try:
-            user = User.objects.get(device_token=req.anonymous.device_token)
-        except User.DoesNotExist:
+            user = Account.objects.get(device_token=req.anonymous.device_token)
+        except Account.DoesNotExist:
             logger.debug("Login: With Anonymous. New User, Create New User")
             user = create_new_user(device_token=req.anonymous.device_token)
             need_create_new_char = True
@@ -108,10 +108,10 @@ def login(request):
         if not req.regular.email or not req.regular.password:
             raise BadMessage()
         try:
-            user = User.objects.get(email=req.regular.email)
+            user = Account.objects.get(email=req.regular.email)
             if user.passwd != req.regular.password:
                 raise SanguoException(120)
-        except User.DoesNotExist:
+        except Account.DoesNotExist:
             raise SanguoException(121)
 
     user.last_server_id = req.server_id
