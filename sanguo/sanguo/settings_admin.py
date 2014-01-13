@@ -4,6 +4,7 @@ __author__ = 'Wang Chao'
 __date__ = '1/13/14'
 
 from settings import *
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 
 ENABLE_ADMIN = True
 
@@ -13,24 +14,20 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    # 'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
+    'grappelli',
     'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
-    'django_nose',
-    'apps.server',
-    'apps.player',
-    'apps.character',
-    'apps.item',
+) + INSTALLED_APPS
+
+
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    'django.core.context_processors.request',
 )
+

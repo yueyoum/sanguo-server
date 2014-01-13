@@ -10,13 +10,13 @@ except (KeyError, ValueError):
     except IndexError:
         TESTING = False
 
-ENABLE_ADMIN = False
 
 CURRENT_PATH = os.path.dirname(os.path.realpath(__file__))
 PROJECT_PATH = os.path.dirname(CURRENT_PATH)
 TMP_PATH = os.path.normpath(os.path.join(PROJECT_PATH, '../tmp'))
 LOG_PATH = os.path.normpath(os.path.join(PROJECT_PATH, 'logs'))
 
+ENABLE_ADMIN = False
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -95,8 +95,8 @@ STATICFILES_DIRS = (
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
     #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
@@ -197,12 +197,6 @@ LOGGING = {
         }
     }
 }
-
-if DEBUG:
-    LOGGING['loggers']['django.db.backends'] = {
-        'handlers': ['console'],
-        'level': 'DEBUG'
-    }
 
 DATETIME_FORMAT = "Y-m-d H:i:s"
 
