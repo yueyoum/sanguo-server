@@ -1,0 +1,191 @@
+[
+{
+    "pk": 1, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u6253\u90201\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
+        "name": "\u9ec4\u94dc", 
+        "icon": null
+    }
+},
+{
+    "pk": 2, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u6253\u90201\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
+        "name": "\u73cd\u73e0", 
+        "icon": null
+    }
+},
+{
+    "pk": 3, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u6253\u90202\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
+        "name": "\u9752\u94dc", 
+        "icon": null
+    }
+},
+{
+    "pk": 4, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u6253\u90202\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
+        "name": "\u7425\u73c0", 
+        "icon": null
+    }
+},
+{
+    "pk": 5, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u6253\u90203\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
+        "name": "\u70bc\u94c1", 
+        "icon": null
+    }
+},
+{
+    "pk": 6, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u6253\u90203\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
+        "name": "\u7802\u91d1", 
+        "icon": null
+    }
+},
+{
+    "pk": 7, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u6253\u90204\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
+        "name": "\u94a2\u94c1", 
+        "icon": null
+    }
+},
+{
+    "pk": 8, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u6253\u90204\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
+        "name": "\u6c34\u6676", 
+        "icon": null
+    }
+},
+{
+    "pk": 9, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u6253\u90205\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
+        "name": "\u94a8\u94c1", 
+        "icon": null
+    }
+},
+{
+    "pk": 10, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u6253\u90205\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
+        "name": "\u7fe1\u7fe0", 
+        "icon": null
+    }
+},
+{
+    "pk": 11, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u6253\u90206\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
+        "name": "\u9ed1\u94c1", 
+        "icon": null
+    }
+},
+{
+    "pk": 12, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u5251\u3001\u5f13\u7c7b\u6b66\u5668", 
+        "name": "\u7cbe\u94a2\u77ed\u94c1", 
+        "icon": null
+    }
+},
+{
+    "pk": 13, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u5200\u3001\u65a7\u7c7b\u6b66\u5668", 
+        "name": "\u7cbe\u94a2\u7247\u94c1", 
+        "icon": null
+    }
+},
+{
+    "pk": 14, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u67aa\u3001\u621f\u7c7b\u6b66\u5668", 
+        "name": "\u7cbe\u94a2\u957f\u94c1", 
+        "icon": null
+    }
+},
+{
+    "pk": 15, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u6247\u3001\u5668\u7c7b\u6b66\u5668", 
+        "name": "\u7cbe\u94a2\u8f6f\u94c1", 
+        "icon": null
+    }
+},
+{
+    "pk": 16, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u94e0\u9632\u5177", 
+        "name": "\u5f02\u517d\u5de8\u9aa8", 
+        "icon": null
+    }
+},
+{
+    "pk": 17, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u7532\u9632\u5177", 
+        "name": "\u5f02\u517d\u9cde\u7532", 
+        "icon": null
+    }
+},
+{
+    "pk": 18, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u888d\u9632\u5177", 
+        "name": "\u5f02\u517d\u67d4\u76ae", 
+        "icon": null
+    }
+},
+{
+    "pk": 19, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u5b9d\u7269", 
+        "name": "\u732e\u5e1d\u8bcf\u4e66", 
+        "icon": null
+    }
+},
+{
+    "pk": 20, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u5175\u4e66", 
+        "name": "\u9ed1\u6a80\u6728\u7247", 
+        "icon": null
+    }
+},
+{
+    "pk": 21, 
+    "model": "item.stuff", 
+    "fields": {
+        "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u9970\u54c1", 
+        "name": "\u5357\u6d77\u73cd\u73e0", 
+        "icon": null
+    }
+}
+]

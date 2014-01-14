@@ -20,4 +20,7 @@ class CharacterAdmin(admin.ModelAdmin):
         return obj.update_needs_exp()
     UpdateNeedsExp.short_description = "升级所需经验"
 
+    def has_add_permission(self, request):
+        return False
+
 admin.site.register(Character, CharacterAdmin)

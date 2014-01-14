@@ -32,7 +32,7 @@ class Server(models.Model):
 
     @staticmethod
     def servers():
-        s = cache.get(SERVER_CACHE_KEY)
+        s = cache.get(SERVER_CACHE_KEY, hours=None)
         if s:
             return s
 

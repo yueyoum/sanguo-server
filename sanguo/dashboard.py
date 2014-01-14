@@ -45,6 +45,7 @@ class CustomIndexDashboard(Dashboard):
             collapsible=True,
             models=('apps.account.*',
                 'apps.character.*',
+                'apps.item.*',
                 ),
             ))
 

@@ -4,17 +4,16 @@ __author__ = 'Wang Chao'
 __date__ = '1/14/14'
 
 from django.contrib import admin
-from apps.item.models import EquipmentClass, Equipment
+from apps.item.models import Equipment, Stuff
 
-class EquipmentClassAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
 
 class EquipmentAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'Icon', 'IconLarge',
-        'step', 'tp', 'cls', 'upgrade_to', 'stuff_needs',
+        'step', 'step_name', 'tp', 'tp_name', 'cls', 'cls_name',
+        'upgrade_to', 'stuff_needs',
         'attack', 'defense', 'hp',
-        'slots', 'gem_addition'
+        'slots', 'gem_addition', 'growing'
     )
 
     list_filter = ('tp', 'cls', 'step',)
@@ -28,5 +27,16 @@ class EquipmentAdmin(admin.ModelAdmin):
         # TODO
         return ""
 
-admin.site.register(EquipmentClass, EquipmentClassAdmin)
+
+class StuffAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'name', 'Icon', 'des',
+    )
+
+    def Icon(self, obj):
+        # TODO
+        return ""
+
+
 admin.site.register(Equipment, EquipmentAdmin)
+admin.site.register(Stuff, StuffAdmin)

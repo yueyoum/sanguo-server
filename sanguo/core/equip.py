@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from apps.item.cache import get_cache_equipment
-from apps.item.models import encode_random_attrs, Equipment
+from apps.item.models import  Equipment
 from core import GLOBAL
 from core.gem import save_gem, delete_gem
 from core.exception import InvalidOperate

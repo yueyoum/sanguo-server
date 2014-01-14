@@ -18,4 +18,7 @@ class AccountAdmin(admin.ModelAdmin):
 
     ordering = ('last_login', )
 
+    def has_add_permission(self, request):
+        return False
+
 admin.site.register(Account, AccountAdmin)
