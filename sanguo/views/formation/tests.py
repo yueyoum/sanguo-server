@@ -8,15 +8,15 @@ from utils import crypto
 from core.character import Char
 from core.equip import generate_and_save_equip
 
+from core.formation import Formation
+
 
 class SocketTest(TransactionTestCase):
     def setUp(self):
         char = char_initialize(1, 1, 'a')
         self.char_id = char.id
         self.session = crypto.encrypt('1:1:{0}'.format(char.id))
-        e = generate_and_save_equip(1, 1, char.id)
-        self.e = e
-        self.equip_id = e.id
+
 
     def tearDown(self):
         app_test_helper._teardown()
@@ -44,21 +44,21 @@ class SocketTest(TransactionTestCase):
         char = Char(self.char_id)
         hero = char.save_hero(1)
         hero_id = hero[0]
-        self._set_socket(hero_id, self.equip_id, 0, 0, 0)
+        self._set_socket(hero_id, 0, 0, 0, 0)
 
-    def test_error_tp(self):
-        char = Char(self.char_id)
-        hero = char.save_hero(1)
-        hero_id = hero[0]
-
-        if self.e.tp == 1:
-            args = [hero_id, 0, 0, self.e.id, 402]
-        elif self.e.tp == 2:
-            args = [hero_id, 0, self.e.id, 0, 402]
-        else:
-            args = [hero_id, self.e.id, 0, 0, 402]
-
-        self._set_socket(*args)
+    # def test_error_tp(self):
+    #     char = Char(self.char_id)
+    #     hero = char.save_hero(1)
+    #     hero_id = hero[0]
+    #
+    #     if self.e.tp == 1:
+    #         args = [hero_id, 0, 0, self.e.id, 402]
+    #     elif self.e.tp == 2:
+    #         args = [hero_id, 0, self.e.id, 0, 402]
+    #     else:
+    #         args = [hero_id, self.e.id, 0, 0, 402]
+    #
+    #     self._set_socket(*args)
 
 
     def test_none_exists(self):
@@ -68,6 +68,7 @@ class SocketTest(TransactionTestCase):
 class FormationTest(TransactionTestCase):
     def setUp(self):
         char = char_initialize(1, 1, 'a')
+        self.char_id = char.id
         self.session = crypto.encrypt('1:1:{0}'.format(char.id))
         self.socket_ids = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
@@ -91,11 +92,21 @@ class FormationTest(TransactionTestCase):
 
 
     def test_set_formation(self):
-        self._set_formation([1, 0, 0, 3, 0, 0, 2, 0, 0])
+        # f = Formation(self.char_id)
+        # socket_ids = []
+        # for i in range(3):
+        #     sid = f.save_socket(hero=i+1)
+        #     socket_ids.append(sid)
+        #
+        # sid1, sid2, sid3 = socket_ids
+        # f.save_formation([sid1, 0, 0, sid2, 0, 0, sid3, 0, 0])
+        #
+
+        self._set_formation([3, 0, 0, 2, 0, 0, 1, 0, 0])
 
     def test_error_set(self):
         self._set_formation([1, 0, 0, 3, 0, 0, 0, 0, 99], 2)
-        self._set_formation([1, 0, 0, 3, 0, 0, 2, 0], 400)
+        self._set_formation([1, 0, 0, 3, 0, 0, 2, 0], 2)
         self._set_formation([1, 0, 3, 0, 0, 0, 2, 0, 0], 403)
 
 

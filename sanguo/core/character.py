@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from collections import defaultdict
 from mongoengine import DoesNotExist
 
 from apps.character.models import Character
@@ -8,12 +7,13 @@ from apps.item.cache import get_cache_equipment
 from core import GLOBAL
 from core.hero.cache import get_cache_hero
 from core.counter import Counter
-from core.formation import save_formation, save_socket, get_char_formation
+import core.formation
 from core.hero import save_hero, delete_hero
 from core.mongoscheme import Hang, MongoChar, MongoHero, MongoPrison
 from preset.settings import COUNTER, CHAR_INITIALIZE
 from core.signals import char_changed_signal, char_updated_signal
 
+from core.formation import Formation
 
 COUNTER_KEYS = COUNTER.keys()
 
@@ -50,7 +50,7 @@ class Char(object):
     # 阵法
     @property
     def formation(self):
-        return get_char_formation(self.id)
+        return core.formation.get_char_formation(self.id)
 
     @property
     def sockets(self):
@@ -75,19 +75,6 @@ class Char(object):
             res.append(heros_dict[s.hero])
         return res
 
-
-    def save_formation(self, socket_ids, send_notify=True):
-        save_formation(self.id, socket_ids, send_notify=send_notify)
-
-    def save_socket(self, socket_id=None, hero=0, weapon=0, armor=0, jewelry=0):
-        save_socket(
-            self.id,
-            socket_id=socket_id,
-            hero=hero,
-            weapon=weapon,
-            armor=armor,
-            jewelry=jewelry
-        )
 
 
     # 武将
@@ -183,7 +170,6 @@ class Char(object):
 
 def char_initialize(account_id, server_id, name):
     from core.prison import Prison
-    from core.equip import generate_and_save_equip
 
     init_gold = CHAR_INITIALIZE.get('gold', 0)
     init_sycee = CHAR_INITIALIZE.get('sycee', 0)
@@ -208,42 +194,19 @@ def char_initialize(account_id, server_id, name):
         Counter(char_id, func_name)
 
     init_hero_ids = CHAR_INITIALIZE.get('heros', [])
-    equips_on = CHAR_INITIALIZE.get('equips_on', {})
     if not init_hero_ids:
-        equips_on = {}
         init_hero_ids = GLOBAL.HEROS.get_random_hero_ids(3)
 
-    hero_init_eqiups = defaultdict(lambda: {})
-    for k, v in equips_on.iteritems():
-        for tid, level in v:
-            e = generate_and_save_equip(tid, level, char_id)
-            tp = GLOBAL.EQUIP.EQUIP_TEMPLATE[tid]['tp']
-            x = hero_init_eqiups.get(k, {})
-            if tp == 1:
-                hero_init_eqiups[k]['weapon'] = e.id
-            elif tp == 2:
-                hero_init_eqiups[k]['jewelry'] = e.id
-            else:
-                hero_init_eqiups[k]['armor'] = e.id
 
-    init_equips = CHAR_INITIALIZE.get('equips', [])
-    if init_equips:
-        for tid, level in init_equips:
-            generate_and_save_equip(tid, level, char_id)
-
-    init_gems = CHAR_INITIALIZE.get('gems', [])
-    if init_gems:
-        from core.gem import save_gem
-
-        save_gem(init_gems, char_id)
 
     hero_ids = save_hero(char_id, init_hero_ids, add_notify=False)
     socket_ids = []
+    f = Formation(char_id)
+
     for index, _id in enumerate(hero_ids):
         h = get_cache_hero(_id)
-        _equips = hero_init_eqiups.get(h.oid, {})
-        _sid = save_socket(char_id, socket_id=index + 1, hero=_id,
-                           send_notify=False, **_equips)
+        _sid = f.save_socket(hero=_id,
+                           send_notify=False)
         socket_ids.append(_sid)
 
     socket_ids = [
@@ -252,8 +215,7 @@ def char_initialize(account_id, server_id, name):
         socket_ids[2], 0, 0,
     ]
 
-    save_formation(char_id, socket_ids, send_notify=False)
-
+    f.save_formation(socket_ids, send_notify=False)
     # 将关卡1设置为new 可进入
     MongoChar.objects(id=char_id).update_one(set__stage_new=1)
 

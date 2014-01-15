@@ -20,15 +20,20 @@ class MongoItem(Document):
     stuffs = DictField()
 
 
-
-
-
 class MongoSocket(EmbeddedDocument):
     # 阵法插槽
     hero = IntField()
     weapon = IntField()
     armor = IntField()
     jewelry = IntField()
+
+
+
+class MongoFormation(Document):
+    id = IntField(primary_key=True)
+    sockets = MapField(EmbeddedDocumentField(MongoSocket))
+    formation = ListField(IntField())
+
 
 
 class MongoChar(Document):
