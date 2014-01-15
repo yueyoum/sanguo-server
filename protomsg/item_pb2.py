@@ -13,44 +13,10 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='item.proto',
   package='Sanguo.protocol.item',
-  serialized_pb='\n\nitem.proto\x12\x14Sanguo.protocol.item\"\xa1\x02\n\x05\x45quip\x12\n\n\x02id\x18\x01 \x02(\x05\x12\n\n\x02tp\x18\x02 \x02(\x05\x12\x0f\n\x07quality\x18\x03 \x02(\x05\x12\x0c\n\x04name\x18\x04 \x02(\t\x12\r\n\x05level\x18\x05 \x02(\x05\x12\x0b\n\x03\x65xp\x18\x06 \x02(\x05\x12\x0f\n\x07max_exp\x18\x07 \x02(\x05\x12\x0f\n\x07\x65\x61t_exp\x18\x08 \x02(\x05\x12\x11\n\tsell_gold\x18\t \x02(\x05\x12\r\n\x05value\x18\n \x02(\x05\x12\x12\n\nwhole_hole\x18\x0b \x02(\x05\x12\x0f\n\x07gem_ids\x18\x0c \x03(\x05\x12\x34\n\x05\x61ttrs\x18\r \x03(\x0b\x32%.Sanguo.protocol.item.Equip.ExtraAttr\x1a&\n\tExtraAttr\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05value\x18\x02 \x02(\x05\"!\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"E\n\tGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"H\n\x0c\x41\x64\x64GemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"K\n\x0fUpdateGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"/\n\x0fRemoveGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"S\n\x0fMergeGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x03 \x02(\x05\x12\x13\n\x0busing_sycee\x18\x04 \x02(\x08\"0\n\x10MergeGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"U\n\x0f\x45mbedGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08\x65quip_id\x18\x02 \x02(\x05\x12\x0f\n\x07hole_id\x18\x03 \x02(\x05\x12\x0e\n\x06gem_id\x18\x04 \x02(\x05\"0\n\x10\x45mbedGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"G\n\x11UnEmbedGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08\x65quip_id\x18\x02 \x02(\x05\x12\x0f\n\x07hole_id\x18\x03 \x02(\x05\"2\n\x12UnEmbedGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"K\n\x0b\x45quipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"N\n\x0e\x41\x64\x64\x45quipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"1\n\x11RemoveEquipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"Q\n\x11UpdateEquipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"E\n\x14StrengthEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x10\n\x08\x63ost_ids\x18\x03 \x03(\x05\"\xd1\x01\n\x15StrengthEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\n\n\x02id\x18\x03 \x01(\x05\x12L\n\tprocesses\x18\x04 \x03(\x0b\x32\x39.Sanguo.protocol.item.StrengthEquipResponse.UpdateProcess\x1a@\n\rUpdateProcess\x12\r\n\x05level\x18\x01 \x02(\x05\x12\x0f\n\x07\x63ur_exp\x18\x02 \x01(\x05\x12\x0f\n\x07max_exp\x18\x03 \x02(\x05\"0\n\x10SellEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"1\n\x11SellEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\nitem.proto\x12\x14Sanguo.protocol.item\"\x9c\x01\n\x05\x45quip\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0b\n\x03oid\x18\x02 \x02(\x05\x12\r\n\x05level\x18\x03 \x02(\x05\x12\x1a\n\x12level_up_need_gold\x18\x04 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x05 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x06 \x02(\x05\x12\n\n\x02hp\x18\x07 \x02(\x05\x12\x0f\n\x07gem_ids\x18\x08 \x03(\x05\x12\x11\n\tsell_gold\x18\t \x02(\x05\"!\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"E\n\tGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"H\n\x0c\x41\x64\x64GemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"K\n\x0fUpdateGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"/\n\x0fRemoveGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"S\n\x0fMergeGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x03 \x02(\x05\x12\x13\n\x0busing_sycee\x18\x04 \x02(\x08\"0\n\x10MergeGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"U\n\x0f\x45mbedGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08\x65quip_id\x18\x02 \x02(\x05\x12\x0f\n\x07hole_id\x18\x03 \x02(\x05\x12\x0e\n\x06gem_id\x18\x04 \x02(\x05\"0\n\x10\x45mbedGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"G\n\x11UnEmbedGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08\x65quip_id\x18\x02 \x02(\x05\x12\x0f\n\x07hole_id\x18\x03 \x02(\x05\"2\n\x12UnEmbedGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"K\n\x0b\x45quipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"N\n\x0e\x41\x64\x64\x45quipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"1\n\x11RemoveEquipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"Q\n\x11UpdateEquipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"3\n\x14StrengthEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"5\n\x15StrengthEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"@\n\x12StepUpEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\r\n\x05to_id\x18\x03 \x02(\x05\"3\n\x13StepUpEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"/\n\x10SellEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"1\n\x11SellEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
 
 
 
-
-_EQUIP_EXTRAATTR = _descriptor.Descriptor(
-  name='ExtraAttr',
-  full_name='Sanguo.protocol.item.Equip.ExtraAttr',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='id', full_name='Sanguo.protocol.item.Equip.ExtraAttr.id', index=0,
-      number=1, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='Sanguo.protocol.item.Equip.ExtraAttr.value', index=1,
-      number=2, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=288,
-  serialized_end=326,
-)
 
 _EQUIP = _descriptor.Descriptor(
   name='Equip',
@@ -67,51 +33,51 @@ _EQUIP = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='tp', full_name='Sanguo.protocol.item.Equip.tp', index=1,
+      name='oid', full_name='Sanguo.protocol.item.Equip.oid', index=1,
       number=2, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='quality', full_name='Sanguo.protocol.item.Equip.quality', index=2,
+      name='level', full_name='Sanguo.protocol.item.Equip.level', index=2,
       number=3, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='name', full_name='Sanguo.protocol.item.Equip.name', index=3,
-      number=4, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      name='level_up_need_gold', full_name='Sanguo.protocol.item.Equip.level_up_need_gold', index=3,
+      number=4, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='level', full_name='Sanguo.protocol.item.Equip.level', index=4,
+      name='attack', full_name='Sanguo.protocol.item.Equip.attack', index=4,
       number=5, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='exp', full_name='Sanguo.protocol.item.Equip.exp', index=5,
+      name='defense', full_name='Sanguo.protocol.item.Equip.defense', index=5,
       number=6, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='max_exp', full_name='Sanguo.protocol.item.Equip.max_exp', index=6,
+      name='hp', full_name='Sanguo.protocol.item.Equip.hp', index=6,
       number=7, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='eat_exp', full_name='Sanguo.protocol.item.Equip.eat_exp', index=7,
-      number=8, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
+      name='gem_ids', full_name='Sanguo.protocol.item.Equip.gem_ids', index=7,
+      number=8, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -122,45 +88,17 @@ _EQUIP = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='Sanguo.protocol.item.Equip.value', index=9,
-      number=10, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='whole_hole', full_name='Sanguo.protocol.item.Equip.whole_hole', index=10,
-      number=11, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='gem_ids', full_name='Sanguo.protocol.item.Equip.gem_ids', index=11,
-      number=12, type=5, cpp_type=1, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='attrs', full_name='Sanguo.protocol.item.Equip.attrs', index=12,
-      number=13, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
   ],
   extensions=[
   ],
-  nested_types=[_EQUIP_EXTRAATTR, ],
+  nested_types=[],
   enum_types=[
   ],
   options=None,
   is_extendable=False,
   extension_ranges=[],
   serialized_start=37,
-  serialized_end=326,
+  serialized_end=193,
 )
 
 
@@ -194,8 +132,8 @@ _GEM = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=328,
-  serialized_end=361,
+  serialized_start=195,
+  serialized_end=228,
 )
 
 
@@ -229,8 +167,8 @@ _GEMNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=363,
-  serialized_end=432,
+  serialized_start=230,
+  serialized_end=299,
 )
 
 
@@ -264,8 +202,8 @@ _ADDGEMNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=434,
-  serialized_end=506,
+  serialized_start=301,
+  serialized_end=373,
 )
 
 
@@ -299,8 +237,8 @@ _UPDATEGEMNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=508,
-  serialized_end=583,
+  serialized_start=375,
+  serialized_end=450,
 )
 
 
@@ -334,8 +272,8 @@ _REMOVEGEMNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=585,
-  serialized_end=632,
+  serialized_start=452,
+  serialized_end=499,
 )
 
 
@@ -383,8 +321,8 @@ _MERGEGEMREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=634,
-  serialized_end=717,
+  serialized_start=501,
+  serialized_end=584,
 )
 
 
@@ -418,8 +356,8 @@ _MERGEGEMRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=719,
-  serialized_end=767,
+  serialized_start=586,
+  serialized_end=634,
 )
 
 
@@ -467,8 +405,8 @@ _EMBEDGEMREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=769,
-  serialized_end=854,
+  serialized_start=636,
+  serialized_end=721,
 )
 
 
@@ -502,8 +440,8 @@ _EMBEDGEMRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=856,
-  serialized_end=904,
+  serialized_start=723,
+  serialized_end=771,
 )
 
 
@@ -544,8 +482,8 @@ _UNEMBEDGEMREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=906,
-  serialized_end=977,
+  serialized_start=773,
+  serialized_end=844,
 )
 
 
@@ -579,8 +517,8 @@ _UNEMBEDGEMRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=979,
-  serialized_end=1029,
+  serialized_start=846,
+  serialized_end=896,
 )
 
 
@@ -614,8 +552,8 @@ _EQUIPNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1031,
-  serialized_end=1106,
+  serialized_start=898,
+  serialized_end=973,
 )
 
 
@@ -649,8 +587,8 @@ _ADDEQUIPNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1108,
-  serialized_end=1186,
+  serialized_start=975,
+  serialized_end=1053,
 )
 
 
@@ -684,8 +622,8 @@ _REMOVEEQUIPNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1188,
-  serialized_end=1237,
+  serialized_start=1055,
+  serialized_end=1104,
 )
 
 
@@ -719,8 +657,8 @@ _UPDATEEQUIPNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1239,
-  serialized_end=1320,
+  serialized_start=1106,
+  serialized_end=1187,
 )
 
 
@@ -745,13 +683,6 @@ _STRENGTHEQUIPREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
-    _descriptor.FieldDescriptor(
-      name='cost_ids', full_name='Sanguo.protocol.item.StrengthEquipRequest.cost_ids', index=2,
-      number=3, type=5, cpp_type=1, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
   ],
   extensions=[
   ],
@@ -761,51 +692,10 @@ _STRENGTHEQUIPREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1322,
-  serialized_end=1391,
+  serialized_start=1189,
+  serialized_end=1240,
 )
 
-
-_STRENGTHEQUIPRESPONSE_UPDATEPROCESS = _descriptor.Descriptor(
-  name='UpdateProcess',
-  full_name='Sanguo.protocol.item.StrengthEquipResponse.UpdateProcess',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='level', full_name='Sanguo.protocol.item.StrengthEquipResponse.UpdateProcess.level', index=0,
-      number=1, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='cur_exp', full_name='Sanguo.protocol.item.StrengthEquipResponse.UpdateProcess.cur_exp', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='max_exp', full_name='Sanguo.protocol.item.StrengthEquipResponse.UpdateProcess.max_exp', index=2,
-      number=3, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=1539,
-  serialized_end=1603,
-)
 
 _STRENGTHEQUIPRESPONSE = _descriptor.Descriptor(
   name='StrengthEquipResponse',
@@ -828,31 +718,94 @@ _STRENGTHEQUIPRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1242,
+  serialized_end=1295,
+)
+
+
+_STEPUPEQUIPREQUEST = _descriptor.Descriptor(
+  name='StepUpEquipRequest',
+  full_name='Sanguo.protocol.item.StepUpEquipRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='Sanguo.protocol.item.StrengthEquipResponse.id', index=2,
-      number=3, type=5, cpp_type=1, label=1,
+      name='session', full_name='Sanguo.protocol.item.StepUpEquipRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='Sanguo.protocol.item.StepUpEquipRequest.id', index=1,
+      number=2, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='processes', full_name='Sanguo.protocol.item.StrengthEquipResponse.processes', index=3,
-      number=4, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
+      name='to_id', full_name='Sanguo.protocol.item.StepUpEquipRequest.to_id', index=2,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
   ],
   extensions=[
   ],
-  nested_types=[_STRENGTHEQUIPRESPONSE_UPDATEPROCESS, ],
+  nested_types=[],
   enum_types=[
   ],
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1394,
-  serialized_end=1603,
+  serialized_start=1297,
+  serialized_end=1361,
+)
+
+
+_STEPUPEQUIPRESPONSE = _descriptor.Descriptor(
+  name='StepUpEquipResponse',
+  full_name='Sanguo.protocol.item.StepUpEquipResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.item.StepUpEquipResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.item.StepUpEquipResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1363,
+  serialized_end=1414,
 )
 
 
@@ -871,9 +824,9 @@ _SELLEQUIPREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='ids', full_name='Sanguo.protocol.item.SellEquipRequest.ids', index=1,
-      number=2, type=5, cpp_type=1, label=3,
-      has_default_value=False, default_value=[],
+      name='id', full_name='Sanguo.protocol.item.SellEquipRequest.id', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -886,8 +839,8 @@ _SELLEQUIPREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1605,
-  serialized_end=1653,
+  serialized_start=1416,
+  serialized_end=1463,
 )
 
 
@@ -921,20 +874,16 @@ _SELLEQUIPRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1655,
-  serialized_end=1704,
+  serialized_start=1465,
+  serialized_end=1514,
 )
 
-_EQUIP_EXTRAATTR.containing_type = _EQUIP;
-_EQUIP.fields_by_name['attrs'].message_type = _EQUIP_EXTRAATTR
 _GEMNOTIFY.fields_by_name['gems'].message_type = _GEM
 _ADDGEMNOTIFY.fields_by_name['gems'].message_type = _GEM
 _UPDATEGEMNOTIFY.fields_by_name['gems'].message_type = _GEM
 _EQUIPNOTIFY.fields_by_name['equips'].message_type = _EQUIP
 _ADDEQUIPNOTIFY.fields_by_name['equips'].message_type = _EQUIP
 _UPDATEEQUIPNOTIFY.fields_by_name['equips'].message_type = _EQUIP
-_STRENGTHEQUIPRESPONSE_UPDATEPROCESS.containing_type = _STRENGTHEQUIPRESPONSE;
-_STRENGTHEQUIPRESPONSE.fields_by_name['processes'].message_type = _STRENGTHEQUIPRESPONSE_UPDATEPROCESS
 DESCRIPTOR.message_types_by_name['Equip'] = _EQUIP
 DESCRIPTOR.message_types_by_name['Gem'] = _GEM
 DESCRIPTOR.message_types_by_name['GemNotify'] = _GEMNOTIFY
@@ -953,17 +902,13 @@ DESCRIPTOR.message_types_by_name['RemoveEquipNotify'] = _REMOVEEQUIPNOTIFY
 DESCRIPTOR.message_types_by_name['UpdateEquipNotify'] = _UPDATEEQUIPNOTIFY
 DESCRIPTOR.message_types_by_name['StrengthEquipRequest'] = _STRENGTHEQUIPREQUEST
 DESCRIPTOR.message_types_by_name['StrengthEquipResponse'] = _STRENGTHEQUIPRESPONSE
+DESCRIPTOR.message_types_by_name['StepUpEquipRequest'] = _STEPUPEQUIPREQUEST
+DESCRIPTOR.message_types_by_name['StepUpEquipResponse'] = _STEPUPEQUIPRESPONSE
 DESCRIPTOR.message_types_by_name['SellEquipRequest'] = _SELLEQUIPREQUEST
 DESCRIPTOR.message_types_by_name['SellEquipResponse'] = _SELLEQUIPRESPONSE
 
 class Equip(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
-
-  class ExtraAttr(_message.Message):
-    __metaclass__ = _reflection.GeneratedProtocolMessageType
-    DESCRIPTOR = _EQUIP_EXTRAATTR
-
-    # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.Equip.ExtraAttr)
   DESCRIPTOR = _EQUIP
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.Equip)
@@ -1066,15 +1011,21 @@ class StrengthEquipRequest(_message.Message):
 
 class StrengthEquipResponse(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
-
-  class UpdateProcess(_message.Message):
-    __metaclass__ = _reflection.GeneratedProtocolMessageType
-    DESCRIPTOR = _STRENGTHEQUIPRESPONSE_UPDATEPROCESS
-
-    # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.StrengthEquipResponse.UpdateProcess)
   DESCRIPTOR = _STRENGTHEQUIPRESPONSE
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.StrengthEquipResponse)
+
+class StepUpEquipRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _STEPUPEQUIPREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.StepUpEquipRequest)
+
+class StepUpEquipResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _STEPUPEQUIPRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.StepUpEquipResponse)
 
 class SellEquipRequest(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType

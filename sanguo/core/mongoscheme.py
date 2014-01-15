@@ -4,6 +4,25 @@ from mongoengine import *
 import core.drives
 
 
+class MongoEmbeddedEquipment(EmbeddedDocument):
+    oid = IntField()
+    level = IntField()
+    gems = ListField(IntField())
+
+
+class MongoItem(Document):
+    id = IntField(primary_key=True)
+    # 装备
+    equipments = MapField(EmbeddedDocumentField(MongoEmbeddedEquipment))
+    # 宝石
+    gems = DictField()
+    # 材料
+    stuffs = DictField()
+
+
+
+
+
 class MongoSocket(EmbeddedDocument):
     # 阵法插槽
     hero = IntField()

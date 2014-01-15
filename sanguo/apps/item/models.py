@@ -4,28 +4,6 @@ from django.db.models.signals import post_delete, post_save
 from utils import cache
 
 
-class EquipUpdateProcess(object):
-    __slots__ = ['processes', ]
-
-    def __init__(self):
-        self.processes = []
-
-    def __iter__(self):
-        for p in self.processes:
-            yield p
-
-
-    def add(self, data):
-        self.processes.append(data)
-
-    @property
-    def end(self):
-        end = self.processes[-1]
-        return end[0], end[1]
-
-
-
-
 class Equipment(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField("名字", max_length=16)

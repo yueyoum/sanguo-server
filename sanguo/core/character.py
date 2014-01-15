@@ -125,6 +125,7 @@ class Char(object):
         return p
 
 
+
     # 装备
     @property
     def equip_ids(self):

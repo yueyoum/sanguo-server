@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 
-from core.equip import generate_and_save_equip, delete_equip
 from core.gem import save_gem, delete_gem
 from core.character import Char
+from core.item import Item
 
 
 def cmd(request):
@@ -22,14 +22,16 @@ def cmd(request):
         elif req.tp == 4:
             char.update(sycee=req.param)
         elif req.tp == 5:
-            generate_and_save_equip(req.param, 1, char_id)
+            item = Item(char_id)
+            item.equip_add(req.param)
         elif req.tp == 6:
             save_gem([(req.param, 1)], char_id)
         elif req.tp == 7:
             char.save_hero(req.param)
     elif req.action == 2:
         if req.tp == 5:
-            delete_equip(req.param)
+            item = Item(char_id)
+            item.equip_remove(req.param)
         elif req.tp == 6:
             delete_gem(req.param, 1, char_id)
 

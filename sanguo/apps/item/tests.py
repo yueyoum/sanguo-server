@@ -13,60 +13,59 @@ from utils import app_test_helper
 from utils import crypto
 
 from core.character import char_initialize
-from core.equip import generate_and_save_equip, delete_equip
-from core.mongoscheme import MongoChar
+from core.equip import generate_and_save_equip
 from core.gem import save_gem
-from apps.character.models import Character
 
+from core.item import Item
+from core.character import Char
 
 def teardown():
     app_test_helper._teardown()
 
 
-class SaveAndDeleteEquipmentTest(TransactionTestCase):
-    def setUp(self):
-        char = char_initialize(1, 1, 'a')
-        self.char_id = char.id
-        c = MongoChar.objects.only('equips').get(id=self.char_id)
-        self.original_equip_amount = len(c.equips)
-
-    def tearDown(self):
-        app_test_helper._teardown()
-
-    def test_save_equip(self):
-        equip = generate_and_save_equip(1, 1, self.char_id)
-        char = MongoChar.objects.only('equips').get(id=self.char_id)
-        self.assertEqual(len(char.equips), 1 + self.original_equip_amount)
-        self.assertTrue(int(equip.id) in char.equips)
-
-        MongoChar.objects(id=self.char_id).update_one(
-            add_to_set__equips=equip.id
-        )
-
-        char.reload()
-        self.assertEqual(len(char.equips), 1 + self.original_equip_amount)
-
-        app_test_helper._mongo_teardown_func()
-
-    def test_remove_equip(self):
-        equip = generate_and_save_equip(1, 1, self.char_id)
-        char = MongoChar.objects.only('equips').get(id=self.char_id)
-        self.assertEqual(len(char.equips), 1 + self.original_equip_amount)
-
-        delete_equip(equip.id)
-        char.reload()
-        self.assertEqual(len(char.equips), 0 + self.original_equip_amount)
-        app_test_helper._mongo_teardown_func()
+# class SaveAndDeleteEquipmentTest(TransactionTestCase):
+#     def setUp(self):
+#         char = char_initialize(1, 1, 'a')
+#         self.char_id = char.id
+#         c = MongoChar.objects.only('equips').get(id=self.char_id)
+#         self.original_equip_amount = len(c.equips)
+#
+#     def tearDown(self):
+#         app_test_helper._teardown()
+#
+#     def test_save_equip(self):
+#         equip = generate_and_save_equip(1, 1, self.char_id)
+#         char = MongoChar.objects.only('equips').get(id=self.char_id)
+#         self.assertEqual(len(char.equips), 1 + self.original_equip_amount)
+#         self.assertTrue(int(equip.id) in char.equips)
+#
+#         MongoChar.objects(id=self.char_id).update_one(
+#             add_to_set__equips=equip.id
+#         )
+#
+#         char.reload()
+#         self.assertEqual(len(char.equips), 1 + self.original_equip_amount)
+#
+#         app_test_helper._mongo_teardown_func()
+#
+#     def test_remove_equip(self):
+#         equip = generate_and_save_equip(1, 1, self.char_id)
+#         char = MongoChar.objects.only('equips').get(id=self.char_id)
+#         self.assertEqual(len(char.equips), 1 + self.original_equip_amount)
+#
+#         delete_equip(equip.id)
+#         char.reload()
+#         self.assertEqual(len(char.equips), 0 + self.original_equip_amount)
+#         app_test_helper._mongo_teardown_func()
 
 
 class StrengthEquipmentTest(TransactionTestCase):
+    fixtures = ['equipment.json',]
     def setUp(self):
         char = char_initialize(1, 1, 'a')
         self.char_id = char.id
         self.session = crypto.encrypt('1:1:{0}'.format(self.char_id))
-
-        c = MongoChar.objects.only('equips').get(id=self.char_id)
-        self.original_equip_amount = len(c.equips)
+        self.item = Item(self.char_id)
 
     def tearDown(self):
         app_test_helper._teardown()
@@ -74,14 +73,13 @@ class StrengthEquipmentTest(TransactionTestCase):
     def _prepare_equip(self):
         self.equip_ids = []
         for i in range(3):
-            e = generate_and_save_equip(1, 1, self.char_id)
-            self.equip_ids.append(int(e.id))
+            eid = self.item.equip_add(i+1)
+            self.equip_ids.append(eid)
 
-    def _strength(self, _id, cost_ids, ret=0):
+    def _strength(self, _id, ret=0):
         req = protomsg.StrengthEquipRequest()
         req.session = self.session
         req.id = _id
-        req.cost_ids.extend(cost_ids)
 
         data = app_test_helper.pack_data(req)
         res = app_test_helper.make_request('/equip/strengthen/', data)
@@ -96,46 +94,40 @@ class StrengthEquipmentTest(TransactionTestCase):
     def test_normal_strength(self):
         self._prepare_equip()
         _id = self.equip_ids[0]
-        cost_ids = self.equip_ids[1:]
 
-        c = Character.objects.get(id=self.char_id)
-        c.gold = 9999
-        c.save()
-        self._strength(_id, cost_ids)
+        c = Char(self.char_id)
+        c.update(gold=9999)
 
-        char = MongoChar.objects.only('equips').get(id=self.char_id)
-        self.assertEqual(len(char.equips), 1 + self.original_equip_amount)
-
-        app_test_helper._mongo_teardown_func()
-
+        self._strength(_id)
 
     def test_not_enough_gold(self):
         self._prepare_equip()
         _id = self.equip_ids[0]
-        cost_ids = self.equip_ids[1:]
-        self._strength(_id, cost_ids, 10)
+        self._strength(_id, 10)
 
     def test_none_exists_strength(self):
-        self._prepare_equip()
-        _id = self.equip_ids[0]
-        cost_ids = self.equip_ids[1:]
-        cost_ids.append(9999)
-        self._strength(_id, cost_ids, 2)
+        self._strength(999, 2)
 
-        char = MongoChar.objects.only('equips').get(id=self.char_id)
-        self.assertEqual(len(char.equips), 3 + self.original_equip_amount)
 
-        app_test_helper._mongo_teardown_func()
+    def test_step_up(self):
+        # XXX fake test
+        req = protomsg.StepUpEquipRequest()
+        req.session = self.session
+        req.id = 1
+        req.to_id = 2
+        data = app_test_helper.pack_data(req)
+        res = app_test_helper.make_request('/equip/stepup/', data)
+        msgs = app_test_helper.unpack_data(res)
+
 
 
 class SellEquipmentTest(TransactionTestCase):
+    fixtures = ['equipment.json',]
     def setUp(self):
         char = char_initialize(1, 1, 'a')
         self.char_id = char.id
         self.session = crypto.encrypt('1:1:{0}'.format(self.char_id))
-
-        c = MongoChar.objects.only('equips').get(id=self.char_id)
-        self.original_equip_amount = len(c.equips)
+        self.item = Item(self.char_id)
 
     def tearDown(self):
         app_test_helper._teardown()
@@ -143,14 +135,14 @@ class SellEquipmentTest(TransactionTestCase):
     def _prepare_equip(self):
         self.equip_ids = []
         for i in range(3):
-            e = generate_and_save_equip(1, 1, self.char_id)
-            self.equip_ids.append(int(e.id))
+            eid = self.item.equip_add(i+1)
+            self.equip_ids.append(eid)
 
 
-    def _sell(self, ids, ret=0):
+    def _sell(self, _id, ret=0):
         req = protomsg.SellEquipRequest()
         req.session = self.session
-        req.ids.extend(ids)
+        req.id = _id
 
         data = app_test_helper.pack_data(req)
         res = app_test_helper.make_request('/equip/sell/', data)
@@ -164,18 +156,11 @@ class SellEquipmentTest(TransactionTestCase):
 
     def test_normal_sell(self):
         self._prepare_equip()
-        self._sell(self.equip_ids)
-
-        char = MongoChar.objects.only('equips').get(id=self.char_id)
-        self.assertEqual(len(char.equips), 0 + self.original_equip_amount)
-
-        app_test_helper._mongo_teardown_func()
+        self._sell(self.equip_ids[0])
 
 
     def test_none_exists_strength(self):
-        self._sell([999], 2)
-
-        app_test_helper._mongo_teardown_func()
+        self._sell(999, 2)
 
 
 class EmbedGemTest(TransactionTestCase):
