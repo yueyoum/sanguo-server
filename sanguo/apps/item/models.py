@@ -7,8 +7,8 @@ from utils import cache
 class Equipment(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField("名字", max_length=16)
-    icon = models.IntegerField("图标ID", blank=True, null=True)
-    icon_large = models.IntegerField("大图标ID", blank=True, null=True)
+    icon = models.CharField("图标ID", max_length=32, blank=True)
+    icon_large = models.CharField("大图标ID", max_length=32, blank=True)
 
     step = models.SmallIntegerField("阶")
     step_name = models.CharField("阶名字", max_length=12)
