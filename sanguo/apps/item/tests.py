@@ -13,8 +13,6 @@ from utils import app_test_helper
 from utils import crypto
 
 from core.character import char_initialize
-from core.equip import generate_and_save_equip
-from core.gem import save_gem
 
 from core.item import Item
 from core.character import Char

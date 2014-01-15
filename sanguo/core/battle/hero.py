@@ -8,10 +8,11 @@ from core import GLOBAL
 from core.hero import FightPowerMixin
 
 from core.hero.cache import get_cache_hero
-from apps.character.cache import get_cache_character
 
 from mixins import ActiveEffectMixin
 
+
+from apps.character.models import Character
 
 logger = logging.getLogger('battle')
 
@@ -237,9 +238,11 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin):
     #        who.skill_action(to, skill, _defense_action_msg)
 
 
-    def real_damage_value(self, damage, target_defense):
-        xx = min(0.024 * target_defense / (self.level + 9), 0.75)
-        value = damage * (1 - xx)
+    def real_damage_value(self, damage, target):
+        # xx = min(0.024 * target_defense / (self.level + 9), 0.75)
+        damage_reduce = min(0.02 * target.using_defense / (self.level + 9) + 0.015 * (target.level - self.level), 0.85)
+        damage_reduce = max(damage_reduce, -0.15)
+        value = damage * (1 - damage_reduce)
         return value
 
 
@@ -278,7 +281,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin):
     def _one_action(self, target, value, msg, eff=None):
         # FIXME
         if not eff or eff == 2:
-            value = self.real_damage_value(value, target.using_defense)
+            value = self.real_damage_value(value, target)
 
         hero_noti = msg.hero_notify.add()
         hero_noti.target_id = target.id
@@ -411,7 +414,7 @@ class BattleHero(InBattleHero):
 
         self.skills = GLOBAL.HEROS[self.original_id]['skills']
 
-        char = get_cache_character(hero.char_id)
+        char = Character.cache_obj(hero.char_id)
         self.level = char.level
         InBattleHero.__init__(self)
 

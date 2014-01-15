@@ -31,7 +31,7 @@ class Server(models.Model):
         super(Server, self).save(*args, **kwargs)
 
     @staticmethod
-    def servers():
+    def all():
         s = cache.get(SERVER_CACHE_KEY, hours=None)
         if s:
             return s

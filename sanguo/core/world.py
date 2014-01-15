@@ -11,7 +11,7 @@ def server_list(user=None):
 
     top = None
     all_servers = []
-    for sid, s in Server.servers().items():
+    for sid, s in Server.all().items():
         _s = ServerMsg()
         _s.id = sid
         _s.name = s.name

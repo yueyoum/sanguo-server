@@ -3,11 +3,7 @@
 from django.db import models
 from django.db.models.signals import post_save
 
-from apps.character.cache import save_cache_character
-
-from apps.account.models import Account
-from apps.server.models import Server
-
+from utils import cache
 
 class Character(models.Model):
     account_id = models.IntegerField("帐号ID")
@@ -30,6 +26,20 @@ class Character(models.Model):
     # 积分  来自每场比武奖励， 用于比武排名
     score_day = models.PositiveIntegerField("日积分", default=0)
     score_week = models.PositiveIntegerField("周积分", default=0)
+
+
+    @staticmethod
+    def cache_obj(_id):
+        c = cache.get('char:{0}'.format(_id))
+        if c:
+            return c
+
+        try:
+            obj = Character.objects.get(_id)
+            return _save_cache_character(obj)
+        except Character.DoesNotExist:
+            return None
+
 
 
     def update_needs_exp(self, level=None):
@@ -60,9 +70,14 @@ class Character(models.Model):
         verbose_name_plural = "角色"
 
 
-def character_save_callback(sender, instance, **kwargs):
+
+def _save_cache_character(obj):
+    cache.set('char:{0}'.format(obj.id), obj)
+    return obj
+
+def character_save_callback(instance, **kwargs):
     # character其他数据直接在外部初始化完了。这里不用hook
-    save_cache_character(instance)
+    _save_cache_character(instance)
 
 
 post_save.connect(

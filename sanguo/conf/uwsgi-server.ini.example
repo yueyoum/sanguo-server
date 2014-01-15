@@ -11,8 +11,12 @@ limit-as = 768
 master = true
 processes = 4
 theads = 2
-daemonize = /tmp/sanguo-uwsgi.log
+enable-threads = true
+daemonize = true
 pidfile = /tmp/sanguo-uwsgi.pid
 stats = 0.0.0.0:9191
+
+req-logger = file:/tmp/sanguo-uwsgi-req.log
+logger = file:/tmp/sanguo-uwsgi.log
 
 

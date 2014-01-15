@@ -146,9 +146,7 @@ class Item(object):
 
     def equip_step_up(self, _id, to):
         # TODO check stuffs
-        try:
-            equip = self.item.equipments[str(_id)]
-        except KeyError:
+        if not self.has_equip(_id):
             raise InvalidOperate()
 
         all_equips = MysqlEquipment.all()
@@ -307,3 +305,17 @@ class Item(object):
             self._msg_equip(equip, int(_id), data.oid, data.level, data.gems)
 
         publish_to_char(self.char_id, pack_msg(msg))
+
+
+    def send_gem_notify(self):
+        msg = protomsg.GemNotify()
+        for k, v in self.item.gems.iteritems():
+            g = msg.gems.add()
+            g.id, g.amount = int(k), v
+
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
+    def send_notify(self):
+        self.send_equip_notify()
+        self.send_gem_notify()

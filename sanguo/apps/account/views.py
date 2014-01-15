@@ -11,8 +11,6 @@ from protomsg import RegisterResponse, StartGameResponse
 from utils import crypto, pack_msg
 from utils.decorate import message_response
 
-from worker import tasks
-
 logger = logging.getLogger('sanguo')
 
 
@@ -46,12 +44,10 @@ def register(request):
     req = request._proto
 
     if not req.email or not req.password or not req.device_token:
-        logger.warning("Register: With Empty Arguments")
-        raise BadMessage()
+        raise BadMessage("Register: With Empty Arguments")
 
     if Account.objects.filter(email=req.email).exists():
-        logger.warning("Register: With an Existed Email: %s" % req.email)
-        raise SanguoException(100)
+        raise SanguoException(100, "Register: With an Existed Email {0}".format(req.email))
 
     try:
         user = Account.objects.get(device_token=req.device_token)
@@ -93,8 +89,8 @@ def register(request):
 @message_response("StartGameResponse")
 def login(request):
     req = request._proto
-    if req.server_id not in Server.servers():
-        raise InvalidOperate()
+    if req.server_id not in Server.all():
+        raise InvalidOperate("Login: With an NON Existed server {0}".format(req.server_id))
 
     need_create_new_char = None
     if req.anonymous.device_token:
@@ -110,14 +106,14 @@ def login(request):
         try:
             user = Account.objects.get(email=req.regular.email)
             if user.passwd != req.regular.password:
-                raise SanguoException(120)
+                raise SanguoException(120, "Login: Wrong Password")
         except Account.DoesNotExist:
-            raise SanguoException(121)
+            raise SanguoException(121, "Login: None Exist Email {0}".format(req.regular.email))
 
     user.last_server_id = req.server_id
     user.save()
     if not user.active:
-        raise SanguoException(122)
+        raise SanguoException(122, "Login: User {0} NOT Active".format(user.id))
 
     request._account_id = user.id
     request._server_id = req.server_id
@@ -153,8 +149,6 @@ def login(request):
         session_str = '{0}:{1}'.format(request._account_id, request._server_id)
 
     session = crypto.encrypt(session_str)
-
-    tasks.update_server_status.apply_async(args=[req.server_id], kwargs={'login_times': 1})
 
     response = StartGameResponse()
     response.ret = 0

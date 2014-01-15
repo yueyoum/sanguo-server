@@ -6,10 +6,9 @@ import protomsg
 
 from core.character import Char
 
-from apps.character.cache import get_cache_character
+
 from core.hero import cal_hero_property
 
-#publish_to_char = rabbit.publish_to_char
 from core.msgpipe import publish_to_char
 from preset.settings import PLUNDER_COST_SYCEE
 from core.counter import Counter
@@ -21,8 +20,10 @@ from core.daily import CheckIn
 from core.formation import Formation
 from core.item import Item
 
+from apps.character.models import Character
+
 def character_notify(char_id):
-    obj = get_cache_character(char_id)
+    obj = Character.cache_obj(char_id)
     data = protomsg.CharacterNotify()
     data.char.id = obj.id
     data.char.name = obj.name
@@ -296,7 +297,7 @@ def prisoner_notify(char_id, objs=None, message_name="PrisonerListNotify"):
         prison = MongoPrison.objects.get(id=char_id)
         objs = prison.prisoners.values()
 
-    cache_char = get_cache_character(char_id)
+    cache_char = Character.cache_obj(char_id)
     level = cache_char.level
 
     msg = getattr(protomsg, message_name)()
@@ -382,8 +383,6 @@ def login_notify(char_id):
     if new_stages:
         new_stage_notify(char_id, new_stages)
 
-    # equipment_notify(char_id)
-    gem_notify(char_id)
 
     hang = hang_notify(char_id)
     if hang and hang.finished:
@@ -403,6 +402,6 @@ def login_notify(char_id):
     m.send_mail_notify()
 
     CheckIn(char_id).send_notify()
-    Item(char_id).send_equip_notify()
+    Item(char_id).send_notify()
     
 

@@ -3,11 +3,11 @@ import protomsg
 from protomsg import RESPONSE_NOTIFY_TYPE
 
 from core.character import char_initialize
-from core.gem import save_gem
 from utils import app_test_helper as tests
 from utils import crypto
 from apps.character.models import Character
 
+from core.item import Item
 
 class GemTest(TransactionTestCase):
     def setUp(self):
@@ -18,7 +18,8 @@ class GemTest(TransactionTestCase):
 
             (47, 4),
         )
-        save_gem(gems, char.id)
+        item = Item(char.id)
+        item.gem_add(gems)
         self.session = crypto.encrypt('1:1:{0}'.format(char.id))
         self.char_id = char.id
 

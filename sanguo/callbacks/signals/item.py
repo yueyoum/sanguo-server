@@ -20,7 +20,7 @@ from core.notify import (
     remove_gem_notify,
     )
 
-from core.formation import find_socket_by_equip
+from core.formation import Formation
 from core import GLOBAL
 
 EQUIP_TEMPLATE = GLOBAL.EQUIP.EQUIP_TEMPLATE
@@ -41,10 +41,9 @@ def _equip_changed(cache_equip_obj, **kwargs):
 
     equip_id = cache_equip_obj.id
 
-    socket = find_socket_by_equip(
-        cache_equip_obj.char_id,
-        equip_id
-    )
+    f = Formation(cache_equip_obj.char_id)
+    socket = f.find_socket_by_equip(equip_id)
+
 
     if socket and socket.hero:
         socket_changed_signal.send(

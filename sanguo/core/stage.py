@@ -3,12 +3,9 @@ import random
 from collections import defaultdict
 
 from core.mongoscheme import MongoChar, Hang
-from core.equip import generate_and_save_equip
-from core.gem import save_gem
 from core import GLOBAL
 from core.character import Char
-
-from apps.character.cache import get_cache_character
+from core.item import Item
 
 from utils import timezone
 from utils.math import GAUSSIAN_TABLE
@@ -160,10 +157,13 @@ def save_drop(char_id, exp, gold, equips, gems):
     # FIXME bulk create
     for tid, level, amount in equips:
         for i in range(amount):
-            generate_and_save_equip(tid, level, char_id)
+            # TODO drop equip
+            pass
+            # generate_and_save_equip(tid, level, char_id)
 
     # gems
-    save_gem(gems, char_id)
+    item = Item(char_id)
+    item.gem_add(gems)
 
 
 static_day_hours = 18

@@ -38,6 +38,14 @@ class Account(models.Model):
             self.platform = 'unknown'
 
         self.platform = self.platform[:32]
+
+        if len(self.all_server_ids) < 253:
+            all_server_ids = self.all_server_ids.split(',')
+            if str(self.last_server_id) not in all_server_ids:
+                all_server_ids.append(str(self.last_server_id))
+                self.all_server_ids = ','.join(all_server_ids)
+
+
         super(Account, self).save(*args, **kwargs)
 
     class Meta:

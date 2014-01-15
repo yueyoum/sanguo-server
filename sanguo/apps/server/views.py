@@ -1,9 +1,10 @@
 from apps.account.models import Account
-from protomsg import GetServerListResponse
 from core.world import server_list
 from core.exception import BadMessage
 from utils import pack_msg
 from utils.decorate import message_response
+
+from protomsg import GetServerListResponse
 
 @message_response("GetServerListResponse")
 def get_server_list(request):

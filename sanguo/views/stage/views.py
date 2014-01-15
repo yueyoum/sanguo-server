@@ -5,8 +5,6 @@ import random
 from mongoengine import DoesNotExist
 
 import protomsg
-from apps.character.cache import get_cache_character
-# from callbacks.timers import hang_job
 from core import GLOBAL
 from core.battle.battle import Battle
 from core.battle.hero import BattleHero, MonsterHero
@@ -28,6 +26,7 @@ from core.character import Char
 from core.prison import Prison
 from preset.settings import PLUNDER_COST_SYCEE
 
+from apps.character.models import Character
 
 logger = logging.getLogger('sanguo')
 
@@ -71,7 +70,7 @@ class PVE(Battle):
     def get_my_name(self, my_id=None):
         if my_id is None:
             my_id = self.my_id
-        cache_char = get_cache_character(my_id)
+        cache_char = Character.cache_obj(my_id)
         return cache_char.name
 
 
@@ -237,8 +236,6 @@ def plunder_list(request):
     res = get_plunder_list(char_id)
     # XXX just for test
     if not res:
-        from apps.character.models import Character
-
         ids = Character.objects.order_by('-id').values_list('id', flat=True)
         ids = ids[:10]
         res = [(i, 8) for i in ids if i != char_id]
@@ -252,7 +249,7 @@ def plunder_list(request):
         plunder = response.plunders.add()
         plunder.id = _id
 
-        cache_char = get_cache_character(_id)
+        cache_char = Character.cache_obj(_id)
         plunder.name = cache_char.name
         plunder.gold = gold
         c = Char(_id)
@@ -279,7 +276,7 @@ def plunder(request):
 
         c.update(sycee=-PLUNDER_COST_SYCEE)
 
-    if get_cache_character(req.id) is None:
+    if Character.cache_obj(req.id) is None:
         logger.warning("Plunder. Char {0} plunder with a NONE exist char {1}".format(
             char_id, req.id
         ))

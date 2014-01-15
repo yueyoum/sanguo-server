@@ -2,12 +2,10 @@
 from mongoengine import DoesNotExist
 
 from apps.character.models import Character
-from apps.character.cache import get_cache_character
 from apps.item.cache import get_cache_equipment
 from core import GLOBAL
 from core.hero.cache import get_cache_hero
 from core.counter import Counter
-import core.formation
 from core.hero import save_hero, delete_hero
 from core.mongoscheme import Hang, MongoChar, MongoHero, MongoPrison
 from preset.settings import COUNTER, CHAR_INITIALIZE
@@ -44,13 +42,13 @@ class Char(object):
 
     @property
     def cacheobj(self):
-        return get_cache_character(self.id)
-
+        return Character.cache_obj(self.id)
 
     # 阵法
     @property
     def formation(self):
-        return core.formation.get_char_formation(self.id)
+        f = Formation(self.id)
+        return f.formation.formation
 
     @property
     def sockets(self):

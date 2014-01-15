@@ -7,8 +7,8 @@ from core import GLOBAL
 from core.drives import document_ids
 from core.mongoscheme import MongoHero
 from core.signals import hero_add_signal, hero_del_signal
-from apps.character.cache import get_cache_character
 
+from apps.character.models import Character
 
 def cal_hero_property(original_id, level):
     """
@@ -101,7 +101,7 @@ def get_hero(_id):
     @rtype: Hero
     """
     hero = MongoHero.objects.get(id=_id)
-    char_obj = get_cache_character(hero.char)
+    char_obj = Character.cache_obj(hero.char)
     return Hero(_id, hero.oid, char_obj.level, char_obj.id)
 
 
