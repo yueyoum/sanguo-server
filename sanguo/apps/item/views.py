@@ -2,7 +2,6 @@
 
 import logging
 
-from core.equip import embed_gem
 from utils.decorate import message_response
 
 from core.item import Item
@@ -41,16 +40,15 @@ def sell_equip(request):
 @message_response("EmbedGemResponse")
 def embed(request):
     req = request._proto
-    char_id = request._char_id
-
-    embed_gem(char_id, req.equip_id, req.hole_id, req.gem_id)
+    item = Item(request._char_id)
+    item.equip_embed(req.equip_id, req.hole_id, req.gem_id)
     return None
 
 
 @message_response("UnEmbedGemResponse")
 def unembed(request):
     req = request._proto
-    char_id = request._char_id
+    item = Item(request._char_id)
+    item.equip_embed(req.equip_id, req.hole_id, 0)
 
-    embed_gem(char_id, req.equip_id, req.hole_id, 0)
     return None

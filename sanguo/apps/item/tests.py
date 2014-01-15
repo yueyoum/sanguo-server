@@ -164,16 +164,18 @@ class SellEquipmentTest(TransactionTestCase):
 
 
 class EmbedGemTest(TransactionTestCase):
+    fixtures = ['equipment.json',]
     def setUp(self):
         char = char_initialize(1, 1, 'a')
         self.char_id = char.id
         self.session = crypto.encrypt('1:1:{0}'.format(self.char_id))
 
-        e = generate_and_save_equip(1, 99, self.char_id)
-        self.equip_id = int(e.id)
+        item = Item(self.char_id)
+        eid = item.equip_add(1)
+        self.equip_id = eid
 
         gems = [(1, 10), (2, 1)]
-        save_gem(gems, self.char_id)
+        item.gem_add(gems)
 
     def tearDown(self):
         app_test_helper._teardown()

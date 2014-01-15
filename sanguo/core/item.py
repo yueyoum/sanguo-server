@@ -84,13 +84,17 @@ class Item(object):
     def has_equip(self, equip_id):
         return str(equip_id) in self.item.equipments
 
+    def has_gem(self, gem_id):
+        return str(gem_id) in self.item.gems
+
     def equip_add(self, oid, level=1, notify=True):
         # TODO 背包是否满了
+        this_equip = MysqlEquipment.all()[oid]
         new_id = document_ids.inc('equipment')
         me = MongoEmbeddedEquipment()
         me.oid = oid
         me.level = level
-        me.gems = []
+        me.gems = [0] * this_equip.slots
 
         self.item.equipments[str(new_id)] = me
         self.item.save()
@@ -172,10 +176,106 @@ class Item(object):
         self.equip_remove(_id)
 
     def equip_embed(self, _id, slot_id, gem_id):
-        pass
+        # gem_id = 0 表示取下slot_id对应的宝石
+        if not self.has_equip(_id):
+            raise InvalidOperate()
 
-    def equip_unembed(self, _id, slot_id):
-        pass
+        if gem_id and not self.has_gem(gem_id):
+            raise InvalidOperate()
+
+        slot_index = slot_id - 1
+        this_equip = self.item.equipments[str(_id)]
+        try:
+            off_gem = this_equip.gems[slot_index]
+            this_equip.gems[slot_index] = gem_id
+        except IndexError:
+            raise InvalidOperate()
+
+        if gem_id:
+            # 镶嵌
+            self.gem_remove(gem_id, 1)
+            if off_gem:
+                self.gem_add([(off_gem, 1)])
+        else:
+            # 取下
+            if not off_gem:
+                raise InvalidOperate()
+            self.gem_add([(off_gem, 1)])
+
+        self.item.save()
+        self._equip_update_notify(_id, this_equip)
+
+
+    def gem_add(self, add_gems):
+        """
+
+        @param add_gems: [(id, amount), (id, amount)]
+        @type add_gems: list | tuple
+        """
+        gems = self.item.gems
+        add_gems_dict = {}
+        for gid, amount in add_gems:
+            add_gems_dict[gid] = add_gems_dict.get(gid, 0) + amount
+
+        new_gems = []
+        update_gems = []
+        for gid, amount in add_gems_dict.iteritems():
+            gid = str(gid)
+            if gid in gems:
+                gems[gid] += amount
+                update_gems.append((int(gid), gems[gid]))
+            else:
+                gems[gid] = amount
+                new_gems.append((int(gid), amount))
+
+        self.item.gems = gems
+        self.item.save()
+
+        if new_gems:
+            msg = protomsg.AddGemNotify()
+            for k, v in new_gems:
+                g = msg.gems.add()
+                g.id, g.amount = k, v
+
+            publish_to_char(self.char_id, pack_msg(msg))
+
+        if update_gems:
+            msg = protomsg.UpdateGemNotify()
+            for k, v in update_gems:
+                g = msg.gems.add()
+                g.id, g.amount = k, v
+
+            publish_to_char(self.char_id, pack_msg(msg))
+
+    def gem_remove(self, _id, amount):
+        """
+
+        @param _id: gem id
+        @type _id: int
+        @param amount: this gem amount
+        @type amount: int
+        """
+        try:
+            this_gem_amount = self.item.gems[str(_id)]
+        except KeyError:
+            raise InvalidOperate()
+
+        new_amount = this_gem_amount - amount
+        if new_amount <= 0:
+            self.item.gems.pop(str(_id))
+            self.item.save()
+
+            msg = protomsg.RemoveGemNotify()
+            msg.ids.append(_id)
+            publish_to_char(self.char_id, pack_msg(msg))
+        else:
+            self.item.gems[str(_id)] = new_amount
+            self.item.save()
+            msg = protomsg.UpdateGemNotify()
+            g = msg.gems.add()
+            g.id, g.amount = _id, new_amount
+
+            publish_to_char(self.char_id, pack_msg(msg))
 
     def gem_merge(self, _id):
         pass
