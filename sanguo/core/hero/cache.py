@@ -32,15 +32,17 @@ def get_cache_hero(_id):
 
 
 def add_extra_attr_to_hero(hero_obj, eid):
-    equip = get_cache_equipment(eid)
-    attrs = equip.active_attrs()
-    for name, value, is_precent in attrs:
-        original_value = getattr(hero_obj, name)
-        if is_precent:
-            new_value = original_value * (1 + value / 100.0)
-        else:
-            new_value = original_value + value
-
-        new_value = int(new_value)
-        setattr(hero_obj, name, new_value)
-
+    # TODO
+    return
+    # equip = get_cache_equipment(eid)
+    # attrs = equip.active_attrs()
+    # for name, value, is_precent in attrs:
+    #     original_value = getattr(hero_obj, name)
+    #     if is_precent:
+    #         new_value = original_value * (1 + value / 100.0)
+    #     else:
+    #         new_value = original_value + value
+    #
+    #     new_value = int(new_value)
+    #     setattr(hero_obj, name, new_value)
+    #
