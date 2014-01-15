@@ -41,7 +41,7 @@ class Equipment(object):
     def sell_gold(self):
         # 出售价格 金币
         total_gold = 100 * (1 - pow(1.08, self.level)) / (1 - 1.08)
-        return int(total_gold * 0.9)
+        return int(total_gold * 0.7)
 
     def level_up_need_gold(self):
         # 强化升级所需金币

@@ -18,6 +18,7 @@ from core.friend import Friend
 from core.mail import Mail
 from core.daily import CheckIn
 
+from core.formation import Formation
 
 def character_notify(char_id):
     obj = get_cache_character(char_id)
@@ -94,31 +95,35 @@ def get_hero_panel_notify(char_id):
 
 
 def socket_notify(char_id):
-    msg = protomsg.SocketNotify()
-    data = MongoChar.objects.only('sockets').get(id=char_id)
-    if not data:
-        return
-
-    sockets = data.sockets
-    for k, v in sockets.iteritems():
-        s = msg.sockets.add()
-        s.id = int(k)
-        s.hero_id = v.hero or 0
-        s.weapon_id = v.weapon or 0
-        s.armor_id = v.armor or 0
-        s.jewelry_id = v.jewelry or 0
-
-    publish_to_char(char_id, pack_msg(msg))
+    f = Formation(char_id)
+    f.send_socket_notify()
+    # msg = protomsg.SocketNotify()
+    # data = MongoChar.objects.only('sockets').get(id=char_id)
+    # if not data:
+    #     return
+    #
+    # sockets = data.sockets
+    # for k, v in sockets.iteritems():
+    #     s = msg.sockets.add()
+    #     s.id = int(k)
+    #     s.hero_id = v.hero or 0
+    #     s.weapon_id = v.weapon or 0
+    #     s.armor_id = v.armor or 0
+    #     s.jewelry_id = v.jewelry or 0
+    #
+    # publish_to_char(char_id, pack_msg(msg))
 
 
 def formation_notify(char_id, formation=None):
-    msg = protomsg.FormationNotify()
-    if not formation:
-        c = Char(char_id)
-        formation = c.formation
-
-    msg.socket_ids.extend(formation)
-    publish_to_char(char_id, pack_msg(msg))
+    f = Formation(char_id)
+    f.send_formation_notify()
+    # msg = protomsg.FormationNotify()
+    # if not formation:
+    #     c = Char(char_id)
+    #     formation = c.formation
+    #
+    # msg.socket_ids.extend(formation)
+    # publish_to_char(char_id, pack_msg(msg))
 
 
 def already_stage_notify(char_id):

@@ -4,6 +4,12 @@ from core.mongoscheme import MongoChar, MongoSocket, MongoFormation
 from core.signals import formation_changed_signal, socket_changed_signal
 from core.exception import InvalidOperate
 
+from utils import pack_msg
+from core.msgpipe import publish_to_char
+
+import protomsg
+
+
 class Formation(object):
     def __init__(self, char_id):
         self.char_id = char_id
@@ -62,6 +68,24 @@ class Formation(object):
                 char_id=self.char_id,
                 socket_ids=socket_ids
             )
+
+    def send_socket_notify(self):
+        msg = protomsg.SocketNotify()
+        for k, v in self.formation.sockets.iteritems():
+            s = msg.sockets.add()
+            s.id = int(k)
+            s.hero_id = v.hero or 0
+            s.weapon_id = v.weapon or 0
+            s.armor_id = v.armor or 0
+            s.jewelry_id = v.jewelry or 0
+
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
+    def send_formation_notify(self):
+        msg = protomsg.FormationNotify()
+        msg.socket_ids.extend(self.formation.formation)
+        publish_to_char(self.char_id, pack_msg(msg))
 
 
 
