@@ -19,6 +19,7 @@ from core.mail import Mail
 from core.daily import CheckIn
 
 from core.formation import Formation
+from core.item import Item
 
 def character_notify(char_id):
     obj = get_cache_character(char_id)
@@ -381,7 +382,7 @@ def login_notify(char_id):
     if new_stages:
         new_stage_notify(char_id, new_stages)
 
-    equipment_notify(char_id)
+    # equipment_notify(char_id)
     gem_notify(char_id)
 
     hang = hang_notify(char_id)
@@ -402,5 +403,6 @@ def login_notify(char_id):
     m.send_mail_notify()
 
     CheckIn(char_id).send_notify()
+    Item(char_id).send_equip_notify()
     
 
