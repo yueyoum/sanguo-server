@@ -31,7 +31,6 @@ class CharNotFound(SanguoException):
         SanguoException.__init__(self, 3, error_msg)
 
 
-
 class GoldNotEnough(SanguoException):
     def __init__(self, error_msg=""):
         SanguoException.__init__(self, 10, error_msg)
@@ -46,3 +45,18 @@ class RenownNotEnough(SanguoException):
     def __init__(self, error_msg=""):
         SanguoException.__init__(self, 12, error_msg)
 
+class LevelTooLow(SanguoException):
+    def __init__(self, error_msg=""):
+        SanguoException.__init__(self, 13, error_msg)
+
+class OfficialTooLow(SanguoException):
+    def __int__(self, error_msg=""):
+        SanguoException.__init__(self, 14, error_msg)
+
+class GemNotEnough(SanguoException):
+    def __int__(self, error_msg=""):
+        SanguoException.__init__(self, 15, error_msg)
+
+class StuffNotEnough(SanguoException):
+    def __init__(self, error_msg=""):
+        SanguoException.__init__(self, 16, error_msg)

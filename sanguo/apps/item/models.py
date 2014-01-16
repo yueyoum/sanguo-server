@@ -71,11 +71,64 @@ post_delete.connect(
 )
 
 
+class Gem(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField("名字", max_length=16)
+    icon = models.CharField("图标", max_length=32, blank=True)
+    tp_name = models.CharField("类型名字", max_length=16)
+    level = models.IntegerField("等级")
+
+    used_for = models.CharField("用于", max_length=16)
+    used_for_name = models.CharField("用于名字", max_length=16)
+    value = models.IntegerField("数值")
+
+    merge_to = models.IntegerField("合成到", null=True, blank=True)
+
+    def __unicode__(self):
+        return u'<宝石: %s>' % self.name
+
+    @staticmethod
+    def all():
+        data = cache.get('gem', hours=None)
+        if data:
+            return data
+
+        return _set_gem_cache()
+
+
+    class Meta:
+        db_table = 'gem'
+        ordering = ('id',)
+        verbose_name = "宝石"
+        verbose_name_plural = "宝石"
+
+
+def _set_gem_cache():
+    gems = Gem.objects.all()
+    data = {g.id: g for g in gems}
+    cache.set('gem', data, hours=None)
+    return data
+
+def _update_gem_cache(*args, **kwargs):
+    _set_gem_cache()
+
+post_save.connect(
+    _update_gem_cache,
+    sender=Gem,
+    dispatch_uid='apps.item.Gem.post_save'
+)
+
+post_delete.connect(
+    _update_gem_cache,
+    sender=Gem,
+    dispatch_uid='apps.item.Gem.post_delete'
+)
+
 
 class Stuff(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField("名字", max_length=16)
-    icon = models.IntegerField("图标ID", blank=True, null=True)
+    icon = models.IntegerField("图标", blank=True, null=True)
     des = models.CharField("描述", max_length=255, blank=True)
 
     def __unicode__(self):

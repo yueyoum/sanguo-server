@@ -23,13 +23,7 @@ hero_changed_signal = Signal(providing_args=['cache_hero_obj'])
 hero_add_signal = Signal(providing_args=['char_id', 'hero_ids'])
 hero_del_signal = Signal(providing_args=['char_id', 'hero_ids'])
 
-equip_changed_signal = Signal(providing_args=['cache_equip_obj'])
-equip_add_signal = Signal(providing_args=['cache_equip_obj'])
-equip_del_signal = Signal(providing_args=['char_id', 'equip_id'])
-
-gem_changed_signal = Signal(providing_args=['char_id', 'gems'])
-gem_add_signal = Signal(providing_args=['char_id', 'gems'])
-gem_del_signal = Signal(providing_args=['char_id', 'gid'])
+equip_changed_signal = Signal(providing_args=['char_id', 'equip_obj'])
 
 formation_changed_signal = Signal(providing_args=['char_id', 'socket_ids'])
 

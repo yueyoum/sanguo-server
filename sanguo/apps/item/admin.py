@@ -4,7 +4,7 @@ __author__ = 'Wang Chao'
 __date__ = '1/14/14'
 
 from django.contrib import admin
-from apps.item.models import Equipment, Stuff
+from apps.item.models import Equipment, Stuff, Gem
 
 
 class EquipmentAdmin(admin.ModelAdmin):
@@ -28,6 +28,15 @@ class EquipmentAdmin(admin.ModelAdmin):
         return ""
 
 
+
+class GemAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'name', 'icon', 'tp_name', 'level',
+        'used_for', 'used_for_name', 'value', 'merge_to'
+    )
+
+    list_filter = ('used_for',)
+
 class StuffAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'Icon', 'des',
@@ -39,4 +48,5 @@ class StuffAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Equipment, EquipmentAdmin)
+admin.site.register(Gem, GemAdmin)
 admin.site.register(Stuff, StuffAdmin)
