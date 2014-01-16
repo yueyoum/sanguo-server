@@ -43,7 +43,9 @@ class CustomIndexDashboard(Dashboard):
             '游戏数据',
             column=1,
             collapsible=True,
-            models=('apps.account.*',
+            models=(
+                'apps.hero.*',
+                'apps.account.*',
                 'apps.character.*',
                 'apps.item.*',
                 ),

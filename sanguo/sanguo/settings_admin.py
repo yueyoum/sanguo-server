@@ -27,6 +27,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'grappelli.dashboard',
     'grappelli',
+    'import_export',
     'django.contrib.admin',
 ) + INSTALLED_APPS
 
