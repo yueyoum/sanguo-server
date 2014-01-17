@@ -35,7 +35,7 @@ class Character(models.Model):
             return c
 
         try:
-            obj = Character.objects.get(_id)
+            obj = Character.objects.get(id=_id)
             return _save_cache_character(obj)
         except Character.DoesNotExist:
             return None
