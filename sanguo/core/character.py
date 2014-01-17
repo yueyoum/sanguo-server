@@ -2,7 +2,6 @@
 from mongoengine import DoesNotExist
 
 from apps.character.models import Character
-from apps.item.cache import get_cache_equipment
 from core import GLOBAL
 from core.counter import Counter
 from core.hero import save_hero, delete_hero, Hero
@@ -51,14 +50,16 @@ class Char(object):
 
     @property
     def sockets(self):
-        c = MongoChar.objects.only('sockets').get(id=self.id)
-        return {int(k): v for k, v in c.sockets.iteritems()}
+        f = Formation(self.id)
+        c = f.formation.sockets
+        return {int(k): v for k, v in c.iteritems()}
 
     @property
     def hero_oid_list(self):
         # 阵法中英雄按照排列顺序的原始ID列表
         heros_dict = self.heros_dict
-        c = MongoChar.objects.only('sockets', 'formation').get(id=self.id)
+        f = Formation(self.id)
+        c = f.formation
         res = []
         for f in c.formation:
             if f == 0:
@@ -93,8 +94,8 @@ class Char(object):
     def in_bag_hero_ids(self):
         heros = MongoHero.objects.filter(char=self.id)
         hero_ids = [h.id for h in heros]
-        mongo_char = MongoChar.objects.only('sockets').get(id=self.id)
-        for s in mongo_char.sockets.values():
+        f = Formation(self.id)
+        for s in f.formation.sockets.values():
             if s.hero:
                 hero_ids.remove(s.hero)
         return hero_ids
@@ -108,20 +109,6 @@ class Char(object):
             p += h.power
         return p
 
-
-
-    # 装备
-    @property
-    def equip_ids(self):
-        char = MongoChar.objects.only('equips').get(id=self.id)
-        return char.equips
-
-    @property
-    def equipments(self):
-        char = MongoChar.objects.only('equips').get(id=self.id)
-        equip_ids = char.equips
-        objs = [get_cache_equipment(eid) for eid in equip_ids]
-        return objs
 
     def update(self, gold=0, sycee=0, exp=0, honor=0, renown=0):
         char = Character.objects.get(id=self.id)
@@ -158,11 +145,6 @@ class Char(object):
             char_id=self.id
         )
 
-
-    @property
-    def gems(self):
-        char = MongoChar.objects.only('gems').get(id=self.id)
-        return {int(k): v for k, v in char.gems.iteritems()}
 
 
 def char_initialize(account_id, server_id, name):

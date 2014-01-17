@@ -1,7 +1,7 @@
 #from core.rabbit import rabbit
 from utils import pack_msg
 from core.stage import get_already_stage, get_new_stage
-from core.mongoscheme import MongoChar, Hang, DoesNotExist, MongoPrison
+from core.mongoscheme import Hang, DoesNotExist, MongoPrison
 import protomsg
 
 from core.character import Char
@@ -99,33 +99,11 @@ def get_hero_panel_notify(char_id):
 def socket_notify(char_id):
     f = Formation(char_id)
     f.send_socket_notify()
-    # msg = protomsg.SocketNotify()
-    # data = MongoChar.objects.only('sockets').get(id=char_id)
-    # if not data:
-    #     return
-    #
-    # sockets = data.sockets
-    # for k, v in sockets.iteritems():
-    #     s = msg.sockets.add()
-    #     s.id = int(k)
-    #     s.hero_id = v.hero or 0
-    #     s.weapon_id = v.weapon or 0
-    #     s.armor_id = v.armor or 0
-    #     s.jewelry_id = v.jewelry or 0
-    #
-    # publish_to_char(char_id, pack_msg(msg))
 
 
 def formation_notify(char_id, formation=None):
     f = Formation(char_id)
     f.send_formation_notify()
-    # msg = protomsg.FormationNotify()
-    # if not formation:
-    #     c = Char(char_id)
-    #     formation = c.formation
-    #
-    # msg.socket_ids.extend(formation)
-    # publish_to_char(char_id, pack_msg(msg))
 
 
 def already_stage_notify(char_id):
@@ -148,100 +126,6 @@ def current_stage_notify(char_id, sid, star):
 def new_stage_notify(char_id, sid):
     msg = protomsg.NewStageNotify()
     msg.stage.id, msg.stage.star = sid, False
-    publish_to_char(char_id, pack_msg(msg))
-
-
-def equipment_notify(char_id, objs=None, message="EquipNotify"):
-    if not objs:
-        c = Char(char_id)
-        objs = c.equipments
-
-    msg = getattr(protomsg, message)()
-    for obj in objs:
-        e = msg.equips.add()
-        e.id = obj.id
-        e.tp = obj.tp
-        e.quality = obj.quality
-        e.name = obj.name
-        e.level = obj.level
-        e.exp = obj.exp
-        e.max_exp = obj.update_needs_exp()
-
-        e.eat_exp = obj.worth_exp()
-        e.sell_gold = obj.sell_value()
-
-        e.value = obj.value
-
-        e.whole_hole = obj.hole_amount
-        e.gem_ids.extend(obj.gems)
-
-        print obj.decoded_random_attrs
-        for k, v, _ in obj.decoded_random_attrs:
-            a = e.attrs.add()
-            a.id = k
-            a.value = v
-
-    publish_to_char(char_id, pack_msg(msg))
-
-
-def add_equipment_notify(char_id, obj):
-    if isinstance(obj, (list, tuple)):
-        objs = obj
-    else:
-        objs = [obj]
-    equipment_notify(char_id, objs=objs, message="AddEquipNotify")
-
-
-def update_equipment_notify(char_id, obj):
-    if isinstance(obj, (list, tuple)):
-        objs = obj
-    else:
-        objs = [obj]
-    equipment_notify(char_id, objs=objs, message="UpdateEquipNotify")
-
-
-def remove_equipment_notify(char_id, _id):
-    if isinstance(_id, (list, tuple)):
-        ids = _id
-    else:
-        ids = [_id]
-
-    msg = protomsg.RemoveEquipNotify()
-    msg.ids.extend(ids)
-
-    publish_to_char(char_id, pack_msg(msg))
-
-
-def gem_notify(char_id, gems=None, message="GemNotify"):
-    if gems is None:
-        mongo_char = MongoChar.objects.only('gems').get(id=char_id)
-        gems = [(int(k), v) for k, v in mongo_char.gems.iteritems()]
-
-    msg = getattr(protomsg, message)()
-    for k, v in gems:
-        g = msg.gems.add()
-        g.id, g.amount = k, v
-
-    publish_to_char(char_id, pack_msg(msg))
-
-
-def add_gem_notify(char_id, gems):
-    gem_notify(char_id, gems=gems, message="AddGemNotify")
-
-
-def update_gem_notify(char_id, gems):
-    gem_notify(char_id, gems=gems, message="UpdateGemNotify")
-
-
-def remove_gem_notify(char_id, _id):
-    if isinstance(_id, (list, tuple)):
-        ids = _id
-    else:
-        ids = [_id]
-
-    msg = protomsg.RemoveGemNotify()
-    msg.ids.extend(ids)
-
     publish_to_char(char_id, pack_msg(msg))
 
 
