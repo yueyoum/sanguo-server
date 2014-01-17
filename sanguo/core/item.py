@@ -5,7 +5,7 @@ __date__ = '1/14/14'
 
 from mongoengine import DoesNotExist
 
-from apps.item.models import Equipment as MysqlEquipment
+from apps.item.models import Equipment as ModelEquipment
 from apps.item.models import Gem as MysqlGem
 from core.mongoscheme import MongoItem, MongoEmbeddedEquipment
 from core.drives import document_ids
@@ -78,7 +78,7 @@ class Equipment(MessageEquipmentMixin):
         self.oid = mongo_equip.oid
         self.level = mongo_equip.level
 
-        all_equips = MysqlEquipment.all()
+        all_equips = ModelEquipment.all()
         self.equip = all_equips[self.oid]
 
     # @staticmethod
@@ -117,6 +117,11 @@ class Equipment(MessageEquipmentMixin):
             ))
 
         self.mongo_item.equipments[str(self.equip_id)].oid = to
+        add_gem_slots = self.equip.slots - len(self.mongo_item.equipments[str(self.equip_id)].gems)
+        # TODO check this value
+        for i in range(add_gem_slots):
+            self.mongo_item.equipments[str(self.equip_id)].gems.append(0)
+
         self.mongo_item.save()
         self.oid = to
 
@@ -227,7 +232,7 @@ class Item(MessageEquipmentMixin):
     def equip_add(self, oid, level=1, notify=True):
         # TODO 背包是否满了
         try:
-            this_equip = MysqlEquipment.all()[oid]
+            this_equip = ModelEquipment.all()[oid]
         except KeyError:
             raise InvalidOperate("Equipment Add: Char {0} Try to add a NONE exists Equipment oid: {1}".format(
                 self.char_id, oid
