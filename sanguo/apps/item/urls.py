@@ -8,5 +8,6 @@ urlpatterns = patterns('',
                        url(r'^equip/sell/$', views.sell_equip),
                        url(r'^equip/embed/$', views.embed),
                        url(r'^equip/unembed/$', views.unembed),
+                       url(r'^gem/merge/$', views.merge),
 )
 

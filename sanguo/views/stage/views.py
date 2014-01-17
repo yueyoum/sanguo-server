@@ -8,7 +8,7 @@ import protomsg
 from core import GLOBAL
 from core.battle.battle import Battle
 from core.battle.hero import BattleHero, MonsterHero
-from core.hero.cache import get_cache_hero
+from core.hero import Hero
 from core.counter import Counter
 from core.exception import SanguoException, InvalidOperate, CounterOverFlow, SyceeNotEnough
 from core.mongoscheme import Hang, MongoChar
@@ -28,6 +28,8 @@ from preset.settings import PLUNDER_COST_SYCEE
 
 from apps.character.models import Character
 
+from core.formation import Formation
+
 logger = logging.getLogger('sanguo')
 
 
@@ -36,9 +38,12 @@ class PVE(Battle):
         if my_id is None:
             my_id = self.my_id
 
-        char_data = MongoChar.objects.get(id=my_id)
-        socket_ids = char_data.formation
-        sockets = char_data.sockets
+        # char_data = MongoChar.objects.get(id=my_id)
+        # socket_ids = char_data.formation
+        # sockets = char_data.sockets
+        f = Formation(my_id)
+        socket_ids = f.formation.formation
+        sockets = f.formation.sockets
 
         my_heros = []
         for hid in socket_ids:
@@ -312,11 +317,13 @@ def plunder(request):
     )
 
     rival_hero_oids = []
-    mongo_char = MongoChar.objects.only('sockets').get(id=req.id)
-    sockets = mongo_char.sockets.values()
+    # mongo_char = MongoChar.objects.only('sockets').get(id=req.id)
+    # sockets = mongo_char.sockets.values()
+    f = Formation(char_id)
+    sockets = f.formation.sockets.values()
     heros = [s.hero for s in sockets if s.hero]
     for h in heros:
-        cache_hero = get_cache_hero(h)
+        cache_hero = Hero.cache_obj(h)
         rival_hero_oids.append(cache_hero.oid)
 
     drop_gold = GLOBAL.STAGE[hang.stage]['normal_gold']

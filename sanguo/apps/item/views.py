@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import logging
-
 from utils.decorate import message_response
-
 from core.item import Item
 
-logger = logging.getLogger('sanguo')
 
 @message_response("StrengthEquipResponse")
 def strengthen_equip(request):
@@ -52,3 +48,12 @@ def unembed(request):
     item.equip_embed(req.equip_id, req.hole_id, 0)
 
     return None
+
+
+@message_response("MergeGemResponse")
+def merge(request):
+    req = request._proto
+    item = Item(request._char_id)
+    item.gem_merge(req.id)
+    return None
+

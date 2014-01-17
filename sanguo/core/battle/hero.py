@@ -5,9 +5,8 @@ from random import randint
 from collections import defaultdict
 
 from core import GLOBAL
-from core.hero import FightPowerMixin
+from core.hero import FightPowerMixin, Hero
 
-from core.hero.cache import get_cache_hero
 
 from mixins import ActiveEffectMixin
 
@@ -403,7 +402,7 @@ class BattleHero(InBattleHero):
     _hero_type = 1
 
     def __init__(self, _id):
-        hero = get_cache_hero(_id)
+        hero = Hero.cache_obj(_id)
         self.id = _id
         self.original_id = hero.oid
         self.attack = hero.attack

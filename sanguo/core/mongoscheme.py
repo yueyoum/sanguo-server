@@ -19,6 +19,10 @@ class MongoItem(Document):
     # 材料
     stuffs = DictField()
 
+    meta = {
+        'collection': 'item'
+    }
+
 
 class MongoSocket(EmbeddedDocument):
     # 阵法插槽
@@ -34,6 +38,9 @@ class MongoFormation(Document):
     sockets = MapField(EmbeddedDocumentField(MongoSocket))
     formation = ListField(IntField())
 
+    meta = {
+        'collection': 'formation'
+    }
 
 
 class MongoChar(Document):

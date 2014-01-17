@@ -17,8 +17,8 @@ def set(key, obj, hours=CACHE_HOURS):
 
 def get(key, hours=CACHE_HOURS):
     value = redis_client.get(key)
-    print "cache hit: ", key
     if value:
+        print "cache hit: ", key
         if hours:
             redis_client.expireat(key, hours_delta(hours))
         return cPickle.loads(value)

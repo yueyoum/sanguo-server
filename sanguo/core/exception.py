@@ -50,11 +50,11 @@ class LevelTooLow(SanguoException):
         SanguoException.__init__(self, 13, error_msg)
 
 class OfficialTooLow(SanguoException):
-    def __int__(self, error_msg=""):
+    def __init__(self, error_msg=""):
         SanguoException.__init__(self, 14, error_msg)
 
 class GemNotEnough(SanguoException):
-    def __int__(self, error_msg=""):
+    def __init__(self, error_msg=""):
         SanguoException.__init__(self, 15, error_msg)
 
 class StuffNotEnough(SanguoException):

@@ -54,6 +54,7 @@
 
     ```
     python manage.py syncdb
+    python loaddata.py
     python manage.py collectstatic
     并用uwsgi-admin启动
     ```
@@ -86,25 +87,30 @@
 9.  测试
 
     ```
+    现在的测试有点复杂。
+
+    首先在mysql中建立 test_sanguo 的database
+    然后启动web， ./start_test_server
+
+    等到web完全启动后，才能开始测试。而且测试是必须加上 RESUE_DB=1
+
     ./start_test_server 启动测试服务，然后在另一个shell中执行：
 
     source activate_env
     cd sanguo
 
     全部测试
-    python manage.py test   
+    REUSE_DB=1 python manage.py test
 
     测试某一个app
-    python manage.py test apps.player.tests
+    REUSE_DB=1 python manage.py test apps.player.tests
 
     测试某一个TestCase
-    python manage.py test apps.player.tests:LoginTest
+    REUSE_DB=1 python manage.py test apps.player.tests:LoginTest
 
     测试某一个TestCase中的一个测试函数
-    python manage.py test apps.player.tests:LoginTest.test_regular_login_with_wrong_password
+    REUSE_DB=1 python manage.py test apps.player.tests:LoginTest.test_regular_login_with_wrong_password
     ```
-    
-
 
 ## Mysql配置
 

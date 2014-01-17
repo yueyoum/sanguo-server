@@ -17,3 +17,20 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+
+
+from django.core.management import call_command
+import loaddata
+call_command('syncdb')
+loaddata.run()
+
+import signal
+import sys
+from utils.app_test_helper import _redis_teardown_func
+
+def _signal_hander(s, f):
+    _redis_teardown_func()
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, _signal_hander)
+

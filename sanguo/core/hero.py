@@ -7,8 +7,12 @@ from core import GLOBAL
 from core.drives import document_ids
 from core.mongoscheme import MongoHero
 from core.signals import hero_add_signal, hero_del_signal
+from core.formation import Formation
 
 from apps.character.models import Character
+from apps.hero.models import Hero as ModelHero
+from utils import cache
+
 
 def cal_hero_property(original_id, level):
     """
@@ -36,28 +40,56 @@ class FightPowerMixin(object):
 
 
 class Hero(FightPowerMixin):
-    def __init__(self, hid, oid, level, char_id):
-        """
+    def __init__(self, hid):
+        hero = MongoHero.objects.get(id=hid)
+        char = Character.cache_obj(hero.char)
 
-        @param hid: hero id
-        @type hid: int
-        @param oid: hero original id
-        @type oid: int
-        @param level: hero level (char level)
-        @type level: int
-        @param char_id: char id
-        @type char_id: int
-        """
         self.id = hid
-        self.oid = oid
-        self.level = level
-        self.char_id = char_id
+        self.oid = hero.oid
+        self.level = char.level
+        self.char_id = char.id
 
         self.attack, self.defense, self.hp = \
             cal_hero_property(self.oid, self.level)
 
-        self.crit = 0
-        self.dodge = 0
+        model_hero = ModelHero.all()[hid]
+        self.crit = model_hero.crit
+        self.dodge = model_hero.dodge
+
+        self._add_equip_attrs()
+
+    def _add_equip_attrs(self):
+        # XXX
+        from core.item import Equipment
+        f = Formation(self.char_id)
+        socket = f.find_socket_by_hero(self.id)
+        if not socket:
+            return
+
+        for x in ['weapon', 'armor', 'jewelry']:
+            if socket[x]:
+                equip = Equipment(self.char_id, self.id)
+                self.attack += equip.attack
+                self.defense += equip.defense
+                self.hp += equip.hp
+
+                for k, v in equip.gem_attributes.iteritems():
+                    value = getattr(self, k)
+                    setattr(self, k, value + v)
+
+    def save_cache(self):
+        cache.set('hero:{0}'.format(self.id), self)
+
+    @staticmethod
+    def cache_obj(hid):
+        h = cache.get('hero:{0}'.format(hid))
+        if h:
+            return h
+
+        h = Hero(hid)
+        h.save_cache()
+        return h
+
 
 
 def save_hero(char_id, hero_original_ids, add_notify=True):
@@ -92,17 +124,6 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
     return id_range
 
 
-def get_hero(_id):
-    """
-
-    @param _id: hero id
-    @type _id: int
-    @return: Hero
-    @rtype: Hero
-    """
-    hero = MongoHero.objects.get(id=_id)
-    char_obj = Character.cache_obj(hero.char)
-    return Hero(_id, hero.oid, char_obj.level, char_obj.id)
 
 
 def delete_hero(char_id, ids):

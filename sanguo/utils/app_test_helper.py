@@ -30,7 +30,7 @@ def _redis_teardown_func():
 
 
 def _teardown():
-    _redis_teardown_func()
+    # _redis_teardown_func()
     _mongo_teardown_func()
 
 

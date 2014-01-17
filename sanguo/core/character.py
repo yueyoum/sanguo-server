@@ -4,9 +4,8 @@ from mongoengine import DoesNotExist
 from apps.character.models import Character
 from apps.item.cache import get_cache_equipment
 from core import GLOBAL
-from core.hero.cache import get_cache_hero
 from core.counter import Counter
-from core.hero import save_hero, delete_hero
+from core.hero import save_hero, delete_hero, Hero
 from core.mongoscheme import Hang, MongoChar, MongoHero, MongoPrison
 from preset.settings import COUNTER, CHAR_INITIALIZE
 from core.signals import char_changed_signal, char_updated_signal
@@ -83,7 +82,7 @@ class Char(object):
 
     @property
     def heros(self):
-        return [get_cache_hero(i) for i in self.heros_dict.keys()]
+        return [Hero.cache_obj(i) for i in self.heros_dict.keys()]
 
     def save_hero(self, hero_original_ids, add_notify=True):
         return save_hero(self.id, hero_original_ids, add_notify=add_notify)
@@ -202,7 +201,7 @@ def char_initialize(account_id, server_id, name):
     f = Formation(char_id)
 
     for index, _id in enumerate(hero_ids):
-        h = get_cache_hero(_id)
+        h = Hero.cache_obj(_id)
         _sid = f.save_socket(hero=_id,
                            send_notify=False)
         socket_ids.append(_sid)

@@ -12,7 +12,6 @@ urlpatterns = patterns('',
                        url(r'^hero/get/$', 'views.hero.views.pick_hero'),
                        url(r'^hero/merge/$', 'views.hero.views.merge_hero'),
 
-                       url(r'^gem/merge/$', 'views.gem.views.merge'),
 
                        url(r'^hang/$', 'views.stage.views.hang_start'),
                        url(r'^hang/cancel/$', 'views.stage.views.hang_cancel'),

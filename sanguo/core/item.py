@@ -20,10 +20,14 @@ from utils import cache
 
 import protomsg
 
+#
+# def _save_cache_equipment(equip_obj):
+#     cache.set('equip:{0}'.format(equip_obj.equip_id), equip_obj)
+
 def equip_updated(func):
     def deco(self, *args, **kwargs):
         res = func(self, *args, **kwargs)
-        cache.set('equip:{0}'.format(self.equip_id), self)
+        # _save_cache_equipment(self)
         self.send_update_notify()
         equip_changed_signal.send(
             sender=None,
@@ -77,11 +81,11 @@ class Equipment(MessageEquipmentMixin):
         all_equips = MysqlEquipment.all()
         self.equip = all_equips[self.oid]
 
-    @staticmethod
-    def cache_obj(equip_id):
-        e = cache.get('equip:{0}'.format(equip_id))
-        if e:
-            return e
+    # @staticmethod
+    # def cache_obj(equip_id):
+    #     e = cache.get('equip:{0}'.format(equip_id))
+    #     if e:
+    #         return e
 
     @equip_updated
     def level_up(self):
@@ -181,11 +185,11 @@ class Equipment(MessageEquipmentMixin):
         attrs = {}
 
         gems = self.mongo_item.equipments[str(self.equip_id)].gems
+        all_gems = MysqlGem.all()
         # TODO get gem
-        for g in gems:
-            gem = object()
-            # FIXME
-            attrs['attack'] = attrs.get('attack', 0) + gem.value
+        for gid in gems:
+            gem = all_gems[gid]
+            attrs[gem.used_for] = attrs.get(gem.used_for, 0) + gem.value
 
         for k, v in attrs.iteritems():
             attrs[k] *= (1 + self.equip.gem_addition / 100.0)

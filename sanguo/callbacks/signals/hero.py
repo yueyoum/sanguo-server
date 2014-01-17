@@ -1,4 +1,3 @@
-from core.hero.cache import get_cache_hero, add_extra_attr_to_hero
 from core.signals import (
     hero_add_signal,
     hero_del_signal,
@@ -12,11 +11,11 @@ from core.notify import (
     update_hero_notify,
     )
 
-from utils import cache
+from core.hero import Hero
 
 
 def _hero_add(char_id, hero_ids, **kwargs):
-    heros = [get_cache_hero(i) for i in hero_ids]
+    heros = [Hero.cache_obj(i) for i in hero_ids]
     add_hero_notify(char_id, heros)
 
 
@@ -47,16 +46,16 @@ hero_changed_signal.connect(
 )
 
 
-def _hero_attribute_change(hero, equip_ids, **kwargs):
-    this_hero = get_cache_hero(hero)
-    for eid in equip_ids:
-        add_extra_attr_to_hero(this_hero, eid)
+def _hero_attribute_change(socket_obj, **kwargs):
+    if not socket_obj.hero:
+        return
 
-    cache.set('hero:{0}'.format(this_hero.id), this_hero)
+    hero = Hero(socket_obj.hero)
+    hero.save_cache()
 
     hero_changed_signal.send(
         sender=None,
-        cache_hero_obj=this_hero
+        cache_hero_obj=hero
     )
 
 

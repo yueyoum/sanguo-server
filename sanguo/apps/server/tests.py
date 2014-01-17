@@ -8,8 +8,6 @@ from protomsg import GetServerListRequest
 
 
 class ServerListTest(TransactionTestCase):
-    fixtures = ['servers.json',]
-
     def test_get_server_list(self):
         req = GetServerListRequest()
         req.session = ""

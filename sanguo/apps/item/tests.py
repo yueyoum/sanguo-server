@@ -58,7 +58,6 @@ def teardown():
 
 
 class StrengthEquipmentTest(TransactionTestCase):
-    fixtures = ['equipment.json',]
     def setUp(self):
         char = char_initialize(1, 1, 'a')
         self.char_id = char.id
@@ -120,7 +119,6 @@ class StrengthEquipmentTest(TransactionTestCase):
 
 
 class SellEquipmentTest(TransactionTestCase):
-    fixtures = ['equipment.json',]
     def setUp(self):
         char = char_initialize(1, 1, 'a')
         self.char_id = char.id
@@ -162,7 +160,6 @@ class SellEquipmentTest(TransactionTestCase):
 
 
 class EmbedGemTest(TransactionTestCase):
-    fixtures = ['equipment.json',]
     def setUp(self):
         char = char_initialize(1, 1, 'a')
         self.char_id = char.id
@@ -215,3 +212,50 @@ class EmbedGemTest(TransactionTestCase):
         self._embed(999, 999, 1, 2)
         self._embed(999, 1, 1, 2)
         self._embed(self.equip_id, 1, 999, 2)
+
+
+
+class GemTest(TransactionTestCase):
+    def setUp(self):
+        char = char_initialize(1, 1, 'a')
+        gems = (
+            (49, 4),
+            (48, 3),
+
+            (47, 4),
+            (46, 3),
+        )
+        item = Item(char.id)
+        item.gem_add(gems)
+        self.session = crypto.encrypt('1:1:{0}'.format(char.id))
+        self.char_id = char.id
+
+    def tearDown(self):
+        app_test_helper._teardown()
+
+
+    def _merge(self, _id, ret=0):
+        req = protomsg.MergeGemRequest()
+        req.session = self.session
+        req.id = _id
+
+        data = app_test_helper.pack_data(req)
+        res = app_test_helper.make_request('/gem/merge/', data)
+        msgs = app_test_helper.unpack_data(res)
+
+        for id_of_msg, len_of_msg, msg in msgs:
+            if id_of_msg == RESPONSE_NOTIFY_TYPE["MergeGemResponse"]:
+                data = protomsg.MergeGemResponse()
+                data.ParseFromString(msg)
+                self.assertEqual(data.ret, ret)
+
+    def test_normal_merge(self):
+        self._merge(47)
+
+    def test_non_exist_merge(self):
+        self._merge(999, 2)
+
+    def test_not_enough_merge(self):
+        self._merge(46, 15)
+
+

@@ -39,21 +39,11 @@ class Formation(object):
         self.formation.sockets[str(socket_id)] = socket
         self.formation.save()
 
-        if socket.hero and send_notify:
-            equip_ids = []
-            if socket.weapon:
-                equip_ids.append(socket.weapon)
-            if socket.armor:
-                equip_ids.append(socket.armor)
-            if socket.jewelry:
-                equip_ids.append(socket.jewelry)
-
-            if equip_ids:
-                socket_changed_signal.send(
-                    sender=None,
-                    hero=socket.hero,
-                    equip_ids=equip_ids
-                )
+        if send_notify:
+            socket_changed_signal.send(
+                sender=None,
+                socket_obj=socket
+            )
 
         return socket_id
 

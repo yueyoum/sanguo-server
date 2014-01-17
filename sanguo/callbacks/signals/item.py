@@ -4,25 +4,19 @@ from core.signals import (
     )
 
 from core.formation import Formation
-from core import GLOBAL
-
-EQUIP_TEMPLATE = GLOBAL.EQUIP.EQUIP_TEMPLATE
 
 
 def _equip_changed(char_id, equip_obj, **kwargs):
-    equip_id = equip_obj.id
+    equip_id = equip_obj.equip_id
 
     f = Formation(char_id)
     socket = f.find_socket_by_equip(equip_id)
 
-    if socket and socket.hero:
+    if socket:
         socket_changed_signal.send(
             sender=None,
-            hero=socket.hero,
-            equip_ids=[equip_id]
+            socket_obj=socket
         )
-
-
 
 
 equip_changed_signal.connect(

@@ -46,6 +46,10 @@ class Hero(models.Model):
             return data
         return _save_cache_hero()
 
+    @staticmethod
+    def update_cache():
+        return _save_cache_hero()
+
     class Meta:
         db_table = 'hero'
         ordering = ('id',)
