@@ -79,3 +79,63 @@ post_delete.connect(
     sender=Hero,
     dispatch_uid='apps.hero.Hero.post_delete'
 )
+
+
+class Monster(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField("名字", max_length=16)
+    avatar = models.CharField("头像", max_length=32)
+    image = models.CharField("卡牌", max_length=32)
+
+    level = models.IntegerField("等级")
+    attack = models.IntegerField("攻击")
+    defense = models.IntegerField("防御")
+    hp = models.IntegerField("生命")
+    crit = models.IntegerField("暴击", default=0)
+    dodge = models.IntegerField("闪避", default=0)
+
+    skill = models.IntegerField("技能", default=0)
+
+    def __unicode__(self):
+        return u'<Monster: %s>' % self.name
+
+    @staticmethod
+    def all():
+        data = cache.get('monster', hours=None)
+        if data:
+            return data
+        return _save_cache_monster()
+
+    @staticmethod
+    def update_cache():
+        return _save_cache_monster()
+
+    class Meta:
+        db_table = 'monster'
+        ordering = ('id',)
+        verbose_name = "怪物"
+        verbose_name_plural = "怪物"
+
+
+def _save_cache_monster():
+    monsters = Monster.objects.all()
+    data = {m.id: m for m in monsters}
+    cache.set('monster', data, hours=None)
+    return data
+
+def _update_monster_cache(*args, **kwargs):
+    _save_cache_monster()
+
+
+post_save.connect(
+    _update_monster_cache,
+    sender=Monster,
+    dispatch_uid='apps.hero.Monster.post_save'
+)
+
+post_delete.connect(
+    _update_monster_cache,
+    sender=Monster,
+    dispatch_uid='apps.hero.Monster.post_delete'
+)
+

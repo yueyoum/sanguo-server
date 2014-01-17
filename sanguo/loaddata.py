@@ -7,6 +7,7 @@ def run():
     from django.core.management import call_command
     call_command('loaddata', 'servers.json')
     call_command('loaddata', 'heros.json')
+    call_command('loaddata', 'monsters.json')
     call_command('loaddata', 'stuff.json')
     call_command('loaddata', 'gems.json')
     call_command('loaddata', 'equipment.json')
