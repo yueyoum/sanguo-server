@@ -188,6 +188,8 @@ class Equipment(MessageEquipmentMixin):
         all_gems = MysqlGem.all()
         # TODO get gem
         for gid in gems:
+            if not gid:
+                continue
             gem = all_gems[gid]
             attrs[gem.used_for] = attrs.get(gem.used_for, 0) + gem.value
 
@@ -279,7 +281,7 @@ class Item(MessageEquipmentMixin):
             ))
 
         e = Equipment(self.char_id, _id, self.item)
-        e.step_up()
+        e.step_up(to)
 
 
     def equip_sell(self, _id):

@@ -8,6 +8,8 @@ from protomsg import GetHeroResponse
 from utils import pack_msg
 from utils.decorate import message_response
 
+from apps.hero.models import Hero as ModelHero
+
 DRAW_HERO = GLOBAL.SETTINGS.DRAW_HERO
 
 @message_response("GetHeroResponse")
@@ -40,7 +42,11 @@ def pick_hero(request):
 
     print "prob =", prob, "target_quality =", target_quality
 
-    hero_id_list = GLOBAL.HEROS.get_hero_ids_by_quality(target_quality)
+    all_heros = ModelHero.all()
+    hero_id_list = []
+    for h in all_heros.values():
+        if h.quality == target_quality:
+            hero_id_list.append(h.id)
 
     if req.ten:
         heros = [random.choice(hero_id_list) for i in range(10)]
@@ -78,7 +84,8 @@ def merge_hero(request):
     for i in using_hero_ids:
         original_ids.append(heros[i])
 
-    original_quality = [GLOBAL.HEROS[hid]['quality'] for hid in original_ids]
+    all_heros = ModelHero.all()
+    original_quality = [all_heros[hid].quality for hid in original_ids]
 
     if len(set(original_quality)) != 1:
         raise SanguoException(301)
@@ -94,7 +101,12 @@ def merge_hero(request):
     else:
         raise SanguoException(302)
 
-    all_hero_ids = GLOBAL.HEROS.get_hero_ids_by_quality(target_quality)
+    all_heros = ModelHero.all()
+    all_hero_ids = []
+    for h in all_heros.values():
+        if h.quality == target_quality:
+            all_hero_ids.append(h.id)
+
     if original_quality[0] == 1:
         while True:
             choosing_id = random.choice(all_hero_ids)

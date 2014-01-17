@@ -12,6 +12,7 @@ from mixins import ActiveEffectMixin
 
 
 from apps.character.models import Character
+from apps.hero.models import Monster
 
 logger = logging.getLogger('battle')
 
@@ -71,7 +72,8 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin):
         self.damage_value = 0
         self.effect_manager = EffectManager()
 
-        self.skills = [GLOBAL.SKILLS[sid] for sid in self.skills]
+        # FIXME
+        self.skills = [GLOBAL.SKILLS[self.skill]]
         self.attack_skills = []
         self.defense_skills = []
         self.passive_skills = []
@@ -411,7 +413,7 @@ class BattleHero(InBattleHero):
         self.crit = hero.crit
         self.dodge = hero.dodge
 
-        self.skills = GLOBAL.HEROS[self.original_id]['skills']
+        self.skill = hero.skill
 
         char = Character.cache_obj(hero.char_id)
         self.level = char.level
@@ -422,16 +424,16 @@ class MonsterHero(InBattleHero):
     _hero_type = 2
 
     def __init__(self, mid):
-        info = GLOBAL.MONSTERS[mid]
+        info = Monster.all()[mid]
         self.id = mid
         self.original_id = mid
-        self.attack = info['attack']
-        self.defense = info['defense']
-        self.hp = info['hp']
-        self.crit = info['crit']
-        self.dodge = info['dodge']
-        self.skills = info['skills']
-        self.level = info['level']
+        self.attack = info.attack
+        self.defense = info.defense
+        self.hp = info.hp
+        self.crit = info.crit
+        self.dodge = info.dodge
+        self.skill = info.skill
+        self.level = info.level
 
         InBattleHero.__init__(self)
 

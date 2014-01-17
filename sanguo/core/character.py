@@ -173,8 +173,6 @@ def char_initialize(account_id, server_id, name):
         Counter(char_id, func_name)
 
     init_hero_ids = CHAR_INITIALIZE.get('heros', [])
-    if not init_hero_ids:
-        init_hero_ids = GLOBAL.HEROS.get_random_hero_ids(3)
 
 
 

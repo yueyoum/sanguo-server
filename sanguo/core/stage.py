@@ -10,9 +10,10 @@ from core.item import Item
 from utils import timezone
 from utils.math import GAUSSIAN_TABLE
 
+from apps.item.models import Gem as ModelGem
+
 STAGE = GLOBAL.STAGE
 STAGE_DROP = GLOBAL.STAGE_DROP
-GEM = GLOBAL.GEM
 
 
 def get_already_stage(char_id):
@@ -114,14 +115,15 @@ def get_stage_standard_drop(char_id, stage_id, star=False):
     )
 
     gems = []
-    drop_gem_level = _drop(gem_level_prob)
-    if drop_gem_level:
-        gems = [
-            (
-                random.choice(GEM.get_ids_by_level(drop_gem_level)),
-                1
-            )
-        ]
+    # TODO
+    # drop_gem_level = _drop(gem_level_prob)
+    # if drop_gem_level:
+    #     gems = [
+    #         (
+    #             random.choice(GEM.get_ids_by_level(drop_gem_level)),
+    #             1
+    #         )
+    #     ]
 
     equip_k = k / 0.6
     equip_quality_prob = (
@@ -133,17 +135,17 @@ def get_stage_standard_drop(char_id, stage_id, star=False):
 
     drop_equip_quality = _drop(equip_quality_prob)
     equips = []
-    if drop_equip_quality:
-        selected_equip_ids = []
-        for k, v in GLOBAL.EQUIP.EQUIP_TEMPLATE.iteritems():
-            if not v['std'] or v['quality'] != drop_equip_quality:
-                continue
-
-            selected_equip_ids.append(k)
-
-        equips = [
-            (random.choice(selected_equip_ids), stage_level, 1)
-        ]
+    # if drop_equip_quality:
+    #     selected_equip_ids = []
+    #     for k, v in GLOBAL.EQUIP.EQUIP_TEMPLATE.iteritems():
+    #         if not v['std'] or v['quality'] != drop_equip_quality:
+    #             continue
+    #
+    #         selected_equip_ids.append(k)
+    #
+    #     equips = [
+    #         (random.choice(selected_equip_ids), stage_level, 1)
+    #     ]
 
     return drop_exp, drop_gold, equips, gems
 
@@ -239,11 +241,12 @@ def get_stage_hang_drop(stage_id, hours):
         gem_list.append((6, g6_amount))
 
     gems = defaultdict(lambda: 0)
-    for glv, gamount in gem_list:
-        gids = GEM.get_ids_by_level(glv)
-        for i in range(gamount):
-            _id = random.choice(gids)
-            gems[_id] += 1
+    # TODO
+    # for glv, gamount in gem_list:
+    #     gids = GEM.get_ids_by_level(glv)
+    #     for i in range(gamount):
+    #         _id = random.choice(gids)
+    #         gems[_id] += 1
 
     gems = gems.items()
 
@@ -262,11 +265,12 @@ def get_stage_hang_drop(stage_id, hours):
             equip_list.append((quality, amount))
 
     equips_dict = defaultdict(lambda: 0)
-    for quality, amount in equip_list:
-        eids = GLOBAL.EQUIP.EQUIP_IDS_BY_QUALITY(quality, only_std=True)
-        for i in range(amount):
-            _id = random.choice(eids)
-            equips_dict[_id] += 1
+    # TODO drop
+    # for quality, amount in equip_list:
+    #     eids = GLOBAL.EQUIP.EQUIP_IDS_BY_QUALITY(quality, only_std=True)
+    #     for i in range(amount):
+    #         _id = random.choice(eids)
+    #         equips_dict[_id] += 1
 
     equips = []
     for k, v in equips_dict.iteritems():

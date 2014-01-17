@@ -24,9 +24,11 @@ def cal_hero_property(original_id, level):
     @return: (attack, defense, hp)
     @rtype: tuple
     """
-    attack = 20 + level * GLOBAL.HEROS[original_id]['attack_grow']
-    defense = 15 + level * GLOBAL.HEROS[original_id]['defense_grow']
-    hp = 45 + level * GLOBAL.HEROS[original_id]['hp_grow']
+
+    obj = ModelHero.all()[original_id]
+    attack = 20 + level * obj.attack_growing
+    defense = 15 + level * obj.defense_growing
+    hp = 45 + level * obj.hp_growing
 
     return int(attack), int(defense), int(hp)
 
@@ -55,6 +57,8 @@ class Hero(FightPowerMixin):
         model_hero = ModelHero.all()[hid]
         self.crit = model_hero.crit
         self.dodge = model_hero.dodge
+
+        self.skill = model_hero.skill
 
         self._add_equip_attrs()
 
