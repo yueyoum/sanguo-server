@@ -259,16 +259,18 @@ class Item(MessageEquipmentMixin):
         return new_id
 
     def equip_remove(self, ids):
-        if not isinstance(ids, (list, tuple)):
+        if not isinstance(ids, (set, list, tuple)):
             ids = [ids]
 
+        ids = set(ids)
         for _id in ids:
             if not self.has_equip(_id):
-                raise InvalidOperate()
+                raise InvalidOperate("Equipment Remove: Char {0} Try to Remove a NONE exist equipment: {1}".format(
+                    self.char_id, _id
+                ))
 
         for _id in ids:
             self.item.equipments.pop(str(_id))
-
 
         self.item.save()
 
@@ -299,7 +301,11 @@ class Item(MessageEquipmentMixin):
 
 
     def equip_sell(self, ids):
+        if not isinstance(ids, (set, list, tuple)):
+            ids = [ids]
+
         # TODO 装备在阵法插槽上
+        ids = set(ids)
         for _id in ids:
             if not self.has_equip(_id):
                 raise InvalidOperate("Equipment Sell: Char {0} Try to sell a NONE exist equipment: {1}".format(
