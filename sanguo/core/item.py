@@ -116,8 +116,10 @@ class Equipment(MessageEquipmentMixin):
                 self.char_id, self.equip_id, to
             ))
 
+        new_equip = ModelEquipment.all()[to]
+
         self.mongo_item.equipments[str(self.equip_id)].oid = to
-        add_gem_slots = self.equip.slots - len(self.mongo_item.equipments[str(self.equip_id)].gems)
+        add_gem_slots = new_equip.slots - len(self.mongo_item.equipments[str(self.equip_id)].gems)
         # TODO check this value
         for i in range(add_gem_slots):
             self.mongo_item.equipments[str(self.equip_id)].gems.append(0)
