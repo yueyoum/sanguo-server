@@ -258,16 +258,22 @@ class Item(MessageEquipmentMixin):
 
         return new_id
 
-    def equip_remove(self, _id):
-        try:
-            del self.item.equipments[str(_id)]
-        except KeyError:
-            raise InvalidOperate()
+    def equip_remove(self, ids):
+        if not isinstance(ids, (list, tuple)):
+            ids = [ids]
+
+        for _id in ids:
+            if not self.has_equip(_id):
+                raise InvalidOperate()
+
+        for _id in ids:
+            self.item.equipments.pop(str(_id))
+
 
         self.item.save()
 
         msg = protomsg.RemoveEquipNotify()
-        msg.ids.append(_id)
+        msg.ids.extend(ids)
         publish_to_char(self.char_id, pack_msg(msg))
 
 
@@ -292,18 +298,22 @@ class Item(MessageEquipmentMixin):
         e.step_up(to)
 
 
-    def equip_sell(self, _id):
+    def equip_sell(self, ids):
         # TODO 装备在阵法插槽上
-        if not self.has_equip(_id):
-            raise InvalidOperate("Equipment Sell: Char {0} Try to sell a NONE exist equipment: {1}".format(
-                self.char_id, _id
-            ))
+        for _id in ids:
+            if not self.has_equip(_id):
+                raise InvalidOperate("Equipment Sell: Char {0} Try to sell a NONE exist equipment: {1}".format(
+                    self.char_id, _id
+                ))
 
-        e = Equipment(self.char_id, _id, self.item)
-        gold = e.sell_gold()
+        gold = 0
+        for _id in ids:
+            e = Equipment(self.char_id, _id, self.item)
+            gold += e.sell_gold()
+
         char = Char(self.char_id)
         char.update(gold=gold)
-        self.equip_remove(_id)
+        self.equip_remove(ids)
 
     def equip_embed(self, _id, slot_id, gem_id):
         # gem_id = 0 表示取下slot_id对应的宝石
