@@ -72,7 +72,7 @@ class Hero(FightPowerMixin):
 
         for x in ['weapon', 'armor', 'jewelry']:
             if socket[x]:
-                equip = Equipment(self.char_id, self.id)
+                equip = Equipment(self.char_id, socket[x])
                 self.attack += equip.attack
                 self.defense += equip.defense
                 self.hp += equip.hp
