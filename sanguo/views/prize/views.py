@@ -2,7 +2,6 @@ from core.mongoscheme import Hang
 
 from core.exception import SanguoException
 from core.notify import hang_notify
-from core.stage import get_stage_hang_drop, save_drop
 
 from mongoengine import DoesNotExist
 
@@ -29,8 +28,9 @@ def prize_get(request):
     if hang is None or not hang.finished:
         raise SanguoException(703)
 
-    exp, gold, equips, gems = get_stage_hang_drop(hang.stage_id, hang.actual_hours)
-    save_drop(char_id, exp, gold, equips, gems)
+    # FIXME
+    # exp, gold, equips, gems = get_stage_hang_drop(hang.stage_id, hang.actual_hours)
+    # save_drop(char_id, exp, gold, equips, gems)
 
     hang.delete()
 
@@ -39,9 +39,9 @@ def prize_get(request):
     response = protomsg.PrizeResponse()
     response.ret = 0
     response.prize_id = 1
-    response.drop.gold = gold
-    response.drop.exp = exp
-    response.drop.equips.extend([i for i, _, _ in equips])
-    response.drop.gems.extend([i for i, _ in gems])
+    response.drop.gold = 0
+    response.drop.exp = 0
+    # response.drop.equips.extend([i for i, _, _ in equips])
+    # response.drop.gems.extend([i for i, _ in gems])
 
     return pack_msg(response)

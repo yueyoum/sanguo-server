@@ -48,6 +48,8 @@ class CustomIndexDashboard(Dashboard):
                 'apps.account.*',
                 'apps.character.*',
                 'apps.item.*',
+                'apps.stage.*',
+                'apps.skill.*',
                 ),
             ))
 

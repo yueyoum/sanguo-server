@@ -22,14 +22,14 @@
 #             h.crit = 0
 #             h.dodge = 0
 # 
-#             h._hero_type = 1
+#             h.HERO_TYPE = 1
 #             self.my_heros.append(h)
 # 
 #     def load_rival_heros(self):
 #         self.rival_heros = []
 #         for i in range(9):
 #             h = MonsterHero(i)
-#             h._hero_type = 2
+#             h.HERO_TYPE = 2
 #             self.rival_heros.append(h)
 # 
 # 

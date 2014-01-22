@@ -21,7 +21,7 @@ class HeroAdmin(ImportExportModelAdmin):
         'quality', 'quality_name',
         'contribution',
         'attack_growing', 'defense_growing', 'hp_growing',
-        'crit', 'dodge', 'skill'
+        'crit', 'dodge', 'skills',
     )
 
     list_filter = (
@@ -34,7 +34,7 @@ class MonsterAdmin(ImportExportModelAdmin):
     list_display = (
         'id', 'name', 'avatar', 'image',
         'level', 'attack', 'defense', 'hp', 'crit', 'dodge',
-        'skill'
+        'skills'
     )
 
     resource_class = MonsterResources

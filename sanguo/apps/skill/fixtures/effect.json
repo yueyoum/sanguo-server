@@ -1,0 +1,112 @@
+[
+{
+    "pk": 1, 
+    "model": "skill.effect", 
+    "fields": {
+        "des": "\u52a0\u8840", 
+        "buff_icon": "", 
+        "name": "\u6062\u590d", 
+        "special": ""
+    }
+},
+{
+    "pk": 2, 
+    "model": "skill.effect", 
+    "fields": {
+        "des": "\u4f24\u5bb3", 
+        "buff_icon": "", 
+        "name": "", 
+        "special": ""
+    }
+},
+{
+    "pk": 3, 
+    "model": "skill.effect", 
+    "fields": {
+        "des": "\u589e\u52a0\u653b\u51fb", 
+        "buff_icon": "", 
+        "name": "\u70ed\u8840", 
+        "special": ""
+    }
+},
+{
+    "pk": 4, 
+    "model": "skill.effect", 
+    "fields": {
+        "des": "\u964d\u4f4e\u653b\u51fb", 
+        "buff_icon": "", 
+        "name": "\u8131\u529b", 
+        "special": ""
+    }
+},
+{
+    "pk": 5, 
+    "model": "skill.effect", 
+    "fields": {
+        "des": "\u589e\u52a0\u9632\u5fa1", 
+        "buff_icon": "", 
+        "name": "\u56fa\u9632", 
+        "special": ""
+    }
+},
+{
+    "pk": 6, 
+    "model": "skill.effect", 
+    "fields": {
+        "des": "\u964d\u4f4e\u9632\u5fa1", 
+        "buff_icon": "", 
+        "name": "\u7834\u7532", 
+        "special": ""
+    }
+},
+{
+    "pk": 7, 
+    "model": "skill.effect", 
+    "fields": {
+        "des": "\u589e\u52a0\u66b4\u51fb", 
+        "buff_icon": "", 
+        "name": "\u9f13\u821e", 
+        "special": ""
+    }
+},
+{
+    "pk": 8, 
+    "model": "skill.effect", 
+    "fields": {
+        "des": "\u964d\u4f4e\u66b4\u51fb", 
+        "buff_icon": "", 
+        "name": "\u865a\u5f31", 
+        "special": ""
+    }
+},
+{
+    "pk": 9, 
+    "model": "skill.effect", 
+    "fields": {
+        "des": "\u51fb\u6655", 
+        "buff_icon": "", 
+        "name": "\u91cd\u51fb", 
+        "special": ""
+    }
+},
+{
+    "pk": 10, 
+    "model": "skill.effect", 
+    "fields": {
+        "des": "\u53cd\u4f24", 
+        "buff_icon": "", 
+        "name": "\u53cd\u4f24\u76fe", 
+        "special": ""
+    }
+},
+{
+    "pk": 11, 
+    "model": "skill.effect", 
+    "fields": {
+        "des": "\u5438\u8840", 
+        "buff_icon": "", 
+        "name": "\u55dc\u8840", 
+        "special": ""
+    }
+}
+]

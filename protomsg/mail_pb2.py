@@ -14,7 +14,7 @@ import world_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='mail.proto',
   package='Sanguo.protocol.mail',
-  serialized_pb='\n\nmail.proto\x12\x14Sanguo.protocol.mail\x1a\x0bworld.proto\"\x98\x01\n\x04Mail\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x0f\n\x07\x63ontent\x18\x03 \x02(\t\x12\x10\n\x08has_read\x18\x04 \x02(\x08\x12\x10\n\x08start_at\x18\x05 \x02(\x05\x12\x10\n\x08max_days\x18\x06 \x02(\x05\x12/\n\nattachment\x18\x07 \x01(\x0b\x32\x1b.Sanguo.protocol.world.Drop\"H\n\nMailNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05mails\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.mail.Mail\".\n\x0fOpenMailRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"0\n\x10OpenMailResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x11\x44\x65leteMailRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"2\n\x12\x44\x65leteMailResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"3\n\x14GetAttachmentRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"5\n\x15GetAttachmentResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\nmail.proto\x12\x14Sanguo.protocol.mail\x1a\x0bworld.proto\"\x9e\x01\n\x04Mail\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x0f\n\x07\x63ontent\x18\x03 \x02(\t\x12\x10\n\x08has_read\x18\x04 \x02(\x08\x12\x10\n\x08start_at\x18\x05 \x02(\x05\x12\x10\n\x08max_days\x18\x06 \x02(\x05\x12\x35\n\nattachment\x18\x07 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\"H\n\nMailNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05mails\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.mail.Mail\".\n\x0fOpenMailRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"0\n\x10OpenMailResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x11\x44\x65leteMailRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"2\n\x12\x44\x65leteMailResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"3\n\x14GetAttachmentRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"5\n\x15GetAttachmentResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
 
 
 
@@ -85,7 +85,7 @@ _MAIL = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=50,
-  serialized_end=202,
+  serialized_end=208,
 )
 
 
@@ -119,8 +119,8 @@ _MAILNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=204,
-  serialized_end=276,
+  serialized_start=210,
+  serialized_end=282,
 )
 
 
@@ -154,8 +154,8 @@ _OPENMAILREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=278,
-  serialized_end=324,
+  serialized_start=284,
+  serialized_end=330,
 )
 
 
@@ -189,8 +189,8 @@ _OPENMAILRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=326,
-  serialized_end=374,
+  serialized_start=332,
+  serialized_end=380,
 )
 
 
@@ -224,8 +224,8 @@ _DELETEMAILREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=376,
-  serialized_end=424,
+  serialized_start=382,
+  serialized_end=430,
 )
 
 
@@ -259,8 +259,8 @@ _DELETEMAILRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=426,
-  serialized_end=476,
+  serialized_start=432,
+  serialized_end=482,
 )
 
 
@@ -294,8 +294,8 @@ _GETATTACHMENTREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=478,
-  serialized_end=529,
+  serialized_start=484,
+  serialized_end=535,
 )
 
 
@@ -329,11 +329,11 @@ _GETATTACHMENTRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=531,
-  serialized_end=584,
+  serialized_start=537,
+  serialized_end=590,
 )
 
-_MAIL.fields_by_name['attachment'].message_type = world_pb2._DROP
+_MAIL.fields_by_name['attachment'].message_type = world_pb2._ATTACHMENT
 _MAILNOTIFY.fields_by_name['mails'].message_type = _MAIL
 DESCRIPTOR.message_types_by_name['Mail'] = _MAIL
 DESCRIPTOR.message_types_by_name['MailNotify'] = _MAILNOTIFY

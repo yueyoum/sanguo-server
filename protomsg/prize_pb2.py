@@ -14,7 +14,7 @@ import world_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='prize.proto',
   package='Sanguo.protocol.prize',
-  serialized_pb='\n\x0bprize.proto\x12\x15Sanguo.protocol.prize\x1a\x0bworld.proto\"1\n\x0bPrizeNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tprize_ids\x18\x02 \x03(\x05\"1\n\x0cPrizeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08prize_id\x18\x02 \x02(\x05\"j\n\rPrizeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08prize_id\x18\x03 \x01(\x05\x12)\n\x04\x64rop\x18\x04 \x01(\x0b\x32\x1b.Sanguo.protocol.world.Drop')
+  serialized_pb='\n\x0bprize.proto\x12\x15Sanguo.protocol.prize\x1a\x0bworld.proto\"1\n\x0bPrizeNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tprize_ids\x18\x02 \x03(\x05\"1\n\x0cPrizeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08prize_id\x18\x02 \x02(\x05\"p\n\rPrizeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08prize_id\x18\x03 \x01(\x05\x12/\n\x04\x64rop\x18\x04 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment')
 
 
 
@@ -134,10 +134,10 @@ _PRIZERESPONSE = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=153,
-  serialized_end=259,
+  serialized_end=265,
 )
 
-_PRIZERESPONSE.fields_by_name['drop'].message_type = world_pb2._DROP
+_PRIZERESPONSE.fields_by_name['drop'].message_type = world_pb2._ATTACHMENT
 DESCRIPTOR.message_types_by_name['PrizeNotify'] = _PRIZENOTIFY
 DESCRIPTOR.message_types_by_name['PrizeRequest'] = _PRIZEREQUEST
 DESCRIPTOR.message_types_by_name['PrizeResponse'] = _PRIZERESPONSE

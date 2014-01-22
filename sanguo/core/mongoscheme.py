@@ -42,18 +42,16 @@ class MongoFormation(Document):
         'collection': 'formation'
     }
 
-
-class MongoChar(Document):
+class MongoStage(Document):
     id = IntField(primary_key=True)
-
     # 已经打过的关卡，key为关卡ID，value 为 bool 值表示是否三星
     stages = DictField()
-    # 新的可以打的关卡
     stage_new = IntField()
 
     meta = {
-        'collection': 'char'
+        'collection': 'stage'
     }
+
 
 
 class MongoHero(Document):

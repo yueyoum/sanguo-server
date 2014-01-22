@@ -2,10 +2,9 @@
 from mongoengine import DoesNotExist
 
 from apps.character.models import Character
-from core import GLOBAL
 from core.counter import Counter
 from core.hero import save_hero, delete_hero, Hero
-from core.mongoscheme import Hang, MongoChar, MongoHero, MongoPrison
+from core.mongoscheme import Hang, MongoHero, MongoPrison
 from preset.settings import COUNTER, CHAR_INITIALIZE
 from core.signals import char_changed_signal, char_updated_signal
 
@@ -30,7 +29,8 @@ class Char(object):
         # WARNING
         # 一般不删除角色
         Character.objects.filter(id=self.id).delete()
-        MongoChar.objects.get(id=self.id).delete()
+        # MongoChar.objects.get(id=self.id).delete()
+        # FIXME mongoscheme 中的全要删除
         MongoHero.objects.filter(char=self.id).delete()
         try:
             MongoPrison.objects.get(id=self.id).delete()
@@ -166,7 +166,6 @@ def char_initialize(account_id, server_id, name):
     )
     char_id = char.id
 
-    MongoChar(id=char_id).save()
     Prison(char_id)
 
     for func_name in COUNTER_KEYS:
@@ -194,6 +193,5 @@ def char_initialize(account_id, server_id, name):
 
     f.save_formation(socket_ids, send_notify=False)
     # 将关卡1设置为new 可进入
-    MongoChar.objects(id=char_id).update_one(set__stage_new=1)
 
     return char

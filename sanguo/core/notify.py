@@ -1,6 +1,5 @@
 #from core.rabbit import rabbit
 from utils import pack_msg
-from core.stage import get_already_stage, get_new_stage
 from core.mongoscheme import Hang, DoesNotExist, MongoPrison
 import protomsg
 
@@ -16,6 +15,8 @@ from core.prison import Prison
 from core.friend import Friend
 from core.mail import Mail
 from core.daily import CheckIn
+
+from core.stage import Stage
 
 from core.formation import Formation
 from core.item import Item
@@ -106,16 +107,6 @@ def formation_notify(char_id, formation=None):
     f.send_formation_notify()
 
 
-def already_stage_notify(char_id):
-    data = get_already_stage(char_id)
-    if data:
-        msg = protomsg.AlreadyStageNotify()
-        for d in data.items():
-            stage = msg.stages.add()
-            stage.id, stage.star = d
-
-        publish_to_char(char_id, pack_msg(msg))
-
 
 def current_stage_notify(char_id, sid, star):
     msg = protomsg.CurrentStageNotify()
@@ -195,7 +186,8 @@ def prisoner_notify(char_id, objs=None, message_name="PrisonerListNotify"):
         # FIXME
         p.value = 5
 
-        p.attack, p.defense, p.hp = cal_hero_property(o.oid, level)
+        # FIXME
+        p.attack, p.defense, p.hp = cal_hero_property(o.oid, level, 1)
         p.crit, p.dodge = 0, 0
 
     publish_to_char(char_id, pack_msg(msg))
@@ -261,12 +253,6 @@ def login_notify(char_id):
     get_hero_panel_notify(char_id)
     socket_notify(char_id)
     formation_notify(char_id)
-    already_stage_notify(char_id)
-
-    new_stages = get_new_stage(char_id)
-    if new_stages:
-        new_stage_notify(char_id, new_stages)
-
 
     hang = hang_notify(char_id)
     if hang and hang.finished:
@@ -287,5 +273,9 @@ def login_notify(char_id):
 
     CheckIn(char_id).send_notify()
     Item(char_id).send_notify()
+
+    stage = Stage(char_id)
+    stage.send_already_stage_notify()
+    stage.send_new_stage_notify()
     
 

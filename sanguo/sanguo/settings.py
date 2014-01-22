@@ -147,6 +147,8 @@ INSTALLED_APPS = (
     'django_nose',
     'apps.server',
     'apps.hero',
+    'apps.stage',
+    'apps.skill',
     'apps.account',
     'apps.character',
     'apps.item',

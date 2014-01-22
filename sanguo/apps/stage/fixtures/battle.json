@@ -1,0 +1,106 @@
+[
+{
+    "pk": 1, 
+    "model": "stage.battle", 
+    "fields": {
+        "level_limit": 1, 
+        "name": "\u9ec4\u5dfe\u4e4b\u4e71"
+    }
+},
+{
+    "pk": 2, 
+    "model": "stage.battle", 
+    "fields": {
+        "level_limit": 1, 
+        "name": "\u8463\u5353\u4e4b\u4e71"
+    }
+},
+{
+    "pk": 3, 
+    "model": "stage.battle", 
+    "fields": {
+        "level_limit": 1, 
+        "name": "\u8346\u5dde\u4e4b\u6218"
+    }
+},
+{
+    "pk": 4, 
+    "model": "stage.battle", 
+    "fields": {
+        "level_limit": 1, 
+        "name": "\u957f\u5b89\u4e4b\u6218"
+    }
+},
+{
+    "pk": 5, 
+    "model": "stage.battle", 
+    "fields": {
+        "level_limit": 1, 
+        "name": "\u6fee\u9633\u4e4b\u6218"
+    }
+},
+{
+    "pk": 6, 
+    "model": "stage.battle", 
+    "fields": {
+        "level_limit": 1, 
+        "name": "\u6c49\u5ef7\u4e4b\u4e89"
+    }
+},
+{
+    "pk": 7, 
+    "model": "stage.battle", 
+    "fields": {
+        "level_limit": 1, 
+        "name": "\u6c5f\u4e1c\u4e4b\u6218"
+    }
+},
+{
+    "pk": 8, 
+    "model": "stage.battle", 
+    "fields": {
+        "level_limit": 1, 
+        "name": "\u4e0b\u90b3\u4e4b\u6218"
+    }
+},
+{
+    "pk": 9, 
+    "model": "stage.battle", 
+    "fields": {
+        "level_limit": 1, 
+        "name": "\u5b98\u6e21\u4e4b\u6218"
+    }
+},
+{
+    "pk": 10, 
+    "model": "stage.battle", 
+    "fields": {
+        "level_limit": 1, 
+        "name": "\u5343\u91cc\u8d70\u5355\u9a91"
+    }
+},
+{
+    "pk": 11, 
+    "model": "stage.battle", 
+    "fields": {
+        "level_limit": 1, 
+        "name": "\u65b0\u91ce\u4e4b\u6218"
+    }
+},
+{
+    "pk": 12, 
+    "model": "stage.battle", 
+    "fields": {
+        "level_limit": 1, 
+        "name": "\u957f\u5742\u5761\u4e4b\u6218"
+    }
+},
+{
+    "pk": 13, 
+    "model": "stage.battle", 
+    "fields": {
+        "level_limit": 1, 
+        "name": "\u8d64\u58c1\u4e4b\u6218"
+    }
+}
+]

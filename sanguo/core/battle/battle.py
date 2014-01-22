@@ -26,7 +26,7 @@ class Ground(object):
                     msg_h.id = h.id
                     msg_h.hp = h.hp
                     msg_h.original_id = h.original_id
-                    if h._hero_type == 1:
+                    if h.HERO_TYPE == 1:
                         msg_h.ht = BattleHeroMsg.HERO
                     else:
                         msg_h.ht = BattleHeroMsg.MONSTER
@@ -45,56 +45,38 @@ class Ground(object):
                 p += h.power
         return p
 
-
-    def my_team_hp(self):
+    def team_hp(self, teams):
         hp = 0
-        for h in self.my_heros:
+        for h in teams:
             if h is None:
                 continue
-
             hp += h.hp
         return hp
-
-    def rival_team_hp(self):
-        hp = 0
-        for h in self.rival_heros:
-            if h is None:
-                continue
-
-            hp += h.hp
-        return hp
-
 
     def is_team_dead(self):
-        if self.my_team_hp() <= 0:
+        if self.team_hp(self.my_heros) <= 0:
             return True, 1
-        if self.rival_team_hp() <= 0:
+        if self.team_hp(self.rival_heros) <= 0:
             return True, 2
-
         return False, None
 
 
     def start(self):
         #### LOG START
         logger.debug("#### Start Ground %d ####" % self.index)
-        line_upper = []
-        for h in self.rival_heros:
-            if h is None:
-                line_upper.append("   .")
-            else:
-                line_upper.append("%4s" % str(h.id))
-        line_upper = ''.join(line_upper)
+        def _log_line(heros):
+            line = []
+            for h in heros:
+                if h is None:
+                    line.append("   .")
+                else:
+                    line.append("%4s" % str(h.id))
 
-        line_bottom = []
-        for h in self.my_heros:
-            if h is None:
-                line_bottom.append("   .")
-            else:
-                line_bottom.append("%4s" % str(h.id))
-        line_bottom = ''.join(line_bottom)
+            line = ''.join(line)
+            logger.debug(line)
 
-        logger.debug(line_upper)
-        logger.debug(line_bottom)
+        _log_line(self.rival_heros)
+        _log_line(self.my_heros)
         ### LOG END
 
 
@@ -118,7 +100,7 @@ class Ground(object):
             battle_field.action()
 
         if i == 29:
-            self.msg.self_win = self.my_team_hp() >= self.rival_team_hp()
+            self.msg.self_win = self.team_hp(self.my_heros) >= self.team_hp(self.rival_heros)
 
         logger.debug("Win = %s" % self.msg.self_win)
         return self.msg.self_win

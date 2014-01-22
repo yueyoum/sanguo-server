@@ -34,7 +34,7 @@ class Hero(models.Model):
     crit = models.IntegerField("暴击", default=0)
     dodge = models.IntegerField("闪避", default=0)
 
-    skill = models.IntegerField("技能", null=True, blank=True)
+    skills = models.CharField("技能", blank=True, max_length=255)
 
     def __unicode__(self):
         return u'<Hero: %s>' % self.name
@@ -94,7 +94,7 @@ class Monster(models.Model):
     crit = models.IntegerField("暴击", default=0)
     dodge = models.IntegerField("闪避", default=0)
 
-    skill = models.IntegerField("技能", default=0)
+    skills = models.CharField("技能", blank=True, max_length=255)
 
     def __unicode__(self):
         return u'<Monster: %s>' % self.name

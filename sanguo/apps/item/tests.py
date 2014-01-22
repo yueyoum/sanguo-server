@@ -138,7 +138,7 @@ class SellEquipmentTest(TransactionTestCase):
     def _sell(self, _id, ret=0):
         req = protomsg.SellEquipRequest()
         req.session = self.session
-        req.id = _id
+        req.ids.append(_id)
 
         data = app_test_helper.pack_data(req)
         res = app_test_helper.make_request('/equip/sell/', data)

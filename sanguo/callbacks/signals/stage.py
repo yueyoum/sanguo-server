@@ -57,35 +57,6 @@ hang_cancel_signal.connect(
 )
 
 
-def _pve_finished(char_id, stage_id, win, star, **kwargs):
-    from core.mongoscheme import MongoChar
-
-    print "_pve_finished", char_id, stage_id, win, star
-    if win:
-        current_stage_notify(char_id, stage_id, star)
-
-    char = MongoChar.objects.only('stages', 'stage_new').get(id=char_id)
-    stages = char.stages
-    if win:
-        # FIXME
-        char.stages[str(stage_id)] = star
-        #char.stage_new = 0
-        new_stage_id = stage_id + 1
-        if char.stage_new != new_stage_id:
-            char.stage_new = new_stage_id
-
-            if str(new_stage_id) not in stages.keys():
-                new_stage_notify(char_id, new_stage_id)
-
-        char.save()
-
-
-pve_finished_signal.connect(
-    _pve_finished,
-    dispatch_uid='core.stage._pve_finished'
-)
-
-
 def _pvp_finished(char_id, rival_id, win, **kwargs):
     # FIXME
     arena_notify(char_id)

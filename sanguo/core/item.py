@@ -204,6 +204,10 @@ class Equipment(MessageEquipmentMixin):
         for k, v in attrs.iteritems():
             attrs[k] *= (1 + self.equip.gem_addition / 100.0)
 
+        # 暴击修正
+        if 'crit' in attrs:
+            attrs['crit'] = int((1 - pow(0.99, attrs['crit'] / 10.0)) * 100)
+
         return attrs
 
     def send_update_notify(self):
@@ -445,6 +449,12 @@ class Item(MessageEquipmentMixin):
 
         self.gem_add([(to_id, 1)])
         self.gem_remove(_id, 4)
+
+    def stuff_add(self, add_stuffs):
+        pass
+
+    def stuff_remove(self, _id, amount):
+        pass
 
 
     def send_equip_notify(self):

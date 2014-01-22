@@ -1,0 +1,182 @@
+[
+{
+    "pk": 1, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u666e\u901a\u653b\u51fb", 
+        "des": "\u9ed8\u8ba4\u666e\u901a\u653b\u51fb", 
+        "mode": 1, 
+        "mode_name": "\u4e3b\u52a8", 
+        "prob": 100, 
+        "special": ""
+    }
+},
+{
+    "pk": 2, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u5355\u4f53\u4f24\u5bb3\u6280\u80fd", 
+        "des": "\u5355\u4f53\u4f24\u5bb3\u6280\u80fd", 
+        "mode": 1, 
+        "mode_name": "\u4e3b\u52a8", 
+        "prob": 25, 
+        "special": ""
+    }
+},
+{
+    "pk": 3, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u5355\u4f53\u4f24\u5bb3\u6280\u80fd+", 
+        "des": "\u5355\u4f53\u4f24\u5bb3\u6280\u80fd+", 
+        "mode": 1, 
+        "mode_name": "\u4e3b\u52a8", 
+        "prob": 25, 
+        "special": ""
+    }
+},
+{
+    "pk": 4, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u5355\u4f53\u4f24\u5bb3\u6280\u80fd++", 
+        "des": "\u5355\u4f53\u4f24\u5bb3\u6280\u80fd++", 
+        "mode": 1, 
+        "mode_name": "\u4e3b\u52a8", 
+        "prob": 25, 
+        "special": ""
+    }
+},
+{
+    "pk": 5, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u7fa4\u4f53\u4f24\u5bb3", 
+        "des": "\u7fa4\u4f53\u4f24\u5bb3", 
+        "mode": 1, 
+        "mode_name": "\u4e3b\u52a8", 
+        "prob": 21, 
+        "special": ""
+    }
+},
+{
+    "pk": 6, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u7fa4\u4f53\u4f24\u5bb3+", 
+        "des": "\u7fa4\u4f53\u4f24\u5bb3+", 
+        "mode": 1, 
+        "mode_name": "\u4e3b\u52a8", 
+        "prob": 21, 
+        "special": ""
+    }
+},
+{
+    "pk": 7, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u7fa4\u4f53\u4f24\u5bb3++", 
+        "des": "\u7fa4\u4f53\u4f24\u5bb3++", 
+        "mode": 1, 
+        "mode_name": "\u4e3b\u52a8", 
+        "prob": 21, 
+        "special": ""
+    }
+},
+{
+    "pk": 8, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u6fc0\u6012\uff08\u653b\uff09", 
+        "des": "\u5355\u4f53\u653b\u51fb\u63d0\u5347\u5e76\u653b\u51fb", 
+        "mode": 1, 
+        "mode_name": "\u4e3b\u52a8", 
+        "prob": 25, 
+        "special": ""
+    }
+},
+{
+    "pk": 9, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u7fa4\u4f53\u653b\u51fb\u4e0a\u5347", 
+        "des": "\u7fa4\u4f53\u653b\u51fb\u4e0a\u5347", 
+        "mode": 1, 
+        "mode_name": "\u4e3b\u52a8", 
+        "prob": 28, 
+        "special": ""
+    }
+},
+{
+    "pk": 10, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u4e3b\u52a8\u9632\u5fa1", 
+        "des": "\u4e3b\u5766\u7528\u5355\u4f53\u9632\u5fa1\u4e3b\u52a8\u6280\u80fd\uff0c\u4e0d\u653b\u51fb", 
+        "mode": 1, 
+        "mode_name": "\u4e3b\u52a8", 
+        "prob": 28, 
+        "special": ""
+    }
+},
+{
+    "pk": 11, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u6fc0\u6012\uff08\u9632\uff09", 
+        "des": "\u526f\u5766\u4f7f\u7528\u6280\u80fd\uff0c\u653b\u51fb\u5e76\u589e\u52a0\u9632\u5fa1", 
+        "mode": 1, 
+        "mode_name": "\u4e3b\u52a8", 
+        "prob": 25, 
+        "special": ""
+    }
+},
+{
+    "pk": 12, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u7fa4\u4f53\u9632\u5fa1", 
+        "des": "\u7fa4\u4f53\u9632\u5fa1", 
+        "mode": 1, 
+        "mode_name": "\u4e3b\u52a8", 
+        "prob": 28, 
+        "special": ""
+    }
+},
+{
+    "pk": 13, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u7fa4\u4f53\u66b4\u51fb", 
+        "des": "\u7fa4\u4f53\u66b4\u51fb", 
+        "mode": 1, 
+        "mode_name": "\u4e3b\u52a8", 
+        "prob": 28, 
+        "special": ""
+    }
+},
+{
+    "pk": 14, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u7fa4\u4f53\u9632\u5fa1", 
+        "des": "\u7fa4\u4f53\u9632\u5fa1", 
+        "mode": 1, 
+        "mode_name": "\u4e3b\u52a8", 
+        "prob": 28, 
+        "special": ""
+    }
+},
+{
+    "pk": 15, 
+    "model": "skill.skill", 
+    "fields": {
+        "name": "\u6fc0\u6012\uff08\u9632\uff09", 
+        "des": "\u526f\u5766\u4f7f\u7528\u6280\u80fd\uff0c\u653b\u51fb\u5e76\u589e\u52a0\u9632\u5fa1", 
+        "mode": 1, 
+        "mode_name": "\u4e3b\u52a8", 
+        "prob": 25, 
+        "special": ""
+    }
+}
+]

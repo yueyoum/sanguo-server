@@ -3,7 +3,6 @@
 __author__ = 'Wang Chao'
 __date__ = '12/30/13'
 
-from core import GLOBAL
 from core.drives import document_ids
 from core.mongoscheme import MongoHero
 from core.signals import hero_add_signal, hero_del_signal
@@ -14,7 +13,7 @@ from apps.hero.models import Hero as ModelHero
 from utils import cache
 
 
-def cal_hero_property(original_id, level):
+def cal_hero_property(original_id, level, step):
     """
 
     @param original_id: hero original id
@@ -24,11 +23,13 @@ def cal_hero_property(original_id, level):
     @return: (attack, defense, hp)
     @rtype: tuple
     """
+    step_diff = 1.08
+    step_adjust = pow(step_diff, step-1)
 
     obj = ModelHero.all()[original_id]
-    attack = 20 + level * obj.attack_growing
-    defense = 15 + level * obj.defense_growing
-    hp = 45 + level * obj.hp_growing
+    attack = 20 * step + level * obj.attack_growing * step_adjust
+    defense = 15 * step + level * obj.defense_growing * step_adjust
+    hp = 45 * step + level * obj.hp_growing * step_adjust
 
     return int(attack), int(defense), int(hp)
 
@@ -37,7 +38,8 @@ class FightPowerMixin(object):
     @property
     def power(self):
         a = self.attack * 2.5 * (1 + self.crit / 2.0)
-        b = (self.hp + self.defense * 5) * (1 + self.dodge / 2.0)
+        # b = (self.hp + self.defense * 5) * (1 + self.dodge / 2.0)
+        b = self.hp + self.defense * 5
         return int(a + b)
 
 
@@ -51,14 +53,15 @@ class Hero(FightPowerMixin):
         self.level = char.level
         self.char_id = char.id
 
+        # FIXME
         self.attack, self.defense, self.hp = \
-            cal_hero_property(self.oid, self.level)
+            cal_hero_property(self.oid, self.level, 1)
 
         model_hero = ModelHero.all()[hid]
         self.crit = model_hero.crit
         self.dodge = model_hero.dodge
 
-        self.skill = model_hero.skill
+        self.skills = [int(i) for i in model_hero.skills.split(',')]
 
         self._add_equip_attrs()
 

@@ -15,7 +15,7 @@ CHAR_INITIALIZE = {
         2: [],
         3: [],
     },
-    'equips': [], # 要给的装备，格式为 [(tid, level), (tid, level)...]
+    'equips': [(1, 3), (78, 3), (102, 3)], # 要给的装备，格式为 [(id, amount), (id amount)...]
     'gems': [], # 要给的宝石，格式为 [(gid, amount), (gid, amount)...]
 }
 
@@ -102,7 +102,7 @@ EQUIP_LEVEL_RANGE = {
 # 每天可以做多少次
 COUNTER = {
     'hang': 8, # 挂机时间
-    'pvp': 8, # 比武次数
+    'arena': 8, # 比武次数
     'plunder': 8        # 掠夺次数
 }
 

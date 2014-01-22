@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 from protomsg import Server as ServerMsg
-from apps.character.models import Character
+from apps.character.models import Character as ModelCharacter
 from apps.server.models import Server
+
+from core.character import  Char
+from core.item import Item
+
 
 def server_list(user=None):
     user_servers = []
     if user:
-        user_servers = Character.objects.only('server_id').filter(
+        user_servers = ModelCharacter.objects.only('server_id').filter(
             account_id=user.id).values_list('server_id', flat=True)
 
     top = None
@@ -29,3 +33,21 @@ def server_list(user=None):
 
     return top, all_servers
 
+
+class Attachment(object):
+    def __init__(self, char_id):
+        self.char_id = char_id
+
+    def save_raw_attachment(self, gold=0, sycee=0, exp=0, official_exp=0, renown=0, equipments=None, gems=None, stuffs=None):
+        char = Char(self.char_id)
+        char.update(gold=gold, sycee=sycee, exp=exp, honor=renown)
+
+        item = Item(self.char_id)
+        if equipments:
+            for eid, level, step in equipments:
+                item.equip_add(eid, level)
+        if gems:
+            item.gem_add(gems)
+
+        if stuffs:
+            item.stuff_add(stuffs)

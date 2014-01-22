@@ -1,7 +1,6 @@
 from django.test import TransactionTestCase
 import protomsg
 from protomsg import RESPONSE_NOTIFY_TYPE
-from core import GLOBAL
 from core.character import char_initialize
 from utils import crypto
 from utils import app_test_helper as tests
@@ -31,31 +30,11 @@ class PVETest(TransactionTestCase):
                 self.assertEqual(data.stage_id, stage_id)
 
     def test_pve(self):
-        #stages = GLOBAL.STAGE
-        #for sid in stages.keys():
+        # stages = Stage.all().keys()
+        # for sid in stages:
         #    self._pve(sid)
         self._pve(1)
 
-
-class PVPTest(TransactionTestCase):
-    def setUp(self):
-        char = char_initialize(1, 1, 'a')
-        self.session = crypto.encrypt('1:1:{0}'.format(char.id))
-
-        char = char_initialize(2, 1, 'b')
-        self.other_char_id = char.id
-
-    def tearDown(self):
-        tests._teardown()
-
-
-    def test_pvp(self):
-        req = protomsg.ArenaRequest()
-        req.session = self.session
-
-        data = tests.pack_data(req)
-        res = tests.make_request('/pvp/', data)
-        msgs = tests.unpack_data(res)
 
 
 class HangTest(TransactionTestCase):
@@ -117,32 +96,3 @@ class HangTest(TransactionTestCase):
                 data.ParseFromString(msg)
                 self.assertEqual(data.ret, 2)
 
-
-class PlunderTest(TransactionTestCase):
-    def setUp(self):
-        char = char_initialize(1, 1, 'a')
-        self.char_id = char.id
-        self.session = crypto.encrypt('1:1:{0}'.format(char.id))
-
-        other_char = char_initialize(2, 1, 'b')
-        self.other_char_id = other_char.id
-
-    def tearDown(self):
-        tests._teardown()
-
-    def test_plunder_list(self):
-        req = protomsg.PlunderListRequest()
-        req.session = self.session
-
-        data = tests.pack_data(req)
-        res = tests.make_request('/plunder/list/', data)
-        msgs = tests.unpack_data(res)
-
-    def test_plunder_battle(self):
-        req = protomsg.PlunderRequest()
-        req.session = self.session
-        req.id = self.other_char_id
-
-        data = tests.pack_data(req)
-        res = tests.make_request('/plunder/', data)
-        msgs = tests.unpack_data(res)

@@ -4,8 +4,7 @@ urlpatterns = patterns('',
 
                        url(r'^test/$', 'views.cmd.cmd'),
 
-                       url(r'^pve/$', 'views.stage.views.pve'),
-                       url(r'^pvp/$', 'views.stage.views.pvp'),
+                       url(r'^pvp/$', 'views.arena.views.arena_battle'),
 
                        url(r'^formation/set/$', 'views.formation.views.set_formation'),
                        url(r'^socket/set/$', 'views.formation.views.set_socket'),
@@ -13,13 +12,10 @@ urlpatterns = patterns('',
                        url(r'^hero/merge/$', 'views.hero.views.merge_hero'),
 
 
-                       url(r'^hang/$', 'views.stage.views.hang_start'),
-                       url(r'^hang/cancel/$', 'views.stage.views.hang_cancel'),
-
                        url(r'^prize/$', 'views.prize.views.prize_get'),
 
-                       url(r'^plunder/list/$', 'views.stage.views.plunder_list'),
-                       url(r'^plunder/$', 'views.stage.views.plunder'),
+                       url(r'^plunder/list/$', 'views.plunder.views.plunder_list'),
+                       url(r'^plunder/$', 'views.plunder.views.plunder'),
 
                        url(r'^prison/open/$', 'views.prison.views.open_slot'),
 
