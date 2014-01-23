@@ -52,6 +52,22 @@ class MongoStage(Document):
         'collection': 'stage'
     }
 
+class MongoEmbeddedPanelHero(EmbeddedDocument):
+    hero_id = IntField()
+    opended = BooleanField()
+
+class MongoHeroPanel(Document):
+    id = IntField(primary_key=True)
+    panel = MapField(EmbeddedDocumentField(MongoEmbeddedPanelHero))
+    # 这组卡牌是否开始
+    started = BooleanField()
+    # 上次刷新的时间戳
+    last_refresh = IntField()
+
+    meta = {
+        'collectioin': 'heropanel'
+    }
+
 
 
 class MongoHero(Document):

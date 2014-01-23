@@ -8,7 +8,9 @@ urlpatterns = patterns('',
 
                        url(r'^formation/set/$', 'views.formation.views.set_formation'),
                        url(r'^socket/set/$', 'views.formation.views.set_socket'),
-                       url(r'^hero/get/$', 'views.hero.views.pick_hero'),
+                       url(r'^hero/get/$', 'views.heropanel.views.open'),
+                       url(r'^heropanel/refresh/$', 'views.heropanel.views.refresh'),
+                       url(r'^heropanel/start/$', 'views.heropanel.views.start'),
                        url(r'^hero/merge/$', 'views.hero.views.merge_hero'),
 
 

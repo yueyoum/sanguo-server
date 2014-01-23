@@ -6,9 +6,14 @@ from core.counter import Counter
 from core.hero import save_hero, delete_hero, Hero
 from core.mongoscheme import Hang, MongoHero, MongoPrison
 from preset.settings import COUNTER, CHAR_INITIALIZE
-from core.signals import char_changed_signal, char_updated_signal
+from core.signals import char_updated_signal
 
 from core.formation import Formation
+
+from core.msgpipe import publish_to_char
+from utils import pack_msg
+
+import protomsg
 
 COUNTER_KEYS = COUNTER.keys()
 
@@ -139,11 +144,26 @@ class Char(object):
 
         # TODO honor
         char.save()
+        self.send_notify()
 
-        char_changed_signal.send(
-            sender=None,
-            char_id=self.id
-        )
+
+    def send_notify(self):
+        char = self.cacheobj
+        msg = protomsg.CharacterNotify()
+        msg.char.id = char.id
+        msg.char.name = char.name
+        msg.char.gold = char.gold
+        msg.char.sycee = char.sycee
+        msg.char.level = char.level
+        msg.char.current_exp = char.exp
+        msg.char.next_level_exp = char.update_needs_exp()
+        msg.char.official = char.official
+        msg.char.power = self.power
+
+        publish_to_char(self.id, pack_msg(msg))
+
+
+
 
 
 

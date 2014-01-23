@@ -103,7 +103,8 @@ EQUIP_LEVEL_RANGE = {
 COUNTER = {
     'hang': 8, # 挂机时间
     'arena': 8, # 比武次数
-    'plunder': 8        # 掠夺次数
+    'plunder': 8,        # 掠夺次数
+    'gethero': 2,        # 免费抽将次数
 }
 
 

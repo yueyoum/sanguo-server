@@ -1,69 +1,12 @@
 # -*- coding: utf-8 -*-
 import random
 
-from core import GLOBAL
 from core.character import Char
-from core.exception import BadMessage, SanguoException, SyceeNotEnough
-from protomsg import GetHeroResponse
-from utils import pack_msg
+from core.exception import SanguoException
 from utils.decorate import message_response
 
 from apps.hero.models import Hero as ModelHero
 
-DRAW_HERO = GLOBAL.SETTINGS.DRAW_HERO
-
-@message_response("GetHeroResponse")
-def pick_hero(request):
-    req = request._proto
-    char_id = request._char_id
-
-    char = Char(char_id)
-    cache_char = char.cacheobj
-
-    try:
-        info = DRAW_HERO[req.mode]
-    except KeyError:
-        raise BadMessage()
-
-    if req.ten:
-        pick_times = 10
-    else:
-        pick_times = 1
-
-    using_sycee = pick_times * info['sycee']
-    if using_sycee > cache_char.sycee:
-        raise SyceeNotEnough()
-
-    prob = random.randint(1, 100)
-
-    for target_quality, target_prob in info['prob']:
-        if target_prob >= prob:
-            break
-
-    print "prob =", prob, "target_quality =", target_quality
-
-    all_heros = ModelHero.all()
-    hero_id_list = []
-    for h in all_heros.values():
-        if h.quality == target_quality:
-            hero_id_list.append(h.id)
-
-    if req.ten:
-        heros = [random.choice(hero_id_list) for i in range(10)]
-    else:
-        heros = [random.choice(hero_id_list)]
-
-    char.update(sycee=-using_sycee)
-    char.save_hero(heros)
-
-    response = GetHeroResponse()
-    response.ret = 0
-    response.mode = req.mode
-    # FIXME
-    # CRON
-    response.free_times = 10
-
-    return pack_msg(response)
 
 
 @message_response("MergeHeroResponse")

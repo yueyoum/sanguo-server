@@ -20,49 +20,23 @@ from core.stage import Stage
 
 from core.formation import Formation
 from core.item import Item
+from core.heropanel import HeroPanel
 
 from apps.character.models import Character
 
-def character_notify(char_id):
-    obj = Character.cache_obj(char_id)
-    data = protomsg.CharacterNotify()
-    data.char.id = obj.id
-    data.char.name = obj.name
-    data.char.gold = obj.gold
-    data.char.gem = obj.sycee
-    data.char.level = obj.level
-
-    data.char.current_exp = obj.exp
-    data.char.next_level_exp = obj.update_needs_exp()
-
-    data.char.official = obj.official
-    # FIXME
-
-    c = Char(char_id)
-    data.char.power = c.power
-    publish_to_char(obj.id, pack_msg(data))
-
 
 def hero_notify(char_id, objs, message_name="HeroNotify"):
-    Msg = getattr(protomsg, message_name)
-    data = Msg()
+    data = getattr(protomsg, message_name)()
 
     for obj in objs:
         g = data.heros.add()
-        g.id = int(obj.id)
+        g.id = obj.id
         g.original_id = obj.oid
 
-        # FIXME
         g.attack = obj.attack
         g.defense = obj.defense
         g.hp = obj.hp
-
-        g.attack_grow = 0
-        g.defense_grow = 0
-        g.hp_grow = 0
-
         g.cirt = obj.crit
-        g.dodge = obj.dodge
 
     publish_to_char(char_id, pack_msg(data))
 
@@ -248,7 +222,8 @@ def login_notify(char_id):
     c = Char(char_id)
     hero_objs = c.heros
 
-    character_notify(char_id)
+    c.send_notify()
+
     hero_notify(char_id, hero_objs)
     get_hero_panel_notify(char_id)
     socket_notify(char_id)
@@ -277,5 +252,7 @@ def login_notify(char_id):
     stage = Stage(char_id)
     stage.send_already_stage_notify()
     stage.send_new_stage_notify()
+
+    HeroPanel(char_id).send_notify()
     
 
