@@ -2,7 +2,6 @@ from core.signals import (
     hang_finished_signal,
     hang_add_signal,
     hang_cancel_signal,
-    pve_finished_signal,
     pvp_finished_signal,
 
     )
@@ -10,9 +9,6 @@ from core.signals import (
 from core.notify import (
     hang_notify,
     prize_notify,
-
-    current_stage_notify,
-    new_stage_notify,
 
     arena_notify,
     )
@@ -32,6 +28,7 @@ def hang_finish(char_id, actual_hours=None, **kwargs):
 
     hang.actual_hours = actual_hours
     hang.finished = True
+    hang.save()
     hang_notify(char_id, hang=hang)
     prize_notify(char_id, 1)
 
