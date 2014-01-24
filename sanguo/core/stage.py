@@ -67,11 +67,12 @@ class Stage(object):
             if str(stage_new) not in self.stage.stages:
                 if self.stage.stage_new != stage_new:
                     self.stage.stage_new = stage_new
-                    self.stage.save()
 
-            self.send_new_stage_notify()
+                self.send_new_stage_notify()
+            self.stage.save()
 
         return battle_msg
+
 
     def get_drop(self, stage_id):
         """
