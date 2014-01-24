@@ -169,6 +169,10 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
     def action(self, target):
         # 英雄行动，首先清理本英雄所施加在其他人身上的效果
+        if self.die:
+            logger.debug("%d: die, return" % self.id)
+            return
+
         msg = self.ground_msg.actions.add()
         msg.from_id = self.id
 
