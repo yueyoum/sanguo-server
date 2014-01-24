@@ -53,7 +53,7 @@ class HeroPanel(object):
 
     @property
     def new_start(self):
-        if not self.panel.started:
+        if self.panel.started:
             return False
 
         if not self.all_closed():
@@ -101,6 +101,11 @@ class HeroPanel(object):
         else:
             c = Counter(self.char_id, 'gethero')
             c.incr()
+
+        if self.panel.panel[str(_id)].opended:
+            raise InvalidOperate("HeroPanel Open: Char {0} Try to open an already opened socket {1}".format(
+                self.char_id, _id
+            ))
 
         hero_id = self.panel.panel[str(_id)].hero_id
         self.panel.panel[str(_id)].opended = True
