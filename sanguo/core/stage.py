@@ -55,13 +55,21 @@ class Stage(object):
             self._msg_stage(msg.stage, stage_id, star)
             publish_to_char(self.char_id, pack_msg(msg))
 
+            if str(stage_id) not in self.stage.stages:
+                self.stage.stages[str(stage_id)] = star
+            else:
+                if not self.stage.stages[str(stage_id)]:
+                    self.stage.stages[str(stage_id)] = star
+
             # 设置新关卡
+
             stage_new = this_stage.next
             if str(stage_new) not in self.stage.stages:
                 if self.stage.stage_new != stage_new:
                     self.stage.stage_new = stage_new
+                    self.stage.save()
 
-                    self.send_new_stage_notify()
+            self.send_new_stage_notify()
 
         return battle_msg
 
