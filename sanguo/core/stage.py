@@ -68,7 +68,7 @@ class Stage(object):
                 if self.stage.stage_new != stage_new:
                     self.stage.stage_new = stage_new
 
-                self.send_new_stage_notify()
+                    self.send_new_stage_notify()
             self.stage.save()
 
         return battle_msg
