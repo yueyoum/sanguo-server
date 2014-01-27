@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from mongoengine import DoesNotExist
 
-from core.mongoscheme import MongoPrison, Prisoner
+from core.mongoscheme import MongoPrison, MongoEmbededPrisoner
 from worker import tasks
 from protomsg import Prisoner as PrisonerProtoMsg
 from core.exception import SyceeNotEnough, SanguoException
@@ -67,7 +67,7 @@ def save_prisoner(char_id, oid):
     # FIXME
     job = tasks.prisoner_change.apply_async((char_id, new_persioner_id, PrisonerProtoMsg.NOT), countdown=60)
 
-    p = Prisoner()
+    p = MongoEmbededPrisoner()
     p.id = new_persioner_id
     p.oid = oid
     p.start_time = timezone.utc_timestamp()

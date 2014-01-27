@@ -35,10 +35,10 @@ class Stage(object):
                 self.char_id, stage_id
             ))
 
-        open_conditon = this_stage.open_condition
-        if open_conditon and str(open_conditon) not in self.stage.stages:
+        open_condition = this_stage.open_condition
+        if open_condition and str(open_condition) not in self.stage.stages:
             raise InvalidOperate("PVE: Char {0} Try PVE in stage {1}. But Open Condition Check NOT passed. {2}".format(
-                self.char_id, stage_id, open_conditon
+                self.char_id, stage_id, open_condition
             ))
 
         battle_msg = protomsg.Battle()

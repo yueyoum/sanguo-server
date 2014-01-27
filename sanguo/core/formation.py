@@ -2,7 +2,7 @@
 
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoSocket, MongoFormation
-from core.signals import formation_changed_signal, socket_changed_signal
+from core.signals import socket_changed_signal
 from core.exception import InvalidOperate
 
 from utils import pack_msg
@@ -54,11 +54,7 @@ class Formation(object):
         self.formation.save()
 
         if send_notify:
-            formation_changed_signal.send(
-                sender=None,
-                char_id=self.char_id,
-                socket_ids=socket_ids
-            )
+            self.send_formation_notify()
 
 
 

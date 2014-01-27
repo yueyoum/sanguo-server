@@ -5,8 +5,9 @@ __date__ = '12/30/13'
 
 from core.drives import document_ids
 from core.mongoscheme import MongoHero
-from core.signals import hero_add_signal, hero_del_signal
+from core.signals import hero_add_signal, hero_del_signal, hero_changed_signal
 from core.formation import Formation
+from core.exception import InvalidOperate
 
 from apps.character.models import Character
 from apps.hero.models import Hero as ModelHero
@@ -45,17 +46,18 @@ class FightPowerMixin(object):
 
 class Hero(FightPowerMixin):
     def __init__(self, hid):
-        hero = MongoHero.objects.get(id=hid)
-        char = Character.cache_obj(hero.char)
+        self.hero = MongoHero.objects.get(id=hid)
+        char = Character.cache_obj(self.hero.char)
 
         self.id = hid
-        self.oid = hero.oid
+        self.oid = self.hero.oid
+        self.step = self.hero.step
         self.level = char.level
         self.char_id = char.id
 
         # FIXME
         self.attack, self.defense, self.hp = \
-            cal_hero_property(self.oid, self.level, 1)
+            cal_hero_property(self.oid, self.level, self.step)
 
         model_hero = ModelHero.all()[hid]
         self.crit = model_hero.crit
@@ -98,6 +100,29 @@ class Hero(FightPowerMixin):
         return h
 
 
+    def step_up(self):
+        # 升阶
+        if self.step >= 5:
+            raise InvalidOperate("Hero Step Up: Char {0} Try to up hero {1}. But this hero already at step 5".format(
+                self.char_id, self.id
+            ))
+
+        # TODO 消耗同名卡
+        self.hero.step += 1
+        self.hero.save()
+
+        hero_changed_signal.send(
+            sender=None,
+            hero_id=self.id
+        )
+
+
+
+
+
+
+
+
 
 def save_hero(char_id, hero_original_ids, add_notify=True):
     """
@@ -119,7 +144,7 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
 
     id_range = range(new_max_id - length + 1, new_max_id + 1)
     for i, _id in enumerate(id_range):
-        MongoHero(id=_id, char=char_id, oid=hero_original_ids[i]).save()
+        MongoHero(id=_id, char=char_id, oid=hero_original_ids[i], step=1).save()
 
     if add_notify:
         hero_add_signal.send(

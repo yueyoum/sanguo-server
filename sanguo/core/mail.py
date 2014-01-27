@@ -4,7 +4,7 @@ __author__ = 'Wang Chao'
 __date__ = '1/2/14'
 
 from mongoengine import DoesNotExist
-from core.mongoscheme import MongoMail, EmbededMail
+from core.mongoscheme import MongoMail, MongoEmbededMail
 from core.msgpipe import publish_to_char
 from core.drives import document_ids
 
@@ -52,7 +52,7 @@ class Mail(object):
             content = content.decode('utf-8')
 
         mail_id = document_ids.inc('mail')
-        m = EmbededMail()
+        m = MongoEmbededMail()
         m.name = name
         m.content = content
         m.attachment = attachment

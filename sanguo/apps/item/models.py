@@ -19,7 +19,7 @@ class Equipment(models.Model):
     cls = models.SmallIntegerField("类别")
     cls_name = models.CharField("类别名字", max_length=12)
 
-    upgrade_to = models.CharField("升级到", max_length=255, blank=True)
+    upgrade_to = models.IntegerField("升级到", null=True, blank=True)
     stuff_needs = models.CharField("所需材料", max_length=255, blank=True)
 
     attack = models.IntegerField("攻击", default=0)
@@ -134,8 +134,36 @@ class Stuff(models.Model):
     def __unicode__(self):
         return u'<材料: %s>' % self.name
 
+    @staticmethod
+    def all():
+        data = cache.get('stuff', hours=None)
+        if data:
+            return data
+        return _save_stuff_cache()
+
     class Meta:
         db_table = 'stuff'
         ordering = ('id',)
         verbose_name = "材料"
         verbose_name_plural = "材料"
+
+
+def _save_stuff_cache(*args, **kwargs):
+    stuffs = Stuff.objects.all()
+    data = {s.id: s for s in stuffs}
+    cache.set('stuff', data, hours=None)
+    return data
+
+post_save.connect(
+    _save_stuff_cache,
+    sender=Stuff,
+    dispatch_uid='apps.item.Stuff.post_save'
+)
+
+post_delete.connect(
+    _save_stuff_cache,
+    sender=Stuff,
+    dispatch_uid='apps.item.Stuff.post_delete'
+)
+
+

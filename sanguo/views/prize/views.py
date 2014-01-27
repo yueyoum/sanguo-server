@@ -1,4 +1,4 @@
-from core.mongoscheme import Hang
+from core.mongoscheme import MongoHang
 
 from core.exception import SanguoException
 from core.notify import hang_notify
@@ -21,7 +21,7 @@ def prize_get(request):
     prize_id = 1
 
     try:
-        hang = Hang.objects.get(id=char_id)
+        hang = MongoHang.objects.get(id=char_id)
     except DoesNotExist:
         hang = None
 

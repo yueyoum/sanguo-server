@@ -97,11 +97,9 @@ def set_formation(request):
 
     socket_ids = [int(s) for s in req.socket_ids]
 
-    print socket_ids
     if len(socket_ids) != 9:
         raise InvalidOperate()
 
-    print f.formation.formation
 
     real_socket_ids = []
     for i in socket_ids:
@@ -111,13 +109,10 @@ def set_formation(request):
             raise InvalidOperate()
         real_socket_ids.append(i)
 
-    print "XXX"
-    print real_socket_ids
-    print f.formation.sockets
+
     if len(real_socket_ids) != len(f.formation.sockets):
         raise InvalidOperate()
 
-    print "YYY"
     for i in range(0, 9, 3):
         no_hero = True
         for j in range(3):

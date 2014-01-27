@@ -143,6 +143,8 @@ class HeroPanel(object):
     def make_new_panel(self, reset_time=True):
         # FIXME 选择武将
         all_heros = Hero.all()
+        choosing
+
         choosing = []
         for i in all_heros.keys():
             if len(choosing) >= self.AMOUNT:

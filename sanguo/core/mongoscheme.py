@@ -65,7 +65,7 @@ class MongoHeroPanel(Document):
     last_refresh = IntField()
 
     meta = {
-        'collectioin': 'heropanel'
+        'collection': 'heropanel'
     }
 
 
@@ -74,6 +74,7 @@ class MongoHero(Document):
     id = IntField(primary_key=True)
     char = IntField(required=True)
     oid = IntField(required=True)
+    step = IntField(required=True, default=1)
 
     meta = {
         'collection': 'hero',
@@ -84,7 +85,7 @@ class MongoHero(Document):
 MongoHero.ensure_indexes()
 
 
-class Hang(Document):
+class MongoHang(Document):
     id = IntField(primary_key=True)
     stage_id = IntField()
     # 选择的总时间
@@ -103,10 +104,10 @@ class Hang(Document):
     }
 
 
-Hang.ensure_indexes()
+MongoHang.ensure_indexes()
 
 
-class Prisoner(EmbeddedDocument):
+class MongoEmbededPrisoner(EmbeddedDocument):
     id = IntField()
     oid = IntField()
     start_time = IntField()
@@ -117,7 +118,7 @@ class Prisoner(EmbeddedDocument):
 class MongoPrison(Document):
     id = IntField(primary_key=True)
     amount = IntField()
-    prisoners = MapField(EmbeddedDocumentField(Prisoner))
+    prisoners = MapField(EmbeddedDocumentField(MongoEmbededPrisoner))
 
     meta = {
         'collection': 'prison'
@@ -145,7 +146,7 @@ class MongoFriend(Document):
     }
 
 
-class EmbededMail(EmbeddedDocument):
+class MongoEmbededMail(EmbeddedDocument):
     name = StringField(required=True)
     content = StringField(required=True)
     attachment = BinaryField()
@@ -155,7 +156,7 @@ class EmbededMail(EmbeddedDocument):
 
 class MongoMail(Document):
     id = IntField(primary_key=True)
-    mails = MapField(EmbeddedDocumentField(EmbededMail))
+    mails = MapField(EmbeddedDocumentField(MongoEmbededMail))
 
     meta = {
         'collection': 'mail'

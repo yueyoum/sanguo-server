@@ -1,10 +1,8 @@
-#from core.rabbit import rabbit
 from utils import pack_msg
-from core.mongoscheme import Hang, DoesNotExist, MongoPrison
+from core.mongoscheme import MongoHang, DoesNotExist, MongoPrison
 import protomsg
 
 from core.character import Char
-
 
 from core.hero import cal_hero_property
 
@@ -33,10 +31,14 @@ def hero_notify(char_id, objs, message_name="HeroNotify"):
         g.id = obj.id
         g.original_id = obj.oid
 
-        g.attack = obj.attack
-        g.defense = obj.defense
-        g.hp = obj.hp
-        g.cirt = obj.crit
+        g.attack = int(obj.attack)
+        g.defense = int(obj.defense)
+        g.hp = int(obj.hp)
+        g.cirt = int(obj.crit)
+
+        g.step = obj.step
+        # FIXME
+        g.step_cost = 1
 
     publish_to_char(char_id, pack_msg(data))
 
@@ -55,50 +57,13 @@ def update_hero_notify(char_id, objs):
     hero_notify(char_id, objs, "UpdateHeroNotify")
 
 
-def get_hero_panel_notify(char_id):
-    msg = protomsg.GetHeroPanelNotify()
-    # FIXME
-    data = [
-        (1, 100, 0, 0),
-        (2, 100, 5, 10),
-        (3, 100, 10, 10),
-    ]
-
-    for d in data:
-        m = msg.get_heros.add()
-        m.mode, m.cost, m.free_times, m.max_free_times = d
-
-    publish_to_char(char_id, pack_msg(msg))
-
-
-def socket_notify(char_id):
-    f = Formation(char_id)
-    f.send_socket_notify()
-
-
-def formation_notify(char_id, formation=None):
-    f = Formation(char_id)
-    f.send_formation_notify()
-
-
-
-def current_stage_notify(char_id, sid, star):
-    msg = protomsg.CurrentStageNotify()
-    msg.stage.id, msg.stage.star = sid, star
-    publish_to_char(char_id, pack_msg(msg))
-
-
-def new_stage_notify(char_id, sid):
-    msg = protomsg.NewStageNotify()
-    msg.stage.id, msg.stage.star = sid, False
-    publish_to_char(char_id, pack_msg(msg))
 
 
 def hang_notify(char_id, hang=None):
     counter = Counter(char_id, 'hang')
     if not hang:
         try:
-            hang = Hang.objects.get(id=char_id)
+            hang = MongoHang.objects.get(id=char_id)
         except DoesNotExist:
             hang = None
 
@@ -225,9 +190,10 @@ def login_notify(char_id):
     c.send_notify()
 
     hero_notify(char_id, hero_objs)
-    get_hero_panel_notify(char_id)
-    socket_notify(char_id)
-    formation_notify(char_id)
+
+    f = Formation(char_id)
+    f.send_socket_notify()
+    f.send_formation_notify()
 
     hang = hang_notify(char_id)
     if hang and hang.finished:

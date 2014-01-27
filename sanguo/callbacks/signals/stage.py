@@ -19,10 +19,10 @@ def hang_add(char_id, hours, **kwargs):
 
 
 def hang_finish(char_id, actual_hours=None, **kwargs):
-    from core.mongoscheme import Hang
+    from core.mongoscheme import MongoHang
 
     print "hang_finish", char_id
-    hang = Hang.objects.get(id=char_id)
+    hang = MongoHang.objects.get(id=char_id)
     if not actual_hours:
         actual_hours = hang.hours
 

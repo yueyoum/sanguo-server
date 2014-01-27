@@ -23,10 +23,13 @@ def _hero_del(char_id, hero_ids, **kwargs):
     remove_hero_notify(char_id, hero_ids)
 
 
-def _hero_change(cache_hero_obj, **kwargs):
+def _hero_change(hero_id, **kwargs):
+    hero = Hero(hero_id)
+    hero.save_cache()
+
     update_hero_notify(
-        cache_hero_obj.char_id,
-        [cache_hero_obj]
+        hero.char_id,
+        [hero,]
     )
 
 
@@ -50,13 +53,15 @@ def _hero_attribute_change(socket_obj, **kwargs):
     if not socket_obj.hero:
         return
 
-    hero = Hero(socket_obj.hero)
-    hero.save_cache()
+    _hero_change(socket_obj.hero)
 
-    hero_changed_signal.send(
-        sender=None,
-        cache_hero_obj=hero
-    )
+    # hero = Hero(socket_obj.hero)
+    # hero.save_cache()
+    #
+    # hero_changed_signal.send(
+    #     sender=None,
+    #     cache_hero_obj=hero
+    # )
 
 
 socket_changed_signal.connect(

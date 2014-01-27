@@ -30,6 +30,7 @@ else:
 
                            url(r'', include('apps.account.urls')),
                            url(r'', include('apps.character.urls')),
+                           url(r'', include('apps.hero.urls')),
                            url(r'', include('apps.item.urls')),
                            url(r'', include('apps.server.urls')),
                            url(r'', include('apps.stage.urls')),

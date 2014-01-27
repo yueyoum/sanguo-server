@@ -6,14 +6,16 @@ __date__ = '1/14/14'
 from mongoengine import DoesNotExist
 
 from apps.item.models import Equipment as ModelEquipment
-from apps.item.models import Gem as MysqlGem
+from apps.item.models import Gem as ModelGem
+from apps.item.models import Stuff as ModelStuff
 from core.mongoscheme import MongoItem, MongoEmbeddedEquipment
 from core.drives import document_ids
 
-from core.exception import InvalidOperate, GoldNotEnough, GemNotEnough
+from core.exception import InvalidOperate, GoldNotEnough, GemNotEnough, StuffNotEnough
 from core.msgpipe import publish_to_char
 from core.character import Char
 from core.signals import equip_changed_signal
+from core.formation import Formation
 
 from utils import pack_msg
 from utils import cache
@@ -108,13 +110,30 @@ class Equipment(MessageEquipmentMixin):
         self.level += 1
 
     @equip_updated
-    def step_up(self, to):
-        # XXX 在调用之前要检查材料是否足够
-        to_oids = [int(i) for i in self.equip.upgrade_to.split(',')]
-        if to not in to_oids:
-            raise InvalidOperate("Equipment Step Up: Char {0} Try to Up Equipment {1} to {2}".format(
-                self.char_id, self.equip_id, to
+    def step_up(self):
+        to = self.equip.upgrade_to
+        if not to:
+            raise InvalidOperate("Equipment Step Up: char {0} Try to Step up equipment {1}. But Can't step up".format(
+                self.char_id, self.equip_id
             ))
+
+        stuff_needs = []
+        for x in self.equip.stuff_needs.split(','):
+            _id, _amount = x.split(':')
+            stuff_needs.append((int(_id), int(_amount)))
+
+        for _id, _amount in stuff_needs:
+            if self.mongo_item.stuffs.get(str(_id), 0) < _amount:
+                raise StuffNotEnough("Equipment Step Up: Char {0} Try to step up equipment {1}. But Stuff {2} NOT enough".format(
+                    self.char_id, self.equip_id, _id
+                ))
+
+        # for _id, _amount in stuff_needs:
+        #     self.mongo_item.stuffs[str(_id)] -= _amount
+        #     if self.mongo_item.stuffs[str(_id)] == 0:
+        #         self.mongo_item.stuffs.pop(str(_id))
+        # 在外面使用Item类的 stuff_remove 方法
+
 
         self.oid = to
         all_equips = ModelEquipment.all()
@@ -122,11 +141,11 @@ class Equipment(MessageEquipmentMixin):
 
         self.mongo_item.equipments[str(self.equip_id)].oid = to
         add_gem_slots = self.equip.slots - len(self.mongo_item.equipments[str(self.equip_id)].gems)
-        # TODO check this value
         for i in range(add_gem_slots):
             self.mongo_item.equipments[str(self.equip_id)].gems.append(0)
 
         self.mongo_item.save()
+        return stuff_needs
 
 
     @equip_updated
@@ -193,7 +212,7 @@ class Equipment(MessageEquipmentMixin):
         attrs = {}
 
         gems = self.mongo_item.equipments[str(self.equip_id)].gems
-        all_gems = MysqlGem.all()
+        all_gems = ModelGem.all()
         # TODO get gem
         for gid in gems:
             if not gid:
@@ -293,26 +312,33 @@ class Item(MessageEquipmentMixin):
         e.level_up()
 
 
-    def equip_step_up(self, _id, to):
+    def equip_step_up(self, equip_id):
         # TODO check stuffs
-        if not self.has_equip(_id):
+        if not self.has_equip(equip_id):
             raise InvalidOperate("Equipment Step Up: Char {0} Try to Step up a NONE exist equipmet: {1}".format(
-                self.char_id, _id
+                self.char_id, equip_id
             ))
 
-        e = Equipment(self.char_id, _id, self.item)
-        e.step_up(to)
+        equip = Equipment(self.char_id, equip_id, self.item)
+        stuff_needs = equip.step_up()
+        for _id, _amount in stuff_needs:
+            self.stuff_remove(_id, _amount)
 
 
     def equip_sell(self, ids):
         if not isinstance(ids, (set, list, tuple)):
             ids = [ids]
 
-        # TODO 装备在阵法插槽上
+        f = Formation(self.char_id)
         ids = set(ids)
         for _id in ids:
             if not self.has_equip(_id):
                 raise InvalidOperate("Equipment Sell: Char {0} Try to sell a NONE exist equipment: {1}".format(
+                    self.char_id, _id
+                ))
+
+            if f.find_socket_by_equip(_id):
+                raise InvalidOperate("Eequipment Sell: Char {0} Try to sell equipment {1}. But it in formation socket".format(
                     self.char_id, _id
                 ))
 
@@ -355,7 +381,7 @@ class Item(MessageEquipmentMixin):
         @type add_gems: list | tuple
         """
 
-        all_gems = MysqlGem.all()
+        all_gems = ModelGem.all()
 
         for gid, _ in add_gems:
             if gid not in all_gems:
@@ -441,7 +467,7 @@ class Item(MessageEquipmentMixin):
                 self.char_id, _id, this_gem_amount
             ))
 
-        to_id = MysqlGem.all()[_id].merge_to
+        to_id = ModelGem.all()[_id].merge_to
         if not to_id:
             raise InvalidOperate("Gem Merge: Char {0} Try to Merge gem: {1}. Which can not merge".format(
                 self.char_id, _id
@@ -450,11 +476,86 @@ class Item(MessageEquipmentMixin):
         self.gem_add([(to_id, 1)])
         self.gem_remove(_id, 4)
 
+
     def stuff_add(self, add_stuffs):
-        pass
+        """
+
+        @param add_stuffs: [(id, amount), (id, amount)]
+        @type add_stuffs: list | tuple
+        """
+        all_stuffs = ModelStuff.all()
+        for _id, _ in add_stuffs:
+            if _id not in all_stuffs:
+                raise InvalidOperate("Stuff Add: Char {0} Try to add a NONE exist Stuff: {1}".format(
+                    self.char_id, _id
+                ))
+
+        stuffs = self.item.stuffs
+        add_stuffs_dict = {}
+        for _id, _amount in add_stuffs:
+            add_stuffs_dict[_id] = add_stuffs_dict.get(_id, 0) + _amount
+
+        new_stuffs = []
+        update_stuffs = []
+        for _id, _amount in add_stuffs_dict.iteritems():
+            sid = str(_id)
+            if sid in stuffs:
+                stuffs[sid] += _amount
+                update_stuffs.append((_id, stuffs[sid]))
+            else:
+                stuffs[sid] = _amount
+                new_stuffs.append((_id, _amount))
+
+        self.item.stuffs = stuffs
+        self.item.save()
+
+        if new_stuffs:
+            msg = protomsg.AddStuffNotify()
+            for k, v in new_stuffs:
+                s = msg.stuffs.add()
+                s.id, s.amount = k, v
+
+            publish_to_char(self.char_id, pack_msg(msg))
+
+        if update_stuffs:
+            msg = protomsg.UpdateStuffNotify()
+            for k, v in update_stuffs:
+                s = msg.stuffs.add()
+                s.id, s.amount = k, v
+
+            publish_to_char(self.char_id, pack_msg(msg))
+
+
 
     def stuff_remove(self, _id, amount):
-        pass
+        """
+        @param _id: stuff id
+        @type _id: int
+        @param amount: this stuff amount
+        @type amount: int
+        """
+        try:
+            this_stuff_amount = self.item.stuffs[str(_id)]
+        except KeyError:
+            raise InvalidOperate("Stuff Remove: Char {0} Try to remove a NONE exist stuff: {1}".format(self.char_id, _id))
+
+        new_amount = this_stuff_amount - amount
+
+        if new_amount <= 0:
+            self.item.stuffs.pop(str(_id))
+            self.item.save()
+
+            msg = protomsg.RemoveStuffNotify()
+            msg.ids.append(_id)
+            publish_to_char(self.char_id, pack_msg(msg))
+        else:
+            self.item.stuffs[str(_id)] = new_amount
+            self.item.save()
+            msg = protomsg.UpdateStuffNotify()
+            g = msg.stuffs.add()
+            g.id, g.amount = _id, new_amount
+
+            publish_to_char(self.char_id, pack_msg(msg))
 
 
     def send_equip_notify(self):
@@ -474,7 +575,16 @@ class Item(MessageEquipmentMixin):
 
         publish_to_char(self.char_id, pack_msg(msg))
 
+    def send_stuff_notify(self):
+        msg = protomsg.StuffNotify()
+        for k, v in self.item.stuffs.iteritems():
+            s = msg.stuffs.add()
+            s.id, s.amount = int(k), v
+
+        publish_to_char(self.char_id, pack_msg(msg))
+
 
     def send_notify(self):
         self.send_equip_notify()
         self.send_gem_notify()
+        self.send_stuff_notify()

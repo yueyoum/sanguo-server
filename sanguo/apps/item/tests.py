@@ -106,15 +106,42 @@ class StrengthEquipmentTest(TransactionTestCase):
         self._strength(999, 2)
 
 
-    def test_step_up(self):
-        # XXX fake test
+
+class EquipmentStepUpTest(TransactionTestCase):
+    def setUp(self):
+        char = char_initialize(1, 1, 'a')
+        self.char_id = char.id
+        self.session = crypto.encrypt('1:1:{0}'.format(self.char_id))
+        self.item = Item(self.char_id)
+        self.equip_id = self.item.equip_add(1)
+
+    def tearDown(self):
+        app_test_helper._teardown()
+
+    def _step_up(self, _id, ret=0):
         req = protomsg.StepUpEquipRequest()
         req.session = self.session
-        req.id = 1
-        req.to_id = 2
+        req.id = _id
         data = app_test_helper.pack_data(req)
         res = app_test_helper.make_request('/equip/stepup/', data)
         msgs = app_test_helper.unpack_data(res)
+        for a, b, c in msgs:
+            if a == protomsg.RESPONSE_NOTIFY_TYPE["StepUpEquipResponse"]:
+                data = protomsg.StepUpEquipResponse()
+                data.ParseFromString(c)
+                self.assertEqual(data.ret, ret)
+
+    def test_none_exist(self):
+        self._step_up(999, 2)
+
+    def test_error_step_up(self):
+        self._step_up(self.equip_id, 16)
+
+    def test_normal_step_up(self):
+        item = Item(self.char_id)
+        item.stuff_add([(1, 1), (2, 1)])
+        self._step_up(self.equip_id)
+
 
 
 

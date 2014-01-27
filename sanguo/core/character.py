@@ -4,7 +4,7 @@ from mongoengine import DoesNotExist
 from apps.character.models import Character
 from core.counter import Counter
 from core.hero import save_hero, delete_hero, Hero
-from core.mongoscheme import Hang, MongoHero, MongoPrison
+from core.mongoscheme import MongoHang, MongoHero, MongoPrison
 from preset.settings import COUNTER, CHAR_INITIALIZE
 from core.signals import char_updated_signal
 
@@ -39,7 +39,7 @@ class Char(object):
         MongoHero.objects.filter(char=self.id).delete()
         try:
             MongoPrison.objects.get(id=self.id).delete()
-            Hang.objects.get(id=self.id).delete()
+            MongoHang.objects.get(id=self.id).delete()
         except DoesNotExist:
             pass
 
@@ -75,7 +75,7 @@ class Char(object):
             if not s.hero:
                 continue
 
-            res.append(heros_dict[s.hero])
+            res.append(heros_dict[s.hero].oid)
         return res
 
 
@@ -84,7 +84,7 @@ class Char(object):
     @property
     def heros_dict(self):
         heros = MongoHero.objects.filter(char=self.id)
-        return {h.id: h.oid for h in heros}
+        return {h.id: h for h in heros}
 
     @property
     def heros(self):

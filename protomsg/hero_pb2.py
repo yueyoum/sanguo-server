@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='hero.proto',
   package='Sanguo.protocol.hero',
-  serialized_pb='\n\nhero.proto\x12\x14Sanguo.protocol.hero\"b\n\x04Hero\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x13\n\x0boriginal_id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x03 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x04 \x02(\x05\x12\n\n\x02hp\x18\x05 \x02(\x05\x12\x0c\n\x04\x63irt\x18\x06 \x02(\x05\"H\n\nHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"K\n\rAddHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"0\n\x10RemoveHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"N\n\x10UpdateHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"\x83\x02\n\x12GetHeroPanelNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x17\n\x0frefresh_seconds\x18\x02 \x02(\x05\x12\x12\n\nfree_times\x18\x03 \x02(\x05\x12\x12\n\nopen_sycee\x18\x04 \x02(\x05\x12\x15\n\rrefresh_sycee\x18\x05 \x02(\x05\x12\x45\n\x07sockets\x18\x06 \x03(\x0b\x32\x34.Sanguo.protocol.hero.GetHeroPanelNotify.PanelSocket\x12\x11\n\tnew_start\x18\x07 \x02(\x08\x1a*\n\x0bPanelSocket\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0f\n\x07hero_id\x18\x02 \x02(\x05\"-\n\x0eGetHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"/\n\x0fGetHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"&\n\x13GetHeroStartRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"4\n\x14GetHeroStartResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"(\n\x15GetHeroRefreshRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"6\n\x16GetHeroRefreshResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\";\n\x10MergeHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x16\n\x0eusing_hero_ids\x18\x02 \x03(\x05\"1\n\x11MergeHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\nhero.proto\x12\x14Sanguo.protocol.hero\"\x83\x01\n\x04Hero\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x13\n\x0boriginal_id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x03 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x04 \x02(\x05\x12\n\n\x02hp\x18\x05 \x02(\x05\x12\x0c\n\x04\x63irt\x18\x06 \x02(\x05\x12\x0c\n\x04step\x18\x07 \x02(\x05\x12\x11\n\tstep_cost\x18\x08 \x02(\x05\"H\n\nHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"K\n\rAddHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"0\n\x10RemoveHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"N\n\x10UpdateHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"\x83\x02\n\x12GetHeroPanelNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x17\n\x0frefresh_seconds\x18\x02 \x02(\x05\x12\x12\n\nfree_times\x18\x03 \x02(\x05\x12\x12\n\nopen_sycee\x18\x04 \x02(\x05\x12\x15\n\rrefresh_sycee\x18\x05 \x02(\x05\x12\x45\n\x07sockets\x18\x06 \x03(\x0b\x32\x34.Sanguo.protocol.hero.GetHeroPanelNotify.PanelSocket\x12\x11\n\tnew_start\x18\x07 \x02(\x08\x1a*\n\x0bPanelSocket\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0f\n\x07hero_id\x18\x02 \x02(\x05\"-\n\x0eGetHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"/\n\x0fGetHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"&\n\x13GetHeroStartRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"4\n\x14GetHeroStartResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"(\n\x15GetHeroRefreshRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"6\n\x16GetHeroRefreshResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x11HeroStepUpRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"2\n\x12HeroStepUpResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\";\n\x10MergeHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x16\n\x0eusing_hero_ids\x18\x02 \x03(\x05\"1\n\x11MergeHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
 
 
 
@@ -67,6 +67,20 @@ _HERO = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='step', full_name='Sanguo.protocol.hero.Hero.step', index=6,
+      number=7, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='step_cost', full_name='Sanguo.protocol.hero.Hero.step_cost', index=7,
+      number=8, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -76,8 +90,8 @@ _HERO = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=36,
-  serialized_end=134,
+  serialized_start=37,
+  serialized_end=168,
 )
 
 
@@ -111,8 +125,8 @@ _HERONOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=136,
-  serialized_end=208,
+  serialized_start=170,
+  serialized_end=242,
 )
 
 
@@ -146,8 +160,8 @@ _ADDHERONOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=210,
-  serialized_end=285,
+  serialized_start=244,
+  serialized_end=319,
 )
 
 
@@ -181,8 +195,8 @@ _REMOVEHERONOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=287,
-  serialized_end=335,
+  serialized_start=321,
+  serialized_end=369,
 )
 
 
@@ -216,8 +230,8 @@ _UPDATEHERONOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=337,
-  serialized_end=415,
+  serialized_start=371,
+  serialized_end=449,
 )
 
 
@@ -251,8 +265,8 @@ _GETHEROPANELNOTIFY_PANELSOCKET = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=635,
-  serialized_end=677,
+  serialized_start=669,
+  serialized_end=711,
 )
 
 _GETHEROPANELNOTIFY = _descriptor.Descriptor(
@@ -320,8 +334,8 @@ _GETHEROPANELNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=418,
-  serialized_end=677,
+  serialized_start=452,
+  serialized_end=711,
 )
 
 
@@ -355,8 +369,8 @@ _GETHEROREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=679,
-  serialized_end=724,
+  serialized_start=713,
+  serialized_end=758,
 )
 
 
@@ -390,8 +404,8 @@ _GETHERORESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=726,
-  serialized_end=773,
+  serialized_start=760,
+  serialized_end=807,
 )
 
 
@@ -418,8 +432,8 @@ _GETHEROSTARTREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=775,
-  serialized_end=813,
+  serialized_start=809,
+  serialized_end=847,
 )
 
 
@@ -453,8 +467,8 @@ _GETHEROSTARTRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=815,
-  serialized_end=867,
+  serialized_start=849,
+  serialized_end=901,
 )
 
 
@@ -481,8 +495,8 @@ _GETHEROREFRESHREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=869,
-  serialized_end=909,
+  serialized_start=903,
+  serialized_end=943,
 )
 
 
@@ -516,8 +530,78 @@ _GETHEROREFRESHRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=911,
-  serialized_end=965,
+  serialized_start=945,
+  serialized_end=999,
+)
+
+
+_HEROSTEPUPREQUEST = _descriptor.Descriptor(
+  name='HeroStepUpRequest',
+  full_name='Sanguo.protocol.hero.HeroStepUpRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.hero.HeroStepUpRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='Sanguo.protocol.hero.HeroStepUpRequest.id', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1001,
+  serialized_end=1049,
+)
+
+
+_HEROSTEPUPRESPONSE = _descriptor.Descriptor(
+  name='HeroStepUpResponse',
+  full_name='Sanguo.protocol.hero.HeroStepUpResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.hero.HeroStepUpResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.hero.HeroStepUpResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1051,
+  serialized_end=1101,
 )
 
 
@@ -551,8 +635,8 @@ _MERGEHEROREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=967,
-  serialized_end=1026,
+  serialized_start=1103,
+  serialized_end=1162,
 )
 
 
@@ -586,8 +670,8 @@ _MERGEHERORESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1028,
-  serialized_end=1077,
+  serialized_start=1164,
+  serialized_end=1213,
 )
 
 _HERONOTIFY.fields_by_name['heros'].message_type = _HERO
@@ -607,6 +691,8 @@ DESCRIPTOR.message_types_by_name['GetHeroStartRequest'] = _GETHEROSTARTREQUEST
 DESCRIPTOR.message_types_by_name['GetHeroStartResponse'] = _GETHEROSTARTRESPONSE
 DESCRIPTOR.message_types_by_name['GetHeroRefreshRequest'] = _GETHEROREFRESHREQUEST
 DESCRIPTOR.message_types_by_name['GetHeroRefreshResponse'] = _GETHEROREFRESHRESPONSE
+DESCRIPTOR.message_types_by_name['HeroStepUpRequest'] = _HEROSTEPUPREQUEST
+DESCRIPTOR.message_types_by_name['HeroStepUpResponse'] = _HEROSTEPUPRESPONSE
 DESCRIPTOR.message_types_by_name['MergeHeroRequest'] = _MERGEHEROREQUEST
 DESCRIPTOR.message_types_by_name['MergeHeroResponse'] = _MERGEHERORESPONSE
 
@@ -687,6 +773,18 @@ class GetHeroRefreshResponse(_message.Message):
   DESCRIPTOR = _GETHEROREFRESHRESPONSE
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.hero.GetHeroRefreshResponse)
+
+class HeroStepUpRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _HEROSTEPUPREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.hero.HeroStepUpRequest)
+
+class HeroStepUpResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _HEROSTEPUPRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.hero.HeroStepUpResponse)
 
 class MergeHeroRequest(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType

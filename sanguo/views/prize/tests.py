@@ -34,9 +34,9 @@ class PrizeTest(TransactionTestCase):
 
 
     def test_normal_prize(self):
-        from core.mongoscheme import Hang
+        from core.mongoscheme import MongoHang
 
-        h = Hang(
+        h = MongoHang(
             id=self.char_id,
             stage_id=1,
             hours=8,

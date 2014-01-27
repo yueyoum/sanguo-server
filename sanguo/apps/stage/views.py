@@ -1,24 +1,19 @@
 # -*- coding: utf-8 -*-
 import logging
-import random
 
 from mongoengine import DoesNotExist
 
 import protomsg
 from core.counter import Counter
 from core.exception import SanguoException, InvalidOperate
-from core.mongoscheme import Hang
-from core.signals import (hang_add_signal, hang_cancel_signal,
-                          pvp_finished_signal)
+from core.mongoscheme import MongoHang
+from core.signals import (hang_add_signal, hang_cancel_signal )
 from core.stage import Stage
 from worker import tasks
 from utils import pack_msg, timezone
 from utils.decorate import message_response
 
 logger = logging.getLogger('sanguo')
-
-from core.battle import PVP
-
 
 
 @message_response("PVEResponse")
@@ -51,7 +46,7 @@ def hang_start(request):
     char_id = request._char_id
 
     try:
-        hang = Hang.objects.get(id=char_id)
+        hang = MongoHang.objects.get(id=char_id)
     except DoesNotExist:
         hang = None
 
@@ -66,7 +61,7 @@ def hang_start(request):
     # FIXME countdown
     job = tasks.hang_finish.apply_async((char_id, ), countdown=10)
 
-    hang = Hang(
+    hang = MongoHang(
         id=char_id,
         stage_id=req.stage_id,
         hours=req.hours,
@@ -95,7 +90,7 @@ def hang_cancel(request):
     char_id = request._char_id
 
     try:
-        hang = Hang.objects.get(id=char_id)
+        hang = MongoHang.objects.get(id=char_id)
     except DoesNotExist:
         logger.warning("Hang Cancel. Char {0} cancel a NONE exist hang".format(char_id))
         raise InvalidOperate()

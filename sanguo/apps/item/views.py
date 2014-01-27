@@ -19,7 +19,7 @@ def step_up_equip(request):
     req = request._proto
 
     item = Item(request._char_id)
-    item.equip_step_up(req.id, req.to_id)
+    item.equip_step_up(req.id)
     return None
 
 
