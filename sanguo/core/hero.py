@@ -3,11 +3,14 @@
 __author__ = 'Wang Chao'
 __date__ = '12/30/13'
 
+import ctypes
+
 from core.drives import document_ids
 from core.mongoscheme import MongoHero
 from core.signals import hero_add_signal, hero_del_signal, hero_changed_signal
 from core.formation import Formation
 from core.exception import InvalidOperate
+from core import DLL
 
 from apps.character.models import Character
 from apps.hero.models import Hero as ModelHero
@@ -24,14 +27,12 @@ def cal_hero_property(original_id, level, step):
     @return: (attack, defense, hp)
     @rtype: tuple
     """
-    step_diff = 1.08
-    step_adjust = pow(step_diff, step-1)
+    hero = ModelHero.all()[original_id]
+    attack = DLL.hero_attack(level, step, ctypes.c_float(hero.attack_growing))
+    defense = DLL.hero_defense(level, step, ctypes.c_float(hero.defense_growing))
+    hp = DLL.hero_hp(level, step, ctypes.c_float(hero.hp_growing))
 
-    obj = ModelHero.all()[original_id]
-    attack = 20 * step + level * obj.attack_growing * step_adjust
-    defense = 15 * step + level * obj.defense_growing * step_adjust
-    hp = 45 * step + level * obj.hp_growing * step_adjust
-
+    # TODO 这里不应该int， 检查使用此参数的代码
     return int(attack), int(defense), int(hp)
 
 

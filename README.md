@@ -19,7 +19,13 @@
     pip install -r requirements.txt
     ```
 
-4.  **如果是直接部署到生产服务器，则略过此步，开发时需要执行这一步**
+4.  编译动态链接库
+
+    ```
+    ./compile-dll.sh
+    ```
+
+5.  **如果是直接部署到生产服务器，则略过此步，开发时需要执行这一步**
 
     ```
     获取最新的proto文件，并编译
@@ -28,8 +34,7 @@
     ./compile-protobufs.sh
     ```
 
-
-5.  设置rabbitmq
+6.  设置rabbitmq
 
     ```
     如果有必要，就先设置local_settings.py
@@ -49,8 +54,7 @@
     ```
 
 
-
-6.  Admin
+7.  Admin
 
     ```
     python manage.py syncdb
@@ -60,7 +64,7 @@
     ```
 
 
-7.  启动worker
+8.  启动worker
 
     ```
     cd sanguo
@@ -73,7 +77,7 @@
     ```
 
 
-8.  编辑配置文件，并启动程序
+9.  编辑配置文件，并启动程序
 
     ```
     cd sanguo
@@ -84,7 +88,7 @@
     测试: start_test_server.sh
     ```
 
-9.  测试
+10.  测试
 
     ```
     现在的测试有点复杂。

@@ -17,6 +17,8 @@ from core.character import Char
 from core.signals import equip_changed_signal
 from core.formation import Formation
 
+from core import DLL
+
 from utils import pack_msg
 from utils import cache
 
@@ -190,21 +192,24 @@ class Equipment(MessageEquipmentMixin):
         if not self.equip.attack:
             return 0
 
-        return self.equip.attack + self.level * self.equip.growing
+        # return self.equip.attack + self.level * self.equip.growing
+        return DLL.equip_attack(self.equip.attack, self.level, self.equip.growing)
 
     @property
     def defense(self):
         if not self.equip.defense:
             return 0
 
-        return self.equip.defense + self.level * self.equip.growing
+        # return self.equip.defense + self.level * self.equip.growing
+        return DLL.equip_defense(self.equip.defense, self.level, self.equip.growing)
 
     @property
     def hp(self):
         if not self.equip.hp:
             return 0
 
-        return self.equip.hp + self.level * self.equip.growing
+        # return self.equip.hp + self.level * self.equip.growing
+        return DLL.equip_hp(self.equip.hp, self.level, self.equip.growing)
 
 
     @property
