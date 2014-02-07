@@ -26,7 +26,7 @@ def create_character(request):
         raise SanguoException(200, "Create Char: Account {0} already has a char in Server {1}".format(account_id, server_id))
 
     if Character.objects.filter(server_id=server_id, name=req.name).exists():
-        raise SanguoException(201, "Create Char: Duplicated name {0} in Server {1}".format(req.name, server_id))
+        raise SanguoException(201, "Create Char: Duplicated name in Server {0}".format(server_id))
 
     char = Char(
         account_id=account_id,

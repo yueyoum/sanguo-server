@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import random
 from django.db import models
 from django.db.models.signals import post_delete, post_save
 from utils import cache
@@ -45,6 +45,48 @@ class Hero(models.Model):
         if data:
             return data
         return _save_cache_hero()
+
+    @staticmethod
+    def get_by_quality(quality, amount=1):
+        assert quality in [1, 2, 3]
+
+        all_heros = Hero.all()
+        all_heros_items = all_heros.items()
+        res = {}
+        while True:
+            if len(res) >= amount:
+                break
+            this = random.choice(all_heros_items)
+            if this[0] in res:
+                continue
+            if this[1].quality != quality:
+                continue
+
+            res[this[0]] = this[1]
+
+        return res
+
+
+    @staticmethod
+    def get_by_quality_not_equal(quality, amount=1):
+        assert quality in [1, 2, 3]
+
+        all_heros_items = Hero.all().items()
+        res = {}
+        while True:
+            if len(res) >= amount:
+                break
+
+            this = random.choice(all_heros_items)
+            if this[0] in res:
+                continue
+            if this[1].quality == quality:
+                continue
+
+            res[this[0]] = this[1]
+
+        return res
+
 
     @staticmethod
     def update_cache():
