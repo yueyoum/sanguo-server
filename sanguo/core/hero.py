@@ -60,7 +60,7 @@ class Hero(FightPowerMixin):
         self.attack, self.defense, self.hp = \
             cal_hero_property(self.oid, self.level, self.step)
 
-        model_hero = ModelHero.all()[hid]
+        model_hero = ModelHero.all()[self.oid]
         self.crit = model_hero.crit
         self.dodge = model_hero.dodge
 

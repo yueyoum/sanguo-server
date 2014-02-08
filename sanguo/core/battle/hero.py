@@ -160,7 +160,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         for i in range(1, len(skill_probs)):
            skill_probs[i][0] += skill_probs[i-1][0]
 
-        prob = randint(1, skill_probs[-1][0])
+        prob = randint(1, 100)
         for _p, skill in skill_probs:
            if prob <= _p:
                return skill
@@ -221,7 +221,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         if self.using_crit >= randint(1, 100):
             msg_target.is_crit = True
 
-        text = "{0} => {1}, Eff: {2}, Crit: {3}".format(self.id, target.id, eff.id, msg_target.is_crit)
+        text = "{0} => {1}, Eff: {2}, Crit: {3}".format(self.id, target.id, eff.id if eff else 'None', msg_target.is_crit)
         logger.debug(text)
 
         if not eff or eff == 2:
@@ -239,7 +239,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         if eff:
             hero_noti.eff = eff.id
 
-        text = 'Value: {0}, Hp: {1}, Eff: {2}'.format(value, target.hp, eff.id)
+        text = 'Value: {0}, Hp: {1}, Eff: {2}'.format(value, target.hp, eff.id if eff else 'None')
         logger.debug(text)
 
 
