@@ -9,6 +9,7 @@ class Task(models.Model):
     id = models.IntegerField(primary_key=True)
     tp = models.IntegerField("类型")
     name = models.CharField("名字", max_length=32)
+    first = models.BooleanField("初始任务", default=False)
     times = models.IntegerField("次数")
     sycee = models.IntegerField("奖励元宝", null=True, blank=True)
     gold = models.IntegerField("奖励金币", null=True, blank=True)
@@ -26,6 +27,34 @@ class Task(models.Model):
         if data:
             return data
         return save_task_cache()
+
+    @staticmethod
+    def all_tp():
+        data = Task.all()
+        tps = []
+        for k, v in data.iteritems():
+            if v.tp not in tps:
+                tps.append(v.tp)
+        return tps
+
+    @staticmethod
+    def get_by_tp(tp, data=None):
+        if not data:
+            data = Task.all()
+        res = {}
+        for k, v in data.iteritems():
+            if v.tp == tp:
+                res[k] = v
+        return res
+
+    @staticmethod
+    def first_ids():
+        data = Task.all()
+        res = []
+        for k, v in data.iteritems():
+            if v.first:
+                res.append(k)
+        return res
 
 
 
