@@ -80,15 +80,17 @@ class Ground(object):
         ### LOG END
 
 
-        my_power = self.ground_power(self.my_heros)
-        rival_power = self.ground_power(self.rival_heros)
-
-        if my_power >= rival_power:
-            first_action_team = self.my_heros
-            second_action_team = self.rival_heros
-        else:
-            first_action_team = self.rival_heros
-            second_action_team = self.my_heros
+        # my_power = self.ground_power(self.my_heros)
+        # rival_power = self.ground_power(self.rival_heros)
+        #
+        # if my_power >= rival_power:
+        #     first_action_team = self.my_heros
+        #     second_action_team = self.rival_heros
+        # else:
+        #     first_action_team = self.rival_heros
+        #     second_action_team = self.my_heros
+        first_action_team = self.my_heros
+        second_action_team = self.rival_heros
 
         battle_field = BattleField(first_action_team, second_action_team, self.msg)
         for i in range(30):
