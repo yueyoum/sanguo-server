@@ -199,9 +199,9 @@ def char_initialize(account_id, server_id, name):
     f = Formation(char_id)
 
     hero_ids = [
-        hero_ids[0], 0, 0,
-        hero_ids[1], 0, 0,
-        hero_ids[2], 0, 0
+        hero_ids[0], hero_ids[1], hero_ids[2],
+        0, 0, 0,
+        0, 0, 0
     ]
     socket_ids = []
     for _id in hero_ids:
@@ -215,11 +215,11 @@ def char_initialize(account_id, server_id, name):
     #                        send_notify=False)
     #     socket_ids.append(_sid)
     #
-    # socket_ids = [
-    #     socket_ids[0], 0, 0,
-    #     socket_ids[1], 0, 0,
-    #     socket_ids[2], 0, 0,
-    # ]
+    socket_ids = [
+        socket_ids[0], socket_ids[3], socket_ids[6],
+        socket_ids[1], socket_ids[4], socket_ids[7],
+        socket_ids[2], socket_ids[5], socket_ids[8],
+    ]
 
     f.save_formation(socket_ids, send_notify=False)
     # 将关卡1设置为new 可进入
