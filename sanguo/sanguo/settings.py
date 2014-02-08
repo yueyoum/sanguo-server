@@ -149,6 +149,7 @@ INSTALLED_APPS = (
     'apps.hero',
     'apps.stage',
     'apps.skill',
+    'apps.task',
     'apps.account',
     'apps.character',
     'apps.item',
