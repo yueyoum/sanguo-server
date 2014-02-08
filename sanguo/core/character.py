@@ -196,20 +196,30 @@ def char_initialize(account_id, server_id, name):
 
 
     hero_ids = save_hero(char_id, init_hero_ids, add_notify=False)
-    socket_ids = []
     f = Formation(char_id)
 
-    for index, _id in enumerate(hero_ids):
-        h = Hero.cache_obj(_id)
-        _sid = f.save_socket(hero=_id,
-                           send_notify=False)
+    hero_ids = [
+        hero_ids[0], 0, 0,
+        hero_ids[1], 0, 0,
+        hero_ids[2], 0, 0
+    ]
+    socket_ids = []
+    for _id in hero_ids:
+        _sid = f.save_socket(hero=_id, send_notify=False)
         socket_ids.append(_sid)
 
-    socket_ids = [
-        socket_ids[0], 0, 0,
-        socket_ids[1], 0, 0,
-        socket_ids[2], 0, 0,
-    ]
+    #
+    # for index, _id in enumerate(hero_ids):
+    #     h = Hero.cache_obj(_id)
+    #     _sid = f.save_socket(hero=_id,
+    #                        send_notify=False)
+    #     socket_ids.append(_sid)
+    #
+    # socket_ids = [
+    #     socket_ids[0], 0, 0,
+    #     socket_ids[1], 0, 0,
+    #     socket_ids[2], 0, 0,
+    # ]
 
     f.save_formation(socket_ids, send_notify=False)
     # 将关卡1设置为new 可进入
