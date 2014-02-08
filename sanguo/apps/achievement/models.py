@@ -4,18 +4,6 @@ from django.db import models
 
 from utils import cache
 
-class AchievementCondition(models.Model):
-    id = models.IntegerField(primary_key=True)
-    name = models.CharField("名称", max_length=32)
-
-    def __unicode(self):
-        return u'<成就条件: %s>' % self.name
-
-    class Meta:
-        db_table = 'achievement_condition'
-        verbose_name = "成就条件"
-        verbose_name_plural = "成就条件"
-
 
 class Achievement(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -24,11 +12,12 @@ class Achievement(models.Model):
     name = models.CharField("成就名称", max_length=32)
     des = models.TextField("描述", blank=True)
 
-    condition = models.ForeignKey(AchievementCondition, verbose_name="条件")
+    condition_id = models.IntegerField("条件ID")
+    condition_name = models.CharField("条件名称", max_length=32)
     condition_value = models.CharField("条件值", max_length=255)
 
     sycee = models.IntegerField("奖励元宝", null=True, blank=True)
-    buff_tp = models.IntegerField("BUFF_ID", null=True, blank=True)
+    buff_id = models.IntegerField("BUFF_ID", null=True, blank=True)
     buff_name = models.CharField("BUFF名称", max_length=32, blank=True)
     buff_value = models.IntegerField("BUFF值", null=True, blank=True)
 
