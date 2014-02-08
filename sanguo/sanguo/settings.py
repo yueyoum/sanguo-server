@@ -150,6 +150,7 @@ INSTALLED_APPS = (
     'apps.stage',
     'apps.skill',
     'apps.task',
+    'apps.achievement',
     'apps.account',
     'apps.character',
     'apps.item',
