@@ -19,6 +19,7 @@ from core.stage import Stage
 from core.formation import Formation
 from core.item import Item
 from core.heropanel import HeroPanel
+from core.task import Task
 
 from apps.character.models import Character
 
@@ -220,5 +221,6 @@ def login_notify(char_id):
     stage.send_new_stage_notify()
 
     HeroPanel(char_id).send_notify()
+    Task(char_id).send_notify()
     
 

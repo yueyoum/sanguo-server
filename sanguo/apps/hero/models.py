@@ -11,10 +11,10 @@ class Hero(models.Model):
     image = models.CharField("卡牌", max_length=32)
 
     tp = models.IntegerField("类型")
-    tp_name = models.CharField("类型名字", max_length=4)
+    tp_name = models.CharField("类型名字", max_length=32)
 
     country = models.IntegerField("国家")
-    country_name = models.CharField("国家名字", max_length=4)
+    country_name = models.CharField("国家名字", max_length=32)
 
     gender = models.IntegerField("性别")
     gender_name = models.CharField("性别名字", max_length=4)

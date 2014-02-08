@@ -4,6 +4,7 @@ from cmd_pb2 import *
 from world_pb2 import *
 from mail_pb2 import *
 from daily_pb2 import *
+from task_pb2 import *
 from character_pb2 import *
 from item_pb2 import *
 from formation_pb2 import *
@@ -91,6 +92,8 @@ RESPONSE_NOTIFY_TYPE = {
     "CheckInNotify": 3000,
     "CheckInResponse": 3002,
     "GetCheckInRewardResponse": 3004,
+    "TaskNotify": 3100,
+    "TaskGetRewardResponse": 3102,
 }
 
 REQUEST_TYPE = {
@@ -133,6 +136,7 @@ REQUEST_TYPE = {
     2105: "GetAttachmentRequest",
     3001: "CheckInRequest",
     3003: "GetCheckInRewardRequest",
+    3101: "TaskGetRewardRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -175,5 +179,6 @@ REQUEST_TYPE_REV = {
     "GetAttachmentRequest": 2105,
     "CheckInRequest": 3001,
     "GetCheckInRewardRequest": 3003,
+    "TaskGetRewardRequest": 3101,
 }
 

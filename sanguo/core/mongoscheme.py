@@ -171,3 +171,20 @@ class MongoCheckIn(Document):
     meta = {
         'collection': 'checkin'
     }
+
+
+class MongoTask(Document):
+    id = IntField(primary_key=True)
+    # key 为任务类型ID， value为此类型次数
+    tasks = DictField()
+    # 已领取奖励的任务ID列表（彻底完成）
+    complete = ListField()
+    # 已经完成但还没领取奖励的ID列表
+    finished = ListField()
+    # 当前进行的任务ID列表 （包括没完成的，完成的但还没领奖的，每种任务类型的最后一档任务）
+    doing = ListField()
+
+    meta = {
+        'collection': 'task'
+    }
+

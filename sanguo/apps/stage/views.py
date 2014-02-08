@@ -9,6 +9,7 @@ from core.exception import SanguoException, InvalidOperate
 from core.mongoscheme import MongoHang
 from core.signals import (hang_add_signal, hang_cancel_signal )
 from core.stage import Stage
+from core.task import Task
 from worker import tasks
 from utils import pack_msg, timezone
 from utils.decorate import message_response
@@ -23,6 +24,8 @@ def pve(request):
     battle_msg = stage.battle(req.stage_id)
     if battle_msg.self_win:
         drop_exp, drop_gold, drop_stuffs = stage.save_drop(req.stage_id)
+        t = Task(request._char_id)
+        t.trig(1)
     else:
         drop_exp, drop_gold, drop_stuffs = 0, 0, []
 
