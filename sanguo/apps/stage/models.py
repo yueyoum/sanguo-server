@@ -72,7 +72,6 @@ class Stage(models.Model):
     star_gold = models.IntegerField("三星金币")
     star_drop = models.CharField("三星掉落", max_length=255)
 
-    times_limit = models.IntegerField()
 
     def __unicode__(self):
         return u'<Stage: %s>' % self.name
@@ -158,4 +157,86 @@ post_delete.connect(
     sender=StageDrop,
     dispatch_uid='apps.stage.StageDrop.post_delete'
 )
+
+
+
+
+class EliteStage(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField("名字", max_length=32)
+    des = models.TextField("描述", blank=True)
+    bg = models.CharField("背景图片", max_length=32, blank=True)
+    level = models.IntegerField("关卡等级")
+
+    times = models.IntegerField("次数限制")
+
+    open_condition = models.IntegerField("前置关卡ID", null=True, blank=True,
+                                         help_text="不填写表示没有前置关卡ID"
+                                         )
+    monsters = models.TextField("怪物ID")
+
+    normal_exp = models.IntegerField("普通经验", default=0)
+    normal_gold = models.IntegerField("普通金币", default=0)
+    normal_drop = models.CharField("普通掉落", max_length=255)
+
+    first_exp = models.IntegerField("首通经验", default=0)
+    first_gold = models.IntegerField("首通金币", default=0)
+    first_drop = models.CharField("首通掉落", max_length=255)
+
+    star_exp = models.IntegerField("三星经验", default=0)
+    star_gold = models.IntegerField("三星金币", default=0)
+    star_drop = models.CharField("三星掉落", max_length=255)
+
+
+    def __unicode__(self):
+        return u'<EliteStage: %s>' % self.name
+
+    @staticmethod
+    def all():
+        data = cache.get('elitestage', hours=None)
+        if data:
+            return data
+        return _save_elitestage_cache()
+
+    @property
+    def decoded_monsters(self):
+        return [int(i) for i in self.monsters.split(',')]
+
+
+    class Meta:
+        db_table = 'elitestage'
+        ordering = ('id',)
+        verbose_name = "精英关卡"
+        verbose_name_plural = "精英关卡"
+
+
+
+def _save_elitestage_cache(*args, **kwargs):
+    stages = EliteStage.objects.all()
+    data = {s.id: s for s in stages}
+    for _id, s in data.items():
+        open_condition = s.open_condition
+        if not open_condition:
+            continue
+
+        data[open_condition].next = _id
+
+    cache.set('elitestage', data, hours=None)
+    return data
+
+
+post_save.connect(
+    _save_elitestage_cache,
+    sender=EliteStage,
+    dispatch_uid='apps.stage.EliteStage.post_save'
+)
+
+post_delete.connect(
+    _save_elitestage_cache,
+    sender=EliteStage,
+    dispatch_uid='apps.stage.EliteStage.post_delete'
+)
+
+
+
 
