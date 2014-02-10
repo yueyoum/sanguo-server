@@ -53,10 +53,7 @@ class Stage(models.Model):
     bg = models.CharField("背景图片", max_length=32, blank=True)
     level = models.IntegerField("关卡等级")
 
-    battle = models.ForeignKey(Battle, verbose_name="所属战役", null=True, blank=True)
-    times_limit = models.IntegerField("每日次数", null=True, blank=True,
-                                      help_text="不填写表示无限制， 0 表示不能打， 其他大于0的数字表示确切的次数"
-                                      )
+    battle = models.ForeignKey(Battle, verbose_name="所属战役")
 
     open_condition = models.IntegerField("前置关卡ID", null=True, blank=True,
                                          help_text="不填写表示没有前置关卡ID"
@@ -121,5 +118,42 @@ post_delete.connect(
     _save_stage_cache,
     sender=Stage,
     dispatch_uid='apps.stage.Stage.post_delete'
+)
+
+
+class StageDrop(models.Model):
+    id = models.IntegerField(primary_key=True)
+    drops = models.CharField("物品掉落", max_length=255, help_text="id:prob,id:prob")
+
+    class Meta:
+        db_table = 'stagedrop'
+        ordering = ('id',)
+        verbose_name = "关卡物品掉落"
+        verbose_name_plural = "关卡物品掉落"
+
+    @staticmethod
+    def all():
+        data = cache.get('stagedrop', hours=None)
+        if data:
+            return data
+        return _save_stagedrop_cache()
+
+
+def _save_stagedrop_cache(*args, **kwargs):
+    drops = StageDrop.objects.all()
+    data = {d.id: d for d in drops}
+    cache.set('stagedrop', data, hours=None)
+    return data
+
+post_save.connect(
+    _save_stagedrop_cache,
+    sender=StageDrop,
+    dispatch_uid='apps.stage.StageDrop.post_save'
+)
+
+post_delete.connect(
+    _save_stagedrop_cache,
+    sender=StageDrop,
+    dispatch_uid='apps.stage.StageDrop.post_delete'
 )
 
