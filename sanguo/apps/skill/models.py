@@ -63,7 +63,9 @@ class Skill(models.Model):
 class SkillEffect(models.Model):
     TARGET = (
         (1, '敌单体'), (2, '自身'),
-        (3, '敌全体'), (4, '已全体')
+        (3, '敌全体'), (4, '已全体'),
+        (5, '随机敌方一个'), (6, '随机敌方两个'),
+        (7, '随机己方一个'), (8, '随机己方两个'),
     )
 
     skill = models.ForeignKey(Skill)
