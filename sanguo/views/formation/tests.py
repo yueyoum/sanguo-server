@@ -99,11 +99,10 @@ class FormationTest(TransactionTestCase):
         # f.save_formation([sid1, 0, 0, sid2, 0, 0, sid3, 0, 0])
         #
 
-        self._set_formation([3, 0, 0, 2, 0, 0, 1, 0, 0])
+        self._set_formation([3, 4, 5, 2, 6, 7, 1, 8, 9])
 
     def test_error_set(self):
-        self._set_formation([1, 0, 0, 3, 0, 0, 0, 0, 99], 2)
-        self._set_formation([1, 0, 0, 3, 0, 0, 2, 0], 2)
-        self._set_formation([1, 0, 3, 0, 0, 0, 2, 0, 0], 403)
-
+        self._set_formation([1, 4, 5, 3, 6, 7, 8, 9, 99], 2)
+        self._set_formation([1, 4, 5, 3, 6, 7, 2, 9], 2)
+        self._set_formation([1, 4, 3, 5, 6, 7, 2, 8, 9], 403)
 

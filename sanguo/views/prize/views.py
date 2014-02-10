@@ -1,9 +1,5 @@
-from core.mongoscheme import MongoHang
-
 from core.exception import SanguoException
-from core.notify import hang_notify
-
-from mongoengine import DoesNotExist
+from core.stage import Hang
 
 import protomsg
 
@@ -20,28 +16,22 @@ def prize_get(request):
     # XXX only support 1 now
     prize_id = 1
 
-    try:
-        hang = MongoHang.objects.get(id=char_id)
-    except DoesNotExist:
-        hang = None
-
-    if hang is None or not hang.finished:
+    hang = Hang(char_id)
+    if not hang.hang:
         raise SanguoException(703)
 
-    # FIXME
-    # exp, gold, equips, gems = get_stage_hang_drop(hang.stage_id, hang.actual_hours)
-    # save_drop(char_id, exp, gold, equips, gems)
-
-    hang.delete()
-
-    hang_notify(char_id)
+    exp, gold, stuffs = hang.save_drop()
+    hang.hang.delete()
+    hang.send_notify()
 
     response = protomsg.PrizeResponse()
     response.ret = 0
     response.prize_id = 1
-    response.drop.gold = 0
-    response.drop.exp = 0
-    # response.drop.equips.extend([i for i, _, _ in equips])
-    # response.drop.gems.extend([i for i, _ in gems])
+    response.drop.gold = gold
+    response.drop.exp = exp
+    for _id, amount in stuffs:
+        s = response.drop.stuffs.add()
+        s.id = _id
+        s.amount = amount
 
     return pack_msg(response)

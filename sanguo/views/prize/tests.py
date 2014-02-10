@@ -1,7 +1,6 @@
 from django.test import TransactionTestCase
 import protomsg
 
-from protomsg import RESPONSE_NOTIFY_TYPE
 from core.character import char_initialize
 from utils import crypto
 from utils import app_test_helper as tests
@@ -39,7 +38,6 @@ class PrizeTest(TransactionTestCase):
         h = MongoHang(
             id=self.char_id,
             stage_id=1,
-            hours=8,
             start=100,
             finished=True,
             actual_hours=8

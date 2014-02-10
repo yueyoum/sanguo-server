@@ -88,8 +88,6 @@ MongoHero.ensure_indexes()
 class MongoHang(Document):
     id = IntField(primary_key=True)
     stage_id = IntField()
-    # 选择的总时间
-    hours = IntField()
     # 开始的UTC 时间戳
     start = IntField()
     # 是否完成
@@ -100,11 +98,10 @@ class MongoHang(Document):
 
     meta = {
         'collection': 'hang',
-        'indexes': ['stage_id', ]
     }
 
 
-MongoHang.ensure_indexes()
+# MongoHang.ensure_indexes()
 
 
 class MongoEmbededPrisoner(EmbeddedDocument):

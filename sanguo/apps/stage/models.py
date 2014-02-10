@@ -72,6 +72,8 @@ class Stage(models.Model):
     star_gold = models.IntegerField("三星金币")
     star_drop = models.CharField("三星掉落", max_length=255)
 
+    times_limit = models.IntegerField()
+
     def __unicode__(self):
         return u'<Stage: %s>' % self.name
 

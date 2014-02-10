@@ -1,5 +1,5 @@
 from utils import pack_msg
-from core.mongoscheme import MongoHang, DoesNotExist, MongoPrison
+from core.mongoscheme import MongoPrison
 import protomsg
 
 from core.character import Char
@@ -14,12 +14,11 @@ from core.friend import Friend
 from core.mail import Mail
 from core.daily import CheckIn
 
-from core.stage import Stage
+from core.stage import Stage, Hang
 
 from core.formation import Formation
 from core.item import Item
 from core.heropanel import HeroPanel
-from core.task import Task
 
 from apps.character.models import Character
 
@@ -58,20 +57,6 @@ def update_hero_notify(char_id, objs):
     hero_notify(char_id, objs, "UpdateHeroNotify")
 
 
-
-
-def hang_notify(char_id, hang=None):
-    counter = Counter(char_id, 'hang')
-    if not hang:
-        try:
-            hang = MongoHang.objects.get(id=char_id)
-        except DoesNotExist:
-            hang = None
-
-    hang_notify_with_data(char_id, counter.cur_value, counter.max_value, hang)
-    return hang
-
-
 def hang_notify_with_data(char_id, hours, max_hours, hang):
     msg = protomsg.HangNotify()
     # FIXME
@@ -84,17 +69,6 @@ def hang_notify_with_data(char_id, hours, max_hours, hang):
         # FIXME
         msg.hang.finished = hang.finished
 
-    publish_to_char(char_id, pack_msg(msg))
-
-
-def prize_notify(char_id, prize_id):
-    if isinstance(prize_id, (list, tuple)):
-        ids = prize_id
-    else:
-        ids = [prize_id]
-
-    msg = protomsg.PrizeNotify()
-    msg.prize_ids.extend(ids)
     publish_to_char(char_id, pack_msg(msg))
 
 
@@ -196,9 +170,9 @@ def login_notify(char_id):
     f.send_socket_notify()
     f.send_formation_notify()
 
-    hang = hang_notify(char_id)
-    if hang and hang.finished:
-        prize_notify(char_id, 1)
+    hang = Hang(char_id)
+    hang.send_notify()
+
 
     plunder_notify(char_id)
     prisoner_notify(char_id)
@@ -221,6 +195,6 @@ def login_notify(char_id):
     stage.send_new_stage_notify()
 
     HeroPanel(char_id).send_notify()
-    Task(char_id).send_notify()
+    # Task(char_id).send_notify()
     
 

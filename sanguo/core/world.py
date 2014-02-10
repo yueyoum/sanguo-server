@@ -5,6 +5,7 @@ from apps.server.models import Server
 
 from core.character import  Char
 from core.item import Item
+from core.hero import save_hero
 
 
 def server_list(user=None):
@@ -38,9 +39,12 @@ class Attachment(object):
     def __init__(self, char_id):
         self.char_id = char_id
 
-    def save_raw_attachment(self, gold=0, sycee=0, exp=0, official_exp=0, renown=0, equipments=None, gems=None, stuffs=None):
+    def save_raw_attachment(self, gold=0, sycee=0, exp=0, official_exp=0, renown=0, heros=None, equipments=None, gems=None, stuffs=None):
         char = Char(self.char_id)
         char.update(gold=gold, sycee=sycee, exp=exp, honor=renown)
+
+        if heros:
+            save_hero(self.char_id, heros)
 
         item = Item(self.char_id)
         if equipments:

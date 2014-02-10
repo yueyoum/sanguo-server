@@ -34,6 +34,7 @@ else:
                            url(r'', include('apps.item.urls')),
                            url(r'', include('apps.server.urls')),
                            url(r'', include('apps.stage.urls')),
+                           url(r'', include('apps.task.urls')),
                            url(r'', include('views.urls')),
     )
 

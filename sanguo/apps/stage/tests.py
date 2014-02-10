@@ -50,7 +50,6 @@ class HangTest(TransactionTestCase):
         req = protomsg.HangRequest()
         req.session = self.session
         req.stage_id = 1
-        req.hours = 8
 
         data = tests.pack_data(req)
         res = tests.make_request('/hang/', data)

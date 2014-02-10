@@ -21,6 +21,8 @@ def run():
     call_command('loaddata', 'skill.json')
     call_command('loaddata', 'skill_effect.json')
 
+    call_command('loaddata', 'task.json')
+
 if __name__ == '__main__':
     import os
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sanguo.settings')
