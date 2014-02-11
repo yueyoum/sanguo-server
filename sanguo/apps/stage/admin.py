@@ -57,11 +57,9 @@ class StageDropAdmin(ImportExportModelAdmin):
 
 class EliteStageAdmin(ImportExportModelAdmin):
     list_display = (
-        'id', 'name', 'des', 'bg', 'level', 'times',
+        'id', 'name', 'bg', 'level', 'times',
         'open_condition', 'Monsters',
         'normal_exp', 'normal_gold', 'normal_drop',
-        'first_exp', 'first_gold', 'first_drop',
-        'star_exp', 'star_gold', 'star_drop',
     )
 
     resource_class = EliteStageResources
@@ -75,8 +73,6 @@ class EliteStageAdmin(ImportExportModelAdmin):
         return "<br />".join(text)
     Monsters.allow_tags = True
     Monsters.short_description = "怪物ID"
-
-
 
 
 

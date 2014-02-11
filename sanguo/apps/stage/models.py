@@ -164,9 +164,8 @@ post_delete.connect(
 class EliteStage(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField("名字", max_length=32)
-    des = models.TextField("描述", blank=True)
     bg = models.CharField("背景图片", max_length=32, blank=True)
-    level = models.IntegerField("关卡等级")
+    level = models.IntegerField("关卡等级", default=1)
 
     times = models.IntegerField("次数限制")
 
@@ -175,17 +174,9 @@ class EliteStage(models.Model):
                                          )
     monsters = models.TextField("怪物ID")
 
-    normal_exp = models.IntegerField("普通经验", default=0)
-    normal_gold = models.IntegerField("普通金币", default=0)
-    normal_drop = models.CharField("普通掉落", max_length=255)
-
-    first_exp = models.IntegerField("首通经验", default=0)
-    first_gold = models.IntegerField("首通金币", default=0)
-    first_drop = models.CharField("首通掉落", max_length=255)
-
-    star_exp = models.IntegerField("三星经验", default=0)
-    star_gold = models.IntegerField("三星金币", default=0)
-    star_drop = models.CharField("三星掉落", max_length=255)
+    normal_exp = models.IntegerField("经验", default=0)
+    normal_gold = models.IntegerField("金币", default=0)
+    normal_drop = models.CharField("掉落", max_length=255)
 
 
     def __unicode__(self):
@@ -204,7 +195,7 @@ class EliteStage(models.Model):
 
 
     class Meta:
-        db_table = 'elitestage'
+        db_table = 'stage_elite'
         ordering = ('id',)
         verbose_name = "精英关卡"
         verbose_name_plural = "精英关卡"
