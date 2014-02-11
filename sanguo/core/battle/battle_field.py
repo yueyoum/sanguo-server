@@ -83,16 +83,16 @@ class BattleField(ActiveEffectMixin):
         heap_effect = HeapEffects()
 
         def _active_all(team_one, team_two):
-            for h in team_one:
-                if h is None:
+            for me in team_one:
+                if me is None:
                     continue
 
-                for sk in h.passive_skills:
+                for sk in me.passive_skills:
                     for eff in sk.effects:
                         if eff.target == 1:
                             raise Exception("UnSupported Passive Skill Effect, Target: 1")
                         if eff.target == 2:
-                            heap_effect.add(h, eff)
+                            heap_effect.add(me, eff)
                         elif eff.target == 3:
                             for h in team_two:
                                 if h:
