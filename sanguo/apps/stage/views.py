@@ -13,6 +13,16 @@ def pve(request):
     req = request._proto
     stage = Stage(request._char_id)
     battle_msg = stage.battle(req.stage_id)
+
+    # DEBUG START
+    # XXX
+    import os
+    from django.conf import settings
+    xx = os.path.join(settings.TMP_PATH, 'battle.txt')
+    with open(xx, 'w') as f:
+        f.write(battle_msg.__str__())
+    # DEBUG END
+
     if battle_msg.self_win:
         drop_exp, drop_gold, drop_stuffs = stage.save_drop(req.stage_id, first=stage.first, star=stage.star)
         t = Task(request._char_id)
