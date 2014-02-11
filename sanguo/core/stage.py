@@ -16,8 +16,9 @@ import protomsg
 from core.exception import InvalidOperate, SanguoException
 from core.battle import PVE
 
-from core.mongoscheme import MongoHang
+from core.mongoscheme import MongoHang, MongoEmbededPlunderLog
 from core.counter import Counter
+from core.character import Char
 
 from worker import tasks
 from utils.math import GAUSSIAN_TABLE
@@ -181,21 +182,27 @@ class Hang(object):
             raise SanguoException(700, "Hang Start: Char {0} Try to a Multi hang".format(self.char_id))
 
         counter = Counter(self.char_id, 'hang')
+        remained_seconds = counter.remained_value
 
-        remained_hours = counter.remained_value
+        if remained_seconds <= 0:
+            raise InvalidOperate("Hang Start: Char {0} try to hang, But NO times available".format(self.char_id))
 
-        if remained_hours <= 0:
-            raise InvalidOperate("Hang Start: Char {0} try to hang, But NO hours available".format(self.char_id))
+        job = tasks.hang_finish.apply_async((self.char_id, remained_seconds), countdown=remained_seconds)
 
-        job = tasks.hang_finish.apply_async((self.char_id, remained_hours), countdown=remained_hours*3600)
+        char = Char(self.char_id)
+        char_level = char.cacheobj.level
 
         hang = MongoHang(
             id=self.char_id,
+            char_level=char_level,
             stage_id=stage_id,
             start=timezone.utc_timestamp(),
             finished=False,
             jobid=job.id,
             actual_hours=0,
+            logs=[],
+            plunder_gold=0,
+            plunder_time=0,
         )
         hang.save()
         self.hang = hang
@@ -213,31 +220,57 @@ class Hang(object):
         self.finish()
 
 
-    def finish(self, actual_hours=None):
+    def finish(self, actual_seconds=None):
         if not self.hang:
             raise InvalidOperate("Hang Finish: Char {0}, NO hang to finish".format(self.char_id))
 
-        if not actual_hours:
-            actual_hours = (timezone.utc_timestamp() - self.hang.start) / 3600
+        if not actual_seconds:
+            actual_seconds = timezone.utc_timestamp() - self.hang.start
 
         self.hang.finished = True
-        self.hang.actual_hours = actual_hours
+        self.hang.actual_seconds = actual_seconds
         self.hang.save()
 
         counter = Counter(self.char_id, 'hang')
-        counter.incr(actual_hours)
+        counter.incr(actual_seconds)
 
         self.send_notify()
         self.send_prize_notify()
 
 
+    def plundered(self, who, win):
+        if not self.hang:
+            return
+        now = timezone.utc_timestamp()
+        if now - self.hang.plunder_time < 15:
+            return
+
+        stage = ModelStage.all()[self.hang.stage_id]
+        gold = stage.normal_gold
+        if not win:
+            gold = -gold
+
+        self.hang.plunder_time = now
+        self.hang.plunder_gold += gold
+
+        l = MongoEmbededPlunderLog()
+        l.name = who
+        l.gold = gold
+
+        if len(self.hang.logs) >= 20:
+            self.hang.logs.pop(0)
+
+        self.hang.append(l)
+        self.hang.save()
+
+
 
     def get_drop(self):
         stage_id = self.hang.stage_id
-        times = self.hang.actual_hours * 3600 / 15
+        times = self.hang.actual_seconds / 15
 
         stage = ModelStage.all()[stage_id]
-        drop_exp = stage.normal_exp * times
+        drop_exp = stage.normal_exp * times + self.hang.plunder_gold
         drop_gold = stage.normal_gold * times
 
         all_drops = StageDrop.all()
@@ -274,12 +307,21 @@ class Hang(object):
     def send_notify(self):
         msg = protomsg.HangNotify()
         counter = Counter(self.char_id, 'hang')
-        msg.max_hours = counter.max_value
-        msg.hours = counter.remained_value
+        msg.remained_time = counter.remained_value
         if self.hang:
             msg.hang.stage_id = self.hang.stage_id
             msg.hang.start_time = self.hang.start
             msg.hang.finished = self.hang.finished
+
+            times = (timezone.utc_timestamp() - self.hang.start) / 15
+            stage = ModelStage.all()[self.hang.stage_id]
+            msg.hang.rewared_gold = stage.normal_gold * times + self.hang.plunder_gold
+
+            for l in self.hang.logs:
+                msg_log = msg.logs.add()
+                msg_log.attacker = l.name
+                msg_log.win = l.gold > 0
+                msg_log.gold = abs(l.gold)
 
         publish_to_char(self.char_id, pack_msg(msg))
 

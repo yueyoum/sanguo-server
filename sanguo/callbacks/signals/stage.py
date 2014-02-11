@@ -10,9 +10,9 @@ from core.notify import (
 from core.stage import Hang
 
 
-def hang_finish(char_id, actual_hours, **kwargs):
+def hang_finish(char_id, actual_seconds, **kwargs):
     hang = Hang(char_id)
-    hang.finish(actual_hours=actual_hours)
+    hang.finish(actual_seconds=actual_seconds)
 
 hang_finished_signal.connect(
     hang_finish,

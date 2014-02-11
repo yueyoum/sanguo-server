@@ -25,7 +25,7 @@ CHAR_INITIALIZE = {
 # 次数限制，每天可以做多少次
 # 每天可以做多少次
 COUNTER = {
-    'hang': 8, # 挂机时间
+    'hang': 8 * 3600, # 挂机时间
     'arena': 8, # 比武次数
     'plunder': 8,        # 掠夺次数
     'gethero': 1,        # 免费抽将次数

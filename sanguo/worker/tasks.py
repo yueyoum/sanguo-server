@@ -27,11 +27,11 @@ def send_mail(mail_id, send_type, send_to):
     pass
 
 @app.task
-def hang_finish(char_id, hours):
+def hang_finish(char_id, seconds):
     hang_finished_signal.send(
         sender=None,
         char_id=char_id,
-        hours=hours
+        actual_seconds=seconds
     )
 
 @app.task

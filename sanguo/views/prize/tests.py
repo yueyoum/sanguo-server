@@ -40,7 +40,8 @@ class PrizeTest(TransactionTestCase):
             stage_id=1,
             start=100,
             finished=True,
-            actual_hours=8
+            actual_seconds=800,
+            plunder_gold=0,
         )
 
         h.save()

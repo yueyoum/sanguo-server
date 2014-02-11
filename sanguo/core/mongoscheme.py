@@ -85,23 +85,37 @@ class MongoHero(Document):
 MongoHero.ensure_indexes()
 
 
+class MongoEmbededPlunderLog(EmbeddedDocument):
+    name = StringField()
+    gold = IntField()
+
+
 class MongoHang(Document):
     id = IntField(primary_key=True)
+    char_level = IntField()
     stage_id = IntField()
     # 开始的UTC 时间戳
     start = IntField()
     # 是否完成
     finished = BooleanField()
     # 实际挂的时间
-    actual_hours = IntField()
+    actual_seconds = IntField()
     jobid = StringField()
+
+    # 被掠夺日志
+    logs = ListField(EmbeddedDocumentField(MongoEmbededPlunderLog))
+    # 被掠夺获得/损失金币
+    plunder_gold = IntField()
+    # 上次被掠夺的时间戳
+    plunder_time = IntField()
 
     meta = {
         'collection': 'hang',
+        'indexes': ['char_level',]
     }
 
 
-# MongoHang.ensure_indexes()
+MongoHang.ensure_indexes()
 
 
 class MongoEmbededPrisoner(EmbeddedDocument):

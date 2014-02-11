@@ -14,7 +14,7 @@ class Character(models.Model):
     gold = models.PositiveIntegerField("金币", default=0)
     sycee = models.PositiveIntegerField("元宝", default=0)
 
-    level = models.PositiveIntegerField("等级", default=1)
+    level = models.PositiveIntegerField("等级", default=1, db_index=True)
     exp = models.PositiveIntegerField("等级经验", default=0)
 
     official = models.PositiveIntegerField("官职", default=1)
