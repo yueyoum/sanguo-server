@@ -22,6 +22,7 @@ def prize_get(request):
 
     exp, gold, stuffs = hang.save_drop()
     hang.hang.delete()
+    hang.hang = None
     hang.send_notify()
 
     response = protomsg.PrizeResponse()
