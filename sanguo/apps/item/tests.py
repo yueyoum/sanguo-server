@@ -134,8 +134,8 @@ class EquipmentStepUpTest(TransactionTestCase):
     def test_none_exist(self):
         self._step_up(999, 2)
 
-    def test_error_step_up(self):
-        self._step_up(self.equip_id, 16)
+    # def test_error_step_up(self):
+    #     self._step_up(self.equip_id, 16)
 
     def test_normal_step_up(self):
         item = Item(self.char_id)

@@ -379,7 +379,7 @@ class Item(MessageEquipmentMixin):
         self.item.save()
 
 
-    def gem_add(self, add_gems):
+    def gem_add(self, add_gems, send_notify=True):
         """
 
         @param add_gems: [(id, amount), (id, amount)]
@@ -413,6 +413,8 @@ class Item(MessageEquipmentMixin):
         self.item.gems = gems
         self.item.save()
 
+        if not send_notify:
+            return
         if new_gems:
             msg = protomsg.AddGemNotify()
             for k, v in new_gems:
@@ -482,7 +484,7 @@ class Item(MessageEquipmentMixin):
         self.gem_remove(_id, 4)
 
 
-    def stuff_add(self, add_stuffs):
+    def stuff_add(self, add_stuffs, send_notify=True):
         """
 
         @param add_stuffs: [(id, amount), (id, amount)]
@@ -514,6 +516,8 @@ class Item(MessageEquipmentMixin):
         self.item.stuffs = stuffs
         self.item.save()
 
+        if not send_notify:
+            return
         if new_stuffs:
             msg = protomsg.AddStuffNotify()
             for k, v in new_stuffs:

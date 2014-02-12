@@ -5,6 +5,7 @@ __date__ = '1/17/14'
 
 def run():
     from django.core.management import call_command
+    call_command('loaddata', 'charinit.json')
     call_command('loaddata', 'servers.json')
 
     call_command('loaddata', 'heros.json')

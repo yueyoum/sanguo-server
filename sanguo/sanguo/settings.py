@@ -155,6 +155,7 @@ INSTALLED_APPS = (
     'apps.character',
     'apps.item',
     'apps.mail',
+    'apps.config',
 )
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

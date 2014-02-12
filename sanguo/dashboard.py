@@ -35,7 +35,8 @@ class CustomIndexDashboard(Dashboard):
             column=1,
             collapsible=True,
             models=('apps.server.*',
-                'apps.mail.*',
+                    'apps.config.*',
+                    'apps.mail.*',
                 ),
             ))
 

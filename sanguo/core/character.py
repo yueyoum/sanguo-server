@@ -2,10 +2,11 @@
 from mongoengine import DoesNotExist
 
 from apps.character.models import Character
+from apps.config.models import CharInit
 from core.counter import Counter
 from core.hero import save_hero, delete_hero, Hero
 from core.mongoscheme import MongoHang, MongoHero, MongoPrison
-from preset.settings import COUNTER, CHAR_INITIALIZE
+from preset.settings import COUNTER
 from core.signals import char_updated_signal
 
 from core.formation import Formation
@@ -169,20 +170,19 @@ class Char(object):
 
 def char_initialize(account_id, server_id, name):
     from core.prison import Prison
+    from core.item import Item
 
-    init_gold = CHAR_INITIALIZE.get('gold', 0)
-    init_sycee = CHAR_INITIALIZE.get('sycee', 0)
-    init_level = CHAR_INITIALIZE.get('level', 1)
-    init_official = CHAR_INITIALIZE.get('official', 1)
+
+    init = CharInit.cache_obj()
 
     char = Character.objects.create(
         account_id=account_id,
         server_id=server_id,
         name=name,
-        gold=init_gold,
-        sycee=init_sycee,
-        level=init_level,
-        official=init_official,
+        gold=init.gold,
+        sycee=init.sycee,
+        level=1,
+        official=1,
     )
     char_id = char.id
 
@@ -191,11 +191,33 @@ def char_initialize(account_id, server_id, name):
     for func_name in COUNTER_KEYS:
         Counter(char_id, func_name)
 
-    init_hero_ids = CHAR_INITIALIZE.get('heros', [])
+    init_heros = init.decoded_heros
+    init_heros_ids = init_heros.keys()
+
+    item = Item(char_id)
+    for k, v in init_heros.iteritems():
+        weapon, armor, jewelry = v
+        new_ids = []
+        if not weapon:
+            new_ids.append(0)
+        else:
+            new_ids.append(item.equip_add(weapon, notify=False))
+        if not armor:
+            new_ids.append(0)
+        else:
+            new_ids.append(item.equip_add(armor, notify=False))
+        if not jewelry:
+            new_ids.append(0)
+        else:
+            new_ids.append(item.equip_add(jewelry, notify=False))
+
+        init_heros[k] = new_ids
+
+    init_heros_equips = init_heros.values()
 
 
+    hero_ids = save_hero(char_id, init_heros_ids, add_notify=False)
 
-    hero_ids = save_hero(char_id, init_hero_ids, add_notify=False)
     f = Formation(char_id)
 
     hero_ids = [
@@ -204,17 +226,14 @@ def char_initialize(account_id, server_id, name):
         0, 0, 0
     ]
     socket_ids = []
-    for _id in hero_ids:
-        _sid = f.save_socket(hero=_id, send_notify=False)
+    for index, _id in enumerate(hero_ids):
+        try:
+            weapon, armor, jewelry = init_heros_equips[index]
+        except IndexError:
+            weapon, armor, jewelry = 0, 0, 0
+        _sid = f.save_socket(hero=_id, weapon=weapon, armor=armor, jewelry=jewelry, send_notify=False)
         socket_ids.append(_sid)
 
-    #
-    # for index, _id in enumerate(hero_ids):
-    #     h = Hero.cache_obj(_id)
-    #     _sid = f.save_socket(hero=_id,
-    #                        send_notify=False)
-    #     socket_ids.append(_sid)
-    #
     socket_ids = [
         socket_ids[0], socket_ids[3], socket_ids[6],
         socket_ids[1], socket_ids[4], socket_ids[7],
@@ -222,6 +241,8 @@ def char_initialize(account_id, server_id, name):
     ]
 
     f.save_formation(socket_ids, send_notify=False)
-    # 将关卡1设置为new 可进入
+
+    item.gem_add(init.decoded_gems, send_notify=False)
+    item.stuff_add(init.decoded_stuffs, send_notify=False)
 
     return char
