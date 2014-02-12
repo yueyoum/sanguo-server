@@ -16,12 +16,13 @@ from protomsg import FRIEND_NOT
 @message_response("PlayerListResponse")
 def player_list(request):
     char_id = request._char_id
+    server_id = request._server_id
     char = Char(char_id)
     level = char.cacheobj.level
     # FIXME
 
     f = Friend(char_id)
-    chars = Character.objects.all()
+    chars = Character.objects.filter(server_id=server_id)
     res = []
     for c in chars:
         if c.id == char_id:
