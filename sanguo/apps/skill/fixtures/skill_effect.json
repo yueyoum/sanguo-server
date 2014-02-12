@@ -1,75 +1,53 @@
 [
 {
-    "pk": 1, 
+    "pk": 19, 
     "model": "skill.skilleffect", 
     "fields": {
-        "skill": 1, 
+        "skill": 20, 
         "rounds": 0, 
         "effect": 2, 
-        "value": 100, 
+        "value": 120, 
         "target": 1
     }
 },
 {
-    "pk": 2, 
+    "pk": 20, 
     "model": "skill.skilleffect", 
     "fields": {
-        "skill": 2, 
-        "rounds": 0, 
-        "effect": 2, 
-        "value": 130, 
+        "skill": 20, 
+        "rounds": 2, 
+        "effect": 6, 
+        "value": 30, 
         "target": 1
     }
 },
 {
-    "pk": 3, 
+    "pk": 21, 
     "model": "skill.skilleffect", 
     "fields": {
-        "skill": 3, 
+        "skill": 21, 
         "rounds": 0, 
         "effect": 2, 
-        "value": 160, 
+        "value": 110, 
         "target": 1
     }
 },
 {
-    "pk": 4, 
+    "pk": 22, 
     "model": "skill.skilleffect", 
     "fields": {
-        "skill": 4, 
-        "rounds": 0, 
-        "effect": 2, 
-        "value": 180, 
+        "skill": 21, 
+        "rounds": 2, 
+        "effect": 6, 
+        "value": 30, 
         "target": 1
     }
 },
 {
-    "pk": 5, 
+    "pk": 23, 
     "model": "skill.skilleffect", 
     "fields": {
-        "skill": 5, 
-        "rounds": 0, 
-        "effect": 2, 
-        "value": 65, 
-        "target": 3
-    }
-},
-{
-    "pk": 6, 
-    "model": "skill.skilleffect", 
-    "fields": {
-        "skill": 6, 
-        "rounds": 0, 
-        "effect": 2, 
-        "value": 85, 
-        "target": 3
-    }
-},
-{
-    "pk": 7, 
-    "model": "skill.skilleffect", 
-    "fields": {
-        "skill": 7, 
+        "skill": 22, 
         "rounds": 0, 
         "effect": 2, 
         "value": 110, 
@@ -77,54 +55,241 @@
     }
 },
 {
-    "pk": 8, 
+    "pk": 24, 
     "model": "skill.skilleffect", 
     "fields": {
-        "skill": 8, 
+        "skill": 23, 
         "rounds": 0, 
         "effect": 2, 
-        "value": 100, 
+        "value": 200, 
         "target": 1
     }
 },
 {
-    "pk": 9, 
+    "pk": 25, 
     "model": "skill.skilleffect", 
     "fields": {
-        "skill": 8, 
+        "skill": 24, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 200, 
+        "target": 1
+    }
+},
+{
+    "pk": 26, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 25, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 150, 
+        "target": 1
+    }
+},
+{
+    "pk": 27, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 26, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 160, 
+        "target": 1
+    }
+},
+{
+    "pk": 28, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 27, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 160, 
+        "target": 1
+    }
+},
+{
+    "pk": 29, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 28, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 135, 
+        "target": 1
+    }
+},
+{
+    "pk": 30, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 29, 
         "rounds": 3, 
-        "effect": 3, 
-        "value": 20, 
+        "effect": 5, 
+        "value": 100, 
         "target": 2
     }
 },
 {
-    "pk": 10, 
+    "pk": 31, 
     "model": "skill.skilleffect", 
     "fields": {
-        "skill": 9, 
-        "rounds": 3, 
-        "effect": 3, 
-        "value": 25, 
+        "skill": 32, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 120, 
+        "target": 3
+    }
+},
+{
+    "pk": 32, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 33, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 80, 
+        "target": 3
+    }
+},
+{
+    "pk": 33, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 35, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 180, 
+        "target": 1
+    }
+},
+{
+    "pk": 34, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 36, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 120, 
+        "target": 1
+    }
+},
+{
+    "pk": 35, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 38, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 130, 
+        "target": 1
+    }
+},
+{
+    "pk": 37, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 40, 
+        "rounds": 1, 
+        "effect": 7, 
+        "value": 10, 
         "target": 4
     }
 },
 {
-    "pk": 11, 
+    "pk": 38, 
     "model": "skill.skilleffect", 
     "fields": {
-        "skill": 10, 
+        "skill": 40, 
+        "rounds": 1, 
+        "effect": 3, 
+        "value": 10, 
+        "target": 2
+    }
+},
+{
+    "pk": 39, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 40, 
         "rounds": 1, 
         "effect": 5, 
-        "value": 150, 
+        "value": 10, 
         "target": 2
     }
 },
 {
-    "pk": 12, 
+    "pk": 41, 
     "model": "skill.skilleffect", 
     "fields": {
-        "skill": 11, 
+        "skill": 41, 
+        "rounds": 1, 
+        "effect": 3, 
+        "value": 8, 
+        "target": 4
+    }
+},
+{
+    "pk": 42, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 41, 
+        "rounds": 1, 
+        "effect": 5, 
+        "value": 10, 
+        "target": 2
+    }
+},
+{
+    "pk": 43, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 41, 
+        "rounds": 1, 
+        "effect": 3, 
+        "value": 10, 
+        "target": 2
+    }
+},
+{
+    "pk": 45, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 42, 
+        "rounds": 1, 
+        "effect": 5, 
+        "value": 9, 
+        "target": 4
+    }
+},
+{
+    "pk": 46, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 42, 
+        "rounds": 1, 
+        "effect": 3, 
+        "value": 10, 
+        "target": 2
+    }
+},
+{
+    "pk": 47, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 42, 
+        "rounds": 1, 
+        "effect": 5, 
+        "value": 10, 
+        "target": 2
+    }
+},
+{
+    "pk": 48, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 43, 
         "rounds": 0, 
         "effect": 2, 
         "value": 100, 
@@ -132,69 +297,157 @@
     }
 },
 {
-    "pk": 13, 
+    "pk": 49, 
     "model": "skill.skilleffect", 
     "fields": {
-        "skill": 11, 
-        "rounds": 3, 
-        "effect": 5, 
-        "value": 25, 
+        "skill": 43, 
+        "rounds": 1, 
+        "effect": 3, 
+        "value": 10, 
         "target": 2
     }
 },
 {
-    "pk": 14, 
+    "pk": 50, 
     "model": "skill.skilleffect", 
     "fields": {
-        "skill": 12, 
-        "rounds": 3, 
+        "skill": 43, 
+        "rounds": 1, 
         "effect": 5, 
-        "value": 30, 
+        "value": 10, 
+        "target": 2
+    }
+},
+{
+    "pk": 51, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 48, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 75, 
+        "target": 3
+    }
+},
+{
+    "pk": 52, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 49, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 85, 
+        "target": 3
+    }
+},
+{
+    "pk": 53, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 50, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 100, 
+        "target": 3
+    }
+},
+{
+    "pk": 54, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 52, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 130, 
+        "target": 3
+    }
+},
+{
+    "pk": 55, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 53, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 110, 
+        "target": 3
+    }
+},
+{
+    "pk": 56, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 54, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 150, 
+        "target": 3
+    }
+},
+{
+    "pk": 57, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 56, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 70, 
+        "target": 3
+    }
+},
+{
+    "pk": 58, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 58, 
+        "rounds": 3, 
+        "effect": 3, 
+        "value": 25, 
         "target": 4
     }
 },
 {
-    "pk": 15, 
+    "pk": 59, 
     "model": "skill.skilleffect", 
     "fields": {
-        "skill": 13, 
+        "skill": 59, 
         "rounds": 3, 
         "effect": 7, 
-        "value": 25, 
-        "target": 4
-    }
-},
-{
-    "pk": 16, 
-    "model": "skill.skilleffect", 
-    "fields": {
-        "skill": 14, 
-        "rounds": 3, 
-        "effect": 5, 
         "value": 30, 
         "target": 4
     }
 },
 {
-    "pk": 17, 
+    "pk": 60, 
     "model": "skill.skilleffect", 
     "fields": {
-        "skill": 15, 
-        "rounds": 0, 
-        "effect": 2, 
-        "value": 100, 
-        "target": 1
-    }
-},
-{
-    "pk": 18, 
-    "model": "skill.skilleffect", 
-    "fields": {
-        "skill": 15, 
+        "skill": 60, 
         "rounds": 3, 
         "effect": 5, 
         "value": 25, 
-        "target": 2
+        "target": 4
+    }
+},
+{
+    "pk": 61, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 61, 
+        "rounds": 3, 
+        "effect": 3, 
+        "value": 15, 
+        "target": 4
+    }
+},
+{
+    "pk": 62, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 61, 
+        "rounds": 3, 
+        "effect": 5, 
+        "value": 15, 
+        "target": 4
     }
 }
 ]
