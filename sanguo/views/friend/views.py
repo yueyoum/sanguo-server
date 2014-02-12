@@ -24,6 +24,8 @@ def player_list(request):
     chars = Character.objects.all()
     res = []
     for c in chars:
+        if c.id == char_id:
+            continue
         if f.is_general_friend(c.id):
             continue
 
