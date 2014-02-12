@@ -51,6 +51,7 @@ class Stage(object):
             self.stage.save()
 
         self.first = False
+        self.first_star = False
 
 
     def battle(self, stage_id):
@@ -78,6 +79,8 @@ class Stage(object):
         star = False
         if battle_msg.first_ground.self_win and battle_msg.second_ground.self_win and battle_msg.third_ground.self_win:
             star = True
+            if str(stage_id) not in self.stage.stages:
+                self.first_star = True
 
         self.star = star
 

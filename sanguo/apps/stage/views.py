@@ -24,7 +24,7 @@ def pve(request):
     # DEBUG END
 
     if battle_msg.self_win:
-        drop_exp, drop_gold, drop_stuffs = stage.save_drop(req.stage_id, first=stage.first, star=stage.star)
+        drop_exp, drop_gold, drop_stuffs = stage.save_drop(req.stage_id, first=stage.first, star=stage.first_star)
         t = Task(request._char_id)
         t.trig(1)
     else:
