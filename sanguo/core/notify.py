@@ -3,6 +3,7 @@ from core.mongoscheme import MongoPrison
 import protomsg
 
 from core.character import Char
+from core.task import Task
 
 from core.hero import cal_hero_property
 
@@ -195,6 +196,6 @@ def login_notify(char_id):
     stage.send_new_stage_notify()
 
     HeroPanel(char_id).send_notify()
-    # Task(char_id).send_notify()
+    Task(char_id).send_notify()
     
 
