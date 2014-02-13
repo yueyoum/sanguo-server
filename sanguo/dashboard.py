@@ -53,6 +53,7 @@ class CustomIndexDashboard(Dashboard):
                 'apps.skill.*',
                 'apps.task.*',
                 'apps.achievement.*',
+                'apps.official.*',
                 ),
             ))
 

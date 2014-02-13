@@ -151,6 +151,7 @@ INSTALLED_APPS = (
     'apps.skill',
     'apps.task',
     'apps.achievement',
+    'apps.official',
     'apps.account',
     'apps.character',
     'apps.item',

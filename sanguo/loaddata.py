@@ -8,6 +8,8 @@ def run():
     call_command('loaddata', 'charinit.json')
     call_command('loaddata', 'servers.json')
 
+    call_command('loaddata', 'official.json')
+
     call_command('loaddata', 'heros.json')
     call_command('loaddata', 'monsters.json')
 
