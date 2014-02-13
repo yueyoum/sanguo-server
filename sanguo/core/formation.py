@@ -56,6 +56,13 @@ class Formation(object):
         if send_notify:
             self.send_formation_notify()
 
+    def in_formation_hero_ids(self):
+        hero_ids = []
+        for s in self.formation.sockets.values():
+            if s.hero:
+                hero_ids.append(s.hero)
+        return hero_ids
+
 
 
     def find_socket_by_hero(self, hero_id):

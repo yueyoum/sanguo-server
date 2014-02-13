@@ -109,9 +109,11 @@ class Char(object):
 
     @property
     def power(self):
-        heros = self.heros
+        f = Formation(self.id)
+        hero_ids = f.in_formation_hero_ids()
         p = 0
-        for h in heros:
+        for hid in hero_ids:
+            h = Hero.cache_obj(hid)
             p += h.power
         return p
 
