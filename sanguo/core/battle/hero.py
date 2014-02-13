@@ -275,15 +275,14 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
                 logger.warning("Unsupported Zero rounds effect: {0}".format(eff.id))
 
             if eff.id == 1:
-                value = self.using_attack
+                # value = self.using_attack
+                raise Exception("Unsupported Eff id: 1")
             elif eff.id == 2:
-                value = self.hp * eff.value  / 100.0
+                value = self.using_attack * eff.value  / 100.0
 
             targets = self.get_effect_target(eff, target)
             for t in targets:
                 self._one_action(t, value, msg, eff)
-
-
 
 
 
