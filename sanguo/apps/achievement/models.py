@@ -6,11 +6,18 @@ from utils import cache
 
 
 class Achievement(models.Model):
+    MODE = (
+        (1, '多个ID条件'),
+        (2, '单个ID条件'),
+        (3, '次数条件'),
+    )
     id = models.IntegerField(primary_key=True)
     tp = models.IntegerField("类型")
     tp_name = models.CharField("类型名字", max_length=32)
     name = models.CharField("成就名称", max_length=32)
     des = models.TextField("描述", blank=True)
+
+    mode = models.IntegerField("条件类型", choices=MODE)
 
     condition_id = models.IntegerField("条件ID")
     condition_name = models.CharField("条件名称", max_length=32)
