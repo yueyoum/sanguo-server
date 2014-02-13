@@ -1,8 +1,7 @@
 from core.signals import char_updated_signal
-from core.notify import hero_notify
+from core.notify import update_hero_notify
 from core.character import Char
 from core.hero import Hero
-from utils import cache
 
 
 
@@ -16,7 +15,7 @@ def _char_updated(char_id, **kwargs):
         h.save_cache()
         heros.append(h)
 
-    hero_notify(char_id, heros)
+    update_hero_notify(char_id, heros)
 
 char_updated_signal.connect(
     _char_updated,
