@@ -68,9 +68,9 @@ class EffectManager(DotEffectMixin, StepHeroNotifyMixin):
                 else:
                     self.active_dot_effects(h, e, msg)
 
-        logger.debug("cleaned_effs = {0}".format(cleaned_effs.items()))
-
         for k, v in cleaned_effs.iteritems():
+            logger.debug("cleaned effs {0}: {1}".format(k.id, v))
+
             hero_noti = msg.hero_notify.add()
             hero_noti.target_id = k.id
             hero_noti.hp = k.hp
