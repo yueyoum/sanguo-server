@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
@@ -14,7 +16,7 @@ class MonsterResources(resources.ModelResource):
 
 class HeroAdmin(ImportExportModelAdmin):
     list_display = (
-        'id', 'name', 'avatar', 'image',
+        'id', 'name', 'Avatar', 'Image',
         'tp', 'tp_name', 'country', 'country_name',
         'gender', 'gender_name',
         'special_equip_id', 'special_addition',
@@ -28,6 +30,18 @@ class HeroAdmin(ImportExportModelAdmin):
         'tp_name', 'country_name', 'gender_name', 'quality_name'
     )
     resource_class = HeroResources
+
+    def Avatar(self, obj):
+        if not obj.avatar:
+            return 'None'
+        return '<img src="/images/武将/头像/{0}.png" />'.format(obj.avatar)
+    Avatar.allow_tags = True
+
+    def Image(self, obj):
+        if not obj.image:
+            return 'None'
+        return '<a href="/images/武将/大图/{0}.jpg" target=_blank><img src="/images/武将/大图/{0}.jpg" width="150" /></a>'.format(obj.image)
+    Image.allow_tags = True
 
 
 class MonsterAdmin(ImportExportModelAdmin):
