@@ -25,7 +25,11 @@ class StepHeroNotifyMixin(object):
 class ActiveEffectMixin(object):
     def _using_eff_value(self, eff, target, attr_name, plus=True):
         base_value = getattr(target, attr_name)
-        value = base_value * eff.value / 100.0
+        # 暴击按照固定值来处理
+        if eff.id == 7 or eff.id == 8:
+            value = eff.value
+        else:
+            value = base_value * eff.value / 100.0
 
         if plus:
             new_value = base_value + value
