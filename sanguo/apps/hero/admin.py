@@ -56,13 +56,13 @@ class MonsterAdmin(ImportExportModelAdmin):
     def Avatar(self, obj):
         if not obj.avatar:
             return 'None'
-        return u'<img src="/images/怪物/头像/{0}.png" />'.format(obj.avatar)
+        return u'<img src="/images/武将/头像/{0}.png" />'.format(obj.avatar)
     Avatar.allow_tags = True
 
     def Image(self, obj):
         if not obj.image:
             return 'None'
-        return u'<a href="/images/怪物/大图/{0}.jpg" target=_blank><img src="/images/怪物/大图/{0}.jpg" width="100" /></a>'.format(obj.image)
+        return u'<a href="/images/武将/大图/{0}.jpg" target=_blank><img src="/images/武将/大图/{0}.jpg" width="100" /></a>'.format(obj.image)
     Image.allow_tags = True
 
 admin.site.register(Hero, HeroAdmin)
