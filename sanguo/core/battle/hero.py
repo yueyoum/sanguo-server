@@ -64,7 +64,7 @@ class EffectManager(DotEffectMixin, StepHeroNotifyMixin):
                 if e.rounds <= 0:
                     self.effect_targets[h].remove(e)
                     h.effect_manager.effects.remove(e)
-                    cleaned_effs[h.id].append(e.id)
+                    cleaned_effs[h].append(e.id)
                 else:
                     self.active_dot_effects(h, e, msg)
 
