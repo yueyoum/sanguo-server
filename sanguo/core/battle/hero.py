@@ -248,6 +248,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         msg_target.is_crit = False
         if self.using_crit >= randint(1, 100):
             msg_target.is_crit = True
+            value *= 2
 
         text = "{0} => {1}, Eff: {2}, Crit: {3}".format(self.id, target.id, eff.id if eff else 'None', msg_target.is_crit)
         logger.debug(text)
