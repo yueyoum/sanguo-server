@@ -31,7 +31,6 @@ class Ground(object):
                     else:
                         msg_h.ht = BattleHeroMsg.MONSTER
 
-
         _fill_up_heros(self.my_heros, msg.self_heros)
         _fill_up_heros(self.rival_heros, msg.rival_heros)
 
@@ -110,6 +109,7 @@ class Ground(object):
 
 class Battle(object):
     __slots__ = ['my_id', 'rival_id', 'my_heros', 'rival_heros', 'msg']
+    BATTLE_TYPE = 'UNSET'
 
     def __init__(self, my_id, rival_id, msg):
         self.my_id = my_id
@@ -155,9 +155,9 @@ class Battle(object):
 
 
     def start(self):
-        logger.debug("###### Start Battle: %d VS %d ######" % (self.my_id, self.rival_id))
+        logger.debug("###### Start Battle {0} : {1} VS {2} ######".format(self.BATTLE_TYPE, self.my_id, self.rival_id))
         heros_list = [str(h) for h in self.my_heros]
-        logger.debug("My Heros: %s" % str(heros_list))
+        logger.debug("My Heros:    %s" % str(heros_list))
         heros_list = [str(h) for h in self.rival_heros]
         logger.debug("Rival Heros: %s" % str(heros_list))
 

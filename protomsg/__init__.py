@@ -5,6 +5,7 @@ from world_pb2 import *
 from mail_pb2 import *
 from daily_pb2 import *
 from task_pb2 import *
+from achievement_pb2 import *
 from character_pb2 import *
 from item_pb2 import *
 from formation_pb2 import *
@@ -94,6 +95,9 @@ RESPONSE_NOTIFY_TYPE = {
     "GetCheckInRewardResponse": 3004,
     "TaskNotify": 3100,
     "TaskGetRewardResponse": 3102,
+    "AchievementNotify": 3200,
+    "UpdateAchievementNotify": 3201,
+    "AchievementGetRewardResponse": 3203,
 }
 
 REQUEST_TYPE = {
@@ -137,6 +141,7 @@ REQUEST_TYPE = {
     3001: "CheckInRequest",
     3003: "GetCheckInRewardRequest",
     3101: "TaskGetRewardRequest",
+    3202: "AchievementGetRewardRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -180,5 +185,6 @@ REQUEST_TYPE_REV = {
     "CheckInRequest": 3001,
     "GetCheckInRewardRequest": 3003,
     "TaskGetRewardRequest": 3101,
+    "AchievementGetRewardRequest": 3202,
 }
 

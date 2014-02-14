@@ -1,19 +1,24 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from random import randint, uniform
+from random import randint, uniform, choice
 from collections import defaultdict
 
 from core.hero import FightPowerMixin, Hero
 
 
-from mixins import ActiveEffectMixin
+from mixins import ActiveEffectMixin, StepHeroNotifyMixin
 
 from apps.hero.models import Monster
 from apps.skill.models import Skill as ModelSkill
 
 logger = logging.getLogger('battle')
 
+class UsingEffect(object):
+    __slots__ = ['id', 'value']
+    def __init__(self, _id, value):
+        self.id = _id
+        self.value = value
 
 class DieEvent(Exception):
     pass
@@ -37,7 +42,7 @@ class DotEffectMixin(object):
         hero_noti = msg.hero_notify.add()
         hero_noti.target_id = target.id
         hero_noti.hp = target.hp
-        hero_noti.eff = eff.id
+
         hero_noti.value = value
 
         logger.debug("Dot %d, hp %d to Target %d. Hp %d" % (
@@ -45,7 +50,7 @@ class DotEffectMixin(object):
         )
 
 
-class EffectManager(DotEffectMixin):
+class EffectManager(DotEffectMixin, StepHeroNotifyMixin):
     def __init__(self):
         self.effect_targets = defaultdict(lambda: [])
         self.effects = []
@@ -65,6 +70,13 @@ class EffectManager(DotEffectMixin):
 
         logger.debug("cleaned_effs = {0}".format(cleaned_effs.items()))
 
+        for k, v in cleaned_effs.iteritems():
+            hero_noti = msg.hero_notify.add()
+            hero_noti.target_id = k.id
+            hero_noti.hp = k.hp
+            hero_noti.removes.extend(v)
+
+
 
     def add_effect_to_target(self, target, eff, msg):
         self.effect_targets[target].append(eff)
@@ -76,11 +88,13 @@ class EffectManager(DotEffectMixin):
     def add_effect(self, me, eff, msg):
         self.effects.append(eff)
 
-        hero_noti = msg.hero_notify.add()
-        hero_noti.target_id = me.id
-        hero_noti.hp = me.hp
-        hero_noti.eff = eff.id
-        hero_noti.buffs.extend(self.effect_ids())
+        self.fill_up_heor_notify(msg, me.id, me.hp, eff)
+        #
+        # hero_noti = msg.hero_notify.add()
+        # hero_noti.target_id = me.id
+        # hero_noti.hp = me.hp
+        # hero_noti.eff = eff.id
+        # hero_noti.buffs.extend(self.effect_ids())
 
 
     def effect_ids(self):
@@ -122,7 +136,6 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
             self.hp = self.max_hp
 
 
-
     def active_initiative_effects(self, msg):
         if self.die:
             raise DieEvent()
@@ -142,12 +155,28 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         self.using_defense = self.defense
         self.using_crit = self.crit
 
+        # 将同名效果的数值叠加
+        reverse_id_table = {
+            4: 3,
+            6: 5,
+            8: 7,
+        }
+        effects_id_values = {}
         for eff in self.effect_manager.effects:
             if eff.id in [1, 2, 9, 10, 11]:
                 logger.warning("active property effects: unsupported eff: {0}".format(eff.id))
                 continue
 
-            self.active_effect(self, eff)
+            eff_id = eff.id
+            eff_value = eff.value
+            if eff_id in reverse_id_table:
+                eff_id = reverse_id_table[eff_id]
+                eff_value = -eff_value
+
+            effects_id_values[eff_id] = effects_id_values.get(eff_id, 0) + eff_value
+
+        for k, v in effects_id_values.iteritems():
+            self.active_effect(self, UsingEffect(k, v))
 
 
     def find_skill(self, skills):
@@ -169,14 +198,14 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
     def action(self, target):
         # 英雄行动，首先清理本英雄所施加在其他人身上的效果
+        msg = self.ground_msg.steps.add()
+        msg.id = self.id
+
+        self.effect_manager.clean(msg)
+
         if self.die:
             logger.debug("%d: die, return" % self.id)
             return
-
-        msg = self.ground_msg.actions.add()
-        msg.from_id = self.id
-
-        self.effect_manager.clean(msg)
 
         try:
             self.active_initiative_effects(msg)
@@ -186,11 +215,10 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         except DizzinessEvent:
             logger.debug("%d: dizziness, return" % self.id)
             return
-
-        hero_noti = msg.hero_notify.add()
-        hero_noti.target_id = self.id
-        hero_noti.hp = self.hp
-        hero_noti.buffs.extend(self.effect_manager.effect_ids())
+        #
+        # hero_noti = msg.hero_notify.add()
+        # hero_noti.target_id = self.id
+        # hero_noti.hp = self.hp
 
         skill = self.find_skill(self.attack_skills)
 
@@ -215,7 +243,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
     def _one_action(self, target, value, msg, eff=None):
         target.active_property_effects()
-        msg_target = msg.targets.add()
+        msg_target = msg.action.targets.add()
         msg_target.target_id = target.id
         msg_target.is_crit = False
         if self.using_crit >= randint(1, 100):
@@ -237,24 +265,69 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         hero_noti.value = value
 
         if eff:
-            hero_noti.eff = eff.id
+            e = hero_noti.adds.add()
+            e.id =eff.id
+            e.value = eff.value
 
         text = 'Value: {0}, Hp: {1}, Eff: {2}'.format(value, target.hp, eff.id if eff else 'None')
         logger.debug(text)
 
 
     def get_effect_target(self, eff, target):
+        def _team(hero):
+            return [h for h in hero._team if h is not None and not h.die]
+
         if eff.target == 1:
+            # 敌单体
             return [target]
         if eff.target == 2:
+            # 自己
             return [self]
         if eff.target == 3:
-            return [h for h in target._team if h is not None and not h.die]
-        return [h for h in self._team if h is not None and not h.die]
+            # 敌全体
+            return _team(target)
+        if eff.target == 4:
+            # 己全体
+            return _team(self)
+        if eff.target == 5:
+            # 敌随机一个
+            team = _team(target)
+            if not team:
+                return []
+            return choice(team)
+        if eff.target == 6:
+            # 敌随机两个
+            team = _team(target)
+            if len(team) <= 2:
+                return team
+            res = []
+            for i in range(2):
+                h = choice(team)
+                team.remove(h)
+                res.append(h)
+            return res
+        if eff.target == 7:
+            # 己随机一个
+            team = _team(self)
+            if not team:
+                return []
+            return choice(team)
+        if eff.target == 8:
+            # 己随机两个
+            team = _team(self)
+            if len(team) <= 2:
+                return team
+            res = []
+            for i in range(2):
+                h = choice(team)
+                team.remove(h)
+                res.append(h)
+            return res
+
 
 
     def skill_action(self, target, skill, msg):
-        msg.skill_id = skill.id
+        msg.action.skill_id = skill.id
         effects = [eff.copy() for eff in skill.effects]
         zero_rounds_effects = []
         for eff in effects[:]:
@@ -272,11 +345,11 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
         for eff in zero_rounds_effects:
             if eff.id not in [1, 2]:
-                logger.warning("Unsupported Zero rounds effect: {0}".format(eff.id))
+                raise Exception("Skill Action: Unsupported Zero rounds effect: {0}".format(eff.id))
 
             if eff.id == 1:
                 # value = self.using_attack
-                raise Exception("Unsupported Eff id: 1")
+                raise Exception("Skill Action: Unsupported Eff id: 1")
             elif eff.id == 2:
                 value = self.using_attack * eff.value  / 100.0
 

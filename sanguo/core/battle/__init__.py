@@ -35,6 +35,7 @@ from apps.stage.models import Stage as ModelStage
 
 
 class PVE(Battle):
+    BATTLE_TYPE = 'PVE'
     def load_my_heros(self, my_id=None):
         if my_id is None:
             my_id = self.my_id
@@ -81,6 +82,7 @@ class PVE(Battle):
 
 
 class PVP(PVE):
+    BATTLE_TYPE = 'PVP'
     def load_rival_heros(self):
         return self.load_my_heros(my_id=self.rival_id)
 

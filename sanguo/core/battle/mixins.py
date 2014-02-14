@@ -1,5 +1,27 @@
 # -*- coding: utf-8 -*-
 
+
+
+class StepHeroNotifyMixin(object):
+    def fill_up_heor_notify(self, step_msg, target_id, hp, eff):
+        # XXX 目前忽略掉exists
+        for index, h in enumerate(step_msg.hero_notify):
+            if h.target_id == target_id:
+                step_msg.hero_notify[index].hp = hp
+                new = step_msg.hero_notify[index].adds.add()
+                new.id = eff.id
+                new.value = eff.value
+                return
+
+        hero_noti = step_msg.hero_notify.add()
+        hero_noti.target_id = target_id
+        hero_noti.hp = hp
+        new = hero_noti.adds.add()
+        new.id = eff.id
+        new.value = eff.value
+
+
+
 class ActiveEffectMixin(object):
     def _using_eff_value(self, eff, target, attr_name, plus=True):
         base_value = getattr(target, attr_name)
@@ -9,8 +31,9 @@ class ActiveEffectMixin(object):
             new_value = base_value + value
         else:
             new_value = base_value - value
-            if new_value < 0:
-                new_value = 0
+
+        if new_value < 0:
+            new_value = 0
         setattr(target, attr_name, new_value)
 
 

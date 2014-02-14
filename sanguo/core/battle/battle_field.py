@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import logging
+import random
 from collections import defaultdict
 
-from mixins import ActiveEffectMixin
+from mixins import ActiveEffectMixin, StepHeroNotifyMixin
 
 TARGET_RULE = {
     0: [0, 1, 2],
@@ -13,7 +14,8 @@ TARGET_RULE = {
 logger = logging.getLogger('battle')
 
 
-class HeapEffects(object):
+
+class HeapEffects(StepHeroNotifyMixin):
     def __init__(self):
         self.x = defaultdict(lambda: [])
 
@@ -23,7 +25,13 @@ class HeapEffects(object):
             x[k.id] = [(_v.id, _v.value) for _v in v]
         return str(x)
 
-    def add(self, h, eff):
+    def add(self, h, eff, step_msg):
+        target = step_msg.action.targets.add()
+        target.target_id = h.id
+        target.is_crit = False
+
+        self.fill_up_heor_notify(step_msg, h.id, h.hp, eff)
+
         eff = eff.copy()
         effs = self.x[h]
         _same = False
@@ -40,6 +48,7 @@ class HeapEffects(object):
         return self.x.items()
 
 
+
 class BattleField(ActiveEffectMixin):
     __slots__ = ['team_one', 'team_two', 'current_pos', 'msg']
 
@@ -47,7 +56,7 @@ class BattleField(ActiveEffectMixin):
         self.team_one = team_one
         self.team_two = team_two
 
-        passive_skills = self.active_passive_effects()
+        passive_skills = self.active_passive_effects(msg)
 
         for h, effs in passive_skills.items():
             for e in effs:
@@ -78,7 +87,7 @@ class BattleField(ActiveEffectMixin):
         self.current_pos = 0
 
 
-    def active_passive_effects(self):
+    def active_passive_effects(self, msg):
         # 被动技能的效果叠加
         heap_effect = HeapEffects()
 
@@ -88,19 +97,85 @@ class BattleField(ActiveEffectMixin):
                     continue
 
                 for sk in me.passive_skills:
+
+                    step = msg.steps.add()
+                    step.id = me.id
+
+                    step.action.skill_id = sk.id
+
                     for eff in sk.effects:
                         if eff.target == 1:
-                            raise Exception("UnSupported Passive Skill Effect, Target: 1")
+                            # 敌单体
+                            raise Exception("Active Passive Skill: UnSupported Passive Skill Effect, Target: 1")
                         if eff.target == 2:
-                            heap_effect.add(me, eff)
+                            # 自己
+                            heap_effect.add(me, eff, step)
                         elif eff.target == 3:
+                            # 敌全体
                             for h in team_two:
                                 if h:
-                                    heap_effect.add(h, eff)
+                                    heap_effect.add(h, eff, step)
                         elif eff.target == 4:
+                            # 已全体
                             for h in team_one:
                                 if h:
-                                    heap_effect.add(h, eff)
+                                    heap_effect.add(h, eff, step)
+                        elif eff.target == 5:
+                            # 敌随机一个
+                            team = []
+                            for h in team_two:
+                                if h:
+                                    team.append(h)
+                            if not team:
+                                raise Exception("Active Passive Skill: No Target. Target: 5")
+
+                            h = random.choice(team)
+                            heap_effect.add(h, eff, step)
+                        elif eff.target == 6:
+                            # 敌随机两个
+                            team = []
+                            for h in team_two:
+                                if h:
+                                    team.append(h)
+                            if not team:
+                                raise Exception("Active Passive Skill: No Target. Target: 6")
+
+                            if len(team) <= 2:
+                                for h in team:
+                                    heap_effect.add(h, eff, step)
+                            else:
+                                for i in range(2):
+                                    h = random.choice(team)
+                                    team.remove(h)
+                                    heap_effect.add(h, eff, step)
+                        elif eff.target == 7:
+                            # 己随机一个
+                            team = []
+                            for h in team_one:
+                                if h:
+                                    team.append(h)
+                            if not team:
+                                raise Exception("Active Passive Skill: No Target. Target: 7")
+
+                            h = random.choice(team)
+                            heap_effect.add(h, eff, step)
+                        elif eff.target == 8:
+                            # 已随机两个
+                            team = []
+                            for h in team_one:
+                                if h:
+                                    team.append(h)
+                            if not team:
+                                raise Exception("Active Passive Skill: No Target. Target: 8")
+
+                            if len(team) <= 2:
+                                for h in team:
+                                    heap_effect.add(h, eff, step)
+                            else:
+                                for i in range(2):
+                                    h = random.choice(team)
+                                    team.remove(h)
+                                    heap_effect.add(h, eff, step)
 
 
         _active_all(self.team_one, self.team_two)
