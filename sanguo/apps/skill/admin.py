@@ -19,6 +19,7 @@ class SkillAdmin(admin.ModelAdmin):
         'mode', 'mode_name', 'prob'
     )
     inlines = [SkillEffectInline,]
+    list_filter = ('mode_name',)
 
 admin.site.register(Effect, EffectAdmin)
 admin.site.register(Skill, SkillAdmin)
