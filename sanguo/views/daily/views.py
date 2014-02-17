@@ -5,11 +5,11 @@ __date__ = '1/6/14'
 
 from core.daily import CheckIn
 from utils.decorate import message_response
-
+from utils import pack_msg
 
 @message_response("CheckInResponse")
 def checkin(request):
     c = CheckIn(request._char_id)
-    c.checkin()
+    msg = c.checkin()
     c.send_notify()
-    return None
+    return pack_msg(msg)
