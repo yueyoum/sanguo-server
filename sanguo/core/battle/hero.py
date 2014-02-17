@@ -121,7 +121,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
                 self.passive_skills.append(s)
 
     def __str__(self):
-        return '<%d, %d, %d>' % (self.index, self.id, self.original_id)
+        return '<%d, %d, %d>' % (self.id, self.real_id, self.original_id)
 
     def set_hp(self, value):
         self.damage_value = value
@@ -367,6 +367,7 @@ class BattleHero(InBattleHero):
     def __init__(self, _id):
         hero = Hero.cache_obj(_id)
         self.id = _id
+        self.real_id = _id
         self.original_id = hero.oid
         self.attack = hero.attack
         self.defense = hero.defense
@@ -386,6 +387,7 @@ class BattleMonster(InBattleHero):
     def __init__(self, mid):
         info = Monster.all()[mid]
         self.id = mid
+        self.real_id = mid
         self.original_id = mid
         self.attack = info.attack
         self.defense = info.defense
