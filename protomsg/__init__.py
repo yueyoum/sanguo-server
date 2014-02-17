@@ -92,7 +92,6 @@ RESPONSE_NOTIFY_TYPE = {
     "GetAttachmentResponse": 2106,
     "CheckInNotify": 3000,
     "CheckInResponse": 3002,
-    "GetCheckInRewardResponse": 3004,
     "TaskNotify": 3100,
     "TaskGetRewardResponse": 3102,
     "AchievementNotify": 3200,
@@ -139,7 +138,6 @@ REQUEST_TYPE = {
     2103: "DeleteMailRequest",
     2105: "GetAttachmentRequest",
     3001: "CheckInRequest",
-    3003: "GetCheckInRewardRequest",
     3101: "TaskGetRewardRequest",
     3202: "AchievementGetRewardRequest",
 }
@@ -183,7 +181,6 @@ REQUEST_TYPE_REV = {
     "DeleteMailRequest": 2103,
     "GetAttachmentRequest": 2105,
     "CheckInRequest": 3001,
-    "GetCheckInRewardRequest": 3003,
     "TaskGetRewardRequest": 3101,
     "AchievementGetRewardRequest": 3202,
 }

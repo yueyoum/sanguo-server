@@ -3,19 +3,20 @@
 __author__ = 'Wang Chao'
 __date__ = '1/6/14'
 
-import datetime
+import random
 
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoCheckIn
 from utils import pack_msg
 from core.msgpipe import publish_to_char
 from core.exception import InvalidOperate
+from core.character import Char
+from core.item import Item
+from apps.item.models import Gem as ModelGem
+from protomsg import CheckInNotify, CheckInResponse
 
-from protomsg import CheckInNotify
 
-
-# FIXME
-TP = [2, 5, 10, 17, 26]
+MAX_DAYS = 7
 
 
 class CheckIn(object):
@@ -25,48 +26,64 @@ class CheckIn(object):
             self.c = MongoCheckIn.objects.get(id=char_id)
         except DoesNotExist:
             self.c = MongoCheckIn(id=char_id)
+            self.c.has_checked = False
+            self.c.days = 0
             self.c.save()
 
-    @property
-    def checkin_days(self):
-        return self.c.days
-
-    @property
-    def whole_days(self):
-        return len(self.c.days)
 
     def checkin(self):
-        day = datetime.datetime.now().day
-        if day not in self.c.days:
-            self.c.days.append(day)
-            self.c.save()
+        if self.c.has_checked:
+            raise InvalidOperate("CheckIN: Char {0} Try to checkin, But already checked".format(self.char_id))
+        self.c.has_checked = True
 
-        self.send_notify()
+        self.c.days += 1
 
-    def get_reward(self, tp):
-        if tp not in TP:
-            raise InvalidOperate()
+        msg = CheckInResponse()
+        if self.c.days == MAX_DAYS:
+            msg.reward.sycee = 100
+            stuff = msg.reward.stuffs.add()
+            stuff.id = 22
+            stuff.amount = 5
 
-        if tp in self.c.has_get:
-            raise InvalidOperate()
+            all_gems = ModelGem.all()
+            level_three_gems = []
+            for g in all_gems.values():
+                if g.level == 3:
+                    level_three_gems.append(g.id)
 
-        # TODO send reward
+            gid = random.choice(level_three_gems)
+            gem = msg.reward.gems.add()
+            gem.id = gid
+            gem.amount = 1
 
-        self.c.has_get.append(tp)
+            char = Char(self.char_id)
+            char.update(sycee=100)
+
+            item = Item(self.char_id)
+            item.stuff_add((22, 5))
+            item.gem_add((gid, 1))
+
+            self.c.days = 0
+        else:
+            msg.reward.sycee = 100
+            char = Char(self.char_id)
+            char.update(sycee=100)
+
+        self.c.save()
+        return msg
+
+
+    def daily_reset(self):
+        # 每日可签到标志重置
+        self.c.has_checked = False
         self.c.save()
         self.send_notify()
 
 
-
     def send_notify(self):
-        has_get = self.c.has_get
-
         m = CheckInNotify()
-        m.checkin_days.extend(self.checkin_days)
-        for tp in TP:
-            t = m.tp.add()
-            t.tp = tp
-            t.complete = m.checkin_days >= tp
-            t.finished = tp in has_get
+        m.checkin = not self.c.has_checked
+        m.days = self.c.days
+        m.max_days = MAX_DAYS
 
         publish_to_char(self.char_id, pack_msg(m))

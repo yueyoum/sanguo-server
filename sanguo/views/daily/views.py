@@ -11,11 +11,5 @@ from utils.decorate import message_response
 def checkin(request):
     c = CheckIn(request._char_id)
     c.checkin()
-    return None
-
-
-@message_response("GetCheckInRewardResponse")
-def get_checkin_reward(request):
-    c = CheckIn(request._char_id)
-    c.get_reward(request._proto.tp)
+    c.send_notify()
     return None

@@ -176,8 +176,10 @@ class MongoMail(Document):
 
 class MongoCheckIn(Document):
     id = IntField(primary_key=True)
-    days = ListField(IntField())
-    has_get = ListField(IntField())
+    # 当天是否已经签过。 次标志用定时任务修改
+    has_checked = BooleanField()
+    # 总共签到天数。到最大循环天数后归零
+    days = IntField()
 
     meta = {
         'collection': 'checkin'
@@ -197,5 +199,20 @@ class MongoTask(Document):
 
     meta = {
         'collection': 'task'
+    }
+
+
+class MongoAchievement(Document):
+    id = IntField(primary_key=True)
+    # 当前开始进行的，但还没完成
+    # key 为成就ID， value 为值 （不一定是Int）
+    doing = DictField()
+    # 已完成但还没领奖的
+    finished = ListField()
+    # 彻底完成的
+    complete = ListField()
+
+    meta = {
+        'collection': 'achievement'
     }
 
