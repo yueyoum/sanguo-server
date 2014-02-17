@@ -23,7 +23,7 @@ class Ground(object):
                     msg_h.hp = 0
                     msg_h.ht = BattleHeroMsg.HERO
                 else:
-                    msg_h.id = h.id
+                    msg_h.id = h.index
                     msg_h.hp = h.hp
                     msg_h.original_id = h.original_id
                     if h.HERO_TYPE == 1:
@@ -124,14 +124,14 @@ class Battle(object):
         for h in self.my_heros:
             index += 1
             if h is not None:
-                h.id = index
+                h.index = index
                 self_power += h.power
 
         rival_power = 0
         for h in self.rival_heros:
             index += 1
             if h is not None:
-                h.id = index
+                h.index = index
                 rival_power += h.power
 
         msg.self_power = self_power

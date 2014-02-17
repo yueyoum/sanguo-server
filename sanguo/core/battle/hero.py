@@ -121,11 +121,12 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
                 self.passive_skills.append(s)
 
     def __str__(self):
-        return '<%d, %d>' % (self.id, self.original_id)
+        return '<%d, %d, %d>' % (self.index, self.id, self.original_id)
 
     def set_hp(self, value):
         self.damage_value = value
         self.hp -= value
+        self.hp = int(self.hp)
         if self.hp <= 0:
             self.hp = 0
             self.die = True
