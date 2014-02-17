@@ -228,6 +228,10 @@ class Equipment(MessageEquipmentMixin):
         for k, v in attrs.iteritems():
             attrs[k] *= (1 + self.equip.gem_addition / 100.0)
 
+        # hp为整数
+        if 'hp' in attrs:
+            attrs['hp'] = int(attrs['hp'])
+
         # 暴击修正
         if 'crit' in attrs:
             attrs['crit'] = int((1 - pow(0.99, attrs['crit'] / 10.0)) * 100)
