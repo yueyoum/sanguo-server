@@ -4,6 +4,7 @@ from protomsg import RESPONSE_NOTIFY_TYPE
 from core.character import char_initialize
 from utils import crypto
 from utils import app_test_helper as tests
+from apps.stage.models import Stage
 
 
 class PVETest(TransactionTestCase):

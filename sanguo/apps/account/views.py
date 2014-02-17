@@ -108,7 +108,7 @@ def login(request):
             if user.passwd != req.regular.password:
                 raise SanguoException(120, "Login: Wrong Password")
         except Account.DoesNotExist:
-            raise SanguoException(121, "Login: None Exist Email {0}".format(req.regular.email))
+            raise SanguoException(121, "Login: None Exist Email")
 
     user.last_server_id = req.server_id
     user.save()

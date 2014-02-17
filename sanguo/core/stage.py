@@ -214,7 +214,7 @@ class Hang(object):
 
     def cancel(self):
         if not self.hang:
-            raise InvalidOperate("Hang Cancel: Char {0}, NO hang to calcel".format(self.char_id))
+            raise InvalidOperate("Hang Cancel: Char {0}, NO hang to cancel".format(self.char_id))
 
         if self.hang.finished:
             raise InvalidOperate("Hang Cancel: Char {0} Try to cancel a finished hang".format(self.char_id))
@@ -263,7 +263,7 @@ class Hang(object):
         if len(self.hang.logs) >= 20:
             self.hang.logs.pop(0)
 
-        self.hang.append(l)
+        self.hang.logs.append(l)
         self.hang.save()
 
 
