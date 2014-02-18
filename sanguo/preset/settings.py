@@ -13,7 +13,10 @@ COUNTER = {
 
 
 # 战俘最多可以有多少个
-MAX_PRISONERS_AMOUNT = 10
+MAX_PRISONERS_AMOUNT = 4
+# 增加监狱最大战俘数量花费
+PRISON_INCR_AMOUNT_COST = 1
+
 # 掠夺消耗元宝
 PLUNDER_COST_SYCEE = 1
 
@@ -28,3 +31,4 @@ MAX_FRIENDS_AMOUNT = 5
 
 # 邮件可以保存多少天
 MAIL_KEEP_DAYS = 1
+

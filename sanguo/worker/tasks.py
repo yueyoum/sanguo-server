@@ -34,25 +34,6 @@ def hang_finish(char_id, seconds):
         actual_seconds=seconds
     )
 
-@app.task
-def prisoner_change(char_id, prisoner_id, status):
-    if status == PrisonerProtoMsg.NOT:
-        new_status = PrisonerProtoMsg.OUT
-    elif status == PrisonerProtoMsg.IN:
-        new_status = PrisonerProtoMsg.FINISH
-    else:
-        raise Exception("prisoner_job, bad status. {0}, {1}, {2}".format(char_id, prisoner_id, status))
-
-    prison = MongoPrison.objects.get(id=char_id)
-    prison.prisoners[str(prisoner_id)].status = new_status
-    prison.save()
-
-    prisoner_changed_signal.send(
-        sender=None,
-        char_id=char_id,
-        mongo_prisoner_obj=prison.prisoners[str(prisoner_id)]
-    )
-
 
 @app.task
 def update_server_status(server_id, char_amount=0, login_times=0,

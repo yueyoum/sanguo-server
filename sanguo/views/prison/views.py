@@ -1,137 +1,32 @@
 # -*- coding: utf-8 -*-
-import logging
 
-from mongoengine import DoesNotExist
-
-from core.exception import SanguoException, InvalidOperate
-from core.hero import save_hero
-from core.mongoscheme import MongoPrison
-from core.signals import prisoner_changed_signal, prisoner_del_signal
-from protomsg import Prisoner as PrisonerProtoMsg
-from worker import tasks
 from utils.decorate import message_response
+from utils import pack_msg
 
 from core.prison import Prison
-from core.notify import prison_notify
 
-logger = logging.getLogger('sanguo')
+from protomsg import PrisonerGetResponse
 
-@message_response("OpenTrainSlotResponse")
-def open_slot(request):
-    req = request._proto
-    char_id = request._char_id
-
-    p = Prison(char_id)
-    p.open_slot()
-
-    prison_notify(char_id, prison=p)
+@message_response("PrisonIncrAmountResponse")
+def incr_prisoners_amount(request):
+    p = Prison(request._char_id)
+    p.incr_amount()
     return None
 
 
-@message_response("TrainResponse")
-def train(request):
+@message_response("PrisonerAddProbResponse")
+def prisoner_add_prob(request):
     req = request._proto
-    char_id = request._char_id
-
-    try:
-        prison = MongoPrison.objects.get(id=char_id)
-    except DoesNotExist:
-        logger.warning("Train. Char {0} has NO prison".format(char_id))
-        raise InvalidOperate()
-
-    prisoners = prison.prisoners
-    if str(req.hero) not in prisoners:
-        logger.warning("Train. Char {0} wanna train a NONE exist prisoner".format(char_id))
-        raise InvalidOperate()
-
-    this_prisoner = prisoners[str(req.hero)]
-    if this_prisoner.status != PrisonerProtoMsg.NOT:
-        logger.warning("Train. Char {0} wanna train a prisoner who can NOT train. {1}".format(
-            char_id, this_prisoner.status
-        ))
-        raise SanguoException(801)
-
-    in_train_amount = 0
-    for p in prisoners.values():
-        if p.status == PrisonerProtoMsg.IN or p.status == PrisonerProtoMsg.FINISH:
-            in_train_amount += 1
-
-    # FIXME
-    if in_train_amount >= 3:
-        logger.warning("Train. Char {0} train amount full, Cannot train".format(char_id))
-        raise SanguoException(802)
-
-
-
-    # 如果以前处于NOT状态，那么还有一个NOT转变为OUT的job
-    # 先将其取消
-    # FIXME , countdown
-    tasks.cancel(this_prisoner.jobid)
-    # job = sched.apply_async(
-    #     (timers.prisoner_job, char_id, req.hero, PrisonerProtoMsg.IN),
-    #     countdown=10
-    # )
-    job = tasks.prisoner_change.apply_async((char_id, req.hero, PrisonerProtoMsg.IN), countdown=10)
-
-    this_prisoner.status = PrisonerProtoMsg.IN
-    this_prisoner.jobid = job.id
-
-    prison.save()
-
-    prisoner_changed_signal.send(
-        sender=None,
-        char_id=char_id,
-        mongo_prisoner_obj=this_prisoner
-    )
-
-    logger.debug("Train. Char {0} start a training. {1}".format(
-        char_id, req.hero
-    ))
+    p = Prison(request)
+    p.prisoner_incr_prob(req.id)
     return None
 
-@message_response("GetPrisonerResponse")
-def get(request):
+@message_response("PrisonerGetResponse")
+def prisoner_get(request):
     req = request._proto
-    char_id = request._char_id
+    p = Prison(request._char_id)
+    got = p.prisoner_get(req.id)
 
-    try:
-        prison = MongoPrison.objects.get(id=char_id)
-    except DoesNotExist:
-        raise InvalidOperate()
-
-    prisoners = prison.prisoners
-    if str(req.hero) not in prisoners:
-        raise InvalidOperate()
-
-    this_prisoner = prisoners[str(req.hero)]
-    if this_prisoner.status == PrisonerProtoMsg.IN:
-        raise SanguoException(803)
-
-    if this_prisoner.status == PrisonerProtoMsg.NOT:
-        # 直接招降
-        pass
-    elif this_prisoner.status == PrisonerProtoMsg.IN:
-        # 加速
-        pass
-    elif this_prisoner.status == PrisonerProtoMsg.OUT:
-        # 直接招降
-        pass
-    else:
-        # 已经完成
-        pass
-
-    # FIXME 扣除元宝
-    # FIXME 检查武将包裹是否满了
-
-    save_hero(char_id, this_prisoner.oid)
-    tasks.cancel(this_prisoner.jobid)
-
-    del prison.prisoners[str(req.hero)]
-    prison.save()
-
-    prisoner_del_signal.send(
-        sender=None,
-        char_id=char_id,
-        prisoner_id=req.hero
-    )
-    return None
+    msg = PrisonerGetResponse()
+    msg.success = got
+    return pack_msg(msg)

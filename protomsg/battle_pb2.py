@@ -14,7 +14,7 @@ import world_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='battle.proto',
   package='Sanguo.protocol.battle',
-  serialized_pb='\n\x0c\x62\x61ttle.proto\x12\x16Sanguo.protocol.battle\x1a\x0bworld.proto\"!\n\x05Stage\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04star\x18\x02 \x02(\x08\"T\n\x12\x41lreadyStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12-\n\x06stages\x18\x02 \x03(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"S\n\x12\x43urrentStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x05stage\x18\x02 \x02(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"O\n\x0eNewStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x05stage\x18\x02 \x02(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"\x95\x01\n\nBattleHero\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x13\n\x0boriginal_id\x18\x02 \x02(\x05\x12\n\n\x02hp\x18\x03 \x02(\x05\x12\x37\n\x02ht\x18\x04 \x02(\x0e\x32+.Sanguo.protocol.battle.BattleHero.HeroType\"!\n\x08HeroType\x12\x08\n\x04HERO\x10\x01\x12\x0b\n\x07MONSTER\x10\x02\"\xba\x03\n\x04Step\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x33\n\x06\x61\x63tion\x18\x02 \x01(\x0b\x32#.Sanguo.protocol.battle.Step.Action\x12<\n\x0bhero_notify\x18\x03 \x03(\x0b\x32\'.Sanguo.protocol.battle.Step.HeroNotify\x1a\x85\x01\n\x06\x41\x63tion\x12\x10\n\x08skill_id\x18\x01 \x01(\x05\x12;\n\x07targets\x18\x02 \x03(\x0b\x32*.Sanguo.protocol.battle.Step.Action.Target\x1a,\n\x06Target\x12\x11\n\ttarget_id\x18\x01 \x02(\x05\x12\x0f\n\x07is_crit\x18\x02 \x02(\x08\x1a\xaa\x01\n\nHeroNotify\x12\x11\n\ttarget_id\x18\x01 \x02(\x05\x12\n\n\x02hp\x18\x02 \x02(\x05\x12:\n\x04\x61\x64\x64s\x18\x03 \x03(\x0b\x32,.Sanguo.protocol.battle.Step.HeroNotify.Buff\x12\x0f\n\x07removes\x18\x04 \x03(\x05\x12\r\n\x05value\x18\x05 \x01(\x05\x1a!\n\x04\x42uff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05value\x18\x02 \x01(\x05\"\xb8\x01\n\x06Ground\x12\x36\n\nself_heros\x18\x01 \x03(\x0b\x32\".Sanguo.protocol.battle.BattleHero\x12\x37\n\x0brival_heros\x18\x02 \x03(\x0b\x32\".Sanguo.protocol.battle.BattleHero\x12\x10\n\x08self_win\x18\x03 \x02(\x08\x12+\n\x05steps\x18\x04 \x03(\x0b\x32\x1c.Sanguo.protocol.battle.Step\"\x8d\x02\n\x06\x42\x61ttle\x12\x12\n\nself_power\x18\x01 \x02(\x05\x12\x13\n\x0brival_power\x18\x02 \x02(\x05\x12\x11\n\tself_name\x18\x03 \x02(\t\x12\x12\n\nrival_name\x18\x04 \x02(\t\x12\x34\n\x0c\x66irst_ground\x18\x05 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x35\n\rsecond_ground\x18\x06 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x34\n\x0cthird_ground\x18\x07 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x10\n\x08self_win\x18\x08 \x02(\x08\"/\n\nPVERequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08stage_id\x18\x02 \x02(\x05\"\x9e\x01\n\x0bPVEResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08stage_id\x18\x03 \x01(\x05\x12.\n\x06\x62\x61ttle\x18\x04 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\x12/\n\x04\x64rop\x18\x05 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\"\xc1\x02\n\nHangNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x15\n\rremained_time\x18\x02 \x02(\x05\x12\x39\n\x04hang\x18\x03 \x01(\x0b\x32+.Sanguo.protocol.battle.HangNotify.HangInfo\x12;\n\x04logs\x18\x04 \x03(\x0b\x32-.Sanguo.protocol.battle.HangNotify.PlunderLog\x1aX\n\x08HangInfo\x12\x10\n\x08stage_id\x18\x01 \x02(\x05\x12\x12\n\nstart_time\x18\x02 \x02(\x05\x12\x10\n\x08\x66inished\x18\x03 \x02(\x08\x12\x14\n\x0crewared_gold\x18\x04 \x02(\x05\x1a\x39\n\nPlunderLog\x12\x10\n\x08\x61ttacker\x18\x01 \x02(\t\x12\x0b\n\x03win\x18\x02 \x02(\x08\x12\x0c\n\x04gold\x18\x03 \x02(\x05\"0\n\x0bHangRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08stage_id\x18\x02 \x02(\x05\",\n\x0cHangResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"$\n\x11HangCancelRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"2\n\x12HangCancelResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"X\n\rPlunderNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\x12\x12\n\nmax_amount\x18\x03 \x02(\x05\x12\x12\n\ncost_sycee\x18\x04 \x02(\x05\"@\n\x07Plunder\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x0c\n\x04gold\x18\x03 \x02(\x05\x12\r\n\x05power\x18\x04 \x02(\x05\"%\n\x12PlunderListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"f\n\x13PlunderListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x31\n\x08plunders\x18\x03 \x03(\x0b\x32\x1f.Sanguo.protocol.battle.Plunder\"-\n\x0ePlunderRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"\x90\x01\n\x0fPlunderResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12.\n\x06\x62\x61ttle\x18\x03 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\x12/\n\x04\x64rop\x18\x04 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\"\x83\x02\n\x08Prisoner\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0b\n\x03oid\x18\x02 \x02(\x05\x12\x12\n\nstart_time\x18\x03 \x02(\x05\x12<\n\x06status\x18\x04 \x02(\x0e\x32,.Sanguo.protocol.battle.Prisoner.TrainStatus\x12\r\n\x05value\x18\x05 \x01(\x05\x12\x0e\n\x06\x61ttack\x18\x06 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x07 \x02(\x05\x12\n\n\x02hp\x18\x08 \x02(\x05\x12\x0c\n\x04\x63rit\x18\t \x02(\x05\x12\r\n\x05\x64odge\x18\n \x02(\x05\"3\n\x0bTrainStatus\x12\x07\n\x03NOT\x10\x01\x12\x06\n\x02IN\x10\x02\x12\x07\n\x03OUT\x10\x03\x12\n\n\x06\x46INISH\x10\x04\"Y\n\x12PrisonerListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x08prisoner\x18\x02 \x03(\x0b\x32 .Sanguo.protocol.battle.Prisoner\"[\n\x14UpdatePrisonerNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x08prisoner\x18\x02 \x03(\x0b\x32 .Sanguo.protocol.battle.Prisoner\"X\n\x11NewPrisonerNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x08prisoner\x18\x02 \x03(\x0b\x32 .Sanguo.protocol.battle.Prisoner\"4\n\x14RemovePrisonerNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"w\n\x0cPrisonNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\r\n\x05slots\x18\x02 \x02(\x05\x12\x11\n\tmax_slots\x18\x03 \x02(\x05\x12\x1c\n\x14max_prisoners_amount\x18\x04 \x02(\x05\x12\x16\n\x0eopen_slot_cost\x18\x05 \x02(\x05\"\'\n\x14OpenTrainSlotRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"5\n\x15OpenTrainSlotResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"-\n\x0cTrainRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0c\n\x04hero\x18\x02 \x02(\x05\"-\n\rTrainResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"3\n\x12GetPrisonerRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0c\n\x04hero\x18\x02 \x02(\x05\"3\n\x13GetPrisonerResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xfa\x01\n\x0b\x41renaNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tweek_rank\x18\x02 \x02(\x05\x12\x10\n\x08\x64\x61y_rank\x18\x03 \x02(\x05\x12\x12\n\nweek_score\x18\x04 \x02(\x05\x12\x11\n\tday_score\x18\x05 \x02(\x05\x12\x17\n\x0fremained_amount\x18\x06 \x02(\x05\x12>\n\x05\x63hars\x18\x07 \x03(\x0b\x32/.Sanguo.protocol.battle.ArenaNotify.NBCharacter\x1a\x35\n\x0bNBCharacter\x12\x0c\n\x04rank\x18\x01 \x02(\x05\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0c\n\x04name\x18\x03 \x02(\t\"\x1f\n\x0c\x41renaRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"l\n\rArenaResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12.\n\x06\x62\x61ttle\x18\x03 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\x12\r\n\x05score\x18\x04 \x01(\x05')
+  serialized_pb='\n\x0c\x62\x61ttle.proto\x12\x16Sanguo.protocol.battle\x1a\x0bworld.proto\"!\n\x05Stage\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04star\x18\x02 \x02(\x08\"T\n\x12\x41lreadyStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12-\n\x06stages\x18\x02 \x03(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"S\n\x12\x43urrentStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x05stage\x18\x02 \x02(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"O\n\x0eNewStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x05stage\x18\x02 \x02(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"\x95\x01\n\nBattleHero\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x13\n\x0boriginal_id\x18\x02 \x02(\x05\x12\n\n\x02hp\x18\x03 \x02(\x05\x12\x37\n\x02ht\x18\x04 \x02(\x0e\x32+.Sanguo.protocol.battle.BattleHero.HeroType\"!\n\x08HeroType\x12\x08\n\x04HERO\x10\x01\x12\x0b\n\x07MONSTER\x10\x02\"\xba\x03\n\x04Step\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x33\n\x06\x61\x63tion\x18\x02 \x01(\x0b\x32#.Sanguo.protocol.battle.Step.Action\x12<\n\x0bhero_notify\x18\x03 \x03(\x0b\x32\'.Sanguo.protocol.battle.Step.HeroNotify\x1a\x85\x01\n\x06\x41\x63tion\x12\x10\n\x08skill_id\x18\x01 \x01(\x05\x12;\n\x07targets\x18\x02 \x03(\x0b\x32*.Sanguo.protocol.battle.Step.Action.Target\x1a,\n\x06Target\x12\x11\n\ttarget_id\x18\x01 \x02(\x05\x12\x0f\n\x07is_crit\x18\x02 \x02(\x08\x1a\xaa\x01\n\nHeroNotify\x12\x11\n\ttarget_id\x18\x01 \x02(\x05\x12\n\n\x02hp\x18\x02 \x02(\x05\x12:\n\x04\x61\x64\x64s\x18\x03 \x03(\x0b\x32,.Sanguo.protocol.battle.Step.HeroNotify.Buff\x12\x0f\n\x07removes\x18\x04 \x03(\x05\x12\r\n\x05value\x18\x05 \x01(\x05\x1a!\n\x04\x42uff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05value\x18\x02 \x01(\x05\"\xb8\x01\n\x06Ground\x12\x36\n\nself_heros\x18\x01 \x03(\x0b\x32\".Sanguo.protocol.battle.BattleHero\x12\x37\n\x0brival_heros\x18\x02 \x03(\x0b\x32\".Sanguo.protocol.battle.BattleHero\x12\x10\n\x08self_win\x18\x03 \x02(\x08\x12+\n\x05steps\x18\x04 \x03(\x0b\x32\x1c.Sanguo.protocol.battle.Step\"\x8d\x02\n\x06\x42\x61ttle\x12\x12\n\nself_power\x18\x01 \x02(\x05\x12\x13\n\x0brival_power\x18\x02 \x02(\x05\x12\x11\n\tself_name\x18\x03 \x02(\t\x12\x12\n\nrival_name\x18\x04 \x02(\t\x12\x34\n\x0c\x66irst_ground\x18\x05 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x35\n\rsecond_ground\x18\x06 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x34\n\x0cthird_ground\x18\x07 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x10\n\x08self_win\x18\x08 \x02(\x08\"/\n\nPVERequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08stage_id\x18\x02 \x02(\x05\"\x9e\x01\n\x0bPVEResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08stage_id\x18\x03 \x01(\x05\x12.\n\x06\x62\x61ttle\x18\x04 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\x12/\n\x04\x64rop\x18\x05 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\"\xc1\x02\n\nHangNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x15\n\rremained_time\x18\x02 \x02(\x05\x12\x39\n\x04hang\x18\x03 \x01(\x0b\x32+.Sanguo.protocol.battle.HangNotify.HangInfo\x12;\n\x04logs\x18\x04 \x03(\x0b\x32-.Sanguo.protocol.battle.HangNotify.PlunderLog\x1aX\n\x08HangInfo\x12\x10\n\x08stage_id\x18\x01 \x02(\x05\x12\x12\n\nstart_time\x18\x02 \x02(\x05\x12\x10\n\x08\x66inished\x18\x03 \x02(\x08\x12\x14\n\x0crewared_gold\x18\x04 \x02(\x05\x1a\x39\n\nPlunderLog\x12\x10\n\x08\x61ttacker\x18\x01 \x02(\t\x12\x0b\n\x03win\x18\x02 \x02(\x08\x12\x0c\n\x04gold\x18\x03 \x02(\x05\"0\n\x0bHangRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08stage_id\x18\x02 \x02(\x05\",\n\x0cHangResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"$\n\x11HangCancelRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"2\n\x12HangCancelResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"X\n\rPlunderNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\x12\x12\n\nmax_amount\x18\x03 \x02(\x05\x12\x12\n\ncost_sycee\x18\x04 \x02(\x05\"@\n\x07Plunder\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x0c\n\x04gold\x18\x03 \x02(\x05\x12\r\n\x05power\x18\x04 \x02(\x05\"%\n\x12PlunderListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"f\n\x13PlunderListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x31\n\x08plunders\x18\x03 \x03(\x0b\x32\x1f.Sanguo.protocol.battle.Plunder\"-\n\x0ePlunderRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"\x90\x01\n\x0fPlunderResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12.\n\x06\x62\x61ttle\x18\x03 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\x12/\n\x04\x64rop\x18\x04 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\"l\n\x08Prisoner\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0b\n\x03oid\x18\x02 \x02(\x05\x12\x0c\n\x04prob\x18\x03 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x04 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x05 \x02(\x05\x12\n\n\x02hp\x18\x06 \x02(\x05\x12\x0c\n\x04\x63rit\x18\x07 \x02(\x05\"Y\n\x12PrisonerListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x08prisoner\x18\x02 \x03(\x0b\x32 .Sanguo.protocol.battle.Prisoner\"[\n\x14UpdatePrisonerNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x08prisoner\x18\x02 \x03(\x0b\x32 .Sanguo.protocol.battle.Prisoner\"X\n\x11NewPrisonerNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x08prisoner\x18\x02 \x03(\x0b\x32 .Sanguo.protocol.battle.Prisoner\"4\n\x14RemovePrisonerNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"5\n\x16PrisonerAddProbRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"7\n\x17PrisonerAddProbResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"1\n\x12PrisonerGetRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"D\n\x13PrisonerGetResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x0f\n\x07success\x18\x03 \x01(\x08\"W\n\x0cPrisonNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x1c\n\x14max_prisoners_amount\x18\x02 \x02(\x05\x12\x18\n\x10incr_amount_cost\x18\x03 \x02(\x05\"*\n\x17PrisonIncrAmountRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"8\n\x18PrisonIncrAmountResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xfa\x01\n\x0b\x41renaNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tweek_rank\x18\x02 \x02(\x05\x12\x10\n\x08\x64\x61y_rank\x18\x03 \x02(\x05\x12\x12\n\nweek_score\x18\x04 \x02(\x05\x12\x11\n\tday_score\x18\x05 \x02(\x05\x12\x17\n\x0fremained_amount\x18\x06 \x02(\x05\x12>\n\x05\x63hars\x18\x07 \x03(\x0b\x32/.Sanguo.protocol.battle.ArenaNotify.NBCharacter\x1a\x35\n\x0bNBCharacter\x12\x0c\n\x04rank\x18\x01 \x02(\x05\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0c\n\x04name\x18\x03 \x02(\t\"\x1f\n\x0c\x41renaRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"l\n\rArenaResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12.\n\x06\x62\x61ttle\x18\x03 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\x12\r\n\x05score\x18\x04 \x01(\x05')
 
 
 
@@ -37,35 +37,6 @@ _BATTLEHERO_HEROTYPE = _descriptor.EnumDescriptor(
   options=None,
   serialized_start=457,
   serialized_end=490,
-)
-
-_PRISONER_TRAINSTATUS = _descriptor.EnumDescriptor(
-  name='TrainStatus',
-  full_name='Sanguo.protocol.battle.Prisoner.TrainStatus',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='NOT', index=0, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='IN', index=1, number=2,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='OUT', index=2, number=3,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='FINISH', index=3, number=4,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=2818,
-  serialized_end=2869,
 )
 
 
@@ -1220,57 +1191,36 @@ _PRISONER = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='start_time', full_name='Sanguo.protocol.battle.Prisoner.start_time', index=2,
+      name='prob', full_name='Sanguo.protocol.battle.Prisoner.prob', index=2,
       number=3, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='status', full_name='Sanguo.protocol.battle.Prisoner.status', index=3,
-      number=4, type=14, cpp_type=8, label=2,
-      has_default_value=False, default_value=1,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='Sanguo.protocol.battle.Prisoner.value', index=4,
-      number=5, type=5, cpp_type=1, label=1,
+      name='attack', full_name='Sanguo.protocol.battle.Prisoner.attack', index=3,
+      number=4, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='attack', full_name='Sanguo.protocol.battle.Prisoner.attack', index=5,
+      name='defense', full_name='Sanguo.protocol.battle.Prisoner.defense', index=4,
+      number=5, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='hp', full_name='Sanguo.protocol.battle.Prisoner.hp', index=5,
       number=6, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='defense', full_name='Sanguo.protocol.battle.Prisoner.defense', index=6,
+      name='crit', full_name='Sanguo.protocol.battle.Prisoner.crit', index=6,
       number=7, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='hp', full_name='Sanguo.protocol.battle.Prisoner.hp', index=7,
-      number=8, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='crit', full_name='Sanguo.protocol.battle.Prisoner.crit', index=8,
-      number=9, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='dodge', full_name='Sanguo.protocol.battle.Prisoner.dodge', index=9,
-      number=10, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -1280,13 +1230,12 @@ _PRISONER = _descriptor.Descriptor(
   ],
   nested_types=[],
   enum_types=[
-    _PRISONER_TRAINSTATUS,
   ],
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2610,
-  serialized_end=2869,
+  serialized_start=2609,
+  serialized_end=2717,
 )
 
 
@@ -1320,8 +1269,8 @@ _PRISONERLISTNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2871,
-  serialized_end=2960,
+  serialized_start=2719,
+  serialized_end=2808,
 )
 
 
@@ -1355,8 +1304,8 @@ _UPDATEPRISONERNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2962,
-  serialized_end=3053,
+  serialized_start=2810,
+  serialized_end=2901,
 )
 
 
@@ -1390,8 +1339,8 @@ _NEWPRISONERNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3055,
-  serialized_end=3143,
+  serialized_start=2903,
+  serialized_end=2991,
 )
 
 
@@ -1425,8 +1374,155 @@ _REMOVEPRISONERNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3145,
-  serialized_end=3197,
+  serialized_start=2993,
+  serialized_end=3045,
+)
+
+
+_PRISONERADDPROBREQUEST = _descriptor.Descriptor(
+  name='PrisonerAddProbRequest',
+  full_name='Sanguo.protocol.battle.PrisonerAddProbRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.battle.PrisonerAddProbRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='Sanguo.protocol.battle.PrisonerAddProbRequest.id', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3047,
+  serialized_end=3100,
+)
+
+
+_PRISONERADDPROBRESPONSE = _descriptor.Descriptor(
+  name='PrisonerAddProbResponse',
+  full_name='Sanguo.protocol.battle.PrisonerAddProbResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.battle.PrisonerAddProbResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.battle.PrisonerAddProbResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3102,
+  serialized_end=3157,
+)
+
+
+_PRISONERGETREQUEST = _descriptor.Descriptor(
+  name='PrisonerGetRequest',
+  full_name='Sanguo.protocol.battle.PrisonerGetRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.battle.PrisonerGetRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='Sanguo.protocol.battle.PrisonerGetRequest.id', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3159,
+  serialized_end=3208,
+)
+
+
+_PRISONERGETRESPONSE = _descriptor.Descriptor(
+  name='PrisonerGetResponse',
+  full_name='Sanguo.protocol.battle.PrisonerGetResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.battle.PrisonerGetResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.battle.PrisonerGetResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='success', full_name='Sanguo.protocol.battle.PrisonerGetResponse.success', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3210,
+  serialized_end=3278,
 )
 
 
@@ -1445,33 +1541,19 @@ _PRISONNOTIFY = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='slots', full_name='Sanguo.protocol.battle.PrisonNotify.slots', index=1,
+      name='max_prisoners_amount', full_name='Sanguo.protocol.battle.PrisonNotify.max_prisoners_amount', index=1,
       number=2, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='max_slots', full_name='Sanguo.protocol.battle.PrisonNotify.max_slots', index=2,
+      name='incr_amount_cost', full_name='Sanguo.protocol.battle.PrisonNotify.incr_amount_cost', index=2,
       number=3, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
-    _descriptor.FieldDescriptor(
-      name='max_prisoners_amount', full_name='Sanguo.protocol.battle.PrisonNotify.max_prisoners_amount', index=3,
-      number=4, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='open_slot_cost', full_name='Sanguo.protocol.battle.PrisonNotify.open_slot_cost', index=4,
-      number=5, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
   ],
   extensions=[
   ],
@@ -1481,20 +1563,20 @@ _PRISONNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3199,
-  serialized_end=3318,
+  serialized_start=3280,
+  serialized_end=3367,
 )
 
 
-_OPENTRAINSLOTREQUEST = _descriptor.Descriptor(
-  name='OpenTrainSlotRequest',
-  full_name='Sanguo.protocol.battle.OpenTrainSlotRequest',
+_PRISONINCRAMOUNTREQUEST = _descriptor.Descriptor(
+  name='PrisonIncrAmountRequest',
+  full_name='Sanguo.protocol.battle.PrisonIncrAmountRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='session', full_name='Sanguo.protocol.battle.OpenTrainSlotRequest.session', index=0,
+      name='session', full_name='Sanguo.protocol.battle.PrisonIncrAmountRequest.session', index=0,
       number=1, type=12, cpp_type=9, label=2,
       has_default_value=False, default_value="",
       message_type=None, enum_type=None, containing_type=None,
@@ -1509,27 +1591,27 @@ _OPENTRAINSLOTREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3320,
-  serialized_end=3359,
+  serialized_start=3369,
+  serialized_end=3411,
 )
 
 
-_OPENTRAINSLOTRESPONSE = _descriptor.Descriptor(
-  name='OpenTrainSlotResponse',
-  full_name='Sanguo.protocol.battle.OpenTrainSlotResponse',
+_PRISONINCRAMOUNTRESPONSE = _descriptor.Descriptor(
+  name='PrisonIncrAmountResponse',
+  full_name='Sanguo.protocol.battle.PrisonIncrAmountResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ret', full_name='Sanguo.protocol.battle.OpenTrainSlotResponse.ret', index=0,
+      name='ret', full_name='Sanguo.protocol.battle.PrisonIncrAmountResponse.ret', index=0,
       number=1, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='session', full_name='Sanguo.protocol.battle.OpenTrainSlotResponse.session', index=1,
+      name='session', full_name='Sanguo.protocol.battle.PrisonIncrAmountResponse.session', index=1,
       number=2, type=12, cpp_type=9, label=2,
       has_default_value=False, default_value="",
       message_type=None, enum_type=None, containing_type=None,
@@ -1544,148 +1626,8 @@ _OPENTRAINSLOTRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3361,
-  serialized_end=3414,
-)
-
-
-_TRAINREQUEST = _descriptor.Descriptor(
-  name='TrainRequest',
-  full_name='Sanguo.protocol.battle.TrainRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='session', full_name='Sanguo.protocol.battle.TrainRequest.session', index=0,
-      number=1, type=12, cpp_type=9, label=2,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='hero', full_name='Sanguo.protocol.battle.TrainRequest.hero', index=1,
-      number=2, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=3416,
-  serialized_end=3461,
-)
-
-
-_TRAINRESPONSE = _descriptor.Descriptor(
-  name='TrainResponse',
-  full_name='Sanguo.protocol.battle.TrainResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ret', full_name='Sanguo.protocol.battle.TrainResponse.ret', index=0,
-      number=1, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='session', full_name='Sanguo.protocol.battle.TrainResponse.session', index=1,
-      number=2, type=12, cpp_type=9, label=2,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=3463,
-  serialized_end=3508,
-)
-
-
-_GETPRISONERREQUEST = _descriptor.Descriptor(
-  name='GetPrisonerRequest',
-  full_name='Sanguo.protocol.battle.GetPrisonerRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='session', full_name='Sanguo.protocol.battle.GetPrisonerRequest.session', index=0,
-      number=1, type=12, cpp_type=9, label=2,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='hero', full_name='Sanguo.protocol.battle.GetPrisonerRequest.hero', index=1,
-      number=2, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=3510,
-  serialized_end=3561,
-)
-
-
-_GETPRISONERRESPONSE = _descriptor.Descriptor(
-  name='GetPrisonerResponse',
-  full_name='Sanguo.protocol.battle.GetPrisonerResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ret', full_name='Sanguo.protocol.battle.GetPrisonerResponse.ret', index=0,
-      number=1, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='session', full_name='Sanguo.protocol.battle.GetPrisonerResponse.session', index=1,
-      number=2, type=12, cpp_type=9, label=2,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=3563,
-  serialized_end=3614,
+  serialized_start=3413,
+  serialized_end=3469,
 )
 
 
@@ -1726,8 +1668,8 @@ _ARENANOTIFY_NBCHARACTER = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3814,
-  serialized_end=3867,
+  serialized_start=3669,
+  serialized_end=3722,
 )
 
 _ARENANOTIFY = _descriptor.Descriptor(
@@ -1795,8 +1737,8 @@ _ARENANOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3617,
-  serialized_end=3867,
+  serialized_start=3472,
+  serialized_end=3722,
 )
 
 
@@ -1823,8 +1765,8 @@ _ARENAREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3869,
-  serialized_end=3900,
+  serialized_start=3724,
+  serialized_end=3755,
 )
 
 
@@ -1872,8 +1814,8 @@ _ARENARESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3902,
-  serialized_end=4010,
+  serialized_start=3757,
+  serialized_end=3865,
 )
 
 _ALREADYSTAGENOTIFY.fields_by_name['stages'].message_type = _STAGE
@@ -1904,8 +1846,6 @@ _HANGNOTIFY.fields_by_name['logs'].message_type = _HANGNOTIFY_PLUNDERLOG
 _PLUNDERLISTRESPONSE.fields_by_name['plunders'].message_type = _PLUNDER
 _PLUNDERRESPONSE.fields_by_name['battle'].message_type = _BATTLE
 _PLUNDERRESPONSE.fields_by_name['drop'].message_type = world_pb2._ATTACHMENT
-_PRISONER.fields_by_name['status'].enum_type = _PRISONER_TRAINSTATUS
-_PRISONER_TRAINSTATUS.containing_type = _PRISONER;
 _PRISONERLISTNOTIFY.fields_by_name['prisoner'].message_type = _PRISONER
 _UPDATEPRISONERNOTIFY.fields_by_name['prisoner'].message_type = _PRISONER
 _NEWPRISONERNOTIFY.fields_by_name['prisoner'].message_type = _PRISONER
@@ -1938,13 +1878,13 @@ DESCRIPTOR.message_types_by_name['PrisonerListNotify'] = _PRISONERLISTNOTIFY
 DESCRIPTOR.message_types_by_name['UpdatePrisonerNotify'] = _UPDATEPRISONERNOTIFY
 DESCRIPTOR.message_types_by_name['NewPrisonerNotify'] = _NEWPRISONERNOTIFY
 DESCRIPTOR.message_types_by_name['RemovePrisonerNotify'] = _REMOVEPRISONERNOTIFY
+DESCRIPTOR.message_types_by_name['PrisonerAddProbRequest'] = _PRISONERADDPROBREQUEST
+DESCRIPTOR.message_types_by_name['PrisonerAddProbResponse'] = _PRISONERADDPROBRESPONSE
+DESCRIPTOR.message_types_by_name['PrisonerGetRequest'] = _PRISONERGETREQUEST
+DESCRIPTOR.message_types_by_name['PrisonerGetResponse'] = _PRISONERGETRESPONSE
 DESCRIPTOR.message_types_by_name['PrisonNotify'] = _PRISONNOTIFY
-DESCRIPTOR.message_types_by_name['OpenTrainSlotRequest'] = _OPENTRAINSLOTREQUEST
-DESCRIPTOR.message_types_by_name['OpenTrainSlotResponse'] = _OPENTRAINSLOTRESPONSE
-DESCRIPTOR.message_types_by_name['TrainRequest'] = _TRAINREQUEST
-DESCRIPTOR.message_types_by_name['TrainResponse'] = _TRAINRESPONSE
-DESCRIPTOR.message_types_by_name['GetPrisonerRequest'] = _GETPRISONERREQUEST
-DESCRIPTOR.message_types_by_name['GetPrisonerResponse'] = _GETPRISONERRESPONSE
+DESCRIPTOR.message_types_by_name['PrisonIncrAmountRequest'] = _PRISONINCRAMOUNTREQUEST
+DESCRIPTOR.message_types_by_name['PrisonIncrAmountResponse'] = _PRISONINCRAMOUNTRESPONSE
 DESCRIPTOR.message_types_by_name['ArenaNotify'] = _ARENANOTIFY
 DESCRIPTOR.message_types_by_name['ArenaRequest'] = _ARENAREQUEST
 DESCRIPTOR.message_types_by_name['ArenaResponse'] = _ARENARESPONSE
@@ -2141,47 +2081,47 @@ class RemovePrisonerNotify(_message.Message):
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.RemovePrisonerNotify)
 
+class PrisonerAddProbRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _PRISONERADDPROBREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.PrisonerAddProbRequest)
+
+class PrisonerAddProbResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _PRISONERADDPROBRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.PrisonerAddProbResponse)
+
+class PrisonerGetRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _PRISONERGETREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.PrisonerGetRequest)
+
+class PrisonerGetResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _PRISONERGETRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.PrisonerGetResponse)
+
 class PrisonNotify(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _PRISONNOTIFY
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.PrisonNotify)
 
-class OpenTrainSlotRequest(_message.Message):
+class PrisonIncrAmountRequest(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _OPENTRAINSLOTREQUEST
+  DESCRIPTOR = _PRISONINCRAMOUNTREQUEST
 
-  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.OpenTrainSlotRequest)
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.PrisonIncrAmountRequest)
 
-class OpenTrainSlotResponse(_message.Message):
+class PrisonIncrAmountResponse(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _OPENTRAINSLOTRESPONSE
+  DESCRIPTOR = _PRISONINCRAMOUNTRESPONSE
 
-  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.OpenTrainSlotResponse)
-
-class TrainRequest(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _TRAINREQUEST
-
-  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.TrainRequest)
-
-class TrainResponse(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _TRAINRESPONSE
-
-  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.TrainResponse)
-
-class GetPrisonerRequest(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _GETPRISONERREQUEST
-
-  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.GetPrisonerRequest)
-
-class GetPrisonerResponse(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _GETPRISONERRESPONSE
-
-  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.GetPrisonerResponse)
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.battle.PrisonIncrAmountResponse)
 
 class ArenaNotify(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType

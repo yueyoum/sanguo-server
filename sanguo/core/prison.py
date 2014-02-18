@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
+import random
+
 from mongoengine import DoesNotExist
-
 from core.mongoscheme import MongoPrison, MongoEmbededPrisoner
-from worker import tasks
-from protomsg import Prisoner as PrisonerProtoMsg
-from core.exception import SyceeNotEnough, SanguoException
+from core.exception import SyceeNotEnough
 from core.character import Char
-
-from utils import timezone
-
-from core.signals import prisoner_add_signal
-from preset.settings import COST_OPEN_PRISON_SLOT, MAX_PRISON_TRAIN_SLOT, MAX_PRISONERS_AMOUNT
-
+from core.exception import InvalidOperate
+from core.hero import save_hero
+from preset.settings import MAX_PRISONERS_AMOUNT, PRISON_INCR_AMOUNT_COST
+import protomsg
+from utils import pack_msg
+from core.msgpipe import publish_to_char
 
 class Prison(object):
     def __init__(self, char_id):
@@ -19,68 +18,113 @@ class Prison(object):
         try:
             self.p = MongoPrison.objects.get(id=self.char_id)
         except DoesNotExist:
-            self.p = MongoPrison(id=self.char_id, amount=0)
+            self.p = MongoPrison(id=self.char_id, amount=MAX_PRISONERS_AMOUNT)
             self.p.save()
-
-        self.slots = self.p.amount
-
-    @property
-    def max_slots(self):
-        return MAX_PRISON_TRAIN_SLOT
-
-    @property
-    def open_slot_cost(self):
-        return COST_OPEN_PRISON_SLOT
-
-    def open_slot(self):
-        if self.slots >= self.max_slots:
-            raise SanguoException(804)
-
-        c = Char(self.char_id)
-        cache_char = c.cacheobj
-        if cache_char.sycee < self.open_slot_cost:
-            raise SyceeNotEnough()
-
-        self.p.amount += 1
-        self.p.save()
-
-        c.update(sycee=-COST_OPEN_PRISON_SLOT)
 
     @property
     def max_prisoner_amount(self):
-        return MAX_PRISONERS_AMOUNT
+        return self.p.amount
 
     def prisoner_full(self):
         return len(self.p.prisoners) >= self.max_prisoner_amount
 
+    def incr_max_prisoner_amount(self):
+        # TODO
+        pass
 
-def save_prisoner(char_id, oid):
-    prison = MongoPrison.objects.only('prisoners').get(id=char_id)
-    prisoner_ids = [int(i) for i in prison.prisoners.keys()]
 
-    new_persioner_id = 1
-    while True:
-        if new_persioner_id not in prisoner_ids:
-            break
-        new_persioner_id += 1
+    def prisoner_add(self, oid):
+        if self.prisoner_full():
+            return
+        prisoner_ids = [int(i) for i in self.p.prisoners.keys()]
 
-    # FIXME
-    job = tasks.prisoner_change.apply_async((char_id, new_persioner_id, PrisonerProtoMsg.NOT), countdown=60)
+        new_prisoner_id = 1
+        while True:
+            if new_prisoner_id not in prisoner_ids:
+                break
+            new_prisoner_id += 1
 
-    p = MongoEmbededPrisoner()
-    p.id = new_persioner_id
-    p.oid = oid
-    p.start_time = timezone.utc_timestamp()
-    p.status = PrisonerProtoMsg.NOT
-    p.jobid = job.id
+        # FIXME 初始概率
+        prob = 10
+        p = MongoEmbededPrisoner()
+        p.oid = oid
+        p.prob = prob
 
-    prison.prisoners[str(new_persioner_id)] = p
-    prison.save()
+        self.p.prisoners[str(new_prisoner_id)] = p
+        self.p.save()
 
-    prisoner_add_signal.send(
-        sender=None,
-        char_id=char_id,
-        mongo_prisoner_obj=p
-    )
+        msg = protomsg.NewPrisonerNotify()
+        p = msg.prisoner.add()
+        self._fill_up_prisoner_msg(p, new_prisoner_id, oid, prob)
 
-    return p
+        publish_to_char(self.char_id, pack_msg(msg))
+
+    def prisoner_incr_prob(self, _id):
+        str_id = str(_id)
+        if str_id not in self.p.prisoners:
+            raise InvalidOperate("Prisoner Incr Prob: Char {0} Try to Incr prob for a NONE exists prisoner {1}".format(self.char_id, _id))
+
+        # TODO 消耗物品。增加多少几率
+        self.p.prisoners[str_id].prob += 10
+        if self.p.prisoners[str_id].prob > 100:
+            self.p.prisoners[str_id].prob = 100
+        self.p.save()
+
+        msg = protomsg.UpdatePrisonerNotify()
+        p = msg.prisoner.add()
+        self._fill_up_prisoner_msg(p, _id, self.p.prisoners[str_id].oid, self.p.prisoners[str_id].prob)
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
+    def prisoner_get(self, _id):
+        str_id = str(_id)
+        if str_id not in self.p.prisoners:
+            raise InvalidOperate("Prisoner Get: Char {0} Try to get a NONE exist prisoner {1}".format(self.char_id, _id))
+
+        got = False
+        prob = self.p.prisoners[str_id].prob
+        if prob >= random.randint(1, 100):
+            # got it
+            save_hero(self.char_id, self.p.prisoners[str_id].oid)
+            got = True
+
+        self.p.prisoners.pop(str_id)
+        self.p.save()
+
+        msg = protomsg.RemovePrisonerNotify()
+        msg.ids.append(_id)
+        publish_to_char(self.char_id, pack_msg(msg))
+
+        return got
+
+
+    def incr_amount(self):
+        char = Char(self.char_id)
+        cache_char = char.cacheobj
+        if cache_char.sycee < PRISON_INCR_AMOUNT_COST:
+            raise SyceeNotEnough("Prison Incr Amount: Char {0} sycee not enough".format(self.char_id))
+
+        char.update(sycee=-PRISON_INCR_AMOUNT_COST)
+        self.p.amount += 1
+        self.p.save()
+        self.send_notify()
+
+
+    def _fill_up_prisoner_msg(self, p, _id, oid, prob):
+        p.id = _id
+        p.oid = oid
+        p.prob = prob
+
+        # FIXME
+        p.attack = 0
+        p.defense = 0
+        p.hp = 0
+        p.crit = 0
+
+
+    def send_notify(self):
+        msg = protomsg.PrisonNotify()
+        msg.max_prisoners_amount = self.max_prisoner_amount
+        msg.incr_amount_cost = PRISON_INCR_AMOUNT_COST
+        publish_to_char(self.char_id, pack_msg(msg))
+

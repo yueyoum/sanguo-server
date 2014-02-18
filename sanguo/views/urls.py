@@ -18,10 +18,9 @@ urlpatterns = patterns('',
                        url(r'^plunder/list/$', 'views.plunder.views.plunder_list'),
                        url(r'^plunder/$', 'views.plunder.views.plunder'),
 
-                       url(r'^prison/open/$', 'views.prison.views.open_slot'),
-
-                       url(r'^prisoner/train/$', 'views.prison.views.train'),
-                       url(r'^prisoner/get/$', 'views.prison.views.get'),
+                       url(r'^prison/incr/$', 'views.prison.views.incr_prisoners_amount'),
+                       url(r'^prisoner/addprob/$', 'views.prison.views.prisoner_add_prob'),
+                       url(r'^prisoner/get/$', 'views.prison.views.prisoner_get'),
 
                        url(r'^friend/player-list/$', 'views.friend.views.player_list'),
                        url(r'^friend/add/$', 'views.friend.views.add'),
@@ -35,5 +34,4 @@ urlpatterns = patterns('',
                        url(r'^mail/getattachment/$', 'views.mail.views.get_attachment'),
 
                        url(r'daily/checkin/$', 'views.daily.views.checkin'),
-                       url(r'daily/checkin/get-reward/$', 'views.daily.views.get_checkin_reward'),
 )

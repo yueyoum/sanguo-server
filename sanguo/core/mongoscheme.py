@@ -85,6 +85,20 @@ class MongoHero(Document):
 MongoHero.ensure_indexes()
 
 
+class MongoEmbededPlunderChar(EmbeddedDocument):
+    is_robot = BooleanField()
+    gold = IntField()
+
+class MongoPlunderList(Document):
+    id = IntField(primary_key=True)
+    chars = MapField(EmbeddedDocumentField(MongoEmbededPlunderChar))
+
+    meta = {
+        'collection': 'plunderlist'
+    }
+
+
+
 class MongoEmbededPlunderLog(EmbeddedDocument):
     name = StringField()
     gold = IntField()
@@ -119,12 +133,8 @@ MongoHang.ensure_indexes()
 
 
 class MongoEmbededPrisoner(EmbeddedDocument):
-    id = IntField()
     oid = IntField()
-    start_time = IntField()
-    status = IntField()
-    jobid = StringField()
-
+    prob = IntField()
 
 class MongoPrison(Document):
     id = IntField(primary_key=True)
