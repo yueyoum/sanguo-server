@@ -28,5 +28,6 @@ def prisoner_get(request):
     got = p.prisoner_get(req.id)
 
     msg = PrisonerGetResponse()
+    msg.ret = 0
     msg.success = got
     return pack_msg(msg)

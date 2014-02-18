@@ -57,7 +57,7 @@ def plunder(request):
             cache_hero = Hero.cache_obj(h)
             rival_hero_oids.append(cache_hero.oid)
 
-        mongo_plunder_list = MongoPlunderList(char_id)
+        mongo_plunder_list = MongoPlunderList.objects.get(id=char_id)
         drop_gold = mongo_plunder_list.chars[str(req.id)].gold
 
         char = Char(char_id)

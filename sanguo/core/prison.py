@@ -132,6 +132,6 @@ class Prison(object):
         msg = protomsg.PrisonerListNotify()
         for k, v in self.p.prisoners.iteritems():
             p = msg.prisoner.add()
-            self._fill_up_prisoner_msg(p, int(k), v.oid, v.pro)
+            self._fill_up_prisoner_msg(p, int(k), v.oid, v.prob)
 
         publish_to_char(self.char_id, pack_msg(msg))
