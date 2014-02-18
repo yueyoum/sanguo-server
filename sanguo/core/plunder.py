@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 __author__ = 'Wang Chao'
 __date__ = '1/22/14'
 import random
@@ -17,7 +18,10 @@ from core.exception import InvalidOperate, CounterOverFlow, SyceeNotEnough
 from core.counter import Counter
 
 from protomsg import Battle as MsgBattle
+from protomsg import PlunderNotify
 from preset.settings import PLUNDER_COST_SYCEE
+from core.msgpipe import publish_to_char
+from utils import pack_msg
 
 PLUNDER_LEVEL_DIFF = 3
 
@@ -97,7 +101,6 @@ class Plunder(object):
 
         return res
 
-
     def plunder(self, _id):
         try:
             mongo_plunder_list = MongoPlunderList.objects.get(id=self.char_id)
@@ -129,3 +132,11 @@ class Plunder(object):
             h.plundered(char.cacheobj.name, msg.self_win)
         return msg
 
+
+    def send_notify(self):
+        count = Counter(self.char_id, 'plunder')
+        msg = PlunderNotify()
+        msg.amount = count.cur_value
+        msg.max_amount = count.max_value
+        msg.cost_sycee = PLUNDER_COST_SYCEE
+        publish_to_char(self.char_id, pack_msg(msg))

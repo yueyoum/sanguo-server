@@ -6,11 +6,7 @@ from django.db import transaction
 
 from apps.server.models import ServerStatus
 
-from core.signals import hang_finished_signal, prisoner_changed_signal
-from core.mongoscheme import MongoPrison
-
-from protomsg import Prisoner as PrisonerProtoMsg
-
+from core.signals import hang_finished_signal
 
 from worker.celery import app
 

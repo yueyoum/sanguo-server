@@ -1,16 +1,12 @@
 from utils import pack_msg
-from core.mongoscheme import MongoPrison
 import protomsg
 
 from core.character import Char
 from core.task import Task
 
-from core.hero import cal_hero_property
-
 from core.msgpipe import publish_to_char
-from preset.settings import PLUNDER_COST_SYCEE
-from core.counter import Counter
 from core.prison import Prison
+from core.plunder import Plunder
 from core.friend import Friend
 from core.mail import Mail
 from core.daily import CheckIn
@@ -20,8 +16,6 @@ from core.stage import Stage, Hang
 from core.formation import Formation
 from core.item import Item
 from core.heropanel import HeroPanel
-
-from apps.character.models import Character
 
 
 def hero_notify(char_id, objs, message_name="HeroNotify"):
@@ -73,71 +67,6 @@ def hang_notify_with_data(char_id, hours, max_hours, hang):
     publish_to_char(char_id, pack_msg(msg))
 
 
-def plunder_notify(char_id):
-    count = Counter(char_id, 'plunder')
-    msg = protomsg.PlunderNotify()
-    msg.amount = count.cur_value
-    msg.max_amount = count.max_value
-    msg.cost_sycee = PLUNDER_COST_SYCEE
-    publish_to_char(char_id, pack_msg(msg))
-
-
-def prisoner_notify(char_id, objs=None, message_name="PrisonerListNotify"):
-    if not objs:
-        prison = MongoPrison.objects.get(id=char_id)
-        objs = prison.prisoners.values()
-
-    cache_char = Character.cache_obj(char_id)
-    level = cache_char.level
-
-    msg = getattr(protomsg, message_name)()
-    for o in objs:
-        p = msg.prisoner.add()
-        p.id = o.id
-        p.oid = o.oid
-        p.start_time = o.start_time
-        p.status = o.status
-
-        # FIXME
-        p.value = 5
-
-        # FIXME
-        p.attack, p.defense, p.hp = cal_hero_property(o.oid, level, 1)
-        p.crit, p.dodge = 0, 0
-
-    publish_to_char(char_id, pack_msg(msg))
-
-
-def update_prisoner_notify(char_id, mongo_prisoner_obj):
-    prisoner_notify(char_id, objs=[mongo_prisoner_obj], message_name="UpdatePrisonerNotify")
-
-
-def new_prisoner_notify(char_id, mongo_prisoner_obj):
-    prisoner_notify(char_id, objs=[mongo_prisoner_obj], message_name="NewPrisonerNotify")
-
-
-def remove_prisoner_notify(char_id, _id):
-    if isinstance(_id, (list, tuple)):
-        ids = _id
-    else:
-        ids = [_id]
-
-    msg = protomsg.RemovePrisonerNotify()
-    msg.ids.extend(ids)
-    publish_to_char(char_id, pack_msg(msg))
-
-
-def prison_notify(char_id, prison=None):
-    if not prison:
-        prison = Prison(char_id)
-    msg = protomsg.PrisonNotify()
-    msg.slots = prison.slots
-    msg.max_slots = prison.max_slots
-    msg.max_prisoners_amount = prison.max_prisoner_amount
-    msg.open_slot_cost = prison.open_slot_cost
-    publish_to_char(char_id, pack_msg(msg))
-
-
 def arena_notify(char_id):
     # FIXME
     msg = protomsg.ArenaNotify()
@@ -174,10 +103,11 @@ def login_notify(char_id):
     hang = Hang(char_id)
     hang.send_notify()
 
+    Plunder(char_id).send_notify()
 
-    plunder_notify(char_id)
-    prisoner_notify(char_id)
-    prison_notify(char_id)
+    p = Prison(char_id)
+    p.send_prisoners_notify()
+    p.send_notify()
 
     arena_notify(char_id)
 
@@ -197,5 +127,4 @@ def login_notify(char_id):
 
     HeroPanel(char_id).send_notify()
     Task(char_id).send_notify()
-    
 

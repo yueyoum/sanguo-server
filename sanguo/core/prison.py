@@ -128,3 +128,10 @@ class Prison(object):
         msg.incr_amount_cost = PRISON_INCR_AMOUNT_COST
         publish_to_char(self.char_id, pack_msg(msg))
 
+    def send_prisoners_notify(self):
+        msg = protomsg.PrisonerListNotify()
+        for k, v in self.p.prisoners.iteritems():
+            p = msg.prisoner.add()
+            self._fill_up_prisoner_msg(p, int(k), v.oid, v.pro)
+
+        publish_to_char(self.char_id, pack_msg(msg))
