@@ -80,7 +80,7 @@ class Arena(object):
             char.name = t.name
 
 
-    def send_arena_notify(self):
+    def send_notify(self):
         msg = protomsg.ArenaNotify()
         self._fill_up_panel_msg(msg)
         publish_to_char(self.char_id, pack_msg(msg))
@@ -133,4 +133,5 @@ class Arena(object):
             score = 0
         redis_client_two.zincrby(REDIS_DAY_KEY, self.char_id, score)
 
+        self.send_notify()
         return msg

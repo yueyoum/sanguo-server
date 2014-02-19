@@ -20,5 +20,3 @@ hero_add_signal = Signal(providing_args=['char_id', 'hero_ids'])
 hero_del_signal = Signal(providing_args=['char_id', 'hero_ids'])
 
 equip_changed_signal = Signal(providing_args=['char_id', 'equip_obj'])
-
-pvp_finished_signal = Signal(providing_args=['char_id', 'rival_id', 'win'])

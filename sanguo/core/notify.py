@@ -16,6 +16,7 @@ from core.stage import Stage, Hang
 from core.formation import Formation
 from core.item import Item
 from core.heropanel import HeroPanel
+from core.arena import Arena
 
 
 def hero_notify(char_id, objs, message_name="HeroNotify"):
@@ -67,26 +68,6 @@ def hang_notify_with_data(char_id, hours, max_hours, hang):
     publish_to_char(char_id, pack_msg(msg))
 
 
-def arena_notify(char_id):
-    # FIXME
-    msg = protomsg.ArenaNotify()
-    msg.week_rank = 1
-    msg.week_score = 2
-    msg.day_rank = 3
-    msg.day_score = 4
-    msg.remained_amount = 5
-
-    nb = [
-        (1, 1, 'aaa'),
-        (2, 2, 'bbb'),
-        (3, 3, 'ccc'),
-    ]
-    for x in nb:
-        n = msg.chars.add()
-        n.rank, n.id, n.name = x
-
-    publish_to_char(char_id, pack_msg(msg))
-
 
 def login_notify(char_id):
     c = Char(char_id)
@@ -109,7 +90,7 @@ def login_notify(char_id):
     p.send_prisoners_notify()
     p.send_notify()
 
-    arena_notify(char_id)
+    Arena(char_id).send_notify()
 
     f = Friend(char_id)
     f.send_friends_notify()
