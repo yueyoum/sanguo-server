@@ -11,11 +11,10 @@ class OfficialResources(resources.ModelResource):
 
 class OfficialAdmin(ImportExportModelAdmin):
     list_display = (
-        'id', 'name', 'exp_needs', 'gold'
+        'id', 'name', 'exp_needs', 'gold', #'stuffs',
     )
 
     resource_class = OfficialResources
 
 admin.site.register(Official, OfficialAdmin)
-
 

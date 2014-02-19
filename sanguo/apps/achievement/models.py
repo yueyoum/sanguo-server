@@ -9,7 +9,7 @@ class Achievement(models.Model):
     MODE = (
         (1, '多个ID条件'),
         (2, '单个ID条件'),
-        (3, '次数条件'),
+        (3, '数量条件'),
     )
     id = models.IntegerField(primary_key=True)
     tp = models.IntegerField("类型")
