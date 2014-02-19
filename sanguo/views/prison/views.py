@@ -17,7 +17,7 @@ def incr_prisoners_amount(request):
 @message_response("PrisonerAddProbResponse")
 def prisoner_add_prob(request):
     req = request._proto
-    p = Prison(request)
+    p = Prison(request._char_id)
     p.prisoner_incr_prob(req.id)
     return None
 

@@ -11,6 +11,8 @@ COUNTER = {
     'gethero': 1,        # 免费抽将次数
 }
 
+# 比武超过限制后每次比武得消耗多少金币
+AREMA_COST_SYCEE = 1
 
 # 战俘最多可以有多少个
 MAX_PRISONERS_AMOUNT = 4

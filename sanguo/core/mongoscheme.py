@@ -3,6 +3,8 @@
 from mongoengine import *
 import core.drives
 
+from protomsg import Attachment as MsgAttachment
+
 
 class MongoEmbeddedEquipment(EmbeddedDocument):
     oid = IntField()
@@ -224,5 +226,71 @@ class MongoAchievement(Document):
 
     meta = {
         'collection': 'achievement'
+    }
+
+
+class MongoArenaTopRanks(Document):
+    # 排名前三的
+    id = IntField(primary_key=True)
+    name = StringField()
+
+    meta = {
+        'collection': 'arena_top_ranks'
+    }
+
+
+class MongoEmbededAttachmentEquipment(EmbeddedDocument):
+    id = IntField()
+    level = IntField(default=1)
+    step = IntField(default=1)
+    amount = IntField(default=1)
+
+class MongoEmbededAttachment(EmbeddedDocument):
+    equipments = ListField(EmbeddedDocumentField(MongoEmbededAttachmentEquipment))
+    gems = DictField()
+    stuffs = DictField()
+    gold = IntField(default=0)
+    sycee = IntField(default=0)
+    official_exp = IntField(default=0)
+    heros = ListField(IntField())
+
+    def to_protobuf(self):
+        msg = MsgAttachment()
+        if self.gold:
+            msg.gold = self.gold
+        if self.sycee:
+            msg.sycee = self.sycee
+        if self.official_exp:
+            msg.official_exp = self.official_exp
+        if self.heros:
+            msg.heros.extend(self.heros)
+
+        for item in self.equipments:
+            e = msg.equipments.add()
+            e.id = item.id
+            e.level = item.level
+            e.step = item.step
+            e.amount = item.amount
+
+        for k, v in self.gems:
+            g = msg.gems.add()
+            g.id = int(k)
+            g.amount = v
+
+        for k, v in self.stuffs:
+            s = msg.stuffs.add()
+            s.id = int(k)
+            s.amount = v
+
+        return msg
+
+
+
+class MongoAttachment(Document):
+    id = IntField(primary_key=True)
+    attachments = MapField(EmbeddedDocumentField(MongoEmbededAttachment))
+
+    meta = {
+        'collection': 'attachment'
     }
 

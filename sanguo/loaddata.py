@@ -7,6 +7,7 @@ def run():
     from django.core.management import call_command
     call_command('loaddata', 'charinit.json')
     call_command('loaddata', 'servers.json')
+    call_command('loaddata', 'arena_reward.json')
 
     call_command('loaddata', 'official.json')
 

@@ -5,6 +5,7 @@ urlpatterns = patterns('',
                        url(r'^test/$', 'views.cmd.cmd'),
 
                        url(r'^pvp/$', 'views.arena.views.arena_battle'),
+                       url(r'^arena/panel/$', 'views.arena.views.arena_panel'),
 
                        url(r'^formation/set/$', 'views.formation.views.set_formation'),
                        url(r'^socket/set/$', 'views.formation.views.set_socket'),

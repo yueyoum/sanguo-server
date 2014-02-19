@@ -9,7 +9,7 @@ from core.mongoscheme import MongoStage
 from utils import timezone
 from utils import pack_msg
 from core.msgpipe import publish_to_char
-from core.world import Attachment
+from core.attachment import Attachment
 
 import protomsg
 
@@ -145,7 +145,7 @@ class Stage(object):
         exp, gold, stuffs = self.get_drop(stage_id, first=first, star=star)
 
         attach = Attachment(self.char_id)
-        attach.save_raw_attachment(exp=exp, gold=gold, stuffs=stuffs)
+        attach.save_to_char(exp=exp, gold=gold, stuffs=stuffs)
 
         return exp, gold, stuffs
 
@@ -297,7 +297,7 @@ class Hang(object):
     def save_drop(self):
         exp, gold, stuffs = self.get_drop()
         a = Attachment(self.char_id)
-        a.save_raw_attachment(exp=exp, gold=gold, stuffs=stuffs)
+        a.save_to_char(exp=exp, gold=gold, stuffs=stuffs)
         return exp, gold, stuffs
 
 
