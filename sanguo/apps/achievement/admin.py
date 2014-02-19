@@ -12,8 +12,8 @@ class AchievementResources(resources.ModelResource):
 
 class AchievementAdmin(ImportExportModelAdmin):
     list_display = ('id', 'tp', 'tp_name', 'name', 'des', 'mode',
-    'condition_id', 'condition_name', 'condition_value',
-    'sycee', 'buff_id', 'buff_name', 'buff_value'
+    'condition_name', 'condition_id', 'condition_value',
+    'sycee', 'buff_used_for', 'buff_name', 'buff_value'
     )
 
     resource_class = AchievementResources

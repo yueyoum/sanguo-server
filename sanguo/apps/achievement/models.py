@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from django.db.models.signals import post_save, post_delete
 
 from utils import cache
 
@@ -19,12 +20,12 @@ class Achievement(models.Model):
 
     mode = models.IntegerField("条件类型", choices=MODE)
 
-    condition_id = models.IntegerField("条件ID")
     condition_name = models.CharField("条件名称", max_length=32)
+    condition_id = models.IntegerField("条件ID")
     condition_value = models.CharField("条件值", max_length=255)
 
     sycee = models.IntegerField("奖励元宝", null=True, blank=True)
-    buff_id = models.IntegerField("BUFF_ID", null=True, blank=True)
+    buff_used_for = models.CharField("BUFF用于", max_length=32, blank=True)
     buff_name = models.CharField("BUFF名称", max_length=32, blank=True)
     buff_value = models.IntegerField("BUFF值", null=True, blank=True)
 
@@ -44,6 +45,11 @@ class Achievement(models.Model):
             return data
         return save_achievement_cache()
 
+    def decoded_condition_value(self):
+        if self.mode == 1:
+            return [int(i) for i in self.condition_value.split(',')]
+        return int(self.condition_value)
+
 
 
 def save_achievement_cache(*args, **kwargs):
@@ -52,4 +58,16 @@ def save_achievement_cache(*args, **kwargs):
     cache.set('achievement', data, hours=None)
     return data
 
+
+post_save.connect(
+    save_achievement_cache,
+    sender=Achievement,
+    dispatch_uid='apps.achievement.Achievement.post_save'
+)
+
+post_delete.connect(
+    save_achievement_cache,
+    sender=Achievement,
+    dispatch_uid='apps.achievement.Achievement.post_delete'
+)
 
