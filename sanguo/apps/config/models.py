@@ -64,3 +64,52 @@ post_delete.connect(
     dispatch_uid='apps.config.CharInit.post_delete'
 )
 
+
+# 比武排名奖励
+class ArenaReward(models.Model):
+    id = models.IntegerField("排名级别", primary_key=True)
+    name = models.CharField("称谓", max_length=32, blank=True)
+    day_gold = models.IntegerField("日金币")
+    week_gold = models.IntegerField("周金币")
+    week_stuffs = models.CharField("周材料", max_length=255, blank=True)
+
+    class Meta:
+        db_table = 'arena_reward'
+        verbose_name = "比武奖励"
+        verbose_name_plural = "比武奖励"
+        ordering = ('id',)
+
+    @staticmethod
+    def all():
+        data = cache.get('arenareward', hours=None)
+        if data:
+            return data
+        return save_arena_reward_cache()
+
+    @staticmethod
+    def cache_obj(rank, data=None):
+        if not data:
+            data = ArenaReward.all()
+        for k, v in data:
+            if rank >= k:
+                return v
+
+
+def save_arena_reward_cache(*args, **kwargs):
+    rewards = ArenaReward.objects.all().order_by('-id')
+    data = {r.id: r for r in rewards}
+    cache.set('arenareward', data, hours=None)
+    return data
+
+
+post_save.connect(
+    save_arena_reward_cache,
+    sender=ArenaReward,
+    dispatch_uid='apps.config.ArenaReward.post_save'
+)
+
+post_delete.connect(
+    save_arena_reward_cache,
+    sender=ArenaReward,
+    dispatch_uid='apps.config.ArenaReward.post_delete'
+)
