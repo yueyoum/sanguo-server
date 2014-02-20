@@ -1,482 +1,576 @@
 [
 {
+    "pk": 0, 
+    "model": "skill.skill", 
+    "fields": {
+        "cast_effect": "swing", 
+        "hit_effect": "blood", 
+        "is_fullscreen": false, 
+        "des": "", 
+        "mode": 1, 
+        "mode_name": "\u4e3b\u52a8", 
+        "prob": 100, 
+        "name": "\u666e\u901a\u653b\u51fb1"
+    }
+},
+{
     "pk": 20, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u771f\u00b7\u5043\u6708\u5200\u6cd5", 
+        "cast_effect": "arua", 
+        "hit_effect": "blood", 
+        "is_fullscreen": false, 
         "des": "\u653b\u51fb\u540e\u964d\u4f4e\u5bf9\u65b9\u9632\u5fa1 ", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 100, 
-        "special": ""
+        "name": "\u771f\u00b7\u5043\u6708\u5200\u6cd5"
     }
 },
 {
     "pk": 21, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u5043\u6708\u5200\u6cd5", 
+        "cast_effect": "arua", 
+        "hit_effect": "blood", 
+        "is_fullscreen": false, 
         "des": "\u653b\u51fb\u540e\u964d\u4f4e\u5bf9\u65b9\u9632\u5fa1\r\n", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 80, 
-        "special": ""
+        "name": "\u5043\u6708\u5200\u6cd5"
     }
 },
 {
     "pk": 22, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u65e0\u53cc", 
+        "cast_effect": "arua", 
+        "hit_effect": "blood", 
+        "is_fullscreen": false, 
         "des": "\u7fa4\u4f53\u7269\u7406AOE 110%\uff0c\u88ab\u52a8\u989d\u5916\u66b4\u51fb15%", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 21, 
-        "special": ""
+        "name": "\u65e0\u53cc"
     }
 },
 {
     "pk": 23, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u9f99\u80c6", 
+        "cast_effect": "arua", 
+        "hit_effect": "sharpe hit", 
+        "is_fullscreen": false, 
         "des": "", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 25, 
-        "special": ""
+        "name": "\u9f99\u80c6"
     }
 },
 {
     "pk": 24, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u731b\u864e\u4e0b\u5c71", 
+        "cast_effect": "arua", 
+        "hit_effect": "blood", 
+        "is_fullscreen": false, 
         "des": "", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 25, 
-        "special": ""
+        "name": "\u731b\u864e\u4e0b\u5c71"
     }
 },
 {
     "pk": 25, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u91cd\u51fb", 
+        "cast_effect": "swing2", 
+        "hit_effect": "blood", 
+        "is_fullscreen": false, 
         "des": "\u5355\u4f53\u4f24\u5bb3135%", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 25, 
-        "special": ""
+        "name": "\u91cd\u51fb"
     }
 },
 {
     "pk": 26, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u91cd\u51fb", 
+        "cast_effect": "swing2", 
+        "hit_effect": "blood", 
+        "is_fullscreen": false, 
         "des": "\u5355\u4f53\u4f24\u5bb3135%\r\n", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 25, 
-        "special": ""
+        "name": "\u91cd\u51fb"
     }
 },
 {
     "pk": 27, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u731b\u51fb", 
+        "cast_effect": "swing2", 
+        "hit_effect": "blood", 
+        "is_fullscreen": false, 
         "des": "\u5355\u4f53\u4f24\u5bb3160%", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 30, 
-        "special": ""
+        "name": "\u731b\u51fb"
     }
 },
 {
     "pk": 28, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u91cd\u51fb", 
+        "cast_effect": "swing2", 
+        "hit_effect": "blood", 
+        "is_fullscreen": false, 
         "des": "\u5355\u4f53\u4f24\u5bb3135%", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 35, 
-        "special": ""
+        "name": "\u91cd\u51fb"
     }
 },
 {
     "pk": 29, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u91d1\u521a", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u9632\u5fa1\u63d0\u5347100%\uff0c3\u56de\u5408\r\n", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 25, 
-        "special": ""
+        "name": "\u91d1\u521a"
     }
 },
 {
     "pk": 32, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u897f\u51c9\u94c1\u9a91", 
+        "cast_effect": "arua", 
+        "hit_effect": "blood", 
+        "is_fullscreen": false, 
         "des": "\u8fde\u51fb\uff0c\u4e3b\u76ee\u6807120%\u4f24\u5bb3\uff0c1\u989d\u5916\u76ee\u6807\u4f24\u5bb350%", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 25, 
-        "special": ""
+        "name": "\u897f\u51c9\u94c1\u9a91"
     }
 },
 {
     "pk": 33, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u9a91\u5175\u51b2\u950b", 
+        "cast_effect": "arua", 
+        "hit_effect": "blood", 
+        "is_fullscreen": false, 
         "des": "\u8fde\u51fb\uff0c\u4e3b\u76ee\u680780%\u4f24\u5bb3\uff0c1\u989d\u5916\u76ee\u6807\u4f24\u5bb340%", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 25, 
-        "special": ""
+        "name": "\u9a91\u5175\u51b2\u950b"
     }
 },
 {
     "pk": 35, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u767e\u6b65\u7a7f\u6768", 
+        "cast_effect": "swing2", 
+        "hit_effect": "blood", 
+        "is_fullscreen": false, 
         "des": "\u968f\u673a\u76ee\u6807\u9ad8\u4f24\u5bb3180%", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 25, 
-        "special": ""
+        "name": "\u767e\u6b65\u7a7f\u6768"
     }
 },
 {
     "pk": 36, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u4e71\u7bad", 
+        "cast_effect": "swing2", 
+        "hit_effect": "blood", 
+        "is_fullscreen": false, 
         "des": "\u968f\u673a\u76ee\u6807\u9ad8\u4f24\u5bb3120%", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 35, 
-        "special": ""
+        "name": "\u4e71\u7bad"
     }
 },
 {
     "pk": 38, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u6697\u5668\u00b7\u98de\u5200", 
+        "cast_effect": "swing2", 
+        "hit_effect": "blood", 
+        "is_fullscreen": false, 
         "des": "\u968f\u673a\u76ee\u6807\u4e2d\u4f24\u5bb3130%\uff0c\u6982\u7387\u9ad8", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 75, 
-        "special": ""
+        "name": "\u6697\u5668\u00b7\u98de\u5200"
     }
 },
 {
     "pk": 40, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u5978\u96c4 \u6d4b\u8bd5", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u5168\u5458\u66b4\u51fb\u4e0a\u534710%\uff0c\u81ea\u8eab\u5168\u5c5e\u6027\u63d0\u534710%", 
         "mode": 2, 
         "mode_name": "\u88ab\u52a8", 
         "prob": 100, 
-        "special": ""
+        "name": "\u5978\u96c4"
     }
 },
 {
     "pk": 41, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u4ec1\u541b", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u5168\u5458\u653b\u51fb\u63d0\u53478%\uff0c\u81ea\u8eab\u5168\u5c5e\u6027\u63d0\u534710%", 
         "mode": 2, 
         "mode_name": "\u88ab\u52a8", 
         "prob": 100, 
-        "special": ""
+        "name": "\u4ec1\u541b"
     }
 },
 {
     "pk": 42, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u57fa\u4e1a", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u5168\u5458\u9632\u5fa1\u63d0\u53478%\uff0c\u81ea\u8eab\u5168\u5c5e\u6027\u63d0\u534710%", 
         "mode": 2, 
         "mode_name": "\u88ab\u52a8", 
         "prob": 100, 
-        "special": ""
+        "name": "\u57fa\u4e1a"
     }
 },
 {
     "pk": 43, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u7fa4\u96c4", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u81ea\u8eab\u5168\u5c5e\u6027\u63d0\u534710%", 
         "mode": 2, 
         "mode_name": "\u88ab\u52a8", 
         "prob": 100, 
-        "special": ""
+        "name": "\u7fa4\u96c4"
     }
 },
 {
     "pk": 44, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u9635\u6cd5\u00b7\u636e\u5b88", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u5c0f\u961f\u9632\u5fa1\u4e0a\u534720%", 
         "mode": 2, 
         "mode_name": "\u88ab\u52a8", 
         "prob": 100, 
-        "special": ""
+        "name": "\u9635\u6cd5\u00b7\u636e\u5b88"
     }
 },
 {
     "pk": 45, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u9635\u6cd5\u00b7\u5f3a\u653b", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u5c0f\u961f\u653b\u51fb\u4e0a\u534710%", 
         "mode": 2, 
         "mode_name": "\u88ab\u52a8", 
         "prob": 100, 
-        "special": ""
+        "name": "\u9635\u6cd5\u00b7\u5f3a\u653b"
     }
 },
 {
     "pk": 46, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u9635\u6cd5\u00b7\u638e\u89d2\u4e4b\u52bf", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u5c0f\u961f\u653b\u9632\u4e0a\u534710%", 
         "mode": 2, 
         "mode_name": "\u88ab\u52a8", 
         "prob": 100, 
-        "special": ""
+        "name": "\u9635\u6cd5\u00b7\u638e\u89d2\u4e4b\u52bf"
     }
 },
 {
     "pk": 48, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u843d\u77f3", 
+        "cast_effect": "summon aura", 
+        "hit_effect": "rockfall", 
+        "is_fullscreen": false, 
         "des": "AOE 75%", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 30, 
-        "special": ""
+        "name": "\u843d\u77f3"
     }
 },
 {
     "pk": 49, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u706b\u653b", 
+        "cast_effect": "summon aura", 
+        "hit_effect": "fire explosion", 
+        "is_fullscreen": false, 
         "des": "AOE 85%", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 25, 
-        "special": ""
+        "name": "\u706b\u653b"
     }
 },
 {
     "pk": 50, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u6c34\u653b", 
+        "cast_effect": "summon aura", 
+        "hit_effect": "thunder", 
+        "is_fullscreen": false, 
         "des": "AOE 100%", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 22, 
-        "special": ""
+        "name": "\u6c34\u653b"
     }
 },
 {
     "pk": 52, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u53ec\u5524\u00b7\u72c2\u98ce", 
+        "cast_effect": "", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "AOE 130%\uff0c\u6982\u7387\u4e2d\uff0c\u88ab\u52a8\u751f\u547d", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 25, 
-        "special": ""
+        "name": "\u53ec\u5524\u00b7\u72c2\u98ce"
     }
 },
 {
     "pk": 53, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u53ec\u5524\u00b7\u5929\u706b", 
+        "cast_effect": "summon aura", 
+        "hit_effect": "fire explosion", 
+        "is_fullscreen": false, 
         "des": "AOE 110%\uff0c\u6982\u7387\u9ad8\uff0c\u88ab\u52a8\u66b4\u51fb", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 35, 
-        "special": ""
+        "name": "\u53ec\u5524\u00b7\u5929\u706b"
     }
 },
 {
     "pk": 54, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u53ec\u5524\u00b7\u96f7\u7535", 
+        "cast_effect": "summon aura", 
+        "hit_effect": "thunder", 
+        "is_fullscreen": false, 
         "des": "AOE 150%\uff0c\u6982\u7387\u4f4e\uff0c\u88ab\u52a8\u653b\u51fb", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 18, 
-        "special": ""
+        "name": "\u53ec\u5524\u00b7\u96f7\u7535"
     }
 },
 {
     "pk": 56, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u5929\u5973\u6563\u82b1", 
+        "cast_effect": "arua", 
+        "hit_effect": "sharpe hit", 
+        "is_fullscreen": false, 
         "des": "\u5168\u4f53\u5f31AOE 70%\uff0c\u9ad8\u51e0\u7387\u89e6\u53d1", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 80, 
-        "special": ""
+        "name": "\u5929\u5973\u6563\u82b1"
     }
 },
 {
     "pk": 57, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u821e\u59ec\u00b7\u6d1b\u795e *", 
+        "cast_effect": "", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u968f\u673a\u654c\u65b9\u76ee\u6807\u6655\u77291\u56de\u5408", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 30, 
-        "special": ""
+        "name": "\u821e\u59ec\u00b7\u6d1b\u795e *"
     }
 },
 {
     "pk": 58, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u821e\u59ec\u00b7\u80e1\u7b33", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u5168\u5458\u653b\u51fb\u63d0\u534725%,3\u56de\u5408", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 25, 
-        "special": ""
+        "name": "\u821e\u59ec\u00b7\u80e1\u7b33"
     }
 },
 {
     "pk": 59, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u821e\u59ec\u00b7\u65e0\u534e", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u5168\u5458\u66b4\u51fb\u63d0\u534730%,3\u56de\u5408", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 25, 
-        "special": ""
+        "name": "\u821e\u59ec\u00b7\u65e0\u534e"
     }
 },
 {
     "pk": 60, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u821e\u59ec\u00b7\u6c5f\u4e1c\u4e8c\u4e54", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u5168\u5458\u9632\u5fa1\u63d0\u534725%,3\u56de\u5408", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 25, 
-        "special": ""
+        "name": "\u821e\u59ec\u00b7\u6c5f\u4e1c\u4e8c\u4e54"
     }
 },
 {
     "pk": 61, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u667a\u8c0b", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u5168\u5458\u653b\u9632\u5404\u63d0\u534715%\uff0c3\u56de\u5408", 
         "mode": 1, 
         "mode_name": "\u4e3b\u52a8", 
         "prob": 25, 
-        "special": ""
+        "name": "\u667a\u8c0b"
     }
 },
 {
     "pk": 65, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u95ed\u6708", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u88ab\u52a8\u66b4\u51fb10%", 
         "mode": 2, 
         "mode_name": "\u88ab\u52a8", 
         "prob": 100, 
-        "special": ""
+        "name": "\u95ed\u6708"
     }
 },
 {
     "pk": 66, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u66b4\u6012", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u88ab\u52a8\u989d\u5916\u66b4\u51fb15%\r\n", 
         "mode": 2, 
         "mode_name": "\u88ab\u52a8", 
         "prob": 100, 
-        "special": ""
+        "name": "\u66b4\u6012"
     }
 },
 {
     "pk": 67, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u6b66\u5723", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u88ab\u52a8\u63d0\u5347\u81ea\u8eab\u9632\u5fa120%", 
         "mode": 2, 
         "mode_name": "\u88ab\u52a8", 
         "prob": 100, 
-        "special": ""
+        "name": "\u6b66\u5723"
     }
 },
 {
     "pk": 68, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u5de8\u529b", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u88ab\u52a8\u63d0\u5347\u653b\u51fb10%\r\n", 
         "mode": 2, 
         "mode_name": "\u88ab\u52a8", 
         "prob": 100, 
-        "special": ""
+        "name": "\u5de8\u529b"
     }
 },
 {
     "pk": 69, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u7834\u91dc\u6c89\u821f", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u88ab\u52a8\u964d\u4f4e\u9632\u5fa15%\u653b\u51fb\u4e0a\u534710%\r\n", 
         "mode": 2, 
         "mode_name": "\u88ab\u52a8", 
         "prob": 100, 
-        "special": ""
+        "name": "\u7834\u91dc\u6c89\u821f"
     }
 },
 {
     "pk": 70, 
     "model": "skill.skill", 
     "fields": {
-        "name": "\u516b\u9635", 
+        "cast_effect": "arua", 
+        "hit_effect": "", 
+        "is_fullscreen": false, 
         "des": "\u88ab\u52a8\u9632\u5fa115%\r\n", 
         "mode": 2, 
         "mode_name": "\u88ab\u52a8", 
         "prob": 100, 
-        "special": ""
+        "name": "\u516b\u9635"
     }
 }
 ]
