@@ -205,12 +205,6 @@ class EliteStage(models.Model):
 def _save_elitestage_cache(*args, **kwargs):
     stages = EliteStage.objects.all()
     data = {s.id: s for s in stages}
-    for _id, s in data.items():
-        open_condition = s.open_condition
-        if not open_condition:
-            continue
-
-        data[open_condition].next = _id
 
     cache.set('elitestage', data, hours=None)
     return data
