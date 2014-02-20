@@ -1,0 +1,16 @@
+config.CharInit:charinit.json
+config.ArenaReward:arena_reward.json
+server.Server:servers.json
+achievement.Achievement:achievement.json
+official.Official:official.json
+hero.Hero:heros.json
+hero.Monster:monsters.json
+item.Stuff:stuff.json
+item.Gem:gems.json
+item.Equipment:equipment.json
+stage.Battle:battle.json
+stage.Stage:stage.json
+skill.Effect:effect.json
+skill.Skill:skill.json
+skill.SkillEffect:skill_effect.json
+task.Task:task.json

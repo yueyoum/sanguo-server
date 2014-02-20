@@ -159,6 +159,8 @@ INSTALLED_APPS = (
     'apps.config',
 )
 
+FIXTURE_DIRS = (os.path.join(PROJECT_PATH, 'fixtures'),)
+
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 NOSE_ARGS = ['--stop',]
