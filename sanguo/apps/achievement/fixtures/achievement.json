@@ -1,0 +1,326 @@
+[
+{
+    "pk": 1, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u641c\u96c6\u6b66\u5c06", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u6b66\u5c06\u641c\u96c61", 
+        "tp_name": "\u6b66\u5c06\u641c\u96c6", 
+        "des": "\u83b7\u5f97\u66f9\u64cd\uff0c\u590f\u4faf\u6e0a", 
+        "buff_used_for": "attack", 
+        "tp": 1, 
+        "buff_name": "\u5168\u519b\u653b\u51fb", 
+        "mode": 1, 
+        "condition_value": "1,2", 
+        "condition_id": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u7532\u7ea7\u6b66\u5c06", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u6b66\u5c06\u641c\u96c62", 
+        "tp_name": "\u6b66\u5c06\u641c\u96c6", 
+        "des": "\u83b7\u5f9710\u4e2a\u7532\u7ea7\u6b66\u5c06", 
+        "buff_used_for": "defense", 
+        "tp": 1, 
+        "buff_name": "\u5168\u519b\u9632\u5fa1", 
+        "mode": 3, 
+        "condition_value": "10", 
+        "condition_id": 2
+    }
+},
+{
+    "pk": 3, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u4e59\u7ea7\u6b66\u5c06", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u6b66\u5c06\u641c\u96c63", 
+        "tp_name": "\u6b66\u5c06\u641c\u96c6", 
+        "des": "\u83b7\u5f9710\u4e2a\u4e59\u7ea7\u6b66\u5c06", 
+        "buff_used_for": "crit", 
+        "tp": 1, 
+        "buff_name": "\u5168\u519b\u66b4\u51fb", 
+        "mode": 3, 
+        "condition_value": "10", 
+        "condition_id": 3
+    }
+},
+{
+    "pk": 4, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u4e19\u7ea7\u6b66\u5c06", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u6b66\u5c06\u641c\u96c64", 
+        "tp_name": "\u6b66\u5c06\u641c\u96c6", 
+        "des": "\u83b7\u5f9710\u4e2a\u4e19\u7ea7\u6b66\u5c06", 
+        "buff_used_for": "hp", 
+        "tp": 1, 
+        "buff_name": "\u5168\u519b\u751f\u547d", 
+        "mode": 3, 
+        "condition_value": "10", 
+        "condition_id": 4
+    }
+},
+{
+    "pk": 5, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u5168\u90e8\u6b66\u5c06", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u6b66\u5c06\u641c\u96c65", 
+        "tp_name": "\u6b66\u5c06\u641c\u96c6", 
+        "des": "\u83b7\u5f97120\u540d\u6b66\u5c06", 
+        "buff_used_for": "attack", 
+        "tp": 1, 
+        "buff_name": "\u5168\u519b\u653b\u51fb", 
+        "mode": 3, 
+        "condition_value": "120", 
+        "condition_id": 5
+    }
+},
+{
+    "pk": 6, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u901a\u5173\u6218\u5f79", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u6218\u6597\u7ecf\u53861", 
+        "tp_name": "\u6218\u6597\u7ecf\u5386", 
+        "des": "\u901a\u5173\u6218\u5f79\u9ec4\u5dfe\u4e4b\u4e71\u6240\u6709\u5173\u5361", 
+        "buff_used_for": "defense", 
+        "tp": 2, 
+        "buff_name": "\u5168\u519b\u9632\u5fa1", 
+        "mode": 2, 
+        "condition_value": "1", 
+        "condition_id": 6
+    }
+},
+{
+    "pk": 7, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u6bd4\u6b66\u6218\u6597", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u6218\u6597\u7ecf\u53862", 
+        "tp_name": "\u6218\u6597\u7ecf\u5386", 
+        "des": "\u53d6\u5f971\u6b21\u6bd4\u6b66\u6218\u6597\u80dc\u5229", 
+        "buff_used_for": "crit", 
+        "tp": 2, 
+        "buff_name": "\u5168\u519b\u66b4\u51fb", 
+        "mode": 3, 
+        "condition_value": "1", 
+        "condition_id": 7
+    }
+},
+{
+    "pk": 8, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u63a0\u593a\u6218\u6597", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u6218\u6597\u7ecf\u53863", 
+        "tp_name": "\u6218\u6597\u7ecf\u5386", 
+        "des": "\u53d6\u5f971\u6b21\u63a0\u593a\u6218\u6597\u80dc\u5229", 
+        "buff_used_for": "hp", 
+        "tp": 2, 
+        "buff_name": "\u5168\u519b\u751f\u547d", 
+        "mode": 3, 
+        "condition_value": "1", 
+        "condition_id": 8
+    }
+},
+{
+    "pk": 9, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u529d\u964d\u6218\u4fd8", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u6210\u957f\u5386\u7a0b1", 
+        "tp_name": "\u6210\u957f\u5386\u7a0b", 
+        "des": "\u6210\u529f\u529d\u964d1\u6b21\u6218\u4fd8", 
+        "buff_used_for": "attack", 
+        "tp": 3, 
+        "buff_name": "\u5168\u519b\u653b\u51fb", 
+        "mode": 3, 
+        "condition_value": "1", 
+        "condition_id": 9
+    }
+},
+{
+    "pk": 10, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u6b66\u5c06\u8fdb\u9636", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u6210\u957f\u5386\u7a0b2", 
+        "tp_name": "\u6210\u957f\u5386\u7a0b", 
+        "des": "\u8fdb\u884c1\u6b21\u6b66\u5c06\u8fdb\u9636\u64cd\u4f5c", 
+        "buff_used_for": "defense", 
+        "tp": 3, 
+        "buff_name": "\u5168\u519b\u9632\u5fa1", 
+        "mode": 3, 
+        "condition_value": "1", 
+        "condition_id": 10
+    }
+},
+{
+    "pk": 11, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u88c5\u5907\u8fdb\u9636", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u6210\u957f\u5386\u7a0b3", 
+        "tp_name": "\u6210\u957f\u5386\u7a0b", 
+        "des": "\u8fdb\u884c1\u6b21\u88c5\u5907\u8fdb\u9636\u64cd\u4f5c", 
+        "buff_used_for": "crit", 
+        "tp": 3, 
+        "buff_name": "\u5168\u519b\u66b4\u51fb", 
+        "mode": 3, 
+        "condition_value": "1", 
+        "condition_id": 11
+    }
+},
+{
+    "pk": 12, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u5b9d\u77f3\u5408\u6210", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u6210\u957f\u5386\u7a0b4", 
+        "tp_name": "\u6210\u957f\u5386\u7a0b", 
+        "des": "\u8fdb\u884c1\u6b21\u5b9d\u77f3\u5408\u6210\u64cd\u4f5c", 
+        "buff_used_for": "hp", 
+        "tp": 3, 
+        "buff_name": "\u5168\u519b\u751f\u547d", 
+        "mode": 3, 
+        "condition_value": "1", 
+        "condition_id": 12
+    }
+},
+{
+    "pk": 13, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u6d88\u8d39\u91d1\u5e01", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u7279\u6b8a\u4e8b\u4ef61", 
+        "tp_name": "\u7279\u6b8a\u4e8b\u4ef6", 
+        "des": "\u7d2f\u79ef\u6d88\u8d391\u4e07\u9ec4\u91d1", 
+        "buff_used_for": "attack", 
+        "tp": 4, 
+        "buff_name": "\u5168\u519b\u653b\u51fb", 
+        "mode": 3, 
+        "condition_value": "10000", 
+        "condition_id": 13
+    }
+},
+{
+    "pk": 14, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u6d88\u8d39\u5143\u5b9d", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u7279\u6b8a\u4e8b\u4ef62", 
+        "tp_name": "\u7279\u6b8a\u4e8b\u4ef6", 
+        "des": "\u7d2f\u79ef\u6d88\u8d391\u767e\u5143\u5b9d", 
+        "buff_used_for": "defense", 
+        "tp": 4, 
+        "buff_name": "\u5168\u519b\u9632\u5fa1", 
+        "mode": 3, 
+        "condition_value": "100", 
+        "condition_id": 14
+    }
+},
+{
+    "pk": 15, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u63d0\u5347\u5b98\u804c", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u7279\u6b8a\u4e8b\u4ef63", 
+        "tp_name": "\u7279\u6b8a\u4e8b\u4ef6", 
+        "des": "\u83b7\u5f97\u5927\u5c06\u519b\u5b98\u804c", 
+        "buff_used_for": "crit", 
+        "tp": 4, 
+        "buff_name": "\u5168\u519b\u66b4\u51fb", 
+        "mode": 2, 
+        "condition_value": "19", 
+        "condition_id": 15
+    }
+},
+{
+    "pk": 16, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u6ee1\u661f\u6b66\u5c06", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u7279\u6b8a\u4e8b\u4ef64", 
+        "tp_name": "\u7279\u6b8a\u4e8b\u4ef6", 
+        "des": "\u62e5\u67091\u540d5\u661f\u6b66\u5c06", 
+        "buff_used_for": "hp", 
+        "tp": 4, 
+        "buff_name": "\u5168\u519b\u751f\u547d", 
+        "mode": 3, 
+        "condition_value": "1", 
+        "condition_id": 16
+    }
+},
+{
+    "pk": 17, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u6ee1\u661f\u88c5\u5907", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u7279\u6b8a\u4e8b\u4ef65", 
+        "tp_name": "\u7279\u6b8a\u4e8b\u4ef6", 
+        "des": "\u62e5\u67091\u4ef66\u9636\u6b66\u5668", 
+        "buff_used_for": "attack", 
+        "tp": 4, 
+        "buff_name": "\u5168\u519b\u653b\u51fb", 
+        "mode": 3, 
+        "condition_value": "1", 
+        "condition_id": 17
+    }
+},
+{
+    "pk": 18, 
+    "model": "achievement.achievement", 
+    "fields": {
+        "condition_name": "\u6ee1\u7ea7\u5b9d\u77f3", 
+        "buff_value": 10, 
+        "sycee": 10, 
+        "name": "\u7279\u6b8a\u4e8b\u4ef66", 
+        "tp_name": "\u7279\u6b8a\u4e8b\u4ef6", 
+        "des": "\u62e5\u67091\u989710\u7ea7\u5b9d\u77f3", 
+        "buff_used_for": "defense", 
+        "tp": 4, 
+        "buff_name": "\u5168\u519b\u9632\u5fa1", 
+        "mode": 3, 
+        "condition_value": "1", 
+        "condition_id": 18
+    }
+}
+]

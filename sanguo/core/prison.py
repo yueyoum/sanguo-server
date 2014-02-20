@@ -11,6 +11,7 @@ from preset.settings import MAX_PRISONERS_AMOUNT, PRISON_INCR_AMOUNT_COST
 import protomsg
 from utils import pack_msg
 from core.msgpipe import publish_to_char
+from core.achievement import Achievement
 
 class Prison(object):
     def __init__(self, char_id):
@@ -87,6 +88,9 @@ class Prison(object):
             # got it
             save_hero(self.char_id, self.p.prisoners[str_id].oid)
             got = True
+
+            achievement = Achievement(self.char_id)
+            achievement.trig(9, 1)
 
         self.p.prisoners.pop(str_id)
         self.p.save()

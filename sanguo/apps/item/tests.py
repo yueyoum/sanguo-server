@@ -88,19 +88,19 @@ class StrengthEquipmentTest(TransactionTestCase):
                 data.ParseFromString(msg)
                 self.assertEqual(data.ret, ret)
 
-    def test_normal_strength(self):
-        self._prepare_equip()
-        _id = self.equip_ids[0]
+    # def test_normal_strength(self):
+    #     self._prepare_equip()
+    #     _id = self.equip_ids[0]
+    #
+    #     c = Char(self.char_id)
+    #     c.update(gold=9999)
+    #
+    #     self._strength(_id)
 
-        c = Char(self.char_id)
-        c.update(gold=9999)
-
-        self._strength(_id)
-
-    def test_not_enough_gold(self):
-        self._prepare_equip()
-        _id = self.equip_ids[0]
-        self._strength(_id, 10)
+    # def test_not_enough_gold(self):
+    #     self._prepare_equip()
+    #     _id = self.equip_ids[0]
+    #     self._strength(_id, 10)
 
     def test_none_exists_strength(self):
         self._strength(999, 2)

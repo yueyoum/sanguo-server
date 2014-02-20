@@ -5,15 +5,19 @@ __date__ = '12/30/13'
 
 import ctypes
 
+from mongoengine import DoesNotExist
+
 from core.drives import document_ids
-from core.mongoscheme import MongoHero
+from core.mongoscheme import MongoHero, MongoAchievement
 from core.signals import hero_add_signal, hero_del_signal, hero_changed_signal
 from core.formation import Formation
 from core.exception import InvalidOperate
 from core import DLL
+from core.achievement import Achievement
 
 from apps.character.models import Character
 from apps.hero.models import Hero as ModelHero
+from apps.achievement.models import Achievement as ModelAchievement
 from utils import cache
 
 
@@ -67,6 +71,7 @@ class Hero(FightPowerMixin):
         self.skills = [int(i) for i in model_hero.skills.split(',')]
 
         self._add_equip_attrs()
+        self._add_achievement_buffs()
 
     def _add_equip_attrs(self):
         # XXX
@@ -87,6 +92,34 @@ class Hero(FightPowerMixin):
                 for k, v in equip.gem_attributes.iteritems():
                     value = getattr(self, k)
                     setattr(self, k, value + v)
+
+
+    def _add_achievement_buffs(self):
+        try:
+            mongo_ach = MongoAchievement.objects.get(id=self.char_id)
+        except DoesNotExist:
+            return
+
+        all_achievements = ModelAchievement.all()
+        buffs = {}
+        for i in mongo_ach.complete:
+            ach = all_achievements[i]
+            if not ach.buff_used_for:
+                continue
+
+            buffs[ach.buff_used_for] = buffs.get(ach.buff_used_for, 0) + ach.buff_value
+
+        for k, v in buffs.iteritems():
+            value = getattr(self, k)
+            if k == 'crit':
+                new_value = value + v
+            else:
+                new_value = value * (1 + v / 100.0)
+
+            new_value = int(new_value)
+            setattr(self, k, new_value)
+
+
 
     def save_cache(self):
         cache.set('hero:{0}'.format(self.id), self)
@@ -117,6 +150,12 @@ class Hero(FightPowerMixin):
             sender=None,
             hero_id=self.id
         )
+
+        achievement = Achievement(self.char_id)
+        achievement.trig(10, 1)
+
+        if self.step == 5:
+            achievement.trig(16, 1)
 
 
 
@@ -154,6 +193,21 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
             char_id=char_id,
             hero_ids=id_range
         )
+
+    all_heros = ModelHero.all()
+    achievement = Achievement(char_id)
+    for oid in hero_original_ids:
+        achievement.trig(1, oid)
+
+        quality = all_heros[oid].quality
+        if quality == 1:
+            achievement.trig(2, 1)
+        elif quality == 2:
+            achievement.trig(3, 1)
+        else:
+            achievement.trig(4, 1)
+
+    achievement.trig(5, length)
 
     return id_range
 

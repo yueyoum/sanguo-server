@@ -54,6 +54,11 @@ class Character(models.Model):
         exp = pow(level, 2.5) + level * 20
         return int(round(exp * 10, -1))
 
+    def update_official_needs_exp(self, level=None):
+        level = level or self.official
+        exp = pow(level, 3.2) * 0.2 + level * 20
+        return int(round(exp), -1)
+
 
     def __unicode__(self):
         return u'<Character %d:%d:%d, %s>' % (

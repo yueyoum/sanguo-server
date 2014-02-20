@@ -8,6 +8,7 @@ def run():
     call_command('loaddata', 'charinit.json')
     call_command('loaddata', 'servers.json')
     call_command('loaddata', 'arena_reward.json')
+    call_command('loaddata', 'achievement.json')
 
     call_command('loaddata', 'official.json')
 

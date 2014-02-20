@@ -45,6 +45,15 @@ class Achievement(models.Model):
             return data
         return save_achievement_cache()
 
+    @staticmethod
+    def get_all_by_conditions():
+        data = cache.get('achievement_conditions', hours=None)
+        if data:
+            return data
+        save_achievement_cache()
+        return cache.get('achievement_conditions', hours=None)
+
+
     def decoded_condition_value(self):
         if self.mode == 1:
             return [int(i) for i in self.condition_value.split(',')]
@@ -54,8 +63,14 @@ class Achievement(models.Model):
 
 def save_achievement_cache(*args, **kwargs):
     achieves = Achievement.objects.all()
-    data = {a.id: a for a in achieves}
+    data = {}
+    conditions = {}
+    for a in achieves:
+        data[a.id] = a
+        conditions.setdefault(a.id, []).append(a)
+
     cache.set('achievement', data, hours=None)
+    cache.set('achievement_conditions', conditions, hours=None)
     return data
 
 

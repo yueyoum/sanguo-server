@@ -16,6 +16,7 @@ from core.mongoscheme import MongoHang, MongoEmbededPlunderChar, MongoPlunderLis
 
 from core.exception import InvalidOperate, CounterOverFlow, SyceeNotEnough
 from core.counter import Counter
+from core.achievement import Achievement
 
 from protomsg import Battle as MsgBattle
 from protomsg import PlunderNotify
@@ -130,6 +131,11 @@ class Plunder(object):
             char = Char(self.char_id)
             h = Hang(self.char_id)
             h.plundered(char.cacheobj.name, msg.self_win)
+
+
+        if msg.self_win:
+            achievement = Achievement(self.char_id)
+            achievement.trig(8, 1)
         return msg
 
 

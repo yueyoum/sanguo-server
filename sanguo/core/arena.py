@@ -15,6 +15,7 @@ from core.battle import PVP
 from core.counter import Counter
 from core.mongoscheme import MongoArenaTopRanks
 from core.exception import CounterOverFlow, SyceeNotEnough
+from core.achievement import Achievement
 from preset.settings import AREMA_COST_SYCEE
 
 import protomsg
@@ -129,6 +130,8 @@ class Arena(object):
 
         if msg.self_win:
             score = 3
+            achievement = Achievement(self.char_id)
+            achievement.trig(7, 1)
         else:
             score = 0
         redis_client_two.zincrby(REDIS_DAY_KEY, self.char_id, score)

@@ -5,11 +5,12 @@ from apps.character.models import Character
 from apps.config.models import CharInit
 from core.counter import Counter
 from core.hero import save_hero, delete_hero, Hero
-from core.mongoscheme import MongoHang, MongoHero, MongoPrison
+from core.mongoscheme import MongoHang, MongoHero, MongoPrison, MongoChar
 from preset.settings import COUNTER
 from core.signals import char_updated_signal
 
 from core.formation import Formation
+from core.achievement import Achievement
 
 from core.msgpipe import publish_to_char
 from utils import pack_msg
@@ -118,11 +119,10 @@ class Char(object):
         return p
 
 
-    def update(self, gold=0, sycee=0, exp=0, honor=0, renown=0):
+    def update(self, gold=0, sycee=0, exp=0, official_exp=0):
         char = Character.objects.get(id=self.id)
         char.gold += gold
         char.sycee += sycee
-        char.renown += renown
 
         if exp:
             new_exp = char.exp + exp
@@ -145,8 +145,48 @@ class Char(object):
                     char_id=self.id
                 )
 
-        # TODO honor
+        if official_exp:
+            new_official_exp = char.off_exp + official_exp
+            official_level = char.official
+            while True:
+                need_exp = char.update_official_needs_exp(official_level)
+                if new_official_exp < need_exp:
+                    break
+                official_level += 1
+                new_official_exp -= need_exp
+
+            char.official = official_level
+            char.off_exp = new_official_exp
+
+
+        # TODO official_exp
         char.save()
+
+        try:
+            mongo_char = MongoChar.objects.get(id=self.id)
+        except DoesNotExist:
+            mongo_char = MongoChar(id=self.id)
+
+        if gold > 0:
+            mongo_char.got_gold += gold
+        if gold < 0:
+            mongo_char.cost_gold += abs(gold)
+        if sycee > 0:
+            mongo_char.got_sycee += sycee
+        if sycee < 0:
+            mongo_char.cost_sycee += abs(sycee)
+
+        mongo_char.save()
+
+        achievement = Achievement(self.id)
+        if gold < 0:
+            achievement.trig(13, abs(gold))
+        if sycee < 0:
+            achievement.trig(14, abs(sycee))
+
+        if char.official == 19:
+            achievement.trig(15, 19)
+
         self.send_notify()
 
 

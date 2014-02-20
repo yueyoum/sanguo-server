@@ -11,11 +11,12 @@ from apps.item.models import Stuff as ModelStuff
 from core.mongoscheme import MongoItem, MongoEmbeddedEquipment
 from core.drives import document_ids
 
-from core.exception import InvalidOperate, GoldNotEnough, GemNotEnough, StuffNotEnough
+from core.exception import InvalidOperate, GoldNotEnough, GemNotEnough, StuffNotEnough, SanguoException
 from core.msgpipe import publish_to_char
 from core.character import Char
 from core.signals import equip_changed_signal
 from core.formation import Formation
+from core.achievement import Achievement
 
 from core import DLL
 
@@ -98,6 +99,13 @@ class Equipment(MessageEquipmentMixin):
                 self.char_id, self.equip_id, self.level
             ))
 
+        char = Char(self.char_id)
+        char_level = char.cacheobj.level
+        if self.level >= char_level:
+            raise SanguoException(501, "Equipment Level Up. Char {0} Try level up equipment {1}. But equipment level {2} can't great than char's level {3}".format(
+                self.char_id, self.equip_id, self.level, char_level
+            ))
+
         gold_needs = self.level_up_need_gold()
         char = Char(self.char_id)
         cache_char = char.cacheobj
@@ -147,6 +155,12 @@ class Equipment(MessageEquipmentMixin):
             self.mongo_item.equipments[str(self.equip_id)].gems.append(0)
 
         self.mongo_item.save()
+
+        achievement = Achievement(self.char_id)
+        achievement.trig(11, 1)
+        if not self.equip.upgrade_to:
+            achievement.trig(17, 1)
+
         return stuff_needs
 
 
@@ -288,6 +302,11 @@ class Item(MessageEquipmentMixin):
             self._msg_equip(msg_equip, new_id, me, Equipment(self.char_id, new_id, self.item))
             publish_to_char(self.char_id, pack_msg(msg))
 
+        if this_equip.step == 6:
+            achievement = Achievement(self.char_id)
+            achievement.trig(17, 1)
+
+
         return new_id
 
     def equip_remove(self, ids):
@@ -392,11 +411,16 @@ class Item(MessageEquipmentMixin):
 
         all_gems = ModelGem.all()
 
+        achievement = Achievement(self.char_id)
+
         for gid, _ in add_gems:
             if gid not in all_gems:
                 raise InvalidOperate("Gem Add: Char {0} Try to add a NONE exist Gem, oid: {1}".format(
                     self.char_id, gid
                 ))
+            this_gem = all_gems[gid]
+            if this_gem.level == 10:
+                achievement.trig(18, 1)
 
         gems = self.item.gems
         add_gems_dict = {}
@@ -486,6 +510,9 @@ class Item(MessageEquipmentMixin):
 
         self.gem_add([(to_id, 1)])
         self.gem_remove(_id, 4)
+
+        achievement = Achievement(self.char_id)
+        achievement.trig(12, 1)
 
 
     def stuff_add(self, add_stuffs, send_notify=True):

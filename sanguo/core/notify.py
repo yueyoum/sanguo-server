@@ -17,6 +17,7 @@ from core.formation import Formation
 from core.item import Item
 from core.heropanel import HeroPanel
 from core.arena import Arena
+from core.achievement import Achievement
 
 
 def hero_notify(char_id, objs, message_name="HeroNotify"):
@@ -108,4 +109,5 @@ def login_notify(char_id):
 
     HeroPanel(char_id).send_notify()
     Task(char_id).send_notify()
+    Achievement(char_id).send_notify()
 
