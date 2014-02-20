@@ -61,6 +61,8 @@ class MongoStage(Document):
     # 已经打过的关卡，key为关卡ID，value 为 bool 值表示是否三星
     stages = DictField()
     stage_new = IntField()
+    # 开启的精英关卡, key 为关卡ID， value 为今日打的次数
+    elites = DictField()
 
     meta = {
         'collection': 'stage'

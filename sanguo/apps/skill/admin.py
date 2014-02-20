@@ -15,7 +15,7 @@ class SkillEffectInline(admin.TabularInline):
 
 class SkillAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'des', 'special',
+        'id', 'name', 'des', 'cast_effect', 'hit_effect', 'is_fullscreen',
         'mode', 'mode_name', 'prob'
     )
     inlines = [SkillEffectInline,]

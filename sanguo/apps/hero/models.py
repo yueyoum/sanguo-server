@@ -35,6 +35,7 @@ class Hero(models.Model):
     dodge = models.IntegerField("闪避", default=0)
 
     skills = models.CharField("技能", blank=True, max_length=255)
+    default_skill = models.IntegerField("默认技能", default=0)
 
     def __unicode__(self):
         return u'<Hero: %s>' % self.name

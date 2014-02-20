@@ -26,7 +26,9 @@ class Skill(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField("名字", max_length=32)
     des = models.TextField("描述", blank=True)
-    special = models.CharField("特效", max_length=32, blank=True)
+    cast_effect = models.CharField("施放特效", max_length=32, blank=True)
+    hit_effect = models.CharField("命中特效", max_length=32, blank=True)
+    is_fullscreen = models.BooleanField("是否全屏", default=False)
 
     mode = models.IntegerField("类型")
     mode_name = models.CharField("类型名字", max_length=8)
