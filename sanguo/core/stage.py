@@ -11,6 +11,7 @@ from utils import pack_msg
 from core.msgpipe import publish_to_char
 from core.attachment import Attachment
 from core.achievement import Achievement
+from core.task import Task
 
 import protomsg
 
@@ -110,6 +111,9 @@ class Stage(object):
             if stage_id == 10:
                 achievement = Achievement(self.char_id)
                 achievement.trig(6, 1)
+
+            t = Task(self.char_id)
+            t.trig(1)
 
         return battle_msg
 

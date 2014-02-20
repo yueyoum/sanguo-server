@@ -16,6 +16,7 @@ from core.counter import Counter
 from core.mongoscheme import MongoArenaTopRanks
 from core.exception import CounterOverFlow, SyceeNotEnough
 from core.achievement import Achievement
+from core.task import Task
 from preset.settings import AREMA_COST_SYCEE
 
 import protomsg
@@ -132,9 +133,13 @@ class Arena(object):
             score = 3
             achievement = Achievement(self.char_id)
             achievement.trig(7, 1)
+
         else:
             score = 0
         redis_client_two.zincrby(REDIS_DAY_KEY, self.char_id, score)
+
+        t = Task(self.char_id)
+        t.trig(2)
 
         self.send_notify()
         return msg

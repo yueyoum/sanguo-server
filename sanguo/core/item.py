@@ -17,6 +17,7 @@ from core.character import Char
 from core.signals import equip_changed_signal
 from core.formation import Formation
 from core.achievement import Achievement
+from core.task import Task
 
 from core import DLL
 
@@ -513,6 +514,8 @@ class Item(MessageEquipmentMixin):
 
         achievement = Achievement(self.char_id)
         achievement.trig(12, 1)
+        t = Task(self.char_id)
+        t.trig(4)
 
 
     def stuff_add(self, add_stuffs, send_notify=True):

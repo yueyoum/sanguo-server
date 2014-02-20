@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from core.stage import Stage, Hang
-from core.task import Task
 from utils import pack_msg
 from utils.decorate import message_response
 
@@ -25,8 +24,6 @@ def pve(request):
 
     if battle_msg.self_win:
         drop_exp, drop_gold, drop_stuffs = stage.save_drop(req.stage_id, first=stage.first, star=stage.first_star)
-        t = Task(request._char_id)
-        t.trig(1)
     else:
         drop_exp, drop_gold, drop_stuffs = 0, 0, []
 

@@ -12,6 +12,7 @@ import protomsg
 from utils import pack_msg
 from core.msgpipe import publish_to_char
 from core.achievement import Achievement
+from core.task import Task
 
 class Prison(object):
     def __init__(self, char_id):
@@ -94,6 +95,9 @@ class Prison(object):
 
         self.p.prisoners.pop(str_id)
         self.p.save()
+
+        t = Task(self.char_id)
+        t.trig(5)
 
         msg = protomsg.RemovePrisonerNotify()
         msg.ids.append(_id)
