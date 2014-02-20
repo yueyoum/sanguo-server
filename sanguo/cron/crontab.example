@@ -2,6 +2,8 @@
 0 2 * * * /PATH/reset_counter.sh
 # 每天02:00 重置可签到状态
 0 2 * * * /PATH/reset_checkin.sh
+# 每天02:00 重置任务
+0 2 * * * /PATH/reset_task.sh
 # 每天21:00 重置比武日积分
 0 21 * * * /PATH/reset_arena_day.py
 # 每天21:30 重置比武周积分
