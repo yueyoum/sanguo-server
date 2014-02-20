@@ -7,10 +7,10 @@
         "name": "\u9ec4\u5dfe\u4e71\u515a", 
         "level": 1, 
         "skills": "28", 
-        "image": "\u5200\u5175", 
+        "image": "\u9ec4\u5dfe\u519b", 
         "attack": 21, 
         "defense": 10, 
-        "avatar": "\u5200\u5175", 
+        "avatar": "\u9ec4\u5dfe\u519b", 
         "crit": 0, 
         "hp": 133
     }
@@ -39,10 +39,10 @@
         "name": "\u9ec4\u5dfe\u4e71\u515a", 
         "level": 2, 
         "skills": "28", 
-        "image": "\u9ec4\u5dfe\u4e71\u515a", 
+        "image": "\u9ec4\u5dfe\u519b", 
         "attack": 29, 
         "defense": 12, 
-        "avatar": "\u9ec4\u5dfe\u4e71\u515a", 
+        "avatar": "\u9ec4\u5dfe\u519b", 
         "crit": 0, 
         "hp": 194
     }
@@ -71,10 +71,10 @@
         "name": "\u9ec4\u5dfe\u4e71\u515a", 
         "level": 3, 
         "skills": "28", 
-        "image": "\u9ec4\u5dfe\u4e71\u515a", 
+        "image": "\u9ec4\u5dfe\u519b", 
         "attack": 38, 
         "defense": 15, 
-        "avatar": "\u9ec4\u5dfe\u4e71\u515a", 
+        "avatar": "\u9ec4\u5dfe\u519b", 
         "crit": 0, 
         "hp": 254
     }
@@ -87,10 +87,10 @@
         "name": "\u6ce2\u624d", 
         "level": 3, 
         "skills": "28", 
-        "image": "\u6b66\u5c06\u80d6", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 40, 
         "defense": 16, 
-        "avatar": "\u6b66\u5c06\u80d6", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 288
     }
@@ -103,10 +103,10 @@
         "name": "\u9ec4\u5dfe\u4e71\u515a", 
         "level": 4, 
         "skills": "28", 
-        "image": "\u9ec4\u5dfe\u4e71\u515a", 
+        "image": "\u9ec4\u5dfe\u519b", 
         "attack": 46, 
         "defense": 18, 
-        "avatar": "\u9ec4\u5dfe\u4e71\u515a", 
+        "avatar": "\u9ec4\u5dfe\u519b", 
         "crit": 0, 
         "hp": 315
     }
@@ -119,10 +119,10 @@
         "name": "\u5f20\u6881", 
         "level": 4, 
         "skills": "28", 
-        "image": "\u5f20\u6881", 
+        "image": "\u6b66\u5c06\u6742boss", 
         "attack": 61, 
         "defense": 23, 
-        "avatar": "\u5f20\u6881", 
+        "avatar": "\u6b66\u5c06\u6742boss", 
         "crit": 0, 
         "hp": 450
     }
@@ -135,10 +135,10 @@
         "name": "\u9ec4\u5dfe\u4e71\u515a", 
         "level": 5, 
         "skills": "28", 
-        "image": "\u9ec4\u5dfe\u4e71\u515a", 
+        "image": "\u9ec4\u5dfe\u519b", 
         "attack": 54, 
         "defense": 20, 
-        "avatar": "\u9ec4\u5dfe\u4e71\u515a", 
+        "avatar": "\u9ec4\u5dfe\u519b", 
         "crit": 0, 
         "hp": 376
     }
@@ -151,10 +151,10 @@
         "name": "\u5f20\u5b9d", 
         "level": 5, 
         "skills": "28", 
-        "image": "\u5f20\u5b9d", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 72, 
         "defense": 27, 
-        "avatar": "\u5f20\u5b9d", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 540
     }
@@ -167,10 +167,10 @@
         "name": "\u9ec4\u5dfe\u4e71\u515a", 
         "level": 6, 
         "skills": "28", 
-        "image": "\u9ec4\u5dfe\u4e71\u515a", 
+        "image": "\u9ec4\u5dfe\u519b", 
         "attack": 63, 
         "defense": 23, 
-        "avatar": "\u9ec4\u5dfe\u4e71\u515a", 
+        "avatar": "\u9ec4\u5dfe\u519b", 
         "crit": 0, 
         "hp": 437
     }
@@ -183,10 +183,10 @@
         "name": "\u5f20\u6881", 
         "level": 6, 
         "skills": "28", 
-        "image": "\u5f20\u6881", 
+        "image": "\u6b66\u5c06\u6742boss", 
         "attack": 83, 
         "defense": 31, 
-        "avatar": "\u5f20\u6881", 
+        "avatar": "\u6b66\u5c06\u6742boss", 
         "crit": 0, 
         "hp": 630
     }
@@ -199,10 +199,10 @@
         "name": "\u9ec4\u5dfe\u4e71\u515a", 
         "level": 7, 
         "skills": "28", 
-        "image": "\u9ec4\u5dfe\u4e71\u515a", 
+        "image": "\u9ec4\u5dfe\u519b", 
         "attack": 71, 
         "defense": 26, 
-        "avatar": "\u9ec4\u5dfe\u4e71\u515a", 
+        "avatar": "\u9ec4\u5dfe\u519b", 
         "crit": 0, 
         "hp": 498
     }
@@ -215,10 +215,10 @@
         "name": "\u5f20\u5b9d", 
         "level": 7, 
         "skills": "28", 
-        "image": "\u5f20\u5b9d", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 94, 
         "defense": 34, 
-        "avatar": "\u5f20\u5b9d", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 720
     }
@@ -231,10 +231,10 @@
         "name": "\u9ec4\u5dfe\u4e71\u515a", 
         "level": 8, 
         "skills": "28", 
-        "image": "\u9ec4\u5dfe\u4e71\u515a", 
+        "image": "\u9ec4\u5dfe\u519b", 
         "attack": 79, 
         "defense": 28, 
-        "avatar": "\u9ec4\u5dfe\u4e71\u515a", 
+        "avatar": "\u9ec4\u5dfe\u519b", 
         "crit": 0, 
         "hp": 558
     }
@@ -247,10 +247,10 @@
         "name": "\u97e9\u5fe0", 
         "level": 8, 
         "skills": "28", 
-        "image": "\u97e9\u5fe0", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 106, 
         "defense": 38, 
-        "avatar": "\u97e9\u5fe0", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 810
     }
@@ -263,10 +263,10 @@
         "name": "\u9ec4\u5dfe\u4e71\u515a", 
         "level": 9, 
         "skills": "28", 
-        "image": "\u9ec4\u5dfe\u4e71\u515a", 
+        "image": "\u9ec4\u5dfe\u519b", 
         "attack": 88, 
         "defense": 31, 
-        "avatar": "\u9ec4\u5dfe\u4e71\u515a", 
+        "avatar": "\u9ec4\u5dfe\u519b", 
         "crit": 0, 
         "hp": 619
     }
@@ -279,10 +279,10 @@
         "name": "\u8d75\u5f18", 
         "level": 9, 
         "skills": "28", 
-        "image": "\u8d75\u5f18", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "attack": 117, 
         "defense": 41, 
-        "avatar": "\u8d75\u5f18", 
+        "avatar": "\u6b66\u5c06_\u82f1\u4fca", 
         "crit": 0, 
         "hp": 900
     }
@@ -295,10 +295,10 @@
         "name": "\u9ec4\u5dfe\u4e71\u515a", 
         "level": 10, 
         "skills": "28", 
-        "image": "\u9ec4\u5dfe\u4e71\u515a", 
+        "image": "\u9ec4\u5dfe\u519b", 
         "attack": 96, 
         "defense": 34, 
-        "avatar": "\u9ec4\u5dfe\u4e71\u515a", 
+        "avatar": "\u9ec4\u5dfe\u519b", 
         "crit": 0, 
         "hp": 680
     }
@@ -311,10 +311,10 @@
         "name": "\u5b59\u4ef2", 
         "level": 10, 
         "skills": "28", 
-        "image": "\u5b59\u4ef2", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "attack": 128, 
         "defense": 45, 
-        "avatar": "\u5b59\u4ef2", 
+        "avatar": "\u6b66\u5c06_\u82f1\u4fca", 
         "crit": 0, 
         "hp": 990
     }
@@ -343,10 +343,10 @@
         "name": "\u5f20\u8ba9", 
         "level": 11, 
         "skills": "28", 
-        "image": "\u5f20\u8ba9", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 111, 
         "defense": 39, 
-        "avatar": "\u5f20\u8ba9", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 864
     }
@@ -407,10 +407,10 @@
         "name": "\u80e1\u8f78", 
         "level": 12, 
         "skills": "28", 
-        "image": "\u80e1\u8f78", 
+        "image": "\u6b66\u5c06\u80d6", 
         "attack": 120, 
         "defense": 42, 
-        "avatar": "\u80e1\u8f78", 
+        "avatar": "\u6b66\u5c06\u80d6", 
         "crit": 0, 
         "hp": 936
     }
@@ -439,10 +439,10 @@
         "name": "\u674e\u7c9b", 
         "level": 13, 
         "skills": "28", 
-        "image": "\u674e\u7c9b", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "attack": 162, 
         "defense": 56, 
-        "avatar": "\u674e\u7c9b", 
+        "avatar": "\u6b66\u5c06_\u82f1\u4fca", 
         "crit": 0, 
         "hp": 1260
     }
@@ -504,11 +504,11 @@
         "level": 16, 
         "skills": "22", 
         "image": "\u5415\u5e03", 
-        "attack": 187, 
-        "defense": 64, 
+        "attack": 350, 
+        "defense": 120, 
         "avatar": "\u5415\u5e03", 
         "crit": 0, 
-        "hp": 1357
+        "hp": 2545
     }
 },
 {
@@ -535,10 +535,10 @@
         "name": "\u5f90\u8363", 
         "level": 15, 
         "skills": "28", 
-        "image": "\u5f90\u8363", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 221, 
         "defense": 76, 
-        "avatar": "\u5f90\u8363", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 1728
     }
@@ -631,10 +631,10 @@
         "name": "\u84af\u8d8a", 
         "level": 16, 
         "skills": "28", 
-        "image": "\u84af\u8d8a", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 234, 
         "defense": 80, 
-        "avatar": "\u84af\u8d8a", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 1836
     }
@@ -647,10 +647,10 @@
         "name": "\u8521\u7441", 
         "level": 16, 
         "skills": "28", 
-        "image": "\u8521\u7441", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 234, 
         "defense": 80, 
-        "avatar": "\u8521\u7441", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 1836
     }
@@ -679,10 +679,10 @@
         "name": "\u9ec4\u7956", 
         "level": 17, 
         "skills": "28", 
-        "image": "\u9ec4\u7956", 
+        "image": "\u6587\u5b98\u8001\u5e74", 
         "attack": 248, 
         "defense": 84, 
-        "avatar": "\u9ec4\u7956", 
+        "avatar": "\u6587\u5b98\u8001\u5e74", 
         "crit": 0, 
         "hp": 1944
     }
@@ -711,10 +711,10 @@
         "name": "\u9648\u751f", 
         "level": 18, 
         "skills": "28", 
-        "image": "\u9648\u751f", 
+        "image": "\u6b66\u5c06\u80d6", 
         "attack": 261, 
         "defense": 89, 
-        "avatar": "\u9648\u751f", 
+        "avatar": "\u6b66\u5c06\u80d6", 
         "crit": 0, 
         "hp": 2052
     }
@@ -727,10 +727,10 @@
         "name": "\u5f20\u864e", 
         "level": 18, 
         "skills": "28", 
-        "image": "\u5f20\u864e", 
+        "image": "\u6b66\u5c06\u6742boss", 
         "attack": 261, 
         "defense": 89, 
-        "avatar": "\u5f20\u864e", 
+        "avatar": "\u6b66\u5c06\u6742boss", 
         "crit": 0, 
         "hp": 2052
     }
@@ -743,10 +743,10 @@
         "name": "\u9ec4\u7956", 
         "level": 18, 
         "skills": "28", 
-        "image": "\u9ec4\u7956", 
+        "image": "\u6587\u5b98\u8001\u5e74", 
         "attack": 261, 
         "defense": 89, 
-        "avatar": "\u9ec4\u7956", 
+        "avatar": "\u6587\u5b98\u8001\u5e74", 
         "crit": 0, 
         "hp": 2052
     }
@@ -775,10 +775,10 @@
         "name": "\u8521\u7441", 
         "level": 19, 
         "skills": "28", 
-        "image": "\u8521\u7441", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 275, 
         "defense": 93, 
-        "avatar": "\u8521\u7441", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 2160
     }
@@ -791,10 +791,10 @@
         "name": "\u9ec4\u7956", 
         "level": 19, 
         "skills": "28", 
-        "image": "\u9ec4\u7956", 
+        "image": "\u6587\u5b98\u8001\u5e74", 
         "attack": 275, 
         "defense": 93, 
-        "avatar": "\u9ec4\u7956", 
+        "avatar": "\u6587\u5b98\u8001\u5e74", 
         "crit": 0, 
         "hp": 2160
     }
@@ -807,10 +807,10 @@
         "name": "\u84af\u826f", 
         "level": 19, 
         "skills": "28", 
-        "image": "\u84af\u826f", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 275, 
         "defense": 93, 
-        "avatar": "\u84af\u826f", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 2160
     }
@@ -839,10 +839,10 @@
         "name": "\u9ec4\u7956", 
         "level": 20, 
         "skills": "28", 
-        "image": "\u9ec4\u7956", 
+        "image": "\u6587\u5b98\u8001\u5e74", 
         "attack": 336, 
         "defense": 113, 
-        "avatar": "\u9ec4\u7956", 
+        "avatar": "\u6587\u5b98\u8001\u5e74", 
         "crit": 0, 
         "hp": 2646
     }
@@ -855,10 +855,10 @@
         "name": "\u5415\u516c", 
         "level": 20, 
         "skills": "28", 
-        "image": "\u5415\u516c", 
+        "image": "\u6587\u5b98\u8001\u5e74", 
         "attack": 360, 
         "defense": 122, 
-        "avatar": "\u5415\u516c", 
+        "avatar": "\u6587\u5b98\u8001\u5e74", 
         "crit": 0, 
         "hp": 2835
     }
@@ -903,10 +903,10 @@
         "name": "\u674e\u8083", 
         "level": 21, 
         "skills": "28", 
-        "image": "\u674e\u8083", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "attack": 352, 
         "defense": 118, 
-        "avatar": "\u674e\u8083", 
+        "avatar": "\u6b66\u5c06_\u82f1\u4fca", 
         "crit": 0, 
         "hp": 2772
     }
@@ -951,10 +951,10 @@
         "name": "\u80e1\u8f66\u513f", 
         "level": 22, 
         "skills": "28", 
-        "image": "\u80e1\u8f66\u513f", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 367, 
         "defense": 123, 
-        "avatar": "\u80e1\u8f66\u513f", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 2898
     }
@@ -999,10 +999,10 @@
         "name": "\u79cd\u62c2", 
         "level": 23, 
         "skills": "28", 
-        "image": "\u79cd\u62c2", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 383, 
         "defense": 129, 
-        "avatar": "\u79cd\u62c2", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 3024
     }
@@ -1015,10 +1015,10 @@
         "name": "\u9c81\u9997", 
         "level": 23, 
         "skills": "28", 
-        "image": "\u9c81\u9997", 
+        "image": "\u6587\u5b98\u8001\u5e74", 
         "attack": 383, 
         "defense": 129, 
-        "avatar": "\u9c81\u9997", 
+        "avatar": "\u6587\u5b98\u8001\u5e74", 
         "crit": 0, 
         "hp": 3024
     }
@@ -1111,10 +1111,10 @@
         "name": "\u79cd\u90b5", 
         "level": 25, 
         "skills": "28", 
-        "image": "\u79cd\u90b5", 
+        "image": "\u9752\u5e74\u6587\u5b98", 
         "attack": 414, 
         "defense": 139, 
-        "avatar": "\u79cd\u90b5", 
+        "avatar": "\u9752\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 3276
     }
@@ -1127,10 +1127,10 @@
         "name": "\u9a6c\u5b87", 
         "level": 25, 
         "skills": "28", 
-        "image": "\u9a6c\u5b87", 
+        "image": "\u9752\u5e74\u6587\u5b98", 
         "attack": 414, 
         "defense": 139, 
-        "avatar": "\u9a6c\u5b87", 
+        "avatar": "\u9752\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 3276
     }
@@ -1140,13 +1140,13 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u5218\u8303\u6b32", 
+        "name": "\u5218\u8303", 
         "level": 25, 
         "skills": "28", 
-        "image": "\u5218\u8303\u6b32", 
+        "image": "\u9752\u5e74\u6587\u5b98", 
         "attack": 414, 
         "defense": 139, 
-        "avatar": "\u5218\u8303\u6b32", 
+        "avatar": "\u9752\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 3276
     }
@@ -1223,10 +1223,10 @@
         "name": "\u8fb9\u8ba9", 
         "level": 26, 
         "skills": "28", 
-        "image": "\u8fb9\u8ba9", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 461, 
         "defense": 154, 
-        "avatar": "\u8fb9\u8ba9", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 3645
     }
@@ -1255,10 +1255,10 @@
         "name": "\u66f9\u8c79", 
         "level": 26, 
         "skills": "28", 
-        "image": "\u66f9\u8c79", 
+        "image": "\u6b66\u5c06\u6742boss", 
         "attack": 461, 
         "defense": 154, 
-        "avatar": "\u66f9\u8c79", 
+        "avatar": "\u6b66\u5c06\u6742boss", 
         "crit": 0, 
         "hp": 3645
     }
@@ -1335,10 +1335,10 @@
         "name": "\u90dd\u840c", 
         "level": 28, 
         "skills": "28", 
-        "image": "\u90dd\u840c", 
+        "image": "\u6b66\u5c06\u80d6", 
         "attack": 494, 
         "defense": 165, 
-        "avatar": "\u90dd\u840c", 
+        "avatar": "\u6b66\u5c06\u80d6", 
         "crit": 0, 
         "hp": 3915
     }
@@ -1351,10 +1351,10 @@
         "name": "\u6210\u5ec9", 
         "level": 28, 
         "skills": "28", 
-        "image": "\u6210\u5ec9", 
+        "image": "\u6b66\u5c06\u80d6", 
         "attack": 494, 
         "defense": 165, 
-        "avatar": "\u6210\u5ec9", 
+        "avatar": "\u6b66\u5c06\u80d6", 
         "crit": 0, 
         "hp": 3915
     }
@@ -1367,10 +1367,10 @@
         "name": "\u5b8b\u5baa", 
         "level": 28, 
         "skills": "28", 
-        "image": "\u5b8b\u5baa", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 494, 
         "defense": 165, 
-        "avatar": "\u5b8b\u5baa", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 3915
     }
@@ -1383,10 +1383,10 @@
         "name": "\u81e7\u9738", 
         "level": 28, 
         "skills": "28", 
-        "image": "\u81e7\u9738", 
+        "image": "\u6b66\u5c06\u6742boss", 
         "attack": 494, 
         "defense": 165, 
-        "avatar": "\u81e7\u9738", 
+        "avatar": "\u6b66\u5c06\u6742boss", 
         "crit": 0, 
         "hp": 3915
     }
@@ -1463,10 +1463,10 @@
         "name": "\u859b\u5170", 
         "level": 29, 
         "skills": "28", 
-        "image": "\u859b\u5170", 
+        "image": "\u6b66\u5c06\u6742boss", 
         "attack": 511, 
         "defense": 170, 
-        "avatar": "\u859b\u5170", 
+        "avatar": "\u6b66\u5c06\u6742boss", 
         "crit": 0, 
         "hp": 4050
     }
@@ -1479,10 +1479,10 @@
         "name": "\u674e\u5c01", 
         "level": 29, 
         "skills": "28", 
-        "image": "\u674e\u5c01", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 511, 
         "defense": 170, 
-        "avatar": "\u674e\u5c01", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 4050
     }
@@ -1511,10 +1511,10 @@
         "name": "\u6210\u5ec9", 
         "level": 30, 
         "skills": "28", 
-        "image": "\u6210\u5ec9", 
+        "image": "\u6b66\u5c06\u80d6", 
         "attack": 528, 
         "defense": 176, 
-        "avatar": "\u6210\u5ec9", 
+        "avatar": "\u6b66\u5c06\u80d6", 
         "crit": 0, 
         "hp": 4185
     }
@@ -1543,10 +1543,10 @@
         "name": "\u5415\u7eee\u73b2", 
         "level": 33, 
         "skills": "4", 
-        "image": "\u5415\u7eee\u73b2", 
+        "image": "\u6b66\u5c06_\u5973", 
         "attack": 578, 
         "defense": 192, 
-        "avatar": "\u5415\u7eee\u73b2", 
+        "avatar": "\u6b66\u5c06_\u5973", 
         "crit": 0, 
         "hp": 4590
     }
@@ -1575,10 +1575,10 @@
         "name": "\u5de6\u7075", 
         "level": 31, 
         "skills": "28", 
-        "image": "\u5de6\u7075", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 581, 
         "defense": 193, 
-        "avatar": "\u5de6\u7075", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 4608
     }
@@ -1607,10 +1607,10 @@
         "name": "\u674e\u5095", 
         "level": 31, 
         "skills": "28", 
-        "image": "\u674e\u5095", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 581, 
         "defense": 193, 
-        "avatar": "\u674e\u5095", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 4608
     }
@@ -1639,10 +1639,10 @@
         "name": "\u674e\u5095", 
         "level": 31, 
         "skills": "28", 
-        "image": "\u674e\u5095", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 581, 
         "defense": 193, 
-        "avatar": "\u674e\u5095", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 4608
     }
@@ -1671,10 +1671,10 @@
         "name": "\u5d14\u52c7", 
         "level": 32, 
         "skills": "28", 
-        "image": "\u5d14\u52c7", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 599, 
         "defense": 199, 
-        "avatar": "\u5d14\u52c7", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 4752
     }
@@ -1719,10 +1719,10 @@
         "name": "\u674e\u5095", 
         "level": 33, 
         "skills": "28", 
-        "image": "\u674e\u5095", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 617, 
         "defense": 204, 
-        "avatar": "\u674e\u5095", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 4896
     }
@@ -1751,10 +1751,10 @@
         "name": "\u5f20\u6d4e", 
         "level": 33, 
         "skills": "28", 
-        "image": "\u5f20\u6d4e", 
+        "image": "\u6b66\u5c06\u6742boss", 
         "attack": 617, 
         "defense": 204, 
-        "avatar": "\u5f20\u6d4e", 
+        "avatar": "\u6b66\u5c06\u6742boss", 
         "crit": 0, 
         "hp": 4896
     }
@@ -1767,10 +1767,10 @@
         "name": "\u5f20\u6d4e", 
         "level": 34, 
         "skills": "28", 
-        "image": "\u5f20\u6d4e", 
+        "image": "\u6b66\u5c06\u6742boss", 
         "attack": 635, 
         "defense": 210, 
-        "avatar": "\u5f20\u6d4e", 
+        "avatar": "\u6b66\u5c06\u6742boss", 
         "crit": 0, 
         "hp": 5040
     }
@@ -1783,10 +1783,10 @@
         "name": "\u674e\u5095", 
         "level": 34, 
         "skills": "28", 
-        "image": "\u674e\u5095", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 635, 
         "defense": 210, 
-        "avatar": "\u674e\u5095", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 5040
     }
@@ -1831,10 +1831,10 @@
         "name": "\u674e\u4e50", 
         "level": 34, 
         "skills": "28", 
-        "image": "\u674e\u4e50", 
+        "image": "\u6b66\u5c06\u80d6", 
         "attack": 635, 
         "defense": 210, 
-        "avatar": "\u674e\u4e50", 
+        "avatar": "\u6b66\u5c06\u80d6", 
         "crit": 0, 
         "hp": 5040
     }
@@ -1847,10 +1847,10 @@
         "name": "\u5f20\u6d4e", 
         "level": 35, 
         "skills": "28", 
-        "image": "\u5f20\u6d4e", 
+        "image": "\u6b66\u5c06\u6742boss", 
         "attack": 653, 
         "defense": 216, 
-        "avatar": "\u5f20\u6d4e", 
+        "avatar": "\u6b66\u5c06\u6742boss", 
         "crit": 0, 
         "hp": 5184
     }
@@ -1863,10 +1863,10 @@
         "name": "\u674e\u5229", 
         "level": 35, 
         "skills": "28", 
-        "image": "\u674e\u5229", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 653, 
         "defense": 216, 
-        "avatar": "\u674e\u5229", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 5184
     }
@@ -1879,10 +1879,10 @@
         "name": "\u674e\u5095", 
         "level": 35, 
         "skills": "28", 
-        "image": "\u674e\u5095", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 653, 
         "defense": 216, 
-        "avatar": "\u674e\u5095", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 5184
     }
@@ -1927,10 +1927,10 @@
         "name": "\u5f20\u82f1", 
         "level": 36, 
         "skills": "28", 
-        "image": "\u5f20\u82f1", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 755, 
         "defense": 249, 
-        "avatar": "\u5f20\u82f1", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 5994
     }
@@ -1975,10 +1975,10 @@
         "name": "\u5218\u7476", 
         "level": 37, 
         "skills": "28", 
-        "image": "\u5218\u7476", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "attack": 775, 
         "defense": 256, 
-        "avatar": "\u5218\u7476", 
+        "avatar": "\u6b66\u5c06_\u82f1\u4fca", 
         "crit": 0, 
         "hp": 6156
     }
@@ -1991,10 +1991,10 @@
         "name": "\u859b\u793c", 
         "level": 37, 
         "skills": "28", 
-        "image": "\u859b\u793c", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "attack": 775, 
         "defense": 256, 
-        "avatar": "\u859b\u793c", 
+        "avatar": "\u6b66\u5c06_\u82f1\u4fca", 
         "crit": 0, 
         "hp": 6156
     }
@@ -2007,10 +2007,10 @@
         "name": "\u4e8e\u9e8b", 
         "level": 38, 
         "skills": "28", 
-        "image": "\u4e8e\u9e8b", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 795, 
         "defense": 262, 
-        "avatar": "\u4e8e\u9e8b", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 6318
     }
@@ -2023,10 +2023,10 @@
         "name": "\u7b2e\u878d", 
         "level": 38, 
         "skills": "28", 
-        "image": "\u7b2e\u878d", 
+        "image": "\u6b66\u5c06\u80d6", 
         "attack": 795, 
         "defense": 262, 
-        "avatar": "\u7b2e\u878d", 
+        "avatar": "\u6b66\u5c06\u80d6", 
         "crit": 0, 
         "hp": 6318
     }
@@ -2039,10 +2039,10 @@
         "name": "\u5218\u7e47", 
         "level": 38, 
         "skills": "28", 
-        "image": "\u5218\u7e47", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 795, 
         "defense": 262, 
-        "avatar": "\u5218\u7e47", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 6318
     }
@@ -2055,10 +2055,10 @@
         "name": "\u9648\u6a2a", 
         "level": 38, 
         "skills": "28", 
-        "image": "\u9648\u6a2a", 
+        "image": "\u6b66\u5c06\u80d6", 
         "attack": 795, 
         "defense": 262, 
-        "avatar": "\u9648\u6a2a", 
+        "avatar": "\u6b66\u5c06\u80d6", 
         "crit": 0, 
         "hp": 6318
     }
@@ -2071,10 +2071,10 @@
         "name": "\u5f20\u82f1", 
         "level": 38, 
         "skills": "28", 
-        "image": "\u5f20\u82f1", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 795, 
         "defense": 262, 
-        "avatar": "\u5f20\u82f1", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 6318
     }
@@ -2087,10 +2087,10 @@
         "name": "\u859b\u793c", 
         "level": 38, 
         "skills": "28", 
-        "image": "\u859b\u793c", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "attack": 795, 
         "defense": 262, 
-        "avatar": "\u859b\u793c", 
+        "avatar": "\u6b66\u5c06_\u82f1\u4fca", 
         "crit": 0, 
         "hp": 6318
     }
@@ -2135,10 +2135,10 @@
         "name": "\u4e25\u8206", 
         "level": 39, 
         "skills": "28", 
-        "image": "\u4e25\u8206", 
+        "image": "\u6b66\u5c06\u80d6", 
         "attack": 815, 
         "defense": 269, 
-        "avatar": "\u4e25\u8206", 
+        "avatar": "\u6b66\u5c06\u80d6", 
         "crit": 0, 
         "hp": 6480
     }
@@ -2167,10 +2167,10 @@
         "name": "\u5468\u6615 ", 
         "level": 40, 
         "skills": "28", 
-        "image": "\u5468\u6615 ", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 835, 
         "defense": 275, 
-        "avatar": "\u5468\u6615 ", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 6642
     }
@@ -2199,10 +2199,10 @@
         "name": "\u738b\u6717", 
         "level": 40, 
         "skills": "28", 
-        "image": "\u738b\u6717", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 835, 
         "defense": 275, 
-        "avatar": "\u738b\u6717", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 6642
     }
@@ -2231,10 +2231,10 @@
         "name": "\u5c71\u8d3c\u9996\u9886", 
         "level": 40, 
         "skills": "28", 
-        "image": "\u5c71\u8d3c\u9996\u9886", 
+        "image": "\u8d75\u6c0f\u5144\u5f1f", 
         "attack": 778, 
         "defense": 254, 
-        "avatar": "\u5c71\u8d3c\u9996\u9886", 
+        "avatar": "\u8d75\u6c0f\u5144\u5f1f", 
         "crit": 0, 
         "hp": 5634
     }
@@ -2263,10 +2263,10 @@
         "name": "\u8340\u6b63", 
         "level": 41, 
         "skills": "28", 
-        "image": "\u8340\u6b63", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 855, 
         "defense": 282, 
-        "avatar": "\u8340\u6b63", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 6804
     }
@@ -2295,10 +2295,10 @@
         "name": "\u66f9\u8c79", 
         "level": 41, 
         "skills": "28", 
-        "image": "\u66f9\u8c79", 
+        "image": "\u6b66\u5c06\u6742boss", 
         "attack": 855, 
         "defense": 282, 
-        "avatar": "\u66f9\u8c79", 
+        "avatar": "\u6b66\u5c06\u6742boss", 
         "crit": 0, 
         "hp": 6804
     }
@@ -2391,10 +2391,10 @@
         "name": "\u9b4f\u7eed", 
         "level": 42, 
         "skills": "28", 
-        "image": "\u9b4f\u7eed", 
+        "image": "\u6b66\u5c06\u6742boss", 
         "attack": 876, 
         "defense": 288, 
-        "avatar": "\u9b4f\u7eed", 
+        "avatar": "\u6b66\u5c06\u6742boss", 
         "crit": 0, 
         "hp": 6966
     }
@@ -2407,10 +2407,10 @@
         "name": "\u5b8b\u5baa", 
         "level": 42, 
         "skills": "28", 
-        "image": "\u5b8b\u5baa", 
+        "image": "\u6b66\u5c06\u80d6", 
         "attack": 876, 
         "defense": 288, 
-        "avatar": "\u5b8b\u5baa", 
+        "avatar": "\u6b66\u5c06\u80d6", 
         "crit": 0, 
         "hp": 6966
     }
@@ -2471,10 +2471,10 @@
         "name": "\u66f9\u6027", 
         "level": 43, 
         "skills": "28", 
-        "image": "\u66f9\u6027", 
+        "image": "\u6b66\u5c06\u6742boss", 
         "attack": 896, 
         "defense": 295, 
-        "avatar": "\u66f9\u6027", 
+        "avatar": "\u6b66\u5c06\u6742boss", 
         "crit": 0, 
         "hp": 7128
     }
@@ -2567,10 +2567,10 @@
         "name": "\u5b59\u89c2", 
         "level": 44, 
         "skills": "28", 
-        "image": "\u5b59\u89c2", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "attack": 916, 
         "defense": 301, 
-        "avatar": "\u5b59\u89c2", 
+        "avatar": "\u6b66\u5c06_\u82f1\u4fca", 
         "crit": 0, 
         "hp": 7290
     }
@@ -2615,10 +2615,10 @@
         "name": "\u5415\u7eee\u73b2", 
         "level": 45, 
         "skills": "4", 
-        "image": "\u5415\u7eee\u73b2", 
+        "image": "\u6b66\u5c06_\u5973", 
         "attack": 936, 
         "defense": 308, 
-        "avatar": "\u5415\u7eee\u73b2", 
+        "avatar": "\u6b66\u5c06_\u5973", 
         "crit": 0, 
         "hp": 7452
     }
@@ -2743,10 +2743,10 @@
         "name": "\u9648\u767b", 
         "level": 46, 
         "skills": "28", 
-        "image": "\u9648\u767b", 
+        "image": "\u9752\u5e74\u6587\u5b98", 
         "attack": 1062, 
         "defense": 349, 
-        "avatar": "\u9648\u767b", 
+        "avatar": "\u9752\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 8460
     }
@@ -2775,10 +2775,10 @@
         "name": "\u9648\u767b", 
         "level": 47, 
         "skills": "28", 
-        "image": "\u9648\u767b", 
+        "image": "\u9752\u5e74\u6587\u5b98", 
         "attack": 1085, 
         "defense": 356, 
-        "avatar": "\u9648\u767b", 
+        "avatar": "\u9752\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 8640
     }
@@ -2951,10 +2951,10 @@
         "name": "\u9ad8\u89c8", 
         "level": 50, 
         "skills": "28", 
-        "image": "\u9ad8\u89c8", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 1152, 
         "defense": 378, 
-        "avatar": "\u9ad8\u89c8", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 9180
     }
@@ -2967,10 +2967,10 @@
         "name": "\u90ed\u56fe", 
         "level": 50, 
         "skills": "28", 
-        "image": "\u90ed\u56fe", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 1152, 
         "defense": 378, 
-        "avatar": "\u90ed\u56fe", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 9180
     }
@@ -2999,10 +2999,10 @@
         "name": "\u848b\u5947", 
         "level": 50, 
         "skills": "28", 
-        "image": "\u848b\u5947", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "attack": 1152, 
         "defense": 378, 
-        "avatar": "\u848b\u5947", 
+        "avatar": "\u6b66\u5c06_\u82f1\u4fca", 
         "crit": 0, 
         "hp": 9180
     }
@@ -3015,10 +3015,10 @@
         "name": "\u8881\u5c1a", 
         "level": 50, 
         "skills": "28", 
-        "image": "\u8881\u5c1a", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 1152, 
         "defense": 378, 
-        "avatar": "\u8881\u5c1a", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 9180
     }
@@ -3079,10 +3079,10 @@
         "name": "\u5b54\u79c0", 
         "level": 51, 
         "skills": "28", 
-        "image": "\u5b54\u79c0", 
+        "image": "\u6b66\u5c06\u6742boss", 
         "attack": 1174, 
         "defense": 385, 
-        "avatar": "\u5b54\u79c0", 
+        "avatar": "\u6b66\u5c06\u6742boss", 
         "crit": 0, 
         "hp": 9360
     }
@@ -3127,10 +3127,10 @@
         "name": "\u97e9\u798f", 
         "level": 52, 
         "skills": "28", 
-        "image": "\u97e9\u798f", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 1197, 
         "defense": 392, 
-        "avatar": "\u97e9\u798f", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 9540
     }
@@ -3175,10 +3175,10 @@
         "name": "\u535e\u559c", 
         "level": 53, 
         "skills": "28", 
-        "image": "\u535e\u559c", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 1219, 
         "defense": 400, 
-        "avatar": "\u535e\u559c", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 9720
     }
@@ -3223,10 +3223,10 @@
         "name": "\u738b\u690d", 
         "level": 54, 
         "skills": "28", 
-        "image": "\u738b\u690d", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 1242, 
         "defense": 407, 
-        "avatar": "\u738b\u690d", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 9900
     }
@@ -3271,10 +3271,10 @@
         "name": "\u79e6\u742a", 
         "level": 55, 
         "skills": "28", 
-        "image": "\u79e6\u742a", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 1264, 
         "defense": 414, 
-        "avatar": "\u79e6\u742a", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 10080
     }
@@ -3287,10 +3287,10 @@
         "name": "\u8521\u9633", 
         "level": 55, 
         "skills": "28", 
-        "image": "\u8521\u9633", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "attack": 1264, 
         "defense": 414, 
-        "avatar": "\u8521\u9633", 
+        "avatar": "\u6b66\u5c06_\u82f1\u4fca", 
         "crit": 0, 
         "hp": 10080
     }
@@ -3415,10 +3415,10 @@
         "name": "\u9648\u5b59", 
         "level": 57, 
         "skills": "28", 
-        "image": "\u9648\u5b59", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 1309, 
         "defense": 428, 
-        "avatar": "\u9648\u5b59", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 10440
     }
@@ -3431,10 +3431,10 @@
         "name": "\u5f20\u6b66", 
         "level": 57, 
         "skills": "28", 
-        "image": "\u5f20\u6b66", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 1309, 
         "defense": 428, 
-        "avatar": "\u5f20\u6b66", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 10440
     }
@@ -3447,10 +3447,10 @@
         "name": "\u5415\u65f7", 
         "level": 57, 
         "skills": "28", 
-        "image": "\u5415\u65f7", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "attack": 1309, 
         "defense": 428, 
-        "avatar": "\u5415\u65f7", 
+        "avatar": "\u6b66\u5c06_\u82f1\u4fca", 
         "crit": 0, 
         "hp": 10440
     }
@@ -3463,10 +3463,10 @@
         "name": "\u5415\u7fd4", 
         "level": 57, 
         "skills": "28", 
-        "image": "\u5415\u7fd4", 
+        "image": "\u6b66\u5c06\u80d6", 
         "attack": 1309, 
         "defense": 428, 
-        "avatar": "\u5415\u7fd4", 
+        "avatar": "\u6b66\u5c06\u80d6", 
         "crit": 0, 
         "hp": 10440
     }
@@ -3543,10 +3543,10 @@
         "name": "\u97e9\u6d69", 
         "level": 59, 
         "skills": "28", 
-        "image": "\u97e9\u6d69", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 1354, 
         "defense": 443, 
-        "avatar": "\u97e9\u6d69", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 10800
     }
@@ -3559,10 +3559,10 @@
         "name": "\u590f\u4faf\u5170", 
         "level": 59, 
         "skills": "28", 
-        "image": "\u590f\u4faf\u5170", 
+        "image": "\u6b66\u5c06\u6742boss", 
         "attack": 1354, 
         "defense": 443, 
-        "avatar": "\u590f\u4faf\u5170", 
+        "avatar": "\u6b66\u5c06\u6742boss", 
         "crit": 0, 
         "hp": 10800
     }
@@ -3719,10 +3719,10 @@
         "name": "\u8521\u7441", 
         "level": 61, 
         "skills": "28", 
-        "image": "\u8521\u7441", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 1538, 
         "defense": 503, 
-        "avatar": "\u8521\u7441", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 12276
     }
@@ -3751,10 +3751,10 @@
         "name": "\u9a6c\u5ef6", 
         "level": 62, 
         "skills": "28", 
-        "image": "\u9a6c\u5ef6", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 1563, 
         "defense": 511, 
-        "avatar": "\u9a6c\u5ef6", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 12474
     }
@@ -3879,10 +3879,10 @@
         "name": "\u664f\u660e", 
         "level": 61, 
         "skills": "28", 
-        "image": "\u664f\u660e", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 1538, 
         "defense": 503, 
-        "avatar": "\u664f\u660e", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 12276
     }
@@ -3895,10 +3895,10 @@
         "name": "\u949f\u7ec5", 
         "level": 61, 
         "skills": "28", 
-        "image": "\u949f\u7ec5", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "attack": 1538, 
         "defense": 503, 
-        "avatar": "\u949f\u7ec5", 
+        "avatar": "\u6b66\u5c06_\u82f1\u4fca", 
         "crit": 0, 
         "hp": 12276
     }
@@ -3911,10 +3911,10 @@
         "name": "\u5f20\u5357", 
         "level": 61, 
         "skills": "28", 
-        "image": "\u5f20\u5357", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "attack": 1538, 
         "defense": 503, 
-        "avatar": "\u5f20\u5357", 
+        "avatar": "\u6b66\u5c06_\u82f1\u4fca", 
         "crit": 0, 
         "hp": 12276
     }
@@ -3927,10 +3927,10 @@
         "name": "\u590f\u4faf\u6069", 
         "level": 62, 
         "skills": "28", 
-        "image": "\u590f\u4faf\u6069", 
+        "image": "\u6b66\u5c06\u6742boss", 
         "attack": 1563, 
         "defense": 511, 
-        "avatar": "\u590f\u4faf\u6069", 
+        "avatar": "\u6b66\u5c06\u6742boss", 
         "crit": 0, 
         "hp": 12474
     }
@@ -3959,10 +3959,10 @@
         "name": "\u590f\u4faf\u6770", 
         "level": 64, 
         "skills": "28", 
-        "image": "\u590f\u4faf\u6770", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 1612, 
         "defense": 527, 
-        "avatar": "\u590f\u4faf\u6770", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 12870
     }
@@ -4135,10 +4135,10 @@
         "name": "\u5f20\u5141", 
         "level": 66, 
         "skills": "28", 
-        "image": "\u5f20\u5141", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "attack": 1661, 
         "defense": 543, 
-        "avatar": "\u5f20\u5141", 
+        "avatar": "\u6b66\u5c06_\u82f1\u4fca", 
         "crit": 0, 
         "hp": 13266
     }
@@ -4151,10 +4151,10 @@
         "name": "\u738b\u718f", 
         "level": 66, 
         "skills": "28", 
-        "image": "\u738b\u718f", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
         "attack": 1661, 
         "defense": 543, 
-        "avatar": "\u738b\u718f", 
+        "avatar": "\u6b66\u5c06\u51f6\u608d", 
         "crit": 0, 
         "hp": 13266
     }
@@ -4167,10 +4167,10 @@
         "name": "\u8521\u7441", 
         "level": 66, 
         "skills": "28", 
-        "image": "\u8521\u7441", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 1661, 
         "defense": 543, 
-        "avatar": "\u8521\u7441", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 13266
     }
@@ -4183,10 +4183,10 @@
         "name": "\u5f20\u5141", 
         "level": 66, 
         "skills": "28", 
-        "image": "\u5f20\u5141", 
+        "image": "\u6b66\u5c06\u6742boss", 
         "attack": 1661, 
         "defense": 543, 
-        "avatar": "\u5f20\u5141", 
+        "avatar": "\u6b66\u5c06\u6742boss", 
         "crit": 0, 
         "hp": 13266
     }
@@ -4215,10 +4215,10 @@
         "name": "\u7126\u89e6", 
         "level": 67, 
         "skills": "28", 
-        "image": "\u7126\u89e6", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "attack": 1686, 
         "defense": 550, 
-        "avatar": "\u7126\u89e6", 
+        "avatar": "\u6b66\u5c06_\u82f1\u4fca", 
         "crit": 0, 
         "hp": 13464
     }
@@ -4231,10 +4231,10 @@
         "name": "\u5f20\u5357", 
         "level": 67, 
         "skills": "28", 
-        "image": "\u5f20\u5357", 
+        "image": "\u6b66\u5c06\u6742boss", 
         "attack": 1686, 
         "defense": 550, 
-        "avatar": "\u5f20\u5357", 
+        "avatar": "\u6b66\u5c06\u6742boss", 
         "crit": 0, 
         "hp": 13464
     }
@@ -4311,10 +4311,10 @@
         "name": "\u9a86\u7edf", 
         "level": 68, 
         "skills": "28", 
-        "image": "\u9a86\u7edf", 
+        "image": "\u9752\u5e74\u6587\u5b98", 
         "attack": 1711, 
         "defense": 558, 
-        "avatar": "\u9a86\u7edf", 
+        "avatar": "\u9752\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 13662
     }
@@ -4327,10 +4327,10 @@
         "name": "\u859b\u7efc", 
         "level": 68, 
         "skills": "28", 
-        "image": "\u859b\u7efc", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
         "attack": 1711, 
         "defense": 558, 
-        "avatar": "\u859b\u7efc", 
+        "avatar": "\u4e2d\u5e74\u6587\u5b98", 
         "crit": 0, 
         "hp": 13662
     }
