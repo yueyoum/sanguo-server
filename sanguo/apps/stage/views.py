@@ -1,10 +1,26 @@
 # -*- coding: utf-8 -*-
 
-from core.stage import Stage, Hang
+from core.stage import Stage, Hang, EliteStage
 from utils import pack_msg
 from utils.decorate import message_response
 
 import protomsg
+
+
+@message_response("ElitePVEResponse")
+def elite_pve(request):
+    req = request._proto
+    stage = EliteStage(request._char_id)
+
+    battle_msg = stage.battle(req.stage_id)
+    # TODO drop
+    response = protomsg.ElitePVEResponse()
+    response.ret = 0
+    response.stage_id = req.stage_id
+    response.battle.MergeFrom(battle_msg)
+
+    return pack_msg(response)
+
 
 
 @message_response("PVEResponse")

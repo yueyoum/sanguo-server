@@ -31,7 +31,7 @@ from core.battle.hero import BattleHero, BattleMonster
 from core.formation import Formation
 
 from apps.character.models import Character as ModelCharacter
-from apps.stage.models import Stage as ModelStage
+from apps.stage.models import Stage as ModelStage, EliteStage as ModelEliteStage
 
 
 class PVE(Battle):
@@ -78,6 +78,29 @@ class PVE(Battle):
 
     def get_rival_name(self):
         return ModelStage.all()[self.rival_id].name
+
+
+
+
+class ElitePVE(PVE):
+    BATTLE_TYPE = 'ElitePVE'
+
+    def load_rival_heros(self):
+        monsters = ModelEliteStage.all()[self.rival_id].decoded_monsters
+
+        rival_heros = []
+        for mid in monsters:
+            if mid == 0:
+                rival_heros.append(None)
+            else:
+                h = BattleMonster(mid)
+                rival_heros.append(h)
+
+        return rival_heros
+
+
+    def get_rival_name(self):
+        return ModelEliteStage.all()[self.rival_id].name
 
 
 

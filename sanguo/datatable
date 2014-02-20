@@ -10,6 +10,7 @@ item.Gem:gems.json
 item.Equipment:equipment.json
 stage.Battle:battle.json
 stage.Stage:stage.json
+stage.EliteStage:stage_elite.json
 skill.Effect:effect.json
 skill.Skill:skill.json
 skill.SkillEffect:skill_effect.json

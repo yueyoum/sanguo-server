@@ -206,6 +206,15 @@ def _save_elitestage_cache(*args, **kwargs):
     stages = EliteStage.objects.all()
     data = {s.id: s for s in stages}
 
+    all_normal_stages = Stage.all()
+    for s in data.values():
+        condition = s.open_condition
+        if not condition:
+            continue
+
+        all_normal_stages[condition].next_elite_stage = s.id
+
+    cache.set('stage', all_normal_stages, hours=None)
     cache.set('elitestage', data, hours=None)
     return data
 

@@ -2,7 +2,7 @@
 import random
 
 from mongoengine import DoesNotExist
-from apps.stage.models import Stage as ModelStage
+from apps.stage.models import Stage as ModelStage, EliteStage as ModelEliteStage
 from apps.stage.models import StageDrop
 from core.mongoscheme import MongoStage
 
@@ -16,7 +16,7 @@ from core.task import Task
 import protomsg
 
 from core.exception import InvalidOperate, SanguoException
-from core.battle import PVE
+from core.battle import PVE, ElitePVE
 
 from core.mongoscheme import MongoHang, MongoEmbededPlunderLog
 from core.counter import Counter
@@ -50,6 +50,7 @@ class Stage(object):
         except DoesNotExist:
             self.stage = MongoStage(id=self.char_id)
             self.stage.stage_new = 1
+            self.stage.elites = {}
             self.stage.save()
 
         self.first = False
@@ -99,7 +100,6 @@ class Stage(object):
                     self.stage.stages[str(stage_id)] = star
 
             # 设置新关卡
-
             stage_new = this_stage.next
             if str(stage_new) not in self.stage.stages:
                 if self.stage.stage_new != stage_new:
@@ -108,12 +108,19 @@ class Stage(object):
                     self.send_new_stage_notify()
             self.stage.save()
 
+            # 开启精英关卡
+            elite_id = getattr(this_stage, 'next_elite_stage', None)
+            if elite_id:
+                elite = EliteStage(self.char_id)
+                elite.enable(elite_id)
+
             if stage_id == 10:
                 achievement = Achievement(self.char_id)
                 achievement.trig(6, 1)
 
             t = Task(self.char_id)
             t.trig(1)
+
 
         return battle_msg
 
@@ -338,3 +345,76 @@ class Hang(object):
         publish_to_char(self.char_id, pack_msg(msg))
 
 
+class EliteStage(object):
+    def __init__(self, char_id):
+        self.char_id = char_id
+        try:
+            self.stage = MongoStage.objects.get(id=self.char_id)
+        except DoesNotExist:
+            self.stage = MongoStage(id=self.char_id)
+            self.stage.stage_new = 1
+            self.stage.elites = {}
+            self.stage.save()
+
+    def enable(self, _id):
+        str_id = str(_id)
+        if _id not in ModelEliteStage.all():
+            raise InvalidOperate("EliteStage Enable. Char {0} try to enable a NONE exists elite stage {1}".format(self.char_id, _id))
+
+        if str_id in self.stage.elites:
+            return
+
+        self.stage.elites[str_id] = 0
+        self.stage.save()
+
+        msg = protomsg.NewEliteStageNotify()
+        msg.stage.id = _id
+        msg.stage.current_times = 0
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
+    def battle(self, _id):
+        str_id = str(_id)
+
+        try:
+            times = self.stage.elites[str_id]
+        except KeyError:
+            raise InvalidOperate("EliteStage Battle. Char {0} try to battle elite stage {1}. But NOT opened".format(self.char_id, _id))
+
+        try:
+            this_stage = ModelEliteStage.all()[_id]
+        except KeyError:
+            raise InvalidOperate("EliteStage Battle. Char {0} try to battle a NONE exists elite stage {1}".format(self.char_id, _id))
+
+        if times >= this_stage.times:
+            raise InvalidOperate("EliteStage Battle. Char {0}. already times {1}. condition times {2}".format(
+                self.char_id, times, this_stage.times
+            ))
+
+        battle_msg = protomsg.Battle()
+        b = ElitePVE(self.char_id, _id, battle_msg)
+        b.start()
+
+        if battle_msg.self_win:
+            self.stage.elites[str_id] += 1
+            self.stage.save()
+
+            msg = protomsg.UpdateEliteStageNotify()
+            msg.stage.id = _id
+            msg.stage.current_time = self.stage.elites[str_id]
+            publish_to_char(self.char_id, pack_msg(msg))
+
+        return battle_msg
+
+
+    def get_drop(self):
+        pass
+
+    def send_notify(self):
+        msg = protomsg.EliteStageNotify()
+        for _id, times in self.stage.elites.iteritems():
+            s = msg.stages.add()
+            s.id = _id
+            s.current_times = times
+
+        publish_to_char(self.char_id, pack_msg(msg))
