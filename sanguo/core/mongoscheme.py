@@ -308,3 +308,23 @@ class MongoAttachment(Document):
         'collection': 'attachment'
     }
 
+
+class MongoStoreAmount(Document):
+    id = IntField(primary_key=True)
+    sold_amount = IntField(default=0)
+
+    # 有总量的物品的卖出数量，id为商品id，sold_amount为卖出数量
+    meta = {
+        'collection': 'store_amount'
+    }
+
+
+class MongoStoreCharLimit(Document):
+    id = IntField(primary_key=True)
+    # 每人每天限量购买记录
+    # 已经买过的商品，key 为id， values 为已经买的量
+    limits = DictField()
+
+    meta = {
+        'collection': 'store_char'
+    }

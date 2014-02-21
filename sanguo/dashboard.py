@@ -37,6 +37,7 @@ class CustomIndexDashboard(Dashboard):
             models=('apps.server.*',
                     'apps.config.*',
                     'apps.mail.*',
+                    'apps.store.*',
                 ),
             ))
 

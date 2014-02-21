@@ -189,6 +189,14 @@ class EliteStage(models.Model):
             return data
         return _save_elitestage_cache()
 
+    @staticmethod
+    def condition_table():
+        data = cache.get('elitestage_condition', hours=None)
+        if data:
+            return data
+        _save_elitestage_cache()
+        return cache.get('elitestage_condition', hours=None)
+
     @property
     def decoded_monsters(self):
         return [int(i) for i in self.monsters.split(',')]
@@ -204,18 +212,14 @@ class EliteStage(models.Model):
 
 def _save_elitestage_cache(*args, **kwargs):
     stages = EliteStage.objects.all()
-    data = {s.id: s for s in stages}
+    data = {}
+    conditions = {}
+    for s in stages:
+        data[s.id] = s
+        conditions[s.open_condition] = s.id
 
-    all_normal_stages = Stage.all()
-    for s in data.values():
-        condition = s.open_condition
-        if not condition:
-            continue
-
-        all_normal_stages[condition].next_elite_stage = s.id
-
-    cache.set('stage', all_normal_stages, hours=None)
     cache.set('elitestage', data, hours=None)
+    cache.set('elitestage_condition', conditions, hours=None)
     return data
 
 

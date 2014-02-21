@@ -18,6 +18,7 @@ from core.item import Item
 from core.heropanel import HeroPanel
 from core.arena import Arena
 from core.achievement import Achievement
+from core.store import Store
 
 
 def hero_notify(char_id, objs, message_name="HeroNotify"):
@@ -111,4 +112,5 @@ def login_notify(char_id):
     Task(char_id).send_notify()
     Achievement(char_id).send_notify()
     EliteStage(char_id).send_notify()
+    Store(char_id).send_notify()
 

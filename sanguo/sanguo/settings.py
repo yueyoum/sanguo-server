@@ -157,6 +157,7 @@ INSTALLED_APPS = (
     'apps.item',
     'apps.mail',
     'apps.config',
+    'apps.store',
 )
 
 FIXTURE_DIRS = (os.path.join(PROJECT_PATH, 'fixtures'),)

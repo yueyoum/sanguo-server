@@ -109,10 +109,8 @@ class Stage(object):
             self.stage.save()
 
             # 开启精英关卡
-            elite_id = getattr(this_stage, 'next_elite_stage', None)
-            if elite_id:
-                elite = EliteStage(self.char_id)
-                elite.enable(elite_id)
+            elite = EliteStage(self.char_id)
+            elite.enable_by_condition_id(stage_id)
 
             if stage_id == 10:
                 achievement = Achievement(self.char_id)
@@ -355,6 +353,21 @@ class EliteStage(object):
             self.stage.stage_new = 1
             self.stage.elites = {}
             self.stage.save()
+
+        self.check()
+
+    def check(self):
+        condition_table = ModelEliteStage.condition_table()
+        for k, v in condition_table.iteritems():
+            if str(k) in self.stage.stages and str(v) not in self.stage.elites:
+                self.enable(v)
+
+    def enable_by_condition_id(self, _id):
+        condition_table = ModelEliteStage.condition_table()
+        if _id not in condition_table:
+            return
+        self.enable(condition_table[_id])
+
 
     def enable(self, _id):
         str_id = str(_id)
