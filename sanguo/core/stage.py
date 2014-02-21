@@ -427,7 +427,7 @@ class EliteStage(object):
         msg = protomsg.EliteStageNotify()
         for _id, times in self.stage.elites.iteritems():
             s = msg.stages.add()
-            s.id = _id
+            s.id = int(_id)
             s.current_times = times
 
         publish_to_char(self.char_id, pack_msg(msg))
