@@ -11,7 +11,7 @@ from core.drives import document_ids
 from core.mongoscheme import MongoHero, MongoAchievement
 from core.signals import hero_add_signal, hero_del_signal, hero_changed_signal
 from core.formation import Formation
-from core.exception import InvalidOperate
+from core.exception import InvalidOperate, GoldNotEnough
 from core import DLL
 from core.achievement import Achievement
 
@@ -143,6 +143,15 @@ class Hero(FightPowerMixin):
             ))
 
         # TODO 消耗同名卡
+        # TODO 花多少金币
+        from core.character import Char
+        c = Char(self.char_id)
+        cache_char = c.cacheobj
+        if cache_char.gold < 1000:
+            raise GoldNotEnough("Hero Step Up. Char {0} try to up hero {1}. But gold not enough".format(self.char_id, self.id))
+
+        c.update(gold=-1000)
+
         self.hero.step += 1
         self.hero.save()
 
