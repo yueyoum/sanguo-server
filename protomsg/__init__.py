@@ -6,6 +6,7 @@ from mail_pb2 import *
 from daily_pb2 import *
 from task_pb2 import *
 from achievement_pb2 import *
+from store_pb2 import *
 from character_pb2 import *
 from item_pb2 import *
 from formation_pb2 import *
@@ -16,6 +17,7 @@ from prize_pb2 import *
 RESPONSE_NOTIFY_TYPE = {
     "CommandResponse": 50,
     "VersionCheckResponse": 52,
+    "SyncResponse": 61,
     "StartGameResponse": 101,
     "GetServerListResponse": 104,
     "RegisterResponse": 106,
@@ -102,11 +104,15 @@ RESPONSE_NOTIFY_TYPE = {
     "AchievementNotify": 3200,
     "UpdateAchievementNotify": 3201,
     "AchievementGetRewardResponse": 3203,
+    "StoreNotify": 3300,
+    "StorePanelResponse": 3303,
+    "StoreBuyResponse": 3305,
 }
 
 REQUEST_TYPE = {
     1: "TestRequest",
     51: "VersionCheckRequest",
+    60: "SyncRequest",
     100: "StartGameRequest",
     102: "GetServerListRequest",
     105: "RegisterRequest",
@@ -147,11 +153,14 @@ REQUEST_TYPE = {
     3001: "CheckInRequest",
     3101: "TaskGetRewardRequest",
     3202: "AchievementGetRewardRequest",
+    3302: "StorePanelRequest",
+    3304: "StoreBuyRequest",
 }
 
 REQUEST_TYPE_REV = {
     "TestRequest": 1,
     "VersionCheckRequest": 51,
+    "SyncRequest": 60,
     "StartGameRequest": 100,
     "GetServerListRequest": 102,
     "RegisterRequest": 105,
@@ -192,5 +201,7 @@ REQUEST_TYPE_REV = {
     "CheckInRequest": 3001,
     "TaskGetRewardRequest": 3101,
     "AchievementGetRewardRequest": 3202,
+    "StorePanelRequest": 3302,
+    "StoreBuyRequest": 3304,
 }
 

@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='world.proto',
   package='Sanguo.protocol.world',
-  serialized_pb='\n\x0bworld.proto\x12\x15Sanguo.protocol.world\"\xad\x01\n\x06Server\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12:\n\x06status\x18\x03 \x02(\x0e\x32*.Sanguo.protocol.world.Server.ServerStatus\x12\x11\n\thave_char\x18\x04 \x02(\x08\":\n\x0cServerStatus\x12\x08\n\x04GOOD\x10\x01\x12\x08\n\x04\x42USY\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\x12\x0c\n\x08MAINTAIN\x10\x04\"/\n\x0f\x43ommandResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"7\n\x13VersionCheckRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07version\x18\x02 \x02(\x05\"4\n\x14VersionCheckResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xa8\x03\n\nAttachment\x12\x0c\n\x04gold\x18\x01 \x01(\x05\x12\r\n\x05sycee\x18\x02 \x01(\x05\x12\x0b\n\x03\x65xp\x18\x03 \x01(\x05\x12\x14\n\x0cofficial_exp\x18\x04 \x01(\x05\x12\x0e\n\x06renown\x18\x05 \x01(\x05\x12\r\n\x05heros\x18\x06 \x03(\x05\x12?\n\nequipments\x18\x07 \x03(\x0b\x32+.Sanguo.protocol.world.Attachment.Equipment\x12\x33\n\x04gems\x18\x08 \x03(\x0b\x32%.Sanguo.protocol.world.Attachment.Gem\x12\x37\n\x06stuffs\x18\t \x03(\x0b\x32\'.Sanguo.protocol.world.Attachment.Stuff\x1a\x44\n\tEquipment\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05level\x18\x02 \x02(\x05\x12\x0c\n\x04step\x18\x03 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x04 \x02(\x05\x1a!\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\x1a#\n\x05Stuff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05')
+  serialized_pb='\n\x0bworld.proto\x12\x15Sanguo.protocol.world\"\xad\x01\n\x06Server\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12:\n\x06status\x18\x03 \x02(\x0e\x32*.Sanguo.protocol.world.Server.ServerStatus\x12\x11\n\thave_char\x18\x04 \x02(\x08\":\n\x0cServerStatus\x12\x08\n\x04GOOD\x10\x01\x12\x08\n\x04\x42USY\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\x12\x0c\n\x08MAINTAIN\x10\x04\"\x1e\n\x0bSyncRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"C\n\x0cSyncResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x15\n\rutc_timestamp\x18\x03 \x02(\x05\"/\n\x0f\x43ommandResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"7\n\x13VersionCheckRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07version\x18\x02 \x02(\x05\"4\n\x14VersionCheckResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xa8\x03\n\nAttachment\x12\x0c\n\x04gold\x18\x01 \x01(\x05\x12\r\n\x05sycee\x18\x02 \x01(\x05\x12\x0b\n\x03\x65xp\x18\x03 \x01(\x05\x12\x14\n\x0cofficial_exp\x18\x04 \x01(\x05\x12\x0e\n\x06renown\x18\x05 \x01(\x05\x12\r\n\x05heros\x18\x06 \x03(\x05\x12?\n\nequipments\x18\x07 \x03(\x0b\x32+.Sanguo.protocol.world.Attachment.Equipment\x12\x33\n\x04gems\x18\x08 \x03(\x0b\x32%.Sanguo.protocol.world.Attachment.Gem\x12\x37\n\x06stuffs\x18\t \x03(\x0b\x32\'.Sanguo.protocol.world.Attachment.Stuff\x1a\x44\n\tEquipment\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05level\x18\x02 \x02(\x05\x12\x0c\n\x04step\x18\x03 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x04 \x02(\x05\x1a!\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\x1a#\n\x05Stuff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05')
 
 
 
@@ -97,6 +97,76 @@ _SERVER = _descriptor.Descriptor(
 )
 
 
+_SYNCREQUEST = _descriptor.Descriptor(
+  name='SyncRequest',
+  full_name='Sanguo.protocol.world.SyncRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.world.SyncRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=214,
+  serialized_end=244,
+)
+
+
+_SYNCRESPONSE = _descriptor.Descriptor(
+  name='SyncResponse',
+  full_name='Sanguo.protocol.world.SyncResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.world.SyncResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.world.SyncResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='utc_timestamp', full_name='Sanguo.protocol.world.SyncResponse.utc_timestamp', index=2,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=246,
+  serialized_end=313,
+)
+
+
 _COMMANDRESPONSE = _descriptor.Descriptor(
   name='CommandResponse',
   full_name='Sanguo.protocol.world.CommandResponse',
@@ -127,8 +197,8 @@ _COMMANDRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=214,
-  serialized_end=261,
+  serialized_start=315,
+  serialized_end=362,
 )
 
 
@@ -162,8 +232,8 @@ _VERSIONCHECKREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=263,
-  serialized_end=318,
+  serialized_start=364,
+  serialized_end=419,
 )
 
 
@@ -197,8 +267,8 @@ _VERSIONCHECKRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=320,
-  serialized_end=372,
+  serialized_start=421,
+  serialized_end=473,
 )
 
 
@@ -246,8 +316,8 @@ _ATTACHMENT_EQUIPMENT = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=659,
-  serialized_end=727,
+  serialized_start=760,
+  serialized_end=828,
 )
 
 _ATTACHMENT_GEM = _descriptor.Descriptor(
@@ -280,8 +350,8 @@ _ATTACHMENT_GEM = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=729,
-  serialized_end=762,
+  serialized_start=830,
+  serialized_end=863,
 )
 
 _ATTACHMENT_STUFF = _descriptor.Descriptor(
@@ -314,8 +384,8 @@ _ATTACHMENT_STUFF = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=764,
-  serialized_end=799,
+  serialized_start=865,
+  serialized_end=900,
 )
 
 _ATTACHMENT = _descriptor.Descriptor(
@@ -397,8 +467,8 @@ _ATTACHMENT = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=375,
-  serialized_end=799,
+  serialized_start=476,
+  serialized_end=900,
 )
 
 _SERVER.fields_by_name['status'].enum_type = _SERVER_SERVERSTATUS
@@ -410,6 +480,8 @@ _ATTACHMENT.fields_by_name['equipments'].message_type = _ATTACHMENT_EQUIPMENT
 _ATTACHMENT.fields_by_name['gems'].message_type = _ATTACHMENT_GEM
 _ATTACHMENT.fields_by_name['stuffs'].message_type = _ATTACHMENT_STUFF
 DESCRIPTOR.message_types_by_name['Server'] = _SERVER
+DESCRIPTOR.message_types_by_name['SyncRequest'] = _SYNCREQUEST
+DESCRIPTOR.message_types_by_name['SyncResponse'] = _SYNCRESPONSE
 DESCRIPTOR.message_types_by_name['CommandResponse'] = _COMMANDRESPONSE
 DESCRIPTOR.message_types_by_name['VersionCheckRequest'] = _VERSIONCHECKREQUEST
 DESCRIPTOR.message_types_by_name['VersionCheckResponse'] = _VERSIONCHECKRESPONSE
@@ -420,6 +492,18 @@ class Server(_message.Message):
   DESCRIPTOR = _SERVER
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.world.Server)
+
+class SyncRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _SYNCREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.world.SyncRequest)
+
+class SyncResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _SYNCRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.world.SyncResponse)
 
 class CommandResponse(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
