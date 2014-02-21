@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
-
+                       url(r'^sync/$', 'views.world.views.sync'),
                        url(r'^test/$', 'views.cmd.cmd'),
 
                        url(r'^pvp/$', 'views.arena.views.arena_battle'),
