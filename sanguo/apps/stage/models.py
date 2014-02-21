@@ -236,5 +236,49 @@ post_delete.connect(
 )
 
 
+class ChallengeStage(models.Model):
+    id = models.IntegerField(primary_key=True)
+    level = models.IntegerField("档次")
+    open_condition = models.IntegerField("需要的挑战书数量")
+    boss = models.IntegerField("怪物")
+    power = models.IntegerField("战斗力")
+    hp = models.IntegerField("血量")
 
+    aid_limit = models.IntegerField("援军上限")
+    time_limit = models.IntegerField("战斗总时间限制", help_text="秒")
+    reward_gold = models.IntegerField("奖励金币")
+    reward_hero = models.IntegerField("奖励武将")
+
+    class Meta:
+        db_table = 'stage_challenge'
+        ordering = ('id',)
+        verbose_name = "猛将挑战"
+        verbose_name_plural = "猛将挑战"
+
+    @staticmethod
+    def all():
+        data = cache.get('challengestage', hours=None)
+        if data:
+            return data
+        return save_challenge_stage_cache()
+
+
+def save_challenge_stage_cache(*args, **kwargs):
+    stages = ChallengeStage.objects.all()
+    data = {s.id: s for s in stages}
+    cache.set('challengestage', data, hours=None)
+    return data
+
+
+post_save.connect(
+    save_challenge_stage_cache,
+    sender=ChallengeStage,
+    dispatch_uid='apps.stage.ChallengeStage.post_save'
+)
+
+post_delete.connect(
+    save_challenge_stage_cache,
+    sender=ChallengeStage,
+    dispatch_uid='apps.stage.ChallengeStage.post_delete'
+)
 
