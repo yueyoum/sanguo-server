@@ -8,7 +8,9 @@
     
     ```
     apt-get install build-essential
-    apt-get install python-dev libmysqld-dev
+    apt-get install python-dev libmysqld-dev libncurses5-dev
+    apt-get install python-pip
+    apt-get install python-virtualenv
     ```
 
 3.  Python虚拟环境。 在项目根目录中执行：
@@ -17,6 +19,10 @@
     virtualenv env
     source activate_env
     pip install -r requirements.txt
+
+    如果速度太慢 可以用v2ex的镜像源： pip install -r requirements.txt -i http://pypi.v2ex.com/simple
+    Mysql-python 可能会报 distribute 的错误，可以在 安装 requirements 之前先升级 distribute
+    pip install -U distribute
     ```
 
 4.  编译动态链接库
