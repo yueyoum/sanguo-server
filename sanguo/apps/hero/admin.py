@@ -21,6 +21,7 @@ class HeroAdmin(ImportExportModelAdmin):
         'gender', 'gender_name',
         'special_equip_id', 'special_addition',
         'quality', 'quality_name',
+        'grade',
         'contribution',
         'attack_growing', 'defense_growing', 'hp_growing',
         'crit', 'dodge', 'skills', 'default_skill'

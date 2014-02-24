@@ -25,6 +25,8 @@ class Hero(models.Model):
     quality = models.IntegerField("品质")
     quality_name = models.CharField("品质名字", max_length=4)
 
+    grade = models.IntegerField("档次")
+
     contribution = models.IntegerField("贡献值")
 
     attack_growing = models.FloatField("攻击成长")
