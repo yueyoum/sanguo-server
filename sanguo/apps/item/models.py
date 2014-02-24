@@ -128,8 +128,10 @@ post_delete.connect(
 class Stuff(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField("名字", max_length=16)
-    icon = models.IntegerField("图标", blank=True, null=True)
+    icon = models.CharField("图标", max_length=255, blank=True)
     des = models.CharField("描述", max_length=255, blank=True)
+    buy_sycee = models.IntegerField("购买需要元宝")
+    sell_gold = models.IntegerField("售卖所得金币")
 
     def __unicode__(self):
         return u'<材料: %s>' % self.name
