@@ -240,14 +240,12 @@ class ChallengeStage(models.Model):
     id = models.IntegerField(primary_key=True)
     level = models.IntegerField("档次")
     open_condition = models.IntegerField("需要的挑战书数量")
-    boss = models.IntegerField("怪物")
-    power = models.IntegerField("战斗力")
-    hp = models.IntegerField("血量")
+    power_range = models.CharField("战斗力范围", max_length=64, help_text='min,max')
+    hp_range = models.CharField("血量范围", max_length=64, help_text='min, max')
 
     aid_limit = models.IntegerField("援军上限")
     time_limit = models.IntegerField("战斗总时间限制", help_text="秒")
     reward_gold = models.IntegerField("奖励金币")
-    reward_hero = models.IntegerField("奖励武将")
 
     class Meta:
         db_table = 'stage_challenge'
