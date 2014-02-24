@@ -36,6 +36,7 @@ else:
                            url(r'', include('apps.stage.urls')),
                            url(r'', include('apps.task.urls')),
                            url(r'', include('apps.store.urls')),
+                           url(r'', include('apps.achievement.urls')),
                            url(r'', include('views.urls')),
     )
 
