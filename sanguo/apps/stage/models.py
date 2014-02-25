@@ -238,6 +238,7 @@ post_delete.connect(
 
 class ChallengeStage(models.Model):
     id = models.IntegerField(primary_key=True)
+    name = models.CharField("名字", max_length=64)
     level = models.IntegerField("档次")
     char_level_needs = models.IntegerField("角色等级需求")
     open_condition = models.IntegerField("需要的挑战书数量")
