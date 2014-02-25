@@ -3,11 +3,17 @@
 __author__ = 'Wang Chao'
 __date__ = '1/14/14'
 
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
+
 from django.contrib import admin
 from apps.item.models import Equipment, Stuff, Gem
 
+class EquipmentResources(resources.ModelResource):
+    class Meta:
+        model = Equipment
 
-class EquipmentAdmin(admin.ModelAdmin):
+class EquipmentAdmin(ImportExportModelAdmin):
     list_display = (
         'id', 'name', 'Icon', 'IconLarge',
         'step', 'step_name', 'tp', 'tp_name', 'cls', 'cls_name',
@@ -17,6 +23,8 @@ class EquipmentAdmin(admin.ModelAdmin):
     )
 
     list_filter = ('tp', 'cls', 'step',)
+    resource_class = EquipmentResources
+
 
     def Icon(self, obj):
         # TODO
