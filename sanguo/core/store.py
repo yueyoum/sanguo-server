@@ -109,10 +109,11 @@ class Store(object):
         msg.sell_tp = goods.sell_tp
         msg.original_price = goods.original_price
         msg.sell_price = goods.sell_price
-        msg.total_amount = goods.total_amount
 
-
-        msg.remained_amount = goods.total_amount - self.sold_amount(goods.id)
+        if goods.total_amount:
+            msg.total_amount = goods.total_amount - self.sold_amount(goods.id)
+        else:
+            msg.total_amount = 0
         msg.limit_amount = goods.limit_amount
         msg.vip_condition = goods.vip_condition
 
