@@ -80,7 +80,7 @@ class EliteStageAdmin(ImportExportModelAdmin):
 
 class ChallengeStageAdmin(ImportExportModelAdmin):
     list_display = (
-        'id', 'level', 'open_condition', 'power_range', 'hp_range',
+        'id', 'level', 'char_level_needs', 'open_condition', 'power_range', 'hp_range',
         'aid_limit', 'time_limit', 'reward_gold'
     )
 

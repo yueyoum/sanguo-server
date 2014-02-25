@@ -239,6 +239,7 @@ post_delete.connect(
 class ChallengeStage(models.Model):
     id = models.IntegerField(primary_key=True)
     level = models.IntegerField("档次")
+    char_level_needs = models.IntegerField("角色等级需求")
     open_condition = models.IntegerField("需要的挑战书数量")
     power_range = models.CharField("战斗力范围", max_length=64, help_text='min,max')
     hp_range = models.CharField("血量范围", max_length=64, help_text='min, max')
