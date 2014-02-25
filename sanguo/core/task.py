@@ -32,6 +32,21 @@ class Task(object):
             self.task.doing = ModelTask.first_ids()
             self.task.save()
 
+        self.check()
+
+
+    def check(self):
+        all_tasks = ModelTask.all()
+        for t in self.task.doing:
+            this_task = all_tasks[t]
+            tp = this_task.tp
+
+            if self.task.tasks[str(tp)] >= this_task.times:
+                # 此任务完成
+                if t not in self.task.finished:
+                    self.task.finished.append(t)
+
+        self.task.save()
 
     def trig(self, tp, times=1):
         # TODO 检查TP ?
@@ -73,6 +88,10 @@ class Task(object):
         char.update(sycee=sycee, gold=gold)
 
         if this_task.next_task:
+            next_task = all_tasks[this_task.next_task]
+            if self.task.tasks[str(this_task.tp)] >= next_task.times:
+                self.task.finished.append(this_task.next_task)
+
             index = self.task.doing.index(_id)
             self.task.doing.pop(index)
             self.task.doing.insert(index, this_task.next_task)
