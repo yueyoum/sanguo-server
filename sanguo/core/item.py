@@ -145,6 +145,14 @@ class Equipment(MessageEquipmentMixin):
         #         self.mongo_item.stuffs.pop(str(_id))
         # 在外面使用Item类的 stuff_remove 方法
 
+        char = Char(self.char_id)
+        cache_char = char.cacheobj
+        if cache_char.gold < 10000:
+            raise GoldNotEnough("Equipment Step Up: Char {0} Try to step up equipent {1}. But Gold NOT enough".format(
+                self.char_id, self.equip_id
+            ))
+
+        char.update(gold=-10000)
 
         self.oid = to
         all_equips = ModelEquipment.all()
