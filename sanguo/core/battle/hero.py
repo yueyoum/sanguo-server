@@ -236,7 +236,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
 
     def real_damage_value(self, damage, target):
-        damage_reduce = min(0.02 * target.using_defense / (self.level + 9) + 0.015 * (target.level - self.level), 0.85)
+        damage_reduce = min(0.02 * target.using_defense / (self.level + 9) + 0 * (target.level - self.level), 0.85)
         damage_reduce = max(damage_reduce, -0.15)
         value = damage * (1 - damage_reduce)
         return value
