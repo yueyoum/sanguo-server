@@ -1,10 +1,16 @@
+import os
 import logging
 
-from core.battle.battle_field import BattleField
+from django.conf import settings
 
+
+from core.battle.battle_field import BattleField
+from utils.timezone import localnow
 from protomsg import BattleHero as BattleHeroMsg
 
 logger = logging.getLogger('battle')
+
+BATTLE_RECORD_PATH = settings.BATTLE_RECORD_PATH
 
 
 class Ground(object):
@@ -182,6 +188,18 @@ class Battle(object):
             self.msg.self_win = False
 
         logger.debug("Battle Win: %s" % self.msg.self_win)
+
+        # record battle msg to file
+        record_name = '{0}-{1}-{2}-{3}.bin'.format(
+            localnow().strftime('%y%m%d:%H%M%S'),
+            self.BATTLE_TYPE,
+            self.my_id,
+            self.rival_id
+        )
+        record_file = os.path.join(BATTLE_RECORD_PATH, record_name)
+
+        with open(record_file, 'wb') as f:
+            f.write(self.msg.SerializeToString())
 
 
 

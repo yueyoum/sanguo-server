@@ -15,6 +15,7 @@ CURRENT_PATH = os.path.dirname(os.path.realpath(__file__))
 PROJECT_PATH = os.path.dirname(CURRENT_PATH)
 TMP_PATH = os.path.normpath(os.path.join(PROJECT_PATH, '../tmp'))
 LOG_PATH = os.path.normpath(os.path.join(PROJECT_PATH, 'logs'))
+BATTLE_RECORD_PATH = os.path.normpath(os.path.join(PROJECT_PATH, 'battle_record'))
 
 ENABLE_ADMIN = False
 DEBUG = True
