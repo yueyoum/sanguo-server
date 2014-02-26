@@ -15,7 +15,7 @@ class ActivePlayers(object):
         self.key = '{0}:{1}'.format(ACTIVE_USER_KEY, server_id)
 
     def set(self, char_id):
-        redis_client_two.zadd(self.key, utc_timestamp())
+        redis_client_two.zadd(self.key, char_id, utc_timestamp())
 
     def get_list(self):
         players = redis_client_two.zrange(self.key, 0, -1)

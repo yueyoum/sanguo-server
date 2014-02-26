@@ -495,7 +495,7 @@ class TeamBattle(TimerCheckAbstractBase):
         need_stuff_amount = this_stage.open_condition_amount
 
         item = Item(self.char_id)
-        if item.has_stuff(need_stuff_id, need_stuff_amount):
+        if not item.has_stuff(need_stuff_id, need_stuff_amount):
             raise StuffNotEnough("TeamBattle Enter. Char {0} Try to enter battle {1}. But stuff not enough".format(self.char_id, _id))
 
         item.stuff_remove(need_stuff_id, need_stuff_amount)

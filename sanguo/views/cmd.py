@@ -28,6 +28,9 @@ def cmd(request):
             item.gem_add([(req.param, 1)])
         elif req.tp == 7:
             char.save_hero(req.param)
+        elif req.tp == 8:
+            item = Item(char_id)
+            item.stuff_add([(req.param, 1)])
     elif req.action == 2:
         if req.tp == 5:
             item = Item(char_id)
