@@ -6,7 +6,7 @@ class MailAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'content',
         'gold', 'sycee', 'exp', 'off_exp', 'heros',
-        'equips', 'gems', 'stuffs',
+        'equipments', 'gems', 'stuffs',
         'create_at', 'send_at',
         'send_type', 'send_to',
         'send_done',
@@ -18,7 +18,7 @@ class MailAdmin(admin.ModelAdmin):
         }),
         ('Attachment', {
             'classes': ('grp-collapse', 'grp-closed'),
-            'fields': ('gold', 'sycee', 'exp', 'off_exp', 'heros', 'equips', 'gems', 'stuffs')
+            'fields': ('gold', 'sycee', 'exp', 'official_exp', 'heros', 'equipments', 'gems', 'stuffs')
         }),
     )
 

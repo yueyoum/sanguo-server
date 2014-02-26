@@ -18,7 +18,7 @@ class Mail(models.Model):
     gold = models.PositiveIntegerField("金币", default=0)
     sycee = models.PositiveIntegerField("元宝", default=0)
     exp = models.PositiveIntegerField("等级经验", default=0)
-    off_exp = models.PositiveIntegerField("官职经验", default=0)
+    official_exp = models.PositiveIntegerField("官职经验", default=0)
     heros = models.CharField("武将", max_length=255, blank=True,
                              help_text='id,id,id'
                              )

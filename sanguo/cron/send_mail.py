@@ -50,6 +50,9 @@ def run():
         except Exception as e:
             logger.write("ERROR: mail: {0}, error: {1}".format(mail.id, str(e)))
             continue
+        else:
+            mail.send_done = True
+            mail.save()
 
     logger.write("Send Mail Complete")
     logger.close()
