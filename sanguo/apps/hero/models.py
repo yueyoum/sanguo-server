@@ -39,6 +39,8 @@ class Hero(models.Model):
     skills = models.CharField("技能", blank=True, max_length=255)
     default_skill = models.IntegerField("默认技能", default=0)
 
+    soul_id = models.IntegerField("将魂ID")
+
     def __unicode__(self):
         return u'<Hero: %s>' % self.name
 
@@ -203,3 +205,14 @@ post_delete.connect(
     dispatch_uid='apps.hero.Monster.post_delete'
 )
 
+
+
+class HeroSoul(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=64)
+
+    class Meta:
+        db_table = 'hero_soul'
+        ordering = ('id',)
+        verbose_name = '将魂'
+        verbose_name_plural = '将魂'
