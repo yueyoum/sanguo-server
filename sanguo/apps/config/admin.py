@@ -3,7 +3,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.config.models import CharInit, ArenaReward
+from apps.config.models import CharInit, ArenaReward, Notify
 
 class CharInitAdmin(admin.ModelAdmin):
     list_display = (
@@ -20,6 +20,17 @@ class ArenaRewardAdmin(ImportExportModelAdmin):
         'id', 'name', 'day_gold', 'week_gold', 'week_stuffs'
     )
 
+
+class NotifyResources(resources.ModelResource):
+    class Meta:
+        model = Notify
+
+class NotifyAdmin(ImportExportModelAdmin):
+    list_display = (
+        'id', 'template',
+    )
+
+
 admin.site.register(CharInit, CharInitAdmin)
 admin.site.register(ArenaReward, ArenaRewardAdmin)
-
+admin.site.register(Notify, NotifyAdmin)

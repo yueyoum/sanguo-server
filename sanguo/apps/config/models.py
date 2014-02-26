@@ -113,3 +113,13 @@ post_delete.connect(
     sender=ArenaReward,
     dispatch_uid='apps.config.ArenaReward.post_delete'
 )
+
+# 通知消息模板
+class Notify(models.Model):
+    id = models.IntegerField(primary_key=True)
+    template = models.CharField("模板", max_length=255)
+
+    class Meta:
+        db_table = 'notify'
+        verbose_name = '消息模板'
+        verbose_name_plural = '消息模板'
