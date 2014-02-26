@@ -19,6 +19,7 @@ from core.heropanel import HeroPanel
 from core.arena import Arena
 from core.achievement import Achievement
 from core.store import Store
+from core.hero import HeroSoul
 
 
 def hero_notify(char_id, objs, message_name="HeroNotify"):
@@ -114,4 +115,5 @@ def login_notify(char_id):
     EliteStage(char_id).send_notify()
     Store(char_id).send_notify()
     TeamBattle(char_id).send_notify()
+    HeroSoul(char_id).send_notify()
 

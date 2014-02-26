@@ -8,7 +8,7 @@ import ctypes
 from mongoengine import DoesNotExist
 
 from core.drives import document_ids
-from core.mongoscheme import MongoHero, MongoAchievement
+from core.mongoscheme import MongoHero, MongoAchievement, MongoHeroSoul
 from core.signals import hero_add_signal, hero_del_signal, hero_changed_signal
 from core.formation import Formation
 from core.exception import InvalidOperate, GoldNotEnough
@@ -20,6 +20,10 @@ from apps.hero.models import Hero as ModelHero
 from apps.achievement.models import Achievement as ModelAchievement
 from utils import cache
 
+from core.msgpipe import publish_to_char
+from utils import pack_msg
+
+import protomsg
 
 def cal_hero_property(original_id, level, step):
     """
@@ -142,8 +146,16 @@ class Hero(FightPowerMixin):
                 self.char_id, self.id
             ))
 
-        # TODO 消耗同名卡
-        # TODO 花多少金币
+        # FIXME 消耗同名卡
+        hs = HeroSoul(self.char_id)
+        this_hero = ModelHero.all()[self.id]
+        soul_id = this_hero.soul_id
+        if not hs.has_soul(soul_id, 2):
+            raise InvalidOperate("Hero Step Up: Char {0} Try to up Hero {1}. But hero soul not enough".format(self.char_id, self.id))
+
+        hs.remove_soul((soul_id, 2))
+
+        # FIXME 花多少金币
         from core.character import Char
         c = Char(self.char_id)
         cache_char = c.cacheobj
@@ -168,10 +180,93 @@ class Hero(FightPowerMixin):
 
 
 
+class HeroSoul(object):
+    def __init__(self, char_id):
+        self.char_id = char_id
+        try:
+            self.mongo_hs = MongoHeroSoul.objects.get(id=self.char_id)
+        except DoesNotExist:
+            self.mongo_hs = MongoHeroSoul(id=self.char_id)
+            self.mongo_hs.souls = {}
+            self.mongo_hs.save()
+
+    def has_soul(self, _id, amount=1):
+        return self.mongo_hs.souls.get(str(_id), 0) >= amount
+
+    def add_soul(self, souls):
+        new_souls = []
+        update_souls = []
+        for _id, amount in souls:
+            str_id = str(_id)
+            if str_id in self.mongo_hs.souls:
+                self.mongo_hs.souls[str_id] += amount
+                update_souls.append((_id, self.mongo_hs.souls[str_id]))
+            else:
+                self.mongo_hs.souls[str_id] = amount
+                new_souls.append((_id, amount))
+
+        self.mongo_hs.save()
+        if new_souls:
+            msg = protomsg.AddHeroSoulNotify()
+            for _id, amount in new_souls:
+                s = msg.herosouls.add()
+                s.id = _id
+                s.amount = amount
+
+            publish_to_char(self.char_id, pack_msg(msg))
+
+        if update_souls:
+            msg = protomsg.UpdateHeroSoulNotify()
+            for _id, amount in update_souls:
+                s = msg.herosouls.add()
+                s.id = _id
+                s.amount = amount
+
+            publish_to_char(self.char_id, pack_msg(msg))
 
 
+    def remove_soul(self, souls):
+        remove_souls = []
+        update_souls = []
+        for _id, amount in souls:
+            if not self.has_soul(_id, amount):
+                raise InvalidOperate("HeroSoul Remove. Char {0} Try to remove a NONE EXISTS/NOT ENOUGH soul {1}. amount {2}".format(
+                    self.char_id, _id, amount
+                ))
 
+        for _id, amount in souls:
+            str_id = str(_id)
+            self.mongo_hs.souls[str_id] -= amount
+            if self.mongo_hs.souls[str_id] <= 0:
+                remove_souls.append(_id)
+                self.mongo_hs.souls.pop(str_id)
+            else:
+                update_souls.append((_id, self.mongo_hs.souls[str_id]))
 
+        self.mongo_hs.save()
+        if remove_souls:
+            msg = protomsg.RemoveHeroSoulNotify()
+            msg.ids.extend(remove_souls)
+
+            publish_to_char(self.char_id, pack_msg(msg))
+
+        if update_souls:
+            msg = protomsg.UpdateHeroSoulNotify()
+            for _id, amount in update_souls:
+                s = msg.herosouls.add()
+                s.id = _id
+                s.amount = amount
+
+            publish_to_char(self.char_id, pack_msg(msg))
+
+    def send_notify(self):
+        msg = protomsg.HeroSoulNotify()
+        for _id, amount in self.mongo_hs.souls:
+            s = msg.herosouls.add()
+            s.id = int(_id)
+            s.amount = amount
+
+        publish_to_char(self.char_id, pack_msg(msg))
 
 
 def save_hero(char_id, hero_original_ids, add_notify=True):
@@ -189,36 +284,56 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
     if not isinstance(hero_original_ids, (list, tuple)):
         hero_original_ids = [hero_original_ids]
 
-    length = len(hero_original_ids)
-    new_max_id = document_ids.inc('charhero', length)
+    char_heros = MongoHero.objects.filter(char=char_id)
+    char_hero_oids = set( [h.oid for h in char_heros] )
 
-    id_range = range(new_max_id - length + 1, new_max_id + 1)
-    for i, _id in enumerate(id_range):
-        MongoHero(id=_id, char=char_id, oid=hero_original_ids[i], step=1).save()
+    to_soul_hero_ids = []
+    for h in hero_original_ids[:]:
+        if h in char_hero_oids:
+            to_soul_hero_ids.append(h)
+            hero_original_ids.remove(h)
 
-    if add_notify:
-        hero_add_signal.send(
-            sender=None,
-            char_id=char_id,
-            hero_ids=id_range
-        )
+    if to_soul_hero_ids:
+        all_model_heros = ModelHero.all()
+        souls = {}
+        for sid in to_soul_hero_ids:
+            this_hero = all_model_heros[sid]
+            souls[this_hero.soul_id] = souls.get(this_hero.soul_id, 0) + 1
 
-    all_heros = ModelHero.all()
-    achievement = Achievement(char_id)
-    for oid in hero_original_ids:
-        achievement.trig(1, oid)
+        hs = HeroSoul(char_id)
+        hs.add_soul(souls.items())
 
-        quality = all_heros[oid].quality
-        if quality == 1:
-            achievement.trig(2, 1)
-        elif quality == 2:
-            achievement.trig(3, 1)
-        else:
-            achievement.trig(4, 1)
+    if hero_original_ids:
+        length = len(hero_original_ids)
+        new_max_id = document_ids.inc('charhero', length)
 
-    achievement.trig(5, length)
+        id_range = range(new_max_id - length + 1, new_max_id + 1)
+        for i, _id in enumerate(id_range):
+            MongoHero(id=_id, char=char_id, oid=hero_original_ids[i], step=1).save()
 
-    return id_range
+        if add_notify:
+            hero_add_signal.send(
+                sender=None,
+                char_id=char_id,
+                hero_ids=id_range
+            )
+
+        all_heros = ModelHero.all()
+        achievement = Achievement(char_id)
+        for oid in hero_original_ids:
+            achievement.trig(1, oid)
+
+            quality = all_heros[oid].quality
+            if quality == 1:
+                achievement.trig(2, 1)
+            elif quality == 2:
+                achievement.trig(3, 1)
+            else:
+                achievement.trig(4, 1)
+
+        achievement.trig(5, length)
+
+        return id_range
 
 
 

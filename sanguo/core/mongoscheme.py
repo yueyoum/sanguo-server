@@ -101,6 +101,17 @@ class MongoHero(Document):
 MongoHero.ensure_indexes()
 
 
+
+class MongoHeroSoul(Document):
+    id = IntField(primary_key=True)
+    # key 为将魂ID， value 为数量
+    souls = DictField()
+
+    meta = {
+        'collection': 'hero_soul',
+    }
+
+
 class MongoEmbededPlunderChar(EmbeddedDocument):
     is_robot = BooleanField()
     gold = IntField()
