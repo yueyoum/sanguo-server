@@ -94,9 +94,9 @@ class Store(object):
         elif this_goolds.item_tp == 2:
             item.equip_add(this_goolds.item)
         elif this_goolds.item_tp == 3:
-            item.gem_add((this_goolds.item, 1))
+            item.gem_add([(this_goolds.item, 1)])
         elif this_goolds.item_tp == 4:
-            item.stuff_add((this_goolds.item, 1))
+            item.stuff_add([(this_goolds.item, 1)])
         else:
             char.update(gold=this_goolds.item)
 
