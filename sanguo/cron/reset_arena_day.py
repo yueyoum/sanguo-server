@@ -38,6 +38,7 @@ def reset():
 
     pipe.execute()
     logger.write("Reset Arena Day: Complete")
+    logger.close()
 
 if __name__ == '__main__':
     reset()

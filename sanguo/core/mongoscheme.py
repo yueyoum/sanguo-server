@@ -199,8 +199,7 @@ class MongoEmbededMail(EmbeddedDocument):
     content = StringField(required=True)
     attachment = BinaryField()
     has_read = BooleanField(required=True)
-    # utc timestamp
-    create_at = IntField(required=True)
+    create_at = DateTimeField(required=True)
 
 class MongoMail(Document):
     id = IntField(primary_key=True)

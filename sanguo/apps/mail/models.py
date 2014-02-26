@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-from django.db.models.signals import post_save, post_delete
+from protomsg import Attachment as MsgAttachment
 
-from worker import tasks
 
 class Mail(models.Model):
     SEND_TYPE = (
         (1, '角色'),
-        (2, '服务器'),
+        (2, '制定服务器'),
         (3, '全部服务器'),
     )
 
@@ -20,15 +19,17 @@ class Mail(models.Model):
     sycee = models.PositiveIntegerField("元宝", default=0)
     exp = models.PositiveIntegerField("等级经验", default=0)
     off_exp = models.PositiveIntegerField("官职经验", default=0)
-    renown = models.PositiveIntegerField("声望", default=0)
+    heros = models.CharField("武将", max_length=255, blank=True,
+                             help_text='id,id,id'
+                             )
 
-    equips = models.CharField("装备", max_length=255, blank=True,
+    equipments = models.CharField("装备", max_length=255, blank=True,
                               help_text='id:amount,id:amount'
                               )
     gems = models.CharField("宝石", max_length=255, blank=True,
                             help_text='id:amount,id:amount'
                             )
-    props = models.CharField("道具", max_length=255, blank=True,
+    stuffs = models.CharField("材料", max_length=255, blank=True,
                              help_text='id:amount,id:amount'
                              )
 
@@ -40,41 +41,46 @@ class Mail(models.Model):
                                help_text='id,id,id'
                                )
 
-    expired = models.BooleanField("失效", default=False)
+    send_done = models.BooleanField("发送成功", default=False, db_index=True)
 
     def __unicode__(self):
         return u'<Mail: %s>' % self.name
 
     class Meta:
         db_table = 'mail'
-        unique_together = (('expired', 'send_to'),)
         verbose_name = '邮件'
         verbose_name_plural = '邮件'
 
+    def to_attachment_protobuf(self):
+        msg = MsgAttachment()
+        if self.gold:
+            msg.gold = self.gold
+        if self.sycee:
+            msg.sycee = self.sycee
+        if self.official_exp:
+            msg.official_exp = self.official_exp
+        if self.heros:
+            msg.heros.extend(self.heros)
 
-def _send_mail(instance, created, **kwargs):
-    if not created:
-        print "NOT CREATED"
-        return
+        for item in self.equipments.split(','):
+            item_id, item_amount = item.split(':')
+            e = msg.equipments.add()
+            e.id = int(item_id)
+            e.level = 1
+            e.step = 1
+            e.amount = int(item_amount)
 
-    # TODO
-    print "CREATED"
+        for item in self.gems.split(','):
+            item_id, item_amount = item.split(':')
+            g = msg.gems.add()
+            g.id = int(item_id)
+            g.amount = int(item_amount)
 
-    # tasks.send_mail.apply_async((instance.id, instance.send_type, instance.send_to))
+        for item in self.stuffs.split(','):
+            item_id, item_amount = item.split(':')
+            s = msg.stuffs.add()
+            s.id = int(item_id)
+            s.amount = int(item_amount)
 
-def _delete_mail(instance, **kwargs):
-    # TODO
-    print "DELETE"
-    pass
+        return msg
 
-post_save.connect(
-    _send_mail,
-    sender=Mail,
-    dispatch_uid='apps.mail.post_save'
-)
-
-post_delete.connect(
-    _delete_mail,
-    sender=Mail,
-    dispatch_uid='apps.mail.post_delete'
-)

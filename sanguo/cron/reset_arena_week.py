@@ -48,6 +48,7 @@ def reset():
         attachment.save_to_attachment(3, gold=gold)
 
     logger.write("Reset Arena Week: Complete")
+    logger.close()
 
 
 if __name__ == '__main__':

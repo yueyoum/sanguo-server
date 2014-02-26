@@ -14,7 +14,7 @@ from core.mongoscheme import MongoAttachment, MongoEmbededAttachment, MongoEmbed
 from core.msgpipe import publish_to_char
 from utils import pack_msg
 
-from protomsg import PrizeNotify
+from protomsg import PrizeNotify, Attachment as MsgAttachment
 
 
 
@@ -26,6 +26,20 @@ class Attachment(object):
         except DoesNotExist:
             self.attachment = MongoAttachment(id=self.char_id)
             self.attachment.save()
+
+    def send_with_attachment_msg(self, msg_bin):
+        msg = MsgAttachment()
+        msg.ParseFromString(msg_bin)
+        self.save_to_char(
+            gold=msg.gold,
+            sycee=msg.sycee,
+            exp=msg.exp,
+            official_exp=msg.official_exp,
+            heros=msg.heros,
+            equipments=[(e.id, e.level, e.step) for e in msg.equipments],
+            gems=[(g.id, g.amount) for g in msg.gems],
+            stuffs=[(s.id, s.amount) for s in msg.stuffs],
+        )
 
     def save_to_char(self, gold=0, sycee=0, exp=0, official_exp=0, heros=None, equipments=None, gems=None, stuffs=None):
         char = Char(self.char_id)

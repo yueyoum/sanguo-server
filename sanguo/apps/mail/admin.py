@@ -5,11 +5,11 @@ from apps.mail.models import Mail
 class MailAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'content',
-        'gold', 'sycee', 'exp', 'off_exp', 'renown',
-        'equips', 'gems', 'props',
+        'gold', 'sycee', 'exp', 'off_exp', 'heros',
+        'equips', 'gems', 'stuffs',
         'create_at', 'send_at',
         'send_type', 'send_to',
-        'expired',
+        'send_done',
     )
 
     fieldsets = (
@@ -18,7 +18,7 @@ class MailAdmin(admin.ModelAdmin):
         }),
         ('Attachment', {
             'classes': ('grp-collapse', 'grp-closed'),
-            'fields': ('gold', 'sycee', 'exp', 'off_exp', 'renown', 'equips', 'gems', 'props')
+            'fields': ('gold', 'sycee', 'exp', 'off_exp', 'heros', 'equips', 'gems', 'stuffs')
         }),
     )
 
