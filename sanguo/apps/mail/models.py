@@ -62,25 +62,28 @@ class Mail(models.Model):
         if self.heros:
             msg.heros.extend(self.heros)
 
-        for item in self.equipments.split(','):
-            item_id, item_amount = item.split(':')
-            e = msg.equipments.add()
-            e.id = int(item_id)
-            e.level = 1
-            e.step = 1
-            e.amount = int(item_amount)
+        if self.equipments:
+            for item in self.equipments.split(','):
+                item_id, item_amount = item.split(':')
+                e = msg.equipments.add()
+                e.id = int(item_id)
+                e.level = 1
+                e.step = 1
+                e.amount = int(item_amount)
 
-        for item in self.gems.split(','):
-            item_id, item_amount = item.split(':')
-            g = msg.gems.add()
-            g.id = int(item_id)
-            g.amount = int(item_amount)
+        if self.gems:
+            for item in self.gems.split(','):
+                item_id, item_amount = item.split(':')
+                g = msg.gems.add()
+                g.id = int(item_id)
+                g.amount = int(item_amount)
 
-        for item in self.stuffs.split(','):
-            item_id, item_amount = item.split(':')
-            s = msg.stuffs.add()
-            s.id = int(item_id)
-            s.amount = int(item_amount)
+        if self.stuffs:
+            for item in self.stuffs.split(','):
+                item_id, item_amount = item.split(':')
+                s = msg.stuffs.add()
+                s.id = int(item_id)
+                s.amount = int(item_amount)
 
         return msg
 
