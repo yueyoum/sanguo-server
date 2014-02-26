@@ -20,6 +20,6 @@ def panel(request):
 @message_response("StoreBuyResponse")
 def buy(request):
     s = Store(request._char_id)
-    s.buy(request._proto.id)
+    s.buy(request._proto.id, request._proto.amount)
     return None
 
