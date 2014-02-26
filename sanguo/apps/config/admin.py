@@ -27,7 +27,7 @@ class NotifyResources(resources.ModelResource):
 
 class NotifyAdmin(ImportExportModelAdmin):
     list_display = (
-        'id', 'template',
+        'id', 'template', 'des',
     )
 
 

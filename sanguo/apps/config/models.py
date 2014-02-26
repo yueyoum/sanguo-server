@@ -118,8 +118,10 @@ post_delete.connect(
 class Notify(models.Model):
     id = models.IntegerField(primary_key=True)
     template = models.CharField("模板", max_length=255)
+    des = models.CharField("说明", blank=True)
 
     class Meta:
         db_table = 'notify'
+        ordering = ('id',)
         verbose_name = '消息模板'
         verbose_name_plural = '消息模板'
