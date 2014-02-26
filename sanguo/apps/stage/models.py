@@ -241,7 +241,8 @@ class ChallengeStage(models.Model):
     name = models.CharField("名字", max_length=64)
     level = models.IntegerField("档次")
     char_level_needs = models.IntegerField("角色等级需求")
-    open_condition = models.IntegerField("需要的挑战书数量")
+    open_condition_id = models.IntegerField("需要道具ID")
+    open_condition_amount = models.IntegerField("需要道具数量")
     power_range = models.CharField("战斗力范围", max_length=64, help_text='min,max')
 
     aid_limit = models.IntegerField("援军上限")
