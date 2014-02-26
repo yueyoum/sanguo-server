@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='store.proto',
   package='Sanguo.protocol.store',
-  serialized_pb='\n\x0bstore.proto\x12\x15Sanguo.protocol.store\"\xfb\x02\n\x05Goods\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0b\n\x03tag\x18\x02 \x02(\x05\x12\x37\n\x07item_tp\x18\x03 \x02(\x0e\x32&.Sanguo.protocol.store.Goods.ITEM_TYPE\x12\x0c\n\x04item\x18\x04 \x02(\x05\x12\x37\n\x07sell_tp\x18\x05 \x02(\x0e\x32&.Sanguo.protocol.store.Goods.SELL_TYPE\x12\x16\n\x0eoriginal_price\x18\x06 \x02(\x05\x12\x12\n\nsell_price\x18\x07 \x02(\x05\x12\x14\n\x0ctotal_amount\x18\x08 \x02(\x05\x12\x14\n\x0climit_amount\x18\t \x02(\x05\x12\x15\n\rvip_condition\x18\n \x02(\x05\">\n\tITEM_TYPE\x12\x08\n\x04HERO\x10\x01\x12\t\n\x05\x45QUIP\x10\x02\x12\x07\n\x03GEM\x10\x03\x12\t\n\x05STUFF\x10\x04\x12\x08\n\x04GOLD\x10\x05\"*\n\tSELL_TYPE\x12\r\n\tSELL_GOLD\x10\x01\x12\x0e\n\nSELL_SYCEE\x10\x02\"K\n\x0bStoreNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x05goods\x18\x02 \x03(\x0b\x32\x1c.Sanguo.protocol.store.Goods\"$\n\x11StorePanelRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"e\n\x12StorePanelResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x31\n\x05panel\x18\x03 \x02(\x0b\x32\".Sanguo.protocol.store.StoreNotify\".\n\x0fStoreBuyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"0\n\x10StoreBuyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\x0bstore.proto\x12\x15Sanguo.protocol.store\"\xfb\x02\n\x05Goods\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0b\n\x03tag\x18\x02 \x02(\x05\x12\x37\n\x07item_tp\x18\x03 \x02(\x0e\x32&.Sanguo.protocol.store.Goods.ITEM_TYPE\x12\x0c\n\x04item\x18\x04 \x02(\x05\x12\x37\n\x07sell_tp\x18\x05 \x02(\x0e\x32&.Sanguo.protocol.store.Goods.SELL_TYPE\x12\x16\n\x0eoriginal_price\x18\x06 \x02(\x05\x12\x12\n\nsell_price\x18\x07 \x02(\x05\x12\x14\n\x0ctotal_amount\x18\x08 \x02(\x05\x12\x14\n\x0climit_amount\x18\t \x02(\x05\x12\x15\n\rvip_condition\x18\n \x02(\x05\">\n\tITEM_TYPE\x12\x08\n\x04HERO\x10\x01\x12\t\n\x05\x45QUIP\x10\x02\x12\x07\n\x03GEM\x10\x03\x12\t\n\x05STUFF\x10\x04\x12\x08\n\x04GOLD\x10\x05\"*\n\tSELL_TYPE\x12\r\n\tSELL_GOLD\x10\x01\x12\x0e\n\nSELL_SYCEE\x10\x02\"K\n\x0bStoreNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x05goods\x18\x02 \x03(\x0b\x32\x1c.Sanguo.protocol.store.Goods\"$\n\x11StorePanelRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"e\n\x12StorePanelResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x31\n\x05panel\x18\x03 \x02(\x0b\x32\".Sanguo.protocol.store.StoreNotify\">\n\x0fStoreBuyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x03 \x02(\x05\"0\n\x10StoreBuyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
 
 
 
@@ -291,6 +291,13 @@ _STOREBUYREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='amount', full_name='Sanguo.protocol.store.StoreBuyRequest.amount', index=2,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -301,7 +308,7 @@ _STOREBUYREQUEST = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=638,
-  serialized_end=684,
+  serialized_end=700,
 )
 
 
@@ -335,8 +342,8 @@ _STOREBUYRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=686,
-  serialized_end=734,
+  serialized_start=702,
+  serialized_end=750,
 )
 
 _GOODS.fields_by_name['item_tp'].enum_type = _GOODS_ITEM_TYPE

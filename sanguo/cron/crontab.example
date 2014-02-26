@@ -4,6 +4,8 @@
 0 2 * * * /PATH/reset_checkin.sh
 # 每天02:00 重置任务
 0 2 * * * /PATH/reset_task.sh
+# 每天02:00 重置商城每人每天限量物品的购买记录
+0 2 * * * /PATH/reset_store_player_limit.sh
 # 每天21:00 重置比武日积分
 0 21 * * * /PATH/reset_arena_day.py
 # 每天21:30 重置比武周积分
