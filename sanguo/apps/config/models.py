@@ -118,7 +118,7 @@ post_delete.connect(
 class Notify(models.Model):
     id = models.IntegerField(primary_key=True)
     template = models.CharField("模板", max_length=255)
-    des = models.CharField("说明", blank=True)
+    des = models.CharField("说明", max_length=255, blank=True)
 
     class Meta:
         db_table = 'notify'
