@@ -11,7 +11,7 @@ from core.friend import Friend
 from core.mail import Mail
 from core.daily import CheckIn
 
-from core.stage import Stage, Hang, EliteStage
+from core.stage import Stage, Hang, EliteStage, TeamBattle
 
 from core.formation import Formation
 from core.item import Item
@@ -113,4 +113,5 @@ def login_notify(char_id):
     Achievement(char_id).send_notify()
     EliteStage(char_id).send_notify()
     Store(char_id).send_notify()
+    TeamBattle(char_id).send_notify()
 

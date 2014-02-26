@@ -464,7 +464,7 @@ class TeamBattle(TimerCheckAbstractBase):
 
 
     def check(self):
-        if not self.mongo_tb:
+        if not self.mongo_tb or self.mongo_tb.status != 2:
             return
 
         if timezone.utc_timestamp() - self.mongo_tb.start_at >= self.mongo_tb.total_seconds:
@@ -501,7 +501,8 @@ class TeamBattle(TimerCheckAbstractBase):
         item.stuff_remove(need_stuff_id, need_stuff_amount)
 
 
-        boss_id = ModelHero.get_by_grade(this_stage.level)
+        boss = ModelHero.get_by_grade(this_stage.level)
+        boss_id = boss.keys()[0]
         boss_power = this_stage.boss_power()
 
 
