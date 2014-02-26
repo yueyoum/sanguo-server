@@ -14,6 +14,10 @@ class MonsterResources(resources.ModelResource):
     class Meta:
         model = Monster
 
+class HeroSoulResources(resources.ModelResource):
+    class Meta:
+        model = HeroSoul
+
 class HeroAdmin(ImportExportModelAdmin):
     list_display = (
         'id', 'name', 'Avatar', 'Image',
@@ -67,10 +71,12 @@ class MonsterAdmin(ImportExportModelAdmin):
         return u'<a href="/images/武将/大图/{0}.jpg" target=_blank><img src="/images/武将/大图/{0}.jpg" width="100" /></a>'.format(obj.image)
     Image.allow_tags = True
 
-class HeroSoulAdmin(admin.ModelAdmin):
+class HeroSoulAdmin(ImportExportModelAdmin):
     list_display = (
         'id', 'name'
     )
+
+    resource_class = HeroSoulResources
 
 admin.site.register(Hero, HeroAdmin)
 admin.site.register(Monster, MonsterAdmin)
