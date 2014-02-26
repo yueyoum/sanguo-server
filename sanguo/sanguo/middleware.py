@@ -9,6 +9,7 @@ from protomsg import REQUEST_TYPE
 from utils import crypto
 from core.msgpipe import message_get
 from core.timercheck import timercheck
+from core.activeplayers import ActivePlayers
 
 NUM_FIELD = struct.Struct('>i')
 EMPTY_SESSION_MSG_TYPE = set([100, 102, 105])
@@ -89,6 +90,8 @@ class UnpackAndVerifyData(object):
                     print "CHAR ID =", request._char_id
 
         timercheck.check(request._char_id)
+        ap = ActivePlayers(request._server_id)
+        ap.set(request._char_id)
 
 
 _BIND = set()

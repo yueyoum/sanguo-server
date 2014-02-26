@@ -13,9 +13,79 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='chat.proto',
   package='Sanguo.protocol.chat',
-  serialized_pb='\n\nchat.proto\x12\x14Sanguo.protocol.chat\";\n\rChatCharacter\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x10\n\x08official\x18\x03 \x02(\x05\"M\n\x0b\x43hatMessage\x12\x31\n\x04\x63har\x18\x01 \x02(\x0b\x32#.Sanguo.protocol.chat.ChatCharacter\x12\x0b\n\x03msg\x18\x02 \x02(\t\"U\n\x11\x43hatMessageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12/\n\x04msgs\x18\x02 \x03(\x0b\x32!.Sanguo.protocol.chat.ChatMessage\"/\n\x0f\x43hatSendRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03msg\x18\x02 \x02(\t\"0\n\x10\x43hatSendResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\nchat.proto\x12\x14Sanguo.protocol.chat\",\n\x10\x42roadcastMessage\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04\x61rgs\x18\x02 \x03(\t\"X\n\x0f\x42roadcastNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x34\n\x04msgs\x18\x02 \x03(\x0b\x32&.Sanguo.protocol.chat.BroadcastMessage\";\n\rChatCharacter\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x10\n\x08official\x18\x03 \x02(\x05\"M\n\x0b\x43hatMessage\x12\x31\n\x04\x63har\x18\x01 \x02(\x0b\x32#.Sanguo.protocol.chat.ChatCharacter\x12\x0b\n\x03msg\x18\x02 \x02(\t\"U\n\x11\x43hatMessageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12/\n\x04msgs\x18\x02 \x03(\x0b\x32!.Sanguo.protocol.chat.ChatMessage\"/\n\x0f\x43hatSendRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03msg\x18\x02 \x02(\t\"0\n\x10\x43hatSendResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
 
 
+
+
+_BROADCASTMESSAGE = _descriptor.Descriptor(
+  name='BroadcastMessage',
+  full_name='Sanguo.protocol.chat.BroadcastMessage',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='Sanguo.protocol.chat.BroadcastMessage.id', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='args', full_name='Sanguo.protocol.chat.BroadcastMessage.args', index=1,
+      number=2, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=36,
+  serialized_end=80,
+)
+
+
+_BROADCASTNOTIFY = _descriptor.Descriptor(
+  name='BroadcastNotify',
+  full_name='Sanguo.protocol.chat.BroadcastNotify',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.chat.BroadcastNotify.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='msgs', full_name='Sanguo.protocol.chat.BroadcastNotify.msgs', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=82,
+  serialized_end=170,
+)
 
 
 _CHATCHARACTER = _descriptor.Descriptor(
@@ -55,8 +125,8 @@ _CHATCHARACTER = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=36,
-  serialized_end=95,
+  serialized_start=172,
+  serialized_end=231,
 )
 
 
@@ -90,8 +160,8 @@ _CHATMESSAGE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=97,
-  serialized_end=174,
+  serialized_start=233,
+  serialized_end=310,
 )
 
 
@@ -125,8 +195,8 @@ _CHATMESSAGENOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=176,
-  serialized_end=261,
+  serialized_start=312,
+  serialized_end=397,
 )
 
 
@@ -160,8 +230,8 @@ _CHATSENDREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=263,
-  serialized_end=310,
+  serialized_start=399,
+  serialized_end=446,
 )
 
 
@@ -195,17 +265,32 @@ _CHATSENDRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=312,
-  serialized_end=360,
+  serialized_start=448,
+  serialized_end=496,
 )
 
+_BROADCASTNOTIFY.fields_by_name['msgs'].message_type = _BROADCASTMESSAGE
 _CHATMESSAGE.fields_by_name['char'].message_type = _CHATCHARACTER
 _CHATMESSAGENOTIFY.fields_by_name['msgs'].message_type = _CHATMESSAGE
+DESCRIPTOR.message_types_by_name['BroadcastMessage'] = _BROADCASTMESSAGE
+DESCRIPTOR.message_types_by_name['BroadcastNotify'] = _BROADCASTNOTIFY
 DESCRIPTOR.message_types_by_name['ChatCharacter'] = _CHATCHARACTER
 DESCRIPTOR.message_types_by_name['ChatMessage'] = _CHATMESSAGE
 DESCRIPTOR.message_types_by_name['ChatMessageNotify'] = _CHATMESSAGENOTIFY
 DESCRIPTOR.message_types_by_name['ChatSendRequest'] = _CHATSENDREQUEST
 DESCRIPTOR.message_types_by_name['ChatSendResponse'] = _CHATSENDRESPONSE
+
+class BroadcastMessage(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _BROADCASTMESSAGE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.chat.BroadcastMessage)
+
+class BroadcastNotify(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _BROADCASTNOTIFY
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.chat.BroadcastNotify)
 
 class ChatCharacter(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType

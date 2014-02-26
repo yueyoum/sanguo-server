@@ -115,6 +115,7 @@ RESPONSE_NOTIFY_TYPE = {
     "StoreBuyResponse": 3305,
     "ChatMessageNotify": 3400,
     "ChatSendResponse": 3402,
+    "BroadcastNotify": 3500,
 }
 
 REQUEST_TYPE = {
