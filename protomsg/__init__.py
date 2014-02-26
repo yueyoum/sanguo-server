@@ -4,6 +4,7 @@ from cmd_pb2 import *
 from world_pb2 import *
 from mail_pb2 import *
 from daily_pb2 import *
+from chat_pb2 import *
 from task_pb2 import *
 from achievement_pb2 import *
 from store_pb2 import *
@@ -62,6 +63,11 @@ RESPONSE_NOTIFY_TYPE = {
     "ArenaNotify": 800,
     "ArenaResponse": 802,
     "ArenaPanelResponse": 804,
+    "TeamBattleNotify": 900,
+    "TeamBattleEnterResponse": 902,
+    "TeamBattleStartResponse": 904,
+    "TeamBattleIncrTimeResponse": 906,
+    "TeamBattleGetRewardResponse": 908,
     "EquipNotify": 1700,
     "AddEquipNotify": 1701,
     "RemoveEquipNotify": 1702,
@@ -107,6 +113,8 @@ RESPONSE_NOTIFY_TYPE = {
     "StoreNotify": 3300,
     "StorePanelResponse": 3303,
     "StoreBuyResponse": 3305,
+    "ChatMessageNotify": 3400,
+    "ChatSendResponse": 3402,
 }
 
 REQUEST_TYPE = {
@@ -134,6 +142,10 @@ REQUEST_TYPE = {
     760: "PrisonIncrAmountRequest",
     801: "ArenaRequest",
     803: "ArenaPanelRequest",
+    901: "TeamBattleEnterRequest",
+    903: "TeamBattleStartRequest",
+    905: "TeamBattleIncrTimeRequest",
+    907: "TeamBattleGetRewardRequest",
     1704: "StrengthEquipRequest",
     1770: "StepUpEquipRequest",
     1706: "SellEquipRequest",
@@ -155,6 +167,7 @@ REQUEST_TYPE = {
     3202: "AchievementGetRewardRequest",
     3302: "StorePanelRequest",
     3304: "StoreBuyRequest",
+    3401: "ChatSendRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -182,6 +195,10 @@ REQUEST_TYPE_REV = {
     "PrisonIncrAmountRequest": 760,
     "ArenaRequest": 801,
     "ArenaPanelRequest": 803,
+    "TeamBattleEnterRequest": 901,
+    "TeamBattleStartRequest": 903,
+    "TeamBattleIncrTimeRequest": 905,
+    "TeamBattleGetRewardRequest": 907,
     "StrengthEquipRequest": 1704,
     "StepUpEquipRequest": 1770,
     "SellEquipRequest": 1706,
@@ -203,5 +220,6 @@ REQUEST_TYPE_REV = {
     "AchievementGetRewardRequest": 3202,
     "StorePanelRequest": 3302,
     "StoreBuyRequest": 3304,
+    "ChatSendRequest": 3401,
 }
 

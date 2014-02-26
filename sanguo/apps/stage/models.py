@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import random
 from django.db import models
 from django.db.models.signals import post_delete, post_save
 
@@ -261,6 +262,12 @@ class ChallengeStage(models.Model):
         if data:
             return data
         return save_challenge_stage_cache()
+
+    def boss_power(self):
+        a, b = self.power_range.split(',')
+        a, b = int(a), int(b)
+        power_range = range(a, b+1)
+        return random.choice(power_range)
 
 
 def save_challenge_stage_cache(*args, **kwargs):

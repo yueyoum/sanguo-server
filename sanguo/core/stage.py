@@ -2,9 +2,10 @@
 import random
 
 from mongoengine import DoesNotExist
-from apps.stage.models import Stage as ModelStage, EliteStage as ModelEliteStage
+from apps.hero.models import Hero as ModelHero
+from apps.stage.models import Stage as ModelStage, EliteStage as ModelEliteStage, ChallengeStage as ModelChallengeStage
 from apps.stage.models import StageDrop
-from core.mongoscheme import MongoStage
+from core.mongoscheme import MongoStage, MongoTeamBattle
 
 from utils import timezone
 from utils import pack_msg
@@ -15,15 +16,20 @@ from core.task import Task
 
 import protomsg
 
-from core.exception import InvalidOperate, SanguoException
+from core.exception import InvalidOperate, SanguoException, SyceeNotEnough, StuffNotEnough
 from core.battle import PVE, ElitePVE
 
 from core.mongoscheme import MongoHang, MongoEmbededPlunderLog
 from core.counter import Counter
 from core.character import Char
+from core.friend import Friend
+from core.hero import save_hero
+from core.item import Item
 
 from worker import tasks
 from utils.math import GAUSSIAN_TABLE
+
+from preset.settings import TEAMBATTLE_INCR_COST
 
 def _parse_drops(all_drops, drop_id):
     if not drop_id:
@@ -429,5 +435,181 @@ class EliteStage(object):
             s = msg.stages.add()
             s.id = int(_id)
             s.current_times = times
+
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
+
+
+class TeamBattle(object):
+    def __init__(self, char_id):
+        self.char_id = char_id
+        try:
+            self.mongo_tb = MongoTeamBattle.objects.get(id=char_id)
+        except DoesNotExist:
+            self.mongo_tb = None
+
+        self.check()
+
+
+    def check(self):
+        if not self.mongo_tb:
+            return
+
+        if timezone.utc_timestamp() - self.mongo_tb.start_at >= self.mongo_tb.total_seconds:
+            # FINISH
+            self.mongo_tb.status = 3
+            self.mongo_tb.save()
+
+    def enter(self, _id):
+        if self.mongo_tb:
+            raise InvalidOperate("TeamBattle Enter. Char {0} Try to enter battle {1}. But last battle NOT complete".format(
+                self.char_id, _id
+            ))
+
+        try:
+            this_stage = ModelChallengeStage.all()[_id]
+        except KeyError:
+            raise InvalidOperate("TeamBattle Enter. Char {0} Try to enter a NONE exists battle {1}".format(_id))
+
+        char = Char(self.char_id)
+        char_level = char.cacheobj.level
+        if char_level < this_stage.char_level_needs:
+            raise InvalidOperate("TeamBattle Enter. Char {0} Try to enter battle {1}. But level not needs. {2}".format(
+                self.char_id, _id, char_level
+            ))
+
+        need_stuff_id = this_stage.open_condition_id
+        need_stuff_amount = this_stage.open_condition_amount
+
+        item = Item(self.char_id)
+        if item.has_stuff(need_stuff_id, need_stuff_amount):
+            raise StuffNotEnough("TeamBattle Enter. Char {0} Try to enter battle {1}. But stuff not enough".format(self.char_id, _id))
+
+        item.stuff_remove(need_stuff_id, need_stuff_amount)
+
+
+        boss_id = ModelHero.get_by_grade(this_stage.level)
+        boss_power = this_stage.boss_power()
+
+
+        self.mongo_tb = MongoTeamBattle(id=self.char_id)
+        self.mongo_tb.battle_id = _id
+        self.mongo_tb.boss_id = boss_id
+        self.mongo_tb.boss_power = boss_power
+        self.mongo_tb.friend_ids = []
+        self.mongo_tb.self_power = char.power
+        self.mongo_tb.start_at = 0
+        self.mongo_tb.total_seconds = this_stage.time_limit
+        self.mongo_tb.status = 1
+        self.mongo_tb.save()
+
+        self.send_notify()
+
+    def start(self, friend_ids=None):
+        if not self.mongo_tb:
+            raise InvalidOperate("TeamBattle Start. Char {0} try to start battle. But NOT entered".format(self.char_id))
+
+        if self.mongo_tb.status != 1:
+            raise InvalidOperate("TeamBattle Start. Char {0} try to start a already started battle {1}. status = {2}".format(
+                self.char_id, self.mongo_tb.battle_id, self.mongo_tb.status
+            ))
+
+        friend_power = 0
+        if friend_ids:
+            f = Friend(self.char_id)
+            for fid in friend_ids:
+                if not f.is_friend(fid):
+                    raise InvalidOperate("TeamBattle Start. Char {0} has no friend {1}".format(self.char_id, fid))
+
+                c = Char(fid)
+                friend_power += c.power
+
+        self.mongo_tb.friend_ids.extend(friend_ids)
+        self.mongo_tb.self_power += friend_power
+        self.mongo_tb.start_at = timezone.utc_timestamp()
+        self.mongo_tb.status = 2
+        self.mongo_tb.save()
+
+        self.send_notify()
+
+
+    def incr_time(self):
+        if not self.mongo_tb:
+            raise InvalidOperate("TeamBattle Incr Time. Char {0} try to incr time. but no battle exists".format(self.char_id))
+
+        if self.mongo_tb.status != 2:
+            raise InvalidOperate("TeamBattle Incr Time. Char {0} try to incr time. but battle {1} status = {2}".format(
+                self.char_id, self.mongo_tb.battle_id, self.mongo_tb.status
+            ))
+
+        char = Char(self.char_id)
+        char_sycee = char.cacheobj.sycee
+        if char_sycee < TEAMBATTLE_INCR_COST:
+            raise SyceeNotEnough("TeamBattle Incr Time. Char {0} try to incr time. but sycee not enough. {1} < {2}".format(
+                self.char_id, char_sycee, TEAMBATTLE_INCR_COST
+            ))
+
+        char.update(sycee=-TEAMBATTLE_INCR_COST)
+
+        self.mongo_tb.total_seconds += 60
+        self.mongo_tb.save()
+        self.send_notify()
+
+    def get_reward(self):
+        if not self.mongo_tb:
+            raise InvalidOperate("TeamBattle Get Reward. Char {0} Try to get reward. But no battle exists".format(self.char_id))
+
+        if self.mongo_tb.status != 3:
+            raise InvalidOperate("TeamBattle Get Reward. Char {0} Try to get reward. But battle {1} status = {2}".format(
+                self.char_id, self.mongo_tb.battle_id, self.mongo_tb.status
+            ))
+
+        this_stage = ModelChallengeStage.all()[self.mongo_tb.battle_id]
+        reward_gold = this_stage.reward_gold / (len(self.mongo_tb.friend_ids) + 1)
+        reward_hero_id = self.mongo_tb.boss_id
+
+        for fid in self.mongo_tb.friend_ids:
+            c = Char(fid)
+            c.update(gold=reward_gold)
+
+        c = Char(self.char_id)
+        c.update(gold=reward_gold)
+        save_hero(self.char_id, reward_hero_id)
+
+        self.mongo_tb.delete()
+        self.mongo_tb = None
+        self.send_notify()
+
+    def send_notify(self):
+        msg = protomsg.TeamBattleNotify()
+        msg.incr_time_cost = TEAMBATTLE_INCR_COST
+        if self.mongo_tb:
+            msg.team_battle.id = self.mongo_tb.battle_id
+            msg.team_battle.boss_id = self.mongo_tb.boss_id
+            msg.team_battle.boss_power = self.mongo_tb.boss_power
+            msg.team_battle.self_ids.extend(self.mongo_tb.friend_ids)
+            msg.team_battle.self_power = self.mongo_tb.self_power
+
+            utc_timestamp = timezone.utc_timestamp()
+
+            step_progress = self.mongo_tb.self_power / self.mongo_tb.boss_power * 0.0034
+            current_progress = (utc_timestamp - self.mongo_tb.start_at) * step_progress
+            if current_progress > 100:
+                current_progress = 100
+            msg.team_battle.step_progress = step_progress
+            msg.team_battle.current_progress = current_progress
+
+            remained_time = self.mongo_tb.total_seconds - (utc_timestamp - self.mongo_tb.start_at)
+            if remained_time < 0:
+                remained_time = 0
+            msg.team_battle.remained_time = remained_time
+
+            msg.team_battle.status = self.mongo_tb.status
+
+            if self.mongo_tb.status == 3:
+                this_stage = ModelChallengeStage.all()[self.mongo_tb.battle_id]
+                msg.team_battle.reward.gold = this_stage.reward_gold / (len(self.mongo_tb.friend_ids) + 1)
+                msg.team_battle.reward.heros.append(self.mongo_tb.boss_id)
 
         publish_to_char(self.char_id, pack_msg(msg))

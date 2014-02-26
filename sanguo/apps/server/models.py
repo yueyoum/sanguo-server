@@ -38,6 +38,11 @@ class Server(models.Model):
 
         return _set_server_cache()
 
+    @staticmethod
+    def all_ids():
+        servers = Server.all()
+        return servers.keys()
+
 
 class ServerStatus(models.Model):
     server = models.OneToOneField(Server)

@@ -90,6 +90,25 @@ class Hero(models.Model):
 
         return res
 
+    @staticmethod
+    def get_by_grade(grade, amount=1):
+
+        all_heros = Hero.all()
+        all_heros_items = all_heros.items()
+        res = {}
+        while True:
+            if len(res) >= amount:
+                break
+            this = random.choice(all_heros_items)
+            if this[0] in res:
+                continue
+            if this[1].grade != grade:
+                continue
+
+            res[this[0]] = this[1]
+
+        return res
+
 
     @staticmethod
     def update_cache():

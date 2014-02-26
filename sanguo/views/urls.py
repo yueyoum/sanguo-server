@@ -2,6 +2,7 @@ from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
                        url(r'^sync/$', 'views.world.views.sync'),
+                       url(r'^chat/send/$', 'views.chat.views.send'),
                        url(r'^test/$', 'views.cmd.cmd'),
 
                        url(r'^pvp/$', 'views.arena.views.arena_battle'),
@@ -35,4 +36,9 @@ urlpatterns = patterns('',
                        url(r'^mail/getattachment/$', 'views.mail.views.get_attachment'),
 
                        url(r'daily/checkin/$', 'views.daily.views.checkin'),
+
+                       url(r'^teambattle/enter/$', 'views.teambattle.views.enter'),
+                       url(r'^teambattle/start/$', 'views.teambattle.views.start'),
+                       url(r'^teambattle/incr/$', 'views.teambattle.views.incr_time'),
+                       url(r'^teambattle/getreward/$', 'views.teambattle.views.get_reward'),
 )

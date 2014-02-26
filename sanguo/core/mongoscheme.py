@@ -328,3 +328,20 @@ class MongoStoreCharLimit(Document):
     meta = {
         'collection': 'store_char'
     }
+
+
+class MongoTeamBattle(Document):
+    id = IntField(primary_key=True)
+    battle_id = IntField()
+    boss_id = IntField()
+    boss_power = IntField()
+    friend_ids = ListField(IntField())
+    self_power = IntField()
+    start_at = IntField()
+    total_seconds = IntField()
+    # status: 1 prepare, 2 started, 3 reward
+    status = IntField()
+
+    meta = {
+        'collection': 'teambattle'
+    }

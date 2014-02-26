@@ -34,3 +34,5 @@ MAX_FRIENDS_AMOUNT = 5
 # 邮件可以保存多少天
 MAIL_KEEP_DAYS = 1
 
+# 猛将挑战增加一分钟需要多少元宝
+TEAMBATTLE_INCR_COST = 1
