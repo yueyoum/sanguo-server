@@ -205,14 +205,3 @@ post_delete.connect(
     dispatch_uid='apps.hero.Monster.post_delete'
 )
 
-
-
-class HeroSoul(models.Model):
-    id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=64)
-
-    class Meta:
-        db_table = 'hero_soul'
-        ordering = ('id',)
-        verbose_name = '将魂'
-        verbose_name_plural = '将魂'

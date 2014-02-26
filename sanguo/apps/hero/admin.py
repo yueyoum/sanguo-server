@@ -4,7 +4,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.hero.models import Hero, Monster, HeroSoul
+from apps.hero.models import Hero, Monster
 
 class HeroResources(resources.ModelResource):
     class Meta:
@@ -14,9 +14,6 @@ class MonsterResources(resources.ModelResource):
     class Meta:
         model = Monster
 
-class HeroSoulResources(resources.ModelResource):
-    class Meta:
-        model = HeroSoul
 
 class HeroAdmin(ImportExportModelAdmin):
     list_display = (
@@ -71,13 +68,6 @@ class MonsterAdmin(ImportExportModelAdmin):
         return u'<a href="/images/武将/大图/{0}.jpg" target=_blank><img src="/images/武将/大图/{0}.jpg" width="100" /></a>'.format(obj.image)
     Image.allow_tags = True
 
-class HeroSoulAdmin(ImportExportModelAdmin):
-    list_display = (
-        'id', 'name'
-    )
-
-    resource_class = HeroSoulResources
 
 admin.site.register(Hero, HeroAdmin)
 admin.site.register(Monster, MonsterAdmin)
-admin.site.register(HeroSoul, HeroSoulAdmin)

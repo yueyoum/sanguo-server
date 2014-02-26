@@ -149,11 +149,10 @@ class Hero(FightPowerMixin):
         # FIXME 消耗同名卡
         hs = HeroSoul(self.char_id)
         this_hero = ModelHero.all()[self.id]
-        soul_id = this_hero.soul_id
-        if not hs.has_soul(soul_id, 2):
+        if not hs.has_soul(this_hero.id, 2):
             raise InvalidOperate("Hero Step Up: Char {0} Try to up Hero {1}. But hero soul not enough".format(self.char_id, self.id))
 
-        hs.remove_soul((soul_id, 2))
+        hs.remove_soul((this_hero.id, 2))
 
         # FIXME 花多少金币
         from core.character import Char
@@ -261,7 +260,7 @@ class HeroSoul(object):
 
     def send_notify(self):
         msg = protomsg.HeroSoulNotify()
-        for _id, amount in self.mongo_hs.souls:
+        for _id, amount in self.mongo_hs.souls.iteritems():
             s = msg.herosouls.add()
             s.id = int(_id)
             s.amount = amount
@@ -298,7 +297,7 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
         souls = {}
         for sid in to_soul_hero_ids:
             this_hero = all_model_heros[sid]
-            souls[this_hero.soul_id] = souls.get(this_hero.soul_id, 0) + 1
+            souls[this_hero.id] = souls.get(this_hero.id, 0) + 1
 
         hs = HeroSoul(char_id)
         hs.add_soul(souls.items())
