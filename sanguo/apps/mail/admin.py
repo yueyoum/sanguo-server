@@ -5,7 +5,7 @@ from apps.mail.models import Mail
 class MailAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'content',
-        'gold', 'sycee', 'exp', 'off_exp', 'heros',
+        'gold', 'sycee', 'exp', 'official_exp', 'heros',
         'equipments', 'gems', 'stuffs',
         'create_at', 'send_at',
         'send_type', 'send_to',

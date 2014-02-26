@@ -3,6 +3,8 @@
 __author__ = 'Wang Chao'
 __date__ = '2/26/14'
 
+import traceback
+
 from _base import Logger
 
 from apps.server.models import Server as ModelServer
@@ -49,6 +51,7 @@ def run():
             send_one_mail(mail)
         except Exception as e:
             logger.write("ERROR: mail: {0}, error: {1}".format(mail.id, str(e)))
+            logger.write(traceback.format_exc())
             continue
         else:
             mail.send_done = True
