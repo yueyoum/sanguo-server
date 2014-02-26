@@ -25,8 +25,9 @@ from core.character import Char
 from core.friend import Friend
 from core.hero import save_hero
 from core.item import Item
+from core.timercheck import TimerCheckAbstractBase, timercheck
 
-from worker import tasks
+# from worker import tasks
 from utils.math import GAUSSIAN_TABLE
 
 from preset.settings import TEAMBATTLE_INCR_COST
@@ -190,7 +191,7 @@ class Stage(object):
 
 
 
-class Hang(object):
+class Hang(TimerCheckAbstractBase):
     def __init__(self, char_id):
         self.char_id = char_id
         try:
@@ -199,6 +200,18 @@ class Hang(object):
                 self.send_prize_notify()
         except DoesNotExist:
             self.hang = None
+
+
+    def check(self):
+        if not self.hang or self.hang.finished:
+            return
+
+        counter = Counter(self.char_id, 'hang')
+        remained_seconds = counter.remained_value
+        if timezone.utc_timestamp() - self.hang.start >= remained_seconds:
+            # finish
+            self.finish(actual_seconds=remained_seconds)
+
 
     def start(self, stage_id):
         if self.hang:
@@ -210,7 +223,7 @@ class Hang(object):
         if remained_seconds <= 0:
             raise InvalidOperate("Hang Start: Char {0} try to hang, But NO times available".format(self.char_id))
 
-        job = tasks.hang_finish.apply_async((self.char_id, remained_seconds), countdown=remained_seconds)
+        # job = tasks.hang_finish.apply_async((self.char_id, remained_seconds), countdown=remained_seconds)
 
         char = Char(self.char_id)
         char_level = char.cacheobj.level
@@ -221,7 +234,7 @@ class Hang(object):
             stage_id=stage_id,
             start=timezone.utc_timestamp(),
             finished=False,
-            jobid=job.id,
+            # jobid=job.id,
             actual_hours=0,
             logs=[],
             plunder_gold=0,
@@ -239,7 +252,7 @@ class Hang(object):
         if self.hang.finished:
             raise InvalidOperate("Hang Cancel: Char {0} Try to cancel a finished hang".format(self.char_id))
 
-        tasks.cancel(self.hang.jobid)
+        # tasks.cancel(self.hang.jobid)
         self.finish()
 
 
@@ -441,15 +454,13 @@ class EliteStage(object):
 
 
 
-class TeamBattle(object):
+class TeamBattle(TimerCheckAbstractBase):
     def __init__(self, char_id):
         self.char_id = char_id
         try:
             self.mongo_tb = MongoTeamBattle.objects.get(id=char_id)
         except DoesNotExist:
             self.mongo_tb = None
-
-        self.check()
 
 
     def check(self):
@@ -460,6 +471,7 @@ class TeamBattle(object):
             # FINISH
             self.mongo_tb.status = 3
             self.mongo_tb.save()
+            self.send_notify()
 
     def enter(self, _id):
         if self.mongo_tb:
@@ -613,3 +625,7 @@ class TeamBattle(object):
                 msg.team_battle.reward.heros.append(self.mongo_tb.boss_id)
 
         publish_to_char(self.char_id, pack_msg(msg))
+
+
+timercheck.register(Hang)
+timercheck.register(TeamBattle)

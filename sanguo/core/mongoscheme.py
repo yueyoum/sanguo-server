@@ -130,7 +130,7 @@ class MongoHang(Document):
     finished = BooleanField()
     # 实际挂的时间
     actual_seconds = IntField()
-    jobid = StringField()
+    # jobid = StringField()
 
     # 被掠夺日志
     logs = ListField(EmbeddedDocumentField(MongoEmbededPlunderLog))

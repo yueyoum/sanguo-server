@@ -8,6 +8,7 @@ from protomsg import REQUEST_TYPE
 #from core.rabbit import rabbit
 from utils import crypto
 from core.msgpipe import message_get
+from core.timercheck import timercheck
 
 NUM_FIELD = struct.Struct('>i')
 EMPTY_SESSION_MSG_TYPE = set([100, 102, 105])
@@ -86,6 +87,8 @@ class UnpackAndVerifyData(object):
                     request._server_id = int(splited_session[1])
                     request._char_id = int(splited_session[2])
                     print "CHAR ID =", request._char_id
+
+        timercheck.check(request._char_id)
 
 
 _BIND = set()
