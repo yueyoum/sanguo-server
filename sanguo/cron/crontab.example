@@ -12,5 +12,7 @@
 30 21 * * * /PATH/reset_arena_week.sh
 # 每隔一定时间发送邮件
 */1 * * * * /PATH/send_mail.sh
+# 每天02:00 清理过期邮件
+0 2 * * * /PATH/clean_mail.sh
 
 

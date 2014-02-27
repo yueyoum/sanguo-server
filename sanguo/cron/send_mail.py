@@ -9,10 +9,9 @@ from django.utils import timezone
 
 from _base import Logger
 
-from apps.server.models import Server as ModelServer
 from apps.mail.models import Mail as ModelMail
+from apps.character.models import Character as ModelCharacter
 from core.mail import Mail
-from core.activeplayers import ActivePlayers
 
 
 def send_to_char(char_id, mail):
@@ -26,17 +25,10 @@ def send_one_mail(mail):
     elif mail.send_type == 2:
         # 发给指定服务器
         server_ids = [int(i) for i in mail.send_to.split(',')]
-        char_ids = []
-        for sid in server_ids:
-            ap = ActivePlayers(sid)
-            char_ids.extend(ap.get_list())
+        char_ids = ModelCharacter.objects.filter(server_id__in=server_ids).values_list('id', flat=True)
     else:
         # 发送给全部服务器
-        server_ids = ModelServer.all_ids()
-        char_ids = []
-        for sid in server_ids:
-            ap = ActivePlayers(sid)
-            char_ids.extend(ap.get_list())
+        char_ids = ModelCharacter.objects.all().values_list('id', flat=True)
 
     for cid in char_ids:
         send_to_char(cid, mail)
