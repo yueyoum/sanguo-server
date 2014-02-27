@@ -34,7 +34,7 @@ class Mail(models.Model):
                              )
 
     create_at = models.DateTimeField(auto_now_add=True)
-    send_at = models.DateTimeField("发送时间")
+    send_at = models.DateTimeField("发送时间", db_index=True)
 
     send_type = models.IntegerField("发送模式", choices=SEND_TYPE)
     send_to = models.CharField("发送到ID", max_length=255, blank=True,

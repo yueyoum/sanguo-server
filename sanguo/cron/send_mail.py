@@ -5,6 +5,8 @@ __date__ = '2/26/14'
 
 import traceback
 
+from django.utils import timezone
+
 from _base import Logger
 
 from apps.server.models import Server as ModelServer
@@ -41,7 +43,7 @@ def send_one_mail(mail):
 
 
 def run():
-    mails = ModelMail.objects.filter(send_done=False).filter(send_lock=False)
+    mails = ModelMail.objects.filter(send_done=False).filter(send_lock=False).filter(send_at__lte=timezone.now())
 
     logger = Logger('send_mail.log')
     logger.write("Send Mail Start. mails amount: {0}".format(mails.count()))
