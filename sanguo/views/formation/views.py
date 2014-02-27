@@ -71,8 +71,8 @@ def set_socket(request):
                 raise SanguoException(402)
 
     _equip_test(1, req.socket.weapon_id)
-    _equip_test(2, req.socket.jewelry_id)
-    _equip_test(3, req.socket.armor_id)
+    _equip_test(2, req.socket.armor_id)
+    _equip_test(3, req.socket.jewelry_id)
 
 
     f.save_socket(
