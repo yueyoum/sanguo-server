@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from apps.item.models import Equipment as ModelEquipment
-from core.mongoscheme import MongoHero
+from core.mongoscheme import MongoHero, MongoItem
 from core.character import Char
 from core.exception import InvalidOperate, SanguoException
 from protomsg import SetSocketResponse
@@ -65,7 +65,8 @@ def set_socket(request):
             # 装备要有，类型不能放错
             if not item.has_equip(e):
                 raise InvalidOperate()
-            this_e = all_equipments[e]
+            e_oid = item.item.equipments[str(e)].oid
+            this_e = all_equipments[e_oid]
             if this_e.tp != tp:
                 raise SanguoException(402)
 
