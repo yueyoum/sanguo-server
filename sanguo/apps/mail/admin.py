@@ -9,7 +9,7 @@ class MailAdmin(admin.ModelAdmin):
         'equipments', 'gems', 'stuffs',
         'create_at', 'send_at',
         'send_type', 'send_to',
-        'send_done',
+        'send_lock', 'send_done',
     )
 
     fieldsets = (

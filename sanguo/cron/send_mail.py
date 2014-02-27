@@ -41,20 +41,23 @@ def send_one_mail(mail):
 
 
 def run():
-    mails = ModelMail.objects.filter(send_done=False)
+    mails = ModelMail.objects.filter(send_done=False).filter(send_lock=False)
 
     logger = Logger('send_mail.log')
     logger.write("Send Mail Start. mails amount: {0}".format(mails.count()))
 
     for mail in mails:
+        mail.send_lock = True
+        mail.save()
         try:
             send_one_mail(mail)
         except Exception as e:
             logger.write("ERROR: mail: {0}, error: {1}".format(mail.id, str(e)))
             logger.write(traceback.format_exc())
-            continue
         else:
             mail.send_done = True
+        finally:
+            mail.send_lock = False
             mail.save()
 
     logger.write("Send Mail Complete")

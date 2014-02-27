@@ -41,6 +41,7 @@ class Mail(models.Model):
                                help_text='id,id,id'
                                )
 
+    send_lock = models.BooleanField("正在发送", default=False, db_index=True)
     send_done = models.BooleanField("发送成功", default=False, db_index=True)
 
     def __unicode__(self):
