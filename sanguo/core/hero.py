@@ -148,7 +148,7 @@ class Hero(FightPowerMixin):
 
         # FIXME 消耗同名卡
         hs = HeroSoul(self.char_id)
-        this_hero = ModelHero.all()[self.id]
+        this_hero = ModelHero.all()[self.oid]
         if not hs.has_soul(this_hero.id, 2):
             raise InvalidOperate("Hero Step Up: Char {0} Try to up Hero {1}. But hero soul not enough".format(self.char_id, self.id))
 
