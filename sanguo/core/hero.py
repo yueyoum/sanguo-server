@@ -152,7 +152,7 @@ class Hero(FightPowerMixin):
         if not hs.has_soul(this_hero.id, 2):
             raise InvalidOperate("Hero Step Up: Char {0} Try to up Hero {1}. But hero soul not enough".format(self.char_id, self.id))
 
-        hs.remove_soul((this_hero.id, 2))
+        hs.remove_soul([(this_hero.id, 2)])
 
         # FIXME 花多少金币
         from core.character import Char
