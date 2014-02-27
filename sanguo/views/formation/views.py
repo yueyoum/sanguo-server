@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from apps.item.models import Equipment as ModelEquipment
+from core.mongoscheme import MongoHero
 from core.character import Char
 from core.exception import InvalidOperate, SanguoException
 from protomsg import SetSocketResponse
@@ -19,22 +21,18 @@ def set_socket(request):
 
     if str(req.socket.id) not in f.formation.sockets:
         raise InvalidOperate()
-    #
+
     char = Char(char_id)
-    # char_eqiup_ids = char.equip_ids
     char_heros = char.heros_dict
-    #
-    # mc = MongoChar.objects.only('sockets').get(id=char_id)
-    # char_sockets = mc.sockets
-    #
-    # if str(req.socket.id) not in char_sockets:
-    #     # socket id 要存在
-    #     raise InvalidOperate()
 
     if req.socket.hero_id:
         # hero 要属于这个char
         if req.socket.hero_id not in char_heros:
             raise InvalidOperate()
+
+    def _get_hero_oid(hid):
+        h = MongoHero.objects.get(id=hid)
+        return h.oid
 
     # 不能重复放置
     for k, s in f.formation.sockets.iteritems():
@@ -44,6 +42,10 @@ def set_socket(request):
         if req.socket.hero_id:
             if s.hero and s.hero == req.socket.hero_id:
                 raise SanguoException(401)
+            # 同名武将不能重复上阵
+            if s.hero:
+                if _get_hero_oid(s.hero) == _get_hero_oid(req.socket.hero_id):
+                    raise InvalidOperate("Same Hero can not in formation at same time")
 
         if req.socket.weapon_id:
             if s.weapon and s.weapon == req.socket.weapon_id:
@@ -57,16 +59,15 @@ def set_socket(request):
             if s.jewelry and s.jewelry == req.socket.jewelry_id:
                 f.formation.sockets[k].jewelry = 0
 
-
+    all_equipments = ModelEquipment.all()
     def _equip_test(tp, e):
         if e:
             # 装备要有，类型不能放错
             if not item.has_equip(e):
                 raise InvalidOperate()
-            # TODO tp check
-            # obj = get_cache_equipment(e)
-            # if obj.tp != tp:
-            #     raise SanguoException(402)
+            this_e = all_equipments[e]
+            if this_e.tp != tp:
+                raise SanguoException(402)
 
     _equip_test(1, req.socket.weapon_id)
     _equip_test(2, req.socket.jewelry_id)

@@ -265,7 +265,7 @@ def char_initialize(account_id, server_id, name):
     hero_ids = [
         hero_ids[0], hero_ids[1], hero_ids[2],
         0, 0, 0,
-        0, 0, 0
+        0, 0,
     ]
     socket_ids = []
     for index, _id in enumerate(hero_ids):
@@ -279,7 +279,7 @@ def char_initialize(account_id, server_id, name):
     socket_ids = [
         socket_ids[0], socket_ids[3], socket_ids[6],
         socket_ids[1], socket_ids[4], socket_ids[7],
-        socket_ids[2], socket_ids[5], socket_ids[8],
+        socket_ids[2], socket_ids[5], 0,
     ]
 
     f.save_formation(socket_ids, send_notify=False)
