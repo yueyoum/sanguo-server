@@ -102,8 +102,9 @@ class PackMessageData(object):
         if response.status_code != 200:
             return response
 
-        # if request.path.startswith('/admin/'):
-        #     return response
+        is_login = False
+        if request.path.startswith('/login/'):
+            is_login = True
 
         char_id = getattr(request, '_char_id', None)
         if char_id:
@@ -112,7 +113,7 @@ class PackMessageData(object):
             #    _BIND.add(char_id)
 
             #other_msgs = rabbit.message_get_all(char_id)
-            other_msgs = message_get(char_id)
+            other_msgs = message_get(char_id, is_login=is_login)
         else:
             other_msgs = []
 
