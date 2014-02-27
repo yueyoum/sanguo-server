@@ -23,7 +23,7 @@ def reset():
     reward_data = ArenaReward.all()
 
     pipe = redis_client_two.pipeline()
-    for index, d in data:
+    for index, d in enumerate(data):
         rank = index + 1
         char_id = int(d[0])
         score = int(d[1])
