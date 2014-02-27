@@ -90,7 +90,7 @@ class ArenaReward(models.Model):
     def cache_obj(rank, data=None):
         if not data:
             data = ArenaReward.all()
-        for k, v in data:
+        for k, v in data.items():
             if rank >= k:
                 return v
 
