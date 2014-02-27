@@ -34,6 +34,8 @@ class Skill(models.Model):
     mode_name = models.CharField("类型名字", max_length=8)
 
     prob = models.IntegerField("触发几率")
+    trig_start = models.IntegerField("触发回合初始", default=1)
+    trig_cooldown = models.IntegerField("触发回合间隔")
 
     def __unicode__(self):
         return u'<Skill %s>' % self.name
