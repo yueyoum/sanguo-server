@@ -103,6 +103,7 @@ class EffectManager(DotEffectMixin, StepHeroNotifyMixin):
 
 class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
     def __init__(self):
+        self._round = 1
         self.die = False
         self.max_hp = self.hp
         self.damage_value = 0
@@ -182,22 +183,33 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
     def find_skill(self, skills):
         # 计算是否触发技能
+        # if not skills:
+        #     return None
+
+        # skill_probs = [[s.prob, s] for s in skills]
+        #
+        # for i in range(1, len(skill_probs)):
+        #    skill_probs[i][0] += skill_probs[i-1][0]
+        #
+        # prob = randint(1, 100)
+        # for _p, skill in skill_probs:
+        #    if prob <= _p:
+        #        return skill
+        # return None
+
         if not skills:
-            return None
+            return []
 
-        skill_probs = [[s.prob, s] for s in skills]
+        active_skills = []
+        for s in skills:
+            if (self._round - s.trig_start) % s.trig_cooldown == 0:
+                active_skills.append(s)
+        return active_skills
 
-        for i in range(1, len(skill_probs)):
-           skill_probs[i][0] += skill_probs[i-1][0]
-
-        prob = randint(1, 100)
-        for _p, skill in skill_probs:
-           if prob <= _p:
-               return skill
-        return None
 
 
     def action(self, target):
+        self._round += 1
         # 英雄行动，首先清理本英雄所施加在其他人身上的效果
         msg = self.ground_msg.steps.add()
         msg.id = self.id
@@ -221,14 +233,27 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         # hero_noti.target_id = self.id
         # hero_noti.hp = self.hp
 
-        skill = self.find_skill(self.attack_skills)
+        # skill = self.find_skill(self.attack_skills)
+        #
+        # if skill is None:
+        #     logger.debug("%d: normal action" % self.id)
+        #     self.normal_action(target, msg)
+        # else:
+        #     logger.debug("%d: skill action %d" % (self.id, skill.id))
+        #     self.skill_action(target, skill, msg)
 
-        if skill is None:
+        skills = self.find_skill(self.attack_skills)
+
+        if not skills:
             logger.debug("%d: normal action" % self.id)
             self.normal_action(target, msg)
         else:
-            logger.debug("%d: skill action %d" % (self.id, skill.id))
-            self.skill_action(target, skill, msg)
+            logger.debug("%d: skill action" % self.id)
+            for skill in skills:
+                logger.debug("%d: skill action %d. rounds = %d" % (self.id, skill.id, self._round))
+                self.skill_action(target, skill, msg)
+
+
 
 
     def normal_action(self, target, msg):
