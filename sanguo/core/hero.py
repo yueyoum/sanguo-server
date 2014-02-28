@@ -36,9 +36,9 @@ def cal_hero_property(original_id, level, step):
     @rtype: tuple
     """
     hero = ModelHero.all()[original_id]
-    attack = DLL.hero_attack(level, step, ctypes.c_float(hero.attack_growing))
-    defense = DLL.hero_defense(level, step, ctypes.c_float(hero.defense_growing))
-    hp = DLL.hero_hp(level, step, ctypes.c_float(hero.hp_growing))
+    attack = DLL.hero_attack(level, step, hero.quality, ctypes.c_float(hero.attack_growing))
+    defense = DLL.hero_defense(level, step, hero.quality, ctypes.c_float(hero.defense_growing))
+    hp = DLL.hero_hp(level, step, hero.quality, ctypes.c_float(hero.hp_growing))
 
     # TODO 这里不应该int， 检查使用此参数的代码
     return int(attack), int(defense), int(hp)
