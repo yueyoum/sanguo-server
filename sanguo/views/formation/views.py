@@ -34,6 +34,8 @@ def set_socket(request):
         h = MongoHero.objects.get(id=hid)
         return h.oid
 
+    changed_sockets = []
+
     # 不能重复放置
     for k, s in f.formation.sockets.iteritems():
         if int(k) == req.socket.id:
@@ -49,15 +51,18 @@ def set_socket(request):
 
         if req.socket.weapon_id:
             if s.weapon and s.weapon == req.socket.weapon_id:
-                f.formation.sockets[k].weapon = 0
+                # f.formation.sockets[k].weapon = 0
+                changed_sockets.append((int(k), s.hero, 0, s.armor, s.jewelry))
 
         if req.socket.armor_id:
             if s.armor and s.armor == req.socket.armor_id:
-                f.formation.sockets[k].armor = 0
+                # f.formation.sockets[k].armor = 0
+                changed_sockets.append((int(k), s.hero, s.weapon, 0, s.jewelry))
 
         if req.socket.jewelry_id:
             if s.jewelry and s.jewelry == req.socket.jewelry_id:
-                f.formation.sockets[k].jewelry = 0
+                # f.formation.sockets[k].jewelry = 0
+                changed_sockets.append((int(k), s.hero, s.weapon, s.armor, 0))
 
     all_equipments = ModelEquipment.all()
     def _equip_test(tp, e):
@@ -82,7 +87,15 @@ def set_socket(request):
         armor=req.socket.armor_id,
         jewelry=req.socket.jewelry_id
     )
-    f.formation.save()
+    # f.formation.save()
+    for socket_id, hero_id, weapon_id, armor_id, jewelry_id in changed_sockets:
+        f.save_socket(
+            socket_id=socket_id,
+            hero=hero_id,
+            weapon=weapon_id,
+            armor=armor_id,
+            jewelry=jewelry_id,
+        )
 
     response = SetSocketResponse()
     response.ret = 0
