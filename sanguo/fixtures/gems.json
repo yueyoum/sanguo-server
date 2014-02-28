@@ -10,7 +10,7 @@
         "used_for": "attack", 
         "merge_to": 2, 
         "used_for_name": "\u653b\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -24,7 +24,7 @@
         "used_for": "attack", 
         "merge_to": 3, 
         "used_for_name": "\u653b\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -38,7 +38,7 @@
         "used_for": "attack", 
         "merge_to": 4, 
         "used_for_name": "\u653b\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -52,7 +52,7 @@
         "used_for": "attack", 
         "merge_to": 5, 
         "used_for_name": "\u653b\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -66,7 +66,7 @@
         "used_for": "attack", 
         "merge_to": 6, 
         "used_for_name": "\u653b\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -80,7 +80,7 @@
         "used_for": "attack", 
         "merge_to": 7, 
         "used_for_name": "\u653b\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -94,7 +94,7 @@
         "used_for": "attack", 
         "merge_to": 8, 
         "used_for_name": "\u653b\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -108,7 +108,7 @@
         "used_for": "attack", 
         "merge_to": 9, 
         "used_for_name": "\u653b\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -122,7 +122,7 @@
         "used_for": "attack", 
         "merge_to": 10, 
         "used_for_name": "\u653b\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -136,7 +136,7 @@
         "used_for": "attack", 
         "merge_to": null, 
         "used_for_name": "\u653b\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -150,7 +150,7 @@
         "used_for": "hp", 
         "merge_to": 12, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -164,7 +164,7 @@
         "used_for": "hp", 
         "merge_to": 13, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -178,7 +178,7 @@
         "used_for": "hp", 
         "merge_to": 14, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -192,7 +192,7 @@
         "used_for": "hp", 
         "merge_to": 15, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -206,21 +206,21 @@
         "used_for": "hp", 
         "merge_to": 16, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
     "pk": 16, 
     "model": "item.gem", 
     "fields": {
-        "name": "6\u7ea7\u751f\u547d\u5b9d\u77f3", 
+        "name": "6\u7ea7\u653b\u51fb\u5b9d\u77f3", 
         "level": 6, 
-        "tp_name": "\u9ec4", 
-        "value": 149, 
-        "used_for": "hp", 
-        "merge_to": 17, 
-        "used_for_name": "\u751f\u547d\u4e0a\u9650", 
-        "icon": ""
+        "tp_name": "\u7ea2", 
+        "value": 60, 
+        "used_for": "attack", 
+        "merge_to": 7, 
+        "used_for_name": "\u653b\u51fb", 
+        "icon": "gem1"
     }
 },
 {
@@ -234,7 +234,7 @@
         "used_for": "hp", 
         "merge_to": 18, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -248,7 +248,7 @@
         "used_for": "hp", 
         "merge_to": 19, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -262,7 +262,7 @@
         "used_for": "hp", 
         "merge_to": 20, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -276,7 +276,7 @@
         "used_for": "hp", 
         "merge_to": null, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -290,7 +290,7 @@
         "used_for": "defense", 
         "merge_to": 22, 
         "used_for_name": "\u9632\u5fa1", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -304,7 +304,7 @@
         "used_for": "defense", 
         "merge_to": 23, 
         "used_for_name": "\u9632\u5fa1", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -318,7 +318,7 @@
         "used_for": "defense", 
         "merge_to": 24, 
         "used_for_name": "\u9632\u5fa1", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -332,7 +332,7 @@
         "used_for": "defense", 
         "merge_to": 25, 
         "used_for_name": "\u9632\u5fa1", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -346,7 +346,7 @@
         "used_for": "defense", 
         "merge_to": 26, 
         "used_for_name": "\u9632\u5fa1", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -360,7 +360,7 @@
         "used_for": "defense", 
         "merge_to": 27, 
         "used_for_name": "\u9632\u5fa1", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -374,7 +374,7 @@
         "used_for": "defense", 
         "merge_to": 28, 
         "used_for_name": "\u9632\u5fa1", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -388,7 +388,7 @@
         "used_for": "defense", 
         "merge_to": 29, 
         "used_for_name": "\u9632\u5fa1", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -402,7 +402,7 @@
         "used_for": "defense", 
         "merge_to": 30, 
         "used_for_name": "\u9632\u5fa1", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -416,7 +416,7 @@
         "used_for": "defense", 
         "merge_to": null, 
         "used_for_name": "\u9632\u5fa1", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -430,7 +430,7 @@
         "used_for": "crit", 
         "merge_to": 32, 
         "used_for_name": "\u66b4\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -444,7 +444,7 @@
         "used_for": "crit", 
         "merge_to": 33, 
         "used_for_name": "\u66b4\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -458,7 +458,7 @@
         "used_for": "crit", 
         "merge_to": 34, 
         "used_for_name": "\u66b4\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -472,7 +472,7 @@
         "used_for": "crit", 
         "merge_to": 35, 
         "used_for_name": "\u66b4\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -486,7 +486,7 @@
         "used_for": "crit", 
         "merge_to": 36, 
         "used_for_name": "\u66b4\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -500,7 +500,7 @@
         "used_for": "crit", 
         "merge_to": 37, 
         "used_for_name": "\u66b4\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -514,7 +514,7 @@
         "used_for": "crit", 
         "merge_to": 38, 
         "used_for_name": "\u66b4\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -528,7 +528,7 @@
         "used_for": "crit", 
         "merge_to": 39, 
         "used_for_name": "\u66b4\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -542,7 +542,7 @@
         "used_for": "crit", 
         "merge_to": 40, 
         "used_for_name": "\u66b4\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 },
 {
@@ -556,7 +556,7 @@
         "used_for": "crit", 
         "merge_to": null, 
         "used_for_name": "\u66b4\u51fb", 
-        "icon": ""
+        "icon": "gem1"
     }
 }
 ]

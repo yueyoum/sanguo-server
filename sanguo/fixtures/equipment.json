@@ -18,8 +18,8 @@
         "growing": 14, 
         "slots": 1, 
         "cls": 1, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon4", 
+        "icon": "weapon4"
     }
 },
 {
@@ -41,8 +41,8 @@
         "growing": 18, 
         "slots": 2, 
         "cls": 1, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon4", 
+        "icon": "weapon4"
     }
 },
 {
@@ -64,8 +64,8 @@
         "growing": 22, 
         "slots": 3, 
         "cls": 1, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon4", 
+        "icon": "weapon4"
     }
 },
 {
@@ -87,8 +87,8 @@
         "growing": 25, 
         "slots": 4, 
         "cls": 1, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon4", 
+        "icon": "weapon4"
     }
 },
 {
@@ -110,8 +110,8 @@
         "growing": 29, 
         "slots": 4, 
         "cls": 1, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon4", 
+        "icon": "weapon4"
     }
 },
 {
@@ -133,8 +133,8 @@
         "growing": 32, 
         "slots": 4, 
         "cls": 1, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon4", 
+        "icon": "weapon4"
     }
 },
 {
@@ -156,8 +156,8 @@
         "growing": 36, 
         "slots": 4, 
         "cls": 1, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon4", 
+        "icon": "weapon4"
     }
 },
 {
@@ -179,8 +179,8 @@
         "growing": 14, 
         "slots": 4, 
         "cls": 2, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon5", 
+        "icon": "weapon5"
     }
 },
 {
@@ -202,8 +202,8 @@
         "growing": 18, 
         "slots": 4, 
         "cls": 2, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon5", 
+        "icon": "weapon5"
     }
 },
 {
@@ -225,8 +225,8 @@
         "growing": 22, 
         "slots": 4, 
         "cls": 2, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon5", 
+        "icon": "weapon5"
     }
 },
 {
@@ -248,8 +248,8 @@
         "growing": 25, 
         "slots": 4, 
         "cls": 2, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon5", 
+        "icon": "weapon5"
     }
 },
 {
@@ -271,8 +271,8 @@
         "growing": 29, 
         "slots": 4, 
         "cls": 2, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon5", 
+        "icon": "weapon5"
     }
 },
 {
@@ -294,8 +294,8 @@
         "growing": 32, 
         "slots": 1, 
         "cls": 2, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon5", 
+        "icon": "weapon5"
     }
 },
 {
@@ -317,8 +317,8 @@
         "growing": 36, 
         "slots": 2, 
         "cls": 2, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon5", 
+        "icon": "weapon5"
     }
 },
 {
@@ -340,8 +340,8 @@
         "growing": 14, 
         "slots": 3, 
         "cls": 3, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon2", 
+        "icon": "weapon2"
     }
 },
 {
@@ -363,8 +363,8 @@
         "growing": 18, 
         "slots": 4, 
         "cls": 3, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon2", 
+        "icon": "weapon2"
     }
 },
 {
@@ -386,8 +386,8 @@
         "growing": 22, 
         "slots": 4, 
         "cls": 3, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon2", 
+        "icon": "weapon2"
     }
 },
 {
@@ -409,8 +409,8 @@
         "growing": 25, 
         "slots": 4, 
         "cls": 3, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon2", 
+        "icon": "weapon2"
     }
 },
 {
@@ -432,8 +432,8 @@
         "growing": 29, 
         "slots": 4, 
         "cls": 3, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon2", 
+        "icon": "weapon2"
     }
 },
 {
@@ -455,8 +455,8 @@
         "growing": 32, 
         "slots": 4, 
         "cls": 3, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon2", 
+        "icon": "weapon2"
     }
 },
 {
@@ -478,8 +478,8 @@
         "growing": 36, 
         "slots": 4, 
         "cls": 3, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon2", 
+        "icon": "weapon2"
     }
 },
 {
@@ -501,8 +501,8 @@
         "growing": 14, 
         "slots": 4, 
         "cls": 4, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon2", 
+        "icon": "weapon2"
     }
 },
 {
@@ -524,8 +524,8 @@
         "growing": 18, 
         "slots": 4, 
         "cls": 4, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon2", 
+        "icon": "weapon2"
     }
 },
 {
@@ -547,8 +547,8 @@
         "growing": 22, 
         "slots": 1, 
         "cls": 4, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon2", 
+        "icon": "weapon2"
     }
 },
 {
@@ -570,8 +570,8 @@
         "growing": 25, 
         "slots": 2, 
         "cls": 4, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon2", 
+        "icon": "weapon2"
     }
 },
 {
@@ -593,8 +593,8 @@
         "growing": 29, 
         "slots": 3, 
         "cls": 4, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon2", 
+        "icon": "weapon2"
     }
 },
 {
@@ -616,8 +616,8 @@
         "growing": 32, 
         "slots": 4, 
         "cls": 4, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon2", 
+        "icon": "weapon2"
     }
 },
 {
@@ -639,8 +639,8 @@
         "growing": 36, 
         "slots": 4, 
         "cls": 4, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon2", 
+        "icon": "weapon2"
     }
 },
 {
@@ -662,8 +662,8 @@
         "growing": 14, 
         "slots": 4, 
         "cls": 5, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon7", 
+        "icon": "weapon7"
     }
 },
 {
@@ -685,8 +685,8 @@
         "growing": 18, 
         "slots": 4, 
         "cls": 5, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon7", 
+        "icon": "weapon7"
     }
 },
 {
@@ -708,8 +708,8 @@
         "growing": 22, 
         "slots": 4, 
         "cls": 5, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon7", 
+        "icon": "weapon7"
     }
 },
 {
@@ -731,8 +731,8 @@
         "growing": 25, 
         "slots": 4, 
         "cls": 5, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon7", 
+        "icon": "weapon7"
     }
 },
 {
@@ -754,8 +754,8 @@
         "growing": 29, 
         "slots": 1, 
         "cls": 5, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon7", 
+        "icon": "weapon7"
     }
 },
 {
@@ -777,8 +777,8 @@
         "growing": 32, 
         "slots": 2, 
         "cls": 5, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon7", 
+        "icon": "weapon7"
     }
 },
 {
@@ -800,8 +800,8 @@
         "growing": 36, 
         "slots": 3, 
         "cls": 5, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon7", 
+        "icon": "weapon7"
     }
 },
 {
@@ -823,8 +823,8 @@
         "growing": 14, 
         "slots": 4, 
         "cls": 6, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon8", 
+        "icon": "weapon8"
     }
 },
 {
@@ -846,8 +846,8 @@
         "growing": 18, 
         "slots": 4, 
         "cls": 6, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon8", 
+        "icon": "weapon8"
     }
 },
 {
@@ -869,8 +869,8 @@
         "growing": 22, 
         "slots": 4, 
         "cls": 6, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon8", 
+        "icon": "weapon8"
     }
 },
 {
@@ -892,8 +892,8 @@
         "growing": 25, 
         "slots": 4, 
         "cls": 6, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon8", 
+        "icon": "weapon8"
     }
 },
 {
@@ -915,8 +915,8 @@
         "growing": 29, 
         "slots": 4, 
         "cls": 6, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon8", 
+        "icon": "weapon8"
     }
 },
 {
@@ -938,8 +938,8 @@
         "growing": 32, 
         "slots": 4, 
         "cls": 6, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon8", 
+        "icon": "weapon8"
     }
 },
 {
@@ -961,8 +961,8 @@
         "growing": 36, 
         "slots": 4, 
         "cls": 6, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon8", 
+        "icon": "weapon8"
     }
 },
 {
@@ -984,8 +984,8 @@
         "growing": 14, 
         "slots": 1, 
         "cls": 7, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon3", 
+        "icon": "weapon3"
     }
 },
 {
@@ -1007,8 +1007,8 @@
         "growing": 18, 
         "slots": 2, 
         "cls": 7, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon3", 
+        "icon": "weapon3"
     }
 },
 {
@@ -1030,8 +1030,8 @@
         "growing": 22, 
         "slots": 3, 
         "cls": 7, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon3", 
+        "icon": "weapon3"
     }
 },
 {
@@ -1053,8 +1053,8 @@
         "growing": 25, 
         "slots": 4, 
         "cls": 7, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon3", 
+        "icon": "weapon3"
     }
 },
 {
@@ -1076,8 +1076,8 @@
         "growing": 29, 
         "slots": 4, 
         "cls": 7, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon3", 
+        "icon": "weapon3"
     }
 },
 {
@@ -1099,8 +1099,8 @@
         "growing": 32, 
         "slots": 4, 
         "cls": 7, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon3", 
+        "icon": "weapon3"
     }
 },
 {
@@ -1122,8 +1122,8 @@
         "growing": 36, 
         "slots": 4, 
         "cls": 7, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon3", 
+        "icon": "weapon3"
     }
 },
 {
@@ -1133,7 +1133,7 @@
         "upgrade_to": 51, 
         "stuff_needs": "2:1,1:1", 
         "gem_addition": 0, 
-        "name": "\u6708\u9999\u7b1b", 
+        "name": "\u6708\u9999", 
         "tp_name": "\u6b66\u5668", 
         "hp": 0, 
         "attack": 32, 
@@ -1145,8 +1145,8 @@
         "growing": 14, 
         "slots": 4, 
         "cls": 8, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon1", 
+        "icon": "weapon1"
     }
 },
 {
@@ -1156,7 +1156,7 @@
         "upgrade_to": 52, 
         "stuff_needs": "4:1,3:2", 
         "gem_addition": 30, 
-        "name": "\u5e7d\u660e\u7b1b", 
+        "name": "\u5e7d\u660e", 
         "tp_name": "\u6b66\u5668", 
         "hp": 0, 
         "attack": 40, 
@@ -1168,8 +1168,8 @@
         "growing": 18, 
         "slots": 1, 
         "cls": 8, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon1", 
+        "icon": "weapon1"
     }
 },
 {
@@ -1179,7 +1179,7 @@
         "upgrade_to": 53, 
         "stuff_needs": "6:1,5:3", 
         "gem_addition": 60, 
-        "name": "\u661f\u8292\u7b1b", 
+        "name": "\u661f\u8292", 
         "tp_name": "\u6b66\u5668", 
         "hp": 0, 
         "attack": 48, 
@@ -1191,8 +1191,8 @@
         "growing": 22, 
         "slots": 2, 
         "cls": 8, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon1", 
+        "icon": "weapon1"
     }
 },
 {
@@ -1202,7 +1202,7 @@
         "upgrade_to": 54, 
         "stuff_needs": "8:1,7:5", 
         "gem_addition": 100, 
-        "name": "\u9e23\u714c\u7b1b", 
+        "name": "\u9e23\u714c", 
         "tp_name": "\u6b66\u5668", 
         "hp": 0, 
         "attack": 56, 
@@ -1214,8 +1214,8 @@
         "growing": 25, 
         "slots": 3, 
         "cls": 8, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon1", 
+        "icon": "weapon1"
     }
 },
 {
@@ -1225,7 +1225,7 @@
         "upgrade_to": 55, 
         "stuff_needs": "10:1,9:10", 
         "gem_addition": 150, 
-        "name": "\u5996\u65cb\u7b1b", 
+        "name": "\u5996\u65cb", 
         "tp_name": "\u6b66\u5668", 
         "hp": 0, 
         "attack": 64, 
@@ -1237,8 +1237,8 @@
         "growing": 29, 
         "slots": 4, 
         "cls": 8, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon1", 
+        "icon": "weapon1"
     }
 },
 {
@@ -1248,7 +1248,7 @@
         "upgrade_to": 56, 
         "stuff_needs": "12:1,11:20", 
         "gem_addition": 200, 
-        "name": "\u6e38\u6708\u7b1b", 
+        "name": "\u6e38\u6708", 
         "tp_name": "\u6b66\u5668", 
         "hp": 0, 
         "attack": 72, 
@@ -1260,8 +1260,8 @@
         "growing": 32, 
         "slots": 4, 
         "cls": 8, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon1", 
+        "icon": "weapon1"
     }
 },
 {
@@ -1271,7 +1271,7 @@
         "upgrade_to": null, 
         "stuff_needs": "", 
         "gem_addition": 260, 
-        "name": "\u6708\u5996\u65e5\u72c2\u7b1b", 
+        "name": "\u6708\u5996\u65e5\u72c2", 
         "tp_name": "\u6b66\u5668", 
         "hp": 0, 
         "attack": 80, 
@@ -1283,8 +1283,8 @@
         "growing": 36, 
         "slots": 4, 
         "cls": 8, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "weapon1", 
+        "icon": "weapon1"
     }
 },
 {
@@ -1306,8 +1306,8 @@
         "growing": 7, 
         "slots": 4, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour6", 
+        "icon": "armour6"
     }
 },
 {
@@ -1329,8 +1329,8 @@
         "growing": 9, 
         "slots": 4, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour6", 
+        "icon": "armour6"
     }
 },
 {
@@ -1352,8 +1352,8 @@
         "growing": 11, 
         "slots": 4, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour6", 
+        "icon": "armour6"
     }
 },
 {
@@ -1375,8 +1375,8 @@
         "growing": 13, 
         "slots": 4, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour6", 
+        "icon": "armour6"
     }
 },
 {
@@ -1398,8 +1398,8 @@
         "growing": 14, 
         "slots": 1, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour6", 
+        "icon": "armour6"
     }
 },
 {
@@ -1421,8 +1421,8 @@
         "growing": 16, 
         "slots": 2, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour6", 
+        "icon": "armour6"
     }
 },
 {
@@ -1444,8 +1444,8 @@
         "growing": 18, 
         "slots": 3, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour6", 
+        "icon": "armour6"
     }
 },
 {
@@ -1467,8 +1467,8 @@
         "growing": 7, 
         "slots": 4, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour3", 
+        "icon": "armour3"
     }
 },
 {
@@ -1490,8 +1490,8 @@
         "growing": 9, 
         "slots": 4, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour3", 
+        "icon": "armour3"
     }
 },
 {
@@ -1513,8 +1513,8 @@
         "growing": 11, 
         "slots": 4, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour3", 
+        "icon": "armour3"
     }
 },
 {
@@ -1536,8 +1536,8 @@
         "growing": 13, 
         "slots": 4, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour3", 
+        "icon": "armour3"
     }
 },
 {
@@ -1559,8 +1559,8 @@
         "growing": 14, 
         "slots": 1, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour3", 
+        "icon": "armour3"
     }
 },
 {
@@ -1582,8 +1582,8 @@
         "growing": 16, 
         "slots": 2, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour3", 
+        "icon": "armour3"
     }
 },
 {
@@ -1605,8 +1605,8 @@
         "growing": 18, 
         "slots": 3, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour3", 
+        "icon": "armour3"
     }
 },
 {
@@ -1628,8 +1628,8 @@
         "growing": 7, 
         "slots": 4, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour1", 
+        "icon": "armour1"
     }
 },
 {
@@ -1651,8 +1651,8 @@
         "growing": 9, 
         "slots": 4, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour1", 
+        "icon": "armour1"
     }
 },
 {
@@ -1674,8 +1674,8 @@
         "growing": 11, 
         "slots": 4, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour1", 
+        "icon": "armour1"
     }
 },
 {
@@ -1697,8 +1697,8 @@
         "growing": 13, 
         "slots": 4, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour1", 
+        "icon": "armour1"
     }
 },
 {
@@ -1720,8 +1720,8 @@
         "growing": 14, 
         "slots": 4, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour1", 
+        "icon": "armour1"
     }
 },
 {
@@ -1743,8 +1743,8 @@
         "growing": 16, 
         "slots": 4, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour1", 
+        "icon": "armour1"
     }
 },
 {
@@ -1766,8 +1766,8 @@
         "growing": 18, 
         "slots": 4, 
         "cls": 10, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "armour1", 
+        "icon": "armour1"
     }
 },
 {
@@ -1789,8 +1789,8 @@
         "growing": 36, 
         "slots": 1, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc2", 
+        "icon": "misc2"
     }
 },
 {
@@ -1812,8 +1812,8 @@
         "growing": 45, 
         "slots": 2, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc2", 
+        "icon": "misc2"
     }
 },
 {
@@ -1835,8 +1835,8 @@
         "growing": 54, 
         "slots": 3, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc2", 
+        "icon": "misc2"
     }
 },
 {
@@ -1858,8 +1858,8 @@
         "growing": 63, 
         "slots": 4, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc2", 
+        "icon": "misc2"
     }
 },
 {
@@ -1881,8 +1881,8 @@
         "growing": 72, 
         "slots": 4, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc2", 
+        "icon": "misc2"
     }
 },
 {
@@ -1904,8 +1904,8 @@
         "growing": 81, 
         "slots": 4, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc2", 
+        "icon": "misc2"
     }
 },
 {
@@ -1927,8 +1927,8 @@
         "growing": 90, 
         "slots": 4, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc2", 
+        "icon": "misc2"
     }
 },
 {
@@ -1950,8 +1950,8 @@
         "growing": 36, 
         "slots": 4, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc5", 
+        "icon": "misc5"
     }
 },
 {
@@ -1973,8 +1973,8 @@
         "growing": 45, 
         "slots": 1, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc5", 
+        "icon": "misc5"
     }
 },
 {
@@ -1996,8 +1996,8 @@
         "growing": 54, 
         "slots": 2, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc5", 
+        "icon": "misc5"
     }
 },
 {
@@ -2019,8 +2019,8 @@
         "growing": 63, 
         "slots": 3, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc5", 
+        "icon": "misc5"
     }
 },
 {
@@ -2042,8 +2042,8 @@
         "growing": 72, 
         "slots": 4, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc5", 
+        "icon": "misc5"
     }
 },
 {
@@ -2065,8 +2065,8 @@
         "growing": 81, 
         "slots": 4, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc5", 
+        "icon": "misc5"
     }
 },
 {
@@ -2088,8 +2088,8 @@
         "growing": 90, 
         "slots": 4, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc5", 
+        "icon": "misc5"
     }
 },
 {
@@ -2111,8 +2111,8 @@
         "growing": 36, 
         "slots": 4, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc3", 
+        "icon": "misc3"
     }
 },
 {
@@ -2134,8 +2134,8 @@
         "growing": 45, 
         "slots": 4, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc3", 
+        "icon": "misc3"
     }
 },
 {
@@ -2157,8 +2157,8 @@
         "growing": 54, 
         "slots": 4, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc3", 
+        "icon": "misc3"
     }
 },
 {
@@ -2180,8 +2180,8 @@
         "growing": 63, 
         "slots": 1, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc3", 
+        "icon": "misc3"
     }
 },
 {
@@ -2203,8 +2203,8 @@
         "growing": 72, 
         "slots": 2, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc3", 
+        "icon": "misc3"
     }
 },
 {
@@ -2226,8 +2226,8 @@
         "growing": 81, 
         "slots": 3, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc3", 
+        "icon": "misc3"
     }
 },
 {
@@ -2249,8 +2249,8 @@
         "growing": 90, 
         "slots": 4, 
         "cls": 12, 
-        "icon_large": "", 
-        "icon": ""
+        "icon_large": "misc3", 
+        "icon": "misc3"
     }
 }
 ]

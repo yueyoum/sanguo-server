@@ -457,7 +457,7 @@
         "battle": 3, 
         "first_drop": "", 
         "normal_exp": 22, 
-        "monsters": "39,39,39,0,39,0,39,40,39", 
+        "monsters": "39,0,39,39,39,0,39,40,39", 
         "normal_gold": 12
     }
 },
@@ -479,7 +479,7 @@
         "battle": 3, 
         "first_drop": "", 
         "normal_exp": 22, 
-        "monsters": "39,39,39,0,39,0,39,41,39", 
+        "monsters": "39,0,39,0,39,39,39,41,39", 
         "normal_gold": 12
     }
 },
