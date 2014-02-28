@@ -103,7 +103,7 @@ class EffectManager(DotEffectMixin, StepHeroNotifyMixin):
 
 class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
     def __init__(self):
-        self._round = 1
+        self._round = 0
         self.die = False
         self.max_hp = self.hp
         self.damage_value = 0
