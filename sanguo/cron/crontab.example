@@ -14,5 +14,7 @@
 */1 * * * * /PATH/send_mail.sh
 # 每天02:00 清理过期邮件
 0 2 * * * /PATH/clean_mail.sh
+# 每天00:00 清理历史战斗录像
+0 0 * * * /PATH/clean_battle_record.sh
 
 
