@@ -5,11 +5,12 @@ __date__ = '2/27/14'
 
 
 import datetime
+from _base import Logger
+
 from django.utils import timezone
 from core.mongoscheme import MongoMail
 from core.mail import Mail
 
-from _base import Logger
 
 DAY_DIFF = 3
 
