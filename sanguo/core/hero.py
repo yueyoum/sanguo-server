@@ -71,6 +71,9 @@ class Hero(FightPowerMixin):
         self.model_hero = ModelHero.all()[self.oid]
         self.crit = self.model_hero.crit
         self.dodge = self.model_hero.dodge
+        self.anger = self.model_hero.anger
+
+        self.default_skill = self.model_hero.default_skill
 
         self.skills = [int(i) for i in self.model_hero.skills.split(',')]
 

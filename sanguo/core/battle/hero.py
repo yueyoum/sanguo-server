@@ -103,7 +103,7 @@ class EffectManager(DotEffectMixin, StepHeroNotifyMixin):
 
 class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
     def __init__(self):
-        self._round = 0
+        # self._round = 0
         self.die = False
         self.max_hp = self.hp
         self.damage_value = 0
@@ -136,6 +136,13 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
         if self.hp > self.max_hp:
             self.hp = self.max_hp
+
+    def set_anger(self, value):
+        self.anger += value
+        if self.anger < 0:
+            self.anger = 0
+        if self.anger > 100:
+            self.anger = 100
 
 
     def active_initiative_effects(self, msg):
@@ -197,19 +204,29 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         #        return skill
         # return None
 
-        if not skills:
-            return []
+        # if not skills:
+        #     return []
+        #
+        # active_skills = []
+        # for s in skills:
+        #     if (self._round - s.trig_start) % s.trig_cooldown == 0:
+        #         active_skills.append(s)
+        # return active_skills
 
-        active_skills = []
-        for s in skills:
-            if (self._round - s.trig_start) % s.trig_cooldown == 0:
-                active_skills.append(s)
-        return active_skills
+        if not skills:
+            return [self.default_skill]
+
+        if self.anger >= 100:
+            self.anger -= 100
+            return skills
+
+        return [self.default_skill]
+
 
 
 
     def action(self, target):
-        self._round += 1
+        # self._round += 1
         # 英雄行动，首先清理本英雄所施加在其他人身上的效果
         msg = self.ground_msg.steps.add()
         msg.id = self.id
@@ -242,22 +259,26 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         #     logger.debug("%d: skill action %d" % (self.id, skill.id))
         #     self.skill_action(target, skill, msg)
 
+        # skills = self.find_skill(self.attack_skills)
+        #
+        # if not skills:
+        #     logger.debug("%d: normal action" % self.id)
+        #     self.normal_action(target, msg)
+        # else:
+        #     logger.debug("%d: skill action" % self.id)
+        #     for skill in skills:
+        #         logger.debug("%d: skill action %d. rounds = %d" % (self.id, skill.id, self._round))
+        #         self.skill_action(target, skill, msg)
+
         skills = self.find_skill(self.attack_skills)
-
-        if not skills:
-            logger.debug("%d: normal action" % self.id)
-            self.normal_action(target, msg)
-        else:
-            logger.debug("%d: skill action" % self.id)
-            for skill in skills:
-                logger.debug("%d: skill action %d. rounds = %d" % (self.id, skill.id, self._round))
-                self.skill_action(target, skill, msg)
+        for skill in skills:
+            logger.debug("%d: skill action %d" % (self.id, skill.id))
+            self.skill_action(target, skill, msg)
 
 
-
-
-    def normal_action(self, target, msg):
-        self._one_action(target, self.using_attack, msg)
+    #
+    # def normal_action(self, target, msg):
+    #     self._one_action(target, self.using_attack, msg)
 
 
     def real_damage_value(self, damage, target):
@@ -354,6 +375,8 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
 
     def skill_action(self, target, skill, msg):
+        self.add_anger_to_target(skill, self, msg)
+
         msg.action.skill_id = skill.id
         effects = [eff.copy() for eff in skill.effects]
         zero_rounds_effects = []
@@ -370,6 +393,8 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
                 if eff.id == 1 or eff.id == 2:
                     self.active_dot_effects(t, eff, msg)
 
+                self.add_anger_to_target(skill, t, msg)
+
         for eff in zero_rounds_effects:
             if eff.id not in [1, 2]:
                 raise Exception("Skill Action: Unsupported Zero rounds effect: {0}".format(eff.id))
@@ -383,6 +408,25 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
             targets = self.get_effect_target(eff, target)
             for t in targets:
                 self._one_action(t, value, msg, eff)
+
+                self.add_anger_to_target(skill, t, msg)
+
+
+    def add_anger_to_target(self, skill, target, msg):
+        hero_noti = msg.hero_notify.add()
+        hero_noti.target_id = target.id
+        hero_noti.hp = target.hp
+
+        if target.id == self.id:
+            using_anger = skill.anger_self
+        elif target in self._team:
+            using_anger = skill.anger_self_team
+        else:
+            using_anger = skill.anger_rival_team
+
+        target.set_anger(using_anger)
+
+        hero_noti.anger = target.anger
 
 
 
@@ -400,8 +444,12 @@ class BattleHero(InBattleHero):
         self.crit = hero.crit
         self.dodge = 0
 
+        self.anger = hero.anger
+
         self.level = hero.level
         self.skills = hero.skills
+
+        self.default_skill = hero.default_skill
 
         super(BattleHero, self).__init__()
 
@@ -419,8 +467,13 @@ class BattleMonster(InBattleHero):
         self.hp = info.hp
         self.crit = info.crit
         self.dodge = 0
+
+        self.anger = 50
+
         self.skills = [int(i) for i in  info.skills.split(',')]
         self.level = info.level
+
+        self.default_skill = 0
 
         super(BattleMonster, self).__init__()
 
