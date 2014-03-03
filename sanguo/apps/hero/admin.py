@@ -20,7 +20,7 @@ class HeroAdmin(ImportExportModelAdmin):
         'id', 'name', 'Avatar', 'Image',
         'tp', 'tp_name', 'country', 'country_name',
         'gender', 'gender_name',
-        'special_equip_id', 'special_addition',
+        'special_equip_cls', 'special_addition',
         'quality', 'quality_name',
         'grade',
         'contribution',

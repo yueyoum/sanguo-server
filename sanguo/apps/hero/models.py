@@ -19,8 +19,11 @@ class Hero(models.Model):
     gender = models.IntegerField("性别")
     gender_name = models.CharField("性别名字", max_length=4)
 
-    special_equip_id = models.IntegerField("专属武器ID", null=True, blank=True)
-    special_addition = models.IntegerField("专属加成", null=True, blank=True)
+    special_equip_cls = models.CharField("专属装备类别", max_length=255, blank=True,
+                                         help_text='武器ID,防具ID,饰品ID   没有某项用0代替，都没有不填')
+    special_addition = models.CharField("专属加成", max_length=255, blank=True,
+                                        help_text='武器加成,防具加成,饰品加成   没有某项用0代替，都没有不填'
+                                        )
 
     quality = models.IntegerField("品质")
     quality_name = models.CharField("品质名字", max_length=4)
