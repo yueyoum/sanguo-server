@@ -68,23 +68,24 @@ class Hero(FightPowerMixin):
         self.attack, self.defense, self.hp = \
             cal_hero_property(self.oid, self.level, self.step)
 
-        model_hero = ModelHero.all()[self.oid]
-        self.crit = model_hero.crit
-        self.dodge = model_hero.dodge
+        self.model_hero = ModelHero.all()[self.oid]
+        self.crit = self.model_hero.crit
+        self.dodge = self.model_hero.dodge
 
-        self.skills = [int(i) for i in model_hero.skills.split(',')]
+        self.skills = [int(i) for i in self.model_hero.skills.split(',')]
 
         self._add_equip_attrs()
         self._add_achievement_buffs()
 
     def _add_equip_attrs(self):
-        # XXX
         from core.item import Equipment
         f = Formation(self.char_id)
         socket = f.find_socket_by_hero(self.id)
         if not socket:
             return
 
+        # 先把装备数值加到人物上
+        equipments = []
         for x in ['weapon', 'armor', 'jewelry']:
             equip_id = getattr(socket, x)
             if equip_id:
@@ -93,9 +94,37 @@ class Hero(FightPowerMixin):
                 self.defense += equip.defense
                 self.hp += equip.hp
 
-                for k, v in equip.gem_attributes.iteritems():
-                    value = getattr(self, k)
-                    setattr(self, k, value + v)
+                equipments.append(equip)
+
+        # 然后加成人物的专属装备
+        additions = {}
+        special_equipments = self.model_hero.special_equipments()
+        if special_equipments:
+            for equip in equipments:
+                _cls = equip.equip.cls
+                if _cls not in special_equipments:
+                    continue
+
+                _tp = equip.equip.tp
+                additions[_tp] = additions.get(_tp, 0) + special_equipments[_cls]
+
+        for _tp, _add_percent in additions.items():
+            if _tp == 1:
+                # attack
+                self.attack *= (1 + _add_percent / 100.0)
+            elif _tp == 2:
+                # defense
+                self.defense *= (1 + _add_percent / 100.0)
+            else:
+                # hp
+                self.hp *= (1 + _add_percent / 100.0)
+                self.hp = int(self.hp)
+
+        # 最后再把宝石加上
+        for equip in equipments:
+            for k, v in equip.gem_attributes.iteritems():
+                value = getattr(self, k)
+                setattr(self, k, value + v)
 
 
     def _add_achievement_buffs(self):

@@ -20,9 +20,9 @@ class Hero(models.Model):
     gender_name = models.CharField("性别名字", max_length=4)
 
     special_equip_cls = models.CharField("专属装备类别", max_length=255, blank=True,
-                                         help_text='武器ID,防具ID,饰品ID   没有某项用0代替，都没有不填')
+                                         help_text='ID,ID,ID   没有某项用0代替，都没有不填')
     special_addition = models.CharField("专属加成", max_length=255, blank=True,
-                                        help_text='武器加成,防具加成,饰品加成   没有某项用0代替，都没有不填'
+                                        help_text='加成,加成,加成   没有某项用0代替，都没有不填'
                                         )
 
     quality = models.IntegerField("品质")
@@ -116,6 +116,21 @@ class Hero(models.Model):
     @staticmethod
     def update_cache():
         return _save_cache_hero()
+
+
+    def special_equipments(self):
+        data = getattr(self, '_special_equipments', None)
+        if data:
+            return data
+
+        if not self.special_equip_cls:
+            return {}
+        equip_cls = [int(i) for i in self.special_equip_cls.split(',')]
+        equip_addition = [int(i) for i in self.special_addition.split(',')]
+        data = dict(zip(equip_cls, equip_addition))
+        self._special_equipments = data
+        return data
+
 
     class Meta:
         db_table = 'hero'
