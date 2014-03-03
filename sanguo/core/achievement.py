@@ -5,6 +5,7 @@ __date__ = '2/12/14'
 
 from mongoscheme import DoesNotExist
 from core.mongoscheme import MongoAchievement
+from core.attachment import Attachment
 
 from apps.achievement.models import Achievement as ModelAchievement
 
@@ -13,6 +14,7 @@ from utils import pack_msg
 
 from protomsg import AchievementNotify, UpdateAchievementNotify
 from protomsg import Achievement as MsgAchievement
+from protomsg import Attachment as MsgAttachment
 
 from core.exception import InvalidOperate
 
@@ -40,6 +42,7 @@ class Achievement(object):
         if achievement_id in self.achievement.complete or achievement_id in self.achievement.finished:
             return
 
+        attachment = Attachment(self.char_id)
         str_id = str(achievement_id)
 
         decoded_condition_value = ach.decoded_condition_value()
@@ -60,6 +63,7 @@ class Achievement(object):
                 # FINISH
                 self.achievement.finished.append(achievement_id)
                 self.achievement.doing.pop(str_id)
+                attachment.save_to_prize(4)
             else:
                 self.achievement.doing[str_id] = ','.join([str(i) for i in values])
 
@@ -68,6 +72,7 @@ class Achievement(object):
                 return
             # FINISH
             self.achievement.finished.append(achievement_id)
+            attachment.save_to_prize(4)
 
         else:
             if str_id in self.achievement.doing:
@@ -81,6 +86,7 @@ class Achievement(object):
                 self.achievement.finished.append(achievement_id)
                 if str_id in self.achievement.doing:
                     self.achievement.doing.pop(str_id)
+                attachment.save_to_prize(4)
             else:
                 self.achievement.doing[str_id] = value
 
@@ -111,6 +117,10 @@ class Achievement(object):
         msg = UpdateAchievementNotify()
         self._fill_up_achievement_msg(msg.achievement, ach)
         publish_to_char(self.char_id, pack_msg(msg))
+
+        msg = MsgAttachment()
+        msg.sycee = ach.sycee
+        return msg
 
 
 

@@ -275,6 +275,7 @@ class MongoEmbededAttachment(EmbeddedDocument):
     stuffs = DictField()
     gold = IntField(default=0)
     sycee = IntField(default=0)
+    exp = IntField(default=0)
     official_exp = IntField(default=0)
     heros = ListField(IntField())
 
@@ -312,6 +313,10 @@ class MongoEmbededAttachment(EmbeddedDocument):
 
 class MongoAttachment(Document):
     id = IntField(primary_key=True)
+    # prize_ids 保存当前所有可领取奖励的id号
+    # attachments 如果保存有对应prize_id的 attachment，则直接在这里领取奖励
+    # 否则就去对应的功能领取奖励
+    prize_ids = ListField(IntField())
     attachments = MapField(EmbeddedDocumentField(MongoEmbededAttachment))
 
     meta = {
