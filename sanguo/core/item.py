@@ -357,14 +357,26 @@ class Item(MessageEquipmentMixin):
         publish_to_char(self.char_id, pack_msg(msg))
 
 
-    def equip_level_up(self, _id):
+    def equip_level_up(self, _id, quick):
         if not self.has_equip(_id):
             raise InvalidOperate("Equipment Level Up: Char {0} Try to Level up a NONE exist equipment: {1}".format(
                 self.char_id, _id
             ))
 
         e = Equipment(self.char_id, _id, self.item)
-        return e.level_up()
+        level_ups = []
+        if quick:
+            while True:
+                try:
+                    level_up = e.level_up()
+                    level_ups.append(level_up)
+                except SanguoException:
+                    break
+        else:
+            level_up = e.level_up()
+            level_ups.append(level_up)
+
+        return level_ups
 
 
     def equip_step_up(self, equip_id):
