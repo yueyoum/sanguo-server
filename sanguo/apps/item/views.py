@@ -12,7 +12,7 @@ def strengthen_equip(request):
     req = request._proto
 
     item = Item(request._char_id)
-    level_ups = item.equip_level_up(req.id)
+    level_ups = item.equip_level_up(req.id, req.quick)
 
     response = StrengthEquipResponse()
     response.ret = 0

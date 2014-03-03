@@ -12,4 +12,3 @@
     alter table skill add column anger_self int(11) not null;
     alter table skill add column anger_self_team int(11) not null;
     alter table skill add column anger_rival_team int(11) not null;
-    
