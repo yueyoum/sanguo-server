@@ -30,7 +30,7 @@ class HeapEffects(StepHeroNotifyMixin):
         target.target_id = h.id
         target.is_crit = False
 
-        self.fill_up_heor_notify(step_msg, h.id, h.hp, eff)
+        self.fill_up_heor_notify(step_msg, h, eff)
 
         eff = eff.copy()
         effs = self.x[h]

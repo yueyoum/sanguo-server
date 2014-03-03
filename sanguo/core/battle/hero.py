@@ -87,14 +87,7 @@ class EffectManager(DotEffectMixin, StepHeroNotifyMixin):
 
     def add_effect(self, me, eff, msg):
         self.effects.append(eff)
-
-        self.fill_up_heor_notify(msg, me.id, me.hp, eff)
-        #
-        # hero_noti = msg.hero_notify.add()
-        # hero_noti.target_id = me.id
-        # hero_noti.hp = me.hp
-        # hero_noti.eff = eff.id
-        # hero_noti.buffs.extend(self.effect_ids())
+        self.fill_up_heor_notify(msg, me, eff)
 
 
     def effect_ids(self):
@@ -172,8 +165,8 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         }
         effects_id_values = {}
         for eff in self.effect_manager.effects:
-            if eff.id in [1, 2, 9, 10, 11]:
-                logger.warning("active property effects: unsupported eff: {0}".format(eff.id))
+            if eff.id in [1, 2, 9, 10, 11, 12, 13]:
+                # logger.warning("active property effects: unsupported eff: {0}".format(eff.id))
                 continue
 
             eff_id = eff.id
