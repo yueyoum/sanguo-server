@@ -134,6 +134,9 @@ class Equipment(MessageEquipmentMixin):
         self.mongo_item.save()
         self.level += actual_level_up
 
+        return actual_level_up
+
+
     @equip_updated
     def step_up(self):
         to = self.equip.upgrade_to
@@ -361,7 +364,7 @@ class Item(MessageEquipmentMixin):
             ))
 
         e = Equipment(self.char_id, _id, self.item)
-        e.level_up()
+        return e.level_up()
 
 
     def equip_step_up(self, equip_id):

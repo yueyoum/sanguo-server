@@ -2,6 +2,9 @@
 
 from utils.decorate import message_response
 from core.item import Item
+from utils import pack_msg
+
+from protomsg import StrengthEquipResponse
 
 
 @message_response("StrengthEquipResponse")
@@ -9,9 +12,13 @@ def strengthen_equip(request):
     req = request._proto
 
     item = Item(request._char_id)
-    item.equip_level_up(req.id)
+    level_up = item.equip_level_up(req.id)
 
-    return None
+    response = StrengthEquipResponse()
+    response.ret = 0
+    response.id = req.id
+    response.level_up = level_up
+    return pack_msg(response)
 
 
 @message_response("StepUpEquipResponse")

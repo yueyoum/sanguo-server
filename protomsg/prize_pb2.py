@@ -14,9 +14,44 @@ import world_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='prize.proto',
   package='Sanguo.protocol.prize',
-  serialized_pb='\n\x0bprize.proto\x12\x15Sanguo.protocol.prize\x1a\x0bworld.proto\"1\n\x0bPrizeNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tprize_ids\x18\x02 \x03(\x05\"1\n\x0cPrizeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08prize_id\x18\x02 \x02(\x05\"p\n\rPrizeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08prize_id\x18\x03 \x01(\x05\x12/\n\x04\x64rop\x18\x04 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment')
+  serialized_pb='\n\x0bprize.proto\x12\x15Sanguo.protocol.prize\x1a\x0bworld.proto\"\"\n\x05Prize\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05param\x18\x02 \x01(\x05\"1\n\x0bPrizeNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tprize_ids\x18\x02 \x03(\x05\"L\n\x0cPrizeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x05prize\x18\x02 \x02(\x0b\x32\x1c.Sanguo.protocol.prize.Prize\"\x8b\x01\n\rPrizeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12+\n\x05prize\x18\x03 \x01(\x0b\x32\x1c.Sanguo.protocol.prize.Prize\x12/\n\x04\x64rop\x18\x04 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment')
 
 
+
+
+_PRIZE = _descriptor.Descriptor(
+  name='Prize',
+  full_name='Sanguo.protocol.prize.Prize',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='Sanguo.protocol.prize.Prize.id', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='param', full_name='Sanguo.protocol.prize.Prize.param', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=51,
+  serialized_end=85,
+)
 
 
 _PRIZENOTIFY = _descriptor.Descriptor(
@@ -49,8 +84,8 @@ _PRIZENOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=51,
-  serialized_end=100,
+  serialized_start=87,
+  serialized_end=136,
 )
 
 
@@ -69,9 +104,9 @@ _PRIZEREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='prize_id', full_name='Sanguo.protocol.prize.PrizeRequest.prize_id', index=1,
-      number=2, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
+      name='prize', full_name='Sanguo.protocol.prize.PrizeRequest.prize', index=1,
+      number=2, type=11, cpp_type=10, label=2,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -84,8 +119,8 @@ _PRIZEREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=102,
-  serialized_end=151,
+  serialized_start=138,
+  serialized_end=214,
 )
 
 
@@ -111,9 +146,9 @@ _PRIZERESPONSE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='prize_id', full_name='Sanguo.protocol.prize.PrizeResponse.prize_id', index=2,
-      number=3, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      name='prize', full_name='Sanguo.protocol.prize.PrizeResponse.prize', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -133,14 +168,23 @@ _PRIZERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=153,
-  serialized_end=265,
+  serialized_start=217,
+  serialized_end=356,
 )
 
+_PRIZEREQUEST.fields_by_name['prize'].message_type = _PRIZE
+_PRIZERESPONSE.fields_by_name['prize'].message_type = _PRIZE
 _PRIZERESPONSE.fields_by_name['drop'].message_type = world_pb2._ATTACHMENT
+DESCRIPTOR.message_types_by_name['Prize'] = _PRIZE
 DESCRIPTOR.message_types_by_name['PrizeNotify'] = _PRIZENOTIFY
 DESCRIPTOR.message_types_by_name['PrizeRequest'] = _PRIZEREQUEST
 DESCRIPTOR.message_types_by_name['PrizeResponse'] = _PRIZERESPONSE
+
+class Prize(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _PRIZE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.prize.Prize)
 
 class PrizeNotify(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
