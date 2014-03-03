@@ -3,6 +3,8 @@
 __author__ = 'Wang Chao'
 __date__ = '1/14/14'
 
+import random
+
 from mongoengine import DoesNotExist
 
 from apps.item.models import Equipment as ModelEquipment
@@ -25,6 +27,9 @@ from utils import pack_msg
 from utils import cache
 
 import protomsg
+
+EQUIP_MAX_LEVEL = 99
+
 
 #
 # def _save_cache_equipment(equip_obj):
@@ -95,30 +100,39 @@ class Equipment(MessageEquipmentMixin):
 
     @equip_updated
     def level_up(self):
-        if self.level >= 99:
+        if self.level >= EQUIP_MAX_LEVEL:
             raise InvalidOperate("Equipment Level Up. Char {0} Try Level Up Equipment {1}. But Equipment already level {2}".format(
                 self.char_id, self.equip_id, self.level
             ))
 
         char = Char(self.char_id)
-        char_level = char.cacheobj.level
+        cache_char = char.cacheobj
+        char_level = cache_char.level
         if self.level >= char_level:
             raise SanguoException(501, "Equipment Level Up. Char {0} Try level up equipment {1}. But equipment level {2} can't great than char's level {3}".format(
                 self.char_id, self.equip_id, self.level, char_level
             ))
 
         gold_needs = self.level_up_need_gold()
-        char = Char(self.char_id)
-        cache_char = char.cacheobj
         if cache_char.gold < gold_needs:
             raise GoldNotEnough("Equipment Level Up. Char {0} Gold {1} Not Enough. Needs {2}".format(
                 self.char_id, cache_char.gold, gold_needs
             ))
 
         char.update(gold=-gold_needs)
-        self.mongo_item.equipments[str(self.equip_id)].level += 1
+
+        LEVEL_UP_PROBS = (
+            (30, 1), (80, 2), (100, 3)
+        )
+        prob = random.randint(1, 100)
+        for p, l in LEVEL_UP_PROBS:
+            if prob <= p:
+                actual_level_up = l
+                break
+
+        self.mongo_item.equipments[str(self.equip_id)].level += actual_level_up
         self.mongo_item.save()
-        self.level += 1
+        self.level += actual_level_up
 
     @equip_updated
     def step_up(self):
@@ -207,7 +221,8 @@ class Equipment(MessageEquipmentMixin):
 
     def level_up_need_gold(self):
         # 强化升级所需金币
-        gold = pow(1.08, self.level) * 100
+        # gold = pow(1.08, self.level) * 100
+        gold = 1.08 * (self.level - 1) * 200
         return int(gold)
 
     @property
