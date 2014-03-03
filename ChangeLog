@@ -4,3 +4,12 @@
 
     alter table hero change special_equip_id special_equip_cls varchar(255) not null;
     alter table hero modify special_addition varchar(255) not null;
+
+    Hero增加怒气属性
+    alter table hero add column anger int(11) not null;
+
+    Skill技能用怒气来触发
+    alter table skill add column anger_self int(11) not null;
+    alter table skill add column anger_self_team int(11) not null;
+    alter table skill add column anger_rival_team int(11) not null;
+    

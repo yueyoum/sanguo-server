@@ -37,6 +37,11 @@ class Skill(models.Model):
     trig_start = models.IntegerField("触发回合初始", default=1)
     trig_cooldown = models.IntegerField("触发回合间隔")
 
+    anger_self = models.IntegerField("对自己的怒气", default=0)
+    anger_self_team = models.IntegerField("对己方的怒气", default=0)
+    anger_rival_team = models.IntegerField("对敌方的怒气", default=0)
+
+
     def __unicode__(self):
         return u'<Skill %s>' % self.name
 
