@@ -46,8 +46,8 @@ class DotEffectMixin(object):
 
         hero_noti.value = value
 
-        logger.debug("Dot %d, hp %d to Target %d. Hp %d" % (
-            eff.id, value, target.id, target.hp)
+        logger.debug("Dot %d, hp %d to Target %d. Hp %d, Anger %d" % (
+            eff.id, value, target.id, target.hp, target.anger)
         )
 
 
@@ -314,7 +314,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
             e.id =eff.id
             e.value = eff.value
 
-        text = 'Value: {0}, Hp: {1}, Eff: {2}'.format(value, target.hp, eff.id if eff else 'None')
+        text = 'Value: {0}, Hp: {1}, Anger: {2}, Eff: {3}'.format(value, target.hp, target.anger, eff.id if eff else 'None')
         logger.debug(text)
 
 
@@ -385,6 +385,8 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
         for eff in effects:
             targets = self.get_effect_target(eff, target)
+            logger.debug("Eff: {0}, targets: {1}".format(eff.id, [i.id for i in targets]))
+
             for t in targets:
                 self.effect_manager.add_effect_to_target(t, eff, msg)
                 if eff.id == 1 or eff.id == 2:
@@ -403,6 +405,8 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
                 value = self.using_attack * eff.value  / 100.0
 
             targets = self.get_effect_target(eff, target)
+            logger.debug("Eff: {0}, targets: {1}".format(eff.id, [i.id for i in targets]))
+
             for t in targets:
                 self._one_action(t, value, msg, eff)
 
@@ -424,6 +428,9 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         target.set_anger(using_anger)
 
         hero_noti.anger = target.anger
+
+        text = '{0} add anger {1} to {2}. Anger: {3}'.format(self.id, using_anger, target.id, target.anger)
+        logger.debug(text)
 
 
 

@@ -27,6 +27,7 @@ class Ground(object):
                     msg_h.id = 0
                     msg_h.original_id = 0
                     msg_h.hp = 0
+                    msg_h.anger = 0
                     msg_h.ht = BattleHeroMsg.HERO
                 else:
                     msg_h.id = h.id
