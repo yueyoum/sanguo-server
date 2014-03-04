@@ -42,6 +42,7 @@ class DotEffectMixin(object):
         hero_noti = msg.hero_notify.add()
         hero_noti.target_id = target.id
         hero_noti.hp = target.hp
+        hero_noti.anger = target.anger
 
         hero_noti.value = value
 
@@ -74,6 +75,7 @@ class EffectManager(DotEffectMixin, StepHeroNotifyMixin):
             hero_noti = msg.hero_notify.add()
             hero_noti.target_id = k.id
             hero_noti.hp = k.hp
+            hero_noti.anger = k.anger
             hero_noti.removes.extend(v)
 
 
@@ -104,6 +106,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
 
         all_skills = ModelSkill.all()
+        self.default_skill = all_skills[self.default_skill]
         self.skills = [all_skills[i] for i in self.skills]
         self.attack_skills = []
         self.passive_skills = []
@@ -304,6 +307,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
         hero_noti.hp = target.hp
         hero_noti.value = value
+        hero_noti.anger = target.anger
 
         if eff:
             e = hero_noti.adds.add()
