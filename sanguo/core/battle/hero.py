@@ -296,7 +296,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         text = "{0} => {1}, Eff: {2}, Crit: {3}".format(self.id, target.id, eff.id if eff else 'None', msg_target.is_crit)
         logger.debug(text)
 
-        if not eff or eff == 2:
+        if not eff or eff.id == 2:
             value = self.real_damage_value(value, target) * uniform(0.97, 1.03)
 
         hero_noti = msg.hero_notify.add()
