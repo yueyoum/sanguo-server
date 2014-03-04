@@ -1,3 +1,9 @@
+* 2014-03-04
+
+    MongoEmbededMail 中 create_at 由以前的DateTimeField 改为 IntField.
+    直接保存UTC时间戳
+
+
 * 2014-03-03
 
     调整Hero Model, 从以前的专属装备ID，改为专属装备类别。

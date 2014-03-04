@@ -16,7 +16,8 @@ from core.mail import Mail
 
 def send_to_char(char_id, mail):
     m = Mail(char_id)
-    m.add(mail.id, mail.name, mail.content, mail.create_at, mail.to_attachment_protobuf().SerializeToString())
+    create_at = int(mail.create_at.strftime('%s'))
+    m.add(mail.id, mail.name, mail.content, create_at, mail.to_attachment_protobuf().SerializeToString())
 
 def send_one_mail(mail):
     if mail.send_type == 1:

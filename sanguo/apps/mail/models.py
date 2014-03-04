@@ -7,7 +7,7 @@ from protomsg import Attachment as MsgAttachment
 class Mail(models.Model):
     SEND_TYPE = (
         (1, '角色'),
-        (2, '制定服务器'),
+        (2, '指定服务器'),
         (3, '全部服务器'),
     )
 
