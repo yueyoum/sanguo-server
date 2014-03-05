@@ -28,13 +28,16 @@ class Ground(object):
                     msg_h.original_id = 0
                     msg_h.hp = 0
                     msg_h.anger = 0
+                    msg_h.max_hp = 0
+                    msg_h.max_anger = 0
                     msg_h.ht = BattleHeroMsg.HERO
                 else:
                     msg_h.id = h.id
                     msg_h.hp = h.hp
                     msg_h.original_id = h.original_id
-                    # msg_h.anger = h.anger
-                    msg_h.anger = 100
+                    msg_h.anger = h.anger
+                    msg_h.max_hp = h.hp
+                    msg_h.max_anger = 100
                     if h.HERO_TYPE == 1:
                         msg_h.ht = BattleHeroMsg.HERO
                     else:
