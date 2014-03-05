@@ -7,12 +7,13 @@ from core.exception import SyceeNotEnough
 from core.character import Char
 from core.exception import InvalidOperate, StuffNotEnough
 from core.hero import save_hero
-from preset.settings import MAX_PRISONERS_AMOUNT, PRISON_INCR_AMOUNT_COST, PRISON_INCR_MAX_AMOUNT, PRISONER_INCR_PROB
 from utils import pack_msg
 from core.msgpipe import publish_to_char
 from core.achievement import Achievement
 from core.task import Task
 from core.item import Item
+from preset.settings import MAX_PRISONERS_AMOUNT, PRISON_INCR_AMOUNT_COST, PRISON_INCR_MAX_AMOUNT, PRISONER_INCR_PROB, PRISONER_START_PROB
+
 
 import protomsg
 
@@ -62,18 +63,16 @@ class Prison(object):
                 break
             new_prisoner_id += 1
 
-        # FIXME 初始概率
-        prob = 10
         p = MongoEmbededPrisoner()
         p.oid = oid
-        p.prob = prob
+        p.prob = PRISONER_START_PROB
 
         self.p.prisoners[str(new_prisoner_id)] = p
         self.p.save()
 
         msg = protomsg.NewPrisonerNotify()
         p = msg.prisoner.add()
-        self._fill_up_prisoner_msg(p, new_prisoner_id, oid, prob)
+        self._fill_up_prisoner_msg(p, new_prisoner_id, oid, PRISONER_START_PROB)
 
         publish_to_char(self.char_id, pack_msg(msg))
 
