@@ -54,7 +54,7 @@ class StageAdmin(ImportExportModelAdmin):
 
 
 class StageDropAdmin(ImportExportModelAdmin):
-    list_display = ('id', 'drops')
+    list_display = ('id', 'equips', 'gems', 'stuffs')
     resource_class = StageDropResources
 
 
