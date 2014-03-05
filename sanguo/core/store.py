@@ -90,15 +90,16 @@ class Store(object):
         # 给东西
         item = Item(self.char_id)
         if this_goolds.item_tp == 1:
-            save_hero(self.char_id, this_goolds.item)
+            save_hero(self.char_id, [this_goolds.item] * amount)
         elif this_goolds.item_tp == 2:
-            item.equip_add(this_goolds.item)
+            for i in range(amount):
+                item.equip_add(this_goolds.item)
         elif this_goolds.item_tp == 3:
-            item.gem_add([(this_goolds.item, 1)])
+            item.gem_add([(this_goolds.item, amount)])
         elif this_goolds.item_tp == 4:
-            item.stuff_add([(this_goolds.item, 1)])
+            item.stuff_add([(this_goolds.item, amount)])
         else:
-            char.update(gold=this_goolds.item)
+            char.update(gold=this_goolds.item * amount)
 
         # 记录日志
         StoreBuyLog.objects.create(
