@@ -9,8 +9,7 @@ from apps.character.models import Character
 class CharacterAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'account_id', 'server_id', 'name', 'gold', 'sycee',
-        'level', 'exp', 'UpdateNeedsExp', 'official', 'off_exp', 'renown',
-        'score_day', 'score_week'
+        'level', 'exp', 'UpdateNeedsExp', 'official', 'off_exp',
     )
 
     ordering = ('-id', )

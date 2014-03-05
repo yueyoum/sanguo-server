@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-import logging
+
+from django.db import IntegrityError
 
 from apps.character.models import Character
 from core.exception import SanguoException
@@ -8,9 +9,7 @@ from protomsg import CreateCharacterResponse
 from utils import crypto, pack_msg
 from utils.decorate import message_response
 
-from core.character import Char
-
-logger = logging.getLogger('sanguo')
+from core.character import char_initialize
 
 
 @message_response("CreateCharacterResponse")
@@ -25,14 +24,12 @@ def create_character(request):
     if Character.objects.filter(account_id=account_id, server_id=server_id).exists():
         raise SanguoException(200, "Create Char: Account {0} already has a char in Server {1}".format(account_id, server_id))
 
-    if Character.objects.filter(server_id=server_id, name=req.name).exists():
-        raise SanguoException(201, "Create Char: Duplicated name in Server {0}".format(server_id))
 
-    char = Char(
-        account_id=account_id,
-        server_id=server_id,
-        name=req.name
-    )
+    try:
+        char = char_initialize(account_id, server_id, req.name)
+    except IntegrityError as e:
+        raise SanguoException(201, "Create Char. ERROR: {0}".format(str(e)))
+
 
     login_signal.send(
         sender=None,

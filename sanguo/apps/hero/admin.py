@@ -51,7 +51,7 @@ class MonsterAdmin(ImportExportModelAdmin):
     list_display = (
         'id', 'name', 'Avatar', 'Image',
         'level', 'attack', 'defense', 'hp', 'crit', 'dodge',
-        'skills'
+        'skills', 'default_skill', 'anger',
     )
 
     resource_class = MonsterResources

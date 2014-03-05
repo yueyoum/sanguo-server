@@ -1,7 +1,32 @@
+* 2014-03-05
+
+    in branch review
+    Fix. 修复在并发情况下可能会因为同服重名的情况而报错
+    在 preset.settings 中增加各种设定，并应用于逻辑中
+
+
 * 2014-03-04
 
     MongoEmbededMail 中 create_at 由以前的DateTimeField 改为 IntField.
     直接保存UTC时间戳
+
+    去掉Character Model中的 renown. 去掉此属性
+    去掉Character Model中的 score.  保存在redis的zset中
+
+    alter table char_ drop column renown;
+    alter table char_ drop column score_day;
+    alter table char_ drop column score_week;
+
+    去掉Account Model中 platform
+    alter table account drop column platform;
+
+    给 Monster 加上 default_skill 和 anger
+    alter table monster add column default_skill int(11) not null;
+    alter table monster add column anger int(11) not null;
+    update monster set default_skill = 0;
+    update monster set anger = 50;
+
+    添加新的错误代码1100： PVE等级限制
 
 
 * 2014-03-03

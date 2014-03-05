@@ -97,9 +97,10 @@ class Stage(models.Model):
 
 
 def _save_stage_cache(*args, **kwargs):
-    stages = Stage.objects.all()
+    stages = Stage.objects.all().select_related('battle')
     data = {s.id: s for s in stages}
     for _id, s in data.items():
+        s.level_limit = s.battle.level_limit
         open_condition = s.open_condition
         if not open_condition:
             continue
@@ -177,7 +178,7 @@ class EliteStage(models.Model):
 
     normal_exp = models.IntegerField("经验", default=0)
     normal_gold = models.IntegerField("金币", default=0)
-    normal_drop = models.CharField("掉落", max_length=255)
+    normal_drop = models.CharField("掉落", max_length=255, blank=True)
 
 
     def __unicode__(self):

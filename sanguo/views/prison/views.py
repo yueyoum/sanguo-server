@@ -10,7 +10,7 @@ from protomsg import PrisonerGetResponse
 @message_response("PrisonIncrAmountResponse")
 def incr_prisoners_amount(request):
     p = Prison(request._char_id)
-    p.incr_amount()
+    p.incr_max_prisoner_amount()
     return None
 
 

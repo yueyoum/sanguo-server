@@ -73,6 +73,13 @@ class Stage(object):
                 self.char_id, stage_id
             ))
 
+        char = Char(self.char_id)
+        char_level = char.cacheobj.level
+        if char_level < this_stage.level_limit:
+            raise SanguoException(1100, "PVE. Char {0} level little than level limit. {1} < {2}".format(
+                self.char_id, char_level, this_stage.level_limit
+            ))
+
         open_condition = this_stage.open_condition
         if open_condition and str(open_condition) not in self.stage.stages:
             raise InvalidOperate("PVE: Char {0} Try PVE in stage {1}. But Open Condition Check NOT passed. {2}".format(
