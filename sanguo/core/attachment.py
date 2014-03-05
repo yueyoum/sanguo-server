@@ -108,7 +108,7 @@ class Attachment(object):
             from core.stage import Hang
             h = Hang(self.char_id)
             att_msg = h.get_drop()
-        if prize_id == 4:
+        elif prize_id == 4:
             # 成就
             from core.achievement import Achievement
             ach = Achievement(self.char_id)
@@ -127,7 +127,7 @@ class Attachment(object):
             try:
                 attachment = self.attachment.attachments[str(prize_id)]
             except KeyError:
-                raise InvalidOperate("Attachment Get. Char {0} Try to get a NONE exists attachment {1}".format(prize_id))
+                raise InvalidOperate("Attachment Get. Char {0} Try to get a NONE exists attachment {1}".format(prize_id, param))
 
             heros = None
             if attachment.heros:

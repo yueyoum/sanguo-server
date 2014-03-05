@@ -40,6 +40,9 @@ class Task(object):
     def check(self):
         all_tasks = ModelTask.all()
         for t in self.task.doing:
+            if t in self.task.complete:
+                continue
+
             this_task = all_tasks[t]
             tp = this_task.tp
 
