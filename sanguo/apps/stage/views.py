@@ -39,9 +39,9 @@ def pve(request):
     # DEBUG END
 
     if battle_msg.self_win:
-        drop_exp, drop_gold, drop_stuffs = stage.save_drop(req.stage_id, first=stage.first, star=stage.first_star)
+        drop_exp, drop_gold, drop_equipment, drop_gems, drop_stuffs = stage.save_drop(req.stage_id, first=stage.first, star=stage.first_star)
     else:
-        drop_exp, drop_gold, drop_stuffs = 0, 0, []
+        drop_exp, drop_gold, drop_equipment, drop_gems, drop_stuffs = 0, 0, [], [],  []
 
     response = protomsg.PVEResponse()
     response.ret = 0
@@ -51,9 +51,19 @@ def pve(request):
     response.drop.gold = drop_gold
     response.drop.exp = drop_exp
     for _id, amount in drop_stuffs:
-        stuff = response.stuffs.add()
+        stuff = response.drop.stuffs.add()
         stuff.id = _id
         stuff.amount = amount
+    for _id, amount in drop_gems:
+        g = response.drop.gems.add()
+        g.id = _id
+        g.amount = amount
+    for _id, level, step in drop_equipment:
+        e = response.drop.equipments.add()
+        e.id = _id
+        e.level = level
+        e.step = step
+        e.amount = 1
 
     return pack_msg(response)
 

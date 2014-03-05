@@ -35,17 +35,52 @@ from preset.settings import TEAMBATTLE_INCR_COST
 
 def _parse_drops(all_drops, drop_id):
     if not drop_id:
-        return []
+        return [], [], []
+
     ids = drop_id.split(',')
-    res = []
+    equips = {}
+    gems = {}
+    stuffs = {}
+
+    def _parse(text):
+        if not text:
+            return {}
+
+        data = {}
+        for t in text.split(','):
+            _id, _prob = t.split(':')
+            _id = int(_id)
+            _prob = int(_prob)
+            data[_id] = data.get(_id, 0) + _prob
+        return data
+
     for _id in ids:
-        drop = all_drops[int(_id)].drops
-        for d in drop.split(','):
-            stuff_id, prob = d.split(':')
-            stuff_id = int(stuff_id)
-            prob = float(prob)
-            res.append((stuff_id, prob))
+        this_drop = all_drops[int(_id)]
+        drop_equip = _parse(this_drop.equips)
+        for k, v in drop_equip.iteritems():
+            equips[k] = equips.get(k, 0) + v
+
+        drop_gems = _parse(this_drop.gems)
+        for k, v in drop_gems.iteritems():
+            gems[k] = gems.get(k, 0) + v
+
+        drop_stuffs = _parse(this_drop.stuffs)
+        for k, v in drop_stuffs.iteritems():
+            stuffs[k] = stuffs.get(k, 0) + v
+
+    return equips.items(), gems.items(), stuffs.items()
+
+
+def _make(drops):
+    res = []
+    for _id, prob in drops:
+        a, b = divmod(prob, 100)
+        a = int(a)
+        if b >= random.uniform(0, 100):
+            a += 1
+        res.append((_id, a))
     return res
+
 
 
 
@@ -135,41 +170,60 @@ class Stage(object):
         """
         @param stage_id: stage id
         @type stage_id: int
-        @return : exp, gold, stuffs. (0, 0, [(id, amount), (id, amount)])
-        @rtype: (int, int, list)
+        @return : exp, gold, equipment, gems, stuffs. (0, 0, [], [], [(id, amount), (id, amount)])
+        @rtype: (int, int, list, list, list)
         """
         all_drops = StageDrop.all()
 
         this_stage = ModelStage.all()[stage_id]
         exp = this_stage.normal_exp
         gold = this_stage.normal_gold
-        stuffs = _parse_drops(all_drops, this_stage.normal_drop)
+        equipments, gems, stuffs = _parse_drops(all_drops, this_stage.normal_drop)
+
+        def _merge(base, addition):
+            base_dict = dict(base)
+            for a, b in addition:
+                base_dict[a] = base_dict.get(a, 0) + b
+
+            return base_dict.items()
 
         if first:
             exp += this_stage.first_exp
             gold += this_stage.first_gold
-            stuffs.extend(_parse_drops(all_drops, this_stage.first_drop))
+            f_equips, f_gems, f_stuffs = _parse_drops(all_drops, this_stage.first_drop)
+
+            equipments = _merge(equipments, f_equips)
+            gems = _merge(gems, f_gems)
+            stuffs = _merge(stuffs, f_stuffs)
 
         if star:
             exp += this_stage.star_exp
             gold += this_stage.star_gold
-            stuffs.extend(_parse_drops(all_drops, this_stage.star_drop))
+            s_equips, s_gems, s_stuffs = _parse_drops(all_drops, this_stage.star_drop)
 
-        drop_stuffs = {}
-        for _id, prob in stuffs:
-            if prob >= random.uniform(0, 100):
-                drop_stuffs[_id] = drop_stuffs.get(_id, 0) + 1
+            equipments = _merge(equipments, s_equips)
+            gems = _merge(gems, s_gems)
+            stuffs = _merge(stuffs, s_stuffs)
 
-        return exp, gold, drop_stuffs.items()
+        drop_equipments = _make(equipments)
+        drop_gems = _make(gems)
+        drop_stuffs = _make(stuffs)
+
+        return exp, gold, drop_equipments, drop_gems, drop_stuffs
 
 
     def save_drop(self, stage_id, first=False, star=False):
-        exp, gold, stuffs = self.get_drop(stage_id, first=first, star=star)
+        exp, gold, equipments, gems, stuffs = self.get_drop(stage_id, first=first, star=star)
+
+        transformed_equipments = []
+        for _id, amount in equipments:
+            for i in range(amount):
+                transformed_equipments.append((_id, 1, 1))
 
         attach = Attachment(self.char_id)
-        attach.save_to_char(exp=exp, gold=gold, stuffs=stuffs)
+        attach.save_to_char(exp=exp, gold=gold, equipments=transformed_equipments, gems=gems, stuffs=stuffs)
 
-        return exp, gold, stuffs
+        return exp, gold, transformed_equipments, gems, stuffs
 
 
 
@@ -310,19 +364,21 @@ class Hang(TimerCheckAbstractBase):
         drop_gold = stage.normal_gold * times
 
         all_drops = StageDrop.all()
-        drop_stuffs = _parse_drops(all_drops, stage.normal_drop)
-        for index, d in enumerate(drop_stuffs):
-            prob = d[1]
-            new_prob = times * prob * (1 + GAUSSIAN_TABLE[round(random.uniform(0, 1), 2)] * 0.08)
-            drop_stuffs[index][1] = new_prob
+        drop_equips, drop_gems, drop_stuffs = _parse_drops(all_drops, stage.normal_drop)
 
-        stuffs = []
-        for _id, prob in drop_stuffs:
-            a, b = divmod(prob, 100)
-            a = int(a)
-            if b >= random.uniform(0, 1):
-                a += 1
-            stuffs.append((_id, a))
+        def _gaussian(drops):
+            for index, d in enumerate(drops):
+                prob = d[1]
+                new_prob = times * prob * (1 + GAUSSIAN_TABLE[round(random.uniform(0, 1), 2)] * 0.08)
+                drops[index][1] = [d[0], new_prob]
+
+        _gaussian(drop_equips)
+        _gaussian(drop_gems)
+        _gaussian(drop_stuffs)
+
+        got_equips = _make(drop_equips)
+        got_gems = _make(drop_gems)
+        got_stuffs = _make(drop_stuffs)
 
         self.hang.delete()
         self.hang = None
@@ -331,15 +387,32 @@ class Hang(TimerCheckAbstractBase):
         c = Char(self.char_id)
         c.update(exp=drop_exp, gold=drop_gold)
         item = Item(self.char_id)
-        item.stuff_add(stuffs)
+        item.stuff_add(got_stuffs)
+        item.gem_add(got_gems)
+        for _id, _amount in got_equips:
+            for i in range(_amount):
+                item.equip_add(_id)
 
         msg = MsgAttachment()
         msg.gold = drop_gold
         msg.exp = drop_exp
-        for _id, _amount in stuffs:
+        for _id, _amount in got_stuffs:
             s = msg.stuffs.add()
             s.id = _id
             s.amount = _amount
+
+        for _id, _amount in got_gems:
+            g = msg.gems.add()
+            g.id = _id
+            g.amount = _amount
+
+        for _id, _amount in got_equips:
+            e = msg.equipments.add()
+            e.id = _id
+            e.level = 1
+            e.step = 1
+            e.amount = _amount
+
         return msg
 
     #
