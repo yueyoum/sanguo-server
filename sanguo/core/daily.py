@@ -39,6 +39,7 @@ class CheckIn(object):
         self.c.days += 1
 
         msg = CheckInResponse()
+        msg.ret = 0
         if self.c.days == MAX_DAYS:
             msg.reward.sycee = 100
             stuff = msg.reward.stuffs.add()

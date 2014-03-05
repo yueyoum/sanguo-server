@@ -27,9 +27,9 @@ def incr_time(request):
     tb.incr_time()
     return None
 
-@message_response("TeamBattleGetRewardResponse")
-def get_reward(request):
-    tb = TeamBattle(request._char_id)
-    tb.get_reward()
-    return None
-
+# @message_response("TeamBattleGetRewardResponse")
+# def get_reward(request):
+#     tb = TeamBattle(request._char_id)
+#     tb.get_reward()
+#     return None
+#

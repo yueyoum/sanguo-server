@@ -15,6 +15,7 @@ from core.achievement import Achievement
 from core.task import Task
 
 import protomsg
+from protomsg import Attachment as MsgAttachment
 
 from core.exception import InvalidOperate, SanguoException, SyceeNotEnough, StuffNotEnough
 from core.battle import PVE, ElitePVE
@@ -196,8 +197,6 @@ class Hang(TimerCheckAbstractBase):
         self.char_id = char_id
         try:
             self.hang = MongoHang.objects.get(id=self.char_id)
-            if self.hang.finished:
-                self.send_prize_notify()
         except DoesNotExist:
             self.hang = None
 
@@ -234,7 +233,6 @@ class Hang(TimerCheckAbstractBase):
             stage_id=stage_id,
             start=timezone.utc_timestamp(),
             finished=False,
-            # jobid=job.id,
             actual_hours=0,
             logs=[],
             plunder_gold=0,
@@ -271,7 +269,9 @@ class Hang(TimerCheckAbstractBase):
         counter.incr(actual_seconds)
 
         self.send_notify()
-        self.send_prize_notify()
+
+        attachment = Attachment(self.char_id)
+        attachment.save_to_prize(1)
 
 
     def plundered(self, who, win):
@@ -324,21 +324,31 @@ class Hang(TimerCheckAbstractBase):
                 a += 1
             stuffs.append((_id, a))
 
-        return drop_exp, drop_gold, stuffs
+        self.hang.delete()
+        self.hang = None
+        self.send_notify()
 
+        c = Char(self.char_id)
+        c.update(exp=drop_exp, gold=drop_gold)
+        item = Item(self.char_id)
+        item.stuff_add(stuffs)
 
-    def save_drop(self):
-        exp, gold, stuffs = self.get_drop()
-        a = Attachment(self.char_id)
-        a.save_to_char(exp=exp, gold=gold, stuffs=stuffs)
-        return exp, gold, stuffs
+        msg = MsgAttachment()
+        msg.gold = drop_gold
+        msg.exp = drop_exp
+        for _id, _amount in stuffs:
+            s = msg.stuffs.add()
+            s.id = _id
+            s.amount = _amount
+        return msg
 
-
-    def send_prize_notify(self):
-        msg = protomsg.PrizeNotify()
-        msg.prize_ids.append(1)
-        publish_to_char(self.char_id, pack_msg(msg))
-
+    #
+    # def save_drop(self):
+    #     exp, gold, stuffs = self.get_drop()
+    #     a = Attachment(self.char_id)
+    #     a.save_to_char(exp=exp, gold=gold, stuffs=stuffs)
+    #     return exp, gold, stuffs
+    #
 
     def send_notify(self):
         msg = protomsg.HangNotify()
@@ -473,6 +483,9 @@ class TeamBattle(TimerCheckAbstractBase):
             self.mongo_tb.save()
             self.send_notify()
 
+            attachment = Attachment(self.char_id)
+            attachment.save_to_prize(7)
+
     def enter(self, _id):
         if self.mongo_tb:
             raise InvalidOperate("TeamBattle Enter. Char {0} Try to enter battle {1}. But last battle NOT complete".format(
@@ -593,6 +606,12 @@ class TeamBattle(TimerCheckAbstractBase):
         self.mongo_tb.delete()
         self.mongo_tb = None
         self.send_notify()
+
+        msg = MsgAttachment()
+        msg.gold = reward_gold
+        msg.heros.append(reward_hero_id)
+        return msg
+
 
     def send_notify(self):
         msg = protomsg.TeamBattleNotify()

@@ -9,6 +9,7 @@ from core.mongoscheme import MongoTask
 from apps.task.models import Task as ModelTask
 
 from core.character import Char
+from core.attachment import Attachment
 
 from core.msgpipe import publish_to_char
 from core.exception import InvalidOperate
@@ -16,6 +17,7 @@ from utils import pack_msg
 
 from protomsg import Task as MsgTask
 from protomsg import TaskNotify
+from protomsg import Attachment as MsgAttachment
 
 class Task(object):
     def __init__(self, char_id):
@@ -38,6 +40,9 @@ class Task(object):
     def check(self):
         all_tasks = ModelTask.all()
         for t in self.task.doing:
+            if t in self.task.complete:
+                continue
+
             this_task = all_tasks[t]
             tp = this_task.tp
 
@@ -45,6 +50,9 @@ class Task(object):
                 # 此任务完成
                 if t not in self.task.finished:
                     self.task.finished.append(t)
+
+                attachment = Attachment(self.char_id)
+                attachment.save_to_prize(5)
 
         self.task.save()
 
@@ -63,6 +71,10 @@ class Task(object):
                 # 此任务完成
                 if t not in self.task.finished:
                     self.task.finished.append(t)
+
+                attachment = Attachment(self.char_id)
+                attachment.save_to_prize(5)
+
 
         self.task.save()
         self.send_notify()
@@ -100,6 +112,11 @@ class Task(object):
         self.task.complete.append(_id)
         self.task.save()
         self.send_notify()
+
+        msg = MsgAttachment()
+        msg.gold = gold
+        msg.sycee = sycee
+        return msg
 
 
 
