@@ -5,9 +5,6 @@ __date__ = '2/19/14'
 
 from mongoengine import DoesNotExist
 
-from core.character import Char
-from core.hero import save_hero
-from core.item import Item
 from core.exception import InvalidOperate
 
 from core.mongoscheme import MongoAttachment, MongoEmbededAttachment, MongoEmbededAttachmentEquipment
@@ -44,6 +41,11 @@ class Attachment(object):
         )
 
     def save_to_char(self, gold=0, sycee=0, exp=0, official_exp=0, heros=None, equipments=None, gems=None, stuffs=None):
+        from core.character import Char
+        from core.hero import save_hero
+        from core.item import Item
+
+
         char = Char(self.char_id)
         char.update(gold=gold, sycee=sycee, exp=exp)
 
