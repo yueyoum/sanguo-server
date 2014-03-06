@@ -174,6 +174,8 @@ class Hero(FightPowerMixin):
 
 
     def step_up_needs_soul_amount(self):
+        if self.step >= HERO_MAX_STEP:
+            return 0
         return HERO_STEP_UP_COST_SOUL_AMOUNT[self.step]
 
     def step_up(self):
