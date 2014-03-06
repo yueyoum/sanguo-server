@@ -100,42 +100,65 @@ class Equipment(MessageEquipmentMixin):
     #         return e
 
     @equip_updated
-    def level_up(self):
-        if self.level >= EQUIP_MAX_LEVEL:
-            raise InvalidOperate("Equipment Level Up. Char {0} Try Level Up Equipment {1}. But Equipment already level {2}".format(
-                self.char_id, self.equip_id, self.level
-            ))
+    def level_up(self, quick=False):
+        def _up():
+            if self.level >= EQUIP_MAX_LEVEL:
+                raise InvalidOperate("Equipment Level Up. Char {0} Try Level Up Equipment {1}. But Equipment already level {2}".format(
+                    self.char_id, self.equip_id, self.level
+                ))
+
+            if self.level >= char_level:
+                raise SanguoException(501, "Equipment Level Up. Char {0} Try level up equipment {1}. But equipment level {2} can't great than char's level {3}".format(
+                    self.char_id, self.equip_id, self.level, char_level
+                ))
+
+            gold_needs = self.level_up_need_gold()
+            if cache_char.gold < gold_needs:
+                raise GoldNotEnough("Equipment Level Up. Char {0} Gold {1} Not Enough. Needs {2}".format(
+                    self.char_id, cache_char.gold, gold_needs
+                ))
+
+            # char.update(gold=-gold_needs)
+            cache_char.gold -= gold_needs
+
+            prob = random.randint(1, 100)
+            for p, l in LEVEL_UP_PROBS:
+                if prob <= p:
+                    actual_level_up = l
+                    break
+
+            self.mongo_item.equipments[str(self.equip_id)].level += actual_level_up
+            self.level += actual_level_up
+            return gold_needs
+
 
         char = Char(self.char_id)
         cache_char = char.cacheobj
         char_level = cache_char.level
-        if self.level >= char_level:
-            raise SanguoException(501, "Equipment Level Up. Char {0} Try level up equipment {1}. But equipment level {2} can't great than char's level {3}".format(
-                self.char_id, self.equip_id, self.level, char_level
-            ))
-
-        gold_needs = self.level_up_need_gold()
-        if cache_char.gold < gold_needs:
-            raise GoldNotEnough("Equipment Level Up. Char {0} Gold {1} Not Enough. Needs {2}".format(
-                self.char_id, cache_char.gold, gold_needs
-            ))
-
-        char.update(gold=-gold_needs)
-
         LEVEL_UP_PROBS = (
             (30, 1), (80, 2), (100, 3)
         )
-        prob = random.randint(1, 100)
-        for p, l in LEVEL_UP_PROBS:
-            if prob <= p:
-                actual_level_up = l
-                break
 
-        self.mongo_item.equipments[str(self.equip_id)].level += actual_level_up
+        all_gold_needs = 0
+
+        equip_msgs = []
+        while True:
+            try:
+                all_gold_needs = _up()
+            except SanguoException:
+                if quick:
+                    break
+                else:
+                    raise
+            else:
+                msg = protomsg.Equip()
+                self._msg_equip(msg, self.equip_id, self.mongo_item.equipments[str(self.equip_id)], self)
+                equip_msgs.append(msg)
+
+        char.update(gold=-all_gold_needs)
         self.mongo_item.save()
-        self.level += actual_level_up
+        return equip_msgs
 
-        return actual_level_up
 
 
     @equip_updated
@@ -361,19 +384,7 @@ class Item(MessageEquipmentMixin):
             ))
 
         e = Equipment(self.char_id, _id, self.item)
-        level_ups = []
-        if quick:
-            while True:
-                try:
-                    level_up = e.level_up()
-                    level_ups.append(level_up)
-                except SanguoException:
-                    break
-        else:
-            level_up = e.level_up()
-            level_ups.append(level_up)
-
-        return level_ups
+        return e.level_up(quick=quick)
 
 
     def equip_step_up(self, equip_id):

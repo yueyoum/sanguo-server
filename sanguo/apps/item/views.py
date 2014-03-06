@@ -12,12 +12,13 @@ def strengthen_equip(request):
     req = request._proto
 
     item = Item(request._char_id)
-    level_ups = item.equip_level_up(req.id, req.quick)
+    equip_msgs = item.equip_level_up(req.id, req.quick)
 
     response = StrengthEquipResponse()
     response.ret = 0
-    response.id = req.id
-    response.level_up.extend(level_ups)
+    for m in equip_msgs:
+        equip_msg = response.equips.add()
+        equip_msg.MergeFrom(m)
     return pack_msg(response)
 
 

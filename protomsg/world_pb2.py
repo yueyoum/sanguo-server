@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='world.proto',
   package='Sanguo.protocol.world',
-  serialized_pb='\n\x0bworld.proto\x12\x15Sanguo.protocol.world\"\xad\x01\n\x06Server\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12:\n\x06status\x18\x03 \x02(\x0e\x32*.Sanguo.protocol.world.Server.ServerStatus\x12\x11\n\thave_char\x18\x04 \x02(\x08\":\n\x0cServerStatus\x12\x08\n\x04GOOD\x10\x01\x12\x08\n\x04\x42USY\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\x12\x0c\n\x08MAINTAIN\x10\x04\"\x1e\n\x0bSyncRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"C\n\x0cSyncResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x15\n\rutc_timestamp\x18\x03 \x02(\x03\"/\n\x0f\x43ommandResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"7\n\x13VersionCheckRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07version\x18\x02 \x02(\x05\"4\n\x14VersionCheckResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xa8\x03\n\nAttachment\x12\x0c\n\x04gold\x18\x01 \x01(\x05\x12\r\n\x05sycee\x18\x02 \x01(\x05\x12\x0b\n\x03\x65xp\x18\x03 \x01(\x05\x12\x14\n\x0cofficial_exp\x18\x04 \x01(\x05\x12\x0e\n\x06renown\x18\x05 \x01(\x05\x12\r\n\x05heros\x18\x06 \x03(\x05\x12?\n\nequipments\x18\x07 \x03(\x0b\x32+.Sanguo.protocol.world.Attachment.Equipment\x12\x33\n\x04gems\x18\x08 \x03(\x0b\x32%.Sanguo.protocol.world.Attachment.Gem\x12\x37\n\x06stuffs\x18\t \x03(\x0b\x32\'.Sanguo.protocol.world.Attachment.Stuff\x1a\x44\n\tEquipment\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05level\x18\x02 \x02(\x05\x12\x0c\n\x04step\x18\x03 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x04 \x02(\x05\x1a!\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\x1a#\n\x05Stuff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05')
+  serialized_pb='\n\x0bworld.proto\x12\x15Sanguo.protocol.world\"\xad\x01\n\x06Server\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12:\n\x06status\x18\x03 \x02(\x0e\x32*.Sanguo.protocol.world.Server.ServerStatus\x12\x11\n\thave_char\x18\x04 \x02(\x08\":\n\x0cServerStatus\x12\x08\n\x04GOOD\x10\x01\x12\x08\n\x04\x42USY\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\x12\x0c\n\x08MAINTAIN\x10\x04\"\x1e\n\x0bSyncRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"C\n\x0cSyncResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x15\n\rutc_timestamp\x18\x03 \x02(\x03\"/\n\x0f\x43ommandResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"7\n\x13VersionCheckRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07version\x18\x02 \x02(\x05\"4\n\x14VersionCheckResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\x98\x03\n\nAttachment\x12\x0c\n\x04gold\x18\x01 \x01(\x05\x12\r\n\x05sycee\x18\x02 \x01(\x05\x12\x0b\n\x03\x65xp\x18\x03 \x01(\x05\x12\x14\n\x0cofficial_exp\x18\x04 \x01(\x05\x12\r\n\x05heros\x18\x05 \x03(\x05\x12?\n\nequipments\x18\x06 \x03(\x0b\x32+.Sanguo.protocol.world.Attachment.Equipment\x12\x33\n\x04gems\x18\x07 \x03(\x0b\x32%.Sanguo.protocol.world.Attachment.Gem\x12\x37\n\x06stuffs\x18\x08 \x03(\x0b\x32\'.Sanguo.protocol.world.Attachment.Stuff\x1a\x44\n\tEquipment\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05level\x18\x02 \x02(\x05\x12\x0c\n\x04step\x18\x03 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x04 \x02(\x05\x1a!\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\x1a#\n\x05Stuff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05')
 
 
 
@@ -316,8 +316,8 @@ _ATTACHMENT_EQUIPMENT = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=760,
-  serialized_end=828,
+  serialized_start=744,
+  serialized_end=812,
 )
 
 _ATTACHMENT_GEM = _descriptor.Descriptor(
@@ -350,8 +350,8 @@ _ATTACHMENT_GEM = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=830,
-  serialized_end=863,
+  serialized_start=814,
+  serialized_end=847,
 )
 
 _ATTACHMENT_STUFF = _descriptor.Descriptor(
@@ -384,8 +384,8 @@ _ATTACHMENT_STUFF = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=865,
-  serialized_end=900,
+  serialized_start=849,
+  serialized_end=884,
 )
 
 _ATTACHMENT = _descriptor.Descriptor(
@@ -424,36 +424,29 @@ _ATTACHMENT = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='renown', full_name='Sanguo.protocol.world.Attachment.renown', index=4,
-      number=5, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='heros', full_name='Sanguo.protocol.world.Attachment.heros', index=5,
-      number=6, type=5, cpp_type=1, label=3,
+      name='heros', full_name='Sanguo.protocol.world.Attachment.heros', index=4,
+      number=5, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='equipments', full_name='Sanguo.protocol.world.Attachment.equipments', index=6,
+      name='equipments', full_name='Sanguo.protocol.world.Attachment.equipments', index=5,
+      number=6, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='gems', full_name='Sanguo.protocol.world.Attachment.gems', index=6,
       number=7, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='gems', full_name='Sanguo.protocol.world.Attachment.gems', index=7,
+      name='stuffs', full_name='Sanguo.protocol.world.Attachment.stuffs', index=7,
       number=8, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='stuffs', full_name='Sanguo.protocol.world.Attachment.stuffs', index=8,
-      number=9, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -468,7 +461,7 @@ _ATTACHMENT = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=476,
-  serialized_end=900,
+  serialized_end=884,
 )
 
 _SERVER.fields_by_name['status'].enum_type = _SERVER_SERVERSTATUS
