@@ -73,7 +73,9 @@ def set_socket(request):
             e_oid = item.item.equipments[str(e)].oid
             this_e = all_equipments[e_oid]
             if this_e.tp != tp:
-                raise SanguoException(402)
+                raise SanguoException(402, "Socket Set. Equip type test Failed. Char {0}. Equip id: {1}, oid {2}, tp {3}. Expect tp: {4}".format(
+                    char_id, e, e_oid, this_e.tp, tp
+                ))
 
     _equip_test(1, req.socket.weapon_id)
     _equip_test(2, req.socket.armor_id)
