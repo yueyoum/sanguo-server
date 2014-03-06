@@ -516,7 +516,7 @@ class EliteStage(object):
 
             msg = protomsg.UpdateEliteStageNotify()
             msg.stage.id = _id
-            msg.stage.current_time = self.stage.elites[str_id]
+            msg.stage.current_times = self.stage.elites[str_id]
             publish_to_char(self.char_id, pack_msg(msg))
 
         return battle_msg
