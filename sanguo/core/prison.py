@@ -2,18 +2,21 @@
 import random
 
 from mongoengine import DoesNotExist
+
+from apps.hero.models import Hero as ModelHero
 from core.mongoscheme import MongoPrison, MongoEmbededPrisoner
 from core.exception import SyceeNotEnough
 from core.character import Char
 from core.exception import InvalidOperate, StuffNotEnough
 from core.hero import save_hero
-from utils import pack_msg
 from core.msgpipe import publish_to_char
 from core.achievement import Achievement
 from core.task import Task
 from core.item import Item
-from preset.settings import MAX_PRISONERS_AMOUNT, PRISON_INCR_AMOUNT_COST, PRISON_INCR_MAX_AMOUNT, PRISONER_INCR_PROB, PRISONER_START_PROB
 
+from utils import pack_msg
+
+from preset.settings import MAX_PRISONERS_AMOUNT, PRISON_INCR_AMOUNT_COST, PRISON_INCR_MAX_AMOUNT, PRISONER_INCR_PROB, PRISONER_START_PROB
 
 import protomsg
 
@@ -34,6 +37,9 @@ class Prison(object):
     def prisoner_full(self):
         return len(self.p.prisoners) >= self.max_prisoner_amount
 
+    def incr_max_prisoner_amount_cost_sycee(self):
+        return PRISON_INCR_AMOUNT_COST[self.max_prisoner_amount]
+
     def incr_max_prisoner_amount(self):
         if PRISON_INCR_MAX_AMOUNT:
             if self.p.amount >= PRISON_INCR_MAX_AMOUNT:
@@ -41,11 +47,12 @@ class Prison(object):
                     self.char_id, self.p.amount, PRISON_INCR_MAX_AMOUNT
                 ))
 
+        cost = self.incr_max_prisoner_amount_cost_sycee()
         char = Char(self.char_id)
-        if char.cacheobj.sycee < PRISON_INCR_AMOUNT_COST:
+        if char.cacheobj.sycee < cost:
             raise SyceeNotEnough("Prison Incr Prisoners Amount. Char {0} sycee NOT enough".format(self.char_id))
 
-        char.update(sycee=-PRISON_INCR_AMOUNT_COST)
+        char.update(sycee=-cost)
         self.p.amount += 1
         self.p.save()
         self.send_notify()
@@ -88,7 +95,10 @@ class Prison(object):
 
         item.stuff_remove(22, 1)
 
-        self.p.prisoners[str_id].prob += PRISONER_INCR_PROB
+        prisoner_oid = self.p.prisoners[str_id].oid
+        prisoner_quality = ModelHero.all()[prisoner_oid].quality
+
+        self.p.prisoners[str_id].prob += PRISONER_INCR_PROB[prisoner_quality]
         if self.p.prisoners[str_id].prob > 100:
             self.p.prisoners[str_id].prob = 100
         self.p.save()
@@ -142,7 +152,7 @@ class Prison(object):
     def send_notify(self):
         msg = protomsg.PrisonNotify()
         msg.max_prisoners_amount = self.max_prisoner_amount
-        msg.incr_amount_cost = PRISON_INCR_AMOUNT_COST
+        msg.incr_amount_cost = self.incr_max_prisoner_amount_cost_sycee()
         publish_to_char(self.char_id, pack_msg(msg))
 
     def send_prisoners_notify(self):

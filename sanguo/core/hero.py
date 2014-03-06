@@ -173,6 +173,9 @@ class Hero(FightPowerMixin):
         return h
 
 
+    def step_up_needs_soul_amount(self):
+        return HERO_STEP_UP_COST_SOUL_AMOUNT[self.step]
+
     def step_up(self):
         # 升阶
         if self.step >= HERO_MAX_STEP:
@@ -180,9 +183,11 @@ class Hero(FightPowerMixin):
                 self.char_id, self.id, HERO_MAX_STEP
             ))
 
+        soul_needs = self.step_up_needs_soul_amount()
+
         hs = HeroSoul(self.char_id)
         this_hero = ModelHero.all()[self.oid]
-        if not hs.has_soul(this_hero.id, HERO_STEP_UP_COST_SOUL_AMOUNT):
+        if not hs.has_soul(this_hero.id, soul_needs):
             raise InvalidOperate("Hero Step Up: Char {0} Try to up Hero {1}. But hero soul not enough".format(self.char_id, self.id))
 
 
@@ -193,7 +198,7 @@ class Hero(FightPowerMixin):
             raise GoldNotEnough("Hero Step Up. Char {0} try to up hero {1}. But gold not enough".format(self.char_id, self.id))
 
         # 检查完毕，开始处理
-        hs.remove_soul([(this_hero.id, HERO_STEP_UP_COST_SOUL_AMOUNT)])
+        hs.remove_soul([(this_hero.id, soul_needs)])
         c.update(gold=-1000)
 
         self.hero.step += 1

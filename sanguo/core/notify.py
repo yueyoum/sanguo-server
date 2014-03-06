@@ -36,8 +36,7 @@ def hero_notify(char_id, objs, message_name="HeroNotify"):
         g.cirt = int(obj.crit)
 
         g.step = obj.step
-        # FIXME
-        g.step_cost = 1
+        g.step_cost = obj.step_up_needs_soul_amount()
 
     publish_to_char(char_id, pack_msg(data))
 
