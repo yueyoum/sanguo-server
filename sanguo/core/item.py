@@ -28,7 +28,8 @@ from utils import cache
 
 import protomsg
 
-EQUIP_MAX_LEVEL = 99
+from preset.settings import EQUIP_MAX_LEVEL, EQUIP_STEP_UP_COST_GOLD
+
 
 
 #
@@ -156,20 +157,16 @@ class Equipment(MessageEquipmentMixin):
                     self.char_id, self.equip_id, _id
                 ))
 
-        # for _id, _amount in stuff_needs:
-        #     self.mongo_item.stuffs[str(_id)] -= _amount
-        #     if self.mongo_item.stuffs[str(_id)] == 0:
-        #         self.mongo_item.stuffs.pop(str(_id))
         # 在外面使用Item类的 stuff_remove 方法
 
         char = Char(self.char_id)
         cache_char = char.cacheobj
-        if cache_char.gold < 10000:
+        if cache_char.gold < EQUIP_STEP_UP_COST_GOLD:
             raise GoldNotEnough("Equipment Step Up: Char {0} Try to step up equipent {1}. But Gold NOT enough".format(
                 self.char_id, self.equip_id
             ))
 
-        char.update(gold=-10000)
+        char.update(gold=-EQUIP_STEP_UP_COST_GOLD)
 
         self.oid = to
         all_equips = ModelEquipment.all()
@@ -380,7 +377,6 @@ class Item(MessageEquipmentMixin):
 
 
     def equip_step_up(self, equip_id):
-        # TODO check stuffs
         if not self.has_equip(equip_id):
             raise InvalidOperate("Equipment Step Up: Char {0} Try to Step up a NONE exist equipmet: {1}".format(
                 self.char_id, equip_id

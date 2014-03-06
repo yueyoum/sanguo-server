@@ -48,24 +48,21 @@ class Equipment(models.Model):
         verbose_name_plural = "装备"
 
 
-def _set_equip_cache():
+def _set_equip_cache(*args, **kwargs):
     equips = Equipment.objects.all()
     data = {e.id: e for e in equips}
     cache.set('equip', data, hours=None)
     return data
 
 
-def _update_equip_cache(*args, **kwargs):
-    _set_equip_cache()
-
 post_save.connect(
-    _update_equip_cache,
+    _set_equip_cache,
     sender=Equipment,
     dispatch_uid='apps.item.Equipment.post_save'
 )
 
 post_delete.connect(
-    _update_equip_cache,
+    _set_equip_cache,
     sender=Equipment,
     dispatch_uid='apps.item.Equipment.post_save'
 )
@@ -103,23 +100,21 @@ class Gem(models.Model):
         verbose_name_plural = "宝石"
 
 
-def _set_gem_cache():
+def _set_gem_cache(*args, **kwargs):
     gems = Gem.objects.all()
     data = {g.id: g for g in gems}
     cache.set('gem', data, hours=None)
     return data
 
-def _update_gem_cache(*args, **kwargs):
-    _set_gem_cache()
 
 post_save.connect(
-    _update_gem_cache,
+    _set_gem_cache,
     sender=Gem,
     dispatch_uid='apps.item.Gem.post_save'
 )
 
 post_delete.connect(
-    _update_gem_cache,
+    _set_gem_cache,
     sender=Gem,
     dispatch_uid='apps.item.Gem.post_delete'
 )

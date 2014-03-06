@@ -5,7 +5,7 @@ from django.utils import timezone
 
 
 class Account(models.Model):
-    email = models.CharField("EMAIL", max_length=64, blank=True, db_index=True)
+    email = models.CharField("EMAIL", max_length=64, blank=True, db_index=True, editable=False)
     passwd = models.CharField("密码", max_length=40, blank=True)
     device_token = models.CharField("设备码", max_length=40, blank=True, db_index=True)
 
@@ -14,9 +14,6 @@ class Account(models.Model):
     last_server_id = models.IntegerField("最后服务器ID", default=0)
     all_server_ids = models.CharField("登录过的所有服务器ID", default='', max_length=255)
     login_times = models.PositiveIntegerField("登录次数")
-
-    # TODO 登录平台
-    platform = models.CharField("登录平台", max_length=32, blank=True)
 
     active = models.BooleanField("激活", default=True)
 
@@ -34,17 +31,11 @@ class Account(models.Model):
         else:
             self.login_times += 1
 
-        if not self.platform:
-            self.platform = 'unknown'
-
-        self.platform = self.platform[:32]
-
         if len(self.all_server_ids) < 253:
             all_server_ids = self.all_server_ids.split(',')
-            if str(self.last_server_id) not in all_server_ids:
+            if self.last_server_id and str(self.last_server_id) not in all_server_ids:
                 all_server_ids.append(str(self.last_server_id))
                 self.all_server_ids = ','.join(all_server_ids)
-
 
         super(Account, self).save(*args, **kwargs)
 

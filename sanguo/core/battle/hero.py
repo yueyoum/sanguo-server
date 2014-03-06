@@ -472,12 +472,12 @@ class BattleMonster(InBattleHero):
         self.crit = info.crit
         self.dodge = 0
 
-        self.anger = 50
+        self.anger = info.anger
 
         self.skills = [int(i) for i in  info.skills.split(',')]
         self.level = info.level
 
-        self.default_skill = 0
+        self.default_skill = info.default_skill
 
         super(BattleMonster, self).__init__()
 

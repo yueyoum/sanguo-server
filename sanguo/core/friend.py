@@ -41,8 +41,7 @@ class Friend(object):
 
     @property
     def max_amount(self):
-        # FIXME
-        vip = 0
+        # FIXME vip
         return MAX_FRIENDS_AMOUNT
 
     @property

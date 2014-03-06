@@ -11,7 +11,7 @@ from protomsg import RegisterResponse, StartGameResponse
 from utils import crypto, pack_msg
 from utils.decorate import message_response
 
-logger = logging.getLogger('sanguo')
+# logger = logging.getLogger('sanguo')
 
 
 def create_new_user(email='', password='', device_token=''):
@@ -52,7 +52,7 @@ def register(request):
     try:
         user = Account.objects.get(device_token=req.device_token)
     except Account.DoesNotExist:
-        logger.debug("Register: Create New User")
+        # logger.debug("Register: Create New User")
         user = create_new_user(
             email=req.email,
             password=req.password,
@@ -61,16 +61,16 @@ def register(request):
     else:
         # 这次注册相当于将device_token和帐号绑定。
         # 删除device_token的记录，等下次再用device_token登录的时候，会新建用户
-        logger.debug("Register: Replace device token with email account")
+        # logger.debug("Register: Replace device token with email account")
         user.email = req.email
         user.passwd = req.password
         user.device_token = ''
         user.save()
 
-    register_signal.send(
-        sender=None,
-        account_id=user.id
-    )
+    # register_signal.send(
+    #     sender=None,
+    #     account_id=user.id
+    # )
 
     response = RegisterResponse()
     response.ret = 0
@@ -97,12 +97,12 @@ def login(request):
         try:
             user = Account.objects.get(device_token=req.anonymous.device_token)
         except Account.DoesNotExist:
-            logger.debug("Login: With Anonymous. New User, Create New User")
+            # logger.debug("Login: With Anonymous. New User, Create New User")
             user = create_new_user(device_token=req.anonymous.device_token)
             need_create_new_char = True
     else:
         if not req.regular.email or not req.regular.password:
-            raise BadMessage()
+            raise BadMessage("Login. Bad Message. No Email or Password")
         try:
             user = Account.objects.get(email=req.regular.email)
             if user.passwd != req.regular.password:

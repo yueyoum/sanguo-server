@@ -141,25 +141,21 @@ class Hero(models.Model):
         verbose_name_plural = "武将"
 
 
-def _save_cache_hero():
+def _save_cache_hero(*args, **kwargs):
     heros = Hero.objects.all()
     data = {h.id: h for h in heros}
     cache.set('hero', data, hours=None)
     return data
 
 
-def _update_hero_cache(*args, **kwargs):
-    _save_cache_hero()
-
-
 post_save.connect(
-    _update_hero_cache,
+    _save_cache_hero,
     sender=Hero,
     dispatch_uid='apps.hero.Hero.post_save'
 )
 
 post_delete.connect(
-    _update_hero_cache,
+    _save_cache_hero,
     sender=Hero,
     dispatch_uid='apps.hero.Hero.post_delete'
 )
@@ -179,6 +175,9 @@ class Monster(models.Model):
     dodge = models.IntegerField("闪避", default=0)
 
     skills = models.CharField("技能", blank=True, max_length=255)
+    default_skill = models.IntegerField("默认技能", default=0)
+
+    anger = models.IntegerField("怒气", default=50)
 
     def __unicode__(self):
         return u'<Monster: %s>' % self.name
@@ -201,24 +200,21 @@ class Monster(models.Model):
         verbose_name_plural = "怪物"
 
 
-def _save_cache_monster():
+def _save_cache_monster(*args, **kwargs):
     monsters = Monster.objects.all()
     data = {m.id: m for m in monsters}
     cache.set('monster', data, hours=None)
     return data
 
-def _update_monster_cache(*args, **kwargs):
-    _save_cache_monster()
-
 
 post_save.connect(
-    _update_monster_cache,
+    _save_cache_monster,
     sender=Monster,
     dispatch_uid='apps.hero.Monster.post_save'
 )
 
 post_delete.connect(
-    _update_monster_cache,
+    _save_cache_monster,
     sender=Monster,
     dispatch_uid='apps.hero.Monster.post_delete'
 )
