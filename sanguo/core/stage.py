@@ -388,6 +388,9 @@ class Hang(TimerCheckAbstractBase):
         got_gems = _make(drop_gems)
         got_stuffs = _make(drop_stuffs)
 
+        print "HANG, drop"
+        print drop_exp, drop_gold, got_equips, got_gems, got_stuffs
+
         self.hang.delete()
         self.hang = None
         self.send_notify()
