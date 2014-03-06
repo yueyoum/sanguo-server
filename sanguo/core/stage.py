@@ -71,12 +71,13 @@ def _parse_drops(all_drops, drop_id):
     return equips.items(), gems.items(), stuffs.items()
 
 
+DROP_PROB_BASE = 100000
 def _make(drops):
     res = []
     for _id, prob in drops:
-        a, b = divmod(prob, 100)
+        a, b = divmod(prob, DROP_PROB_BASE)
         a = int(a)
-        if b >= random.uniform(0, 100):
+        if b >= random.randint(0, DROP_PROB_BASE):
             a += 1
         res.append((_id, a))
     return res
@@ -504,13 +505,13 @@ class EliteStage(object):
             raise InvalidOperate("EliteStage Battle. Char {0} try to battle elite stage {1}. But NOT opened".format(self.char_id, _id))
 
         try:
-            this_stage = ModelEliteStage.all()[_id]
+            self.this_stage = ModelEliteStage.all()[_id]
         except KeyError:
             raise InvalidOperate("EliteStage Battle. Char {0} try to battle a NONE exists elite stage {1}".format(self.char_id, _id))
 
-        if times >= this_stage.times:
+        if times >= self.this_stage.times:
             raise InvalidOperate("EliteStage Battle. Char {0}. already times {1}. condition times {2}".format(
-                self.char_id, times, this_stage.times
+                self.char_id, times, self.this_stage.times
             ))
 
         battle_msg = protomsg.Battle()
@@ -529,8 +530,39 @@ class EliteStage(object):
         return battle_msg
 
 
-    def get_drop(self):
-        pass
+    def get_drop(self, _id=None):
+        if _id:
+            this_stage = ModelEliteStage.all()[_id]
+        else:
+            this_stage = self.this_stage
+
+        drop_gold = this_stage.normal_gold
+        drop_exp = this_stage.normal_exp
+
+        all_drops = StageDrop.all()
+        drop_equips, drop_gems, drop_stuffs = _parse_drops(all_drops, this_stage.normal_drop)
+
+        drop_equips = _make(drop_equips)
+        drop_gems = _make(drop_gems)
+        drop_stuffs = _make(drop_stuffs)
+
+        return drop_exp, drop_gold, drop_equips, drop_gems, drop_stuffs
+
+
+    def save_drop(self, _id=None):
+        drop_exp, drop_gold, drop_equips, drop_gems, drop_stuffs = self.get_drop(_id=_id)
+
+        transformed_equipments = []
+        for _id, amount in drop_equips:
+            for i in range(amount):
+                transformed_equipments.append((_id, 1, 1))
+
+        attach = Attachment(self.char_id)
+        attach.save_to_char(exp=drop_exp, gold=drop_gold, equipments=transformed_equipments, gems=drop_gems, stuffs=drop_stuffs)
+
+        return drop_exp, drop_gold, transformed_equipments, drop_gems, drop_stuffs
+
+
 
     def send_notify(self):
         msg = protomsg.EliteStageNotify()
