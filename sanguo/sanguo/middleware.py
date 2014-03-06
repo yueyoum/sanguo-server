@@ -90,8 +90,10 @@ class UnpackAndVerifyData(object):
                     print "CHAR ID =", request._char_id
 
         timercheck.check(request._char_id)
-        ap = ActivePlayers(request._server_id)
-        ap.set(request._char_id)
+        if request._server_id:
+            ap = ActivePlayers(request._server_id)
+            if request._char_id:
+                ap.set(request._char_id)
 
 
 _BIND = set()
