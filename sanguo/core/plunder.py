@@ -52,6 +52,9 @@ class Plunder(object):
 
             c = random.choice(choosing_id_list)
             choosing_id_list.remove(c)
+            if c[0] == self.char_id:
+                continue
+
             if c[0] not in ids:
                 ids.append(c[0])
 
@@ -88,7 +91,6 @@ class Plunder(object):
             if char_level == 0:
                 break
 
-        res = []
         for i in robot_ids:
             char = Char(i)
             res.append((i, char.cacheobj.name, min_gold, char.power, True))
