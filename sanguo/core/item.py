@@ -142,18 +142,23 @@ class Equipment(MessageEquipmentMixin):
         all_gold_needs = 0
 
         equip_msgs = []
-        while True:
-            try:
-                all_gold_needs = _up()
-            except SanguoException:
-                if quick:
+
+        if quick:
+            while True:
+                try:
+                    all_gold_needs += _up()
+                except SanguoException:
                     break
                 else:
-                    raise
-            else:
-                msg = protomsg.Equip()
-                self._msg_equip(msg, self.equip_id, self.mongo_item.equipments[str(self.equip_id)], self)
-                equip_msgs.append(msg)
+                    msg = protomsg.Equip()
+                    self._msg_equip(msg, self.equip_id, self.mongo_item.equipments[str(self.equip_id)], self)
+                    equip_msgs.append(msg)
+        else:
+            all_gold_needs += _up()
+            msg = protomsg.Equip()
+            self._msg_equip(msg, self.equip_id, self.mongo_item.equipments[str(self.equip_id)], self)
+            equip_msgs.append(msg)
+
 
         char.update(gold=-all_gold_needs)
         self.mongo_item.save()
