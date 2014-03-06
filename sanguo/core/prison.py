@@ -38,14 +38,15 @@ class Prison(object):
         return len(self.p.prisoners) >= self.max_prisoner_amount
 
     def incr_max_prisoner_amount_cost_sycee(self):
+        if self.p.amount >= PRISON_INCR_MAX_AMOUNT:
+            return 0
         return PRISON_INCR_AMOUNT_COST[self.max_prisoner_amount]
 
     def incr_max_prisoner_amount(self):
-        if PRISON_INCR_MAX_AMOUNT:
-            if self.p.amount >= PRISON_INCR_MAX_AMOUNT:
-                raise InvalidOperate("Prison Incr Prisoners Amount. Char {0} amount {1} already touch PRISON_INCR_MAX_AMOUNT {2}".format(
-                    self.char_id, self.p.amount, PRISON_INCR_MAX_AMOUNT
-                ))
+        if self.p.amount >= PRISON_INCR_MAX_AMOUNT:
+            raise InvalidOperate("Prison Incr Prisoners Amount. Char {0} amount {1} already touch PRISON_INCR_MAX_AMOUNT {2}".format(
+                self.char_id, self.p.amount, PRISON_INCR_MAX_AMOUNT
+            ))
 
         cost = self.incr_max_prisoner_amount_cost_sycee()
         char = Char(self.char_id)

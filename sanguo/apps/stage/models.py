@@ -126,9 +126,9 @@ post_delete.connect(
 
 class StageDrop(models.Model):
     id = models.IntegerField(primary_key=True)
-    equips = models.CharField("装备掉落", max_length=255, help_text="id:prob,id:prob")
-    gems = models.CharField("宝石掉落", max_length=255, help_text='id:prob,id:prob')
-    stuffs = models.CharField("材料掉落", max_length=255, help_text='id:prob,id:prob')
+    equips = models.CharField("装备掉落", max_length=255, blank=True, help_text="id:prob,id:prob")
+    gems = models.CharField("宝石掉落", max_length=255, blank=True, help_text='id:prob,id:prob')
+    stuffs = models.CharField("材料掉落", max_length=255, blank=True, help_text='id:prob,id:prob')
 
     class Meta:
         db_table = 'stagedrop'
