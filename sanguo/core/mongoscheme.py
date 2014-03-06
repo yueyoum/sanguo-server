@@ -165,7 +165,8 @@ class MongoEmbededPrisoner(EmbeddedDocument):
 
 class MongoPrison(Document):
     id = IntField(primary_key=True)
-    amount = IntField()
+    # amount 为用户花钱增加的额外数量，所以总量就是默认最大+amount
+    amount = IntField(default=0)
     prisoners = MapField(EmbeddedDocumentField(MongoEmbededPrisoner))
 
     meta = {

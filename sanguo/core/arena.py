@@ -17,7 +17,7 @@ from core.mongoscheme import MongoArenaTopRanks
 from core.exception import CounterOverFlow, SyceeNotEnough
 from core.achievement import Achievement
 from core.task import Task
-from preset.settings import AREMA_COST_SYCEE
+from preset.settings import ARENA_COST_SYCEE, ARENA_GET_SCORE_WHEN_LOST, ARENA_GET_SCORE_WHEN_WIN
 
 import protomsg
 
@@ -73,7 +73,7 @@ class Arena(object):
         msg.week_score = self.week_score
         msg.day_score = self.day_score
         msg.remained_amount = self.remained_amount
-        msg.arena_cost = AREMA_COST_SYCEE
+        msg.arena_cost = ARENA_COST_SYCEE
 
         top_ranks = MongoArenaTopRanks.objects.all()
         for t in top_ranks:
@@ -92,13 +92,21 @@ class Arena(object):
     def battle(self):
         counter = Counter(self.char_id, 'arena')
         try:
+            # 免费次数
             counter.incr()
         except CounterOverFlow:
-            char = Char(self.char_id)
-            cache_char = char.cacheobj
-            if cache_char.sycee < AREMA_COST_SYCEE:
-                raise SyceeNotEnough("Arena Battle: Char {0} have no free times, and sycee not enough".format(self.char_id))
-            char.update(sycee=-AREMA_COST_SYCEE)
+            counter = Counter(self.char_id, 'arena_sycee')
+            try:
+                # 花费元宝次数
+                counter.incr()
+            except CounterOverFlow:
+                raise
+            else:
+                char = Char(self.char_id)
+                cache_char = char.cacheobj
+                if cache_char.sycee < ARENA_COST_SYCEE:
+                    raise SyceeNotEnough("Arena Battle: Char {0} have no free times, and sycee not enough".format(self.char_id))
+                char.update(sycee=-ARENA_COST_SYCEE)
 
         my_score = self.day_score
         choosings = redis_client_two.zrangebyscore(REDIS_DAY_KEY, my_score, my_score)
@@ -130,13 +138,15 @@ class Arena(object):
         b.start()
 
         if msg.self_win:
-            score = 3
+            score = ARENA_GET_SCORE_WHEN_WIN
             achievement = Achievement(self.char_id)
             achievement.trig(7, 1)
 
         else:
-            score = 0
-        redis_client_two.zincrby(REDIS_DAY_KEY, self.char_id, score)
+            score = ARENA_GET_SCORE_WHEN_LOST
+
+        if score:
+            redis_client_two.zincrby(REDIS_DAY_KEY, self.char_id, score)
 
         t = Task(self.char_id)
         t.trig(2)

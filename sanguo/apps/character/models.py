@@ -17,15 +17,8 @@ class Character(models.Model):
     level = models.PositiveIntegerField("等级", default=1, db_index=True)
     exp = models.PositiveIntegerField("等级经验", default=0)
 
-    official = models.PositiveIntegerField("官职", default=1)
+    official = models.PositiveIntegerField("官职", default=0)
     off_exp = models.PositiveIntegerField("官职经验", default=0)
-
-    # 声望  来自比武日/周奖励， 用于商城购买
-    renown = models.PositiveIntegerField("声望", default=0)
-
-    # 积分  来自每场比武奖励， 用于比武排名
-    score_day = models.PositiveIntegerField("日积分", default=0)
-    score_week = models.PositiveIntegerField("周积分", default=0)
 
 
     @staticmethod

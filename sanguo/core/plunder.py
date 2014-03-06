@@ -4,6 +4,7 @@
 __author__ = 'Wang Chao'
 __date__ = '1/22/14'
 import random
+import logging
 
 from mongoscheme import Q, DoesNotExist
 
@@ -18,12 +19,19 @@ from core.exception import InvalidOperate, CounterOverFlow, SyceeNotEnough
 from core.counter import Counter
 from core.achievement import Achievement
 from core.task import Task
+from core.formation import Formation
+from core.hero import Hero
+from core.prison import Prison
+
 
 from protomsg import Battle as MsgBattle
 from protomsg import PlunderNotify
-from preset.settings import PLUNDER_COST_SYCEE
 from core.msgpipe import publish_to_char
 from utils import pack_msg
+
+from preset.settings import PLUNDER_COST_SYCEE, PLUNDER_GET_OFFICIAL_EXP_WHEN_LOST, PLUNDER_GET_OFFICIAL_EXP_WHEN_WIN, PLUNDER_GET_HERO_PROB
+
+logger = logging.getLogger('sanguo')
 
 PLUNDER_LEVEL_DIFF = 3
 
@@ -114,33 +122,77 @@ class Plunder(object):
 
         counter = Counter(self.char_id, 'plunder')
         try:
+            # 免费次数
             counter.incr()
         except CounterOverFlow:
-            # 使用元宝
-            c = Char(self.char_id)
-            cache_char = c.cacheobj
-            if cache_char.sycee < PLUNDER_COST_SYCEE:
-                raise SyceeNotEnough()
+            # 使用元宝次数
+            counter = Counter(self.char_id, 'plunder_sycee')
+            try:
+                counter.incr()
+            except CounterOverFlow:
+                raise
+            else:
+                # 使用元宝
+                c = Char(self.char_id)
+                cache_char = c.cacheobj
+                if cache_char.sycee < PLUNDER_COST_SYCEE:
+                    raise SyceeNotEnough()
 
-            c.update(sycee=-PLUNDER_COST_SYCEE)
+                c.update(sycee=-PLUNDER_COST_SYCEE)
 
         msg = MsgBattle()
         pvp = PVP(self.char_id, _id, msg)
         pvp.start()
+
 
         if not mongo_plunder_list.chars[str(_id)].is_robot:
             char = Char(self.char_id)
             h = Hang(self.char_id)
             h.plundered(char.cacheobj.name, msg.self_win)
 
+        t = Task(self.char_id)
+        t.trig(3)
 
         if msg.self_win:
+            drop_official_exp = PLUNDER_GET_OFFICIAL_EXP_WHEN_WIN
+            # FIXME drop_gold
+            drop_gold = mongo_plunder_list.chars[str(_id)].gold
+
+            char = Char(self.char_id)
+            char.update(gold=drop_gold, official_exp=drop_official_exp)
+
             achievement = Achievement(self.char_id)
             achievement.trig(8, 1)
 
-        t = Task(self.char_id)
-        t.trig(3)
-        return msg
+            drop_hero_id = 0
+            if PLUNDER_GET_HERO_PROB >= random.randint(1, 100):
+                prison = Prison(self.char_id)
+                if prison.prisoner_full():
+                    logger.debug("Plunder. Char {0} prison full. NOT drop hero".format(self.char_id))
+                else:
+                    # 取对方上阵武将原始ID
+                    rival_hero_oids = []
+
+                    f = Formation(_id)
+                    sockets = f.formation.sockets.values()
+                    heros = [s.hero for s in sockets if s.hero]
+                    for h in heros:
+                        cache_hero = Hero.cache_obj(h)
+                        rival_hero_oids.append(cache_hero.oid)
+
+                    drop_hero_id = random.choice(rival_hero_oids)
+                    prison.prisoner_add(drop_hero_id)
+
+                logger.debug("Plunder. Char {0} plunder success. Got Hero: {1}".format(
+                    self.char_id, drop_hero_id
+                ))
+        else:
+            drop_gold = 0
+            drop_official_exp = PLUNDER_GET_OFFICIAL_EXP_WHEN_LOST
+            drop_hero_id = 0
+
+        self.send_notify()
+        return msg, drop_gold, drop_official_exp, drop_hero_id
 
 
     def send_notify(self):

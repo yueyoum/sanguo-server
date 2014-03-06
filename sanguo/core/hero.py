@@ -23,6 +23,8 @@ from utils import cache
 from core.msgpipe import publish_to_char
 from utils import pack_msg
 
+from preset.settings import HERO_MAX_STEP, HERO_STEP_UP_COST_SOUL_AMOUNT, HERO_STEP_UP_COST_GOLD
+
 import protomsg
 
 def cal_hero_property(original_id, level, step):
@@ -173,26 +175,25 @@ class Hero(FightPowerMixin):
 
     def step_up(self):
         # 升阶
-        if self.step >= 5:
-            raise InvalidOperate("Hero Step Up: Char {0} Try to up hero {1}. But this hero already at step 5".format(
-                self.char_id, self.id
+        if self.step >= HERO_MAX_STEP:
+            raise InvalidOperate("Hero Step Up: Char {0} Try to up hero {1}. But this hero already at max step {2}".format(
+                self.char_id, self.id, HERO_MAX_STEP
             ))
 
-        # FIXME 消耗同名卡
         hs = HeroSoul(self.char_id)
         this_hero = ModelHero.all()[self.oid]
-        if not hs.has_soul(this_hero.id, 2):
+        if not hs.has_soul(this_hero.id, HERO_STEP_UP_COST_SOUL_AMOUNT):
             raise InvalidOperate("Hero Step Up: Char {0} Try to up Hero {1}. But hero soul not enough".format(self.char_id, self.id))
 
-        hs.remove_soul([(this_hero.id, 2)])
 
-        # FIXME 花多少金币
         from core.character import Char
         c = Char(self.char_id)
         cache_char = c.cacheobj
-        if cache_char.gold < 1000:
+        if cache_char.gold < HERO_STEP_UP_COST_GOLD:
             raise GoldNotEnough("Hero Step Up. Char {0} try to up hero {1}. But gold not enough".format(self.char_id, self.id))
 
+        # 检查完毕，开始处理
+        hs.remove_soul([(this_hero.id, HERO_STEP_UP_COST_SOUL_AMOUNT)])
         c.update(gold=-1000)
 
         self.hero.step += 1
@@ -206,7 +207,7 @@ class Hero(FightPowerMixin):
         achievement = Achievement(self.char_id)
         achievement.trig(10, 1)
 
-        if self.step == 5:
+        if self.step == HERO_MAX_STEP:
             achievement.trig(16, 1)
 
 
@@ -301,17 +302,6 @@ class HeroSoul(object):
 
 
 def save_hero(char_id, hero_original_ids, add_notify=True):
-    """
-
-    @param char_id: char id
-    @type char_id: int
-    @param hero_original_ids: hero original ids
-    @type hero_original_ids: int | list | tuple
-    @param add_notify: whether send add hero notify
-    @type add_notify: bool
-    @return: hero id range
-    @rtype: list
-    """
     if not isinstance(hero_original_ids, (list, tuple)):
         hero_original_ids = [hero_original_ids]
 

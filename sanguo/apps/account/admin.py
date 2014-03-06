@@ -9,14 +9,14 @@ from apps.account.models import Account
 class AccountAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'email', 'device_token', 'register_at', 'last_login', 'last_server_id', 'all_server_ids',
-        'login_times', 'platform', 'active'
+        'login_times', 'active'
     )
 
     fields = (
-        'email', 'passwd'
+        'email', 'active'
     )
 
-    ordering = ('last_login', )
+    ordering = ('-last_login', )
 
     def has_add_permission(self, request):
         return False
