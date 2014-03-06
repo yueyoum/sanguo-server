@@ -209,6 +209,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         #         active_skills.append(s)
         # return active_skills
 
+        logger.debug("%d find skill. anger = %d" % (self.id, self.anger))
         if not skills:
             return [self.default_skill]
 
