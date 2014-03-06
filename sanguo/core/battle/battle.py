@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import logging
 
@@ -43,10 +45,39 @@ class Ground(object):
                     else:
                         msg_h.ht = BattleHeroMsg.MONSTER
 
+
+        # 怒气并没有作为技能效果。是直接绑定在技能上的。所以这里得特殊处理怒气
+        # 为什么不把怒气做成技能效果？
+        # 因为怒气只影响效果命中的单位，但效果目标却包含了随机目标。那么怒气效果选择的目标不一定和其他效果一致
+        # 是否要支持多个效果相同目标？
+        self.active_angers()
+
         _fill_up_heros(self.my_heros, msg.self_heros)
         _fill_up_heros(self.rival_heros, msg.rival_heros)
 
         self.msg = msg
+
+
+    def active_angers(self):
+        def _active_all(team_one, team_two):
+            for me in team_one:
+                if me is None:
+                    continue
+
+                for sk in me.passive_skills:
+                    if sk.anger_self:
+                        me.set_anger(sk.anger_self)
+                    if sk.anger_self_team:
+                        for h in team_one:
+                            if h:
+                                h.set_anger(sk.anger_self_team)
+                    if sk.anger_rival_team:
+                        for h in team_two:
+                            if h:
+                                h.set_anger(sk.anger_rival_team)
+
+        _active_all(self.my_heros, self.rival_heros)
+        _active_all(self.rival_heros, self.my_heros)
 
 
     def ground_power(self, heros):
