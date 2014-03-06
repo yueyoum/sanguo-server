@@ -63,12 +63,12 @@ class ActiveEffectMixin(object):
         elif eff.id == 8:
             attr_name = 'using_crit' if using_attr else 'crit'
             plus = False
-        elif eff.id == 12:
-            attr_name = 'anger'
-            plus = True
-        elif eff.id == 13:
-            attr_name = 'anger'
-            plus = False
+        # elif eff.id == 12:
+        #     attr_name = 'anger'
+        #     plus = True
+        # elif eff.id == 13:
+        #     attr_name = 'anger'
+        #     plus = False
         else:
             raise TypeError("using_effects, Unsupported eff: %d" % eff.id)
 

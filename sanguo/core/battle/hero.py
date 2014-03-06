@@ -168,7 +168,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         }
         effects_id_values = {}
         for eff in self.effect_manager.effects:
-            if eff.id in [1, 2, 9, 10, 11, 12, 13]:
+            if eff.id in [1, 2, 9, 10, 11]:
                 # logger.warning("active property effects: unsupported eff: {0}".format(eff.id))
                 continue
 

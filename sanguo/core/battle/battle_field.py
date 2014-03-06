@@ -56,11 +56,18 @@ class BattleField(ActiveEffectMixin):
         self.team_one = team_one
         self.team_two = team_two
 
-        passive_skills = self.active_passive_effects(msg)
+        passive_skills_effs = self.active_passive_effects(msg)
 
-        for h, effs in passive_skills.items():
+        for h, effs in passive_skills_effs.items():
             for e in effs:
                 self.active_effect(h, e, using_attr=False)
+
+        # 怒气并没有作为技能效果。是直接绑定在技能上的。所以这里得特殊处理怒气
+        # 为什么不把怒气做成技能效果？
+        # 因为怒气只影响效果命中的单位，但效果目标却包含了随机目标。那么怒气效果选择的目标不一定和其他效果一致
+        # 是否要支持多个效果相同目标？
+
+        self.active_angers()
 
         for index, h in enumerate(self.team_one):
             if h is not None:
@@ -85,6 +92,30 @@ class BattleField(ActiveEffectMixin):
                 )
 
         self.current_pos = 0
+
+
+    def active_angers(self):
+        def _active_all(team_one, team_two):
+            for me in team_one:
+                if me is None:
+                    continue
+
+                for sk in me.passive_skills:
+                    if sk.anger_self:
+                        me.set_anger(sk.anger_self)
+                    if sk.anger_self_team:
+                        for h in team_one:
+                            if h:
+                                h.set_anger(sk.anger_self_team)
+                    if sk.anger_rival_team:
+                        for h in team_two:
+                            if h:
+                                h.set_anger(sk.anger_rival_team)
+
+        _active_all(self.team_one, self.team_two)
+        _active_all(self.team_two, self.team_one)
+
+
 
 
     def active_passive_effects(self, msg):
