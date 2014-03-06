@@ -50,7 +50,7 @@ class Character(models.Model):
     def update_official_needs_exp(self, level=None):
         level = level or self.official
         exp = pow(level, 3.2) * 0.2 + level * 20
-        return int(round(exp), -1)
+        return int(round(exp, -1))
 
 
     def __unicode__(self):

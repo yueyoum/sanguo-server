@@ -26,7 +26,7 @@ def reset():
 
 
     reward_data = ArenaReward.all()
-    for index, char_id in data:
+    for index, char_id in enumerate(data):
         rank = index + 1
         char_id = int(char_id)
 
