@@ -357,6 +357,8 @@ class MongoTeamBattle(Document):
     total_seconds = IntField()
     # status: 1 prepare, 2 started, 3 reward
     status = IntField()
+    # 每秒进度，是否完成就看已经经过的秒数乘以这个数值是否达到1
+    step = FloatField(default=0)
 
     meta = {
         'collection': 'teambattle'

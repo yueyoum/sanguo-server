@@ -592,7 +592,7 @@ class TeamBattle(TimerCheckAbstractBase):
         if not self.mongo_tb or self.mongo_tb.status != 2:
             return
 
-        if timezone.utc_timestamp() - self.mongo_tb.start_at >= self.mongo_tb.total_seconds:
+        if (timezone.utc_timestamp() - self.mongo_tb.start_at) * self.mongo_tb.step >= 1:
             # FINISH
             self.mongo_tb.status = 3
             self.mongo_tb.save()
@@ -670,6 +670,9 @@ class TeamBattle(TimerCheckAbstractBase):
         self.mongo_tb.self_power += friend_power
         self.mongo_tb.start_at = timezone.utc_timestamp()
         self.mongo_tb.status = 2
+
+        step = random.uniform(1, 1.05) * self.mongo_tb.self_power / self.mongo_tb.boss_power * 0.0033
+        self.mongo_tb.step = step
         self.mongo_tb.save()
 
         self.send_notify()
@@ -740,7 +743,7 @@ class TeamBattle(TimerCheckAbstractBase):
 
             utc_timestamp = timezone.utc_timestamp()
 
-            step_progress = self.mongo_tb.self_power / self.mongo_tb.boss_power * 0.0034
+            step_progress = self.mongo_tb.step
             current_progress = (utc_timestamp - self.mongo_tb.start_at) * step_progress
             if current_progress > 100:
                 current_progress = 100
