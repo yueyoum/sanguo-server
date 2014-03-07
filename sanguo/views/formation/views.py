@@ -10,6 +10,7 @@ from utils.decorate import message_response
 
 from core.formation import Formation
 from core.item import Item
+from core.signals import hero_changed_signal
 
 @message_response("SetSocketResponse")
 def set_socket(request):
@@ -36,14 +37,21 @@ def set_socket(request):
 
     changed_sockets = []
 
+    off_hero_id = None
+
     # 不能重复放置
     for k, s in f.formation.sockets.iteritems():
         if int(k) == req.socket.id:
             continue
 
         if req.socket.hero_id:
-            if s.hero and s.hero == req.socket.hero_id:
-                raise SanguoException(401)
+            if s.hero:
+                if s.hero == req.socket.hero_id:
+                    # 同一个武将上到多个socket
+                    raise SanguoException(401)
+                # 要调换hero
+                off_hero_id = s.hero
+
             # 同名武将不能重复上阵
             if s.hero:
                 if _get_hero_oid(s.hero) == _get_hero_oid(req.socket.hero_id):
@@ -97,6 +105,12 @@ def set_socket(request):
             weapon=weapon_id,
             armor=armor_id,
             jewelry=jewelry_id,
+        )
+
+    if off_hero_id:
+        hero_changed_signal.send(
+            sender=None,
+            hero_id=off_hero_id,
         )
 
     response = SetSocketResponse()
