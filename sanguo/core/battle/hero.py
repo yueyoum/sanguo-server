@@ -341,7 +341,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
             team = _team(target)
             if not team:
                 return []
-            return choice(team)
+            return [choice(team)]
         if eff.target == 6:
             # 敌随机两个
             team = _team(target)
@@ -358,7 +358,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
             team = _team(self)
             if not team:
                 return []
-            return choice(team)
+            return [choice(team)]
         if eff.target == 8:
             # 己随机两个
             team = _team(self)
