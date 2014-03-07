@@ -55,7 +55,10 @@ def _parse_drops(all_drops, drop_id):
         return data
 
     for _id in ids:
-        this_drop = all_drops[int(_id)]
+        int_id = int(_id)
+        if int_id == 0:
+            continue
+        this_drop = all_drops[int_id]
         drop_equip = _parse(this_drop.equips)
         for k, v in drop_equip.iteritems():
             equips[k] = equips.get(k, 0) + v
@@ -79,7 +82,8 @@ def _make(drops):
         a = int(a)
         if b >= random.randint(0, DROP_PROB_BASE):
             a += 1
-        res.append((_id, a))
+        if a:
+            res.append((_id, a))
     return res
 
 
