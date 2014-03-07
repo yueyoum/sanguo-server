@@ -5,15 +5,18 @@ __date__ = '1/6/14'
 
 import random
 
+from apps.item.models import Gem as ModelGem
+from apps.official.models import Official as ModelOfficial
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoCheckIn
-from utils import pack_msg
 from core.msgpipe import publish_to_char
 from core.exception import InvalidOperate
 from core.character import Char
 from core.item import Item
-from apps.item.models import Gem as ModelGem
-from protomsg import CheckInNotify, CheckInResponse
+from core.counter import Counter
+from core.attachment import Attachment
+from utils import pack_msg
+from protomsg import CheckInNotify, CheckInResponse, Attachment as MsgAttachment
 
 
 MAX_DAYS = 7
@@ -88,3 +91,38 @@ class CheckIn(object):
         m.max_days = MAX_DAYS
 
         publish_to_char(self.char_id, pack_msg(m))
+
+
+class OfficalDailyReward(object):
+    def __init__(self, char_id):
+        self.char_id = char_id
+
+    def check(self):
+        char = Char(self.char_id)
+        official_level = char.cacheobj.official
+        if official_level == 0:
+            return
+
+        counter = Counter(self.char_id, 'official_reward')
+        remained_value = counter.remained_value
+        if remained_value > 0:
+            attachment = Attachment(self.char_id)
+            attachment.save_to_prize(8)
+
+
+    def get_reward(self):
+        char = Char(self.char_id)
+        official_level = char.cacheobj.official
+        if official_level == 0:
+            raise InvalidOperate("Offical Get Reward. Char {0} offical = {1}. try to get reward".format(self.char_id, official_level))
+
+        counter = Counter(self.char_id, 'official_reward')
+        counter.incr()
+
+        gold = ModelOfficial.all()[official_level].gold
+        char.update(gold=gold)
+
+        msg = MsgAttachment()
+        msg.gold = gold
+        return msg
+

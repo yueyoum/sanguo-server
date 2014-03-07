@@ -10,6 +10,7 @@ COUNTER = {
     'arena_sycee': 5,    # 比武次数 购买
     'plunder_sycee': 5,  # 掠夺次数 购买
     'gethero': 1,        # 免费抽将次数
+    'official_reward': 1,       # 官职每日登录领取奖励次数
 }
 
 #########################

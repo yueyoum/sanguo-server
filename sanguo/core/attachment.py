@@ -66,7 +66,7 @@ class Attachment(object):
     def save_to_prize(self, prize_id):
         if prize_id not in self.attachment.prize_ids:
             self.attachment.prize_ids.append(prize_id)
-        self.attachment.save()
+            self.attachment.save()
         self.send_notify()
 
 
@@ -125,6 +125,12 @@ class Attachment(object):
             from core.stage import TeamBattle
             tb = TeamBattle(self.char_id)
             att_msg = tb.get_reward()
+        elif prize_id == 8:
+            # 官职每日登录
+            from core.daily import OfficalDailyReward
+            od = OfficalDailyReward(self.char_id)
+            att_msg = od.get_reward()
+            return att_msg
         else:
             try:
                 attachment = self.attachment.attachments[str(prize_id)]
