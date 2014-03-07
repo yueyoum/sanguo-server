@@ -6,7 +6,6 @@ from utils import cache
 class Official(models.Model):
     id = models.IntegerField("等级", primary_key=True)
     name = models.CharField("名称", max_length=32)
-    exp_needs = models.IntegerField("升级所需经验")
     gold = models.IntegerField("每日可领取金币")
     # stuffs = models.CharField("升级道具奖励", max_length=255, blank=True,
     #                                   help_text='id:amount,id:amount'

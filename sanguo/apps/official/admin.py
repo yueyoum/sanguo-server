@@ -11,7 +11,7 @@ class OfficialResources(resources.ModelResource):
 
 class OfficialAdmin(ImportExportModelAdmin):
     list_display = (
-        'id', 'name', 'exp_needs', 'gold', #'stuffs',
+        'id', 'name', 'gold', #'stuffs',
     )
 
     resource_class = OfficialResources

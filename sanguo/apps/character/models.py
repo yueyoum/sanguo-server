@@ -5,6 +5,16 @@ from django.db.models.signals import post_save
 
 from utils import cache
 
+def level_update_exp(level):
+    exp = pow(level, 2.5) + level * 20
+    return int(round(exp * 10, -1))
+
+
+def official_update_exp(level):
+    exp = pow(level + 1, 3.2) * 0.2 + (level + 1) * 20
+    return int(round(exp, -1))
+
+
 class Character(models.Model):
     account_id = models.IntegerField("帐号ID")
     server_id = models.IntegerField("服务器ID")
@@ -36,21 +46,13 @@ class Character(models.Model):
 
 
     def update_needs_exp(self, level=None):
-        """
-
-        @param level: None or Char level
-        @type level: None or int
-        @return: the exp which needs for update to next level
-        @rtype: int
-        """
         level = level or self.level
-        exp = pow(level, 2.5) + level * 20
-        return int(round(exp * 10, -1))
+        return level_update_exp(level)
+
 
     def update_official_needs_exp(self, level=None):
         level = level or self.official
-        exp = pow(level, 3.2) * 0.2 + level * 20
-        return int(round(exp, -1))
+        return official_update_exp(level)
 
 
     def __unicode__(self):

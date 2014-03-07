@@ -201,6 +201,9 @@ class Char(object):
         msg.char.current_exp = char.exp
         msg.char.next_level_exp = char.update_needs_exp()
         msg.char.official = char.official
+        msg.char.official_exp = char.off_exp
+        msg.char.next_official_exp = char.update_official_needs_exp()
+
         msg.char.power = self.power
 
         publish_to_char(self.id, pack_msg(msg))
