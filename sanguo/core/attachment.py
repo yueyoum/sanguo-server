@@ -120,22 +120,24 @@ class Attachment(object):
             from core.task import Task
             task = Task(self.char_id)
             att_msg = task.get_reward(param)
-        elif prize_id == 7:
-            # 团队本
-            from core.stage import TeamBattle
-            tb = TeamBattle(self.char_id)
-            att_msg = tb.get_reward()
-        elif prize_id == 8:
+        elif prize_id == 6:
             # 官职每日登录
             from core.daily import OfficalDailyReward
             od = OfficalDailyReward(self.char_id)
             att_msg = od.get_reward()
             return att_msg
+        elif prize_id == 7:
+            # 团队本
+            from core.stage import TeamBattle
+            tb = TeamBattle(self.char_id)
+            att_msg = tb.get_reward()
         else:
             try:
                 attachment = self.attachment.attachments[str(prize_id)]
             except KeyError:
-                raise InvalidOperate("Attachment Get. Char {0} Try to get a NONE exists attachment {1}".format(prize_id, param))
+                raise InvalidOperate("Attachment Get. Char {0} Try to get a NONE exists attachment {1}, param = {2}".format(
+                    self.char_id, prize_id, param
+                ))
 
             heros = None
             if attachment.heros:

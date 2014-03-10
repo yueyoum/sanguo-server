@@ -218,8 +218,6 @@ def char_initialize(account_id, server_id, name):
         name=name,
         gold=init.gold,
         sycee=init.sycee,
-        level=1,
-        official=1,
     )
     char_id = char.id
 
