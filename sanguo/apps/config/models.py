@@ -20,7 +20,7 @@ class CharInit(models.Model):
 
     @staticmethod
     def cache_obj():
-        data = cache.get('charinit', hours=None)
+        data = cache.get('charinit')
         if data:
             return data
         return save_charinit_cache()
@@ -48,7 +48,7 @@ def save_charinit_cache(*args, **kwargs):
         decoded_stuffs.append((int(sid), int(amount)))
     data.decoded_stuffs = decoded_stuffs
 
-    cache.set('charinit', data, hours=None)
+    cache.set('charinit', data, expire=None)
     return data
 
 
@@ -81,7 +81,7 @@ class ArenaReward(models.Model):
 
     @staticmethod
     def all():
-        data = cache.get('arenareward', hours=None)
+        data = cache.get('arenareward')
         if data:
             return data
         return save_arena_reward_cache()
@@ -98,7 +98,7 @@ class ArenaReward(models.Model):
 def save_arena_reward_cache(*args, **kwargs):
     rewards = ArenaReward.objects.all().order_by('-id')
     data = {r.id: r for r in rewards}
-    cache.set('arenareward', data, hours=None)
+    cache.set('arenareward', data, expire=None)
     return data
 
 

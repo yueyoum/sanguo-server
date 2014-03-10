@@ -3,23 +3,21 @@ from cPickle import HIGHEST_PROTOCOL
 
 from django.conf import settings
 from core.drives import redis_client
-from utils.timezone import hours_delta
-
-CACHE_HOURS = settings.CACHE_HOURS
 
 
-def set(key, obj, hours=CACHE_HOURS):
+CACHE_SECONDS = settings.CACHE_SECONDS
+
+
+def set(key, obj, expire=CACHE_SECONDS):
     value = cPickle.dumps(obj, HIGHEST_PROTOCOL)
     redis_client.set(key, value)
-    if hours:
-        redis_client.expireat(key, hours_delta(hours))
+    if expire:
+        redis_client.expire(key, expire)
 
 
-def get(key, hours=CACHE_HOURS):
+def get(key):
     value = redis_client.get(key)
     if value:
-        if hours:
-            redis_client.expireat(key, hours_delta(hours))
         return cPickle.loads(value)
     return None
 

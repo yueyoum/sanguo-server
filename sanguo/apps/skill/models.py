@@ -52,7 +52,7 @@ class Skill(models.Model):
 
     @staticmethod
     def all():
-        data = cache.get('skill', hours=None)
+        data = cache.get('skill')
         if data:
             return data
         return _save_cache_skill()
@@ -113,7 +113,7 @@ def _save_cache_skill(*args, **kwargs):
         s.effects = using_effects
         data[s.id] = s
 
-    cache.set('skill', data, hours=None)
+    cache.set('skill', data, expire=None)
     return data
 
 

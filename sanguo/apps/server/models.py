@@ -32,7 +32,7 @@ class Server(models.Model):
 
     @staticmethod
     def all():
-        s = cache.get(SERVER_CACHE_KEY, hours=None)
+        s = cache.get(SERVER_CACHE_KEY)
         if s:
             return s
 
@@ -67,7 +67,7 @@ def _set_server_cache():
     data = {}
     for s in servers:
         data[s.id] = s
-    cache.set(SERVER_CACHE_KEY, data, hours=None)
+    cache.set(SERVER_CACHE_KEY, data, expire=None)
     return data
 
 

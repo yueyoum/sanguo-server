@@ -49,7 +49,7 @@ class Hero(models.Model):
 
     @staticmethod
     def all():
-        data = cache.get('hero', hours=None)
+        data = cache.get('hero')
         if data:
             return data
         return _save_cache_hero()
@@ -144,7 +144,7 @@ class Hero(models.Model):
 def _save_cache_hero(*args, **kwargs):
     heros = Hero.objects.all()
     data = {h.id: h for h in heros}
-    cache.set('hero', data, hours=None)
+    cache.set('hero', data, expire=None)
     return data
 
 
@@ -184,7 +184,7 @@ class Monster(models.Model):
 
     @staticmethod
     def all():
-        data = cache.get('monster', hours=None)
+        data = cache.get('monster')
         if data:
             return data
         return _save_cache_monster()
@@ -203,7 +203,7 @@ class Monster(models.Model):
 def _save_cache_monster(*args, **kwargs):
     monsters = Monster.objects.all()
     data = {m.id: m for m in monsters}
-    cache.set('monster', data, hours=None)
+    cache.set('monster', data, expire=None)
     return data
 
 

@@ -23,7 +23,7 @@ class Task(models.Model):
 
     @staticmethod
     def all():
-        data = cache.get('task', hours=None)
+        data = cache.get('task')
         if data:
             return data
         return save_task_cache()
@@ -61,7 +61,7 @@ class Task(models.Model):
 def save_task_cache(*args, **kwargs):
     tasks = Task.objects.all()
     data = {t.id: t for t in tasks}
-    cache.set('task', data, hours=None)
+    cache.set('task', data, expire=None)
     return data
 
 post_save.connect(

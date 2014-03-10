@@ -51,7 +51,7 @@ class Store(models.Model):
 
     @staticmethod
     def all():
-        data = cache.get('store', hours=None)
+        data = cache.get('store')
         if data:
             return data
         return save_store_cache()
@@ -65,7 +65,7 @@ class Store(models.Model):
 def save_store_cache(*args, **kwargs):
     ss = Store.objects.all()
     data = {s.id: s for s in ss}
-    cache.set('store', data, hours=None)
+    cache.set('store', data, expire=None)
     return data
 
 

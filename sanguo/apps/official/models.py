@@ -22,7 +22,7 @@ class Official(models.Model):
 
     @staticmethod
     def all():
-        data = cache.get('official', hours=None)
+        data = cache.get('official')
         if data:
             return data
         return save_offical_cache()
@@ -31,7 +31,7 @@ class Official(models.Model):
 def save_offical_cache(*args, **kwargs):
     offs = Official.objects.all()
     data = {o.id: o for o in offs}
-    cache.set('official', data, hours=None)
+    cache.set('official', data, expire=None)
     return data
 
 

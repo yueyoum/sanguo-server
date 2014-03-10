@@ -13,7 +13,7 @@ class Battle(models.Model):
 
     @staticmethod
     def all():
-        data = cache.get('battle', hours=None)
+        data = cache.get('battle')
         if data:
             return data
         return _save_battle_cache()
@@ -31,7 +31,7 @@ class Battle(models.Model):
 def _save_battle_cache(*args, **kwargs):
     battles = Battle.objects.all()
     data = {b.id: b for b in battles}
-    cache.set('battle', data, hours=None)
+    cache.set('battle', data, expire=None)
     return data
 
 post_save.connect(
@@ -79,7 +79,7 @@ class Stage(models.Model):
 
     @staticmethod
     def all():
-        data = cache.get('stage', hours=None)
+        data = cache.get('stage')
         if data:
             return data
         return _save_stage_cache()
@@ -107,7 +107,7 @@ def _save_stage_cache(*args, **kwargs):
 
         data[open_condition].next = _id
 
-    cache.set('stage', data, hours=None)
+    cache.set('stage', data, expire=None)
     return data
 
 
@@ -138,7 +138,7 @@ class StageDrop(models.Model):
 
     @staticmethod
     def all():
-        data = cache.get('stagedrop', hours=None)
+        data = cache.get('stagedrop')
         if data:
             return data
         return _save_stagedrop_cache()
@@ -147,7 +147,7 @@ class StageDrop(models.Model):
 def _save_stagedrop_cache(*args, **kwargs):
     drops = StageDrop.objects.all()
     data = {d.id: d for d in drops}
-    cache.set('stagedrop', data, hours=None)
+    cache.set('stagedrop', data, expire=None)
     return data
 
 post_save.connect(
@@ -188,18 +188,18 @@ class EliteStage(models.Model):
 
     @staticmethod
     def all():
-        data = cache.get('elitestage', hours=None)
+        data = cache.get('elitestage')
         if data:
             return data
         return _save_elitestage_cache()
 
     @staticmethod
     def condition_table():
-        data = cache.get('elitestage_condition', hours=None)
+        data = cache.get('elitestage_condition')
         if data:
             return data
         _save_elitestage_cache()
-        return cache.get('elitestage_condition', hours=None)
+        return cache.get('elitestage_condition')
 
     @property
     def decoded_monsters(self):
@@ -222,8 +222,8 @@ def _save_elitestage_cache(*args, **kwargs):
         data[s.id] = s
         conditions[s.open_condition] = s.id
 
-    cache.set('elitestage', data, hours=None)
-    cache.set('elitestage_condition', conditions, hours=None)
+    cache.set('elitestage', data, expire=None)
+    cache.set('elitestage_condition', conditions, expire=None)
     return data
 
 
@@ -261,7 +261,7 @@ class ChallengeStage(models.Model):
 
     @staticmethod
     def all():
-        data = cache.get('challengestage', hours=None)
+        data = cache.get('challengestage')
         if data:
             return data
         return save_challenge_stage_cache()
@@ -276,7 +276,7 @@ class ChallengeStage(models.Model):
 def save_challenge_stage_cache(*args, **kwargs):
     stages = ChallengeStage.objects.all()
     data = {s.id: s for s in stages}
-    cache.set('challengestage', data, hours=None)
+    cache.set('challengestage', data, expire=None)
     return data
 
 

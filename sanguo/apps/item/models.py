@@ -36,7 +36,7 @@ class Equipment(models.Model):
 
     @staticmethod
     def all():
-        data = cache.get('equip', hours=None)
+        data = cache.get('equip')
         if data:
             return data
         return _set_equip_cache()
@@ -51,7 +51,7 @@ class Equipment(models.Model):
 def _set_equip_cache(*args, **kwargs):
     equips = Equipment.objects.all()
     data = {e.id: e for e in equips}
-    cache.set('equip', data, hours=None)
+    cache.set('equip', data, expire=None)
     return data
 
 
@@ -86,7 +86,7 @@ class Gem(models.Model):
 
     @staticmethod
     def all():
-        data = cache.get('gem', hours=None)
+        data = cache.get('gem')
         if data:
             return data
 
@@ -103,7 +103,7 @@ class Gem(models.Model):
 def _set_gem_cache(*args, **kwargs):
     gems = Gem.objects.all()
     data = {g.id: g for g in gems}
-    cache.set('gem', data, hours=None)
+    cache.set('gem', data, expire=None)
     return data
 
 
@@ -133,7 +133,7 @@ class Stuff(models.Model):
 
     @staticmethod
     def all():
-        data = cache.get('stuff', hours=None)
+        data = cache.get('stuff')
         if data:
             return data
         return _save_stuff_cache()
@@ -148,7 +148,7 @@ class Stuff(models.Model):
 def _save_stuff_cache(*args, **kwargs):
     stuffs = Stuff.objects.all()
     data = {s.id: s for s in stuffs}
-    cache.set('stuff', data, hours=None)
+    cache.set('stuff', data, expire=None)
     return data
 
 post_save.connect(
