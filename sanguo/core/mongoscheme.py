@@ -131,6 +131,22 @@ class MongoEmbededPlunderLog(EmbeddedDocument):
     gold = IntField()
 
 
+class MongoHangRemainedTime(Document):
+    id = IntField(primary_key=True)
+    # 这个剩余时间是否跨过了天的分割时间。
+    # 如果跨过了，
+    #   如果剩余时间为0,那么重置剩余时间到最大时间
+    #   如果还有剩余时间，那么什么也不做，继续保持这个上一天的剩余时间
+    # 如果没有跨过
+    #   如果剩余时间为0,则表示挂机时间已经用完，不能挂机
+    #   如果还有剩余时间，那么可以挂机，这个就表示当天的挂机剩余时间
+    crossed = BooleanField()
+    remained = IntField()
+
+    meta = {
+        'collection': 'hang_remained',
+    }
+
 class MongoHang(Document):
     id = IntField(primary_key=True)
     char_level = IntField()
@@ -141,7 +157,9 @@ class MongoHang(Document):
     finished = BooleanField()
     # 实际挂的时间
     actual_seconds = IntField()
-    # jobid = StringField()
+    # 剩余时间 这里的数值和 上面 MongoHangRemainedTime 中的remained是一样的。
+    # 用来当定时任务把 MongoHangRemainedTime 删除后，但是用户还在挂机中，用来恢复MongoHangRemainedTime中的remained数值
+    remained = IntField()
 
     # 被掠夺日志
     logs = ListField(EmbeddedDocumentField(MongoEmbededPlunderLog))

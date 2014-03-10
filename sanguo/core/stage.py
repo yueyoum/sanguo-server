@@ -5,7 +5,7 @@ from mongoengine import DoesNotExist
 from apps.hero.models import Hero as ModelHero
 from apps.stage.models import Stage as ModelStage, EliteStage as ModelEliteStage, ChallengeStage as ModelChallengeStage
 from apps.stage.models import StageDrop
-from core.mongoscheme import MongoStage, MongoTeamBattle
+from core.mongoscheme import MongoStage, MongoTeamBattle, MongoEmbededPlunderLog, MongoHang, MongoHangRemainedTime
 
 from utils import timezone
 from utils import pack_msg
@@ -20,18 +20,15 @@ from protomsg import Attachment as MsgAttachment
 from core.exception import InvalidOperate, SanguoException, SyceeNotEnough, StuffNotEnough
 from core.battle import PVE, ElitePVE
 
-from core.mongoscheme import MongoHang, MongoEmbededPlunderLog
-from core.counter import Counter
 from core.character import Char
 from core.friend import Friend
 from core.hero import save_hero
 from core.item import Item
 from core.timercheck import TimerCheckAbstractBase, timercheck
 
-# from worker import tasks
 from utils.math import GAUSSIAN_TABLE
 
-from preset.settings import TEAMBATTLE_INCR_COST
+from preset.settings import TEAMBATTLE_INCR_COST, HANG_SECONDS, DROP_PROB_BASE
 
 def _parse_drops(all_drops, drop_id):
     if not drop_id:
@@ -74,7 +71,6 @@ def _parse_drops(all_drops, drop_id):
     return equips.items(), gems.items(), stuffs.items()
 
 
-DROP_PROB_BASE = 100000
 def _make(drops):
     res = []
     for _id, prob in drops:
@@ -266,27 +262,41 @@ class Hang(TimerCheckAbstractBase):
         except DoesNotExist:
             self.hang = None
 
+        try:
+            self.hang_remained = MongoHangRemainedTime.objects.get(id=self.char_id)
+        except DoesNotExist:
+            self.hang_remained = MongoHangRemainedTime(id=self.char_id)
+
+            if self.hang:
+                self.hang_remained.crossed = True
+                self.hang_remained.remained = self.hang.remained
+            else:
+                self.hang_remained.crossed = False
+                self.hang_remained.remained = HANG_SECONDS
+            self.hang_remained.save()
+
 
     def check(self):
         if not self.hang or self.hang.finished:
             return
 
-        counter = Counter(self.char_id, 'hang')
-        remained_seconds = counter.remained_value
-        if timezone.utc_timestamp() - self.hang.start >= remained_seconds:
+        if timezone.utc_timestamp() - self.hang.start >= self.hang_remained.remained:
             # finish
-            self.finish(actual_seconds=remained_seconds)
+            self.finish(actual_seconds=self.hang_remained.remained)
 
 
     def start(self, stage_id):
         if self.hang:
             raise SanguoException(700, "Hang Start: Char {0} Try to a Multi hang".format(self.char_id))
 
-        counter = Counter(self.char_id, 'hang')
-        remained_seconds = counter.remained_value
-
-        if remained_seconds <= 0:
-            raise InvalidOperate("Hang Start: Char {0} try to hang, But NO times available".format(self.char_id))
+        if self.hang_remained.crossed:
+            if self.hang_remained.remained <= 0:
+                self.hang_remained.crossed = False
+                self.hang_remained.remained = HANG_SECONDS
+                self.hang_remained.save()
+        else:
+            if self.hang_remained.remained <= 0:
+                raise InvalidOperate("Hang Start: Char {0} try to hang, But NO times available".format(self.char_id))
 
         # job = tasks.hang_finish.apply_async((self.char_id, remained_seconds), countdown=remained_seconds)
 
@@ -299,6 +309,7 @@ class Hang(TimerCheckAbstractBase):
             stage_id=stage_id,
             start=timezone.utc_timestamp(),
             finished=False,
+            remained=self.hang_remained.remained,
             actual_hours=0,
             logs=[],
             plunder_gold=0,
@@ -327,12 +338,17 @@ class Hang(TimerCheckAbstractBase):
         if not actual_seconds:
             actual_seconds = timezone.utc_timestamp() - self.hang.start
 
+        remained_seconds = self.hang_remained.remained - actual_seconds
+        if remained_seconds <= 0:
+            remained_seconds = 0
+
+        self.hang_remained.remained = remained_seconds
+        self.hang_remained.save()
+
         self.hang.finished = True
         self.hang.actual_seconds = actual_seconds
+        self.hang.remained = remained_seconds
         self.hang.save()
-
-        counter = Counter(self.char_id, 'hang')
-        counter.incr(actual_seconds)
 
         self.send_notify()
 
@@ -440,9 +456,8 @@ class Hang(TimerCheckAbstractBase):
 
     def send_notify(self):
         msg = protomsg.HangNotify()
-        counter = Counter(self.char_id, 'hang')
-        msg.remained_time = counter.remained_value
         if self.hang:
+            msg.remained_time = self.hang_remained.remained - (timezone.utc_timestamp() - self.hang.start)
             msg.hang.stage_id = self.hang.stage_id
             msg.hang.start_time = self.hang.start
             msg.hang.finished = self.hang.finished
@@ -456,6 +471,8 @@ class Hang(TimerCheckAbstractBase):
                 msg_log.attacker = l.name
                 msg_log.win = l.gold > 0
                 msg_log.gold = abs(l.gold)
+        else:
+            msg.remained_time = self.hang_remained.remained
 
         publish_to_char(self.char_id, pack_msg(msg))
 
