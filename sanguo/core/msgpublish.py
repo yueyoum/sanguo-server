@@ -25,7 +25,7 @@ class ChatMessagePublish(object):
         chat_msg.char.id = self.cache_char.id
         chat_msg.char.name = self.cache_char.name
         chat_msg.char.official = self.cache_char.official
-        chat_msg.msg = text.encode('utf-8')
+        chat_msg.msg = text
         publish_to_char(target_char_id, pack_msg(msg))
 
     def to_server(self, text):
@@ -45,6 +45,6 @@ class BroadcastMessagePublish(object):
             b_msg = msg.msgs.add()
             b_msg.id = tid
             for a in args:
-                b_msg.args.append(a.encode('utf-8'))
+                b_msg.args.append(a)
 
             publish_to_char(cid, pack_msg(msg))
