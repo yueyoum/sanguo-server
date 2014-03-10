@@ -109,7 +109,7 @@ class Arena(object):
                 cache_char = char.cacheobj
                 if cache_char.sycee < ARENA_COST_SYCEE:
                     raise SyceeNotEnough("Arena Battle: Char {0} have no free times, and sycee not enough".format(self.char_id))
-                char.update(sycee=-ARENA_COST_SYCEE)
+                char.update(sycee=-ARENA_COST_SYCEE, des='Arena Battle Cost')
 
         my_score = self.day_score
         choosings = redis_client_two.zrangebyscore(REDIS_DAY_KEY, my_score, my_score)

@@ -97,7 +97,7 @@ class Task(object):
         char = Char(self.char_id)
         sycee = this_task.sycee if this_task.sycee else 0
         gold = this_task.gold if this_task.gold else 0
-        char.update(sycee=sycee, gold=gold)
+        char.update(sycee=sycee, gold=gold, des="Task {0} Reward".format(_id))
 
         if this_task.next_task:
             next_task = all_tasks[this_task.next_task]

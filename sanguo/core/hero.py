@@ -199,7 +199,7 @@ class Hero(FightPowerMixin):
 
         # 检查完毕，开始处理
         hs.remove_soul([(this_hero.id, soul_needs)])
-        c.update(gold=-1000)
+        c.update(gold=-HERO_STEP_UP_COST_GOLD, des='Hero Step Up. {0} to {1}'.format(self.hero.step, self.hero.step+1))
 
         self.hero.step += 1
         self.hero.save()

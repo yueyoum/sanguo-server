@@ -53,7 +53,7 @@ class Prison(object):
         if char.cacheobj.sycee < cost:
             raise SyceeNotEnough("Prison Incr Prisoners Amount. Char {0} sycee NOT enough".format(self.char_id))
 
-        char.update(sycee=-cost)
+        char.update(sycee=-cost, des='Prison. Incr max prisoner amount')
         self.p.amount += 1
         self.p.save()
         self.send_notify()

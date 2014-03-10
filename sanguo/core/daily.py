@@ -61,7 +61,8 @@ class CheckIn(object):
             gem.amount = 1
 
             char = Char(self.char_id)
-            char.update(sycee=100)
+            # FIXME
+            char.update(sycee=100, des='Daily Checkin')
 
             item = Item(self.char_id)
             item.stuff_add((22, 5))
@@ -71,7 +72,7 @@ class CheckIn(object):
         else:
             msg.reward.sycee = 100
             char = Char(self.char_id)
-            char.update(sycee=100)
+            char.update(sycee=100, des='Daily Checkin')
 
         self.c.save()
         return msg
@@ -120,7 +121,7 @@ class OfficalDailyReward(object):
         counter.incr()
 
         gold = ModelOfficial.all()[official_level].gold
-        char.update(gold=gold)
+        char.update(gold=gold, des='Official Daily Reward')
 
         msg = MsgAttachment()
         msg.gold = gold

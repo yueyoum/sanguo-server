@@ -83,9 +83,9 @@ class Store(object):
 
         # 扣钱
         if this_goolds.sell_tp == 1:
-            char.update(gold=-this_goolds.sell_price * amount)
+            char.update(gold=-this_goolds.sell_price * amount, des='Store Buy. Cost')
         else:
-            char.update(sycee=-this_goolds.sell_price * amount)
+            char.update(sycee=-this_goolds.sell_price * amount, des='Store Buy. Cost')
 
         # 给东西
         item = Item(self.char_id)
@@ -99,7 +99,7 @@ class Store(object):
         elif this_goolds.item_tp == 4:
             item.stuff_add([(this_goolds.item, amount)])
         else:
-            char.update(gold=this_goolds.item * amount)
+            char.update(gold=this_goolds.item * amount, des='Store Buy. Buy Gold')
 
         # 记录日志
         StoreBuyLog.objects.create(

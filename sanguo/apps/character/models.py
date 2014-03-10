@@ -86,3 +86,19 @@ post_save.connect(
     dispatch_uid='apps.character.Character.post_save'
 )
 
+
+class CharPropertyLog(models.Model):
+    char_id = models.IntegerField(db_index=True)
+    gold = models.IntegerField("金币", default=0)
+    sycee = models.IntegerField("元宝", default=0)
+    exp = models.IntegerField("经验", default=0)
+    official_exp = models.IntegerField("官职经验", default=0)
+    des = models.CharField("描述", max_length=255, blank=True)
+    add_time = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    class Meta:
+        db_table = 'char_log'
+        ordering = ('-add_time',)
+        verbose_name = '角色日志'
+        verbose_name_plural = '角色日志'
+

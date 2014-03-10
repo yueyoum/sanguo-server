@@ -3,7 +3,7 @@ from django.db.models import Q
 
 from mongoengine import DoesNotExist
 
-from apps.character.models import Character
+from apps.character.models import Character, CharPropertyLog
 from apps.config.models import CharInit
 from core.counter import Counter
 from core.hero import save_hero, Hero
@@ -113,7 +113,7 @@ class Char(object):
         return p
 
 
-    def update(self, gold=0, sycee=0, exp=0, official_exp=0):
+    def update(self, gold=0, sycee=0, exp=0, official_exp=0, des=''):
         char = Character.objects.get(id=self.id)
         char.gold += gold
         char.sycee += sycee
@@ -139,9 +139,12 @@ class Char(object):
                     char_id=self.id
                 )
 
+            des = '{0}. Level {1} to {2}'.format(des, old_level, char.level)
+
         if official_exp:
             new_official_exp = char.off_exp + official_exp
             official_level = char.official
+            old_official_level = char.official
             while True:
                 need_exp = char.update_official_needs_exp(official_level)
                 if new_official_exp < need_exp:
@@ -152,7 +155,19 @@ class Char(object):
             char.official = official_level
             char.off_exp = new_official_exp
 
+            des = '{0}. Official {1} to {2}'.format(des, old_official_level, char.official)
+
         char.save()
+
+        # save to CharPropertyLog
+        CharPropertyLog.objects.create(
+            char_id=self.id,
+            gold=gold,
+            sycee=sycee,
+            exp=exp,
+            official_exp=official_exp,
+            des=des[:255]
+        )
 
         try:
             mongo_char = MongoChar.objects.get(id=self.id)

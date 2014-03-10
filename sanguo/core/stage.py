@@ -416,7 +416,7 @@ class Hang(TimerCheckAbstractBase):
         self.send_notify()
 
         c = Char(self.char_id)
-        c.update(exp=drop_exp, gold=drop_gold)
+        c.update(exp=drop_exp, gold=drop_gold, des='Hang Reward')
         item = Item(self.char_id)
         item.stuff_add(got_stuffs)
         item.gem_add(got_gems)
@@ -715,7 +715,7 @@ class TeamBattle(TimerCheckAbstractBase):
                 self.char_id, char_sycee, TEAMBATTLE_INCR_COST
             ))
 
-        char.update(sycee=-TEAMBATTLE_INCR_COST)
+        char.update(sycee=-TEAMBATTLE_INCR_COST, des='TeamBattle Incr Time')
 
         self.mongo_tb.total_seconds += 60
         self.mongo_tb.save()
@@ -736,10 +736,10 @@ class TeamBattle(TimerCheckAbstractBase):
 
         for fid in self.mongo_tb.friend_ids:
             c = Char(fid)
-            c.update(gold=reward_gold)
+            c.update(gold=reward_gold, des='TeamBattle Reward as friend')
 
         c = Char(self.char_id)
-        c.update(gold=reward_gold)
+        c.update(gold=reward_gold, des='TeamBattle Reward as Host')
         save_hero(self.char_id, reward_hero_id)
 
         self.mongo_tb.delete()

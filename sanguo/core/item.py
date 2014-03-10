@@ -143,6 +143,8 @@ class Equipment(MessageEquipmentMixin):
 
         equip_msgs = []
 
+        old_level = self.mongo_item.equipments[str(self.equip_id)].level
+
         if quick:
             while True:
                 try:
@@ -159,8 +161,9 @@ class Equipment(MessageEquipmentMixin):
             self._msg_equip(msg, self.equip_id, self.mongo_item.equipments[str(self.equip_id)], self)
             equip_msgs.append(msg)
 
+        new_level = self.mongo_item.equipments[str(self.equip_id)].level
 
-        char.update(gold=-all_gold_needs)
+        char.update(gold=-all_gold_needs, des='Equipment Level up. {1} from {0} to {1}'.format(self.equip_id, old_level, new_level))
         self.mongo_item.save()
         return equip_msgs
 
@@ -194,7 +197,9 @@ class Equipment(MessageEquipmentMixin):
                 self.char_id, self.equip_id
             ))
 
-        char.update(gold=-EQUIP_STEP_UP_COST_GOLD)
+        char.update(gold=-EQUIP_STEP_UP_COST_GOLD, des='Equipment Step up. {1} step up from {2} to {3}'.format(
+            self.equip_id, self.mongo_item.equipments[str(self.equip_id)].oid, to
+        ))
 
         self.oid = to
         all_equips = ModelEquipment.all()
@@ -426,7 +431,7 @@ class Item(MessageEquipmentMixin):
             gold += e.sell_gold()
 
         char = Char(self.char_id)
-        char.update(gold=gold)
+        char.update(gold=gold, des='Equipment Sell. sell {0}'.format(ids))
         self.equip_remove(ids)
 
     def equip_embed(self, _id, slot_id, gem_id):

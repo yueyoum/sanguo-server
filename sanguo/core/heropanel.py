@@ -124,7 +124,7 @@ class HeroPanel(object):
             if cache_char.sycee < GETHERO_COST_SYCEE:
                 raise SyceeNotEnough()
 
-            char.update(sycee=-GETHERO_COST_SYCEE)
+            char.update(sycee=-GETHERO_COST_SYCEE, des='HeroPanel Open')
         else:
             c = Counter(self.char_id, 'gethero')
             c.incr()
@@ -163,7 +163,7 @@ class HeroPanel(object):
             if cache_char.sycee < REFRESH_COST_SYCEE:
                 raise SyceeNotEnough()
 
-            char.update(sycee=-REFRESH_COST_SYCEE)
+            char.update(sycee=-REFRESH_COST_SYCEE, des='HeroPanel Refresh')
 
             self.panel = self.make_new_panel(reset_time=False)
             self.send_notify()

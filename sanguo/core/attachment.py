@@ -47,7 +47,7 @@ class Attachment(object):
 
 
         char = Char(self.char_id)
-        char.update(gold=gold, sycee=sycee, exp=exp)
+        char.update(gold=gold, sycee=sycee, exp=exp, des='Attachment')
 
         if heros:
             save_hero(self.char_id, heros)

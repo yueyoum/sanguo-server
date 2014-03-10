@@ -141,7 +141,7 @@ class Plunder(object):
                 if cache_char.sycee < PLUNDER_COST_SYCEE:
                     raise SyceeNotEnough("Plunder: Char {0} Try to Plunder {1}. But Sycee NOT enough".format(self.char_id, _id))
 
-                c.update(sycee=-PLUNDER_COST_SYCEE)
+                c.update(sycee=-PLUNDER_COST_SYCEE, des='Plunder Battle Cost')
 
         msg = MsgBattle()
         pvp = PVP(self.char_id, _id, msg)
@@ -162,7 +162,7 @@ class Plunder(object):
             drop_gold = mongo_plunder_list.chars[str(_id)].gold
 
             char = Char(self.char_id)
-            char.update(gold=drop_gold, official_exp=drop_official_exp)
+            char.update(gold=drop_gold, official_exp=drop_official_exp, des='Plunder Reward')
 
             achievement = Achievement(self.char_id)
             achievement.trig(8, 1)

@@ -4,7 +4,7 @@ __author__ = 'Wang Chao'
 __date__ = '1/13/14'
 
 from django.contrib import admin
-from apps.character.models import Character
+from apps.character.models import Character, CharPropertyLog
 
 class CharacterAdmin(admin.ModelAdmin):
     list_display = (
@@ -22,4 +22,13 @@ class CharacterAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         return False
 
+
+class CharLogAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'char_id', 'gold', 'sycee', 'exp', 'official_exp', 'des', 'add_time',
+    )
+
+    list_filter = ('char_id',)
+
 admin.site.register(Character, CharacterAdmin)
+admin.site.register(CharPropertyLog, CharLogAdmin)

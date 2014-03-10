@@ -108,7 +108,7 @@ class Achievement(object):
 
         from core.character import Char
         char = Char(self.char_id)
-        char.update(sycee=ach.sycee)
+        char.update(sycee=ach.sycee, des='Achievement {0} reward'.format(achievement_id))
 
         self.achievement.finished.remove(achievement_id)
         self.achievement.complete.append(achievement_id)

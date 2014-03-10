@@ -12,14 +12,14 @@ def cmd(request):
 
     if req.action == 1:
         if req.tp == 1:
-            char.update(exp=req.param)
+            char.update(exp=req.param, des="Cmd")
         elif req.tp == 2:
             # FIXME
             print "UnSupported"
         elif req.tp == 3:
-            char.update(gold=req.param)
+            char.update(gold=req.param, des='Cmd')
         elif req.tp == 4:
-            char.update(sycee=req.param)
+            char.update(sycee=req.param, des='Cmd')
         elif req.tp == 5:
             item = Item(char_id)
             item.equip_add(req.param)
