@@ -4,13 +4,14 @@ __author__ = 'Wang Chao'
 __date__ = '1/21/14'
 
 from utils import pack_msg
-from utils.decorate import message_response
+from utils.decorate import message_response, operate_guard
 from core.plunder import Plunder
 import protomsg
 
 
 
 @message_response("PlunderListResponse")
+@operate_guard('plunder_list', 10, keep_result=True)
 def plunder_list(request):
     char_id = request._char_id
     p = Plunder(char_id)
@@ -30,6 +31,7 @@ def plunder_list(request):
 
 
 @message_response("PlunderResponse")
+@operate_guard('plunder', 15, keep_result=False)
 def plunder(request):
     req = request._proto
     char_id = request._char_id

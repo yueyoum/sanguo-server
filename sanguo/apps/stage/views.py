@@ -2,12 +2,13 @@
 
 from core.stage import Stage, Hang, EliteStage
 from utils import pack_msg
-from utils.decorate import message_response
+from utils.decorate import message_response, operate_guard
 
 import protomsg
 
 
 @message_response("ElitePVEResponse")
+@operate_guard('elite_pve', 15, keep_result=False)
 def elite_pve(request):
     req = request._proto
     stage = EliteStage(request._char_id)
@@ -48,6 +49,7 @@ def elite_pve(request):
 
 
 @message_response("PVEResponse")
+@operate_guard('pve', 15, keep_result=False)
 def pve(request):
     req = request._proto
     stage = Stage(request._char_id)

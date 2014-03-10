@@ -6,7 +6,7 @@ __date__ = '12/31/13'
 from core.friend import Friend
 from core.character import Char, get_char_ids_by_level_range
 from utils import pack_msg
-from utils.decorate import message_response
+from utils.decorate import message_response, operate_guard
 
 import protomsg
 from protomsg import FRIEND_NOT
@@ -14,6 +14,7 @@ from protomsg import FRIEND_NOT
 LEVEL_DIFF = 10
 
 @message_response("PlayerListResponse")
+@operate_guard('friend_player_list', 10, keep_result=True)
 def player_list(request):
     char_id = request._char_id
     server_id = request._server_id

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import protomsg
 from utils import pack_msg
-from utils.decorate import message_response
+from utils.decorate import message_response, operate_guard
 
 from core.arena import Arena
 
@@ -10,6 +10,7 @@ __date__ = '1/22/14'
 
 
 @message_response("ArenaPanelResponse")
+@operate_guard('arena_panel', 10, keep_result=True)
 def arena_panel(request):
     arena = Arena(request._char_id)
     response = protomsg.ArenaPanelResponse()
@@ -19,6 +20,7 @@ def arena_panel(request):
     return pack_msg(response)
 
 @message_response("ArenaResponse")
+@operate_guard('arena_battle', 15, keep_result=False)
 def arena_battle(request):
     char_id = request._char_id
 
