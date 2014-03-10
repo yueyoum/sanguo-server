@@ -5,12 +5,13 @@ __date__ = '2/25/14'
 
 from core.msgpublish import ChatMessagePublish
 from core.exception import InvalidOperate
-from utils.decorate import message_response
+from utils.decorate import message_response, operate_guard
 
 
 MSG_LEN_MAX = 50
 
 @message_response("ChatSendResponse")
+@operate_guard('chat', 15, keep_result=False)
 def send(request):
     req = request._proto
     msg = req.msg
