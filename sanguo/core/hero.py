@@ -42,7 +42,6 @@ def cal_hero_property(original_id, level, step):
     defense = DLL.hero_defense(level, step, hero.quality, ctypes.c_float(hero.defense_growing))
     hp = DLL.hero_hp(level, step, hero.quality, ctypes.c_float(hero.hp_growing))
 
-    # TODO 这里不应该int， 检查使用此参数的代码
     return int(attack), int(defense), int(hp)
 
 
@@ -66,7 +65,6 @@ class Hero(FightPowerMixin):
         self.level = char.level
         self.char_id = char.id
 
-        # FIXME
         self.attack, self.defense, self.hp = \
             cal_hero_property(self.oid, self.level, self.step)
 

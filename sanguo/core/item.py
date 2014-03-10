@@ -284,7 +284,6 @@ class Equipment(MessageEquipmentMixin):
 
         gems = self.mongo_item.equipments[str(self.equip_id)].gems
         all_gems = ModelGem.all()
-        # TODO get gem
         for gid in gems:
             if not gid:
                 continue

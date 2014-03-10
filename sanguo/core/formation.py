@@ -3,7 +3,7 @@
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoSocket, MongoFormation
 from core.signals import socket_changed_signal
-from core.exception import InvalidOperate
+from core.exception import InvalidOperate, SanguoException
 
 from utils import pack_msg
 from core.msgpipe import publish_to_char
@@ -20,6 +20,10 @@ class Formation(object):
             self.formation = MongoFormation(id=self.char_id)
             self.formation.formation = [0] * 9
             self.formation.save()
+
+    def all_socket_ids(self):
+        ids = self.formation.sockets.keys()
+        return [int(i) for i in ids]
 
     def save_socket(self, socket_id=None, hero=0, weapon=0, armor=0, jewelry=0, send_notify=True):
         if not socket_id:
@@ -49,7 +53,16 @@ class Formation(object):
 
 
     def save_formation(self, socket_ids, send_notify=True):
-        # TODO check
+        all_ids = self.all_socket_ids()
+        for _id in socket_ids:
+            if _id == 0:
+                continue
+
+            if _id not in all_ids:
+                raise SanguoException(403, "Formation Set formation. Char {0} try to set a wrong socket_ids: {1}. Actual: {2}".format(
+                    self.char_id, socket_ids, all_ids
+                ))
+
         self.formation.formation = socket_ids
         self.formation.save()
 

@@ -117,8 +117,6 @@ class HeroPanel(object):
             raise InvalidOperate("HeroPanel Open: Char {0} Try to open an already opened socket {1}".format(
                 self.char_id, _id
             ))
-        # TODO   检查武将包裹是否满了
-
         if self.free_times == 0:
             # 使用元宝
             char = Char(self.char_id)

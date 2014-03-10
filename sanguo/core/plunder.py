@@ -10,7 +10,7 @@ from mongoscheme import Q, DoesNotExist
 
 from apps.character.models import Character
 from apps.stage.models import Stage as ModelStage
-from core.character import Char
+from core.character import Char, get_char_ids_by_level_range
 from core.battle import PVP
 from core.stage import Hang
 from core.mongoscheme import MongoHang, MongoEmbededPlunderChar, MongoPlunderList
@@ -48,7 +48,8 @@ class Plunder(object):
         @rtype: list
         """
         char = Char(self.char_id)
-        char_level = char.cacheobj.level
+        cache_char = char.cacheobj
+        char_level = cache_char.level
 
         choosing_list = MongoHang.objects(Q(char_level__gte=char_level-PLUNDER_LEVEL_DIFF) & Q(char_level__lte=char_level+PLUNDER_LEVEL_DIFF))
         choosing_id_list = [(c.id, c.stage_id) for c in choosing_list]
@@ -85,19 +86,19 @@ class Plunder(object):
         robot_ids = []
         robot_amount = 10 - len(ids)
 
-        while len(robot_ids) < robot_amount:
+        if len(robot_ids) < robot_amount:
             # 添加机器人
-            real_chars = Character.objects.filter(level=char_level)
+            min_level = char_level - 20
+            if min_level <= 1:
+                min_level = 1
+            real_chars = get_char_ids_by_level_range(cache_char.server_id, min_level, char_level)
+
             for c in real_chars:
-                if c.id == self.char_id:
+                if c == self.char_id:
                     continue
-                robot_ids.append(c.id)
+                robot_ids.append(c)
                 if len(robot_ids) >= robot_amount:
                     break
-
-            char_level -= 1
-            if char_level == 0:
-                break
 
         for i in robot_ids:
             char = Char(i)

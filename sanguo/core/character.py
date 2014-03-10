@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
+from django.db.models import Q
+
 from mongoengine import DoesNotExist
 
 from apps.character.models import Character
 from apps.config.models import CharInit
 from core.counter import Counter
-from core.hero import save_hero, delete_hero, Hero
-from core.mongoscheme import MongoHang, MongoHero, MongoPrison, MongoChar
+from core.hero import save_hero, Hero
+from core.mongoscheme import MongoHero, MongoChar
 from preset.settings import COUNTER
 from core.signals import char_updated_signal
 
@@ -35,15 +37,9 @@ class Char(object):
     def delete(self):
         # WARNING
         # 一般不删除角色
-        Character.objects.filter(id=self.id).delete()
-        # MongoChar.objects.get(id=self.id).delete()
         # FIXME mongoscheme 中的全要删除
-        MongoHero.objects.filter(char=self.id).delete()
-        try:
-            MongoPrison.objects.get(id=self.id).delete()
-            MongoHang.objects.get(id=self.id).delete()
-        except DoesNotExist:
-            pass
+        pass
+
 
     @property
     def cacheobj(self):
@@ -95,8 +91,6 @@ class Char(object):
     def save_hero(self, hero_original_ids, add_notify=True):
         return save_hero(self.id, hero_original_ids, add_notify=add_notify)
 
-    def delete_hero(self, ids):
-        delete_hero(self.id, ids)
 
     def in_bag_hero_ids(self):
         heros = MongoHero.objects.filter(char=self.id)
@@ -158,8 +152,6 @@ class Char(object):
             char.official = official_level
             char.off_exp = new_official_exp
 
-
-        # TODO official_exp
         char.save()
 
         try:
@@ -291,3 +283,8 @@ def char_initialize(account_id, server_id, name):
     item.stuff_add(init.decoded_stuffs, send_notify=False)
 
     return char
+
+
+def get_char_ids_by_level_range(server_id, min_level, max_level):
+    ids = Character.objects.filter(Q(server_id=server_id) & Q(level__gte=min_level) & Q(level__lte=max_level)).values_list('id', flat=True)
+    return list(ids)

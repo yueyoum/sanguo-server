@@ -55,22 +55,6 @@ def update_hero_notify(char_id, objs):
     hero_notify(char_id, objs, "UpdateHeroNotify")
 
 
-def hang_notify_with_data(char_id, hours, max_hours, hang):
-    msg = protomsg.HangNotify()
-    # FIXME
-    msg.hours = hours or 8
-    msg.max_hours = max_hours
-    if hang is not None:
-        msg.hang.stage_id = hang.stage_id
-        msg.hang.whole_hours = hang.hours
-        msg.hang.start_time = hang.start
-        # FIXME
-        msg.hang.finished = hang.finished
-
-    publish_to_char(char_id, pack_msg(msg))
-
-
-
 def login_notify(char_id):
     c = Char(char_id)
     hero_objs = c.heros

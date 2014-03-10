@@ -4,14 +4,14 @@ __author__ = 'Wang Chao'
 __date__ = '12/31/13'
 
 from core.friend import Friend
-from core.character import Char
-from apps.character.models import Character
+from core.character import Char, get_char_ids_by_level_range
 from utils import pack_msg
 from utils.decorate import message_response
 
 import protomsg
 from protomsg import FRIEND_NOT
 
+LEVEL_DIFF = 10
 
 @message_response("PlayerListResponse")
 def player_list(request):
@@ -19,18 +19,18 @@ def player_list(request):
     server_id = request._server_id
     char = Char(char_id)
     level = char.cacheobj.level
-    # FIXME
+
+    char_ids = get_char_ids_by_level_range(server_id, level-LEVEL_DIFF, level+LEVEL_DIFF)
 
     f = Friend(char_id)
-    chars = Character.objects.filter(server_id=server_id)
     res = []
-    for c in chars:
-        if c.id == char_id:
+    for c in char_ids:
+        if c == char_id:
             continue
-        if f.is_general_friend(c.id):
+        if f.is_general_friend(c):
             continue
 
-        res.append(c.id)
+        res.append(c)
         if len(res) >= 5:
             break
 

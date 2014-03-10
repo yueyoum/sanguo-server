@@ -89,7 +89,6 @@ class Prison(object):
         if str_id not in self.p.prisoners:
             raise InvalidOperate("Prisoner Incr Prob: Char {0} Try to Incr prob for a NONE exists prisoner {1}".format(self.char_id, _id))
 
-        # TODO 消耗物品。增加多少几率
         item = Item(self.char_id)
         if not item.has_stuff(22, 1):
             raise StuffNotEnough("Prison Prisoner Get. Char {0} Try to get {1}. But Stuff not enough".format(self.char_id, _id))
