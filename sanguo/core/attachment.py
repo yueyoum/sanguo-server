@@ -125,7 +125,6 @@ class Attachment(object):
             from core.daily import OfficalDailyReward
             od = OfficalDailyReward(self.char_id)
             att_msg = od.get_reward()
-            return att_msg
         elif prize_id == 7:
             # 团队本
             from core.stage import TeamBattle
