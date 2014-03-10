@@ -107,7 +107,7 @@ class OfficalDailyReward(object):
         remained_value = counter.remained_value
         if remained_value > 0:
             attachment = Attachment(self.char_id)
-            attachment.save_to_prize(8)
+            attachment.save_to_prize(6)
 
 
     def get_reward(self):
