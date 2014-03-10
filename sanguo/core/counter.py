@@ -32,7 +32,8 @@ class Counter(object):
 
     @property
     def remained_value(self):
-        return self.max_value - self.cur_value
+        value = self.max_value - self.cur_value
+        return value if value >=0 else 0
 
     def incr(self, value=1):
         if self.remained_value < value:

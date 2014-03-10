@@ -14,7 +14,7 @@ from core.character import Char
 from core.battle import PVP
 from core.counter import Counter
 from core.mongoscheme import MongoArenaTopRanks
-from core.exception import CounterOverFlow, SyceeNotEnough
+from core.exception import CounterOverFlow, SyceeNotEnough, InvalidOperate
 from core.achievement import Achievement
 from core.task import Task
 from preset.settings import ARENA_COST_SYCEE, ARENA_GET_SCORE_WHEN_LOST, ARENA_GET_SCORE_WHEN_WIN
@@ -34,14 +34,14 @@ class Arena(object):
     def day_rank(self):
         rank = redis_client_two.zrevrank(REDIS_DAY_KEY, self.char_id)
         if not rank:
-            return 0
+            return 1
         return rank + 1
 
     @property
     def week_rank(self):
         rank = redis_client_two.zrevrank(REDIS_WEEK_KEY, self.char_id)
         if not rank:
-            return 0
+            return 1
         return rank + 1
 
     @property
@@ -59,12 +59,14 @@ class Arena(object):
         return int(score)
 
     @property
-    def remained_amount(self):
+    def remained_free_times(self):
         c = Counter(self.char_id, 'arena')
-        amount = c.remained_value
-        if amount < 0:
-            amount = 0
-        return amount
+        return c.remained_value
+
+    @property
+    def remained_sycee_times(self):
+        c = Counter(self.char_id, 'arena_sycee')
+        return c.remained_value
 
 
     def _fill_up_panel_msg(self, msg):
@@ -72,7 +74,8 @@ class Arena(object):
         msg.day_rank = self.day_rank
         msg.week_score = self.week_score
         msg.day_score = self.day_score
-        msg.remained_amount = self.remained_amount
+        msg.remained_free_times = self.remained_free_times
+        msg.remained_sycee_times = self.remained_sycee_times
         msg.arena_cost = ARENA_COST_SYCEE
 
         top_ranks = MongoArenaTopRanks.objects.all()
@@ -100,7 +103,7 @@ class Arena(object):
                 # 花费元宝次数
                 counter.incr()
             except CounterOverFlow:
-                raise
+                raise InvalidOperate("Arena Battle. Char {0} has no times to battle".format(self.char_id))
             else:
                 char = Char(self.char_id)
                 cache_char = char.cacheobj

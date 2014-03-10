@@ -132,13 +132,13 @@ class Plunder(object):
             try:
                 counter.incr()
             except CounterOverFlow:
-                raise
+                raise InvalidOperate("Plunder: Char {0} Try to Plunder {1}. But no times available".format(self.char_id, _id))
             else:
                 # 使用元宝
                 c = Char(self.char_id)
                 cache_char = c.cacheobj
                 if cache_char.sycee < PLUNDER_COST_SYCEE:
-                    raise SyceeNotEnough()
+                    raise SyceeNotEnough("Plunder: Char {0} Try to Plunder {1}. But Sycee NOT enough".format(self.char_id, _id))
 
                 c.update(sycee=-PLUNDER_COST_SYCEE)
 
@@ -198,9 +198,10 @@ class Plunder(object):
 
 
     def send_notify(self):
-        count = Counter(self.char_id, 'plunder')
+        free_count = Counter(self.char_id, 'plunder')
+        sycee_count = Counter(self.char_id, 'plunder_sycee')
         msg = PlunderNotify()
-        msg.amount = count.cur_value
-        msg.max_amount = count.max_value
+        msg.remained_free_times = free_count.remained_value
+        msg.remained_sycee_times = sycee_count.remained_value
         msg.cost_sycee = PLUNDER_COST_SYCEE
         publish_to_char(self.char_id, pack_msg(msg))
