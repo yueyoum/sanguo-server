@@ -1,3 +1,10 @@
+* 2014-03-11
+
+    StoreBuyLog 添加 order_id, status
+    alter table store_log add column order_id varchar(255) not null;
+    alter table store_log add column status int(11) not null;
+
+
 * 2014-03-06
 
     Official Model删除 exp_needs 列。 用公式计算。

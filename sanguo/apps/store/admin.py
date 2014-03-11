@@ -23,8 +23,8 @@ class StoreAdmin(ImportExportModelAdmin):
 
 class StoreBuyLogAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'char_id', 'tag_id', 'item_tp', 'item', 'sell_tp',
-        'sell_price', 'amount', 'buy_time'
+        'order_id', 'char_id', 'tag_id', 'item_tp', 'item', 'sell_tp',
+        'sell_price', 'amount', 'buy_time', 'status',
     )
 
 

@@ -70,6 +70,12 @@ def save_store_cache(*args, **kwargs):
 
 
 class StoreBuyLog(models.Model):
+    STATUS = (
+        (1, '订单'),
+        (2, '付款'),
+        (3, '完成')
+    )
+    order_id = models.CharField("订单ID", max_length=255, db_index=True)
     char_id = models.IntegerField("角色ID", db_index=True)
     tag_id = models.IntegerField("标签", choices=STORE_TAG)
     item_tp = models.IntegerField("类型", choices=STORE_ITEM_TP)
@@ -78,6 +84,7 @@ class StoreBuyLog(models.Model):
     sell_price = models.IntegerField("售价")
     amount = models.IntegerField("购买数量")
     buy_time = models.DateTimeField("购买时间")
+    status = models.IntegerField("状态", choices=STATUS)
 
     class Meta:
         db_table = 'store_log'
