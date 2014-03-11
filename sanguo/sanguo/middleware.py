@@ -126,7 +126,8 @@ class PackMessageData(object):
                 ''.join(other_msgs)
             )
         else:
-            num_of_msgs = len(other_msgs) + 1
+            ret_msg_amount = getattr(response, '_msg_amount', 1)
+            num_of_msgs = len(other_msgs) + ret_msg_amount
             data = '%s%s%s' % (
                 NUM_FIELD.pack(num_of_msgs),
                 response.content,

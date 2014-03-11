@@ -7,9 +7,12 @@ from apps.account.models import Account
 from core.exception import SanguoException, BadMessage, InvalidOperate
 from core.signals import login_signal, register_signal
 from core.world import server_list
-from protomsg import RegisterResponse, StartGameResponse
 from utils import crypto, pack_msg
 from utils.decorate import message_response
+from utils import timezone
+
+from protomsg import RegisterResponse, StartGameResponse, SyncResponse
+
 
 # logger = logging.getLogger('sanguo')
 
@@ -158,4 +161,8 @@ def login(request):
         response.regular.MergeFrom(req.regular)
     response.need_create_new_char = need_create_new_char
 
-    return pack_msg(response, session)
+    sync = SyncResponse()
+    sync.ret = 0
+    sync.utc_timestamp = timezone.utc_timestamp()
+
+    return [pack_msg(sync), pack_msg(response, session)]

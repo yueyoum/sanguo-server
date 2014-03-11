@@ -19,6 +19,12 @@ def message_response(message_name):
                 res = func(request, *args, **kwargs)
                 if res is None:
                     return HttpResponse(pack_msg(m), content_type='text/plain')
+                if isinstance(res, (list, tuple)):
+                    msg_amount = len(res)
+                    res = ''.join(res)
+                    response = HttpResponse(res, content_type='text/plain')
+                    response._msg_amount = msg_amount
+                    return response
                 return HttpResponse(res, content_type='text/plain')
             except SanguoException as e:
                 m.ret = e.error_id
