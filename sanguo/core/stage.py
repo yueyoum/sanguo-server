@@ -154,8 +154,8 @@ class Stage(object):
                     self.stage.stages[str(stage_id)] = star
 
             # 设置新关卡
-            if this_stage.next:
-                stage_new = this_stage.next
+            stage_new = getattr(this_stage, 'next', None)
+            if stage_new:
                 if str(stage_new) not in self.stage.stages:
                     if self.stage.stage_new != stage_new:
                         self.stage.stage_new = stage_new
