@@ -11,6 +11,8 @@ class Achievement(models.Model):
         (1, '多个ID条件'),
         (2, '单个ID条件'),
         (3, '数量条件'),
+        (4, '阀值数量条件'),
+        (5, '唯一数量条件'),
     )
     id = models.IntegerField(primary_key=True)
     tp = models.IntegerField("类型")

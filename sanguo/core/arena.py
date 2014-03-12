@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-import random
 
 __author__ = 'Wang Chao'
 __date__ = '1/22/14'
+
+import random
+from mongoengine import DoesNotExist
 
 from apps.character.models import Character
 
@@ -13,7 +15,7 @@ from core.drives import redis_client_two
 from core.character import Char
 from core.battle import PVP
 from core.counter import Counter
-from core.mongoscheme import MongoArenaTopRanks
+from core.mongoscheme import MongoArenaTopRanks, MongoArena
 from core.exception import CounterOverFlow, SyceeNotEnough, InvalidOperate
 from core.achievement import Achievement
 from core.task import Task
@@ -140,19 +142,38 @@ class Arena(object):
         b = PVP(self.char_id, rival_id, msg)
         b.start()
 
+        achievement = Achievement(self.char_id)
+
+        try:
+            mongo_arena = MongoArena.objects.get(id=self.char_id)
+        except DoesNotExist:
+            mongo_arena = MongoArena(id=self.char_id)
+            mongo_arena.rank = 0
+            mongo_arena.continues_win = 0
+
         if msg.self_win:
             score = ARENA_GET_SCORE_WHEN_WIN
-            achievement = Achievement(self.char_id)
             achievement.trig(7, 1)
-
+            mongo_arena.continues_win += 1
         else:
             score = ARENA_GET_SCORE_WHEN_LOST
+            mongo_arena.continues_win = 0
+
+        mongo_arena.save()
+        achievement.trig(26, mongo_arena.continues_win)
 
         if score:
             redis_client_two.zincrby(REDIS_DAY_KEY, self.char_id, score)
 
         t = Task(self.char_id)
         t.trig(2)
+
+        day_rank = self.day_rank
+        if day_rank == 1:
+            achievement.trig(25, 1)
+
+        rank_diff = self.day_rank - mongo_arena.rank
+        achievement.trig(24, rank_diff)
 
         self.send_notify()
         return msg

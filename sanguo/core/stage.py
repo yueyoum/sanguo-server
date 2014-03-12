@@ -138,6 +138,9 @@ class Stage(object):
 
         self.star = star
 
+
+        achievement = Achievement(self.char_id)
+
         if battle_msg.self_win:
             # 当前关卡通知
             msg = protomsg.CurrentStageNotify()
@@ -164,11 +167,14 @@ class Stage(object):
             elite.enable_by_condition_id(stage_id)
 
             if stage_id == 10:
-                achievement = Achievement(self.char_id)
                 achievement.trig(6, 1)
+            if star:
+                achievement.trig(22, stage_id)
 
             t = Task(self.char_id)
             t.trig(1)
+        else:
+            achievement.trig(23, stage_id)
 
 
         return battle_msg
@@ -355,6 +361,10 @@ class Hang(TimerCheckAbstractBase):
         attachment = Attachment(self.char_id)
         attachment.save_to_prize(1)
 
+        actual_hours = actual_seconds / 3600
+        achievement = Achievement(self.char_id)
+        achievement.trig(35, actual_hours)
+
 
     def plundered(self, who, win):
         if not self.hang:
@@ -380,6 +390,9 @@ class Hang(TimerCheckAbstractBase):
 
         self.hang.logs.append(l)
         self.hang.save()
+
+        achievement = Achievement(self.char_id)
+        achievement.trig(38, 1)
 
 
 
@@ -443,6 +456,9 @@ class Hang(TimerCheckAbstractBase):
             e.level = 1
             e.step = 1
             e.amount = _amount
+
+        achievement = Achievement(self.char_id)
+        achievement.trig(36, drop_exp)
 
         return msg
 
@@ -677,6 +693,8 @@ class TeamBattle(TimerCheckAbstractBase):
                 self.char_id, self.mongo_tb.battle_id, self.mongo_tb.status
             ))
 
+        achievement = Achievement(self.char_id)
+
         friend_power = 0
         if friend_ids:
             f = Friend(self.char_id)
@@ -687,6 +705,8 @@ class TeamBattle(TimerCheckAbstractBase):
                 c = Char(fid)
                 friend_power += c.power
 
+            achievement.trig(30, len(friend_ids))
+
         self.mongo_tb.friend_ids.extend(friend_ids)
         self.mongo_tb.self_power += friend_power
         self.mongo_tb.start_at = timezone.utc_timestamp()
@@ -695,6 +715,8 @@ class TeamBattle(TimerCheckAbstractBase):
         step = random.uniform(1, 1.05) * self.mongo_tb.self_power / self.mongo_tb.boss_power * 0.0033
         self.mongo_tb.step = step
         self.mongo_tb.save()
+
+        achievement.trig(29, 1)
 
         self.send_notify()
 

@@ -231,6 +231,17 @@ class Equipment(MessageEquipmentMixin):
             ))
 
         self.mongo_item.save()
+
+        gem_full = True
+        for g in self.mongo_item.equipments[str(self.equip_id)].gems:
+            if g == 0:
+                gem_full = False
+                break
+
+        if gem_full:
+            achievement = Achievement(self.char_id)
+            achievement.trig(42, 1)
+
         return off_gem
 
     @equip_updated

@@ -211,9 +211,8 @@ class Hero(FightPowerMixin):
 
         achievement = Achievement(self.char_id)
         achievement.trig(10, 1)
-
-        if self.step == HERO_MAX_STEP:
-            achievement.trig(16, 1)
+        if self.hero.step == HERO_MAX_STEP:
+            achievement.trig(20, self.oid)
 
 
 
@@ -352,12 +351,13 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
             quality = all_heros[oid].quality
             if quality == 1:
                 achievement.trig(2, 1)
-            elif quality == 2:
-                achievement.trig(3, 1)
-            else:
-                achievement.trig(4, 1)
 
-        achievement.trig(5, length)
+            gender = all_heros[oid].gender
+            if gender == 2:
+                achievement.trig(40, 1)
+
+        char_heros_amount = MongoHero.objects.filter(char=char_id).count()
+        achievement.trig(41, char_heros_amount)
 
         return id_range
 

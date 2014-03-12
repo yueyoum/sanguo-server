@@ -241,6 +241,23 @@ class MongoCheckIn(Document):
     }
 
 
+class MongoEmbededContinuesRecord(EmbeddedDocument):
+    # date 上次干这件事情的日期， 只保留年月日
+    date = DateTimeField()
+    # days 连续做了多少天
+    days = IntField()
+
+
+class MongoContinues(Document):
+    id = IntField(primary_key=True)
+    # key 为 写死的对应功能的 string
+    records = MapField(EmbeddedDocumentField(MongoEmbededContinuesRecord))
+
+    meta = {
+        'collection': 'continues'
+    }
+
+
 class MongoTask(Document):
     id = IntField(primary_key=True)
     # key 为任务类型ID， value为此类型次数
@@ -279,6 +296,18 @@ class MongoArenaTopRanks(Document):
 
     meta = {
         'collection': 'arena_top_ranks'
+    }
+
+class MongoArena(Document):
+    id = IntField(primary_key=True)
+    # 每个人自己的排名
+    # 由定时任务每天更新，同时也可以统计每天的名字变化
+    rank = IntField()
+    # 连续胜利场次
+    continues_win = IntField(default=0)
+
+    meta = {
+        'collection': 'arena'
     }
 
 

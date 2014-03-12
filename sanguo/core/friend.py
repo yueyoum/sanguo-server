@@ -11,6 +11,7 @@ from core.mongoscheme import MongoFriend
 from core.character import Char
 from core.msgpipe import publish_to_char
 from core.exception import InvalidOperate, BadMessage, CharNotFound, SanguoException
+from core.achievement import Achievement
 
 import protomsg
 from protomsg import FRIEND_NOT, FRIEND_OK, FRIEND_ACK, FRIEND_APPLY
@@ -47,6 +48,15 @@ class Friend(object):
     def cur_amount(self):
         fs = self.mf.friends
         return len(fs)
+
+    @property
+    def real_cur_amount(self):
+        fs = self.mf.friends.values()
+        amount = 0
+        for f in fs:
+            if f == FRIEND_OK:
+                amount += 1
+        return amount
 
     def friends_list(self):
         """
@@ -199,6 +209,9 @@ class Friend(object):
     def someone_accept_me(self, from_id):
         self.mf.friends[str(from_id)] = FRIEND_OK
         self.mf.save()
+
+        achievement = Achievement(self.char_id)
+        achievement.trig(33, self.real_cur_amount)
 
         msg = protomsg.UpdateFriendNotify()
         self._msg_friend(msg.friend, from_id, FRIEND_OK)

@@ -3,10 +3,13 @@
 __author__ = 'Wang Chao'
 __date__ = '2/19/14'
 
+from mongoengine import DoesNotExist
+
 from _base import Logger
 from apps.config.models import ArenaReward
 from core.drives import redis_client_two
 from core.attachment import Attachment
+from core.mongoscheme import MongoArena
 
 from core.arena import REDIS_DAY_KEY, REDIS_WEEK_KEY
 
@@ -35,6 +38,17 @@ def reset():
         attachment.save_to_attachment(2, gold=gold)
 
         pipe.zincrby(REDIS_WEEK_KEY, char_id, score)
+
+        try:
+            mongo_rank = MongoArena.objects.get(id=char_id)
+        except DoesNotExist:
+            mongo_rank = MongoArena(id=char_id)
+            mongo_rank.rank = rank
+            mongo_rank.save()
+        else:
+            last_rank = mongo_rank.rank
+            mongo_rank.rank = rank
+            mongo_rank.save()
 
     pipe.execute()
     logger.write("Reset Arena Day: Complete")

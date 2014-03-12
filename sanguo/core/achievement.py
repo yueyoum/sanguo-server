@@ -48,6 +48,7 @@ class Achievement(object):
         decoded_condition_value = ach.decoded_condition_value()
 
         if ach.mode == 1:
+            # 多个ID条件
             if new_value not in decoded_condition_value:
                 return
 
@@ -68,20 +69,22 @@ class Achievement(object):
                 self.achievement.doing[str_id] = ','.join([str(i) for i in values])
 
         elif ach.mode == 2:
+            # 单个ID条件
             if new_value != decoded_condition_value:
                 return
             # FINISH
             self.achievement.finished.append(achievement_id)
             attachment.save_to_prize(4)
 
-        else:
+        elif ach.mode == 3:
+            # 普通数量条件 数量累加
             if str_id in self.achievement.doing:
                 value = self.achievement.doing[str_id]
             else:
                 value = 0
 
             value += new_value
-            if new_value >= ach.decoded_condition_value():
+            if value >= decoded_condition_value:
                 # FINISH
                 self.achievement.finished.append(achievement_id)
                 if str_id in self.achievement.doing:
@@ -90,11 +93,42 @@ class Achievement(object):
             else:
                 self.achievement.doing[str_id] = value
 
+        elif ach.mode == 4:
+            # 阀值数量条件 trig
+            # 这里不叠加，只是简单的比较
+            if new_value >= decoded_condition_value:
+                # FINISH
+                self.achievement.finished.append(achievement_id)
+                if str_id in self.achievement.doing:
+                    self.achievement.doing.pop(str_id)
+                attachment.save_to_prize(4)
+            else:
+                self.achievement.doing[str_id] = new_value
+
+        else:
+            # 唯一数量条件 trig 会将一系列id发来，这里要存储id列表，相同id不保存，最后统计这个列表元素的数量
+            if str_id in self.achievement.doing:
+                values = [int(i) for i in self.achievement.doing[str_id].split(',')]
+            else:
+                values = []
+
+            if new_value not in values:
+                values.append(new_value)
+
+            if len(values) >= decoded_condition_value:
+                # FINISH
+                self.achievement.finished.append(achievement_id)
+                self.achievement.doing.pop(str_id)
+                attachment.save_to_prize(4)
+            else:
+                self.achievement.doing[str_id] = ','.join([str(i) for i in values])
+
+
         self.achievement.save()
 
-        msg = UpdateAchievementNotify()
-        self._fill_up_achievement_msg(msg.achievement, ach)
-        publish_to_char(self.char_id, pack_msg(msg))
+        # msg = UpdateAchievementNotify()
+        # self._fill_up_achievement_msg(msg.achievement, ach)
+        # publish_to_char(self.char_id, pack_msg(msg))
 
 
     def get_reward(self, achievement_id):
@@ -114,9 +148,9 @@ class Achievement(object):
         self.achievement.complete.append(achievement_id)
         self.achievement.save()
 
-        msg = UpdateAchievementNotify()
-        self._fill_up_achievement_msg(msg.achievement, ach)
-        publish_to_char(self.char_id, pack_msg(msg))
+        # msg = UpdateAchievementNotify()
+        # self._fill_up_achievement_msg(msg.achievement, ach)
+        # publish_to_char(self.char_id, pack_msg(msg))
 
         msg = MsgAttachment()
         msg.sycee = ach.sycee
@@ -125,6 +159,7 @@ class Achievement(object):
 
 
     def send_notify(self):
+        return
         all_achievements = ModelAchievement.all()
 
         msg = AchievementNotify()
@@ -163,7 +198,10 @@ class Achievement(object):
             msg.cach.condition = decoded_condition_value
             if msg.status == MsgAchievement.DOING:
                 if str(ach.id) in self.achievement.doing:
-                    msg.cach.current = int(self.achievement.doing[str(ach.id)])
+                    if ach.mode == 5:
+                        msg.cach.current = len(self.achievement.doing[str(ach.id)].split(','))
+                    else:
+                        msg.cach.current = int(self.achievement.doing[str(ach.id)])
                 else:
                     msg.cach.current = 0
             else:

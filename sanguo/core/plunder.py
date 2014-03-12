@@ -156,6 +156,9 @@ class Plunder(object):
         t = Task(self.char_id)
         t.trig(3)
 
+        achievement = Achievement(self.char_id)
+        achievement.trig(27, 1)
+
         if msg.self_win:
             drop_official_exp = PLUNDER_GET_OFFICIAL_EXP_WHEN_WIN
             # FIXME drop_gold
@@ -164,7 +167,6 @@ class Plunder(object):
             char = Char(self.char_id)
             char.update(gold=drop_gold, official_exp=drop_official_exp, des='Plunder Reward')
 
-            achievement = Achievement(self.char_id)
             achievement.trig(8, 1)
 
             drop_hero_id = 0

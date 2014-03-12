@@ -33,3 +33,8 @@ def local_timestamp():
 def hours_delta(h):
     now = datetime.datetime.now()
     return now + datetime.timedelta(hours=h)
+
+def make_date(source=None):
+    if not source:
+        source = localnow()
+    return datetime.datetime(year=source.year, month=source.month, day=source.day)

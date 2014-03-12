@@ -118,6 +118,8 @@ class Char(object):
         char.gold += gold
         char.sycee += sycee
 
+        achievement = Achievement(self.id)
+
         if exp:
             new_exp = char.exp + exp
             level = char.level
@@ -132,6 +134,8 @@ class Char(object):
 
             char.exp = new_exp
             char.level = level
+
+            achievement.trig(34, char.level)
 
             if char.level != old_level:
                 char_updated_signal.send(
@@ -154,6 +158,9 @@ class Char(object):
 
             char.official = official_level
             char.off_exp = new_official_exp
+
+            if char.off_exp > old_official_level:
+                achievement.trig(31, 1)
 
             des = '{0}. Official {1} to {2}'.format(des, old_official_level, char.official)
 
@@ -185,9 +192,8 @@ class Char(object):
 
         mongo_char.save()
 
-        achievement = Achievement(self.id)
-        if gold < 0:
-            achievement.trig(13, abs(gold))
+
+        achievement.trig(37, char.gold)
         if sycee < 0:
             achievement.trig(14, abs(sycee))
 
