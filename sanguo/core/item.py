@@ -197,7 +197,7 @@ class Equipment(MessageEquipmentMixin):
                 self.char_id, self.equip_id
             ))
 
-        char.update(gold=-EQUIP_STEP_UP_COST_GOLD, des='Equipment Step up. {1} step up from {2} to {3}'.format(
+        char.update(gold=-EQUIP_STEP_UP_COST_GOLD, des='Equipment Step up. {0} step up from {1} to {2}'.format(
             self.equip_id, self.mongo_item.equipments[str(self.equip_id)].oid, to
         ))
 
