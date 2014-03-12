@@ -154,12 +154,13 @@ class Stage(object):
                     self.stage.stages[str(stage_id)] = star
 
             # 设置新关卡
-            stage_new = this_stage.next
-            if str(stage_new) not in self.stage.stages:
-                if self.stage.stage_new != stage_new:
-                    self.stage.stage_new = stage_new
+            if this_stage.next:
+                stage_new = this_stage.next
+                if str(stage_new) not in self.stage.stages:
+                    if self.stage.stage_new != stage_new:
+                        self.stage.stage_new = stage_new
 
-                    self.send_new_stage_notify()
+                        self.send_new_stage_notify()
             self.stage.save()
 
             # 开启精英关卡
