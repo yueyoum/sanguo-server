@@ -411,7 +411,7 @@ class Hang(TimerCheckAbstractBase):
         def _gaussian(drops):
             for index, d in enumerate(drops):
                 prob = d[1]
-                new_prob = times * prob * (1 + GAUSSIAN_TABLE[round(random.uniform(0, 1), 2)] * 0.08)
+                new_prob = times * prob * (1 + GAUSSIAN_TABLE[round(random.uniform(0.01, 0.99), 2)] * 0.08)
                 drops[index] = [d[0], new_prob]
 
         _gaussian(drop_equips)
