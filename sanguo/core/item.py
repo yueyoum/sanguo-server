@@ -371,7 +371,7 @@ class Item(MessageEquipmentMixin):
 
         if this_equip.step == 6:
             achievement = Achievement(self.char_id)
-            achievement.trig(17, 1)
+            achievement.trig(32, 1)
 
 
         return new_id

@@ -69,7 +69,7 @@ def save_achievement_cache(*args, **kwargs):
     conditions = {}
     for a in achieves:
         data[a.id] = a
-        conditions.setdefault(a.id, []).append(a)
+        conditions.setdefault(a.condition_id, []).append(a)
 
     cache.set('achievement', data, expire=None)
     cache.set('achievement_conditions', conditions, expire=None)
