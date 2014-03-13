@@ -49,7 +49,7 @@ class Formation(object):
                 socket_obj=socket
             )
 
-            msg = protomsg.SocketNotify()
+            msg = protomsg.UpdateSocketNotify()
             s = msg.sockets.add()
             self._msg_socket(s, socket_id, socket)
             publish_to_char(self.char_id, pack_msg(msg))

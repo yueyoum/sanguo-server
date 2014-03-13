@@ -41,6 +41,7 @@ RESPONSE_NOTIFY_TYPE = {
     "FormationNotify": 402,
     "AddSocketNotify": 403,
     "SocketNotify": 404,
+    "UpdateSocketNotify": 407,
     "SetSocketResponse": 406,
     "AlreadyStageNotify": 500,
     "CurrentStageNotify": 501,
