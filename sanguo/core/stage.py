@@ -272,7 +272,8 @@ class Hang(TimerCheckAbstractBase):
         try:
             self.hang_remained = MongoHangRemainedTime.objects.get(id=self.char_id)
         except DoesNotExist:
-            self.hang_remained = MongoHangRemainedTime(id=self.char_id)
+            self.hang_remained = MongoHangRemainedTime()
+            self.hang_remained.id = self.char_id
 
             if self.hang:
                 self.hang_remained.crossed = True
@@ -317,7 +318,7 @@ class Hang(TimerCheckAbstractBase):
             start=timezone.utc_timestamp(),
             finished=False,
             remained=self.hang_remained.remained,
-            actual_hours=0,
+            actual_seconds=0,
             logs=[],
             plunder_gold=0,
             plunder_time=0,
@@ -386,7 +387,7 @@ class Hang(TimerCheckAbstractBase):
         l.name = who
         l.gold = gold
 
-        if len(self.hang.logs) >= 20:
+        if len(self.hang.logs) >= 5:
             self.hang.logs.pop(0)
 
         self.hang.logs.append(l)
@@ -474,14 +475,21 @@ class Hang(TimerCheckAbstractBase):
     def send_notify(self):
         msg = protomsg.HangNotify()
         if self.hang:
-            msg.remained_time = self.hang_remained.remained - (timezone.utc_timestamp() - self.hang.start)
+            used_time = timezone.utc_timestamp() - self.hang.start
+            msg.remained_time = self.hang_remained.remained - used_time
             msg.hang.stage_id = self.hang.stage_id
             msg.hang.start_time = self.hang.start
+            if self.hang.finished:
+                msg.hang.used_time = self.hang.actual_seconds
+            else:
+                msg.hang.used_time = used_time
+
             msg.hang.finished = self.hang.finished
 
             times = (timezone.utc_timestamp() - self.hang.start) / 15
             stage = ModelStage.all()[self.hang.stage_id]
             msg.hang.rewared_gold = stage.normal_gold * times + self.hang.plunder_gold
+            msg.hang.rewared_exp = stage.normal_exp * times
 
             for l in self.hang.logs:
                 msg_log = msg.logs.add()
