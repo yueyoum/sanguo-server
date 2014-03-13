@@ -146,12 +146,17 @@ class Equipment(MessageEquipmentMixin):
         old_level = self.mongo_item.equipments[str(self.equip_id)].level
 
         if quick:
+            quick_times = 0
             while True:
                 try:
                     all_gold_needs += _up()
                 except SanguoException:
-                    break
+                    if quick_times == 0:
+                        raise
+                    else:
+                        break
                 else:
+                    quick_times += 1
                     msg = protomsg.Equip()
                     self._msg_equip(msg, self.equip_id, self.mongo_item.equipments[str(self.equip_id)], self)
                     equip_msgs.append(msg)
