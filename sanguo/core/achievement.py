@@ -126,9 +126,9 @@ class Achievement(object):
 
         self.achievement.save()
 
-        # msg = UpdateAchievementNotify()
-        # self._fill_up_achievement_msg(msg.achievement, ach)
-        # publish_to_char(self.char_id, pack_msg(msg))
+        msg = UpdateAchievementNotify()
+        self._fill_up_achievement_msg(msg.achievement, ach)
+        publish_to_char(self.char_id, pack_msg(msg))
 
 
     def get_reward(self, achievement_id):
@@ -148,9 +148,9 @@ class Achievement(object):
         self.achievement.complete.append(achievement_id)
         self.achievement.save()
 
-        # msg = UpdateAchievementNotify()
-        # self._fill_up_achievement_msg(msg.achievement, ach)
-        # publish_to_char(self.char_id, pack_msg(msg))
+        msg = UpdateAchievementNotify()
+        self._fill_up_achievement_msg(msg.achievement, ach)
+        publish_to_char(self.char_id, pack_msg(msg))
 
         msg = MsgAttachment()
         msg.sycee = ach.sycee
@@ -159,7 +159,6 @@ class Achievement(object):
 
 
     def send_notify(self):
-        return
         all_achievements = ModelAchievement.all()
 
         msg = AchievementNotify()
