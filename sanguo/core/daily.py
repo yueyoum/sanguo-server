@@ -6,14 +6,15 @@ __date__ = '1/6/14'
 import datetime
 import random
 
+from mongoengine import DoesNotExist
+
+
 from apps.item.models import Gem as ModelGem
 from apps.official.models import Official as ModelOfficial
-from mongoengine import DoesNotExist
 from core.mongoscheme import MongoCheckIn, MongoEmbededContinuesRecord, MongoContinues
 from core.msgpipe import publish_to_char
 from core.exception import InvalidOperate
 from core.character import Char
-from core.item import Item
 from core.counter import Counter
 from core.attachment import Attachment
 from core.achievement import Achievement
@@ -49,6 +50,8 @@ class CheckIn(object):
         msg = CheckInResponse()
         msg.ret = 0
         if self.c.days == MAX_DAYS:
+            from core.item import Item
+
             msg.reward.sycee = 100
             stuff = msg.reward.stuffs.add()
             stuff.id = 22
