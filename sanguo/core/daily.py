@@ -95,7 +95,7 @@ class CheckIn(object):
 
     def send_notify(self):
         m = CheckInNotify()
-        m.checkin = not self.c.has_checked
+        m.checkin = self.c.has_checked
         m.days = self.c.days
         m.max_days = MAX_DAYS
 
