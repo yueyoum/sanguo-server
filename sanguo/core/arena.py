@@ -31,6 +31,8 @@ SCORE_DIFF = 100
 class Arena(object):
     def __init__(self, char_id):
         self.char_id = char_id
+        if not self.day_score:
+            redis_client_two.zincrby(REDIS_DAY_KEY, self.char_id, 1)
 
     @property
     def day_rank(self):
