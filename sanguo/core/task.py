@@ -10,6 +10,8 @@ from apps.task.models import Task as ModelTask
 
 from core.character import Char
 from core.attachment import Attachment
+from core.achievement import Achievement
+from core.daily import Continues
 
 from core.msgpipe import publish_to_char
 from core.exception import InvalidOperate
@@ -113,11 +115,28 @@ class Task(object):
         self.task.save()
         self.send_notify()
 
+        if self.all_complete(all_tasks=all_tasks):
+            achievement = Achievement(self.char_id)
+            achievement.trig(43, 1)
+
+            c = Continues(self.char_id)
+            c.set('task')
+
         msg = MsgAttachment()
         msg.gold = gold
         msg.sycee = sycee
         return msg
 
+
+    def all_complete(self, all_tasks=None):
+        if not all_tasks:
+            all_tasks = ModelTask.all()
+        for tid in self.task.doing:
+            this_task = all_tasks[tid]
+            if this_task.next_task:
+                return False
+
+        return True
 
 
     def send_notify(self):

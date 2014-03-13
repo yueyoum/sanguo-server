@@ -16,6 +16,8 @@ from core.character import Char
 from core.item import Item
 from core.counter import Counter
 from core.attachment import Attachment
+from core.achievement import Achievement
+
 from utils import pack_msg
 from utils import timezone
 
@@ -147,6 +149,11 @@ class Continues(object):
         # task              每天完成所有任务
         # login_reward      每天领取登录奖励
 
+        CONDITION_ID = {
+            'task': 44,
+            'login_reward': 45
+        }
+
         today = timezone.make_date()
 
         if func_name in self.mongo_c.records:
@@ -154,25 +161,25 @@ class Continues(object):
             record_date_plus_one_day = this_record.date + datetime.timedelta(days=1)
             if today < record_date_plus_one_day:
                 # 还在当天
-                return
-
-            if today == record_date_plus_one_day:
+                pass
+            elif today == record_date_plus_one_day:
                 # 连续一天 要的就是这个
                 self.mongo_c.records[func_name].date = today
                 self.mongo_c.records[func_name].days += 1
-                self.mongo_c.save()
-                # TODO achievement notify
-                return
+            else:
+                # 没有连续，重置days
+                self.mongo_c.records[func_name].date = today
+                self.mongo_c.records[func_name].days = 1
+        else:
+            record = MongoEmbededContinuesRecord()
+            record.date = today
+            record.days = 1
+            self.mongo_c.records[func_name] = record
 
-            # 没有连续，重置days
-            self.mongo_c.records[func_name].date = today
-            self.mongo_c.records[func_name].days = 1
-            self.mongo_c.save()
-            return
-
-        self.mongo_c.records[func_name].date = today
-        self.mongo_c.records[func_name].days = 1
         self.mongo_c.save()
+
+        achievement = Achievement(self.char_id)
+        achievement.trig(CONDITION_ID[func_name], self.mongo_c.records[func_name].days)
 
 
 

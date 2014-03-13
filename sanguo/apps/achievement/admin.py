@@ -16,7 +16,7 @@ class AchievementAdmin(ImportExportModelAdmin):
     'sycee', 'buff_used_for', 'buff_name', 'buff_value'
     )
 
-    list_filter = ('condition_id',)
+    list_filter = ('mode', 'condition_id',)
 
     resource_class = AchievementResources
 
