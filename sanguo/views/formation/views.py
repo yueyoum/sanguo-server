@@ -113,10 +113,7 @@ def set_socket(request):
             hero_id=off_hero_id,
         )
 
-    response = SetSocketResponse()
-    response.ret = 0
-    response.socket.MergeFrom(req.socket)
-    return pack_msg(response)
+    return None
 
 
 @message_response("SetFormationResponse")

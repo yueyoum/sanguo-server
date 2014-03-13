@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='formation.proto',
   package='Sanguo.protocol.formation',
-  serialized_pb='\n\x0f\x66ormation.proto\x12\x19Sanguo.protocol.formation\"^\n\x06Socket\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0f\n\x07hero_id\x18\x02 \x02(\x05\x12\x11\n\tweapon_id\x18\x03 \x02(\x05\x12\x10\n\x08\x61rmor_id\x18\x04 \x02(\x05\x12\x12\n\njewelry_id\x18\x05 \x02(\x05\"\"\n\x0f\x41\x64\x64SocketNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"V\n\x10SetSocketRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\x06socket\x18\x02 \x02(\x0b\x32!.Sanguo.protocol.formation.Socket\"d\n\x11SetSocketResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x31\n\x06socket\x18\x03 \x01(\x0b\x32!.Sanguo.protocol.formation.Socket\":\n\x13SetFormationRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nsocket_ids\x18\x02 \x03(\x05\"4\n\x14SetFormationResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"S\n\x0cSocketNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x07sockets\x18\x02 \x03(\x0b\x32!.Sanguo.protocol.formation.Socket\"6\n\x0f\x46ormationNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nsocket_ids\x18\x02 \x03(\x05')
+  serialized_pb='\n\x0f\x66ormation.proto\x12\x19Sanguo.protocol.formation\"^\n\x06Socket\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0f\n\x07hero_id\x18\x02 \x02(\x05\x12\x11\n\tweapon_id\x18\x03 \x02(\x05\x12\x10\n\x08\x61rmor_id\x18\x04 \x02(\x05\x12\x12\n\njewelry_id\x18\x05 \x02(\x05\"\"\n\x0f\x41\x64\x64SocketNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"V\n\x10SetSocketRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\x06socket\x18\x02 \x02(\x0b\x32!.Sanguo.protocol.formation.Socket\"1\n\x11SetSocketResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\":\n\x13SetFormationRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nsocket_ids\x18\x02 \x03(\x05\"4\n\x14SetFormationResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"S\n\x0cSocketNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x07sockets\x18\x02 \x03(\x0b\x32!.Sanguo.protocol.formation.Socket\"6\n\x0f\x46ormationNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nsocket_ids\x18\x02 \x03(\x05')
 
 
 
@@ -158,13 +158,6 @@ _SETSOCKETRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
-    _descriptor.FieldDescriptor(
-      name='socket', full_name='Sanguo.protocol.formation.SetSocketResponse.socket', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
   ],
   extensions=[
   ],
@@ -175,7 +168,7 @@ _SETSOCKETRESPONSE = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=266,
-  serialized_end=366,
+  serialized_end=315,
 )
 
 
@@ -209,8 +202,8 @@ _SETFORMATIONREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=368,
-  serialized_end=426,
+  serialized_start=317,
+  serialized_end=375,
 )
 
 
@@ -244,8 +237,8 @@ _SETFORMATIONRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=428,
-  serialized_end=480,
+  serialized_start=377,
+  serialized_end=429,
 )
 
 
@@ -279,8 +272,8 @@ _SOCKETNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=482,
-  serialized_end=565,
+  serialized_start=431,
+  serialized_end=514,
 )
 
 
@@ -314,12 +307,11 @@ _FORMATIONNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=567,
-  serialized_end=621,
+  serialized_start=516,
+  serialized_end=570,
 )
 
 _SETSOCKETREQUEST.fields_by_name['socket'].message_type = _SOCKET
-_SETSOCKETRESPONSE.fields_by_name['socket'].message_type = _SOCKET
 _SOCKETNOTIFY.fields_by_name['sockets'].message_type = _SOCKET
 DESCRIPTOR.message_types_by_name['Socket'] = _SOCKET
 DESCRIPTOR.message_types_by_name['AddSocketNotify'] = _ADDSOCKETNOTIFY

@@ -49,6 +49,11 @@ class Formation(object):
                 socket_obj=socket
             )
 
+            msg = protomsg.SocketNotify()
+            s = msg.sockets.add()
+            self._msg_socket(s, socket_id, socket)
+            publish_to_char(self.char_id, pack_msg(msg))
+
         return socket_id
 
 
@@ -92,15 +97,19 @@ class Formation(object):
         return None
 
 
+    def _msg_socket(self, msg, _id, socket):
+        msg.id = _id
+        msg.hero_id = socket.hero or 0
+        msg.weapon_id = socket.weapon or 0
+        msg.armor_id = socket.armor or 0
+        msg.jewelry_id = socket.jewelry or 0
+
+
     def send_socket_notify(self):
         msg = protomsg.SocketNotify()
         for k, v in self.formation.sockets.iteritems():
             s = msg.sockets.add()
-            s.id = int(k)
-            s.hero_id = v.hero or 0
-            s.weapon_id = v.weapon or 0
-            s.armor_id = v.armor or 0
-            s.jewelry_id = v.jewelry or 0
+            self._msg_socket(s, int(k), v)
 
         publish_to_char(self.char_id, pack_msg(msg))
 
