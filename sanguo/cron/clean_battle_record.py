@@ -4,12 +4,11 @@ import datetime
 from _base import Logger
 
 from django.conf import settings
-from utils.timezone import localnow
 
 DAYS_DIFF = 7
 
 def clean():
-    now = localnow()
+    now = datetime.datetime.now()
     DAY = now - datetime.timedelta(days=DAYS_DIFF)
 
     BATTLE_RECORD_PATH = settings.BATTLE_RECORD_PATH
