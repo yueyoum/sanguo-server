@@ -475,14 +475,17 @@ class Hang(TimerCheckAbstractBase):
     def send_notify(self):
         msg = protomsg.HangNotify()
         if self.hang:
-            used_time = timezone.utc_timestamp() - self.hang.start
-            msg.remained_time = self.hang_remained.remained - used_time
             msg.hang.stage_id = self.hang.stage_id
             msg.hang.start_time = self.hang.start
             if self.hang.finished:
                 msg.hang.used_time = self.hang.actual_seconds
+                msg.remained_time = self.hang_remained.remained
             else:
+                used_time = timezone.utc_timestamp() - self.hang.start
+
                 msg.hang.used_time = used_time
+                msg.remained_time = self.hang_remained.remained - used_time
+
 
             msg.hang.finished = self.hang.finished
 
