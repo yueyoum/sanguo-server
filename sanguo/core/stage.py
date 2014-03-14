@@ -489,7 +489,7 @@ class Hang(TimerCheckAbstractBase):
 
             msg.hang.finished = self.hang.finished
 
-            times = (timezone.utc_timestamp() - self.hang.start) / 15
+            times = msg.hang.used_time / 15
             stage = ModelStage.all()[self.hang.stage_id]
             msg.hang.rewared_gold = stage.normal_gold * times + self.hang.plunder_gold
             msg.hang.rewared_exp = stage.normal_exp * times
