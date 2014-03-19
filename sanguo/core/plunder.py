@@ -33,7 +33,7 @@ from preset.settings import PLUNDER_COST_SYCEE, PLUNDER_GET_OFFICIAL_EXP_WHEN_LO
 
 logger = logging.getLogger('sanguo')
 
-PLUNDER_LEVEL_DIFF = 3
+PLUNDER_LEVEL_DIFF = 10
 
 class Plunder(object):
     def __init__(self, char_id):
@@ -51,7 +51,7 @@ class Plunder(object):
         cache_char = char.cacheobj
         char_level = cache_char.level
 
-        choosing_list = MongoHang.objects(Q(char_level__gte=char_level-PLUNDER_LEVEL_DIFF) & Q(char_level__lte=char_level+PLUNDER_LEVEL_DIFF))
+        choosing_list = MongoHang.objects(Q(char_level__gte=char_level-PLUNDER_LEVEL_DIFF) & Q(char_level__lte=char_level+PLUNDER_LEVEL_DIFF) & Q(id__ne=self.char_id))
         choosing_id_list = [(c.id, c.stage_id) for c in choosing_list]
         choosing_id_dict = dict(choosing_id_list)
         ids = []
@@ -124,24 +124,8 @@ class Plunder(object):
             raise InvalidOperate("Plunder: Char {0} Try to Pluner {1} which is not in plunder list".format(self.char_id, _id))
 
         counter = Counter(self.char_id, 'plunder')
-        try:
-            # 免费次数
-            counter.incr()
-        except CounterOverFlow:
-            # 使用元宝次数
-            counter = Counter(self.char_id, 'plunder_sycee')
-            try:
-                counter.incr()
-            except CounterOverFlow:
-                raise InvalidOperate("Plunder: Char {0} Try to Plunder {1}. But no times available".format(self.char_id, _id))
-            else:
-                # 使用元宝
-                c = Char(self.char_id)
-                cache_char = c.cacheobj
-                if cache_char.sycee < PLUNDER_COST_SYCEE:
-                    raise SyceeNotEnough("Plunder: Char {0} Try to Plunder {1}. But Sycee NOT enough".format(self.char_id, _id))
-
-                c.update(sycee=-PLUNDER_COST_SYCEE, des='Plunder Battle Cost')
+        if counter.remained_value <= 0:
+            raise InvalidOperate("Plunder: Char {0} Try to Plunder {1}. But no times available".format(self.char_id, _id))
 
         msg = MsgBattle()
         pvp = PVP(self.char_id, _id, msg)
@@ -160,6 +144,8 @@ class Plunder(object):
         achievement.trig(27, 1)
 
         if msg.self_win:
+            counter.incr()
+
             drop_official_exp = PLUNDER_GET_OFFICIAL_EXP_WHEN_WIN
             # FIXME drop_gold
             drop_gold = mongo_plunder_list.chars[str(_id)].gold
