@@ -298,6 +298,27 @@ class MongoArenaTopRanks(Document):
         'collection': 'arena_top_ranks'
     }
 
+class MongoArenaDay(Document):
+    id = IntField(primary_key=True)
+    score = IntField()
+
+    meta = {
+        'collection': 'arena_day',
+        'indexes': ['score',]
+    }
+
+MongoArenaDay.ensure_indexes()
+
+
+class MongoArenaWeek(Document):
+    id = IntField(primary_key=True)
+    score = IntField()
+    rank = IntField()
+
+    meta = {
+        'collection': 'arena_week'
+    }
+
 class MongoArena(Document):
     id = IntField(primary_key=True)
     # 每个人自己的排名
