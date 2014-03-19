@@ -14,7 +14,7 @@ class StoreAdmin(ImportExportModelAdmin):
     list_display = (
         'id', 'tag_id', 'item_tp', 'item',
         'sell_tp', 'original_price', 'sell_price',
-        'total_amount', 'limit_amount', 'vip_condition'
+        'total_amount', 'limit_amount', 'vip_condition', 'char_level',
     )
 
     resource_class = StoreResources

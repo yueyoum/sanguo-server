@@ -43,6 +43,7 @@ class Store(models.Model):
     limit_amount = models.IntegerField("每人每天限够", default=0, help_text='0表示没有限制')
 
     vip_condition = models.IntegerField("VIP等级需求", default=0, help_text='多少级VIP以上才能购买')
+    char_level = models.IntegerField("君主等级")
 
     class Meta:
         db_table = 'store'
