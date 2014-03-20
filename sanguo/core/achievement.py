@@ -12,7 +12,7 @@ from apps.achievement.models import Achievement as ModelAchievement
 from core.msgpipe import publish_to_char
 from utils import pack_msg
 
-from protomsg import AchievementNotify, UpdateAchievementNotify, AddAchievementNotify, RemoveAchievementNotify
+from protomsg import AchievementNotify, UpdateAchievementNotify
 from protomsg import Achievement as MsgAchievement
 from protomsg import Attachment as MsgAttachment
 
@@ -152,17 +152,14 @@ class Achievement(object):
 
         self.achievement.save()
 
-        if ach.next:
-            add_msg = AddAchievementNotify()
-            self._fill_up_achievement_msg(add_msg.achievement, ACHIEVEMENT_ALL[ach.next])
-            publish_to_char(self.char_id, pack_msg(add_msg))
 
-            rm_msg = RemoveAchievementNotify()
-            rm_msg.id = ach.id
-            publish_to_char(self.char_id, pack_msg(rm_msg))
-        else:
+        msg = UpdateAchievementNotify()
+        self._fill_up_achievement_msg(msg.achievement, ach)
+        publish_to_char(self.char_id, pack_msg(msg))
+
+        if ach.next:
             msg = UpdateAchievementNotify()
-            self._fill_up_achievement_msg(msg.achievement, ach)
+            self._fill_up_achievement_msg(msg.achievement, ACHIEVEMENT_ALL[ach.next])
             publish_to_char(self.char_id, pack_msg(msg))
 
         msg = MsgAttachment()
@@ -172,21 +169,19 @@ class Achievement(object):
 
 
     def send_notify(self):
-        # all_achievements = ModelAchievement.all()
-        #
-        # msg = AchievementNotify()
-        # for v in all_achievements.values():
-        #     a = msg.achievements.add()
-        #     self._fill_up_achievement_msg(a, v)
-        #
-        # publish_to_char(self.char_id, pack_msg(msg))
-
         msg = AchievementNotify()
-        for i in self.achievement.display:
+        for v in ACHIEVEMENT_ALL.values():
             a = msg.achievements.add()
-            self._fill_up_achievement_msg(a, ACHIEVEMENT_ALL[i])
+            self._fill_up_achievement_msg(a, v)
 
         publish_to_char(self.char_id, pack_msg(msg))
+
+        # msg = AchievementNotify()
+        # for i in self.achievement.display:
+        #     a = msg.achievements.add()
+        #     self._fill_up_achievement_msg(a, ACHIEVEMENT_ALL[i])
+        #
+        # publish_to_char(self.char_id, pack_msg(msg))
 
 
     def _fill_up_achievement_msg(self, msg, ach):
@@ -199,6 +194,7 @@ class Achievement(object):
             status = MsgAchievement.DOING
 
         msg.status = status
+        msg.show = ach.id in self.achievement.display
 
         decoded_condition_value = ach.decoded_condition_value()
 
