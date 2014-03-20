@@ -11,7 +11,6 @@ from apps.task.models import Task as ModelTask
 from core.character import Char
 from core.attachment import Attachment
 from core.achievement import Achievement
-from core.daily import Continues
 
 from core.msgpipe import publish_to_char
 from core.exception import InvalidOperate
@@ -83,6 +82,7 @@ class Task(object):
 
 
     def get_reward(self, _id):
+        # FIXME 重复领奖？？？
         all_tasks = ModelTask.all()
         try:
             this_task = all_tasks[_id]
@@ -117,10 +117,7 @@ class Task(object):
 
         if self.all_complete(all_tasks=all_tasks):
             achievement = Achievement(self.char_id)
-            achievement.trig(43, 1)
-
-            c = Continues(self.char_id)
-            c.set('task')
+            achievement.trig(30, 1)
 
         msg = MsgAttachment()
         msg.gold = gold

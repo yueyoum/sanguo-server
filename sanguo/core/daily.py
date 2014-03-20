@@ -3,25 +3,19 @@
 __author__ = 'Wang Chao'
 __date__ = '1/6/14'
 
-import datetime
 import random
 
 from mongoengine import DoesNotExist
-
-
 from apps.item.models import Gem as ModelGem
 from apps.official.models import Official as ModelOfficial
-from core.mongoscheme import MongoCheckIn, MongoEmbededContinuesRecord, MongoContinues
+from core.mongoscheme import MongoCheckIn
 from core.msgpipe import publish_to_char
 from core.exception import InvalidOperate
 from core.character import Char
 from core.counter import Counter
 from core.attachment import Attachment
 from core.achievement import Achievement
-
 from utils import pack_msg
-from utils import timezone
-
 from protomsg import CheckInNotify, CheckInResponse, Attachment as MsgAttachment
 
 
@@ -83,6 +77,10 @@ class CheckIn(object):
             char.update(sycee=100, des='Daily Checkin')
 
         self.c.save()
+
+        achievement = Achievement(self.char_id)
+        achievement.trig(34, 1)
+
         return msg
 
 
@@ -135,54 +133,54 @@ class OfficalDailyReward(object):
         msg.gold = gold
         return msg
 
-
-class Continues(object):
-    def __init__(self, char_id):
-        self.char_id = char_id
-        try:
-            self.mongo_c = MongoContinues.objects.get(id=self.char_id)
-        except DoesNotExist:
-            self.mongo_c = MongoContinues(id=self.char_id)
-            self.mongo_c.records = {}
-            self.mongo_c.save()
-
-
-    def set(self, func_name):
-        # func_name in:
-        # task              每天完成所有任务
-        # login_reward      每天领取登录奖励
-
-        CONDITION_ID = {
-            'task': 44,
-            'login_reward': 45
-        }
-
-        today = timezone.make_date()
-
-        if func_name in self.mongo_c.records:
-            this_record = self.mongo_c.records[func_name]
-            record_date_plus_one_day = this_record.date + datetime.timedelta(days=1)
-            if today < record_date_plus_one_day:
-                # 还在当天
-                pass
-            elif today == record_date_plus_one_day:
-                # 连续一天 要的就是这个
-                self.mongo_c.records[func_name].date = today
-                self.mongo_c.records[func_name].days += 1
-            else:
-                # 没有连续，重置days
-                self.mongo_c.records[func_name].date = today
-                self.mongo_c.records[func_name].days = 1
-        else:
-            record = MongoEmbededContinuesRecord()
-            record.date = today
-            record.days = 1
-            self.mongo_c.records[func_name] = record
-
-        self.mongo_c.save()
-
-        achievement = Achievement(self.char_id)
-        achievement.trig(CONDITION_ID[func_name], self.mongo_c.records[func_name].days)
-
-
-
+#
+# class Continues(object):
+#     def __init__(self, char_id):
+#         self.char_id = char_id
+#         try:
+#             self.mongo_c = MongoContinues.objects.get(id=self.char_id)
+#         except DoesNotExist:
+#             self.mongo_c = MongoContinues(id=self.char_id)
+#             self.mongo_c.records = {}
+#             self.mongo_c.save()
+#
+#
+#     def set(self, func_name):
+#         # func_name in:
+#         # task              每天完成所有任务
+#         # login_reward      每天领取登录奖励
+#
+#         CONDITION_ID = {
+#             'task': 44,
+#             'login_reward': 45
+#         }
+#
+#         today = timezone.make_date()
+#
+#         if func_name in self.mongo_c.records:
+#             this_record = self.mongo_c.records[func_name]
+#             record_date_plus_one_day = this_record.date + datetime.timedelta(days=1)
+#             if today < record_date_plus_one_day:
+#                 # 还在当天
+#                 pass
+#             elif today == record_date_plus_one_day:
+#                 # 连续一天 要的就是这个
+#                 self.mongo_c.records[func_name].date = today
+#                 self.mongo_c.records[func_name].days += 1
+#             else:
+#                 # 没有连续，重置days
+#                 self.mongo_c.records[func_name].date = today
+#                 self.mongo_c.records[func_name].days = 1
+#         else:
+#             record = MongoEmbededContinuesRecord()
+#             record.date = today
+#             record.days = 1
+#             self.mongo_c.records[func_name] = record
+#
+#         self.mongo_c.save()
+#
+#         achievement = Achievement(self.char_id)
+#         achievement.trig(CONDITION_ID[func_name], self.mongo_c.records[func_name].days)
+#
+#
+#

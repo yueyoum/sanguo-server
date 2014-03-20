@@ -11,6 +11,7 @@ from apps.config.models import ArenaReward
 from core.attachment import Attachment
 from core.mongoscheme import MongoArenaTopRanks, MongoArenaWeek
 from core.character import Char
+from core.achievement import Achievement
 
 
 TOP_RANKS = [1, 2, 3]
@@ -30,6 +31,9 @@ def reset():
         gold = reward.week_gold
         attachment = Attachment(d.id)
         attachment.save_to_attachment(3, gold=gold)
+
+        achievement = Achievement(d.id)
+        achievement.trig(10, d.rank)
 
         if d.rank in TOP_RANKS:
             try:

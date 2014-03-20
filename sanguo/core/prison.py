@@ -120,9 +120,9 @@ class Prison(object):
             # got it
             save_hero(self.char_id, self.p.prisoners[str_id].oid)
             got = True
-
-            achievement = Achievement(self.char_id)
-            achievement.trig(9, 1)
+            #
+            # achievement = Achievement(self.char_id)
+            # achievement.trig(9, 1)
 
         self.p.prisoners.pop(str_id)
         self.p.save()

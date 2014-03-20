@@ -211,7 +211,7 @@ class Friend(object):
         self.mf.save()
 
         achievement = Achievement(self.char_id)
-        achievement.trig(33, self.real_cur_amount)
+        achievement.trig(27, self.real_cur_amount)
 
         msg = protomsg.UpdateFriendNotify()
         self._msg_friend(msg.friend, from_id, FRIEND_OK)

@@ -12,11 +12,15 @@ from apps.achievement.models import Achievement as ModelAchievement
 from core.msgpipe import publish_to_char
 from utils import pack_msg
 
-from protomsg import AchievementNotify, UpdateAchievementNotify
+from protomsg import AchievementNotify, UpdateAchievementNotify, AddAchievementNotify, RemoveAchievementNotify
 from protomsg import Achievement as MsgAchievement
 from protomsg import Attachment as MsgAttachment
 
 from core.exception import InvalidOperate
+
+
+ACHIEVEMENT_ALL = ModelAchievement.all()
+ACHIEVEMENT_ALL_BY_CONDITION = ModelAchievement.get_all_by_conditions()
 
 
 class Achievement(object):
@@ -27,13 +31,14 @@ class Achievement(object):
         except DoesNotExist:
             self.achievement = MongoAchievement(id=char_id)
             self.achievement.doing = {}
+            self.achievement.display = ModelAchievement.first_ids()
             self.achievement.finished = []
             self.achievement.complete = []
             self.achievement.save()
 
 
     def trig(self, condition_id, new_value=None):
-        achs = ModelAchievement.get_all_by_conditions()[condition_id]
+        achs = ACHIEVEMENT_ALL_BY_CONDITION[condition_id]
         for a in achs:
             self.trig_by_achievement(a, new_value=new_value)
 
@@ -106,23 +111,15 @@ class Achievement(object):
                 self.achievement.doing[str_id] = new_value
 
         else:
-            # 唯一数量条件 trig 会将一系列id发来，这里要存储id列表，相同id不保存，最后统计这个列表元素的数量
-            if str_id in self.achievement.doing:
-                values = [int(i) for i in self.achievement.doing[str_id].split(',')]
-            else:
-                values = []
-
-            if new_value not in values:
-                values.append(new_value)
-
-            if len(values) >= decoded_condition_value:
+            # 反向阀值条件， 比较小于就完成
+            if new_value <= decoded_condition_value:
                 # FINISH
                 self.achievement.finished.append(achievement_id)
-                self.achievement.doing.pop(str_id)
+                if str_id in self.achievement.doing:
+                    self.achievement.doing.pop(str_id)
                 attachment.save_to_prize(4)
             else:
-                self.achievement.doing[str_id] = ','.join([str(i) for i in values])
-
+                self.achievement.doing[str_id] = new_value
 
         self.achievement.save()
 
@@ -136,21 +133,37 @@ class Achievement(object):
             raise InvalidOperate("Achievement Get Reward: Char {0} try to get achievement {1}. But this achievement not finished".format(self.char_id, achievement_id))
 
         try:
-            ach = ModelAchievement.all()[achievement_id]
+            ach = ACHIEVEMENT_ALL[achievement_id]
         except KeyError:
             raise InvalidOperate("Achievement Get Reward: Char {0} try to get a NONE exists achievement {1}".format(self.char_id, achievement_id))
 
         from core.character import Char
         char = Char(self.char_id)
+        # TODO items
         char.update(sycee=ach.sycee, des='Achievement {0} reward'.format(achievement_id))
 
         self.achievement.finished.remove(achievement_id)
         self.achievement.complete.append(achievement_id)
+
+        if ach.next:
+            index = self.achievement.display.index(achievement_id)
+            self.achievement.display.pop(index)
+            self.achievement.display.insert(index, ach.next)
+
         self.achievement.save()
 
-        msg = UpdateAchievementNotify()
-        self._fill_up_achievement_msg(msg.achievement, ach)
-        publish_to_char(self.char_id, pack_msg(msg))
+        if ach.next:
+            add_msg = AddAchievementNotify()
+            self._fill_up_achievement_msg(add_msg.achievement, ACHIEVEMENT_ALL[ach.next])
+            publish_to_char(self.char_id, pack_msg(add_msg))
+
+            rm_msg = RemoveAchievementNotify()
+            rm_msg.id = ach.id
+            publish_to_char(self.char_id, pack_msg(rm_msg))
+        else:
+            msg = UpdateAchievementNotify()
+            self._fill_up_achievement_msg(msg.achievement, ach)
+            publish_to_char(self.char_id, pack_msg(msg))
 
         msg = MsgAttachment()
         msg.sycee = ach.sycee
@@ -159,12 +172,19 @@ class Achievement(object):
 
 
     def send_notify(self):
-        all_achievements = ModelAchievement.all()
+        # all_achievements = ModelAchievement.all()
+        #
+        # msg = AchievementNotify()
+        # for v in all_achievements.values():
+        #     a = msg.achievements.add()
+        #     self._fill_up_achievement_msg(a, v)
+        #
+        # publish_to_char(self.char_id, pack_msg(msg))
 
         msg = AchievementNotify()
-        for v in all_achievements.values():
+        for i in self.achievement.display:
             a = msg.achievements.add()
-            self._fill_up_achievement_msg(a, v)
+            self._fill_up_achievement_msg(a, ACHIEVEMENT_ALL[i])
 
         publish_to_char(self.char_id, pack_msg(msg))
 
@@ -197,10 +217,7 @@ class Achievement(object):
             msg.cach.condition = decoded_condition_value
             if msg.status == MsgAchievement.DOING:
                 if str(ach.id) in self.achievement.doing:
-                    if ach.mode == 5:
-                        msg.cach.current = len(self.achievement.doing[str(ach.id)].split(','))
-                    else:
-                        msg.cach.current = int(self.achievement.doing[str(ach.id)])
+                    msg.cach.current = int(self.achievement.doing[str(ach.id)])
                 else:
                     msg.cach.current = 0
             else:

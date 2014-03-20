@@ -115,6 +115,8 @@ RESPONSE_NOTIFY_TYPE = {
     "AchievementNotify": 3200,
     "UpdateAchievementNotify": 3201,
     "AchievementGetRewardResponse": 3203,
+    "AddAchievementNotify": 3204,
+    "RemoveAchievementNotify": 3205,
     "StoreNotify": 3300,
     "StorePanelResponse": 3303,
     "StoreBuyResponse": 3305,

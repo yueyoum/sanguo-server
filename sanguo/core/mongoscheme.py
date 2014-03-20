@@ -240,23 +240,23 @@ class MongoCheckIn(Document):
         'collection': 'checkin'
     }
 
-
-class MongoEmbededContinuesRecord(EmbeddedDocument):
-    # date 上次干这件事情的日期， 只保留年月日
-    date = DateTimeField()
-    # days 连续做了多少天
-    days = IntField()
-
-
-class MongoContinues(Document):
-    id = IntField(primary_key=True)
-    # key 为 写死的对应功能的 string
-    records = MapField(EmbeddedDocumentField(MongoEmbededContinuesRecord))
-
-    meta = {
-        'collection': 'continues'
-    }
-
+#
+# class MongoEmbededContinuesRecord(EmbeddedDocument):
+#     # date 上次干这件事情的日期， 只保留年月日
+#     date = DateTimeField()
+#     # days 连续做了多少天
+#     days = IntField()
+#
+#
+# class MongoContinues(Document):
+#     id = IntField(primary_key=True)
+#     # key 为 写死的对应功能的 string
+#     records = MapField(EmbeddedDocumentField(MongoEmbededContinuesRecord))
+#
+#     meta = {
+#         'collection': 'continues'
+#     }
+#
 
 class MongoTask(Document):
     id = IntField(primary_key=True)
@@ -279,6 +279,9 @@ class MongoAchievement(Document):
     # 当前开始进行的，但还没完成
     # key 为成就ID， value 为值 （不一定是Int）
     doing = DictField()
+
+    # 要显示的成就列表
+    display = ListField()
     # 已完成但还没领奖的
     finished = ListField()
     # 彻底完成的

@@ -218,9 +218,9 @@ class Equipment(MessageEquipmentMixin):
         self.mongo_item.save()
 
         achievement = Achievement(self.char_id)
-        achievement.trig(11, 1)
+        achievement.trig(22, 1)
         if not self.equip.upgrade_to:
-            achievement.trig(17, 1)
+            achievement.trig(23, 1)
 
         return stuff_needs
 
@@ -237,15 +237,13 @@ class Equipment(MessageEquipmentMixin):
 
         self.mongo_item.save()
 
-        gem_full = True
+        gem_amount = 0
         for g in self.mongo_item.equipments[str(self.equip_id)].gems:
-            if g == 0:
-                gem_full = False
-                break
+            if g != 0:
+                gem_amount += 1
 
-        if gem_full:
-            achievement = Achievement(self.char_id)
-            achievement.trig(42, 1)
+        achievement = Achievement(self.char_id)
+        achievement.trig(24, gem_amount)
 
         return off_gem
 
@@ -374,11 +372,6 @@ class Item(MessageEquipmentMixin):
             self._msg_equip(msg_equip, new_id, me, Equipment(self.char_id, new_id, self.item))
             publish_to_char(self.char_id, pack_msg(msg))
 
-        if this_equip.step == 6:
-            achievement = Achievement(self.char_id)
-            achievement.trig(32, 1)
-
-
         return new_id
 
     def equip_remove(self, ids):
@@ -482,16 +475,12 @@ class Item(MessageEquipmentMixin):
 
         all_gems = ModelGem.all()
 
-        achievement = Achievement(self.char_id)
 
         for gid, _ in add_gems:
             if gid not in all_gems:
                 raise InvalidOperate("Gem Add: Char {0} Try to add a NONE exist Gem, oid: {1}".format(
                     self.char_id, gid
                 ))
-            this_gem = all_gems[gid]
-            if this_gem.level == 10:
-                achievement.trig(18, 1)
 
         gems = self.item.gems
         add_gems_dict = {}
@@ -582,8 +571,12 @@ class Item(MessageEquipmentMixin):
         self.gem_add([(to_id, 1)])
         self.gem_remove(_id, 4)
 
+        to_gem_obj = ModelGem.all()[to_id]
+
         achievement = Achievement(self.char_id)
-        achievement.trig(12, 1)
+        achievement.trig(25, 1)
+        achievement.trig(26, to_gem_obj.level)
+
         t = Task(self.char_id)
         t.trig(4)
 

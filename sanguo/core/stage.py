@@ -167,15 +167,14 @@ class Stage(object):
             elite = EliteStage(self.char_id)
             elite.enable_by_condition_id(stage_id)
 
-            if stage_id == 10:
-                achievement.trig(6, 1)
+            achievement.trig(7, stage_id)
             if star:
-                achievement.trig(22, stage_id)
+                achievement.trig(9, 1)
 
             t = Task(self.char_id)
             t.trig(1)
         else:
-            achievement.trig(23, stage_id)
+            achievement.trig(8, 1)
 
 
         return battle_msg
@@ -365,7 +364,7 @@ class Hang(TimerCheckAbstractBase):
 
         actual_hours = actual_seconds / 3600
         achievement = Achievement(self.char_id)
-        achievement.trig(35, actual_hours)
+        achievement.trig(28, actual_hours)
 
 
     def plundered(self, who, win):
@@ -394,7 +393,7 @@ class Hang(TimerCheckAbstractBase):
         self.hang.save()
 
         achievement = Achievement(self.char_id)
-        achievement.trig(38, 1)
+        achievement.trig(33, 1)
 
 
 
@@ -460,7 +459,7 @@ class Hang(TimerCheckAbstractBase):
             e.amount = _amount
 
         achievement = Achievement(self.char_id)
-        achievement.trig(36, drop_exp)
+        achievement.trig(29, drop_exp)
 
         return msg
 
@@ -717,7 +716,7 @@ class TeamBattle(TimerCheckAbstractBase):
                 c = Char(fid)
                 friend_power += c.power
 
-            achievement.trig(30, len(friend_ids))
+            achievement.trig(17, 1)
 
         self.mongo_tb.friend_ids.extend(friend_ids)
         self.mongo_tb.self_power += friend_power
@@ -727,8 +726,6 @@ class TeamBattle(TimerCheckAbstractBase):
         step = random.uniform(1, 1.05) * self.mongo_tb.self_power / self.mongo_tb.boss_power * 0.0033
         self.mongo_tb.step = step
         self.mongo_tb.save()
-
-        achievement.trig(29, 1)
 
         self.send_notify()
 

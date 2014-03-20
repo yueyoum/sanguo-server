@@ -158,14 +158,13 @@ class Arena(object):
 
         if msg.self_win:
             score = ARENA_GET_SCORE_WHEN_WIN
-            achievement.trig(7, 1)
+            achievement.trig(11, 1)
             mongo_arena.continues_win += 1
         else:
             score = ARENA_GET_SCORE_WHEN_LOST
             mongo_arena.continues_win = 0
 
         mongo_arena.save()
-        achievement.trig(26, mongo_arena.continues_win)
 
 
         if score:

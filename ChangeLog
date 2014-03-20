@@ -1,3 +1,14 @@
+* 2014-03-19
+
+	New Achievement
+
+	alter table achievement add column first tinyint(1) not null;
+	alter table achievement add column next int(11);
+	alter table achievement add column equipments varchar(255) not null;
+	alter table achievement add column gems varchar(255) not null;
+	alter table achievement add column stuffs varchar(255) not null;
+
+
 * 2014-03-12
 
     New Achievement

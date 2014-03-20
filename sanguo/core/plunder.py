@@ -140,8 +140,8 @@ class Plunder(object):
         t = Task(self.char_id)
         t.trig(3)
 
-        achievement = Achievement(self.char_id)
-        achievement.trig(27, 1)
+        # achievement = Achievement(self.char_id)
+        # achievement.trig(27, 1)
 
         if msg.self_win:
             counter.incr()
@@ -153,7 +153,7 @@ class Plunder(object):
             char = Char(self.char_id)
             char.update(gold=drop_gold, official_exp=drop_official_exp, des='Plunder Reward')
 
-            achievement.trig(8, 1)
+            # achievement.trig(12, 1)
 
             drop_hero_id = 0
             if PLUNDER_GET_HERO_PROB >= random.randint(1, 100):

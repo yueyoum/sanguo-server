@@ -27,6 +27,8 @@ from preset.settings import HERO_MAX_STEP, HERO_STEP_UP_COST_SOUL_AMOUNT, HERO_S
 
 import protomsg
 
+ALL_HEROS = ModelHero.all()
+
 def cal_hero_property(original_id, level, step):
     """
 
@@ -68,7 +70,7 @@ class Hero(FightPowerMixin):
         self.attack, self.defense, self.hp = \
             cal_hero_property(self.oid, self.level, self.step)
 
-        self.model_hero = ModelHero.all()[self.oid]
+        self.model_hero = ALL_HEROS[self.oid]
         self.crit = self.model_hero.crit
         self.dodge = self.model_hero.dodge
         self.anger = self.model_hero.anger
@@ -210,9 +212,9 @@ class Hero(FightPowerMixin):
         )
 
         achievement = Achievement(self.char_id)
-        achievement.trig(10, 1)
+        achievement.trig(20, 1)
         if self.hero.step == HERO_MAX_STEP:
-            achievement.trig(20, self.oid)
+            achievement.trig(21, 1)
 
 
 
@@ -336,28 +338,14 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
         for i, _id in enumerate(id_range):
             MongoHero(id=_id, char=char_id, oid=hero_original_ids[i], step=1).save()
 
-        if add_notify:
-            hero_add_signal.send(
-                sender=None,
-                char_id=char_id,
-                hero_ids=id_range
-            )
+        hero_add_signal.send(
+            sender=None,
+            char_id=char_id,
+            hero_ids=id_range,
+            hero_original_ids=hero_original_ids,
+            send_notify=add_notify,
+        )
 
-        all_heros = ModelHero.all()
-        achievement = Achievement(char_id)
-        for oid in hero_original_ids:
-            achievement.trig(1, oid)
-
-            quality = all_heros[oid].quality
-            if quality == 1:
-                achievement.trig(2, 1)
-
-            gender = all_heros[oid].gender
-            if gender == 2:
-                achievement.trig(40, 1)
-
-        char_heros_amount = MongoHero.objects.filter(char=char_id).count()
-        achievement.trig(41, char_heros_amount)
 
         return id_range
 

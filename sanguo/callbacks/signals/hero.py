@@ -12,11 +12,50 @@ from core.notify import (
     )
 
 from core.hero import Hero
+from core.character import Char
+from core.achievement import Achievement
+
+from apps.hero.models import Hero as ModelHero
 
 
-def _hero_add(char_id, hero_ids, **kwargs):
-    heros = [Hero.cache_obj(i) for i in hero_ids]
-    add_hero_notify(char_id, heros)
+ALL_HEROS = ModelHero.all()
+
+def _hero_add(char_id, hero_ids, hero_original_ids, send_notify, **kwargs):
+    if send_notify:
+        heros = [Hero.cache_obj(i) for i in hero_ids]
+        add_hero_notify(char_id, heros)
+
+    char = Char(char_id)
+    char_heros_dict = char.heros_dict
+
+    achievement = Achievement(char_id)
+    achievement.trig(1, len(char_heros_dict))
+
+    quality_one_heros_amount = 0
+    quality_two_heros_amount = 0
+    quality_three_heros_amount = 0
+    gender_female_heros_amount = 0
+
+
+    for h in char_heros_dict.values():
+        original_hero = ALL_HEROS[h.oid]
+        if original_hero.quality == 1:
+            quality_one_heros_amount += 1
+        if original_hero.quality == 2:
+            quality_two_heros_amount += 1
+        if original_hero.quality == 3:
+            quality_three_heros_amount += 1
+        if original_hero.gender == 2:
+            gender_female_heros_amount += 1
+
+    achievement.trig(2, quality_one_heros_amount)
+    achievement.trig(3, quality_two_heros_amount)
+    achievement.trig(4, quality_three_heros_amount)
+    achievement.trig(5, gender_female_heros_amount)
+
+    for oid in hero_original_ids:
+        achievement.trig(6, oid)
+
 
 
 def _hero_del(char_id, hero_ids, **kwargs):
