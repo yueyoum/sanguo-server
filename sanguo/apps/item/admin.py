@@ -47,7 +47,7 @@ class GemAdmin(admin.ModelAdmin):
 
 class StuffAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'Icon', 'des', 'buy_sycee', 'sell_gold',
+        'id', 'name', 'Icon', 'tp', 'des', 'buy_sycee', 'sell_gold',
     )
 
     def Icon(self, obj):
