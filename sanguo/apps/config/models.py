@@ -125,3 +125,43 @@ class Notify(models.Model):
         ordering = ('id',)
         verbose_name = '消息模板'
         verbose_name_plural = '消息模板'
+
+
+# 功能开放
+class FunctionOpen(models.Model):
+    FUNC_ID = (
+        (1, '装备强化'),
+        (2, '装备进阶'),
+        (3, '武将进阶'),
+        (4, '宝石镶嵌'),
+        (5, '日常任务'),
+        (6, '成就任务'),
+        (7, '挂机功能'),
+        (8, '比武功能'),
+        (9, '掠夺功能'),
+        (10, '官职功能'),
+        (11, '精英副本'),
+        (12, '好友功能'),
+        (13, '猛将挑战'),
+    )
+
+    SOCKET_AMOUNT = (
+        (4, '上阵四人'),
+        (5, '上阵五人'),
+        (6, '上阵六人'),
+        (7, '上阵七人'),
+        (8, '上阵八人'),
+    )
+
+    char_level = models.IntegerField("君主等级条件", default=0)
+    stage_id = models.IntegerField("关卡ID条件", default=0)
+
+    func_id = models.IntegerField("开启功能", choices=FUNC_ID)
+    socket_amount = models.IntegerField("上阵人数", choices=SOCKET_AMOUNT)
+
+    class Meta:
+        db_table = 'function_open'
+        ordering = ('id',)
+        verbose_name = '功能开启'
+        verbose_name_plural = '功能开启'
+
