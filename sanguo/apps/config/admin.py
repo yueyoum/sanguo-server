@@ -44,3 +44,4 @@ class FunctionOpenAdmin(admin.ModelAdmin):
 admin.site.register(CharInit, CharInitAdmin)
 admin.site.register(ArenaReward, ArenaRewardAdmin)
 admin.site.register(Notify, NotifyAdmin)
+admin.site.register(FunctionOpen, FunctionOpenAdmin)
