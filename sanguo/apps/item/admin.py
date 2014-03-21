@@ -27,8 +27,10 @@ class EquipmentAdmin(ImportExportModelAdmin):
 
 
     def Icon(self, obj):
-        # TODO
-        return ""
+        if not obj.icon:
+            return 'None'
+        return u'<img src="/images/equipment/100/{0}.png" />'.format(obj.icon)
+    Icon.allow_tags = True
 
 
     def IconLarge(self, obj):
@@ -39,11 +41,22 @@ class EquipmentAdmin(ImportExportModelAdmin):
 
 class GemAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'icon', 'tp_name', 'level',
+        'id', 'name', 'Icon', 'tp_name', 'level',
         'used_for', 'used_for_name', 'value', 'merge_to'
     )
 
     list_filter = ('used_for',)
+
+
+    def Icon(self, obj):
+        if not obj.icon:
+            return 'None'
+        return u'<img src="/images/gem/{0}.png" />'.format(obj.icon)
+    Icon.allow_tags = True
+
+
+
+
 
 class StuffAdmin(admin.ModelAdmin):
     list_display = (
@@ -51,9 +64,10 @@ class StuffAdmin(admin.ModelAdmin):
     )
 
     def Icon(self, obj):
-        # TODO
-        return ""
-
+        if not obj.icon:
+            return 'None'
+        return u'<img src="/images/item/{0}.png" />'.format(obj.icon)
+    Icon.allow_tags = True
 
 admin.site.register(Equipment, EquipmentAdmin)
 admin.site.register(Gem, GemAdmin)
