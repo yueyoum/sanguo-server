@@ -134,6 +134,7 @@ class Stuff(models.Model):
     sell_gold = models.IntegerField("售卖所得金币")
 
     tp = models.IntegerField("类型", choices=TYPE)
+    value = models.IntegerField("值", null=True, blank=True)
 
     def __unicode__(self):
         return u'<材料: %s>' % self.name
@@ -144,6 +145,16 @@ class Stuff(models.Model):
         if data:
             return data
         return _save_stuff_cache()
+
+    @staticmethod
+    def all_by_tp(tp):
+        data = Stuff.all()
+        res = {}
+        for d in data:
+            if d.tp == tp:
+                res[d.id] = d
+        return res
+
 
     class Meta:
         db_table = 'stuff'
