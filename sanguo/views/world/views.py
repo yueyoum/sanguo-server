@@ -11,7 +11,6 @@ from utils.decorate import message_response, operate_guard
 from utils import timezone
 from utils import pack_msg
 from protomsg import SyncResponse
-from protomsg import SellRequest
 
 @message_response("SyncResponse")
 @operate_guard('sync', 3, keep_result=False)
@@ -43,25 +42,24 @@ def sell(request):
 
     for ele in req.elements:
         # XXX
-        if ele.tp == SellRequest.SELL_HERO:
+        if ele.tp == 1:
             print "NOT SUPPORT SELL HERO"
             continue
 
-        if ele.tp == SellRequest.SELL_SOUL:
+        if ele.tp == 2:
             print "NOT SUPPORT SELL SOUL"
             continue
 
-        if ele.tp == SellRequest.SELL_EQUIPMENT:
+        if ele.tp == 3:
             item.equip_sell([ele.id])
             continue
 
-        if ele.tp == SellRequest.SELL_GEM:
+        if ele.tp == 4:
             item.gem_remove(ele.id, ele.amount)
             continue
 
-        if ele.tp == SellRequest.SELL_STUFF:
+        if ele.tp == 5:
             item.stuff_remove(ele.id, ele.amount)
             continue
-
 
     return None

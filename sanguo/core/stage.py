@@ -526,7 +526,7 @@ class Hang(TimerCheckAbstractBase):
 
             times = msg.hang.used_time / 15
             stage = ModelStage.all()[self.hang.stage_id]
-            msg.hang.rewared_gold = self._actual_gold(stage.normal_drop * times)
+            msg.hang.rewared_gold = self._actual_gold(stage.normal_gold * times)
             msg.hang.rewared_exp = stage.normal_exp * times
 
             for l in self.hang.logs:

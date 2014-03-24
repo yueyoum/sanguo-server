@@ -138,7 +138,6 @@ class Formation(object):
 
 
     def special_buy(self, socket_id, tp):
-        # 不要直接使用此方法 应该从core.item.Item 中调用。那里会处理 equip_add
         try:
             this_socket = self.formation.sockets[str(socket_id)]
         except KeyError:
@@ -161,15 +160,21 @@ class Formation(object):
             # FIXME
             raise Exception("Special buy, not find. tp = {0}".format(tp))
 
+        from core.item import Item
+        item = Item(self.char_id)
+
         if tp == SpecialEquipmentBuyRequest.SOCKET_WEAPON:
             on_id = _find_speicial_id(ALL_WEAPONS.values())
-            self.formation.sockets[str(socket_id)].weapon = on_id
+            new_id = item.equip_add(on_id)
+            self.formation.sockets[str(socket_id)].weapon = new_id
         elif tp == SpecialEquipmentBuyRequest.SOCKET_ARMOR:
             on_id = _find_speicial_id(ALL_ARMORS.values())
-            self.formation.sockets[str(socket_id)].armor = on_id
+            new_id = item.equip_add(on_id)
+            self.formation.sockets[str(socket_id)].armor = new_id
         else:
             on_id = _find_speicial_id(ALL_JEWELRY.values())
-            self.formation.sockets[str(socket_id)].jewelry = on_id
+            new_id = item.equip_add(on_id)
+            self.formation.sockets[str(socket_id)].jewelry = new_id
 
         self.formation.save()
         socket_changed_signal.send(
@@ -179,7 +184,7 @@ class Formation(object):
 
         self._send_socket_changed_notify(socket_id, self.formation.sockets[str(socket_id)])
 
-        return on_id
+
 
 
     def _send_socket_changed_notify(self, socket_id, socket):
