@@ -4,6 +4,7 @@ import random
 from mongoengine import DoesNotExist
 
 from apps.hero.models import Hero as ModelHero
+from apps.item.models import Stuff as ModelStuff
 from core.mongoscheme import MongoPrison, MongoEmbededPrisoner
 from core.exception import SyceeNotEnough
 from core.character import Char
@@ -16,9 +17,17 @@ from core.item import Item
 
 from utils import pack_msg
 
-from preset.settings import MAX_PRISONERS_AMOUNT, PRISON_INCR_AMOUNT_COST, PRISON_INCR_MAX_AMOUNT, PRISONER_INCR_PROB, PRISONER_START_PROB
+from preset.settings import (
+    PRISONER_START_PROB,
+    PRISONER_RELEASE_GOT_TREASURE,
+    PRISONER_KILL_GOT_TREASURE,
+    PRISONER_KILL_GOT_SOUL,
+)
 
 import protomsg
+
+TREASURES = ModelStuff.all_by_tp(2)
+ALL_HEROS = ModelHero.all()
 
 
 class Prison(object):
@@ -27,42 +36,10 @@ class Prison(object):
         try:
             self.p = MongoPrison.objects.get(id=self.char_id)
         except DoesNotExist:
-            self.p = MongoPrison(id=self.char_id, amount=0)
+            self.p = MongoPrison(id=self.char_id)
             self.p.save()
 
-    @property
-    def max_prisoner_amount(self):
-        return self.p.amount + MAX_PRISONERS_AMOUNT
-
-    def prisoner_full(self):
-        return len(self.p.prisoners) >= self.max_prisoner_amount
-
-    def incr_max_prisoner_amount_cost_sycee(self):
-        if self.p.amount >= PRISON_INCR_MAX_AMOUNT:
-            return 0
-        return PRISON_INCR_AMOUNT_COST[self.max_prisoner_amount]
-
-    def incr_max_prisoner_amount(self):
-        if self.p.amount >= PRISON_INCR_MAX_AMOUNT:
-            raise InvalidOperate("Prison Incr Prisoners Amount. Char {0} amount {1} already touch PRISON_INCR_MAX_AMOUNT {2}".format(
-                self.char_id, self.p.amount, PRISON_INCR_MAX_AMOUNT
-            ))
-
-        cost = self.incr_max_prisoner_amount_cost_sycee()
-        char = Char(self.char_id)
-        if char.cacheobj.sycee < cost:
-            raise SyceeNotEnough("Prison Incr Prisoners Amount. Char {0} sycee NOT enough".format(self.char_id))
-
-        char.update(sycee=-cost, des='Prison. Incr max prisoner amount')
-        self.p.amount += 1
-        self.p.save()
-        self.send_notify()
-
-
-
-    def prisoner_add(self, oid):
-        if self.prisoner_full():
-            return
+    def prisoner_add(self, oid, gold):
         prisoner_ids = [int(i) for i in self.p.prisoners.keys()]
 
         new_prisoner_id = 1
@@ -74,6 +51,8 @@ class Prison(object):
         p = MongoEmbededPrisoner()
         p.oid = oid
         p.prob = PRISONER_START_PROB
+        p.active = True
+        p.gold = gold
 
         self.p.prisoners[str(new_prisoner_id)] = p
         self.p.save()
@@ -84,38 +63,34 @@ class Prison(object):
 
         publish_to_char(self.char_id, pack_msg(msg))
 
-    def prisoner_incr_prob(self, _id):
-        str_id = str(_id)
-        if str_id not in self.p.prisoners:
-            raise InvalidOperate("Prisoner Incr Prob: Char {0} Try to Incr prob for a NONE exists prisoner {1}".format(self.char_id, _id))
 
-        item = Item(self.char_id)
-        if not item.has_stuff(22, 1):
-            raise StuffNotEnough("Prison Prisoner Get. Char {0} Try to get {1}. But Stuff not enough".format(self.char_id, _id))
-
-        item.stuff_remove(22, 1)
-
-        prisoner_oid = self.p.prisoners[str_id].oid
-        prisoner_quality = ModelHero.all()[prisoner_oid].quality
-
-        self.p.prisoners[str_id].prob += PRISONER_INCR_PROB[prisoner_quality]
-        if self.p.prisoners[str_id].prob > 100:
-            self.p.prisoners[str_id].prob = 100
-        self.p.save()
-
-        msg = protomsg.UpdatePrisonerNotify()
-        p = msg.prisoner.add()
-        self._fill_up_prisoner_msg(p, _id, self.p.prisoners[str_id].oid, self.p.prisoners[str_id].prob)
-        publish_to_char(self.char_id, pack_msg(msg))
-
-
-    def prisoner_get(self, _id):
+    def prisoner_get(self, _id, treasures):
         str_id = str(_id)
         if str_id not in self.p.prisoners:
             raise InvalidOperate("Prisoner Get: Char {0} Try to get a NONE exist prisoner {1}".format(self.char_id, _id))
 
+        if not self.p.prisoners[str_id].active:
+            raise InvalidOperate("Prisoner Get. Char {0} Try to get a NOT active prisoner {1}".format(self.char_id, _id))
+
+        item = Item(self.char_id)
+        for tid in treasures:
+            if not item.has_stuff(tid, 1):
+                raise StuffNotEnough("Prisoner Get. Char {0} get prisoner {1}. Using {2}. But {3} not enough".format(
+                    self.char_id, _id, treasures, tid
+                ))
+
+        treasures_prob = 0
+        for tid in treasures:
+            try:
+                treasures_prob += TREASURES[tid].value
+            except KeyError:
+                raise InvalidOperate("Prisoner Get. Char {0} try to get {1}. Using a NONE treasure {2}".format(self.char_id, _id, tid))
+
+        for tid in treasures:
+            item.stuff_remove(tid, 1)
+
         got = False
-        prob = self.p.prisoners[str_id].prob
+        prob = self.p.prisoners[str_id].prob + treasures_prob
         if prob >= random.randint(1, 100):
             # got it
             save_hero(self.char_id, self.p.prisoners[str_id].oid)
@@ -124,17 +99,74 @@ class Prison(object):
             # achievement = Achievement(self.char_id)
             # achievement.trig(9, 1)
 
-        self.p.prisoners.pop(str_id)
+            self.p.prisoners.pop(str_id)
+
+            msg = protomsg.RemovePrisonerNotify()
+            msg.ids.append(_id)
+            publish_to_char(self.char_id, pack_msg(msg))
+
+        else:
+            self.p.prisoners[str_id].active = False
+
+            msg = protomsg.UpdatePrisonerNotify()
+            p = msg.prisoner.add()
+            p.id = _id
+            p.oid = self.p.prisoners[str_id].oid
+            p.prob = self.p.prisoners[str_id].prob
+            p.active = self.p.prisoners[str_id].active
+            publish_to_char(self.char_id, pack_msg(msg))
+
         self.p.save()
 
         t = Task(self.char_id)
         t.trig(5)
 
+        return got
+
+
+    def _abandon(self, _id):
+        try:
+            p = self.p.prisoners.pop(str(_id))
+        except KeyError:
+            raise InvalidOperate("Prisoner Release. Char {0} Try to release a NONE exists prisoner {1}".format(self.char_id, _id))
+
+        self.p.save()
+
         msg = protomsg.RemovePrisonerNotify()
         msg.ids.append(_id)
         publish_to_char(self.char_id, pack_msg(msg))
+        return p
 
-        return got
+    def release(self, _id):
+        p = self._abandon(_id)
+        got_gold = p.gold
+        got_treasure = random.choice(PRISONER_RELEASE_GOT_TREASURE[ALL_HEROS[p.oid].quality])
+
+        char = Char(self.char_id)
+        char.update(gold=got_gold, des="Prisoner Release")
+
+        stuffs = [(got_treasure, 1)]
+
+        item = Item(self.char_id)
+        item.stuff_add(stuffs)
+
+        return got_gold, stuffs
+
+
+    def kill(self, _id):
+        p = self._abandon(_id)
+        quality = ALL_HEROS[p.oid].quality
+        souls = [(22, PRISONER_KILL_GOT_SOUL[quality])]
+
+        treasures = [(random.choice(PRISONER_KILL_GOT_TREASURE[quality]), 1)]
+
+        stuffs = []
+        stuffs.extend(souls)
+        stuffs.extend(treasures)
+
+        item = Item(self.char_id)
+        item.stuff_add(stuffs)
+        return stuffs
 
 
     def _fill_up_prisoner_msg(self, p, _id, oid, prob):
@@ -142,18 +174,6 @@ class Prison(object):
         p.oid = oid
         p.prob = prob
 
-        # FIXME
-        p.attack = 0
-        p.defense = 0
-        p.hp = 0
-        p.crit = 0
-
-
-    def send_notify(self):
-        msg = protomsg.PrisonNotify()
-        msg.max_prisoners_amount = self.max_prisoner_amount
-        msg.incr_amount_cost = self.incr_max_prisoner_amount_cost_sycee()
-        publish_to_char(self.char_id, pack_msg(msg))
 
     def send_prisoners_notify(self):
         msg = protomsg.PrisonerListNotify()

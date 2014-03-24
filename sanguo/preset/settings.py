@@ -45,29 +45,36 @@ EQUIP_STEP_UP_COST_GOLD = 5000
 #########################
 #      掠夺             #
 #########################
-# 掠夺超过免费次数后每次掠夺消耗元宝
-PLUNDER_COST_SYCEE = 20
 # 掠夺失败获得官职经验
 PLUNDER_GET_OFFICIAL_EXP_WHEN_LOST = 2
 # 掠夺胜利获得官职经验
 PLUNDER_GET_OFFICIAL_EXP_WHEN_WIN = 5
-# 掠夺胜利获得对方武将概率,随机抽取
-PLUNDER_GET_HERO_PROB = 50
-
+# 掠夺点数（战功）
+PLUNDER_POINT = {2: 1, 3: 2}
+# 防御成功获得金币
+PLUNDER_DEFENSE_SUCCESS_GOLD = 1000
+# 防御失败损失金币
+PLUNDER_DEFENSE_FAILURE_GOLD = 1000
+# 最大防御成功次数
+PLUNDER_DEFENSE_SUCCESS_MAX_TIMES = 10
+# 最大防御失败次数
+PLUNDER_DEFENSE_FAILURE_MAX_TIMES = 8
+# 掠夺获取收益各档所需点数
+PLUNDER_REWARD_NEEDS_POINT = {1:3, 2: 2, 3: 1}
+# 掠夺获取道具按照多少小时计算
+PLUNDER_GOT_ITEMS_HOUR = 2
 
 #########################
 #      战俘             #
 #########################
 # 战俘初始劝降几率
 PRISONER_START_PROB = 10
-# 使用一次诏书增加多少劝降几率 和武将品质相关 1:10,2:50,3:100
-PRISONER_INCR_PROB = {1: 10, 2: 50, 3: 100}
-# 初始战俘最多可以有多少个
-MAX_PRISONERS_AMOUNT = 1
-# 增加监狱最大战俘数量花费 1:元宝100,2：2:元宝1000,3:元宝5000
-PRISON_INCR_AMOUNT_COST = {1: 100, 2: 1000,3: 5000}
-# 增加的监狱战俘数量上限，None为没有上限 . 总量就是初始数量 + 此数量
-PRISON_INCR_MAX_AMOUNT = 3
+# 释放获得宝物 key: quality, value: 宝物ID列表
+PRISONER_RELEASE_GOT_TREASURE = {3: [24], 2: [25], 1: [26]}
+# 斩首获得宝物 key: quality, value: 宝物ID列表
+PRISONER_KILL_GOT_TREASURE = {3: [24], 2: [25], 1: [26]}
+# 斩首获得通用卡魂 key: quality, value: amount
+PRISONER_KILL_GOT_SOUL = {3: 1, 2: 2, 1: 3}
 
 
 #########################

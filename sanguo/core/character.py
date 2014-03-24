@@ -108,6 +108,8 @@ class Char(object):
         hero_ids = f.in_formation_hero_ids()
         p = 0
         for hid in hero_ids:
+            if hid == 0:
+                continue
             h = Hero.cache_obj(hid)
             p += h.power
         return p

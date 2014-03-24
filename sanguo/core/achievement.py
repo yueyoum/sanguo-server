@@ -137,10 +137,11 @@ class Achievement(object):
         except KeyError:
             raise InvalidOperate("Achievement Get Reward: Char {0} try to get a NONE exists achievement {1}".format(self.char_id, achievement_id))
 
-        from core.character import Char
-        char = Char(self.char_id)
-        # TODO items
-        char.update(sycee=ach.sycee, des='Achievement {0} reward'.format(achievement_id))
+        if ach.sycee:
+            from core.character import Char
+            char = Char(self.char_id)
+            # TODO items
+            char.update(sycee=ach.sycee, des='Achievement {0} reward'.format(achievement_id))
 
         self.achievement.finished.remove(achievement_id)
         self.achievement.complete.append(achievement_id)
@@ -163,7 +164,8 @@ class Achievement(object):
             publish_to_char(self.char_id, pack_msg(msg))
 
         msg = MsgAttachment()
-        msg.sycee = ach.sycee
+        if ach.sycee:
+            msg.sycee = ach.sycee
         return msg
 
 

@@ -60,6 +60,8 @@ class MongoStage(Document):
     id = IntField(primary_key=True)
     # 已经打过的关卡，key为关卡ID，value 为 bool 值表示是否三星
     stages = DictField()
+    # 最大三星关卡
+    max_star_stage = IntField()
     stage_new = IntField()
     # 开启的精英关卡, key 为关卡ID， value 为今日打的次数
     elites = DictField()
@@ -112,17 +114,25 @@ class MongoHeroSoul(Document):
     }
 
 
-class MongoEmbededPlunderChar(EmbeddedDocument):
+class MongoEmbededPlunderChars(EmbeddedDocument):
     is_robot = BooleanField()
     gold = IntField()
 
-class MongoPlunderList(Document):
+
+class MongoPlunder(Document):
     id = IntField(primary_key=True)
-    chars = MapField(EmbeddedDocumentField(MongoEmbededPlunderChar))
+    points = IntField()
+    chars = MapField(EmbeddedDocumentField(MongoEmbededPlunderChars))
+
+    # 记录下上次打赢的是谁，以便获取战俘
+    target_char = IntField()
+    # 记录下都领取过哪些类型的奖励，防止多次重复领取
+    got_reward = ListField()
 
     meta = {
-        'collection': 'plunderlist'
+        'collection': 'plunder'
     }
+
 
 
 
@@ -163,10 +173,10 @@ class MongoHang(Document):
 
     # 被掠夺日志
     logs = ListField(EmbeddedDocumentField(MongoEmbededPlunderLog))
-    # 被掠夺获得/损失金币
-    plunder_gold = IntField()
-    # 上次被掠夺的时间戳
-    plunder_time = IntField()
+
+    plunder_win_times = IntField()
+    plunder_lose_times = IntField()
+
 
     meta = {
         'collection': 'hang',
@@ -180,11 +190,13 @@ MongoHang.ensure_indexes()
 class MongoEmbededPrisoner(EmbeddedDocument):
     oid = IntField()
     prob = IntField()
+    active = BooleanField(default=True)
+
+    # 掠夺收益金币/2，这就是释放所得金币
+    gold = IntField()
 
 class MongoPrison(Document):
     id = IntField(primary_key=True)
-    # amount 为用户花钱增加的额外数量，所以总量就是默认最大+amount
-    amount = IntField(default=0)
     prisoners = MapField(EmbeddedDocumentField(MongoEmbededPrisoner))
 
     meta = {

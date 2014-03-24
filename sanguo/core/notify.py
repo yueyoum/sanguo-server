@@ -74,7 +74,6 @@ def login_notify(char_id):
 
     p = Prison(char_id)
     p.send_prisoners_notify()
-    p.send_notify()
 
     Arena(char_id).send_notify()
 

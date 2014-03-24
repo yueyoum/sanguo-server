@@ -79,8 +79,26 @@ class Formation(object):
         for s in self.formation.sockets.values():
             if s.hero:
                 hero_ids.append(s.hero)
+            else:
+                hero_ids.append(0)
         return hero_ids
 
+
+    def in_formation_hero_original_ids(self):
+        from core.character import Char
+        ids = self.in_formation_hero_ids()
+
+        char = Char(self.char_id)
+        char_heros = char.heros_dict
+
+        res = []
+        for i in ids:
+            if i == 0:
+                res.append(0)
+            else:
+                res.append(char_heros[i].oid)
+
+        return res
 
 
     def find_socket_by_hero(self, hero_id):

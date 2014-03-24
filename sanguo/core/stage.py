@@ -28,7 +28,15 @@ from core.timercheck import TimerCheckAbstractBase, timercheck
 
 from utils.math import GAUSSIAN_TABLE
 
-from preset.settings import TEAMBATTLE_INCR_COST, HANG_SECONDS, DROP_PROB_BASE
+from preset.settings import (
+    TEAMBATTLE_INCR_COST,
+    HANG_SECONDS,
+    DROP_PROB_BASE,
+    PLUNDER_DEFENSE_SUCCESS_GOLD,
+    PLUNDER_DEFENSE_FAILURE_GOLD,
+    PLUNDER_DEFENSE_SUCCESS_MAX_TIMES,
+    PLUNDER_DEFENSE_FAILURE_MAX_TIMES,
+)
 
 def _parse_drops(all_drops, drop_id):
     if not drop_id:
@@ -93,6 +101,8 @@ class Stage(object):
             self.stage = MongoStage.objects.get(id=self.char_id)
         except DoesNotExist:
             self.stage = MongoStage(id=self.char_id)
+            self.stage.stages = {}
+            self.stage.max_star_stage = 0
             self.stage.stage_new = 1
             self.stage.elites = {}
             self.stage.save()
@@ -136,6 +146,9 @@ class Stage(object):
             if str(stage_id) not in self.stage.stages:
                 self.first_star = True
 
+            if stage_id > self.stage.max_star_stage:
+                self.stage.max_star_stage = stage_id
+
         self.star = star
 
 
@@ -161,7 +174,7 @@ class Stage(object):
                         self.stage.stage_new = stage_new
 
                         self.send_new_stage_notify()
-            self.stage.save()
+
 
             # 开启精英关卡
             elite = EliteStage(self.char_id)
@@ -176,11 +189,11 @@ class Stage(object):
         else:
             achievement.trig(8, 1)
 
-
+        self.stage.save()
         return battle_msg
 
 
-    def get_drop(self, stage_id, first=False, star=False):
+    def get_drop(self, stage_id, times=1, first=False, star=False):
         """
         @param stage_id: stage id
         @type stage_id: int
@@ -219,6 +232,16 @@ class Stage(object):
             gems = _merge(gems, s_gems)
             stuffs = _merge(stuffs, s_stuffs)
 
+        def _multi(drops):
+            for index, d in enumerate(drops):
+                prob = d[1]
+                new_prob = times * prob
+                drops[index] = [d[0], new_prob]
+
+        _multi(equipments)
+        _multi(gems)
+        _multi(stuffs)
+
         drop_equipments = _make(equipments)
         drop_gems = _make(gems)
         drop_stuffs = _make(stuffs)
@@ -226,8 +249,12 @@ class Stage(object):
         return exp, gold, drop_equipments, drop_gems, drop_stuffs
 
 
-    def save_drop(self, stage_id, first=False, star=False):
-        exp, gold, equipments, gems, stuffs = self.get_drop(stage_id, first=first, star=star)
+    def save_drop(self, stage_id, times=1, first=False, star=False, only_items=False):
+        exp, gold, equipments, gems, stuffs = self.get_drop(stage_id, times=times, first=first, star=star)
+
+        if only_items:
+            exp = 0
+            gold = 0
 
         transformed_equipments = []
         for _id, amount in equipments:
@@ -271,8 +298,7 @@ class Hang(TimerCheckAbstractBase):
         try:
             self.hang_remained = MongoHangRemainedTime.objects.get(id=self.char_id)
         except DoesNotExist:
-            self.hang_remained = MongoHangRemainedTime()
-            self.hang_remained.id = self.char_id
+            self.hang_remained = MongoHangRemainedTime(id=self.char_id)
 
             if self.hang:
                 self.hang_remained.crossed = True
@@ -319,8 +345,8 @@ class Hang(TimerCheckAbstractBase):
             remained=self.hang_remained.remained,
             actual_seconds=0,
             logs=[],
-            plunder_gold=0,
-            plunder_time=0,
+            plunder_win_times=0,
+            plunder_lose_times=0,
         )
         hang.save()
         self.hang = hang
@@ -367,20 +393,23 @@ class Hang(TimerCheckAbstractBase):
         achievement.trig(28, actual_hours)
 
 
-    def plundered(self, who, win):
+    def plundered(self, who, self_win):
         if not self.hang:
             return
-        now = timezone.utc_timestamp()
-        if now - self.hang.plunder_time < 15:
-            return
 
-        stage = ModelStage.all()[self.hang.stage_id]
-        gold = stage.normal_gold
-        if not win:
-            gold = -gold
+        if self_win:
+            if self.hang.plunder_win_times >= PLUNDER_DEFENSE_SUCCESS_MAX_TIMES:
+                return
 
-        self.hang.plunder_time = now
-        self.hang.plunder_gold += gold
+            self.hang.plunder_win_times += 1
+            gold = PLUNDER_DEFENSE_SUCCESS_GOLD
+        else:
+            if self.hang.plunder_lose_times >= PLUNDER_DEFENSE_FAILURE_MAX_TIMES:
+                return
+
+            self.hang.plunder_lose_times += 1
+            gold = -PLUNDER_DEFENSE_FAILURE_GOLD
+
 
         l = MongoEmbededPlunderLog()
         l.name = who
@@ -404,6 +433,10 @@ class Hang(TimerCheckAbstractBase):
         stage = ModelStage.all()[stage_id]
         drop_exp = stage.normal_exp * times + self.hang.plunder_gold
         drop_gold = stage.normal_gold * times
+
+        drop_gold = drop_gold + self.hang.plunder_win_times * PLUNDER_DEFENSE_SUCCESS_GOLD - self.hang.plunder_lose_times * PLUNDER_DEFENSE_FAILURE_GOLD
+        if drop_gold < 0:
+            drop_gold = 0
 
         all_drops = StageDrop.all()
         drop_equips, drop_gems, drop_stuffs = _parse_drops(all_drops, stage.normal_drop)

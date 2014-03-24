@@ -20,10 +20,12 @@ urlpatterns = patterns('',
 
                        url(r'^plunder/list/$', 'views.plunder.views.plunder_list'),
                        url(r'^plunder/$', 'views.plunder.views.plunder'),
+                       url(r'^plunder/getreward/$', 'views.plunder.views.get_reward'),
 
-                       url(r'^prison/incr/$', 'views.prison.views.incr_prisoners_amount'),
-                       url(r'^prisoner/addprob/$', 'views.prison.views.prisoner_add_prob'),
+
                        url(r'^prisoner/get/$', 'views.prison.views.prisoner_get'),
+                       url(r'^prisoner/release/$', 'views.prison.views.prisoner_release'),
+                       url(r'^prisoner/kill/$', 'views.prison.views.prisoner_kill'),
 
                        url(r'^friend/player-list/$', 'views.friend.views.player_list'),
                        url(r'^friend/add/$', 'views.friend.views.add'),
@@ -41,5 +43,4 @@ urlpatterns = patterns('',
                        url(r'^teambattle/enter/$', 'views.teambattle.views.enter'),
                        url(r'^teambattle/start/$', 'views.teambattle.views.start'),
                        url(r'^teambattle/incr/$', 'views.teambattle.views.incr_time'),
-                       url(r'^teambattle/getreward/$', 'views.teambattle.views.get_reward'),
 )

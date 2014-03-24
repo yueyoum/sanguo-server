@@ -1,17 +1,20 @@
 * 2014-03-21
 
-	alter table stuff add column tp int(11) not null;
+    alter table stuff add column tp int(11) not null;
+    alter table stuff add column value int(11);
+
+    Add FunctionOpen Model
 
 
 * 2014-03-19
 
-	New Achievement
+    New Achievement
 
-	alter table achievement add column first tinyint(1) not null;
-	alter table achievement add column next int(11);
-	alter table achievement add column equipments varchar(255) not null;
-	alter table achievement add column gems varchar(255) not null;
-	alter table achievement add column stuffs varchar(255) not null;
+    alter table achievement add column first tinyint(1) not null;
+    alter table achievement add column next int(11);
+    alter table achievement add column equipments varchar(255) not null;
+    alter table achievement add column gems varchar(255) not null;
+    alter table achievement add column stuffs varchar(255) not null;
 
 
 * 2014-03-12

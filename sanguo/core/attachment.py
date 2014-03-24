@@ -45,9 +45,9 @@ class Attachment(object):
         from core.hero import save_hero
         from core.item import Item
 
-
-        char = Char(self.char_id)
-        char.update(gold=gold, sycee=sycee, exp=exp, des='Attachment')
+        if gold or sycee or exp:
+            char = Char(self.char_id)
+            char.update(gold=gold, sycee=sycee, exp=exp, des='Attachment')
 
         if heros:
             save_hero(self.char_id, heros)
