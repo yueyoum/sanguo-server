@@ -41,6 +41,15 @@ class Equipment(models.Model):
             return data
         return _set_equip_cache()
 
+    @staticmethod
+    def all_initial_equips():
+        data = Equipment.all()
+        res = {}
+        for d in data.values():
+            if d.step == 0:
+                res[d.id] = d
+        return res
+
     class Meta:
         db_table = 'equipment'
         ordering = ('id',)

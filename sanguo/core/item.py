@@ -466,6 +466,12 @@ class Item(MessageEquipmentMixin):
         self.item.save()
 
 
+    def special_buy(self, socket_id, tp):
+        f = Formation(self.char_id)
+        on_id = f.special_buy(socket_id, tp)
+        self.equip_add(on_id, 1)
+
+
     def gem_add(self, add_gems, send_notify=True):
         """
 
