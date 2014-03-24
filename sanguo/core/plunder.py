@@ -123,7 +123,7 @@ class Plunder(object):
             res.append([i, char.cacheobj.name, char.power, f.in_formation_hero_original_ids(), True])
 
         final_ids = [r[0] for r in res]
-        this_stages = MongoStage.objects.filter(id__in=[final_ids])
+        this_stages = MongoStage.objects.filter(id__in=final_ids)
         this_stages_dict = {s.id: s.max_star_stage for s in this_stages}
         for r in res:
             _id = r[0]

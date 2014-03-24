@@ -150,7 +150,7 @@ class Stuff(models.Model):
     def all_by_tp(tp):
         data = Stuff.all()
         res = {}
-        for d in data:
+        for d in data.values():
             if d.tp == tp:
                 res[d.id] = d
         return res
