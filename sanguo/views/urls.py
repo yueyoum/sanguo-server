@@ -3,6 +3,7 @@ from django.conf.urls import patterns, url
 urlpatterns = patterns('',
                        url(r'^sync/$', 'views.world.views.sync'),
                        url(r'^resume/$', 'views.world.views.resume'),
+                       url(r'^sell/$', 'views.world.views.sell'),
                        url(r'^chat/send/$', 'views.chat.views.send'),
                        url(r'^test/$', 'views.cmd.cmd'),
 

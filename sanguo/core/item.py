@@ -555,6 +555,14 @@ class Item(MessageEquipmentMixin):
 
             publish_to_char(self.char_id, pack_msg(msg))
 
+    def gem_sell(self, _id, amount):
+        # TODO get gold
+        gold = 10 * amount
+        self.gem_remove(_id, amount)
+
+        char = Char(self.char_id)
+        char.update(gold=gold, des="Gem Sell")
+
     def gem_merge(self, _id):
         try:
             this_gem_amount = self.item.gems[str(_id)]
@@ -668,6 +676,16 @@ class Item(MessageEquipmentMixin):
             g.id, g.amount = _id, new_amount
 
             publish_to_char(self.char_id, pack_msg(msg))
+
+
+    def stuff_sell(self, _id, amount):
+        # TODO get gold
+        gold = 10 * amount
+        self.stuff_remove(_id, amount)
+
+        char = Char(self.char_id)
+        char.update(gold=gold, des="Gem Sell")
+
 
 
     def send_equip_notify(self):

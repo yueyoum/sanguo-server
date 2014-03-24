@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='item.proto',
   package='Sanguo.protocol.item',
-  serialized_pb='\n\nitem.proto\x12\x14Sanguo.protocol.item\"\x9c\x01\n\x05\x45quip\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0b\n\x03oid\x18\x02 \x02(\x05\x12\r\n\x05level\x18\x03 \x02(\x05\x12\x1a\n\x12level_up_need_gold\x18\x04 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x05 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x06 \x02(\x05\x12\n\n\x02hp\x18\x07 \x02(\x05\x12\x0f\n\x07gem_ids\x18\x08 \x03(\x05\x12\x11\n\tsell_gold\x18\t \x02(\x05\"!\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"#\n\x05Stuff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"K\n\x0bStuffNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06stuffs\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Stuff\"N\n\x0e\x41\x64\x64StuffNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06stuffs\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Stuff\"Q\n\x11UpdateStuffNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06stuffs\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Stuff\"1\n\x11RemoveStuffNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"E\n\tGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"H\n\x0c\x41\x64\x64GemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"K\n\x0fUpdateGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"/\n\x0fRemoveGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\".\n\x0fMergeGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"0\n\x10MergeGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"U\n\x0f\x45mbedGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08\x65quip_id\x18\x02 \x02(\x05\x12\x0f\n\x07hole_id\x18\x03 \x02(\x05\x12\x0e\n\x06gem_id\x18\x04 \x02(\x05\"0\n\x10\x45mbedGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"G\n\x11UnEmbedGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08\x65quip_id\x18\x02 \x02(\x05\x12\x0f\n\x07hole_id\x18\x03 \x02(\x05\"2\n\x12UnEmbedGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"K\n\x0b\x45quipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"N\n\x0e\x41\x64\x64\x45quipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"1\n\x11RemoveEquipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"Q\n\x11UpdateEquipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"B\n\x14StrengthEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\r\n\x05quick\x18\x03 \x02(\x08\"b\n\x15StrengthEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12+\n\x06\x65quips\x18\x03 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"1\n\x12StepUpEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"3\n\x13StepUpEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x10SellEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"1\n\x11SellEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xe2\x01\n\x1aSpecialEquipmentBuyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tsocket_id\x18\x02 \x02(\x05\x12P\n\x02tp\x18\x03 \x02(\x0e\x32\x44.Sanguo.protocol.item.SpecialEquipmentBuyRequest.SocketEquipmentType\"N\n\x13SocketEquipmentType\x12\x11\n\rSOCKET_WEAPON\x10\x01\x12\x10\n\x0cSOCKET_ARMOR\x10\x02\x12\x12\n\x0eSOCKET_JEWELRY\x10\x03\";\n\x1bSpecialEquipmentBuyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\nitem.proto\x12\x14Sanguo.protocol.item\"\x9c\x01\n\x05\x45quip\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0b\n\x03oid\x18\x02 \x02(\x05\x12\r\n\x05level\x18\x03 \x02(\x05\x12\x1a\n\x12level_up_need_gold\x18\x04 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x05 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x06 \x02(\x05\x12\n\n\x02hp\x18\x07 \x02(\x05\x12\x0f\n\x07gem_ids\x18\x08 \x03(\x05\x12\x11\n\tsell_gold\x18\t \x02(\x05\"!\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"#\n\x05Stuff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"K\n\x0bStuffNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06stuffs\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Stuff\"N\n\x0e\x41\x64\x64StuffNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06stuffs\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Stuff\"Q\n\x11UpdateStuffNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06stuffs\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Stuff\"1\n\x11RemoveStuffNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"E\n\tGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"H\n\x0c\x41\x64\x64GemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"K\n\x0fUpdateGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"/\n\x0fRemoveGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\".\n\x0fMergeGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"0\n\x10MergeGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"U\n\x0f\x45mbedGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08\x65quip_id\x18\x02 \x02(\x05\x12\x0f\n\x07hole_id\x18\x03 \x02(\x05\x12\x0e\n\x06gem_id\x18\x04 \x02(\x05\"0\n\x10\x45mbedGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"G\n\x11UnEmbedGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08\x65quip_id\x18\x02 \x02(\x05\x12\x0f\n\x07hole_id\x18\x03 \x02(\x05\"2\n\x12UnEmbedGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"K\n\x0b\x45quipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"N\n\x0e\x41\x64\x64\x45quipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"1\n\x11RemoveEquipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"Q\n\x11UpdateEquipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"B\n\x14StrengthEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\r\n\x05quick\x18\x03 \x02(\x08\"b\n\x15StrengthEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12+\n\x06\x65quips\x18\x03 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"1\n\x12StepUpEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"3\n\x13StepUpEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xe2\x01\n\x1aSpecialEquipmentBuyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tsocket_id\x18\x02 \x02(\x05\x12P\n\x02tp\x18\x03 \x02(\x0e\x32\x44.Sanguo.protocol.item.SpecialEquipmentBuyRequest.SocketEquipmentType\"N\n\x13SocketEquipmentType\x12\x11\n\rSOCKET_WEAPON\x10\x01\x12\x10\n\x0cSOCKET_ARMOR\x10\x02\x12\x12\n\x0eSOCKET_JEWELRY\x10\x03\";\n\x1bSpecialEquipmentBuyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
 
 
 
@@ -38,8 +38,8 @@ _SPECIALEQUIPMENTBUYREQUEST_SOCKETEQUIPMENTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2002,
-  serialized_end=2080,
+  serialized_start=1901,
+  serialized_end=1979,
 )
 
 
@@ -1002,76 +1002,6 @@ _STEPUPEQUIPRESPONSE = _descriptor.Descriptor(
 )
 
 
-_SELLEQUIPREQUEST = _descriptor.Descriptor(
-  name='SellEquipRequest',
-  full_name='Sanguo.protocol.item.SellEquipRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='session', full_name='Sanguo.protocol.item.SellEquipRequest.session', index=0,
-      number=1, type=12, cpp_type=9, label=2,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ids', full_name='Sanguo.protocol.item.SellEquipRequest.ids', index=1,
-      number=2, type=5, cpp_type=1, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=1752,
-  serialized_end=1800,
-)
-
-
-_SELLEQUIPRESPONSE = _descriptor.Descriptor(
-  name='SellEquipResponse',
-  full_name='Sanguo.protocol.item.SellEquipResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ret', full_name='Sanguo.protocol.item.SellEquipResponse.ret', index=0,
-      number=1, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='session', full_name='Sanguo.protocol.item.SellEquipResponse.session', index=1,
-      number=2, type=12, cpp_type=9, label=2,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=1802,
-  serialized_end=1851,
-)
-
-
 _SPECIALEQUIPMENTBUYREQUEST = _descriptor.Descriptor(
   name='SpecialEquipmentBuyRequest',
   full_name='Sanguo.protocol.item.SpecialEquipmentBuyRequest',
@@ -1110,8 +1040,8 @@ _SPECIALEQUIPMENTBUYREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1854,
-  serialized_end=2080,
+  serialized_start=1753,
+  serialized_end=1979,
 )
 
 
@@ -1145,8 +1075,8 @@ _SPECIALEQUIPMENTBUYRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2082,
-  serialized_end=2141,
+  serialized_start=1981,
+  serialized_end=2040,
 )
 
 _STUFFNOTIFY.fields_by_name['stuffs'].message_type = _STUFF
@@ -1186,8 +1116,6 @@ DESCRIPTOR.message_types_by_name['StrengthEquipRequest'] = _STRENGTHEQUIPREQUEST
 DESCRIPTOR.message_types_by_name['StrengthEquipResponse'] = _STRENGTHEQUIPRESPONSE
 DESCRIPTOR.message_types_by_name['StepUpEquipRequest'] = _STEPUPEQUIPREQUEST
 DESCRIPTOR.message_types_by_name['StepUpEquipResponse'] = _STEPUPEQUIPRESPONSE
-DESCRIPTOR.message_types_by_name['SellEquipRequest'] = _SELLEQUIPREQUEST
-DESCRIPTOR.message_types_by_name['SellEquipResponse'] = _SELLEQUIPRESPONSE
 DESCRIPTOR.message_types_by_name['SpecialEquipmentBuyRequest'] = _SPECIALEQUIPMENTBUYREQUEST
 DESCRIPTOR.message_types_by_name['SpecialEquipmentBuyResponse'] = _SPECIALEQUIPMENTBUYRESPONSE
 
@@ -1340,18 +1268,6 @@ class StepUpEquipResponse(_message.Message):
   DESCRIPTOR = _STEPUPEQUIPRESPONSE
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.StepUpEquipResponse)
-
-class SellEquipRequest(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _SELLEQUIPREQUEST
-
-  # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.SellEquipRequest)
-
-class SellEquipResponse(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _SELLEQUIPRESPONSE
-
-  # @@protoc_insertion_point(class_scope:Sanguo.protocol.item.SellEquipResponse)
 
 class SpecialEquipmentBuyRequest(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
