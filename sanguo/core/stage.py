@@ -424,6 +424,11 @@ class Hang(TimerCheckAbstractBase):
         achievement = Achievement(self.char_id)
         achievement.trig(33, 1)
 
+    def _actual_gold(self, drop_gold):
+        drop_gold = drop_gold + self.hang.plunder_win_times * PLUNDER_DEFENSE_SUCCESS_GOLD - self.hang.plunder_lose_times * PLUNDER_DEFENSE_FAILURE_GOLD
+        if drop_gold < 0:
+            drop_gold = 0
+        return drop_gold
 
 
     def get_drop(self):
@@ -431,12 +436,10 @@ class Hang(TimerCheckAbstractBase):
         times = self.hang.actual_seconds / 15
 
         stage = ModelStage.all()[stage_id]
-        drop_exp = stage.normal_exp * times + self.hang.plunder_gold
+        drop_exp = stage.normal_exp * times
         drop_gold = stage.normal_gold * times
 
-        drop_gold = drop_gold + self.hang.plunder_win_times * PLUNDER_DEFENSE_SUCCESS_GOLD - self.hang.plunder_lose_times * PLUNDER_DEFENSE_FAILURE_GOLD
-        if drop_gold < 0:
-            drop_gold = 0
+        drop_gold = self._actual_gold(drop_gold)
 
         all_drops = StageDrop.all()
         drop_equips, drop_gems, drop_stuffs = _parse_drops(all_drops, stage.normal_drop)
@@ -523,7 +526,7 @@ class Hang(TimerCheckAbstractBase):
 
             times = msg.hang.used_time / 15
             stage = ModelStage.all()[self.hang.stage_id]
-            msg.hang.rewared_gold = stage.normal_gold * times + self.hang.plunder_gold
+            msg.hang.rewared_gold = self._actual_gold(stage.normal_drop * times)
             msg.hang.rewared_exp = stage.normal_exp * times
 
             for l in self.hang.logs:

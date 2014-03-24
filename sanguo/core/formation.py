@@ -174,7 +174,7 @@ class Formation(object):
         self.formation.save()
         socket_changed_signal.send(
             sender=None,
-            socket=self.formation.sockets[str(socket_id)]
+            socket_obj=self.formation.sockets[str(socket_id)]
         )
 
         self._send_socket_changed_notify(socket_id, self.formation.sockets[str(socket_id)])
