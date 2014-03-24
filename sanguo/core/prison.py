@@ -58,8 +58,8 @@ class Prison(object):
         self.p.save()
 
         msg = protomsg.NewPrisonerNotify()
-        p = msg.prisoner.add()
-        self._fill_up_prisoner_msg(p, new_prisoner_id, oid, PRISONER_START_PROB)
+        msg_p = msg.prisoner.add()
+        self._fill_up_prisoner_msg(msg_p, new_prisoner_id, oid, PRISONER_START_PROB, True)
 
         publish_to_char(self.char_id, pack_msg(msg))
 
@@ -110,10 +110,9 @@ class Prison(object):
 
             msg = protomsg.UpdatePrisonerNotify()
             p = msg.prisoner.add()
-            p.id = _id
-            p.oid = self.p.prisoners[str_id].oid
-            p.prob = self.p.prisoners[str_id].prob
-            p.active = self.p.prisoners[str_id].active
+            p_obj = self.p.prisoners[str_id]
+            self._fill_up_prisoner_msg(p, _id, p_obj.oid, p_obj.prob, p_obj.active)
+
             publish_to_char(self.char_id, pack_msg(msg))
 
         self.p.save()
@@ -169,16 +168,17 @@ class Prison(object):
         return stuffs
 
 
-    def _fill_up_prisoner_msg(self, p, _id, oid, prob):
+    def _fill_up_prisoner_msg(self, p, _id, oid, prob, active):
         p.id = _id
         p.oid = oid
         p.prob = prob
+        p.active = active
 
 
     def send_prisoners_notify(self):
         msg = protomsg.PrisonerListNotify()
         for k, v in self.p.prisoners.iteritems():
             p = msg.prisoner.add()
-            self._fill_up_prisoner_msg(p, int(k), v.oid, v.prob)
+            self._fill_up_prisoner_msg(p, int(k), v.oid, v.prob, v.active)
 
         publish_to_char(self.char_id, pack_msg(msg))

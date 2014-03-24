@@ -78,6 +78,10 @@ class Formation(object):
         hero_ids = []
         sockets = self.formation.sockets
         for sid in self.formation.formation:
+            if sid == 0:
+                hero_ids.append(0)
+                continue
+
             s = sockets[str(sid)]
             if s.hero:
                 hero_ids.append(s.hero)
