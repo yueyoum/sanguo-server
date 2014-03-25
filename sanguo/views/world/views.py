@@ -55,11 +55,11 @@ def sell(request):
             continue
 
         if ele.tp == 4:
-            item.gem_remove(ele.id, ele.amount)
+            item.gem_sell(ele.id, ele.amount)
             continue
 
         if ele.tp == 5:
-            item.stuff_remove(ele.id, ele.amount)
+            item.stuff_sell(ele.id, ele.amount)
             continue
 
     return None
