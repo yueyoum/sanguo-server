@@ -1,3 +1,10 @@
+* 2014-03-25
+
+    alter table stage drop column des;
+    alter table monster drop column avatar;
+
+
+
 * 2014-03-21
 
     alter table stuff add column tp int(11) not null;

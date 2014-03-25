@@ -32,7 +32,7 @@ class BattleAdmin(ImportExportModelAdmin):
 
 class StageAdmin(ImportExportModelAdmin):
     list_display = (
-        'id', 'name', 'des', 'bg', 'level', 'battle',
+        'id', 'name', 'bg', 'level', 'battle',
         'open_condition', 'Monsters',
         'normal_exp', 'normal_gold', 'normal_drop',
         'first_exp', 'first_gold', 'first_drop',

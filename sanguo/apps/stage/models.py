@@ -50,7 +50,7 @@ post_delete.connect(
 class Stage(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField("名字", max_length=32)
-    des = models.TextField("描述", blank=True)
+
     bg = models.CharField("背景图片", max_length=32, blank=True)
     level = models.IntegerField("关卡等级")
 

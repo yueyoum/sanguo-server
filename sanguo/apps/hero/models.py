@@ -164,7 +164,6 @@ post_delete.connect(
 class Monster(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField("名字", max_length=16)
-    avatar = models.CharField("头像", max_length=32)
     image = models.CharField("卡牌", max_length=32)
 
     level = models.IntegerField("等级")

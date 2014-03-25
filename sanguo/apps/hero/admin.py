@@ -43,25 +43,25 @@ class HeroAdmin(ImportExportModelAdmin):
     def Image(self, obj):
         if not obj.image:
             return 'None'
-        return u'<a href="/images/hero/image/{0}.jpg" target=_blank><img src="/images/hero/image/{0}.jpg" width="100" /></a>'.format(obj.image)
+        return u'<a href="/images/hero/image/{0}.jpg" target=_blank><img src="/images/hero/image/{0}.jpg" width="80" /></a>'.format(obj.image)
     Image.allow_tags = True
 
 
 class MonsterAdmin(ImportExportModelAdmin):
     list_display = (
-        'id', 'name', 'Avatar', 'Image',
+        'id', 'name', 'Image',
         'level', 'attack', 'defense', 'hp', 'crit', 'dodge',
         'skills', 'default_skill', 'anger',
     )
 
     resource_class = MonsterResources
 
-    def Avatar(self, obj):
-        return ""
-
 
     def Image(self, obj):
-        return ""
+        if not obj.image:
+            return 'None'
+        return u'<a href="/images/hero/image/{0}.jpg" target=_blank><img src="/images/hero/image/{0}.jpg" width="80" /></a>'.format(obj.image)
+    Image.allow_tags = True
 
 
 
