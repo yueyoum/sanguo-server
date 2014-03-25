@@ -147,6 +147,7 @@ class HeroPanel(object):
 
         save_hero(self.char_id, hero_id)
         self.send_notify()
+        return hero_id
 
 
     def refresh(self):
