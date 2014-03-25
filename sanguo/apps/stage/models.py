@@ -10,6 +10,7 @@ class Battle(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField("名字", max_length=32)
     level_limit = models.IntegerField("等级限制", default=1)
+    des = models.TextField("描述", blank=True)
 
     @staticmethod
     def all():

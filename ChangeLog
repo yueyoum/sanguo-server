@@ -1,5 +1,6 @@
 * 2014-03-25
 
+    alter table battle add column des longtext not null;
     alter table stage drop column des;
     alter table monster drop column avatar;
 

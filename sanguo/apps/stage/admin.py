@@ -27,7 +27,7 @@ class ChallengeStageResources(resources.ModelResource):
         model = ChallengeStage
 
 class BattleAdmin(ImportExportModelAdmin):
-    list_display = ('id', 'name', 'level_limit',)
+    list_display = ('id', 'name', 'level_limit', 'des',)
     resource_class = BattleResources
 
 class StageAdmin(ImportExportModelAdmin):
