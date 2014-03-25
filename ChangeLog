@@ -4,6 +4,8 @@
     alter table stage drop column des;
     alter table monster drop column avatar;
 
+    alter table gem add column sell_gold int(11) not null;
+
 
 
 * 2014-03-21

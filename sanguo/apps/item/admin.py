@@ -42,7 +42,8 @@ class EquipmentAdmin(ImportExportModelAdmin):
 class GemAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'Icon', 'tp_name', 'level',
-        'used_for', 'used_for_name', 'value', 'merge_to'
+        'used_for', 'used_for_name', 'value', 'merge_to',
+        'sell_gold',
     )
 
     list_filter = ('used_for',)
