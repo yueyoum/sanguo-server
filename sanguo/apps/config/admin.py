@@ -3,7 +3,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.config.models import CharInit, ArenaReward, Notify, FunctionOpen
+from apps.config.models import CharInit, ArenaReward, Notify, FunctionOpen, NPCFriend
 
 class CharInitAdmin(admin.ModelAdmin):
     list_display = (
@@ -40,8 +40,21 @@ class FunctionOpenAdmin(admin.ModelAdmin):
     )
 
 
+class NPCFriendResources(resources.ModelResource):
+    class Meta:
+        model = NPCFriend
+
+class NPCFriendAdmin(ImportExportModelAdmin):
+    list_display = (
+        'id', 'name', 'power', 'sycee'
+    )
+
+    resource_class = NPCFriendResources
+
+
 
 admin.site.register(CharInit, CharInitAdmin)
 admin.site.register(ArenaReward, ArenaRewardAdmin)
 admin.site.register(Notify, NotifyAdmin)
 admin.site.register(FunctionOpen, FunctionOpenAdmin)
+admin.site.register(NPCFriend, NPCFriendAdmin)
