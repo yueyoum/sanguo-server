@@ -31,8 +31,9 @@ class TimerCheck(object):
 
     def check(self, char_id):
         now = utc_timestamp()
-        if char_id in self.check_time and now - self.check_time[char_id] < CHECK_INTERVAL:
-            return
+        # XXX
+        # if char_id in self.check_time and now - self.check_time[char_id] < CHECK_INTERVAL:
+        #     return
 
         self.check_time[char_id] = now
         for cls in self.checkers:
