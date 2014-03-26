@@ -14,7 +14,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='friend.proto',
   package='Sanguo.protocol.friend',
-  serialized_pb='\n\x0c\x66riend.proto\x12\x16Sanguo.protocol.friend\"\x9b\x01\n\x06\x46riend\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\r\n\x05level\x18\x03 \x02(\x05\x12\x10\n\x08official\x18\x04 \x02(\x05\x12\r\n\x05power\x18\x05 \x01(\x05\x12\x34\n\x06status\x18\x06 \x02(\x0e\x32$.Sanguo.protocol.friend.FriendStatus\x12\x11\n\tformation\x18\x07 \x03(\x05\"Q\n\rFriendsNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12/\n\x07\x66riends\x18\x02 \x03(\x0b\x32\x1e.Sanguo.protocol.friend.Friend\"R\n\x0fNewFriendNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12.\n\x06\x66riend\x18\x02 \x02(\x0b\x32\x1e.Sanguo.protocol.friend.Friend\"1\n\x12RemoveFriendNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"U\n\x12UpdateFriendNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12.\n\x06\x66riend\x18\x02 \x02(\x0b\x32\x1e.Sanguo.protocol.friend.Friend\"N\n\x13\x46riendsAmountNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nmax_amount\x18\x02 \x02(\x05\x12\x12\n\ncur_amount\x18\x03 \x02(\x05\"$\n\x11PlayerListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"c\n\x12PlayerListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12/\n\x07players\x18\x03 \x03(\x0b\x32\x1e.Sanguo.protocol.friend.Friend\"=\n\x10\x46riendAddRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x01(\x05\x12\x0c\n\x04name\x18\x03 \x01(\t\"1\n\x11\x46riendAddResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"5\n\x16\x46riendTerminateRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"7\n\x17\x46riendTerminateResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"2\n\x13\x46riendCancelRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"4\n\x14\x46riendCancelResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"2\n\x13\x46riendAcceptRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"4\n\x14\x46riendAcceptResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"2\n\x13\x46riendRefuseRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"4\n\x14\x46riendRefuseResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c*O\n\x0c\x46riendStatus\x12\x0e\n\nFRIEND_NOT\x10\x01\x12\r\n\tFRIEND_OK\x10\x02\x12\x0e\n\nFRIEND_ACK\x10\x03\x12\x10\n\x0c\x46RIEND_APPLY\x10\x04')
+  serialized_pb='\n\x0c\x66riend.proto\x12\x16Sanguo.protocol.friend\"\x9b\x01\n\x06\x46riend\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\r\n\x05level\x18\x03 \x02(\x05\x12\x10\n\x08official\x18\x04 \x02(\x05\x12\r\n\x05power\x18\x05 \x01(\x05\x12\x34\n\x06status\x18\x06 \x02(\x0e\x32$.Sanguo.protocol.friend.FriendStatus\x12\x11\n\tformation\x18\x07 \x03(\x05\"Q\n\rFriendsNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12/\n\x07\x66riends\x18\x02 \x03(\x0b\x32\x1e.Sanguo.protocol.friend.Friend\"\'\n\x14\x46riendRefreshRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"5\n\x15\x46riendRefreshResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"R\n\x0fNewFriendNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12.\n\x06\x66riend\x18\x02 \x02(\x0b\x32\x1e.Sanguo.protocol.friend.Friend\"1\n\x12RemoveFriendNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"U\n\x12UpdateFriendNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12.\n\x06\x66riend\x18\x02 \x02(\x0b\x32\x1e.Sanguo.protocol.friend.Friend\"N\n\x13\x46riendsAmountNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nmax_amount\x18\x02 \x02(\x05\x12\x12\n\ncur_amount\x18\x03 \x02(\x05\"$\n\x11PlayerListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"c\n\x12PlayerListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12/\n\x07players\x18\x03 \x03(\x0b\x32\x1e.Sanguo.protocol.friend.Friend\"=\n\x10\x46riendAddRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x01(\x05\x12\x0c\n\x04name\x18\x03 \x01(\t\"1\n\x11\x46riendAddResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"5\n\x16\x46riendTerminateRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"7\n\x17\x46riendTerminateResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"2\n\x13\x46riendCancelRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"4\n\x14\x46riendCancelResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"2\n\x13\x46riendAcceptRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"4\n\x14\x46riendAcceptResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"2\n\x13\x46riendRefuseRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"4\n\x14\x46riendRefuseResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c*O\n\x0c\x46riendStatus\x12\x0e\n\nFRIEND_NOT\x10\x01\x12\r\n\tFRIEND_OK\x10\x02\x12\x0e\n\nFRIEND_ACK\x10\x03\x12\x10\n\x0c\x46RIEND_APPLY\x10\x04')
 
 _FRIENDSTATUS = _descriptor.EnumDescriptor(
   name='FriendStatus',
@@ -41,8 +41,8 @@ _FRIENDSTATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1266,
-  serialized_end=1345,
+  serialized_start=1362,
+  serialized_end=1441,
 )
 
 FriendStatus = enum_type_wrapper.EnumTypeWrapper(_FRIENDSTATUS)
@@ -158,6 +158,69 @@ _FRIENDSNOTIFY = _descriptor.Descriptor(
 )
 
 
+_FRIENDREFRESHREQUEST = _descriptor.Descriptor(
+  name='FriendRefreshRequest',
+  full_name='Sanguo.protocol.friend.FriendRefreshRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.friend.FriendRefreshRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=281,
+  serialized_end=320,
+)
+
+
+_FRIENDREFRESHRESPONSE = _descriptor.Descriptor(
+  name='FriendRefreshResponse',
+  full_name='Sanguo.protocol.friend.FriendRefreshResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.friend.FriendRefreshResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.friend.FriendRefreshResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=322,
+  serialized_end=375,
+)
+
+
 _NEWFRIENDNOTIFY = _descriptor.Descriptor(
   name='NewFriendNotify',
   full_name='Sanguo.protocol.friend.NewFriendNotify',
@@ -188,8 +251,8 @@ _NEWFRIENDNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=281,
-  serialized_end=363,
+  serialized_start=377,
+  serialized_end=459,
 )
 
 
@@ -223,8 +286,8 @@ _REMOVEFRIENDNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=365,
-  serialized_end=414,
+  serialized_start=461,
+  serialized_end=510,
 )
 
 
@@ -258,8 +321,8 @@ _UPDATEFRIENDNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=416,
-  serialized_end=501,
+  serialized_start=512,
+  serialized_end=597,
 )
 
 
@@ -300,8 +363,8 @@ _FRIENDSAMOUNTNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=503,
-  serialized_end=581,
+  serialized_start=599,
+  serialized_end=677,
 )
 
 
@@ -328,8 +391,8 @@ _PLAYERLISTREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=583,
-  serialized_end=619,
+  serialized_start=679,
+  serialized_end=715,
 )
 
 
@@ -370,8 +433,8 @@ _PLAYERLISTRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=621,
-  serialized_end=720,
+  serialized_start=717,
+  serialized_end=816,
 )
 
 
@@ -412,8 +475,8 @@ _FRIENDADDREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=722,
-  serialized_end=783,
+  serialized_start=818,
+  serialized_end=879,
 )
 
 
@@ -447,8 +510,8 @@ _FRIENDADDRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=785,
-  serialized_end=834,
+  serialized_start=881,
+  serialized_end=930,
 )
 
 
@@ -482,8 +545,8 @@ _FRIENDTERMINATEREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=836,
-  serialized_end=889,
+  serialized_start=932,
+  serialized_end=985,
 )
 
 
@@ -517,8 +580,8 @@ _FRIENDTERMINATERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=891,
-  serialized_end=946,
+  serialized_start=987,
+  serialized_end=1042,
 )
 
 
@@ -552,8 +615,8 @@ _FRIENDCANCELREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=948,
-  serialized_end=998,
+  serialized_start=1044,
+  serialized_end=1094,
 )
 
 
@@ -587,8 +650,8 @@ _FRIENDCANCELRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1000,
-  serialized_end=1052,
+  serialized_start=1096,
+  serialized_end=1148,
 )
 
 
@@ -622,8 +685,8 @@ _FRIENDACCEPTREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1054,
-  serialized_end=1104,
+  serialized_start=1150,
+  serialized_end=1200,
 )
 
 
@@ -657,8 +720,8 @@ _FRIENDACCEPTRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1106,
-  serialized_end=1158,
+  serialized_start=1202,
+  serialized_end=1254,
 )
 
 
@@ -692,8 +755,8 @@ _FRIENDREFUSEREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1160,
-  serialized_end=1210,
+  serialized_start=1256,
+  serialized_end=1306,
 )
 
 
@@ -727,8 +790,8 @@ _FRIENDREFUSERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1212,
-  serialized_end=1264,
+  serialized_start=1308,
+  serialized_end=1360,
 )
 
 _FRIEND.fields_by_name['status'].enum_type = _FRIENDSTATUS
@@ -738,6 +801,8 @@ _UPDATEFRIENDNOTIFY.fields_by_name['friend'].message_type = _FRIEND
 _PLAYERLISTRESPONSE.fields_by_name['players'].message_type = _FRIEND
 DESCRIPTOR.message_types_by_name['Friend'] = _FRIEND
 DESCRIPTOR.message_types_by_name['FriendsNotify'] = _FRIENDSNOTIFY
+DESCRIPTOR.message_types_by_name['FriendRefreshRequest'] = _FRIENDREFRESHREQUEST
+DESCRIPTOR.message_types_by_name['FriendRefreshResponse'] = _FRIENDREFRESHRESPONSE
 DESCRIPTOR.message_types_by_name['NewFriendNotify'] = _NEWFRIENDNOTIFY
 DESCRIPTOR.message_types_by_name['RemoveFriendNotify'] = _REMOVEFRIENDNOTIFY
 DESCRIPTOR.message_types_by_name['UpdateFriendNotify'] = _UPDATEFRIENDNOTIFY
@@ -766,6 +831,18 @@ class FriendsNotify(_message.Message):
   DESCRIPTOR = _FRIENDSNOTIFY
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.friend.FriendsNotify)
+
+class FriendRefreshRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _FRIENDREFRESHREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.friend.FriendRefreshRequest)
+
+class FriendRefreshResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _FRIENDREFRESHRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.friend.FriendRefreshResponse)
 
 class NewFriendNotify(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType

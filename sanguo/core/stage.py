@@ -4,6 +4,7 @@ import random
 from mongoengine import DoesNotExist
 from apps.hero.models import Hero as ModelHero
 from apps.stage.models import Stage as ModelStage, EliteStage as ModelEliteStage, ChallengeStage as ModelChallengeStage
+from apps.config.models import NPCFriend as ModelNPCFriends
 from apps.stage.models import StageDrop
 from core.mongoscheme import MongoStage, MongoTeamBattle, MongoEmbededPlunderLog, MongoHang, MongoHangRemainedTime
 
@@ -37,6 +38,9 @@ from preset.settings import (
     PLUNDER_DEFENSE_SUCCESS_MAX_TIMES,
     PLUNDER_DEFENSE_FAILURE_MAX_TIMES,
 )
+
+NPCFRIENDS = ModelNPCFriends.all()
+
 
 def _parse_drops(all_drops, drop_id):
     if not drop_id:
@@ -685,21 +689,22 @@ class TeamBattle(TimerCheckAbstractBase):
             attachment = Attachment(self.char_id)
             attachment.save_to_prize(7)
 
-    def enter(self, _id):
+
+    def start(self, _id, friend_ids=None, npc_ids=None):
         if self.mongo_tb:
-            raise InvalidOperate("TeamBattle Enter. Char {0} Try to enter battle {1}. But last battle NOT complete".format(
+            raise InvalidOperate("TeamBattle Start. Char {0} Try to start battle {1}. But last battle NOT complete".format(
                 self.char_id, _id
             ))
 
         try:
             this_stage = ModelChallengeStage.all()[_id]
         except KeyError:
-            raise InvalidOperate("TeamBattle Enter. Char {0} Try to enter a NONE exists battle {1}".format(_id))
+            raise InvalidOperate("TeamBattle Start. Char {0} Try to start a NONE exists battle {1}".format(_id))
 
         char = Char(self.char_id)
         char_level = char.cacheobj.level
         if char_level < this_stage.char_level_needs:
-            raise InvalidOperate("TeamBattle Enter. Char {0} Try to enter battle {1}. But level not needs. {2}".format(
+            raise InvalidOperate("TeamBattle Start. Char {0} Try to start battle {1}. But level not needs. {2}".format(
                 self.char_id, _id, char_level
             ))
 
@@ -708,39 +713,11 @@ class TeamBattle(TimerCheckAbstractBase):
 
         item = Item(self.char_id)
         if not item.has_stuff(need_stuff_id, need_stuff_amount):
-            raise StuffNotEnough("TeamBattle Enter. Char {0} Try to enter battle {1}. But stuff not enough".format(self.char_id, _id))
-
-        item.stuff_remove(need_stuff_id, need_stuff_amount)
-
+            raise StuffNotEnough("TeamBattle Start. Char {0} Try to start battle {1}. But stuff not enough".format(self.char_id, _id))
 
         boss = ModelHero.get_by_grade(this_stage.level)
         boss_id = boss.keys()[0]
         boss_power = this_stage.boss_power()
-
-
-        self.mongo_tb = MongoTeamBattle(id=self.char_id)
-        self.mongo_tb.battle_id = _id
-        self.mongo_tb.boss_id = boss_id
-        self.mongo_tb.boss_power = boss_power
-        self.mongo_tb.friend_ids = []
-        self.mongo_tb.self_power = char.power
-        self.mongo_tb.start_at = 0
-        self.mongo_tb.total_seconds = this_stage.time_limit
-        self.mongo_tb.status = 1
-        self.mongo_tb.save()
-
-        self.send_notify()
-
-    def start(self, friend_ids=None):
-        if not self.mongo_tb:
-            raise InvalidOperate("TeamBattle Start. Char {0} try to start battle. But NOT entered".format(self.char_id))
-
-        if self.mongo_tb.status != 1:
-            raise InvalidOperate("TeamBattle Start. Char {0} try to start a already started battle {1}. status = {2}".format(
-                self.char_id, self.mongo_tb.battle_id, self.mongo_tb.status
-            ))
-
-        achievement = Achievement(self.char_id)
 
         friend_power = 0
         if friend_ids:
@@ -752,11 +729,42 @@ class TeamBattle(TimerCheckAbstractBase):
                 c = Char(fid)
                 friend_power += c.power
 
+
+        if npc_ids:
+            sycee_needs = 0
+            for nid in npc_ids:
+                try:
+                    npc = NPCFRIENDS[nid]
+                except KeyError:
+                    raise InvalidOperate("TeamBattle Start. Char {0} choose a NONE exists npc {1}".format(self.char_id, nid))
+
+                friend_power += npc.power
+                sycee_needs += npc.sycee
+
+            char = Char(self.char_id)
+            char_sycee = char.cacheobj.sycee
+            if char_sycee < sycee_needs:
+                raise SyceeNotEnough("TeamBattle Start. Char {0} choose npcs {1}. But sycee not enough. {2} < {3}".format(
+                    self.char_id, npc_ids, char_sycee, sycee_needs
+                ))
+
+            char.update(sycee=-sycee_needs, des='TeamBattle. NPC')
+
+
+        if friend_ids:
+            achievement = Achievement(self.char_id)
             achievement.trig(17, 1)
 
-        self.mongo_tb.friend_ids.extend(friend_ids)
-        self.mongo_tb.self_power += friend_power
+        item.stuff_remove(need_stuff_id, need_stuff_amount)
+
+
+        self.mongo_tb = MongoTeamBattle(id=self.char_id)
+        self.mongo_tb.battle_id = _id
+        self.mongo_tb.boss_id = boss_id
+        self.mongo_tb.boss_power = boss_power
+        self.mongo_tb.self_power = friend_power
         self.mongo_tb.start_at = timezone.utc_timestamp()
+        self.mongo_tb.total_seconds = this_stage.time_limit
         self.mongo_tb.status = 2
 
         step = random.uniform(1, 1.05) * self.mongo_tb.self_power / self.mongo_tb.boss_power * 0.0033
@@ -765,28 +773,6 @@ class TeamBattle(TimerCheckAbstractBase):
 
         self.send_notify()
 
-
-    def incr_time(self):
-        if not self.mongo_tb:
-            raise InvalidOperate("TeamBattle Incr Time. Char {0} try to incr time. but no battle exists".format(self.char_id))
-
-        if self.mongo_tb.status != 2:
-            raise InvalidOperate("TeamBattle Incr Time. Char {0} try to incr time. but battle {1} status = {2}".format(
-                self.char_id, self.mongo_tb.battle_id, self.mongo_tb.status
-            ))
-
-        char = Char(self.char_id)
-        char_sycee = char.cacheobj.sycee
-        if char_sycee < TEAMBATTLE_INCR_COST:
-            raise SyceeNotEnough("TeamBattle Incr Time. Char {0} try to incr time. but sycee not enough. {1} < {2}".format(
-                self.char_id, char_sycee, TEAMBATTLE_INCR_COST
-            ))
-
-        char.update(sycee=-TEAMBATTLE_INCR_COST, des='TeamBattle Incr Time')
-
-        self.mongo_tb.total_seconds += 60
-        self.mongo_tb.save()
-        self.send_notify()
 
     def get_reward(self):
         if not self.mongo_tb:
@@ -826,7 +812,6 @@ class TeamBattle(TimerCheckAbstractBase):
             msg.team_battle.id = self.mongo_tb.battle_id
             msg.team_battle.boss_id = self.mongo_tb.boss_id
             msg.team_battle.boss_power = self.mongo_tb.boss_power
-            msg.team_battle.self_ids.extend(self.mongo_tb.friend_ids)
             msg.team_battle.self_power = self.mongo_tb.self_power
 
             utc_timestamp = timezone.utc_timestamp()

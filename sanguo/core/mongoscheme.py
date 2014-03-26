@@ -434,11 +434,10 @@ class MongoTeamBattle(Document):
     battle_id = IntField()
     boss_id = IntField()
     boss_power = IntField()
-    friend_ids = ListField(IntField())
     self_power = IntField()
     start_at = IntField()
     total_seconds = IntField()
-    # status: 1 prepare, 2 started, 3 reward
+    # status: 2 started, 3 reward
     status = IntField()
     # 每秒进度，是否完成就看已经经过的秒数乘以这个数值是否达到1
     step = FloatField(default=0)

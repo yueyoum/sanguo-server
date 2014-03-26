@@ -83,3 +83,10 @@ def refuse(request):
     f.refuse(req.id)
     return None
 
+
+@message_response("FriendRefreshResponse")
+@operate_guard('friend_refresh', 10, keep_result=True)
+def refresh(request):
+    f = Friend(request._char_id)
+    f.send_friends_notify()
+    return None

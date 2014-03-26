@@ -34,6 +34,7 @@ urlpatterns = patterns('',
                        url(r'^friend/accept/$', 'views.friend.views.accept'),
                        url(r'^friend/refuse/$', 'views.friend.views.refuse'),
                        url(r'^friend/terminate/$', 'views.friend.views.terminate'),
+                       url(r'^friend/refresh/$', 'views.friend.views.refresh'),
 
                        url(r'^mail/open/$', 'views.mail.views.open'),
                        url(r'^mail/delete/$', 'views.mail.views.delete'),
@@ -41,7 +42,5 @@ urlpatterns = patterns('',
 
                        url(r'daily/checkin/$', 'views.daily.views.checkin'),
 
-                       url(r'^teambattle/enter/$', 'views.teambattle.views.enter'),
                        url(r'^teambattle/start/$', 'views.teambattle.views.start'),
-                       url(r'^teambattle/incr/$', 'views.teambattle.views.incr_time'),
 )

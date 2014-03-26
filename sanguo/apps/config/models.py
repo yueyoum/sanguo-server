@@ -173,6 +173,11 @@ class NPCFriend(models.Model):
     power = models.IntegerField("战斗力")
     sycee = models.IntegerField("所需元宝")
 
+    @staticmethod
+    def all():
+        fs = NPCFriend.objects.all()
+        return {f.id: f for f in fs}
+
     class Meta:
         db_table = 'npc_friend'
         ordering = ('id',)
