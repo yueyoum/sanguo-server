@@ -229,7 +229,7 @@ class GameGuide(models.Model):
     area_x = models.IntegerField(default=0)
     area_y = models.IntegerField(default=0)
     area_shape = models.IntegerField(choices=SHAPE)
-    area_size = models.CharField("尺寸")
+    area_size = models.CharField("尺寸", max_length=255)
 
     class Meta:
         db_table = 'game_guide'
