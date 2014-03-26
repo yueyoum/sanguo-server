@@ -1,3 +1,8 @@
+* 2014-03-26
+
+    add Dialog Model
+    
+
 * 2014-03-25
 
     alter table battle add column des longtext not null;

@@ -3,7 +3,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from apps.config.models import CharInit, ArenaReward, Notify, FunctionOpen, NPCFriend
+from apps.config.models import CharInit, ArenaReward, Notify, FunctionOpen, NPCFriend, Dialog, DialogStatement
 
 class CharInitAdmin(admin.ModelAdmin):
     list_display = (
@@ -51,6 +51,18 @@ class NPCFriendAdmin(ImportExportModelAdmin):
 
     resource_class = NPCFriendResources
 
+class DialogStatementinline(admin.TabularInline):
+    model = DialogStatement
+    extra = 1
+
+class DialogAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'stage_id', 'ground_id', 'start_at'
+    )
+
+    inlines = [DialogStatementinline,]
+
+    list_filter = ('stage_id', )
 
 
 admin.site.register(CharInit, CharInitAdmin)
@@ -58,3 +70,4 @@ admin.site.register(ArenaReward, ArenaRewardAdmin)
 admin.site.register(Notify, NotifyAdmin)
 admin.site.register(FunctionOpen, FunctionOpenAdmin)
 admin.site.register(NPCFriend, NPCFriendAdmin)
+admin.site.register(Dialog, DialogAdmin)

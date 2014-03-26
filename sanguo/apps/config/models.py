@@ -183,3 +183,37 @@ class NPCFriend(models.Model):
         ordering = ('id',)
         verbose_name = "好友NPC"
         verbose_name_plural = "好友NPC"
+
+
+# 对话
+class Dialog(models.Model):
+    START_AT = (
+        (1, '开始'),
+        (2, '结束'),
+    )
+    stage_id = models.IntegerField("关卡ID")
+    ground_id = models.IntegerField("哪一军")
+    start_at = models.IntegerField("开始于", choices=START_AT)
+
+    class Meta:
+        db_table = 'dialog'
+        ordering = ('id',)
+        verbose_name = "对话"
+        verbose_name_plural = "对话"
+
+
+class DialogStatement(models.Model):
+    POSITION = (
+        (1, '左'),
+        (2, '右'),
+    )
+
+    dialog = models.ForeignKey(Dialog)
+    position = models.IntegerField("位置", choices=POSITION)
+    who = models.IntegerField("武将ID")
+    speech = models.CharField("发言", max_length=255)
+
+    class Meta:
+        db_table = 'dialog_statement'
+        ordering = ('id',)
+
