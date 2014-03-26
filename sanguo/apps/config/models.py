@@ -217,3 +217,22 @@ class DialogStatement(models.Model):
         db_table = 'dialog_statement'
         ordering = ('id',)
 
+# 新手引导
+class GameGuide(models.Model):
+    SHAPE = (
+        (1, '圆形'),
+        (2, '方形'),
+    )
+
+    guide_id = models.IntegerField()
+    speech = models.CharField("发言", max_length=255, blank=True)
+    area_x = models.IntegerField(default=0)
+    area_y = models.IntegerField(default=0)
+    area_shape = models.IntegerField(choices=SHAPE)
+    area_size = models.CharField("尺寸")
+
+    class Meta:
+        db_table = 'game_guide'
+        ordering = ('id',)
+        verbose_name = '新手引导'
+        verbose_name_plural = '新手引导'
