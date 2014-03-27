@@ -10,6 +10,7 @@ from core.character import char_initialize
 
 from utils import app_test_helper
 from utils import crypto
+from utils import timezone
 
 import protomsg
 
@@ -75,7 +76,8 @@ class MailTest(TransactionTestCase):
 
     def test_open_mail_normal(self):
         m = Mail(self.char_id)
-        mid = m.add('xxx', 'yyy')
+        m.add(1, 'xxx', 'yyy', timezone.utc_timestamp())
+        mid = 1
         self.assertEqual(m.mail.mails[str(mid)].has_read, False)
 
         self._open(mid)
@@ -91,8 +93,8 @@ class MailTest(TransactionTestCase):
 
 
     def test_delete_mail_normal(self):
-        mid = Mail(self.char_id).add('xxx', 'yyy')
-        self._delete(mid)
+        Mail(self.char_id).add(1, 'xxx', 'yyy', timezone.utc_timestamp())
+        self._delete(1)
 
         self.assertEqual(Mail(self.char_id).count(), 0)
 
@@ -100,10 +102,10 @@ class MailTest(TransactionTestCase):
     def test_delete_mail_error(self):
         self._delete(999, 2)
 
-
-    def test_get_attachment(self):
-        # mid = Mail(self.char_id).add('xxx', 'yyy')
-        # self._get_attach(mid, 2)
-        #
-        # app_test_helper._mongo_teardown_func()
-        pass
+    #
+    # def test_get_attachment(self):
+    #     # mid = Mail(self.char_id).add('xxx', 'yyy')
+    #     # self._get_attach(mid, 2)
+    #     #
+    #     # app_test_helper._mongo_teardown_func()
+    #     pass

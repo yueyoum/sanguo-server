@@ -61,48 +61,47 @@ class SocketTest(TransactionTestCase):
     def test_none_exists(self):
         self._set_socket(99999, 0, 0, 0, 2)
 
-
-class FormationTest(TransactionTestCase):
-    def setUp(self):
-        char = char_initialize(1, 1, 'a')
-        self.char_id = char.id
-        self.session = crypto.encrypt('1:1:{0}'.format(char.id))
-        self.socket_ids = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-    def tearDown(self):
-        app_test_helper._teardown()
-
-    def _set_formation(self, socket_ids, ret=0):
-        req = protomsg.SetFormationRequest()
-        req.session = self.session
-        req.socket_ids.extend(socket_ids)
-
-        data = app_test_helper.pack_data(req)
-        res = app_test_helper.make_request('/formation/set/', data)
-        msgs = app_test_helper.unpack_data(res)
-
-        for id_of_msg, len_of_msg, msg in msgs:
-            if id_of_msg == RESPONSE_NOTIFY_TYPE["SetFormationResponse"]:
-                data = protomsg.SetFormationResponse()
-                data.ParseFromString(msg)
-                self.assertEqual(data.ret, ret)
-
-
-    def test_set_formation(self):
-        # f = Formation(self.char_id)
-        # socket_ids = []
-        # for i in range(3):
-        #     sid = f.save_socket(hero=i+1)
-        #     socket_ids.append(sid)
-        #
-        # sid1, sid2, sid3 = socket_ids
-        # f.save_formation([sid1, 0, 0, sid2, 0, 0, sid3, 0, 0])
-        #
-
-        self._set_formation([3, 4, 5, 2, 6, 7, 1, 8, 9])
-
-    def test_error_set(self):
-        self._set_formation([1, 4, 5, 3, 6, 7, 8, 9, 99], 2)
-        self._set_formation([1, 4, 5, 3, 6, 7, 2, 9], 2)
-        self._set_formation([1, 4, 3, 5, 6, 7, 2, 8, 9], 403)
-
+#
+# class FormationTest(TransactionTestCase):
+#     def setUp(self):
+#         char = char_initialize(1, 1, 'a')
+#         self.char_id = char.id
+#         self.session = crypto.encrypt('1:1:{0}'.format(char.id))
+#         self.socket_ids = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+#
+#     def tearDown(self):
+#         app_test_helper._teardown()
+#
+#     def _set_formation(self, socket_ids, ret=0):
+#         req = protomsg.SetFormationRequest()
+#         req.session = self.session
+#         req.socket_ids.extend(socket_ids)
+#
+#         data = app_test_helper.pack_data(req)
+#         res = app_test_helper.make_request('/formation/set/', data)
+#         msgs = app_test_helper.unpack_data(res)
+#
+#         for id_of_msg, len_of_msg, msg in msgs:
+#             if id_of_msg == RESPONSE_NOTIFY_TYPE["SetFormationResponse"]:
+#                 data = protomsg.SetFormationResponse()
+#                 data.ParseFromString(msg)
+#                 self.assertEqual(data.ret, ret)
+#
+#
+#     def test_set_formation(self):
+#         # f = Formation(self.char_id)
+#         # socket_ids = []
+#         # for i in range(3):
+#         #     sid = f.save_socket(hero=i+1)
+#         #     socket_ids.append(sid)
+#         #
+#         # sid1, sid2, sid3 = socket_ids
+#         # f.save_formation([sid1, 0, 0, sid2, 0, 0, sid3, 0, 0])
+#         #
+#
+#         self._set_formation([3, 4, 5, 2, 6, 7, 1, 8, 9])
+#
+#     def test_error_set(self):
+#         self._set_formation([1, 4, 5, 3, 6, 7, 8, 9, 99], 2)
+#         self._set_formation([1, 4, 5, 3, 6, 7, 2, 9], 2)
+#
