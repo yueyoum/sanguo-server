@@ -224,7 +224,7 @@ class Plunder(object):
         if tp == PLUNDER_HERO:
             f = Formation(self.mongo_plunder.target_char)
             heros = f.in_formation_hero_original_ids()
-            got_hero_id = random.choice(heros)
+            got_hero_id = random.choice([hid for hid in heros if hid])
             p = Prison(self.char_id)
             p.prisoner_add(got_hero_id, plunder_gold/2)
         elif tp == PLUNDER_STUFF:
