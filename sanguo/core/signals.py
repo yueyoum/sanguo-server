@@ -13,7 +13,10 @@ plunder_finished_signal = Signal(providing_args=['from_char_id', 'to_char_id', '
 hang_finished_signal = Signal(providing_args=['char_id', 'actual_seconds'])
 
 char_created_signal = Signal(providing_args=['account_id', 'server_id', 'char_obj'])
-char_updated_signal = Signal(providing_args=['char_id'])
+char_level_up_signal = Signal(providing_args=['char_id', 'new_level'])
+char_official_up_signal = Signal(providing_args=['char_id', 'new_official'])
+char_gold_changed_signal = Signal(providing_args=['char_id', 'now_value', 'change_value'])
+char_sycee_changed_signal = Signal(providing_args=['char_id', 'now_value', 'change_value'])
 
 hero_changed_signal = Signal(providing_args=['hero_id'])
 hero_add_signal = Signal(providing_args=['char_id', 'hero_ids', 'hero_original_ids', 'send_notify'])

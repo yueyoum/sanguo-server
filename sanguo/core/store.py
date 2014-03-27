@@ -6,6 +6,7 @@ __date__ = '2/20/14'
 from mongoengine import DoesNotExist
 
 from django.utils import timezone as dj_timezone
+from django.db import transaction
 
 from apps.store.models import Store as ModelStore, StoreBuyLog
 from core.mongoscheme import MongoStoreAmount, MongoStoreCharLimit
@@ -82,46 +83,47 @@ class Store(object):
             mongo_store_amount.sold_amount += amount
             mongo_store_amount.save()
 
-        # 购买日志
-        order_id = '{0}-{1}'.format(timebased_unique_id(), str(self.char_id).zfill(10))
-        buy_log = StoreBuyLog.objects.create(
-            order_id = order_id,
-            char_id = self.char_id,
-            tag_id = this_goods.tag_id,
-            item_tp = this_goods.item_tp,
-            item = this_goods.item,
-            sell_tp = this_goods.sell_tp,
-            sell_price =this_goods.sell_price,
-            amount = amount,
-            buy_time = dj_timezone.now(),
-            status = 1,
-        )
+        with transaction.atomic():
+            # 购买日志
+            order_id = '{0}-{1}'.format(timebased_unique_id(), str(self.char_id).zfill(10))
+            buy_log = StoreBuyLog.objects.create(
+                order_id = order_id,
+                char_id = self.char_id,
+                tag_id = this_goods.tag_id,
+                item_tp = this_goods.item_tp,
+                item = this_goods.item,
+                sell_tp = this_goods.sell_tp,
+                sell_price =this_goods.sell_price,
+                amount = amount,
+                buy_time = dj_timezone.now(),
+                status = 1,
+            )
 
-        # 扣钱
-        if this_goods.sell_tp == 1:
-            char.update(gold=-this_goods.sell_price * amount, des='Store Buy. Cost')
-        else:
-            char.update(sycee=-this_goods.sell_price * amount, des='Store Buy. Cost')
+            # 扣钱
+            if this_goods.sell_tp == 1:
+                char.update(gold=-this_goods.sell_price * amount, des='Store Buy. Cost')
+            else:
+                char.update(sycee=-this_goods.sell_price * amount, des='Store Buy. Cost')
 
-        buy_log.status = 2
-        buy_log.save()
+            buy_log.status = 2
+            buy_log.save()
 
-        # 给东西
-        item = Item(self.char_id)
-        if this_goods.item_tp == 1:
-            save_hero(self.char_id, [this_goods.item] * amount)
-        elif this_goods.item_tp == 2:
-            for i in range(amount):
-                item.equip_add(this_goods.item)
-        elif this_goods.item_tp == 3:
-            item.gem_add([(this_goods.item, amount)])
-        elif this_goods.item_tp == 4:
-            item.stuff_add([(this_goods.item, amount)])
-        else:
-            char.update(gold=this_goods.item * amount, des='Store Buy. Buy Gold')
+            # 给东西
+            item = Item(self.char_id)
+            if this_goods.item_tp == 1:
+                save_hero(self.char_id, [this_goods.item] * amount)
+            elif this_goods.item_tp == 2:
+                for i in range(amount):
+                    item.equip_add(this_goods.item)
+            elif this_goods.item_tp == 3:
+                item.gem_add([(this_goods.item, amount)])
+            elif this_goods.item_tp == 4:
+                item.stuff_add([(this_goods.item, amount)])
+            else:
+                char.update(gold=this_goods.item * amount, des='Store Buy. Buy Gold')
 
-        buy_log.status = 3
-        buy_log.save()
+            buy_log.status = 3
+            buy_log.save()
 
         self.send_notify()
 

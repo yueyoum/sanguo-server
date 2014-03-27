@@ -4,6 +4,8 @@ __author__ = 'Wang Chao'
 __date__ = '1/23/14'
 
 import random
+
+from django.db import transaction
 from mongoengine import DoesNotExist
 from apps.hero.models import Hero
 
@@ -104,6 +106,7 @@ class HeroPanel(object):
         self.send_notify()
 
 
+    @transaction.atomic
     def open(self, _id):
         if self.all_opended():
             raise InvalidOperate("Get Hero, Open: Char {0} Try to open {1}. But All Opened".format(self.char_id, _id))
@@ -149,7 +152,7 @@ class HeroPanel(object):
         self.send_notify()
         return hero_id
 
-
+    @transaction.atomic
     def refresh(self):
         if self.all_opended():
             # 重新开始，不重置刷新功能

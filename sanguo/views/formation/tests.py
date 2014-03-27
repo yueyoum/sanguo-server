@@ -6,6 +6,7 @@ from core.character import char_initialize
 from utils import app_test_helper
 from utils import crypto
 from core.character import Char
+from core.hero import save_hero
 
 
 class SocketTest(TransactionTestCase):
@@ -39,7 +40,7 @@ class SocketTest(TransactionTestCase):
 
     def test_normal(self):
         char = Char(self.char_id)
-        hero = char.save_hero(1)
+        hero = save_hero(char.id, 1)
         hero_id = hero[0]
         self._set_socket(hero_id, 0, 0, 0, 0)
 

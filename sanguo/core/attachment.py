@@ -3,6 +3,7 @@
 __author__ = 'Wang Chao'
 __date__ = '2/19/14'
 
+from django.db import transaction
 from mongoengine import DoesNotExist
 
 from core.exception import InvalidOperate
@@ -103,7 +104,7 @@ class Attachment(object):
 
         self.send_notify()
 
-
+    @transaction.atomic
     def get_attachment(self, prize_id, param=0):
         if prize_id == 1:
             # 挂机

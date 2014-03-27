@@ -5,6 +5,8 @@ __date__ = '1/6/14'
 
 import random
 
+from django.db import transaction
+
 from mongoengine import DoesNotExist
 from apps.item.models import Gem as ModelGem
 from apps.official.models import Official as ModelOfficial
@@ -34,6 +36,7 @@ class CheckIn(object):
             self.c.save()
 
 
+    @transaction.atomic
     def checkin(self):
         if self.c.has_checked:
             raise InvalidOperate("CheckIN: Char {0} Try to checkin, But already checked".format(self.char_id))

@@ -2,6 +2,7 @@
 import random
 
 from mongoengine import DoesNotExist
+from django.db import transaction
 
 from apps.hero.models import Hero as ModelHero
 from apps.item.models import Stuff as ModelStuff
@@ -136,6 +137,7 @@ class Prison(object):
         publish_to_char(self.char_id, pack_msg(msg))
         return p
 
+    @transaction.atomic
     def release(self, _id):
         p = self._abandon(_id)
         got_gold = p.gold

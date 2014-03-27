@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import random
 
+from django.db import transaction
+
 from mongoengine import DoesNotExist
 from apps.hero.models import Hero as ModelHero
 from apps.stage.models import Stage as ModelStage, EliteStage as ModelEliteStage, ChallengeStage as ModelChallengeStage
 from apps.config.models import NPCFriend as ModelNPCFriends
-from apps.stage.models import StageDrop
+from apps.stage.models import StageDrop as ModelStageDrop
 from core.mongoscheme import MongoStage, MongoTeamBattle, MongoEmbededPlunderLog, MongoHang, MongoHangRemainedTime
 
 from utils import timezone
@@ -40,9 +42,10 @@ from preset.settings import (
 )
 
 NPCFRIENDS = ModelNPCFriends.all()
+ALL_DROPS = ModelStageDrop.all()
 
 
-def _parse_drops(all_drops, drop_id):
+def _parse_drops(drop_id):
     if not drop_id:
         return [], [], []
 
@@ -67,7 +70,7 @@ def _parse_drops(all_drops, drop_id):
         int_id = int(_id)
         if int_id == 0:
             continue
-        this_drop = all_drops[int_id]
+        this_drop = ALL_DROPS[int_id]
         drop_equip = _parse(this_drop.equips)
         for k, v in drop_equip.iteritems():
             equips[k] = equips.get(k, 0) + v
@@ -204,12 +207,11 @@ class Stage(object):
         @return : exp, gold, equipment, gems, stuffs. (0, 0, [], [], [(id, amount), (id, amount)])
         @rtype: (int, int, list, list, list)
         """
-        all_drops = StageDrop.all()
 
         this_stage = ModelStage.all()[stage_id]
         exp = this_stage.normal_exp
         gold = this_stage.normal_gold
-        equipments, gems, stuffs = _parse_drops(all_drops, this_stage.normal_drop)
+        equipments, gems, stuffs = _parse_drops(this_stage.normal_drop)
 
         def _merge(base, addition):
             base_dict = dict(base)
@@ -221,7 +223,7 @@ class Stage(object):
         if first:
             exp += this_stage.first_exp
             gold += this_stage.first_gold
-            f_equips, f_gems, f_stuffs = _parse_drops(all_drops, this_stage.first_drop)
+            f_equips, f_gems, f_stuffs = _parse_drops(this_stage.first_drop)
 
             equipments = _merge(equipments, f_equips)
             gems = _merge(gems, f_gems)
@@ -230,7 +232,7 @@ class Stage(object):
         if star:
             exp += this_stage.star_exp
             gold += this_stage.star_gold
-            s_equips, s_gems, s_stuffs = _parse_drops(all_drops, this_stage.star_drop)
+            s_equips, s_gems, s_stuffs = _parse_drops(this_stage.star_drop)
 
             equipments = _merge(equipments, s_equips)
             gems = _merge(gems, s_gems)
@@ -265,8 +267,9 @@ class Stage(object):
             for i in range(amount):
                 transformed_equipments.append((_id, 1, 1))
 
-        attach = Attachment(self.char_id)
-        attach.save_to_char(exp=exp, gold=gold, equipments=transformed_equipments, gems=gems, stuffs=stuffs)
+        with transaction.atomic():
+            attach = Attachment(self.char_id)
+            attach.save_to_char(exp=exp, gold=gold, equipments=transformed_equipments, gems=gems, stuffs=stuffs)
 
         return exp, gold, transformed_equipments, gems, stuffs
 
@@ -445,8 +448,7 @@ class Hang(TimerCheckAbstractBase):
 
         drop_gold = self._actual_gold(drop_gold)
 
-        all_drops = StageDrop.all()
-        drop_equips, drop_gems, drop_stuffs = _parse_drops(all_drops, stage.normal_drop)
+        drop_equips, drop_gems, drop_stuffs = _parse_drops(stage.normal_drop)
 
         def _gaussian(drops):
             for index, d in enumerate(drops):
@@ -630,8 +632,7 @@ class EliteStage(object):
         drop_gold = this_stage.normal_gold
         drop_exp = this_stage.normal_exp
 
-        all_drops = StageDrop.all()
-        drop_equips, drop_gems, drop_stuffs = _parse_drops(all_drops, this_stage.normal_drop)
+        drop_equips, drop_gems, drop_stuffs = _parse_drops(this_stage.normal_drop)
 
         drop_equips = _make(drop_equips)
         drop_gems = _make(drop_gems)
@@ -648,8 +649,9 @@ class EliteStage(object):
             for i in range(amount):
                 transformed_equipments.append((_id, 1, 1))
 
-        attach = Attachment(self.char_id)
-        attach.save_to_char(exp=drop_exp, gold=drop_gold, equipments=transformed_equipments, gems=drop_gems, stuffs=drop_stuffs)
+        with transaction.atomic():
+            attach = Attachment(self.char_id)
+            attach.save_to_char(exp=drop_exp, gold=drop_gold, equipments=transformed_equipments, gems=drop_gems, stuffs=drop_stuffs)
 
         return drop_exp, drop_gold, transformed_equipments, drop_gems, drop_stuffs
 
@@ -762,12 +764,12 @@ class TeamBattle(TimerCheckAbstractBase):
         self.mongo_tb.battle_id = _id
         self.mongo_tb.boss_id = boss_id
         self.mongo_tb.boss_power = boss_power
-        self.mongo_tb.self_power = friend_power
+        self.mongo_tb.self_power = char.power + friend_power
         self.mongo_tb.start_at = timezone.utc_timestamp()
         self.mongo_tb.total_seconds = this_stage.time_limit
         self.mongo_tb.status = 2
 
-        step = random.uniform(1, 1.05) * self.mongo_tb.self_power / self.mongo_tb.boss_power * 0.0033
+        step = random.uniform(1, 1.05) * self.mongo_tb.self_power / self.mongo_tb.boss_power * (1.0 / this_stage.time_limit)
         self.mongo_tb.step = step
         self.mongo_tb.save()
 
@@ -784,12 +786,13 @@ class TeamBattle(TimerCheckAbstractBase):
             ))
 
         this_stage = ModelChallengeStage.all()[self.mongo_tb.battle_id]
-        reward_gold = this_stage.reward_gold / (len(self.mongo_tb.friend_ids) + 1)
+        # FIXME
+        reward_gold = this_stage.reward_gold
         reward_hero_id = self.mongo_tb.boss_id
 
-        for fid in self.mongo_tb.friend_ids:
-            c = Char(fid)
-            c.update(gold=reward_gold, des='TeamBattle Reward as friend')
+        # for fid in self.mongo_tb.friend_ids:
+        #     c = Char(fid)
+        #     c.update(gold=reward_gold, des='TeamBattle Reward as friend')
 
         c = Char(self.char_id)
         c.update(gold=reward_gold, des='TeamBattle Reward as Host')
@@ -807,7 +810,6 @@ class TeamBattle(TimerCheckAbstractBase):
 
     def send_notify(self):
         msg = protomsg.TeamBattleNotify()
-        msg.incr_time_cost = TEAMBATTLE_INCR_COST
         if self.mongo_tb:
             msg.team_battle.id = self.mongo_tb.battle_id
             msg.team_battle.boss_id = self.mongo_tb.boss_id
@@ -832,7 +834,8 @@ class TeamBattle(TimerCheckAbstractBase):
 
             if self.mongo_tb.status == 3:
                 this_stage = ModelChallengeStage.all()[self.mongo_tb.battle_id]
-                msg.team_battle.reward.gold = this_stage.reward_gold / (len(self.mongo_tb.friend_ids) + 1)
+                # FIXME
+                msg.team_battle.reward.gold = this_stage.reward_gold
                 msg.team_battle.reward.heros.append(self.mongo_tb.boss_id)
 
         publish_to_char(self.char_id, pack_msg(msg))

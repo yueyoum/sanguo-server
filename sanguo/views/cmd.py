@@ -2,6 +2,7 @@ from django.http import HttpResponse
 
 from core.character import Char
 from core.item import Item
+from core.hero import save_hero
 
 
 def cmd(request):
@@ -27,7 +28,7 @@ def cmd(request):
             item = Item(char_id)
             item.gem_add([(req.param, 1)])
         elif req.tp == 7:
-            char.save_hero(req.param)
+            save_hero(char_id, req.param)
         elif req.tp == 8:
             item = Item(char_id)
             item.stuff_add([(req.param, 1)])

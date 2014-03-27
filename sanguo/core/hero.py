@@ -7,6 +7,8 @@ import ctypes
 
 from mongoengine import DoesNotExist
 
+from django.db import transaction
+
 from core.drives import document_ids
 from core.mongoscheme import MongoHero, MongoAchievement, MongoHeroSoul
 from core.signals import hero_add_signal, hero_del_signal, hero_changed_signal
@@ -178,6 +180,8 @@ class Hero(FightPowerMixin):
             return 0
         return HERO_STEP_UP_COST_SOUL_AMOUNT[self.step]
 
+
+    @transaction.atomic
     def step_up(self):
         # 升阶
         if self.step >= HERO_MAX_STEP:

@@ -1,25 +1,45 @@
 # -*- coding: utf-8 -*-
 from django.db.models import Q
 
-from mongoengine import DoesNotExist
-
-from apps.character.models import Character, CharPropertyLog
+from apps.character.models import Character, CharPropertyLog, level_update_exp, official_update_exp
 from apps.config.models import CharInit
-from core.counter import Counter
+
 from core.hero import save_hero, Hero
-from core.mongoscheme import MongoHero, MongoChar
-from preset.settings import COUNTER
-from core.signals import char_updated_signal
-
+from core.mongoscheme import MongoHero
+from core.signals import char_level_up_signal, char_official_up_signal, char_gold_changed_signal, char_sycee_changed_signal
 from core.formation import Formation
-from core.achievement import Achievement
-
 from core.msgpipe import publish_to_char
+
 from utils import pack_msg
 
 import protomsg
 
-COUNTER_KEYS = COUNTER.keys()
+
+
+def char_level_up(current_exp, current_level, add_exp):
+    new_exp = current_exp + add_exp
+    while True:
+        need_exp = level_update_exp(current_level)
+        if new_exp < need_exp:
+            break
+
+        current_level += 1
+        new_exp -= need_exp
+
+    return new_exp, current_level
+
+def char_official_up(current_official_exp, current_official, add_official_exp):
+    new_official_exp = current_official_exp + add_official_exp
+    while True:
+        need_exp = official_update_exp(current_official)
+        if new_official_exp < need_exp:
+            break
+        current_official += 1
+        new_official_exp -= need_exp
+
+    return new_official_exp, current_official
+
+
 
 
 class Char(object):
@@ -45,38 +65,17 @@ class Char(object):
     def cacheobj(self):
         return Character.cache_obj(self.id)
 
-    # 阵法
-    @property
-    def formation(self):
-        f = Formation(self.id)
-        return f.formation.formation
-
-    @property
-    def sockets(self):
-        f = Formation(self.id)
-        c = f.formation.sockets
-        return {int(k): v for k, v in c.iteritems()}
-
-    @property
-    def hero_oid_list(self):
-        # 阵法中英雄按照排列顺序的原始ID列表
-        heros_dict = self.heros_dict
-        f = Formation(self.id)
-        c = f.formation
-        res = []
-        for f in c.formation:
-            if f == 0:
-                res.append(0)
-                continue
-
-            s = c.sockets[str(f)]
-            if not s.hero:
-                continue
-
-            res.append(heros_dict[s.hero].oid)
-        return res
-
-
+    # # 阵法
+    # @property
+    # def formation(self):
+    #     f = Formation(self.id)
+    #     return f.formation.formation
+    #
+    # @property
+    # def sockets(self):
+    #     f = Formation(self.id)
+    #     c = f.formation.sockets
+    #     return {int(k): v for k, v in c.iteritems()}
 
     # 武将
     @property
@@ -87,19 +86,6 @@ class Char(object):
     @property
     def heros(self):
         return [Hero.cache_obj(i) for i in self.heros_dict.keys()]
-
-    def save_hero(self, hero_original_ids, add_notify=True):
-        return save_hero(self.id, hero_original_ids, add_notify=add_notify)
-
-
-    def in_bag_hero_ids(self):
-        heros = MongoHero.objects.filter(char=self.id)
-        hero_ids = [h.id for h in heros]
-        f = Formation(self.id)
-        for s in f.formation.sockets.values():
-            if s.hero:
-                hero_ids.remove(s.hero)
-        return hero_ids
 
 
     @property
@@ -116,52 +102,50 @@ class Char(object):
 
 
     def update(self, gold=0, sycee=0, exp=0, official_exp=0, des=''):
-        char = Character.objects.get(id=self.id)
-        char.gold += gold
-        char.sycee += sycee
+        # char = Character.objects.get(id=self.id)
+        char = self.cacheobj
+        if gold:
+            char.gold += gold
+            char_gold_changed_signal.send(
+                sender=None,
+                char_id=self.id,
+                now_value=char.gold,
+                change_value=gold
+            )
 
-        achievement = Achievement(self.id)
+        if sycee:
+            char.sycee += sycee
+            char_sycee_changed_signal.send(
+                sender=None,
+                char_id=self.id,
+                now_value=char.sycee,
+                change_value=sycee
+            )
 
         if exp:
-            new_exp = char.exp + exp
-            level = char.level
             old_level = char.level
-            while True:
-                need_exp = char.update_needs_exp(level)
-                if new_exp < need_exp:
-                    break
-
-                level += 1
-                new_exp -= need_exp
-
-            char.exp = new_exp
-            char.level = level
-
-            achievement.trig(18, char.level)
+            char.exp, char.level = char_level_up(char.exp, char.level, exp)
 
             if char.level != old_level:
-                char_updated_signal.send(
+                char_level_up_signal.send(
                     sender=None,
-                    char_id=self.id
+                    char_id=self.id,
+                    new_level=char.level,
                 )
 
             des = '{0}. Level {1} to {2}'.format(des, old_level, char.level)
 
+
         if official_exp:
-            new_official_exp = char.off_exp + official_exp
-            official_level = char.official
             old_official_level = char.official
-            while True:
-                need_exp = char.update_official_needs_exp(official_level)
-                if new_official_exp < need_exp:
-                    break
-                official_level += 1
-                new_official_exp -= need_exp
+            char.off_exp, char.official = char_official_up(char.off_exp, char.official, official_exp)
 
-            char.official = official_level
-            char.off_exp = new_official_exp
-
-            achievement.trig(19, char.official)
+            if char.official != old_official_level:
+                char_official_up_signal.send(
+                    sender=None,
+                    char_id=self.id,
+                    new_official=char.official
+                )
 
             des = '{0}. Official {1} to {2}'.format(des, old_official_level, char.official)
 
@@ -176,27 +160,6 @@ class Char(object):
             official_exp=official_exp,
             des=des[:255]
         )
-
-        try:
-            mongo_char = MongoChar.objects.get(id=self.id)
-        except DoesNotExist:
-            mongo_char = MongoChar(id=self.id)
-
-        if gold > 0:
-            mongo_char.got_gold += gold
-        if gold < 0:
-            mongo_char.cost_gold += abs(gold)
-        if sycee > 0:
-            mongo_char.got_sycee += sycee
-        if sycee < 0:
-            mongo_char.cost_sycee += abs(sycee)
-
-        mongo_char.save()
-
-
-        achievement.trig(32, char.gold)
-        if sycee < 0:
-            achievement.trig(31, abs(sycee))
 
         self.send_notify()
 
@@ -221,13 +184,8 @@ class Char(object):
 
 
 
-
-
-
 def char_initialize(account_id, server_id, name):
-    from core.prison import Prison
     from core.item import Item
-
 
     init = CharInit.cache_obj()
 
@@ -239,11 +197,6 @@ def char_initialize(account_id, server_id, name):
         sycee=init.sycee,
     )
     char_id = char.id
-
-    Prison(char_id)
-
-    for func_name in COUNTER_KEYS:
-        Counter(char_id, func_name)
 
     init_heros = init.decoded_heros
     init_heros_ids = init_heros.keys()

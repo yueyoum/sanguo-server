@@ -6,18 +6,6 @@ import core.drives
 from protomsg import Attachment as MsgAttachment
 
 
-class MongoChar(Document):
-    id = IntField(primary_key=True)
-    got_gold = IntField(default=0)
-    got_sycee = IntField(default=0)
-    cost_gold = IntField(default=0)
-    cost_sycee = IntField(default=0)
-
-    meta = {
-        'collection': 'char'
-    }
-
-
 class MongoEmbeddedEquipment(EmbeddedDocument):
     oid = IntField()
     level = IntField()
@@ -252,23 +240,7 @@ class MongoCheckIn(Document):
         'collection': 'checkin'
     }
 
-#
-# class MongoEmbededContinuesRecord(EmbeddedDocument):
-#     # date 上次干这件事情的日期， 只保留年月日
-#     date = DateTimeField()
-#     # days 连续做了多少天
-#     days = IntField()
-#
-#
-# class MongoContinues(Document):
-#     id = IntField(primary_key=True)
-#     # key 为 写死的对应功能的 string
-#     records = MapField(EmbeddedDocumentField(MongoEmbededContinuesRecord))
-#
-#     meta = {
-#         'collection': 'continues'
-#     }
-#
+
 
 class MongoTask(Document):
     id = IntField(primary_key=True)

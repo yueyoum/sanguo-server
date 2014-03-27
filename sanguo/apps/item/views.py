@@ -32,14 +32,6 @@ def step_up_equip(request):
 
 
 
-@message_response("SellEquipResponse")
-def sell_equip(request):
-    req = request._proto
-
-    item = Item(request._char_id)
-    item.equip_sell([i for i in req.ids])
-
-    return None
 
 @message_response("EmbedGemResponse")
 def embed(request):

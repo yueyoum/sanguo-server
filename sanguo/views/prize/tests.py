@@ -27,7 +27,7 @@
 #
 #         return msgs
 #
-# 
+#
 #     def test_error_prize(self):
 #         msgs = self._prize_get(1)
 #

@@ -38,8 +38,7 @@ HERO_STEP_UP_COST_GOLD = 1000
 EQUIP_MAX_LEVEL = 99
 # 装备最高阶数 (初始第0阶)
 EQUIP_MAX_STEP= 6
-# 装备升阶花费多少金币
-EQUIP_STEP_UP_COST_GOLD = 5000
+
 
 
 #########################

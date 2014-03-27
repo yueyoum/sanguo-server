@@ -12,6 +12,7 @@ from core.character import Char
 from core.msgpipe import publish_to_char
 from core.exception import InvalidOperate, BadMessage, CharNotFound, SanguoException
 from core.achievement import Achievement
+from core.formation import Formation
 
 import protomsg
 from protomsg import FRIEND_NOT, FRIEND_OK, FRIEND_ACK, FRIEND_APPLY
@@ -255,7 +256,8 @@ class Friend(object):
 
         msg.status = status
         if status == FRIEND_OK:
-            msg.formation.extend(char_f.hero_oid_list)
+            f = Formation(fid)
+            msg.formation.extend(f.in_formation_hero_original_ids())
 
     def send_friends_amount_notify(self):
         msg = protomsg.FriendsAmountNotify()

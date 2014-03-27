@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='achievement.proto',
   package='Sanguo.protocol.achievement',
-  serialized_pb='\n\x11\x61\x63hievement.proto\x12\x1bSanguo.protocol.achievement\"\xab\x04\n\x0b\x41\x63hievement\x12\n\n\x02id\x18\x01 \x02(\x05\x12I\n\x04mach\x18\x02 \x01(\x0b\x32;.Sanguo.protocol.achievement.Achievement.MultiIDAchievement\x12J\n\x04sach\x18\x03 \x01(\x0b\x32<.Sanguo.protocol.achievement.Achievement.SingleIDAchievement\x12I\n\x04\x63\x61\x63h\x18\x04 \x01(\x0b\x32;.Sanguo.protocol.achievement.Achievement.CounterAchievement\x12I\n\x06status\x18\x05 \x02(\x0e\x32\x39.Sanguo.protocol.achievement.Achievement.AchivementStatus\x12\x0c\n\x04show\x18\x06 \x02(\x08\x1a\x38\n\x12MultiIDAchievement\x12\x0f\n\x07\x63urrent\x18\x01 \x03(\x05\x12\x11\n\tcondition\x18\x02 \x03(\x05\x1a(\n\x13SingleIDAchievement\x12\x11\n\tcondition\x18\x01 \x02(\x05\x1a\x38\n\x12\x43ounterAchievement\x12\x0f\n\x07\x63urrent\x18\x01 \x02(\x05\x12\x11\n\tcondition\x18\x02 \x02(\x05\"7\n\x10\x41\x63hivementStatus\x12\t\n\x05\x44OING\x10\x01\x12\n\n\x06REWARD\x10\x02\x12\x0c\n\x08\x43OMPLETE\x10\x03\"d\n\x11\x41\x63hievementNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12>\n\x0c\x61\x63hievements\x18\x02 \x03(\x0b\x32(.Sanguo.protocol.achievement.Achievement\"i\n\x17UpdateAchievementNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12=\n\x0b\x61\x63hievement\x18\x02 \x02(\x0b\x32(.Sanguo.protocol.achievement.Achievement\":\n\x1b\x41\x63hievementGetRewardRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"<\n\x1c\x41\x63hievementGetRewardResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\x11\x61\x63hievement.proto\x12\x1bSanguo.protocol.achievement\"\xab\x04\n\x0b\x41\x63hievement\x12\n\n\x02id\x18\x01 \x02(\x05\x12I\n\x04mach\x18\x02 \x01(\x0b\x32;.Sanguo.protocol.achievement.Achievement.MultiIDAchievement\x12J\n\x04sach\x18\x03 \x01(\x0b\x32<.Sanguo.protocol.achievement.Achievement.SingleIDAchievement\x12I\n\x04\x63\x61\x63h\x18\x04 \x01(\x0b\x32;.Sanguo.protocol.achievement.Achievement.CounterAchievement\x12I\n\x06status\x18\x05 \x02(\x0e\x32\x39.Sanguo.protocol.achievement.Achievement.AchivementStatus\x12\x0c\n\x04show\x18\x06 \x02(\x08\x1a\x38\n\x12MultiIDAchievement\x12\x0f\n\x07\x63urrent\x18\x01 \x03(\x05\x12\x11\n\tcondition\x18\x02 \x03(\x05\x1a(\n\x13SingleIDAchievement\x12\x11\n\tcondition\x18\x01 \x02(\x05\x1a\x38\n\x12\x43ounterAchievement\x12\x0f\n\x07\x63urrent\x18\x01 \x02(\x05\x12\x11\n\tcondition\x18\x02 \x02(\x05\"7\n\x10\x41\x63hivementStatus\x12\t\n\x05\x44OING\x10\x01\x12\n\n\x06REWARD\x10\x02\x12\x0c\n\x08\x43OMPLETE\x10\x03\"d\n\x11\x41\x63hievementNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12>\n\x0c\x61\x63hievements\x18\x02 \x03(\x0b\x32(.Sanguo.protocol.achievement.Achievement\"i\n\x17UpdateAchievementNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12=\n\x0b\x61\x63hievement\x18\x02 \x02(\x0b\x32(.Sanguo.protocol.achievement.Achievement')
 
 
 
@@ -271,76 +271,6 @@ _UPDATEACHIEVEMENTNOTIFY = _descriptor.Descriptor(
   serialized_end=815,
 )
 
-
-_ACHIEVEMENTGETREWARDREQUEST = _descriptor.Descriptor(
-  name='AchievementGetRewardRequest',
-  full_name='Sanguo.protocol.achievement.AchievementGetRewardRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='session', full_name='Sanguo.protocol.achievement.AchievementGetRewardRequest.session', index=0,
-      number=1, type=12, cpp_type=9, label=2,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='id', full_name='Sanguo.protocol.achievement.AchievementGetRewardRequest.id', index=1,
-      number=2, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=817,
-  serialized_end=875,
-)
-
-
-_ACHIEVEMENTGETREWARDRESPONSE = _descriptor.Descriptor(
-  name='AchievementGetRewardResponse',
-  full_name='Sanguo.protocol.achievement.AchievementGetRewardResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ret', full_name='Sanguo.protocol.achievement.AchievementGetRewardResponse.ret', index=0,
-      number=1, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='session', full_name='Sanguo.protocol.achievement.AchievementGetRewardResponse.session', index=1,
-      number=2, type=12, cpp_type=9, label=2,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=877,
-  serialized_end=937,
-)
-
 _ACHIEVEMENT_MULTIIDACHIEVEMENT.containing_type = _ACHIEVEMENT;
 _ACHIEVEMENT_SINGLEIDACHIEVEMENT.containing_type = _ACHIEVEMENT;
 _ACHIEVEMENT_COUNTERACHIEVEMENT.containing_type = _ACHIEVEMENT;
@@ -354,8 +284,6 @@ _UPDATEACHIEVEMENTNOTIFY.fields_by_name['achievement'].message_type = _ACHIEVEME
 DESCRIPTOR.message_types_by_name['Achievement'] = _ACHIEVEMENT
 DESCRIPTOR.message_types_by_name['AchievementNotify'] = _ACHIEVEMENTNOTIFY
 DESCRIPTOR.message_types_by_name['UpdateAchievementNotify'] = _UPDATEACHIEVEMENTNOTIFY
-DESCRIPTOR.message_types_by_name['AchievementGetRewardRequest'] = _ACHIEVEMENTGETREWARDREQUEST
-DESCRIPTOR.message_types_by_name['AchievementGetRewardResponse'] = _ACHIEVEMENTGETREWARDRESPONSE
 
 class Achievement(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
@@ -392,18 +320,6 @@ class UpdateAchievementNotify(_message.Message):
   DESCRIPTOR = _UPDATEACHIEVEMENTNOTIFY
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.achievement.UpdateAchievementNotify)
-
-class AchievementGetRewardRequest(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _ACHIEVEMENTGETREWARDREQUEST
-
-  # @@protoc_insertion_point(class_scope:Sanguo.protocol.achievement.AchievementGetRewardRequest)
-
-class AchievementGetRewardResponse(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _ACHIEVEMENTGETREWARDRESPONSE
-
-  # @@protoc_insertion_point(class_scope:Sanguo.protocol.achievement.AchievementGetRewardResponse)
 
 
 # @@protoc_insertion_point(module_scope)

@@ -6,6 +6,8 @@ __date__ = '1/22/14'
 import random
 import logging
 
+from django.db import transaction
+
 from mongoscheme import Q, DoesNotExist
 
 from apps.character.models import Character
@@ -194,6 +196,7 @@ class Plunder(object):
         return msg
 
 
+    @transaction.atomic
     def get_reward(self, tp):
         if not self.mongo_plunder.target_char:
             raise InvalidOperate("Plunder Get Reward. Char {0} try to get reward type {1}. But no target char".format(self.char_id, tp))

@@ -89,7 +89,8 @@ class UnpackAndVerifyData(object):
                     request._char_id = int(splited_session[2])
                     print "CHAR ID =", request._char_id
 
-        timercheck.check(request._char_id)
+        if request._char_id:
+            timercheck.check(request._char_id)
         if request._server_id:
             ap = ActivePlayers(request._server_id)
             if request._char_id:
