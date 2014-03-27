@@ -28,7 +28,7 @@ from utils import cache
 
 import protomsg
 
-from preset.settings import EQUIP_MAX_LEVEL, EQUIP_STEP_UP_COST_GOLD
+from preset.settings import EQUIP_MAX_LEVEL
 
 
 
@@ -68,6 +68,7 @@ class MessageEquipmentMixin(object):
         msg.level = mongo_equip.level
 
         msg.level_up_need_gold = equip_obj.level_up_need_gold()
+        msg.step_up_need_gold = equip_obj.step_up_need_gold()
         msg.attack = equip_obj.attack
         msg.defense = equip_obj.defense
         msg.hp = equip_obj.hp
@@ -197,12 +198,13 @@ class Equipment(MessageEquipmentMixin):
 
         char = Char(self.char_id)
         cache_char = char.cacheobj
-        if cache_char.gold < EQUIP_STEP_UP_COST_GOLD:
+        step_up_need_gold = self.step_up_need_gold()
+        if cache_char.gold < step_up_need_gold:
             raise GoldNotEnough("Equipment Step Up: Char {0} Try to step up equipent {1}. But Gold NOT enough".format(
                 self.char_id, self.equip_id
             ))
 
-        char.update(gold=-EQUIP_STEP_UP_COST_GOLD, des='Equipment Step up. {0} step up from {1} to {2}'.format(
+        char.update(gold=-step_up_need_gold, des='Equipment Step up. {0} step up from {1} to {2}'.format(
             self.equip_id, self.mongo_item.equipments[str(self.equip_id)].oid, to
         ))
 
@@ -271,6 +273,11 @@ class Equipment(MessageEquipmentMixin):
         # gold = pow(1.08, self.level) * 100
         gold = 1.08 * (self.level - 1) * 200
         return int(gold)
+
+
+    def step_up_need_gold(self):
+        return int(round(1000 * pow(1.7, self.equip.step), -3))
+
 
     @property
     def attack(self):

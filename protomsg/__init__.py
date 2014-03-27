@@ -2,6 +2,7 @@ from account_pb2 import *
 from hero_pb2 import *
 from cmd_pb2 import *
 from world_pb2 import *
+from guide_pb2 import *
 from mail_pb2 import *
 from daily_pb2 import *
 from chat_pb2 import *
@@ -121,6 +122,8 @@ RESPONSE_NOTIFY_TYPE = {
     "ChatMessageNotify": 3400,
     "ChatSendResponse": 3402,
     "BroadcastNotify": 3500,
+    "GuideNotify": 4000,
+    "GuideFinishResponse": 4002,
 }
 
 REQUEST_TYPE = {
@@ -175,6 +178,7 @@ REQUEST_TYPE = {
     3302: "StorePanelRequest",
     3304: "StoreBuyRequest",
     3401: "ChatSendRequest",
+    4001: "GuideFinishRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -229,5 +233,6 @@ REQUEST_TYPE_REV = {
     "StorePanelRequest": 3302,
     "StoreBuyRequest": 3304,
     "ChatSendRequest": 3401,
+    "GuideFinishRequest": 4001,
 }
 

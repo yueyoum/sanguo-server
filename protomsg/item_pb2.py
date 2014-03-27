@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='item.proto',
   package='Sanguo.protocol.item',
-  serialized_pb='\n\nitem.proto\x12\x14Sanguo.protocol.item\"\x9c\x01\n\x05\x45quip\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0b\n\x03oid\x18\x02 \x02(\x05\x12\r\n\x05level\x18\x03 \x02(\x05\x12\x1a\n\x12level_up_need_gold\x18\x04 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x05 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x06 \x02(\x05\x12\n\n\x02hp\x18\x07 \x02(\x05\x12\x0f\n\x07gem_ids\x18\x08 \x03(\x05\x12\x11\n\tsell_gold\x18\t \x02(\x05\"!\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"#\n\x05Stuff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"K\n\x0bStuffNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06stuffs\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Stuff\"N\n\x0e\x41\x64\x64StuffNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06stuffs\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Stuff\"Q\n\x11UpdateStuffNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06stuffs\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Stuff\"1\n\x11RemoveStuffNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"E\n\tGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"H\n\x0c\x41\x64\x64GemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"K\n\x0fUpdateGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"/\n\x0fRemoveGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\".\n\x0fMergeGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"0\n\x10MergeGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"U\n\x0f\x45mbedGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08\x65quip_id\x18\x02 \x02(\x05\x12\x0f\n\x07hole_id\x18\x03 \x02(\x05\x12\x0e\n\x06gem_id\x18\x04 \x02(\x05\"0\n\x10\x45mbedGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"G\n\x11UnEmbedGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08\x65quip_id\x18\x02 \x02(\x05\x12\x0f\n\x07hole_id\x18\x03 \x02(\x05\"2\n\x12UnEmbedGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"K\n\x0b\x45quipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"N\n\x0e\x41\x64\x64\x45quipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"1\n\x11RemoveEquipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"Q\n\x11UpdateEquipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"B\n\x14StrengthEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\r\n\x05quick\x18\x03 \x02(\x08\"b\n\x15StrengthEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12+\n\x06\x65quips\x18\x03 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"1\n\x12StepUpEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"3\n\x13StepUpEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xe2\x01\n\x1aSpecialEquipmentBuyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tsocket_id\x18\x02 \x02(\x05\x12P\n\x02tp\x18\x03 \x02(\x0e\x32\x44.Sanguo.protocol.item.SpecialEquipmentBuyRequest.SocketEquipmentType\"N\n\x13SocketEquipmentType\x12\x11\n\rSOCKET_WEAPON\x10\x01\x12\x10\n\x0cSOCKET_ARMOR\x10\x02\x12\x12\n\x0eSOCKET_JEWELRY\x10\x03\";\n\x1bSpecialEquipmentBuyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\nitem.proto\x12\x14Sanguo.protocol.item\"\xb7\x01\n\x05\x45quip\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0b\n\x03oid\x18\x02 \x02(\x05\x12\r\n\x05level\x18\x03 \x02(\x05\x12\x1a\n\x12level_up_need_gold\x18\x04 \x02(\x05\x12\x19\n\x11step_up_need_gold\x18\x05 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x06 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x07 \x02(\x05\x12\n\n\x02hp\x18\x08 \x02(\x05\x12\x0f\n\x07gem_ids\x18\t \x03(\x05\x12\x11\n\tsell_gold\x18\n \x02(\x05\"!\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"#\n\x05Stuff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"K\n\x0bStuffNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06stuffs\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Stuff\"N\n\x0e\x41\x64\x64StuffNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06stuffs\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Stuff\"Q\n\x11UpdateStuffNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06stuffs\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Stuff\"1\n\x11RemoveStuffNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"E\n\tGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"H\n\x0c\x41\x64\x64GemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"K\n\x0fUpdateGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\'\n\x04gems\x18\x02 \x03(\x0b\x32\x19.Sanguo.protocol.item.Gem\"/\n\x0fRemoveGemNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\".\n\x0fMergeGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"0\n\x10MergeGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"U\n\x0f\x45mbedGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08\x65quip_id\x18\x02 \x02(\x05\x12\x0f\n\x07hole_id\x18\x03 \x02(\x05\x12\x0e\n\x06gem_id\x18\x04 \x02(\x05\"0\n\x10\x45mbedGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"G\n\x11UnEmbedGemRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08\x65quip_id\x18\x02 \x02(\x05\x12\x0f\n\x07hole_id\x18\x03 \x02(\x05\"2\n\x12UnEmbedGemResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"K\n\x0b\x45quipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"N\n\x0e\x41\x64\x64\x45quipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"1\n\x11RemoveEquipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"Q\n\x11UpdateEquipNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x06\x65quips\x18\x02 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"B\n\x14StrengthEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\r\n\x05quick\x18\x03 \x02(\x08\"b\n\x15StrengthEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12+\n\x06\x65quips\x18\x03 \x03(\x0b\x32\x1b.Sanguo.protocol.item.Equip\"1\n\x12StepUpEquipRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"3\n\x13StepUpEquipResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xe2\x01\n\x1aSpecialEquipmentBuyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tsocket_id\x18\x02 \x02(\x05\x12P\n\x02tp\x18\x03 \x02(\x0e\x32\x44.Sanguo.protocol.item.SpecialEquipmentBuyRequest.SocketEquipmentType\"N\n\x13SocketEquipmentType\x12\x11\n\rSOCKET_WEAPON\x10\x01\x12\x10\n\x0cSOCKET_ARMOR\x10\x02\x12\x12\n\x0eSOCKET_JEWELRY\x10\x03\";\n\x1bSpecialEquipmentBuyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
 
 
 
@@ -38,8 +38,8 @@ _SPECIALEQUIPMENTBUYREQUEST_SOCKETEQUIPMENTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1901,
-  serialized_end=1979,
+  serialized_start=1928,
+  serialized_end=2006,
 )
 
 
@@ -79,36 +79,43 @@ _EQUIP = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='attack', full_name='Sanguo.protocol.item.Equip.attack', index=4,
+      name='step_up_need_gold', full_name='Sanguo.protocol.item.Equip.step_up_need_gold', index=4,
       number=5, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='defense', full_name='Sanguo.protocol.item.Equip.defense', index=5,
+      name='attack', full_name='Sanguo.protocol.item.Equip.attack', index=5,
       number=6, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='hp', full_name='Sanguo.protocol.item.Equip.hp', index=6,
+      name='defense', full_name='Sanguo.protocol.item.Equip.defense', index=6,
       number=7, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='gem_ids', full_name='Sanguo.protocol.item.Equip.gem_ids', index=7,
-      number=8, type=5, cpp_type=1, label=3,
+      name='hp', full_name='Sanguo.protocol.item.Equip.hp', index=7,
+      number=8, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='gem_ids', full_name='Sanguo.protocol.item.Equip.gem_ids', index=8,
+      number=9, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='sell_gold', full_name='Sanguo.protocol.item.Equip.sell_gold', index=8,
-      number=9, type=5, cpp_type=1, label=2,
+      name='sell_gold', full_name='Sanguo.protocol.item.Equip.sell_gold', index=9,
+      number=10, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -123,7 +130,7 @@ _EQUIP = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=37,
-  serialized_end=193,
+  serialized_end=220,
 )
 
 
@@ -157,8 +164,8 @@ _GEM = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=195,
-  serialized_end=228,
+  serialized_start=222,
+  serialized_end=255,
 )
 
 
@@ -192,8 +199,8 @@ _STUFF = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=230,
-  serialized_end=265,
+  serialized_start=257,
+  serialized_end=292,
 )
 
 
@@ -227,8 +234,8 @@ _STUFFNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=267,
-  serialized_end=342,
+  serialized_start=294,
+  serialized_end=369,
 )
 
 
@@ -262,8 +269,8 @@ _ADDSTUFFNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=344,
-  serialized_end=422,
+  serialized_start=371,
+  serialized_end=449,
 )
 
 
@@ -297,8 +304,8 @@ _UPDATESTUFFNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=424,
-  serialized_end=505,
+  serialized_start=451,
+  serialized_end=532,
 )
 
 
@@ -332,8 +339,8 @@ _REMOVESTUFFNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=507,
-  serialized_end=556,
+  serialized_start=534,
+  serialized_end=583,
 )
 
 
@@ -367,8 +374,8 @@ _GEMNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=558,
-  serialized_end=627,
+  serialized_start=585,
+  serialized_end=654,
 )
 
 
@@ -402,8 +409,8 @@ _ADDGEMNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=629,
-  serialized_end=701,
+  serialized_start=656,
+  serialized_end=728,
 )
 
 
@@ -437,8 +444,8 @@ _UPDATEGEMNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=703,
-  serialized_end=778,
+  serialized_start=730,
+  serialized_end=805,
 )
 
 
@@ -472,8 +479,8 @@ _REMOVEGEMNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=780,
-  serialized_end=827,
+  serialized_start=807,
+  serialized_end=854,
 )
 
 
@@ -507,8 +514,8 @@ _MERGEGEMREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=829,
-  serialized_end=875,
+  serialized_start=856,
+  serialized_end=902,
 )
 
 
@@ -542,8 +549,8 @@ _MERGEGEMRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=877,
-  serialized_end=925,
+  serialized_start=904,
+  serialized_end=952,
 )
 
 
@@ -591,8 +598,8 @@ _EMBEDGEMREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=927,
-  serialized_end=1012,
+  serialized_start=954,
+  serialized_end=1039,
 )
 
 
@@ -626,8 +633,8 @@ _EMBEDGEMRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1014,
-  serialized_end=1062,
+  serialized_start=1041,
+  serialized_end=1089,
 )
 
 
@@ -668,8 +675,8 @@ _UNEMBEDGEMREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1064,
-  serialized_end=1135,
+  serialized_start=1091,
+  serialized_end=1162,
 )
 
 
@@ -703,8 +710,8 @@ _UNEMBEDGEMRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1137,
-  serialized_end=1187,
+  serialized_start=1164,
+  serialized_end=1214,
 )
 
 
@@ -738,8 +745,8 @@ _EQUIPNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1189,
-  serialized_end=1264,
+  serialized_start=1216,
+  serialized_end=1291,
 )
 
 
@@ -773,8 +780,8 @@ _ADDEQUIPNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1266,
-  serialized_end=1344,
+  serialized_start=1293,
+  serialized_end=1371,
 )
 
 
@@ -808,8 +815,8 @@ _REMOVEEQUIPNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1346,
-  serialized_end=1395,
+  serialized_start=1373,
+  serialized_end=1422,
 )
 
 
@@ -843,8 +850,8 @@ _UPDATEEQUIPNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1397,
-  serialized_end=1478,
+  serialized_start=1424,
+  serialized_end=1505,
 )
 
 
@@ -885,8 +892,8 @@ _STRENGTHEQUIPREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1480,
-  serialized_end=1546,
+  serialized_start=1507,
+  serialized_end=1573,
 )
 
 
@@ -927,8 +934,8 @@ _STRENGTHEQUIPRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1548,
-  serialized_end=1646,
+  serialized_start=1575,
+  serialized_end=1673,
 )
 
 
@@ -962,8 +969,8 @@ _STEPUPEQUIPREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1648,
-  serialized_end=1697,
+  serialized_start=1675,
+  serialized_end=1724,
 )
 
 
@@ -997,8 +1004,8 @@ _STEPUPEQUIPRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1699,
-  serialized_end=1750,
+  serialized_start=1726,
+  serialized_end=1777,
 )
 
 
@@ -1040,8 +1047,8 @@ _SPECIALEQUIPMENTBUYREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1753,
-  serialized_end=1979,
+  serialized_start=1780,
+  serialized_end=2006,
 )
 
 
@@ -1075,8 +1082,8 @@ _SPECIALEQUIPMENTBUYRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1981,
-  serialized_end=2040,
+  serialized_start=2008,
+  serialized_end=2067,
 )
 
 _STUFFNOTIFY.fields_by_name['stuffs'].message_type = _STUFF
