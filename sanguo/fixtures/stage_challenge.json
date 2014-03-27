@@ -3,45 +3,45 @@
     "pk": 1, 
     "model": "stage.challengestage", 
     "fields": {
-        "time_limit": 300, 
+        "time_limit": 60, 
         "name": "\u767e\u6218\u52c7\u5c06", 
-        "level": 2, 
+        "level": 4, 
         "open_condition_id": 23, 
-        "reward_gold": 5000, 
+        "reward_gold": 10000, 
         "aid_limit": 5, 
-        "open_condition_amount": 20, 
+        "open_condition_amount": 5, 
         "char_level_needs": 0, 
-        "power_range": "5000,10000"
+        "power_range": "60000,80000"
     }
 },
 {
     "pk": 2, 
     "model": "stage.challengestage", 
     "fields": {
-        "time_limit": 300, 
+        "time_limit": 60, 
         "name": "\u4e07\u519b\u98de\u5c06", 
         "level": 3, 
         "open_condition_id": 23, 
-        "reward_gold": 3000, 
+        "reward_gold": 10000, 
         "aid_limit": 5, 
         "open_condition_amount": 10, 
-        "char_level_needs": 0, 
-        "power_range": "5000,10000"
+        "char_level_needs": 20, 
+        "power_range": "180000,200000"
     }
 },
 {
     "pk": 3, 
     "model": "stage.challengestage", 
     "fields": {
-        "time_limit": 300, 
+        "time_limit": 60, 
         "name": "\u65e0\u53cc\u795e\u5c06", 
-        "level": 4, 
+        "level": 2, 
         "open_condition_id": 23, 
-        "reward_gold": 2000, 
+        "reward_gold": 20000, 
         "aid_limit": 5, 
-        "open_condition_amount": 10, 
-        "char_level_needs": 0, 
-        "power_range": "5000,10000"
+        "open_condition_amount": 40, 
+        "char_level_needs": 28, 
+        "power_range": "240000,300000"
     }
 }
 ]

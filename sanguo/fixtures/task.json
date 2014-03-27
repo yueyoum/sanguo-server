@@ -3,11 +3,11 @@
     "pk": 1, 
     "model": "task.task", 
     "fields": {
-        "sycee": 10, 
+        "sycee": 20, 
         "name": "\u901a\u8fc7\u4efb\u610f\u5173\u5361", 
-        "gold": 1000, 
+        "gold": 2000, 
         "tp": 1, 
-        "times": 3, 
+        "times": 1, 
         "next_task": 2, 
         "first": true
     }
@@ -20,7 +20,7 @@
         "name": "\u901a\u8fc7\u4efb\u610f\u5173\u5361", 
         "gold": 5000, 
         "tp": 1, 
-        "times": 5, 
+        "times": 3, 
         "next_task": 3, 
         "first": false
     }
@@ -29,11 +29,11 @@
     "pk": 3, 
     "model": "task.task", 
     "fields": {
-        "sycee": 10, 
+        "sycee": 20, 
         "name": "\u901a\u8fc7\u4efb\u610f\u5173\u5361", 
-        "gold": 10000, 
+        "gold": 15000, 
         "tp": 1, 
-        "times": 10, 
+        "times": 7, 
         "next_task": null, 
         "first": false
     }
@@ -42,9 +42,9 @@
     "pk": 4, 
     "model": "task.task", 
     "fields": {
-        "sycee": 10, 
+        "sycee": 20, 
         "name": "\u8fdb\u884c\u6bd4\u6b66\u6218\u6597", 
-        "gold": 1000, 
+        "gold": 2000, 
         "tp": 2, 
         "times": 1, 
         "next_task": 5, 
@@ -68,9 +68,9 @@
     "pk": 6, 
     "model": "task.task", 
     "fields": {
-        "sycee": 10, 
+        "sycee": 20, 
         "name": "\u8fdb\u884c\u6bd4\u6b66\u6218\u6597", 
-        "gold": 10000, 
+        "gold": 20000, 
         "tp": 2, 
         "times": 10, 
         "next_task": null, 
@@ -81,9 +81,9 @@
     "pk": 7, 
     "model": "task.task", 
     "fields": {
-        "sycee": 10, 
+        "sycee": 20, 
         "name": "\u8fdb\u884c\u63a0\u593a\u6218\u6597", 
-        "gold": 1000, 
+        "gold": 2000, 
         "tp": 3, 
         "times": 1, 
         "next_task": 8, 
@@ -98,7 +98,7 @@
         "name": "\u8fdb\u884c\u63a0\u593a\u6218\u6597", 
         "gold": 5000, 
         "tp": 3, 
-        "times": 3, 
+        "times": 5, 
         "next_task": 9, 
         "first": false
     }
@@ -107,9 +107,9 @@
     "pk": 9, 
     "model": "task.task", 
     "fields": {
-        "sycee": 10, 
+        "sycee": 20, 
         "name": "\u8fdb\u884c\u63a0\u593a\u6218\u6597", 
-        "gold": 10000, 
+        "gold": 20000, 
         "tp": 3, 
         "times": 10, 
         "next_task": null, 
@@ -124,7 +124,7 @@
         "name": "\u8fdb\u884c\u5b9d\u77f3\u5408\u6210", 
         "gold": 1000, 
         "tp": 4, 
-        "times": 3, 
+        "times": 1, 
         "next_task": 11, 
         "first": true
     }
@@ -135,9 +135,9 @@
     "fields": {
         "sycee": 10, 
         "name": "\u8fdb\u884c\u5b9d\u77f3\u5408\u6210", 
-        "gold": 5000, 
+        "gold": 3000, 
         "tp": 4, 
-        "times": 5, 
+        "times": 2, 
         "next_task": 12, 
         "first": false
     }
@@ -150,7 +150,7 @@
         "name": "\u8fdb\u884c\u5b9d\u77f3\u5408\u6210", 
         "gold": 10000, 
         "tp": 4, 
-        "times": 10, 
+        "times": 3, 
         "next_task": null, 
         "first": false
     }
@@ -161,7 +161,7 @@
     "fields": {
         "sycee": 10, 
         "name": "\u8fdb\u884c\u6b66\u5c06\u529d\u964d", 
-        "gold": 1000, 
+        "gold": 5000, 
         "tp": 5, 
         "times": 1, 
         "next_task": 14, 
@@ -174,9 +174,9 @@
     "fields": {
         "sycee": 10, 
         "name": "\u8fdb\u884c\u6b66\u5c06\u529d\u964d", 
-        "gold": 5000, 
+        "gold": 8000, 
         "tp": 5, 
-        "times": 5, 
+        "times": 3, 
         "next_task": 15, 
         "first": false
     }
@@ -187,9 +187,9 @@
     "fields": {
         "sycee": 10, 
         "name": "\u8fdb\u884c\u6b66\u5c06\u529d\u964d", 
-        "gold": 10000, 
+        "gold": 20000, 
         "tp": 5, 
-        "times": 10, 
+        "times": 6, 
         "next_task": null, 
         "first": false
     }
