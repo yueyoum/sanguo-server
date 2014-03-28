@@ -2,7 +2,7 @@
 
 ## 部署
 
-1.  确保系统中已安装Nginx, Mysql, Redis, Mongodb, Erlang, RabbitMQ
+1.  确保系统中已安装Nginx, Mysql, Redis, Mongodb
 
 2.  安装依赖
     
@@ -40,25 +40,6 @@
     ./compile-protobufs.sh
     ```
 
-6.  设置rabbitmq
-
-    ```
-    如果有必要，就先设置local_settings.py
-
-    开启 rabbitmq 的管理界面:
-
-    rabbitmq-plugins enable rabbitmq_management
-
-    然后在管理界面中添加两个 vhost: sanguo, sanguo_test
-    并给予 guest .* .* .* 的权限
-
-    管理界面的端口是 55672
-
-    TODO:
-
-    安全设置，不能让其他人随意登录
-    ```
-
 
 7.  Admin
 
@@ -69,18 +50,6 @@
     并用uwsgi-admin启动
     ```
 
-
-8.  启动worker
-
-    ```
-    cd sanguo
-    celery worker --app worker -l info
-
-    TODO:
-
-    1, 使用 supervisord 来让 celery worker 后台运行
-    2, log
-    ```
 
 
 9.  编辑配置文件，并启动程序
@@ -95,14 +64,6 @@
     ```
 
 10.  测试
-
-    ```
-    现在的测试有点复杂。
-
-    首先在mysql中建立 test_sanguo 的database
-    然后启动web， ./start_test_server
-
-    等到web完全启动后，才能开始测试。而且测试是必须加上 RESUE_DB=1
 
     ./start_test_server 启动测试服务，然后在另一个shell中执行：
 
@@ -149,10 +110,6 @@ ubuntu x64 系统上 uWSGI 可能会报这样的错误
 1460     add_cflags = ['-lpthread', '-lgcc_s']
 1461     add_ldflags = ['-lpthread', '-lgcc_s']
 ```
-
-# 重启rabbitmq
-
-当重启完 rabbitmq 后，已经要确保celery worker 进程没有挂掉
 
 
 # 系统设置
