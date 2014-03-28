@@ -413,6 +413,7 @@ class MongoTeamBattle(Document):
     status = IntField()
     # 每秒进度，是否完成就看已经经过的秒数乘以这个数值是否达到1
     step = FloatField(default=0)
+    friend_ids = ListField(IntField())
 
     meta = {
         'collection': 'teambattle'

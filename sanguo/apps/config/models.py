@@ -85,24 +85,6 @@ class FunctionOpen(models.Model):
         verbose_name_plural = '功能开启'
 
 
-# 请好友打boss, 好友NPC
-class NPCFriend(models.Model):
-    id = models.IntegerField(primary_key=True)
-    name = models.CharField("名字", max_length=64)
-    power = models.IntegerField("战斗力")
-    sycee = models.IntegerField("所需元宝")
-
-    @staticmethod
-    def all():
-        fs = NPCFriend.objects.all()
-        return {f.id: f for f in fs}
-
-    class Meta:
-        db_table = 'npc_friend'
-        ordering = ('id',)
-        verbose_name = "好友NPC"
-        verbose_name_plural = "好友NPC"
-
 
 # 对话
 class Dialog(models.Model):

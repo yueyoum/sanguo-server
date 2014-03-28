@@ -37,6 +37,7 @@ def hero_notify(char_id, objs, message_name="HeroNotify"):
 
         g.step = obj.step
         g.step_cost = obj.step_up_needs_soul_amount()
+        g.power = obj.power
 
     publish_to_char(char_id, pack_msg(data))
 

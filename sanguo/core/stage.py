@@ -5,7 +5,6 @@ from django.db import transaction
 
 from mongoengine import DoesNotExist
 
-from apps.config.models import NPCFriend as ModelNPCFriends
 from core.mongoscheme import MongoStage, MongoTeamBattle, MongoEmbededPlunderLog, MongoHang, MongoHangRemainedTime
 
 
@@ -42,8 +41,6 @@ from preset.settings import (
 
 from preset.data import HEROS, STAGES, STAGE_CHALLENGE, STAGE_ELITE, STAGE_DROP, STAGE_ELITE_CONDITION
 
-
-NPCFRIENDS = ModelNPCFriends.all()
 
 def _parse_drops(drop_id):
     if not drop_id:
@@ -681,7 +678,8 @@ class TeamBattle(TimerCheckAbstractBase):
         if not self.mongo_tb or self.mongo_tb.status != 2:
             return
 
-        if (timezone.utc_timestamp() - self.mongo_tb.start_at) * self.mongo_tb.step >= 1:
+        time_diff = timezone.utc_timestamp() - self.mongo_tb.start_at
+        if time_diff >= STAGE_CHALLENGE[self.mongo_tb.battle_id].time_limit or time_diff * self.mongo_tb.step >= 1:
             # FINISH
             self.mongo_tb.status = 3
             self.mongo_tb.save()
@@ -691,7 +689,7 @@ class TeamBattle(TimerCheckAbstractBase):
             attachment.save_to_prize(7)
 
 
-    def start(self, _id, friend_ids=None, npc_ids=None):
+    def start(self, _id, friend_ids):
         if self.mongo_tb:
             raise InvalidOperate("TeamBattle Start. Char {0} Try to start battle {1}. But last battle NOT complete".format(
                 self.char_id, _id
@@ -723,14 +721,22 @@ class TeamBattle(TimerCheckAbstractBase):
 
         boss_id = random.choice(choosing_bosses)
 
-        a, b = this_stage.power_range.split(',')
-        a, b = int(a), int(b)
-        power_range = range(a, b+1)
-        boss_power = random.choice(power_range)
+        def _get_boss_power(p):
+            if ',' in p:
+                a, b = p.split(',')
+                a, b = int(a), int(b)
+                power_range = range(a, b+1)
+                return random.choice(power_range)
+            return int(p)
+
+        boss_power = _get_boss_power(this_stage.power_range)
 
 
         friend_power = 0
         if friend_ids:
+            if len(friend_ids) > this_stage.aid_limit:
+                raise InvalidOperate("TeamBattle Start. Char {0} Friend amount > aid limit".format(self.char_id))
+
             f = Friend(self.char_id)
             for fid in friend_ids:
                 if not f.is_friend(fid):
@@ -739,29 +745,6 @@ class TeamBattle(TimerCheckAbstractBase):
                 c = Char(fid)
                 friend_power += c.power
 
-
-        if npc_ids:
-            sycee_needs = 0
-            for nid in npc_ids:
-                try:
-                    npc = NPCFRIENDS[nid]
-                except KeyError:
-                    raise InvalidOperate("TeamBattle Start. Char {0} choose a NONE exists npc {1}".format(self.char_id, nid))
-
-                friend_power += npc.power
-                sycee_needs += npc.sycee
-
-            char = Char(self.char_id)
-            char_sycee = char.cacheobj.sycee
-            if char_sycee < sycee_needs:
-                raise SyceeNotEnough("TeamBattle Start. Char {0} choose npcs {1}. But sycee not enough. {2} < {3}".format(
-                    self.char_id, npc_ids, char_sycee, sycee_needs
-                ))
-
-            char.update(sycee=-sycee_needs, des='TeamBattle. NPC')
-
-
-        if friend_ids:
             achievement = Achievement(self.char_id)
             achievement.trig(17, 1)
 
@@ -776,6 +759,7 @@ class TeamBattle(TimerCheckAbstractBase):
         self.mongo_tb.start_at = timezone.utc_timestamp()
         self.mongo_tb.total_seconds = this_stage.time_limit
         self.mongo_tb.status = 2
+        self.mongo_tb.friend_ids = friend_ids
 
         step = random.uniform(1, 1.05) * self.mongo_tb.self_power / self.mongo_tb.boss_power * (1.0 / this_stage.time_limit)
         self.mongo_tb.step = step
@@ -824,19 +808,8 @@ class TeamBattle(TimerCheckAbstractBase):
             msg.team_battle.boss_power = self.mongo_tb.boss_power
             msg.team_battle.self_power = self.mongo_tb.self_power
 
-            utc_timestamp = timezone.utc_timestamp()
-
-            step_progress = self.mongo_tb.step
-            current_progress = (utc_timestamp - self.mongo_tb.start_at) * step_progress
-            if current_progress > 100:
-                current_progress = 100
-            msg.team_battle.step_progress = step_progress
-            msg.team_battle.current_progress = current_progress
-
-            remained_time = self.mongo_tb.total_seconds - (utc_timestamp - self.mongo_tb.start_at)
-            if remained_time < 0:
-                remained_time = 0
-            msg.team_battle.remained_time = remained_time
+            msg.start_at = self.mongo_tb.start_at
+            msg.team_battle.step_progress = self.mongo_tb.step
 
             msg.team_battle.status = self.mongo_tb.status
 

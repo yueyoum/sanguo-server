@@ -9,6 +9,7 @@ from mongoengine import DoesNotExist
 from apps.character.models import Character
 from core.mongoscheme import MongoFriend
 from core.character import Char
+from core.hero import Hero
 from core.msgpipe import publish_to_char
 from core.exception import InvalidOperate, BadMessage, CharNotFound, SanguoException
 from core.achievement import Achievement
@@ -255,9 +256,18 @@ class Friend(object):
             msg.power = char_f.power
 
         msg.status = status
+
+        f = Formation(fid)
+        in_formation_hero_ids = [h for h in f.in_formation_hero_ids() if h]
+        hero_list = [(Hero.cache_obj(hid).power, hid) for hid in in_formation_hero_ids]
+        hero_list.sort(key=lambda item: -item[0])
+        leader_oid = Hero.cache_obj(hero_list[0][1]).oid
+
         if status == FRIEND_OK:
             f = Formation(fid)
             msg.formation.extend(f.in_formation_hero_original_ids())
+
+        msg.leader = leader_oid
 
     def send_friends_amount_notify(self):
         msg = protomsg.FriendsAmountNotify()
