@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from apps.item.models import Equipment as ModelEquipment
-from core.mongoscheme import MongoHero, MongoItem
+from core.mongoscheme import MongoHero
 from core.character import Char
 from core.exception import InvalidOperate, SanguoException
-from protomsg import SetSocketResponse
-from utils import pack_msg
 from utils.decorate import message_response
 
 from core.formation import Formation
 from core.item import Item
 from core.signals import hero_changed_signal
+
+from preset.data import EQUIPMENTS
 
 @message_response("SetSocketResponse")
 def set_socket(request):
@@ -72,14 +71,13 @@ def set_socket(request):
                 # f.formation.sockets[k].jewelry = 0
                 changed_sockets.append((int(k), s.hero, s.weapon, s.armor, 0))
 
-    all_equipments = ModelEquipment.all()
     def _equip_test(tp, e):
         if e:
             # 装备要有，类型不能放错
             if not item.has_equip(e):
                 raise InvalidOperate()
             e_oid = item.item.equipments[str(e)].oid
-            this_e = all_equipments[e_oid]
+            this_e = EQUIPMENTS[e_oid]
             if this_e.tp != tp:
                 raise SanguoException(402, "Socket Set. Equip type test Failed. Char {0}. Equip id: {1}, oid {2}, tp {3}. Expect tp: {4}".format(
                     char_id, e, e_oid, this_e.tp, tp

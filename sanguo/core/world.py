@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
 from protomsg import Server as ServerMsg
 from apps.character.models import Character as ModelCharacter
-from apps.server.models import Server
 
-from core.character import  Char
-from core.item import Item
-from core.hero import save_hero
-
+from preset.data import SERVERS
 
 def server_list(user=None):
     user_servers = []
@@ -16,7 +12,7 @@ def server_list(user=None):
 
     top = None
     all_servers = []
-    for sid, s in Server.all().items():
+    for sid, s in SERVERS.items():
         _s = ServerMsg()
         _s.id = sid
         _s.name = s.name

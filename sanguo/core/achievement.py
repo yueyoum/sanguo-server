@@ -7,7 +7,6 @@ from mongoscheme import DoesNotExist
 from core.mongoscheme import MongoAchievement
 from core.attachment import Attachment
 
-from apps.achievement.models import Achievement as ModelAchievement
 
 from core.msgpipe import publish_to_char
 from utils import pack_msg
@@ -18,9 +17,8 @@ from protomsg import Attachment as MsgAttachment
 
 from core.exception import InvalidOperate
 
+from preset.data import ACHIEVEMENTS, ACHIEVEMENT_CONDITIONS, ACHIEVEMENT_FIRST_IDS
 
-ACHIEVEMENT_ALL = ModelAchievement.all()
-ACHIEVEMENT_ALL_BY_CONDITION = ModelAchievement.get_all_by_conditions()
 
 
 class Achievement(object):
@@ -31,14 +29,14 @@ class Achievement(object):
         except DoesNotExist:
             self.achievement = MongoAchievement(id=char_id)
             self.achievement.doing = {}
-            self.achievement.display = ModelAchievement.first_ids()
+            self.achievement.display = ACHIEVEMENT_FIRST_IDS
             self.achievement.finished = []
             self.achievement.complete = []
             self.achievement.save()
 
 
     def trig(self, condition_id, new_value=None):
-        achs = ACHIEVEMENT_ALL_BY_CONDITION[condition_id]
+        achs = ACHIEVEMENT_CONDITIONS[condition_id]
         for a in achs:
             self.trig_by_achievement(a, new_value=new_value)
 
@@ -50,7 +48,7 @@ class Achievement(object):
         attachment = Attachment(self.char_id)
         str_id = str(achievement_id)
 
-        decoded_condition_value = ach.decoded_condition_value()
+        decoded_condition_value = ach.decoded_condition_value
 
         if ach.mode == 1:
             # 多个ID条件
@@ -133,7 +131,7 @@ class Achievement(object):
             raise InvalidOperate("Achievement Get Reward: Char {0} try to get achievement {1}. But this achievement not finished".format(self.char_id, achievement_id))
 
         try:
-            ach = ACHIEVEMENT_ALL[achievement_id]
+            ach = ACHIEVEMENTS[achievement_id]
         except KeyError:
             raise InvalidOperate("Achievement Get Reward: Char {0} try to get a NONE exists achievement {1}".format(self.char_id, achievement_id))
 
@@ -160,7 +158,7 @@ class Achievement(object):
 
         if ach.next:
             msg = UpdateAchievementNotify()
-            self._fill_up_achievement_msg(msg.achievement, ACHIEVEMENT_ALL[ach.next])
+            self._fill_up_achievement_msg(msg.achievement, ACHIEVEMENTS[ach.next])
             publish_to_char(self.char_id, pack_msg(msg))
 
         msg = MsgAttachment()
@@ -172,7 +170,7 @@ class Achievement(object):
 
     def send_notify(self):
         msg = AchievementNotify()
-        for v in ACHIEVEMENT_ALL.values():
+        for v in ACHIEVEMENTS.values():
             a = msg.achievements.add()
             self._fill_up_achievement_msg(a, v)
 
@@ -198,7 +196,7 @@ class Achievement(object):
         msg.status = status
         msg.show = ach.id in self.achievement.display
 
-        decoded_condition_value = ach.decoded_condition_value()
+        decoded_condition_value = ach.decoded_condition_value
 
         if ach.mode == 1:
             msg.mach.condition.extend(decoded_condition_value)

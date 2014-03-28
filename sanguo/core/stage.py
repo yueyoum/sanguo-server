@@ -4,11 +4,10 @@ import random
 from django.db import transaction
 
 from mongoengine import DoesNotExist
-from apps.hero.models import Hero as ModelHero
-from apps.stage.models import Stage as ModelStage, EliteStage as ModelEliteStage, ChallengeStage as ModelChallengeStage
+
 from apps.config.models import NPCFriend as ModelNPCFriends
-from apps.stage.models import StageDrop as ModelStageDrop
 from core.mongoscheme import MongoStage, MongoTeamBattle, MongoEmbededPlunderLog, MongoHang, MongoHangRemainedTime
+
 
 from utils import timezone
 from utils import pack_msg
@@ -41,9 +40,10 @@ from preset.settings import (
     PLUNDER_DEFENSE_FAILURE_MAX_TIMES,
 )
 
-NPCFRIENDS = ModelNPCFriends.all()
-ALL_DROPS = ModelStageDrop.all()
+from preset.data import HEROS, STAGES, STAGE_CHALLENGE, STAGE_ELITE, STAGE_DROP, STAGE_ELITE_CONDITION
 
+
+NPCFRIENDS = ModelNPCFriends.all()
 
 def _parse_drops(drop_id):
     if not drop_id:
@@ -70,7 +70,7 @@ def _parse_drops(drop_id):
         int_id = int(_id)
         if int_id == 0:
             continue
-        this_drop = ALL_DROPS[int_id]
+        this_drop = STAGE_DROP[int_id]
         drop_equip = _parse(this_drop.equips)
         for k, v in drop_equip.iteritems():
             equips[k] = equips.get(k, 0) + v
@@ -119,9 +119,8 @@ class Stage(object):
 
 
     def battle(self, stage_id):
-        all_stages = ModelStage.all()
         try:
-            this_stage = all_stages[stage_id]
+            this_stage = STAGES[stage_id]
         except KeyError:
             raise InvalidOperate("PVE: Char {0} Try PVE in a NONE exist stage {1}".format(
                 self.char_id, stage_id
@@ -208,7 +207,7 @@ class Stage(object):
         @rtype: (int, int, list, list, list)
         """
 
-        this_stage = ModelStage.all()[stage_id]
+        this_stage = STAGES[stage_id]
         exp = this_stage.normal_exp
         gold = this_stage.normal_gold
         equipments, gems, stuffs = _parse_drops(this_stage.normal_drop)
@@ -442,7 +441,7 @@ class Hang(TimerCheckAbstractBase):
         stage_id = self.hang.stage_id
         times = self.hang.actual_seconds / 15
 
-        stage = ModelStage.all()[stage_id]
+        stage = STAGES[stage_id]
         drop_exp = stage.normal_exp * times
         drop_gold = stage.normal_gold * times
 
@@ -531,7 +530,7 @@ class Hang(TimerCheckAbstractBase):
             msg.hang.finished = self.hang.finished
 
             times = msg.hang.used_time / 15
-            stage = ModelStage.all()[self.hang.stage_id]
+            stage = STAGES[self.hang.stage_id]
             msg.hang.rewared_gold = self._actual_gold(stage.normal_gold * times)
             msg.hang.rewared_exp = stage.normal_exp * times
 
@@ -560,21 +559,21 @@ class EliteStage(object):
         self.check()
 
     def check(self):
-        condition_table = ModelEliteStage.condition_table()
-        for k, v in condition_table.iteritems():
-            if str(k) in self.stage.stages and str(v) not in self.stage.elites:
-                self.enable(v)
+        for k, v in STAGE_ELITE_CONDITION.iteritems():
+            for _v in v:
+                if str(k) in self.stage.stages and str(_v) not in self.stage.elites:
+                    self.enable(_v)
 
     def enable_by_condition_id(self, _id):
-        condition_table = ModelEliteStage.condition_table()
-        if _id not in condition_table:
+        if _id not in STAGE_ELITE_CONDITION:
             return
-        self.enable(condition_table[_id])
+        for v in STAGE_ELITE_CONDITION[_id]:
+            self.enable(v)
 
 
     def enable(self, _id):
         str_id = str(_id)
-        if _id not in ModelEliteStage.all():
+        if _id not in STAGE_ELITE:
             raise InvalidOperate("EliteStage Enable. Char {0} try to enable a NONE exists elite stage {1}".format(self.char_id, _id))
 
         if str_id in self.stage.elites:
@@ -598,7 +597,7 @@ class EliteStage(object):
             raise InvalidOperate("EliteStage Battle. Char {0} try to battle elite stage {1}. But NOT opened".format(self.char_id, _id))
 
         try:
-            self.this_stage = ModelEliteStage.all()[_id]
+            self.this_stage = STAGE_ELITE[_id]
         except KeyError:
             raise InvalidOperate("EliteStage Battle. Char {0} try to battle a NONE exists elite stage {1}".format(self.char_id, _id))
 
@@ -625,7 +624,7 @@ class EliteStage(object):
 
     def get_drop(self, _id=None):
         if _id:
-            this_stage = ModelEliteStage.all()[_id]
+            this_stage = STAGE_ELITE[_id]
         else:
             this_stage = self.this_stage
 
@@ -699,7 +698,7 @@ class TeamBattle(TimerCheckAbstractBase):
             ))
 
         try:
-            this_stage = ModelChallengeStage.all()[_id]
+            this_stage = STAGE_CHALLENGE[_id]
         except KeyError:
             raise InvalidOperate("TeamBattle Start. Char {0} Try to start a NONE exists battle {1}".format(_id))
 
@@ -717,9 +716,18 @@ class TeamBattle(TimerCheckAbstractBase):
         if not item.has_stuff(need_stuff_id, need_stuff_amount):
             raise StuffNotEnough("TeamBattle Start. Char {0} Try to start battle {1}. But stuff not enough".format(self.char_id, _id))
 
-        boss = ModelHero.get_by_grade(this_stage.level)
-        boss_id = boss.keys()[0]
-        boss_power = this_stage.boss_power()
+        choosing_bosses = []
+        for k, v in HEROS.iteritems():
+            if v.grade == this_stage.level:
+                choosing_bosses.append(k)
+
+        boss_id = random.choice(choosing_bosses)
+
+        a, b = this_stage.power_range.split(',')
+        a, b = int(a), int(b)
+        power_range = range(a, b+1)
+        boss_power = random.choice(power_range)
+
 
         friend_power = 0
         if friend_ids:
@@ -785,7 +793,7 @@ class TeamBattle(TimerCheckAbstractBase):
                 self.char_id, self.mongo_tb.battle_id, self.mongo_tb.status
             ))
 
-        this_stage = ModelChallengeStage.all()[self.mongo_tb.battle_id]
+        this_stage = STAGE_CHALLENGE[self.mongo_tb.battle_id]
         # FIXME
         reward_gold = this_stage.reward_gold
         reward_hero_id = self.mongo_tb.boss_id
@@ -833,7 +841,7 @@ class TeamBattle(TimerCheckAbstractBase):
             msg.team_battle.status = self.mongo_tb.status
 
             if self.mongo_tb.status == 3:
-                this_stage = ModelChallengeStage.all()[self.mongo_tb.battle_id]
+                this_stage = STAGE_CHALLENGE[self.mongo_tb.battle_id]
                 # FIXME
                 msg.team_battle.reward.gold = this_stage.reward_gold
                 msg.team_battle.reward.heros.append(self.mongo_tb.boss_id)

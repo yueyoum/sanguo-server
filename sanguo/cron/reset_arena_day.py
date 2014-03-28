@@ -6,11 +6,9 @@ __date__ = '2/19/14'
 from mongoengine import DoesNotExist
 
 from _base import Logger
-from apps.config.models import ArenaReward
 from core.character import Char
-from core.drives import redis_client_two
 from core.attachment import Attachment
-from core.mongoscheme import MongoArena, MongoArenaDay, MongoArenaWeek
+from core.mongoscheme import MongoArenaDay, MongoArenaWeek
 
 
 # 发送奖励，将日积分累加到周积分上，并且将日积分归零
@@ -23,8 +21,6 @@ def reset():
 
     arena_day = MongoArenaDay.objects.all()
     MongoArenaDay.objects.delete()
-
-    # reward_data = ArenaReward.all()
 
     chars_data = []
     for ad in arena_day:

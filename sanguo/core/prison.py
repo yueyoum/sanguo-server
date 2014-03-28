@@ -4,8 +4,6 @@ import random
 from mongoengine import DoesNotExist
 from django.db import transaction
 
-from apps.hero.models import Hero as ModelHero
-from apps.item.models import Stuff as ModelStuff
 from core.mongoscheme import MongoPrison, MongoEmbededPrisoner
 from core.exception import SyceeNotEnough
 from core.character import Char
@@ -27,8 +25,7 @@ from preset.settings import (
 
 import protomsg
 
-TREASURES = ModelStuff.all_by_tp(2)
-ALL_HEROS = ModelHero.all()
+from preset.data import HEROS, STUFFS, TREASURES
 
 
 class Prison(object):
@@ -141,7 +138,7 @@ class Prison(object):
     def release(self, _id):
         p = self._abandon(_id)
         got_gold = p.gold
-        got_treasure = random.choice(PRISONER_RELEASE_GOT_TREASURE[ALL_HEROS[p.oid].quality])
+        got_treasure = random.choice(PRISONER_RELEASE_GOT_TREASURE[HEROS[p.oid].quality])
 
         char = Char(self.char_id)
         char.update(gold=got_gold, des="Prisoner Release")
@@ -156,7 +153,7 @@ class Prison(object):
 
     def kill(self, _id):
         p = self._abandon(_id)
-        quality = ALL_HEROS[p.oid].quality
+        quality = HEROS[p.oid].quality
         souls = [(22, PRISONER_KILL_GOT_SOUL[quality])]
 
         treasures = [(random.choice(PRISONER_KILL_GOT_TREASURE[quality]), 1)]

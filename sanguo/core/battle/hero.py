@@ -9,15 +9,12 @@ from core.hero import FightPowerMixin, Hero
 
 from mixins import ActiveEffectMixin, StepHeroNotifyMixin
 
-from apps.hero.models import Monster as ModelMonster, Hero as ModelHero
-from apps.skill.models import Skill as ModelSkill
 
 from preset.settings import DEMAGE_VALUE_ADJUST
+from preset.data import HEROS, MONSTERS, SKILLS
 
 logger = logging.getLogger('battle')
 
-ALL_HEROS = ModelHero.all()
-ALL_MONSTER = ModelMonster.all()
 
 class UsingEffect(object):
     __slots__ = ['id', 'value']
@@ -110,9 +107,8 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         self.effect_manager = EffectManager()
 
 
-        all_skills = ModelSkill.all()
-        self.default_skill = all_skills[self.default_skill]
-        self.skills = [all_skills[i] for i in self.skills]
+        self.default_skill = SKILLS[self.default_skill]
+        self.skills = [SKILLS[i] for i in self.skills]
         self.attack_skills = []
         self.passive_skills = []
 
@@ -291,8 +287,8 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
         # 攻击修正
         if self.HERO_TYPE == 1 and target.HERO_TYPE == 1:
-            self_tp = ALL_HEROS[self.original_id].tp
-            target_tp = ALL_HEROS[target.original_id].tp
+            self_tp = HEROS[self.original_id].tp
+            target_tp = HEROS[target.original_id].tp
             modulus = DEMAGE_VALUE_ADJUST[self_tp][target_tp]
 
             value += value * modulus
@@ -478,7 +474,7 @@ class BattleMonster(InBattleHero):
     HERO_TYPE = 2
 
     def __init__(self, mid):
-        info = ALL_MONSTER[mid]
+        info = MONSTERS[mid]
         self.id = mid
         self.real_id = mid
         self.original_id = mid

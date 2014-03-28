@@ -14,11 +14,8 @@ from core.notify import (
 from core.hero import Hero
 from core.character import Char
 from core.achievement import Achievement
+from preset.data import HEROS
 
-from apps.hero.models import Hero as ModelHero
-
-
-ALL_HEROS = ModelHero.all()
 
 def _hero_add(char_id, hero_ids, hero_original_ids, send_notify, **kwargs):
     if send_notify:
@@ -38,7 +35,7 @@ def _hero_add(char_id, hero_ids, hero_original_ids, send_notify, **kwargs):
 
 
     for h in char_heros_dict.values():
-        original_hero = ALL_HEROS[h.oid]
+        original_hero = HEROS[h.oid]
         if original_hero.quality == 1:
             quality_one_heros_amount += 1
         if original_hero.quality == 2:

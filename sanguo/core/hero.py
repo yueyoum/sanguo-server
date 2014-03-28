@@ -18,18 +18,16 @@ from core import DLL
 from core.achievement import Achievement
 
 from apps.character.models import Character
-from apps.hero.models import Hero as ModelHero
-from apps.achievement.models import Achievement as ModelAchievement
 from utils import cache
 
 from core.msgpipe import publish_to_char
 from utils import pack_msg
 
 from preset.settings import HERO_MAX_STEP, HERO_STEP_UP_COST_SOUL_AMOUNT, HERO_STEP_UP_COST_GOLD
+from preset.data import HEROS, ACHIEVEMENTS
 
 import protomsg
 
-ALL_HEROS = ModelHero.all()
 
 def cal_hero_property(original_id, level, step):
     """
@@ -41,7 +39,7 @@ def cal_hero_property(original_id, level, step):
     @return: (attack, defense, hp)
     @rtype: tuple
     """
-    hero = ModelHero.all()[original_id]
+    hero = HEROS[original_id]
     attack = DLL.hero_attack(level, step, hero.quality, ctypes.c_float(hero.attack_growing))
     defense = DLL.hero_defense(level, step, hero.quality, ctypes.c_float(hero.defense_growing))
     hp = DLL.hero_hp(level, step, hero.quality, ctypes.c_float(hero.hp_growing))
@@ -72,7 +70,7 @@ class Hero(FightPowerMixin):
         self.attack, self.defense, self.hp = \
             cal_hero_property(self.oid, self.level, self.step)
 
-        self.model_hero = ALL_HEROS[self.oid]
+        self.model_hero = HEROS[self.oid]
         self.crit = self.model_hero.crit
         self.dodge = self.model_hero.dodge
         self.anger = self.model_hero.anger
@@ -105,7 +103,7 @@ class Hero(FightPowerMixin):
 
         # 然后加成人物的专属装备
         additions = {}
-        special_equipments = self.model_hero.special_equipments()
+        special_equipments = self.model_hero.special_equipments
         if special_equipments:
             for equip in equipments:
                 _cls = equip.equip.cls
@@ -140,10 +138,9 @@ class Hero(FightPowerMixin):
         except DoesNotExist:
             return
 
-        all_achievements = ModelAchievement.all()
         buffs = {}
         for i in mongo_ach.complete:
-            ach = all_achievements[i]
+            ach = ACHIEVEMENTS[i]
             if not ach.buff_used_for:
                 continue
 
@@ -192,7 +189,7 @@ class Hero(FightPowerMixin):
         soul_needs = self.step_up_needs_soul_amount()
 
         hs = HeroSoul(self.char_id)
-        this_hero = ModelHero.all()[self.oid]
+        this_hero = HEROS[self.oid]
         if not hs.has_soul(this_hero.id, soul_needs):
             raise InvalidOperate("Hero Step Up: Char {0} Try to up Hero {1}. But hero soul not enough".format(self.char_id, self.id))
 
@@ -325,10 +322,9 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
             hero_original_ids.remove(h)
 
     if to_soul_hero_ids:
-        all_model_heros = ModelHero.all()
         souls = {}
         for sid in to_soul_hero_ids:
-            this_hero = all_model_heros[sid]
+            this_hero = HEROS[sid]
             souls[this_hero.id] = souls.get(this_hero.id, 0) + 1
 
         hs = HeroSoul(char_id)

@@ -8,8 +8,7 @@ import random
 from django.db import transaction
 
 from mongoengine import DoesNotExist
-from apps.item.models import Gem as ModelGem
-from apps.official.models import Official as ModelOfficial
+
 from core.mongoscheme import MongoCheckIn
 from core.msgpipe import publish_to_char
 from core.exception import InvalidOperate
@@ -20,6 +19,7 @@ from core.achievement import Achievement
 from utils import pack_msg
 from protomsg import CheckInNotify, CheckInResponse, Attachment as MsgAttachment
 
+from preset.data import GEMS, OFFICIAL
 
 MAX_DAYS = 7
 
@@ -54,9 +54,8 @@ class CheckIn(object):
             stuff.id = 22
             stuff.amount = 5
 
-            all_gems = ModelGem.all()
             level_three_gems = []
-            for g in all_gems.values():
+            for g in GEMS.values():
                 if g.level == 3:
                     level_three_gems.append(g.id)
 
@@ -129,7 +128,7 @@ class OfficalDailyReward(object):
         counter = Counter(self.char_id, 'official_reward')
         counter.incr()
 
-        gold = ModelOfficial.all()[official_level].gold
+        gold = OFFICIAL[official_level].gold
         char.update(gold=gold, des='Official Daily Reward')
 
         msg = MsgAttachment()

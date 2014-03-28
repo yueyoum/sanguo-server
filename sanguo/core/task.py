@@ -6,7 +6,6 @@ __date__ = '2/8/14'
 from mongoengine import DoesNotExist
 
 from core.mongoscheme import MongoTask
-from apps.task.models import Task as ModelTask
 
 from core.character import Char
 from core.attachment import Attachment
@@ -20,6 +19,9 @@ from protomsg import Task as MsgTask
 from protomsg import TaskNotify
 from protomsg import Attachment as MsgAttachment
 
+from preset.data import TASKS, TASKS_FIRST_IDS, TASKS_ALL_TP
+
+
 class Task(object):
     def __init__(self, char_id):
         self.char_id = char_id
@@ -27,24 +29,22 @@ class Task(object):
             self.task = MongoTask.objects.get(id=char_id)
         except DoesNotExist:
             self.task = MongoTask(id=char_id)
-            all_task_tps = ModelTask.all_tp()
-            for tp in all_task_tps:
+            for tp in TASKS_ALL_TP:
                 self.task.tasks[str(tp)] = 0
             self.task.complete = []
             self.task.finished = []
-            self.task.doing = ModelTask.first_ids()
+            self.task.doing = TASKS_FIRST_IDS
             self.task.save()
 
         self.check()
 
 
     def check(self):
-        all_tasks = ModelTask.all()
         for t in self.task.doing:
             if t in self.task.complete:
                 continue
 
-            this_task = all_tasks[t]
+            this_task = TASKS[t]
             tp = this_task.tp
 
             if self.task.tasks[str(tp)] >= this_task.times:
@@ -61,10 +61,9 @@ class Task(object):
         # TODO 检查TP ?
 
         self.task.tasks[str(tp)] += times
-        all_tasks = ModelTask.all()
 
         for t in self.task.doing:
-            this_task = all_tasks[t]
+            this_task = TASKS[t]
             if this_task.tp != tp:
                 continue
 
@@ -83,9 +82,8 @@ class Task(object):
 
     def get_reward(self, _id):
         # FIXME 重复领奖？？？
-        all_tasks = ModelTask.all()
         try:
-            this_task = all_tasks[_id]
+            this_task = TASKS[_id]
         except KeyError:
             raise InvalidOperate("Task Get Reward: Char {0} Try to get reward from a NONE exist task {1}".format(
                 self.char_id, _id
@@ -102,7 +100,7 @@ class Task(object):
         char.update(sycee=sycee, gold=gold, des="Task {0} Reward".format(_id))
 
         if this_task.next_task:
-            next_task = all_tasks[this_task.next_task]
+            next_task = TASKS[this_task.next_task]
             if self.task.tasks[str(this_task.tp)] >= next_task.times:
                 self.task.finished.append(this_task.next_task)
 
@@ -115,7 +113,7 @@ class Task(object):
         self.task.save()
         self.send_notify()
 
-        if self.all_complete(all_tasks=all_tasks):
+        if self.all_complete():
             achievement = Achievement(self.char_id)
             achievement.trig(30, 1)
 
@@ -125,11 +123,9 @@ class Task(object):
         return msg
 
 
-    def all_complete(self, all_tasks=None):
-        if not all_tasks:
-            all_tasks = ModelTask.all()
+    def all_complete(self):
         for tid in self.task.doing:
-            this_task = all_tasks[tid]
+            this_task = TASKS[tid]
             if this_task.next_task:
                 return False
 
@@ -138,9 +134,8 @@ class Task(object):
 
     def send_notify(self):
         msg = TaskNotify()
-        all_tasks = ModelTask.all()
         for t in self.task.doing:
-            this_task = all_tasks[t]
+            this_task = TASKS[t]
             msg_t = msg.tasks.add()
             msg_t.id = t
             msg_t.current_times = self.task.tasks[str(this_task.tp)]

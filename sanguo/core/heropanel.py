@@ -7,7 +7,6 @@ import random
 
 from django.db import transaction
 from mongoengine import DoesNotExist
-from apps.hero.models import Hero
 
 from core.mongoscheme import MongoHeroPanel
 from core.counter import Counter
@@ -18,6 +17,8 @@ from core.character import Char
 from core.msgpipe import publish_to_char
 from utils import pack_msg
 from utils import timezone
+
+from preset.data import HERO_GET_BY_QUALITY, HERO_GET_BY_QUALITY_NOT_EQUAL
 
 
 import protomsg
@@ -186,7 +187,7 @@ class HeroPanel(object):
         good_hero_amount = 1
         if random.randint(1, 100) <= 4:
             good_hero_amount = 2
-        good_hero = Hero.get_by_quality(1, good_hero_amount)
+        good_hero = HERO_GET_BY_QUALITY(1, good_hero_amount)
 
         panel.good_hero = good_hero.keys()[0]
         if good_hero_amount == 2:
@@ -195,7 +196,7 @@ class HeroPanel(object):
 
 
         other_hero_amount = MAX_AMOUNT - good_hero_amount
-        other_heros = Hero.get_by_quality_not_equal(1, other_hero_amount)
+        other_heros = HERO_GET_BY_QUALITY_NOT_EQUAL(1, other_hero_amount)
 
         panel.other_heros.extend(other_heros.keys())
 

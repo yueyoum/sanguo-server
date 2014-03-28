@@ -2,7 +2,6 @@
 from django.db.models import Q
 
 from apps.character.models import Character, CharPropertyLog, level_update_exp, official_update_exp
-from apps.config.models import CharInit
 
 from core.hero import save_hero, Hero
 from core.mongoscheme import MongoHero
@@ -11,6 +10,8 @@ from core.formation import Formation
 from core.msgpipe import publish_to_char
 
 from utils import pack_msg
+
+from preset.data import CHARINIT
 
 import protomsg
 
@@ -187,18 +188,16 @@ class Char(object):
 def char_initialize(account_id, server_id, name):
     from core.item import Item
 
-    init = CharInit.cache_obj()
-
     char = Character.objects.create(
         account_id=account_id,
         server_id=server_id,
         name=name,
-        gold=init.gold,
-        sycee=init.sycee,
+        gold=CHARINIT.gold,
+        sycee=CHARINIT.sycee,
     )
     char_id = char.id
 
-    init_heros = init.decoded_heros
+    init_heros = CHARINIT.decoded_heros
     init_heros_ids = init_heros.keys()
 
     item = Item(char_id)
@@ -249,8 +248,8 @@ def char_initialize(account_id, server_id, name):
 
     f.save_formation(socket_ids, send_notify=False)
 
-    item.gem_add(init.decoded_gems, send_notify=False)
-    item.stuff_add(init.decoded_stuffs, send_notify=False)
+    item.gem_add(CHARINIT.decoded_gems, send_notify=False)
+    item.stuff_add(CHARINIT.decoded_stuffs, send_notify=False)
 
     return char
 

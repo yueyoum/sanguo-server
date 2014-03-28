@@ -9,9 +9,6 @@ from django.db import transaction
 
 from mongoengine import DoesNotExist
 
-from apps.item.models import Equipment as ModelEquipment
-from apps.item.models import Gem as ModelGem
-from apps.item.models import Stuff as ModelStuff
 from core.mongoscheme import MongoItem, MongoEmbeddedEquipment
 from core.drives import document_ids
 
@@ -31,6 +28,7 @@ from utils import cache
 import protomsg
 
 from preset.settings import EQUIP_MAX_LEVEL
+from preset.data import EQUIPMENTS, GEMS, STUFFS
 
 
 
@@ -93,8 +91,7 @@ class Equipment(MessageEquipmentMixin):
         self.oid = mongo_equip.oid
         self.level = mongo_equip.level
 
-        all_equips = ModelEquipment.all()
-        self.equip = all_equips[self.oid]
+        self.equip = EQUIPMENTS[self.oid]
 
     # @staticmethod
     # def cache_obj(equip_id):
@@ -213,8 +210,7 @@ class Equipment(MessageEquipmentMixin):
         ))
 
         self.oid = to
-        all_equips = ModelEquipment.all()
-        self.equip = all_equips[self.oid]
+        self.equip = EQUIPMENTS[self.oid]
 
         self.mongo_item.equipments[str(self.equip_id)].oid = to
         add_gem_slots = self.equip.slots - len(self.mongo_item.equipments[str(self.equip_id)].gems)
@@ -313,11 +309,10 @@ class Equipment(MessageEquipmentMixin):
         attrs = {}
 
         gems = self.mongo_item.equipments[str(self.equip_id)].gems
-        all_gems = ModelGem.all()
         for gid in gems:
             if not gid:
                 continue
-            gem = all_gems[gid]
+            gem = GEMS[gid]
             attrs[gem.used_for] = attrs.get(gem.used_for, 0) + gem.value
 
         for k, v in attrs.iteritems():
@@ -362,7 +357,7 @@ class Item(MessageEquipmentMixin):
     def equip_add(self, oid, level=1, notify=True):
         # TODO 背包是否满了
         try:
-            this_equip = ModelEquipment.all()[oid]
+            this_equip = EQUIPMENTS[oid]
         except KeyError:
             raise InvalidOperate("Equipment Add: Char {0} Try to add a NONE exists Equipment oid: {1}".format(
                 self.char_id, oid
@@ -491,11 +486,8 @@ class Item(MessageEquipmentMixin):
         @type add_gems: list | tuple
         """
 
-        all_gems = ModelGem.all()
-
-
         for gid, _ in add_gems:
-            if gid not in all_gems:
+            if gid not in GEMS:
                 raise InvalidOperate("Gem Add: Char {0} Try to add a NONE exist Gem, oid: {1}".format(
                     self.char_id, gid
                 ))
@@ -590,7 +582,7 @@ class Item(MessageEquipmentMixin):
                 self.char_id, _id, this_gem_amount
             ))
 
-        to_id = ModelGem.all()[_id].merge_to
+        to_id = GEMS[_id].merge_to
         if not to_id:
             raise InvalidOperate("Gem Merge: Char {0} Try to Merge gem: {1}. Which can not merge".format(
                 self.char_id, _id
@@ -599,7 +591,7 @@ class Item(MessageEquipmentMixin):
         self.gem_add([(to_id, 1)])
         self.gem_remove(_id, 4)
 
-        to_gem_obj = ModelGem.all()[to_id]
+        to_gem_obj = GEMS[to_id]
 
         achievement = Achievement(self.char_id)
         achievement.trig(25, 1)
@@ -615,9 +607,8 @@ class Item(MessageEquipmentMixin):
         @param add_stuffs: [(id, amount), (id, amount)]
         @type add_stuffs: list | tuple
         """
-        all_stuffs = ModelStuff.all()
         for _id, _ in add_stuffs:
-            if _id not in all_stuffs:
+            if _id not in STUFFS:
                 raise InvalidOperate("Stuff Add: Char {0} Try to add a NONE exist Stuff: {1}".format(
                     self.char_id, _id
                 ))

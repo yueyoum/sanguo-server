@@ -4,7 +4,7 @@ dump() {
     declare -a arr
     arr=(`echo "$1" | tr ':', ' '`)
     echo ${arr[@]}
-    python manage.py dumpdata ${arr[0]} --indent=4 > fixtures/${arr[1]}
+    python manage.py dumpdata ${arr[0]} --indent=4 > preset/fixtures/${arr[1]}
 }
 
 

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from apps.server.models import Server
 from apps.character.models import Character
 from apps.account.models import Account
 from core.exception import SanguoException, BadMessage, InvalidOperate
@@ -10,6 +9,8 @@ from core.world import server_list
 from utils import crypto, pack_msg
 from utils.decorate import message_response
 from utils import timezone
+
+from preset.data import SERVERS
 
 from protomsg import RegisterResponse, StartGameResponse, SyncResponse
 
@@ -92,7 +93,7 @@ def register(request):
 @message_response("StartGameResponse")
 def login(request):
     req = request._proto
-    if req.server_id not in Server.all():
+    if req.server_id not in SERVERS:
         raise InvalidOperate("Login: With an NON Existed server {0}".format(req.server_id))
 
     need_create_new_char = None

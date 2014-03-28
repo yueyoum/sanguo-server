@@ -7,11 +7,17 @@ from mongoengine import DoesNotExist
 
 from _base import Logger
 
-from apps.config.models import ArenaReward
 from core.attachment import Attachment
 from core.mongoscheme import MongoArenaTopRanks, MongoArenaWeek
 from core.character import Char
 from core.achievement import Achievement
+
+from preset.data import ARENA_REWARD
+
+def _get_reward(rank):
+    for k, v in ARENA_REWARD.items():
+        if rank >= k:
+            return v
 
 
 TOP_RANKS = [1, 2, 3]
@@ -24,10 +30,9 @@ def reset():
     data = MongoArenaWeek.objects.all()
     MongoArenaWeek.objects.delete()
 
-    reward_data = ArenaReward.all()
 
     for d in data:
-        reward = ArenaReward.cache_obj(d.rank, reward_data)
+        reward = _get_reward(d.rank)
         gold = reward.week_gold
         attachment = Attachment(d.id)
         attachment.save_to_attachment(3, gold=gold)

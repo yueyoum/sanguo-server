@@ -2,8 +2,6 @@
 
 from mongoengine import DoesNotExist
 
-from apps.hero.models import Hero as ModelHero
-from apps.item.models import Equipment as ModelEquipment
 from core.mongoscheme import MongoSocket, MongoFormation, MongoHero
 from core.signals import socket_changed_signal
 from core.exception import InvalidOperate, SanguoException
@@ -14,13 +12,18 @@ from core.msgpipe import publish_to_char
 import protomsg
 from protomsg import SpecialEquipmentBuyRequest
 
-ALL_HEROS = ModelHero.all()
-ALL_INITIAL_EQUIPMENTS = ModelEquipment.all_initial_equips()
-ALL_EQUIPMENTS = ModelEquipment.all()
+from preset.data import EQUIPMENTS, HEROS
+
+ALL_INITIAL_EQUIPMENTS = {}
+
+for d in EQUIPMENTS.values():
+    if d.step == 0:
+        ALL_INITIAL_EQUIPMENTS[d.id] = d
+
 ALL_WEAPONS = {}
 ALL_ARMORS = {}
 ALL_JEWELRY = {}
-for _e in ALL_EQUIPMENTS.values():
+for _e in EQUIPMENTS.values():
     if _e.tp == 1:
         ALL_WEAPONS[_e.id] = _e
     elif _e.tp == 2:
@@ -150,7 +153,8 @@ class Formation(object):
 
         oid = MongoHero.objects.get(id=this_socket.hero).oid
 
-        special_cls = ALL_HEROS[oid].special_equipments().keys()
+        this_hero = HEROS[oid]
+        special_cls = [int(i) for i in this_hero.special_equip_cls.split(',')]
 
         def _find_speicial_id(equipments):
             for e in equipments:
@@ -185,8 +189,6 @@ class Formation(object):
         self._send_socket_changed_notify(socket_id, self.formation.sockets[str(socket_id)])
 
 
-
-
     def _send_socket_changed_notify(self, socket_id, socket):
         msg = protomsg.UpdateSocketNotify()
         s = msg.sockets.add()
@@ -215,8 +217,4 @@ class Formation(object):
         msg = protomsg.FormationNotify()
         msg.socket_ids.extend(self.formation.formation)
         publish_to_char(self.char_id, pack_msg(msg))
-
-
-
-
 
