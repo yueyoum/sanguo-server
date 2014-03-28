@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-import random
 from django.db import models
-from django.db.models.signals import post_delete, post_save
-from utils import cache
+
 
 class Hero(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -47,92 +45,6 @@ class Hero(models.Model):
     def __unicode__(self):
         return u'<Hero: %s>' % self.name
 
-    @staticmethod
-    def all():
-        data = cache.get('hero')
-        if data:
-            return data
-        return _save_cache_hero()
-
-    @staticmethod
-    def get_by_quality(quality, amount=1):
-        assert quality in [1, 2, 3]
-
-        all_heros = Hero.all()
-        all_heros_items = all_heros.items()
-        res = {}
-        while True:
-            if len(res) >= amount:
-                break
-            this = random.choice(all_heros_items)
-            if this[0] in res:
-                continue
-            if this[1].quality != quality:
-                continue
-
-            res[this[0]] = this[1]
-
-        return res
-
-
-    @staticmethod
-    def get_by_quality_not_equal(quality, amount=1):
-        assert quality in [1, 2, 3]
-
-        all_heros_items = Hero.all().items()
-        res = {}
-        while True:
-            if len(res) >= amount:
-                break
-
-            this = random.choice(all_heros_items)
-            if this[0] in res:
-                continue
-            if this[1].quality == quality:
-                continue
-
-            res[this[0]] = this[1]
-
-        return res
-
-    @staticmethod
-    def get_by_grade(grade, amount=1):
-
-        all_heros = Hero.all()
-        all_heros_items = all_heros.items()
-        res = {}
-        while True:
-            if len(res) >= amount:
-                break
-            this = random.choice(all_heros_items)
-            if this[0] in res:
-                continue
-            if this[1].grade != grade:
-                continue
-
-            res[this[0]] = this[1]
-
-        return res
-
-
-    @staticmethod
-    def update_cache():
-        return _save_cache_hero()
-
-
-    def special_equipments(self):
-        data = getattr(self, '_special_equipments', None)
-        if data:
-            return data
-
-        if not self.special_equip_cls:
-            return {}
-        equip_cls = [int(i) for i in self.special_equip_cls.split(',')]
-        equip_addition = [int(i) for i in self.special_addition.split(',')]
-        data = dict(zip(equip_cls, equip_addition))
-        self._special_equipments = data
-        return data
-
 
     class Meta:
         db_table = 'hero'
@@ -140,25 +52,6 @@ class Hero(models.Model):
         verbose_name = "武将"
         verbose_name_plural = "武将"
 
-
-def _save_cache_hero(*args, **kwargs):
-    heros = Hero.objects.all()
-    data = {h.id: h for h in heros}
-    cache.set('hero', data, expire=None)
-    return data
-
-
-post_save.connect(
-    _save_cache_hero,
-    sender=Hero,
-    dispatch_uid='apps.hero.Hero.post_save'
-)
-
-post_delete.connect(
-    _save_cache_hero,
-    sender=Hero,
-    dispatch_uid='apps.hero.Hero.post_delete'
-)
 
 
 class Monster(models.Model):
@@ -181,40 +74,9 @@ class Monster(models.Model):
     def __unicode__(self):
         return u'<Monster: %s>' % self.name
 
-    @staticmethod
-    def all():
-        data = cache.get('monster')
-        if data:
-            return data
-        return _save_cache_monster()
-
-    @staticmethod
-    def update_cache():
-        return _save_cache_monster()
-
     class Meta:
         db_table = 'monster'
         ordering = ('id',)
         verbose_name = "怪物"
         verbose_name_plural = "怪物"
-
-
-def _save_cache_monster(*args, **kwargs):
-    monsters = Monster.objects.all()
-    data = {m.id: m for m in monsters}
-    cache.set('monster', data, expire=None)
-    return data
-
-
-post_save.connect(
-    _save_cache_monster,
-    sender=Monster,
-    dispatch_uid='apps.hero.Monster.post_save'
-)
-
-post_delete.connect(
-    _save_cache_monster,
-    sender=Monster,
-    dispatch_uid='apps.hero.Monster.post_delete'
-)
 

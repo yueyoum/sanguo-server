@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-from django.db.models.signals import post_save, post_delete
-
-from utils import cache
-
 
 class Achievement(models.Model):
     MODE = (
@@ -46,66 +42,4 @@ class Achievement(models.Model):
         ordering = ('id',)
         verbose_name = "成就"
         verbose_name_plural = "成就"
-
-    @staticmethod
-    def all():
-        data = cache.get('achievement')
-        if data:
-            return data
-        return save_achievement_cache()
-
-    @staticmethod
-    def get_all_by_conditions():
-        data = cache.get('achievement_conditions')
-        if data:
-            return data
-        save_achievement_cache()
-        return cache.get('achievement_conditions')
-
-
-    @staticmethod
-    def first_ids():
-        data = cache.get('achievement_first_ids')
-        if data:
-            return data
-        save_achievement_cache()
-        return cache.get('achievement_first_ids')
-
-
-
-    def decoded_condition_value(self):
-        if self.mode == 1:
-            return [int(i) for i in self.condition_value.split(',')]
-        return int(self.condition_value)
-
-
-
-def save_achievement_cache(*args, **kwargs):
-    achieves = Achievement.objects.all()
-    data = {}
-    conditions = {}
-    first_ids = []
-    for a in achieves:
-        data[a.id] = a
-        conditions.setdefault(a.condition_id, []).append(a)
-        if a.first:
-            first_ids.append(a.id)
-
-    cache.set('achievement', data, expire=None)
-    cache.set('achievement_conditions', conditions, expire=None)
-    cache.set('achievement_first_ids', first_ids, expire=None)
-    return data
-
-
-post_save.connect(
-    save_achievement_cache,
-    sender=Achievement,
-    dispatch_uid='apps.achievement.Achievement.post_save'
-)
-
-post_delete.connect(
-    save_achievement_cache,
-    sender=Achievement,
-    dispatch_uid='apps.achievement.Achievement.post_delete'
-)
 

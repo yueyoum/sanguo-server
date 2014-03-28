@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from django.db.models.signals import post_delete, post_save
-from utils import cache
-
 
 class Equipment(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -34,21 +31,6 @@ class Equipment(models.Model):
     def __unicode__(self):
         return u'<装备: %s>' % self.name
 
-    @staticmethod
-    def all():
-        data = cache.get('equip')
-        if data:
-            return data
-        return _set_equip_cache()
-
-    @staticmethod
-    def all_initial_equips():
-        data = Equipment.all()
-        res = {}
-        for d in data.values():
-            if d.step == 0:
-                res[d.id] = d
-        return res
 
     class Meta:
         db_table = 'equipment'
@@ -56,25 +38,6 @@ class Equipment(models.Model):
         verbose_name = "装备"
         verbose_name_plural = "装备"
 
-
-def _set_equip_cache(*args, **kwargs):
-    equips = Equipment.objects.all()
-    data = {e.id: e for e in equips}
-    cache.set('equip', data, expire=None)
-    return data
-
-
-post_save.connect(
-    _set_equip_cache,
-    sender=Equipment,
-    dispatch_uid='apps.item.Equipment.post_save'
-)
-
-post_delete.connect(
-    _set_equip_cache,
-    sender=Equipment,
-    dispatch_uid='apps.item.Equipment.post_save'
-)
 
 
 class Gem(models.Model):
@@ -95,40 +58,12 @@ class Gem(models.Model):
     def __unicode__(self):
         return u'<宝石: %s>' % self.name
 
-    @staticmethod
-    def all():
-        data = cache.get('gem')
-        if data:
-            return data
-
-        return _set_gem_cache()
-
 
     class Meta:
         db_table = 'gem'
         ordering = ('id',)
         verbose_name = "宝石"
         verbose_name_plural = "宝石"
-
-
-def _set_gem_cache(*args, **kwargs):
-    gems = Gem.objects.all()
-    data = {g.id: g for g in gems}
-    cache.set('gem', data, expire=None)
-    return data
-
-
-post_save.connect(
-    _set_gem_cache,
-    sender=Gem,
-    dispatch_uid='apps.item.Gem.post_save'
-)
-
-post_delete.connect(
-    _set_gem_cache,
-    sender=Gem,
-    dispatch_uid='apps.item.Gem.post_delete'
-)
 
 
 class Stuff(models.Model):
@@ -150,46 +85,10 @@ class Stuff(models.Model):
     def __unicode__(self):
         return u'<材料: %s>' % self.name
 
-    @staticmethod
-    def all():
-        data = cache.get('stuff')
-        if data:
-            return data
-        return _save_stuff_cache()
-
-    @staticmethod
-    def all_by_tp(tp):
-        data = Stuff.all()
-        res = {}
-        for d in data.values():
-            if d.tp == tp:
-                res[d.id] = d
-        return res
-
 
     class Meta:
         db_table = 'stuff'
         ordering = ('id',)
         verbose_name = "道具"
         verbose_name_plural = "道具"
-
-
-def _save_stuff_cache(*args, **kwargs):
-    stuffs = Stuff.objects.all()
-    data = {s.id: s for s in stuffs}
-    cache.set('stuff', data, expire=None)
-    return data
-
-post_save.connect(
-    _save_stuff_cache,
-    sender=Stuff,
-    dispatch_uid='apps.item.Stuff.post_save'
-)
-
-post_delete.connect(
-    _save_stuff_cache,
-    sender=Stuff,
-    dispatch_uid='apps.item.Stuff.post_delete'
-)
-
 

@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-from django.db.models.signals import post_delete, post_save
 
-from utils import cache
 
 class Effect(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -45,23 +43,6 @@ class Skill(models.Model):
     def __unicode__(self):
         return u'<Skill %s>' % self.name
 
-    @staticmethod
-    def cache_obj(sid):
-        data = Skill.all()
-        return data[sid]
-
-    @staticmethod
-    def all():
-        data = cache.get('skill')
-        if data:
-            return data
-        return _save_cache_skill()
-
-    @staticmethod
-    def update_cache():
-        return _save_cache_skill()
-
-
     class Meta:
         db_table = 'skill'
         ordering = ('id',)
@@ -85,43 +66,4 @@ class SkillEffect(models.Model):
 
     class Meta:
         db_table = 'skill_effect'
-
-
-class UsingEffect(object):
-    __slots__ = ['id', 'target', 'value', 'rounds']
-    def __init__(self, id, target, value, rounds):
-        self.id = id
-        self.target = target
-        self.value = value
-        self.rounds =  rounds
-
-    def copy(self):
-        return UsingEffect(self.id, self.target, self.value, self.rounds)
-
-
-def _save_cache_skill(*args, **kwargs):
-    skills = Skill.objects.all()
-    data = {}
-    for s in skills:
-        effects = s.skilleffect_set.all()
-        using_effects = []
-        for e in effects:
-            using_effects.append(
-                UsingEffect(e.effect_id, e.target, e.value, e.rounds)
-            )
-
-        s.effects = using_effects
-        data[s.id] = s
-
-    cache.set('skill', data, expire=None)
-    return data
-
-
-post_save.connect(_save_cache_skill, sender=Effect)
-post_save.connect(_save_cache_skill, sender=Skill)
-post_save.connect(_save_cache_skill, sender=SkillEffect)
-
-post_delete.connect(_save_cache_skill, sender=Effect)
-post_delete.connect(_save_cache_skill, sender=Skill)
-post_delete.connect(_save_cache_skill, sender=SkillEffect)
 

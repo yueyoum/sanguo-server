@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-from utils import cache
 
 class Official(models.Model):
     id = models.IntegerField("等级", primary_key=True)
@@ -19,19 +18,4 @@ class Official(models.Model):
 
     def __unicode__(self):
         return u'<Official: %s>' % self.name
-
-    @staticmethod
-    def all():
-        data = cache.get('official')
-        if data:
-            return data
-        return save_offical_cache()
-
-
-def save_offical_cache(*args, **kwargs):
-    offs = Official.objects.all()
-    data = {o.id: o for o in offs}
-    cache.set('official', data, expire=None)
-    return data
-
 

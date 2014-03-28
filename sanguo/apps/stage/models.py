@@ -1,23 +1,13 @@
 # -*- coding: utf-8 -*-
 
-import random
 from django.db import models
-from django.db.models.signals import post_delete, post_save
 
-from utils import cache
 
 class Battle(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField("名字", max_length=32)
     level_limit = models.IntegerField("等级限制", default=1)
     des = models.TextField("描述", blank=True)
-
-    @staticmethod
-    def all():
-        data = cache.get('battle')
-        if data:
-            return data
-        return _save_battle_cache()
 
     def __unicode__(self):
         return u'<Battle: %s>' % self.name
@@ -28,24 +18,6 @@ class Battle(models.Model):
         verbose_name = "战役"
         verbose_name_plural = "战役"
 
-
-def _save_battle_cache(*args, **kwargs):
-    battles = Battle.objects.all()
-    data = {b.id: b for b in battles}
-    cache.set('battle', data, expire=None)
-    return data
-
-post_save.connect(
-    _save_battle_cache,
-    sender=Battle,
-    dispatch_uid='apps.stage.Battle.post_save'
-)
-
-post_delete.connect(
-    _save_battle_cache,
-    sender=Battle,
-    dispatch_uid='apps.stage.Battle.post_delete'
-)
 
 
 class Stage(models.Model):
@@ -78,51 +50,12 @@ class Stage(models.Model):
     def __unicode__(self):
         return u'<Stage: %s>' % self.name
 
-    @staticmethod
-    def all():
-        data = cache.get('stage')
-        if data:
-            return data
-        return _save_stage_cache()
-
-    @property
-    def decoded_monsters(self):
-        return [int(i) for i in self.monsters.split(',')]
-
 
     class Meta:
         db_table = 'stage'
         ordering = ('id',)
         verbose_name = "关卡"
         verbose_name_plural = "关卡"
-
-
-def _save_stage_cache(*args, **kwargs):
-    stages = Stage.objects.all().select_related('battle')
-    data = {s.id: s for s in stages}
-    for _id, s in data.items():
-        s.level_limit = s.battle.level_limit
-        open_condition = s.open_condition
-        if not open_condition:
-            continue
-
-        data[open_condition].next = _id
-
-    cache.set('stage', data, expire=None)
-    return data
-
-
-post_save.connect(
-    _save_stage_cache,
-    sender=Stage,
-    dispatch_uid='apps.stage.Stage.post_save'
-)
-
-post_delete.connect(
-    _save_stage_cache,
-    sender=Stage,
-    dispatch_uid='apps.stage.Stage.post_delete'
-)
 
 
 class StageDrop(models.Model):
@@ -136,33 +69,6 @@ class StageDrop(models.Model):
         ordering = ('id',)
         verbose_name = "关卡物品掉落"
         verbose_name_plural = "关卡物品掉落"
-
-    @staticmethod
-    def all():
-        data = cache.get('stagedrop')
-        if data:
-            return data
-        return _save_stagedrop_cache()
-
-
-def _save_stagedrop_cache(*args, **kwargs):
-    drops = StageDrop.objects.all()
-    data = {d.id: d for d in drops}
-    cache.set('stagedrop', data, expire=None)
-    return data
-
-post_save.connect(
-    _save_stagedrop_cache,
-    sender=StageDrop,
-    dispatch_uid='apps.stage.StageDrop.post_save'
-)
-
-post_delete.connect(
-    _save_stagedrop_cache,
-    sender=StageDrop,
-    dispatch_uid='apps.stage.StageDrop.post_delete'
-)
-
 
 
 
@@ -185,25 +91,6 @@ class EliteStage(models.Model):
     def __unicode__(self):
         return u'<EliteStage: %s>' % self.name
 
-    @staticmethod
-    def all():
-        data = cache.get('elitestage')
-        if data:
-            return data
-        return _save_elitestage_cache()
-
-    @staticmethod
-    def condition_table():
-        data = cache.get('elitestage_condition')
-        if data:
-            return data
-        _save_elitestage_cache()
-        return cache.get('elitestage_condition')
-
-    @property
-    def decoded_monsters(self):
-        return [int(i) for i in self.monsters.split(',')]
-
 
     class Meta:
         db_table = 'stage_elite'
@@ -211,32 +98,6 @@ class EliteStage(models.Model):
         verbose_name = "精英关卡"
         verbose_name_plural = "精英关卡"
 
-
-
-def _save_elitestage_cache(*args, **kwargs):
-    stages = EliteStage.objects.all()
-    data = {}
-    conditions = {}
-    for s in stages:
-        data[s.id] = s
-        conditions[s.open_condition] = s.id
-
-    cache.set('elitestage', data, expire=None)
-    cache.set('elitestage_condition', conditions, expire=None)
-    return data
-
-
-post_save.connect(
-    _save_elitestage_cache,
-    sender=EliteStage,
-    dispatch_uid='apps.stage.EliteStage.post_save'
-)
-
-post_delete.connect(
-    _save_elitestage_cache,
-    sender=EliteStage,
-    dispatch_uid='apps.stage.EliteStage.post_delete'
-)
 
 
 class ChallengeStage(models.Model):
@@ -258,36 +119,4 @@ class ChallengeStage(models.Model):
         verbose_name = "猛将挑战"
         verbose_name_plural = "猛将挑战"
 
-    @staticmethod
-    def all():
-        data = cache.get('challengestage')
-        if data:
-            return data
-        return save_challenge_stage_cache()
-
-    def boss_power(self):
-        a, b = self.power_range.split(',')
-        a, b = int(a), int(b)
-        power_range = range(a, b+1)
-        return random.choice(power_range)
-
-
-def save_challenge_stage_cache(*args, **kwargs):
-    stages = ChallengeStage.objects.all()
-    data = {s.id: s for s in stages}
-    cache.set('challengestage', data, expire=None)
-    return data
-
-
-post_save.connect(
-    save_challenge_stage_cache,
-    sender=ChallengeStage,
-    dispatch_uid='apps.stage.ChallengeStage.post_save'
-)
-
-post_delete.connect(
-    save_challenge_stage_cache,
-    sender=ChallengeStage,
-    dispatch_uid='apps.stage.ChallengeStage.post_delete'
-)
 
