@@ -238,6 +238,9 @@ for s in STAGES.values():
     bid = s.battle
     s.level_limit = BATTLES[bid].level_limit
     s.decoded_monsters = _stage_decoded_monsters(s)
+    open_condition = s.open_condition
+    if open_condition:
+        STAGES[open_condition].next = s.id
 
 for s in STAGE_ELITE.values():
     s.decoded_monsters = _stage_decoded_monsters(s)
