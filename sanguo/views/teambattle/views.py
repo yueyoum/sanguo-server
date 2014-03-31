@@ -12,7 +12,6 @@ def start(request):
     req = request._proto
     tb = TeamBattle(request._char_id)
     friend_ids = [int(i) for i in req.friend_ids]
-    npc_ids = [int(i) for i in req.npc_ids]
-    tb.start(req.id, friend_ids, npc_ids)
+    tb.start(req.id, friend_ids)
     return None
 
