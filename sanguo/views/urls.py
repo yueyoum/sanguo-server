@@ -26,8 +26,8 @@ urlpatterns = patterns('',
 
                        url(r'^prisoner/get/$', 'views.prison.views.prisoner_get'),
                        # FIXME
-                       url(r'^prioner/release/$', 'views.prison.views.prisoner_release'),
-                       url(r'^prioner/kill/$', 'views.prison.views.prisoner_kill'),
+                       url(r'^prionser/release/$', 'views.prison.views.prisoner_release'),
+                       url(r'^prionser/kill/$', 'views.prison.views.prisoner_kill'),
 
                        url(r'^friend/player-list/$', 'views.friend.views.player_list'),
                        url(r'^friend/add/$', 'views.friend.views.add'),
