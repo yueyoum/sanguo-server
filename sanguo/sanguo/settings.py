@@ -161,7 +161,6 @@ INSTALLED_APPS = (
     'apps.store',
 )
 
-FIXTURE_DIRS = (os.path.join(PROJECT_PATH, 'fixtures'),)
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

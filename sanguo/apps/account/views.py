@@ -51,7 +51,7 @@ def register(request):
         raise BadMessage("Register: With Empty Arguments")
 
     if Account.objects.filter(email=req.email).exists():
-        raise SanguoException(100, "Register: With an Existed Email {0}".format(req.email))
+        raise SanguoException(100, "Register: With an Existed Email {0}".format(req.email.encode('utf-8')))
 
     try:
         user = Account.objects.get(device_token=req.device_token)

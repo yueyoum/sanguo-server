@@ -17,7 +17,7 @@ def create_character(request):
     req = request._proto
 
     if len(req.name) > 7:
-        raise SanguoException(202, "Create Char: name too long. {0}".format(req.name))
+        raise SanguoException(202, "Create Char: name too long. {0}".format(req.name.encode('utf-8')))
 
     account_id, server_id = request._account_id, request._server_id
 
