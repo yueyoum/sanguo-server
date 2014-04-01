@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db.models import Q
+from django.db import IntegrityError
 
 from apps.character.models import Character, CharPropertyLog, level_update_exp, official_update_exp
 
@@ -8,6 +9,7 @@ from core.mongoscheme import MongoHero
 from core.signals import char_level_up_signal, char_official_up_signal, char_gold_changed_signal, char_sycee_changed_signal
 from core.formation import Formation
 from core.msgpipe import publish_to_char
+from core.exception import SanguoException
 
 from utils import pack_msg
 
@@ -184,18 +186,30 @@ class Char(object):
         publish_to_char(self.id, pack_msg(msg))
 
 
+def char_create(account_id, server_id, name):
+    if len(name) > 7:
+        raise SanguoException(202, "Create Char: name too long. {0}".format(name.encode('utf-8')))
 
-def char_initialize(account_id, server_id, name):
+    if Character.objects.filter(account_id=account_id, server_id=server_id).exists():
+        raise SanguoException(200, "Create Char: Account {0} already has a char in Server {1}".format(account_id, server_id))
+
+    try:
+        char = Character.objects.create(
+            account_id=account_id,
+            server_id=server_id,
+            name=name,
+            gold=CHARINIT.gold,
+            sycee=CHARINIT.sycee,
+        )
+    except IntegrityError as e:
+        raise SanguoException(201, "Create Char. ERROR: {0}".format(str(e)))
+
+    return char.id
+
+
+
+def char_initialize(char_id):
     from core.item import Item
-
-    char = Character.objects.create(
-        account_id=account_id,
-        server_id=server_id,
-        name=name,
-        gold=CHARINIT.gold,
-        sycee=CHARINIT.sycee,
-    )
-    char_id = char.id
 
     init_heros = CHARINIT.decoded_heros
     init_heros_ids = init_heros.keys()
@@ -220,7 +234,6 @@ def char_initialize(account_id, server_id, name):
         init_heros[k] = new_ids
 
     init_heros_equips = init_heros.values()
-
 
     hero_ids = save_hero(char_id, init_heros_ids, add_notify=False)
 
@@ -250,8 +263,6 @@ def char_initialize(account_id, server_id, name):
 
     item.gem_add(CHARINIT.decoded_gems, send_notify=False)
     item.stuff_add(CHARINIT.decoded_stuffs, send_notify=False)
-
-    return char
 
 
 def get_char_ids_by_level_range(server_id, min_level, max_level):

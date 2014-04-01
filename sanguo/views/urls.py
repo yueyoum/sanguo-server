@@ -45,3 +45,11 @@ urlpatterns = patterns('',
 
                        url(r'^teambattle/start/$', 'views.teambattle.views.start'),
 )
+
+
+# API
+urlpatterns += patterns('',
+                        url(r'^api/character/create/$', 'views.api.views.character_create'),
+
+
+)

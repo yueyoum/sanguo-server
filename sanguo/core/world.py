@@ -20,6 +20,10 @@ def server_list(user=None):
         _s.status = ServerMsg.GOOD
         _s.have_char = sid in user_servers
 
+        # FIXME
+        _s.url = 'http://work.mztimes.com'
+        _s.port = 8004
+
         if user and user.last_server_id and user.last_server_id == sid:
             top = _s
 

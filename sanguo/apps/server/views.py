@@ -30,13 +30,10 @@ def get_server_list(request):
     res = GetServerListResponse()
     res.ret = 0
 
-    res.top.id, res.top.name, res.top.status, res.top.have_char = \
-        top.id, top.name, top.status, top.have_char
-
+    res.top.MergeFrom(top)
     for server in all_servers:
         s = res.servers.add()
-        s.id, s.name, s.status, s.have_char = \
-            server.id, server.name, server.status, server.have_char
+        s.MergeFrom(server)
 
     return pack_msg(res)
 

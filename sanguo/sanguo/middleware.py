@@ -31,8 +31,8 @@ def _unpack(res):
 
 class UnpackAndVerifyData(object):
     def process_request(self, request):
-        # if request.path.startswith('/admin/'):
-        #     return None
+        if request.path.startswith('/api/'):
+            return None
 
         if request.method != "POST":
             return HttpResponse(status=403)
@@ -103,6 +103,9 @@ _BIND = set()
 class PackMessageData(object):
     def process_response(self, request, response):
         if response.status_code != 200:
+            return response
+
+        if request.path.startswith('/api/'):
             return response
 
         is_login = False

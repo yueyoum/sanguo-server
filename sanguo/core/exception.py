@@ -6,6 +6,7 @@ logger = logging.getLogger('sanguo')
 class SanguoException(Exception):
     def __init__(self, error_id, error_msg=""):
         self.error_id = error_id
+        self.error_msg = error_msg
         if error_msg:
             logger.info("[EXCEPTION {0}] {1}".format(error_id, error_msg))
         Exception.__init__(self)
