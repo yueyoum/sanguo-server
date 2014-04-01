@@ -808,7 +808,7 @@ class TeamBattle(TimerCheckAbstractBase):
             msg.team_battle.boss_power = self.mongo_tb.boss_power
             msg.team_battle.self_power = self.mongo_tb.self_power
 
-            msg.start_at = self.mongo_tb.start_at
+            msg.team_battle.start_at = self.mongo_tb.start_at
             msg.team_battle.step_progress = self.mongo_tb.step
 
             msg.team_battle.status = self.mongo_tb.status
