@@ -6,7 +6,6 @@ __date__ = '1/22/14'
 import random
 from mongoengine import DoesNotExist, Q
 
-from apps.character.models import Character
 
 from core.msgpipe import publish_to_char
 from utils import pack_msg
@@ -14,7 +13,7 @@ from utils import pack_msg
 from core.character import Char
 from core.battle import PVP
 from core.counter import Counter
-from core.mongoscheme import MongoArenaTopRanks, MongoArena, MongoArenaDay, MongoArenaWeek
+from core.mongoscheme import MongoArenaTopRanks, MongoArena, MongoArenaDay, MongoArenaWeek, MongoCharacter
 from core.exception import CounterOverFlow, SyceeNotEnough, InvalidOperate
 from core.achievement import Achievement
 from core.task import Task
@@ -107,16 +106,16 @@ class Arena(object):
         choosing = [c.id for c in choosing if c.id != self.char_id]
 
         if not choosing:
-            char_count = Character.objects.count()
+            char_count = MongoCharacter.objects.count()
             id_list = random.sample(range(1, char_count+1), min(char_count, 100))
-            choosing = Character.objects.filter(id__in=id_list).values_list('id', flat=True)
-            choosing = list(choosing)
+            choosing = MongoCharacter.objects.filter(id__in=id_list)
+            choosing = [c.id for c in choosing]
             if self.char_id in choosing:
                 choosing.remove(self.char_id)
 
             if not choosing:
-                choosing = Character.objects.values_list('id', flat=True)
-                choosing = list(choosing)
+                choosing = MongoCharacter.objects.all()
+                choosing = [c.id for c in choosing]
                 choosing.remove(self.char_id)
 
         return random.choice(choosing)

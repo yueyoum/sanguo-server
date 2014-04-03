@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='world.proto',
   package='Sanguo.protocol.world',
-  serialized_pb='\n\x0bworld.proto\x12\x15Sanguo.protocol.world\"\xc8\x01\n\x06Server\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12:\n\x06status\x18\x03 \x02(\x0e\x32*.Sanguo.protocol.world.Server.ServerStatus\x12\x11\n\thave_char\x18\x04 \x02(\x08\x12\x0b\n\x03url\x18\x05 \x02(\t\x12\x0c\n\x04port\x18\x06 \x02(\x05\":\n\x0cServerStatus\x12\x08\n\x04GOOD\x10\x01\x12\x08\n\x04\x42USY\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\x12\x0c\n\x08MAINTAIN\x10\x04\"\x1e\n\x0bSyncRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"C\n\x0cSyncResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x15\n\rutc_timestamp\x18\x03 \x02(\x03\" \n\rResumeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\".\n\x0eResumeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"/\n\x0f\x43ommandResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"7\n\x13VersionCheckRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07version\x18\x02 \x02(\x05\"4\n\x14VersionCheckResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\x98\x03\n\nAttachment\x12\x0c\n\x04gold\x18\x01 \x01(\x05\x12\r\n\x05sycee\x18\x02 \x01(\x05\x12\x0b\n\x03\x65xp\x18\x03 \x01(\x05\x12\x14\n\x0cofficial_exp\x18\x04 \x01(\x05\x12\r\n\x05heros\x18\x05 \x03(\x05\x12?\n\nequipments\x18\x06 \x03(\x0b\x32+.Sanguo.protocol.world.Attachment.Equipment\x12\x33\n\x04gems\x18\x07 \x03(\x0b\x32%.Sanguo.protocol.world.Attachment.Gem\x12\x37\n\x06stuffs\x18\x08 \x03(\x0b\x32\'.Sanguo.protocol.world.Attachment.Stuff\x1a\x44\n\tEquipment\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05level\x18\x02 \x02(\x05\x12\x0c\n\x04step\x18\x03 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x04 \x02(\x05\x1a!\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\x1a#\n\x05Stuff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"\xad\x02\n\x0bSellRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12@\n\x08\x65lements\x18\x02 \x03(\x0b\x32..Sanguo.protocol.world.SellRequest.SellElement\x1a\xca\x01\n\x0bSellElement\x12\x43\n\x02tp\x18\x01 \x02(\x0e\x32\x37.Sanguo.protocol.world.SellRequest.SellElement.SellType\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x03 \x02(\x05\"Z\n\x08SellType\x12\r\n\tSELL_HERO\x10\x01\x12\r\n\tSELL_SOUL\x10\x02\x12\x12\n\x0eSELL_EQUIPMENT\x10\x03\x12\x0c\n\x08SELL_GEM\x10\x04\x12\x0e\n\nSELL_STUFF\x10\x05\",\n\x0cSellResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\x0bworld.proto\x12\x15Sanguo.protocol.world\"\xad\x01\n\x06Server\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12:\n\x06status\x18\x03 \x02(\x0e\x32*.Sanguo.protocol.world.Server.ServerStatus\x12\x11\n\thave_char\x18\x04 \x02(\x08\":\n\x0cServerStatus\x12\x08\n\x04GOOD\x10\x01\x12\x08\n\x04\x42USY\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\x12\x0c\n\x08MAINTAIN\x10\x04\"\x1e\n\x0bSyncRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"C\n\x0cSyncResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x15\n\rutc_timestamp\x18\x03 \x02(\x03\" \n\rResumeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\".\n\x0eResumeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"/\n\x0f\x43ommandResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"7\n\x13VersionCheckRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07version\x18\x02 \x02(\x05\"4\n\x14VersionCheckResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\x98\x03\n\nAttachment\x12\x0c\n\x04gold\x18\x01 \x01(\x05\x12\r\n\x05sycee\x18\x02 \x01(\x05\x12\x0b\n\x03\x65xp\x18\x03 \x01(\x05\x12\x14\n\x0cofficial_exp\x18\x04 \x01(\x05\x12\r\n\x05heros\x18\x05 \x03(\x05\x12?\n\nequipments\x18\x06 \x03(\x0b\x32+.Sanguo.protocol.world.Attachment.Equipment\x12\x33\n\x04gems\x18\x07 \x03(\x0b\x32%.Sanguo.protocol.world.Attachment.Gem\x12\x37\n\x06stuffs\x18\x08 \x03(\x0b\x32\'.Sanguo.protocol.world.Attachment.Stuff\x1a\x44\n\tEquipment\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05level\x18\x02 \x02(\x05\x12\x0c\n\x04step\x18\x03 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x04 \x02(\x05\x1a!\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\x1a#\n\x05Stuff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"\xad\x02\n\x0bSellRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12@\n\x08\x65lements\x18\x02 \x03(\x0b\x32..Sanguo.protocol.world.SellRequest.SellElement\x1a\xca\x01\n\x0bSellElement\x12\x43\n\x02tp\x18\x01 \x02(\x0e\x32\x37.Sanguo.protocol.world.SellRequest.SellElement.SellType\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x03 \x02(\x05\"Z\n\x08SellType\x12\r\n\tSELL_HERO\x10\x01\x12\r\n\tSELL_SOUL\x10\x02\x12\x12\n\x0eSELL_EQUIPMENT\x10\x03\x12\x0c\n\x08SELL_GEM\x10\x04\x12\x0e\n\nSELL_STUFF\x10\x05\",\n\x0cSellResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
 
 
 
@@ -42,8 +42,8 @@ _SERVER_SERVERSTATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=181,
-  serialized_end=239,
+  serialized_start=154,
+  serialized_end=212,
 )
 
 _SELLREQUEST_SELLELEMENT_SELLTYPE = _descriptor.EnumDescriptor(
@@ -75,8 +75,8 @@ _SELLREQUEST_SELLELEMENT_SELLTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1207,
-  serialized_end=1297,
+  serialized_start=1180,
+  serialized_end=1270,
 )
 
 
@@ -115,20 +115,6 @@ _SERVER = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
-    _descriptor.FieldDescriptor(
-      name='url', full_name='Sanguo.protocol.world.Server.url', index=4,
-      number=5, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='port', full_name='Sanguo.protocol.world.Server.port', index=5,
-      number=6, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
   ],
   extensions=[
   ],
@@ -140,7 +126,7 @@ _SERVER = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=39,
-  serialized_end=239,
+  serialized_end=212,
 )
 
 
@@ -167,8 +153,8 @@ _SYNCREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=241,
-  serialized_end=271,
+  serialized_start=214,
+  serialized_end=244,
 )
 
 
@@ -209,8 +195,8 @@ _SYNCRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=273,
-  serialized_end=340,
+  serialized_start=246,
+  serialized_end=313,
 )
 
 
@@ -237,8 +223,8 @@ _RESUMEREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=342,
-  serialized_end=374,
+  serialized_start=315,
+  serialized_end=347,
 )
 
 
@@ -272,8 +258,8 @@ _RESUMERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=376,
-  serialized_end=422,
+  serialized_start=349,
+  serialized_end=395,
 )
 
 
@@ -307,8 +293,8 @@ _COMMANDRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=424,
-  serialized_end=471,
+  serialized_start=397,
+  serialized_end=444,
 )
 
 
@@ -342,8 +328,8 @@ _VERSIONCHECKREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=473,
-  serialized_end=528,
+  serialized_start=446,
+  serialized_end=501,
 )
 
 
@@ -377,8 +363,8 @@ _VERSIONCHECKRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=530,
-  serialized_end=582,
+  serialized_start=503,
+  serialized_end=555,
 )
 
 
@@ -426,8 +412,8 @@ _ATTACHMENT_EQUIPMENT = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=853,
-  serialized_end=921,
+  serialized_start=826,
+  serialized_end=894,
 )
 
 _ATTACHMENT_GEM = _descriptor.Descriptor(
@@ -460,8 +446,8 @@ _ATTACHMENT_GEM = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=923,
-  serialized_end=956,
+  serialized_start=896,
+  serialized_end=929,
 )
 
 _ATTACHMENT_STUFF = _descriptor.Descriptor(
@@ -494,8 +480,8 @@ _ATTACHMENT_STUFF = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=958,
-  serialized_end=993,
+  serialized_start=931,
+  serialized_end=966,
 )
 
 _ATTACHMENT = _descriptor.Descriptor(
@@ -570,8 +556,8 @@ _ATTACHMENT = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=585,
-  serialized_end=993,
+  serialized_start=558,
+  serialized_end=966,
 )
 
 
@@ -613,8 +599,8 @@ _SELLREQUEST_SELLELEMENT = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1095,
-  serialized_end=1297,
+  serialized_start=1068,
+  serialized_end=1270,
 )
 
 _SELLREQUEST = _descriptor.Descriptor(
@@ -647,8 +633,8 @@ _SELLREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=996,
-  serialized_end=1297,
+  serialized_start=969,
+  serialized_end=1270,
 )
 
 
@@ -682,8 +668,8 @@ _SELLRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1299,
-  serialized_end=1343,
+  serialized_start=1272,
+  serialized_end=1316,
 )
 
 _SERVER.fields_by_name['status'].enum_type = _SERVER_SERVERSTATUS

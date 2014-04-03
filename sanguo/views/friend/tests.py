@@ -3,7 +3,7 @@
 __author__ = 'Wang Chao'
 __date__ = '12/31/13'
 
-from django.test import TransactionTestCase
+from django.test import TestCase
 
 
 from core.friend import Friend
@@ -14,14 +14,14 @@ from utils import crypto
 import protomsg
 from protomsg import RESPONSE_NOTIFY_TYPE
 
-class FriendTest(TransactionTestCase):
+class FriendTest(TestCase):
     def setUp(self):
-        char = char_initialize(1, 1, 'a')
-        self.char_id = char.id
+        char_initialize(1, 1, 1, 'a')
+        self.char_id = 1
         self.session = crypto.encrypt('1:1:{0}'.format(self.char_id))
 
-        char = char_initialize(2, 1, 'b')
-        self.char_two_id = char.id
+        char_initialize(2, 1, 2, 'b')
+        self.char_two_id = 2
         self.char_two_session = crypto.encrypt('1:1:{0}'.format(self.char_two_id))
 
     def tearDown(self):

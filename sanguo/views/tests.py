@@ -19,8 +19,8 @@ def teardown():
 
 class CmdTest(TransactionTestCase):
     def setUp(self):
-        char = char_initialize(1, 1, 'a')
-        self.session = crypto.encrypt('1:1:{0}'.format(char.id))
+        char_initialize(1, 1, 1, 'a')
+        self.session = crypto.encrypt('1:1:{0}'.format(1))
 
     def tearDown(self):
         tests._teardown()

@@ -1,33 +1,37 @@
 # -*- coding: utf-8 -*-
-from protomsg import Server as ServerMsg
-from apps.character.models import Character as ModelCharacter
+import requests
 
-from preset.data import SERVERS
+from protomsg import Server as ServerMsg
+
+# from preset.data import SERVERS
+
+from django.conf import settings
 
 def server_list(user=None):
-    user_servers = []
+
     if user:
-        user_servers = ModelCharacter.objects.only('server_id').filter(
-            account_id=user.id).values_list('server_id', flat=True)
+        params = {'account_id': user.id}
+    else:
+        params = {}
+
+    x = requests.get(settings.GATE_URL + '/api/server-list/', params=params)
+    servers = x.json()
 
     top = None
     all_servers = []
-    for sid, s in SERVERS.items():
+    for s in servers['data']:
         _s = ServerMsg()
-        _s.id = sid
-        _s.name = s.name
-        # FIXME status
-        _s.status = ServerMsg.GOOD
-        _s.have_char = sid in user_servers
-
-        # FIXME
-        _s.url = 'http://work.mztimes.com'
-        _s.port = 8004
-
-        if user and user.last_server_id and user.last_server_id == sid:
-            top = _s
+        _s.id = s['id']
+        _s.name = s['name']
+        _s.status = s['status']
+        _s.have_char = s['have_char']
+        _s.url = s['url']
+        _s.port = s['port']
 
         all_servers.append(_s)
+
+        if user and user.last_server_id == s['id']:
+            top = _s
 
     if top is None:
         top = all_servers[-1]

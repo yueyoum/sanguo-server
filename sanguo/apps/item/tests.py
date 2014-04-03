@@ -5,7 +5,7 @@ when you run "manage.py test".
 Replace this with more appropriate tests for your application.
 """
 
-from django.test import TransactionTestCase
+from django.test import TestCase
 import protomsg
 from protomsg import RESPONSE_NOTIFY_TYPE
 
@@ -107,10 +107,10 @@ def teardown():
 #
 
 
-class EquipmentStepUpTest(TransactionTestCase):
+class EquipmentStepUpTest(TestCase):
     def setUp(self):
-        char = char_initialize(1, 1, 'a')
-        self.char_id = char.id
+        char_initialize(1, 1, 1, 'a')
+        self.char_id = 1
         self.session = crypto.encrypt('1:1:{0}'.format(self.char_id))
         self.item = Item(self.char_id)
         self.equip_id = self.item.equip_add(1)
@@ -186,10 +186,10 @@ class EquipmentStepUpTest(TransactionTestCase):
 #         self._sell(999, 2)
 #
 
-class EmbedGemTest(TransactionTestCase):
+class EmbedGemTest(TestCase):
     def setUp(self):
-        char = char_initialize(1, 1, 'a')
-        self.char_id = char.id
+        char_initialize(1, 1, 1, 'a')
+        self.char_id = 1
         self.session = crypto.encrypt('1:1:{0}'.format(self.char_id))
 
         item = Item(self.char_id)

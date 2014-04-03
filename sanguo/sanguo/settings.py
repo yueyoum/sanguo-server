@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # Django settings for sanguo project.
 import os
 import sys
@@ -239,6 +241,10 @@ CELERY_RESULT_SERIALIZER = 'json'
 if TESTING:
     REDIS_DB = 1
     MONGODB_DB = 'test_sanguo'
+
+
+GATE_URL = 'http://work.mztimes.com:8020'
+NODE_ID = 1
 
 try:
     from settings_local import *

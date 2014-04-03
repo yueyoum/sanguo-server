@@ -26,7 +26,7 @@ def _hero_add(char_id, hero_ids, hero_original_ids, send_notify, **kwargs):
     char_heros_dict = char.heros_dict
 
     achievement = Achievement(char_id)
-    achievement.trig(1, len(char_heros_dict))
+    achievement.trig(1, len(char_heros_dict), send_notify=send_notify)
 
     quality_one_heros_amount = 0
     quality_two_heros_amount = 0
@@ -45,13 +45,13 @@ def _hero_add(char_id, hero_ids, hero_original_ids, send_notify, **kwargs):
         if original_hero.gender == 2:
             gender_female_heros_amount += 1
 
-    achievement.trig(2, quality_one_heros_amount)
-    achievement.trig(3, quality_two_heros_amount)
-    achievement.trig(4, quality_three_heros_amount)
-    achievement.trig(5, gender_female_heros_amount)
+    achievement.trig(2, quality_one_heros_amount, send_notify=send_notify)
+    achievement.trig(3, quality_two_heros_amount, send_notify=send_notify)
+    achievement.trig(4, quality_three_heros_amount, send_notify=send_notify)
+    achievement.trig(5, gender_female_heros_amount, send_notify=send_notify)
 
     for oid in hero_original_ids:
-        achievement.trig(6, oid)
+        achievement.trig(6, oid, send_notify=send_notify)
 
 
 

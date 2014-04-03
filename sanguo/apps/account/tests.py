@@ -5,7 +5,7 @@ when you run "manage.py test".
 Replace this with more appropriate tests for your application.
 """
 
-from django.test import TransactionTestCase
+from django.test import TestCase
 
 from protomsg import (
     RESPONSE_NOTIFY_TYPE,
@@ -22,28 +22,25 @@ def teardown():
     tests._teardown()
 
 
-class RegisterTest(TransactionTestCase):
-    def setUp(self):
-        users = (
-            ('123@456.com', '123456', ''),
-            ('', '', '123456'),
-        )
-        for email, passwd, token in users:
-            Account.objects.create(
-                email=email,
-                passwd=passwd,
-                device_token=token
-            )
+def account_create(email, password, token):
+    req = RegisterRequest()
+    req.session = ""
+    req.email = email
+    req.password = password
+    req.device_token = token
+
+    data = tests.pack_data(req)
+    res = tests.make_request('/player/register/', data)
+    return res
+
+class RegisterTest(TestCase):
+    def teardown(self):
+        tests._teardown()
+
 
     def _register(self, email, password, device_token, ret):
-        req = RegisterRequest()
-        req.session = ""
-        req.email = email
-        req.password = password
-        req.device_token = device_token
+        res = account_create(email, password, device_token)
 
-        data = tests.pack_data(req)
-        res = tests.make_request('/player/register/', data)
 
         msgs = tests.unpack_data(res)
         id_of_msg, len_of_msg, msg = msgs[0]
@@ -63,24 +60,12 @@ class RegisterTest(TransactionTestCase):
         self._register("aaa@aaa.aaa", "123456", "123456", 0)
 
     def test_register_with_email_has_been_taken(self):
-        self._register("123@456.com", "123456", "0987654321", 100)
+        self._register("www@bbb.com", "123456", "0987654321", 0)
+        self._register("www@bbb.com", "123456", "0987654321", 100)
 
 
-class LoginTest(TransactionTestCase):
-    def setUp(self):
-        users = (
-            (1, '123@456.com', '123456', ''),
-            (2, '', '', '123456'),
-        )
-        for id, email, passwd, token in users:
-            Account.objects.create(
-                id=id,
-                email=email,
-                passwd=passwd,
-                device_token=token
-            )
-
-    def tearDown(self):
+class LoginTest(TestCase):
+    def teardown(self):
         tests._teardown()
 
 
@@ -118,9 +103,14 @@ class LoginTest(TransactionTestCase):
         self._regular_login('123456', '123456', 121)
 
     def test_regular_login_with_exists(self):
-        self._regular_login('123@456.com', '123456', 0)
+        account_create('123@456.com', '12345', 'xxx')
+        self._regular_login('123@456.com', '12345', 0)
 
     def test_regular_login_with_wrong_password(self):
-        self._regular_login('123@456.com', 'abcd', 120)
+        account_create('aaa@bbb.com', '12345', 'xxx')
+        self._regular_login('aaa@bbb.com', 'abcd', 120)
 
+    def test_regular_login_ok(self):
+        account_create('xxx@xxx.xxx', '12345', 'xxx')
+        self._regular_login('xxx@xxx.xxx', '12345', 0)
 

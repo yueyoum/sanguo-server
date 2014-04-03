@@ -6,6 +6,25 @@ import core.drives
 from protomsg import Attachment as MsgAttachment
 
 
+class MongoCharacter(Document):
+    id = IntField(primary_key=True)
+    account_id = IntField()
+    server_id = IntField()
+
+    name = StringField()
+    gold = IntField(default=0)
+    sycee = IntField(default=0)
+    level = IntField(default=1)
+    exp = IntField(default=0)
+    official = IntField(default=0)
+    official_exp = IntField(default=0)
+
+    meta = {
+        'collection': 'character',
+        'indexes': ['server_id', 'level'],
+    }
+
+
 class MongoEmbeddedEquipment(EmbeddedDocument):
     oid = IntField()
     level = IntField()

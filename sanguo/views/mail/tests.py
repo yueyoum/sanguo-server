@@ -3,7 +3,7 @@
 __author__ = 'Wang Chao'
 __date__ = '1/2/14'
 
-from django.test import TransactionTestCase
+from django.test import TestCase
 
 from core.mail import Mail
 from core.character import char_initialize
@@ -14,10 +14,10 @@ from utils import timezone
 
 import protomsg
 
-class MailTest(TransactionTestCase):
+class MailTest(TestCase):
     def setUp(self):
-        char = char_initialize(1, 1, 'a')
-        self.char_id = char.id
+        char_initialize(1, 1, 1, 'a')
+        self.char_id = 1
         self.session = crypto.encrypt('1:1:{0}'.format(self.char_id))
 
 

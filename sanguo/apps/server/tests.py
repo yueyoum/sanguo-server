@@ -1,4 +1,4 @@
-from django.test import TransactionTestCase
+from django.test import TestCase
 
 
 from utils import app_test_helper
@@ -7,7 +7,7 @@ from protomsg import GetServerListRequest
 
 
 
-class ServerListTest(TransactionTestCase):
+class ServerListTest(TestCase):
     def test_get_server_list(self):
         req = GetServerListRequest()
         req.session = ""

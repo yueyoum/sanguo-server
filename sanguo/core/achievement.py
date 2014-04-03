@@ -35,12 +35,12 @@ class Achievement(object):
             self.achievement.save()
 
 
-    def trig(self, condition_id, new_value=None):
+    def trig(self, condition_id, new_value=None, send_notify=True):
         achs = ACHIEVEMENT_CONDITIONS[condition_id]
         for a in achs:
-            self.trig_by_achievement(a, new_value=new_value)
+            self.trig_by_achievement(a, new_value=new_value, send_notify=send_notify)
 
-    def trig_by_achievement(self, ach, new_value=None):
+    def trig_by_achievement(self, ach, new_value=None, send_notify=True):
         achievement_id = ach.id
         if achievement_id in self.achievement.complete or achievement_id in self.achievement.finished:
             return
@@ -121,9 +121,10 @@ class Achievement(object):
 
         self.achievement.save()
 
-        msg = UpdateAchievementNotify()
-        self._fill_up_achievement_msg(msg.achievement, ach)
-        publish_to_char(self.char_id, pack_msg(msg))
+        if send_notify:
+            msg = UpdateAchievementNotify()
+            self._fill_up_achievement_msg(msg.achievement, ach)
+            publish_to_char(self.char_id, pack_msg(msg))
 
 
     def get_reward(self, achievement_id):

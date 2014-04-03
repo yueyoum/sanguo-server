@@ -6,8 +6,7 @@ __date__ = '12/31/13'
 
 from mongoengine import DoesNotExist
 
-from apps.character.models import Character
-from core.mongoscheme import MongoFriend
+from core.mongoscheme import MongoFriend, MongoCharacter
 from core.character import Char
 from core.hero import Hero
 from core.msgpipe import publish_to_char
@@ -87,13 +86,13 @@ class Friend(object):
 
         if target_id:
             try:
-                c = Character.objects.get(id=target_id)
-            except Character.DoesNotExist:
+                c = MongoCharacter.objects.get(id=target_id)
+            except DoesNotExist:
                 raise InvalidOperate()
         else:
             try:
-                c = Character.objects.get(server_id=self.cache_char.server_id, name=target_name)
-            except Character.DoesNotExist:
+                c = MongoCharacter.objects.get(server_id=self.cache_char.server_id, name=target_name)
+            except DoesNotExist:
                 raise CharNotFound()
 
         if str(c.id) in self.mf.friends:

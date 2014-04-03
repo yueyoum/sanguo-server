@@ -10,7 +10,6 @@ from django.db import transaction
 
 from mongoscheme import Q, DoesNotExist
 
-from apps.character.models import Character
 from apps.stage.models import Stage as ModelStage
 from core.character import Char, get_char_ids_by_level_range
 from core.battle import PVP

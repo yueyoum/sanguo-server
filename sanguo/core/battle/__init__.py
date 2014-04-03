@@ -29,8 +29,8 @@ from core.battle.battle import Battle
 from core.battle.hero import BattleHero, BattleMonster
 
 from core.formation import Formation
+from core.character import Char
 
-from apps.character.models import Character as ModelCharacter
 
 from preset.data import STAGES, STAGE_ELITE
 
@@ -73,8 +73,7 @@ class PVE(Battle):
     def get_my_name(self, my_id=None):
         if my_id is None:
             my_id = self.my_id
-        cache_char = ModelCharacter.cache_obj(my_id)
-        return cache_char.name
+        return Char(my_id).cacheobj.name
 
 
     def get_rival_name(self):

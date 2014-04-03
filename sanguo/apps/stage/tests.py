@@ -1,4 +1,4 @@
-from django.test import TransactionTestCase
+from django.test import TestCase
 import protomsg
 from protomsg import RESPONSE_NOTIFY_TYPE
 from core.character import char_initialize
@@ -7,13 +7,15 @@ from utils import app_test_helper as tests
 from apps.stage.models import Stage
 
 
-class PVETest(TransactionTestCase):
-    def setUp(self):
-        char = char_initialize(1, 1, 'a')
-        self.session = crypto.encrypt('1:1:{0}'.format(char.id))
+def tearDown():
+    tests._teardown()
 
-    def tearDown(self):
-        tests._teardown()
+
+class PVETest(TestCase):
+    def setUp(self):
+        char_initialize(1, 1, 1, 'a')
+        self.session = crypto.encrypt('1:1:{0}'.format(1))
+
 
     def _pve(self, stage_id):
         req = protomsg.PVERequest()
@@ -38,14 +40,14 @@ class PVETest(TransactionTestCase):
 
 
 
-class HangTest(TransactionTestCase):
+class HangTest(TestCase):
     def setUp(self):
-        char = char_initialize(1, 1, 'a')
-        self.session = crypto.encrypt('1:1:{0}'.format(char.id))
+        char_initialize(1, 1, 1, 'a')
+        self.session = crypto.encrypt('1:1:{0}'.format(1))
+
 
     def tearDown(self):
         tests._teardown()
-
 
     def _hang(self):
         req = protomsg.HangRequest()

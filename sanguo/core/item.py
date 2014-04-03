@@ -10,7 +10,6 @@ from django.db import transaction
 from mongoengine import DoesNotExist
 
 from core.mongoscheme import MongoItem, MongoEmbeddedEquipment
-from core.drives import document_ids
 
 from core.exception import InvalidOperate, GoldNotEnough, GemNotEnough, StuffNotEnough, SanguoException
 from core.msgpipe import publish_to_char
@@ -24,6 +23,7 @@ from core import DLL
 
 from utils import pack_msg
 from utils import cache
+from utils.functional import id_generator
 
 import protomsg
 
@@ -363,7 +363,8 @@ class Item(MessageEquipmentMixin):
                 self.char_id, oid
             ))
 
-        new_id = document_ids.inc('equipment')
+        # new_id = document_ids.inc('equipment')
+        new_id = id_generator('equipment')[0]
         me = MongoEmbeddedEquipment()
         me.oid = oid
         me.level = level

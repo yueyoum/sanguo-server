@@ -9,16 +9,15 @@ from mongoengine import DoesNotExist
 
 from django.db import transaction
 
-from core.drives import document_ids
-from core.mongoscheme import MongoHero, MongoAchievement, MongoHeroSoul
+from core.mongoscheme import MongoHero, MongoAchievement, MongoHeroSoul, MongoCharacter
 from core.signals import hero_add_signal, hero_del_signal, hero_changed_signal
 from core.formation import Formation
 from core.exception import InvalidOperate, GoldNotEnough
 from core import DLL
 from core.achievement import Achievement
 
-from apps.character.models import Character
 from utils import cache
+from utils.functional import id_generator
 
 from core.msgpipe import publish_to_char
 from utils import pack_msg
@@ -59,7 +58,7 @@ class FightPowerMixin(object):
 class Hero(FightPowerMixin):
     def __init__(self, hid):
         self.hero = MongoHero.objects.get(id=hid)
-        char = Character.cache_obj(self.hero.char)
+        char = MongoCharacter.objects.get(id=self.hero.char)
 
         self.id = hid
         self.oid = self.hero.oid
@@ -149,9 +148,9 @@ class Hero(FightPowerMixin):
         for k, v in buffs.iteritems():
             value = getattr(self, k)
             if k == 'crit':
-                new_value = value + v
+                new_value = value + v / 100
             else:
-                new_value = value * (1 + v / 100.0)
+                new_value = value * (1 + v / 10000.0)
 
             new_value = int(new_value)
             setattr(self, k, new_value)
@@ -332,9 +331,9 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
 
     if hero_original_ids:
         length = len(hero_original_ids)
-        new_max_id = document_ids.inc('charhero', length)
-
-        id_range = range(new_max_id - length + 1, new_max_id + 1)
+        # new_max_id = document_ids.inc('charhero', length)
+        # id_range = range(new_max_id - length + 1, new_max_id + 1)
+        id_range = id_generator('charhero', length)
         for i, _id in enumerate(id_range):
             MongoHero(id=_id, char=char_id, oid=hero_original_ids[i], step=1).save()
 
@@ -345,7 +344,6 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
             hero_original_ids=hero_original_ids,
             send_notify=add_notify,
         )
-
 
         return id_range
 

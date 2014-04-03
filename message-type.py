@@ -68,6 +68,28 @@ def set_request_type(xml_src, des):
         f.writelines(msg_type_rev)
 
 
+def set_type_command(xml_src, des):
+    PATTERN = re.compile('\<protocol\s+name="(?:[a-zA-Z]+Request)"\s+type="(\d+)"\s+command="(/[a-z\-/]+/)".+\>')
+
+    type_command = []
+    type_command.append("TYPE_COMMAND = {\n")
+
+    for line in file(xml_src):
+        x = PATTERN.search(line)
+        if not x:
+            continue
+
+        _type, _command = x.groups()
+        type_command.append(
+            '   {0}: "{1}",\n'.format(_type, _command)
+        )
+
+    type_command.append("}\n\n")
+
+    with open(des, 'a') as f:
+        f.writelines(type_command)
+
+
 if __name__ == '__main__':
     self_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -81,4 +103,5 @@ if __name__ == '__main__':
     import_all_protos(msg_path, des)
     set_response_notify_type(xml_src, des)
     set_request_type(xml_src, des)
+    set_type_command(xml_src, des)
 

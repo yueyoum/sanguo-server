@@ -1,4 +1,4 @@
-from django.test import TransactionTestCase
+from django.test import TestCase
 
 import protomsg
 from protomsg import RESPONSE_NOTIFY_TYPE
@@ -9,11 +9,11 @@ from core.character import Char
 from core.hero import save_hero
 
 
-class SocketTest(TransactionTestCase):
+class SocketTest(TestCase):
     def setUp(self):
-        char = char_initialize(1, 1, 'a')
-        self.char_id = char.id
-        self.session = crypto.encrypt('1:1:{0}'.format(char.id))
+        char_initialize(1, 1, 1, 'a')
+        self.char_id = 1
+        self.session = crypto.encrypt('1:1:{0}'.format(1))
 
 
     def tearDown(self):

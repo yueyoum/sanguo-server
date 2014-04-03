@@ -1,4 +1,4 @@
-from django.test import TransactionTestCase
+from django.test import TestCase
 
 from utils import app_test_helper
 from core.character import char_initialize
@@ -7,17 +7,19 @@ import protomsg
 
 from utils import crypto
 
-class HeroTest(TransactionTestCase):
+
+def tearDown():
+    app_test_helper._teardown()
+
+
+class HeroTest(TestCase):
     def setUp(self):
-        char = char_initialize(1, 1, 'a')
-        self.char_id = char.id
+        char = char_initialize(1, 1, 1, 'a')
+        self.char_id = 1
         self.session = crypto.encrypt('1:1:{0}'.format(self.char_id))
 
         id_range = save_hero(self.char_id, 1)
         self.hero_id = id_range[0]
-
-    def tearDown(self):
-        app_test_helper._teardown()
 
 
     def _step_up(self, _id, ret=0):

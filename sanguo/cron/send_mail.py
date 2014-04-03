@@ -10,8 +10,8 @@ from django.utils import timezone
 from _base import Logger
 
 from apps.mail.models import Mail as ModelMail
-from apps.character.models import Character as ModelCharacter
 from core.mail import Mail
+from core.mongoscheme import MongoCharacter
 
 
 def send_to_char(char_id, mail):
@@ -23,16 +23,18 @@ def send_one_mail(mail):
     if mail.send_type == 1:
         # 发给某些角色
         char_ids = [int(i) for i in mail.send_to.split(',')]
-    elif mail.send_type == 2:
-        # 发给指定服务器
-        server_ids = [int(i) for i in mail.send_to.split(',')]
-        char_ids = ModelCharacter.objects.filter(server_id__in=server_ids).values_list('id', flat=True)
-    else:
-        # 发送给全部服务器
-        char_ids = ModelCharacter.objects.all().values_list('id', flat=True)
-
-    for cid in char_ids:
-        send_to_char(cid, mail)
+    # elif mail.send_type == 2:
+    #     # 发给指定服务器
+    #     server_ids = [int(i) for i in mail.send_to.split(',')]
+    #     chars = MongoCharacter.objects.filter(server_id__in=server_ids)
+    #     char_ids = [c.id for c in chars]
+    # else:
+    #     # 发送给全部服务器
+    #     char_ids = ModelCharacter.objects.all().values_list('id', flat=True)
+    #
+    # for cid in char_ids:
+    #     send_to_char(cid, mail)
+    # FIXME send mail via api
 
 
 def run():

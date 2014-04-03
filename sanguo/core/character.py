@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
-from django.db.models import Q
-from django.db import IntegrityError
+# from django.db.models import Q
+# from django.db import IntegrityError
 
-from apps.character.models import Character, CharPropertyLog, level_update_exp, official_update_exp
+
+# from apps.character.models import Character, CharPropertyLog, level_update_exp, official_update_exp
+
+from mongoengine import Q
 
 from core.hero import save_hero, Hero
-from core.mongoscheme import MongoHero
+from core.mongoscheme import MongoHero, MongoCharacter
 from core.signals import char_level_up_signal, char_official_up_signal, char_gold_changed_signal, char_sycee_changed_signal
 from core.formation import Formation
 from core.msgpipe import publish_to_char
@@ -16,6 +19,16 @@ from utils import pack_msg
 from preset.data import CHARINIT
 
 import protomsg
+
+
+def level_update_exp(level):
+    exp = pow(level, 2.5) + level * 20
+    return int(round(exp * 10, -1))
+
+
+def official_update_exp(level):
+    exp = pow(level + 1, 3.2) * 0.2 + (level + 1) * 20
+    return int(round(exp, -1))
 
 
 
@@ -46,15 +59,17 @@ def char_official_up(current_official_exp, current_official, add_official_exp):
 
 
 class Char(object):
-    def __init__(self, char_id=None, **kwargs):
-        if not char_id:
-            account_id = kwargs['account_id']
-            server_id = kwargs['server_id']
-            name = kwargs['name']
-            char = char_initialize(account_id, server_id, name)
-            self.id = char.id
-        else:
-            self.id = char_id
+    def __init__(self, char_id):
+        # if not char_id:
+        #     account_id = kwargs['account_id']
+        #     server_id = kwargs['server_id']
+        #     name = kwargs['name']
+        #     char = char_initialize(account_id, server_id, name)
+        #     self.id = char.id
+        # else:
+        #     self.id = char_id
+        self.id = char_id
+        self.mc = MongoCharacter.objects.get(id=char_id)
 
 
     def delete(self):
@@ -66,7 +81,10 @@ class Char(object):
 
     @property
     def cacheobj(self):
-        return Character.cache_obj(self.id)
+        # FIXME
+        # return Character.cache_obj(self.id)
+        return self.mc
+
 
     # # 阵法
     # @property
@@ -106,7 +124,8 @@ class Char(object):
 
     def update(self, gold=0, sycee=0, exp=0, official_exp=0, des=''):
         # char = Character.objects.get(id=self.id)
-        char = self.cacheobj
+        # char = self.cacheobj
+        char = MongoCharacter.objects.get(id=self.id)
         if gold:
             char.gold += gold
             char_gold_changed_signal.send(
@@ -141,7 +160,7 @@ class Char(object):
 
         if official_exp:
             old_official_level = char.official
-            char.off_exp, char.official = char_official_up(char.off_exp, char.official, official_exp)
+            char.official_exp, char.official = char_official_up(char.official_exp, char.official, official_exp)
 
             if char.official != old_official_level:
                 char_official_up_signal.send(
@@ -155,14 +174,14 @@ class Char(object):
         char.save()
 
         # save to CharPropertyLog
-        CharPropertyLog.objects.create(
-            char_id=self.id,
-            gold=gold,
-            sycee=sycee,
-            exp=exp,
-            official_exp=official_exp,
-            des=des[:255]
-        )
+        # CharPropertyLog.objects.create(
+        #     char_id=self.id,
+        #     gold=gold,
+        #     sycee=sycee,
+        #     exp=exp,
+        #     official_exp=official_exp,
+        #     des=des[:255]
+        # )
 
         self.send_notify()
 
@@ -176,43 +195,53 @@ class Char(object):
         msg.char.sycee = char.sycee
         msg.char.level = char.level
         msg.char.current_exp = char.exp
-        msg.char.next_level_exp = char.update_needs_exp()
+        msg.char.next_level_exp = level_update_exp(char.level)
         msg.char.official = char.official
-        msg.char.official_exp = char.off_exp
-        msg.char.next_official_exp = char.update_official_needs_exp()
+        msg.char.official_exp = char.official_exp
+        msg.char.next_official_exp = official_update_exp(char.level)
 
         msg.char.power = self.power
 
         publish_to_char(self.id, pack_msg(msg))
 
+#
+# def char_create(account_id, server_id, name):
+#     if len(name) > 7:
+#         raise SanguoException(202, "Create Char: name too long. {0}".format(name.encode('utf-8')))
+#
+#     if Character.objects.filter(account_id=account_id, server_id=server_id).exists():
+#         raise SanguoException(200, "Create Char: Account {0} already has a char in Server {1}".format(account_id, server_id))
+#
+#     try:
+#         char = Character.objects.create(
+#             account_id=account_id,
+#             server_id=server_id,
+#             name=name,
+#             gold=CHARINIT.gold,
+#             sycee=CHARINIT.sycee,
+#         )
+#     except IntegrityError as e:
+#         raise SanguoException(201, "Create Char. ERROR: {0}".format(str(e)))
+#
+#     return char.id
+#
 
-def char_create(account_id, server_id, name):
-    if len(name) > 7:
-        raise SanguoException(202, "Create Char: name too long. {0}".format(name.encode('utf-8')))
 
-    if Character.objects.filter(account_id=account_id, server_id=server_id).exists():
-        raise SanguoException(200, "Create Char: Account {0} already has a char in Server {1}".format(account_id, server_id))
+def char_initialize(account_id, server_id, char_id, name):
+    mc = MongoCharacter(id=char_id)
+    mc.account_id = account_id
+    mc.server_id = server_id
+    mc.name = name
+    mc.gold = CHARINIT.gold
+    mc.sycee = CHARINIT.sycee
+    mc.save()
 
-    try:
-        char = Character.objects.create(
-            account_id=account_id,
-            server_id=server_id,
-            name=name,
-            gold=CHARINIT.gold,
-            sycee=CHARINIT.sycee,
-        )
-    except IntegrityError as e:
-        raise SanguoException(201, "Create Char. ERROR: {0}".format(str(e)))
-
-    return char.id
-
-
-
-def char_initialize(char_id):
     from core.item import Item
 
     init_heros = CHARINIT.decoded_heros
     init_heros_ids = init_heros.keys()
+
+    transformed_init_heros = {}
 
     item = Item(char_id)
     for k, v in init_heros.iteritems():
@@ -231,9 +260,9 @@ def char_initialize(char_id):
         else:
             new_ids.append(item.equip_add(jewelry, notify=False))
 
-        init_heros[k] = new_ids
+        transformed_init_heros[k] = new_ids
 
-    init_heros_equips = init_heros.values()
+    init_heros_equips = transformed_init_heros.values()
 
     hero_ids = save_hero(char_id, init_heros_ids, add_notify=False)
 
@@ -263,8 +292,12 @@ def char_initialize(char_id):
 
     item.gem_add(CHARINIT.decoded_gems, send_notify=False)
     item.stuff_add(CHARINIT.decoded_stuffs, send_notify=False)
+    print "char_initialize done"
 
 
 def get_char_ids_by_level_range(server_id, min_level, max_level):
-    ids = Character.objects.filter(Q(server_id=server_id) & Q(level__gte=min_level) & Q(level__lte=max_level)).values_list('id', flat=True)
-    return list(ids)
+    # ids = Character.objects.filter(Q(server_id=server_id) & Q(level__gte=min_level) & Q(level__lte=max_level)).values_list('id', flat=True)
+    # return list(ids)
+    chars = MongoCharacter.objects.filter(Q(server_id=server_id) & Q(level__gte=min_level) & Q(level__lte=max_level))
+    return [c.id for c in chars]
+

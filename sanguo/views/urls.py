@@ -49,7 +49,5 @@ urlpatterns = patterns('',
 
 # API
 urlpatterns += patterns('',
-                        url(r'^api/character/create/$', 'views.api.views.character_create'),
-
-
+                        url(r'^api/character/initialize/$', 'views.api.views.character_initialize'),
 )

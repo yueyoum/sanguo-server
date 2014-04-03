@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from core.character import char_initialize
-from django.test import TransactionTestCase
+from django.test import TestCase
 import protomsg
 from utils import crypto
 
@@ -10,13 +10,13 @@ __author__ = 'Wang Chao'
 __date__ = '1/22/14'
 
 
-class ArenaTest(TransactionTestCase):
+class ArenaTest(TestCase):
     def setUp(self):
-        char = char_initialize(1, 1, 'a')
-        self.session = crypto.encrypt('1:1:{0}'.format(char.id))
+        char_initialize(1, 1, 1, 'a')
+        self.session = crypto.encrypt('1:1:{0}'.format(1))
 
-        char = char_initialize(2, 1, 'b')
-        self.other_char_id = char.id
+        char = char_initialize(2, 1, 2, 'b')
+        self.other_char_id = 2
 
     def tearDown(self):
         tests._teardown()
