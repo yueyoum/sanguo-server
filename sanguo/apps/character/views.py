@@ -43,8 +43,8 @@ def create_character(request):
 
     login_signal.send(
         sender=None,
-        account_id=req._account_id,
-        server_id=req._server_id,
+        account_id=request._account_id,
+        server_id=request._server_id,
         char_id=char_id
     )
 
