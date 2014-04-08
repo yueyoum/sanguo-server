@@ -59,7 +59,10 @@ class Monster(models.Model):
     name = models.CharField("名字", max_length=16)
     image = models.CharField("卡牌", max_length=32)
 
-    level = models.IntegerField("等级")
+    tp = models.IntegerField("类型")
+    tp_name = models.CharField("类型名字", max_length=32)
+
+    quality = models.IntegerField("品质")
     attack = models.IntegerField("攻击")
     defense = models.IntegerField("防御")
     hp = models.IntegerField("生命")

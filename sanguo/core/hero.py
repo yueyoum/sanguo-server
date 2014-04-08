@@ -23,7 +23,7 @@ from core.msgpipe import publish_to_char
 from utils import pack_msg
 
 from preset.settings import HERO_MAX_STEP, HERO_STEP_UP_COST_SOUL_AMOUNT, HERO_STEP_UP_COST_GOLD
-from preset.data import HEROS, ACHIEVEMENTS
+from preset.data import HEROS, ACHIEVEMENTS, MONSTERS
 
 import protomsg
 
@@ -44,6 +44,17 @@ def cal_hero_property(original_id, level, step):
     hp = DLL.hero_hp(level, step, hero.quality, ctypes.c_float(hero.hp_growing))
 
     return int(attack), int(defense), int(hp)
+
+
+def cal_monster_property(oid, level):
+    monster = MONSTERS[oid]
+    attack = DLL.hero_attack(level, 1, monster.quality, ctypes.c_float(monster.attack))
+    defense = DLL.hero_attack(level, 1, monster.quality, ctypes.c_float(monster.defense))
+    hp = DLL.hero_attack(level, 1, monster.quality, ctypes.c_float(monster.hp))
+
+    return int(attack), int(defense), int(hp)
+
+
 
 
 class FightPowerMixin(object):

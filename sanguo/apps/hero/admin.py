@@ -50,7 +50,8 @@ class HeroAdmin(ImportExportModelAdmin):
 class MonsterAdmin(ImportExportModelAdmin):
     list_display = (
         'id', 'name', 'Image',
-        'level', 'attack', 'defense', 'hp', 'crit', 'dodge',
+        'tp', 'tp_name', 'quality',
+        'attack', 'defense', 'hp', 'crit', 'dodge',
         'skills', 'default_skill', 'anger',
     )
 

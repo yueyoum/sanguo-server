@@ -4,12 +4,8 @@ import logging
 from random import randint, uniform, choice
 from collections import defaultdict
 
-from core.hero import FightPowerMixin, Hero
-
-
+from core.hero import FightPowerMixin, Hero, cal_monster_property
 from mixins import ActiveEffectMixin, StepHeroNotifyMixin
-
-
 from preset.settings import DEMAGE_VALUE_ADJUST
 from preset.data import HEROS, MONSTERS, SKILLS
 
@@ -473,14 +469,14 @@ class BattleHero(InBattleHero):
 class BattleMonster(InBattleHero):
     HERO_TYPE = 2
 
-    def __init__(self, mid):
+    def __init__(self, mid, level):
         info = MONSTERS[mid]
         self.id = mid
         self.real_id = mid
         self.original_id = mid
-        self.attack = info.attack
-        self.defense = info.defense
-        self.hp = info.hp
+
+        self.attack, self.defense, self.hp = cal_monster_property(mid, level)
+
         self.crit = info.crit
         self.dodge = 0
 
@@ -492,5 +488,3 @@ class BattleMonster(InBattleHero):
         self.default_skill = info.default_skill
 
         super(BattleMonster, self).__init__()
-
-
