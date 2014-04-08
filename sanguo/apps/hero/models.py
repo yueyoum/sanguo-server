@@ -63,9 +63,10 @@ class Monster(models.Model):
     tp_name = models.CharField("类型名字", max_length=32)
 
     quality = models.IntegerField("品质")
-    attack = models.IntegerField("攻击")
-    defense = models.IntegerField("防御")
-    hp = models.IntegerField("生命")
+    attack = models.FloatField("攻击成长")
+    defense = models.FloatField("防御成长")
+    hp = models.FloatField("生命成长")
+
     crit = models.IntegerField("暴击", default=0)
     dodge = models.IntegerField("闪避", default=0)
 
