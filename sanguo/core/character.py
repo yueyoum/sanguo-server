@@ -207,97 +207,97 @@ class Char(object):
         publish_to_char(self.id, pack_msg(msg))
 
 
-if settings.IS_GUIDE_SERVER:
-    def char_initialize(account_id, server_id, char_id, name):
-        mc = MongoCharacter(id=char_id)
-        mc.account_id = account_id
-        mc.server_id = server_id
-        mc.name = name
-        mc.gold = CHARINIT.gold
-        mc.sycee = CHARINIT.sycee
-        mc.save()
+# if settings.IS_GUIDE_SERVER:
+#     def char_initialize(account_id, server_id, char_id, name):
+#         mc = MongoCharacter(id=char_id)
+#         mc.account_id = account_id
+#         mc.server_id = server_id
+#         mc.name = name
+#         mc.gold = CHARINIT.gold
+#         mc.sycee = CHARINIT.sycee
+#         mc.save()
+#
+#         f = Formation(char_id)
+#         socket_ids = []
+#         for i in range(3):
+#             _sid = f.save_socket(send_notify=False)
+#             socket_ids.append(_sid)
+#
+#         socket_ids = [
+#             socket_ids[0], 0, 0,
+#             socket_ids[1], 0, 0,
+#             socket_ids[2], 0, 0,
+#         ]
+#         f.save_formation(socket_ids, send_notify=False)
+#         print "char_initialize done"
+#
+# else:
+def char_initialize(account_id, server_id, char_id, name):
+    mc = MongoCharacter(id=char_id)
+    mc.account_id = account_id
+    mc.server_id = server_id
+    mc.name = name
+    mc.gold = CHARINIT.gold
+    mc.sycee = CHARINIT.sycee
+    mc.save()
 
-        f = Formation(char_id)
-        socket_ids = []
-        for i in range(3):
-            _sid = f.save_socket(send_notify=False)
-            socket_ids.append(_sid)
+    from core.item import Item
 
-        socket_ids = [
-            socket_ids[0], 0, 0,
-            socket_ids[1], 0, 0,
-            socket_ids[2], 0, 0,
-        ]
-        f.save_formation(socket_ids, send_notify=False)
-        print "char_initialize done"
+    init_heros = CHARINIT.decoded_heros
+    init_heros_ids = init_heros.keys()
 
-else:
-    def char_initialize(account_id, server_id, char_id, name):
-        mc = MongoCharacter(id=char_id)
-        mc.account_id = account_id
-        mc.server_id = server_id
-        mc.name = name
-        mc.gold = CHARINIT.gold
-        mc.sycee = CHARINIT.sycee
-        mc.save()
+    transformed_init_heros = {}
 
-        from core.item import Item
+    item = Item(char_id)
+    for k, v in init_heros.iteritems():
+        weapon, armor, jewelry = v
+        new_ids = []
+        if not weapon:
+            new_ids.append(0)
+        else:
+            new_ids.append(item.equip_add(weapon, notify=False))
+        if not armor:
+            new_ids.append(0)
+        else:
+            new_ids.append(item.equip_add(armor, notify=False))
+        if not jewelry:
+            new_ids.append(0)
+        else:
+            new_ids.append(item.equip_add(jewelry, notify=False))
 
-        init_heros = CHARINIT.decoded_heros
-        init_heros_ids = init_heros.keys()
+        transformed_init_heros[k] = new_ids
 
-        transformed_init_heros = {}
+    init_heros_equips = transformed_init_heros.values()
 
-        item = Item(char_id)
-        for k, v in init_heros.iteritems():
-            weapon, armor, jewelry = v
-            new_ids = []
-            if not weapon:
-                new_ids.append(0)
-            else:
-                new_ids.append(item.equip_add(weapon, notify=False))
-            if not armor:
-                new_ids.append(0)
-            else:
-                new_ids.append(item.equip_add(armor, notify=False))
-            if not jewelry:
-                new_ids.append(0)
-            else:
-                new_ids.append(item.equip_add(jewelry, notify=False))
+    hero_ids = save_hero(char_id, init_heros_ids, add_notify=False)
 
-            transformed_init_heros[k] = new_ids
+    f = Formation(char_id)
 
-        init_heros_equips = transformed_init_heros.values()
+    hero_ids = [
+        hero_ids[0], hero_ids[1], hero_ids[2],
+        0, 0, 0,
+        0, 0,
+    ]
+    socket_ids = []
+    for index, _id in enumerate(hero_ids):
+        try:
+            weapon, armor, jewelry = init_heros_equips[index]
+        except IndexError:
+            weapon, armor, jewelry = 0, 0, 0
+        _sid = f.save_socket(hero=_id, weapon=weapon, armor=armor, jewelry=jewelry, send_notify=False)
+        socket_ids.append(_sid)
 
-        hero_ids = save_hero(char_id, init_heros_ids, add_notify=False)
+    socket_ids = [
+        socket_ids[0], socket_ids[3], socket_ids[6],
+        socket_ids[1], socket_ids[4], socket_ids[7],
+        socket_ids[2], socket_ids[5], 0,
+    ]
 
-        f = Formation(char_id)
+    f.save_formation(socket_ids, send_notify=False)
 
-        hero_ids = [
-            hero_ids[0], hero_ids[1], hero_ids[2],
-            0, 0, 0,
-            0, 0,
-        ]
-        socket_ids = []
-        for index, _id in enumerate(hero_ids):
-            try:
-                weapon, armor, jewelry = init_heros_equips[index]
-            except IndexError:
-                weapon, armor, jewelry = 0, 0, 0
-            _sid = f.save_socket(hero=_id, weapon=weapon, armor=armor, jewelry=jewelry, send_notify=False)
-            socket_ids.append(_sid)
-
-        socket_ids = [
-            socket_ids[0], socket_ids[3], socket_ids[6],
-            socket_ids[1], socket_ids[4], socket_ids[7],
-            socket_ids[2], socket_ids[5], 0,
-        ]
-
-        f.save_formation(socket_ids, send_notify=False)
-
-        item.gem_add(CHARINIT.decoded_gems, send_notify=False)
-        item.stuff_add(CHARINIT.decoded_stuffs, send_notify=False)
-        print "char_initialize done"
+    item.gem_add(CHARINIT.decoded_gems, send_notify=False)
+    item.stuff_add(CHARINIT.decoded_stuffs, send_notify=False)
+    print "char_initialize done"
 
 
 def get_char_ids_by_level_range(server_id, min_level, max_level):
