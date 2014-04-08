@@ -246,6 +246,8 @@ if TESTING:
 GATE_URL = 'http://work.mztimes.com:8020'
 NODE_ID = 1
 
+IS_GUIDE_SERVER = False
+
 try:
     from settings_local import *
 except ImportError:

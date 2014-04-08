@@ -29,7 +29,6 @@ else:
                            # url(r'^admin/', include(admin.site.urls)),
 
                            url(r'', include('apps.account.urls')),
-                           url(r'', include('apps.character.urls')),
                            url(r'', include('apps.hero.urls')),
                            url(r'', include('apps.item.urls')),
                            url(r'', include('apps.server.urls')),
@@ -37,4 +36,9 @@ else:
                            url(r'', include('apps.store.urls')),
                            url(r'', include('views.urls')),
     )
+
+    if settings.IS_GUIDE_SERVER:
+        urlpatterns += patterns('',
+                                url(r'', include('apps.character.urls')),
+        )
 

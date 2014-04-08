@@ -2,7 +2,6 @@ import json
 
 from django.http import HttpResponse
 
-from core.exception import SanguoException
 
 from core.character import char_initialize
 
