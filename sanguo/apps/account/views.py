@@ -202,6 +202,13 @@ def login(request):
     request._account_id = account_id
     request._server_id = req.server_id
 
+    login_signal.send(
+        sender=None,
+        account_id=request._account_id,
+        server_id=request._server_id,
+        char_id=char_id
+    )
+
     if char_id:
         request._char_id = char_id
         session_str = '{0}:{1}:{2}'.format(
