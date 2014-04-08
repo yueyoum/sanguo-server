@@ -42,8 +42,7 @@ def resume(request):
 
     response = ResumeResponse()
     response.ret = 0
-    response.session = new_session
-    return [pack_msg(response), pack_msg(sync)]
+    return [pack_msg(response, new_session), pack_msg(sync)]
 
 
 
