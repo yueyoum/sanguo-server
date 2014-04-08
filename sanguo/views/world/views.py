@@ -10,7 +10,8 @@ from utils.decorate import message_response, operate_guard
 
 from utils import timezone
 from utils import pack_msg
-from protomsg import SyncResponse
+from utils import crypto
+from protomsg import SyncResponse, ResumeResponse
 
 @message_response("SyncResponse")
 @operate_guard('sync', 3, keep_result=False)
@@ -24,13 +25,26 @@ def sync(request):
 @message_response("ResumeResponse")
 @operate_guard('resume', 3, keep_result=False)
 def resume(request):
+    req = request._proto
+    sync = SyncResponse()
+    sync.ret = 0
+    sync.utc_timestamp = timezone.utc_timestamp()
+
     login_signal.send(
         sender=None,
         account_id=request._account_id,
         server_id=request._server_id,
         char_id=request._char_id,
     )
-    return None
+
+    new_session = '%d:%d:%d' % (request._account_id, req.server_id, request._char_id)
+    new_session = crypto.encrypt(new_session)
+
+    response = ResumeResponse()
+    response.ret = 0
+    response.session = new_session
+    return [pack_msg(response), pack_msg(sync)]
+
 
 
 @message_response("SellResponse")
