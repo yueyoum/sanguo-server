@@ -19,7 +19,6 @@ TMP_PATH = os.path.normpath(os.path.join(PROJECT_PATH, '../tmp'))
 LOG_PATH = os.path.normpath(os.path.join(PROJECT_PATH, 'logs'))
 BATTLE_RECORD_PATH = os.path.normpath(os.path.join(PROJECT_PATH, 'battle_record'))
 
-ENABLE_ADMIN = False
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -30,21 +29,21 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'sanguo', # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '127.0.0.1', # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '3306', # Set to empty string for default.
-        'CONN_MAX_AGE': 120,
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+    #     'NAME': 'sanguo', # Or path to database file if using sqlite3.
+    #     # The following settings are not used with sqlite3:
+    #     'USER': 'root',
+    #     'PASSWORD': 'root',
+    #     'HOST': '127.0.0.1', # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+    #     'PORT': '3306', # Set to empty string for default.
+    #     'CONN_MAX_AGE': 120,
+    # }
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -148,19 +147,6 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'django_nose',
-    'apps.server',
-    'apps.hero',
-    'apps.stage',
-    'apps.skill',
-    'apps.task',
-    'apps.achievement',
-    'apps.official',
-    'apps.account',
-    'apps.character',
-    'apps.item',
-    'apps.mail',
-    'apps.config',
-    'apps.store',
 )
 
 
@@ -243,7 +229,7 @@ if TESTING:
     MONGODB_DB = 'test_sanguo'
 
 
-GATE_URL = 'http://work.mztimes.com:8020'
+HUB_URL = 'http://work.mztimes.com:8020'
 NODE_ID = 1
 
 IS_GUIDE_SERVER = False
