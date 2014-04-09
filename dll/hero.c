@@ -2,8 +2,8 @@
 
 float hero_calculate(int modulus, int level, int step, int quality, float growing)
 {
-    float step_adjust = pow(STEP_DIFF, step-1);
-    float value = modulus * step * (4-quality) * 1.2 + level * growing * step_adjust;
+    float step_adjust = pow(STEP_DIFF, step);
+    float value = modulus * (step+1) * (4-quality) * 1.2 + level * growing * step_adjust;
     return value;
 }
 

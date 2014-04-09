@@ -65,7 +65,7 @@ class PVE(Battle):
             if mid == 0:
                 rival_heros.append(None)
             else:
-                h = BattleMonster(mid, stage.level)
+                h = BattleMonster(mid, stage.level, stage.strength_modulus)
                 rival_heros.append(h)
 
         return rival_heros
@@ -94,7 +94,7 @@ class ElitePVE(PVE):
             if mid == 0:
                 rival_heros.append(None)
             else:
-                h = BattleMonster(mid, stage.level)
+                h = BattleMonster(mid, stage.level, stage.strength_modulus)
                 rival_heros.append(h)
 
         return rival_heros

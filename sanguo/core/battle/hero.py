@@ -282,12 +282,11 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         value = damage * (1 - damage_reduce)
 
         # 攻击修正
-        if self.HERO_TYPE == 1 and target.HERO_TYPE == 1:
-            self_tp = HEROS[self.original_id].tp
-            target_tp = HEROS[target.original_id].tp
-            modulus = DEMAGE_VALUE_ADJUST[self_tp][target_tp]
+        self_tp = HEROS[self.original_id].tp
+        target_tp = HEROS[target.original_id].tp
+        modulus = DEMAGE_VALUE_ADJUST[self_tp][target_tp]
 
-            value += value * modulus
+        value += value * modulus
 
         return value
 
@@ -469,7 +468,7 @@ class BattleHero(InBattleHero):
 class BattleMonster(InBattleHero):
     HERO_TYPE = 2
 
-    def __init__(self, mid, level):
+    def __init__(self, mid, level, strength_modulus):
         info = MONSTERS[mid]
         self.id = mid
         self.real_id = mid
@@ -480,10 +479,15 @@ class BattleMonster(InBattleHero):
         self.crit = info.crit
         self.dodge = 0
 
+        self.attack = int(self.attack * strength_modulus)
+        self.defense = int(self.defense * strength_modulus)
+        self.hp = int(self.hp * strength_modulus)
+        self.crit = int(self.crit * strength_modulus)
+
         self.anger = info.anger
 
         self.skills = [int(i) for i in  info.skills.split(',')]
-        self.level = info.level
+        self.level = level
 
         self.default_skill = info.default_skill
 

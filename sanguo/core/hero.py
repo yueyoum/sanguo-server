@@ -49,8 +49,8 @@ def cal_hero_property(original_id, level, step):
 def cal_monster_property(oid, level):
     monster = MONSTERS[oid]
     attack = DLL.hero_attack(level, 0, monster.quality, ctypes.c_float(monster.attack))
-    defense = DLL.hero_attack(level, 0, monster.quality, ctypes.c_float(monster.defense))
-    hp = DLL.hero_attack(level, 0, monster.quality, ctypes.c_float(monster.hp))
+    defense = DLL.hero_defense(level, 0, monster.quality, ctypes.c_float(monster.defense))
+    hp = DLL.hero_hp(level, 0, monster.quality, ctypes.c_float(monster.hp))
 
     return int(attack), int(defense), int(hp)
 
