@@ -9,10 +9,10 @@ import requests
 
 from django.conf import settings
 
-GATE_URL = settings.GATE_URL
+HUB_URL = settings.HUB_URL
 
 def apicall(data, cmd):
-    x = requests.post('{0}{1}'.format(GATE_URL, cmd), data)
+    x = requests.post('{0}{1}'.format(HUB_URL, cmd), data)
     return x.json()
 
 
