@@ -186,7 +186,7 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u6708\u5bd2\u77f3", 
-        "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u6247\u3001\u5668\u7c7b\u6b66\u5668", 
+        "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u6247\u3001\u7b1b\u7c7b\u6b66\u5668", 
         "buy_sycee": 0, 
         "tp": 1, 
         "sell_gold": 15000, 
