@@ -16,7 +16,7 @@
         "battle": 1, 
         "first_drop": "", 
         "normal_exp": 18, 
-        "monsters": "0,1,0,0,1,0,0,2,0", 
+        "monsters": "0,1,0,0,1,0,0,5,0", 
         "normal_gold": 7
     }
 },
@@ -37,7 +37,7 @@
         "battle": 1, 
         "first_drop": "", 
         "normal_exp": 18, 
-        "monsters": "0,3,0,0,3,0,0,4,0", 
+        "monsters": "0,1,0,0,1,0,0,6,0", 
         "normal_gold": 7
     }
 },
@@ -58,7 +58,7 @@
         "battle": 1, 
         "first_drop": "", 
         "normal_exp": 20, 
-        "monsters": "0,5,0,0,5,0,0,6,0", 
+        "monsters": "0,1,0,0,1,0,0,8,0", 
         "normal_gold": 8
     }
 },
@@ -79,7 +79,7 @@
         "battle": 1, 
         "first_drop": "", 
         "normal_exp": 20, 
-        "monsters": "0,7,0,0,7,0,0,8,0", 
+        "monsters": "0,1,0,0,1,0,0,9,0", 
         "normal_gold": 8
     }
 },
@@ -100,7 +100,7 @@
         "battle": 1, 
         "first_drop": "", 
         "normal_exp": 20, 
-        "monsters": "0,9,0,0,9,0,0,10,0", 
+        "monsters": "0,1,0,0,1,0,0,7,0", 
         "normal_gold": 9
     }
 },
@@ -121,7 +121,7 @@
         "battle": 1, 
         "first_drop": "", 
         "normal_exp": 22, 
-        "monsters": "0,11,0,0,11,0,0,12,0", 
+        "monsters": "0,1,0,1,0,1,0,5,0", 
         "normal_gold": 10
     }
 },
@@ -142,7 +142,7 @@
         "battle": 1, 
         "first_drop": "", 
         "normal_exp": 22, 
-        "monsters": "0,13,0,13,0,13,0,14,0", 
+        "monsters": "0,1,0,1,0,1,0,6,0", 
         "normal_gold": 10
     }
 },
@@ -163,7 +163,7 @@
         "battle": 1, 
         "first_drop": "", 
         "normal_exp": 22, 
-        "monsters": "15,0,0,15,15,0,0,0,16", 
+        "monsters": "1,0,1,0,1,0,0,8,0", 
         "normal_gold": 11
     }
 },
@@ -184,7 +184,7 @@
         "battle": 1, 
         "first_drop": "", 
         "normal_exp": 22, 
-        "monsters": "0,0,17,0,17,17,0,18,0", 
+        "monsters": "0,1,0,0,1,1,0,10,0", 
         "normal_gold": 11
     }
 },
@@ -205,7 +205,7 @@
         "battle": 1, 
         "first_drop": "", 
         "normal_exp": 22, 
-        "monsters": "19,0,0,0,0,19,19,20,19", 
+        "monsters": "0,5,0,0,6,10,8,11,8", 
         "normal_gold": 12
     }
 },
@@ -226,7 +226,7 @@
         "battle": 2, 
         "first_drop": "", 
         "normal_exp": 22, 
-        "monsters": "21,0,21,21,0,21,21,22,21", 
+        "monsters": "1,0,1,0,4,0,0,5,3", 
         "normal_gold": 12
     }
 },
@@ -247,7 +247,7 @@
         "battle": 2, 
         "first_drop": "", 
         "normal_exp": 22, 
-        "monsters": "21,0,21,21,0,21,21,23,21", 
+        "monsters": "3,0,4,0,2,2,6,0,3", 
         "normal_gold": 12
     }
 },
@@ -268,7 +268,7 @@
         "battle": 2, 
         "first_drop": "", 
         "normal_exp": 22, 
-        "monsters": "24,24,24,0,25,0,24,24,24", 
+        "monsters": "3,0,4,2,2,0,12,0,5", 
         "normal_gold": 12
     }
 },
@@ -289,7 +289,7 @@
         "battle": 2, 
         "first_drop": "", 
         "normal_exp": 22, 
-        "monsters": "24,24,24,24,26,24,0,24,0", 
+        "monsters": "4,0,0,2,3,0,4,6,13", 
         "normal_gold": 12
     }
 },
@@ -310,7 +310,7 @@
         "battle": 2, 
         "first_drop": "", 
         "normal_exp": 22, 
-        "monsters": "27,27,27,27,27,27,28,0,29", 
+        "monsters": "0,6,0,3,0,3,4,23,4", 
         "normal_gold": 13
     }
 },
@@ -331,7 +331,7 @@
         "battle": 2, 
         "first_drop": "", 
         "normal_exp": 24, 
-        "monsters": "0,27,0,27,27,27,0,30,0", 
+        "monsters": "0,3,0,3,8,3,4,14,4", 
         "normal_gold": 14
     }
 },
@@ -352,7 +352,7 @@
         "battle": 2, 
         "first_drop": "", 
         "normal_exp": 24, 
-        "monsters": "31,31,31,31,31,31,0,32,0", 
+        "monsters": "4,3,4,6,2,6,0,17,0", 
         "normal_gold": 14
     }
 },
@@ -373,7 +373,7 @@
         "battle": 2, 
         "first_drop": "", 
         "normal_exp": 24, 
-        "monsters": "31,32,31,31,31,31,31,0,31", 
+        "monsters": "2,0,3,4,15,4,8,0,8", 
         "normal_gold": 15
     }
 },
@@ -394,7 +394,7 @@
         "battle": 2, 
         "first_drop": "", 
         "normal_exp": 24, 
-        "monsters": "31,33,31,31,34,31,31,35,31", 
+        "monsters": "3,0,9,0,2,4,6,16,3", 
         "normal_gold": 14
     }
 },
@@ -415,7 +415,7 @@
         "battle": 2, 
         "first_drop": "", 
         "normal_exp": 24, 
-        "monsters": "31,36,31,31,37,31,31,38,31", 
+        "monsters": "3,0,9,4,10,6,18,3,3", 
         "normal_gold": 14
     }
 },
@@ -436,7 +436,7 @@
         "battle": 3, 
         "first_drop": "", 
         "normal_exp": 22, 
-        "monsters": "39,0,39,39,39,0,39,40,39", 
+        "monsters": "2,0,2,3,4,3,3,8,3", 
         "normal_gold": 12
     }
 },
@@ -457,7 +457,7 @@
         "battle": 3, 
         "first_drop": "", 
         "normal_exp": 22, 
-        "monsters": "39,0,39,0,39,39,39,41,39", 
+        "monsters": "3,10,3,0,6,4,3,3,3", 
         "normal_gold": 12
     }
 },
@@ -478,7 +478,7 @@
         "battle": 3, 
         "first_drop": "", 
         "normal_exp": 22, 
-        "monsters": "42,0,42,0,42,42,0,42,43", 
+        "monsters": "2,9,0,6,4,4,3,3,5", 
         "normal_gold": 13
     }
 },
@@ -499,7 +499,7 @@
         "battle": 3, 
         "first_drop": "", 
         "normal_exp": 22, 
-        "monsters": "42,0,42,42,42,42,43,42,42", 
+        "monsters": "3,6,3,0,2,4,4,9,4", 
         "normal_gold": 13
     }
 },
@@ -520,7 +520,7 @@
         "battle": 3, 
         "first_drop": "", 
         "normal_exp": 24, 
-        "monsters": "44,44,44,45,44,44,0,0,44", 
+        "monsters": "6,4,4,3,8,3,3,10,0", 
         "normal_gold": 13
     }
 },
@@ -541,7 +541,7 @@
         "battle": 3, 
         "first_drop": "", 
         "normal_exp": 24, 
-        "monsters": "44,44,44,44,44,44,46,0,47", 
+        "monsters": "2,0,5,8,4,4,2,8,2", 
         "normal_gold": 13
     }
 },
@@ -562,7 +562,7 @@
         "battle": 3, 
         "first_drop": "", 
         "normal_exp": 24, 
-        "monsters": "48,48,48,48,0,48,49,48,48", 
+        "monsters": "0,4,4,3,19,9,6,2,2", 
         "normal_gold": 14
     }
 },
@@ -583,7 +583,7 @@
         "battle": 3, 
         "first_drop": "", 
         "normal_exp": 24, 
-        "monsters": "48,48,48,48,0,48,50,0,51", 
+        "monsters": "3,3,20,4,4,10,6,2,0", 
         "normal_gold": 14
     }
 },
@@ -604,7 +604,7 @@
         "battle": 3, 
         "first_drop": "", 
         "normal_exp": 24, 
-        "monsters": "52,0,52,52,52,52,53,52,54", 
+        "monsters": "0,2,4,5,2,2,3,21,3", 
         "normal_gold": 15
     }
 },
@@ -625,7 +625,7 @@
         "battle": 3, 
         "first_drop": "", 
         "normal_exp": 26, 
-        "monsters": "52,53,52,52,54,52,52,55,52", 
+        "monsters": "7,5,4,3,3,2,6,22,8", 
         "normal_gold": 15
     }
 },
@@ -646,7 +646,7 @@
         "battle": 4, 
         "first_drop": "", 
         "normal_exp": 24, 
-        "monsters": "56,0,56,56,56,56,56,57,56", 
+        "monsters": "3,3,10,6,0,5,4,10,4", 
         "normal_gold": 15
     }
 },
@@ -667,7 +667,7 @@
         "battle": 4, 
         "first_drop": "", 
         "normal_exp": 24, 
-        "monsters": "56,57,56,56,56,56,56,56,56", 
+        "monsters": "2,5,8,4,9,0,6,3,3", 
         "normal_gold": 15
     }
 },
@@ -688,7 +688,7 @@
         "battle": 4, 
         "first_drop": "", 
         "normal_exp": 24, 
-        "monsters": "58,0,58,58,59,58,58,58,58", 
+        "monsters": "6,0,9,4,5,4,2,6,4", 
         "normal_gold": 15
     }
 },
@@ -709,7 +709,7 @@
         "battle": 4, 
         "first_drop": "", 
         "normal_exp": 24, 
-        "monsters": "58,60,58,0,58,0,58,0,58", 
+        "monsters": "4,0,7,3,3,8,6,9,4", 
         "normal_gold": 15
     }
 },
@@ -730,7 +730,7 @@
         "battle": 4, 
         "first_drop": "", 
         "normal_exp": 26, 
-        "monsters": "0,62,0,61,61,61,61,61,61", 
+        "monsters": "5,3,4,2,2,9,6,7,0", 
         "normal_gold": 15
     }
 },
@@ -751,7 +751,7 @@
         "battle": 4, 
         "first_drop": "", 
         "normal_exp": 26, 
-        "monsters": "61,61,61,61,61,61,63,0,64", 
+        "monsters": "3,0,2,4,5,23,4,9,2", 
         "normal_gold": 15
     }
 },
@@ -772,7 +772,7 @@
         "battle": 4, 
         "first_drop": "", 
         "normal_exp": 26, 
-        "monsters": "65,65,65,65,65,65,66,0,67", 
+        "monsters": "0,3,4,2,3,9,6,15,4", 
         "normal_gold": 16
     }
 },
@@ -793,7 +793,7 @@
         "battle": 4, 
         "first_drop": "", 
         "normal_exp": 26, 
-        "monsters": "68,0,68,68,68,68,0,69,0", 
+        "monsters": "6,3,16,2,4,5,7,2,0", 
         "normal_gold": 16
     }
 },
@@ -814,7 +814,7 @@
         "battle": 4, 
         "first_drop": "", 
         "normal_exp": 26, 
-        "monsters": "68,70,68,68,71,68,68,72,68", 
+        "monsters": "4,2,8,3,3,5,0,17,8", 
         "normal_gold": 16
     }
 },
@@ -835,7 +835,7 @@
         "battle": 4, 
         "first_drop": "", 
         "normal_exp": 26, 
-        "monsters": "68,68,68,73,68,74,68,75,68", 
+        "monsters": "3,6,4,7,5,2,6,24,4", 
         "normal_gold": 16
     }
 },
@@ -856,7 +856,7 @@
         "battle": 5, 
         "first_drop": "", 
         "normal_exp": 26, 
-        "monsters": "76,76,76,76,76,76,76,77,76", 
+        "monsters": "4,3,6,6,0,2,10,2,2", 
         "normal_gold": 17
     }
 },
@@ -877,7 +877,7 @@
         "battle": 5, 
         "first_drop": "", 
         "normal_exp": 26, 
-        "monsters": "78,78,0,0,78,78,78,78,79", 
+        "monsters": "2,3,25,4,6,3,7,0,2", 
         "normal_gold": 17
     }
 },
@@ -898,7 +898,7 @@
         "battle": 5, 
         "first_drop": "", 
         "normal_exp": 26, 
-        "monsters": "0,80,80,0,80,80,81,80,80", 
+        "monsters": "3,2,5,4,8,3,26,0,10", 
         "normal_gold": 17
     }
 },
@@ -919,7 +919,7 @@
         "battle": 5, 
         "first_drop": "", 
         "normal_exp": 26, 
-        "monsters": "82,82,82,0,0,82,83,82,82", 
+        "monsters": "4,5,3,4,8,2,6,27,0", 
         "normal_gold": 17
     }
 },
@@ -931,7 +931,7 @@
         "star_gold": 3400, 
         "bg": "\u5c71\u8def\u573a\u666f", 
         "open_condition": 44, 
-        "name": "\u5178\u97e6\u594b\u52c7\u6551\u66f9\u64cd", 
+        "name": "\u6fee\u9633\u7a81\u56f4\u62181", 
         "level": 23, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -940,7 +940,7 @@
         "battle": 5, 
         "first_drop": "", 
         "normal_exp": 28, 
-        "monsters": "82,84,82,82,85,82,82,86,82", 
+        "monsters": "3,4,28,0,10,5,3,5,4", 
         "normal_gold": 17
     }
 },
@@ -952,7 +952,7 @@
         "star_gold": 3400, 
         "bg": "\u57ce\u4e0b", 
         "open_condition": 45, 
-        "name": "\u8bef\u5165\u6fee\u9633\u9669\u4e2d\u8ba1", 
+        "name": "\u6fee\u9633\u7a81\u56f4\u62182", 
         "level": 23, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -961,7 +961,7 @@
         "battle": 5, 
         "first_drop": "", 
         "normal_exp": 28, 
-        "monsters": "90,87,90,90,0,90,88,90,89", 
+        "monsters": "7,0,5,4,4,9,3,5,4", 
         "normal_gold": 17
     }
 },
@@ -973,7 +973,7 @@
         "star_gold": 3600, 
         "bg": "\u5c71\u8def\u573a\u666f", 
         "open_condition": 46, 
-        "name": "\u66f9\u64cd\u8bc8\u6b7b\u8bf1\u5415\u5e03", 
+        "name": "\u66f9\u64cd\u8bc8\u4ea1\u8bf1\u5415\u5e03", 
         "level": 24, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -982,7 +982,7 @@
         "battle": 5, 
         "first_drop": "", 
         "normal_exp": 28, 
-        "monsters": "90,90,90,90,90,90,0,91,0", 
+        "monsters": "6,2,2,0,34,3,3,9,2", 
         "normal_gold": 18
     }
 },
@@ -1003,7 +1003,7 @@
         "battle": 5, 
         "first_drop": "", 
         "normal_exp": 28, 
-        "monsters": "90,90,90,90,90,90,0,92,93", 
+        "monsters": "5,2,4,10,0,3,6,3,16", 
         "normal_gold": 18
     }
 },
@@ -1024,7 +1024,7 @@
         "battle": 5, 
         "first_drop": "", 
         "normal_exp": 28, 
-        "monsters": "94,94,94,94,94,94,94,94,95", 
+        "monsters": "0,3,4,6,15,8,6,3,4", 
         "normal_gold": 18
     }
 },
@@ -1045,7 +1045,7 @@
         "battle": 5, 
         "first_drop": "", 
         "normal_exp": 28, 
-        "monsters": "94,94,94,0,94,0,96,97,98", 
+        "monsters": "3,7,10,6,4,5,3,17,8", 
         "normal_gold": 18
     }
 },
@@ -1057,7 +1057,7 @@
         "star_gold": 3600, 
         "bg": "\u539f\u91ce", 
         "open_condition": 50, 
-        "name": "\u674e\u5095\u52ab\u6301\u6c49\u732e\u5e1d", 
+        "name": "\u674e\u5095\u4e4b\u4e711", 
         "level": 26, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -1066,7 +1066,7 @@
         "battle": 6, 
         "first_drop": "", 
         "normal_exp": 28, 
-        "monsters": "102,102,99,102,0,100,101,102,102", 
+        "monsters": "5,3,4,7,4,2,6,10,0", 
         "normal_gold": 18
     }
 },
@@ -1078,7 +1078,7 @@
         "star_gold": 3600, 
         "bg": "\u57ce\u4e0b", 
         "open_condition": 51, 
-        "name": "\u6768\u5949\u53cd\u53db\u674e\u5095", 
+        "name": "\u674e\u5095\u4e4b\u4e712", 
         "level": 26, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -1087,7 +1087,7 @@
         "battle": 6, 
         "first_drop": "", 
         "normal_exp": 28, 
-        "monsters": "102,0,102,0,102,102,102,102,103", 
+        "monsters": "2,6,5,0,4,9,10,3,2", 
         "normal_gold": 18
     }
 },
@@ -1099,7 +1099,7 @@
         "star_gold": 3800, 
         "bg": "\u539f\u91ce", 
         "open_condition": 52, 
-        "name": "\u6768\u5949\u534e\u9634\u6551\u9a7e", 
+        "name": "\u674e\u5095\u4e4b\u4e713", 
         "level": 27, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -1108,7 +1108,7 @@
         "battle": 6, 
         "first_drop": "", 
         "normal_exp": 28, 
-        "monsters": "104,104,104,104,104,105,104,104,106", 
+        "monsters": "4,3,6,6,0,2,10,2,2", 
         "normal_gold": 19
     }
 },
@@ -1120,7 +1120,7 @@
         "star_gold": 3800, 
         "bg": "\u5c71\u8def\u573a\u666f", 
         "open_condition": 53, 
-        "name": "\u5f90\u6643\u4fdd\u5e1d\u79fb\u4e1c\u90fd", 
+        "name": "\u674e\u5095\u4e4b\u4e714", 
         "level": 27, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -1129,7 +1129,7 @@
         "battle": 6, 
         "first_drop": "", 
         "normal_exp": 28, 
-        "monsters": "104,104,104,104,106,104,104,104,104", 
+        "monsters": "3,3,10,6,0,5,4,10,4", 
         "normal_gold": 19
     }
 },
@@ -1141,7 +1141,7 @@
         "star_gold": 3800, 
         "bg": "\u539f\u91ce", 
         "open_condition": 54, 
-        "name": "\u674e\u90ed\u5408\u5175\u6b32\u6740\u541b", 
+        "name": "\u674e\u5095\u4e4b\u4e715", 
         "level": 28, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -1150,7 +1150,7 @@
         "battle": 6, 
         "first_drop": "", 
         "normal_exp": 30, 
-        "monsters": "107,107,107,107,108,107,107,107,109", 
+        "monsters": "3,0,4,0,2,2,6,0,3", 
         "normal_gold": 19
     }
 },
@@ -1171,7 +1171,7 @@
         "battle": 6, 
         "first_drop": "", 
         "normal_exp": 30, 
-        "monsters": "107,107,107,107,107,107,110,107,107", 
+        "monsters": "9,5,0,6,4,4,3,2,5", 
         "normal_gold": 19
     }
 },
@@ -1192,7 +1192,7 @@
         "battle": 6, 
         "first_drop": "", 
         "normal_exp": 30, 
-        "monsters": "114,114,114,111,112,113,114,114,114", 
+        "monsters": "6,8,3,5,9,2,6,0,7", 
         "normal_gold": 20
     }
 },
@@ -1204,7 +1204,7 @@
         "star_gold": 4000, 
         "bg": "\u539f\u91ce", 
         "open_condition": 57, 
-        "name": "\u674e\u4e50\u53cd\u53db\u53c8\u52ab\u9a7e", 
+        "name": "\u674e\u4e50\u4e4b\u4e71", 
         "level": 29, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -1213,7 +1213,7 @@
         "battle": 6, 
         "first_drop": "", 
         "normal_exp": 30, 
-        "monsters": "114,114,114,114,114,114,114,115,114", 
+        "monsters": "8,4,4,6,4,2,8,3,0", 
         "normal_gold": 20
     }
 },
@@ -1225,7 +1225,7 @@
         "star_gold": 4000, 
         "bg": "\u5c71\u8def\u573a\u666f", 
         "open_condition": 58, 
-        "name": "\u66f9\u64cd\u524d\u519b\u6551\u9a7e", 
+        "name": "\u66f9\u519b\u6551\u9a7e", 
         "level": 30, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -1234,7 +1234,7 @@
         "battle": 6, 
         "first_drop": "", 
         "normal_exp": 30, 
-        "monsters": "114,116,114,114,117,114,114,118,114", 
+        "monsters": "29,5,4,10,5,3,7,0,3", 
         "normal_gold": 20
     }
 },
@@ -1255,7 +1255,7 @@
         "battle": 6, 
         "first_drop": "", 
         "normal_exp": 30, 
-        "monsters": "114,114,114,117,118,119,114,114,114", 
+        "monsters": "2,3,8,6,3,12,7,3,7", 
         "normal_gold": 20
     }
 },
@@ -1276,7 +1276,7 @@
         "battle": 7, 
         "first_drop": "", 
         "normal_exp": 30, 
-        "monsters": "120,120,120,120,121,120,120,120,120", 
+        "monsters": "2,0,2,3,4,3,3,8,3", 
         "normal_gold": 20
     }
 },
@@ -1297,7 +1297,7 @@
         "battle": 7, 
         "first_drop": "", 
         "normal_exp": 30, 
-        "monsters": "120,120,120,120,122,120,120,120,120", 
+        "monsters": "3,10,3,0,6,4,3,3,3", 
         "normal_gold": 20
     }
 },
@@ -1318,7 +1318,7 @@
         "battle": 7, 
         "first_drop": "", 
         "normal_exp": 30, 
-        "monsters": "123,123,123,124,123,123,123,123,123", 
+        "monsters": "2,9,0,6,4,4,3,3,5", 
         "normal_gold": 21
     }
 },
@@ -1330,7 +1330,7 @@
         "star_gold": 4200, 
         "bg": "\u519b\u8425\u573a\u666f", 
         "open_condition": 63, 
-        "name": "\u79e3\u9675\u653b\u859b\u793c", 
+        "name": "\u5f3a\u653b\u859b\u793c", 
         "level": 32, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -1339,7 +1339,7 @@
         "battle": 7, 
         "first_drop": "", 
         "normal_exp": 30, 
-        "monsters": "123,123,123,123,123,123,123,123,125", 
+        "monsters": "3,6,3,0,2,4,4,9,4", 
         "normal_gold": 21
     }
 },
@@ -1360,7 +1360,7 @@
         "battle": 7, 
         "first_drop": "", 
         "normal_exp": 30, 
-        "monsters": "123,123,123,123,123,123,123,123,125", 
+        "monsters": "30,0,30,30,30,10,7,30,30", 
         "normal_gold": 21
     }
 },
@@ -1381,7 +1381,7 @@
         "battle": 7, 
         "first_drop": "", 
         "normal_exp": 30, 
-        "monsters": "123,123,123,129,123,130,123,131,123", 
+        "monsters": "30,8,30,6,30,30,6,0,10", 
         "normal_gold": 21
     }
 },
@@ -1402,7 +1402,7 @@
         "battle": 7, 
         "first_drop": "", 
         "normal_exp": 32, 
-        "monsters": "132,133,132,132,132,132,132,132,132", 
+        "monsters": "5,30,30,7,0,8,31,30,30", 
         "normal_gold": 21
     }
 },
@@ -1423,7 +1423,7 @@
         "battle": 7, 
         "first_drop": "", 
         "normal_exp": 32, 
-        "monsters": "132,132,132,132,132,132,134,132,135", 
+        "monsters": "6,8,3,5,9,2,6,0,7", 
         "normal_gold": 21
     }
 },
@@ -1444,7 +1444,7 @@
         "battle": 7, 
         "first_drop": "", 
         "normal_exp": 32, 
-        "monsters": "132,132,132,132,132,132,136,137,138", 
+        "monsters": "6,0,32,2,4,10,6,4,3", 
         "normal_gold": 22
     }
 },
@@ -1465,7 +1465,7 @@
         "battle": 7, 
         "first_drop": "", 
         "normal_exp": 32, 
-        "monsters": "139,139,139,139,140,139,140,139,140", 
+        "monsters": "6,4,5,4,3,7,28,7,10", 
         "normal_gold": 22
     }
 },
@@ -1486,7 +1486,7 @@
         "battle": 8, 
         "first_drop": "", 
         "normal_exp": 32, 
-        "monsters": "141,142,141,141,141,141,141,141,143", 
+        "monsters": "5,3,4,2,2,9,6,7,0", 
         "normal_gold": 22
     }
 },
@@ -1507,7 +1507,7 @@
         "battle": 8, 
         "first_drop": "", 
         "normal_exp": 32, 
-        "monsters": "153,153,153,144,153,145,153,146,153", 
+        "monsters": "3,0,2,4,5,23,4,9,2", 
         "normal_gold": 22
     }
 },
@@ -1528,7 +1528,7 @@
         "battle": 8, 
         "first_drop": "", 
         "normal_exp": 32, 
-        "monsters": "147,147,147,148,147,147,147,147,149", 
+        "monsters": "6,3,3,7,0,10,35,9,3", 
         "normal_gold": 22
     }
 },
@@ -1549,7 +1549,7 @@
         "battle": 8, 
         "first_drop": "", 
         "normal_exp": 32, 
-        "monsters": "153,150,153,153,151,153,153,152,153", 
+        "monsters": "5,3,4,7,4,2,6,10,0", 
         "normal_gold": 22
     }
 },
@@ -1570,7 +1570,7 @@
         "battle": 8, 
         "first_drop": "", 
         "normal_exp": 32, 
-        "monsters": "153,153,153,153,156,153,153,154,153", 
+        "monsters": "6,3,4,3,9,4,6,0,36", 
         "normal_gold": 23
     }
 },
@@ -1582,7 +1582,7 @@
         "star_gold": 4600, 
         "bg": "\u539f\u91ce", 
         "open_condition": 75, 
-        "name": "\u590f\u4faf\u60c7\u62e8\u77e2\u5556\u775b", 
+        "name": "\u62e8\u77e2\u5556\u775b", 
         "level": 38, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -1591,7 +1591,7 @@
         "battle": 8, 
         "first_drop": "", 
         "normal_exp": 32, 
-        "monsters": "153,154,153,153,156,153,153,155,153", 
+        "monsters": "5,4,3,10,3,3,7,0,9", 
         "normal_gold": 23
     }
 },
@@ -1612,7 +1612,7 @@
         "battle": 8, 
         "first_drop": "", 
         "normal_exp": 34, 
-        "monsters": "160,160,157,160,158,160,159,160,160", 
+        "monsters": "6,2,2,0,34,3,3,9,2", 
         "normal_gold": 23
     }
 },
@@ -1633,7 +1633,7 @@
         "battle": 8, 
         "first_drop": "", 
         "normal_exp": 34, 
-        "monsters": "160,160,160,160,161,160,160,160,160", 
+        "monsters": "0,3,4,6,15,8,6,3,4", 
         "normal_gold": 23
     }
 },
@@ -1645,7 +1645,7 @@
         "star_gold": 4600, 
         "bg": "\u57ce\u4e0b", 
         "open_condition": 78, 
-        "name": "\u5415\u5e03\u9001\u5973\u6c42\u63f4\u519b", 
+        "name": "\u591c\u963b\u5415\u5e03", 
         "level": 40, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -1654,7 +1654,7 @@
         "battle": 8, 
         "first_drop": "", 
         "normal_exp": 34, 
-        "monsters": "162,163,162,162,162,162,164,162,162", 
+        "monsters": "5,2,4,10,0,3,6,3,16", 
         "normal_gold": 23
     }
 },
@@ -1666,7 +1666,7 @@
         "star_gold": 4600, 
         "bg": "\u57ce\u4e0b", 
         "open_condition": 79, 
-        "name": "\u767d\u95e8\u697c\u751f\u64d2\u5415\u5e03", 
+        "name": "\u9b42\u65ad\u767d\u95e8\u697c", 
         "level": 40, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -1675,7 +1675,7 @@
         "battle": 8, 
         "first_drop": "", 
         "normal_exp": 34, 
-        "monsters": "162,162,162,162,162,166,165,167,164", 
+        "monsters": "6,7,10,7,3,2,17,4,9", 
         "normal_gold": 23
     }
 },
@@ -1696,7 +1696,7 @@
         "battle": 9, 
         "first_drop": "", 
         "normal_exp": 34, 
-        "monsters": "168,168,169,168,168,170,168,168,168", 
+        "monsters": "6,3,9,7,10,2,5,0,4", 
         "normal_gold": 24
     }
 },
@@ -1717,7 +1717,7 @@
         "battle": 9, 
         "first_drop": "", 
         "normal_exp": 34, 
-        "monsters": "171,171,171,171,171,172,171,171,171", 
+        "monsters": "3,5,4,8,9,0,4,6,7", 
         "normal_gold": 24
     }
 },
@@ -1738,7 +1738,7 @@
         "battle": 9, 
         "first_drop": "", 
         "normal_exp": 34, 
-        "monsters": "173,173,173,173,173,173,174,173,175", 
+        "monsters": "5,4,5,3,6,8,2,7,0", 
         "normal_gold": 24
     }
 },
@@ -1759,7 +1759,7 @@
         "battle": 9, 
         "first_drop": "", 
         "normal_exp": 34, 
-        "monsters": "173,173,173,173,173,173,176,173,173", 
+        "monsters": "4,3,8,6,8,25,7,4,0", 
         "normal_gold": 24
     }
 },
@@ -1771,7 +1771,7 @@
         "star_gold": 4800, 
         "bg": "\u519b\u8425\u573a\u666f", 
         "open_condition": 84, 
-        "name": "\u5218\u5907\u5954\u8881\u7ecd", 
+        "name": "\u5218\u5907\u8ba8\u4f10\u62184", 
         "level": 43, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -1780,7 +1780,7 @@
         "battle": 9, 
         "first_drop": "", 
         "normal_exp": 34, 
-        "monsters": "177,177,177,177,178,177,177,177,179", 
+        "monsters": "5,3,27,7,4,2,6,4,0", 
         "normal_gold": 24
     }
 },
@@ -1801,7 +1801,7 @@
         "battle": 9, 
         "first_drop": "", 
         "normal_exp": 34, 
-        "monsters": "177,180,177,177,177,177,177,177,177", 
+        "monsters": "7,2,2,26,8,4,3,9,0", 
         "normal_gold": 24
     }
 },
@@ -1822,7 +1822,7 @@
         "battle": 9, 
         "first_drop": "", 
         "normal_exp": 34, 
-        "monsters": "181,181,181,181,181,181,181,181,182", 
+        "monsters": "6,4,10,6,4,19,6,5,0", 
         "normal_gold": 25
     }
 },
@@ -1843,7 +1843,7 @@
         "battle": 9, 
         "first_drop": "", 
         "normal_exp": 34, 
-        "monsters": "181,181,181,181,183,181,184,181,181", 
+        "monsters": "6,4,20,4,3,10,5,0,5", 
         "normal_gold": 25
     }
 },
@@ -1864,7 +1864,7 @@
         "battle": 9, 
         "first_drop": "", 
         "normal_exp": 36, 
-        "monsters": "181,185,181,181,186,181,181,187,181", 
+        "monsters": "4,4,2,7,0,10,37,8,8", 
         "normal_gold": 25
     }
 },
@@ -1885,7 +1885,7 @@
         "battle": 9, 
         "first_drop": "", 
         "normal_exp": 36, 
-        "monsters": "181,181,181,188,189,190,181,181,181", 
+        "monsters": "7,5,6,2,5,3,6,9,22", 
         "normal_gold": 25
     }
 },
@@ -1906,7 +1906,7 @@
         "battle": 10, 
         "first_drop": "", 
         "normal_exp": 36, 
-        "monsters": "191,191,191,191,192,191,191,191,191", 
+        "monsters": "6,8,3,5,9,2,6,0,7", 
         "normal_gold": 25
     }
 },
@@ -1927,7 +1927,7 @@
         "battle": 10, 
         "first_drop": "", 
         "normal_exp": 36, 
-        "monsters": "191,193,191,191,191,191,191,191,191", 
+        "monsters": "4,3,7,38,4,2,2,0,10", 
         "normal_gold": 25
     }
 },
@@ -1939,7 +1939,7 @@
         "star_gold": 5200, 
         "bg": "\u5c71\u8def\u573a\u666f", 
         "open_condition": 92, 
-        "name": "\u8bb8\u891a\u8ffd\u51fb", 
+        "name": "\u8bb8\u891a\u8ffd\u51fb\u6218", 
         "level": 47, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -1948,7 +1948,7 @@
         "battle": 10, 
         "first_drop": "", 
         "normal_exp": 36, 
-        "monsters": "194,194,194,194,194,194,194,194,195", 
+        "monsters": "6,3,9,7,10,2,5,0,4", 
         "normal_gold": 26
     }
 },
@@ -1969,7 +1969,7 @@
         "battle": 10, 
         "first_drop": "", 
         "normal_exp": 36, 
-        "monsters": "194,194,194,194,194,194,196,194,194", 
+        "monsters": "6,4,3,7,4,0,39,9,3", 
         "normal_gold": 26
     }
 },
@@ -1981,7 +1981,7 @@
         "star_gold": 5200, 
         "bg": "\u5c71\u8def\u573a\u666f", 
         "open_condition": 94, 
-        "name": "\u5f90\u6643\u8ffd\u51fb", 
+        "name": "\u5f90\u6643\u8ffd\u51fb\u6218", 
         "level": 48, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -1990,7 +1990,7 @@
         "battle": 10, 
         "first_drop": "", 
         "normal_exp": 36, 
-        "monsters": "197,197,197,198,197,197,197,197,197", 
+        "monsters": "6,2,3,6,0,10,4,3,7", 
         "normal_gold": 26
     }
 },
@@ -2011,7 +2011,7 @@
         "battle": 10, 
         "first_drop": "", 
         "normal_exp": 36, 
-        "monsters": "197,197,197,197,197,199,197,197,197", 
+        "monsters": "40,0,10,6,3,4,7,4,3", 
         "normal_gold": 26
     }
 },
@@ -2023,7 +2023,7 @@
         "star_gold": 5200, 
         "bg": "\u5c71\u8def\u573a\u666f", 
         "open_condition": 96, 
-        "name": "\u4e8e\u7981\u8ffd\u51fb", 
+        "name": "\u4e8e\u7981\u8ffd\u51fb\u6218", 
         "level": 49, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -2032,7 +2032,7 @@
         "battle": 10, 
         "first_drop": "", 
         "normal_exp": 36, 
-        "monsters": "200,200,201,200,200,200,200,200,200", 
+        "monsters": "6,10,4,5,0,5,4,3,9", 
         "normal_gold": 26
     }
 },
@@ -2053,7 +2053,7 @@
         "battle": 10, 
         "first_drop": "", 
         "normal_exp": 36, 
-        "monsters": "200,200,200,200,200,200,200,202,200", 
+        "monsters": "4,8,4,6,0,36,5,4,7", 
         "normal_gold": 26
     }
 },
@@ -2065,7 +2065,7 @@
         "star_gold": 5400, 
         "bg": "\u5c71\u8def\u573a\u666f", 
         "open_condition": 98, 
-        "name": "\u674e\u5178\u8ffd\u51fb", 
+        "name": "\u674e\u5178\u8ffd\u51fb\u6218", 
         "level": 50, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -2074,7 +2074,7 @@
         "battle": 10, 
         "first_drop": "", 
         "normal_exp": 36, 
-        "monsters": "203,203,203,203,203,203,203,203,204", 
+        "monsters": "9,10,4,7,8,3,2,0,5", 
         "normal_gold": 27
     }
 },
@@ -2086,7 +2086,7 @@
         "star_gold": 5400, 
         "bg": "\u5c71\u8def\u573a\u666f", 
         "open_condition": 99, 
-        "name": "\u9ec4\u6cb3\u6e21\u53e3\u4e4b\u6218", 
+        "name": "\u6e21\u53e3\u4e4b\u6218", 
         "level": 50, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -2095,7 +2095,7 @@
         "battle": 10, 
         "first_drop": "", 
         "normal_exp": 36, 
-        "monsters": "205,206,207,203,203,203,203,203,203", 
+        "monsters": "7,6,10,5,4,4,6,41,6", 
         "normal_gold": 27
     }
 },
@@ -2116,7 +2116,7 @@
         "battle": 11, 
         "first_drop": "", 
         "normal_exp": 38, 
-        "monsters": "208,208,208,208,208,209,208,208,208", 
+        "monsters": "5,4,5,3,6,8,2,7,0", 
         "normal_gold": 27
     }
 },
@@ -2137,7 +2137,7 @@
         "battle": 11, 
         "first_drop": "", 
         "normal_exp": 38, 
-        "monsters": "208,208,210,208,211,208,212,208,208", 
+        "monsters": "5,4,3,10,3,3,7,0,9", 
         "normal_gold": 27
     }
 },
@@ -2158,7 +2158,7 @@
         "battle": 11, 
         "first_drop": "", 
         "normal_exp": 38, 
-        "monsters": "213,213,213,214,213,213,213,213,215", 
+        "monsters": "5,9,0,6,36,2,4,9,3", 
         "normal_gold": 27
     }
 },
@@ -2179,7 +2179,7 @@
         "battle": 11, 
         "first_drop": "", 
         "normal_exp": 38, 
-        "monsters": "213,213,213,213,213,216,217,213,213", 
+        "monsters": "6,3,10,37,3,2,4,6,0", 
         "normal_gold": 27
     }
 },
@@ -2200,7 +2200,7 @@
         "battle": 11, 
         "first_drop": "", 
         "normal_exp": 38, 
-        "monsters": "218,219,218,218,218,218,218,218,218", 
+        "monsters": "7,3,2,4,6,40,7,0,5", 
         "normal_gold": 28
     }
 },
@@ -2212,7 +2212,7 @@
         "star_gold": 5600, 
         "bg": "\u539f\u91ce", 
         "open_condition": 105, 
-        "name": "\u667a\u7834\u516b\u95e8\u91d1\u9501", 
+        "name": "\u516b\u95e8\u91d1\u9501", 
         "level": 53, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -2221,7 +2221,7 @@
         "battle": 11, 
         "first_drop": "", 
         "normal_exp": 38, 
-        "monsters": "218,219,218,218,218,218,218,220,218", 
+        "monsters": "0,6,5,3,3,4,42,9,8", 
         "normal_gold": 28
     }
 },
@@ -2233,7 +2233,7 @@
         "star_gold": 5600, 
         "bg": "\u57ce\u4e0b", 
         "open_condition": 106, 
-        "name": "\u5f90\u5eb6\u7834\u8ba1\u593a\u6a0a\u57ce", 
+        "name": "\u7834\u8ba1\u593a\u6a0a\u57ce1", 
         "level": 54, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -2242,7 +2242,7 @@
         "battle": 11, 
         "first_drop": "", 
         "normal_exp": 38, 
-        "monsters": "221,221,221,221,221,221,222,221,223", 
+        "monsters": "7,6,3,4,10,0,6,6,41", 
         "normal_gold": 28
     }
 },
@@ -2254,7 +2254,7 @@
         "star_gold": 5600, 
         "bg": "\u539f\u91ce", 
         "open_condition": 107, 
-        "name": "\u5f90\u5eb6\u6551\u6bcd\u6295\u66f9\u64cd", 
+        "name": "\u7834\u8ba1\u593a\u6a0a\u57ce2", 
         "level": 54, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -2263,7 +2263,7 @@
         "battle": 11, 
         "first_drop": "", 
         "normal_exp": 38, 
-        "monsters": "221,221,221,221,221,221,224,221,225", 
+        "monsters": "7,0,10,4,3,9,6,5,45", 
         "normal_gold": 28
     }
 },
@@ -2284,7 +2284,7 @@
         "battle": 11, 
         "first_drop": "", 
         "normal_exp": 38, 
-        "monsters": "226,227,226,226,226,226,226,226,226", 
+        "monsters": "6,0,9,3,3,7,6,44,4", 
         "normal_gold": 28
     }
 },
@@ -2305,7 +2305,7 @@
         "battle": 11, 
         "first_drop": "", 
         "normal_exp": 38, 
-        "monsters": "226,226,228,226,226,226,227,229,230", 
+        "monsters": "6,8,10,7,4,10,6,10,46", 
         "normal_gold": 28
     }
 },
@@ -2326,7 +2326,7 @@
         "battle": 12, 
         "first_drop": "", 
         "normal_exp": 38, 
-        "monsters": "231,231,231,232,231,231,233,231,231", 
+        "monsters": "6,8,3,5,9,2,6,0,7", 
         "normal_gold": 29
     }
 },
@@ -2347,7 +2347,7 @@
         "battle": 12, 
         "first_drop": "", 
         "normal_exp": 38, 
-        "monsters": "231,231,231,234,231,231,231,231,231", 
+        "monsters": "6,3,9,7,10,2,5,0,4", 
         "normal_gold": 29
     }
 },
@@ -2359,7 +2359,7 @@
         "star_gold": 5800, 
         "bg": "\u539f\u91ce", 
         "open_condition": 112, 
-        "name": "\u5173\u7fbd\u5148\u5954\u6c5f\u9675", 
+        "name": "\u6c5f\u9675\u5148\u884c\u6218", 
         "level": 57, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -2368,7 +2368,7 @@
         "battle": 12, 
         "first_drop": "", 
         "normal_exp": 40, 
-        "monsters": "231,231,231,231,235,231,236,231,237", 
+        "monsters": "6,4,10,0,7,3,6,47,4", 
         "normal_gold": 29
     }
 },
@@ -2389,7 +2389,7 @@
         "battle": 12, 
         "first_drop": "", 
         "normal_exp": 40, 
-        "monsters": "241,241,241,241,238,241,239,241,240", 
+        "monsters": "6,0,5,37,5,9,4,7,8", 
         "normal_gold": 29
     }
 },
@@ -2401,7 +2401,7 @@
         "star_gold": 5800, 
         "bg": "\u539f\u91ce", 
         "open_condition": 114, 
-        "name": "\u8d75\u4e91\u8840\u6218\u957f\u5742\u5761", 
+        "name": "\u8840\u6218\u957f\u5742\u5761", 
         "level": 58, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -2410,7 +2410,7 @@
         "battle": 12, 
         "first_drop": "", 
         "normal_exp": 40, 
-        "monsters": "241,241,243,241,241,241,241,242,241", 
+        "monsters": "5,4,4,6,48,8,6,0,10", 
         "normal_gold": 29
     }
 },
@@ -2422,7 +2422,7 @@
         "star_gold": 5800, 
         "bg": "\u539f\u91ce", 
         "open_condition": 115, 
-        "name": "\u5b50\u9f99\u5355\u9a91\u6551\u963f\u6597", 
+        "name": "\u5355\u9a91\u6551\u963f\u6597", 
         "level": 58, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -2431,7 +2431,7 @@
         "battle": 12, 
         "first_drop": "", 
         "normal_exp": 40, 
-        "monsters": "241,244,241,241,245,241,241,246,241", 
+        "monsters": "4,5,4,7,0,10,6,45,6", 
         "normal_gold": 29
     }
 },
@@ -2443,7 +2443,7 @@
         "star_gold": 6000, 
         "bg": "\u5c71\u8def\u573a\u666f", 
         "open_condition": 116, 
-        "name": "\u5f20\u98de\u5927\u95f9\u957f\u677f\u6865", 
+        "name": "\u5927\u95f9\u957f\u677f\u6865", 
         "level": 59, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -2452,7 +2452,7 @@
         "battle": 12, 
         "first_drop": "", 
         "normal_exp": 40, 
-        "monsters": "241,241,247,248,241,241,241,249,241", 
+        "monsters": "5,3,10,7,0,36,6,9,9", 
         "normal_gold": 30
     }
 },
@@ -2464,7 +2464,7 @@
         "star_gold": 6000, 
         "bg": "\u539f\u91ce", 
         "open_condition": 117, 
-        "name": "\u8bf8\u845b\u590f\u6c5f\u5f15\u63f4\u519b", 
+        "name": "\u590f\u6c5f\u4e4b\u63f4", 
         "level": 59, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -2473,7 +2473,7 @@
         "battle": 12, 
         "first_drop": "", 
         "normal_exp": 40, 
-        "monsters": "241,241,241,250,241,251,241,252,241", 
+        "monsters": "7,0,10,50,5,5,5,3,5", 
         "normal_gold": 30
     }
 },
@@ -2494,7 +2494,7 @@
         "battle": 12, 
         "first_drop": "", 
         "normal_exp": 40, 
-        "monsters": "241,241,241,241,253,241,254,241,257", 
+        "monsters": "7,5,3,6,0,10,6,10,41", 
         "normal_gold": 30
     }
 },
@@ -2515,7 +2515,7 @@
         "battle": 12, 
         "first_drop": "", 
         "normal_exp": 40, 
-        "monsters": "258,258,258,254,258,250,255,256,257", 
+        "monsters": "6,5,5,6,8,10,7,46,7", 
         "normal_gold": 30
     }
 },
@@ -2536,7 +2536,7 @@
         "battle": 13, 
         "first_drop": "", 
         "normal_exp": 40, 
-        "monsters": "258,258,258,258,258,258,259,258,261", 
+        "monsters": "7,8,8,6,6,49,7,0,10", 
         "normal_gold": 30
     }
 },
@@ -2557,7 +2557,7 @@
         "battle": 13, 
         "first_drop": "", 
         "normal_exp": 40, 
-        "monsters": "263,260,263,263,261,263,263,262,263", 
+        "monsters": "6,6,8,7,0,10,7,48,7", 
         "normal_gold": 30
     }
 },
@@ -2578,7 +2578,7 @@
         "battle": 13, 
         "first_drop": "", 
         "normal_exp": 40, 
-        "monsters": "263,263,263,263,263,263,264,263,265", 
+        "monsters": "5,3,5,10,0,10,6,6,51", 
         "normal_gold": 31
     }
 },
@@ -2590,7 +2590,7 @@
         "star_gold": 6200, 
         "bg": "\u539f\u91ce", 
         "open_condition": 123, 
-        "name": "\u8d64\u58c1\u521d\u6218\u9000\u66f9\u64cd", 
+        "name": "\u8d64\u58c1\u521d\u6218", 
         "level": 62, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -2599,7 +2599,7 @@
         "battle": 13, 
         "first_drop": "", 
         "normal_exp": 40, 
-        "monsters": "267,267,267,265,264,267,266,267,267", 
+        "monsters": "6,10,5,10,10,52,7,0,10", 
         "normal_gold": 31
     }
 },
@@ -2620,7 +2620,7 @@
         "battle": 13, 
         "first_drop": "", 
         "normal_exp": 42, 
-        "monsters": "267,267,268,267,267,267,269,267,267", 
+        "monsters": "5,9,5,10,0,10,7,40,10", 
         "normal_gold": 31
     }
 },
@@ -2632,7 +2632,7 @@
         "star_gold": 6200, 
         "bg": "\u57ce\u4e0b", 
         "open_condition": 125, 
-        "name": "\u820c\u6218\u7fa4\u5112\u60f9\u6740\u8eab", 
+        "name": "\u820c\u6218\u7fa4\u5112", 
         "level": 63, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -2641,7 +2641,7 @@
         "battle": 13, 
         "first_drop": "", 
         "normal_exp": 42, 
-        "monsters": "273,273,273,237,270,273,271,273,272", 
+        "monsters": "10,0,10,6,47,6,7,7,7", 
         "normal_gold": 31
     }
 },
@@ -2653,7 +2653,7 @@
         "star_gold": 6200, 
         "bg": "\u539f\u91ce", 
         "open_condition": 126, 
-        "name": "\u5367\u9f99\u8bf8\u845b\u796d\u4e1c\u98ce", 
+        "name": "\u796d\u4e1c\u98ce", 
         "level": 64, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -2662,7 +2662,7 @@
         "battle": 13, 
         "first_drop": "", 
         "normal_exp": 42, 
-        "monsters": "273,273,273,273,273,273,273,274,273", 
+        "monsters": "6,0,10,5,5,5,54,7,41", 
         "normal_gold": 31
     }
 },
@@ -2674,7 +2674,7 @@
         "star_gold": 6200, 
         "bg": "\u539f\u91ce", 
         "open_condition": 127, 
-        "name": "\u96cf\u51e4\u5e9e\u7edf\u8fde\u73af\u8ba1", 
+        "name": "\u8fde\u73af\u8ba1", 
         "level": 64, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -2683,7 +2683,7 @@
         "battle": 13, 
         "first_drop": "", 
         "normal_exp": 42, 
-        "monsters": "273,273,273,273,274,273,273,275,273", 
+        "monsters": "7,0,10,37,9,8,6,36,10", 
         "normal_gold": 31
     }
 },
@@ -2695,7 +2695,7 @@
         "star_gold": 6400, 
         "bg": "\u519b\u8425\u573a\u666f", 
         "open_condition": 128, 
-        "name": "\u9ec4\u76d6\u82e6\u8089\u964d\u66f9\u64cd", 
+        "name": "\u82e6\u8089\u8ba1", 
         "level": 65, 
         "star_exp": 0, 
         "first_gold": 0, 
@@ -2704,7 +2704,7 @@
         "battle": 13, 
         "first_drop": "", 
         "normal_exp": 42, 
-        "monsters": "273,273,273,273,273,268,269,273,277", 
+        "monsters": "6,0,10,5,5,53,7,55,7", 
         "normal_gold": 32
     }
 },
@@ -2725,7 +2725,7 @@
         "battle": 13, 
         "first_drop": "", 
         "normal_exp": 42, 
-        "monsters": "268,276,269,276,275,276,278,279,280", 
+        "monsters": "44,40,39,50,36,45,42,46,43", 
         "normal_gold": 32
     }
 }

@@ -4,9 +4,9 @@
     "model": "config.arenareward", 
     "fields": {
         "week_stuffs": "", 
-        "week_gold": 100, 
+        "week_gold": 500000, 
         "name": "\u4e1e\u76f8", 
-        "day_gold": 100
+        "day_gold": 100000
     }
 },
 {
@@ -14,9 +14,9 @@
     "model": "config.arenareward", 
     "fields": {
         "week_stuffs": "", 
-        "week_gold": 100, 
+        "week_gold": 300000, 
         "name": "\u5927\u90fd\u7763", 
-        "day_gold": 100
+        "day_gold": 80000
     }
 },
 {
@@ -24,19 +24,19 @@
     "model": "config.arenareward", 
     "fields": {
         "week_stuffs": "", 
-        "week_gold": 100, 
+        "week_gold": 150000, 
         "name": "\u5927\u53f8\u9a6c", 
-        "day_gold": 100
+        "day_gold": 50000
     }
 },
 {
-    "pk": 4, 
+    "pk": 10, 
     "model": "config.arenareward", 
     "fields": {
         "week_stuffs": "", 
-        "week_gold": 100, 
+        "week_gold": 100000, 
         "name": "", 
-        "day_gold": 100
+        "day_gold": 30000
     }
 },
 {

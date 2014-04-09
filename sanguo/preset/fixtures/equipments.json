@@ -110,8 +110,8 @@
         "growing": 29, 
         "slots": 4, 
         "cls": 1, 
-        "icon_large": "\u767e\u8f9f\u5200", 
-        "icon": "\u767e\u8f9f\u5200"
+        "icon_large": "\u767e\u5288\u5200", 
+        "icon": "\u767e\u5288\u5200"
     }
 },
 {
@@ -765,7 +765,7 @@
         "upgrade_to": 35, 
         "stuff_needs": "12:1,11:20", 
         "gem_addition": 200, 
-        "name": "\u65b9\u5929\u621f", 
+        "name": "\u9738\u738b\u621f", 
         "tp_name": "\u6b66\u5668", 
         "hp": 0, 
         "attack": 72, 
@@ -777,8 +777,8 @@
         "growing": 32, 
         "slots": 4, 
         "cls": 5, 
-        "icon_large": "\u65b9\u5929\u621f", 
-        "icon": "\u65b9\u5929\u621f"
+        "icon_large": "\u9738\u738b\u621f", 
+        "icon": "\u9738\u738b\u621f"
     }
 },
 {
@@ -788,7 +788,7 @@
         "upgrade_to": null, 
         "stuff_needs": "", 
         "gem_addition": 260, 
-        "name": "\u5c07\u9738\u65b9\u5929\u621f", 
+        "name": "\u65b9\u5929\u753b\u621f", 
         "tp_name": "\u6b66\u5668", 
         "hp": 0, 
         "attack": 80, 
@@ -800,8 +800,8 @@
         "growing": 36, 
         "slots": 4, 
         "cls": 5, 
-        "icon_large": "\u5c07\u9738\u65b9\u5929\u621f", 
-        "icon": "\u5c07\u9738\u65b9\u5929\u621f"
+        "icon_large": "\u65b9\u5929\u753b\u621f", 
+        "icon": "\u65b9\u5929\u753b\u621f"
     }
 },
 {
@@ -1141,12 +1141,12 @@
         "step": 0, 
         "defense": 0, 
         "step_name": "\u767d", 
-        "cls_name": "\u5668", 
+        "cls_name": "\u7b1b", 
         "growing": 14, 
         "slots": 1, 
         "cls": 8, 
-        "icon_large": "\u6708\u9999", 
-        "icon": "\u6708\u9999"
+        "icon_large": "\u6708\u9999\u7b1b", 
+        "icon": "\u6708\u9999\u7b1b"
     }
 },
 {
@@ -1164,12 +1164,12 @@
         "step": 1, 
         "defense": 0, 
         "step_name": "\u7eff", 
-        "cls_name": "\u5668", 
+        "cls_name": "\u7b1b", 
         "growing": 18, 
         "slots": 2, 
         "cls": 8, 
-        "icon_large": "\u5e7d\u660e", 
-        "icon": "\u5e7d\u660e"
+        "icon_large": "\u5e7d\u660e\u7b1b", 
+        "icon": "\u5e7d\u660e\u7b1b"
     }
 },
 {
@@ -1187,12 +1187,12 @@
         "step": 2, 
         "defense": 0, 
         "step_name": "\u84dd", 
-        "cls_name": "\u5668", 
+        "cls_name": "\u7b1b", 
         "growing": 22, 
         "slots": 3, 
         "cls": 8, 
-        "icon_large": "\u661f\u8292", 
-        "icon": "\u661f\u8292"
+        "icon_large": "\u661f\u8292\u7b1b", 
+        "icon": "\u661f\u8292\u7b1b"
     }
 },
 {
@@ -1210,12 +1210,12 @@
         "step": 3, 
         "defense": 0, 
         "step_name": "\u7d2b", 
-        "cls_name": "\u5668", 
+        "cls_name": "\u7b1b", 
         "growing": 25, 
         "slots": 4, 
         "cls": 8, 
-        "icon_large": "\u9e23\u714c", 
-        "icon": "\u9e23\u714c"
+        "icon_large": "\u9e23\u714c\u7b1b", 
+        "icon": "\u9e23\u714c\u7b1b"
     }
 },
 {
@@ -1233,12 +1233,12 @@
         "step": 4, 
         "defense": 0, 
         "step_name": "\u7d2b", 
-        "cls_name": "\u5668", 
+        "cls_name": "\u7b1b", 
         "growing": 29, 
         "slots": 4, 
         "cls": 8, 
-        "icon_large": "\u5996\u65cb", 
-        "icon": "\u5996\u65cb"
+        "icon_large": "\u5996\u65cb\u7b1b", 
+        "icon": "\u5996\u65cb\u7b1b"
     }
 },
 {
@@ -1256,12 +1256,12 @@
         "step": 5, 
         "defense": 0, 
         "step_name": "\u7d2b", 
-        "cls_name": "\u5668", 
+        "cls_name": "\u7b1b", 
         "growing": 32, 
         "slots": 4, 
         "cls": 8, 
-        "icon_large": "\u6e38\u6708", 
-        "icon": "\u6e38\u6708"
+        "icon_large": "\u6e38\u6708\u7b1b", 
+        "icon": "\u6e38\u6708\u7b1b"
     }
 },
 {
@@ -1279,12 +1279,12 @@
         "step": 6, 
         "defense": 0, 
         "step_name": "\u6a59", 
-        "cls_name": "\u5668", 
+        "cls_name": "\u7b1b", 
         "growing": 36, 
         "slots": 4, 
         "cls": 8, 
-        "icon_large": "\u6708\u5996\u65e5\u72c2", 
-        "icon": "\u6708\u5996\u65e5\u72c2"
+        "icon_large": "\u6708\u5996\u65e5\u72c2\u7b1b", 
+        "icon": "\u6708\u5996\u65e5\u72c2\u7b1b"
     }
 },
 {
@@ -1329,8 +1329,8 @@
         "growing": 9, 
         "slots": 2, 
         "cls": 9, 
-        "icon_large": "\u94dc\u955c\u51ef", 
-        "icon": "\u94dc\u955c\u51ef"
+        "icon_large": "\u94dc\u955c\u94e0", 
+        "icon": "\u94dc\u955c\u94e0"
     }
 },
 {
@@ -1398,8 +1398,8 @@
         "growing": 14, 
         "slots": 4, 
         "cls": 9, 
-        "icon_large": "\u9ec4\u91d1\u51ef", 
-        "icon": "\u9ec4\u91d1\u51ef"
+        "icon_large": "\u9ec4\u91d1\u94e0", 
+        "icon": "\u9ec4\u91d1\u94e0"
     }
 },
 {
@@ -2099,7 +2099,7 @@
         "upgrade_to": 93, 
         "stuff_needs": "2:1,1:1", 
         "gem_addition": 0, 
-        "name": "\u82cd\u72fc\u5c06\u519b\u5370", 
+        "name": "\u82cd\u72fc\u5c06\u5370", 
         "tp_name": "\u9970\u54c1", 
         "hp": 80, 
         "attack": 0, 
@@ -2111,8 +2111,8 @@
         "growing": 36, 
         "slots": 1, 
         "cls": 14, 
-        "icon_large": "\u82cd\u72fc\u5c06\u519b\u5370", 
-        "icon": "\u82cd\u72fc\u5c06\u519b\u5370"
+        "icon_large": "\u82cd\u72fc\u5c06\u5370", 
+        "icon": "\u82cd\u72fc\u5c06\u5370"
     }
 },
 {
@@ -2122,7 +2122,7 @@
         "upgrade_to": 94, 
         "stuff_needs": "4:1,3:2", 
         "gem_addition": 30, 
-        "name": "\u731b\u864e\u5c06\u519b\u5370", 
+        "name": "\u731b\u864e\u5c06\u5370", 
         "tp_name": "\u9970\u54c1", 
         "hp": 100, 
         "attack": 0, 
@@ -2134,8 +2134,8 @@
         "growing": 45, 
         "slots": 2, 
         "cls": 14, 
-        "icon_large": "\u731b\u864e\u5c06\u519b\u5370", 
-        "icon": "\u731b\u864e\u5c06\u519b\u5370"
+        "icon_large": "\u731b\u864e\u5c06\u5370", 
+        "icon": "\u731b\u864e\u5c06\u5370"
     }
 },
 {
@@ -2145,7 +2145,7 @@
         "upgrade_to": 95, 
         "stuff_needs": "6:1,5:3", 
         "gem_addition": 60, 
-        "name": "\u6012\u72ee\u5c06\u519b\u5370", 
+        "name": "\u6012\u72ee\u5c06\u5370", 
         "tp_name": "\u9970\u54c1", 
         "hp": 120, 
         "attack": 0, 
@@ -2157,8 +2157,8 @@
         "growing": 54, 
         "slots": 3, 
         "cls": 14, 
-        "icon_large": "\u6012\u72ee\u5c06\u519b\u5370", 
-        "icon": "\u6012\u72ee\u5c06\u519b\u5370"
+        "icon_large": "\u6012\u72ee\u5c06\u5370", 
+        "icon": "\u6012\u72ee\u5c06\u5370"
     }
 },
 {
@@ -2168,7 +2168,7 @@
         "upgrade_to": 96, 
         "stuff_needs": "8:1,7:5", 
         "gem_addition": 100, 
-        "name": "\u7384\u6b66\u5c06\u519b\u5370", 
+        "name": "\u7384\u6b66\u5c06\u5370", 
         "tp_name": "\u9970\u54c1", 
         "hp": 140, 
         "attack": 0, 
@@ -2180,8 +2180,8 @@
         "growing": 63, 
         "slots": 4, 
         "cls": 14, 
-        "icon_large": "\u7384\u6b66\u5c06\u519b\u5370", 
-        "icon": "\u7384\u6b66\u5c06\u519b\u5370"
+        "icon_large": "\u7384\u6b66\u5c06\u5370", 
+        "icon": "\u7384\u6b66\u5c06\u5370"
     }
 },
 {
@@ -2191,7 +2191,7 @@
         "upgrade_to": 97, 
         "stuff_needs": "10:1,9:10", 
         "gem_addition": 150, 
-        "name": "\u9e92\u9e9f\u5c06\u519b\u5370", 
+        "name": "\u9e92\u9e9f\u5c06\u5370", 
         "tp_name": "\u9970\u54c1", 
         "hp": 160, 
         "attack": 0, 
@@ -2203,8 +2203,8 @@
         "growing": 72, 
         "slots": 4, 
         "cls": 14, 
-        "icon_large": "\u9e92\u9e9f\u5c06\u519b\u5370", 
-        "icon": "\u9e92\u9e9f\u5c06\u519b\u5370"
+        "icon_large": "\u9e92\u9e9f\u5c06\u5370", 
+        "icon": "\u9e92\u9e9f\u5c06\u5370"
     }
 },
 {
@@ -2214,7 +2214,7 @@
         "upgrade_to": 98, 
         "stuff_needs": "12:1,11:20", 
         "gem_addition": 200, 
-        "name": "\u98de\u9f99\u5c06\u519b\u5370", 
+        "name": "\u98de\u9f99\u5c06\u5370", 
         "tp_name": "\u9970\u54c1", 
         "hp": 180, 
         "attack": 0, 
@@ -2226,8 +2226,8 @@
         "growing": 81, 
         "slots": 4, 
         "cls": 14, 
-        "icon_large": "\u98de\u9f99\u5c06\u519b\u5370", 
-        "icon": "\u98de\u9f99\u5c06\u519b\u5370"
+        "icon_large": "\u98de\u9f99\u5c06\u5370", 
+        "icon": "\u98de\u9f99\u5c06\u5370"
     }
 },
 {
@@ -2249,8 +2249,8 @@
         "growing": 90, 
         "slots": 4, 
         "cls": 14, 
-        "icon_large": "\u6b66\u5723\u91d1\u7389\u5370", 
-        "icon": "\u6b66\u5723\u91d1\u7389\u5370"
+        "icon_large": "\u6b66\u5723\u7eaf\u91d1\u5370", 
+        "icon": "\u6b66\u5723\u7eaf\u91d1\u5370"
     }
 }
 ]
