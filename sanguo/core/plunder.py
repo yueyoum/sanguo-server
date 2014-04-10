@@ -7,44 +7,30 @@ import random
 import logging
 
 from django.db import transaction
-
 from mongoscheme import Q, DoesNotExist
-
-from apps.stage.models import Stage as ModelStage
 from core.character import Char, get_char_ids_by_level_range
 from core.battle import PVP
 from core.stage import Hang
 from core.mongoscheme import MongoHang, MongoPlunder, MongoEmbededPlunderChars, MongoStage
-
-from core.exception import InvalidOperate, CounterOverFlow, SyceeNotEnough
+from core.exception import InvalidOperate
 from core.counter import Counter
-from core.achievement import Achievement
 from core.task import Task
 from core.formation import Formation
-from core.hero import Hero
 from core.prison import Prison
 from core.stage import Stage
-
-
 from protomsg import Battle as MsgBattle
 from protomsg import PlunderNotify
 from core.msgpipe import publish_to_char
 from utils import pack_msg
-
 from preset.settings import (
-    PLUNDER_GET_OFFICIAL_EXP_WHEN_LOST,
     PLUNDER_GET_OFFICIAL_EXP_WHEN_WIN,
     PLUNDER_POINT,
     PLUNDER_DEFENSE_FAILURE_GOLD,
-    PLUNDER_DEFENSE_FAILURE_MAX_TIMES,
-    PLUNDER_DEFENSE_SUCCESS_GOLD,
-    PLUNDER_DEFENSE_SUCCESS_MAX_TIMES,
     PLUNDER_REWARD_NEEDS_POINT,
     PLUNDER_GOT_ITEMS_HOUR,
 )
+from protomsg import PLUNDER_HERO, PLUNDER_STUFF
 
-
-from protomsg import PLUNDER_GOLD, PLUNDER_HERO, PLUNDER_STUFF
 
 logger = logging.getLogger('sanguo')
 

@@ -9,7 +9,7 @@ from django.utils import timezone
 
 from _base import Logger
 
-from apps.mail.models import Mail as ModelMail
+# from apps.mail.models import Mail as ModelMail
 from core.mail import Mail
 from core.mongoscheme import MongoCharacter
 
@@ -38,27 +38,28 @@ def send_one_mail(mail):
 
 
 def run():
-    mails = ModelMail.objects.filter(send_done=False).filter(send_lock=False).filter(send_at__lte=timezone.now())
-
-    logger = Logger('send_mail.log')
-    logger.write("Send Mail Start. mails amount: {0}".format(mails.count()))
-
-    for mail in mails:
-        mail.send_lock = True
-        mail.save()
-        try:
-            send_one_mail(mail)
-        except Exception as e:
-            logger.write("ERROR: mail: {0}, error: {1}".format(mail.id, str(e)))
-            logger.write(traceback.format_exc())
-        else:
-            mail.send_done = True
-        finally:
-            mail.send_lock = False
-            mail.save()
-
-    logger.write("Send Mail Complete")
-    logger.close()
+    # mails = ModelMail.objects.filter(send_done=False).filter(send_lock=False).filter(send_at__lte=timezone.now())
+    #
+    # logger = Logger('send_mail.log')
+    # logger.write("Send Mail Start. mails amount: {0}".format(mails.count()))
+    #
+    # for mail in mails:
+    #     mail.send_lock = True
+    #     mail.save()
+    #     try:
+    #         send_one_mail(mail)
+    #     except Exception as e:
+    #         logger.write("ERROR: mail: {0}, error: {1}".format(mail.id, str(e)))
+    #         logger.write(traceback.format_exc())
+    #     else:
+    #         mail.send_done = True
+    #     finally:
+    #         mail.send_lock = False
+    #         mail.save()
+    #
+    # logger.write("Send Mail Complete")
+    # logger.close()
+    pass
 
 
 if __name__ == '__main__':

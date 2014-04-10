@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-# from django.db.models import Q
-# from django.db import IntegrityError
 
-
-# from apps.character.models import Character, CharPropertyLog, level_update_exp, official_update_exp
 
 from django.conf import settings
 
@@ -14,7 +10,6 @@ from core.mongoscheme import MongoHero, MongoCharacter
 from core.signals import char_level_up_signal, char_official_up_signal, char_gold_changed_signal, char_sycee_changed_signal
 from core.formation import Formation
 from core.msgpipe import publish_to_char
-from core.exception import SanguoException
 
 from utils import pack_msg
 
