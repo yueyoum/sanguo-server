@@ -5,7 +5,7 @@ __date__ = '12/31/13'
 
 from core.friend import Friend
 from core.character import Char, get_char_ids_by_level_range
-from utils import pack_msg
+from libs import pack_msg
 from utils.decorate import message_response, operate_guard
 
 import protomsg

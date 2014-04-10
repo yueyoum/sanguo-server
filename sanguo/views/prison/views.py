@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from utils.decorate import message_response
-from utils import pack_msg
+from libs import pack_msg
 
 from core.prison import Prison
 

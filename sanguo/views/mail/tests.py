@@ -9,7 +9,7 @@ from core.mail import Mail
 from core.character import char_initialize
 
 from utils import app_test_helper
-from utils import crypto
+from libs import crypto
 from utils import timezone
 
 import protomsg

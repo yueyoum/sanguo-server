@@ -9,7 +9,7 @@ import protomsg
 from protomsg import RESPONSE_NOTIFY_TYPE
 
 from utils import app_test_helper
-from utils import crypto
+from libs import crypto
 
 from core.character import char_initialize
 

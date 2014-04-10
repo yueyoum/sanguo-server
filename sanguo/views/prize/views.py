@@ -1,6 +1,6 @@
 from core.attachment import Attachment
 
-from utils import pack_msg
+from libs import pack_msg
 from utils.decorate import message_response
 
 from protomsg import PrizeResponse

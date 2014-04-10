@@ -9,7 +9,7 @@ from django.test import TestCase, TransactionTestCase
 import protomsg
 
 from core.character import char_initialize
-from utils import crypto
+from libs import crypto
 from utils import app_test_helper as tests
 
 

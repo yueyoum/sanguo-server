@@ -3,7 +3,7 @@
 __author__ = 'Wang Chao'
 __date__ = '1/21/14'
 
-from utils import pack_msg
+from libs import pack_msg
 from utils.decorate import message_response, operate_guard
 from core.plunder import Plunder
 import protomsg

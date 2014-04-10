@@ -282,3 +282,6 @@ TYPE_COMMAND = {
    4001: "/guide/finish/",
 }
 
+COMMAND_TYPE = {v: k for k, v in TYPE_COMMAND.iteritems()}
+COMMAND_REQUEST = {k: REQUEST_TYPE[v] for k, v in COMMAND_TYPE.iteritems()}
+

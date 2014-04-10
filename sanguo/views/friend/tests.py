@@ -9,7 +9,7 @@ from django.test import TestCase
 from core.friend import Friend
 from core.character import char_initialize
 from utils import app_test_helper
-from utils import crypto
+from libs import crypto
 
 import protomsg
 from protomsg import RESPONSE_NOTIFY_TYPE

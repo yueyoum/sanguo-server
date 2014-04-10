@@ -10,7 +10,7 @@ from core.character import char_initialize
 from core.hero import save_hero, Hero
 import protomsg
 
-from utils import crypto
+from libs import crypto
 
 
 def tearDown():

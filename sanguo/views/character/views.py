@@ -7,7 +7,7 @@ __date__ = '4/9/14'
 from core.exception import SanguoException
 from core.signals import login_signal
 from protomsg import CreateCharacterResponse
-from utils import crypto, pack_msg
+from libs import crypto, pack_msg
 from utils.decorate import message_response
 
 

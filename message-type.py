@@ -90,6 +90,16 @@ def set_type_command(xml_src, des):
         f.writelines(type_command)
 
 
+def set_extra(xml_src, des):
+    texts = [
+        "COMMAND_TYPE = {v: k for k, v in TYPE_COMMAND.iteritems()}\n",
+        "COMMAND_REQUEST = {k: REQUEST_TYPE[v] for k, v in COMMAND_TYPE.iteritems()}\n\n",
+    ]
+
+    with open(des, 'a') as f:
+        f.writelines(texts)
+
+
 if __name__ == '__main__':
     self_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -104,4 +114,5 @@ if __name__ == '__main__':
     set_response_notify_type(xml_src, des)
     set_request_type(xml_src, des)
     set_type_command(xml_src, des)
+    set_extra(xml_src, des)
 

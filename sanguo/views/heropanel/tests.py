@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from core.character import char_initialize
-from utils import crypto
+from libs import crypto
 
 __author__ = 'Wang Chao'
 __date__ = '1/23/14'

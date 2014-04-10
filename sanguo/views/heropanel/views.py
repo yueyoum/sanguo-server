@@ -4,7 +4,7 @@ __author__ = 'Wang Chao'
 __date__ = '1/23/14'
 
 from utils.decorate import message_response
-from utils import pack_msg
+from libs import pack_msg
 
 from core.heropanel import HeroPanel
 

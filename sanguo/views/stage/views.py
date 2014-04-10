@@ -4,7 +4,7 @@ __author__ = 'Wang Chao'
 __date__ = '4/9/14'
 
 from core.stage import Stage, Hang, EliteStage
-from utils import pack_msg
+from libs import pack_msg
 from utils.decorate import message_response, operate_guard
 
 import protomsg

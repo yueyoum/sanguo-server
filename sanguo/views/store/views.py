@@ -8,7 +8,7 @@ __date__ = '4/9/14'
 from utils.decorate import message_response
 
 from core.store import Store
-from utils import pack_msg
+from libs import pack_msg
 
 from protomsg import StorePanelResponse, StoreBuyResponse
 

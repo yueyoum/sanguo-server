@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import protomsg
-from utils import pack_msg
+from libs import pack_msg
 from utils.decorate import message_response, operate_guard
 
 from core.arena import Arena
