@@ -5,7 +5,8 @@ __date__ = '1/23/14'
 
 import random
 
-from django.db import transaction
+from django.conf import settings
+
 from mongoengine import DoesNotExist
 
 from core.mongoscheme import MongoHeroPanel
@@ -18,7 +19,7 @@ from core.msgpipe import publish_to_char
 from utils import pack_msg
 from utils import timezone
 
-from preset.data import HERO_GET_BY_QUALITY, HERO_GET_BY_QUALITY_NOT_EQUAL
+from preset.data import HERO_GET_BY_QUALITY, HERO_GET_BY_QUALITY_NOT_EQUAL, CHARINIT
 
 
 import protomsg
@@ -108,45 +109,48 @@ class HeroPanel(object):
 
 
     def open(self, _id):
-        if self.all_opended():
-            raise InvalidOperate("Get Hero, Open: Char {0} Try to open {1}. But All Opened".format(self.char_id, _id))
-
-        if str(_id) not in self.panel.panel:
-            raise InvalidOperate("Get Hero, Open: Char {0} Try to open a NONE exist socket id: {1}".format(
-                self.char_id, _id
-            ))
-
-        if self.panel.panel[str(_id)]:
-            raise InvalidOperate("HeroPanel Open: Char {0} Try to open an already opened socket {1}".format(
-                self.char_id, _id
-            ))
-        if self.free_times == 0:
-            # 使用元宝
-            char = Char(self.char_id)
-            cache_char = char.cacheobj
-            if cache_char.sycee < GETHERO_COST_SYCEE:
-                raise SyceeNotEnough()
-
-            char.update(sycee=-GETHERO_COST_SYCEE, des='HeroPanel Open')
+        if settings.IS_GUIDE_SERVER:
+            hero_id = CHARINIT.extra_hero
         else:
-            c = Counter(self.char_id, 'gethero')
-            c.incr()
+            if self.all_opended():
+                raise InvalidOperate("Get Hero, Open: Char {0} Try to open {1}. But All Opened".format(self.char_id, _id))
 
-        if self.has_got_good_hero():
-            hero_id = random.choice(self.panel.other_heros)
-            self.panel.other_heros.remove(hero_id)
-        else:
-            prob = GET_GOOD_HERO_PROB[self.open_times + 1]
-            if random.randint(1, 100) <= prob:
-                # 取得甲卡
-                hero_id = self.panel.good_hero
-                self.panel.good_hero = 0
+            if str(_id) not in self.panel.panel:
+                raise InvalidOperate("Get Hero, Open: Char {0} Try to open a NONE exist socket id: {1}".format(
+                    self.char_id, _id
+                ))
+
+            if self.panel.panel[str(_id)]:
+                raise InvalidOperate("HeroPanel Open: Char {0} Try to open an already opened socket {1}".format(
+                    self.char_id, _id
+                ))
+            if self.free_times == 0:
+                # 使用元宝
+                char = Char(self.char_id)
+                cache_char = char.cacheobj
+                if cache_char.sycee < GETHERO_COST_SYCEE:
+                    raise SyceeNotEnough()
+
+                char.update(sycee=-GETHERO_COST_SYCEE, des='HeroPanel Open')
             else:
+                c = Counter(self.char_id, 'gethero')
+                c.incr()
+
+            if self.has_got_good_hero():
                 hero_id = random.choice(self.panel.other_heros)
                 self.panel.other_heros.remove(hero_id)
+            else:
+                prob = GET_GOOD_HERO_PROB[self.open_times + 1]
+                if random.randint(1, 100) <= prob:
+                    # 取得甲卡
+                    hero_id = self.panel.good_hero
+                    self.panel.good_hero = 0
+                else:
+                    hero_id = random.choice(self.panel.other_heros)
+                    self.panel.other_heros.remove(hero_id)
 
-        self.panel.panel[str(_id)] = hero_id
-        self.panel.save()
+            self.panel.panel[str(_id)] = hero_id
+            self.panel.save()
 
         save_hero(self.char_id, hero_id)
         self.send_notify()

@@ -6,7 +6,7 @@ from django.conf import settings
 from mongoengine import Q
 
 from core.hero import save_hero, Hero
-from core.mongoscheme import MongoHero, MongoCharacter
+from core.mongoscheme import MongoHero, MongoCharacter, MongoStage
 from core.signals import char_level_up_signal, char_official_up_signal, char_gold_changed_signal, char_sycee_changed_signal
 from core.formation import Formation
 from core.msgpipe import publish_to_char
@@ -239,6 +239,9 @@ def char_initialize(account_id, server_id, char_id, name):
     from core.item import Item
 
     init_heros = CHARINIT.decoded_heros
+    if not settings.IS_GUIDE_SERVER:
+        init_heros[CHARINIT.extra_hero] = [0, 0, 0]
+
     init_heros_ids = init_heros.keys()
 
     transformed_init_heros = {}
@@ -284,18 +287,26 @@ def char_initialize(account_id, server_id, char_id, name):
         _sid = f.save_socket(hero=_id, weapon=weapon, armor=armor, jewelry=jewelry, send_notify=False)
         socket_ids.append(_sid)
 
-    socket_ids = socket_ids + (9-len(socket_ids)) * [0]
+    # socket_ids = socket_ids + (9-len(socket_ids)) * [0]
 
     socket_ids = [
-        socket_ids[0], socket_ids[3], socket_ids[6],
-        socket_ids[1], socket_ids[4], socket_ids[7],
-        socket_ids[2], socket_ids[5], socket_ids[8],
+        socket_ids[0], socket_ids[3], 0,
+        socket_ids[1], 0, 0,
+        socket_ids[2], 0, 0,
     ]
 
     f.save_formation(socket_ids, send_notify=False)
 
     item.gem_add(CHARINIT.decoded_gems, send_notify=False)
     item.stuff_add(CHARINIT.decoded_stuffs, send_notify=False)
+
+    if not settings.IS_GUIDE_SERVER:
+        ms = MongoStage(id=char_id)
+        ms.stages['1'] = True
+        ms.max_star_stage = 1
+        ms.stage_new = 2
+        ms.save()
+
     print "char_initialize done"
 
 
