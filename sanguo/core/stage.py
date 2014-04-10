@@ -263,9 +263,8 @@ class Stage(object):
             for i in range(amount):
                 transformed_equipments.append((_id, 1, 1))
 
-        with transaction.atomic():
-            attach = Attachment(self.char_id)
-            attach.save_to_char(exp=exp, gold=gold, equipments=transformed_equipments, gems=gems, stuffs=stuffs)
+        attach = Attachment(self.char_id)
+        attach.save_to_char(exp=exp, gold=gold, equipments=transformed_equipments, gems=gems, stuffs=stuffs)
 
         return exp, gold, transformed_equipments, gems, stuffs
 
@@ -645,9 +644,8 @@ class EliteStage(object):
             for i in range(amount):
                 transformed_equipments.append((_id, 1, 1))
 
-        with transaction.atomic():
-            attach = Attachment(self.char_id)
-            attach.save_to_char(exp=drop_exp, gold=drop_gold, equipments=transformed_equipments, gems=drop_gems, stuffs=drop_stuffs)
+        attach = Attachment(self.char_id)
+        attach.save_to_char(exp=drop_exp, gold=drop_gold, equipments=transformed_equipments, gems=drop_gems, stuffs=drop_stuffs)
 
         return drop_exp, drop_gold, transformed_equipments, drop_gems, drop_stuffs
 

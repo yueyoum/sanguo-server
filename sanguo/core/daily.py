@@ -36,7 +36,6 @@ class CheckIn(object):
             self.c.save()
 
 
-    @transaction.atomic
     def checkin(self):
         if self.c.has_checked:
             raise InvalidOperate("CheckIN: Char {0} Try to checkin, But already checked".format(self.char_id))

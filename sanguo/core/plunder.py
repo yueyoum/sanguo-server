@@ -181,7 +181,6 @@ class Plunder(object):
         return msg
 
 
-    @transaction.atomic
     def get_reward(self, tp):
         if not self.mongo_plunder.target_char:
             raise InvalidOperate("Plunder Get Reward. Char {0} try to get reward type {1}. But no target char".format(self.char_id, tp))

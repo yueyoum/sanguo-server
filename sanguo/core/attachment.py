@@ -104,7 +104,6 @@ class Attachment(object):
 
         self.send_notify()
 
-    @transaction.atomic
     def get_attachment(self, prize_id, param=0):
         if prize_id == 1:
             # 挂机

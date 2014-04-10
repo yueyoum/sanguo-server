@@ -188,7 +188,6 @@ class Hero(FightPowerMixin):
         return HERO_STEP_UP_COST_SOUL_AMOUNT[self.step]
 
 
-    @transaction.atomic
     def step_up(self):
         # 升阶
         if self.step >= HERO_MAX_STEP:

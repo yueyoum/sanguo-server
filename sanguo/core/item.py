@@ -168,9 +168,8 @@ class Equipment(MessageEquipmentMixin):
 
         new_level = self.mongo_item.equipments[str(self.equip_id)].level
 
-        with transaction.atomic():
-            char.update(gold=-all_gold_needs, des='Equipment Level up. {1} from {0} to {1}'.format(self.equip_id, old_level, new_level))
-            self.mongo_item.save()
+        char.update(gold=-all_gold_needs, des='Equipment Level up. {1} from {0} to {1}'.format(self.equip_id, old_level, new_level))
+        self.mongo_item.save()
 
         return equip_msgs
 
@@ -418,14 +417,12 @@ class Item(MessageEquipmentMixin):
                 self.char_id, equip_id
             ))
 
-        with transaction.atomic():
-            equip = Equipment(self.char_id, equip_id, self.item)
-            stuff_needs = equip.step_up()
-            for _id, _amount in stuff_needs:
-                self.stuff_remove(_id, _amount)
+        equip = Equipment(self.char_id, equip_id, self.item)
+        stuff_needs = equip.step_up()
+        for _id, _amount in stuff_needs:
+            self.stuff_remove(_id, _amount)
 
 
-    @transaction.atomic
     def equip_sell(self, ids):
         if not isinstance(ids, (set, list, tuple)):
             ids = [ids]
@@ -561,7 +558,6 @@ class Item(MessageEquipmentMixin):
             publish_to_char(self.char_id, pack_msg(msg))
 
 
-    @transaction.atomic
     def gem_sell(self, _id, amount):
         # TODO get gold
         gold = 10 * amount
@@ -684,7 +680,6 @@ class Item(MessageEquipmentMixin):
             publish_to_char(self.char_id, pack_msg(msg))
 
 
-    @transaction.atomic
     def stuff_sell(self, _id, amount):
         # TODO get gold
         gold = 10 * amount
