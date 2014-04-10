@@ -14,7 +14,7 @@
         "attack": 12.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 1, 
+        "quality": 3, 
         "hp": 35.0
     }
 },
@@ -33,7 +33,7 @@
         "attack": 11.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 1, 
+        "quality": 3, 
         "hp": 42.0
     }
 },
@@ -52,7 +52,7 @@
         "attack": 15.0, 
         "defense": 4.0, 
         "crit": 0, 
-        "quality": 1, 
+        "quality": 3, 
         "hp": 35.0
     }
 },
@@ -71,7 +71,7 @@
         "attack": 13.0, 
         "defense": 4.0, 
         "crit": 0, 
-        "quality": 1, 
+        "quality": 3, 
         "hp": 40.0
     }
 },

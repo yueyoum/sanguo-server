@@ -4,14 +4,15 @@
     "model": "stage.elitestage", 
     "fields": {
         "normal_drop": "102", 
+        "normal_gold": 3000, 
         "bg": "", 
         "open_condition": 10, 
-        "name": "\u9ec4\u5dfe\u518d\u8d77", 
+        "strength_modulus": 2.8, 
         "level": 8, 
         "times": 1, 
         "normal_exp": 2000, 
         "monsters": "5,0,5,6,0,6,8,11,8", 
-        "normal_gold": 3000
+        "name": "\u9ec4\u5dfe\u518d\u8d77"
     }
 },
 {
@@ -19,14 +20,15 @@
     "model": "stage.elitestage", 
     "fields": {
         "normal_drop": "103", 
+        "normal_gold": 4000, 
         "bg": "", 
         "open_condition": 20, 
-        "name": "\u518d\u88ad\u864e\u7262", 
+        "strength_modulus": 2.8, 
         "level": 15, 
         "times": 1, 
         "normal_exp": 2500, 
         "monsters": "2,16,2,17,8,15,10,18,10", 
-        "normal_gold": 4000
+        "name": "\u518d\u88ad\u864e\u7262"
     }
 },
 {
@@ -34,14 +36,15 @@
     "model": "stage.elitestage", 
     "fields": {
         "normal_drop": "101,103", 
+        "normal_gold": 4500, 
         "bg": "", 
         "open_condition": 30, 
-        "name": "\u7389\u73ba\u98ce\u6ce2", 
+        "strength_modulus": 2.8, 
         "level": 20, 
         "times": 1, 
         "normal_exp": 3000, 
         "monsters": "6,5,5,19,20,10,7,21,22", 
-        "normal_gold": 4500
+        "name": "\u7389\u73ba\u98ce\u6ce2"
     }
 },
 {
@@ -49,14 +52,15 @@
     "model": "stage.elitestage", 
     "fields": {
         "normal_drop": "104", 
+        "normal_gold": 5000, 
         "bg": "", 
         "open_condition": 40, 
-        "name": "\u70fd\u706b\u90fd\u57ce", 
+        "strength_modulus": 2.8, 
         "level": 26, 
         "times": 1, 
         "normal_exp": 3500, 
         "monsters": "5,23,5,17,15,16,7,24,7", 
-        "normal_gold": 5000
+        "name": "\u70fd\u706b\u90fd\u57ce"
     }
 },
 {
@@ -64,14 +68,15 @@
     "model": "stage.elitestage", 
     "fields": {
         "normal_drop": "103,104", 
+        "normal_gold": 6000, 
         "bg": "", 
         "open_condition": 50, 
-        "name": "\u518d\u6218\u6fee\u9633", 
+        "strength_modulus": 2.8, 
         "level": 33, 
         "times": 1, 
         "normal_exp": 4000, 
         "monsters": "7,10,7,25,26,27,34,17,15", 
-        "normal_gold": 6000
+        "name": "\u518d\u6218\u6fee\u9633"
     }
 },
 {
@@ -79,14 +84,15 @@
     "model": "stage.elitestage", 
     "fields": {
         "normal_drop": "103,105", 
+        "normal_gold": 7000, 
         "bg": "", 
         "open_condition": 60, 
-        "name": "\u6c49\u5ead\u6551\u7687", 
+        "strength_modulus": 2.8, 
         "level": 35, 
         "times": 1, 
         "normal_exp": 4500, 
         "monsters": "6,8,10,7,7,29,6,12,7", 
-        "normal_gold": 7000
+        "name": "\u6c49\u5ead\u6551\u7687"
     }
 },
 {
@@ -94,14 +100,15 @@
     "model": "stage.elitestage", 
     "fields": {
         "normal_drop": "106", 
+        "normal_gold": 8000, 
         "bg": "", 
         "open_condition": 70, 
-        "name": "\u6c5f\u4e1c\u9738\u4e1a", 
+        "strength_modulus": 2.8, 
         "level": 38, 
         "times": 1, 
         "normal_exp": 5000, 
         "monsters": "30,31,30,7,32,7,6,28,10", 
-        "normal_gold": 8000
+        "name": "\u6c5f\u4e1c\u9738\u4e1a"
     }
 },
 {
@@ -109,14 +116,15 @@
     "model": "stage.elitestage", 
     "fields": {
         "normal_drop": "103,105", 
+        "normal_gold": 9000, 
         "bg": "", 
         "open_condition": 80, 
-        "name": "\u6c34\u6df9\u4e0b\u90b3", 
+        "strength_modulus": 2.8, 
         "level": 44, 
         "times": 1, 
         "normal_exp": 5500, 
         "monsters": "7,23,7,35,16,36,17,15,34", 
-        "normal_gold": 9000
+        "name": "\u6c34\u6df9\u4e0b\u90b3"
     }
 },
 {
@@ -124,14 +132,15 @@
     "model": "stage.elitestage", 
     "fields": {
         "normal_drop": "104,106", 
+        "normal_gold": 10000, 
         "bg": "", 
         "open_condition": 90, 
-        "name": "\u5b98\u6e21\u6076\u6218", 
+        "strength_modulus": 2.8, 
         "level": 50, 
         "times": 1, 
         "normal_exp": 6000, 
         "monsters": "26,27,25,6,37,10,19,22,20", 
-        "normal_gold": 10000
+        "name": "\u5b98\u6e21\u6076\u6218"
     }
 },
 {
@@ -139,14 +148,15 @@
     "model": "stage.elitestage", 
     "fields": {
         "normal_drop": "105,106", 
+        "normal_gold": 12000, 
         "bg": "", 
         "open_condition": 100, 
-        "name": "\u518d\u8d70\u5343\u91cc", 
+        "strength_modulus": 2.8, 
         "level": 55, 
         "times": 1, 
         "normal_exp": 7000, 
         "monsters": "38,7,39,40,36,10,10,41,10", 
-        "normal_gold": 12000
+        "name": "\u518d\u8d70\u5343\u91cc"
     }
 },
 {
@@ -154,14 +164,15 @@
     "model": "stage.elitestage", 
     "fields": {
         "normal_drop": "106,107", 
+        "normal_gold": 15000, 
         "bg": "", 
         "open_condition": 110, 
-        "name": "\u706b\u70e7\u65b0\u91ce", 
+        "strength_modulus": 2.8, 
         "level": 60, 
         "times": 1, 
         "normal_exp": 8000, 
         "monsters": "36,37,10,40,41,42,45,44,46", 
-        "normal_gold": 15000
+        "name": "\u706b\u70e7\u65b0\u91ce"
     }
 },
 {
@@ -169,14 +180,15 @@
     "model": "stage.elitestage", 
     "fields": {
         "normal_drop": "108,109", 
+        "normal_gold": 18000, 
         "bg": "", 
         "open_condition": 120, 
-        "name": "\u4e03\u8fdb\u4e03\u51fa", 
+        "strength_modulus": 2.8, 
         "level": 64, 
         "times": 1, 
         "normal_exp": 9000, 
         "monsters": "47,37,48,45,36,50,7,41,46", 
-        "normal_gold": 18000
+        "name": "\u4e03\u8fdb\u4e03\u51fa"
     }
 },
 {
@@ -184,14 +196,15 @@
     "model": "stage.elitestage", 
     "fields": {
         "normal_drop": "110", 
+        "normal_gold": 22000, 
         "bg": "", 
         "open_condition": 130, 
-        "name": "\u706b\u70e7\u8d64\u58c1", 
+        "strength_modulus": 2.8, 
         "level": 70, 
         "times": 1, 
         "normal_exp": 10000, 
         "monsters": "48,50,37,47,41,54,42,43,46", 
-        "normal_gold": 22000
+        "name": "\u706b\u70e7\u8d64\u58c1"
     }
 }
 ]

@@ -82,7 +82,7 @@
         "hp_growing": 54.23, 
         "avatar": "\u590f\u4faf\u6e0a", 
         "country": 1, 
-        "special_equip_cls": "1,9,14", 
+        "special_equip_cls": "7,9,14", 
         "contribution": 300
     }
 },
