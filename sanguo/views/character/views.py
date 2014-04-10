@@ -33,6 +33,7 @@ def create_character(request):
         30: 202,
         31: 200,
         32: 201,
+        33: 2,
     }
 
     if res['ret'] != 0:
