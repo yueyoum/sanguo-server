@@ -268,11 +268,13 @@ def char_initialize(account_id, server_id, char_id, name):
 
     f = Formation(char_id)
 
-    hero_ids = [
-        hero_ids[0], hero_ids[1], hero_ids[2],
-        0, 0, 0,
-        0, 0,
-    ]
+    hero_ids = hero_ids + (8-len(hero_ids)) * [0]
+
+    # hero_ids = [
+    #     hero_ids[0], hero_ids[1], hero_ids[2],
+    #     0, 0, 0,
+    #     0, 0,
+    # ]
     socket_ids = []
     for index, _id in enumerate(hero_ids):
         try:
@@ -282,10 +284,12 @@ def char_initialize(account_id, server_id, char_id, name):
         _sid = f.save_socket(hero=_id, weapon=weapon, armor=armor, jewelry=jewelry, send_notify=False)
         socket_ids.append(_sid)
 
+    socket_ids = socket_ids + (9-len(socket_ids)) * [0]
+
     socket_ids = [
         socket_ids[0], socket_ids[3], socket_ids[6],
         socket_ids[1], socket_ids[4], socket_ids[7],
-        socket_ids[2], socket_ids[5], 0,
+        socket_ids[2], socket_ids[5], socket_ids[8],
     ]
 
     f.save_formation(socket_ids, send_notify=False)
