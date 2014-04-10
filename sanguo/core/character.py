@@ -271,7 +271,7 @@ def char_initialize(account_id, server_id, char_id, name):
 
     f = Formation(char_id)
 
-    hero_ids = hero_ids + (8-len(hero_ids)) * [0]
+    hero_ids = hero_ids + (4-len(hero_ids)) * [0]
 
     # hero_ids = [
     #     hero_ids[0], hero_ids[1], hero_ids[2],
@@ -300,12 +300,12 @@ def char_initialize(account_id, server_id, char_id, name):
     item.gem_add(CHARINIT.decoded_gems, send_notify=False)
     item.stuff_add(CHARINIT.decoded_stuffs, send_notify=False)
 
-    if not settings.IS_GUIDE_SERVER:
-        ms = MongoStage(id=char_id)
-        ms.stages['1'] = True
-        ms.max_star_stage = 1
-        ms.stage_new = 2
-        ms.save()
+    # if not settings.IS_GUIDE_SERVER:
+    #     ms = MongoStage(id=char_id)
+    #     ms.stages['1'] = True
+    #     ms.max_star_stage = 1
+    #     ms.stage_new = 2
+    #     ms.save()
 
     print "char_initialize done"
 
