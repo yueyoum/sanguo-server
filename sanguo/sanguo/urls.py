@@ -7,7 +7,6 @@ redis_client.ping()
 
 import callbacks.signals
 
-
 urlpatterns = patterns('',
                        # Examples:
                        # url(r'^$', 'sanguo.views.home', name='home'),
@@ -20,10 +19,4 @@ urlpatterns = patterns('',
                        # url(r'^admin/', include(admin.site.urls)),
                        url(r'', include('views.urls')),
 )
-
-
-if settings.IS_GUIDE_SERVER:
-    urlpatterns += patterns('',
-                            url(r'', include('apps.character.urls')),
-    )
 
