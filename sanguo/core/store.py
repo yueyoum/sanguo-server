@@ -163,5 +163,6 @@ class Store(object):
 
 
     def send_notify(self):
-        msg = self.fill_up_notify_msg()
-        publish_to_char(self.char_id, pack_msg(msg))
+        # msg = self.fill_up_notify_msg()
+        # publish_to_char(self.char_id, pack_msg(msg))
+        pass
