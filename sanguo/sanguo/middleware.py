@@ -21,6 +21,9 @@ class UnpackAndVerifyData(RequestFilter):
     def process_request(self, request):
         super(UnpackAndVerifyData, self).process_request(request)
 
+        if request.path.startswith('/api/'):
+            return
+
         if request._char_id:
             timercheck.check(request._char_id)
         if request._server_id:
