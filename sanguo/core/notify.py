@@ -20,6 +20,7 @@ from core.arena import Arena
 from core.achievement import Achievement
 from core.store import Store
 from core.hero import HeroSoul
+from core.functionopen import FunctionOpen
 
 
 def hero_notify(char_id, objs, message_name="HeroNotify"):
@@ -99,4 +100,6 @@ def login_notify(char_id):
     Store(char_id).send_notify()
     TeamBattle(char_id).send_notify()
     HeroSoul(char_id).send_notify()
+    FunctionOpen(char_id).send_notify()
+    
 
