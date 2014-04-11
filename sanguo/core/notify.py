@@ -101,5 +101,5 @@ def login_notify(char_id):
     TeamBattle(char_id).send_notify()
     HeroSoul(char_id).send_notify()
     FunctionOpen(char_id).send_notify()
-    
+
 
