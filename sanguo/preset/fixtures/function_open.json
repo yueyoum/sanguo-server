@@ -30,36 +30,6 @@
     }
 },
 {
-    "pk": 4, 
-    "model": "config.functionopen", 
-    "fields": {
-        "char_level": 0, 
-        "stage_id": 0, 
-        "func_id": 3, 
-        "socket_amount": null
-    }
-},
-{
-    "pk": 5, 
-    "model": "config.functionopen", 
-    "fields": {
-        "char_level": 0, 
-        "stage_id": 0, 
-        "func_id": 5, 
-        "socket_amount": null
-    }
-},
-{
-    "pk": 6, 
-    "model": "config.functionopen", 
-    "fields": {
-        "char_level": 0, 
-        "stage_id": 0, 
-        "func_id": 6, 
-        "socket_amount": null
-    }
-},
-{
     "pk": 7, 
     "model": "config.functionopen", 
     "fields": {
@@ -90,32 +60,12 @@
     }
 },
 {
-    "pk": 10, 
-    "model": "config.functionopen", 
-    "fields": {
-        "char_level": 0, 
-        "stage_id": 0, 
-        "func_id": 10, 
-        "socket_amount": null
-    }
-},
-{
     "pk": 11, 
     "model": "config.functionopen", 
     "fields": {
         "char_level": 0, 
         "stage_id": 10, 
         "func_id": 11, 
-        "socket_amount": null
-    }
-},
-{
-    "pk": 12, 
-    "model": "config.functionopen", 
-    "fields": {
-        "char_level": 0, 
-        "stage_id": 0, 
-        "func_id": 12, 
         "socket_amount": null
     }
 },
@@ -127,16 +77,6 @@
         "stage_id": 0, 
         "func_id": 13, 
         "socket_amount": null
-    }
-},
-{
-    "pk": 14, 
-    "model": "config.functionopen", 
-    "fields": {
-        "char_level": 0, 
-        "stage_id": 0, 
-        "func_id": null, 
-        "socket_amount": 4
     }
 },
 {

@@ -4,7 +4,7 @@ __author__ = 'Wang Chao'
 __date__ = '4/9/14'
 
 
-from utils.decorate import message_response
+from utils.decorate import message_response, function_check
 from core.item import Item
 from libs import pack_msg
 
@@ -12,6 +12,7 @@ from protomsg import StrengthEquipResponse
 
 
 @message_response("StrengthEquipResponse")
+@function_check(1)
 def strengthen_equip(request):
     req = request._proto
 
@@ -27,6 +28,7 @@ def strengthen_equip(request):
 
 
 @message_response("StepUpEquipResponse")
+@function_check(2)
 def step_up_equip(request):
     req = request._proto
 
@@ -38,6 +40,7 @@ def step_up_equip(request):
 
 
 @message_response("EmbedGemResponse")
+@function_check(4)
 def embed(request):
     req = request._proto
     item = Item(request._char_id)

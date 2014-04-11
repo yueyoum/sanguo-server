@@ -4,13 +4,14 @@ __author__ = 'Wang Chao'
 __date__ = '4/9/14'
 
 
-from utils.decorate import message_response
+from utils.decorate import message_response, function_check
 from core.character import Char
 from core.hero import Hero
 from core.exception import InvalidOperate
 
 
 @message_response("HeroStepUpResponse")
+@function_check(3)
 def step_up(request):
     char_id = request._char_id
     char = Char(char_id)

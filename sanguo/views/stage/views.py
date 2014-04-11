@@ -5,13 +5,14 @@ __date__ = '4/9/14'
 
 from core.stage import Stage, Hang, EliteStage
 from libs import pack_msg
-from utils.decorate import message_response, operate_guard
+from utils.decorate import message_response, operate_guard, function_check
 
 import protomsg
 
 
 @message_response("ElitePVEResponse")
 @operate_guard('elite_pve', 15, keep_result=False)
+@function_check(11)
 def elite_pve(request):
     req = request._proto
     stage = EliteStage(request._char_id)
@@ -101,6 +102,7 @@ def pve(request):
 
 
 @message_response("HangResponse")
+@function_check(7)
 def hang_start(request):
     req = request._proto
     char_id = request._char_id

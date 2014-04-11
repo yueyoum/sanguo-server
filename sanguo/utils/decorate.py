@@ -3,6 +3,7 @@ import logging
 from django.http import HttpResponse
 
 from core.exception import SanguoException, InvalidOperate
+from core.mongoscheme import MongoFunctionOpen
 from utils import cache
 from utils import pack_msg
 import protomsg
@@ -62,4 +63,15 @@ def operate_guard(func_name, interval, keep_result=False):
         return wrap
     return deco
 
+
+def function_check(func_id):
+    def deco(func):
+        def wrap(request, *args, **kwargs):
+            fo = MongoFunctionOpen.objects.get(id=request._char_id)
+            if func_id in fo.freeze:
+                # FIXME error code
+                raise SanguoException(2, "FUNC FREEZE")
+            return func(request, *args, **kwargs)
+        return wrap
+    return deco
 
