@@ -6,6 +6,16 @@ import core.drives
 from protomsg import Attachment as MsgAttachment
 
 
+class MongoFunctionOpen(Document):
+    id = IntField(primary_key=True)
+    # list of freeze func ids
+    freeze = ListField(IntField())
+
+    meta = {
+        'collection': 'function_open',
+    }
+
+
 class MongoCharacter(Document):
     id = IntField(primary_key=True)
     account_id = IntField()

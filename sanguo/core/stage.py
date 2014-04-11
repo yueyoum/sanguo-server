@@ -26,6 +26,7 @@ from core.friend import Friend
 from core.hero import save_hero
 from core.item import Item
 from core.timercheck import TimerCheckAbstractBase, timercheck
+from core.signals import pve_finished_signal
 
 from utils.math import GAUSSIAN_TABLE
 
@@ -193,6 +194,15 @@ class Stage(object):
             achievement.trig(8, 1)
 
         self.stage.save()
+
+        pve_finished_signal.send(
+            sender=None,
+            char_id=self.char_id,
+            stage_id=stage_id,
+            win=battle_msg.self_win,
+            star=star,
+        )
+
         return battle_msg
 
 

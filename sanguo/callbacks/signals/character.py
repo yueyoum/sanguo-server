@@ -3,6 +3,7 @@ from core.notify import update_hero_notify
 from core.character import Char
 from core.hero import Hero
 from core.achievement import Achievement
+from core.functionopen import FunctionOpen
 
 
 
@@ -20,6 +21,9 @@ def _char_level_up(char_id, new_level, **kwargs):
         heros.append(h)
 
     update_hero_notify(char_id, heros)
+
+    fo = FunctionOpen(char_id)
+    fo.trig_by_char_level(new_level)
 
 
 def _char_official_up(char_id, new_official, **kwargs):

@@ -48,6 +48,7 @@ def _find_file(fixture_name):
 
     raise Exception("Can not find {0}".format(fixture_name))
 
+FUNCTION_OPEN = object_maker(_find_file('function_open.json'))
 CHARINIT = object_maker(_find_file('charinit.json'))[1]
 ARENA_REWARD = object_maker(_find_file('arena_reward.json'))
 SERVERS = object_maker(_find_file('servers.json'))
@@ -67,6 +68,11 @@ EFFECTS = object_maker(_find_file('effects.json'))
 SKILLS = object_maker(_find_file('skills.json'))
 SKILL_EFFECT = object_maker(_find_file('skill_effect.json'))
 TASKS = object_maker(_find_file('tasks.json'))
+
+
+for k, v in FUNCTION_OPEN.items():
+    if v.char_level == 0 and v.stage_id == 0:
+        FUNCTION_OPEN.pop(k)
 
 
 def _parse_char_init():

@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='world.proto',
   package='Sanguo.protocol.world',
-  serialized_pb='\n\x0bworld.proto\x12\x15Sanguo.protocol.world\"\xad\x01\n\x06Server\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12:\n\x06status\x18\x03 \x02(\x0e\x32*.Sanguo.protocol.world.Server.ServerStatus\x12\x11\n\thave_char\x18\x04 \x02(\x08\":\n\x0cServerStatus\x12\x08\n\x04GOOD\x10\x01\x12\x08\n\x04\x42USY\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\x12\x0c\n\x08MAINTAIN\x10\x04\"\x1e\n\x0bSyncRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"C\n\x0cSyncResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x15\n\rutc_timestamp\x18\x03 \x02(\x03\"3\n\rResumeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tserver_id\x18\x02 \x02(\x05\".\n\x0eResumeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"/\n\x0f\x43ommandResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"7\n\x13VersionCheckRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07version\x18\x02 \x02(\x05\"4\n\x14VersionCheckResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\x98\x03\n\nAttachment\x12\x0c\n\x04gold\x18\x01 \x01(\x05\x12\r\n\x05sycee\x18\x02 \x01(\x05\x12\x0b\n\x03\x65xp\x18\x03 \x01(\x05\x12\x14\n\x0cofficial_exp\x18\x04 \x01(\x05\x12\r\n\x05heros\x18\x05 \x03(\x05\x12?\n\nequipments\x18\x06 \x03(\x0b\x32+.Sanguo.protocol.world.Attachment.Equipment\x12\x33\n\x04gems\x18\x07 \x03(\x0b\x32%.Sanguo.protocol.world.Attachment.Gem\x12\x37\n\x06stuffs\x18\x08 \x03(\x0b\x32\'.Sanguo.protocol.world.Attachment.Stuff\x1a\x44\n\tEquipment\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05level\x18\x02 \x02(\x05\x12\x0c\n\x04step\x18\x03 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x04 \x02(\x05\x1a!\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\x1a#\n\x05Stuff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"\xad\x02\n\x0bSellRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12@\n\x08\x65lements\x18\x02 \x03(\x0b\x32..Sanguo.protocol.world.SellRequest.SellElement\x1a\xca\x01\n\x0bSellElement\x12\x43\n\x02tp\x18\x01 \x02(\x0e\x32\x37.Sanguo.protocol.world.SellRequest.SellElement.SellType\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x03 \x02(\x05\"Z\n\x08SellType\x12\r\n\tSELL_HERO\x10\x01\x12\r\n\tSELL_SOUL\x10\x02\x12\x12\n\x0eSELL_EQUIPMENT\x10\x03\x12\x0c\n\x08SELL_GEM\x10\x04\x12\x0e\n\nSELL_STUFF\x10\x05\",\n\x0cSellResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\x0bworld.proto\x12\x15Sanguo.protocol.world\"\xad\x01\n\x06Server\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12:\n\x06status\x18\x03 \x02(\x0e\x32*.Sanguo.protocol.world.Server.ServerStatus\x12\x11\n\thave_char\x18\x04 \x02(\x08\":\n\x0cServerStatus\x12\x08\n\x04GOOD\x10\x01\x12\x08\n\x04\x42USY\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\x12\x0c\n\x08MAINTAIN\x10\x04\"\x1e\n\x0bSyncRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"C\n\x0cSyncResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x15\n\rutc_timestamp\x18\x03 \x02(\x03\"3\n\rResumeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tserver_id\x18\x02 \x02(\x05\".\n\x0eResumeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"/\n\x0f\x43ommandResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"7\n\x13VersionCheckRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07version\x18\x02 \x02(\x05\"4\n\x14VersionCheckResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\x98\x03\n\nAttachment\x12\x0c\n\x04gold\x18\x01 \x01(\x05\x12\r\n\x05sycee\x18\x02 \x01(\x05\x12\x0b\n\x03\x65xp\x18\x03 \x01(\x05\x12\x14\n\x0cofficial_exp\x18\x04 \x01(\x05\x12\r\n\x05heros\x18\x05 \x03(\x05\x12?\n\nequipments\x18\x06 \x03(\x0b\x32+.Sanguo.protocol.world.Attachment.Equipment\x12\x33\n\x04gems\x18\x07 \x03(\x0b\x32%.Sanguo.protocol.world.Attachment.Gem\x12\x37\n\x06stuffs\x18\x08 \x03(\x0b\x32\'.Sanguo.protocol.world.Attachment.Stuff\x1a\x44\n\tEquipment\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05level\x18\x02 \x02(\x05\x12\x0c\n\x04step\x18\x03 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x04 \x02(\x05\x1a!\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\x1a#\n\x05Stuff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"\xad\x02\n\x0bSellRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12@\n\x08\x65lements\x18\x02 \x03(\x0b\x32..Sanguo.protocol.world.SellRequest.SellElement\x1a\xca\x01\n\x0bSellElement\x12\x43\n\x02tp\x18\x01 \x02(\x0e\x32\x37.Sanguo.protocol.world.SellRequest.SellElement.SellType\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x03 \x02(\x05\"Z\n\x08SellType\x12\r\n\tSELL_HERO\x10\x01\x12\r\n\tSELL_SOUL\x10\x02\x12\x12\n\x0eSELL_EQUIPMENT\x10\x03\x12\x0c\n\x08SELL_GEM\x10\x04\x12\x0e\n\nSELL_STUFF\x10\x05\",\n\x0cSellResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xc4\x02\n\x14\x46reezeFunctionNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12G\n\x05\x66uncs\x18\x02 \x03(\x0e\x32\x38.Sanguo.protocol.world.FreezeFunctionNotify.FunctionType\"\xd1\x01\n\x0c\x46unctionType\x12\x16\n\x12\x45QUIPMENT_STRENGTH\x10\x01\x12\x12\n\x0e\x45QUIPMENT_STEP\x10\x02\x12\r\n\tHERO_STEP\x10\x03\x12\r\n\tGEM_EMBED\x10\x04\x12\x08\n\x04TASK\x10\x05\x12\x0f\n\x0b\x41\x43HIEVEMENT\x10\x06\x12\x08\n\x04HANG\x10\x07\x12\t\n\x05\x41RENA\x10\x08\x12\x0b\n\x07PLUNDER\x10\t\x12\x0c\n\x08OFFICIAL\x10\n\x12\x0f\n\x0bSTAGE_ELITE\x10\x0b\x12\n\n\x06\x46RIEND\x10\x0c\x12\x0f\n\x0bTEAM_BATTLE\x10\r')
 
 
 
@@ -77,6 +77,71 @@ _SELLREQUEST_SELLELEMENT_SELLTYPE = _descriptor.EnumDescriptor(
   options=None,
   serialized_start=1199,
   serialized_end=1289,
+)
+
+_FREEZEFUNCTIONNOTIFY_FUNCTIONTYPE = _descriptor.EnumDescriptor(
+  name='FunctionType',
+  full_name='Sanguo.protocol.world.FreezeFunctionNotify.FunctionType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='EQUIPMENT_STRENGTH', index=0, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EQUIPMENT_STEP', index=1, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='HERO_STEP', index=2, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='GEM_EMBED', index=3, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='TASK', index=4, number=5,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ACHIEVEMENT', index=5, number=6,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='HANG', index=6, number=7,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ARENA', index=7, number=8,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='PLUNDER', index=8, number=9,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='OFFICIAL', index=9, number=10,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='STAGE_ELITE', index=10, number=11,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FRIEND', index=11, number=12,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='TEAM_BATTLE', index=12, number=13,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=1453,
+  serialized_end=1662,
 )
 
 
@@ -679,6 +744,42 @@ _SELLRESPONSE = _descriptor.Descriptor(
   serialized_end=1335,
 )
 
+
+_FREEZEFUNCTIONNOTIFY = _descriptor.Descriptor(
+  name='FreezeFunctionNotify',
+  full_name='Sanguo.protocol.world.FreezeFunctionNotify',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.world.FreezeFunctionNotify.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='funcs', full_name='Sanguo.protocol.world.FreezeFunctionNotify.funcs', index=1,
+      number=2, type=14, cpp_type=8, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _FREEZEFUNCTIONNOTIFY_FUNCTIONTYPE,
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1338,
+  serialized_end=1662,
+)
+
 _SERVER.fields_by_name['status'].enum_type = _SERVER_SERVERSTATUS
 _SERVER_SERVERSTATUS.containing_type = _SERVER;
 _ATTACHMENT_EQUIPMENT.containing_type = _ATTACHMENT;
@@ -691,6 +792,8 @@ _SELLREQUEST_SELLELEMENT.fields_by_name['tp'].enum_type = _SELLREQUEST_SELLELEME
 _SELLREQUEST_SELLELEMENT.containing_type = _SELLREQUEST;
 _SELLREQUEST_SELLELEMENT_SELLTYPE.containing_type = _SELLREQUEST_SELLELEMENT;
 _SELLREQUEST.fields_by_name['elements'].message_type = _SELLREQUEST_SELLELEMENT
+_FREEZEFUNCTIONNOTIFY.fields_by_name['funcs'].enum_type = _FREEZEFUNCTIONNOTIFY_FUNCTIONTYPE
+_FREEZEFUNCTIONNOTIFY_FUNCTIONTYPE.containing_type = _FREEZEFUNCTIONNOTIFY;
 DESCRIPTOR.message_types_by_name['Server'] = _SERVER
 DESCRIPTOR.message_types_by_name['SyncRequest'] = _SYNCREQUEST
 DESCRIPTOR.message_types_by_name['SyncResponse'] = _SYNCRESPONSE
@@ -702,6 +805,7 @@ DESCRIPTOR.message_types_by_name['VersionCheckResponse'] = _VERSIONCHECKRESPONSE
 DESCRIPTOR.message_types_by_name['Attachment'] = _ATTACHMENT
 DESCRIPTOR.message_types_by_name['SellRequest'] = _SELLREQUEST
 DESCRIPTOR.message_types_by_name['SellResponse'] = _SELLRESPONSE
+DESCRIPTOR.message_types_by_name['FreezeFunctionNotify'] = _FREEZEFUNCTIONNOTIFY
 
 class Server(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
@@ -792,6 +896,12 @@ class SellResponse(_message.Message):
   DESCRIPTOR = _SELLRESPONSE
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.world.SellResponse)
+
+class FreezeFunctionNotify(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _FREEZEFUNCTIONNOTIFY
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.world.FreezeFunctionNotify)
 
 
 # @@protoc_insertion_point(module_scope)

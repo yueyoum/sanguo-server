@@ -22,6 +22,7 @@ RESPONSE_NOTIFY_TYPE = {
     "SyncResponse": 61,
     "ResumeResponse": 64,
     "SellResponse": 66,
+    "FreezeFunctionNotify": 67,
     "StartGameResponse": 101,
     "GetServerListResponse": 104,
     "RegisterResponse": 106,

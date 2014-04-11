@@ -47,9 +47,38 @@ class Formation(object):
         ids = self.formation.sockets.keys()
         return [int(i) for i in ids]
 
+    def opened_socket_amount(self):
+        return len(self.formation.sockets)
+
+
+    def open_socket(self, all_amount):
+        opened = self.opened_socket_amount()
+        needed = all_amount - opened
+        if needed <= 0:
+            return
+
+        msg = protomsg.AddSocketNotify()
+
+        for i in range(needed):
+            socket_id = self.opened_socket_amount() + 1
+            socket = MongoSocket()
+            socket.hero = 0
+            socket.weapon = 0
+            socket.armor = 0
+            socket.jewelry = 0
+            self.formation.sockets[str(socket_id)] = socket
+
+            msg_s = msg.sockets.add()
+            self._msg_socket(msg_s, socket_id, socket)
+
+        self.formation.save()
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
+
     def save_socket(self, socket_id=None, hero=0, weapon=0, armor=0, jewelry=0, send_notify=True):
         if not socket_id:
-            socket_id = len(self.formation.sockets) + 1
+            socket_id = self.opened_socket_amount() + 1
             socket = MongoSocket()
         else:
             try:
