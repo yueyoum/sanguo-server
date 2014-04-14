@@ -447,3 +447,10 @@ class MongoTeamBattle(Document):
     meta = {
         'collection': 'teambattle'
     }
+
+
+class MongoLevy(Document):
+    id = IntField(primary_key=True)
+    # 每次次数
+    times = IntField(default=0)
+

@@ -680,5 +680,16 @@
         "value": 20, 
         "target": 3
     }
+},
+{
+    "pk": 86, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "skill": 2, 
+        "rounds": 0, 
+        "effect": 2, 
+        "value": 100, 
+        "target": 1
+    }
 }
 ]

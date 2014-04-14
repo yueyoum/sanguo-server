@@ -13,7 +13,7 @@ from preset.data import FUNCTION_OPEN
 
 from utils import pack_msg
 
-from protomsg import FreezeFunctionNotify
+from protomsg import FreezeFunctionNotify, OpenFunctionNotify
 
 
 FUNCTION_OPEN_FUNCS = {}
@@ -40,22 +40,24 @@ class FunctionOpen(object):
 
 
     def trig(self, char_level, stage_id):
-        func_opended = False
+        opened_funcs = []
         for func_id in self.mf.freeze[:]:
             this_func = FUNCTION_OPEN_FUNCS_REV[func_id]
             if char_level >= this_func.char_level and stage_id >= this_func.stage_id:
                 # OPEN
                 self.mf.freeze.remove(func_id)
-                func_opended = True
+                opened_funcs.append(func_id)
 
-        if func_opended:
+        if opened_funcs:
             self.mf.save()
-            self.send_notify()
+            for of in opened_funcs:
+                self.send_open_notify(of)
 
         f = Formation(self.char_id)
         for v in FUNCTION_OPEN_SOCKETS.values():
             if char_level >= v.char_level and stage_id >= v.stage_id:
                 f.open_socket(v.socket_amount)
+                self.send_open_notify(20)
 
 
     def trig_by_char_level(self, char_level):
@@ -69,6 +71,12 @@ class FunctionOpen(object):
         c = MongoCharacter.objects.get(id=self.char_id)
         char_level = c.level
         self.trig(char_level, stage_id)
+
+
+    def send_open_notify(self, func_id):
+        msg = OpenFunctionNotify()
+        msg.func = func_id
+        publish_to_char(self.char_id, pack_msg(msg))
 
 
     def send_notify(self):

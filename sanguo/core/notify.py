@@ -21,6 +21,7 @@ from core.achievement import Achievement
 from core.store import Store
 from core.hero import HeroSoul
 from core.functionopen import FunctionOpen
+from core.levy import Levy
 
 
 def hero_notify(char_id, objs, message_name="HeroNotify"):
@@ -101,5 +102,6 @@ def login_notify(char_id):
     TeamBattle(char_id).send_notify()
     HeroSoul(char_id).send_notify()
     FunctionOpen(char_id).send_notify()
+    Levy(char_id).send_notify()
 
 
