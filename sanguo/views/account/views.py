@@ -77,4 +77,4 @@ def login(request):
     sync.ret = 0
     sync.utc_timestamp = timezone.utc_timestamp()
 
-    return [pack_msg(sync), pack_msg(response, session)]
+    return [pack_msg(response, session), pack_msg(sync)]
