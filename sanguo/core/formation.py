@@ -55,7 +55,7 @@ class Formation(object):
         opened = self.opened_socket_amount()
         needed = all_amount - opened
         if needed <= 0:
-            return
+            return False
 
         msg = protomsg.AddSocketNotify()
 
@@ -73,6 +73,7 @@ class Formation(object):
 
         self.formation.save()
         publish_to_char(self.char_id, pack_msg(msg))
+        return True
 
 
 

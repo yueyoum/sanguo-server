@@ -46,6 +46,7 @@ class FunctionOpen(object):
         except DoesNotExist:
             passed_stages = []
 
+        passed_stages.append('0')
         if stage_id:
             passed_stages.append(str(stage_id))
 
@@ -63,8 +64,8 @@ class FunctionOpen(object):
         f = Formation(self.char_id)
         for v in FUNCTION_OPEN_SOCKETS.values():
             if char_level >= v.char_level and str(v.stage_id) in passed_stages:
-                f.open_socket(v.socket_amount)
-                if 20 not in opened_funcs:
+                opended = f.open_socket(v.socket_amount)
+                if opended and 20 not in opened_funcs:
                     opened_funcs.append(20)
 
         return opened_funcs
