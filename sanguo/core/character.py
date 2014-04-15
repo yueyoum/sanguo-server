@@ -184,11 +184,12 @@ class Char(object):
         #     des=des[:255]
         # )
 
-        self.send_notify(opended_funcs=opended_funcs)
+        self.send_notify(char=char, opended_funcs=opended_funcs)
 
 
-    def send_notify(self, opended_funcs=None):
-        char = self.cacheobj
+    def send_notify(self, char=None, opended_funcs=None):
+        if not char:
+            char = self.cacheobj
         msg = protomsg.CharacterNotify()
         msg.char.id = char.id
         msg.char.name = char.name
