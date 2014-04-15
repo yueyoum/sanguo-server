@@ -42,7 +42,7 @@ class FunctionOpen(object):
     def trig(self, char_level, stage_id=None):
         try:
             s = MongoStage.objects.get(id=self.char_id)
-            passed_stages = s.stages
+            passed_stages = s.stages.keys()
         except DoesNotExist:
             passed_stages = []
 
