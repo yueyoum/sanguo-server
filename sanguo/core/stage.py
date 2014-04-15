@@ -162,7 +162,7 @@ class Stage(object):
         if battle_msg.self_win:
             # 当前关卡通知
             msg = protomsg.CurrentStageNotify()
-            opened_func = FunctionOpen(self.char_id).trig_by_stage()
+            opened_func = FunctionOpen(self.char_id).trig_by_stage_id(stage_id)
             self._msg_stage(msg.stage, stage_id, star)
             msg.funcs.extend(opened_func)
             publish_to_char(self.char_id, pack_msg(msg))

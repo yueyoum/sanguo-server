@@ -39,12 +39,15 @@ class FunctionOpen(object):
             self.mf.save()
 
 
-    def trig(self, char_level):
+    def trig(self, char_level, stage_id=None):
         try:
             s = MongoStage.objects.get(id=self.char_id)
             passed_stages = s.stages
         except DoesNotExist:
             passed_stages = []
+
+        if stage_id:
+            passed_stages.append(str(stage_id))
 
         opened_funcs = []
         for func_id in self.mf.freeze[:]:
@@ -71,10 +74,10 @@ class FunctionOpen(object):
         return self.trig(char_level)
 
 
-    def trig_by_stage(self):
+    def trig_by_stage_id(self, stage_id):
         c = MongoCharacter.objects.get(id=self.char_id)
         char_level = c.level
-        return self.trig(char_level)
+        return self.trig(char_level, stage_id)
 
 
     def send_notify(self):
