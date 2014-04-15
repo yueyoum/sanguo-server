@@ -9,7 +9,9 @@ from core.hero import save_hero, Hero
 from core.mongoscheme import MongoHero, MongoCharacter, MongoStage
 from core.signals import char_level_up_signal, char_official_up_signal, char_gold_changed_signal, char_sycee_changed_signal
 from core.formation import Formation
+from core.functionopen import FunctionOpen
 from core.msgpipe import publish_to_char
+
 
 from utils import pack_msg
 
@@ -122,6 +124,7 @@ class Char(object):
     def update(self, gold=0, sycee=0, exp=0, official_exp=0, des=''):
         # char = Character.objects.get(id=self.id)
         # char = self.cacheobj
+        opended_funcs = []
         char = MongoCharacter.objects.get(id=self.id)
         if gold:
             char.gold += gold
@@ -151,6 +154,7 @@ class Char(object):
                     char_id=self.id,
                     new_level=char.level,
                 )
+                opended_funcs = FunctionOpen(self.id).trig_by_char_level(char.level)
 
             des = '{0}. Level {1} to {2}'.format(des, old_level, char.level)
 
@@ -180,10 +184,10 @@ class Char(object):
         #     des=des[:255]
         # )
 
-        self.send_notify()
+        self.send_notify(opended_funcs=opended_funcs)
 
 
-    def send_notify(self):
+    def send_notify(self, opended_funcs=None):
         char = self.cacheobj
         msg = protomsg.CharacterNotify()
         msg.char.id = char.id
@@ -198,6 +202,9 @@ class Char(object):
         msg.char.next_official_exp = official_update_exp(char.level)
 
         msg.char.power = self.power
+
+        if opended_funcs:
+            msg.funcs.extend(opended_funcs)
 
         publish_to_char(self.id, pack_msg(msg))
 

@@ -26,6 +26,7 @@ from core.friend import Friend
 from core.hero import save_hero
 from core.item import Item
 from core.timercheck import TimerCheckAbstractBase, timercheck
+from core.functionopen import FunctionOpen
 from core.signals import pve_finished_signal
 
 from utils.math import GAUSSIAN_TABLE
@@ -161,7 +162,9 @@ class Stage(object):
         if battle_msg.self_win:
             # 当前关卡通知
             msg = protomsg.CurrentStageNotify()
+            opened_func = FunctionOpen(self.char_id).trig_by_stage_id(stage_id)
             self._msg_stage(msg.stage, stage_id, star)
+            msg.funcs.extend(opened_func)
             publish_to_char(self.char_id, pack_msg(msg))
 
             if str(stage_id) not in self.stage.stages:

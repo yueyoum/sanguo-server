@@ -4,13 +4,10 @@ from core.signals import (
     )
 
 from core.stage import Hang
-from core.functionopen import FunctionOpen
 
 
 def pve_finish(char_id, stage_id, win, star, **kwargs):
-    if win:
-        fo = FunctionOpen(char_id)
-        fo.trig_by_stage_id(stage_id)
+    pass
 
 
 def hang_finish(char_id, actual_seconds, **kwargs):
