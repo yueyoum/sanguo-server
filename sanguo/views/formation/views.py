@@ -135,9 +135,9 @@ def set_formation(request):
             raise InvalidOperate()
         real_socket_ids.append(i)
 
-
-    if len(real_socket_ids) != len(f.formation.sockets):
-        raise InvalidOperate()
+    #
+    # if len(real_socket_ids) != len(f.formation.sockets):
+    #     raise InvalidOperate()
 
     for i in range(0, 9, 3):
         no_hero = True
