@@ -1,4 +1,5 @@
 import os
+import glob
 import datetime
 
 from _base import Logger
@@ -14,7 +15,7 @@ def clean():
     BATTLE_RECORD_PATH = settings.BATTLE_RECORD_PATH
     os.chdir(BATTLE_RECORD_PATH)
     amount = 0
-    files = os.listdir('.')
+    files = glob.glob('*.bin')
     for f in files:
         t = os.path.getctime(f)
         create_date = datetime.datetime.fromtimestamp(t)

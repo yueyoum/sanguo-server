@@ -1,21 +1,21 @@
-# 每天02:00点重置计数器
-0 2 * * * /PATH/reset_counter.sh
-# 每天02:00点重置挂机剩余时间
-0 2 * * * /PATH/reset_hang.sh
-# 每天02:00 重置可签到状态
-0 2 * * * /PATH/reset_checkin.sh
-# 每天02:00 重置任务
-0 2 * * * /PATH/reset_task.sh
-# 每天02:00 重置商城每人每天限量物品的购买记录
-0 2 * * * /PATH/reset_store_player_limit.sh
+# 每天00:00点重置计数器
+0 0 * * * /PATH/reset_counter.sh
+# 每天00:00点重置挂机剩余时间
+0 0 * * * /PATH/reset_hang.sh
+# 每天00:00 重置可签到状态
+0 0 * * * /PATH/reset_checkin.sh
+# 每天00:00 重置任务
+0 0 * * * /PATH/reset_task.sh
+# 每天00:00 重置商城每人每天限量物品的购买记录
+0 0 * * * /PATH/reset_store_player_limit.sh
 # 每天21:00 重置比武日积分
 0 21 * * * /PATH/reset_arena_day.sh
 # 每天21:30 重置比武周积分
 30 21 * * * /PATH/reset_arena_week.sh
 # 每隔一定时间发送邮件
-*/1 * * * * /PATH/send_mail.sh
-# 每天02:00 清理过期邮件
-0 2 * * * /PATH/clean_mail.sh
+*/10 * * * * /PATH/send_mail.sh
+# 每天00:00 清理过期邮件
+0 0 * * * /PATH/clean_mail.sh
 # 每天00:00 清理历史战斗录像
 0 0 * * * /PATH/clean_battle_record.sh
 
