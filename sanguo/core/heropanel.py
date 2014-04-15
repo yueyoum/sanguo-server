@@ -156,25 +156,27 @@ class HeroPanel(object):
         self.send_notify()
         return hero_id
 
+
     def refresh(self):
-        if self.all_opended():
-            # 重新开始，不重置刷新功能
-            self.panel = self.make_new_panel(reset_time=False)
-            self.send_notify()
-            return
+        if not settings.IS_GUIDE_SERVER:
+            if self.all_opended():
+                # 重新开始，不重置刷新功能
+                self.panel = self.make_new_panel(reset_time=False)
+                self.send_notify()
+                return
 
-        if self.refresh_seconds > 0:
-            # 免费刷新还在冷却，只能用元宝刷新，不重置免费刷新时间
-            char = Char(self.char_id)
-            cache_char = char.cacheobj
-            if cache_char.sycee < REFRESH_COST_SYCEE:
-                raise SyceeNotEnough()
+            if self.refresh_seconds > 0:
+                # 免费刷新还在冷却，只能用元宝刷新，不重置免费刷新时间
+                char = Char(self.char_id)
+                cache_char = char.cacheobj
+                if cache_char.sycee < REFRESH_COST_SYCEE:
+                    raise SyceeNotEnough()
 
-            char.update(sycee=-REFRESH_COST_SYCEE, des='HeroPanel Refresh')
+                char.update(sycee=-REFRESH_COST_SYCEE, des='HeroPanel Refresh')
 
-            self.panel = self.make_new_panel(reset_time=False)
-            self.send_notify()
-            return
+                self.panel = self.make_new_panel(reset_time=False)
+                self.send_notify()
+                return
 
         # 可以用免费刷新
         self.panel = self.make_new_panel()
