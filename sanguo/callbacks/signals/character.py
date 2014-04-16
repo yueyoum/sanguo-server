@@ -1,14 +1,12 @@
 from core.signals import char_level_up_signal, char_official_up_signal, char_gold_changed_signal, char_sycee_changed_signal
 from core.notify import update_hero_notify
-from core.character import Char
-from core.hero import Hero
+from core.hero import Hero, char_heros_dict
 from core.achievement import Achievement
 
 
 
 def _char_level_up(char_id, new_level, **kwargs):
-    char = Char(char_id)
-    heros_dict = char.heros_dict
+    heros_dict = char_heros_dict(char_id)
 
     achievement = Achievement(char_id)
     achievement.trig(18, new_level)

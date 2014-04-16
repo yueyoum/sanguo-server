@@ -85,29 +85,6 @@ class Char(object):
         return self.mc
 
 
-    # # 阵法
-    # @property
-    # def formation(self):
-    #     f = Formation(self.id)
-    #     return f.formation.formation
-    #
-    # @property
-    # def sockets(self):
-    #     f = Formation(self.id)
-    #     c = f.formation.sockets
-    #     return {int(k): v for k, v in c.iteritems()}
-
-    # 武将
-    @property
-    def heros_dict(self):
-        heros = MongoHero.objects.filter(char=self.id)
-        return {h.id: h for h in heros}
-
-    @property
-    def heros(self):
-        return [Hero.cache_obj(i) for i in self.heros_dict.keys()]
-
-
     @property
     def power(self):
         f = Formation(self.id)

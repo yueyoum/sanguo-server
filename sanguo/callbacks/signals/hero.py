@@ -11,8 +11,7 @@ from core.notify import (
     update_hero_notify,
     )
 
-from core.hero import Hero
-from core.character import Char
+from core.hero import Hero, char_heros_dict
 from core.achievement import Achievement
 from preset.data import HEROS
 
@@ -22,11 +21,10 @@ def _hero_add(char_id, hero_ids, hero_original_ids, send_notify, **kwargs):
         heros = [Hero.cache_obj(i) for i in hero_ids]
         add_hero_notify(char_id, heros)
 
-    char = Char(char_id)
-    char_heros_dict = char.heros_dict
+    heros_dict = char_heros_dict(char_id)
 
     achievement = Achievement(char_id)
-    achievement.trig(1, len(char_heros_dict), send_notify=send_notify)
+    achievement.trig(1, len(heros_dict), send_notify=send_notify)
 
     quality_one_heros_amount = 0
     quality_two_heros_amount = 0
@@ -34,7 +32,7 @@ def _hero_add(char_id, hero_ids, hero_original_ids, send_notify, **kwargs):
     gender_female_heros_amount = 0
 
 
-    for h in char_heros_dict.values():
+    for h in heros_dict.values():
         original_hero = HEROS[h.oid]
         if original_hero.quality == 1:
             quality_one_heros_amount += 1

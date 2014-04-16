@@ -57,10 +57,10 @@ class MongoItem(Document):
 
 class MongoSocket(EmbeddedDocument):
     # 阵法插槽
-    hero = IntField()
-    weapon = IntField()
-    armor = IntField()
-    jewelry = IntField()
+    hero = IntField(default=0)
+    weapon = IntField(default=0)
+    armor = IntField(default=0)
+    jewelry = IntField(default=0)
 
 
 

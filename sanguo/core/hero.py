@@ -28,6 +28,15 @@ from preset.data import HEROS, ACHIEVEMENTS, MONSTERS
 import protomsg
 
 
+def char_heros_dict(char_id):
+    heros = MongoHero.objects.filter(char=char_id)
+    return {h.id: h for h in heros}
+
+def char_heros_obj(char_id):
+    heros = char_heros_dict(char_id)
+    return [Hero.cache_obj(i) for i in heros.keys()]
+
+
 def cal_hero_property(original_id, level, step):
     """
 
