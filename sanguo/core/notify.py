@@ -38,8 +38,10 @@ def hero_notify(char_id, objs, message_name="HeroNotify"):
         g.cirt = int(obj.crit)
 
         g.step = obj.step
-        g.step_cost = obj.step_up_needs_soul_amount()
         g.power = obj.power
+        # FIXME
+        g.max_socket_amount = 2
+        g.current_socket_amount = 1
 
     publish_to_char(char_id, pack_msg(data))
 
