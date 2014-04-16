@@ -310,6 +310,8 @@ class Formation(object):
 
 
     def in_formation_hero_original_ids(self):
+        from core.hero import char_heros_dict
+
         ids = self.in_formation_hero_ids()
         char_heros = char_heros_dict(self.char_id)
 
