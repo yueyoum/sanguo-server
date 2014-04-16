@@ -3,7 +3,6 @@
 from mongoengine import DoesNotExist
 
 from core.mongoscheme import MongoSocket, MongoFormation, MongoHero
-from core.item import Item
 from core.hero import char_heros_dict
 from core.signals import socket_changed_signal, hero_changed_signal
 from core.exception import InvalidOperate, SanguoException
@@ -104,6 +103,7 @@ class Formation(object):
 
     def set_socket(self, socket_id, hero_id, weapon_id, armor_id, jewelry_id):
         # 由客户端操作来设置socket
+        from core.item import Item
         item = Item(self.char_id)
 
         if str(socket_id) not in self.formation.sockets:
