@@ -7,7 +7,6 @@ import ctypes
 
 from mongoengine import DoesNotExist
 
-from django.db import transaction
 
 from core.mongoscheme import MongoHero, MongoAchievement, MongoHeroSoul, MongoCharacter
 from core.signals import hero_add_signal, hero_del_signal, hero_changed_signal
