@@ -49,6 +49,8 @@ class Formation(object):
 
     def max_socket_id(self):
         ids = self.all_socket_ids()
+        if not ids:
+            return 0
         return max(ids)
 
     def opened_socket_amount(self):
