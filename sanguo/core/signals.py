@@ -18,6 +18,7 @@ char_official_up_signal = Signal(providing_args=['char_id', 'new_official'])
 char_gold_changed_signal = Signal(providing_args=['char_id', 'now_value', 'change_value'])
 char_sycee_changed_signal = Signal(providing_args=['char_id', 'now_value', 'change_value'])
 
+hero_step_up_signal = Signal(providing_args=['char_id', 'hero_id', 'new_step'])
 hero_changed_signal = Signal(providing_args=['hero_id'])
 hero_add_signal = Signal(providing_args=['char_id', 'hero_ids', 'hero_original_ids', 'send_notify'])
 hero_del_signal = Signal(providing_args=['char_id', 'hero_ids'])

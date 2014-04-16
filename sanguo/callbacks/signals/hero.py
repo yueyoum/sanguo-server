@@ -2,6 +2,7 @@ from core.signals import (
     hero_add_signal,
     hero_del_signal,
     hero_changed_signal,
+    hero_step_up_signal,
     socket_changed_signal,
     )
 
@@ -14,6 +15,7 @@ from core.notify import (
 from core.hero import Hero, char_heros_dict
 from core.achievement import Achievement
 from preset.data import HEROS
+from preset.settings import HERO_MAX_STEP
 
 
 def _hero_add(char_id, hero_ids, hero_original_ids, send_notify, **kwargs):
@@ -67,6 +69,12 @@ def _hero_change(hero_id, **kwargs):
     )
 
 
+def _hero_step_up(char_id, hero_id, new_step, **kwargs):
+    achievement = Achievement(char_id)
+    achievement.trig(20, 1)
+    if new_step == HERO_MAX_STEP:
+        achievement.trig(21, 1)
+
 hero_add_signal.connect(
     _hero_add,
     dispatch_uid='core.callbacks.hero._hero_add'
@@ -81,6 +89,12 @@ hero_changed_signal.connect(
     _hero_change,
     dispatch_uid='callbacks.signals.hero._hero_change'
 )
+
+hero_step_up_signal.connect(
+    _hero_step_up,
+    dispatch_uid='callbacks.signals.hero._hero_step_up'
+)
+
 
 
 def _hero_attribute_change(socket_obj, **kwargs):

@@ -663,7 +663,12 @@ class Item(MessageEquipmentMixin):
 
         new_amount = this_stuff_amount - amount
 
-        if new_amount <= 0:
+        if new_amount < 0:
+            raise StuffNotEnough("Stuff Remove: Char {0} Try to remove {1}. But not enough, {2} < {3}".format(
+                self.char_id, _id, this_stuff_amount, amount
+            ))
+
+        if new_amount == 0:
             self.item.stuffs.pop(str(_id))
             self.item.save()
 

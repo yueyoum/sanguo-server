@@ -40,8 +40,8 @@ def hero_notify(char_id, objs, message_name="HeroNotify"):
         g.step = obj.step
         g.power = obj.power
         # FIXME
-        g.max_socket_amount = 2
-        g.current_socket_amount = 1
+        g.max_socket_amount = obj.max_socket_amount
+        g.current_socket_amount = obj.current_socket_amount
 
     publish_to_char(char_id, pack_msg(data))
 

@@ -109,7 +109,9 @@ class MongoHero(Document):
     id = IntField(primary_key=True)
     char = IntField(required=True)
     oid = IntField(required=True)
-    step = IntField(required=True, default=1)
+    step = IntField(required=True)
+    # 升阶是一点一点来的，而不是一下升上去的，progress记录了当前进度
+    progress = IntField(required=True)
 
     meta = {
         'collection': 'hero',

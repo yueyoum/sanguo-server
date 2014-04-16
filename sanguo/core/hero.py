@@ -9,8 +9,9 @@ from mongoengine import DoesNotExist
 
 
 from core.mongoscheme import MongoHero, MongoAchievement, MongoHeroSoul, MongoCharacter
-from core.signals import hero_add_signal, hero_del_signal, hero_changed_signal
+from core.signals import hero_add_signal, hero_del_signal, hero_changed_signal, hero_step_up_signal
 from core.formation import Formation
+from core.item import Item
 from core.exception import InvalidOperate, GoldNotEnough
 from core import DLL
 from core.achievement import Achievement
@@ -21,7 +22,7 @@ from utils.functional import id_generator
 from core.msgpipe import publish_to_char
 from utils import pack_msg
 
-from preset.settings import HERO_MAX_STEP, HERO_STEP_UP_COST_SOUL_AMOUNT, HERO_STEP_UP_COST_GOLD
+from preset.settings import HERO_MAX_STEP, HERO_START_STEP, HERO_STEP_UP_COST_SOUL_AMOUNT, HERO_STEP_UP_COST_GOLD, HERO_SOUL_TO_COMMON_SOUL
 from preset.data import HEROS, ACHIEVEMENTS, MONSTERS
 
 import protomsg
@@ -82,6 +83,7 @@ class Hero(FightPowerMixin):
         self.id = hid
         self.oid = self.hero.oid
         self.step = self.hero.step
+        self.progress = self.hero.progress
         self.level = char.level
         self.char_id = char.id
 
@@ -190,26 +192,44 @@ class Hero(FightPowerMixin):
         return h
 
 
+    @property
+    def max_socket_amount(self):
+        # 当前升阶全部孔数
+        return self.step_up_needs_soul_amount()
+
+    @property
+    def current_socket_amount(self):
+        # 当前已经点亮的孔数
+        return self.hero.progress
+
+
     def step_up_needs_soul_amount(self):
         if self.step >= HERO_MAX_STEP:
             return 0
         return HERO_STEP_UP_COST_SOUL_AMOUNT[self.step]
 
 
-    def step_up(self):
+    def _step_up_using_soul(self):
+        hs = HeroSoul(self.char_id)
+        this_hero = HEROS[self.oid]
+
+        hs.remove_soul([(this_hero.id, 1)])
+
+    def _step_up_using_common_soul(self):
+        item = Item(self.char_id)
+        quality = HEROS[self.oid].quality
+        common_soul_needs = HERO_SOUL_TO_COMMON_SOUL[quality]
+        item.stuff_remove(22, common_soul_needs)
+
+
+    def step_up(self, method):
+        # method: 1 using soul
+        # method: 2 using common soul
         # 升阶
         if self.step >= HERO_MAX_STEP:
             raise InvalidOperate("Hero Step Up: Char {0} Try to up hero {1}. But this hero already at max step {2}".format(
                 self.char_id, self.id, HERO_MAX_STEP
             ))
-
-        soul_needs = self.step_up_needs_soul_amount()
-
-        hs = HeroSoul(self.char_id)
-        this_hero = HEROS[self.oid]
-        if not hs.has_soul(this_hero.id, soul_needs):
-            raise InvalidOperate("Hero Step Up: Char {0} Try to up Hero {1}. But hero soul not enough".format(self.char_id, self.id))
-
 
         from core.character import Char
         c = Char(self.char_id)
@@ -217,23 +237,34 @@ class Hero(FightPowerMixin):
         if cache_char.gold < HERO_STEP_UP_COST_GOLD:
             raise GoldNotEnough("Hero Step Up. Char {0} try to up hero {1}. But gold not enough".format(self.char_id, self.id))
 
-        # 检查完毕，开始处理
-        hs.remove_soul([(this_hero.id, soul_needs)])
-        c.update(gold=-HERO_STEP_UP_COST_GOLD, des='Hero Step Up. {0} to {1}'.format(self.hero.step, self.hero.step+1))
+        if method == 1:
+            self._step_up_using_soul()
+        else:
+            self._step_up_using_common_soul()
 
-        self.hero.step += 1
+        c.update(gold=-HERO_STEP_UP_COST_GOLD, des='Hero Step Up')
+
+        # 扣完东西了，开始搞一次
+        self.hero.progress += 1
+        soul_needs = self.step_up_needs_soul_amount()
+        if self.hero.progress >= soul_needs:
+            # 真正的升阶
+            # 否则仅仅是记录当前状态
+            self.hero.step += 1
+            self.hero.progress = 0
+
+            hero_step_up_signal.send(
+                sender=None,
+                char_id=self.char_id,
+                hero_id=self.id,
+                new_step=self.hero.step
+            )
+
         self.hero.save()
-
         hero_changed_signal.send(
             sender=None,
             hero_id=self.id
         )
-
-        achievement = Achievement(self.char_id)
-        achievement.trig(20, 1)
-        if self.hero.step == HERO_MAX_STEP:
-            achievement.trig(21, 1)
-
 
 
 class HeroSoul(object):
@@ -353,7 +384,7 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
         # id_range = range(new_max_id - length + 1, new_max_id + 1)
         id_range = id_generator('charhero', length)
         for i, _id in enumerate(id_range):
-            MongoHero(id=_id, char=char_id, oid=hero_original_ids[i], step=1).save()
+            MongoHero(id=_id, char=char_id, oid=hero_original_ids[i], step=HERO_START_STEP, progress=0).save()
 
         hero_add_signal.send(
             sender=None,
