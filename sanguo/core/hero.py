@@ -11,7 +11,6 @@ from mongoengine import DoesNotExist
 from core.mongoscheme import MongoHero, MongoAchievement, MongoHeroSoul, MongoCharacter
 from core.signals import hero_add_signal, hero_del_signal, hero_changed_signal, hero_step_up_signal
 from core.formation import Formation
-from core.item import Item
 from core.exception import InvalidOperate, GoldNotEnough
 from core import DLL
 from core.achievement import Achievement
@@ -216,6 +215,8 @@ class Hero(FightPowerMixin):
         hs.remove_soul([(this_hero.id, 1)])
 
     def _step_up_using_common_soul(self):
+        from core.item import Item
+
         item = Item(self.char_id)
         quality = HEROS[self.oid].quality
         common_soul_needs = HERO_SOUL_TO_COMMON_SOUL[quality]
