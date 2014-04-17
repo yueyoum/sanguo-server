@@ -16,6 +16,48 @@ from utils import pack_msg
 from protomsg import PrizeNotify, Attachment as MsgAttachment
 
 
+def raw_data_to_attachment_protomsg(data):
+    # data is dict, {
+    # 'gold': 0,
+    # 'sycee': 0,
+    # 'exp': 0,
+    # 'official_exp': 0,
+    # 'heros': [{id:, level: step: amount: }, ...],
+    # 'herosouls': [{id: amount:}, ...],
+    # 'equipments': [{id: level: amount:}, ...],
+    # 'gems': [{id: amount:}, ...],
+    # 'stuffs': [{id: amount:}, ...]
+    # }
+
+    # TODO, modify proto
+    msg = MsgAttachment()
+    msg.gold = data['gold']
+    msg.sycee = data['sycee']
+    msg.exp = data['exp']
+    msg.official_exp = data['official_exp']
+    for x in data['heros']:
+        msg.heros.append(x['id'])
+    for x in data['equipments']:
+        msg_e = msg.equipments.add()
+        msg_e.id = x['id']
+        msg_e.level = x['level']
+        msg_e.step = 1
+        msg_e.amount = x['amount']
+
+    for x in data['gems']:
+        msg_g = msg.gems.add()
+        msg_g.id = x['id']
+        msg_g.amount = x['amount']
+
+    for x in data['stuffs']:
+        msg_s = msg.stuffs.add()
+        msg_s.id = x['id']
+        msg_s.amount = x['amount']
+
+    return msg
+
+
+
 class Attachment(object):
     def __init__(self, char_id):
         self.char_id = char_id

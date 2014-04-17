@@ -8,6 +8,7 @@ from utils import cache
 from utils import pack_msg
 import protomsg
 
+from libs.decorate import json_return
 
 logger = logging.getLogger('sanguo')
 

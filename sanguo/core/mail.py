@@ -18,15 +18,17 @@ import protomsg
 
 
 class Mail(object):
-    def __init__(self, char_id):
+    def __init__(self, char_id, mailobj=None):
         self.char_id = char_id
-        try:
-            self.mail = MongoMail.objects.get(id=self.char_id)
-        except DoesNotExist:
-            self.mail = MongoMail(id=self.char_id)
-            self.mail.mails = {}
-            self.mail.save()
-
+        if mailobj:
+            self.mail = mailobj
+        else:
+            try:
+                self.mail = MongoMail.objects.get(id=self.char_id)
+            except DoesNotExist:
+                self.mail = MongoMail(id=self.char_id)
+                self.mail.mails = {}
+                self.mail.save()
 
     def count(self):
         return len(self.mail.mails)
@@ -95,8 +97,8 @@ class Mail(object):
             m.has_read = v.has_read
             if v.attachment:
                 m.attachment.MergeFromString(v.attachment)
-            # m.start_at = int(v.create_at.strftime('%s'))
-            m.start_at = v.create_at
+            m.start_at = int(v.create_at.strftime('%s'))
+            # m.start_at = v.create_at
             m.max_days = MAIL_KEEP_DAYS
 
         publish_to_char(self.char_id, pack_msg(msg))

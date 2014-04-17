@@ -3,29 +3,27 @@
 __author__ = 'Wang Chao'
 __date__ = '2/27/14'
 
+import datetime
+
 from _base import Logger
 
 from django.utils import timezone
 from core.mongoscheme import MongoMail
 from core.mail import Mail
+from preset.settings import MAIL_KEEP_DAYS
 
-
-DAY_DIFF = 3
 
 def clean():
     logger = Logger("clean_mail.log")
     logger.write("Clean Mail Start.")
 
-    now = int(timezone.now().strftime('%s'))
+    DIFF = timezone.now() - datetime.timedelta(days=MAIL_KEEP_DAYS)
     mails = MongoMail.objects.all()
     amount = 0
     for m in mails:
-        char_mail = Mail(m.id)
+        char_mail = Mail(m.id, mailobj=m)
         for k, v in m.mails.items():
-            days, seconds = divmod(now-v.create_at, 3600*24)
-            if seconds:
-                days += 1
-            if days > DAY_DIFF:
+            if v.create_at < DIFF:
                 char_mail.delete(k)
                 amount += 1
 
