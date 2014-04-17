@@ -4,12 +4,12 @@ __author__ = 'Wang Chao'
 __date__ = '2/27/14'
 
 import datetime
-
+import pytz
 from _base import Logger
 
 from django.utils import timezone
 from core.mongoscheme import MongoMail
-from core.mail import Mail
+from core.mail import Mail, FORMAT
 from preset.settings import MAIL_KEEP_DAYS
 
 
@@ -23,7 +23,9 @@ def clean():
     for m in mails:
         char_mail = Mail(m.id, mailobj=m)
         for k, v in m.mails.items():
-            if v.create_at < DIFF:
+            create_at = datetime.datetime.strptime(v.create_at, FORMAT)
+            create_at = create_at.replace(tzinfo=pytz.utc)
+            if create_at < DIFF:
                 char_mail.delete(k)
                 amount += 1
 

@@ -3,6 +3,8 @@
 __author__ = 'Wang Chao'
 __date__ = '1/2/14'
 
+import datetime
+
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoMail, MongoEmbededMail
 from core.msgpipe import publish_to_char
@@ -15,7 +17,7 @@ from utils import pack_msg
 
 import protomsg
 
-
+FORMAT = '%Y-%m-%d %H:%M:%S'
 
 class Mail(object):
     def __init__(self, char_id, mailobj=None):
@@ -97,7 +99,9 @@ class Mail(object):
             m.has_read = v.has_read
             if v.attachment:
                 m.attachment.MergeFromString(v.attachment)
-            m.start_at = int(v.create_at.strftime('%s'))
+
+            create_at = datetime.datetime.strptime(v.create_at, FORMAT)
+            m.start_at = int(create_at.strftime('%s'))
             # m.start_at = v.create_at
             m.max_days = MAIL_KEEP_DAYS
 
