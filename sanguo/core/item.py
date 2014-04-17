@@ -270,7 +270,7 @@ class Equipment(MessageEquipmentMixin):
     def level_up_need_gold(self):
         # 强化升级所需金币
         # gold = pow(1.08, self.level) * 100
-        gold = 1.08 * (self.level - 1) * 200
+        gold = 1.08 * (self.level - 1) * 200 + 100
         return int(gold)
 
 
