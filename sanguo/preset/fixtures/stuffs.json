@@ -307,7 +307,7 @@
         "buy_sycee": 0, 
         "tp": 2, 
         "sell_gold": 1000, 
-        "value": 3, 
+        "value": 1, 
         "icon": ""
     }
 },
@@ -320,7 +320,7 @@
         "buy_sycee": 0, 
         "tp": 2, 
         "sell_gold": 1500, 
-        "value": 4, 
+        "value": 2, 
         "icon": ""
     }
 },
@@ -333,7 +333,7 @@
         "buy_sycee": 0, 
         "tp": 2, 
         "sell_gold": 5000, 
-        "value": 6, 
+        "value": 3, 
         "icon": ""
     }
 },
@@ -359,7 +359,7 @@
         "buy_sycee": 0, 
         "tp": 2, 
         "sell_gold": 20000, 
-        "value": 11, 
+        "value": 30, 
         "icon": ""
     }
 }

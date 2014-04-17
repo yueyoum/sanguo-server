@@ -5,7 +5,8 @@
     "fields": {
         "char_level": 5, 
         "stage_id": 0, 
-        "func_id": 1, 
+        "text": "", 
+        "func": 1, 
         "socket_amount": null
     }
 },
@@ -15,7 +16,8 @@
     "fields": {
         "char_level": 10, 
         "stage_id": 0, 
-        "func_id": 2, 
+        "text": "", 
+        "func": 2, 
         "socket_amount": null
     }
 },
@@ -25,7 +27,8 @@
     "fields": {
         "char_level": 10, 
         "stage_id": 0, 
-        "func_id": 4, 
+        "text": "", 
+        "func": 4, 
         "socket_amount": null
     }
 },
@@ -35,7 +38,8 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 20, 
-        "func_id": 7, 
+        "text": "", 
+        "func": 7, 
         "socket_amount": null
     }
 },
@@ -45,7 +49,8 @@
     "fields": {
         "char_level": 30, 
         "stage_id": 0, 
-        "func_id": 8, 
+        "text": "", 
+        "func": 8, 
         "socket_amount": null
     }
 },
@@ -55,7 +60,8 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 25, 
-        "func_id": 9, 
+        "text": "", 
+        "func": 9, 
         "socket_amount": null
     }
 },
@@ -65,7 +71,8 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 10, 
-        "func_id": 11, 
+        "text": "", 
+        "func": 11, 
         "socket_amount": null
     }
 },
@@ -75,7 +82,8 @@
     "fields": {
         "char_level": 20, 
         "stage_id": 0, 
-        "func_id": 13, 
+        "text": "", 
+        "func": 13, 
         "socket_amount": null
     }
 },
@@ -83,9 +91,10 @@
     "pk": 15, 
     "model": "config.functionopen", 
     "fields": {
-        "char_level": 5, 
-        "stage_id": 0, 
-        "func_id": null, 
+        "char_level": 0, 
+        "stage_id": 5, 
+        "text": "\u4e0a\u9635\u4e94\u4eba", 
+        "func": null, 
         "socket_amount": 5
     }
 },
@@ -93,9 +102,10 @@
     "pk": 16, 
     "model": "config.functionopen", 
     "fields": {
-        "char_level": 10, 
-        "stage_id": 0, 
-        "func_id": null, 
+        "char_level": 0, 
+        "stage_id": 10, 
+        "text": "\u4e0a\u9635\u516d\u4eba", 
+        "func": null, 
         "socket_amount": 6
     }
 },
@@ -103,9 +113,10 @@
     "pk": 17, 
     "model": "config.functionopen", 
     "fields": {
-        "char_level": 15, 
-        "stage_id": 0, 
-        "func_id": null, 
+        "char_level": 0, 
+        "stage_id": 15, 
+        "text": "\u4e0a\u9635\u4e03\u4eba", 
+        "func": null, 
         "socket_amount": 7
     }
 },
@@ -113,9 +124,10 @@
     "pk": 18, 
     "model": "config.functionopen", 
     "fields": {
-        "char_level": 20, 
-        "stage_id": 0, 
-        "func_id": null, 
+        "char_level": 0, 
+        "stage_id": 20, 
+        "text": "\u4e0a\u9635\u516b\u4eba", 
+        "func": null, 
         "socket_amount": 8
     }
 }
