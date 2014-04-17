@@ -28,7 +28,7 @@ def send_mail(request):
     mail_name = data['mail']['name']
     mail_content = data['mail']['content']
     mail_send_at = data['mail']['send_at']
-    attachment = raw_data_to_attachment_protomsg(data['mail']['attachment'])
+    attachment = raw_data_to_attachment_protomsg(data['mail']['attachment']).SerializeToString()
 
     for cid in cids:
         m = Mail(cid)

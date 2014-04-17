@@ -66,6 +66,7 @@ def login_notify(char_id):
     Char(char_id).send_notify()
 
     hero_notify(char_id, hero_objs)
+    Item(char_id).send_notify()
 
     f = Formation(char_id)
     f.send_socket_notify()
@@ -89,7 +90,7 @@ def login_notify(char_id):
     m.send_mail_notify()
 
     CheckIn(char_id).send_notify()
-    Item(char_id).send_notify()
+
 
     stage = Stage(char_id)
     stage.send_already_stage_notify()
