@@ -128,13 +128,25 @@ class Formation(object):
 
         # 对于第一次上人的情况特殊处理
         this_socket = self.formation.sockets[str(socket_id)]
+        print "set socket debug"
+        print this_socket.hero
+        print this_socket.weapon
+        print this_socket.armor
+        print this_socket.jewelry
+        print '-------'
+        print hero_id
+        print weapon_id
+        print armor_id
+        print jewelry_id
         if not this_socket.hero and not this_socket.weapon and not this_socket.armor and not this_socket.jewelry and hero_id and not weapon_id and not armor_id and not jewelry_id:
             # first time pick up a hero in this socket
             # 要把这个人往前放
+            print "xxxxxxxx"
             socket_ids = self.all_socket_ids()
             socket_ids.sort()
             for sid in socket_ids:
                 s = self.formation.sockets[str(sid)]
+                print sid, s.hero
                 if not s.hero:
                     self.save_socket(sid, hero_id, s.weapon, s.armor, s.jewelry)
                     return
