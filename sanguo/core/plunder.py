@@ -216,7 +216,15 @@ class Plunder(object):
             max_star_stage = stage.stage.max_star_stage
             if not max_star_stage:
                 max_star_stage = 1
-            _, _, got_equipments, got_gems, got_stuffs = stage.save_drop(max_star_stage, times=PLUNDER_GOT_ITEMS_HOUR * 3600 / 15, only_items=True)
+            drop = stage.save_drop(max_star_stage, times=PLUNDER_GOT_ITEMS_HOUR * 3600 / 15, only_items=True)
+            for e in drop['equipments']:
+                for i in range(e['amount']):
+                    got_equipments.append((e['id'], e['level'], 1))
+            for g in drop['gems']:
+                got_gems.append((g['id'], g['amount']))
+            for s in drop['stuffs']:
+                got_stuffs.append((s['id'], s['amount']))
+
         else:
             got_gold = plunder_gold
             char =Char(self.char_id)

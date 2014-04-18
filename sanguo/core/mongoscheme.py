@@ -247,7 +247,7 @@ class MongoFriend(Document):
 class MongoEmbededMail(EmbeddedDocument):
     name = StringField(required=True)
     content = StringField(required=True)
-    attachment = BinaryField()
+    attachment = StringField(required=False)
     has_read = BooleanField(required=True)
     create_at = StringField(required=True)
 

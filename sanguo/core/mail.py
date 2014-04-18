@@ -3,6 +3,7 @@
 __author__ = 'Wang Chao'
 __date__ = '1/2/14'
 
+import json
 import datetime
 
 from mongoengine import DoesNotExist
@@ -35,7 +36,7 @@ class Mail(object):
     def count(self):
         return len(self.mail.mails)
 
-    def add(self, mail_id, name, content, create_at, attachment=None):
+    def add(self, mail_id, name, content, create_at, attachment=''):
         if not isinstance(name, unicode):
             name = name.decode('utf-8')
 
@@ -79,8 +80,8 @@ class Mail(object):
         if not self.mail.mails[str(mail_id)].attachment:
             raise InvalidOperate()
 
-        att = Attachment(self.char_id)
-        att.send_with_attachment_msg(self.mail.mails[str(mail_id)].attachment)
+        attachment = Attachment(self.char_id)
+        attachment.save_standard_drop(json.loads(self.mail.mails[str(mail_id)].attachment), des='Mail Attachment')
 
         self.mail.mails[str(mail_id)].attachment = ''
         self.mail.mails[str(mail_id)].has_read = True

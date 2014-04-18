@@ -69,6 +69,17 @@ SKILLS = object_maker(_find_file('skills.json'))
 SKILL_EFFECT = object_maker(_find_file('skill_effect.json'))
 TASKS = object_maker(_find_file('tasks.json'))
 
+def _got_package():
+    f = _find_file('package.json')
+    with open(f, 'r') as x:
+        data = json.loads(x.read())
+    p = {}
+    for k, v in data.iteritems():
+        p[int(k)] = v
+    return p
+
+PACKAGES = _got_package()
+
 
 for k, v in FUNCTION_OPEN.items():
     if v.char_level == 0 and v.stage_id == 0:
@@ -77,22 +88,25 @@ for k, v in FUNCTION_OPEN.items():
 
 def _parse_char_init():
     decoded_heros = {}
-    for hero in CHARINIT.heros.split('|'):
-        hero_id, equips = hero.split(':')
-        equip_ids = [int(i) for i in equips.split(',')]
-        decoded_heros[int(hero_id)] = equip_ids
+    if CHARINIT.heros:
+        for hero in CHARINIT.heros.split('|'):
+            hero_id, equips = hero.split(':')
+            equip_ids = [int(i) for i in equips.split(',')]
+            decoded_heros[int(hero_id)] = equip_ids
     CHARINIT.decoded_heros = decoded_heros
 
     decoded_gems = []
-    for gems in CHARINIT.gems.split(','):
-        gid, amount = gems.split(':')
-        decoded_gems.append((int(gid), int(amount)))
+    if CHARINIT.gems:
+        for gems in CHARINIT.gems.split(','):
+            gid, amount = gems.split(':')
+            decoded_gems.append((int(gid), int(amount)))
     CHARINIT.decoded_gems = decoded_gems
 
     decoded_stuffs = []
-    for stuff in CHARINIT.stuffs.split(','):
-        sid, amount = stuff.split(':')
-        decoded_stuffs.append((int(sid), int(amount)))
+    if CHARINIT.stuffs:
+        for stuff in CHARINIT.stuffs.split(','):
+            sid, amount = stuff.split(':')
+            decoded_stuffs.append((int(sid), int(amount)))
     CHARINIT.decoded_stuffs = decoded_stuffs
 
 _parse_char_init()

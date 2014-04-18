@@ -54,6 +54,7 @@ def get_reward(request):
     char_id = request._char_id
 
     p = Plunder(char_id)
+    # FIXME using standard drop
     got_hero_id, got_equipments, got_gems, got_stuffs, got_gold = p.get_reward(req.tp)
 
     response = protomsg.PlunderGetRewardResponse()

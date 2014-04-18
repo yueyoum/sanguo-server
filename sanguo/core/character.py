@@ -258,11 +258,7 @@ def char_initialize(account_id, server_id, char_id, name):
 
     hero_ids = hero_ids + (4-len(hero_ids)) * [0]
 
-    # hero_ids = [
-    #     hero_ids[0], hero_ids[1], hero_ids[2],
-    #     0, 0, 0,
-    #     0, 0,
-    # ]
+
     socket_ids = []
     for index, _id in enumerate(hero_ids):
         try:
@@ -272,7 +268,6 @@ def char_initialize(account_id, server_id, char_id, name):
         _sid = f.save_socket(hero=_id, weapon=weapon, armor=armor, jewelry=jewelry, send_notify=False)
         socket_ids.append(_sid)
 
-    # socket_ids = socket_ids + (9-len(socket_ids)) * [0]
 
     socket_ids = [
         socket_ids[0], socket_ids[3], 0,
@@ -282,8 +277,10 @@ def char_initialize(account_id, server_id, char_id, name):
 
     f.save_formation(socket_ids, send_notify=False)
 
-    item.gem_add(CHARINIT.decoded_gems, send_notify=False)
-    item.stuff_add(CHARINIT.decoded_stuffs, send_notify=False)
+    if CHARINIT.decoded_gems:
+        item.gem_add(CHARINIT.decoded_gems, send_notify=False)
+    if CHARINIT.decoded_stuffs:
+        item.stuff_add(CHARINIT.decoded_stuffs, send_notify=False)
 
     # if not settings.IS_GUIDE_SERVER:
     #     ms = MongoStage(id=char_id)
@@ -292,7 +289,6 @@ def char_initialize(account_id, server_id, char_id, name):
     #     ms.stage_new = 2
     #     ms.save()
 
-    print "char_initialize done"
 
 
 def get_char_ids_by_level_range(server_id, min_level, max_level):

@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import random
 
-from django.db import transaction
-
 from mongoengine import DoesNotExist
 
 from core.mongoscheme import MongoStage, MongoTeamBattle, MongoEmbededPlunderLog, MongoHang, MongoHangRemainedTime
@@ -11,7 +9,7 @@ from core.mongoscheme import MongoStage, MongoTeamBattle, MongoEmbededPlunderLog
 from utils import timezone
 from utils import pack_msg
 from core.msgpipe import publish_to_char
-from core.attachment import Attachment
+from core.attachment import Attachment, standard_drop_to_attachment_protomsg
 from core.achievement import Achievement
 from core.task import Task
 
@@ -41,61 +39,87 @@ from preset.settings import (
     PLUNDER_DEFENSE_FAILURE_MAX_TIMES,
 )
 
-from preset.data import HEROS, STAGES, STAGE_CHALLENGE, STAGE_ELITE, STAGE_DROP, STAGE_ELITE_CONDITION
+from preset.data import HEROS, STAGES, STAGE_CHALLENGE, STAGE_ELITE, STAGE_DROP, STAGE_ELITE_CONDITION, PACKAGES
 
 
-def _parse_drops(drop_id):
-    if not drop_id:
-        return [], [], []
-
-    ids = drop_id.split(',')
-    equips = {}
-    gems = {}
-    stuffs = {}
-
-    def _parse(text):
-        if not text:
-            return {}
-
-        data = {}
-        for t in text.split(','):
-            _id, _prob = t.split(':')
-            _id = int(_id)
-            _prob = int(_prob)
-            data[_id] = data.get(_id, 0) + _prob
-        return data
-
-    for _id in ids:
-        int_id = int(_id)
-        if int_id == 0:
+def get_drop(drop_ids, multi=1, gaussian=False):
+    # 从pakcage中解析并计算掉落，返回为 dict
+    # {
+    #     'gold': 0,
+    #     'sycee': 0,
+    #     'exp': 0,
+    #     'official_exp': 0,
+    #     'heros': [
+    #         {id: level: step: amount:},...
+    #     ],
+    #     'equipments': [
+    #         {id: level: amount:},...
+    #     ],
+    #     'gems': [
+    #         {id: amount:},...
+    #     ],
+    #     'stuffs': [
+    #         {id: amount:},...
+    #     ]
+    # }
+    gold = 0
+    sycee = 0
+    exp = 0
+    official_exp = 0
+    heros = []
+    equipments = []
+    gems = []
+    stuffs = []
+    for d in drop_ids:
+        if d == 0:
+            # 一般不会为0，0实在策划填写编辑器的时候本来为空，却填了个0
             continue
-        this_drop = STAGE_DROP[int_id]
-        drop_equip = _parse(this_drop.equips)
-        for k, v in drop_equip.iteritems():
-            equips[k] = equips.get(k, 0) + v
 
-        drop_gems = _parse(this_drop.gems)
-        for k, v in drop_gems.iteritems():
-            gems[k] = gems.get(k, 0) + v
+        p = PACKAGES[d]
+        gold += p['gold']
+        sycee += p['sycee']
+        exp += ['exp']
+        official_exp += p['official_exp']
+        heros.extend(p['heros'])
+        equipments.extend(p['equipments'])
+        gems.extend(p['gems'])
+        stuffs.extend(p['stuffs'])
 
-        drop_stuffs = _parse(this_drop.stuffs)
-        for k, v in drop_stuffs.iteritems():
-            stuffs[k] = stuffs.get(k, 0) + v
+    def _make(items):
+        for index, item in enumerate(items[:]):
+            prob = item['prob'] * multi
+            if gaussian:
+                prob = prob * (1 + GAUSSIAN_TABLE[round(random.uniform(0.01, 0.99), 2)] * 0.08)
 
-    return equips.items(), gems.items(), stuffs.items()
+            a, b = divmod(prob, DROP_PROB_BASE)
+            a = int(a)
+            if b > random.randint(0, DROP_PROB_BASE):
+                a += 1
 
+            if a == 0:
+                items.pop(index)
+                continue
 
-def _make(drops):
-    res = []
-    for _id, prob in drops:
-        a, b = divmod(prob, DROP_PROB_BASE)
-        a = int(a)
-        if b >= random.randint(0, DROP_PROB_BASE):
-            a += 1
-        if a:
-            res.append((_id, a))
-    return res
+            items[index]['amount'] *= a
+            items[index].pop('prob')
 
+        return items
+
+    heros = _make(heros)
+    equipments = _make(equipments)
+    gems = _make(gems)
+    stuffs = _make(stuffs)
+
+    return {
+        'gold': gold * multi,
+        'sycee': sycee * multi,
+        'exp': exp * multi,
+        'offcial_exp': official_exp * multi,
+        'heros': heros,
+        'equipments': equipments,
+        'gems': gems,
+        'stuffs': stuffs,
+    }
 
 
 
@@ -126,7 +150,7 @@ class Stage(object):
             ))
 
         char = Char(self.char_id)
-        char_level = char.cacheobj.level
+        char_level = char.mc.level
         if char_level < this_stage.level_limit:
             raise SanguoException(1100, "PVE. Char {0} level little than level limit. {1} < {2}".format(
                 self.char_id, char_level, this_stage.level_limit
@@ -148,7 +172,7 @@ class Stage(object):
         star = False
         if battle_msg.first_ground.self_win and battle_msg.second_ground.self_win and battle_msg.third_ground.self_win:
             star = True
-            if str(stage_id) not in self.stage.stages:
+            if not self.stage.stages.get(str(stage_id), False):
                 self.first_star = True
 
             if stage_id > self.stage.max_star_stage:
@@ -156,8 +180,6 @@ class Stage(object):
 
         self.star = star
 
-
-        achievement = Achievement(self.char_id)
 
         if battle_msg.self_win:
             # 当前关卡通知
@@ -187,14 +209,6 @@ class Stage(object):
             elite = EliteStage(self.char_id)
             elite.enable_by_condition_id(stage_id)
 
-            achievement.trig(7, stage_id)
-            if star:
-                achievement.trig(9, 1)
-
-            t = Task(self.char_id)
-            t.trig(1)
-        else:
-            achievement.trig(8, 1)
 
         self.stage.save()
 
@@ -209,77 +223,33 @@ class Stage(object):
         return battle_msg
 
 
-    def get_drop(self, stage_id, times=1, first=False, star=False):
-        """
-        @param stage_id: stage id
-        @type stage_id: int
-        @return : exp, gold, equipment, gems, stuffs. (0, 0, [], [], [(id, amount), (id, amount)])
-        @rtype: (int, int, list, list, list)
-        """
-
+    def save_drop(self, stage_id, times=1, first=False, star=False, only_items=False):
         this_stage = STAGES[stage_id]
         exp = this_stage.normal_exp
         gold = this_stage.normal_gold
-        equipments, gems, stuffs = _parse_drops(this_stage.normal_drop)
 
-        def _merge(base, addition):
-            base_dict = dict(base)
-            for a, b in addition:
-                base_dict[a] = base_dict.get(a, 0) + b
+        drop_ids = []
+        if this_stage.normal_drop:
+            drop_ids.extend([int(i) for i in this_stage.normal_drop.split(',')])
+        if first and this_stage.first_drop:
+            drop_ids.extend([int(i) for i in this_stage.first_drop.split(',')])
+        if star and this_stage.star_drop:
+            drop_ids.extend([int(i) for i in this_stage.star_drop.split(',')])
 
-            return base_dict.items()
-
-        if first:
-            exp += this_stage.first_exp
-            gold += this_stage.first_gold
-            f_equips, f_gems, f_stuffs = _parse_drops(this_stage.first_drop)
-
-            equipments = _merge(equipments, f_equips)
-            gems = _merge(gems, f_gems)
-            stuffs = _merge(stuffs, f_stuffs)
-
-        if star:
-            exp += this_stage.star_exp
-            gold += this_stage.star_gold
-            s_equips, s_gems, s_stuffs = _parse_drops(this_stage.star_drop)
-
-            equipments = _merge(equipments, s_equips)
-            gems = _merge(gems, s_gems)
-            stuffs = _merge(stuffs, s_stuffs)
-
-        def _multi(drops):
-            for index, d in enumerate(drops):
-                prob = d[1]
-                new_prob = times * prob
-                drops[index] = [d[0], new_prob]
-
-        _multi(equipments)
-        _multi(gems)
-        _multi(stuffs)
-
-        drop_equipments = _make(equipments)
-        drop_gems = _make(gems)
-        drop_stuffs = _make(stuffs)
-
-        return exp, gold, drop_equipments, drop_gems, drop_stuffs
-
-
-    def save_drop(self, stage_id, times=1, first=False, star=False, only_items=False):
-        exp, gold, equipments, gems, stuffs = self.get_drop(stage_id, times=times, first=first, star=star)
+        standard_drop = get_drop(drop_ids, multi=times)
+        standard_drop['gold'] += gold
+        standard_drop['exp'] += exp
 
         if only_items:
-            exp = 0
-            gold = 0
+            standard_drop['gold'] = 0
+            standard_drop['sycee'] = 0
+            standard_drop['exp'] = 0
+            standard_drop['official_exp'] = 0
 
-        transformed_equipments = []
-        for _id, amount in equipments:
-            for i in range(amount):
-                transformed_equipments.append((_id, 1, 1))
+        attachment = Attachment(self.char_id)
+        attachment.save_standard_drop(standard_drop, des='Stage, save drop')
 
-        attach = Attachment(self.char_id)
-        attach.save_to_char(exp=exp, gold=gold, equipments=transformed_equipments, gems=gems, stuffs=stuffs)
-
-        return exp, gold, transformed_equipments, gems, stuffs
+        return standard_drop
 
 
 
@@ -346,7 +316,6 @@ class Hang(TimerCheckAbstractBase):
             if self.hang_remained.remained <= 0:
                 raise InvalidOperate("Hang Start: Char {0} try to hang, But NO times available".format(self.char_id))
 
-        # job = tasks.hang_finish.apply_async((self.char_id, remained_seconds), countdown=remained_seconds)
 
         char = Char(self.char_id)
         char_level = char.cacheobj.level
@@ -375,7 +344,6 @@ class Hang(TimerCheckAbstractBase):
         if self.hang.finished:
             raise InvalidOperate("Hang Cancel: Char {0} Try to cancel a finished hang".format(self.char_id))
 
-        # tasks.cancel(self.hang.jobid)
         self.finish()
 
 
@@ -446,80 +414,37 @@ class Hang(TimerCheckAbstractBase):
         return drop_gold
 
 
-    def get_drop(self):
+    def save_drop(self):
         stage_id = self.hang.stage_id
         times = self.hang.actual_seconds / 15
 
         stage = STAGES[stage_id]
+
         drop_exp = stage.normal_exp * times
         drop_gold = stage.normal_gold * times
-
         drop_gold = self._actual_gold(drop_gold)
 
-        drop_equips, drop_gems, drop_stuffs = _parse_drops(stage.normal_drop)
+        drop_ids = [int(i) for i in stage.normal_drop.split(',')]
+        standard_drop = get_drop(drop_ids, multi=times, gaussian=True)
 
-        def _gaussian(drops):
-            for index, d in enumerate(drops):
-                prob = d[1]
-                new_prob = times * prob * (1 + GAUSSIAN_TABLE[round(random.uniform(0.01, 0.99), 2)] * 0.08)
-                drops[index] = [d[0], new_prob]
-
-        _gaussian(drop_equips)
-        _gaussian(drop_gems)
-        _gaussian(drop_stuffs)
-
-        got_equips = _make(drop_equips)
-        got_gems = _make(drop_gems)
-        got_stuffs = _make(drop_stuffs)
+        standard_drop['exp'] += drop_exp
+        standard_drop['gold'] += drop_gold
 
         print "HANG, drop"
-        print drop_exp, drop_gold, got_equips, got_gems, got_stuffs
+        print standard_drop
 
         self.hang.delete()
         self.hang = None
         self.send_notify()
 
-        c = Char(self.char_id)
-        c.update(exp=drop_exp, gold=drop_gold, des='Hang Reward')
-        item = Item(self.char_id)
-        item.stuff_add(got_stuffs)
-        item.gem_add(got_gems)
-        for _id, _amount in got_equips:
-            for i in range(_amount):
-                item.equip_add(_id)
-
-        msg = MsgAttachment()
-        msg.gold = drop_gold
-        msg.exp = drop_exp
-        for _id, _amount in got_stuffs:
-            s = msg.stuffs.add()
-            s.id = _id
-            s.amount = _amount
-
-        for _id, _amount in got_gems:
-            g = msg.gems.add()
-            g.id = _id
-            g.amount = _amount
-
-        for _id, _amount in got_equips:
-            e = msg.equipments.add()
-            e.id = _id
-            e.level = 1
-            e.step = 1
-            e.amount = _amount
+        attachment = Attachment(self.char_id)
+        attachment.save_standard_drop(standard_drop, des='Hang Reward')
 
         achievement = Achievement(self.char_id)
         achievement.trig(29, drop_exp)
 
-        return msg
+        return standard_drop_to_attachment_protomsg(standard_drop)
 
-    #
-    # def save_drop(self):
-    #     exp, gold, stuffs = self.get_drop()
-    #     a = Attachment(self.char_id)
-    #     a.save_to_char(exp=exp, gold=gold, stuffs=stuffs)
-    #     return exp, gold, stuffs
-    #
 
     def send_notify(self):
         msg = protomsg.HangNotify()
@@ -631,37 +556,26 @@ class EliteStage(object):
         return battle_msg
 
 
-    def get_drop(self, _id=None):
+    def save_drop(self, _id=None):
         if _id:
             this_stage = STAGE_ELITE[_id]
         else:
             this_stage = self.this_stage
 
-        drop_gold = this_stage.normal_gold
-        drop_exp = this_stage.normal_exp
-
-        drop_equips, drop_gems, drop_stuffs = _parse_drops(this_stage.normal_drop)
-
-        drop_equips = _make(drop_equips)
-        drop_gems = _make(drop_gems)
-        drop_stuffs = _make(drop_stuffs)
-
-        return drop_exp, drop_gold, drop_equips, drop_gems, drop_stuffs
+        exp = this_stage.normal_exp
+        gold = this_stage.normal_gold
 
 
-    def save_drop(self, _id=None):
-        drop_exp, drop_gold, drop_equips, drop_gems, drop_stuffs = self.get_drop(_id=_id)
+        drop_ids = [int(i) for i in this_stage.normal_drop.split(',')]
 
-        transformed_equipments = []
-        for _id, amount in drop_equips:
-            for i in range(amount):
-                transformed_equipments.append((_id, 1, 1))
+        standard_drop = get_drop(drop_ids)
+        standard_drop['gold'] += gold
+        standard_drop['exp'] += exp
 
-        attach = Attachment(self.char_id)
-        attach.save_to_char(exp=drop_exp, gold=drop_gold, equipments=transformed_equipments, gems=drop_gems, stuffs=drop_stuffs)
+        attachment = Attachment(self.char_id)
+        attachment.save_standard_drop(standard_drop, des='EliteStage, save drop')
 
-        return drop_exp, drop_gold, transformed_equipments, drop_gems, drop_stuffs
-
+        return standard_drop
 
 
     def send_notify(self):

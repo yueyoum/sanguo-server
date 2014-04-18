@@ -4,10 +4,11 @@ __author__ = 'Wang Chao'
 __date__ = '4/17/14'
 
 import json
+
 from utils.decorate import json_return
 from core.mongoscheme import MongoCharacter
 from core.mail import Mail
-from core.attachment import raw_data_to_attachment_protomsg
+
 
 @json_return
 def send_mail(request):
@@ -28,7 +29,7 @@ def send_mail(request):
     mail_name = data['mail']['name']
     mail_content = data['mail']['content']
     mail_send_at = data['mail']['send_at']
-    attachment = raw_data_to_attachment_protomsg(data['mail']['attachment']).SerializeToString()
+    attachment = json.dumps(data['mail']['attachment'])
 
     for cid in cids:
         m = Mail(cid)

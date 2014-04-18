@@ -16,14 +16,13 @@ from utils import pack_msg
 from protomsg import PrizeNotify, Attachment as MsgAttachment
 
 
-def raw_data_to_attachment_protomsg(data):
+def standard_drop_to_attachment_protomsg(data):
     # data is dict, {
     # 'gold': 0,
     # 'sycee': 0,
     # 'exp': 0,
     # 'official_exp': 0,
-    # 'heros': [{id:, level: step: amount: }, ...],
-    # 'herosouls': [{id: amount:}, ...],
+    # 'heros': [{id: amount:}, ...],
     # 'equipments': [{id: level: amount:}, ...],
     # 'gems': [{id: amount:}, ...],
     # 'stuffs': [{id: amount:}, ...]
@@ -31,25 +30,25 @@ def raw_data_to_attachment_protomsg(data):
 
     # TODO, modify proto
     msg = MsgAttachment()
-    msg.gold = data['gold']
-    msg.sycee = data['sycee']
-    msg.exp = data['exp']
-    msg.official_exp = data['official_exp']
-    for x in data['heros']:
+    msg.gold = data.get('gold', 0)
+    msg.sycee = data.get('sycee', 0)
+    msg.exp = data.get('exp', 0)
+    msg.official_exp = data.get('official_exp', 0)
+    for x in data.get('heros', []):
         msg.heros.append(x['id'])
-    for x in data['equipments']:
+    for x in data.get('equipments', []):
         msg_e = msg.equipments.add()
         msg_e.id = x['id']
         msg_e.level = x['level']
         msg_e.step = 1
         msg_e.amount = x['amount']
 
-    for x in data['gems']:
+    for x in data.get('gems', []):
         msg_g = msg.gems.add()
         msg_g.id = x['id']
         msg_g.amount = x['amount']
 
-    for x in data['stuffs']:
+    for x in data.get('stuffs', []):
         msg_s = msg.stuffs.add()
         msg_s.id = x['id']
         msg_s.amount = x['amount']
@@ -69,19 +68,39 @@ class Attachment(object):
             self.attachment.attachments = {}
             self.attachment.save()
 
-    def send_with_attachment_msg(self, msg_bin):
-        msg = MsgAttachment()
-        msg.ParseFromString(msg_bin)
-        self.save_to_char(
-            gold=msg.gold,
-            sycee=msg.sycee,
-            exp=msg.exp,
-            official_exp=msg.official_exp,
-            heros=msg.heros,
-            equipments=[(e.id, e.level, e.step) for e in msg.equipments],
-            gems=[(g.id, g.amount) for g in msg.gems],
-            stuffs=[(s.id, s.amount) for s in msg.stuffs],
-        )
+
+    def save_standard_drop(self, drop, des=''):
+        from core.character import Char
+        from core.hero import save_hero
+        from core.item import Item
+
+        if drop['gold'] or drop['sycee'] or drop['exp'] or drop['official_exp']:
+            char = Char(self.char_id)
+            char.update(gold=drop['gold'], sycee=drop['sycee'], exp=drop['exp'], official_exp=drop['official_exp'], des=des)
+
+        if drop['heros']:
+            heros = []
+            for h in drop['heros']:
+                heros.extend([h['id']] * h['amount'])
+            save_hero(self.char_id, heros)
+
+        item = Item(self.char_id)
+        for e in drop['equipments']:
+            for i in range(e['amount']):
+                item.equip_add(e['id'], e['level'])
+
+        if drop['gems']:
+            gems = []
+            for g in drop['gems']:
+                gems.append((g['id'], g['amount']))
+            item.gem_add(gems)
+
+        if drop['stuffs']:
+            stuffs = []
+            for s in drop['stuffs']:
+                stuffs.append((s['id'], s['amount']))
+            item.stuff_add(stuffs)
+
 
     def save_to_char(self, gold=0, sycee=0, exp=0, official_exp=0, heros=None, equipments=None, gems=None, stuffs=None):
         from core.character import Char
@@ -151,7 +170,7 @@ class Attachment(object):
             # 挂机
             from core.stage import Hang
             h = Hang(self.char_id)
-            att_msg = h.get_drop()
+            att_msg = h.save_drop()
         elif prize_id == 4:
             # 成就
             from core.achievement import Achievement

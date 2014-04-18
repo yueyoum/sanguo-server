@@ -1,0 +1,1365 @@
+{
+    "512": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 75, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "1": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 1, 
+                "prob": 200
+            }, 
+            {
+                "amount": 1, 
+                "id": 2, 
+                "prob": 200
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "2": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 4, 
+                "prob": 79
+            }, 
+            {
+                "amount": 1, 
+                "id": 3, 
+                "prob": 159
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "3": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 6, 
+                "prob": 26
+            }, 
+            {
+                "amount": 1, 
+                "id": 5, 
+                "prob": 79
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "4": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 8, 
+                "prob": 19
+            }, 
+            {
+                "amount": 1, 
+                "id": 7, 
+                "prob": 94
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "5": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 10, 
+                "prob": 12
+            }, 
+            {
+                "amount": 1, 
+                "id": 9, 
+                "prob": 123
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "6": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 11, 
+                "prob": 205
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "513": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "520": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 14, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "521": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "10": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 12, 
+                "prob": 10
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "11": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 13, 
+                "prob": 10
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "12": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 14, 
+                "prob": 10
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "13": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 15, 
+                "prob": 10
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "14": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 16, 
+                "prob": 10
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "15": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 17, 
+                "prob": 10
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "16": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 18, 
+                "prob": 10
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "17": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 19, 
+                "prob": 10
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "18": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 20, 
+                "prob": 10
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "19": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 21, 
+                "prob": 10
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "814": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 14, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "516": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 73, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "815": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 14, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "517": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 67, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "801": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 1, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "802": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 2, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "803": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 3, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "804": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 4, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "518": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 98, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "550": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 35, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "551": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 34, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "808": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 8, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "809": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 9, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "810": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 10, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "519": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 12, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "812": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 12, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "301": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "302": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "303": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "816": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 16, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "817": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 17, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "818": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 18, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "819": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 19, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "820": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 20, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "821": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 21, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "822": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 22, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "823": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 23, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "824": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 24, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "825": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 25, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "826": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 26, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "827": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 27, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "828": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 28, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "522": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "201": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 23, 
+                "prob": 60
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "202": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 23, 
+                "prob": 80
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "203": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 23, 
+                "prob": 95
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "811": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 11, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "514": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 87, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "805": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 5, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "806": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 6, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "813": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 13, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "101": {
+        "gems": [
+            {
+                "amount": 1, 
+                "id": 1, 
+                "prob": 200
+            }, 
+            {
+                "amount": 1, 
+                "id": 11, 
+                "prob": 200
+            }, 
+            {
+                "amount": 1, 
+                "id": 21, 
+                "prob": 200
+            }, 
+            {
+                "amount": 1, 
+                "id": 31, 
+                "prob": 200
+            }
+        ], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "102": {
+        "gems": [
+            {
+                "amount": 1, 
+                "id": 1, 
+                "prob": 300
+            }, 
+            {
+                "amount": 1, 
+                "id": 11, 
+                "prob": 300
+            }, 
+            {
+                "amount": 1, 
+                "id": 21, 
+                "prob": 300
+            }, 
+            {
+                "amount": 1, 
+                "id": 31, 
+                "prob": 300
+            }
+        ], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "103": {
+        "gems": [
+            {
+                "amount": 1, 
+                "id": 1, 
+                "prob": 160
+            }, 
+            {
+                "amount": 1, 
+                "id": 11, 
+                "prob": 160
+            }, 
+            {
+                "amount": 1, 
+                "id": 21, 
+                "prob": 160
+            }, 
+            {
+                "amount": 1, 
+                "id": 31, 
+                "prob": 160
+            }, 
+            {
+                "amount": 1, 
+                "id": 2, 
+                "prob": 50
+            }, 
+            {
+                "amount": 1, 
+                "id": 12, 
+                "prob": 50
+            }, 
+            {
+                "amount": 1, 
+                "id": 22, 
+                "prob": 50
+            }, 
+            {
+                "amount": 1, 
+                "id": 32, 
+                "prob": 50
+            }
+        ], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "104": {
+        "gems": [
+            {
+                "amount": 1, 
+                "id": 2, 
+                "prob": 180
+            }, 
+            {
+                "amount": 1, 
+                "id": 12, 
+                "prob": 180
+            }, 
+            {
+                "amount": 1, 
+                "id": 22, 
+                "prob": 180
+            }, 
+            {
+                "amount": 1, 
+                "id": 32, 
+                "prob": 180
+            }
+        ], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "105": {
+        "gems": [
+            {
+                "amount": 1, 
+                "id": 2, 
+                "prob": 280
+            }, 
+            {
+                "amount": 1, 
+                "id": 12, 
+                "prob": 280
+            }, 
+            {
+                "amount": 1, 
+                "id": 22, 
+                "prob": 280
+            }, 
+            {
+                "amount": 1, 
+                "id": 32, 
+                "prob": 280
+            }
+        ], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "807": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 7, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "515": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 92, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "1001": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "501": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 48, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "502": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 51, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "503": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 74, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "504": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 22, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "505": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 68, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "506": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 47, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 69, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "507": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 71, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "508": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 76, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "509": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 78, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "510": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 93, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "511": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 79, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }
+}

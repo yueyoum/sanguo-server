@@ -4,6 +4,7 @@ __author__ = 'Wang Chao'
 __date__ = '4/9/14'
 
 from core.stage import Stage, Hang, EliteStage
+from core.attachment import standard_drop_to_attachment_protomsg
 from libs import pack_msg
 from utils.decorate import message_response, operate_guard, function_check
 
@@ -19,34 +20,18 @@ def elite_pve(request):
 
     battle_msg = stage.battle(req.stage_id)
     if battle_msg.self_win:
-        drop_exp, drop_gold, drop_equipment, drop_gems, drop_stuffs = stage.save_drop()
+        drop = stage.save_drop()
     else:
-        drop_exp, drop_gold, drop_equipment, drop_gems, drop_stuffs = 0, 0, [], [], []
+        drop = {}
 
     print "Elite PVE. drop:"
-    print drop_exp, drop_gold, drop_equipment, drop_gems, drop_stuffs
+    print drop
 
     response = protomsg.ElitePVEResponse()
     response.ret = 0
     response.stage_id = req.stage_id
     response.battle.MergeFrom(battle_msg)
-
-    response.drop.gold = drop_gold
-    response.drop.exp = drop_exp
-    for _id, amount in drop_stuffs:
-        stuff = response.drop.stuffs.add()
-        stuff.id = _id
-        stuff.amount = amount
-    for _id, amount in drop_gems:
-        g = response.drop.gems.add()
-        g.id = _id
-        g.amount = amount
-    for _id, level, step in drop_equipment:
-        e = response.drop.equipments.add()
-        e.id = _id
-        e.level = level
-        e.step = step
-        e.amount = 1
+    response.drop.MergeFrom(standard_drop_to_attachment_protomsg(drop))
 
     return pack_msg(response)
 
@@ -69,35 +54,19 @@ def pve(request):
     # DEBUG END
 
     if battle_msg.self_win:
-        drop_exp, drop_gold, drop_equipment, drop_gems, drop_stuffs = stage.save_drop(req.stage_id, first=stage.first, star=stage.first_star)
+        drop = stage.save_drop(req.stage_id, first=stage.first, star=stage.first_star)
     else:
-        drop_exp, drop_gold, drop_equipment, drop_gems, drop_stuffs = 0, 0, [], [],  []
+        drop = {}
 
     print "PVE. drop:"
-    print drop_exp, drop_gold, drop_equipment, drop_gems, drop_stuffs
+    print drop
 
     response = protomsg.PVEResponse()
     response.ret = 0
     response.stage_id = req.stage_id
     response.battle.MergeFrom(battle_msg)
 
-    response.drop.gold = drop_gold
-    response.drop.exp = drop_exp
-    for _id, amount in drop_stuffs:
-        stuff = response.drop.stuffs.add()
-        stuff.id = _id
-        stuff.amount = amount
-    for _id, amount in drop_gems:
-        g = response.drop.gems.add()
-        g.id = _id
-        g.amount = amount
-    for _id, level, step in drop_equipment:
-        e = response.drop.equipments.add()
-        e.id = _id
-        e.level = level
-        e.step = step
-        e.amount = 1
-
+    response.drop.MergeFrom(standard_drop_to_attachment_protomsg(drop))
     return pack_msg(response)
 
 
