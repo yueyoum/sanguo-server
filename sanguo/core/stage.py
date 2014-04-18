@@ -78,7 +78,7 @@ def get_drop(drop_ids, multi=1, gaussian=False):
         p = PACKAGES[d]
         gold += p['gold']
         sycee += p['sycee']
-        exp += ['exp']
+        exp += p['exp']
         official_exp += p['official_exp']
         heros.extend(p['heros'])
         equipments.extend(p['equipments'])
@@ -86,7 +86,8 @@ def get_drop(drop_ids, multi=1, gaussian=False):
         stuffs.extend(p['stuffs'])
 
     def _make(items):
-        for index, item in enumerate(items[:]):
+        final_items = []
+        for index, item in enumerate(items):
             prob = item['prob'] * multi
             if gaussian:
                 prob = prob * (1 + GAUSSIAN_TABLE[round(random.uniform(0.01, 0.99), 2)] * 0.08)
@@ -97,13 +98,13 @@ def get_drop(drop_ids, multi=1, gaussian=False):
                 a += 1
 
             if a == 0:
-                items.pop(index)
                 continue
 
-            items[index]['amount'] *= a
-            items[index].pop('prob')
+            item['amount'] *= a
+            item.pop('prob')
+            final_items.append(item)
 
-        return items
+        return final_items
 
     heros = _make(heros)
     equipments = _make(equipments)
