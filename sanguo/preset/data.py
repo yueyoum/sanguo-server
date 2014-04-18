@@ -69,6 +69,11 @@ SKILLS = object_maker(_find_file('skills.json'))
 SKILL_EFFECT = object_maker(_find_file('skill_effect.json'))
 TASKS = object_maker(_find_file('tasks.json'))
 
+# 为了兼容旧代码
+for v in FUNCTION_OPEN.values():
+    v.func_id = v.func
+
+
 def _got_package():
     f = _find_file('package.json')
     with open(f, 'r') as x:
