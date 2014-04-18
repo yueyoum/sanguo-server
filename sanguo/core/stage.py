@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import random
+import copy
 
 from mongoengine import DoesNotExist
 
@@ -75,7 +76,7 @@ def get_drop(drop_ids, multi=1, gaussian=False):
             # 一般不会为0，0实在策划填写编辑器的时候本来为空，却填了个0
             continue
 
-        p = PACKAGES[d]
+        p = copy.deepcopy(PACKAGES[d])
         gold += p['gold']
         sycee += p['sycee']
         exp += p['exp']
