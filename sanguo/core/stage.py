@@ -115,7 +115,7 @@ def get_drop(drop_ids, multi=1, gaussian=False):
         'gold': gold * multi,
         'sycee': sycee * multi,
         'exp': exp * multi,
-        'offcial_exp': official_exp * multi,
+        'official_exp': official_exp * multi,
         'heros': heros,
         'equipments': equipments,
         'gems': gems,
