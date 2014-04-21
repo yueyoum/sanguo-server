@@ -16,6 +16,19 @@ from utils import pack_msg
 from protomsg import PrizeNotify, Attachment as MsgAttachment
 
 
+def make_standard_drop_from_template():
+    return {
+        'gold': 0,
+        'sycee': 0,
+        'exp': 0,
+        'official_exp': 0,
+        'heros': [],
+        'equipments': [],
+        'gems': [],
+        'stuffs': [],
+    }
+
+
 def standard_drop_to_attachment_protomsg(data):
     # data is dict, {
     # 'gold': 0,

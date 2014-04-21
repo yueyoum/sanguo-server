@@ -4,6 +4,7 @@ from cmd_pb2 import *
 from world_pb2 import *
 from guide_pb2 import *
 from mail_pb2 import *
+from purchase_pb2 import *
 from daily_pb2 import *
 from chat_pb2 import *
 from task_pb2 import *
@@ -126,6 +127,8 @@ RESPONSE_NOTIFY_TYPE = {
     "GuideFinishResponse": 4002,
     "LevyNotify": 4100,
     "LevyResponse": 4102,
+    "GetProductsResponse": 4201,
+    "BuyVerityResponse": 4203,
 }
 
 REQUEST_TYPE = {
@@ -180,6 +183,8 @@ REQUEST_TYPE = {
     3401: "ChatSendRequest",
     4001: "GuideFinishRequest",
     4101: "LevyRequest",
+    4200: "GetProductsRequest",
+    4202: "BuyVerityRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -234,6 +239,8 @@ REQUEST_TYPE_REV = {
     "ChatSendRequest": 3401,
     "GuideFinishRequest": 4001,
     "LevyRequest": 4101,
+    "GetProductsRequest": 4200,
+    "BuyVerityRequest": 4202,
 }
 
 TYPE_COMMAND = {
@@ -287,6 +294,8 @@ TYPE_COMMAND = {
    3401: "/chat/send/",
    4001: "/guide/finish/",
    4101: "/levy/",
+   4200: "/purchase/products/",
+   4202: "/purchase/verify/",
 }
 
 COMMAND_TYPE = {v: k for k, v in TYPE_COMMAND.iteritems()}
