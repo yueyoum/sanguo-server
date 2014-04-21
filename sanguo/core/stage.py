@@ -227,8 +227,6 @@ class Stage(object):
 
     def save_drop(self, stage_id, times=1, first=False, star=False, only_items=False):
         this_stage = STAGES[stage_id]
-        exp = this_stage.normal_exp
-        gold = this_stage.normal_gold
 
         drop_ids = []
         if this_stage.normal_drop:
@@ -239,8 +237,15 @@ class Stage(object):
             drop_ids.extend([int(i) for i in this_stage.star_drop.split(',')])
 
         standard_drop = get_drop(drop_ids, multi=times)
-        standard_drop['gold'] += gold
-        standard_drop['exp'] += exp
+        standard_drop['gold'] += this_stage.normal_exp
+        standard_drop['exp'] += this_stage.normal_gold
+
+        if first:
+            standard_drop['gold'] += this_stage.first_gold
+            standard_drop['exp'] += this_stage.first_exp
+        if star:
+            standard_drop['gold'] += this_stage.star_gold
+            standard_drop['exp'] += this_stage.star_exp
 
         if only_items:
             standard_drop['gold'] = 0
