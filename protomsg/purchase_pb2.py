@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='purchase.proto',
   package='Sanguo.protocol.purchase',
-  serialized_pb='\n\x0epurchase.proto\x12\x18Sanguo.protocol.purchase\"%\n\x12GetProductsRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"\xae\x01\n\x13GetProductsResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12G\n\x08products\x18\x03 \x03(\x0b\x32\x35.Sanguo.protocol.purchase.GetProductsResponse.Product\x1a\x30\n\x07Product\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x0b\n\x03\x64\x65s\x18\x03 \x02(\t\"E\n\x10\x42uyVerityRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\x12\x0f\n\x07receipt\x18\x03 \x02(\t\"?\n\x11\x42uyVerityResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x0c\n\x04name\x18\x03 \x01(\t')
+  serialized_pb='\n\x0epurchase.proto\x12\x18Sanguo.protocol.purchase\"%\n\x12GetProductsRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"\xae\x01\n\x13GetProductsResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12G\n\x08products\x18\x03 \x03(\x0b\x32\x35.Sanguo.protocol.purchase.GetProductsResponse.Product\x1a\x30\n\x07Product\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x0b\n\x03\x64\x65s\x18\x03 \x02(\t\"E\n\x10\x42uyVerityRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\x12\x0f\n\x07receipt\x18\x03 \x02(\t\"R\n\x11\x42uyVerityResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x11\n\tadd_sycee\x18\x04 \x01(\x05')
 
 
 
@@ -199,6 +199,13 @@ _BUYVERITYRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='add_sycee', full_name='Sanguo.protocol.purchase.BuyVerityResponse.add_sycee', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -209,7 +216,7 @@ _BUYVERITYRESPONSE = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=331,
-  serialized_end=394,
+  serialized_end=413,
 )
 
 _GETPRODUCTSRESPONSE_PRODUCT.containing_type = _GETPRODUCTSRESPONSE;
