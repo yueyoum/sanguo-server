@@ -18,7 +18,6 @@ from core.item import Item
 from core.heropanel import HeroPanel
 from core.arena import Arena
 from core.achievement import Achievement
-from core.store import Store
 from core.hero import HeroSoul, char_heros_obj
 from core.functionopen import FunctionOpen
 from core.levy import Levy
@@ -100,7 +99,6 @@ def login_notify(char_id):
     Task(char_id).send_notify()
     Achievement(char_id).send_notify()
     EliteStage(char_id).send_notify()
-    Store(char_id).send_notify()
     TeamBattle(char_id).send_notify()
     HeroSoul(char_id).send_notify()
     FunctionOpen(char_id).send_notify()

@@ -411,15 +411,6 @@ class MongoAttachment(Document):
     }
 
 
-class MongoStoreAmount(Document):
-    id = IntField(primary_key=True)
-    sold_amount = IntField(default=0)
-
-    # 有总量的物品的卖出数量，id为商品id，sold_amount为卖出数量
-    meta = {
-        'collection': 'store_amount'
-    }
-
 
 class MongoStoreCharLimit(Document):
     id = IntField(primary_key=True)

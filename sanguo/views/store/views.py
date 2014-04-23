@@ -3,14 +3,13 @@
 __author__ = 'Wang Chao'
 __date__ = '4/9/14'
 
-# -*- coding: utf-8 -*-
 
 from utils.decorate import message_response
 
 from core.store import Store
 from libs import pack_msg
 
-from protomsg import StorePanelResponse, StoreBuyResponse
+from protomsg import StorePanelResponse
 
 @message_response("StorePanelResponse")
 def panel(request):
