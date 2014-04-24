@@ -2,6 +2,8 @@
 0 0 * * * /PATH/reset_counter.sh
 # 每天00:00点重置挂机剩余时间
 0 0 * * * /PATH/reset_hang.sh
+# 每天00:00点重置精英关卡打过次数
+0 0 * * * /PATH/reset_stage_elite.sh
 # 每天00:00 重置可签到状态
 0 0 * * * /PATH/reset_checkin.sh
 # 每天00:00 重置任务
