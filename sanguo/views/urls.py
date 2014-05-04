@@ -1,5 +1,4 @@
 from django.conf.urls import patterns, url
-from django.conf import settings
 
 urlpatterns = patterns('',
                        url(r'^sync/$', 'views.world.views.sync'),
@@ -59,7 +58,7 @@ urlpatterns = patterns('',
 
                        url(r'daily/checkin/$', 'views.daily.views.checkin'),
 
-                       url(r'^teambattle/start/$', 'views.teambattle.views.start'),
+                       # url(r'^teambattle/start/$', 'views.teambattle.views.start'),
 
                        url(r'^store/panel/$', 'views.store.views.panel'),
                        url(r'^store/buy/$', 'views.store.views.buy'),
@@ -74,10 +73,3 @@ urlpatterns += patterns('',
                         url(r'^api/mail/send/$', 'views.api.mail.views.send_mail'),
                         url(r'^api/purchase/done/$', 'views.api.purchase.views.purchase_done'),
 )
-
-
-if settings.IS_GUIDE_SERVER:
-    urlpatterns += patterns('',
-                            url(r'^char/create/$', 'views.character.views.create_character'),
-    )
-

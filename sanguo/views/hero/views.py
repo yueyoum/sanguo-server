@@ -6,7 +6,8 @@ __date__ = '4/9/14'
 
 from utils.decorate import message_response, function_check
 from core.hero import Hero, char_heros_dict
-from core.exception import InvalidOperate
+from core.exception import SanguoException
+from preset import errormsg
 
 
 @message_response("HeroStepUpResponse")
@@ -15,13 +16,18 @@ def step_up(request):
     char_id = request._char_id
     heros_dict = char_heros_dict(char_id)
 
-    _id = request._proto.id
+    req = request._proto
+    _id = req.id
 
     if _id not in heros_dict:
-        raise InvalidOperate("Hero Step Up: Char {0} Try to up a NONE exist hero: {1}".format(
-            char_id, _id
-        ))
+        raise SanguoException(
+            errormsg.HERO_NOT_EXSIT,
+            char_id,
+            "Hero Step Up",
+            "hero {0} not belong to char {1}".format(_id, char_id)
+        )
+
 
     h = Hero(_id)
-    h.step_up()
+    h.step_up(req.method)
     return None

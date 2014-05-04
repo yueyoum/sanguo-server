@@ -187,31 +187,6 @@ class Char(object):
         publish_to_char(self.id, pack_msg(msg))
 
 
-# if settings.IS_GUIDE_SERVER:
-#     def char_initialize(account_id, server_id, char_id, name):
-#         mc = MongoCharacter(id=char_id)
-#         mc.account_id = account_id
-#         mc.server_id = server_id
-#         mc.name = name
-#         mc.gold = CHARINIT.gold
-#         mc.sycee = CHARINIT.sycee
-#         mc.save()
-#
-#         f = Formation(char_id)
-#         socket_ids = []
-#         for i in range(3):
-#             _sid = f.save_socket(send_notify=False)
-#             socket_ids.append(_sid)
-#
-#         socket_ids = [
-#             socket_ids[0], 0, 0,
-#             socket_ids[1], 0, 0,
-#             socket_ids[2], 0, 0,
-#         ]
-#         f.save_formation(socket_ids, send_notify=False)
-#         print "char_initialize done"
-#
-# else:
 def char_initialize(account_id, server_id, char_id, name):
     mc = MongoCharacter(id=char_id)
     mc.account_id = account_id
@@ -224,8 +199,6 @@ def char_initialize(account_id, server_id, char_id, name):
     from core.item import Item
 
     init_heros = CHARINIT.decoded_heros
-    if not settings.IS_GUIDE_SERVER:
-        init_heros[CHARINIT.extra_hero] = [0, 0, 0]
 
     init_heros_ids = init_heros.keys()
 
@@ -281,14 +254,6 @@ def char_initialize(account_id, server_id, char_id, name):
         item.gem_add(CHARINIT.decoded_gems, send_notify=False)
     if CHARINIT.decoded_stuffs:
         item.stuff_add(CHARINIT.decoded_stuffs, send_notify=False)
-
-    # if not settings.IS_GUIDE_SERVER:
-    #     ms = MongoStage(id=char_id)
-    #     ms.stages['1'] = True
-    #     ms.max_star_stage = 1
-    #     ms.stage_new = 2
-    #     ms.save()
-
 
 
 def get_char_ids_by_level_range(server_id, min_level, max_level):

@@ -1,63 +1,32 @@
 import logging
+from django.conf import settings
+from utils.timezone import localnow
 
 logger = logging.getLogger('sanguo')
 
+NODE_ID = settings.NODE_ID
 
 class SanguoException(Exception):
-    def __init__(self, error_id, error_msg=""):
+    def __init__(self, error_id, char_id, func_name, error_msg=""):
         self.error_id = error_id
         self.error_msg = error_msg
-        if error_msg:
-            logger.info("[EXCEPTION {0}] {1}".format(error_id, error_msg))
+
+        extra = {
+            'node_id': NODE_ID,
+            'error_id': error_id,
+            'char_id': char_id,
+            'func_name': func_name,
+            'error_msg': error_msg,
+            'occurred_at': localnow().strftime('%Y-%m-%d %H:%M:%S'),
+        }
+
+        logger.debug("Node: {0}. Error_id: {1}. Char_id: {2}. Func_name: {3}. Msg: {4}".format(
+            NODE_ID, error_id, char_id, func_name, error_msg),
+                    extra=extra
+                    )
         Exception.__init__(self)
 
 
-class CounterOverFlow(SanguoException):
-    def __init__(self, error_msg=""):
-        SanguoException.__init__(self, 20, error_msg)
+class CounterOverFlow(Exception):
+    pass
 
-
-class BadMessage(SanguoException):
-    def __init__(self, error_msg=""):
-        SanguoException.__init__(self, 1, error_msg)
-
-
-class InvalidOperate(SanguoException):
-    def __init__(self, error_msg=""):
-        SanguoException.__init__(self, 2, error_msg)
-
-
-class CharNotFound(SanguoException):
-    def __init__(self, error_msg=""):
-        SanguoException.__init__(self, 3, error_msg)
-
-
-class GoldNotEnough(SanguoException):
-    def __init__(self, error_msg=""):
-        SanguoException.__init__(self, 10, error_msg)
-
-
-class SyceeNotEnough(SanguoException):
-    def __init__(self, error_msg=""):
-        SanguoException.__init__(self, 11, error_msg)
-
-
-class RenownNotEnough(SanguoException):
-    def __init__(self, error_msg=""):
-        SanguoException.__init__(self, 12, error_msg)
-
-class LevelTooLow(SanguoException):
-    def __init__(self, error_msg=""):
-        SanguoException.__init__(self, 13, error_msg)
-
-class OfficialTooLow(SanguoException):
-    def __init__(self, error_msg=""):
-        SanguoException.__init__(self, 14, error_msg)
-
-class GemNotEnough(SanguoException):
-    def __init__(self, error_msg=""):
-        SanguoException.__init__(self, 15, error_msg)
-
-class StuffNotEnough(SanguoException):
-    def __init__(self, error_msg=""):
-        SanguoException.__init__(self, 16, error_msg)

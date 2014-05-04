@@ -15,9 +15,10 @@ from protomsg import AchievementNotify, UpdateAchievementNotify
 from protomsg import Achievement as MsgAchievement
 from protomsg import Attachment as MsgAttachment
 
-from core.exception import InvalidOperate
+from core.exception import SanguoException
 
 from preset.data import ACHIEVEMENTS, ACHIEVEMENT_CONDITIONS, ACHIEVEMENT_FIRST_IDS
+from preset import errormsg
 
 
 
@@ -128,13 +129,23 @@ class Achievement(object):
 
 
     def get_reward(self, achievement_id):
-        if achievement_id not in self.achievement.finished:
-            raise InvalidOperate("Achievement Get Reward: Char {0} try to get achievement {1}. But this achievement not finished".format(self.char_id, achievement_id))
-
         try:
             ach = ACHIEVEMENTS[achievement_id]
         except KeyError:
-            raise InvalidOperate("Achievement Get Reward: Char {0} try to get a NONE exists achievement {1}".format(self.char_id, achievement_id))
+            raise SanguoException(
+                errormsg.ACHIEVEMENT_NOT_EXIST,
+                self.char_id,
+                "Achievement Get Reward",
+                "{0} not exist".format(achievement_id)
+            )
+
+        if achievement_id not in self.achievement.finished:
+            raise SanguoException(
+                errormsg.ACHIEVEMENT_NOT_FINISH,
+                self.char_id,
+                "Achievement Get Reward",
+                "{0} not finished".format(achievement_id)
+            )
 
         if ach.sycee:
             from core.character import Char
@@ -176,13 +187,6 @@ class Achievement(object):
             self._fill_up_achievement_msg(a, v)
 
         publish_to_char(self.char_id, pack_msg(msg))
-
-        # msg = AchievementNotify()
-        # for i in self.achievement.display:
-        #     a = msg.achievements.add()
-        #     self._fill_up_achievement_msg(a, ACHIEVEMENT_ALL[i])
-        #
-        # publish_to_char(self.char_id, pack_msg(msg))
 
 
     def _fill_up_achievement_msg(self, msg, ach):

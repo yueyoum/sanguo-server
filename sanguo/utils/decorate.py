@@ -2,11 +2,12 @@ import logging
 
 from django.http import HttpResponse
 
-from core.exception import SanguoException, InvalidOperate
+from core.exception import SanguoException
 from core.mongoscheme import MongoFunctionOpen
 from utils import cache
 from utils import pack_msg
 import protomsg
+from preset import errormsg
 
 from libs.decorate import json_return
 
@@ -56,7 +57,12 @@ def operate_guard(func_name, interval, keep_result=False):
             else:
                 x = cache.get(redis_key)
                 if x:
-                    raise InvalidOperate("Operate Guard. Char {0} operate {1} too fast".format(char_id, func_name))
+                    raise SanguoException(
+                        errormsg.INVALID_OPERATE,
+                        char_id,
+                        "Operate Guard",
+                        "operate {0} too fast".format(func_name)
+                    )
 
                 cache.set(redis_key, 1, expire=interval)
                 return func(request, *args, **kwargs)

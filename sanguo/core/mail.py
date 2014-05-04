@@ -10,13 +10,12 @@ from mongoengine import DoesNotExist
 from core.mongoscheme import MongoMail, MongoEmbededMail
 from core.msgpipe import publish_to_char
 from core.attachment import Attachment
-
-from core.exception import InvalidOperate
-
+from core.exception import SanguoException
 from preset.settings import MAIL_KEEP_DAYS
 from utils import pack_msg
-
 import protomsg
+from preset import errormsg
+
 
 FORMAT = '%Y-%m-%d %H:%M:%S'
 
@@ -59,7 +58,12 @@ class Mail(object):
         try:
             self.mail.mails.pop(str(mail_id))
         except KeyError:
-            raise InvalidOperate()
+            raise SanguoException(
+                errormsg.MAIL_NOT_EXIST,
+                self.char_id,
+                "Mail Delete",
+                "mail {0} not exist".format(mail_id)
+            )
 
         self.mail.save()
         self.send_mail_notify()
@@ -68,17 +72,32 @@ class Mail(object):
         try:
             self.mail.mails[str(mail_id)].has_read = True
         except KeyError:
-            raise InvalidOperate("Mail Open. Char {0} Try to open a NONE exist mail {1}".format(self.char_id, mail_id))
+            raise SanguoException(
+                errormsg.MAIL_NOT_EXIST,
+                self.char_id,
+                "Mail Open",
+                "mail {0} not exist".format(mail_id)
+            )
 
         self.mail.save()
         self.send_mail_notify()
 
     def get_attachment(self, mail_id):
         if str(mail_id) not in self.mail.mails:
-            raise InvalidOperate()
+            raise SanguoException(
+                errormsg.MAIL_NOT_EXIST,
+                self.char_id,
+                "Mail Get Attachment",
+                "mail {0} not exist".format(mail_id)
+            )
 
         if not self.mail.mails[str(mail_id)].attachment:
-            raise InvalidOperate()
+            raise SanguoException(
+                errormsg.MAIL_HAS_NO_ATTACHMENT,
+                self.char_id,
+                "Mail Get Attachment",
+                "mail {0} has no attachment".format(mail_id)
+            )
 
         attachment = Attachment(self.char_id)
         attachment.save_standard_drop(json.loads(self.mail.mails[str(mail_id)].attachment), des='Mail Attachment')

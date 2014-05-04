@@ -5,41 +5,29 @@ __date__ = '1/14/14'
 
 import random
 
-from django.db import transaction
-
 from mongoengine import DoesNotExist
-
 from core.mongoscheme import MongoItem, MongoEmbeddedEquipment
-
-from core.exception import InvalidOperate, GoldNotEnough, GemNotEnough, StuffNotEnough, SanguoException
+from core.exception import SanguoException
 from core.msgpipe import publish_to_char
 from core.character import Char
 from core.signals import equip_changed_signal
 from core.formation import Formation
 from core.achievement import Achievement
 from core.task import Task
-
+from core.resource import check_character, check_stuff
 from core import DLL
-
 from utils import pack_msg
-from utils import cache
 from utils.functional import id_generator
-
 import protomsg
-
 from preset.settings import EQUIP_MAX_LEVEL
 from preset.data import EQUIPMENTS, GEMS, STUFFS
+from preset import errormsg
 
 
-
-#
-# def _save_cache_equipment(equip_obj):
-#     cache.set('equip:{0}'.format(equip_obj.equip_id), equip_obj)
 
 def equip_updated(func):
     def deco(self, *args, **kwargs):
         res = func(self, *args, **kwargs)
-        # _save_cache_equipment(self)
         self.send_update_notify()
         equip_changed_signal.send(
             sender=None,
@@ -93,32 +81,35 @@ class Equipment(MessageEquipmentMixin):
 
         self.equip = EQUIPMENTS[self.oid]
 
-    # @staticmethod
-    # def cache_obj(equip_id):
-    #     e = cache.get('equip:{0}'.format(equip_id))
-    #     if e:
-    #         return e
+
 
     @equip_updated
     def level_up(self, quick=False):
         def _up():
             if self.level >= EQUIP_MAX_LEVEL:
-                raise InvalidOperate("Equipment Level Up. Char {0} Try Level Up Equipment {1}. But Equipment already level {2}".format(
-                    self.char_id, self.equip_id, self.level
-                ))
+                raise SanguoException(
+                    errormsg.EQUIPMENT_REACH_MAX_LEVEL,
+                    self.char_id,
+                    "Equipment Level Up",
+                    "Equipment {0} has already touch max level {1}".format(self.equip.id, EQUIP_MAX_LEVEL))
 
             if self.level >= char_level:
-                raise SanguoException(501, "Equipment Level Up. Char {0} Try level up equipment {1}. But equipment level {2} can't great than char's level {3}".format(
-                    self.char_id, self.equip_id, self.level, char_level
-                ))
+                raise SanguoException(
+                    errormsg.EQUIPMENT_REACH_CHAR_LEVEL,
+                    self.char_id,
+                    "Equipment Level Up",
+                    "Equipment {0} level {1} >= char level {2}".format(self.equip.id, self.level, char_level)
+                )
 
             gold_needs = self.level_up_need_gold()
             if cache_char.gold < gold_needs:
-                raise GoldNotEnough("Equipment Level Up. Char {0} Gold {1} Not Enough. Needs {2}".format(
-                    self.char_id, cache_char.gold, gold_needs
-                ))
+                raise SanguoException(
+                    errormsg.GOLD_NOT_ENOUGH,
+                    self.char_id,
+                    "Equipment Level Up",
+                    "Gold Not Enough"
+                )
 
-            # char.update(gold=-gold_needs)
             cache_char.gold -= gold_needs
 
             prob = random.randint(1, 100)
@@ -133,17 +124,15 @@ class Equipment(MessageEquipmentMixin):
 
 
         char = Char(self.char_id)
-        cache_char = char.cacheobj
+        cache_char = char.mc
         char_level = cache_char.level
         LEVEL_UP_PROBS = (
             (30, 1), (80, 2), (100, 3)
         )
 
         all_gold_needs = 0
-
         equip_msgs = []
 
-        old_level = self.mongo_item.equipments[str(self.equip_id)].level
 
         if quick:
             quick_times = 0
@@ -166,11 +155,10 @@ class Equipment(MessageEquipmentMixin):
             self._msg_equip(msg, self.equip_id, self.mongo_item.equipments[str(self.equip_id)], self)
             equip_msgs.append(msg)
 
-        new_level = self.mongo_item.equipments[str(self.equip_id)].level
+        with check_character(self.char_id, gold=-all_gold_needs, func_name="Equipment Level Up"):
+            self.mongo_item.save()
 
-        char.update(gold=-all_gold_needs, des='Equipment Level up. {1} from {0} to {1}'.format(self.equip_id, old_level, new_level))
         self.mongo_item.save()
-
         return equip_msgs
 
 
@@ -179,44 +167,31 @@ class Equipment(MessageEquipmentMixin):
     def step_up(self):
         to = self.equip.upgrade_to
         if not to:
-            raise InvalidOperate("Equipment Step Up: char {0} Try to Step up equipment {1}. But Can't step up".format(
-                self.char_id, self.equip_id
-            ))
+            raise SanguoException(
+                errormsg.EQUIPMENT_REACH_MAX_STEP,
+                self.char_id,
+                "Equipment Step Up",
+                "Equipment {0} Can not step up".format(self.equip_id)
+            )
+
+        step_up_need_gold = self.step_up_need_gold()
 
         stuff_needs = []
         for x in self.equip.stuff_needs.split(','):
             _id, _amount = x.split(':')
             stuff_needs.append((int(_id), int(_amount)))
 
-        for _id, _amount in stuff_needs:
-            if self.mongo_item.stuffs.get(str(_id), 0) < _amount:
-                raise StuffNotEnough("Equipment Step Up: Char {0} Try to step up equipment {1}. But Stuff {2} NOT enough".format(
-                    self.char_id, self.equip_id, _id
-                ))
 
-        # 在外面使用Item类的 stuff_remove 方法
+        with check_character(self.char_id, gold=-step_up_need_gold, func_name="Equipment Step Up"), check_stuff(self.char_id, stuff_needs, func_name="Equipment Step Up"):
+            self.oid = to
+            self.equip = EQUIPMENTS[self.oid]
 
-        char = Char(self.char_id)
-        cache_char = char.cacheobj
-        step_up_need_gold = self.step_up_need_gold()
-        if cache_char.gold < step_up_need_gold:
-            raise GoldNotEnough("Equipment Step Up: Char {0} Try to step up equipent {1}. But Gold NOT enough".format(
-                self.char_id, self.equip_id
-            ))
+            self.mongo_item.equipments[str(self.equip_id)].oid = to
+            add_gem_slots = self.equip.slots - len(self.mongo_item.equipments[str(self.equip_id)].gems)
+            for i in range(add_gem_slots):
+                self.mongo_item.equipments[str(self.equip_id)].gems.append(0)
 
-        char.update(gold=-step_up_need_gold, des='Equipment Step up. {0} step up from {1} to {2}'.format(
-            self.equip_id, self.mongo_item.equipments[str(self.equip_id)].oid, to
-        ))
-
-        self.oid = to
-        self.equip = EQUIPMENTS[self.oid]
-
-        self.mongo_item.equipments[str(self.equip_id)].oid = to
-        add_gem_slots = self.equip.slots - len(self.mongo_item.equipments[str(self.equip_id)].gems)
-        for i in range(add_gem_slots):
-            self.mongo_item.equipments[str(self.equip_id)].gems.append(0)
-
-        self.mongo_item.save()
+            self.mongo_item.save()
 
         achievement = Achievement(self.char_id)
         achievement.trig(22, 1)
@@ -232,9 +207,12 @@ class Equipment(MessageEquipmentMixin):
             off_gem = self.mongo_item.equipments[str(self.equip_id)].gems[index]
             self.mongo_item.equipments[str(self.equip_id)].gems[index] = gem_id
         except IndexError:
-            raise InvalidOperate("Equipment Add Gem: Char {0} Try to add gem to a NONE exist gem slot. Equipment: {1}, Gems {2}".format(
-                self.char_id, self.equip_id, self.mongo_item.equipments[str(self.equip_id)].gems
-            ))
+            raise SanguoException(
+                errormsg.EQUIPMENT_ADD_GEM_IN_NONE_SLOT,
+                self.char_id,
+                "Equipment Add Gem",
+                "Equipment {0} gems IndexError. index {1}".format(self.equip_id, index)
+            )
 
         self.mongo_item.save()
 
@@ -254,9 +232,12 @@ class Equipment(MessageEquipmentMixin):
             off_gem = self.mongo_item.equipments[str(self.equip_id)].gems[index]
             self.mongo_item.equipments[str(self.equip_id)].gems[index] = 0
         except IndexError:
-            raise InvalidOperate("Equipment Add Gem: Char {0} Try to remove gem from a NONE exist gem slot. Equipment: {1}, Gems {2}".format(
-                self.char_id, self.equip_id, self.mongo_item.equipments[str(self.equip_id)].gems
-            ))
+            raise SanguoException(
+                errormsg.EQUIPMENT_REM_GEM_IN_NONE_SLOT,
+                self.char_id,
+                "Equipment Rem Gem",
+                "Equipment {0} gems IndexError. index {1}".format(self.equip_id, index)
+            )
 
         self.mongo_item.save()
         return off_gem
@@ -358,11 +339,13 @@ class Item(MessageEquipmentMixin):
         try:
             this_equip = EQUIPMENTS[oid]
         except KeyError:
-            raise InvalidOperate("Equipment Add: Char {0} Try to add a NONE exists Equipment oid: {1}".format(
-                self.char_id, oid
-            ))
+            raise SanguoException(
+                errormsg.EQUIPMENT_NOT_EXIST,
+                self.char_id,
+                "Equipment Add",
+                "Equipment {0} NOT exist".format(oid)
+            )
 
-        # new_id = document_ids.inc('equipment')
         new_id = id_generator('equipment')[0]
         me = MongoEmbeddedEquipment()
         me.oid = oid
@@ -387,9 +370,12 @@ class Item(MessageEquipmentMixin):
         ids = set(ids)
         for _id in ids:
             if not self.has_equip(_id):
-                raise InvalidOperate("Equipment Remove: Char {0} Try to Remove a NONE exist equipment: {1}".format(
-                    self.char_id, _id
-                ))
+                raise SanguoException(
+                    errormsg.EQUIPMENT_NOT_EXIST,
+                    self.char_id,
+                    "Equipment Remove",
+                    "Equipment {0} NOT exist".format(_id)
+                )
 
         for _id in ids:
             self.item.equipments.pop(str(_id))
@@ -403,9 +389,12 @@ class Item(MessageEquipmentMixin):
 
     def equip_level_up(self, _id, quick):
         if not self.has_equip(_id):
-            raise InvalidOperate("Equipment Level Up: Char {0} Try to Level up a NONE exist equipment: {1}".format(
-                self.char_id, _id
-            ))
+            raise SanguoException(
+                errormsg.EQUIPMENT_NOT_EXIST,
+                self.char_id,
+                "Equipment Level Up",
+                "Equipment {0} NOT exist".format(_id)
+            )
 
         e = Equipment(self.char_id, _id, self.item)
         return e.level_up(quick=quick)
@@ -413,14 +402,16 @@ class Item(MessageEquipmentMixin):
 
     def equip_step_up(self, equip_id):
         if not self.has_equip(equip_id):
-            raise InvalidOperate("Equipment Step Up: Char {0} Try to Step up a NONE exist equipmet: {1}".format(
-                self.char_id, equip_id
-            ))
+            raise SanguoException(
+                errormsg.EQUIPMENT_NOT_EXIST,
+                self.char_id,
+                "Equipment Step Up",
+                "Equipment {0} NOT exist".format(equip_id)
+            )
 
         equip = Equipment(self.char_id, equip_id, self.item)
-        stuff_needs = equip.step_up()
-        for _id, _amount in stuff_needs:
-            self.stuff_remove(_id, _amount)
+        equip.step_up()
+
 
 
     def equip_sell(self, ids):
@@ -431,14 +422,20 @@ class Item(MessageEquipmentMixin):
         ids = set(ids)
         for _id in ids:
             if not self.has_equip(_id):
-                raise InvalidOperate("Equipment Sell: Char {0} Try to sell a NONE exist equipment: {1}".format(
-                    self.char_id, _id
-                ))
+                raise SanguoException(
+                    errormsg.EQUIPMENT_NOT_EXIST,
+                    self.char_id,
+                    "Equipment Sell",
+                    "Equipment {0} NOT exist".format(_id)
+                )
 
             if f.find_socket_by_equip(_id):
-                raise InvalidOperate("Eequipment Sell: Char {0} Try to sell equipment {1}. But it in formation socket".format(
-                    self.char_id, _id
-                ))
+                raise SanguoException(
+                    errormsg.EQUIPMENT_CANNOT_SELL_FORMATION,
+                    self.char_id,
+                    "Equipment Sell",
+                    "Equipment {0} in Formation, Can not sell".format(_id)
+                )
 
         gold = 0
         for _id in ids:
@@ -449,13 +446,25 @@ class Item(MessageEquipmentMixin):
         char.update(gold=gold, des='Equipment Sell. sell {0}'.format(ids))
         self.equip_remove(ids)
 
+
     def equip_embed(self, _id, slot_id, gem_id):
         # gem_id = 0 表示取下slot_id对应的宝石
         if not self.has_equip(_id):
-            raise InvalidOperate()
+            raise SanguoException(
+                errormsg.EQUIPMENT_NOT_EXIST,
+                self.char_id,
+                "Equipment Embed Gem",
+                "Equipment {0} NOT exist".format(_id)
+            )
 
         if gem_id and not self.has_gem(gem_id):
-            raise InvalidOperate()
+            raise SanguoException(
+                errormsg.GEM_NOT_EXIST,
+                self.char_id,
+                "Equipment Embed Gem",
+                "Gem {0} NOT exist".format(gem_id)
+            )
+
 
         slot_index = slot_id - 1
 
@@ -486,9 +495,13 @@ class Item(MessageEquipmentMixin):
 
         for gid, _ in add_gems:
             if gid not in GEMS:
-                raise InvalidOperate("Gem Add: Char {0} Try to add a NONE exist Gem, oid: {1}".format(
-                    self.char_id, gid
-                ))
+                raise SanguoException(
+                    errormsg.GEM_NOT_EXIST,
+                    self.char_id,
+                    "Gem Add",
+                    "Gem {0} not exist".format(gid)
+                )
+
 
         gems = self.item.gems
         add_gems_dict = {}
@@ -538,7 +551,12 @@ class Item(MessageEquipmentMixin):
         try:
             this_gem_amount = self.item.gems[str(_id)]
         except KeyError:
-            raise InvalidOperate()
+            raise SanguoException(
+                errormsg.GEM_NOT_EXIST,
+                self.char_id,
+                "Gem Remove",
+                "Gem {0} not exist".format(_id)
+            )
 
         new_amount = this_gem_amount - amount
         if new_amount <= 0:
@@ -567,26 +585,34 @@ class Item(MessageEquipmentMixin):
         char.update(gold=gold, des="Gem Sell")
 
     def gem_merge(self, _id):
-        try:
-            this_gem_amount = self.item.gems[str(_id)]
-        except KeyError:
-            raise InvalidOperate("Gem Merge: Char {0} Try to Merge a NONE exist gem: {1}".format(
-                self.char_id, _id
-            ))
+        this_gem_amount = self.item.gems.get(str(_id), 0)
+        if this_gem_amount == 0:
+            raise SanguoException(
+                errormsg.GEM_NOT_EXIST,
+                self.char_id,
+                "Gem Merge",
+                "Gem {0} not exist".format(_id)
+            )
 
-        if this_gem_amount < 4:
-            raise GemNotEnough("Gem Merge: Char {0} Try to Merge gem: {1}, But amount not enough. {2}".format(
-                self.char_id, _id, this_gem_amount
-            ))
+        elif this_gem_amount < 4:
+            raise SanguoException(
+                errormsg.GEM_NOT_ENOUGH,
+                self.char_id,
+                "Gem Merge",
+                "Gem {0} not enough. {1} < 4".format(_id, this_gem_amount)
+            )
 
         to_id = GEMS[_id].merge_to
         if not to_id:
-            raise InvalidOperate("Gem Merge: Char {0} Try to Merge gem: {1}. Which can not merge".format(
-                self.char_id, _id
-            ))
+            raise SanguoException(
+                errormsg.GEM_CAN_NOT_MERGE,
+                self.char_id,
+                "Gem Merge",
+                "Gem {0} can not merge".format(_id)
+            )
 
-        self.gem_add([(to_id, 1)])
         self.gem_remove(_id, 4)
+        self.gem_add([(to_id, 1)])
 
         to_gem_obj = GEMS[to_id]
 
@@ -606,9 +632,12 @@ class Item(MessageEquipmentMixin):
         """
         for _id, _ in add_stuffs:
             if _id not in STUFFS:
-                raise InvalidOperate("Stuff Add: Char {0} Try to add a NONE exist Stuff: {1}".format(
-                    self.char_id, _id
-                ))
+                raise SanguoException(
+                    errormsg.STUFF_NOT_EXIST,
+                    self.char_id,
+                    "Stuff Add",
+                    "Stuff Oid {0} not exist".format(_id)
+                )
 
         stuffs = self.item.stuffs
         add_stuffs_dict = {}
@@ -659,14 +688,22 @@ class Item(MessageEquipmentMixin):
         try:
             this_stuff_amount = self.item.stuffs[str(_id)]
         except KeyError:
-            raise InvalidOperate("Stuff Remove: Char {0} Try to remove a NONE exist stuff: {1}".format(self.char_id, _id))
+            raise SanguoException(
+                errormsg.STUFF_NOT_EXIST,
+                self.char_id,
+                "Stuff Remove",
+                "Stuff {0} not exist".format(_id)
+            )
 
         new_amount = this_stuff_amount - amount
 
         if new_amount < 0:
-            raise StuffNotEnough("Stuff Remove: Char {0} Try to remove {1}. But not enough, {2} < {3}".format(
-                self.char_id, _id, this_stuff_amount, amount
-            ))
+            raise SanguoException(
+                errormsg.STUFF_NOT_ENOUGH,
+                self.char_id,
+                "Stuff Remove",
+                "Stuff {0} not enough".format(_id)
+            )
 
         if new_amount == 0:
             self.item.stuffs.pop(str(_id))

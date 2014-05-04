@@ -1,4 +1,3 @@
-import logging
 from mongoengine import DoesNotExist
 
 from core.mongoscheme import MongoCounter
@@ -6,7 +5,6 @@ from core.exception import CounterOverFlow
 from preset.settings import COUNTER
 
 
-logger = logging.getLogger('sanguo')
 
 
 class Counter(object):
@@ -37,9 +35,6 @@ class Counter(object):
 
     def incr(self, value=1):
         if self.remained_value < value:
-            logging.info("Counter. char {0}. {1}. MaxValue: {0}, CurValue: {1}, WannaValue: {2}".format(
-                self.char_id, self.func_name, self.max_value, self.cur_value, value
-            ))
             raise CounterOverFlow()
 
         self.c.cur_value += value

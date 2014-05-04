@@ -10,7 +10,7 @@ from core.mongoscheme import MongoFriend, MongoCharacter
 from core.character import Char
 from core.hero import Hero
 from core.msgpipe import publish_to_char
-from core.exception import InvalidOperate, BadMessage, CharNotFound, SanguoException
+from core.exception import SanguoException
 from core.achievement import Achievement
 from core.formation import Formation
 
@@ -18,6 +18,7 @@ import protomsg
 from protomsg import FRIEND_NOT, FRIEND_OK, FRIEND_ACK, FRIEND_APPLY
 
 from preset.settings import MAX_FRIENDS_AMOUNT
+from preset import errormsg
 from utils import pack_msg
 
 
@@ -25,19 +26,22 @@ class Friend(object):
     def __init__(self, char_id):
         self.char_id = char_id
         self.char = Char(self.char_id)
-        self.cache_char = self.char.cacheobj
 
         try:
             self.mf = MongoFriend.objects.get(id=self.char_id)
         except DoesNotExist:
             self.mf = MongoFriend(id=self.char_id)
+            self.mf.friends = {}
+            self.mf.accepting = []
             self.mf.save()
 
     def is_friend(self, target_id):
+        # 真正的好友，对方接受了我的好友申请的
         t = str(target_id)
         return t in self.mf.friends and self.mf.friends[t] == FRIEND_OK
 
     def is_general_friend(self, target_id):
+        # 广义好友，只要是自己或者对方发过好友申请的都算
         return str(target_id) in self.mf.friends or target_id in self.mf.accepting
 
 
@@ -61,8 +65,6 @@ class Friend(object):
 
     def friends_list(self):
         """
-
-
         @return: All Friends List. Format: [(id, status), (id, status)...]
         @rtype: list
         """
@@ -79,24 +81,51 @@ class Friend(object):
 
     def add(self, target_id=None, target_name=None):
         if not target_id and not target_name:
-            raise BadMessage()
+            raise SanguoException(
+                errormsg.BAD_MESSAGE,
+                self.char_id,
+                "Friend Add",
+                "no target_id and no target_name"
+            )
 
         if self.cur_amount >= self.max_amount:
-            raise SanguoException(1001)
+            raise SanguoException(
+                errormsg.FRIEND_FULL,
+                self.char_id,
+                "Friend Add",
+                "friend full, can not add"
+            )
 
         if target_id:
             try:
                 c = MongoCharacter.objects.get(id=target_id)
             except DoesNotExist:
-                raise InvalidOperate()
+                raise SanguoException(
+                    errormsg.CHARACTER_NOT_FOUND,
+                    self.char_id,
+                    "Friend Add",
+                    "character id {0} not found".format(target_id)
+                )
         else:
             try:
-                c = MongoCharacter.objects.get(server_id=self.cache_char.server_id, name=target_name)
+                c = MongoCharacter.objects.get(server_id=self.char.mc.server_id, name=target_name)
             except DoesNotExist:
-                raise CharNotFound()
+                raise SanguoException(
+                    errormsg.CHARACTER_NOT_FOUND,
+                    self.char_id,
+                    "Friend Add",
+                    u"can not found character {0} in server {1}".format(target_name, self.cache_char.server_id)
+                )
 
         if str(c.id) in self.mf.friends:
-            raise SanguoException(1000)
+            if self.mf.friends[str(c.id)] == FRIEND_OK:
+                raise SanguoException(
+                    errormsg.FRIEND_ALREADY_ADD,
+                    self.char_id,
+                    "Friend Add",
+                    "character {0} already has beed added".format(c.id)
+                )
+            return
 
         self.mf.friends[str(c.id)] = FRIEND_ACK
         self.mf.save()
@@ -127,7 +156,12 @@ class Friend(object):
     def terminate(self, target_id):
         t = str(target_id)
         if t not in self.mf.friends or self.mf.friends[t] != FRIEND_OK:
-            raise InvalidOperate()
+            raise SanguoException(
+                errormsg.FRIEND_NOT_OK,
+                self.char_id,
+                "Friend Terminate",
+                "character {0} is not friend".format(target_id)
+            )
 
         self.mf.friends.pop(t)
         self.mf.save()
@@ -161,7 +195,12 @@ class Friend(object):
     def cancel(self, target_id):
         t = str(target_id)
         if t not in self.mf.friends or self.mf.friends[t] != FRIEND_ACK:
-            raise InvalidOperate()
+            raise SanguoException(
+                errormsg.FRIEND_NOT_ACK,
+                self.char_id,
+                "Friend Cancel",
+                "not ack for character {0}".format(target_id)
+            )
 
         self.mf.friends.pop(t)
         self.mf.save()
@@ -188,11 +227,20 @@ class Friend(object):
 
     def accept(self, target_id):
         if target_id not in self.mf.accepting:
-            raise InvalidOperate()
+            raise SanguoException(
+                errormsg.FRIEND_NOT_IN_ACCEPT_LIST,
+                self.char_id,
+                "Friend Accept",
+                "character {0} not in accept list".format(target_id)
+            )
 
-        if self.cur_amount > self.max_amount:
-            raise SanguoException(1001)
-
+        if self.cur_amount >= self.max_amount:
+            raise SanguoException(
+                errormsg.FRIEND_FULL,
+                self.char_id,
+                "Friend Accept",
+                "friend full, can not accept"
+            )
 
         self.mf.accepting.remove(target_id)
         self.mf.friends[str(target_id)] = FRIEND_OK
@@ -221,14 +269,18 @@ class Friend(object):
 
     def refuse(self, target_id):
         if target_id not in self.mf.accepting:
-            raise InvalidOperate()
+            raise SanguoException(
+                errormsg.FRIEND_NOT_IN_ACCEPT_LIST,
+                self.char_id,
+                "Friend Refuse",
+                "character {0} not in accept list".format(target_id)
+            )
 
         self.mf.accepting.remove(target_id)
         self.mf.save()
 
         target_char_friend = Friend(target_id)
         target_char_friend.someone_refuse_me(self.char_id)
-
 
         msg = protomsg.RemoveFriendNotify()
         msg.id = target_id

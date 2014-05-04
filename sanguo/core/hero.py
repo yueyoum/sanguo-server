@@ -6,24 +6,19 @@ __date__ = '12/30/13'
 import ctypes
 
 from mongoengine import DoesNotExist
-
-
 from core.mongoscheme import MongoHero, MongoAchievement, MongoHeroSoul, MongoCharacter
 from core.signals import hero_add_signal, hero_del_signal, hero_changed_signal, hero_step_up_signal
 from core.formation import Formation
-from core.exception import InvalidOperate, GoldNotEnough
+from core.exception import SanguoException
 from core import DLL
-from core.achievement import Achievement
-
+from core.resource import check_character
 from utils import cache
 from utils.functional import id_generator
-
 from core.msgpipe import publish_to_char
 from utils import pack_msg
-
 from preset.settings import HERO_MAX_STEP, HERO_START_STEP, HERO_STEP_UP_COST_SOUL_AMOUNT, HERO_STEP_UP_COST_GOLD, HERO_SOUL_TO_COMMON_SOUL
 from preset.data import HEROS, ACHIEVEMENTS, MONSTERS
-
+from preset import errormsg
 import protomsg
 
 
@@ -228,22 +223,19 @@ class Hero(FightPowerMixin):
         # method: 2 using common soul
         # 升阶
         if self.step >= HERO_MAX_STEP:
-            raise InvalidOperate("Hero Step Up: Char {0} Try to up hero {1}. But this hero already at max step {2}".format(
-                self.char_id, self.id, HERO_MAX_STEP
-            ))
+            raise SanguoException(
+                errormsg.HERO_REACH_MAX_STEP,
+                self.char_id,
+                "Hero Step Up",
+                "Hero {0} reach max step {1}".format(self.id, HERO_MAX_STEP)
+            )
 
-        from core.character import Char
-        c = Char(self.char_id)
-        cache_char = c.cacheobj
-        if cache_char.gold < HERO_STEP_UP_COST_GOLD:
-            raise GoldNotEnough("Hero Step Up. Char {0} try to up hero {1}. But gold not enough".format(self.char_id, self.id))
+        with check_character(self.char_id, gold=-HERO_STEP_UP_COST_GOLD, func_name="Hero Step Up"):
+            if method == 1:
+                self._step_up_using_soul()
+            else:
+                self._step_up_using_common_soul()
 
-        if method == 1:
-            self._step_up_using_soul()
-        else:
-            self._step_up_using_common_soul()
-
-        c.update(gold=-HERO_STEP_UP_COST_GOLD, des='Hero Step Up')
 
         # 扣完东西了，开始搞一次
         self.hero.progress += 1
@@ -318,9 +310,12 @@ class HeroSoul(object):
         update_souls = []
         for _id, amount in souls:
             if not self.has_soul(_id, amount):
-                raise InvalidOperate("HeroSoul Remove. Char {0} Try to remove a NONE EXISTS/NOT ENOUGH soul {1}. amount {2}".format(
-                    self.char_id, _id, amount
-                ))
+                raise SanguoException(
+                    errormsg.SOUL_NOT_ENOUGH,
+                    self.char_id,
+                    "HeroSoul Remove",
+                    "HeroSoul {0} not enough/exist, expected amount {1}".format(_id, amount)
+                )
 
         for _id, amount in souls:
             str_id = str(_id)
@@ -381,8 +376,6 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
 
     if hero_original_ids:
         length = len(hero_original_ids)
-        # new_max_id = document_ids.inc('charhero', length)
-        # id_range = range(new_max_id - length + 1, new_max_id + 1)
         id_range = id_generator('charhero', length)
         for i, _id in enumerate(id_range):
             MongoHero(id=_id, char=char_id, oid=hero_original_ids[i], step=HERO_START_STEP, progress=0).save()

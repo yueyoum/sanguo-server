@@ -165,7 +165,10 @@ LOGGING = {
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(message)s'
-        }
+        },
+        'simple': {
+            'format': '%(message)s'
+        },
     },
     'filters': {
         'require_debug_false': {
@@ -182,6 +185,11 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'level': 'DEBUG',
             'formatter': 'verbose'
+        },
+        'logman': {
+            'class': 'utils.log.LogManHandler',
+            'level': 'DEBUG',
+            'formatter': 'simple',
         }
     },
     'loggers': {
@@ -192,7 +200,7 @@ LOGGING = {
         },
 
         'sanguo': {
-            'handlers': ['console'],
+            'handlers': ['console', 'logman'],
             'level': 'DEBUG'
         }
     }
@@ -232,7 +240,8 @@ if TESTING:
 HUB_URL = 'http://work.mztimes.com:8020'
 NODE_ID = 1
 
-IS_GUIDE_SERVER = False
+LOG_MAN_HOST = "127.0.0.1"
+LOG_MAN_PORT = 10099
 
 try:
     from settings_local import *

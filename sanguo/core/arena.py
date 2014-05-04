@@ -4,22 +4,20 @@ __author__ = 'Wang Chao'
 __date__ = '1/22/14'
 
 import random
+
 from mongoengine import DoesNotExist, Q
-
-
 from core.msgpipe import publish_to_char
 from utils import pack_msg
-
 from core.character import Char
 from core.battle import PVP
 from core.counter import Counter
 from core.mongoscheme import MongoArenaTopRanks, MongoArena, MongoArenaDay, MongoArenaWeek, MongoCharacter
-from core.exception import CounterOverFlow, SyceeNotEnough, InvalidOperate
+from core.exception import CounterOverFlow, SanguoException
 from core.achievement import Achievement
 from core.task import Task
 from preset.settings import ARENA_COST_SYCEE, ARENA_GET_SCORE_WHEN_LOST, ARENA_GET_SCORE_WHEN_WIN, COUNTER
-
 import protomsg
+from preset import errormsg
 
 
 DAY_MAX_SCORE = (COUNTER['arena'] + COUNTER['arena_sycee']) * ARENA_GET_SCORE_WHEN_WIN
@@ -132,13 +130,24 @@ class Arena(object):
                 # 花费元宝次数
                 counter.incr()
             except CounterOverFlow:
-                raise InvalidOperate("Arena Battle. Char {0} has no times to battle".format(self.char_id))
+                raise SanguoException(
+                    errormsg.ARENA_NO_TIMES,
+                    self.char_id,
+                    "Arena Battle",
+                    "arena no times"
+                )
             else:
                 char = Char(self.char_id)
                 cache_char = char.cacheobj
                 if cache_char.sycee < ARENA_COST_SYCEE:
-                    raise SyceeNotEnough("Arena Battle: Char {0} have no free times, and sycee not enough".format(self.char_id))
+                    raise SanguoException(
+                        errormsg.SYCEE_NOT_ENOUGH,
+                        self.char_id,
+                        "Arena Battle",
+                        'arena battle using sycee. But sycee not enough. {0} < {1}'.format(cache_char.sycee, ARENA_COST_SYCEE)
+                    )
                 char.update(sycee=-ARENA_COST_SYCEE, des='Arena Battle Cost')
+
 
         rival_id = self.choose_rival()
 
@@ -172,13 +181,6 @@ class Arena(object):
 
         t = Task(self.char_id)
         t.trig(2)
-
-        # day_rank = self.day_rank
-        # if day_rank == 1:
-        #     achievement.trig(25, 1)
-        #
-        # rank_diff = self.day_rank - mongo_arena.rank
-        # achievement.trig(24, rank_diff)
 
         self.send_notify()
         return msg

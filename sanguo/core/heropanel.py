@@ -6,22 +6,17 @@ __date__ = '1/23/14'
 import random
 
 from django.conf import settings
-
 from mongoengine import DoesNotExist
-
 from core.mongoscheme import MongoHeroPanel
 from core.counter import Counter
-from core.exception import InvalidOperate, SyceeNotEnough
+from core.exception import SanguoException, CounterOverFlow
 from core.hero import save_hero
-from core.character import Char
-
+from core.resource import check_character
 from core.msgpipe import publish_to_char
 from utils import pack_msg
 from utils import timezone
-
 from preset.data import HERO_GET_BY_QUALITY, HERO_GET_BY_QUALITY_NOT_EQUAL, CHARINIT
-
-
+from preset import errormsg
 import protomsg
 
 REFRESH = 60
@@ -109,33 +104,40 @@ class HeroPanel(object):
 
 
     def open(self, _id):
-        if settings.IS_GUIDE_SERVER:
-            hero_id = CHARINIT.extra_hero
+        if str(_id) not in self.panel.panel:
+            raise SanguoException(
+                errormsg.HEROPANEL_SOCKET_NOT_EXIST,
+                self.char_id,
+                "HeroPanel Open",
+                "HeroPanel Socket {0} not exist".format(_id)
+            )
+
+        if self.panel.panel[str(_id)]:
+            raise SanguoException(
+                errormsg.HEROPANEL_SOCKET_ALREADY_OPENED,
+                self.char_id,
+                "HeroPanel Open",
+                "HeroPanel Socket {0} already opended".format(_id)
+            )
+
+        using_sycee = 0
+
+        if self.free_times == 0:
+            # 使用元宝
+            using_sycee = -GETHERO_COST_SYCEE
         else:
-            if self.all_opended():
-                raise InvalidOperate("Get Hero, Open: Char {0} Try to open {1}. But All Opened".format(self.char_id, _id))
-
-            if str(_id) not in self.panel.panel:
-                raise InvalidOperate("Get Hero, Open: Char {0} Try to open a NONE exist socket id: {1}".format(
-                    self.char_id, _id
-                ))
-
-            if self.panel.panel[str(_id)]:
-                raise InvalidOperate("HeroPanel Open: Char {0} Try to open an already opened socket {1}".format(
-                    self.char_id, _id
-                ))
-            if self.free_times == 0:
-                # 使用元宝
-                char = Char(self.char_id)
-                cache_char = char.cacheobj
-                if cache_char.sycee < GETHERO_COST_SYCEE:
-                    raise SyceeNotEnough()
-
-                char.update(sycee=-GETHERO_COST_SYCEE, des='HeroPanel Open')
-            else:
-                c = Counter(self.char_id, 'gethero')
+            c = Counter(self.char_id, 'gethero')
+            try:
                 c.incr()
+            except CounterOverFlow:
+                raise SanguoException(
+                    errormsg.HEROPANEL_NO_TIMES,
+                    self.char_id,
+                    "HeroPanel Open",
+                    "no times"
+                )
 
+        with check_character(self.char_id, sycee=using_sycee, func_name="HeroPanel Open"):
             if self.has_got_good_hero():
                 hero_id = random.choice(self.panel.other_heros)
                 self.panel.other_heros.remove(hero_id)
@@ -166,14 +168,8 @@ class HeroPanel(object):
 
         if self.refresh_seconds > 0:
             # 免费刷新还在冷却，只能用元宝刷新，不重置免费刷新时间
-            char = Char(self.char_id)
-            cache_char = char.cacheobj
-            if cache_char.sycee < REFRESH_COST_SYCEE:
-                raise SyceeNotEnough()
-
-            char.update(sycee=-REFRESH_COST_SYCEE, des='HeroPanel Refresh')
-
-            self.panel = self.make_new_panel(reset_time=False)
+            with check_character(self.char_id, sycee=-REFRESH_COST_SYCEE, func_name="HeroPanel Refresh"):
+                self.panel = self.make_new_panel(reset_time=False)
             self.send_notify()
             return
 
@@ -197,12 +193,10 @@ class HeroPanel(object):
             panel.other_heros.append(good_hero.keys()[1])
 
 
-
         other_hero_amount = MAX_AMOUNT - good_hero_amount
         other_heros = HERO_GET_BY_QUALITY_NOT_EQUAL(1, other_hero_amount)
 
         panel.other_heros.extend(other_heros.keys())
-
 
         if reset_time:
             panel.last_refresh = timezone.utc_timestamp()

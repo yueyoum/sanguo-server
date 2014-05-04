@@ -16,7 +16,6 @@ def character_initialize(request):
     try:
         char_initialize(account_id, server_id, char_id, name)
     except:
-        print "char_initialize Failure!"
         ret = 1
 
     return HttpResponse(json.dumps({'ret': ret}), content_type='application/json')

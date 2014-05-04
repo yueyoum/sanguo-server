@@ -5,21 +5,18 @@ __date__ = '1/6/14'
 
 import random
 
-from django.db import transaction
-
 from mongoengine import DoesNotExist
-
 from core.mongoscheme import MongoCheckIn
 from core.msgpipe import publish_to_char
-from core.exception import InvalidOperate
+from core.exception import SanguoException
 from core.character import Char
 from core.counter import Counter
 from core.attachment import Attachment
 from core.achievement import Achievement
 from utils import pack_msg
 from protomsg import CheckInNotify, CheckInResponse, Attachment as MsgAttachment
-
 from preset.data import GEMS, OFFICIAL
+from preset import errormsg
 
 MAX_DAYS = 7
 
@@ -38,7 +35,12 @@ class CheckIn(object):
 
     def checkin(self):
         if self.c.has_checked:
-            raise InvalidOperate("CheckIN: Char {0} Try to checkin, But already checked".format(self.char_id))
+            raise SanguoException(
+                errormsg.CHECKIN_ALREADY_CHECKIN,
+                self.char_id,
+                "CheckIn checkin",
+                "already checkin",
+            )
         self.c.has_checked = True
 
         self.c.days += 1
@@ -119,10 +121,25 @@ class OfficalDailyReward(object):
 
 
     def get_reward(self):
+        counter = Counter(self.char_id, 'official_reward')
+        if counter.remained_value <= 0:
+            raise SanguoException(
+                errormsg.OFFICAL_ALREADY_GET_REWARD,
+                self.char_id,
+                "OfficalDailyReward Get Reward",
+                "already got"
+            )
+
+
         char = Char(self.char_id)
-        official_level = char.cacheobj.official
+        official_level = char.mc.official
         if official_level == 0:
-            raise InvalidOperate("Offical Get Reward. Char {0} offical = {1}. try to get reward".format(self.char_id, official_level))
+            raise SanguoException(
+                errormsg.OFFICAL_ZERO_GET_REWARD,
+                self.char_id,
+                "OfficalDailyReward Get Reward",
+                "char official level = 0"
+            )
 
         counter = Counter(self.char_id, 'official_reward')
         counter.incr()

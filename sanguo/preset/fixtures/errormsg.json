@@ -1,0 +1,758 @@
+[
+{
+    "pk": 100, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "BAD_MESSAGE", 
+        "text_zh": "\u6d88\u606f\u683c\u5f0f\u9519\u8bef", 
+        "des": ""
+    }
+},
+{
+    "pk": 101, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "INVALID_OPERATE", 
+        "text_zh": "\u975e\u6cd5\u64cd\u4f5c", 
+        "des": ""
+    }
+},
+{
+    "pk": 102, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "CHARACTER_NOT_FOUND", 
+        "text_zh": "\u627e\u4e0d\u7684\u6b64\u89d2\u8272", 
+        "des": "\u901a\u8fc7\u540d\u5b57\u67e5\u627e\u89d2\u8272"
+    }
+},
+{
+    "pk": 103, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FUNC_FREEZE", 
+        "text_zh": "\u529f\u80fd\u672a\u5f00\u653e", 
+        "des": ""
+    }
+},
+{
+    "pk": 120, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "GOLD_NOT_ENOUGH", 
+        "text_zh": "\u91d1\u5e01\u4e0d\u8db3", 
+        "des": ""
+    }
+},
+{
+    "pk": 121, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "SYCEE_NOT_ENOUGH", 
+        "text_zh": "\u5143\u5b9d\u4e0d\u8db3", 
+        "des": ""
+    }
+},
+{
+    "pk": 122, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "LEVEL_NOT_ENOUGH", 
+        "text_zh": "\u7b49\u7ea7\u4e0d\u8db3 ", 
+        "des": ""
+    }
+},
+{
+    "pk": 123, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "OFFICIAL_NOT_ENOUGH", 
+        "text_zh": "\u5b98\u804c\u4e0d\u8db3", 
+        "des": ""
+    }
+},
+{
+    "pk": 130, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "EQUIPMENT_NOT_ENOUGH", 
+        "text_zh": "\u88c5\u5907\u4e0d\u591f", 
+        "des": ""
+    }
+},
+{
+    "pk": 131, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "GEM_NOT_ENOUGH", 
+        "text_zh": "\u5b9d\u77f3\u4e0d\u591f", 
+        "des": ""
+    }
+},
+{
+    "pk": 132, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STUFF_NOT_ENOUGH", 
+        "text_zh": "\u6750\u6599\u4e0d\u591f", 
+        "des": "\u4e0d\u5305\u62ec\u901a\u7528\u5361\u9b42"
+    }
+},
+{
+    "pk": 133, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "SOUL_NOT_ENOUGH", 
+        "text_zh": "\u5361\u9b42\u4e0d\u591f", 
+        "des": ""
+    }
+},
+{
+    "pk": 134, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "COMMON_SOUL_NOT_ENOUGH", 
+        "text_zh": "\u901a\u7528\u5361\u9b42\u4e0d\u591f", 
+        "des": ""
+    }
+},
+{
+    "pk": 140, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HERO_NOT_EXSIT", 
+        "text_zh": "\u6b66\u5c06\u4e0d\u5b58\u5728", 
+        "des": ""
+    }
+},
+{
+    "pk": 141, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "EQUIPMENT_NOT_EXIST", 
+        "text_zh": "\u88c5\u5907\u4e0d\u5b58\u5728", 
+        "des": ""
+    }
+},
+{
+    "pk": 142, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "GEM_NOT_EXIST", 
+        "text_zh": "\u5b9d\u77f3\u4e0d\u5b58\u5728", 
+        "des": ""
+    }
+},
+{
+    "pk": 143, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STUFF_NOT_EXIST", 
+        "text_zh": "\u9053\u5177\u4e0d\u5b58\u5728", 
+        "des": ""
+    }
+},
+{
+    "pk": 150, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "EMAIL_HAS_BEEN_TAKEN", 
+        "text_zh": "\u6b64\u5e10\u53f7\u5df2\u6ce8\u518c", 
+        "des": ""
+    }
+},
+{
+    "pk": 151, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "WRONG_PASSWORD", 
+        "text_zh": "\u5bc6\u7801\u9519\u8bef", 
+        "des": ""
+    }
+},
+{
+    "pk": 152, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "ACCOUNT_NOT_EXSIT", 
+        "text_zh": "\u5e10\u53f7\u4e0d\u5b58\u5728", 
+        "des": ""
+    }
+},
+{
+    "pk": 153, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "ACCOUNT_BAN", 
+        "text_zh": "\u5e10\u53f7\u88ab\u51bb\u7ed3\uff0c\u65e0\u6cd5\u767b\u5f55", 
+        "des": ""
+    }
+},
+{
+    "pk": 160, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "CHAR_NAME_HAS_BEEN_TAKEN", 
+        "text_zh": "\u89d2\u8272\u540d\u5df2\u7ecf\u88ab\u5360\u7528", 
+        "des": ""
+    }
+},
+{
+    "pk": 161, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "CHAR_NAME_TOO_LONG", 
+        "text_zh": "\u89d2\u8272\u540d\u4e0d\u80fd\u591a\u4e8e\u4e03\u4e2a\u5b57\u7b26", 
+        "des": ""
+    }
+},
+{
+    "pk": 162, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "CHAR_NAME_INVALID", 
+        "text_zh": "\u8bf7\u91cd\u65b0\u9009\u62e9\u5408\u9002\u7684\u540d\u5b57", 
+        "des": ""
+    }
+},
+{
+    "pk": 163, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "CHAR_ALREADY_EXIST", 
+        "text_zh": " \u6240\u5728\u670d\u5df2\u7ecf\u6709\u89d2\u8272\uff0c\u65e0\u6cd5\u91cd\u590d\u5efa\u7acb", 
+        "des": ""
+    }
+},
+{
+    "pk": 169, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "CHAR_CREATE_FAUILER", 
+        "text_zh": "\u5efa\u7acb\u89d2\u8272\u5931\u8d25\uff0c\u8bf7\u91cd\u8bd5", 
+        "des": "\u8c03\u7528\u89d2\u8272\u521d\u59cb\u5316API\u5bfc\u81f4\u7684\u9519\u8bef"
+    }
+},
+{
+    "pk": 300, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "EQUIPMENT_REACH_MAX_LEVEL", 
+        "text_zh": "\u88c5\u5907\u5df2\u7ecf\u5230\u6700\u9ad8\u7b49\u7ea7\uff0c\u65e0\u6cd5\u5347\u7ea7", 
+        "des": ""
+    }
+},
+{
+    "pk": 301, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "EQUIPMENT_REACH_CHAR_LEVEL", 
+        "text_zh": "\u88c5\u5907\u7b49\u7ea7\u4e0d\u80fd\u9ad8\u4e8e\u4e3b\u516c\u7b49\u7ea7\uff0c\u65e0\u6cd5\u5f3a\u5316", 
+        "des": ""
+    }
+},
+{
+    "pk": 302, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "EQUIPMENT_REACH_MAX_STEP", 
+        "text_zh": "\u88c5\u5907\u5df2\u7ecf\u5230\u6700\u9ad8\u9636\uff0c\u65e0\u6cd5\u5347\u9636", 
+        "des": ""
+    }
+},
+{
+    "pk": 303, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "EQUIPMENT_ADD_GEM_IN_NONE_SLOT", 
+        "text_zh": "\u88c5\u5907\u9576\u5d4c\u5b9d\u77f3\uff0c\u9576\u5d4c\u9519\u8bef", 
+        "des": ""
+    }
+},
+{
+    "pk": 304, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "EQUIPMENT_REM_GEM_IN_NONE_SLOT", 
+        "text_zh": "\u88c5\u5907\u53d6\u4e0b\u5b9d\u77f3\u9519\u8bef", 
+        "des": ""
+    }
+},
+{
+    "pk": 305, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "EQUIPMENT_CANNOT_SELL_FORMATION", 
+        "text_zh": "\u88c5\u5907\u5728\u9635\u6cd5\u4e2d\uff0c\u65e0\u6cd5\u51fa\u552e", 
+        "des": ""
+    }
+},
+{
+    "pk": 320, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "GEM_CAN_NOT_MERGE", 
+        "text_zh": "\u5b9d\u77f3\u65e0\u6cd5\u5408\u6210", 
+        "des": ""
+    }
+},
+{
+    "pk": 400, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HERO_REACH_MAX_STEP", 
+        "text_zh": "\u6b66\u5c06\u5230\u6700\u9ad8i\u9636\uff0c\u65e0\u6cd5\u5347\u9636", 
+        "des": ""
+    }
+},
+{
+    "pk": 500, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FORMATION_NONE_EXIST_SOCKET", 
+        "text_zh": "\u9635\u6cd5\u9519\u8bef\uff0c\u4e0d\u5b58\u5728\u7684\u63d2\u69fd", 
+        "des": ""
+    }
+},
+{
+    "pk": 501, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FORMATION_SET_SOCKET_INVALUE_EQUIP_TYPE", 
+        "text_zh": "\u9635\u6cd5\u9519\u8bef\uff0c\u88c5\u5907\u7c7b\u578b\u653e\u9519", 
+        "des": ""
+    }
+},
+{
+    "pk": 502, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FORMATION_SET_SOCKET_HERO_IN_MULTI_SOCKET", 
+        "text_zh": "\u9635\u6cd5\u9519\u8bef\uff0c\u6b66\u5c06\u5728\u591a\u4e2a\u63d2\u69fd\u4e2d", 
+        "des": ""
+    }
+},
+{
+    "pk": 503, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FORMATION_SET_SOCKET_SAME_HERO", 
+        "text_zh": "\u9635\u6cd5\u9519\u8bef\uff0c\u540c\u540d\u6b66\u5c06\u4e0d\u80fd\u4e0a\u9635", 
+        "des": ""
+    }
+},
+{
+    "pk": 504, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FORMATION_SAVE_NO_HERO", 
+        "text_zh": "\u9635\u6cd5\u9519\u8bef\uff0c\u6bcf\u519b\u5fc5\u987b\u6709\u6b66\u5c06", 
+        "des": ""
+    }
+},
+{
+    "pk": 505, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FORMATION_NO_HERO", 
+        "text_zh": "\u9635\u6cd5\u9519\u8bef\uff0c\u63d2\u69fd\u6ca1\u6709\u6b66\u5c06", 
+        "des": ""
+    }
+},
+{
+    "pk": 600, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STAGE_NOT_EXIST", 
+        "text_zh": "\u5173\u5361\u4e0d\u5b58\u5728", 
+        "des": ""
+    }
+},
+{
+    "pk": 601, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STAGE_LEVEL_GREATER_THAN_CHAR_LEVEL", 
+        "text_zh": "\u89d2\u8272\u7b49\u7ea7\u5c0f\u4e8e\u5173\u5361\u9700\u6c42\u7b49\u7ea7\uff0c\u65e0\u6cd5\u8fdb\u5165", 
+        "des": ""
+    }
+},
+{
+    "pk": 602, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STAGE_NOT_OPEN", 
+        "text_zh": "\u5173\u53e3\u4e3a\u8fbe\u5230\u5f00\u542f\u6761\u4ef6\uff0c\u65e0\u6cd5\u8fdb\u5165", 
+        "des": ""
+    }
+},
+{
+    "pk": 700, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HANG_MULTI", 
+        "text_zh": "\u65e0\u6cd5\u540c\u65f6\u8fdb\u884c\u591a\u4e2a\u6302\u673a", 
+        "des": ""
+    }
+},
+{
+    "pk": 701, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HANG_NO_TIME", 
+        "text_zh": "\u5f53\u65e5\u6302\u673a\u65f6\u95f4\u5df2\u7ecf\u7528\u5b8c", 
+        "des": ""
+    }
+},
+{
+    "pk": 702, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HANG_NOT_EXIST", 
+        "text_zh": "\u4e0d\u5b58\u5728\u7684\u6302\u673a", 
+        "des": ""
+    }
+},
+{
+    "pk": 703, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HANG_ALREADY_FINISHED", 
+        "text_zh": "\u6302\u673a\u5df2\u7ecf\u7ed3\u675f\uff0c\u65e0\u6cd5\u53d6\u6d88", 
+        "des": ""
+    }
+},
+{
+    "pk": 800, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STAGE_ELITE_NOT_EXIST", 
+        "text_zh": "\u7cbe\u82f1\u5173\u5361\u4e0d\u5b58\u5728", 
+        "des": ""
+    }
+},
+{
+    "pk": 801, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STAGE_ELITE_NOT_OPEN", 
+        "text_zh": " \u7cbe\u82f1\u5173\u5361\u6ca1\u6709\u5f00\u542f", 
+        "des": ""
+    }
+},
+{
+    "pk": 802, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STAGE_ELITE_NO_TIMES", 
+        "text_zh": "\u7cbe\u82f1\u5173\u5361\u5f53\u65e5\u6b21\u6570\u5df2\u7ecf\u7528\u5b8c", 
+        "des": ""
+    }
+},
+{
+    "pk": 1000, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HEROPANEL_SOCKET_NOT_EXIST", 
+        "text_zh": "\u7ffb\u5361\u9519\u8bef\uff0c\u4e0d\u5b58\u5728\u7684\u63d2\u69fd", 
+        "des": ""
+    }
+},
+{
+    "pk": 1001, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HEROPANEL_SOCKET_ALREADY_OPENED", 
+        "text_zh": "\u7ffb\u5361\u9519\u8bef\uff0c\u5bf9\u5e94\u4f4d\u7f6e\u5df2\u7ecf\u7ffb\u5f00\u4e86", 
+        "des": ""
+    }
+},
+{
+    "pk": 1002, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HEROPANEL_NO_TIMES", 
+        "text_zh": "\u7ffb\u5361\u6b21\u6570\u5df2\u7ecf\u7528\u5b8c", 
+        "des": ""
+    }
+},
+{
+    "pk": 1100, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "PLUNDER_NOT_IN_LIST", 
+        "text_zh": "\u8981\u63a0\u593a\u7684\u5bf9\u8c61\u4e0d\u5728\u63a0\u593a\u5217\u8868\u4e2d", 
+        "des": ""
+    }
+},
+{
+    "pk": 1101, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "PLUNDER_NO_TIMES", 
+        "text_zh": "\u4eca\u65e5\u63a0\u593a\u6b21\u6570\u5df2\u7ecf\u7528\u5b8c", 
+        "des": ""
+    }
+},
+{
+    "pk": 1102, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "PLUNDER_GET_REWARD_NO_TARGET", 
+        "text_zh": "\u63a0\u593a\u6ca1\u6709\u76ee\u6807\u73a9\u5bb6\uff0c\u65e0\u6cd5\u9886\u53d6\u5956\u52b1", 
+        "des": ""
+    }
+},
+{
+    "pk": 1103, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "PLUNDER_GET_REWARD_ALREADY_GOT", 
+        "text_zh": "\u63a0\u593a\u83b7\u53d6\u5956\u52b1\uff0c\u5bf9\u5e94\u5956\u52b1\u7c7b\u578b\u5df2\u7ecf\u83b7\u53d6\u8fc7", 
+        "des": ""
+    }
+},
+{
+    "pk": 1104, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "PLUNDER_GET_REWARD_POINTS_NOT_ENOUGH", 
+        "text_zh": "\u63a0\u593a\u83b7\u53d6\u5956\u52b1\uff0c\u4f46\u662f\u79ef\u5206\u4e0d\u591f", 
+        "des": ""
+    }
+},
+{
+    "pk": 1200, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "PRISONER_NOT_EXIST", 
+        "text_zh": "\u56da\u72af\u4e0d\u5b58\u5728", 
+        "des": ""
+    }
+},
+{
+    "pk": 1201, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "PRISONER_NOT_ACTIVE", 
+        "text_zh": "\u56da\u72af\u65e0\u6cd5\u518d\u83b7\u53d6", 
+        "des": "\u5df2\u7ecf\u83b7\u53d6\u8fc7\u4e00\u6b21\uff0c\u4f46\u5931\u8d25\u4e86"
+    }
+},
+{
+    "pk": 1300, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "TASK_NOT_EXIST", 
+        "text_zh": "\u4e0d\u5b58\u5728\u7684\u4efb\u52a1", 
+        "des": ""
+    }
+},
+{
+    "pk": 1301, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "TASK_NOT_FINISH", 
+        "text_zh": "\u4efb\u52a1\u6ca1\u6709\u5b8c\u6210", 
+        "des": ""
+    }
+},
+{
+    "pk": 1400, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "MAIL_NOT_EXIST", 
+        "text_zh": "\u4e0d\u5b58\u5728\u7684\u90ae\u4ef6", 
+        "des": ""
+    }
+},
+{
+    "pk": 1401, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "MAIL_HAS_NO_ATTACHMENT", 
+        "text_zh": "\u90ae\u4ef6\u6ca1\u6709\u9644\u4ef6", 
+        "des": ""
+    }
+},
+{
+    "pk": 1500, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "ARENA_NO_TIMES", 
+        "text_zh": "\u4eca\u65e5\u7ade\u6280\u573a\u6b21\u6570\u5df2\u7ecf\u7528\u5b8c", 
+        "des": ""
+    }
+},
+{
+    "pk": 1600, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "ACHIEVEMENT_NOT_FINISH", 
+        "text_zh": "\u6210\u5c31\u6ca1\u6709\u5b8c\u6210", 
+        "des": "\u53ef\u80fd\u5c31\u53bb\u83b7\u53d6\u5956\u52b1"
+    }
+},
+{
+    "pk": 1601, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "ACHIEVEMENT_NOT_EXIST", 
+        "text_zh": "\u6210\u5c31\u4e0d\u5b58\u5728", 
+        "des": ""
+    }
+},
+{
+    "pk": 2000, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "ATTACHMENT_NOT_EXIST", 
+        "text_zh": "\u4e0d\u5b58\u5728\u7684\u5956\u52b1", 
+        "des": ""
+    }
+},
+{
+    "pk": 2100, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "CHECKIN_ALREADY_CHECKIN", 
+        "text_zh": "\u4eca\u65e5\u5df2\u7ecf\u7b7e\u5230\u8fc7\u4e86", 
+        "des": ""
+    }
+},
+{
+    "pk": 2101, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "OFFICAL_ZERO_GET_REWARD", 
+        "text_zh": "\u6ca1\u6709\u5b98\u804c\u4e0d\u80fd\u9886\u5956", 
+        "des": ""
+    }
+},
+{
+    "pk": 2102, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "OFFICAL_ALREADY_GET_REWARD", 
+        "text_zh": "\u5f53\u65e5\u5df2\u7ecf\u9886\u53d6\u8fc7\u5b98\u804c\u5956\u52b1", 
+        "des": ""
+    }
+},
+{
+    "pk": 2200, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "LEVY_NO_TIMES", 
+        "text_zh": "\u4eca\u65e5\u5f81\u6536\u6b21\u6570\u5df2\u7ecf\u7528\u5b8c", 
+        "des": ""
+    }
+},
+{
+    "pk": 3000, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STORE_GOODS_NOT_EXIST", 
+        "text_zh": "\u5546\u57ce\u7269\u54c1\u4e0d\u5b58\u5728", 
+        "des": ""
+    }
+},
+{
+    "pk": 3001, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STORE_GOODS_LEVEL_CONDITION", 
+        "text_zh": "\u5546\u57ce\u7269\u54c1\u6709\u7b49\u7ea7\u9650\u5236\uff0c\u65e0\u6cd5\u8d2d\u4e70", 
+        "des": ""
+    }
+},
+{
+    "pk": 3002, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STORE_GOODS_VIP_CONDITION", 
+        "text_zh": "\u5546\u57ce\u7269\u54c1\u6709VIP\u9650\u5236\uff0c\u65e0\u6cd5\u8d2d\u4e70", 
+        "des": ""
+    }
+},
+{
+    "pk": 3003, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STORE_GOODS_AMOUNT_NOT_ENOUGH", 
+        "text_zh": "\u5546\u54c1\u5269\u4f59\u6570\u91cf\u4e0d\u8db3", 
+        "des": ""
+    }
+},
+{
+    "pk": 3004, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STORE_GOODS_CHAR_LIMIT", 
+        "text_zh": "\u5546\u54c1\u8fbe\u5230\u6bcf\u4eba\u6bcf\u5929\u9650\u8d2d\uff0c\u65e0\u6cd5\u8d2d\u4e70", 
+        "des": ""
+    }
+},
+{
+    "pk": 3005, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STORE_BUY_FAILURE", 
+        "text_zh": "\u5546\u57ce\u8d2d\u4e70\u5931\u8d25", 
+        "des": ""
+    }
+},
+{
+    "pk": 3100, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FRIEND_FULL", 
+        "text_zh": "\u597d\u53cb\u5df2\u6ee1\uff0c\u65e0\u6cd5\u518d\u52a0\u597d\u53cb", 
+        "des": ""
+    }
+},
+{
+    "pk": 3101, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FRIEND_ALREADY_ADD", 
+        "text_zh": "\u5bf9\u65b9\u5df2\u7ecf\u662f\u4f60\u7684\u597d\u53cb", 
+        "des": ""
+    }
+},
+{
+    "pk": 3102, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FRIEND_NOT_OK", 
+        "text_zh": "\u5bf9\u65b9\u4e0d\u662f\u4f60\u7684\u597d\u53cb", 
+        "des": "\u5728\u7ed3\u675f\u597d\u53cb\u5173\u7cfb\u65f6\u53d1\u751f\u7684\u9519\u8bef"
+    }
+},
+{
+    "pk": 3103, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FRIEND_NOT_ACK", 
+        "text_zh": "\u6ca1\u6709\u5411\u5bf9\u65b9\u53d1\u51fa\u597d\u53cb\u7533\u8bf7", 
+        "des": "\u5728\u53d6\u6d88\u597d\u53cb\u7533\u8bf7\u65f6\u53d1\u751f\u7684\u9519\u8bef"
+    }
+},
+{
+    "pk": 3104, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FRIEND_NOT_IN_ACCEPT_LIST", 
+        "text_zh": "\u5bf9\u65b9\u6ca1\u6709\u5411\u4f60\u53d1\u9001\u597d\u53cb\u7533\u8bf7", 
+        "des": "\u53d1\u751f\u5728\u63a5\u53d7/\u62d2\u7edd\u597d\u53cb\u7533\u8bf7\u65f6"
+    }
+},
+{
+    "pk": 3200, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "CHAT_MESSAGE_TOO_LONG", 
+        "text_zh": "\u804a\u5929\u6d88\u606f\u592a\u957f", 
+        "des": ""
+    }
+}
+]

@@ -13,7 +13,6 @@ from utils.decorate import message_response
 
 from utils.api import api_character_create
 
-# ONLY GUIDE SERVER WILL CALL THIS VIEW FUNCTION
 @message_response("CreateCharacterResponse")
 def create_character(request):
     req = request._proto
@@ -25,19 +24,13 @@ def create_character(request):
     }
 
     res = api_character_create(data)
-    print "CREATE CHARACTER"
-    print res
-
-    # FIXME
-    ret_table = {
-        30: 202,
-        31: 200,
-        32: 201,
-        33: 2,
-    }
-
     if res['ret'] != 0:
-        raise SanguoException(ret_table[res['ret']])
+        raise SanguoException(
+            res['ret'],
+            0,
+            'Character Create',
+            'api_character_create, ret = {0}'.format(res['ret'])
+        )
 
     char_id = res['data']['char_id']
 
@@ -50,8 +43,7 @@ def create_character(request):
 
     request._char_id = char_id
 
-    # new_session = '%s:%d' % (request._session, char_id)
-    new_session = '%d:0:%d' % (request._account_id, char_id)
+    new_session = '%d:%d:%d' % (request._account_id, request._server_id, char_id)
     new_session = crypto.encrypt(new_session)
 
     response = CreateCharacterResponse()

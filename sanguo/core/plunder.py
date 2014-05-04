@@ -6,13 +6,12 @@ __date__ = '1/22/14'
 import random
 import logging
 
-from django.db import transaction
 from mongoscheme import Q, DoesNotExist
 from core.character import Char, get_char_ids_by_level_range
 from core.battle import PVP
 from core.stage import Hang
 from core.mongoscheme import MongoHang, MongoPlunder, MongoEmbededPlunderChars, MongoStage
-from core.exception import InvalidOperate
+from core.exception import SanguoException
 from core.counter import Counter
 from core.task import Task
 from core.formation import Formation
@@ -30,6 +29,7 @@ from preset.settings import (
     PLUNDER_GOT_ITEMS_HOUR,
 )
 from protomsg import PLUNDER_HERO, PLUNDER_STUFF
+from preset import errormsg
 
 
 logger = logging.getLogger('sanguo')
@@ -133,11 +133,21 @@ class Plunder(object):
 
     def plunder(self, _id):
         if str(_id) not in self.mongo_plunder.chars:
-            raise InvalidOperate("Plunder: Char {0} Try to Pluner {1} which is not in plunder list".format(self.char_id, _id))
+            raise SanguoException(
+                errormsg.PLUNDER_NOT_IN_LIST,
+                self.char_id,
+                "Plunder Plunder",
+                "Plunder, {0} not in plunder list".format(_id)
+            )
 
         counter = Counter(self.char_id, 'plunder')
         if counter.remained_value <= 0:
-            raise InvalidOperate("Plunder: Char {0} Try to Plunder {1}. But no times available".format(self.char_id, _id))
+            raise SanguoException(
+                errormsg.PLUNDER_NO_TIMES,
+                self.char_id,
+                "Plunder Plunder",
+                "Plunder no times"
+            )
 
         msg = MsgBattle()
         pvp = PVP(self.char_id, _id, msg)
@@ -183,16 +193,29 @@ class Plunder(object):
 
     def get_reward(self, tp):
         if not self.mongo_plunder.target_char:
-            raise InvalidOperate("Plunder Get Reward. Char {0} try to get reward type {1}. But no target char".format(self.char_id, tp))
+            raise SanguoException(
+                errormsg.PLUNDER_GET_REWARD_NO_TARGET,
+                self.char_id,
+                "Plunder Get Reward",
+                "no Target char"
+            )
 
         if tp in self.mongo_plunder.got_reward:
-            raise InvalidOperate("Plunder Get Reward. Char {0} try to get tp {1} which has already got".format(self.char_id, tp))
+            raise SanguoException(
+                errormsg.PLUNDER_GET_REWARD_ALREADY_GOT,
+                self.char_id,
+                "Plunder Get Reward",
+                "tp {0} already got".format(tp)
+            )
 
         need_points = PLUNDER_REWARD_NEEDS_POINT[tp]
         if self.mongo_plunder.points < need_points:
-            raise InvalidOperate("Plunder Get Reward. Char {0} try to get tp {1}. But points NOT enough. {2} < {3}".format(
-                self.char_id, tp, self.mongo_plunder.points, need_points
-            ))
+            raise SanguoException(
+                errormsg.PLUNDER_GET_REWARD_POINTS_NOT_ENOUGH,
+                self.char_id,
+                "Plunder Get Reward",
+                "points not enough. {0} < {1}".format(self.mongo_plunder.points, need_points)
+            )
 
         self.mongo_plunder.points -= need_points
         self.mongo_plunder.save()

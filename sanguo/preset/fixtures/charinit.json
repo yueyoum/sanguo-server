@@ -4,10 +4,9 @@
     "model": "config.charinit", 
     "fields": {
         "gems": "", 
-        "sycee": 300, 
-        "gold": 0, 
-        "extra_hero": 22, 
+        "sycee": 0, 
         "heros": "48:8,64,78|51:22,71,92|74:1,71,92", 
+        "gold": 0, 
         "stuffs": ""
     }
 }

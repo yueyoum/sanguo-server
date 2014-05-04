@@ -10,13 +10,14 @@ from core.msgpipe import publish_to_char
 from core.character import Char
 from core.item import Item
 from core.hero import save_hero
-from core.exception import InvalidOperate, GoldNotEnough, SyceeNotEnough
+from core.exception import SanguoException
 
 from utils import pack_msg
 from utils.api import api_store_buy, api_store_get
 
 
 from protomsg import StoreNotify
+from preset import errormsg
 
 
 
@@ -40,7 +41,12 @@ class Store(object):
         try:
             this_goods = store[_id]
         except KeyError:
-            raise InvalidOperate("Store Buy. Char {0} Try to buy a NONE exists goods {1}".format(self.char_id, _id))
+            raise SanguoException(
+                errormsg.STORE_GOODS_NOT_EXIST,
+                self.char_id,
+                "Store Buy",
+                "{0} not exist".format(_id)
+            )
 
         char = Char(self.char_id)
         mc = char.mc
@@ -53,39 +59,54 @@ class Store(object):
 
         # check level
         if this_goods['level_condition'] > mc.level:
-            raise InvalidOperate("Store Buy. Char {0} Try to buy {1}. But level test not passed. {2} < {3}".format(
-                self.char_id, _id, mc.level, this_goods['level_condition']
-            ))
+            raise SanguoException(
+                errormsg.STORE_GOODS_LEVEL_CONDITION,
+                self.char_id,
+                "Store Buy",
+                "{0} has level condition {1}. greater than char level {2}".format(_id, this_goods['level_condition'], mc.level)
+            )
 
         # check total amount
         if this_goods['has_total_amount']:
             if this_goods['total_amount_run_time'] < amount:
-                raise InvalidOperate("Store Buy. Char {0} Try to buy {1}. Buy total_amount_run_time {2} < amount {3}".format(
-                    self.char_id, _id, this_goods['total_amount_run_time'], amount
-                ))
+                raise SanguoException(
+                    errormsg.STORE_GOODS_AMOUNT_NOT_ENOUGH,
+                    self.char_id,
+                    "Store Buy",
+                    "{0} amount not enough. remained {1}, buy amount {2}".format(_id, this_goods['total_amount_run_time'], amount)
+                )
+
 
         # check limit
         if this_goods['has_limit_amount']:
             remained_amount = self.get_limit_remained_amount(_id, this_goods['limit_amount'])
             if remained_amount < amount:
-                raise InvalidOperate("Store Buy. Char {0} Try to buy {1}. Buy limit remained amount {2} < amount {3}".format(
-                    self.char_id, _id, remained_amount, amount
-                ))
+                raise SanguoException(
+                    errormsg.STORE_GOODS_CHAR_LIMIT,
+                    self.char_id,
+                    "Store Buy",
+                    "{0} reach limit {1}".format(_id, this_goods['limit_amount'])
+                )
 
         # check gold or sycee
         wealth_needs = this_goods['sell_price'] * amount
 
         if this_goods['sell_type'] == 1:
             if mc.gold < wealth_needs:
-                raise GoldNotEnough("Store Buy. Char {0} try to buy {1}. But gold not enough. {2} < {3}".format(
-                    self.char_id, _id, mc.gold, wealth_needs
-                ))
+                raise SanguoException(
+                    errormsg.GOLD_NOT_ENOUGH,
+                    self.char_id,
+                    "Store Buy",
+                    "gold not enough",
+                )
         else:
             if mc.sycee < wealth_needs:
-                raise SyceeNotEnough("Store Buy. Char {0} try to buy {1}. But sycee not enough. {2} < {3}".format(
-                    self.char_id, _id, mc.sycee, wealth_needs
-                ))
-
+                raise SanguoException(
+                    errormsg.SYCEE_NOT_ENOUGH,
+                    self.char_id,
+                    "Store Buy",
+                    "sycee not enough"
+                )
 
         # 本地server检查完毕，然后通过API通知HUB购买。
         # 对于有total amount限制的物品，HUB可能返回错误
@@ -97,10 +118,12 @@ class Store(object):
 
         res = api_store_buy(data)
         if res['ret'] != 0:
-            # FIXME error code
-            raise InvalidOperate("Store Buy. Char {0} try to buy {1}. Buy buy failure. ret = {2}".format(
-                self.char_id, _id, res['ret']
-            ))
+            raise SanguoException(
+                res['ret'],
+                self.char_id,
+                "Store Buy",
+                "api failure"
+            )
 
         # ALL OK
         # 开始操作
@@ -188,7 +211,6 @@ class Store(object):
                 g.vip_condition.can_buy = False
 
         return msg
-
 
 
     def send_notify(self, store=None):

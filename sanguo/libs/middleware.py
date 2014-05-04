@@ -58,9 +58,6 @@ class RequestFilter(object):
                 game_session = p.session
                 decrypted_session = ""
                 if msg_id not in MSG_TYPE_EMPTY_SESSION:
-                    if not game_session:
-                        print "NO SESSION"
-                        return HttpResponse(status=403)
                     try:
                         decrypted_session = crypto.decrypt(game_session)
                     except crypto.BadEncryptedText:

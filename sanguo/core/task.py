@@ -12,7 +12,7 @@ from core.attachment import Attachment
 from core.achievement import Achievement
 
 from core.msgpipe import publish_to_char
-from core.exception import InvalidOperate
+from core.exception import SanguoException
 from utils import pack_msg
 
 from protomsg import Task as MsgTask
@@ -20,6 +20,7 @@ from protomsg import TaskNotify
 from protomsg import Attachment as MsgAttachment
 
 from preset.data import TASKS, TASKS_FIRST_IDS, TASKS_ALL_TP
+from preset import errormsg
 
 
 class Task(object):
@@ -85,14 +86,20 @@ class Task(object):
         try:
             this_task = TASKS[_id]
         except KeyError:
-            raise InvalidOperate("Task Get Reward: Char {0} Try to get reward from a NONE exist task {1}".format(
-                self.char_id, _id
-            ))
+            raise SanguoException(
+                errormsg.TASK_NOT_EXIST,
+                self.char_id,
+                "Task Get Reward",
+                "Task {0} not exist".format(_id)
+            )
 
         if _id not in self.task.finished:
-            raise InvalidOperate("Task Get Reward: Char {0} Try to get reward from task {1}. But this task not FINISHED".format(
-                self.char_id, _id
-            ))
+            raise SanguoException(
+                errormsg.TASK_NOT_FINISH,
+                self.char_id,
+                "Task Get Reward",
+                "Task {0} not finish".format(_id)
+            )
 
         char = Char(self.char_id)
         sycee = this_task.sycee if this_task.sycee else 0

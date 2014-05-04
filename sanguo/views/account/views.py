@@ -28,16 +28,14 @@ def login(request):
         data['password'] = req.regular.password
 
     res = api_account_login(data)
-    print "LOGIN RES"
-    print res
-
-    ret_table = {
-        20: 121,
-        21: 120
-    }
 
     if res['ret'] != 0:
-        raise SanguoException(ret_table[res['ret']], 'xxx')
+        raise SanguoException(
+            res['ret'],
+            0,
+            'Login',
+            'login, api_account_login, ret = {0}'.format(res['ret'])
+        )
 
     account_id = res['data']['account_id']
     char_id = res['data']['char_id']

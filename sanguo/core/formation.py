@@ -4,7 +4,7 @@ from mongoengine import DoesNotExist
 
 from core.mongoscheme import MongoSocket, MongoFormation, MongoHero
 from core.signals import socket_changed_signal, hero_changed_signal
-from core.exception import InvalidOperate, SanguoException
+from core.exception import SanguoException
 
 from utils import pack_msg
 from core.msgpipe import publish_to_char
@@ -13,6 +13,7 @@ import protomsg
 from protomsg import SpecialEquipmentBuyRequest
 
 from preset.data import EQUIPMENTS, HEROS
+from preset import errormsg
 
 ALL_INITIAL_EQUIPMENTS = {}
 
@@ -110,47 +111,58 @@ class Formation(object):
         item = Item(self.char_id)
 
         if str(socket_id) not in self.formation.sockets:
-            raise InvalidOperate()
+            raise SanguoException(
+                errormsg.FORMATION_NONE_EXIST_SOCKET,
+                self.char_id,
+                "Formation Set Socket",
+                "Socket {0} not exist".format(socket_id)
+            )
 
         char_heros = char_heros_dict(self.char_id)
 
         # 首先检测是否拥有
         if hero_id and hero_id not in char_heros:
-            raise InvalidOperate("Formation, Set Socket. Char {0} Try to set hero {1} in socket {2}. But this hero NOT belong to this char".format(
-                self.char_id, hero_id, socket_id
-            ))
+            raise SanguoException(
+                errormsg.HERO_NOT_EXSIT,
+                self.char_id,
+                "Formation Set Socket",
+                "Set Socket, Hero {0} not belong to self".format(hero_id)
+            )
 
         for i in [weapon_id, armor_id, jewelry_id]:
             if i and not item.has_equip(i):
-                raise InvalidOperate("Formation, Set Socket. Char {0} Try to set equip {1} in socket {2}. But this equip NOT belong to this char".format(
-                    self.char_id, i, socket_id
-                ))
+                raise SanguoException(
+                    errormsg.EQUIPMENT_NOT_EXIST,
+                    self.char_id,
+                    "Formation Set Socket",
+                    "Set Socket, Equipment {0} not belong to self".format(i)
+                )
+
 
         # 对于第一次上人的情况特殊处理
         this_socket = self.formation.sockets[str(socket_id)]
-        print "set socket debug"
-        print this_socket.hero
-        print this_socket.weapon
-        print this_socket.armor
-        print this_socket.jewelry
-        print '-------'
-        print hero_id
-        print weapon_id
-        print armor_id
-        print jewelry_id
+        # print "set socket debug"
+        # print this_socket.hero
+        # print this_socket.weapon
+        # print this_socket.armor
+        # print this_socket.jewelry
+        # print '-------'
+        # print hero_id
+        # print weapon_id
+        # print armor_id
+        # print jewelry_id
         if not this_socket.hero and not this_socket.weapon and not this_socket.armor and not this_socket.jewelry and hero_id and not weapon_id and not armor_id and not jewelry_id:
             # first time pick up a hero in this socket
             # 要把这个人往前放
-            print "xxxxxxxx"
+            # print "xxxxxxxx"
             socket_ids = self.all_socket_ids()
             socket_ids.sort()
             for sid in socket_ids:
                 s = self.formation.sockets[str(sid)]
-                print sid, s.hero
+                # print sid, s.hero
                 if not s.hero:
                     self.save_socket(sid, hero_id, s.weapon, s.armor, s.jewelry)
                     return
-
 
         # 然后检测装备类型
         def _equip_test(tp, e):
@@ -161,9 +173,12 @@ class Formation(object):
             e_oid = item.item.equipments[str(e)].oid
             this_e = EQUIPMENTS[e_oid]
             if this_e.tp != tp:
-                raise SanguoException(402, "Formation, Set Socket. Equip type test Failed. Char {0}. Equip id: {1}, oid {2}, tp {3}. Expect tp: {4}".format(
-                    self.char_id, e, e_oid, this_e.tp, tp
-                ))
+                raise SanguoException(
+                    errormsg.FORMATION_SET_SOCKET_INVALUE_EQUIP_TYPE,
+                    self.char_id,
+                    "Formation Set Socket",
+                    "Set Socket. Equipment {0} type {1} not match. expected {2}".format(e, this_e.tp, tp)
+                )
 
         _equip_test(1, weapon_id)
         _equip_test(2, armor_id)
@@ -185,15 +200,22 @@ class Formation(object):
             if hero_id and s.hero:
                 if s.hero == hero_id:
                     # 同一个武将上到多个socket
-                    raise SanguoException(401, "Formation, Set Socket. Char {0} Try to set hero {1} in socket {2}. But this hero already in socket {3}".format(
-                        self.char_id, hero_id, socket_id, k
-                    ))
+                    raise SanguoException(
+                        errormsg.FORMATION_SET_SOCKET_HERO_IN_MULTI_SOCKET,
+                        self.char_id,
+                        "Formation Set Socket",
+                        "Set Socket. hero {0} alreay in socket {1}".format(hero_id, k)
+                    )
 
                 # 同名武将不能重复上阵
                 if char_heros[s.hero].oid == char_heros[hero_id].oid:
-                    raise InvalidOperate("Formation, Set Socket. Char {0} Try to set hero {1} in socket {2}. But Same Hero oid {3} already in socket {4}".format(
-                        self.char_id, hero_id, socket_id, char_heros[hero_id].oid, k
-                    ))
+                    raise SanguoException(
+                        errormsg.FORMATION_SET_SOCKET_SAME_HERO,
+                        self.char_id,
+                        "Formation Set Socket",
+                        "Set Socket. same hero can not in formation at same time"
+
+                    )
 
             if weapon_id and s.weapon and s.weapon == weapon_id:
                 changed_sockets.append((int(k), s.hero, 0, s.armor, s.jewelry))
@@ -237,7 +259,12 @@ class Formation(object):
             try:
                 socket = self.formation.sockets[str(socket_id)]
             except KeyError:
-                raise InvalidOperate()
+                raise SanguoException(
+                    errormsg.FORMATION_NONE_EXIST_SOCKET,
+                    self.char_id,
+                    "Formation Save Socket",
+                    "Socket {0} not exist".format(socket_id)
+                )
 
         socket.hero = hero
         socket.weapon = weapon
@@ -260,20 +287,25 @@ class Formation(object):
 
     def save_formation(self, socket_ids, send_notify=True):
         if len(socket_ids) != 9:
-            raise InvalidOperate("Formation, Save Formation. Char {0} Try to save formation, But length is {1}. {2}".format(
-                self.char_id, len(socket_ids), socket_ids
-            ))
+            raise SanguoException(
+                errormsg.BAD_MESSAGE,
+                self.char_id,
+                "Formation Save Formation",
+                "Save Formation. But request formation length is {0}".format(len(socket_ids))
+            )
 
-        # real_socket_ids = []
-        # for i in socket_ids:
-        #     if i == 0:
-        #         continue
-        #     if i not in f.formation.formation:
-        #         raise InvalidOperate()
-        #     real_socket_ids.append(i)
-        #
-        # if len(real_socket_ids) != len(f.formation.sockets):
-        #     raise InvalidOperate()
+        all_ids = self.all_socket_ids()
+        for _id in socket_ids:
+            if _id == 0:
+                continue
+
+            if _id not in all_ids:
+                raise SanguoException(
+                    errormsg.FORMATION_NONE_EXIST_SOCKET,
+                    self.char_id,
+                    "Formation Save Formation",
+                    "Save Formation. {0} not in socket ids {1}".format(_id, all_ids)
+                )
 
         for i in range(0, 9, 3):
             no_hero = True
@@ -287,19 +319,13 @@ class Formation(object):
                     no_hero = False
                     break
             if no_hero:
-                raise SanguoException(403, "Formation, Save Formation. Char {0} Try to save formation. But LINE {1} has no hero".format(
-                    self.char_id, i
-                ))
+                raise SanguoException(
+                    errormsg.FORMATION_SAVE_NO_HERO,
+                    self.char_id,
+                    "Formation Save Formation",
+                    "Save Formation. Line {0} has no hero".format(i)
+                )
 
-        all_ids = self.all_socket_ids()
-        for _id in socket_ids:
-            if _id == 0:
-                continue
-
-            if _id not in all_ids:
-                raise SanguoException(403, "Formation, Save formation. Char {0} try to set a wrong socket_ids: {1}. Actual: {2}".format(
-                    self.char_id, socket_ids, all_ids
-                ))
 
         self.formation.formation = socket_ids
         self.formation.save()
@@ -357,12 +383,21 @@ class Formation(object):
         try:
             this_socket = self.formation.sockets[str(socket_id)]
         except KeyError:
-            raise InvalidOperate("Formation Special Buy. Char {0} try to operate on a NONE exists socket id {1}".format(self.char_id, socket_id))
+            raise SanguoException(
+                errormsg.FORMATION_NONE_EXIST_SOCKET,
+                self.char_id,
+                "Formation Special Buy",
+                "socket {0} not exist".format(socket_id)
+            )
 
         if not this_socket.hero:
-            raise InvalidOperate("Formation Special Buy. Char {0}. Can NOT buy special equipment for socket {1} which has no hero".format(
-                self.char_id, socket_id
-            ))
+            raise SanguoException(
+                errormsg.FORMATION_NO_HERO,
+                self.char_id,
+                "Formation Special Buy",
+                "socket {0} no hero".format(socket_id)
+            )
+
 
         oid = MongoHero.objects.get(id=this_socket.hero).oid
 

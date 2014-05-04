@@ -3,17 +3,16 @@
 __author__ = 'Wang Chao'
 __date__ = '2/19/14'
 
-from django.db import transaction
 from mongoengine import DoesNotExist
 
-from core.exception import InvalidOperate
-
+from core.exception import SanguoException
 from core.mongoscheme import MongoAttachment, MongoEmbededAttachment, MongoEmbededAttachmentEquipment
-
 from core.msgpipe import publish_to_char
 from utils import pack_msg
 
 from protomsg import PrizeNotify, Attachment as MsgAttachment
+
+from preset import errormsg
 
 
 def make_standard_drop_from_template():
@@ -208,9 +207,12 @@ class Attachment(object):
             try:
                 attachment = self.attachment.attachments[str(prize_id)]
             except KeyError:
-                raise InvalidOperate("Attachment Get. Char {0} Try to get a NONE exists attachment {1}, param = {2}".format(
-                    self.char_id, prize_id, param
-                ))
+                raise SanguoException(
+                    errormsg.ATTACHMENT_NOT_EXIST,
+                    self.char_id,
+                    "Attachment Get",
+                    "{0} not exist".format(prize_id)
+                )
 
             heros = None
             if attachment.heros:
