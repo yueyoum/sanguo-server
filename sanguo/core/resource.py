@@ -6,13 +6,12 @@ __date__ = '4/29/14'
 from contextlib import contextmanager
 
 from core.exception import SanguoException
-from core.character import Char
-from core.item import Item
 
 from preset.errormsg import GOLD_NOT_ENOUGH, SYCEE_NOT_ENOUGH, STUFF_NOT_ENOUGH, GEM_NOT_ENOUGH
 
 @contextmanager
 def check_character(char_id, gold=0, sycee=0, save=True, func_name=""):
+    from core.character import Char
     c = Char(char_id)
     mc = c.mc
     if gold < 0 and mc.gold < abs(gold):
@@ -30,6 +29,7 @@ def check_character(char_id, gold=0, sycee=0, save=True, func_name=""):
 @contextmanager
 def check_stuff(char_id, stuffs, func_name=""):
     # stuffs = [(id, amount), (id, amount)...]
+    from core.item import Item
     item = Item(char_id)
     for _id, _amount in stuffs:
         if not item.has_stuff(_id, _amount):
@@ -44,6 +44,7 @@ def check_stuff(char_id, stuffs, func_name=""):
 @contextmanager
 def check_gem(char_id, gems, func_name=""):
     # gems = [(id, amount), (id, amount)...]
+    from core.item import Item
     item = Item(char_id)
     for _id, _amount in gems:
         if not item.has_gem(_id, _amount):
