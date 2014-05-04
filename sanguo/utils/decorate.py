@@ -77,7 +77,12 @@ def function_check(func_id):
             fo = MongoFunctionOpen.objects.get(id=request._char_id)
             if func_id in fo.freeze:
                 # FIXME error code
-                raise SanguoException(2, "FUNC FREEZE")
+                raise SanguoException(
+                    errormsg.FUNC_FREEZE,
+                    request._char_id,
+                    "Function Open Check",
+                    "func {0} freeze".format(func_id)
+                )
             return func(request, *args, **kwargs)
         return wrap
     return deco
