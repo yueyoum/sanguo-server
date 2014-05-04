@@ -64,6 +64,8 @@ urlpatterns = patterns('',
                        url(r'^store/buy/$', 'views.store.views.buy'),
 
                        url(r'^levy/$', 'views.levy.views.levy'),
+
+                       url(r'char/create/$', 'views.character.views.create_character'),
 )
 
 
