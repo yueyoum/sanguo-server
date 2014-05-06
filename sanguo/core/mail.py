@@ -9,7 +9,7 @@ import datetime
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoMail, MongoEmbededMail
 from core.msgpipe import publish_to_char
-from core.attachment import Attachment
+from core.attachment import Attachment, standard_drop_to_attachment_protomsg
 from core.exception import SanguoException
 from preset.settings import MAIL_KEEP_DAYS, DATETIME_FORMAT as FORMAT
 from utils import pack_msg
@@ -123,7 +123,9 @@ class Mail(object):
             m.content = v.content
             m.has_read = v.has_read
             if v.attachment:
-                m.attachment.MergeFromString(v.attachment)
+                m.attachment.MergeFrom(
+                    standard_drop_to_attachment_protomsg(json.loads(v.attachment))
+                )
 
             create_at = datetime.datetime.strptime(v.create_at, FORMAT)
             m.start_at = int(create_at.strftime('%s'))
