@@ -457,8 +457,8 @@ class Hang(TimerCheckAbstractBase):
 
 
     def save_drop(self):
-        stage_id = self.hang.stage_id
-        times = self.hang.actual_seconds / 15
+        stage_id = self.hang_doing.stage_id
+        times = self.hang_doing.actual_seconds / 15
 
         stage = STAGES[stage_id]
 
@@ -475,8 +475,8 @@ class Hang(TimerCheckAbstractBase):
         print "HANG, drop"
         print standard_drop
 
-        self.hang.delete()
-        self.hang = None
+        self.hang_doing.delete()
+        self.hang_doing = None
         self.send_notify()
 
         attachment = Attachment(self.char_id)
