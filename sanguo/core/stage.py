@@ -318,7 +318,7 @@ class Hang(TimerCheckAbstractBase):
 
         self.send_notify()
 
-        if remained:
+        if remained and stage_id:
             stage = STAGES[stage_id]
             exp = remained / 15 * stage.normal_exp
             gold = remained / 15 * stage.normal_gold * 0.5
