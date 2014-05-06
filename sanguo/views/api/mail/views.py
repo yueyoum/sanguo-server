@@ -25,7 +25,7 @@ def send_mail(request):
         if not cids:
             return {'ret': 1}
 
-    mail_id = data['mail']['id']
+    # mail_id = data['mail']['id']
     mail_name = data['mail']['name']
     mail_content = data['mail']['content']
     mail_send_at = data['mail']['send_at']
@@ -33,6 +33,6 @@ def send_mail(request):
 
     for cid in cids:
         m = Mail(cid)
-        m.add(mail_id, mail_name, mail_content, mail_send_at, attachment)
+        m.add(mail_name, mail_content, mail_send_at, attachment)
 
     return {'ret': 0}

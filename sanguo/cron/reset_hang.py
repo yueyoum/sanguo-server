@@ -1,12 +1,23 @@
 from _base import Logger
 
-from core.mongoscheme import MongoHangRemainedTime
+import traceback
 
+from core.stage import Hang
+from core.mongoscheme import MongoHang
 
 def reset():
-    MongoHangRemainedTime.objects.delete()
     logger = Logger('reset_hang.log')
-    logger.write("MongoHangRemainedTime Clean Done")
+
+    for mh in MongoHang.objects.all():
+        h = Hang(mh.id)
+        try:
+            h.cronjob()
+        except:
+            e = traceback.format_exc()
+            logger.write("==== Exception ====")
+            logger.write(e)
+
+    logger.write("Hang Reset Done")
     logger.close()
 
 

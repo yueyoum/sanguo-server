@@ -11,13 +11,11 @@ from core.mongoscheme import MongoMail, MongoEmbededMail
 from core.msgpipe import publish_to_char
 from core.attachment import Attachment
 from core.exception import SanguoException
-from preset.settings import MAIL_KEEP_DAYS
+from preset.settings import MAIL_KEEP_DAYS, DATETIME_FORMAT as FORMAT
 from utils import pack_msg
 import protomsg
 from preset import errormsg
 
-
-FORMAT = '%Y-%m-%d %H:%M:%S'
 
 class Mail(object):
     def __init__(self, char_id, mailobj=None):
@@ -35,7 +33,7 @@ class Mail(object):
     def count(self):
         return len(self.mail.mails)
 
-    def add(self, mail_id, name, content, create_at, attachment=''):
+    def add(self, name, content, create_at, attachment=''):
         if not isinstance(name, unicode):
             name = name.decode('utf-8')
 
@@ -49,9 +47,16 @@ class Mail(object):
         m.has_read = False
         m.create_at = create_at
 
+        mail_ids = [int(i) for i in self.mail.mails.keys()]
+        if not mail_ids:
+            mail_id = 1
+        else:
+            mail_id = max(mail_ids) + 1
+
         self.mail.mails[str(mail_id)] = m
         self.mail.save()
         self.send_mail_notify()
+        return mail_id
 
     def delete(self, mail_id):
 

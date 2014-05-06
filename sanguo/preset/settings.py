@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-
+DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 # 次数限制，每天可以做多少次
 COUNTER = {
@@ -44,6 +44,13 @@ EQUIP_MAX_LEVEL = 99
 EQUIP_MAX_STEP= 6
 
 
+#########################
+#      挂机             #
+#########################
+
+HANG_RESET_MAIL_TITLE = u'挂机清算补偿'
+HANG_RESET_MAIL_CONTENT = u'挂机清算补偿'
+
 
 #########################
 #      掠夺             #
@@ -61,7 +68,7 @@ PLUNDER_DEFENSE_FAILURE_GOLD = 1000
 # 最大防御成功次数
 PLUNDER_DEFENSE_SUCCESS_MAX_TIMES = 10
 # 最大防御失败次数
-PLUNDER_DEFENSE_FAILURE_MAX_TIMES = 8
+PLUNDER_DEFENSE_FAILURE_MAX_TIMES = 10
 # 掠夺获取收益各档所需点数
 PLUNDER_REWARD_NEEDS_POINT = {1:3, 2: 2, 3: 1}
 # 掠夺获取道具按照多少小时计算

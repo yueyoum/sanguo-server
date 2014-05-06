@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 import random
 import copy
+import json
 
 from mongoengine import DoesNotExist
-from core.mongoscheme import MongoStage, MongoEmbededPlunderLog, MongoHang, MongoHangRemainedTime
+from core.mongoscheme import MongoStage, MongoEmbededPlunderLog, MongoHang, MongoHangDoing
 from utils import timezone
 from utils import pack_msg
 from core.msgpipe import publish_to_char
-from core.attachment import Attachment, standard_drop_to_attachment_protomsg
+from core.attachment import Attachment, standard_drop_to_attachment_protomsg, make_standard_drop_from_template
 from core.achievement import Achievement
 import protomsg
 from core.exception import SanguoException
@@ -15,19 +16,26 @@ from core.battle import PVE, ElitePVE
 from core.character import Char
 from core.timercheck import TimerCheckAbstractBase, timercheck
 from core.functionopen import FunctionOpen
+from core.mail import Mail
 from core.signals import pve_finished_signal
 from utils.math import GAUSSIAN_TABLE
 from preset.settings import (
+    DATETIME_FORMAT,
     HANG_SECONDS,
     DROP_PROB_BASE,
     PLUNDER_DEFENSE_SUCCESS_GOLD,
     PLUNDER_DEFENSE_FAILURE_GOLD,
     PLUNDER_DEFENSE_SUCCESS_MAX_TIMES,
     PLUNDER_DEFENSE_FAILURE_MAX_TIMES,
+    HANG_RESET_MAIL_TITLE,
+    HANG_RESET_MAIL_CONTENT,
 )
 from preset.data import STAGES, STAGE_ELITE, STAGE_ELITE_CONDITION, PACKAGES
 from preset import errormsg
 
+def max_star_stage_id(char_id):
+    s = MongoStage.objects.get(char_id)
+    return s.max_star_stage
 
 def get_drop(drop_ids, multi=1, gaussian=False):
     # 从pakcage中解析并计算掉落，返回为 dict
@@ -274,33 +282,56 @@ class Hang(TimerCheckAbstractBase):
         try:
             self.hang = MongoHang.objects.get(id=self.char_id)
         except DoesNotExist:
-            self.hang = None
+            self.hang = MongoHang(id=self.char_id)
+            self.hang.remained = HANG_SECONDS
+            self.hang.save()
 
         try:
-            self.hang_remained = MongoHangRemainedTime.objects.get(id=self.char_id)
+            self.hang_doing = MongoHangDoing.objects.get(id=self.char_id)
         except DoesNotExist:
-            self.hang_remained = MongoHangRemainedTime(id=self.char_id)
-
-            if self.hang:
-                self.hang_remained.crossed = True
-                self.hang_remained.remained = self.hang.remained
-            else:
-                self.hang_remained.crossed = False
-                self.hang_remained.remained = HANG_SECONDS
-            self.hang_remained.save()
-
+            self.hang_doing = None
 
     def check(self):
-        if not self.hang or self.hang.finished:
+        if not self.hang_doing or self.hang_doing.finished:
             return
 
-        if timezone.utc_timestamp() - self.hang.start >= self.hang_remained.remained:
+        if timezone.utc_timestamp() - self.hang_doing.start >= self.hang.remained:
             # finish
-            self.finish(actual_seconds=self.hang_remained.remained)
+            self.finish(actual_seconds=self.hang.remained)
+
+
+    def cronjob(self):
+        remained = self.hang.remained
+        self.hang.remained = HANG_SECONDS
+        self.hang.save()
+
+        if self.hang_doing:
+            stage_id = self.hang_doing.stage_id
+            if not self.hang_doing.finished:
+                self.hang_doing.start = timezone.utc_timestamp()
+                self.hang_doing.save()
+        else:
+            if remained:
+                stage_id = max_star_stage_id(self.char_id)
+            else:
+                stage_id = 0
+
+        self.send_notify()
+
+        if remained:
+            stage = STAGES[stage_id]
+            exp = remained / 15 * stage.normal_exp
+            gold = remained / 15 * stage.normal_gold * 0.5
+            standard_drop = make_standard_drop_from_template()
+            standard_drop['exp'] = exp
+            standard_drop['gold'] = gold
+
+            m = Mail(self.char_id)
+            m.add(HANG_RESET_MAIL_TITLE, HANG_RESET_MAIL_CONTENT, timezone.localnow().strftime(DATETIME_FORMAT), json.dumps(standard_drop))
 
 
     def start(self, stage_id):
-        if self.hang:
+        if self.hang_doing:
             raise SanguoException(
                 errormsg.HANG_MULTI,
                 self.char_id,
@@ -308,42 +339,35 @@ class Hang(TimerCheckAbstractBase):
                 "Hang Multi"
             )
 
-        if self.hang_remained.crossed:
-            if self.hang_remained.remained <= 0:
-                self.hang_remained.crossed = False
-                self.hang_remained.remained = HANG_SECONDS
-                self.hang_remained.save()
-        else:
-            if self.hang_remained.remained <= 0:
-                raise SanguoException(
-                    errormsg.HANG_NO_TIME,
-                    self.char_id,
-                    "Hang Start",
-                    "Hang No Time Available"
-                )
+        if not self.hang.remained <= 0:
+            raise SanguoException(
+                errormsg.HANG_NO_TIME,
+                self.char_id,
+                "Hang Start",
+                "Hang No Time Available"
+            )
 
         char = Char(self.char_id)
         char_level = char.cacheobj.level
 
-        hang = MongoHang(
+        hang_doing = MongoHangDoing(
             id=self.char_id,
             char_level=char_level,
             stage_id=stage_id,
             start=timezone.utc_timestamp(),
             finished=False,
-            remained=self.hang_remained.remained,
             actual_seconds=0,
             logs=[],
             plunder_win_times=0,
             plunder_lose_times=0,
         )
-        hang.save()
-        self.hang = hang
+        hang_doing.save()
+        self.hang_doing = hang_doing
         self.send_notify()
 
 
     def cancel(self):
-        if not self.hang:
+        if not self.hang_doing:
             raise SanguoException(
                 errormsg.HANG_NOT_EXIST,
                 self.char_id,
@@ -351,7 +375,7 @@ class Hang(TimerCheckAbstractBase):
                 "Hang cancel. But no hang exist"
             )
 
-        if self.hang.finished:
+        if self.hang_doing.finished:
             raise SanguoException(
                 errormsg.HANG_ALREADY_FINISHED,
                 self.char_id,
@@ -363,7 +387,7 @@ class Hang(TimerCheckAbstractBase):
 
 
     def finish(self, actual_seconds=None):
-        if not self.hang:
+        if not self.hang_doing:
             raise SanguoException(
                 errormsg.HANG_NOT_EXIST,
                 self.char_id,
@@ -372,19 +396,18 @@ class Hang(TimerCheckAbstractBase):
             )
 
         if not actual_seconds:
-            actual_seconds = timezone.utc_timestamp() - self.hang.start
+            actual_seconds = timezone.utc_timestamp() - self.hang_doing.start
 
-        remained_seconds = self.hang_remained.remained - actual_seconds
+        remained_seconds = self.hang.remained - actual_seconds
         if remained_seconds <= 0:
             remained_seconds = 0
 
-        self.hang_remained.remained = remained_seconds
-        self.hang_remained.save()
-
-        self.hang.finished = True
-        self.hang.actual_seconds = actual_seconds
         self.hang.remained = remained_seconds
         self.hang.save()
+
+        self.hang_doing.finished = True
+        self.hang_doing.actual_seconds = actual_seconds
+        self.hang_doing.save()
 
         self.send_notify()
 
@@ -397,37 +420,37 @@ class Hang(TimerCheckAbstractBase):
 
 
     def plundered(self, who, self_win):
-        if not self.hang:
+        if not self.hang_doing:
             return
 
         if self_win:
-            if self.hang.plunder_win_times >= PLUNDER_DEFENSE_SUCCESS_MAX_TIMES:
+            if self.hang_doing.plunder_win_times >= PLUNDER_DEFENSE_SUCCESS_MAX_TIMES:
                 return
 
-            self.hang.plunder_win_times += 1
+            self.hang_doing.plunder_win_times += 1
             gold = PLUNDER_DEFENSE_SUCCESS_GOLD
         else:
-            if self.hang.plunder_lose_times >= PLUNDER_DEFENSE_FAILURE_MAX_TIMES:
+            if self.hang_doing.plunder_lose_times >= PLUNDER_DEFENSE_FAILURE_MAX_TIMES:
                 return
 
-            self.hang.plunder_lose_times += 1
+            self.hang_doing.plunder_lose_times += 1
             gold = -PLUNDER_DEFENSE_FAILURE_GOLD
 
         l = MongoEmbededPlunderLog()
         l.name = who
         l.gold = gold
 
-        if len(self.hang.logs) >= 5:
-            self.hang.logs.pop(0)
+        if len(self.hang_doing.logs) >= 5:
+            self.hang_doing.logs.pop(0)
 
-        self.hang.logs.append(l)
-        self.hang.save()
+        self.hang_doing.logs.append(l)
+        self.hang_doing.save()
 
         achievement = Achievement(self.char_id)
         achievement.trig(33, 1)
 
     def _actual_gold(self, drop_gold):
-        drop_gold = drop_gold + self.hang.plunder_win_times * PLUNDER_DEFENSE_SUCCESS_GOLD - self.hang.plunder_lose_times * PLUNDER_DEFENSE_FAILURE_GOLD
+        drop_gold = drop_gold + self.hang_doing.plunder_win_times * PLUNDER_DEFENSE_SUCCESS_GOLD - self.hang_doing.plunder_lose_times * PLUNDER_DEFENSE_FAILURE_GOLD
         if drop_gold < 0:
             drop_gold = 0
         return drop_gold
@@ -467,32 +490,33 @@ class Hang(TimerCheckAbstractBase):
 
     def send_notify(self):
         msg = protomsg.HangNotify()
-        if self.hang:
-            msg.hang.stage_id = self.hang.stage_id
-            msg.hang.start_time = self.hang.start
-            if self.hang.finished:
-                msg.hang.used_time = self.hang.actual_seconds
-                msg.remained_time = self.hang_remained.remained
+
+        if self.hang_doing:
+            msg.hang.stage_id = self.hang_doing.stage_id
+            msg.hang.start_time = self.hang_doing.start
+            if self.hang_doing.finished:
+                msg.hang.used_time = self.hang_doing.actual_seconds
+                msg.remained_time = self.hang.remained
             else:
-                used_time = timezone.utc_timestamp() - self.hang.start
+                used_time = timezone.utc_timestamp() - self.hang_doing.start
 
                 msg.hang.used_time = used_time
-                msg.remained_time = self.hang_remained.remained - used_time
+                msg.remained_time = self.hang.remained - used_time
 
-            msg.hang.finished = self.hang.finished
+            msg.hang.finished = self.hang_doing.finished
 
             times = msg.hang.used_time / 15
-            stage = STAGES[self.hang.stage_id]
+            stage = STAGES[self.hang_doing.stage_id]
             msg.hang.rewared_gold = self._actual_gold(stage.normal_gold * times)
             msg.hang.rewared_exp = stage.normal_exp * times
 
-            for l in self.hang.logs:
+            for l in self.hang_doing.logs:
                 msg_log = msg.logs.add()
                 msg_log.attacker = l.name
                 msg_log.win = l.gold > 0
                 msg_log.gold = abs(l.gold)
         else:
-            msg.remained_time = self.hang_remained.remained
+            msg.remained_time = self.hang.remained
 
         publish_to_char(self.char_id, pack_msg(msg))
 

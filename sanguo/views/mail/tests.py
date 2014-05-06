@@ -76,8 +76,7 @@ class MailTest(TestCase):
 
     def test_open_mail_normal(self):
         m = Mail(self.char_id)
-        m.add(1, 'xxx', 'yyy', timezone.utc_timestamp())
-        mid = 1
+        mid = m.add('xxx', 'yyy', timezone.utc_timestamp())
         self.assertEqual(m.mail.mails[str(mid)].has_read, False)
 
         self._open(mid)
@@ -93,8 +92,8 @@ class MailTest(TestCase):
 
 
     def test_delete_mail_normal(self):
-        Mail(self.char_id).add(1, 'xxx', 'yyy', timezone.utc_timestamp())
-        self._delete(1)
+        mid = Mail(self.char_id).add('xxx', 'yyy', timezone.utc_timestamp())
+        self._delete(mid)
 
         self.assertEqual(Mail(self.char_id).count(), 0)
 
