@@ -218,6 +218,7 @@ class Plunder(object):
             )
 
         self.mongo_plunder.points -= need_points
+        self.mongo_plunder.got_reward.append(tp)
         self.mongo_plunder.save()
 
         got_hero_id = 0
