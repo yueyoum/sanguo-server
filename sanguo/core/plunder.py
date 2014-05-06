@@ -10,7 +10,7 @@ from mongoscheme import Q, DoesNotExist
 from core.character import Char, get_char_ids_by_level_range
 from core.battle import PVP
 from core.stage import Hang
-from core.mongoscheme import MongoHang, MongoPlunder, MongoEmbededPlunderChars, MongoStage
+from core.mongoscheme import MongoHang, MongoHangDoing, MongoPlunder, MongoEmbededPlunderChars, MongoStage
 from core.exception import SanguoException
 from core.counter import Counter
 from core.task import Task
@@ -59,7 +59,7 @@ class Plunder(object):
         cache_char = char.cacheobj
         char_level = cache_char.level
 
-        choosing_list = MongoHang.objects(Q(char_level__gte=char_level-PLUNDER_LEVEL_DIFF) & Q(char_level__lte=char_level+PLUNDER_LEVEL_DIFF) & Q(id__ne=self.char_id))
+        choosing_list = MongoHangDoing.objects(Q(char_level__gte=char_level-PLUNDER_LEVEL_DIFF) & Q(char_level__lte=char_level+PLUNDER_LEVEL_DIFF) & Q(id__ne=self.char_id))
         choosing_id_list = [c.id for c in choosing_list]
         ids = []
         while True:

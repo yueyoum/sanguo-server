@@ -34,7 +34,7 @@ from preset.data import STAGES, STAGE_ELITE, STAGE_ELITE_CONDITION, PACKAGES
 from preset import errormsg
 
 def max_star_stage_id(char_id):
-    s = MongoStage.objects.get(char_id)
+    s = MongoStage.objects.get(id=char_id)
     return s.max_star_stage
 
 def get_drop(drop_ids, multi=1, gaussian=False):
