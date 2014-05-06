@@ -323,8 +323,8 @@ class Hang(TimerCheckAbstractBase):
             exp = remained / 15 * stage.normal_exp
             gold = remained / 15 * stage.normal_gold * 0.5
             standard_drop = make_standard_drop_from_template()
-            standard_drop['exp'] = exp
-            standard_drop['gold'] = gold
+            standard_drop['exp'] = int(exp)
+            standard_drop['gold'] = int(gold)
 
             m = Mail(self.char_id)
             m.add(HANG_RESET_MAIL_TITLE, HANG_RESET_MAIL_CONTENT, timezone.localnow().strftime(DATETIME_FORMAT), json.dumps(standard_drop))
