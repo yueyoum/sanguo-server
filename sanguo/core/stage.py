@@ -339,7 +339,7 @@ class Hang(TimerCheckAbstractBase):
                 "Hang Multi"
             )
 
-        if not self.hang.remained <= 0:
+        if self.hang.remained <= 0:
             raise SanguoException(
                 errormsg.HANG_NO_TIME,
                 self.char_id,
