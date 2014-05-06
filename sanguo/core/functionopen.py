@@ -9,23 +9,16 @@ from mongoscheme import MongoFunctionOpen, MongoCharacter, MongoStage
 from core.formation import Formation
 from core.msgpipe import publish_to_char
 
-from preset.data import FUNCTION_OPEN
-
+from preset.data import FUNCTION_DEFINE
 from utils import pack_msg
-
 from protomsg import FreezeFunctionNotify
 
-
-FUNCTION_OPEN_FUNCS = {}
-FUNCTION_OPEN_SOCKETS = {}
-for k, v in FUNCTION_OPEN.items():
-    if v.func_id:
-        FUNCTION_OPEN_FUNCS[k] = v
-    else:
-        FUNCTION_OPEN_SOCKETS[k] = v
-
-FUNCTION_OPEN_FUNCS_REV = {v.func_id: v for _, v in FUNCTION_OPEN_FUNCS.items()}
-
+FUNC_SOCKET_AMOUNT_TABLE = {
+    50: 5,
+    51: 6,
+    52: 7,
+    53: 8,
+}
 
 
 class FunctionOpen(object):
@@ -35,7 +28,7 @@ class FunctionOpen(object):
             self.mf = MongoFunctionOpen.objects.get(id=self.char_id)
         except DoesNotExist:
             self.mf = MongoFunctionOpen(id=self.char_id)
-            self.mf.freeze.extend(FUNCTION_OPEN_FUNCS_REV.keys())
+            self.mf.freeze.extend(FUNCTION_DEFINE.keys())
             self.mf.save()
 
 
@@ -52,7 +45,7 @@ class FunctionOpen(object):
 
         opened_funcs = []
         for func_id in self.mf.freeze[:]:
-            this_func = FUNCTION_OPEN_FUNCS_REV[func_id]
+            this_func = FUNCTION_DEFINE[func_id]
             if char_level >= this_func.char_level and str(this_func.stage_id) in passed_stages:
                 # OPEN
                 self.mf.freeze.remove(func_id)
@@ -62,11 +55,11 @@ class FunctionOpen(object):
             self.mf.save()
 
         f = Formation(self.char_id)
-        for v in FUNCTION_OPEN_SOCKETS.values():
-            if char_level >= v.char_level and str(v.stage_id) in passed_stages:
-                opended = f.open_socket(v.socket_amount)
-                if opended and 20 not in opened_funcs:
-                    opened_funcs.append(20)
+        for of in opened_funcs[:]:
+            if of in FUNC_SOCKET_AMOUNT_TABLE:
+                opened = f.open_socket(FUNC_SOCKET_AMOUNT_TABLE[of])
+                if not opened:
+                    opened_funcs.remove(of)
 
         return opened_funcs
 

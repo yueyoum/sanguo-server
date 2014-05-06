@@ -31,16 +31,6 @@ def object_maker(fixture_file):
     return res
 
 
-# def name_maker(fixture_file):
-#     name = os.path.basename(fixture_file)
-#     a, _ = os.path.splitext(name)
-#     return a.upper()
-#
-# _globals = globals()
-# for f in FIXTURES_FILES:
-#     _globals[name_maker(f)] = object_maker(f)
-#
-
 def _find_file(fixture_name):
     for f in FIXTURES_FILES:
         if f.endswith(fixture_name):
@@ -48,7 +38,7 @@ def _find_file(fixture_name):
 
     raise Exception("Can not find {0}".format(fixture_name))
 
-FUNCTION_OPEN = object_maker(_find_file('function_open.json'))
+FUNCTION_DEFINE = object_maker(_find_file('function_define.json'))
 CHARINIT = object_maker(_find_file('charinit.json'))[1]
 ARENA_REWARD = object_maker(_find_file('arena_reward.json'))
 SERVERS = object_maker(_find_file('servers.json'))
@@ -69,10 +59,6 @@ SKILLS = object_maker(_find_file('skills.json'))
 SKILL_EFFECT = object_maker(_find_file('skill_effect.json'))
 TASKS = object_maker(_find_file('tasks.json'))
 
-# 为了兼容旧代码
-for v in FUNCTION_OPEN.values():
-    v.func_id = v.func
-
 
 def _got_package():
     f = _find_file('package.json')
@@ -86,9 +72,9 @@ def _got_package():
 PACKAGES = _got_package()
 
 
-for k, v in FUNCTION_OPEN.items():
+for k, v in FUNCTION_DEFINE.items():
     if v.char_level == 0 and v.stage_id == 0:
-        FUNCTION_OPEN.pop(k)
+        FUNCTION_DEFINE.pop(k)
 
 
 def _parse_char_init():

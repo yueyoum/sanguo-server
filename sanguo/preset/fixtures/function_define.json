@@ -1,0 +1,182 @@
+[
+{
+    "pk": 1, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 2, 
+        "name": "\u88c5\u5907\u5f3a\u5316", 
+        "text": "\u88c5\u5907\u5f3a\u5316\u529f\u80fd\u5f00\u542f\uff0c\u53ef\u4ece\u5305\u88f9\u6216\u6b66\u5c06\u754c\u9762\u4e2d\u9009\u62e9\u88c5\u5907\u8fdb\u884c\u5f3a\u5316"
+    }
+},
+{
+    "pk": 2, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 5, 
+        "name": "\u88c5\u5907\u8fdb\u9636", 
+        "text": "\u88c5\u5907\u5f3a\u5316\u529f\u80fd\u5f00\u542f\uff0c\u53ef\u4ece\u5305\u88f9\u6216\u6b66\u5c06\u754c\u9762\u4e2d\u9009\u62e9\u88c5\u5907\u8fdb\u884c\u8fdb\u9636"
+    }
+},
+{
+    "pk": 3, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 0, 
+        "name": "\u6b66\u5c06\u8fdb\u9636", 
+        "text": ""
+    }
+},
+{
+    "pk": 4, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 6, 
+        "name": "\u5b9d\u77f3\u9576\u5d4c", 
+        "text": "\u5b9d\u77f3\u9576\u5d4c\u529f\u80fd\u5f00\u542f\uff0c\u53ef\u4ece\u5305\u88f9\u6216\u6b66\u5c06\u754c\u9762\u4e2d\u9009\u62e9\u88c5\u5907\u8fdb\u884c\u9576\u5d4c"
+    }
+},
+{
+    "pk": 5, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 0, 
+        "name": "\u65e5\u5e38\u4efb\u52a1", 
+        "text": ""
+    }
+},
+{
+    "pk": 6, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 0, 
+        "name": "\u6210\u5c31\u4efb\u52a1", 
+        "text": ""
+    }
+},
+{
+    "pk": 7, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 20, 
+        "name": "\u6302\u673a\u529f\u80fd", 
+        "text": "\u6302\u673a\u529f\u80fd\u5f00\u542f\uff0c\u8fbe\u6210\u4e09\u661f\u8bc4\u4ef7\u7684\u5173\u5361\u53ef\u901a\u8fc7\u6302\u673a\u81ea\u52a8\u6218\u6597"
+    }
+},
+{
+    "pk": 8, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 15, 
+        "name": "\u6bd4\u6b66\u529f\u80fd", 
+        "text": "\u6bd4\u6b66\u529f\u80fd\u5f00\u542f\uff0c\u901a\u8fc7\u6bd4\u6b66\u53ef\u63d0\u5347\u5b98\u804c\u7b49\u7ea7\uff0c\u6bcf\u5929\u8fd8\u53ef\u9886\u53d6\u6392\u540d\u5956\u52b1"
+    }
+},
+{
+    "pk": 9, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 25, 
+        "name": "\u63a0\u593a\u529f\u80fd", 
+        "text": "\u63a0\u593a\u529f\u80fd\u5f00\u542f\uff0c\u901a\u8fc7\u63a0\u593a\u5176\u5b83\u73a9\u5bb6\u53ef\u83b7\u5f97\u4e30\u5bcc\u5956\u52b1"
+    }
+},
+{
+    "pk": 10, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 0, 
+        "name": "\u5b98\u804c\u529f\u80fd", 
+        "text": ""
+    }
+},
+{
+    "pk": 11, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 10, 
+        "name": "\u7cbe\u82f1\u526f\u672c", 
+        "text": "\u7cbe\u82f1\u526f\u672c\u5f00\u542f\uff0c\u53ef\u5728\u51fa\u5f81\u4e2d\u9009\u62e9\u7cbe\u82f1\u96be\u5ea6\u7684\u5173\u5361\u8fdb\u884c\u6311\u6218"
+    }
+},
+{
+    "pk": 12, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 0, 
+        "name": "\u597d\u53cb\u529f\u80fd", 
+        "text": ""
+    }
+},
+{
+    "pk": 13, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 0, 
+        "name": "\u731b\u5c06\u6311\u6218", 
+        "text": ""
+    }
+},
+{
+    "pk": 14, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 1, 
+        "name": "\u70b9\u5c06", 
+        "text": "\u70b9\u5c06\u529f\u80fd\u5f00\u542f\uff0c\u901a\u8fc7\u70b9\u5c06\u53ef\u4ee5\u83b7\u53d6\u66f4\u591a\u7684\u6b66\u5c06"
+    }
+},
+{
+    "pk": 50, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 10, 
+        "name": "\u4e0a\u9635\u4e94\u4eba", 
+        "text": " \u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u4e94\u4eba\uff0c\u53ef\u5728\u5c06\u9886\u754c\u9762\u914d\u7f6e\u65b0\u7684\u6b66\u5c06\uff0c\u5982\u6b66\u5c06\u4e0d\u8db3\u53ef\u901a\u8fc7\u70b9\u5c06\u83b7\u53d6"
+    }
+},
+{
+    "pk": 51, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 20, 
+        "name": "\u4e0a\u9635\u516d\u4eba", 
+        "text": " \u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u516d\u4eba\uff0c\u53ef\u5728\u5c06\u9886\u754c\u9762\u914d\u7f6e\u65b0\u7684\u6b66\u5c06\uff0c\u5982\u6b66\u5c06\u4e0d\u8db3\u53ef\u901a\u8fc7\u70b9\u5c06\u83b7\u53d6"
+    }
+},
+{
+    "pk": 52, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 30, 
+        "name": "\u4e0a\u9635\u4e03\u4eba", 
+        "text": "\u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u4e03\u4eba\uff0c\u53ef\u5728\u5c06\u9886\u754c\u9762\u914d\u7f6e\u65b0\u7684\u6b66\u5c06\uff0c\u5982\u6b66\u5c06\u4e0d\u8db3\u53ef\u901a\u8fc7\u70b9\u5c06\u83b7\u53d6"
+    }
+},
+{
+    "pk": 53, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 40, 
+        "name": "\u4e0a\u9635\u516b\u4eba", 
+        "text": "\u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u516b\u4eba\uff0c\u53ef\u5728\u5c06\u9886\u754c\u9762\u914d\u7f6e\u65b0\u7684\u6b66\u5c06\uff0c\u5982\u6b66\u5c06\u4e0d\u8db3\u53ef\u901a\u8fc7\u70b9\u5c06\u83b7\u53d6"
+    }
+}
+]
