@@ -4,18 +4,18 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u9ec4\u5dfe\u519b", 
+        "name": "\u9ec4\u5dfe\u519b\uff08\u5f31\uff09", 
         "skills": "28", 
         "tp_name": "\u653b", 
         "image": "\u9ec4\u5dfe\u519b", 
         "tp": 1, 
         "anger": 50, 
         "default_skill": 0, 
-        "attack": 7.5, 
+        "attack": 4.0, 
         "defense": 5.0, 
         "crit": 0, 
         "quality": 3, 
-        "hp": 45.0
+        "hp": 35.0
     }
 },
 {
@@ -23,18 +23,18 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u5200\u5175", 
+        "name": "\u9ec4\u5dfe\u519b\uff08\u4e2d\uff09", 
         "skills": "28", 
         "tp_name": "\u653b", 
-        "image": "\u5200\u5175", 
+        "image": "\u9ec4\u5dfe\u519b", 
         "tp": 1, 
         "anger": 50, 
         "default_skill": 0, 
-        "attack": 10.0, 
-        "defense": 6.0, 
+        "attack": 8.0, 
+        "defense": 5.0, 
         "crit": 0, 
         "quality": 3, 
-        "hp": 42.0
+        "hp": 35.0
     }
 },
 {
@@ -42,7 +42,83 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u9a91\u5175", 
+        "name": "\u5200\u5175\uff08\u5f31\uff09", 
+        "skills": "28", 
+        "tp_name": "\u653b", 
+        "image": "\u5200\u5175", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 8.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 3, 
+        "hp": 40.0
+    }
+},
+{
+    "pk": 4, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5200\u5175\uff08\u4e2d\uff09", 
+        "skills": "28", 
+        "tp_name": "\u653b", 
+        "image": "\u5200\u5175", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 10.0, 
+        "defense": 7.0, 
+        "crit": 0, 
+        "quality": 3, 
+        "hp": 42.0
+    }
+},
+{
+    "pk": 5, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5200\u5175\uff08\u5f3a\uff09", 
+        "skills": "28", 
+        "tp_name": "\u653b", 
+        "image": "\u5200\u5175", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 11.0, 
+        "defense": 9.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 45.0
+    }
+},
+{
+    "pk": 6, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9a91\u5175\uff08\u5f31\uff09", 
+        "skills": "33", 
+        "tp_name": "\u653b", 
+        "image": "\u9a91\u5175", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 9.0, 
+        "defense": 4.0, 
+        "crit": 0, 
+        "quality": 3, 
+        "hp": 33.0
+    }
+},
+{
+    "pk": 7, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9a91\u5175\uff08\u4e2d\uff09", 
         "skills": "33", 
         "tp_name": "\u653b", 
         "image": "\u9a91\u5175", 
@@ -57,11 +133,49 @@
     }
 },
 {
-    "pk": 4, 
+    "pk": 8, 
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u5f13\u624b", 
+        "name": "\u9a91\u5175\uff08\u5f3a\uff09", 
+        "skills": "33", 
+        "tp_name": "\u653b", 
+        "image": "\u9a91\u5175", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 4.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 42.0
+    }
+},
+{
+    "pk": 9, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5f13\u624b\uff08\u5f31\uff09", 
+        "skills": "36", 
+        "tp_name": "\u653b", 
+        "image": "\u5f13\u624b", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 2, 
+        "attack": 7.0, 
+        "defense": 3.0, 
+        "crit": 0, 
+        "quality": 3, 
+        "hp": 34.0
+    }
+},
+{
+    "pk": 10, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5f13\u624b\uff08\u4e2d\uff09", 
         "skills": "36", 
         "tp_name": "\u653b", 
         "image": "\u5f13\u624b", 
@@ -76,136 +190,22 @@
     }
 },
 {
-    "pk": 5, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u653b\u51fb\u578b\u6742\u6b66\u5c06", 
-        "skills": "28", 
-        "tp_name": "\u653b", 
-        "image": "\u6b66\u5c06_\u82f1\u4fca", 
-        "tp": 1, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 14.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 38.0
-    }
-},
-{
-    "pk": 6, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u9632\u5fa1\u578b\u6742\u6b66\u5c06", 
-        "skills": "29", 
-        "tp_name": "\u9632", 
-        "image": "\u6b66\u5c06\u51f6\u608d", 
-        "tp": 2, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 12.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 40.0
-    }
-},
-{
-    "pk": 7, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u7cbe\u82f1\u6b66\u5c06", 
-        "skills": "27", 
-        "tp_name": "\u9632", 
-        "image": "\u6b66\u5c06\u6742boss", 
-        "tp": 2, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 15.0, 
-        "defense": 8.0, 
-        "crit": 10, 
-        "quality": 2, 
-        "hp": 42.0
-    }
-},
-{
-    "pk": 8, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u7b56\u7565\u578b\u6b66\u5c06-\u5f31", 
-        "skills": "28", 
-        "tp_name": "\u7b56", 
-        "image": "\u9752\u5e74\u6587\u5b98", 
-        "tp": 3, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 11.0, 
-        "defense": 6.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 33.0
-    }
-},
-{
-    "pk": 9, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u7b56\u7565\u578b\u6b66\u5c06-\u4e2d", 
-        "skills": "28", 
-        "tp_name": "\u7b56", 
-        "image": "\u4e2d\u5e74\u6587\u5b98", 
-        "tp": 3, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 13.0, 
-        "defense": 6.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 35.0
-    }
-},
-{
-    "pk": 10, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u7b56\u7565\u578b\u6b66\u5c06-\u5f3a", 
-        "skills": "28", 
-        "tp_name": "\u7b56", 
-        "image": "\u6587\u5b98\u8001\u5e74", 
-        "tp": 3, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 15.0, 
-        "defense": 6.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 38.0
-    }
-},
-{
     "pk": 11, 
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u5f20\u89d2", 
-        "skills": "28", 
-        "tp_name": "\u7b56", 
-        "image": "\u5f20\u89d2", 
-        "tp": 3, 
+        "name": "\u5f13\u624b\uff08\u5f3a\uff09", 
+        "skills": "36", 
+        "tp_name": "\u653b", 
+        "image": "\u5f13\u624b", 
+        "tp": 1, 
         "anger": 50, 
-        "default_skill": 0, 
-        "attack": 16.0, 
-        "defense": 7.0, 
+        "default_skill": 2, 
+        "attack": 13.0, 
+        "defense": 5.0, 
         "crit": 0, 
         "quality": 2, 
-        "hp": 48.0
+        "hp": 45.0
     }
 },
 {
@@ -213,18 +213,18 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u90ed\u6c5c", 
+        "name": "\u653b\u51fb\u578b\u6742\u6b66\u5c06\uff08\u91cd\u51fb\uff09", 
         "skills": "28", 
-        "tp_name": "\u7b56", 
-        "image": "\u90ed\u6c5c", 
-        "tp": 3, 
+        "tp_name": "\u653b", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
+        "tp": 1, 
         "anger": 50, 
         "default_skill": 0, 
-        "attack": 15.0, 
-        "defense": 6.0, 
+        "attack": 16.0, 
+        "defense": 7.0, 
         "crit": 0, 
         "quality": 2, 
-        "hp": 43.0
+        "hp": 38.0
     }
 },
 {
@@ -232,18 +232,18 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u674e\u5112", 
-        "skills": "49", 
-        "tp_name": "\u7b56", 
-        "image": "\u674e\u5112", 
-        "tp": 3, 
+        "name": "\u653b\u51fb\u578b\u6742\u6b66\u5c06\uff08\u9a91\u5175\u51b2\u950b\uff09", 
+        "skills": "33", 
+        "tp_name": "\u653b", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
+        "tp": 1, 
         "anger": 50, 
         "default_skill": 0, 
-        "attack": 16.0, 
-        "defense": 6.0, 
+        "attack": 15.0, 
+        "defense": 7.0, 
         "crit": 0, 
         "quality": 2, 
-        "hp": 43.0
+        "hp": 38.0
     }
 },
 {
@@ -251,10 +251,10 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u534e\u96c4", 
-        "skills": "25,69", 
+        "name": "\u653b\u51fb\u578b\u6742\u6b66\u5c06\uff08\u91cd\u51fb+\u5f3a\u653b\uff09", 
+        "skills": "28,45", 
         "tp_name": "\u653b", 
-        "image": "\u534e\u96c4", 
+        "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "tp": 1, 
         "anger": 50, 
         "default_skill": 0, 
@@ -262,7 +262,7 @@
         "defense": 7.0, 
         "crit": 0, 
         "quality": 2, 
-        "hp": 48.0
+        "hp": 38.0
     }
 },
 {
@@ -270,18 +270,18 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u8c82\u8749", 
-        "skills": "56,65", 
-        "tp_name": "\u7b56", 
-        "image": "\u8c82\u8749", 
-        "tp": 3, 
+        "name": "\u9632\u5fa1\u578b\u6742\u6b66\u5c06\uff08\u91d1\u521a\uff09", 
+        "skills": "29", 
+        "tp_name": "\u9632", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
+        "tp": 2, 
         "anger": 50, 
         "default_skill": 0, 
-        "attack": 15.0, 
-        "defense": 6.0, 
+        "attack": 13.0, 
+        "defense": 7.0, 
         "crit": 0, 
         "quality": 2, 
-        "hp": 43.0
+        "hp": 40.0
     }
 },
 {
@@ -289,18 +289,18 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u9648\u5bab", 
-        "skills": "19,46", 
-        "tp_name": "\u7b56", 
-        "image": "\u9648\u5bab", 
-        "tp": 3, 
+        "name": "\u9632\u5fa1\u578b\u6742\u6b66\u5c06\uff08\u91cd\u51fb+\u636e\u5b88\uff09", 
+        "skills": "28,44", 
+        "tp_name": "\u9632", 
+        "image": "\u6b66\u5c06\u51f6\u608d", 
+        "tp": 2, 
         "anger": 50, 
         "default_skill": 0, 
-        "attack": 14.0, 
+        "attack": 10.0, 
         "defense": 7.0, 
         "crit": 0, 
         "quality": 2, 
-        "hp": 50.0
+        "hp": 40.0
     }
 },
 {
@@ -308,18 +308,18 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u5415\u5e03", 
-        "skills": "22,66", 
-        "tp_name": "\u653b", 
-        "image": "\u5415\u5e03", 
-        "tp": 1, 
+        "name": "\u7cbe\u82f1\u6b66\u5c06\uff08\u731b\u51fb\uff09", 
+        "skills": "27", 
+        "tp_name": "\u9632", 
+        "image": "\u6b66\u5c06\u6742boss", 
+        "tp": 2, 
         "anger": 50, 
         "default_skill": 0, 
-        "attack": 17.0, 
-        "defense": 7.0, 
-        "crit": 15, 
+        "attack": 16.0, 
+        "defense": 8.0, 
+        "crit": 10, 
         "quality": 2, 
-        "hp": 50.0
+        "hp": 42.0
     }
 },
 {
@@ -327,18 +327,18 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u8463\u5353", 
-        "skills": "28,43", 
-        "tp_name": "\u9632", 
-        "image": "\u8463\u5353", 
-        "tp": 2, 
+        "name": "\u7b56\u7565\u578b\u6b66\u5c06-\u5f31\uff08\u706b\u653b\uff09", 
+        "skills": "49", 
+        "tp_name": "\u7b56", 
+        "image": "\u9752\u5e74\u6587\u5b98", 
+        "tp": 3, 
         "anger": 50, 
         "default_skill": 0, 
-        "attack": 16.0, 
-        "defense": 7.0, 
+        "attack": 12.0, 
+        "defense": 6.0, 
         "crit": 0, 
         "quality": 2, 
-        "hp": 48.0
+        "hp": 33.0
     }
 },
 {
@@ -346,18 +346,18 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u989c\u826f", 
-        "skills": "33", 
-        "tp_name": "\u653b", 
-        "image": "\u989c\u826f", 
-        "tp": 1, 
+        "name": "\u7b56\u7565\u578b\u6b66\u5c06-\u4e2d\uff08\u706b\u653b\uff09", 
+        "skills": "49", 
+        "tp_name": "\u7b56", 
+        "image": "\u4e2d\u5e74\u6587\u5b98", 
+        "tp": 3, 
         "anger": 50, 
         "default_skill": 0, 
-        "attack": 16.0, 
-        "defense": 7.0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
         "crit": 0, 
         "quality": 2, 
-        "hp": 47.0
+        "hp": 35.0
     }
 },
 {
@@ -365,193 +365,22 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u6587\u4e11", 
-        "skills": "33", 
-        "tp_name": "\u653b", 
-        "image": "\u6587\u4e11", 
-        "tp": 1, 
+        "name": "\u7b56\u7565\u578b\u6b66\u5c06-\u5f3a\uff08\u706b\u653b\uff09", 
+        "skills": "49", 
+        "tp_name": "\u7b56", 
+        "image": "\u6587\u5b98\u8001\u5e74", 
+        "tp": 3, 
         "anger": 50, 
         "default_skill": 0, 
         "attack": 16.0, 
-        "defense": 7.0, 
+        "defense": 6.0, 
         "crit": 0, 
         "quality": 2, 
-        "hp": 46.0
+        "hp": 38.0
     }
 },
 {
     "pk": 21, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u5218\u8868", 
-        "skills": "28,43", 
-        "tp_name": "\u9632", 
-        "image": "\u5218\u8868", 
-        "tp": 2, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 14.0, 
-        "defense": 6.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 41.0
-    }
-},
-{
-    "pk": 22, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u8881\u7ecd", 
-        "skills": "28,43", 
-        "tp_name": "\u9632", 
-        "image": "\u8881\u7ecd", 
-        "tp": 2, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 14.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 49.0
-    }
-},
-{
-    "pk": 23, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u9ad8\u987a", 
-        "skills": "45", 
-        "tp_name": "\u653b", 
-        "image": "\u9ad8\u987a", 
-        "tp": 1, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 16.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 49.0
-    }
-},
-{
-    "pk": 24, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u738b\u5141", 
-        "skills": "46", 
-        "tp_name": "\u7b56", 
-        "image": "\u738b\u5141", 
-        "tp": 3, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 14.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 46.0
-    }
-},
-{
-    "pk": 25, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u5218\u5907", 
-        "skills": "25,41", 
-        "tp_name": "\u9632", 
-        "image": "\u5218\u5907", 
-        "tp": 2, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 14.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 48.0
-    }
-},
-{
-    "pk": 26, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u5173\u7fbd", 
-        "skills": "20,67", 
-        "tp_name": "\u9632", 
-        "image": "\u5173\u7fbd", 
-        "tp": 2, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 17.0, 
-        "defense": 8.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 52.0
-    }
-},
-{
-    "pk": 27, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u5f20\u98de", 
-        "skills": "27,69", 
-        "tp_name": "\u653b", 
-        "image": "\u5f20\u98de", 
-        "tp": 1, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 17.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 48.0
-    }
-},
-{
-    "pk": 28, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u592a\u53f2\u6148", 
-        "skills": "35", 
-        "tp_name": "\u653b", 
-        "image": "\u592a\u53f2\u6148", 
-        "tp": 1, 
-        "anger": 50, 
-        "default_skill": 2, 
-        "attack": 16.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 49.0
-    }
-},
-{
-    "pk": 29, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u8d3e\u8be9", 
-        "skills": "49,73", 
-        "tp_name": "\u7b56", 
-        "image": "\u8d3e\u8be9", 
-        "tp": 3, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 17.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 49.0
-    }
-},
-{
-    "pk": 30, 
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
@@ -570,7 +399,7 @@
     }
 },
 {
-    "pk": 31, 
+    "pk": 22, 
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
@@ -589,273 +418,26 @@
     }
 },
 {
-    "pk": 32, 
+    "pk": 23, 
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u4e25\u767d\u864e", 
-        "skills": "27", 
+        "name": "\u523a\u5ba2", 
+        "skills": "38", 
         "tp_name": "\u653b", 
-        "image": "\u4e25\u767d\u864e", 
+        "image": "\u5973\u523a\u5ba2", 
         "tp": 1, 
         "anger": 50, 
         "default_skill": 0, 
-        "attack": 14.0, 
-        "defense": 6.0, 
+        "attack": 17.0, 
+        "defense": 3.0, 
         "crit": 0, 
         "quality": 2, 
-        "hp": 44.0
+        "hp": 42.0
     }
 },
 {
-    "pk": 33, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u8881\u672f", 
-        "skills": "28,43", 
-        "tp_name": "\u9632", 
-        "image": "\u8881\u672f", 
-        "tp": 2, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 14.0, 
-        "defense": 6.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 41.0
-    }
-},
-{
-    "pk": 34, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u5415\u7eee\u73b2", 
-        "skills": "22", 
-        "tp_name": "\u653b", 
-        "image": "\u6b66\u5c06_\u5973", 
-        "tp": 1, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 14.0, 
-        "defense": 6.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 45.0
-    }
-},
-{
-    "pk": 35, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u7eaa\u7075", 
-        "skills": "25,69", 
-        "tp_name": "\u653b", 
-        "image": "\u7eaa\u7075", 
-        "tp": 1, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 15.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 47.0
-    }
-},
-{
-    "pk": 36, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u5f20\u8fbd", 
-        "skills": "26,46", 
-        "tp_name": "\u653b", 
-        "image": "\u5f20\u8fbd", 
-        "tp": 1, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 16.0, 
-        "defense": 8.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 52.0
-    }
-},
-{
-    "pk": 37, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u5f20\u90c3", 
-        "skills": "36,46", 
-        "tp_name": "\u653b", 
-        "image": "\u5f20\u90c3", 
-        "tp": 1, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 16.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 51.0
-    }
-},
-{
-    "pk": 38, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u5f90\u6643", 
-        "skills": "25,46", 
-        "tp_name": "\u653b", 
-        "image": "\u5f90\u6643", 
-        "tp": 1, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 16.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 50.0
-    }
-},
-{
-    "pk": 39, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u4e8e\u7981", 
-        "skills": "29", 
-        "tp_name": "\u9632", 
-        "image": "\u4e8e\u7981", 
-        "tp": 2, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 15.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 47.0
-    }
-},
-{
-    "pk": 40, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u674e\u5178", 
-        "skills": "28,46", 
-        "tp_name": "\u9632", 
-        "image": "\u674e\u5178", 
-        "tp": 2, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 15.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 51.0
-    }
-},
-{
-    "pk": 41, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u66f9\u4e15", 
-        "skills": "36,40", 
-        "tp_name": "\u9632", 
-        "image": "\u66f9\u4e15", 
-        "tp": 2, 
-        "anger": 50, 
-        "default_skill": 2, 
-        "attack": 15.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 47.0
-    }
-},
-{
-    "pk": 42, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u590f\u4faf\u60c7", 
-        "skills": "25,69", 
-        "tp_name": "\u653b", 
-        "image": "\u590f\u4faf\u60c7", 
-        "tp": 1, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 16.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 50.0
-    }
-},
-{
-    "pk": 43, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u590f\u4faf\u6e0a", 
-        "skills": "35", 
-        "tp_name": "\u653b", 
-        "image": "\u590f\u4faf\u6e0a", 
-        "tp": 1, 
-        "anger": 50, 
-        "default_skill": 2, 
-        "attack": 16.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 49.0
-    }
-},
-{
-    "pk": 44, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u66f9\u6d2a", 
-        "skills": "33", 
-        "tp_name": "\u9632", 
-        "image": "\u66f9\u6d2a", 
-        "tp": 2, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 14.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 47.0
-    }
-},
-{
-    "pk": 45, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u66f9\u4ec1", 
-        "skills": "28,44", 
-        "tp_name": "\u9632", 
-        "image": "\u66f9\u4ec1", 
-        "tp": 2, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 15.0, 
-        "defense": 8.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 52.0
-    }
-},
-{
-    "pk": 46, 
+    "pk": 101, 
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
@@ -866,72 +448,53 @@
         "tp": 2, 
         "anger": 50, 
         "default_skill": 0, 
-        "attack": 16.0, 
-        "defense": 8.0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
         "crit": 0, 
         "quality": 2, 
-        "hp": 52.0
+        "hp": 62.0
     }
 },
 {
-    "pk": 47, 
+    "pk": 102, 
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u6587\u8058", 
-        "skills": "27", 
+        "name": "\u590f\u4faf\u60c7", 
+        "skills": "25,69", 
         "tp_name": "\u653b", 
-        "image": "\u6587\u8058", 
+        "image": "\u590f\u4faf\u60c7", 
         "tp": 1, 
         "anger": 50, 
         "default_skill": 0, 
-        "attack": 15.0, 
-        "defense": 7.0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
         "crit": 0, 
         "quality": 2, 
-        "hp": 50.0
+        "hp": 60.0
     }
 },
 {
-    "pk": 48, 
+    "pk": 103, 
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u4e50\u8fdb", 
-        "skills": "26,45", 
-        "tp_name": "\u653b", 
-        "image": "\u4e50\u8fdb", 
-        "tp": 1, 
+        "name": "\u590f\u4faf\u6e0a", 
+        "skills": "35", 
+        "tp_name": "\u9632", 
+        "image": "\u590f\u4faf\u6e0a", 
+        "tp": 2, 
         "anger": 50, 
-        "default_skill": 0, 
-        "attack": 15.0, 
-        "defense": 7.0, 
+        "default_skill": 2, 
+        "attack": 14.0, 
+        "defense": 6.0, 
         "crit": 0, 
         "quality": 2, 
-        "hp": 48.0
+        "hp": 59.0
     }
 },
 {
-    "pk": 49, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u725b\u91d1", 
-        "skills": "28", 
-        "tp_name": "\u653b", 
-        "image": "\u725b\u91d1", 
-        "tp": 1, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 15.0, 
-        "defense": 7.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 46.0
-    }
-},
-{
-    "pk": 50, 
+    "pk": 104, 
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
@@ -942,72 +505,72 @@
         "tp": 1, 
         "anger": 50, 
         "default_skill": 0, 
-        "attack": 17.0, 
-        "defense": 7.0, 
+        "attack": 15.0, 
+        "defense": 5.0, 
         "crit": 0, 
         "quality": 2, 
-        "hp": 45.0
+        "hp": 54.0
     }
 },
 {
-    "pk": 51, 
+    "pk": 105, 
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u848b\u5e72", 
-        "skills": "48", 
-        "tp_name": "\u7b56", 
-        "image": "\u848b\u5e72", 
-        "tp": 3, 
+        "name": "\u5f20\u8fbd", 
+        "skills": "26,46", 
+        "tp_name": "\u9632", 
+        "image": "\u5f20\u8fbd", 
+        "tp": 2, 
         "anger": 50, 
         "default_skill": 0, 
-        "attack": 14.0, 
-        "defense": 4.0, 
-        "crit": 0, 
-        "quality": 2, 
-        "hp": 32.0
-    }
-},
-{
-    "pk": 52, 
-    "model": "hero.monster", 
-    "fields": {
-        "dodge": 0, 
-        "name": "\u8340\u5f67", 
-        "skills": "49", 
-        "tp_name": "\u7b56", 
-        "image": "\u8340\u5f67", 
-        "tp": 3, 
-        "anger": 50, 
-        "default_skill": 0, 
-        "attack": 17.0, 
+        "attack": 15.0, 
         "defense": 6.0, 
         "crit": 0, 
         "quality": 2, 
-        "hp": 41.0
+        "hp": 62.0
     }
 },
 {
-    "pk": 53, 
+    "pk": 106, 
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u738b\u5f02", 
-        "skills": "27", 
+        "name": "\u9c8d\u4e09\u5a18", 
+        "skills": "20,72", 
         "tp_name": "\u653b", 
-        "image": "\u738b\u5f02", 
+        "image": "\u9c8d\u4e09\u5a18", 
         "tp": 1, 
         "anger": 50, 
         "default_skill": 0, 
-        "attack": 16.0, 
-        "defense": 7.0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
         "crit": 0, 
         "quality": 2, 
-        "hp": 50.0
+        "hp": 59.0
     }
 },
 {
-    "pk": 54, 
+    "pk": 107, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5f90\u5eb6", 
+        "skills": "48,71", 
+        "tp_name": "\u7b56", 
+        "image": "\u5f90\u5eb6", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 59.0
+    }
+},
+{
+    "pk": 108, 
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
@@ -1018,15 +581,34 @@
         "tp": 3, 
         "anger": 50, 
         "default_skill": 0, 
-        "attack": 15.0, 
-        "defense": 7.0, 
+        "attack": 13.0, 
+        "defense": 5.0, 
         "crit": 0, 
         "quality": 2, 
-        "hp": 45.0
+        "hp": 54.0
     }
 },
 {
-    "pk": 55, 
+    "pk": 109, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5e9e\u5fb7", 
+        "skills": "36,45", 
+        "tp_name": "\u653b", 
+        "image": "\u5e9e\u5fb7", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 2, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 110, 
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
@@ -1037,11 +619,1740 @@
         "tp": 3, 
         "anger": 50, 
         "default_skill": 0, 
+        "attack": 12.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 59.0
+    }
+},
+{
+    "pk": 111, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5218\u5907", 
+        "skills": "25,41", 
+        "tp_name": "\u9632", 
+        "image": "\u5218\u5907", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
         "attack": 13.0, 
-        "defense": 7.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 112, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5173\u7fbd", 
+        "skills": "20,67", 
+        "tp_name": "\u9632", 
+        "image": "\u5173\u7fbd", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 62.0
+    }
+},
+{
+    "pk": 113, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5f20\u98de", 
+        "skills": "27,69", 
+        "tp_name": "\u653b", 
+        "image": "\u5f20\u98de", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 57.0
+    }
+},
+{
+    "pk": 114, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u8bf8\u845b\u4eae", 
+        "skills": "52,70", 
+        "tp_name": "\u7b56", 
+        "image": "\u8bf8\u845b\u4eae", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 59.0
+    }
+},
+{
+    "pk": 115, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u8d75\u4e91", 
+        "skills": "23", 
+        "tp_name": "\u653b", 
+        "image": "\u8d75\u4e91", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 61.0
+    }
+},
+{
+    "pk": 116, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9ec4\u5fe0", 
+        "skills": "35", 
+        "tp_name": "\u653b", 
+        "image": "\u9ec4\u5fe0", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 2, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 59.0
+    }
+},
+{
+    "pk": 117, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9a6c\u8d85", 
+        "skills": "32", 
+        "tp_name": "\u653b", 
+        "image": "\u9a6c\u8d85", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 59.0
+    }
+},
+{
+    "pk": 118, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u795d\u878d\u592b\u4eba", 
+        "skills": "38", 
+        "tp_name": "\u653b", 
+        "image": "\u795d\u878d\u592b\u4eba", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 119, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5173\u94f6\u5c4f", 
+        "skills": "21,72", 
+        "tp_name": "\u9632", 
+        "image": "\u5173\u94f6\u5c4f", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 56.0
+    }
+},
+{
+    "pk": 120, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u8d3e\u8be9", 
+        "skills": "49,73", 
+        "tp_name": "\u7b56", 
+        "image": "\u8d3e\u8be9", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 121, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5b59\u6743", 
+        "skills": "25,42", 
+        "tp_name": "\u9632", 
+        "image": "\u5b59\u6743", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 57.0
+    }
+},
+{
+    "pk": 122, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5b59\u7b56", 
+        "skills": "23,42", 
+        "tp_name": "\u653b", 
+        "image": "\u5b59\u7b56", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 61.0
+    }
+},
+{
+    "pk": 123, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5468\u745c", 
+        "skills": "53,73", 
+        "tp_name": "\u7b56", 
+        "image": "\u5468\u745c", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 62.0
+    }
+},
+{
+    "pk": 124, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u592a\u53f2\u6148", 
+        "skills": "35", 
+        "tp_name": "\u653b", 
+        "image": "\u592a\u53f2\u6148", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 2, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 59.0
+    }
+},
+{
+    "pk": 125, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5415\u8499", 
+        "skills": "50,73", 
+        "tp_name": "\u9632", 
+        "image": "\u5415\u8499", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 62.0
+    }
+},
+{
+    "pk": 126, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5468\u6cf0", 
+        "skills": "29", 
+        "tp_name": "\u9632", 
+        "image": "\u5468\u6cf0", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 57.0
+    }
+},
+{
+    "pk": 127, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u7518\u5b81", 
+        "skills": "25,69", 
+        "tp_name": "\u653b", 
+        "image": "\u7518\u5b81", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 60.0
+    }
+},
+{
+    "pk": 128, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5f20\u90c3", 
+        "skills": "36,46", 
+        "tp_name": "\u653b", 
+        "image": "\u5f20\u90c3", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 61.0
+    }
+},
+{
+    "pk": 129, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5b59\u5c1a\u9999", 
+        "skills": "35", 
+        "tp_name": "\u7b56", 
+        "image": "\u5b59\u5c1a\u9999", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 2, 
+        "attack": 14.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 56.0
+    }
+},
+{
+    "pk": 130, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u53f8\u9a6c\u61ff", 
+        "skills": "54", 
+        "tp_name": "\u7b56", 
+        "image": "\u53f8\u9a6c\u61ff", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 61.0
+    }
+},
+{
+    "pk": 131, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9ec4\u6708\u82f1", 
+        "skills": "61,72", 
+        "tp_name": "\u7b56", 
+        "image": "\u9ec4\u6708\u82f1", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 50.0
+    }
+},
+{
+    "pk": 132, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u738b\u5143\u59ec", 
+        "skills": "59,72", 
+        "tp_name": "\u7b56", 
+        "image": "\u738b\u5143\u59ec", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 56.0
+    }
+},
+{
+    "pk": 133, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5f20\u6625\u534e", 
+        "skills": "61,72", 
+        "tp_name": "\u7b56", 
+        "image": "\u5f20\u6625\u534e", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 55.0
+    }
+},
+{
+    "pk": 134, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5415\u5e03", 
+        "skills": "22,66", 
+        "tp_name": "\u653b", 
+        "image": "\u5415\u5e03", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 15, 
+        "quality": 2, 
+        "hp": 60.0
+    }
+},
+{
+    "pk": 135, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u8c82\u8749", 
+        "skills": "56,65", 
+        "tp_name": "\u7b56", 
+        "image": "\u8c82\u8749", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 52.0
+    }
+},
+{
+    "pk": 136, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9b4f\u5ef6", 
+        "skills": "29", 
+        "tp_name": "\u653b", 
+        "image": "\u9b4f\u5ef6", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 62.0
+    }
+},
+{
+    "pk": 137, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u6b65\u7ec3\u5e08", 
+        "skills": "59,72", 
+        "tp_name": "\u7b56", 
+        "image": "\u6b65\u7ec3\u5e08", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 138, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5927\u4e54", 
+        "skills": "60,72", 
+        "tp_name": "\u7b56", 
+        "image": "\u5927\u4e54", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 53.0
+    }
+},
+{
+    "pk": 139, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5c0f\u4e54", 
+        "skills": "60,72", 
+        "tp_name": "\u7b56", 
+        "image": "\u5c0f\u4e54", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 52.0
+    }
+},
+{
+    "pk": 140, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u738b\u5f02", 
+        "skills": "27", 
+        "tp_name": "\u653b", 
+        "image": "\u738b\u5f02", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 60.0
+    }
+},
+{
+    "pk": 141, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u66f9\u4ec1", 
+        "skills": "28,44", 
+        "tp_name": "\u9632", 
+        "image": "\u66f9\u4ec1", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 62.0
+    }
+},
+{
+    "pk": 142, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9ec4\u76d6", 
+        "skills": "29", 
+        "tp_name": "\u9632", 
+        "image": "\u9ec4\u76d6", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 143, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u4e8e\u7981", 
+        "skills": "29", 
+        "tp_name": "\u9632", 
+        "image": "\u4e8e\u7981", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 57.0
+    }
+},
+{
+    "pk": 144, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u4e50\u8fdb", 
+        "skills": "26,45", 
+        "tp_name": "\u9632", 
+        "image": "\u4e50\u8fdb", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 57.0
+    }
+},
+{
+    "pk": 145, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u674e\u5178", 
+        "skills": "28,46", 
+        "tp_name": "\u9632", 
+        "image": "\u674e\u5178", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 61.0
+    }
+},
+{
+    "pk": 146, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u53f8\u9a6c\u662d", 
+        "skills": "49", 
+        "tp_name": "\u7b56", 
+        "image": "\u53f8\u9a6c\u662d", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 57.0
+    }
+},
+{
+    "pk": 147, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5218\u7985", 
+        "skills": "25,41", 
+        "tp_name": "\u9632", 
+        "image": "\u5218\u7985", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 7.0, 
+        "defense": 3.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 37.0
+    }
+},
+{
+    "pk": 148, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u66f9\u4e15", 
+        "skills": "36,40", 
+        "tp_name": "\u653b", 
+        "image": "\u66f9\u4e15", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 2, 
+        "attack": 14.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 56.0
+    }
+},
+{
+    "pk": 149, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u534e\u96c4", 
+        "skills": "25,69", 
+        "tp_name": "\u653b", 
+        "image": "\u534e\u96c4", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 150, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5b5f\u83b7", 
+        "skills": "26,68", 
+        "tp_name": "\u653b", 
+        "image": "\u5b5f\u83b7", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 56.0
+    }
+},
+{
+    "pk": 151, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9a6c\u5cb1", 
+        "skills": "32", 
+        "tp_name": "\u653b", 
+        "image": "\u9a6c\u5cb1", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 152, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5173\u5e73", 
+        "skills": "21", 
+        "tp_name": "\u653b", 
+        "image": "\u5173\u5e73", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 153, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u6c99\u6469\u67ef", 
+        "skills": "28", 
+        "tp_name": "\u653b", 
+        "image": "\u6c99\u6469\u67ef", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 48.0
+    }
+},
+{
+    "pk": 154, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5468\u4ed3", 
+        "skills": "28", 
+        "tp_name": "\u9632", 
+        "image": "\u5468\u4ed3", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 53.0
+    }
+},
+{
+    "pk": 155, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5b59\u575a", 
+        "skills": "28,42", 
+        "tp_name": "\u9632", 
+        "image": "\u5b59\u575a", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 56.0
+    }
+},
+{
+    "pk": 156, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5f90\u6643", 
+        "skills": "25,46", 
+        "tp_name": "\u9632", 
+        "image": "\u5f90\u6643", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 60.0
+    }
+},
+{
+    "pk": 157, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u7a0b\u666e", 
+        "skills": "28", 
+        "tp_name": "\u653b", 
+        "image": "\u7a0b\u666e", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 158, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5f90\u76db", 
+        "skills": "28", 
+        "tp_name": "\u653b", 
+        "image": "\u5f90\u76db", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 60.0
+    }
+},
+{
+    "pk": 159, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u66f9\u6d2a", 
+        "skills": "33", 
+        "tp_name": "\u653b", 
+        "image": "\u66f9\u6d2a", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 57.0
+    }
+},
+{
+    "pk": 160, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u738b\u5e73", 
+        "skills": "27", 
+        "tp_name": "\u653b", 
+        "image": "\u738b\u5e73", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 60.0
+    }
+},
+{
+    "pk": 161, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u8bf8\u845b\u747e", 
+        "skills": "50", 
+        "tp_name": "\u7b56", 
+        "image": "\u8bf8\u845b\u747e", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 55.0
+    }
+},
+{
+    "pk": 162, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u53f8\u9a6c\u5e08", 
+        "skills": "48", 
+        "tp_name": "\u7b56", 
+        "image": "\u53f8\u9a6c\u5e08", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 163, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5ed6\u5316", 
+        "skills": "27", 
+        "tp_name": "\u653b", 
+        "image": "\u5ed6\u5316", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 56.0
+    }
+},
+{
+    "pk": 164, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9ad8\u987a", 
+        "skills": "45", 
+        "tp_name": "\u653b", 
+        "image": "\u9ad8\u987a", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 59.0
+    }
+},
+{
+    "pk": 165, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u989c\u826f", 
+        "skills": "33", 
+        "tp_name": "\u653b", 
+        "image": "\u989c\u826f", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 57.0
+    }
+},
+{
+    "pk": 166, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u6587\u4e11", 
+        "skills": "33", 
+        "tp_name": "\u653b", 
+        "image": "\u6587\u4e11", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 55.0
+    }
+},
+{
+    "pk": 167, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9648\u5bab", 
+        "skills": "19,46", 
+        "tp_name": "\u7b56", 
+        "image": "\u9648\u5bab", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 12.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 60.0
+    }
+},
+{
+    "pk": 168, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u8463\u5353", 
+        "skills": "28,43", 
+        "tp_name": "\u9632", 
+        "image": "\u8463\u5353", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 57.0
+    }
+},
+{
+    "pk": 169, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u7518\u592b\u4eba", 
+        "skills": "59,72", 
+        "tp_name": "\u7b56", 
+        "image": "\u7518\u592b\u4eba", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 11.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 170, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u4e25\u989c", 
+        "skills": "29", 
+        "tp_name": "\u653b", 
+        "image": "\u4e25\u989c", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 171, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u8881\u7ecd", 
+        "skills": "28,43", 
+        "tp_name": "\u9632", 
+        "image": "\u8881\u7ecd", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 59.0
+    }
+},
+{
+    "pk": 172, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u6cd5\u6b63", 
+        "skills": "49", 
+        "tp_name": "\u7b56", 
+        "image": "\u6cd5\u6b63", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 173, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u738b\u5141", 
+        "skills": "46", 
+        "tp_name": "\u7b56", 
+        "image": "\u738b\u5141", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 12.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 55.0
+    }
+},
+{
+    "pk": 174, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5140\u7a81\u9aa8", 
+        "skills": "29", 
+        "tp_name": "\u653b", 
+        "image": "\u5140\u7a81\u9aa8", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 53.0
+    }
+},
+{
+    "pk": 175, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9a6c\u817e", 
+        "skills": "32", 
+        "tp_name": "\u653b", 
+        "image": "\u9a6c\u817e", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 176, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u8881\u672f", 
+        "skills": "28,43", 
+        "tp_name": "\u9632", 
+        "image": "\u8881\u672f", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 12.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 50.0
+    }
+},
+{
+    "pk": 177, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u516c\u5b59\u74d2", 
+        "skills": "28,43", 
+        "tp_name": "\u9632", 
+        "image": "\u516c\u5b59\u74d2", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 59.0
+    }
+},
+{
+    "pk": 178, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5f20\u89d2", 
+        "skills": "54", 
+        "tp_name": "\u7b56", 
+        "image": "\u5f20\u89d2", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 57.0
+    }
+},
+{
+    "pk": 179, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u97e9\u9042", 
+        "skills": "28,43", 
+        "tp_name": "\u9632", 
+        "image": "\u97e9\u9042", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 60.0
+    }
+},
+{
+    "pk": 180, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u6587\u8058", 
+        "skills": "27", 
+        "tp_name": "\u9632", 
+        "image": "\u6587\u8058", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 60.0
+    }
+},
+{
+    "pk": 181, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5f20\u662d", 
+        "skills": "49", 
+        "tp_name": "\u7b56", 
+        "image": "\u5f20\u662d", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 4.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 44.0
+    }
+},
+{
+    "pk": 182, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5f20\u9c81", 
+        "skills": "48", 
+        "tp_name": "\u9632", 
+        "image": "\u5f20\u9c81", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 5.0, 
         "crit": 0, 
         "quality": 2, 
         "hp": 49.0
+    }
+},
+{
+    "pk": 183, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u8340\u5f67", 
+        "skills": "49", 
+        "tp_name": "\u7b56", 
+        "image": "\u8340\u5f67", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 49.0
+    }
+},
+{
+    "pk": 184, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u7eaa\u7075", 
+        "skills": "25,69", 
+        "tp_name": "\u653b", 
+        "image": "\u7eaa\u7075", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 57.0
+    }
+},
+{
+    "pk": 185, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u725b\u91d1", 
+        "skills": "28", 
+        "tp_name": "\u9632", 
+        "image": "\u725b\u91d1", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 55.0
+    }
+},
+{
+    "pk": 186, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u848b\u5e72", 
+        "skills": "48", 
+        "tp_name": "\u7b56", 
+        "image": "\u848b\u5e72", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 12.0, 
+        "defense": 3.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 38.0
+    }
+},
+{
+    "pk": 187, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5218\u8868", 
+        "skills": "28,43", 
+        "tp_name": "\u9632", 
+        "image": "\u5218\u8868", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 49.0
+    }
+},
+{
+    "pk": 188, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u6f58\u748b", 
+        "skills": "28", 
+        "tp_name": "\u653b", 
+        "image": "\u6f58\u748b", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 189, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5f20\u4efb", 
+        "skills": "28", 
+        "tp_name": "\u653b", 
+        "image": "\u5f20\u4efb", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 60.0
+    }
+},
+{
+    "pk": 190, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9a6c\u5fe0", 
+        "skills": "35", 
+        "tp_name": "\u653b", 
+        "image": "\u9a6c\u5fe0", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 55.0
+    }
+},
+{
+    "pk": 191, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9c81\u8083", 
+        "skills": "50", 
+        "tp_name": "\u7b56", 
+        "image": "\u9c81\u8083", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 192, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5434\u56fd\u592a", 
+        "skills": "59,72", 
+        "tp_name": "\u7b56", 
+        "image": "\u5434\u56fd\u592a", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 4.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 47.0
+    }
+},
+{
+    "pk": 193, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u4e25\u767d\u864e", 
+        "skills": "27", 
+        "tp_name": "\u653b", 
+        "image": "\u4e25\u767d\u864e", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 53.0
+    }
+},
+{
+    "pk": 194, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9a6c\u8c21", 
+        "skills": "46", 
+        "tp_name": "\u7b56", 
+        "image": "\u9a6c\u8c21", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 54.0
+    }
+},
+{
+    "pk": 195, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5f20\u82de", 
+        "skills": "27", 
+        "tp_name": "\u653b", 
+        "image": "\u5f20\u82de", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 196, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5218\u5c01", 
+        "skills": "28", 
+        "tp_name": "\u653b", 
+        "image": "\u5218\u5c01", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 56.0
+    }
+},
+{
+    "pk": 197, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u4e01\u5949", 
+        "skills": "28", 
+        "tp_name": "\u9632", 
+        "image": "\u4e01\u5949", 
+        "tp": 2, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 59.0
+    }
+},
+{
+    "pk": 198, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u90ed\u6c5c", 
+        "skills": "28", 
+        "tp_name": "\u653b", 
+        "image": "\u90ed\u6c5c", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 52.0
+    }
+},
+{
+    "pk": 199, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u674e\u5f02", 
+        "skills": "28", 
+        "tp_name": "\u653b", 
+        "image": "\u674e\u5f02", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 13.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 51.0
+    }
+},
+{
+    "pk": 200, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u674e\u5112", 
+        "skills": "49", 
+        "tp_name": "\u7b56", 
+        "image": "\u674e\u5112", 
+        "tp": 3, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 52.0
+    }
+},
+{
+    "pk": 201, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5415\u7eee\u73b2", 
+        "skills": "22", 
+        "tp_name": "\u653b", 
+        "image": "\u6b66\u5c06_\u5973", 
+        "tp": 1, 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 15.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 60.0
     }
 }
 ]
