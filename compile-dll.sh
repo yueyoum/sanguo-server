@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd exdll
+cd exdll-src
 ./build.sh
 
 cp external_calculate.py ../sanguo/dll
