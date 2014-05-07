@@ -3,14 +3,12 @@
 __author__ = 'Wang Chao'
 __date__ = '12/30/13'
 
-import ctypes
 
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoHero, MongoAchievement, MongoHeroSoul, MongoCharacter
 from core.signals import hero_add_signal, hero_del_signal, hero_changed_signal, hero_step_up_signal
 from core.formation import Formation
 from core.exception import SanguoException
-from core import DLL
 from core.resource import check_character
 from utils import cache
 from utils.functional import id_generator
@@ -21,6 +19,7 @@ from preset.data import HEROS, ACHIEVEMENTS, MONSTERS
 from preset import errormsg
 import protomsg
 
+from dll import external_calculate
 
 def char_heros_dict(char_id):
     heros = MongoHero.objects.filter(char=char_id)
@@ -42,22 +41,22 @@ def cal_hero_property(original_id, level, step):
     @rtype: tuple
     """
     hero = HEROS[original_id]
-    attack = DLL.hero_attack(level, step, hero.quality, ctypes.c_float(hero.attack_growing))
-    defense = DLL.hero_defense(level, step, hero.quality, ctypes.c_float(hero.defense_growing))
-    hp = DLL.hero_hp(level, step, hero.quality, ctypes.c_float(hero.hp_growing))
 
-    return int(attack), int(defense), int(hp)
+    attack = external_calculate.Hero.attack(level, step, hero.quality, hero.attack_growing)
+    defense = external_calculate.Hero.defense(level, step, hero.quality, hero.defense_growing)
+    hp = external_calculate.Hero.hp(level, step, hero.quality, hero.hp_growing)
+
+    return attack, defense, hp
 
 
 def cal_monster_property(oid, level):
     monster = MONSTERS[oid]
-    attack = DLL.hero_attack(level, 0, monster.quality, ctypes.c_float(monster.attack))
-    defense = DLL.hero_defense(level, 0, monster.quality, ctypes.c_float(monster.defense))
-    hp = DLL.hero_hp(level, 0, monster.quality, ctypes.c_float(monster.hp))
 
-    return int(attack), int(defense), int(hp)
+    attack = external_calculate.Hero.attack(level, 0, monster.quality, monster.attack)
+    defense = external_calculate.Hero.defense(level, 0, monster.quality, monster.defense)
+    hp = external_calculate.Hero.hp(level, 0, monster.quality, monster.hp)
 
-
+    return attack, defense, hp
 
 
 class FightPowerMixin(object):

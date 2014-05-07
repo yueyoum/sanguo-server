@@ -15,7 +15,6 @@ from core.formation import Formation
 from core.achievement import Achievement
 from core.task import Task
 from core.resource import check_character, check_stuff
-from core import DLL
 from utils import pack_msg
 from utils.functional import id_generator
 import protomsg
@@ -23,6 +22,7 @@ from preset.settings import EQUIP_MAX_LEVEL
 from preset.data import EQUIPMENTS, GEMS, STUFFS
 from preset import errormsg
 
+from dll import external_calculate
 
 
 def equip_updated(func):
@@ -264,24 +264,21 @@ class Equipment(MessageEquipmentMixin):
         if not self.equip.attack:
             return 0
 
-        # return self.equip.attack + self.level * self.equip.growing
-        return DLL.equip_attack(self.equip.attack, self.level, self.equip.growing)
+        return external_calculate.Equipment.attack(self.equip.attack, self.level, self.equip.growing)
 
     @property
     def defense(self):
         if not self.equip.defense:
             return 0
 
-        # return self.equip.defense + self.level * self.equip.growing
-        return DLL.equip_defense(self.equip.defense, self.level, self.equip.growing)
+        return external_calculate.Equipment.defense(self.equip.defense, self.level, self.equip.growing)
 
     @property
     def hp(self):
         if not self.equip.hp:
             return 0
 
-        # return self.equip.hp + self.level * self.equip.growing
-        return DLL.equip_hp(self.equip.hp, self.level, self.equip.growing)
+        return external_calculate.Equipment.hp(self.equip.hp, self.level, self.equip.growing)
 
 
     @property
