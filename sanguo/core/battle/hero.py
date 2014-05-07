@@ -282,8 +282,16 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         value = damage * (1 - damage_reduce)
 
         # 攻击修正
-        self_tp = HEROS[self.original_id].tp
-        target_tp = HEROS[target.original_id].tp
+        if self.HERO_TYPE == 1:
+            self_tp = HEROS[self.original_id].tp
+        else:
+            self_tp = MONSTERS[self.original_id].tp
+
+        if target.HERO_TYPE == 1:
+            target_tp = HEROS[target.original_id].tp
+        else:
+            target_tp = MONSTERS[target.original_id].tp
+
         modulus = DEMAGE_VALUE_ADJUST[self_tp][target_tp]
 
         value += value * modulus
