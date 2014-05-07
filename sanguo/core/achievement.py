@@ -50,6 +50,8 @@ class Achievement(object):
 
         decoded_condition_value = ach.decoded_condition_value
 
+        updated = True
+
         if ach.mode == 1:
             # 多个ID条件
             if new_value not in decoded_condition_value:
@@ -62,6 +64,8 @@ class Achievement(object):
 
             if new_value not in values:
                 values.append(new_value)
+            else:
+                updated = False
 
             if set(values) == set(decoded_condition_value):
                 # FINISH
@@ -121,7 +125,7 @@ class Achievement(object):
 
         self.achievement.save()
 
-        if send_notify:
+        if send_notify and updated:
             msg = UpdateAchievementNotify()
             self._fill_up_achievement_msg(msg.achievement, ach)
             publish_to_char(self.char_id, pack_msg(msg))
