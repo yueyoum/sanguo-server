@@ -174,9 +174,13 @@ class Achievement(object):
 
 
     def send_reward(self, aid, sycee, packages):
-        ps = [int(i) for i in packages.split(',')]
-        if not sycee and not ps:
+        if not sycee and not packages:
             return
+
+        if packages:
+            ps = [int(i) for i in packages.split(',')]
+        else:
+            ps = []
 
         drops = get_drop(ps)
         drops['sycee'] += sycee if sycee else 0
