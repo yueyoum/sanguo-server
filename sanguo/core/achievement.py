@@ -13,7 +13,6 @@ from utils import pack_msg
 
 from protomsg import AchievementNotify, UpdateAchievementNotify
 from protomsg import Achievement as MsgAchievement
-from protomsg import Attachment as MsgAttachment
 
 from core.exception import SanguoException
 
