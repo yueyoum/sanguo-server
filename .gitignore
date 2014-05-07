@@ -13,3 +13,5 @@ test.db
 
 env
 sanguo/static
+
+config.xml

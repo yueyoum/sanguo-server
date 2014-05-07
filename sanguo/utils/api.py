@@ -9,7 +9,7 @@ import requests
 
 from django.conf import settings
 
-HUB_URL = settings.HUB_URL
+HUB_URL = "http://{0}:{1}".format(settings.HUB_HOST, settings.HUB_PORT)
 
 def apicall(data, cmd):
     x = requests.post('{0}{1}'.format(HUB_URL, cmd), data)

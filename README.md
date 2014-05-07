@@ -2,7 +2,7 @@
 
 ## 部署
 
-1.  确保系统中已安装Nginx, Mysql, Redis, Mongodb
+1.  确保系统中已安装Nginx, uWSGI, Redis, Mongodb, swig
 
 2.  安装依赖
     
@@ -11,6 +11,8 @@
     apt-get install python-dev libmysqld-dev libncurses5-dev
     apt-get install python-pip
     apt-get install python-virtualenv
+    apt-get install libpcre3-dev
+    apt-get install libpcre++-dev
     ```
 
 3.  Python虚拟环境。 在项目根目录中执行：
@@ -37,51 +39,22 @@
     获取最新的proto文件，并编译
     git submodule init
     git submodule update
+    git submodule foreach git pull
     ./compile-protobufs.sh
     ```
 
 
-7.  Admin
-
-    ```
-    python manage.py syncdb
-    python loaddata.py
-    python manage.py collectstatic
-    并用uwsgi-admin启动
-    ```
-
-
-
-9.  编辑配置文件，并启动程序
+6.  编辑配置文件，并启动程序
 
     ```
     cd sanguo
-    vim sanguo/local_settings.py
-    ./start_*_server.sh
+    cp config.template.xml config.xml
+    vim config.xml
 
-    开发: start_dev_server.sh
-    测试: start_test_server.sh
+    start server
+    正式服务器用 uWSGI 启动
     ```
 
-10.  测试
-
-    ./start_test_server 启动测试服务，然后在另一个shell中执行：
-
-    source activate_env
-    cd sanguo
-
-    全部测试
-    REUSE_DB=1 python manage.py test
-
-    测试某一个app
-    REUSE_DB=1 python manage.py test apps.player.tests
-
-    测试某一个TestCase
-    REUSE_DB=1 python manage.py test apps.player.tests:LoginTest
-
-    测试某一个TestCase中的一个测试函数
-    REUSE_DB=1 python manage.py test apps.player.tests:LoginTest.test_regular_login_with_wrong_password
-    ```
 
 ## Mysql配置
 

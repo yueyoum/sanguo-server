@@ -2,25 +2,13 @@
 
 # Django settings for sanguo project.
 import os
-import sys
-
-try:
-    TESTING = int(os.environ['TEST']) == 1
-except (KeyError, ValueError):
-    try:
-        TESTING = sys.argv[1] == 'test'
-    except IndexError:
-        TESTING = False
-
-
-CURRENT_PATH = os.path.dirname(os.path.realpath(__file__))
-PROJECT_PATH = os.path.dirname(CURRENT_PATH)
-TMP_PATH = os.path.normpath(os.path.join(PROJECT_PATH, '../tmp'))
-LOG_PATH = os.path.normpath(os.path.join(PROJECT_PATH, 'logs'))
-BATTLE_RECORD_PATH = os.path.normpath(os.path.join(PROJECT_PATH, 'battle_record'))
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+TMP_PATH = os.path.normpath(os.path.join(BASE_DIR, '../tmp'))
+LOG_PATH = os.path.normpath(os.path.join(BASE_DIR, 'logs'))
+BATTLE_RECORD_PATH = os.path.normpath(os.path.join(BASE_DIR, 'battle_record'))
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = False
 
 ADMINS = (
 # ('Your Name', 'your_email@example.com'),
@@ -81,7 +69,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -146,13 +134,12 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'django_nose',
 )
 
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+# TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
-NOSE_ARGS = ['--stop',]
+# NOSE_ARGS = ['--stop',]
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -208,43 +195,33 @@ LOGGING = {
 
 DATETIME_FORMAT = "Y-m-d H:i:s"
 
-REDIS_HOST = "127.0.0.1"
-REDIS_PORT = 6380
-REDIS_DB = 0
 
-MONGODB_HOST = "127.0.0.1"
-MONGODB_PORT = 27017
-MONGODB_DB = 'sanguo'
+# project settings
+import xml.etree.ElementTree as et
+tree = et.ElementTree(file=os.path.join(BASE_DIR, "config.xml"))
 
-CRYPTO_KEY = '1234567890abcdef'
-CRYPTO_PREFIX = 'ok'
+ENABLE_BATTLE_LOG = tree.find('battle/log').text == "true"
 
-CACHE_SECONDS = 3600
+REDIS_HOST = tree.find('redis/host').text
+REDIS_PORT = int( tree.find('redis/port').text )
+REDIS_DB = int( tree.find('redis/db').text )
 
-if TESTING:
-    BROKER_URL = 'amqp://guest:guest@localhost:5672/sanguo_test'
-else:
-    BROKER_URL = 'amqp://guest:guest@localhost:5672/sanguo'
-CELERY_IMPORTS = ('worker.tasks',)
-CELERY_ENABLE_UTC = True
-CELERY_TIMEZONE = TIME_ZONE
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
+MONGODB_HOST = tree.find('mongodb/host').text
+MONGODB_PORT = int( tree.find('mongodb/port').text )
+MONGODB_DB = tree.find('mongodb/db').text
 
-if TESTING:
-    REDIS_DB = 1
-    MONGODB_DB = 'test_sanguo'
+CRYPTO_KEY = tree.find('crypto/key').text
+CRYPTO_PREFIX = tree.find('crypto/prefix').text
 
+CACHE_SECONDS = int( tree.find('cache/seconds').text )
 
-HUB_URL = 'http://work.mztimes.com:8020'
-NODE_ID = 1
+HUB_HOST = tree.find('hub/host').text
+HUB_PORT = int( tree.find('hub/port').text )
 
-LOG_MAN_HOST = "127.0.0.1"
-LOG_MAN_PORT = 10099
+NODE_ID = int( tree.find('node/id').text )
 
-try:
-    from settings_local import *
-except ImportError:
-    pass
+LOG_MAN_HOST = tree.find('log/host').text
+LOG_MAN_PORT = int( tree.find('log/port').text )
 
+del et
+del tree
