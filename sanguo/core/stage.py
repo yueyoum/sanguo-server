@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import random
-import copy
 import json
 
 from mongoengine import DoesNotExist
@@ -8,7 +6,7 @@ from core.mongoscheme import MongoStage, MongoEmbededPlunderLog, MongoHang, Mong
 from utils import timezone
 from utils import pack_msg
 from core.msgpipe import publish_to_char
-from core.attachment import Attachment, standard_drop_to_attachment_protomsg, make_standard_drop_from_template
+from core.attachment import Attachment, standard_drop_to_attachment_protomsg, make_standard_drop_from_template, get_drop
 from core.achievement import Achievement
 import protomsg
 from core.exception import SanguoException
@@ -18,11 +16,9 @@ from core.timercheck import TimerCheckAbstractBase, timercheck
 from core.functionopen import FunctionOpen
 from core.mail import Mail
 from core.signals import pve_finished_signal
-from utils.math import GAUSSIAN_TABLE
 from preset.settings import (
     DATETIME_FORMAT,
     HANG_SECONDS,
-    DROP_PROB_BASE,
     PLUNDER_DEFENSE_SUCCESS_GOLD,
     PLUNDER_DEFENSE_FAILURE_GOLD,
     PLUNDER_DEFENSE_SUCCESS_MAX_TIMES,
@@ -30,93 +26,12 @@ from preset.settings import (
     HANG_RESET_MAIL_TITLE,
     HANG_RESET_MAIL_CONTENT,
 )
-from preset.data import STAGES, STAGE_ELITE, STAGE_ELITE_CONDITION, PACKAGES
+from preset.data import STAGES, STAGE_ELITE, STAGE_ELITE_CONDITION
 from preset import errormsg
 
 def max_star_stage_id(char_id):
     s = MongoStage.objects.get(id=char_id)
     return s.max_star_stage
-
-def get_drop(drop_ids, multi=1, gaussian=False):
-    # 从pakcage中解析并计算掉落，返回为 dict
-    # {
-    #     'gold': 0,
-    #     'sycee': 0,
-    #     'exp': 0,
-    #     'official_exp': 0,
-    #     'heros': [
-    #         {id: level: step: amount:},...
-    #     ],
-    #     'equipments': [
-    #         {id: level: amount:},...
-    #     ],
-    #     'gems': [
-    #         {id: amount:},...
-    #     ],
-    #     'stuffs': [
-    #         {id: amount:},...
-    #     ]
-    # }
-    gold = 0
-    sycee = 0
-    exp = 0
-    official_exp = 0
-    heros = []
-    equipments = []
-    gems = []
-    stuffs = []
-    for d in drop_ids:
-        if d == 0:
-            # 一般不会为0，0实在策划填写编辑器的时候本来为空，却填了个0
-            continue
-
-        p = copy.deepcopy(PACKAGES[d])
-        gold += p['gold']
-        sycee += p['sycee']
-        exp += p['exp']
-        official_exp += p['official_exp']
-        heros.extend(p['heros'])
-        equipments.extend(p['equipments'])
-        gems.extend(p['gems'])
-        stuffs.extend(p['stuffs'])
-
-    def _make(items):
-        final_items = []
-        for index, item in enumerate(items):
-            prob = item['prob'] * multi
-            if gaussian:
-                prob = prob * (1 + GAUSSIAN_TABLE[round(random.uniform(0.01, 0.99), 2)] * 0.08)
-
-            a, b = divmod(prob, DROP_PROB_BASE)
-            a = int(a)
-            if b > random.randint(0, DROP_PROB_BASE):
-                a += 1
-
-            if a == 0:
-                continue
-
-            item['amount'] *= a
-            item.pop('prob')
-            final_items.append(item)
-
-        return final_items
-
-    heros = _make(heros)
-    equipments = _make(equipments)
-    gems = _make(gems)
-    stuffs = _make(stuffs)
-
-    return {
-        'gold': gold * multi,
-        'sycee': sycee * multi,
-        'exp': exp * multi,
-        'official_exp': official_exp * multi,
-        'heros': heros,
-        'equipments': equipments,
-        'gems': gems,
-        'stuffs': stuffs,
-    }
-
 
 class Stage(object):
     def __init__(self, char_id):

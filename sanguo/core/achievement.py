@@ -5,7 +5,7 @@ __date__ = '2/12/14'
 
 from mongoscheme import DoesNotExist
 from core.mongoscheme import MongoAchievement
-from core.attachment import Attachment
+from core.attachment import Attachment, get_drop, standard_drop_to_attachment_protomsg
 
 
 from core.msgpipe import publish_to_char
@@ -147,11 +147,9 @@ class Achievement(object):
                 "{0} not finished".format(achievement_id)
             )
 
-        if ach.sycee:
-            from core.character import Char
-            char = Char(self.char_id)
-            # TODO items
-            char.update(sycee=ach.sycee, des='Achievement {0} reward'.format(achievement_id))
+        standard_drop = self.send_reward(achievement_id, ach.sycee, ach.package)
+        print "Achievement Reward:", achievement_id
+        print standard_drop
 
         self.achievement.finished.remove(achievement_id)
         self.achievement.complete.append(achievement_id)
@@ -163,7 +161,6 @@ class Achievement(object):
 
         self.achievement.save()
 
-
         msg = UpdateAchievementNotify()
         self._fill_up_achievement_msg(msg.achievement, ach)
         publish_to_char(self.char_id, pack_msg(msg))
@@ -173,11 +170,19 @@ class Achievement(object):
             self._fill_up_achievement_msg(msg.achievement, ACHIEVEMENTS[ach.next])
             publish_to_char(self.char_id, pack_msg(msg))
 
-        msg = MsgAttachment()
-        if ach.sycee:
-            msg.sycee = ach.sycee
-        return msg
+        return standard_drop_to_attachment_protomsg(standard_drop)
 
+
+    def send_reward(self, aid, sycee, packages):
+        ps = [int(i) for i in packages.split(',')]
+        if not sycee and not ps:
+            return
+
+        drops = get_drop(ps)
+        drops['sycee'] += sycee if sycee else 0
+
+        Attachment(self.char_id).save_standard_drop(drops, des="Achievement {0} reward".format(aid))
+        return drops
 
 
     def send_notify(self):

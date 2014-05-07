@@ -3,16 +3,22 @@
 __author__ = 'Wang Chao'
 __date__ = '2/19/14'
 
+import random
+import copy
+
 from mongoengine import DoesNotExist
 
 from core.exception import SanguoException
 from core.mongoscheme import MongoAttachment, MongoEmbededAttachment, MongoEmbededAttachmentEquipment
 from core.msgpipe import publish_to_char
+from utils.math import GAUSSIAN_TABLE
 from utils import pack_msg
 
 from protomsg import PrizeNotify, Attachment as MsgAttachment
 
 from preset import errormsg
+from preset.data import PACKAGES
+from preset.settings import DROP_PROB_BASE
 
 
 def make_standard_drop_from_template():
@@ -26,6 +32,27 @@ def make_standard_drop_from_template():
         'gems': [],
         'stuffs': [],
     }
+
+
+def merge_standard_drops(drops):
+    template = make_standard_drop_from_template()
+    for d in drops:
+        template['gold'] += d['gold']
+        template['sycee'] += d['sycee']
+        template['exp'] += d['exp']
+        template['official_exp'] += d['official_exp']
+        template['heros'].extend(d['heros'])
+        template['equipments'].extend(d['equipments'])
+        template['gems'].extend(d['gems'])
+        template['stuffs'].extend(d['stuffs'])
+
+    return template
+
+
+def merge_standard_drops_by_ids(ids):
+    drops = [PACKAGES[i] for i in ids]
+    return merge_standard_drops(drops)
+
 
 
 def standard_drop_to_attachment_protomsg(data):
@@ -67,6 +94,86 @@ def standard_drop_to_attachment_protomsg(data):
 
     return msg
 
+
+def get_drop(drop_ids, multi=1, gaussian=False):
+    # 从pakcage中解析并计算掉落，返回为 dict
+    # {
+    #     'gold': 0,
+    #     'sycee': 0,
+    #     'exp': 0,
+    #     'official_exp': 0,
+    #     'heros': [
+    #         {id: level: step: amount:},...
+    #     ],
+    #     'equipments': [
+    #         {id: level: amount:},...
+    #     ],
+    #     'gems': [
+    #         {id: amount:},...
+    #     ],
+    #     'stuffs': [
+    #         {id: amount:},...
+    #     ]
+    # }
+    gold = 0
+    sycee = 0
+    exp = 0
+    official_exp = 0
+    heros = []
+    equipments = []
+    gems = []
+    stuffs = []
+    for d in drop_ids:
+        if d == 0:
+            # 一般不会为0，0实在策划填写编辑器的时候本来为空，却填了个0
+            continue
+
+        p = copy.deepcopy(PACKAGES[d])
+        gold += p['gold']
+        sycee += p['sycee']
+        exp += p['exp']
+        official_exp += p['official_exp']
+        heros.extend(p['heros'])
+        equipments.extend(p['equipments'])
+        gems.extend(p['gems'])
+        stuffs.extend(p['stuffs'])
+
+    def _make(items):
+        final_items = []
+        for index, item in enumerate(items):
+            prob = item['prob'] * multi
+            if gaussian:
+                prob = prob * (1 + GAUSSIAN_TABLE[round(random.uniform(0.01, 0.99), 2)] * 0.08)
+
+            a, b = divmod(prob, DROP_PROB_BASE)
+            a = int(a)
+            if b > random.randint(0, DROP_PROB_BASE):
+                a += 1
+
+            if a == 0:
+                continue
+
+            item['amount'] *= a
+            item.pop('prob')
+            final_items.append(item)
+
+        return final_items
+
+    heros = _make(heros)
+    equipments = _make(equipments)
+    gems = _make(gems)
+    stuffs = _make(stuffs)
+
+    return {
+        'gold': gold * multi,
+        'sycee': sycee * multi,
+        'exp': exp * multi,
+        'official_exp': official_exp * multi,
+        'heros': heros,
+        'equipments': equipments,
+        'gems': gems,
+        'stuffs': stuffs,
+    }
 
 
 class Attachment(object):

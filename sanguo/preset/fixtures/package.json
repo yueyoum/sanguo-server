@@ -168,7 +168,13 @@
         "exp": 0, 
         "gold": 0, 
         "equipments": [], 
-        "heros": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 55, 
+                "prob": 100000
+            }
+        ], 
         "stuffs": [], 
         "official_exp": 0
     }, 
@@ -832,7 +838,29 @@
         "exp": 0, 
         "gold": 0, 
         "equipments": [], 
-        "heros": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 64, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "523": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 13, 
+                "prob": 100000
+            }
+        ], 
         "stuffs": [], 
         "official_exp": 0
     }, 
@@ -900,6 +928,27 @@
         ], 
         "official_exp": 0
     }, 
+    "525": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 65, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 66, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
     "514": {
         "gems": [], 
         "sycee": 0, 
@@ -910,6 +959,54 @@
             {
                 "amount": 1, 
                 "id": 87, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "524": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 5, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "526": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 7, 
+                "prob": 100000
+            }
+        ], 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "527": {
+        "gems": [], 
+        "sycee": 0, 
+        "exp": 0, 
+        "gold": 0, 
+        "equipments": [], 
+        "heros": [
+            {
+                "amount": 1, 
+                "id": 23, 
                 "prob": 100000
             }
         ], 
