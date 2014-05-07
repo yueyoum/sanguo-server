@@ -1,3 +1,6 @@
 [submodule "protobuf"]
 	path = protobuf
 	url = git@192.168.1.100:sanguo/protobuf.git
+[submodule "exdll"]
+	path = exdll
+	url = git@work.mztimes.com:sanguo/dll.git
