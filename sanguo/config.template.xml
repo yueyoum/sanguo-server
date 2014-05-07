@@ -5,15 +5,15 @@
     </node>
 
     <redis>
-        <host>"127.0.0.1"</host>
+        <host>127.0.0.1</host>
         <port>6380</port>
         <db>0</db>
     </redis>
 
     <mongodb>
-        <host>"127.0.0.1"</host>
+        <host>127.0.0.1</host>
         <port>27017</port>
-        <db>"sanguo"</db>
+        <db>sanguo</db>
     </mongodb>
 
     <cache>
@@ -29,17 +29,17 @@
     <!-- which means all nodes must keep the same settings -->
 
     <crypto>
-        <key>"1234567890abcdef"</key>
-        <prefix>"ok"</prefix>
+        <key>1234567890abcdef</key>
+        <prefix>ok</prefix>
     </crypto>
 
     <hub>
-        <host>"127.0.0.1"</host>
+        <host>127.0.0.1</host>
         <port>8020</port>
     </hub>
 
     <log>
-        <host>"127.0.0.1"</host>
+        <host>127.0.0.1</host>
         <port>10099</port>
     </log>
 </config>
