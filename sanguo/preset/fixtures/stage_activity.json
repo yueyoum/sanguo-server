@@ -1,0 +1,162 @@
+[
+{
+    "pk": 101, 
+    "model": "stage.activelystage", 
+    "fields": {
+        "normal_drop": "0", 
+        "normal_gold": 20000, 
+        "bg": "\u519b\u8425\u573a\u666f", 
+        "strength_modulus": 2.0, 
+        "level": 15, 
+        "tp": 1, 
+        "char_level": 1, 
+        "normal_exp": 0, 
+        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "name": "\u4e4c\u5de2\u52ab\u7cae I"
+    }
+},
+{
+    "pk": 102, 
+    "model": "stage.activelystage", 
+    "fields": {
+        "normal_drop": "0", 
+        "normal_gold": 30000, 
+        "bg": "\u519b\u8425\u573a\u666f", 
+        "strength_modulus": 2.1, 
+        "level": 30, 
+        "tp": 1, 
+        "char_level": 15, 
+        "normal_exp": 0, 
+        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "name": "\u4e4c\u5de2\u52ab\u7cae II"
+    }
+},
+{
+    "pk": 103, 
+    "model": "stage.activelystage", 
+    "fields": {
+        "normal_drop": "0", 
+        "normal_gold": 40000, 
+        "bg": "\u519b\u8425\u573a\u666f", 
+        "strength_modulus": 2.2, 
+        "level": 45, 
+        "tp": 1, 
+        "char_level": 30, 
+        "normal_exp": 0, 
+        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "name": "\u4e4c\u5de2\u52ab\u7cae III"
+    }
+},
+{
+    "pk": 104, 
+    "model": "stage.activelystage", 
+    "fields": {
+        "normal_drop": "0", 
+        "normal_gold": 50000, 
+        "bg": "\u519b\u8425\u573a\u666f", 
+        "strength_modulus": 2.3, 
+        "level": 60, 
+        "tp": 1, 
+        "char_level": 45, 
+        "normal_exp": 0, 
+        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "name": "\u4e4c\u5de2\u52ab\u7cae IV"
+    }
+},
+{
+    "pk": 105, 
+    "model": "stage.activelystage", 
+    "fields": {
+        "normal_drop": "0", 
+        "normal_gold": 60000, 
+        "bg": "\u519b\u8425\u573a\u666f", 
+        "strength_modulus": 2.4, 
+        "level": 75, 
+        "tp": 1, 
+        "char_level": 60, 
+        "normal_exp": 0, 
+        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "name": "\u4e4c\u5de2\u52ab\u7cae V"
+    }
+},
+{
+    "pk": 201, 
+    "model": "stage.activelystage", 
+    "fields": {
+        "normal_drop": "301", 
+        "normal_gold": 0, 
+        "bg": "\u5c71\u8def\u573a\u666f ", 
+        "strength_modulus": 2.0, 
+        "level": 15, 
+        "tp": 2, 
+        "char_level": 1, 
+        "normal_exp": 0, 
+        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "name": "\u6218\u5357\u86ee I"
+    }
+},
+{
+    "pk": 202, 
+    "model": "stage.activelystage", 
+    "fields": {
+        "normal_drop": "301", 
+        "normal_gold": 0, 
+        "bg": "\u5c71\u8def\u573a\u666f ", 
+        "strength_modulus": 2.1, 
+        "level": 30, 
+        "tp": 2, 
+        "char_level": 15, 
+        "normal_exp": 0, 
+        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "name": "\u6218\u5357\u86ee II"
+    }
+},
+{
+    "pk": 203, 
+    "model": "stage.activelystage", 
+    "fields": {
+        "normal_drop": "302", 
+        "normal_gold": 0, 
+        "bg": "\u5c71\u8def\u573a\u666f ", 
+        "strength_modulus": 2.2, 
+        "level": 45, 
+        "tp": 2, 
+        "char_level": 30, 
+        "normal_exp": 0, 
+        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "name": "\u6218\u5357\u86ee III"
+    }
+},
+{
+    "pk": 204, 
+    "model": "stage.activelystage", 
+    "fields": {
+        "normal_drop": "302", 
+        "normal_gold": 0, 
+        "bg": "\u5c71\u8def\u573a\u666f ", 
+        "strength_modulus": 2.3, 
+        "level": 60, 
+        "tp": 2, 
+        "char_level": 45, 
+        "normal_exp": 0, 
+        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "name": "\u6218\u5357\u86ee IV"
+    }
+},
+{
+    "pk": 205, 
+    "model": "stage.activelystage", 
+    "fields": {
+        "normal_drop": "303", 
+        "normal_gold": 0, 
+        "bg": "\u5c71\u8def\u573a\u666f ", 
+        "strength_modulus": 2.4, 
+        "level": 75, 
+        "tp": 2, 
+        "char_level": 60, 
+        "normal_exp": 0, 
+        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "name": "\u6218\u5357\u86ee V"
+    }
+}
+]

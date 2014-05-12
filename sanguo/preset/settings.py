@@ -9,6 +9,10 @@ COUNTER = {
     'plunder': 10,        # 掠夺次数 免费
     'gethero': 1,        # 免费抽将次数
     'official_reward': 1,       # 官职每日登录领取奖励次数
+
+    'stage_elite': 3,                   # 精英关卡总次数
+    'stage_active_type_one': 3,         # 活动产金币关卡总次数
+    'stage_active_type_two': 3,         # 活动产宝石宝物关卡总次数
 }
 
 #########################

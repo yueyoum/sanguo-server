@@ -5,19 +5,15 @@ from core.exception import CounterOverFlow
 from preset.settings import COUNTER
 
 
-
-
 class Counter(object):
     def __init__(self, char_id, func_name):
         self.char_id = char_id
         self.func_name = func_name
-        self.key = '{0}.{1}'.format(char_id, func_name)
         try:
-            self.c = MongoCounter.objects.get(id=self.key)
+            self.c = MongoCounter.objects.get(id=self.char_id)
         except DoesNotExist:
-            self.c = MongoCounter()
-            self.c.id = self.key
-            self.c.cur_value = 0
+            self.c = MongoCounter(id=self.char_id)
+            self.c.counter = COUNTER
             self.c.save()
 
     @property
@@ -26,7 +22,7 @@ class Counter(object):
 
     @property
     def cur_value(self):
-        return self.c.cur_value
+        return self.c.counter[self.func_name]
 
     @property
     def remained_value(self):
@@ -37,6 +33,5 @@ class Counter(object):
         if self.remained_value < value:
             raise CounterOverFlow()
 
-        self.c.cur_value += value
+        self.c.counter[self.func_name] += value
         self.c.save()
-    

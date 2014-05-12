@@ -52,6 +52,7 @@ EQUIPMENTS = object_maker(_find_file('equipments.json'))
 BATTLES = object_maker(_find_file('battles.json'))
 STAGES = object_maker(_find_file('stages.json'))
 STAGE_ELITE = object_maker(_find_file('stage_elite.json'))
+STAGE_ACTIVITY = object_maker(_find_file('stage_activity.json'))
 STAGE_CHALLENGE = object_maker(_find_file('stage_challenge.json'))
 STAGE_DROP = object_maker(_find_file('stage_drop.json'))
 EFFECTS = object_maker(_find_file('effects.json'))
@@ -182,16 +183,9 @@ def HERO_GET_BY_GRADE(grade, amount=1):
 
     return res
 
-#
-# EQUIPMENTS_INITIAL = {}
-# for d in EQUIPMENTS.values():
-#     if d.step == 0:
-#         EQUIPMENTS_INITIAL[d.id] = d
-#
-#
-#
-#
-
+STAGE_ACTIVITY_CONDITION = {}
+for k, v in STAGE_ACTIVITY.iteritems():
+    STAGE_ACTIVITY_CONDITION.setdefault(v.char_level, []).append(k)
 
 
 STAGE_ELITE_CONDITION = {}
@@ -256,6 +250,8 @@ for s in STAGES.values():
 for s in STAGE_ELITE.values():
     s.decoded_monsters = _stage_decoded_monsters(s)
 
+for s in STAGE_ACTIVITY.values():
+    s.decoded_monsters = _stage_decoded_monsters(s)
 
 
 

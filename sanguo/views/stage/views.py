@@ -3,12 +3,35 @@
 __author__ = 'Wang Chao'
 __date__ = '4/9/14'
 
-from core.stage import Stage, Hang, EliteStage
+from core.stage import Stage, Hang, EliteStage, ActivityStage
 from core.attachment import standard_drop_to_attachment_protomsg
 from libs import pack_msg
 from utils.decorate import message_response, operate_guard, function_check
 
 import protomsg
+
+
+@message_response("ActivityStagePVEResponse")
+@operate_guard('activity_pve', 15, keep_result=False)
+def active_pve(request):
+    req = request._proto
+    stage = ActivityStage(request._char_id)
+
+    battle_msg = stage.battle(req.stage_id)
+    if battle_msg.self_win:
+        drop = stage.save_drop()
+    else:
+        drop = {}
+
+    response = protomsg.ActivityStagePVEResponse()
+    response.ret = 0
+    response.stage_id = req.stage_id
+    response.battle.MergeFrom(battle_msg)
+    if drop:
+        response.drop.MergeFrom(standard_drop_to_attachment_protomsg(drop))
+
+    return pack_msg(response)
+
 
 
 @message_response("ElitePVEResponse")
@@ -24,14 +47,12 @@ def elite_pve(request):
     else:
         drop = {}
 
-    print "Elite PVE. drop:"
-    print drop
-
     response = protomsg.ElitePVEResponse()
     response.ret = 0
     response.stage_id = req.stage_id
     response.battle.MergeFrom(battle_msg)
-    response.drop.MergeFrom(standard_drop_to_attachment_protomsg(drop))
+    if drop:
+        response.drop.MergeFrom(standard_drop_to_attachment_protomsg(drop))
 
     return pack_msg(response)
 
@@ -49,15 +70,13 @@ def pve(request):
     else:
         drop = {}
 
-    print "PVE. drop:"
-    print drop
-
     response = protomsg.PVEResponse()
     response.ret = 0
     response.stage_id = req.stage_id
     response.battle.MergeFrom(battle_msg)
+    if drop:
+        response.drop.MergeFrom(standard_drop_to_attachment_protomsg(drop))
 
-    response.drop.MergeFrom(standard_drop_to_attachment_protomsg(drop))
     return pack_msg(response)
 
 

@@ -2,6 +2,7 @@ from core.signals import char_level_up_signal, char_official_up_signal, char_gol
 from core.notify import update_hero_notify
 from core.hero import Hero, char_heros_dict
 from core.achievement import Achievement
+from core.stage import ActivityStage
 
 
 
@@ -18,6 +19,9 @@ def _char_level_up(char_id, new_level, **kwargs):
         heros.append(h)
 
     update_hero_notify(char_id, heros)
+
+    activity_stage = ActivityStage(char_id)
+    activity_stage.check(new_level)
 
 
 def _char_official_up(char_id, new_official, **kwargs):

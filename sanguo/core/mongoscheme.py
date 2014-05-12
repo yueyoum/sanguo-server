@@ -82,6 +82,8 @@ class MongoStage(Document):
     stage_new = IntField()
     # 开启的精英关卡, key 为关卡ID， value 为今日打的次数
     elites = DictField()
+    # 开启的活动关卡
+    activities = ListField(IntField())
 
     meta = {
         'collection': 'stage'
@@ -216,7 +218,8 @@ class MongoPrison(Document):
 
 class MongoCounter(Document):
     id = StringField(primary_key=True)
-    cur_value = IntField()
+    # key 是 preset.settings.COUNTER 中的key，值也是剩余的至
+    counter = DictField()
 
     meta = {
         'collection': 'counter'

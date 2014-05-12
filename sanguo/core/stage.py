@@ -8,14 +8,14 @@ from utils import pack_msg
 from core.msgpipe import publish_to_char
 from core.attachment import Attachment, standard_drop_to_attachment_protomsg, make_standard_drop_from_template, get_drop
 from core.achievement import Achievement
-import protomsg
 from core.exception import SanguoException
-from core.battle import PVE, ElitePVE
+from core.battle import PVE, ElitePVE, ActivityPVE
 from core.character import Char
 from core.timercheck import TimerCheckAbstractBase, timercheck
 from core.functionopen import FunctionOpen
 from core.mail import Mail
 from core.signals import pve_finished_signal
+from core.counter import Counter
 from preset.settings import (
     DATETIME_FORMAT,
     HANG_SECONDS,
@@ -26,8 +26,11 @@ from preset.settings import (
     HANG_RESET_MAIL_TITLE,
     HANG_RESET_MAIL_CONTENT,
 )
-from preset.data import STAGES, STAGE_ELITE, STAGE_ELITE_CONDITION
+from preset.data import STAGES, STAGE_ELITE, STAGE_ELITE_CONDITION, STAGE_ACTIVITY, STAGE_ACTIVITY_CONDITION
 from preset import errormsg
+
+import protomsg
+
 
 def max_star_stage_id(char_id):
     s = MongoStage.objects.get(id=char_id)
@@ -44,6 +47,7 @@ class Stage(object):
             self.stage.max_star_stage = 0
             self.stage.stage_new = 1
             self.stage.elites = {}
+            self.stage.activities = []
             self.stage.save()
 
         self.first = False
@@ -445,6 +449,7 @@ class EliteStage(object):
             self.stage = MongoStage(id=self.char_id)
             self.stage.stage_new = 1
             self.stage.elites = {}
+            self.stage.activities = []
             self.stage.save()
 
         self.check()
@@ -515,6 +520,15 @@ class EliteStage(object):
                 "StageElite {0} no times".format(_id)
             )
 
+        counter = Counter(self.char_id, 'stage_elite')
+        if counter.remained_value <= 0:
+            raise SanguoException(
+                errormsg.STAGE_ELITE_TOTAL_NO_TIMES,
+                self.char_id,
+                "StageElite Battle",
+                "stageElite no total times. battle {0}".format(_id)
+            )
+
         battle_msg = protomsg.Battle()
         b = ElitePVE(self.char_id, _id, battle_msg)
         b.start()
@@ -527,6 +541,9 @@ class EliteStage(object):
             msg.stage.id = _id
             msg.stage.current_times = self.stage.elites[str_id]
             publish_to_char(self.char_id, pack_msg(msg))
+
+            counter.incr()
+            self.send_remained_times_notify(times=counter.remained_value)
 
         return battle_msg
 
@@ -560,6 +577,135 @@ class EliteStage(object):
             s.current_times = times
 
         publish_to_char(self.char_id, pack_msg(msg))
+
+
+    def send_remained_times_notify(self, times=None):
+        if not times:
+            c = Counter(self.char_id, 'stage_elite')
+            times = c.remained_value
+
+        msg = protomsg.EliteStageRemainedTimesNotify()
+        msg.times = times
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
+
+class ActivityStage(object):
+    def __init__(self, char_id):
+        self.char_id = char_id
+        try:
+            self.stage = MongoStage.objects.get(id=self.char_id)
+        except DoesNotExist:
+            self.stage = MongoStage(id=self.char_id)
+            self.stage.stage_new = 1
+            self.stage.elites = {}
+            self.stage.activities = []
+            self.stage.save()
+
+
+    def check(self, char_level=None):
+        if not char_level:
+            char = Char(self.char_id)
+            char_level = char.mc.level
+
+        enabled = []
+        for k, v in STAGE_ACTIVITY_CONDITION.iteritems():
+            if char_level >= k:
+                for _v in v:
+                    if _v not in self.stage.activities:
+                        enabled.append(_v)
+
+        if enabled:
+            self.enable(enabled)
+
+
+    def enable(self, enabled):
+        self.stage.activities.extend(enabled)
+        self.stage.save()
+
+        msg = protomsg.NewActivityStageNotify()
+        msg.ids.extend(enabled)
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
+
+    def battle(self, _id):
+        try:
+            self.this_stage = STAGE_ACTIVITY[_id]
+        except KeyError:
+            raise SanguoException(
+                errormsg.STAGE_ACTIVITY_NOT_EXIST,
+                self.char_id,
+                "StageActivity Battle",
+                "StageActivity {0} not exist".format(_id)
+            )
+
+        if _id not in self.stage.activities:
+            raise SanguoException(
+                errormsg.STAGE_ACTIVITY_NOT_OPEN,
+                self.char_id,
+                "StageActivity Battle",
+                "StageActivity {0} not open".format(_id)
+            )
+
+        if self.this_stage.tp == 1:
+            func_name = 'stage_active_type_one'
+        else:
+            func_name = 'stage_active_type_two'
+
+        counter = Counter(self.char_id, func_name)
+        if counter.remained_value <= 0:
+            raise SanguoException(
+                errormsg.STAGE_ACTIVITY_TOTAL_NO_TIMES,
+                self.char_id,
+                "StageActivity Battle",
+                "StageActivity no total times. battle {0}".format(_id)
+            )
+
+        battle_msg = protomsg.Battle()
+        b = ActivityPVE(self.char_id, _id, battle_msg)
+        b.start()
+
+        if battle_msg.self_win:
+            counter.incr()
+            self.send_remained_times_notify()
+
+        return battle_msg
+
+
+    def save_drop(self):
+        if self.this_stage.tp == 1:
+            standard_drop = make_standard_drop_from_template()
+            standard_drop['gold'] = self.this_stage.normal_gold
+        else:
+            standard_drop = get_drop([int(i) for i in self.this_stage.normal_drop])
+
+        attachment = Attachment(self.char_id)
+        attachment.save_standard_drop(standard_drop, des="ActivityStage, save drop")
+        return standard_drop
+
+
+
+    def send_notify(self):
+        msg = protomsg.ActivityStageNotify()
+        msg.ids.extend(self.stage.activities)
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
+    def send_remained_times_notify(self):
+        msg = protomsg.ActivityStageRemainedTimesNotify()
+
+        counter = Counter(self.char_id, 'stage_active_type_one')
+        msg.type_one_times = counter.remained_value
+
+        counter.func_name = 'stage_active_type_two'
+        msg.type_one_times = counter.remained_value
+
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
+
+
 
 
 #

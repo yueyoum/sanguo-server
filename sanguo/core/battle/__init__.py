@@ -33,10 +33,11 @@ from core.formation import Formation
 from core.character import Char
 
 
-from preset.data import STAGES, STAGE_ELITE
+from preset.data import STAGES, STAGE_ELITE, STAGE_ACTIVITY
 
 class PVE(Battle):
     BATTLE_TYPE = 'PVE'
+    STAGE_MODEL = STAGES
     def load_my_heros(self, my_id=None):
         if my_id is None:
             my_id = self.my_id
@@ -57,8 +58,9 @@ class PVE(Battle):
 
         return my_heros
 
+
     def load_rival_heros(self):
-        stage = STAGES[self.rival_id]
+        stage = self.STAGE_MODEL[self.rival_id]
         monsters = stage.decoded_monsters
 
         rival_heros = []
@@ -70,6 +72,7 @@ class PVE(Battle):
                 rival_heros.append(h)
 
         return rival_heros
+
 
     def get_my_name(self, my_id=None):
         if my_id is None:
@@ -78,32 +81,19 @@ class PVE(Battle):
 
 
     def get_rival_name(self):
-        return STAGES[self.rival_id].name
+        return self.STAGE_MODEL[self.rival_id].name
 
 
 
 
 class ElitePVE(PVE):
     BATTLE_TYPE = 'ElitePVE'
-
-    def load_rival_heros(self):
-        stage = STAGE_ELITE[self.rival_id]
-        monsters = stage.decoded_monsters
-
-        rival_heros = []
-        for mid in monsters:
-            if mid == 0:
-                rival_heros.append(None)
-            else:
-                h = BattleMonster(mid, stage.level, stage.strength_modulus)
-                rival_heros.append(h)
-
-        return rival_heros
+    STAGE_MODEL = STAGE_ELITE
 
 
-    def get_rival_name(self):
-        return STAGE_ELITE[self.rival_id].name
-
+class ActivityPVE(PVE):
+    BATTLE_TYPE = 'ActivityPVE'
+    STAGE_MODEL = STAGE_ACTIVITY
 
 
 class PVP(PVE):
