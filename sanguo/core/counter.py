@@ -13,7 +13,7 @@ class Counter(object):
             self.c = MongoCounter.objects.get(id=self.char_id)
         except DoesNotExist:
             self.c = MongoCounter(id=self.char_id)
-            self.c.counter = COUNTER
+            self.c.counter = {k: 0 for k in COUNTER.keys()}
             self.c.save()
 
     @property

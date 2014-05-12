@@ -13,7 +13,7 @@ import protomsg
 
 @message_response("ActivityStagePVEResponse")
 @operate_guard('activity_pve', 15, keep_result=False)
-def active_pve(request):
+def activity_pve(request):
     req = request._proto
     stage = ActivityStage(request._char_id)
 
