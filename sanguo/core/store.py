@@ -33,7 +33,7 @@ class Store(object):
     def get_new_store(self):
         data = api_store_get({})
         store = data['data']['store']
-        return store
+        return {int(k): v for k, v in store.iteritems()}
 
     def buy(self, _id, amount):
         store = self.get_new_store()
