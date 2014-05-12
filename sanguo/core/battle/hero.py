@@ -487,10 +487,10 @@ class BattleMonster(InBattleHero):
         self.crit = info.crit
         self.dodge = 0
 
-        self.attack = int(self.attack * strength_modulus)
-        self.defense = int(self.defense * strength_modulus)
+        self.attack = self.attack * strength_modulus
+        self.defense = self.defense * strength_modulus
         self.hp = int(self.hp * strength_modulus)
-        self.crit = int(self.crit * strength_modulus)
+        self.crit = self.crit * strength_modulus
 
         self.anger = info.anger
 
