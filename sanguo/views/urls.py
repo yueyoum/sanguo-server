@@ -32,7 +32,7 @@ urlpatterns = patterns('',
                        url(r'^hang/$', 'views.stage.views.hang_start'),
                        url(r'^hang/cancel/$', 'views.stage.views.hang_cancel'),
                        url(r'^elitepve/$', 'views.stage.views.elite_pve'),
-                       url(r'^/activitypve//$', 'views.stage.views.activity_pve'),
+                       url(r'^activitypve//$', 'views.stage.views.activity_pve'),
 
                        url(r'^prize/$', 'views.prize.views.prize_get'),
 
