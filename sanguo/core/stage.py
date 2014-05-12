@@ -699,10 +699,9 @@ class ActivityStage(object):
         msg.type_one_times = counter.remained_value
 
         counter.func_name = 'stage_active_type_two'
-        msg.type_one_times = counter.remained_value
+        msg.type_two_times = counter.remained_value
 
         publish_to_char(self.char_id, pack_msg(msg))
-
 
 
 

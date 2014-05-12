@@ -302,65 +302,65 @@
     "pk": 24, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u7389\u5982\u610f", 
+        "name": "\u9526\u56ca", 
         "des": "", 
         "buy_sycee": 0, 
         "tp": 2, 
         "sell_gold": 1000, 
         "value": 1, 
-        "icon": ""
+        "icon": "\u5b9d\u7269-\u9526\u56ca"
     }
 },
 {
     "pk": 25, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u591c\u660e\u73e0", 
+        "name": "\u7389\u5982\u610f", 
         "des": "", 
         "buy_sycee": 0, 
         "tp": 2, 
         "sell_gold": 1500, 
         "value": 2, 
-        "icon": ""
+        "icon": "\u5b9d\u7269-\u5982\u610f"
     }
 },
 {
     "pk": 26, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u548c\u6c0f\u74a7", 
+        "name": "\u6f06\u5668", 
         "des": "", 
         "buy_sycee": 0, 
         "tp": 2, 
         "sell_gold": 5000, 
         "value": 3, 
-        "icon": ""
+        "icon": "\u5b9d\u7269-\u6f06\u5668"
     }
 },
 {
     "pk": 27, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u9f99\u4e4b\u65b9\u58f6", 
+        "name": "\u5b9d\u9f0e", 
         "des": "", 
         "buy_sycee": 0, 
         "tp": 2, 
         "sell_gold": 10000, 
         "value": 8, 
-        "icon": ""
+        "icon": "\u5b9d\u7269-\u9f0e"
     }
 },
 {
     "pk": 28, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u6f06\u6d82\u4e4b\u9f0e", 
+        "name": "\u5b9d\u5370", 
         "des": "", 
         "buy_sycee": 0, 
         "tp": 2, 
         "sell_gold": 20000, 
         "value": 30, 
-        "icon": ""
+        "icon": "\u5b9d\u7269-\u5b9d\u5370"
     }
 }
 ]
