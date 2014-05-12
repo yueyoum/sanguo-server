@@ -138,7 +138,7 @@ class Store(object):
 
 
         # 扣钱
-        if this_goods.sell_tp == 1:
+        if this_goods.sell_type == 1:
             char.update(gold=-wealth_needs, des='Store Buy {0} * {1}. Cost'.format(_id, amount))
         else:
             char.update(sycee=-wealth_needs, des='Store Buy {0} * {1}. Cost'.format(_id, amount))
