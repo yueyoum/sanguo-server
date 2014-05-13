@@ -6,13 +6,14 @@
         "normal_drop": "0", 
         "normal_gold": 20000, 
         "bg": "\u519b\u8425\u573a\u666f", 
-        "strength_modulus": 2.0, 
-        "level": 15, 
+        "strength_modulus": 1.4, 
+        "level": 12, 
         "tp": 1, 
+        "battle_name": "\u4e4c\u5de2\u52ab\u7cae", 
         "char_level": 1, 
         "normal_exp": 0, 
         "monsters": "8,8,8,5,5,5,12,15,12", 
-        "name": "\u4e4c\u5de2\u52ab\u7cae I"
+        "name": "\u96be\u5ea6\u4e00"
     }
 },
 {
@@ -22,13 +23,14 @@
         "normal_drop": "0", 
         "normal_gold": 30000, 
         "bg": "\u519b\u8425\u573a\u666f", 
-        "strength_modulus": 2.1, 
-        "level": 30, 
+        "strength_modulus": 1.6, 
+        "level": 26, 
         "tp": 1, 
+        "battle_name": "\u4e4c\u5de2\u52ab\u7cae", 
         "char_level": 15, 
         "normal_exp": 0, 
         "monsters": "8,8,8,5,5,5,12,15,12", 
-        "name": "\u4e4c\u5de2\u52ab\u7cae II"
+        "name": "\u96be\u5ea6\u4e8c"
     }
 },
 {
@@ -38,13 +40,14 @@
         "normal_drop": "0", 
         "normal_gold": 40000, 
         "bg": "\u519b\u8425\u573a\u666f", 
-        "strength_modulus": 2.2, 
-        "level": 45, 
+        "strength_modulus": 1.8, 
+        "level": 40, 
         "tp": 1, 
+        "battle_name": "\u4e4c\u5de2\u52ab\u7cae", 
         "char_level": 30, 
         "normal_exp": 0, 
         "monsters": "8,8,8,5,5,5,12,15,12", 
-        "name": "\u4e4c\u5de2\u52ab\u7cae III"
+        "name": "\u96be\u5ea6\u4e09"
     }
 },
 {
@@ -54,13 +57,14 @@
         "normal_drop": "0", 
         "normal_gold": 50000, 
         "bg": "\u519b\u8425\u573a\u666f", 
-        "strength_modulus": 2.3, 
-        "level": 60, 
+        "strength_modulus": 2.0, 
+        "level": 55, 
         "tp": 1, 
+        "battle_name": "\u4e4c\u5de2\u52ab\u7cae", 
         "char_level": 45, 
         "normal_exp": 0, 
         "monsters": "8,8,8,5,5,5,12,15,12", 
-        "name": "\u4e4c\u5de2\u52ab\u7cae IV"
+        "name": "\u96be\u5ea6\u56db"
     }
 },
 {
@@ -70,13 +74,14 @@
         "normal_drop": "0", 
         "normal_gold": 60000, 
         "bg": "\u519b\u8425\u573a\u666f", 
-        "strength_modulus": 2.4, 
-        "level": 75, 
+        "strength_modulus": 2.2, 
+        "level": 70, 
         "tp": 1, 
+        "battle_name": "\u4e4c\u5de2\u52ab\u7cae", 
         "char_level": 60, 
         "normal_exp": 0, 
         "monsters": "8,8,8,5,5,5,12,15,12", 
-        "name": "\u4e4c\u5de2\u52ab\u7cae V"
+        "name": "\u96be\u5ea6\u4e94"
     }
 },
 {
@@ -86,13 +91,14 @@
         "normal_drop": "301", 
         "normal_gold": 0, 
         "bg": "\u5c71\u8def\u573a\u666f ", 
-        "strength_modulus": 2.0, 
-        "level": 15, 
+        "strength_modulus": 1.4, 
+        "level": 12, 
         "tp": 2, 
+        "battle_name": "\u6218\u5357\u86ee", 
         "char_level": 1, 
         "normal_exp": 0, 
         "monsters": "8,8,8,5,5,5,12,15,12", 
-        "name": "\u6218\u5357\u86ee I"
+        "name": "\u96be\u5ea6\u4e00"
     }
 },
 {
@@ -102,13 +108,14 @@
         "normal_drop": "301", 
         "normal_gold": 0, 
         "bg": "\u5c71\u8def\u573a\u666f ", 
-        "strength_modulus": 2.1, 
-        "level": 30, 
+        "strength_modulus": 1.6, 
+        "level": 26, 
         "tp": 2, 
+        "battle_name": "\u6218\u5357\u86ee", 
         "char_level": 15, 
         "normal_exp": 0, 
         "monsters": "8,8,8,5,5,5,12,15,12", 
-        "name": "\u6218\u5357\u86ee II"
+        "name": "\u96be\u5ea6\u4e8c"
     }
 },
 {
@@ -118,13 +125,14 @@
         "normal_drop": "302", 
         "normal_gold": 0, 
         "bg": "\u5c71\u8def\u573a\u666f ", 
-        "strength_modulus": 2.2, 
-        "level": 45, 
+        "strength_modulus": 1.8, 
+        "level": 40, 
         "tp": 2, 
+        "battle_name": "\u6218\u5357\u86ee", 
         "char_level": 30, 
         "normal_exp": 0, 
         "monsters": "8,8,8,5,5,5,12,15,12", 
-        "name": "\u6218\u5357\u86ee III"
+        "name": "\u96be\u5ea6\u4e09"
     }
 },
 {
@@ -134,13 +142,14 @@
         "normal_drop": "302", 
         "normal_gold": 0, 
         "bg": "\u5c71\u8def\u573a\u666f ", 
-        "strength_modulus": 2.3, 
-        "level": 60, 
+        "strength_modulus": 2.0, 
+        "level": 55, 
         "tp": 2, 
+        "battle_name": "\u6218\u5357\u86ee", 
         "char_level": 45, 
         "normal_exp": 0, 
         "monsters": "8,8,8,5,5,5,12,15,12", 
-        "name": "\u6218\u5357\u86ee IV"
+        "name": "\u96be\u5ea6\u56db"
     }
 },
 {
@@ -150,13 +159,14 @@
         "normal_drop": "303", 
         "normal_gold": 0, 
         "bg": "\u5c71\u8def\u573a\u666f ", 
-        "strength_modulus": 2.4, 
-        "level": 75, 
+        "strength_modulus": 2.2, 
+        "level": 70, 
         "tp": 2, 
+        "battle_name": "\u6218\u5357\u86ee", 
         "char_level": 60, 
         "normal_exp": 0, 
         "monsters": "8,8,8,5,5,5,12,15,12", 
-        "name": "\u6218\u5357\u86ee V"
+        "name": "\u96be\u5ea6\u4e94"
     }
 }
 ]

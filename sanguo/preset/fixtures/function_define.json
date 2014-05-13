@@ -73,8 +73,8 @@
     "pk": 8, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
-        "stage_id": 15, 
+        "char_level": 15, 
+        "stage_id": 0, 
         "name": "\u6bd4\u6b66\u529f\u80fd", 
         "text": "\u6bd4\u6b66\u529f\u80fd\u5f00\u542f\uff0c\u901a\u8fc7\u6bd4\u6b66\u53ef\u63d0\u5347\u5b98\u804c\u7b49\u7ea7\uff0c\u6bcf\u5929\u8fd8\u53ef\u9886\u53d6\u6392\u540d\u5956\u52b1"
     }
