@@ -216,9 +216,7 @@ class Hero(FightPowerMixin):
                 )
             item.stuff_remove(22, amount_diff)
 
-        hs.remove_soul([(self.oid, self_soul_amount)])
         hs.purge_soul(self.oid)
-
 
     def step_up(self):
         # 升阶
