@@ -364,12 +364,15 @@ class SaveHeroResult(object):
     __slots__ = ['id_range', 'actual_heros', 'to_souls']
 
 
+def get_char_hero_oids(char_id):
+    heros = MongoHero.objects.filter(char=char_id)
+    return [h.oid for h in heros]
+
 def save_hero(char_id, hero_original_ids, add_notify=True):
     if not isinstance(hero_original_ids, (list, tuple)):
         hero_original_ids = [hero_original_ids]
 
-    char_heros = MongoHero.objects.filter(char=char_id)
-    char_hero_oids = set( [h.oid for h in char_heros] )
+    char_hero_oids = get_char_hero_oids(char_id)
 
     to_soul_hero_ids = []
     for h in hero_original_ids[:]:
@@ -415,6 +418,24 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
     res.actual_heros = hero_original_ids
     res.to_souls = souls.items()
     return res
+
+
+def recruit_hero(char_id, _id):
+    char_hero_oids = get_char_hero_oids(char_id)
+    if _id in char_hero_oids:
+        raise SanguoException(
+            errormsg.SOUL_CAN_NOT_RECRUIT,
+            char_id,
+            "Recruit Hero",
+            "Hero {0} already exist".format(_id)
+        )
+
+    soul_amount = external_calculate.Hero.step_up_using_soul_amount(HEROS[_id].quality)
+    hs = HeroSoul(char_id)
+    hs.remove_soul([(_id, soul_amount)])
+
+    save_hero(char_id, [_id])
+
 
 
 def delete_hero(char_id, ids):

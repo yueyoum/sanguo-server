@@ -16,6 +16,7 @@ urlpatterns = patterns('',
                        url(r'^socket/set/$', 'views.formation.views.set_socket'),
 
                        url(r'^hero/stepup/$', 'views.hero.views.step_up'),
+                       url(r'^hero/recruit/$', 'views.hero.views.recruit'),
 
                        url(r'^hero/get/$', 'views.heropanel.views.open'),
                        url(r'^heropanel/refresh/$', 'views.heropanel.views.refresh'),

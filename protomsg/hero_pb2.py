@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='hero.proto',
   package='Sanguo.protocol.hero',
-  serialized_pb='\n\nhero.proto\x12\x14Sanguo.protocol.hero\"\xb9\x01\n\x04Hero\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x13\n\x0boriginal_id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x03 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x04 \x02(\x05\x12\n\n\x02hp\x18\x05 \x02(\x05\x12\x0c\n\x04\x63irt\x18\x06 \x02(\x05\x12\x0c\n\x04step\x18\x07 \x02(\x05\x12\r\n\x05power\x18\x08 \x02(\x05\x12\x19\n\x11max_socket_amount\x18\t \x02(\x05\x12\x1d\n\x15\x63urrent_socket_amount\x18\n \x02(\x05\"&\n\x08HeroSoul\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"T\n\x0eHeroSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\therosouls\x18\x02 \x03(\x0b\x32\x1e.Sanguo.protocol.hero.HeroSoul\"W\n\x11\x41\x64\x64HeroSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\therosouls\x18\x02 \x03(\x0b\x32\x1e.Sanguo.protocol.hero.HeroSoul\"Z\n\x14UpdateHeroSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\therosouls\x18\x02 \x03(\x0b\x32\x1e.Sanguo.protocol.hero.HeroSoul\"4\n\x14RemoveHeroSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"H\n\nHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"K\n\rAddHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"0\n\x10RemoveHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"N\n\x10UpdateHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"\x83\x02\n\x12GetHeroPanelNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x17\n\x0frefresh_seconds\x18\x02 \x02(\x05\x12\x12\n\nfree_times\x18\x03 \x02(\x05\x12\x12\n\nopen_sycee\x18\x04 \x02(\x05\x12\x15\n\rrefresh_sycee\x18\x05 \x02(\x05\x12\x45\n\x07sockets\x18\x06 \x03(\x0b\x32\x34.Sanguo.protocol.hero.GetHeroPanelNotify.PanelSocket\x12\x11\n\tnew_start\x18\x07 \x02(\x08\x1a*\n\x0bPanelSocket\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0f\n\x07hero_id\x18\x02 \x02(\x05\"-\n\x0eGetHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"M\n\x0fGetHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\n\n\x02id\x18\x03 \x01(\x05\x12\x10\n\x08hero_oid\x18\x04 \x01(\x05\"&\n\x13GetHeroStartRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"4\n\x14GetHeroStartResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"(\n\x15GetHeroRefreshRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"6\n\x16GetHeroRefreshResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x11HeroStepUpRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"2\n\x12HeroStepUpResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\";\n\x10MergeHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x16\n\x0eusing_hero_ids\x18\x02 \x03(\x05\"1\n\x11MergeHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"I\n\x10HeroToSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07hero_id\x18\x02 \x02(\x05\x12\x13\n\x0bsoul_amount\x18\x03 \x02(\x05')
+  serialized_pb='\n\nhero.proto\x12\x14Sanguo.protocol.hero\"\xb9\x01\n\x04Hero\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x13\n\x0boriginal_id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x03 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x04 \x02(\x05\x12\n\n\x02hp\x18\x05 \x02(\x05\x12\x0c\n\x04\x63irt\x18\x06 \x02(\x05\x12\x0c\n\x04step\x18\x07 \x02(\x05\x12\r\n\x05power\x18\x08 \x02(\x05\x12\x19\n\x11max_socket_amount\x18\t \x02(\x05\x12\x1d\n\x15\x63urrent_socket_amount\x18\n \x02(\x05\"&\n\x08HeroSoul\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"T\n\x0eHeroSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\therosouls\x18\x02 \x03(\x0b\x32\x1e.Sanguo.protocol.hero.HeroSoul\"W\n\x11\x41\x64\x64HeroSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\therosouls\x18\x02 \x03(\x0b\x32\x1e.Sanguo.protocol.hero.HeroSoul\"Z\n\x14UpdateHeroSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\therosouls\x18\x02 \x03(\x0b\x32\x1e.Sanguo.protocol.hero.HeroSoul\"4\n\x14RemoveHeroSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"H\n\nHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"K\n\rAddHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"0\n\x10RemoveHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"N\n\x10UpdateHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"\x83\x02\n\x12GetHeroPanelNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x17\n\x0frefresh_seconds\x18\x02 \x02(\x05\x12\x12\n\nfree_times\x18\x03 \x02(\x05\x12\x12\n\nopen_sycee\x18\x04 \x02(\x05\x12\x15\n\rrefresh_sycee\x18\x05 \x02(\x05\x12\x45\n\x07sockets\x18\x06 \x03(\x0b\x32\x34.Sanguo.protocol.hero.GetHeroPanelNotify.PanelSocket\x12\x11\n\tnew_start\x18\x07 \x02(\x08\x1a*\n\x0bPanelSocket\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0f\n\x07hero_id\x18\x02 \x02(\x05\"-\n\x0eGetHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"M\n\x0fGetHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\n\n\x02id\x18\x03 \x01(\x05\x12\x10\n\x08hero_oid\x18\x04 \x01(\x05\"&\n\x13GetHeroStartRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"4\n\x14GetHeroStartResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"(\n\x15GetHeroRefreshRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"6\n\x16GetHeroRefreshResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x11HeroStepUpRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"2\n\x12HeroStepUpResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\";\n\x10MergeHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x16\n\x0eusing_hero_ids\x18\x02 \x03(\x05\"1\n\x11MergeHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"I\n\x10HeroToSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07hero_id\x18\x02 \x02(\x05\x12\x13\n\x0bsoul_amount\x18\x03 \x02(\x05\"1\n\x12HeroRecruitRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"3\n\x13HeroRecruitResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
 
 
 
@@ -919,6 +919,76 @@ _HEROTOSOULNOTIFY = _descriptor.Descriptor(
   serialized_end=1733,
 )
 
+
+_HERORECRUITREQUEST = _descriptor.Descriptor(
+  name='HeroRecruitRequest',
+  full_name='Sanguo.protocol.hero.HeroRecruitRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.hero.HeroRecruitRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='Sanguo.protocol.hero.HeroRecruitRequest.id', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1735,
+  serialized_end=1784,
+)
+
+
+_HERORECRUITRESPONSE = _descriptor.Descriptor(
+  name='HeroRecruitResponse',
+  full_name='Sanguo.protocol.hero.HeroRecruitResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.hero.HeroRecruitResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.hero.HeroRecruitResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1786,
+  serialized_end=1837,
+)
+
 _HEROSOULNOTIFY.fields_by_name['herosouls'].message_type = _HEROSOUL
 _ADDHEROSOULNOTIFY.fields_by_name['herosouls'].message_type = _HEROSOUL
 _UPDATEHEROSOULNOTIFY.fields_by_name['herosouls'].message_type = _HEROSOUL
@@ -949,6 +1019,8 @@ DESCRIPTOR.message_types_by_name['HeroStepUpResponse'] = _HEROSTEPUPRESPONSE
 DESCRIPTOR.message_types_by_name['MergeHeroRequest'] = _MERGEHEROREQUEST
 DESCRIPTOR.message_types_by_name['MergeHeroResponse'] = _MERGEHERORESPONSE
 DESCRIPTOR.message_types_by_name['HeroToSoulNotify'] = _HEROTOSOULNOTIFY
+DESCRIPTOR.message_types_by_name['HeroRecruitRequest'] = _HERORECRUITREQUEST
+DESCRIPTOR.message_types_by_name['HeroRecruitResponse'] = _HERORECRUITRESPONSE
 
 class Hero(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
@@ -1087,6 +1159,18 @@ class HeroToSoulNotify(_message.Message):
   DESCRIPTOR = _HEROTOSOULNOTIFY
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.hero.HeroToSoulNotify)
+
+class HeroRecruitRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _HERORECRUITREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.hero.HeroRecruitRequest)
+
+class HeroRecruitResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _HERORECRUITRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.hero.HeroRecruitResponse)
 
 
 # @@protoc_insertion_point(module_scope)

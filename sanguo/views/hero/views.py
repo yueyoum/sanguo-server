@@ -5,7 +5,7 @@ __date__ = '4/9/14'
 
 
 from utils.decorate import message_response, function_check
-from core.hero import Hero, char_heros_dict
+from core.hero import Hero, char_heros_dict, recruit_hero
 from core.exception import SanguoException
 from preset import errormsg
 
@@ -30,3 +30,9 @@ def step_up(request):
     h = Hero(_id)
     h.step_up()
     return None
+
+@message_response("HeroRecruitResponse")
+def recruit(request):
+    recruit_hero(request._char_id, request._proto.id)
+    return None
+
