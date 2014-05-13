@@ -5,7 +5,7 @@ __date__ = '2/12/14'
 
 from mongoscheme import DoesNotExist
 from core.mongoscheme import MongoAchievement
-from core.attachment import Attachment, get_drop, standard_drop_to_attachment_protomsg
+from core.attachment import Attachment, get_drop, standard_drop_to_attachment_protomsg, save_standard_drop
 
 
 from core.msgpipe import publish_to_char
@@ -188,7 +188,7 @@ class Achievement(object):
         drops = get_drop(ps)
         drops['sycee'] += sycee if sycee else 0
 
-        Attachment(self.char_id).save_standard_drop(drops, des="Achievement {0} reward".format(aid))
+        drops = save_standard_drop(self.char_id, drops, des="Achievement {0} reward".format(aid))
         return drops
 
 

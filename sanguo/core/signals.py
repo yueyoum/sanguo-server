@@ -22,5 +22,6 @@ hero_step_up_signal = Signal(providing_args=['char_id', 'hero_id', 'new_step'])
 hero_changed_signal = Signal(providing_args=['hero_id'])
 hero_add_signal = Signal(providing_args=['char_id', 'hero_ids', 'hero_original_ids', 'send_notify'])
 hero_del_signal = Signal(providing_args=['char_id', 'hero_ids'])
+hero_to_soul_signal = Signal(providing_args=['char_id', 'souls'])
 
 equip_changed_signal = Signal(providing_args=['char_id', 'equip_obj'])

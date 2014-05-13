@@ -43,6 +43,7 @@ RESPONSE_NOTIFY_TYPE = {
     "AddHeroSoulNotify": 351,
     "UpdateHeroSoulNotify": 352,
     "RemoveHeroSoulNotify": 353,
+    "HeroToSoulNotify": 354,
     "SetFormationResponse": 401,
     "FormationNotify": 402,
     "AddSocketNotify": 403,

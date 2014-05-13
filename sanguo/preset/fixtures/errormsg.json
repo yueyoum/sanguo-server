@@ -350,6 +350,16 @@
     }
 },
 {
+    "pk": 401, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HERO_STEP_UP_ALL_NOT_ENOUGH", 
+        "text_zh": "\u5361\u9b42\u4e0d\u591f\uff0c\u65e0\u6cd5\u5347\u9636", 
+        "des": "", 
+        "area": ""
+    }
+},
+{
     "pk": 500, 
     "model": "errormsg.errormsg", 
     "fields": {

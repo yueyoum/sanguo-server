@@ -3,6 +3,7 @@ from core.signals import (
     hero_del_signal,
     hero_changed_signal,
     hero_step_up_signal,
+    hero_to_soul_signal,
     socket_changed_signal,
     )
 
@@ -16,6 +17,11 @@ from core.hero import Hero, char_heros_dict
 from core.achievement import Achievement
 from preset.data import HEROS
 from preset.settings import HERO_MAX_STEP
+
+from protomsg import HeroToSoulNotify
+
+from utils import pack_msg
+from core.msgpipe import publish_to_char
 
 
 def _hero_add(char_id, hero_ids, hero_original_ids, send_notify, **kwargs):
@@ -68,6 +74,13 @@ def _hero_change(hero_id, **kwargs):
         [hero,]
     )
 
+def _hero_to_soul(char_id, souls, **kwargs):
+    for _id, _amount in souls:
+        msg = HeroToSoulNotify()
+        msg.hero_id = char_id
+        msg.soul_amount = _amount
+        publish_to_char(char_id, pack_msg(msg))
+
 
 def _hero_step_up(char_id, hero_id, new_step, **kwargs):
     achievement = Achievement(char_id)
@@ -95,6 +108,10 @@ hero_step_up_signal.connect(
     dispatch_uid='callbacks.signals.hero._hero_step_up'
 )
 
+hero_to_soul_signal.connect(
+    _hero_to_soul,
+    dispatch_uid='callbacks.signals.hero._hero_to_soul'
+)
 
 
 def _hero_attribute_change(socket_obj, **kwargs):

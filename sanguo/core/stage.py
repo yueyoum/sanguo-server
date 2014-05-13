@@ -6,7 +6,7 @@ from core.mongoscheme import MongoStage, MongoEmbededPlunderLog, MongoHang, Mong
 from utils import timezone
 from utils import pack_msg
 from core.msgpipe import publish_to_char
-from core.attachment import Attachment, standard_drop_to_attachment_protomsg, make_standard_drop_from_template, get_drop
+from core.attachment import Attachment, standard_drop_to_attachment_protomsg, make_standard_drop_from_template, get_drop, save_standard_drop
 from core.achievement import Achievement
 from core.exception import SanguoException
 from core.battle import PVE, ElitePVE, ActivityPVE
@@ -171,9 +171,7 @@ class Stage(object):
             standard_drop['exp'] = 0
             standard_drop['official_exp'] = 0
 
-        attachment = Attachment(self.char_id)
-        attachment.save_standard_drop(standard_drop, des='Stage, save drop')
-
+        standard_drop = save_standard_drop(self.char_id, standard_drop, des="Stage {0} drop".format(stage_id))
         return standard_drop
 
 
@@ -398,8 +396,7 @@ class Hang(TimerCheckAbstractBase):
         self.hang_doing = None
         self.send_notify()
 
-        attachment = Attachment(self.char_id)
-        attachment.save_standard_drop(standard_drop, des='Hang Reward')
+        standard_drop = save_standard_drop(self.char_id, standard_drop, des="Hang Reward")
 
         achievement = Achievement(self.char_id)
         achievement.trig(29, drop_exp)
@@ -563,9 +560,7 @@ class EliteStage(object):
         standard_drop['gold'] += gold
         standard_drop['exp'] += exp
 
-        attachment = Attachment(self.char_id)
-        attachment.save_standard_drop(standard_drop, des='EliteStage, save drop')
-
+        standard_drop = save_standard_drop(self.char_id, standard_drop, des="EliteStage {0} drop".format(this_stage.id))
         return standard_drop
 
 
@@ -680,10 +675,8 @@ class ActivityStage(object):
         else:
             standard_drop = get_drop([int(i) for i in self.this_stage.normal_drop])
 
-        attachment = Attachment(self.char_id)
-        attachment.save_standard_drop(standard_drop, des="ActivityStage, save drop")
+        standard_drop = save_standard_drop(self.char_id, standard_drop, des="ActivityStage {0} drop".format(self.this_stage.id))
         return standard_drop
-
 
 
     def send_notify(self):

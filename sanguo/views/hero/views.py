@@ -27,7 +27,6 @@ def step_up(request):
             "hero {0} not belong to char {1}".format(_id, char_id)
         )
 
-
     h = Hero(_id)
-    h.step_up(req.method)
+    h.step_up()
     return None

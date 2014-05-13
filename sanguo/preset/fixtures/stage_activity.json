@@ -12,7 +12,7 @@
         "battle_name": "\u4e4c\u5de2\u52ab\u7cae", 
         "char_level": 1, 
         "normal_exp": 0, 
-        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "monsters": "8,13,8,5,15,5,12,20,12", 
         "name": "\u96be\u5ea6\u4e00"
     }
 },
@@ -29,7 +29,7 @@
         "battle_name": "\u4e4c\u5de2\u52ab\u7cae", 
         "char_level": 15, 
         "normal_exp": 0, 
-        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "monsters": "8,13,8,5,15,5,12,20,12", 
         "name": "\u96be\u5ea6\u4e8c"
     }
 },
@@ -46,7 +46,7 @@
         "battle_name": "\u4e4c\u5de2\u52ab\u7cae", 
         "char_level": 30, 
         "normal_exp": 0, 
-        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "monsters": "8,13,8,5,15,5,12,20,12", 
         "name": "\u96be\u5ea6\u4e09"
     }
 },
@@ -63,7 +63,7 @@
         "battle_name": "\u4e4c\u5de2\u52ab\u7cae", 
         "char_level": 45, 
         "normal_exp": 0, 
-        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "monsters": "8,13,8,5,15,5,12,20,12", 
         "name": "\u96be\u5ea6\u56db"
     }
 },
@@ -80,7 +80,7 @@
         "battle_name": "\u4e4c\u5de2\u52ab\u7cae", 
         "char_level": 60, 
         "normal_exp": 0, 
-        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "monsters": "8,13,8,5,15,5,12,20,12", 
         "name": "\u96be\u5ea6\u4e94"
     }
 },
@@ -88,7 +88,7 @@
     "pk": 201, 
     "model": "stage.activelystage", 
     "fields": {
-        "normal_drop": "301", 
+        "normal_drop": "301,110", 
         "normal_gold": 0, 
         "bg": "\u5c71\u8def\u573a\u666f ", 
         "strength_modulus": 1.4, 
@@ -97,7 +97,7 @@
         "battle_name": "\u6218\u5357\u86ee", 
         "char_level": 1, 
         "normal_exp": 0, 
-        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "monsters": "8,174,8,5,118,5,12,150,12", 
         "name": "\u96be\u5ea6\u4e00"
     }
 },
@@ -105,7 +105,7 @@
     "pk": 202, 
     "model": "stage.activelystage", 
     "fields": {
-        "normal_drop": "301", 
+        "normal_drop": "301,111", 
         "normal_gold": 0, 
         "bg": "\u5c71\u8def\u573a\u666f ", 
         "strength_modulus": 1.6, 
@@ -114,7 +114,7 @@
         "battle_name": "\u6218\u5357\u86ee", 
         "char_level": 15, 
         "normal_exp": 0, 
-        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "monsters": "8,174,8,5,118,5,12,150,12", 
         "name": "\u96be\u5ea6\u4e8c"
     }
 },
@@ -122,7 +122,7 @@
     "pk": 203, 
     "model": "stage.activelystage", 
     "fields": {
-        "normal_drop": "302", 
+        "normal_drop": "302,112", 
         "normal_gold": 0, 
         "bg": "\u5c71\u8def\u573a\u666f ", 
         "strength_modulus": 1.8, 
@@ -131,7 +131,7 @@
         "battle_name": "\u6218\u5357\u86ee", 
         "char_level": 30, 
         "normal_exp": 0, 
-        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "monsters": "8,174,8,5,118,5,12,150,12", 
         "name": "\u96be\u5ea6\u4e09"
     }
 },
@@ -139,7 +139,7 @@
     "pk": 204, 
     "model": "stage.activelystage", 
     "fields": {
-        "normal_drop": "302", 
+        "normal_drop": "302,113", 
         "normal_gold": 0, 
         "bg": "\u5c71\u8def\u573a\u666f ", 
         "strength_modulus": 2.0, 
@@ -148,7 +148,7 @@
         "battle_name": "\u6218\u5357\u86ee", 
         "char_level": 45, 
         "normal_exp": 0, 
-        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "monsters": "8,174,8,5,118,5,12,150,12", 
         "name": "\u96be\u5ea6\u56db"
     }
 },
@@ -156,7 +156,7 @@
     "pk": 205, 
     "model": "stage.activelystage", 
     "fields": {
-        "normal_drop": "303", 
+        "normal_drop": "303,114", 
         "normal_gold": 0, 
         "bg": "\u5c71\u8def\u573a\u666f ", 
         "strength_modulus": 2.2, 
@@ -165,7 +165,7 @@
         "battle_name": "\u6218\u5357\u86ee", 
         "char_level": 60, 
         "normal_exp": 0, 
-        "monsters": "8,8,8,5,5,5,12,15,12", 
+        "monsters": "8,174,8,5,118,5,12,150,12", 
         "name": "\u96be\u5ea6\u4e94"
     }
 }

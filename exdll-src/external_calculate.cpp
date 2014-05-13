@@ -1,6 +1,13 @@
 #include <math.h>
 #include "external_calculate.h"
 
+const float Hero::step_diff = 1.08;
+const int Hero::modulus_attack = 20;
+const int Hero::modulus_defense = 15;
+const int Hero::modulus_hp = 45;
+
+const int Hero::hero_to_soul_table[] = {120, 60, 30};
+const int Hero::step_up_gold_table[] = {10000, 5000, 1000};
 
 
 int Hero::_calculate(int m, int level, int step, int quality, float growing)
@@ -23,6 +30,18 @@ int Hero::defense(int level, int step, int quality, float growing)
 int Hero::hp(int level, int step, int quality, float growing)
 {
     return _calculate(modulus_hp, level, step, quality, growing);
+}
+
+int Hero::step_up_using_soul_amount(int quality)
+{
+    if(quality <1 or quality >3) return 0;
+    return hero_to_soul_table[quality-1];
+}
+
+int Hero::step_up_using_gold(int quality)
+{
+    if(quality <1 or quality >3) return 0;
+    return step_up_gold_table[quality-1];
 }
 
 

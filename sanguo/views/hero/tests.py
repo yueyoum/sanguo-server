@@ -23,7 +23,7 @@ class HeroTest(TestCase):
         self.char_id = 1
         self.session = crypto.encrypt('1:1:{0}'.format(self.char_id))
 
-        id_range = save_hero(self.char_id, 1)
+        id_range = save_hero(self.char_id, 1).id_range
         self.hero_id = id_range[0]
 
 

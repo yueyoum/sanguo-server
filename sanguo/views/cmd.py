@@ -1,43 +1,36 @@
 from django.http import HttpResponse
 
-from core.character import Char
-from core.item import Item
-from core.hero import save_hero
-
+from core.attachment import make_standard_drop_from_template, save_standard_drop
 
 def cmd(request):
     req = request._proto
     char_id = request._char_id
 
-    char = Char(char_id)
+    if req.action == 2:
+        print "Unsupported"
+        return
 
-    if req.action == 1:
-        if req.tp == 1:
-            char.update(exp=req.param, des="Cmd")
-        elif req.tp == 2:
-            # FIXME
-            print "UnSupported"
-        elif req.tp == 3:
-            char.update(gold=req.param, des='Cmd')
-        elif req.tp == 4:
-            char.update(sycee=req.param, des='Cmd')
-        elif req.tp == 5:
-            item = Item(char_id)
-            item.equip_add(req.param)
-        elif req.tp == 6:
-            item = Item(char_id)
-            item.gem_add([(req.param, 1)])
-        elif req.tp == 7:
-            save_hero(char_id, req.param)
-        elif req.tp == 8:
-            item = Item(char_id)
-            item.stuff_add([(req.param, 1)])
-    elif req.action == 2:
-        if req.tp == 5:
-            item = Item(char_id)
-            item.equip_remove(req.param)
-        elif req.tp == 6:
-            item = Item(char_id)
-            item.gem_remove(req.param, 1)
+    drop = make_standard_drop_from_template()
+    if req.tp == 1:
+        drop['exp'] = req.param
+    elif req.tp == 2:
+        drop['official_exp'] = req.param
+    elif req.tp == 3:
+        drop['gold'] = req.param
+    elif req.tp == 4:
+        drop['sycee'] = req.param
+    elif req.tp == 5:
+        drop['equipments'].append((req.param, 1, 1))
+    elif req.tp == 6:
+        drop['gems'].append((req.param, 1))
+    elif req.tp == 7:
+        drop['heros'].append((req.param, 1))
+    elif req.tp == 8:
+        drop['stuffs'].append((req.param, 1))
+    elif req.tp == 9:
+        drop['souls'].append((req.param, 1))
+
+    standard_drop = save_standard_drop(char_id, drop, des="CMD")
+    print standard_drop
 
     return HttpResponse('', content_type='text/plain')

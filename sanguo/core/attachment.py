@@ -28,31 +28,54 @@ def make_standard_drop_from_template():
         'exp': 0,
         'official_exp': 0,
         'heros': [],
+        'souls': [],
         'equipments': [],
         'gems': [],
         'stuffs': [],
     }
 
 
-def merge_standard_drops(drops):
-    template = make_standard_drop_from_template()
-    for d in drops:
-        template['gold'] += d['gold']
-        template['sycee'] += d['sycee']
-        template['exp'] += d['exp']
-        template['official_exp'] += d['official_exp']
-        template['heros'].extend(d['heros'])
-        template['equipments'].extend(d['equipments'])
-        template['gems'].extend(d['gems'])
-        template['stuffs'].extend(d['stuffs'])
+def save_standard_drop(char_id, drop, des=''):
+    from core.character import Char
+    from core.hero import save_hero, HeroSoul
+    from core.item import Item
 
-    return template
+    if drop['gold'] or drop['sycee'] or drop['exp'] or drop['official_exp']:
+        char = Char(char_id)
+        char.update(gold=drop['gold'], sycee=drop['sycee'], exp=drop['exp'], official_exp=drop['official_exp'], des=des)
 
+    if drop['heros']:
+        heros = []
+        for _id, _amount in drop['heros']:
+            heros.extend([_id] * _amount)
+        sh_res = save_hero(char_id, heros)
 
-def merge_standard_drops_by_ids(ids):
-    drops = [PACKAGES[i] for i in ids]
-    return merge_standard_drops(drops)
+    if drop['souls']:
+        hs = HeroSoul(char_id)
+        hs.add_soul(drop['souls'])
 
+    item = Item(char_id)
+    for _id, _level, _amount in drop['equipments']:
+        for i in range(_amount):
+            item.equip_add(_id, _level)
+
+    if drop['gems']:
+        item.gem_add(drop['gems'])
+
+    if drop['stuffs']:
+        item.stuff_add(drop['stuffs'])
+
+    # normalize the drop
+    if drop['heros']:
+        drop['heros'] = sh_res.actual_heros
+        souls = dict(drop['souls'])
+
+        for _sid, _samount in sh_res.to_souls:
+            souls[_sid] = souls.get(_sid, 0) + _samount
+
+        drop['souls'] = souls.items()
+
+    return drop
 
 
 def standard_drop_to_attachment_protomsg(data):
@@ -61,36 +84,43 @@ def standard_drop_to_attachment_protomsg(data):
     # 'sycee': 0,
     # 'exp': 0,
     # 'official_exp': 0,
-    # 'heros': [{id: amount:}, ...],
-    # 'equipments': [{id: level: amount:}, ...],
-    # 'gems': [{id: amount:}, ...],
-    # 'stuffs': [{id: amount:}, ...]
+    # 'heros': [id, id...],
+    # 'souls': [(id, amount), ...]
+    # 'equipments': [(id, level, amount), ...],
+    # 'gems': [(id, amount), ...],
+    # 'stuffs': [(id, amount), ...]
     # }
 
-    # TODO, modify proto
     msg = MsgAttachment()
     msg.gold = data.get('gold', 0)
     msg.sycee = data.get('sycee', 0)
     msg.exp = data.get('exp', 0)
     msg.official_exp = data.get('official_exp', 0)
+
     for x in data.get('heros', []):
-        msg.heros.append(x['id'])
-    for x in data.get('equipments', []):
+        msg_h = msg.heros.add()
+        msg_h.id = x
+
+    for _id, _amount in data.get('souls', []):
+        msg_soul = msg.souls.add()
+        msg_soul.id = _id
+        msg_soul.amount = _amount
+
+    for _id, _level, _amount in data.get('equipments', []):
         msg_e = msg.equipments.add()
-        msg_e.id = x['id']
-        msg_e.level = x['level']
-        msg_e.step = 1
-        msg_e.amount = x['amount']
+        msg_e.id = _id
+        msg_e.level = _level
+        msg_e.amount = _amount
 
-    for x in data.get('gems', []):
+    for _id, _amount in data.get('gems', []):
         msg_g = msg.gems.add()
-        msg_g.id = x['id']
-        msg_g.amount = x['amount']
+        msg_g.id = _id
+        msg_g.amount = _amount
 
-    for x in data.get('stuffs', []):
+    for _id, _amount in data.get('stuffs', []):
         msg_s = msg.stuffs.add()
-        msg_s.id = x['id']
-        msg_s.amount = x['amount']
+        msg_s.id = _id
+        msg_s.amount = _amount
 
     return msg
 
@@ -120,9 +150,11 @@ def get_drop(drop_ids, multi=1, gaussian=False):
     exp = 0
     official_exp = 0
     heros = []
+    souls = []
     equipments = []
     gems = []
     stuffs = []
+
     for d in drop_ids:
         if d == 0:
             # 一般不会为0，0实在策划填写编辑器的时候本来为空，却填了个0
@@ -133,6 +165,7 @@ def get_drop(drop_ids, multi=1, gaussian=False):
         sycee += p['sycee']
         exp += p['exp']
         official_exp += p['official_exp']
+
         heros.extend(p['heros'])
         equipments.extend(p['equipments'])
         gems.extend(p['gems'])
@@ -169,10 +202,11 @@ def get_drop(drop_ids, multi=1, gaussian=False):
         'sycee': sycee * multi,
         'exp': exp * multi,
         'official_exp': official_exp * multi,
-        'heros': heros,
-        'equipments': equipments,
-        'gems': gems,
-        'stuffs': stuffs,
+        'heros': [(x['id'], x['amount']) for x in heros],
+        'souls': souls,   # FIXME
+        'equipments': [(x['id'], x['level'], x['amount']) for x in equipments],
+        'gems': [(x['id'], x['amount']) for x in gems],
+        'stuffs': [(x['id'], x['amount']) for x in stuffs],
     }
 
 
@@ -186,40 +220,6 @@ class Attachment(object):
             self.attachment.prize_ids = []
             self.attachment.attachments = {}
             self.attachment.save()
-
-
-    def save_standard_drop(self, drop, des=''):
-        from core.character import Char
-        from core.hero import save_hero
-        from core.item import Item
-
-        if drop['gold'] or drop['sycee'] or drop['exp'] or drop['official_exp']:
-            char = Char(self.char_id)
-            char.update(gold=drop['gold'], sycee=drop['sycee'], exp=drop['exp'], official_exp=drop['official_exp'], des=des)
-
-        if drop['heros']:
-            heros = []
-            for h in drop['heros']:
-                heros.extend([h['id']] * h['amount'])
-            save_hero(self.char_id, heros)
-
-        item = Item(self.char_id)
-        for e in drop['equipments']:
-            for i in range(e['amount']):
-                item.equip_add(e['id'], e['level'])
-
-        if drop['gems']:
-            gems = []
-            for g in drop['gems']:
-                gems.append((g['id'], g['amount']))
-            item.gem_add(gems)
-
-        if drop['stuffs']:
-            stuffs = []
-            for s in drop['stuffs']:
-                stuffs.append((s['id'], s['amount']))
-            item.stuff_add(stuffs)
-
 
     def save_to_char(self, gold=0, sycee=0, exp=0, official_exp=0, heros=None, equipments=None, gems=None, stuffs=None):
         from core.character import Char

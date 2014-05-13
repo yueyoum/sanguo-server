@@ -6,7 +6,7 @@ __date__ = '12/30/13'
 
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoHero, MongoAchievement, MongoHeroSoul, MongoCharacter
-from core.signals import hero_add_signal, hero_del_signal, hero_changed_signal, hero_step_up_signal
+from core.signals import hero_add_signal, hero_del_signal, hero_changed_signal, hero_step_up_signal, hero_to_soul_signal
 from core.formation import Formation
 from core.exception import SanguoException
 from core.resource import check_character
@@ -14,7 +14,7 @@ from utils import cache
 from utils.functional import id_generator
 from core.msgpipe import publish_to_char
 from utils import pack_msg
-from preset.settings import HERO_MAX_STEP, HERO_START_STEP, HERO_STEP_UP_COST_SOUL_AMOUNT, HERO_STEP_UP_COST_GOLD, HERO_SOUL_TO_COMMON_SOUL
+from preset.settings import HERO_MAX_STEP, HERO_START_STEP, HERO_STEP_UP_SOCKET_AMOUNT
 from preset.data import HEROS, ACHIEVEMENTS, MONSTERS
 from preset import errormsg
 import protomsg
@@ -170,7 +170,6 @@ class Hero(FightPowerMixin):
             setattr(self, k, new_value)
 
 
-
     def save_cache(self):
         cache.set('hero:{0}'.format(self.id), self)
 
@@ -188,7 +187,9 @@ class Hero(FightPowerMixin):
     @property
     def max_socket_amount(self):
         # 当前升阶全部孔数
-        return self.step_up_needs_soul_amount()
+        if self.step >= HERO_MAX_STEP:
+            return 0
+        return HERO_STEP_UP_SOCKET_AMOUNT[self.step]
 
     @property
     def current_socket_amount(self):
@@ -196,30 +197,30 @@ class Hero(FightPowerMixin):
         return self.hero.progress
 
 
-    def step_up_needs_soul_amount(self):
-        if self.step >= HERO_MAX_STEP:
-            return 0
-        return HERO_STEP_UP_COST_SOUL_AMOUNT[self.step]
-
-
     def _step_up_using_soul(self):
-        hs = HeroSoul(self.char_id)
-        this_hero = HEROS[self.oid]
-
-        hs.remove_soul([(this_hero.id, 1)])
-
-    def _step_up_using_common_soul(self):
         from core.item import Item
+        needs_amount = external_calculate.Hero.step_up_using_soul_amount(self.model_hero.quality)
 
-        item = Item(self.char_id)
-        quality = HEROS[self.oid].quality
-        common_soul_needs = HERO_SOUL_TO_COMMON_SOUL[quality]
-        item.stuff_remove(22, common_soul_needs)
+        hs = HeroSoul(self.char_id)
+        self_soul_amount = hs.soul_amount(self.oid)
+
+        amount_diff = needs_amount - self_soul_amount
+        if amount_diff >= 0:
+            item = Item(self.char_id)
+            if not item.has_stuff(22, amount_diff):
+                raise SanguoException(
+                    errormsg.HERO_STEP_UP_ALL_NOT_ENOUGH,
+                    self.char_id,
+                    "Hero Step Up",
+                    "soul not enough"
+                )
+            item.stuff_remove(22, amount_diff)
+
+        hs.remove_soul([(self.oid, self_soul_amount)])
+        hs.purge_soul(self.oid)
 
 
-    def step_up(self, method):
-        # method: 1 using soul
-        # method: 2 using common soul
+    def step_up(self):
         # 升阶
         if self.step >= HERO_MAX_STEP:
             raise SanguoException(
@@ -229,17 +230,15 @@ class Hero(FightPowerMixin):
                 "Hero {0} reach max step {1}".format(self.id, HERO_MAX_STEP)
             )
 
-        with check_character(self.char_id, gold=-HERO_STEP_UP_COST_GOLD, func_name="Hero Step Up"):
-            if method == 1:
-                self._step_up_using_soul()
-            else:
-                self._step_up_using_common_soul()
+        cost_gold = external_calculate.Hero.step_up_using_gold(self.model_hero.quality)
+
+        with check_character(self.char_id, gold=-cost_gold, func_name="Hero Step Up"):
+            self._step_up_using_soul()
 
 
         # 扣完东西了，开始搞一次
         self.hero.progress += 1
-        soul_needs = self.step_up_needs_soul_amount()
-        if self.hero.progress >= soul_needs:
+        if self.hero.progress >= self.max_socket_amount:
             # 真正的升阶
             # 否则仅仅是记录当前状态
             self.hero.step += 1
@@ -269,8 +268,11 @@ class HeroSoul(object):
             self.mongo_hs.souls = {}
             self.mongo_hs.save()
 
+    def soul_amount(self, _id):
+        return self.mongo_hs.souls.get(str(_id), 0)
+
     def has_soul(self, _id, amount=1):
-        return self.mongo_hs.souls.get(str(_id), 0) >= amount
+        return self.soul_amount(_id) >= amount
 
     def add_soul(self, souls):
         new_souls = []
@@ -341,6 +343,16 @@ class HeroSoul(object):
 
             publish_to_char(self.char_id, pack_msg(msg))
 
+
+    def purge_soul(self, _id):
+        self.mongo_hs.souls.pop(str(_id))
+        self.mongo_hs.save()
+
+        msg = protomsg.RemoveHeroSoulNotify()
+        msg.ids.append(_id)
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
     def send_notify(self):
         msg = protomsg.HeroSoulNotify()
         for _id, amount in self.mongo_hs.souls.iteritems():
@@ -349,6 +361,9 @@ class HeroSoul(object):
             s.amount = amount
 
         publish_to_char(self.char_id, pack_msg(msg))
+
+class SaveHeroResult(object):
+    __slots__ = ['id_range', 'actual_heros', 'to_souls']
 
 
 def save_hero(char_id, hero_original_ids, add_notify=True):
@@ -364,15 +379,25 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
             to_soul_hero_ids.append(h)
             hero_original_ids.remove(h)
 
+    souls = {}
     if to_soul_hero_ids:
-        souls = {}
         for sid in to_soul_hero_ids:
             this_hero = HEROS[sid]
             souls[this_hero.id] = souls.get(this_hero.id, 0) + 1
 
+        for k in souls.keys():
+            souls[k] *= external_calculate.Hero.step_up_using_soul_amount(HEROS[k].quality)
+
         hs = HeroSoul(char_id)
         hs.add_soul(souls.items())
 
+        hero_to_soul_signal.send(
+            sender=None,
+            char_id=char_id,
+            souls=souls.items(),
+        )
+
+    id_range = []
     if hero_original_ids:
         length = len(hero_original_ids)
         id_range = id_generator('charhero', length)
@@ -387,9 +412,11 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
             send_notify=add_notify,
         )
 
-        return id_range
-
-
+    res = SaveHeroResult()
+    res.id_range = id_range
+    res.actual_heros = hero_original_ids
+    res.to_souls = souls.items()
+    return res
 
 
 def delete_hero(char_id, ids):

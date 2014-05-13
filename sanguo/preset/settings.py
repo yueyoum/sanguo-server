@@ -31,12 +31,8 @@ DROP_PROB_BASE = 100000
 HERO_MAX_STEP = 5
 # 武将初始阶数
 HERO_START_STEP = 0
-# 武将升阶消耗多少同名卡魂，step1~4 : 1,1,2,2,3
-HERO_STEP_UP_COST_SOUL_AMOUNT = {0: 1, 1: 2, 2: 3, 3: 4, 4: 5}
-# 武将升阶花费多少金币
-HERO_STEP_UP_COST_GOLD = 1000
-# 同名卡魂和通用卡魂的对应关系. 一张同名卡魂对应多少张通用卡魂, key 为品质
-HERO_SOUL_TO_COMMON_SOUL = {3: 10, 2: 50, 1: 300}
+# 武将升阶有几个孔
+HERO_STEP_UP_SOCKET_AMOUNT = {0: 1, 1: 2, 2: 3, 3: 4, 4: 5}
 
 
 #########################

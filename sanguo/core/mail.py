@@ -9,7 +9,7 @@ import datetime
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoMail, MongoEmbededMail
 from core.msgpipe import publish_to_char
-from core.attachment import Attachment, standard_drop_to_attachment_protomsg
+from core.attachment import standard_drop_to_attachment_protomsg, save_standard_drop
 from core.exception import SanguoException
 from preset.settings import MAIL_KEEP_DAYS, DATETIME_FORMAT as FORMAT
 from utils import pack_msg
@@ -104,8 +104,7 @@ class Mail(object):
                 "mail {0} has no attachment".format(mail_id)
             )
 
-        attachment = Attachment(self.char_id)
-        attachment.save_standard_drop(json.loads(self.mail.mails[str(mail_id)].attachment), des='Mail Attachment')
+        save_standard_drop(self.char_id, json.loads(self.mail.mails[str(mail_id)].attachment), des="Mail Attachment")
 
         self.mail.mails[str(mail_id)].attachment = ''
         self.mail.mails[str(mail_id)].has_read = True

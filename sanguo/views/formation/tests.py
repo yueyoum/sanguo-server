@@ -40,7 +40,7 @@ class SocketTest(TestCase):
 
     def test_normal(self):
         char = Char(self.char_id)
-        hero = save_hero(char.id, 1)
+        hero = save_hero(char.id, 1).id_range
         hero_id = hero[0]
         self._set_socket(hero_id, 0, 0, 0, 0)
 

@@ -14,7 +14,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='world.proto',
   package='Sanguo.protocol.world',
-  serialized_pb='\n\x0bworld.proto\x12\x15Sanguo.protocol.world\"\xad\x01\n\x06Server\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12:\n\x06status\x18\x03 \x02(\x0e\x32*.Sanguo.protocol.world.Server.ServerStatus\x12\x11\n\thave_char\x18\x04 \x02(\x08\":\n\x0cServerStatus\x12\x08\n\x04GOOD\x10\x01\x12\x08\n\x04\x42USY\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\x12\x0c\n\x08MAINTAIN\x10\x04\"\x1e\n\x0bSyncRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"C\n\x0cSyncResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x15\n\rutc_timestamp\x18\x03 \x02(\x03\"3\n\rResumeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tserver_id\x18\x02 \x02(\x05\".\n\x0eResumeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"/\n\x0f\x43ommandResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"7\n\x13VersionCheckRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07version\x18\x02 \x02(\x05\"4\n\x14VersionCheckResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\x98\x03\n\nAttachment\x12\x0c\n\x04gold\x18\x01 \x01(\x05\x12\r\n\x05sycee\x18\x02 \x01(\x05\x12\x0b\n\x03\x65xp\x18\x03 \x01(\x05\x12\x14\n\x0cofficial_exp\x18\x04 \x01(\x05\x12\r\n\x05heros\x18\x05 \x03(\x05\x12?\n\nequipments\x18\x06 \x03(\x0b\x32+.Sanguo.protocol.world.Attachment.Equipment\x12\x33\n\x04gems\x18\x07 \x03(\x0b\x32%.Sanguo.protocol.world.Attachment.Gem\x12\x37\n\x06stuffs\x18\x08 \x03(\x0b\x32\'.Sanguo.protocol.world.Attachment.Stuff\x1a\x44\n\tEquipment\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05level\x18\x02 \x02(\x05\x12\x0c\n\x04step\x18\x03 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x04 \x02(\x05\x1a!\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\x1a#\n\x05Stuff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"\xad\x02\n\x0bSellRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12@\n\x08\x65lements\x18\x02 \x03(\x0b\x32..Sanguo.protocol.world.SellRequest.SellElement\x1a\xca\x01\n\x0bSellElement\x12\x43\n\x02tp\x18\x01 \x02(\x0e\x32\x37.Sanguo.protocol.world.SellRequest.SellElement.SellType\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x03 \x02(\x05\"Z\n\x08SellType\x12\r\n\tSELL_HERO\x10\x01\x12\r\n\tSELL_SOUL\x10\x02\x12\x12\n\x0eSELL_EQUIPMENT\x10\x03\x12\x0c\n\x08SELL_GEM\x10\x04\x12\x0e\n\nSELL_STUFF\x10\x05\",\n\x0cSellResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"[\n\x14\x46reezeFunctionNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x05\x66uncs\x18\x02 \x03(\x0e\x32#.Sanguo.protocol.world.FunctionType*\xfe\x02\n\x0c\x46unctionType\x12\x1b\n\x17\x46UNC_EQUIPMENT_STRENGTH\x10\x01\x12\x17\n\x13\x46UNC_EQUIPMENT_STEP\x10\x02\x12\x12\n\x0e\x46UNC_HERO_STEP\x10\x03\x12\x12\n\x0e\x46UNC_GEM_EMBED\x10\x04\x12\r\n\tFUNC_TASK\x10\x05\x12\x14\n\x10\x46UNC_ACHIEVEMENT\x10\x06\x12\r\n\tFUNC_HANG\x10\x07\x12\x0e\n\nFUNC_ARENA\x10\x08\x12\x10\n\x0c\x46UNC_PLUNDER\x10\t\x12\x11\n\rFUNC_OFFICIAL\x10\n\x12\x14\n\x10\x46UNC_STAGE_ELITE\x10\x0b\x12\x0f\n\x0b\x46UNC_FRIEND\x10\x0c\x12\x14\n\x10\x46UNC_TEAM_BATTLE\x10\r\x12\x11\n\rFUNC_GET_HERO\x10\x0e\x12\x14\n\x10\x46UNC_SOCKET_FIVE\x10\x32\x12\x13\n\x0f\x46UNC_SOCKET_SIX\x10\x33\x12\x15\n\x11\x46UNC_SOCKET_SEVEN\x10\x34\x12\x15\n\x11\x46UNC_SOCKET_EIGHT\x10\x35')
+  serialized_pb='\n\x0bworld.proto\x12\x15Sanguo.protocol.world\"\xad\x01\n\x06Server\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12:\n\x06status\x18\x03 \x02(\x0e\x32*.Sanguo.protocol.world.Server.ServerStatus\x12\x11\n\thave_char\x18\x04 \x02(\x08\":\n\x0cServerStatus\x12\x08\n\x04GOOD\x10\x01\x12\x08\n\x04\x42USY\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\x12\x0c\n\x08MAINTAIN\x10\x04\"\x1e\n\x0bSyncRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"C\n\x0cSyncResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x15\n\rutc_timestamp\x18\x03 \x02(\x03\"3\n\rResumeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tserver_id\x18\x02 \x02(\x05\".\n\x0eResumeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"/\n\x0f\x43ommandResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"7\n\x13VersionCheckRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07version\x18\x02 \x02(\x05\"4\n\x14VersionCheckResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xb5\x04\n\nAttachment\x12\x0c\n\x04gold\x18\x01 \x01(\x05\x12\r\n\x05sycee\x18\x02 \x01(\x05\x12\x0b\n\x03\x65xp\x18\x03 \x01(\x05\x12\x14\n\x0cofficial_exp\x18\x04 \x01(\x05\x12\x35\n\x05heros\x18\x05 \x03(\x0b\x32&.Sanguo.protocol.world.Attachment.Hero\x12\x39\n\x05souls\x18\x06 \x03(\x0b\x32*.Sanguo.protocol.world.Attachment.HeroSoul\x12?\n\nequipments\x18\x07 \x03(\x0b\x32+.Sanguo.protocol.world.Attachment.Equipment\x12\x33\n\x04gems\x18\x08 \x03(\x0b\x32%.Sanguo.protocol.world.Attachment.Gem\x12\x37\n\x06stuffs\x18\t \x03(\x0b\x32\'.Sanguo.protocol.world.Attachment.Stuff\x1a\x39\n\tEquipment\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05level\x18\x02 \x02(\x05\x12\x11\n\x06\x61mount\x18\x03 \x01(\x05:\x01\x31\x1a$\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x11\n\x06\x61mount\x18\x02 \x01(\x05:\x01\x31\x1a&\n\x05Stuff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x11\n\x06\x61mount\x18\x02 \x01(\x05:\x01\x31\x1a\x12\n\x04Hero\x12\n\n\x02id\x18\x01 \x02(\x05\x1a)\n\x08HeroSoul\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x11\n\x06\x61mount\x18\x02 \x01(\x05:\x01\x31\"\xad\x02\n\x0bSellRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12@\n\x08\x65lements\x18\x02 \x03(\x0b\x32..Sanguo.protocol.world.SellRequest.SellElement\x1a\xca\x01\n\x0bSellElement\x12\x43\n\x02tp\x18\x01 \x02(\x0e\x32\x37.Sanguo.protocol.world.SellRequest.SellElement.SellType\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x03 \x02(\x05\"Z\n\x08SellType\x12\r\n\tSELL_HERO\x10\x01\x12\r\n\tSELL_SOUL\x10\x02\x12\x12\n\x0eSELL_EQUIPMENT\x10\x03\x12\x0c\n\x08SELL_GEM\x10\x04\x12\x0e\n\nSELL_STUFF\x10\x05\",\n\x0cSellResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"[\n\x14\x46reezeFunctionNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x05\x66uncs\x18\x02 \x03(\x0e\x32#.Sanguo.protocol.world.FunctionType*\xfe\x02\n\x0c\x46unctionType\x12\x1b\n\x17\x46UNC_EQUIPMENT_STRENGTH\x10\x01\x12\x17\n\x13\x46UNC_EQUIPMENT_STEP\x10\x02\x12\x12\n\x0e\x46UNC_HERO_STEP\x10\x03\x12\x12\n\x0e\x46UNC_GEM_EMBED\x10\x04\x12\r\n\tFUNC_TASK\x10\x05\x12\x14\n\x10\x46UNC_ACHIEVEMENT\x10\x06\x12\r\n\tFUNC_HANG\x10\x07\x12\x0e\n\nFUNC_ARENA\x10\x08\x12\x10\n\x0c\x46UNC_PLUNDER\x10\t\x12\x11\n\rFUNC_OFFICIAL\x10\n\x12\x14\n\x10\x46UNC_STAGE_ELITE\x10\x0b\x12\x0f\n\x0b\x46UNC_FRIEND\x10\x0c\x12\x14\n\x10\x46UNC_TEAM_BATTLE\x10\r\x12\x11\n\rFUNC_GET_HERO\x10\x0e\x12\x14\n\x10\x46UNC_SOCKET_FIVE\x10\x32\x12\x13\n\x0f\x46UNC_SOCKET_SIX\x10\x33\x12\x15\n\x11\x46UNC_SOCKET_SEVEN\x10\x34\x12\x15\n\x11\x46UNC_SOCKET_EIGHT\x10\x35')
 
 _FUNCTIONTYPE = _descriptor.EnumDescriptor(
   name='FunctionType',
@@ -97,8 +97,8 @@ _FUNCTIONTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1431,
-  serialized_end=1813,
+  serialized_start=1588,
+  serialized_end=1970,
 )
 
 FunctionType = enum_type_wrapper.EnumTypeWrapper(_FUNCTIONTYPE)
@@ -180,8 +180,8 @@ _SELLREQUEST_SELLELEMENT_SELLTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1199,
-  serialized_end=1289,
+  serialized_start=1356,
+  serialized_end=1446,
 )
 
 
@@ -502,16 +502,9 @@ _ATTACHMENT_EQUIPMENT = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='step', full_name='Sanguo.protocol.world.Attachment.Equipment.step', index=2,
-      number=3, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='amount', full_name='Sanguo.protocol.world.Attachment.Equipment.amount', index=3,
-      number=4, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
+      name='amount', full_name='Sanguo.protocol.world.Attachment.Equipment.amount', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=1,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -524,8 +517,8 @@ _ATTACHMENT_EQUIPMENT = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=845,
-  serialized_end=913,
+  serialized_start=944,
+  serialized_end=1001,
 )
 
 _ATTACHMENT_GEM = _descriptor.Descriptor(
@@ -544,8 +537,8 @@ _ATTACHMENT_GEM = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='amount', full_name='Sanguo.protocol.world.Attachment.Gem.amount', index=1,
-      number=2, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=1,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -558,8 +551,8 @@ _ATTACHMENT_GEM = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=915,
-  serialized_end=948,
+  serialized_start=1003,
+  serialized_end=1039,
 )
 
 _ATTACHMENT_STUFF = _descriptor.Descriptor(
@@ -578,7 +571,34 @@ _ATTACHMENT_STUFF = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='amount', full_name='Sanguo.protocol.world.Attachment.Stuff.amount', index=1,
-      number=2, type=5, cpp_type=1, label=2,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1041,
+  serialized_end=1079,
+)
+
+_ATTACHMENT_HERO = _descriptor.Descriptor(
+  name='Hero',
+  full_name='Sanguo.protocol.world.Attachment.Hero',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='Sanguo.protocol.world.Attachment.Hero.id', index=0,
+      number=1, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -592,8 +612,42 @@ _ATTACHMENT_STUFF = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=950,
-  serialized_end=985,
+  serialized_start=1081,
+  serialized_end=1099,
+)
+
+_ATTACHMENT_HEROSOUL = _descriptor.Descriptor(
+  name='HeroSoul',
+  full_name='Sanguo.protocol.world.Attachment.HeroSoul',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='Sanguo.protocol.world.Attachment.HeroSoul.id', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='amount', full_name='Sanguo.protocol.world.Attachment.HeroSoul.amount', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1101,
+  serialized_end=1142,
 )
 
 _ATTACHMENT = _descriptor.Descriptor(
@@ -633,28 +687,35 @@ _ATTACHMENT = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='heros', full_name='Sanguo.protocol.world.Attachment.heros', index=4,
-      number=5, type=5, cpp_type=1, label=3,
+      number=5, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='equipments', full_name='Sanguo.protocol.world.Attachment.equipments', index=5,
+      name='souls', full_name='Sanguo.protocol.world.Attachment.souls', index=5,
       number=6, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='gems', full_name='Sanguo.protocol.world.Attachment.gems', index=6,
+      name='equipments', full_name='Sanguo.protocol.world.Attachment.equipments', index=6,
       number=7, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='stuffs', full_name='Sanguo.protocol.world.Attachment.stuffs', index=7,
+      name='gems', full_name='Sanguo.protocol.world.Attachment.gems', index=7,
       number=8, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='stuffs', full_name='Sanguo.protocol.world.Attachment.stuffs', index=8,
+      number=9, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -662,14 +723,14 @@ _ATTACHMENT = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_ATTACHMENT_EQUIPMENT, _ATTACHMENT_GEM, _ATTACHMENT_STUFF, ],
+  nested_types=[_ATTACHMENT_EQUIPMENT, _ATTACHMENT_GEM, _ATTACHMENT_STUFF, _ATTACHMENT_HERO, _ATTACHMENT_HEROSOUL, ],
   enum_types=[
   ],
   options=None,
   is_extendable=False,
   extension_ranges=[],
   serialized_start=577,
-  serialized_end=985,
+  serialized_end=1142,
 )
 
 
@@ -711,8 +772,8 @@ _SELLREQUEST_SELLELEMENT = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1087,
-  serialized_end=1289,
+  serialized_start=1244,
+  serialized_end=1446,
 )
 
 _SELLREQUEST = _descriptor.Descriptor(
@@ -745,8 +806,8 @@ _SELLREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=988,
-  serialized_end=1289,
+  serialized_start=1145,
+  serialized_end=1446,
 )
 
 
@@ -780,8 +841,8 @@ _SELLRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1291,
-  serialized_end=1335,
+  serialized_start=1448,
+  serialized_end=1492,
 )
 
 
@@ -815,8 +876,8 @@ _FREEZEFUNCTIONNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1337,
-  serialized_end=1428,
+  serialized_start=1494,
+  serialized_end=1585,
 )
 
 _SERVER.fields_by_name['status'].enum_type = _SERVER_SERVERSTATUS
@@ -824,6 +885,10 @@ _SERVER_SERVERSTATUS.containing_type = _SERVER;
 _ATTACHMENT_EQUIPMENT.containing_type = _ATTACHMENT;
 _ATTACHMENT_GEM.containing_type = _ATTACHMENT;
 _ATTACHMENT_STUFF.containing_type = _ATTACHMENT;
+_ATTACHMENT_HERO.containing_type = _ATTACHMENT;
+_ATTACHMENT_HEROSOUL.containing_type = _ATTACHMENT;
+_ATTACHMENT.fields_by_name['heros'].message_type = _ATTACHMENT_HERO
+_ATTACHMENT.fields_by_name['souls'].message_type = _ATTACHMENT_HEROSOUL
 _ATTACHMENT.fields_by_name['equipments'].message_type = _ATTACHMENT_EQUIPMENT
 _ATTACHMENT.fields_by_name['gems'].message_type = _ATTACHMENT_GEM
 _ATTACHMENT.fields_by_name['stuffs'].message_type = _ATTACHMENT_STUFF
@@ -913,6 +978,18 @@ class Attachment(_message.Message):
     DESCRIPTOR = _ATTACHMENT_STUFF
 
     # @@protoc_insertion_point(class_scope:Sanguo.protocol.world.Attachment.Stuff)
+
+  class Hero(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+    DESCRIPTOR = _ATTACHMENT_HERO
+
+    # @@protoc_insertion_point(class_scope:Sanguo.protocol.world.Attachment.Hero)
+
+  class HeroSoul(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+    DESCRIPTOR = _ATTACHMENT_HEROSOUL
+
+    # @@protoc_insertion_point(class_scope:Sanguo.protocol.world.Attachment.HeroSoul)
   DESCRIPTOR = _ATTACHMENT
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.world.Attachment)

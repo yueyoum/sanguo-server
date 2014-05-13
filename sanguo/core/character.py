@@ -225,7 +225,7 @@ def char_initialize(account_id, server_id, char_id, name):
 
     init_heros_equips = transformed_init_heros.values()
 
-    hero_ids = save_hero(char_id, init_heros_ids, add_notify=False)
+    hero_ids = save_hero(char_id, init_heros_ids, add_notify=False).id_range
 
     f = Formation(char_id)
 
