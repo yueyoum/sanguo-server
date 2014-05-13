@@ -77,7 +77,7 @@ def _hero_change(hero_id, **kwargs):
 def _hero_to_soul(char_id, souls, **kwargs):
     for _id, _amount in souls:
         msg = HeroToSoulNotify()
-        msg.hero_id = char_id
+        msg.hero_id = _id
         msg.soul_amount = _amount
         publish_to_char(char_id, pack_msg(msg))
 
