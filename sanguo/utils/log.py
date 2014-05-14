@@ -3,6 +3,7 @@
 __author__ = 'Wang Chao'
 __date__ = '4/28/14'
 
+import json
 import struct
 import logging
 
@@ -52,15 +53,16 @@ def _make_resource_data(record):
     data = {
         'char_id': record.char_id,
         'income': record.income,
-        'exp': getattr(record, 'exp', 0),
-        'official_exp': getattr(record, 'official_exp', 0),
-        'gold': getattr(record, 'gold', 0),
-        'sycee': getattr(record, 'sycee', 0),
-        'heros': getattr(record, 'heros', ''),
-        'souls': getattr(record, 'gold', ''),
-        'equipments': getattr(record, 'equipments', ''),
-        'gems': getattr(record, 'gems', ''),
-        'stuffs': getattr(record, 'stuffs', ''),
+        'func_name': record.func_name,
+        'exp': record.exp,
+        'official_exp': record.official_exp,
+        'gold': record.gold,
+        'sycee': record.sycee,
+        'heros': json.dumps(record.heros),
+        'souls': json.dumps(record.souls),
+        'equipments': json.dumps(record.equipments),
+        'gems': json.dumps(record.gems),
+        'stuffs': json.dumps(record.stuffs),
         'des': record.des,
         'occurred_at': record.occurred_at,
     }
