@@ -35,48 +35,9 @@ def make_standard_drop_from_template():
     }
 
 
-def save_standard_drop(char_id, drop, des=''):
-    from core.character import Char
-    from core.hero import save_hero, HeroSoul
-    from core.item import Item
-
-    if drop['gold'] or drop['sycee'] or drop['exp'] or drop['official_exp']:
-        char = Char(char_id)
-        char.update(gold=drop['gold'], sycee=drop['sycee'], exp=drop['exp'], official_exp=drop['official_exp'], des=des)
-
-    if drop['heros']:
-        heros = []
-        for _id, _amount in drop['heros']:
-            heros.extend([_id] * _amount)
-        sh_res = save_hero(char_id, heros)
-
-    if drop['souls']:
-        hs = HeroSoul(char_id)
-        hs.add_soul(drop['souls'])
-
-    item = Item(char_id)
-    for _id, _level, _amount in drop['equipments']:
-        for i in range(_amount):
-            item.equip_add(_id, _level)
-
-    if drop['gems']:
-        item.gem_add(drop['gems'])
-
-    if drop['stuffs']:
-        item.stuff_add(drop['stuffs'])
-
-    # normalize the drop
-    if drop['heros']:
-        drop['heros'] = sh_res.actual_heros
-        souls = dict(drop['souls'])
-
-        for _sid, _samount in sh_res.to_souls:
-            souls[_sid] = souls.get(_sid, 0) + _samount
-
-        drop['souls'] = souls.items()
-
-    return drop
-
+def save_standard_drop(*args, **kwargs):
+    # FIXME
+    pass
 
 def standard_drop_to_attachment_protomsg(data):
     # data is dict, {

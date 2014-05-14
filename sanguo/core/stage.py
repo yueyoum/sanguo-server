@@ -6,7 +6,7 @@ from core.mongoscheme import MongoStage, MongoEmbededPlunderLog, MongoHang, Mong
 from utils import timezone
 from utils import pack_msg
 from core.msgpipe import publish_to_char
-from core.attachment import Attachment, standard_drop_to_attachment_protomsg, make_standard_drop_from_template, get_drop, save_standard_drop
+from core.attachment import Attachment, standard_drop_to_attachment_protomsg, make_standard_drop_from_template, get_drop
 from core.achievement import Achievement
 from core.exception import SanguoException
 from core.battle import PVE, ElitePVE, ActivityPVE
@@ -16,6 +16,7 @@ from core.functionopen import FunctionOpen
 from core.mail import Mail
 from core.signals import pve_finished_signal
 from core.counter import Counter
+from core.resource import Resource
 from preset.settings import (
     DATETIME_FORMAT,
     HANG_SECONDS,
@@ -28,7 +29,6 @@ from preset.settings import (
 )
 from preset.data import STAGES, STAGE_ELITE, STAGE_ELITE_CONDITION, STAGE_ACTIVITY, STAGE_ACTIVITY_CONDITION
 from preset import errormsg
-
 import protomsg
 
 
@@ -171,7 +171,9 @@ class Stage(object):
             standard_drop['exp'] = 0
             standard_drop['official_exp'] = 0
 
-        standard_drop = save_standard_drop(self.char_id, standard_drop, des="Stage {0} drop".format(stage_id))
+        resource = Resource(self.char_id, "Stage Drop", "stage {0}".format(stage_id))
+        standard_drop = resource.add(**standard_drop)
+
         return standard_drop
 
 
@@ -396,7 +398,8 @@ class Hang(TimerCheckAbstractBase):
         self.hang_doing = None
         self.send_notify()
 
-        standard_drop = save_standard_drop(self.char_id, standard_drop, des="Hang Reward")
+        resource = Resource(self.char_id, "Hang Reward")
+        standard_drop = resource.add(**standard_drop)
 
         achievement = Achievement(self.char_id)
         achievement.trig(29, drop_exp)
@@ -560,7 +563,9 @@ class EliteStage(object):
         standard_drop['gold'] += gold
         standard_drop['exp'] += exp
 
-        standard_drop = save_standard_drop(self.char_id, standard_drop, des="EliteStage {0} drop".format(this_stage.id))
+        resource = Resource(self.char_id, "EliteStage Drop", "stage {0}".format(this_stage.id))
+        standard_drop = resource.add(**standard_drop)
+
         return standard_drop
 
 
@@ -675,7 +680,9 @@ class ActivityStage(object):
         else:
             standard_drop = get_drop([int(i) for i in self.this_stage.normal_drop.split(',')])
 
-        standard_drop = save_standard_drop(self.char_id, standard_drop, des="ActivityStage {0} drop".format(self.this_stage.id))
+        resource = Resource(self.char_id, "ActivityStage Drop", "stage {0}".format(self.this_stage.id))
+        standard_drop = resource.add(**standard_drop)
+
         return standard_drop
 
 

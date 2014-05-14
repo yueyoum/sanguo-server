@@ -18,7 +18,7 @@ class SanguoException(Exception):
             'occurred_at': localnow().strftime('%Y-%m-%d %H:%M:%S'),
         }
 
-        logger.debug("Error_id: {1}. Char_id: {2}. Func_name: {3}. Msg: {4}".format(
+        logger.debug("Error_id: {0}. Char_id: {1}. Func_name: {2}. Msg: {3}".format(
                     error_id, char_id, func_name, error_msg),
                     extra=extra
                     )

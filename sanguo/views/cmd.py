@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 
-from core.attachment import make_standard_drop_from_template, save_standard_drop
+from core.attachment import make_standard_drop_from_template
+from core.resource import Resource
 
 def cmd(request):
     req = request._proto
@@ -30,7 +31,9 @@ def cmd(request):
     elif req.tp == 9:
         drop['souls'].append((req.param, 1))
 
-    standard_drop = save_standard_drop(char_id, drop, des="CMD")
+
+    resource = Resource(char_id, "CMD")
+    standard_drop = resource.add(**drop)
     print standard_drop
 
     return HttpResponse('', content_type='text/plain')
