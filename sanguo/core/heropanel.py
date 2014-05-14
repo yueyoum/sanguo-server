@@ -5,17 +5,16 @@ __date__ = '1/23/14'
 
 import random
 
-from django.conf import settings
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoHeroPanel
 from core.counter import Counter
 from core.exception import SanguoException, CounterOverFlow
 from core.hero import save_hero
-from core.resource import check_character
+from core.resource import Resource
 from core.msgpipe import publish_to_char
 from utils import pack_msg
 from utils import timezone
-from preset.data import HERO_GET_BY_QUALITY, HERO_GET_BY_QUALITY_NOT_EQUAL, CHARINIT
+from preset.data import HERO_GET_BY_QUALITY, HERO_GET_BY_QUALITY_NOT_EQUAL
 from preset import errormsg
 import protomsg
 
@@ -137,7 +136,8 @@ class HeroPanel(object):
                     "no times"
                 )
 
-        with check_character(self.char_id, sycee=using_sycee, func_name="HeroPanel Open"):
+        resource = Resource(self.char_id, "HeroPanel Open")
+        with resource.check(sycee=-using_sycee):
             if self.has_got_good_hero():
                 hero_id = random.choice(self.panel.other_heros)
                 self.panel.other_heros.remove(hero_id)
@@ -168,7 +168,8 @@ class HeroPanel(object):
 
         if self.refresh_seconds > 0:
             # 免费刷新还在冷却，只能用元宝刷新，不重置免费刷新时间
-            with check_character(self.char_id, sycee=-REFRESH_COST_SYCEE, func_name="HeroPanel Refresh"):
+            resouce = Resource(self.char_id, "HeroPanel Refresh")
+            with resouce.check(sycee=-REFRESH_COST_SYCEE):
                 self.panel = self.make_new_panel(reset_time=False)
             self.send_notify()
             return

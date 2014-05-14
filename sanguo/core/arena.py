@@ -8,13 +8,13 @@ import random
 from mongoengine import DoesNotExist, Q
 from core.msgpipe import publish_to_char
 from utils import pack_msg
-from core.character import Char
 from core.battle import PVP
 from core.counter import Counter
 from core.mongoscheme import MongoArenaTopRanks, MongoArena, MongoArenaDay, MongoArenaWeek, MongoCharacter
 from core.exception import CounterOverFlow, SanguoException
 from core.achievement import Achievement
 from core.task import Task
+from core.resource import Resource
 from preset.settings import ARENA_COST_SYCEE, ARENA_GET_SCORE_WHEN_LOST, ARENA_GET_SCORE_WHEN_WIN, COUNTER
 import protomsg
 from preset import errormsg
@@ -137,17 +137,8 @@ class Arena(object):
                     "arena no times"
                 )
             else:
-                char = Char(self.char_id)
-                cache_char = char.cacheobj
-                if cache_char.sycee < ARENA_COST_SYCEE:
-                    raise SanguoException(
-                        errormsg.SYCEE_NOT_ENOUGH,
-                        self.char_id,
-                        "Arena Battle",
-                        'arena battle using sycee. But sycee not enough. {0} < {1}'.format(cache_char.sycee, ARENA_COST_SYCEE)
-                    )
-                char.update(sycee=-ARENA_COST_SYCEE, des='Arena Battle Cost')
-
+                resource = Resource(self.char_id, "Arena Battle", "battle for no free times")
+                resource.check_and_remove(sycee=-ARENA_COST_SYCEE)
 
         rival_id = self.choose_rival()
 

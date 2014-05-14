@@ -7,17 +7,16 @@ from mongoengine import DoesNotExist
 
 from core.mongoscheme import MongoTask
 
-from core.character import Char
-from core.attachment import Attachment
+from core.attachment import Attachment, standard_drop_to_attachment_protomsg
 from core.achievement import Achievement
 
 from core.msgpipe import publish_to_char
 from core.exception import SanguoException
+from core.resource import Resource
 from utils import pack_msg
 
 from protomsg import Task as MsgTask
 from protomsg import TaskNotify
-from protomsg import Attachment as MsgAttachment
 
 from preset.data import TASKS, TASKS_FIRST_IDS, TASKS_ALL_TP
 from preset import errormsg
@@ -101,10 +100,11 @@ class Task(object):
                 "Task {0} not finish".format(_id)
             )
 
-        char = Char(self.char_id)
         sycee = this_task.sycee if this_task.sycee else 0
         gold = this_task.gold if this_task.gold else 0
-        char.update(sycee=sycee, gold=gold, des="Task {0} Reward".format(_id))
+
+        resource = Resource(self.char_id, "Task Reward")
+        standard_drop = resource.add(gold=gold, sycee=sycee)
 
         if this_task.next_task:
             next_task = TASKS[this_task.next_task]
@@ -124,10 +124,7 @@ class Task(object):
             achievement = Achievement(self.char_id)
             achievement.trig(30, 1)
 
-        msg = MsgAttachment()
-        msg.gold = gold
-        msg.sycee = sycee
-        return msg
+        return standard_drop_to_attachment_protomsg(standard_drop)
 
 
     def all_complete(self):

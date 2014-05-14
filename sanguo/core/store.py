@@ -8,13 +8,11 @@ from mongoengine import DoesNotExist
 from core.mongoscheme import MongoStoreCharLimit
 from core.msgpipe import publish_to_char
 from core.character import Char
-from core.item import Item
-from core.hero import save_hero
 from core.exception import SanguoException
+from core.resource import Resource
 
 from utils import pack_msg
 from utils.api import api_store_buy, api_store_get
-
 
 from protomsg import StoreNotify
 from preset import errormsg
@@ -91,6 +89,12 @@ class Store(object):
         # check gold or sycee
         wealth_needs = this_goods['sell_price'] * amount
 
+        resource = Resource(self.char_id, "Store Buy", 'buy {0}, amount: {1}'.format(_id, amount))
+        if this_goods['sell_type'] == 1:
+            resource_need = {'gold': -wealth_needs}
+        else:
+            resource_need = {'sycee': -wealth_needs}
+
         if this_goods['sell_type'] == 1:
             if mc.gold < wealth_needs:
                 raise SanguoException(
@@ -108,53 +112,47 @@ class Store(object):
                     "sycee not enough"
                 )
 
-        # 本地server检查完毕，然后通过API通知HUB购买。
-        # 对于有total amount限制的物品，HUB可能返回错误
-        data = {
-            'char_id': self.char_id,
-            'goods_id': _id,
-            'goods_amount': amount,
-        }
+        with resource.check(**resource_need):
+            # 本地server检查完毕，然后通过API通知HUB购买。
+            # 对于有total amount限制的物品，HUB可能返回错误
+            data = {
+                'char_id': self.char_id,
+                'goods_id': _id,
+                'goods_amount': amount,
+            }
 
-        res = api_store_buy(data)
-        if res['ret'] != 0:
-            raise SanguoException(
-                res['ret'],
-                self.char_id,
-                "Store Buy",
-                "api failure"
-            )
+            res = api_store_buy(data)
+            if res['ret'] != 0:
+                raise SanguoException(
+                    res['ret'],
+                    self.char_id,
+                    "Store Buy",
+                    "api failure"
+                )
 
-        # ALL OK
-        # 开始操作
-        if this_goods['has_limit_amount']:
-            # 有每人限量的记录到每人的购买记录中
-            self.mc_limit.limits[str(_id)] = self.mc_limit.limits.get(str(_id), 0) + amount
-            self.mc_limit.save()
+            # ALL OK
+            # 开始操作
+            if this_goods['has_limit_amount']:
+                # 有每人限量的记录到每人的购买记录中
+                self.mc_limit.limits[str(_id)] = self.mc_limit.limits.get(str(_id), 0) + amount
+                self.mc_limit.save()
 
-        # 更新store
-        if this_goods['has_total_amount']:
-            store[_id]['total_amount_run_time'] = res['data']['total_amount_run_time']
+            # 更新store
+            if this_goods['has_total_amount']:
+                store[_id]['total_amount_run_time'] = res['data']['total_amount_run_time']
 
+            # 给东西
+            resource_add = {}
+            if this_goods['item_tp'] == 1:
+                resource_add['heros'] = [(this_goods['item_id'], amount)]
+            elif this_goods['item_tp'] == 2:
+                resource_add['equipments'] = [this_goods['item_id']] * amount
+            elif this_goods['item_tp'] == 3:
+                resource_add['gems'] = [(this_goods['item_id'], amount)]
+            else:
+                resource_add['stuffs'] = [(this_goods['item_id'], amount)]
 
-        # 扣钱
-        if this_goods.sell_type == 1:
-            char.update(gold=-wealth_needs, des='Store Buy {0} * {1}. Cost'.format(_id, amount))
-        else:
-            char.update(sycee=-wealth_needs, des='Store Buy {0} * {1}. Cost'.format(_id, amount))
-
-
-        # 给东西
-        item = Item(self.char_id)
-        if this_goods['item_tp'] == 1:
-            save_hero(self.char_id, [this_goods['item_id']] * amount)
-        elif this_goods.item_tp == 2:
-            for i in range(amount):
-                item.equip_add(this_goods['item_id'])
-        elif this_goods.item_tp == 3:
-            item.gem_add([(this_goods['item_id'], amount)])
-        else:
-            item.stuff_add([(this_goods['item_id'], amount)])
+            resource.add(**resource_add)
 
         self.send_notify(store=store)
 

@@ -10,6 +10,7 @@ from mongoscheme import MongoLevy
 from core.character import Char
 from core.msgpipe import publish_to_char
 from core.exception import SanguoException
+from core.resource import Resource
 from utils import pack_msg
 from protomsg import LevyNotify
 from preset import errormsg
@@ -59,27 +60,24 @@ class Levy(object):
                 "no times"
             )
 
-        cost_cyess = self.get_cost_sycee()
         c = Char(self.char_id)
-        if c.mc.sycee < cost_cyess:
-            raise SanguoException(
-                errormsg.SYCEE_NOT_ENOUGH,
-                self.char_id,
-                "Levy levy",
-                "Sycee Not Enough. {0} < cost {1}".format(c.mc.sycee, cost_cyess)
-            )
+        resource = Resource(self.char_id, "Levy")
 
-        got_gold = 10000 * c.mc.level * 2
-        prob = random.randint(1, 100)
-        for k, v in CRIT_PROB_TABLE:
-            if prob <= k:
-                break
+        cost_cyess = self.get_cost_sycee()
 
-        got_gold *= v
+        with resource.check(sycee=-cost_cyess):
+            got_gold = 10000 * c.mc.level * 2
+            prob = random.randint(1, 100)
+            for k, v in CRIT_PROB_TABLE:
+                if prob <= k:
+                    break
 
-        c.update(gold=got_gold, sycee=-cost_cyess)
-        self.ml.times += 1
-        self.ml.save()
+            got_gold *= v
+
+            self.ml.times += 1
+            self.ml.save()
+            resource.add(gold=got_gold)
+
         self.send_notify()
 
     def send_notify(self):

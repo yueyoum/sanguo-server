@@ -9,7 +9,7 @@ from core.mongoscheme import MongoHero, MongoAchievement, MongoHeroSoul, MongoCh
 from core.signals import hero_add_signal, hero_del_signal, hero_changed_signal, hero_step_up_signal, hero_to_soul_signal
 from core.formation import Formation
 from core.exception import SanguoException
-from core.resource import check_character
+from core.resource import Resource
 from utils import cache
 from utils.functional import id_generator
 from core.msgpipe import publish_to_char
@@ -197,27 +197,6 @@ class Hero(FightPowerMixin):
         return self.hero.progress
 
 
-    def _step_up_using_soul(self):
-        from core.item import Item
-        needs_amount = external_calculate.Hero.step_up_using_soul_amount(self.model_hero.quality)
-
-        hs = HeroSoul(self.char_id)
-        self_soul_amount = hs.soul_amount(self.oid)
-
-        amount_diff = needs_amount - self_soul_amount
-        if amount_diff >= 0:
-            item = Item(self.char_id)
-            if not item.has_stuff(22, amount_diff):
-                raise SanguoException(
-                    errormsg.HERO_STEP_UP_ALL_NOT_ENOUGH,
-                    self.char_id,
-                    "Hero Step Up",
-                    "soul not enough"
-                )
-            item.stuff_remove(22, amount_diff)
-
-        hs.purge_soul(self.oid)
-
     def step_up(self):
         # 升阶
         if self.step >= HERO_MAX_STEP:
@@ -228,11 +207,35 @@ class Hero(FightPowerMixin):
                 "Hero {0} reach max step {1}".format(self.id, HERO_MAX_STEP)
             )
 
+        resource_needs = {}
         cost_gold = external_calculate.Hero.step_up_using_gold(self.model_hero.quality)
 
-        with check_character(self.char_id, gold=-cost_gold, func_name="Hero Step Up"):
-            self._step_up_using_soul()
+        resource_needs['gold'] = -cost_gold
+        soul_needs_amount = external_calculate.Hero.step_up_using_soul_amount(self.model_hero.quality)
 
+        hs = HeroSoul(self.char_id)
+        self_soul_amount = hs.soul_amount(self.oid)
+
+        common_soul_needs = soul_needs_amount - self_soul_amount
+        if common_soul_needs <= 0:
+            # don't need common soul
+            resource_needs['souls'] = [(self.oid, soul_needs_amount)]
+        else:
+            # need common soul
+            resource_needs['stuffs'] = [(22, common_soul_needs)]
+
+        resource = Resource(self.char_id, "Hero Step Up", 'step up {0}'.format(self.id))
+        try:
+            resource.check_and_remove(**resource_needs)
+        except SanguoException as e:
+            if e.error_id == errormsg.SOUL_NOT_ENOUGH or e.error_id == errormsg.STUFF_NOT_ENOUGH:
+                raise SanguoException(
+                    errormsg.HERO_STEP_UP_ALL_NOT_ENOUGH,
+                    self.char_id,
+                    "Hero Step Up",
+                    "soul not enough"
+                )
+            raise e
 
         # 扣完东西了，开始搞一次
         self.hero.progress += 1

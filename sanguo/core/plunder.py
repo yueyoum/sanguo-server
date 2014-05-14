@@ -3,20 +3,22 @@
 
 __author__ = 'Wang Chao'
 __date__ = '1/22/14'
+
 import random
-import logging
 
 from mongoscheme import Q, DoesNotExist
 from core.character import Char, get_char_ids_by_level_range
 from core.battle import PVP
 from core.stage import Hang
-from core.mongoscheme import MongoHang, MongoHangDoing, MongoPlunder, MongoEmbededPlunderChars, MongoStage
+from core.mongoscheme import MongoHangDoing, MongoPlunder, MongoEmbededPlunderChars, MongoStage
 from core.exception import SanguoException
 from core.counter import Counter
 from core.task import Task
 from core.formation import Formation
 from core.prison import Prison
 from core.stage import Stage
+from core.resource import Resource
+from core.attachment import make_standard_drop_from_template, get_drop, standard_drop_to_attachment_protomsg
 from protomsg import Battle as MsgBattle
 from protomsg import PlunderNotify
 from core.msgpipe import publish_to_char
@@ -28,11 +30,10 @@ from preset.settings import (
     PLUNDER_REWARD_NEEDS_POINT,
     PLUNDER_GOT_ITEMS_HOUR,
 )
-from protomsg import PLUNDER_HERO, PLUNDER_STUFF
+from protomsg import PLUNDER_HERO, PLUNDER_STUFF, PLUNDER_GOLD
 from preset import errormsg
+from preset.data import STAGES
 
-
-logger = logging.getLogger('sanguo')
 
 PLUNDER_LEVEL_DIFF = 10
 
@@ -180,8 +181,8 @@ class Plunder(object):
             drop_official_exp = PLUNDER_GET_OFFICIAL_EXP_WHEN_WIN
             drop_gold = PLUNDER_DEFENSE_FAILURE_GOLD
 
-            char = Char(self.char_id)
-            char.update(gold=drop_gold, official_exp=drop_official_exp, des='Plunder Reward')
+            resource = Resource(self.char_id, "Plunder")
+            resource.add(gold=drop_gold, official_exp=drop_official_exp)
         else:
             self.mongo_plunder.target_char = 0
 
@@ -221,41 +222,37 @@ class Plunder(object):
         self.mongo_plunder.got_reward.append(tp)
         self.mongo_plunder.save()
 
-        got_hero_id = 0
-        got_equipments = []
-        got_gems = []
-        got_stuffs = []
-        got_gold = 0
-
+        standard_drop = make_standard_drop_from_template()
         plunder_gold = self.mongo_plunder.chars[str(self.mongo_plunder.target_char)].gold
 
+        got_hero_id = 0
         if tp == PLUNDER_HERO:
             f = Formation(self.mongo_plunder.target_char)
             heros = f.in_formation_hero_original_ids()
             got_hero_id = random.choice([hid for hid in heros if hid])
             p = Prison(self.char_id)
             p.prisoner_add(got_hero_id, plunder_gold/2)
+
         elif tp == PLUNDER_STUFF:
             stage = Stage(self.mongo_plunder.target_char)
             max_star_stage = stage.stage.max_star_stage
             if not max_star_stage:
                 max_star_stage = 1
-            drop = stage.save_drop(max_star_stage, times=PLUNDER_GOT_ITEMS_HOUR * 3600 / 15, only_items=True)
-            for e in drop['equipments']:
-                for i in range(e['amount']):
-                    got_equipments.append((e['id'], e['level'], 1))
-            for g in drop['gems']:
-                got_gems.append((g['id'], g['amount']))
-            for s in drop['stuffs']:
-                got_stuffs.append((s['id'], s['amount']))
 
-        else:
-            got_gold = plunder_gold
-            char =Char(self.char_id)
-            char.update(gold=got_gold)
+            drop_ids = [int(i) for i in STAGES[max_star_stage].normal_drop.split(',')]
+            drop = get_drop(drop_ids, multi=PLUNDER_GOT_ITEMS_HOUR * 3600 / 15)
+            standard_drop.update(drop)
+
+        elif tp == PLUNDER_GOLD:
+            standard_drop['gold'] = plunder_gold
+
+        resource = Resource(self.char_id, "Plunder Reward")
+        resource.add(**standard_drop)
 
         self.send_notify()
-        return got_hero_id, got_equipments, got_gems, got_stuffs, got_gold
+        if got_hero_id:
+            standard_drop['heros'] = [got_hero_id]
+        return standard_drop_to_attachment_protomsg(standard_drop)
 
 
     def send_notify(self):

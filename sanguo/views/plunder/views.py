@@ -54,34 +54,12 @@ def get_reward(request):
     char_id = request._char_id
 
     p = Plunder(char_id)
-    # FIXME using standard drop
-    got_hero_id, got_equipments, got_gems, got_stuffs, got_gold = p.get_reward(req.tp)
+    attachment_msg = p.get_reward(req.tp)
 
     response = protomsg.PlunderGetRewardResponse()
     response.ret = 0
     response.tp = req.tp
-
-    if got_hero_id:
-        response.reward.heros.append(got_hero_id)
-    if got_equipments:
-        for _id, level, step in got_equipments:
-            e = response.reward.equipments.add()
-            e.id = _id
-            e.level = level
-            e.step = step
-            e.amount = 1
-    if got_gems:
-        for _id, amount in got_gems:
-            g = response.reward.gems.add()
-            g.id = _id
-            g.amount = amount
-    if got_stuffs:
-        for _id, amount in got_stuffs:
-            s = response.reward.stuffs.add()
-            s.id = _id
-            s.amount = amount
-    if got_gold:
-        response.reward.gold = got_gold
+    response.reward.MergeFrom(attachment_msg)
 
     return pack_msg(response)
 

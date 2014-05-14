@@ -59,29 +59,11 @@ def char_official_up(current_official_exp, current_official, add_official_exp):
 
 class Char(object):
     def __init__(self, char_id):
-        # if not char_id:
-        #     account_id = kwargs['account_id']
-        #     server_id = kwargs['server_id']
-        #     name = kwargs['name']
-        #     char = char_initialize(account_id, server_id, name)
-        #     self.id = char.id
-        # else:
-        #     self.id = char_id
         self.id = char_id
         self.mc = MongoCharacter.objects.get(id=char_id)
 
-
-    def delete(self):
-        # WARNING
-        # 一般不删除角色
-        # FIXME mongoscheme 中的全要删除
-        pass
-
-
     @property
     def cacheobj(self):
-        # FIXME
-        # return Character.cache_obj(self.id)
         return self.mc
 
 
@@ -98,9 +80,7 @@ class Char(object):
         return p
 
 
-    def update(self, gold=0, sycee=0, exp=0, official_exp=0, des=''):
-        # char = Character.objects.get(id=self.id)
-        # char = self.cacheobj
+    def update(self, gold=0, sycee=0, exp=0, official_exp=0):
         opended_funcs = []
         char = MongoCharacter.objects.get(id=self.id)
         if gold:
@@ -133,9 +113,6 @@ class Char(object):
                 )
                 opended_funcs = FunctionOpen(self.id).trig_by_char_level(char.level)
 
-            des = '{0}. Level {1} to {2}'.format(des, old_level, char.level)
-
-
         if official_exp:
             old_official_level = char.official
             char.official_exp, char.official = char_official_up(char.official_exp, char.official, official_exp)
@@ -147,20 +124,7 @@ class Char(object):
                     new_official=char.official
                 )
 
-            des = '{0}. Official {1} to {2}'.format(des, old_official_level, char.official)
-
         char.save()
-
-        # save to CharPropertyLog
-        # CharPropertyLog.objects.create(
-        #     char_id=self.id,
-        #     gold=gold,
-        #     sycee=sycee,
-        #     exp=exp,
-        #     official_exp=official_exp,
-        #     des=des[:255]
-        # )
-
         self.send_notify(char=char, opended_funcs=opended_funcs)
 
 

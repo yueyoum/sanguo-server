@@ -673,7 +673,7 @@ class ActivityStage(object):
             standard_drop = make_standard_drop_from_template()
             standard_drop['gold'] = self.this_stage.normal_gold
         else:
-            standard_drop = get_drop([int(i) for i in self.this_stage.normal_drop])
+            standard_drop = get_drop([int(i) for i in self.this_stage.normal_drop.split(',')])
 
         standard_drop = save_standard_drop(self.char_id, standard_drop, des="ActivityStage {0} drop".format(self.this_stage.id))
         return standard_drop

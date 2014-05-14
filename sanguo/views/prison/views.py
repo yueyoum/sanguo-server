@@ -24,16 +24,11 @@ def prisoner_release(request):
     req = request._proto
 
     p = Prison(request._char_id)
-    gold, stuffs = p.release(req.id)
+    attachment_msg = p.release(req.id)
 
     response = PrisonerReleaseResponse()
     response.ret = 0
-    response.reward.gold = gold
-    for _id, amount in stuffs:
-        s = response.reward.stuffs.add()
-        s.id = _id
-        s.amount = amount
-
+    response.reward.MergeFrom(attachment_msg)
     return pack_msg(response)
 
 
@@ -42,15 +37,11 @@ def prisoner_kill(request):
     req = request._proto
 
     p = Prison(request._char_id)
-    stuffs = p.kill(req.id)
+    attachment_msg = p.kill(req.id)
 
     response = PrisonerKillResponse()
     response.ret = 0
-    for _id, amount in stuffs:
-        s = response.reward.stuffs.add()
-        s.id = _id
-        s.amount = amount
-
+    response.reward.MergeFrom(attachment_msg)
     return pack_msg(response)
 
 

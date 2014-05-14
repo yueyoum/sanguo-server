@@ -4,12 +4,11 @@ import random
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoPrison, MongoEmbededPrisoner
 from core.exception import SanguoException
-from core.character import Char
 from core.hero import save_hero
 from core.msgpipe import publish_to_char
 from core.task import Task
-from core.item import Item
-from core.resource import check_stuff
+from core.resource import Resource
+from core.attachment import standard_drop_to_attachment_protomsg
 from utils import pack_msg
 from preset.settings import (
     PRISONER_START_PROB,
@@ -89,7 +88,8 @@ class Prison(object):
 
         using_stuffs = [(tid, 1) for tid in treasures]
 
-        with check_stuff(self.char_id, using_stuffs, func_name="Prisoner Get"):
+        resource = Resource(self.char_id, "Prisoner Get")
+        with resource.check(stuffs=using_stuffs):
             got = False
             prob = self.p.prisoners[str_id].prob + treasures_prob
             if prob >= random.randint(1, 100):
@@ -138,20 +138,15 @@ class Prison(object):
         publish_to_char(self.char_id, pack_msg(msg))
         return p
 
+
     def release(self, _id):
         p = self._abandon(_id, action="Prisoner Release")
         got_gold = p.gold
         got_treasure = random.choice(PRISONER_RELEASE_GOT_TREASURE[HEROS[p.oid].quality])
 
-        char = Char(self.char_id)
-        char.update(gold=got_gold, des="Prisoner Release")
-
-        stuffs = [(got_treasure, 1)]
-
-        item = Item(self.char_id)
-        item.stuff_add(stuffs)
-
-        return got_gold, stuffs
+        resource = Resource(self.char_id, "Prisoner Release")
+        standard_drop = resource.add(gold=got_gold, stuffs=[(got_treasure, 1)])
+        return standard_drop_to_attachment_protomsg(standard_drop)
 
 
     def kill(self, _id):
@@ -165,9 +160,9 @@ class Prison(object):
         stuffs.extend(souls)
         stuffs.extend(treasures)
 
-        item = Item(self.char_id)
-        item.stuff_add(stuffs)
-        return stuffs
+        resource = Resource(self.char_id, "Prisoner Kill")
+        standard_drop = resource.add(stuffs=stuffs)
+        return standard_drop_to_attachment_protomsg(standard_drop)
 
 
     def _fill_up_prisoner_msg(self, p, _id, oid, prob, active):

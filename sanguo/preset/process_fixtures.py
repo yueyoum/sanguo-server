@@ -23,9 +23,30 @@ def process_errormsg(in_file, out_file):
         f.writelines(data)
 
 
+def process_errormsg_zh(in_file, out_file):
+    lines = []
+    lines.append("# -*- coding: utf-8 -*-\n\n")
+    lines.append("ERRORMSGZH = {\n")
+
+    with open(in_file, 'r') as f:
+        content = json.loads(f.read())
+
+    for c in content:
+        error_id = c['pk']
+        error_zh = c['fields']['text_zh'].encode('utf-8')
+        lines.append('    {0}: "{1}",\n'.format(error_id, error_zh))
+
+    lines.append("}\n\n")
+
+    with open(out_file, 'w') as f:
+        f.writelines(lines)
+
 
 if __name__ == '__main__':
     errormsg_in = os.path.join(SELF_PATH, 'fixtures', 'errormsg.json')
     errormsg_out = os.path.join(SELF_PATH, 'errormsg.py')
     process_errormsg(errormsg_in, errormsg_out)
+
+    errormsg_zh_out = os.path.join(SELF_PATH, 'errormsg_zh.py')
+    process_errormsg_zh(errormsg_in, errormsg_zh_out)
 

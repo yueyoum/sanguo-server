@@ -5,6 +5,8 @@ from mongoengine import DoesNotExist
 from core.mongoscheme import MongoSocket, MongoFormation, MongoHero
 from core.signals import socket_changed_signal, hero_changed_signal
 from core.exception import SanguoException
+from core.attachment import make_standard_drop_from_template
+from core.resource import resource_logger
 
 from utils import pack_msg
 from core.msgpipe import publish_to_char
@@ -31,7 +33,6 @@ for _e in EQUIPMENTS.values():
         ALL_ARMORS[_e.id] = _e
     else:
         ALL_JEWELRY[_e.id] = _e
-
 
 
 class Formation(object):
@@ -380,6 +381,7 @@ class Formation(object):
 
 
     def special_buy(self, socket_id, tp):
+        # FIXME
         try:
             this_socket = self.formation.sockets[str(socket_id)]
         except KeyError:
@@ -433,6 +435,13 @@ class Formation(object):
             sender=None,
             socket_obj=self.formation.sockets[str(socket_id)]
         )
+
+        standard_drop = make_standard_drop_from_template()
+        standard_drop['equipments'] = [(new_id, 1, 1)]
+        standard_drop['income'] = 1
+        standard_drop['func_name'] = "Special Buy"
+        standard_drop['des'] = ''
+        resource_logger(self.char_id, standard_drop)
 
         self._send_socket_changed_notify(socket_id, self.formation.sockets[str(socket_id)])
 

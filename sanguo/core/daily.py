@@ -11,10 +11,11 @@ from core.msgpipe import publish_to_char
 from core.exception import SanguoException
 from core.character import Char
 from core.counter import Counter
-from core.attachment import Attachment
+from core.attachment import Attachment, standard_drop_to_attachment_protomsg
 from core.achievement import Achievement
+from core.resource import Resource
 from utils import pack_msg
-from protomsg import CheckInNotify, CheckInResponse, Attachment as MsgAttachment
+from protomsg import CheckInNotify, CheckInResponse
 from preset.data import GEMS, OFFICIAL
 from preset import errormsg
 
@@ -45,15 +46,11 @@ class CheckIn(object):
 
         self.c.days += 1
 
-        msg = CheckInResponse()
-        msg.ret = 0
-        if self.c.days == MAX_DAYS:
-            from core.item import Item
+        resource_add = {}
+        resource_add['sycee'] = 100
 
-            msg.reward.sycee = 100
-            stuff = msg.reward.stuffs.add()
-            stuff.id = 22
-            stuff.amount = 5
+        if self.c.days == MAX_DAYS:
+            resource_add['stuffs'] = [(22, 5)]
 
             level_three_gems = []
             for g in GEMS.values():
@@ -61,25 +58,17 @@ class CheckIn(object):
                     level_three_gems.append(g.id)
 
             gid = random.choice(level_three_gems)
-            gem = msg.reward.gems.add()
-            gem.id = gid
-            gem.amount = 1
-
-            char = Char(self.char_id)
-            # FIXME
-            char.update(sycee=100, des='Daily Checkin')
-
-            item = Item(self.char_id)
-            item.stuff_add((22, 5))
-            item.gem_add((gid, 1))
-
+            resource_add['gems'] = [(gid, 1)]
             self.c.days = 0
-        else:
-            msg.reward.sycee = 100
-            char = Char(self.char_id)
-            char.update(sycee=100, des='Daily Checkin')
 
         self.c.save()
+
+        resource = Resource(self.char_id, "Daily Checkin", 'checkin reward')
+        standard_drop = resource.add(**resource_add)
+
+        msg = CheckInResponse()
+        msg.ret = 0
+        msg.reward.MergeFrom(standard_drop_to_attachment_protomsg(standard_drop))
 
         achievement = Achievement(self.char_id)
         achievement.trig(34, 1)
@@ -145,60 +134,8 @@ class OfficalDailyReward(object):
         counter.incr()
 
         gold = OFFICIAL[official_level].gold
-        char.update(gold=gold, des='Official Daily Reward')
 
-        msg = MsgAttachment()
-        msg.gold = gold
-        return msg
+        resource = Resource(self.char_id, "Daily Official", 'official reward')
+        standard_drop = resource.add(gold=gold)
+        return standard_drop_to_attachment_protomsg(standard_drop)
 
-#
-# class Continues(object):
-#     def __init__(self, char_id):
-#         self.char_id = char_id
-#         try:
-#             self.mongo_c = MongoContinues.objects.get(id=self.char_id)
-#         except DoesNotExist:
-#             self.mongo_c = MongoContinues(id=self.char_id)
-#             self.mongo_c.records = {}
-#             self.mongo_c.save()
-#
-#
-#     def set(self, func_name):
-#         # func_name in:
-#         # task              每天完成所有任务
-#         # login_reward      每天领取登录奖励
-#
-#         CONDITION_ID = {
-#             'task': 44,
-#             'login_reward': 45
-#         }
-#
-#         today = timezone.make_date()
-#
-#         if func_name in self.mongo_c.records:
-#             this_record = self.mongo_c.records[func_name]
-#             record_date_plus_one_day = this_record.date + datetime.timedelta(days=1)
-#             if today < record_date_plus_one_day:
-#                 # 还在当天
-#                 pass
-#             elif today == record_date_plus_one_day:
-#                 # 连续一天 要的就是这个
-#                 self.mongo_c.records[func_name].date = today
-#                 self.mongo_c.records[func_name].days += 1
-#             else:
-#                 # 没有连续，重置days
-#                 self.mongo_c.records[func_name].date = today
-#                 self.mongo_c.records[func_name].days = 1
-#         else:
-#             record = MongoEmbededContinuesRecord()
-#             record.date = today
-#             record.days = 1
-#             self.mongo_c.records[func_name] = record
-#
-#         self.mongo_c.save()
-#
-#         achievement = Achievement(self.char_id)
-#         achievement.trig(CONDITION_ID[func_name], self.mongo_c.records[func_name].days)
-#
-#
-#

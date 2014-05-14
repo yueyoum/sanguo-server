@@ -3,7 +3,7 @@
 __author__ = 'Wang Chao'
 __date__ = '4/28/14'
 
-
+import struct
 import logging
 
 import zmq
@@ -11,6 +11,10 @@ import msgpack
 
 from django.conf import settings
 
+
+fmt = struct.Struct('>i')
+LOG_SYSTEM_ID = fmt.pack(1)
+LOG_RESOURCE_ID = fmt.pack(2)
 
 context = zmq.Context()
 sock = context.socket(zmq.PUSH)
@@ -20,15 +24,47 @@ sock.connect("tcp://{0}:{1}".format(settings.LOG_MAN_HOST, settings.LOG_MAN_PORT
 
 class LogManHandler(logging.Handler):
     def emit(self, record):
-        data = {
-            'levelname': record.levelname,
-            'node_id': record.node_id,
-            'error_id': record.error_id,
-            'char_id': record.char_id,
-            'func_name': record.func_name,
-            'msg': record.error_msg,
-            'occurred_at': record.occurred_at,
-        }
+        if record.log_type_id == 1:
+            data = _make_system_data(record)
+        elif record.log_type_id == 2:
+            data = _make_resource_data(record)
+        else:
+            print "NOT SUPPORTED LOG TYPE ID", record.log_type_id
+            return
 
-        binary = msgpack.packb(data)
-        sock.send(binary)
+        sock.send(data)
+
+
+def _make_system_data(record):
+    data = {
+        'levelname': record.levelname,
+        'error_id': record.error_id,
+        'char_id': record.char_id,
+        'func_name': record.func_name,
+        'msg': record.error_msg,
+        'occurred_at': record.occurred_at,
+    }
+
+    binary = msgpack.packb(data)
+    return '%s%s' % (LOG_SYSTEM_ID, binary)
+
+def _make_resource_data(record):
+    data = {
+        'char_id': record.char_id,
+        'income': record.income,
+        'exp': getattr(record, 'exp', 0),
+        'official_exp': getattr(record, 'official_exp', 0),
+        'gold': getattr(record, 'gold', 0),
+        'sycee': getattr(record, 'sycee', 0),
+        'heros': getattr(record, 'heros', ''),
+        'souls': getattr(record, 'gold', ''),
+        'equipments': getattr(record, 'equipments', ''),
+        'gems': getattr(record, 'gems', ''),
+        'stuffs': getattr(record, 'stuffs', ''),
+        'des': record.des,
+        'occurred_at': record.occurred_at,
+    }
+
+    binary = msgpack.packb(data)
+    return '%s%s' % (LOG_RESOURCE_ID, binary)
+

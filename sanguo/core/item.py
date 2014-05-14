@@ -14,7 +14,7 @@ from core.signals import equip_changed_signal
 from core.formation import Formation
 from core.achievement import Achievement
 from core.task import Task
-from core.resource import check_character, check_stuff
+from core.resource import Resource
 from utils import pack_msg
 from utils.functional import id_generator
 import protomsg
@@ -155,10 +155,10 @@ class Equipment(MessageEquipmentMixin):
             self._msg_equip(msg, self.equip_id, self.mongo_item.equipments[str(self.equip_id)], self)
             equip_msgs.append(msg)
 
-        with check_character(self.char_id, gold=-all_gold_needs, func_name="Equipment Level Up"):
+        resource = Resource(self.char_id, "Equipment Level Up", "equipment {0}".format(self.equip_id))
+        with resource.check(gold=-all_gold_needs):
             self.mongo_item.save()
 
-        self.mongo_item.save()
         return equip_msgs
 
 
@@ -181,8 +181,8 @@ class Equipment(MessageEquipmentMixin):
             _id, _amount = x.split(':')
             stuff_needs.append((int(_id), int(_amount)))
 
-
-        with check_character(self.char_id, gold=-step_up_need_gold, func_name="Equipment Step Up"), check_stuff(self.char_id, stuff_needs, func_name="Equipment Step Up"):
+        resouce = Resource(self.char_id, "Equipment Step Up", "equipment {0}".format(self.equip_id))
+        with resouce.check(gold=-step_up_need_gold, stuffs=stuff_needs):
             self.oid = to
             self.equip = EQUIPMENTS[self.oid]
 
@@ -332,7 +332,6 @@ class Item(MessageEquipmentMixin):
         return self.item.stuffs.get(str(stuff_id), 0) >= amount
 
     def equip_add(self, oid, level=1, notify=True):
-        # TODO 背包是否满了
         try:
             this_equip = EQUIPMENTS[oid]
         except KeyError:
@@ -439,9 +438,9 @@ class Item(MessageEquipmentMixin):
             e = Equipment(self.char_id, _id, self.item)
             gold += e.sell_gold()
 
-        char = Char(self.char_id)
-        char.update(gold=gold, des='Equipment Sell. sell {0}'.format(ids))
-        self.equip_remove(ids)
+        resource = Resource(self.char_id, "Equipment Sell", "equipments {0}".format(ids))
+        resource.check_and_remove(equipments=ids)
+        resource.add(gold=gold)
 
 
     def equip_embed(self, _id, slot_id, gem_id):
@@ -574,12 +573,12 @@ class Item(MessageEquipmentMixin):
 
 
     def gem_sell(self, _id, amount):
-        # TODO get gold
         gold = 10 * amount
-        self.gem_remove(_id, amount)
 
-        char = Char(self.char_id)
-        char.update(gold=gold, des="Gem Sell")
+        resource = Resource(self.char_id, "Gem Sell", "sell: {0}, amount {1}".format(_id, amount))
+        resource.check_and_remove(gems=[(_id, amount)])
+        resource.add(gold=gold)
+
 
     def gem_merge(self, _id):
         this_gem_amount = self.item.gems.get(str(_id), 0)
@@ -722,11 +721,10 @@ class Item(MessageEquipmentMixin):
     def stuff_sell(self, _id, amount):
         # TODO get gold
         gold = 10 * amount
-        self.stuff_remove(_id, amount)
 
-        char = Char(self.char_id)
-        char.update(gold=gold, des="Gem Sell")
-
+        resource = Resource(self.char_id, "Stuff Sell", "sell {0}, amount: {1}".format(_id, amount))
+        resource.check_and_remove(stuffs=[(_id, amount)])
+        resource.add(gold=gold)
 
 
     def send_equip_notify(self):

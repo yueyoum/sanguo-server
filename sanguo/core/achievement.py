@@ -5,8 +5,8 @@ __date__ = '2/12/14'
 
 from mongoscheme import DoesNotExist
 from core.mongoscheme import MongoAchievement
-from core.attachment import Attachment, get_drop, standard_drop_to_attachment_protomsg, save_standard_drop
-
+from core.attachment import Attachment, get_drop, standard_drop_to_attachment_protomsg, make_standard_drop_from_template
+from core.resource import Resource
 
 from core.msgpipe import publish_to_char
 from utils import pack_msg
@@ -178,7 +178,7 @@ class Achievement(object):
 
     def send_reward(self, aid, sycee, packages):
         if not sycee and not packages:
-            return
+            return make_standard_drop_from_template()
 
         if packages:
             ps = [int(i) for i in packages.split(',')]
@@ -188,7 +188,8 @@ class Achievement(object):
         drops = get_drop(ps)
         drops['sycee'] += sycee if sycee else 0
 
-        drops = save_standard_drop(self.char_id, drops, des="Achievement {0} reward".format(aid))
+        resource = Resource(self.char_id, "Achievement Reward", "achievement {0}".format(aid))
+        drops = resource.add(**drops)
         return drops
 
 
