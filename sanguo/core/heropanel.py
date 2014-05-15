@@ -123,7 +123,7 @@ class HeroPanel(object):
 
         if self.free_times == 0:
             # 使用元宝
-            using_sycee = -GETHERO_COST_SYCEE
+            using_sycee = GETHERO_COST_SYCEE
         else:
             c = Counter(self.char_id, 'gethero')
             try:
