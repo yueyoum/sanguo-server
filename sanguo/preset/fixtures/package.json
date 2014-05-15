@@ -4,6 +4,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -20,6 +21,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -41,6 +43,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -62,6 +65,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -83,6 +87,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -104,6 +109,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -125,6 +131,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -141,6 +148,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [], 
@@ -151,6 +159,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -167,6 +176,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -183,6 +193,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -199,6 +210,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -215,6 +227,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -231,6 +244,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -247,6 +261,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -263,6 +278,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -279,6 +295,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -295,6 +312,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -311,6 +329,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -327,6 +346,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -343,6 +363,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -359,6 +380,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -375,6 +397,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -391,6 +414,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -407,6 +431,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -423,6 +448,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -439,6 +465,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -455,6 +482,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -471,6 +499,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -487,6 +516,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -508,6 +538,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -524,6 +555,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -540,6 +572,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -577,6 +610,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [], 
@@ -608,6 +642,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [], 
@@ -659,6 +694,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [], 
@@ -690,6 +726,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [], 
@@ -721,6 +758,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [], 
@@ -752,6 +790,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [], 
@@ -783,6 +822,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [], 
@@ -793,6 +833,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -830,6 +871,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [], 
@@ -881,6 +923,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [], 
@@ -932,6 +975,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [], 
@@ -942,6 +986,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -958,6 +1003,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -974,6 +1020,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -990,6 +1037,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1006,6 +1054,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1022,6 +1071,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1038,6 +1088,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1054,6 +1105,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1070,6 +1122,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1086,6 +1139,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1102,6 +1156,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1118,6 +1173,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1134,6 +1190,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1150,6 +1207,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1166,6 +1224,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1182,6 +1241,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1198,6 +1258,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1214,6 +1275,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1230,6 +1292,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1246,6 +1309,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1262,6 +1326,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1278,6 +1343,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1294,6 +1360,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1310,6 +1377,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1326,6 +1394,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1342,6 +1411,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1358,6 +1428,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1374,6 +1445,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1390,6 +1462,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1406,6 +1479,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1422,6 +1496,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1438,6 +1513,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1454,6 +1530,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1470,6 +1547,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [
@@ -1486,6 +1564,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [], 
         "stuffs": [], 
@@ -1496,6 +1575,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -1512,6 +1592,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -1528,6 +1609,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -1544,6 +1626,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -1560,6 +1643,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -1576,6 +1660,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -1597,6 +1682,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -1613,6 +1699,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -1629,6 +1716,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -1645,6 +1733,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
@@ -1661,6 +1750,7 @@
         "sycee": 0, 
         "exp": 0, 
         "gold": 0, 
+        "souls": [], 
         "equipments": [], 
         "heros": [
             {
