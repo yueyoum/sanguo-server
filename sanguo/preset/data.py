@@ -227,7 +227,11 @@ def _achievement_decoded_condition_values(self):
 
 ACHIEVEMENT_CONDITIONS = {}
 ACHIEVEMENT_FIRST_IDS = []
-for ach in ACHIEVEMENTS.values():
+for aid, ach in ACHIEVEMENTS.items():
+    if not ach.open:
+        ACHIEVEMENTS.pop(aid)
+        continue
+
     ach.decoded_condition_value = _achievement_decoded_condition_values(ach)
     ACHIEVEMENT_CONDITIONS.setdefault(ach.condition_id, []).append(ach)
     if ach.first:

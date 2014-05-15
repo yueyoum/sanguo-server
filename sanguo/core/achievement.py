@@ -35,12 +35,14 @@ class Achievement(object):
             self.achievement.save()
 
 
-    def trig(self, condition_id, new_value=None, send_notify=True):
+
+    def trig(self, condition_id, new_value, send_notify=True):
         achs = ACHIEVEMENT_CONDITIONS[condition_id]
         for a in achs:
-            self.trig_by_achievement(a, new_value=new_value, send_notify=send_notify)
+            self.trig_achievement(a, new_value, send_notify=send_notify)
 
-    def trig_by_achievement(self, ach, new_value=None, send_notify=True):
+
+    def trig_achievement(self, ach, new_value, send_notify=True):
         achievement_id = ach.id
         if achievement_id in self.achievement.complete or achievement_id in self.achievement.finished:
             return
@@ -50,11 +52,21 @@ class Achievement(object):
 
         decoded_condition_value = ach.decoded_condition_value
 
-        updated = True
+
+        def finish_it():
+            if achievement_id not in self.achievement.finished:
+                self.achievement.finished.append(achievement_id)
+            if str_id in self.achievement.doing:
+                self.achievement.doing.pop(str_id)
+
+            if achievement_id in self.achievement.display:
+                attachment.save_to_prize(4)
+
 
         if ach.mode == 1:
             # 多个ID条件
-            if new_value not in decoded_condition_value:
+            actual_new_value = [i for i in new_value if i in decoded_condition_value]
+            if not actual_new_value:
                 return
 
             if str_id in self.achievement.doing:
@@ -62,16 +74,13 @@ class Achievement(object):
             else:
                 values = []
 
-            if new_value not in values:
-                values.append(new_value)
-            else:
-                updated = False
+            for av in actual_new_value:
+                if av not in values:
+                    values.append(av)
 
             if set(values) == set(decoded_condition_value):
                 # FINISH
-                self.achievement.finished.append(achievement_id)
-                self.achievement.doing.pop(str_id)
-                attachment.save_to_prize(4)
+                finish_it()
             else:
                 self.achievement.doing[str_id] = ','.join([str(i) for i in values])
 
@@ -80,8 +89,7 @@ class Achievement(object):
             if new_value != decoded_condition_value:
                 return
             # FINISH
-            self.achievement.finished.append(achievement_id)
-            attachment.save_to_prize(4)
+            finish_it()
 
         elif ach.mode == 3:
             # 普通数量条件 数量累加
@@ -93,22 +101,16 @@ class Achievement(object):
             value += new_value
             if value >= decoded_condition_value:
                 # FINISH
-                self.achievement.finished.append(achievement_id)
-                if str_id in self.achievement.doing:
-                    self.achievement.doing.pop(str_id)
-                attachment.save_to_prize(4)
+                finish_it()
             else:
                 self.achievement.doing[str_id] = value
 
         elif ach.mode == 4:
-            # 阀值数量条件 trig
+            # 阀值数量条件
             # 这里不叠加，只是简单的比较
             if new_value >= decoded_condition_value:
                 # FINISH
-                self.achievement.finished.append(achievement_id)
-                if str_id in self.achievement.doing:
-                    self.achievement.doing.pop(str_id)
-                attachment.save_to_prize(4)
+                finish_it()
             else:
                 self.achievement.doing[str_id] = new_value
 
@@ -116,16 +118,14 @@ class Achievement(object):
             # 反向阀值条件， 比较小于就完成
             if new_value <= decoded_condition_value:
                 # FINISH
-                self.achievement.finished.append(achievement_id)
-                if str_id in self.achievement.doing:
-                    self.achievement.doing.pop(str_id)
-                attachment.save_to_prize(4)
+                finish_it()
             else:
                 self.achievement.doing[str_id] = new_value
 
         self.achievement.save()
 
-        if send_notify and updated:
+
+        if send_notify and achievement_id in self.achievement.display:
             msg = UpdateAchievementNotify()
             self._fill_up_achievement_msg(msg.achievement, ach)
             publish_to_char(self.char_id, pack_msg(msg))
@@ -142,6 +142,14 @@ class Achievement(object):
                 "{0} not exist".format(achievement_id)
             )
 
+        if achievement_id not in self.achievement.display:
+            raise SanguoException(
+                errormsg.ACHIEVEMENT_NOT_FINISH,
+                self.char_id,
+                "Achievement Get Reward",
+                "{0} not in display".format(achievement_id)
+            )
+
         if achievement_id not in self.achievement.finished:
             raise SanguoException(
                 errormsg.ACHIEVEMENT_NOT_FINISH,
@@ -151,26 +159,28 @@ class Achievement(object):
             )
 
         standard_drop = self.send_reward(achievement_id, ach.sycee, ach.package)
-        print "Achievement Reward:", achievement_id
-        print standard_drop
 
         self.achievement.finished.remove(achievement_id)
         self.achievement.complete.append(achievement_id)
+
+        updated_achs = [ach]
 
         if ach.next:
             index = self.achievement.display.index(achievement_id)
             self.achievement.display.pop(index)
             self.achievement.display.insert(index, ach.next)
 
+            updated_achs.append(ACHIEVEMENTS[ach.next])
+
+            if ach.next in self.achievement.finished:
+                attachment = Attachment(self.char_id)
+                attachment.save_to_prize(4)
+
         self.achievement.save()
 
-        msg = UpdateAchievementNotify()
-        self._fill_up_achievement_msg(msg.achievement, ach)
-        publish_to_char(self.char_id, pack_msg(msg))
-
-        if ach.next:
+        for up_ach in updated_achs:
             msg = UpdateAchievementNotify()
-            self._fill_up_achievement_msg(msg.achievement, ACHIEVEMENTS[ach.next])
+            self._fill_up_achievement_msg(msg.achievement, up_ach)
             publish_to_char(self.char_id, pack_msg(msg))
 
         return standard_drop_to_attachment_protomsg(standard_drop)
