@@ -143,7 +143,7 @@ class Stage(object):
         return battle_msg
 
 
-    def save_drop(self, stage_id, times=1, first=False, star=False, only_items=False):
+    def save_drop(self, stage_id, first=False, star=False):
         this_stage = STAGES[stage_id]
 
         drop_ids = []
@@ -154,25 +154,19 @@ class Stage(object):
         if star and this_stage.star_drop:
             drop_ids.extend([int(i) for i in this_stage.star_drop.split(',')])
 
-        standard_drop = get_drop(drop_ids, multi=times)
-        standard_drop['gold'] += this_stage.normal_exp
-        standard_drop['exp'] += this_stage.normal_gold
+        perpare_drop = get_drop(drop_ids)
+        perpare_drop['gold'] += this_stage.normal_exp
+        perpare_drop['exp'] += this_stage.normal_gold
 
         if first:
-            standard_drop['gold'] += this_stage.first_gold
-            standard_drop['exp'] += this_stage.first_exp
+            perpare_drop['gold'] += this_stage.first_gold
+            perpare_drop['exp'] += this_stage.first_exp
         if star:
-            standard_drop['gold'] += this_stage.star_gold
-            standard_drop['exp'] += this_stage.star_exp
-
-        if only_items:
-            standard_drop['gold'] = 0
-            standard_drop['sycee'] = 0
-            standard_drop['exp'] = 0
-            standard_drop['official_exp'] = 0
+            perpare_drop['gold'] += this_stage.star_gold
+            perpare_drop['exp'] += this_stage.star_exp
 
         resource = Resource(self.char_id, "Stage Drop", "stage {0}".format(stage_id))
-        standard_drop = resource.add(**standard_drop)
+        standard_drop = resource.add(**perpare_drop)
 
         return standard_drop
 
@@ -386,20 +380,17 @@ class Hang(TimerCheckAbstractBase):
         drop_gold = self._actual_gold(drop_gold)
 
         drop_ids = [int(i) for i in stage.normal_drop.split(',')]
-        standard_drop = get_drop(drop_ids, multi=times, gaussian=True)
+        prepare_drop = get_drop(drop_ids, multi=times, gaussian=True)
 
-        standard_drop['exp'] += drop_exp
-        standard_drop['gold'] += drop_gold
-
-        print "HANG, drop"
-        print standard_drop
+        prepare_drop['exp'] += drop_exp
+        prepare_drop['gold'] += drop_gold
 
         self.hang_doing.delete()
         self.hang_doing = None
         self.send_notify()
 
         resource = Resource(self.char_id, "Hang Reward")
-        standard_drop = resource.add(**standard_drop)
+        standard_drop = resource.add(**prepare_drop)
 
         achievement = Achievement(self.char_id)
         achievement.trig(29, drop_exp)
@@ -559,12 +550,12 @@ class EliteStage(object):
 
         drop_ids = [int(i) for i in this_stage.normal_drop.split(',')]
 
-        standard_drop = get_drop(drop_ids)
-        standard_drop['gold'] += gold
-        standard_drop['exp'] += exp
+        prepare_drop = get_drop(drop_ids)
+        prepare_drop['gold'] += gold
+        prepare_drop['exp'] += exp
 
         resource = Resource(self.char_id, "EliteStage Drop", "stage {0}".format(this_stage.id))
-        standard_drop = resource.add(**standard_drop)
+        standard_drop = resource.add(**prepare_drop)
 
         return standard_drop
 
@@ -675,13 +666,13 @@ class ActivityStage(object):
 
     def save_drop(self):
         if self.this_stage.tp == 1:
-            standard_drop = make_standard_drop_from_template()
-            standard_drop['gold'] = self.this_stage.normal_gold
+            prepare_drop = make_standard_drop_from_template()
+            prepare_drop['gold'] = self.this_stage.normal_gold
         else:
-            standard_drop = get_drop([int(i) for i in self.this_stage.normal_drop.split(',')])
+            prepare_drop = get_drop([int(i) for i in self.this_stage.normal_drop.split(',')])
 
         resource = Resource(self.char_id, "ActivityStage Drop", "stage {0}".format(self.this_stage.id))
-        standard_drop = resource.add(**standard_drop)
+        standard_drop = resource.add(**prepare_drop)
 
         return standard_drop
 

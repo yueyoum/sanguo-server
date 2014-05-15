@@ -14,7 +14,6 @@ from core.mail import Mail
 def send_mail(request):
     data = request.body
     data = json.loads(data)
-    print data
 
     sid = data.get('server_id', None)
     if sid:
@@ -25,7 +24,6 @@ def send_mail(request):
         if not cids:
             return {'ret': 1}
 
-    # mail_id = data['mail']['id']
     mail_name = data['mail']['name']
     mail_content = data['mail']['content']
     mail_send_at = data['mail']['send_at']

@@ -5,11 +5,13 @@ __date__ = '2/19/14'
 
 import random
 import copy
+import json
 
 from mongoengine import DoesNotExist
 
+from core.resource import Resource
 from core.exception import SanguoException
-from core.mongoscheme import MongoAttachment, MongoEmbededAttachment, MongoEmbededAttachmentEquipment
+from core.mongoscheme import MongoAttachment
 from core.msgpipe import publish_to_char
 from utils.math import GAUSSIAN_TABLE
 from utils import pack_msg
@@ -20,6 +22,12 @@ from preset import errormsg
 from preset.data import PACKAGES
 from preset.settings import DROP_PROB_BASE
 
+
+# drop 分为三个阶段，三种状态
+# package_drop 编辑器数据，包含prob。 这个只能用于 get_drop
+# prepare_drop 从 get_drop 获取，这个用于 Resource.add
+# standard_drop 从 Resource.add 获取，这个也是最终用于填充Attachment消息的drop
+# standard_drop 与 prepare_drop 的唯一区别在于，prepare_drop 中的 heros 格式为 [(id, amount)...]. 但standard_drop为 [id,id...]
 
 def make_standard_drop_from_template():
     return {
@@ -33,11 +41,6 @@ def make_standard_drop_from_template():
         'gems': [],
         'stuffs': [],
     }
-
-
-def save_standard_drop(*args, **kwargs):
-    # FIXME
-    pass
 
 def standard_drop_to_attachment_protomsg(data):
     # data is dict, {
@@ -88,24 +91,42 @@ def standard_drop_to_attachment_protomsg(data):
 
 def get_drop(drop_ids, multi=1, gaussian=False):
     # 从pakcage中解析并计算掉落，返回为 dict
+    # package 格式
     # {
     #     'gold': 0,
     #     'sycee': 0,
     #     'exp': 0,
     #     'official_exp': 0,
     #     'heros': [
-    #         {id: level: step: amount:},...
+    #         {id: amount: prob:},...
+    #     ],
+    #     'souls': [
+    #         {id: amount: prob:},...
     #     ],
     #     'equipments': [
-    #         {id: level: amount:},...
+    #         {id: level: amount: prob:},...
     #     ],
     #     'gems': [
-    #         {id: amount:},...
+    #         {id: amount: prob:},...
     #     ],
     #     'stuffs': [
-    #         {id: amount:},...
+    #         {id: amount: prob:},...
     #     ]
     # }
+    #
+    # 返回的是从prob概率计算后的 prepare_drop 格式
+    # {
+    #     'gold': 0,
+    #     'sycee': 0,
+    #     'exp': 0,
+    #     'official_exp': 0,
+    #     'heros': [(id, amount)...],
+    #     'souls': [(id, amount)...],
+    #     'equipments': [(id, level, amount)...],
+    #     'gems': [(id, amount)...],
+    #     'stuffs': [(id, amount)...]
+    # }
+
     gold = 0
     sycee = 0
     exp = 0
@@ -128,13 +149,14 @@ def get_drop(drop_ids, multi=1, gaussian=False):
         official_exp += p['official_exp']
 
         heros.extend(p['heros'])
+        souls.extend(p['souls'])
         equipments.extend(p['equipments'])
         gems.extend(p['gems'])
         stuffs.extend(p['stuffs'])
 
     def _make(items):
         final_items = []
-        for index, item in enumerate(items):
+        for item in items:
             prob = item['prob'] * multi
             if gaussian:
                 prob = prob * (1 + GAUSSIAN_TABLE[round(random.uniform(0.01, 0.99), 2)] * 0.08)
@@ -148,12 +170,12 @@ def get_drop(drop_ids, multi=1, gaussian=False):
                 continue
 
             item['amount'] *= a
-            item.pop('prob')
             final_items.append(item)
 
         return final_items
 
     heros = _make(heros)
+    souls = _make(souls)
     equipments = _make(equipments)
     gems = _make(gems)
     stuffs = _make(stuffs)
@@ -164,7 +186,7 @@ def get_drop(drop_ids, multi=1, gaussian=False):
         'exp': exp * multi,
         'official_exp': official_exp * multi,
         'heros': [(x['id'], x['amount']) for x in heros],
-        'souls': souls,   # FIXME
+        'souls': [(x['id'], x['amount']) for x in souls],
         'equipments': [(x['id'], x['level'], x['amount']) for x in equipments],
         'gems': [(x['id'], x['amount']) for x in gems],
         'stuffs': [(x['id'], x['amount']) for x in stuffs],
@@ -182,29 +204,6 @@ class Attachment(object):
             self.attachment.attachments = {}
             self.attachment.save()
 
-    def save_to_char(self, gold=0, sycee=0, exp=0, official_exp=0, heros=None, equipments=None, gems=None, stuffs=None):
-        from core.character import Char
-        from core.hero import save_hero
-        from core.item import Item
-
-        if gold or sycee or exp:
-            char = Char(self.char_id)
-            char.update(gold=gold, sycee=sycee, exp=exp, des='Attachment')
-
-        if heros:
-            save_hero(self.char_id, heros)
-
-        item = Item(self.char_id)
-        if equipments:
-            for eid, level, step in equipments:
-                item.equip_add(eid, level)
-        if gems:
-            item.gem_add(gems)
-
-        if stuffs:
-            item.stuff_add(stuffs)
-
-
     def save_to_prize(self, prize_id):
         if prize_id not in self.attachment.prize_ids:
             self.attachment.prize_ids.append(prize_id)
@@ -212,32 +211,8 @@ class Attachment(object):
         self.send_notify()
 
 
-    def save_to_attachment(self, prize_id, gold=0, sycee=0, exp=0, official_exp=0, heros=None, equipments=None, gems=None, stuffs=None):
-        embeded_attachment = MongoEmbededAttachment()
-        embeded_attachment.gold = gold
-        embeded_attachment.exp = exp
-        embeded_attachment.sycee = sycee
-        embeded_attachment.official_exp = official_exp
-
-        if heros:
-            embeded_attachment.heros.extend(heros)
-        if equipments:
-            for _id, level, step in equipments:
-                equip = MongoEmbededAttachmentEquipment()
-                equip.id = _id
-                equip.level = level
-                equip.step = step
-                equip.amount = 1
-
-                embeded_attachment.equipments.append(equip)
-        if gems:
-            for _id, amount in gems:
-                embeded_attachment.gems[str(_id)] = amount
-        if stuffs:
-            for _id, amount in stuffs:
-                embeded_attachment.stuffs[str(_id)] = amount
-
-        self.attachment.attachments[str(prize_id)] = embeded_attachment
+    def save_to_attachment(self, prize_id, **kwargs):
+        self.attachment.attachments[str(prize_id)] = json.dumps(kwargs)
 
         if prize_id not in self.attachment.prize_ids:
             self.attachment.prize_ids.append(prize_id)
@@ -282,34 +257,14 @@ class Attachment(object):
                     "{0} not exist".format(prize_id)
                 )
 
-            heros = None
-            if attachment.heros:
-                heros = [int(i) for i in attachment.heros]
-            equipments = None
-            if attachment.equipments:
-                equipments = [(i.id, i.level, i.step) for i in attachment.equipments]
-            gems = None
-            if attachment.gems:
-                gems = [(int(k), v) for k, v in attachment.gems.items()]
-            stuffs = None
-            if attachment.stuffs:
-                stuffs = [(int(k), v) for k, v in attachment.stuffs.items()]
-
-            self.save_to_char(
-                gold=attachment.gold,
-                sycee=attachment.sycee,
-                exp=attachment.exp,
-                official_exp=attachment.official_exp,
-                heros=heros,
-                equipments=equipments,
-                gems=gems,
-                stuffs=stuffs
-            )
+            attachment = json.loads(attachment)
+            resource = Resource(self.char_id, "Prize {0}".format(prize_id))
+            standard_drop = resource.add(**attachment)
 
             self.attachment.attachments.pop(str(prize_id))
             self.attachment.save()
 
-            att_msg = attachment.to_protobuf()
+            att_msg = standard_drop_to_attachment_protomsg(standard_drop)
 
         # 删除此prize_id
         if prize_id in self.attachment.prize_ids:
@@ -321,7 +276,6 @@ class Attachment(object):
         self.send_notify()
 
         return att_msg
-
 
 
     def send_notify(self):
