@@ -208,7 +208,7 @@ class Hang(TimerCheckAbstractBase):
         if not self.hang_doing or self.hang_doing.finished:
             return
 
-        if timezone.utc_timestamp() - self.hang_doing.start >= self.hang.remained:
+        if timezone.utc_timestamp() - self.hang_doing.day_start >= self.hang.remained:
             # finish
             self.finish(actual_seconds=self.hang.remained)
 
@@ -221,7 +221,8 @@ class Hang(TimerCheckAbstractBase):
         if self.hang_doing:
             stage_id = self.hang_doing.stage_id
             if not self.hang_doing.finished:
-                self.hang_doing.start = timezone.utc_timestamp()
+                # self.hang_doing.start = timezone.utc_timestamp()
+                self.hang_doing.day_start = timezone.utc_timestamp()
                 self.hang_doing.save()
         else:
             if remained:
@@ -263,11 +264,13 @@ class Hang(TimerCheckAbstractBase):
         char = Char(self.char_id)
         char_level = char.cacheobj.level
 
+        now = timezone.utc_timestamp()
         hang_doing = MongoHangDoing(
             id=self.char_id,
             char_level=char_level,
             stage_id=stage_id,
-            start=timezone.utc_timestamp(),
+            start=now,
+            day_start=now,
             finished=False,
             actual_seconds=0,
             logs=[],
@@ -311,7 +314,7 @@ class Hang(TimerCheckAbstractBase):
         if not actual_seconds:
             actual_seconds = timezone.utc_timestamp() - self.hang_doing.start
 
-        remained_seconds = self.hang.remained - actual_seconds
+        remained_seconds = self.hang.remained - (timezone.utc_timestamp() - self.hang_doing.day_start)
         if remained_seconds <= 0:
             remained_seconds = 0
 
@@ -408,10 +411,8 @@ class Hang(TimerCheckAbstractBase):
                 msg.hang.used_time = self.hang_doing.actual_seconds
                 msg.remained_time = self.hang.remained
             else:
-                used_time = timezone.utc_timestamp() - self.hang_doing.start
-
-                msg.hang.used_time = used_time
-                msg.remained_time = self.hang.remained - used_time
+                msg.hang.used_time = timezone.utc_timestamp() - self.hang_doing.start
+                msg.remained_time = self.hang.remained - (timezone.utc_timestamp() - self.hang_doing.day_start)
 
             msg.hang.finished = self.hang_doing.finished
 

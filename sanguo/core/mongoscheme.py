@@ -177,6 +177,9 @@ class MongoHangDoing(Document):
     stage_id = IntField()
     # 开始的UTC 时间戳
     start = IntField()
+    # 只有在挂机跨过一天的分割时，自动续第二天的挂机时，这里的day_start才和start不一样
+    # 并且判断当日时间有没有用完也是用day_start来判断的
+    day_start = IntField()
     finished = BooleanField()
     # 实际挂机时间
     actual_seconds = IntField()
