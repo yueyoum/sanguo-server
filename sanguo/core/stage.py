@@ -374,7 +374,8 @@ class Hang(TimerCheckAbstractBase):
 
     def save_drop(self):
         stage_id = self.hang_doing.stage_id
-        times = self.hang_doing.actual_seconds / 15
+        actual_seconds = self.hang_doing.actual_seconds
+        times = actual_seconds / 15
 
         stage = STAGES[stage_id]
 
@@ -392,7 +393,7 @@ class Hang(TimerCheckAbstractBase):
         self.hang_doing = None
         self.send_notify()
 
-        resource = Resource(self.char_id, "Hang Reward")
+        resource = Resource(self.char_id, "Hang Reward", "actual seconds = {0}, times = {1}".format(actual_seconds, times))
         standard_drop = resource.add(**prepare_drop)
 
         achievement = Achievement(self.char_id)
