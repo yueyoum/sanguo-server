@@ -217,8 +217,8 @@ class HeroPanel(object):
 
         random.shuffle(embedded_hero_objs)
 
-        for i in embedded_hero_objs:
-            self.panel.panel[str(i+1)] = i
+        for index, i in enumerate(embedded_hero_objs):
+            panel.panel[str(index+1)] = i
 
         panel.save()
         return panel
