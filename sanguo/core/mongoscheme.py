@@ -87,15 +87,16 @@ class MongoStage(Document):
         'collection': 'stage'
     }
 
+class MongoEmbeddedHeroPanelHero(EmbeddedDocument):
+    oid = IntField()
+    # 是否是好卡
+    good = BooleanField()
+    opened = BooleanField()
+
+
 class MongoHeroPanel(Document):
     id = IntField(primary_key=True)
-    # 甲品质卡
-    good_hero = IntField()
-    # 其他卡，（可能包括一张甲卡）
-    other_heros = ListField(IntField())
-    panel = DictField()
-    # 这组卡牌是否开始
-    started = BooleanField()
+    panel = MapField(EmbeddedDocumentField(MongoEmbeddedHeroPanelHero))
     # 上次刷新的时间戳
     last_refresh = IntField()
 

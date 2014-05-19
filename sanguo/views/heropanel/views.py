@@ -11,14 +11,6 @@ from core.heropanel import HeroPanel
 from protomsg import GetHeroResponse
 
 
-@message_response("GetHeroStartResponse")
-@function_check(14)
-def start(request):
-    p = HeroPanel(request._char_id)
-    p.start()
-    return None
-
-
 @message_response("GetHeroRefreshResponse")
 @function_check(14)
 def refresh(request):

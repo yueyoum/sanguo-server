@@ -28,7 +28,8 @@ def _check_character(char_id, gold=0, sycee=0, func_name=""):
 
     yield
 
-    c.update(gold=gold, sycee=sycee)
+    if gold or sycee:
+        c.update(gold=gold, sycee=sycee)
 
 
 def _check_hero_soul(char_id, souls, func_name=""):

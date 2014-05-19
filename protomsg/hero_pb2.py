@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='hero.proto',
   package='Sanguo.protocol.hero',
-  serialized_pb='\n\nhero.proto\x12\x14Sanguo.protocol.hero\"\xb9\x01\n\x04Hero\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x13\n\x0boriginal_id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x03 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x04 \x02(\x05\x12\n\n\x02hp\x18\x05 \x02(\x05\x12\x0c\n\x04\x63irt\x18\x06 \x02(\x05\x12\x0c\n\x04step\x18\x07 \x02(\x05\x12\r\n\x05power\x18\x08 \x02(\x05\x12\x19\n\x11max_socket_amount\x18\t \x02(\x05\x12\x1d\n\x15\x63urrent_socket_amount\x18\n \x02(\x05\"&\n\x08HeroSoul\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"T\n\x0eHeroSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\therosouls\x18\x02 \x03(\x0b\x32\x1e.Sanguo.protocol.hero.HeroSoul\"W\n\x11\x41\x64\x64HeroSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\therosouls\x18\x02 \x03(\x0b\x32\x1e.Sanguo.protocol.hero.HeroSoul\"Z\n\x14UpdateHeroSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\therosouls\x18\x02 \x03(\x0b\x32\x1e.Sanguo.protocol.hero.HeroSoul\"4\n\x14RemoveHeroSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"H\n\nHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"K\n\rAddHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"0\n\x10RemoveHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"N\n\x10UpdateHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"\x83\x02\n\x12GetHeroPanelNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x17\n\x0frefresh_seconds\x18\x02 \x02(\x05\x12\x12\n\nfree_times\x18\x03 \x02(\x05\x12\x12\n\nopen_sycee\x18\x04 \x02(\x05\x12\x15\n\rrefresh_sycee\x18\x05 \x02(\x05\x12\x45\n\x07sockets\x18\x06 \x03(\x0b\x32\x34.Sanguo.protocol.hero.GetHeroPanelNotify.PanelSocket\x12\x11\n\tnew_start\x18\x07 \x02(\x08\x1a*\n\x0bPanelSocket\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0f\n\x07hero_id\x18\x02 \x02(\x05\"-\n\x0eGetHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"M\n\x0fGetHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\n\n\x02id\x18\x03 \x01(\x05\x12\x10\n\x08hero_oid\x18\x04 \x01(\x05\"&\n\x13GetHeroStartRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"4\n\x14GetHeroStartResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"(\n\x15GetHeroRefreshRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"6\n\x16GetHeroRefreshResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x11HeroStepUpRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"2\n\x12HeroStepUpResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\";\n\x10MergeHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x16\n\x0eusing_hero_ids\x18\x02 \x03(\x05\"1\n\x11MergeHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"I\n\x10HeroToSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07hero_id\x18\x02 \x02(\x05\x12\x13\n\x0bsoul_amount\x18\x03 \x02(\x05\"1\n\x12HeroRecruitRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"3\n\x13HeroRecruitResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\nhero.proto\x12\x14Sanguo.protocol.hero\"\xb9\x01\n\x04Hero\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x13\n\x0boriginal_id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x03 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x04 \x02(\x05\x12\n\n\x02hp\x18\x05 \x02(\x05\x12\x0c\n\x04\x63irt\x18\x06 \x02(\x05\x12\x0c\n\x04step\x18\x07 \x02(\x05\x12\r\n\x05power\x18\x08 \x02(\x05\x12\x19\n\x11max_socket_amount\x18\t \x02(\x05\x12\x1d\n\x15\x63urrent_socket_amount\x18\n \x02(\x05\"&\n\x08HeroSoul\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x02 \x02(\x05\"T\n\x0eHeroSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\therosouls\x18\x02 \x03(\x0b\x32\x1e.Sanguo.protocol.hero.HeroSoul\"W\n\x11\x41\x64\x64HeroSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\therosouls\x18\x02 \x03(\x0b\x32\x1e.Sanguo.protocol.hero.HeroSoul\"Z\n\x14UpdateHeroSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\therosouls\x18\x02 \x03(\x0b\x32\x1e.Sanguo.protocol.hero.HeroSoul\"4\n\x14RemoveHeroSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"H\n\nHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"K\n\rAddHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"0\n\x10RemoveHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"N\n\x10UpdateHeroNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12)\n\x05heros\x18\x02 \x03(\x0b\x32\x1a.Sanguo.protocol.hero.Hero\"\x93\x02\n\x12GetHeroPanelNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x17\n\x0frefresh_seconds\x18\x02 \x02(\x05\x12\x12\n\nfree_times\x18\x03 \x02(\x05\x12\x12\n\nopen_sycee\x18\x04 \x02(\x05\x12\x15\n\rrefresh_sycee\x18\x05 \x02(\x05\x12\x45\n\x07sockets\x18\x06 \x03(\x0b\x32\x34.Sanguo.protocol.hero.GetHeroPanelNotify.PanelSocket\x12\x11\n\tnew_start\x18\x07 \x02(\x08\x1a:\n\x0bPanelSocket\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0f\n\x07hero_id\x18\x02 \x02(\x05\x12\x0e\n\x06opened\x18\x03 \x02(\x08\"-\n\x0eGetHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"M\n\x0fGetHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\n\n\x02id\x18\x03 \x01(\x05\x12\x10\n\x08hero_oid\x18\x04 \x01(\x05\"&\n\x13GetHeroStartRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"4\n\x14GetHeroStartResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"(\n\x15GetHeroRefreshRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"6\n\x16GetHeroRefreshResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x11HeroStepUpRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"2\n\x12HeroStepUpResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\";\n\x10MergeHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x16\n\x0eusing_hero_ids\x18\x02 \x03(\x05\"1\n\x11MergeHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"I\n\x10HeroToSoulNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07hero_id\x18\x02 \x02(\x05\x12\x13\n\x0bsoul_amount\x18\x03 \x02(\x05\"1\n\x12HeroRecruitRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"3\n\x13HeroRecruitResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
 
 
 
@@ -445,6 +445,13 @@ _GETHEROPANELNOTIFY_PANELSOCKET = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='opened', full_name='Sanguo.protocol.hero.GetHeroPanelNotify.PanelSocket.opened', index=2,
+      number=3, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -455,7 +462,7 @@ _GETHEROPANELNOTIFY_PANELSOCKET = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=1084,
-  serialized_end=1126,
+  serialized_end=1142,
 )
 
 _GETHEROPANELNOTIFY = _descriptor.Descriptor(
@@ -524,7 +531,7 @@ _GETHEROPANELNOTIFY = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=867,
-  serialized_end=1126,
+  serialized_end=1142,
 )
 
 
@@ -558,8 +565,8 @@ _GETHEROREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1128,
-  serialized_end=1173,
+  serialized_start=1144,
+  serialized_end=1189,
 )
 
 
@@ -607,8 +614,8 @@ _GETHERORESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1175,
-  serialized_end=1252,
+  serialized_start=1191,
+  serialized_end=1268,
 )
 
 
@@ -635,8 +642,8 @@ _GETHEROSTARTREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1254,
-  serialized_end=1292,
+  serialized_start=1270,
+  serialized_end=1308,
 )
 
 
@@ -670,8 +677,8 @@ _GETHEROSTARTRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1294,
-  serialized_end=1346,
+  serialized_start=1310,
+  serialized_end=1362,
 )
 
 
@@ -698,8 +705,8 @@ _GETHEROREFRESHREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1348,
-  serialized_end=1388,
+  serialized_start=1364,
+  serialized_end=1404,
 )
 
 
@@ -733,8 +740,8 @@ _GETHEROREFRESHRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1390,
-  serialized_end=1444,
+  serialized_start=1406,
+  serialized_end=1460,
 )
 
 
@@ -768,8 +775,8 @@ _HEROSTEPUPREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1446,
-  serialized_end=1494,
+  serialized_start=1462,
+  serialized_end=1510,
 )
 
 
@@ -803,8 +810,8 @@ _HEROSTEPUPRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1496,
-  serialized_end=1546,
+  serialized_start=1512,
+  serialized_end=1562,
 )
 
 
@@ -838,8 +845,8 @@ _MERGEHEROREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1548,
-  serialized_end=1607,
+  serialized_start=1564,
+  serialized_end=1623,
 )
 
 
@@ -873,8 +880,8 @@ _MERGEHERORESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1609,
-  serialized_end=1658,
+  serialized_start=1625,
+  serialized_end=1674,
 )
 
 
@@ -915,8 +922,8 @@ _HEROTOSOULNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1660,
-  serialized_end=1733,
+  serialized_start=1676,
+  serialized_end=1749,
 )
 
 
@@ -950,8 +957,8 @@ _HERORECRUITREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1735,
-  serialized_end=1784,
+  serialized_start=1751,
+  serialized_end=1800,
 )
 
 
@@ -985,8 +992,8 @@ _HERORECRUITRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1786,
-  serialized_end=1837,
+  serialized_start=1802,
+  serialized_end=1853,
 )
 
 _HEROSOULNOTIFY.fields_by_name['herosouls'].message_type = _HEROSOUL

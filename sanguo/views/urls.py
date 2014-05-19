@@ -20,7 +20,6 @@ urlpatterns = patterns('',
 
                        url(r'^hero/get/$', 'views.heropanel.views.open'),
                        url(r'^heropanel/refresh/$', 'views.heropanel.views.refresh'),
-                       url(r'^heropanel/start/$', 'views.heropanel.views.start'),
 
                        url(r'^equip/strengthen/$', 'views.item.views.strengthen_equip'),
                        url(r'^equip/stepup/$', 'views.item.views.step_up_equip'),
