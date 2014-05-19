@@ -40,6 +40,16 @@
     }
 },
 {
+    "pk": 104, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "OPERATE_TOO_FAST", 
+        "text_zh": "\u64cd\u4f5c\u592a\u5feb", 
+        "des": "", 
+        "area": ""
+    }
+},
+{
     "pk": 120, 
     "model": "errormsg.errormsg", 
     "fields": {
@@ -594,7 +604,17 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "HEROPANEL_NO_TIMES", 
-        "text_zh": "\u7ffb\u5361\u6b21\u6570\u5df2\u7ecf\u7528\u5b8c", 
+        "text_zh": "\u7ffb\u5361\u6b21\u6570\u5df2\u7ecf\u7528\u5b8c\uff0c\u9700\u8981\u4f7f\u7528\u5143\u5b9d", 
+        "des": "NOT USING", 
+        "area": ""
+    }
+},
+{
+    "pk": 1003, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HEROPANEL_ALL_OPENED", 
+        "text_zh": "\u5f53\u524d\u6b66\u5c06\u90fd\u5df2\u7ecf\u5f00\u542f\uff0c\u65e0\u6cd5\u518d\u70b9\u5c06", 
         "des": "", 
         "area": ""
     }
