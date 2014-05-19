@@ -40,7 +40,7 @@ def message_response(message_name):
 def operate_guard(func_name, interval, keep_result=False):
     def deco(func):
         def wrap(request, *args, **kwargs):
-            char_id = getattr(request, 'char_id', None)
+            char_id = getattr(request, '_char_id', None)
             if not char_id:
                 return func(request, *args, **kwargs)
 
@@ -58,7 +58,7 @@ def operate_guard(func_name, interval, keep_result=False):
                 x = cache.get(redis_key)
                 if x:
                     raise SanguoException(
-                        errormsg.INVALID_OPERATE,
+                        errormsg.OPERATE_TOO_FAST,
                         char_id,
                         "Operate Guard",
                         "operate {0} too fast".format(func_name)
