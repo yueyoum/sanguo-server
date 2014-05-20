@@ -8,13 +8,16 @@ from celery.task.control import revoke
 
 from worker.celery import app
 
-from core.stage import Hang
+from core.signals import hang_finished_signal
 
 def cancel(jobid):
     revoke(jobid)
 
 @app.task
 def hang_job(char_id, seconds):
-    h = Hang(char_id)
-    h.finish(actual_seconds=seconds)
+    hang_finished_signal.send(
+        sender=None,
+        char_id=char_id,
+        actual_seconds=seconds
+    )
 
