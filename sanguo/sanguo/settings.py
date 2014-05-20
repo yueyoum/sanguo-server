@@ -223,5 +223,15 @@ NODE_ID = int( tree.find('node/id').text )
 LOG_MAN_HOST = tree.find('log/host').text
 LOG_MAN_PORT = int( tree.find('log/port').text )
 
+
+CELERY_IMPORTS = ('worker.tasks',)
+CELERY_ENABLE_UTC = True
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+BROKER_URL = tree.find('celery/broker').text
+
+
 del et
 del tree

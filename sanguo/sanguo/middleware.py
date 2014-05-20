@@ -4,7 +4,7 @@ from django.http import HttpResponse
 import protomsg
 
 from core.msgpipe import message_get
-from core.timercheck import timercheck
+# from core.timercheck import timercheck
 from core.activeplayers import ActivePlayers
 
 ### FOR DEBUG
@@ -24,13 +24,11 @@ class UnpackAndVerifyData(RequestFilter):
         if request.path.startswith('/api/'):
             return
 
-        if request._char_id:
-            timercheck.check(request._char_id)
-        if request._server_id:
+        # if request._char_id:
+        #     timercheck.check(request._char_id)
+        if request._server_id and request._char_id:
             ap = ActivePlayers(request._server_id)
-            if request._char_id:
-                ap.set(request._char_id)
-
+            ap.set(request._char_id)
 
 class PackMessageData(object):
     def process_response(self, request, response):

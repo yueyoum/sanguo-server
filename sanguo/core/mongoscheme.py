@@ -174,6 +174,8 @@ class MongoHang(Document):
 
 class MongoHangDoing(Document):
     id = IntField(primary_key=True)
+    jobid = StringField()
+
     char_level = IntField()
     stage_id = IntField()
     # 开始的UTC 时间戳

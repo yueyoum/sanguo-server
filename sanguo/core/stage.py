@@ -11,12 +11,14 @@ from core.achievement import Achievement
 from core.exception import SanguoException
 from core.battle import PVE, ElitePVE, ActivityPVE
 from core.character import Char
-from core.timercheck import TimerCheckAbstractBase, timercheck
+# from core.timercheck import TimerCheckAbstractBase, timercheck
 from core.functionopen import FunctionOpen
 from core.mail import Mail
 from core.signals import pve_finished_signal
 from core.counter import Counter
 from core.resource import Resource
+from worker import tasks
+
 from preset.settings import (
     DATETIME_FORMAT,
     HANG_SECONDS,
@@ -189,7 +191,7 @@ class Stage(object):
         publish_to_char(self.char_id, pack_msg(msg))
 
 
-class Hang(TimerCheckAbstractBase):
+class Hang(object):
     def __init__(self, char_id):
         self.char_id = char_id
         try:
@@ -204,14 +206,6 @@ class Hang(TimerCheckAbstractBase):
         except DoesNotExist:
             self.hang_doing = None
 
-    def check(self):
-        if not self.hang_doing or self.hang_doing.finished:
-            return
-
-        if timezone.utc_timestamp() - self.hang_doing.day_start >= self.hang.remained:
-            # finish
-            self.finish(actual_seconds=self.hang.remained)
-
 
     def cronjob(self):
         remained = self.hang.remained
@@ -221,14 +215,10 @@ class Hang(TimerCheckAbstractBase):
         if self.hang_doing:
             stage_id = self.hang_doing.stage_id
             if not self.hang_doing.finished:
-                # self.hang_doing.start = timezone.utc_timestamp()
                 self.hang_doing.day_start = timezone.utc_timestamp()
                 self.hang_doing.save()
         else:
-            if remained:
-                stage_id = max_star_stage_id(self.char_id)
-            else:
-                stage_id = 0
+            stage_id = max_star_stage_id(self.char_id)
 
         self.send_notify()
 
@@ -263,10 +253,13 @@ class Hang(TimerCheckAbstractBase):
 
         char = Char(self.char_id)
         char_level = char.cacheobj.level
-
         now = timezone.utc_timestamp()
+
+        job = tasks.hang_job.apply_async((self.char_id, self.hang.remained), countdown=self.hang.remained)
+
         hang_doing = MongoHangDoing(
             id=self.char_id,
+            jobid=job.id,
             char_level=char_level,
             stage_id=stage_id,
             start=now,
@@ -280,6 +273,13 @@ class Hang(TimerCheckAbstractBase):
         hang_doing.save()
         self.hang_doing = hang_doing
         self.send_notify()
+
+
+    def remined_when_hanging(self):
+        remained_seconds = self.hang.remained - (timezone.utc_timestamp() - self.hang_doing.day_start)
+        if remained_seconds <= 0:
+            remained_seconds = 0
+        return remained_seconds
 
 
     def cancel(self):
@@ -299,6 +299,8 @@ class Hang(TimerCheckAbstractBase):
                 "Hang cancel. But hang already finished"
             )
 
+        tasks.cancel(self.hang_doing.jobid)
+
         self.finish()
 
 
@@ -314,11 +316,7 @@ class Hang(TimerCheckAbstractBase):
         if not actual_seconds:
             actual_seconds = timezone.utc_timestamp() - self.hang_doing.start
 
-        remained_seconds = self.hang.remained - (timezone.utc_timestamp() - self.hang_doing.day_start)
-        if remained_seconds <= 0:
-            remained_seconds = 0
-
-        self.hang.remained = remained_seconds
+        self.hang.remained = self.remined_when_hanging()
         self.hang.save()
 
         self.hang_doing.finished = True
@@ -413,7 +411,7 @@ class Hang(TimerCheckAbstractBase):
                 msg.remained_time = self.hang.remained
             else:
                 msg.hang.used_time = timezone.utc_timestamp() - self.hang_doing.start
-                msg.remained_time = self.hang.remained - (timezone.utc_timestamp() - self.hang_doing.day_start)
+                msg.remained_time = self.remined_when_hanging()
 
             msg.hang.finished = self.hang_doing.finished
 
@@ -858,6 +856,3 @@ class ActivityStage(object):
 #
 #         publish_to_char(self.char_id, pack_msg(msg))
 
-
-timercheck.register(Hang)
-# timercheck.register(TeamBattle)
