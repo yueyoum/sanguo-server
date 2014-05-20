@@ -1,9 +1,10 @@
+from __future__ import absolute_import
 # -*- coding: utf-8 -*-
 
 __author__ = 'Wang Chao'
 __date__ = '5/20/14'
 
-from __future__ import absolute_import
+
 import os
 from celery import Celery
 
