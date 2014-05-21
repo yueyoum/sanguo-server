@@ -217,11 +217,14 @@ class Hang(object):
         if self.hang_doing:
             stage_id = self.hang_doing.stage_id
             if not self.hang_doing.finished:
-                tasks.cancel(self.hang_doing.jobid)
-                newjob = tasks.hang_job.apply_async((self.char_id, HANG_SECONDS), countdown=HANG_SECONDS)
-                self.hang_doing.day_start = timezone.utc_timestamp()
-                self.hang_doing.jobid = newjob.id
-                self.hang_doing.save()
+                # 到结算点就终止
+                self.finish(remained=HANG_SECONDS)
+                # 下面的代码是自动开始新的挂机
+                # tasks.cancel(self.hang_doing.jobid)
+                # newjob = tasks.hang_job.apply_async((self.char_id, HANG_SECONDS), countdown=HANG_SECONDS)
+                # self.hang_doing.day_start = timezone.utc_timestamp()
+                # self.hang_doing.jobid = newjob.id
+                # self.hang_doing.save()
         else:
             stage_id = max_star_stage_id(self.char_id)
 
@@ -268,7 +271,6 @@ class Hang(object):
             char_level=char_level,
             stage_id=stage_id,
             start=now,
-            day_start=now,
             finished=False,
             actual_seconds=0,
             logs=[],
@@ -281,7 +283,7 @@ class Hang(object):
 
 
     def remined_when_hanging(self):
-        remained_seconds = self.hang.remained - (timezone.utc_timestamp() - self.hang_doing.day_start)
+        remained_seconds = self.hang.remained - (timezone.utc_timestamp() - self.hang_doing.start)
         if remained_seconds <= 0:
             remained_seconds = 0
         return remained_seconds
@@ -309,7 +311,7 @@ class Hang(object):
         self.finish()
 
 
-    def finish(self, actual_seconds=None):
+    def finish(self, actual_seconds=None, remained=None):
         if not self.hang_doing:
             raise SanguoException(
                 errormsg.HANG_NOT_EXIST,
@@ -321,7 +323,7 @@ class Hang(object):
         if not actual_seconds:
             actual_seconds = timezone.utc_timestamp() - self.hang_doing.start
 
-        self.hang.remained = self.remined_when_hanging()
+        self.hang.remained = remained or self.remined_when_hanging()
         self.hang.save()
 
         self.hang_doing.finished = True

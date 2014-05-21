@@ -8,7 +8,7 @@ __date__ = '5/20/14'
 from worker.celery import app
 
 def cancel(jobid):
-    app.control.revoke(jobid, terminate=True)
+    app.control.revoke(jobid, terminate=True, signal='SIGKILL')
 
 @app.task
 def hang_job(char_id, seconds):
