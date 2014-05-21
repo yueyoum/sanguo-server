@@ -6,6 +6,7 @@ from core.exception import SanguoException
 from core.mongoscheme import MongoFunctionOpen
 from utils import cache
 from utils import pack_msg
+from utils.timezone import localnow
 import protomsg
 from preset import errormsg
 
@@ -48,7 +49,18 @@ def operate_guard(func_name, interval, keep_result=False):
             if keep_result:
                 data = cache.get(redis_key)
                 if data:
-                    logger.info("Operate Guard. Char {0} operate {1} too fast. Return result from cache.".format(char_id, func_name))
+                    extra = {
+                        'log_type_id': 1,
+                        'error_id': errormsg.OPERATE_TOO_FAST,
+                        'char_id': char_id,
+                        'func_name': func_name,
+                        'error_msg': 'Operate Too Fast, Return from cache',
+                        'occurred_at': localnow().strftime('%Y-%m-%d %H:%M:%S'),
+                    }
+
+                    logger.info("Operate Guard. Char {0} operate {1} too fast. Return result from cache.".format(char_id, func_name),
+                                extra=extra
+                                )
                     return data
 
                 data = func(request, *args, **kwargs)
