@@ -66,7 +66,7 @@ class Levy(object):
         cost_cyess = self.get_cost_sycee()
 
         with resource.check(sycee=-cost_cyess):
-            got_gold = 10000 * c.mc.level * 2
+            got_gold = 10000 + (c.mc.level * 2)
             prob = random.randint(1, 100)
             for k, v in CRIT_PROB_TABLE:
                 if prob <= k:
