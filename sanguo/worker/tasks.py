@@ -4,12 +4,11 @@ from __future__ import absolute_import
 __author__ = 'Wang Chao'
 __date__ = '5/20/14'
 
-from celery.task.control import revoke
 
 from worker.celery import app
 
 def cancel(jobid):
-    revoke(jobid, terminate=True)
+    app.control.revoke(jobid, terminate=True)
 
 @app.task
 def hang_job(char_id, seconds):
