@@ -114,7 +114,7 @@ class Friend(object):
                     errormsg.CHARACTER_NOT_FOUND,
                     self.char_id,
                     "Friend Add",
-                    u"can not found character {0} in server {1}".format(target_name, self.cache_char.server_id)
+                    u"can not found character {0} in server {1}".format(target_name, self.char.mc.server_id)
                 )
 
         if str(c.id) in self.mf.friends:
