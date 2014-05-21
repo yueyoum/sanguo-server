@@ -217,7 +217,10 @@ class Hang(object):
         if self.hang_doing:
             stage_id = self.hang_doing.stage_id
             if not self.hang_doing.finished:
+                tasks.cancel(self.hang_doing.jobid)
+                newjob = tasks.hang_job.apply_async((self.char_id, HANG_SECONDS), countdown=HANG_SECONDS)
                 self.hang_doing.day_start = timezone.utc_timestamp()
+                self.hang_doing.jobid = newjob.id
                 self.hang_doing.save()
         else:
             stage_id = max_star_stage_id(self.char_id)
