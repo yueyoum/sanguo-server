@@ -49,7 +49,7 @@ GET_HERO_QUALITY_THREE_POOL = [100,76,77,78,79,80,81,82,84,85,86,87,88,89,90,92,
 # 抽奖多少几率产生两个甲品质卡 (基数为100)
 GET_HERO_TWO_QUALITY_ONE_HEROS = 4
 # 刷新间隔 （秒）
-GET_HERO_REFRESH = 60
+GET_HERO_REFRESH = 60 * 60 * 12
 # 抽卡花费元宝
 GET_HERO_COST = 300
 # 抽卡强制刷新花费元宝 （刷新间隔还在冷却中）
