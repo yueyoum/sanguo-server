@@ -63,6 +63,9 @@ class Task(object):
         self.task.tasks[str(tp)] += times
 
         for t in self.task.doing:
+            if t in self.task.complete:
+                continue
+
             this_task = TASKS[t]
             if this_task.tp != tp:
                 continue
@@ -103,7 +106,7 @@ class Task(object):
         sycee = this_task.sycee if this_task.sycee else 0
         gold = this_task.gold if this_task.gold else 0
 
-        resource = Resource(self.char_id, "Task Reward")
+        resource = Resource(self.char_id, "Task Reward", "task {0}".format(_id))
         standard_drop = resource.add(gold=gold, sycee=sycee)
 
         if this_task.next_task:
