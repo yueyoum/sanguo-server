@@ -21,6 +21,7 @@ from core.achievement import Achievement
 from core.hero import HeroSoul, char_heros_obj
 from core.functionopen import FunctionOpen
 from core.levy import Levy
+from core.attachment import Attachment
 
 
 def hero_notify(char_id, objs, message_name="HeroNotify"):
@@ -109,5 +110,4 @@ def login_notify(char_id):
     HeroSoul(char_id).send_notify()
     FunctionOpen(char_id).send_notify()
     Levy(char_id).send_notify()
-
-
+    Attachment(char_id).send_notify()
