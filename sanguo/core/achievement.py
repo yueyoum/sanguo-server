@@ -158,8 +158,6 @@ class Achievement(object):
                 "{0} not finished".format(achievement_id)
             )
 
-        standard_drop = self.send_reward(achievement_id, ach.sycee, ach.package)
-
         self.achievement.finished.remove(achievement_id)
         self.achievement.complete.append(achievement_id)
 
@@ -183,6 +181,7 @@ class Achievement(object):
             self._fill_up_achievement_msg(msg.achievement, up_ach)
             publish_to_char(self.char_id, pack_msg(msg))
 
+        standard_drop = self.send_reward(achievement_id, ach.sycee, ach.package)
         return standard_drop_to_attachment_protomsg(standard_drop)
 
 
