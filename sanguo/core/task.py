@@ -14,6 +14,7 @@ from core.msgpipe import publish_to_char
 from core.exception import SanguoException
 from core.resource import Resource
 from utils import pack_msg
+from utils.log import system_logger
 
 from protomsg import Task as MsgTask
 from protomsg import TaskNotify
@@ -57,8 +58,11 @@ class Task(object):
 
         self.task.save()
 
+
     def trig(self, tp, times=1):
-        # TODO 检查TP ?
+        if tp not in TASKS_ALL_TP:
+            system_logger(errormsg.INVALID_OPERATE, self.char_id, "Task Trig", "invalid tp {0}".format(tp))
+            return
 
         self.task.tasks[str(tp)] += times
 
@@ -84,7 +88,6 @@ class Task(object):
 
 
     def get_reward(self, _id):
-        # FIXME 重复领奖？？？
         try:
             this_task = TASKS[_id]
         except KeyError:
@@ -101,6 +104,14 @@ class Task(object):
                 self.char_id,
                 "Task Get Reward",
                 "Task {0} not finish".format(_id)
+            )
+
+        if _id in self.task.complete:
+            raise SanguoException(
+                errormsg.TASK_ALREADY_GOT_REWARD,
+                self.char_id,
+                "Task Get Reward",
+                "Task {0} already got reward".format(_id)
             )
 
         sycee = this_task.sycee if this_task.sycee else 0
@@ -157,5 +168,4 @@ class Task(object):
             msg_t.status = status
 
         publish_to_char(self.char_id, pack_msg(msg))
-
 

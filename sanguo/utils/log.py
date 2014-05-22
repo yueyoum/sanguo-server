@@ -11,6 +11,7 @@ import zmq
 import msgpack
 
 from django.conf import settings
+from utils.timezone import localnow
 
 
 fmt = struct.Struct('>i')
@@ -21,6 +22,8 @@ context = zmq.Context()
 sock = context.socket(zmq.PUSH)
 
 sock.connect("tcp://{0}:{1}".format(settings.LOG_MAN_HOST, settings.LOG_MAN_PORT))
+
+logger = logging.getLogger('sanguo')
 
 
 class LogManHandler(logging.Handler):
@@ -69,4 +72,20 @@ def _make_resource_data(record):
 
     binary = msgpack.packb(data)
     return '%s%s' % (LOG_RESOURCE_ID, binary)
+
+
+def system_logger(error_id, char_id, func_name, error_msg):
+    extra = {
+        'log_type_id': 1,
+        'error_id': error_id,
+        'char_id': char_id,
+        'func_name': func_name,
+        'error_msg': error_msg,
+        'occurred_at': localnow().strftime('%Y-%m-%d %H:%M:%S'),
+    }
+
+    logger.debug("Error_id: {0}. Char_id: {1}. Func_name: {2}. Msg: {3}".format(
+                error_id, char_id, func_name, error_msg),
+                extra=extra
+                )
 
