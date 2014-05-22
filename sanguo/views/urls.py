@@ -8,6 +8,7 @@ urlpatterns = patterns('',
                        url(r'^test/$', 'views.cmd.cmd'),
 
                        url(r'^player/login/$', 'views.account.views.login'),
+                       url(r'^player/bind/$', 'views.account.views.bind'),
 
                        url(r'^pvp/$', 'views.arena.views.arena_battle'),
                        url(r'^arena/panel/$', 'views.arena.views.arena_panel'),

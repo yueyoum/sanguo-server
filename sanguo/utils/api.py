@@ -18,6 +18,7 @@ def apicall(data, cmd):
 
 api_server_report = partial(apicall, cmd='/api/server-list/report/')
 api_account_login = partial(apicall, cmd='/api/account/login/')
+api_account_bind = partial(apicall, cmd='/api/account/bind/')
 api_character_create = partial(apicall, cmd='/api/character/create/')
 
 api_store_get = partial(apicall, cmd='/api/store/get/')
