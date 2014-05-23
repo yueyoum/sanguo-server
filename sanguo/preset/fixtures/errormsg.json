@@ -938,5 +938,55 @@
         "des": "", 
         "area": ""
     }
+},
+{
+    "pk": 4000, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "ACTIVATE_CODE_NOT_EXIST", 
+        "text_zh": "\u6fc0\u6d3b\u7801\u4e0d\u5b58\u5728", 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 4001, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "ACTIVATE_CODE_ALREADY_USED", 
+        "text_zh": "\u6b64\u6fc0\u6d3b\u7801\u5df2\u7ecf\u4f7f\u7528\u8fc7", 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 4002, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "ACTIVATE_CODE_USED_TIMES_OUT", 
+        "text_zh": "\u6b64\u6fc0\u6d3b\u7801\u5df2\u7ecf\u8fbe\u5230\u53ef\u7528\u6b21\u6570\u9650\u5236", 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 4003, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "ACTIVATE_CODE_EXPIRED", 
+        "text_zh": "\u6b64\u6fc0\u6d3b\u7801\u5df2\u7ecf\u8fc7\u671f", 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 4004, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "ACTIVATE_CODE_CAN_NOT_USE", 
+        "text_zh": "\u6b64\u6fc0\u6d3b\u7801\u4e0d\u80fd\u4f7f\u7528", 
+        "des": "", 
+        "area": ""
+    }
 }
 ]
