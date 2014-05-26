@@ -42,7 +42,7 @@ def make_standard_drop_from_template():
         'stuffs': [],
     }
 
-def standard_drop_to_attachment_protomsg(data):
+def standard_drop_to_attachment_protomsg(data, is_prepare=False):
     # data is dict, {
     # 'gold': 0,
     # 'sycee': 0,
@@ -61,7 +61,14 @@ def standard_drop_to_attachment_protomsg(data):
     msg.exp = data.get('exp', 0)
     msg.official_exp = data.get('official_exp', 0)
 
-    for x in data.get('heros', []):
+    if is_prepare:
+        heros = []
+        for _hid, _amount in data.get('heros', []):
+            heros.extend([_hid] * _amount)
+    else:
+        heros = data.get('heros', [])
+
+    for x in heros:
         msg_h = msg.heros.add()
         msg_h.id = x
 
