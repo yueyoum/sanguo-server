@@ -67,7 +67,8 @@ urlpatterns = patterns('',
 
                        url(r'^levy/$', 'views.levy.views.levy'),
 
-                       url(r'char/create/$', 'views.character.views.create_character'),
+                       url(r'^char/create/$', 'views.character.views.create_character'),
+                       url(r'^activatecode/use/$', 'views.world.views.activatecode_use'),
 )
 
 
