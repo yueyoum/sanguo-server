@@ -160,3 +160,9 @@ MAIL_KEEP_DAYS = 7
 
 # 猛将挑战增加一分钟需要多少元宝
 TEAMBATTLE_INCR_COST = 100
+
+#########################
+#      激活码            #
+#########################
+ACTIVATECODE_MAIL_TITLE = u'激活码领取成功'
+ACTIVATECODE_MAIL_CONTENT = u'激活码领取成功'

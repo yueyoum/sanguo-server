@@ -23,3 +23,5 @@ api_character_create = partial(apicall, cmd='/api/character/create/')
 
 api_store_get = partial(apicall, cmd='/api/store/get/')
 api_store_buy = partial(apicall, cmd='/api/store/buy/')
+
+api_activatecode_use = partial(apicall, cmd='/api/activatecode/use/')

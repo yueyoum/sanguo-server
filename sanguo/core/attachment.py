@@ -89,6 +89,58 @@ def standard_drop_to_attachment_protomsg(data):
     return msg
 
 
+def get_drop_from_raw_package(package, multi=1, gaussian=False):
+    gold = package['gold']
+    sycee = package['sycee']
+    exp = package['exp']
+    official_exp = package['official_exp']
+    heros = package['heros']
+    souls = package['souls']
+    equipments = package['equipments']
+    gems = package['gems']
+    stuffs = package['stuffs']
+
+    def _make(items):
+        final_items = []
+        for item in items:
+            prob = item['prob'] * multi
+            if gaussian:
+                prob = prob * (1 + GAUSSIAN_TABLE[round(random.uniform(0.01, 0.99), 2)] * 0.08)
+
+            a, b = divmod(prob, DROP_PROB_BASE)
+            a = int(a)
+            if b > random.randint(0, DROP_PROB_BASE):
+                a += 1
+
+            if a == 0:
+                continue
+
+            item['amount'] *= a
+            final_items.append(item)
+
+        return final_items
+
+    heros = _make(heros)
+    souls = _make(souls)
+    equipments = _make(equipments)
+    gems = _make(gems)
+    stuffs = _make(stuffs)
+
+    return {
+        'gold': gold * multi,
+        'sycee': sycee * multi,
+        'exp': exp * multi,
+        'official_exp': official_exp * multi,
+        'heros': [(x['id'], x['amount']) for x in heros],
+        'souls': [(x['id'], x['amount']) for x in souls],
+        'equipments': [(x['id'], x['level'], x['amount']) for x in equipments],
+        'gems': [(x['id'], x['amount']) for x in gems],
+        'stuffs': [(x['id'], x['amount']) for x in stuffs],
+    }
+
+
+
+
 def get_drop(drop_ids, multi=1, gaussian=False):
     # 从pakcage中解析并计算掉落，返回为 dict
     # package 格式
@@ -154,43 +206,19 @@ def get_drop(drop_ids, multi=1, gaussian=False):
         gems.extend(p['gems'])
         stuffs.extend(p['stuffs'])
 
-    def _make(items):
-        final_items = []
-        for item in items:
-            prob = item['prob'] * multi
-            if gaussian:
-                prob = prob * (1 + GAUSSIAN_TABLE[round(random.uniform(0.01, 0.99), 2)] * 0.08)
-
-            a, b = divmod(prob, DROP_PROB_BASE)
-            a = int(a)
-            if b > random.randint(0, DROP_PROB_BASE):
-                a += 1
-
-            if a == 0:
-                continue
-
-            item['amount'] *= a
-            final_items.append(item)
-
-        return final_items
-
-    heros = _make(heros)
-    souls = _make(souls)
-    equipments = _make(equipments)
-    gems = _make(gems)
-    stuffs = _make(stuffs)
-
-    return {
-        'gold': gold * multi,
-        'sycee': sycee * multi,
-        'exp': exp * multi,
-        'official_exp': official_exp * multi,
-        'heros': [(x['id'], x['amount']) for x in heros],
-        'souls': [(x['id'], x['amount']) for x in souls],
-        'equipments': [(x['id'], x['level'], x['amount']) for x in equipments],
-        'gems': [(x['id'], x['amount']) for x in gems],
-        'stuffs': [(x['id'], x['amount']) for x in stuffs],
+    package = {
+        'gold': gold,
+        'sycee': sycee,
+        'exp': exp,
+        'official_exp': official_exp,
+        'heros': heros,
+        'souls': souls,
+        'equipments': equipments,
+        'gems': gems,
+        'stuffs': stuffs,
     }
+
+    return get_drop_from_raw_package(package, multi=multi, gaussian=gaussian)
 
 
 class Attachment(object):

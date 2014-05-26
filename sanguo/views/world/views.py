@@ -3,14 +3,26 @@
 __author__ = 'Wang Chao'
 __date__ = '2/21/14'
 
+import json
+
+import arrow
+
 from core.signals import login_signal
 from core.item import Item
+from core.exception import SanguoException
+
+from core.attachment import get_drop_from_raw_package
+from core.mail import Mail
 
 from utils.decorate import message_response, operate_guard
+from utils.api import api_activatecode_use
 
 from utils import timezone
 from libs import crypto, pack_msg
 from protomsg import SyncResponse, ResumeResponse
+
+from preset.settings import ACTIVATECODE_MAIL_TITLE, ACTIVATECODE_MAIL_CONTENT
+
 
 @message_response("SyncResponse")
 @operate_guard('sync', 3, keep_result=False)
@@ -75,3 +87,37 @@ def sell(request):
             continue
 
     return None
+
+@message_response("ActivateCodeUseResponse")
+def activatecode_use(request):
+    char_id = request._char_id
+    code_id = request._proto.code_id
+
+    data = {
+        'char_id': char_id,
+        'code_id': code_id
+    }
+
+    res = api_activatecode_use(data)
+    if res['ret'] != 0:
+        raise SanguoException(
+            res['ret'],
+            char_id,
+            "ActivateCode use",
+            "api_activatecode_use ret = {0}".format(res['ret'])
+        )
+
+    # DONE
+    package = res['data']['package']
+    drop = get_drop_from_raw_package(package)
+
+    mail = Mail(char_id)
+    mail.add(
+        ACTIVATECODE_MAIL_TITLE,
+        ACTIVATECODE_MAIL_CONTENT,
+        arrow.utcnow().format('YYYY-MM-DD HH:mm:ss'),
+        attachment=json.dumps(drop)
+    )
+
+    return None
+

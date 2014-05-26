@@ -12,3 +12,4 @@ redis==2.8.0
 requests==2.2.1
 pyzmq==14.1.1
 msgpack-python==0.4.2
+arrow==0.4.2
