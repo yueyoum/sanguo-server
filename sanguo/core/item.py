@@ -439,7 +439,7 @@ class Item(MessageEquipmentMixin):
             gold += e.sell_gold()
 
         resource = Resource(self.char_id, "Equipment Sell", "equipments {0}".format(ids))
-        resource.check_and_remove(equipments=ids)
+        resource.check_and_remove(equipments=list(ids))
         resource.add(gold=gold)
 
 
