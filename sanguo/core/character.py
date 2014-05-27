@@ -10,6 +10,7 @@ from core.mongoscheme import MongoHero, MongoCharacter, MongoStage
 from core.signals import char_level_up_signal, char_official_up_signal, char_gold_changed_signal, char_sycee_changed_signal
 from core.formation import Formation
 from core.functionopen import FunctionOpen
+from core.vip import get_vip_level
 from core.msgpipe import publish_to_char
 
 
@@ -80,7 +81,7 @@ class Char(object):
         return p
 
 
-    def update(self, gold=0, sycee=0, exp=0, official_exp=0):
+    def update(self, gold=0, sycee=0, exp=0, official_exp=0, purchase_got=0, purchase_actual_got=0):
         opended_funcs = []
         char = MongoCharacter.objects.get(id=self.id)
         if gold:
@@ -92,6 +93,7 @@ class Char(object):
                 change_value=gold
             )
 
+        sycee += purchase_actual_got
         if sycee:
             char.sycee += sycee
             char_sycee_changed_signal.send(
@@ -124,6 +126,12 @@ class Char(object):
                     new_official=char.official
                 )
 
+        # VIP
+        total_purchase_got = char.purchase_got + purchase_got
+        vip = get_vip_level(total_purchase_got)
+        char.purchase_got = total_purchase_got
+        char.vip = vip
+
         char.save()
         self.send_notify(char=char, opended_funcs=opended_funcs)
 
@@ -144,6 +152,7 @@ class Char(object):
         msg.char.next_official_exp = official_update_exp(char.level)
 
         msg.char.power = self.power
+        msg.char.vip = char.vip
 
         if opended_funcs:
             msg.funcs.extend(opended_funcs)

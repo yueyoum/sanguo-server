@@ -166,10 +166,15 @@ class Resource(object):
         from core.item import Item
 
         data = _get_resource_data(**kwargs)
+        purchase_got = kwargs.get('purchase_got', 0)
+        purchase_actual_got = kwargs.get('purchase_actual_got', 0)
 
-        if data['gold'] or data['sycee'] or data['exp'] or data['official_exp']:
+        if data['gold'] or data['sycee'] or data['exp'] or data['official_exp'] or purchase_got:
             char = Char(self.char_id)
-            char.update(gold=data['gold'], sycee=data['sycee'], exp=data['exp'], official_exp=data['official_exp'])
+            char.update(gold=data['gold'], sycee=data['sycee'], exp=data['exp'], official_exp=data['official_exp'],
+                        purchase_got=purchase_got,
+                        purchase_actual_got=purchase_actual_got,
+                        )
     
         if data['heros']:
             heros = []

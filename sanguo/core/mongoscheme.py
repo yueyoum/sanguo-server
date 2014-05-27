@@ -27,6 +27,10 @@ class MongoCharacter(Document):
     official = IntField(default=0)
     official_exp = IntField(default=0)
 
+    # 充值真实获得
+    purchase_got = IntField(default=0)
+    vip = IntField(default=0)
+
     meta = {
         'collection': 'character',
         'indexes': ['server_id', 'level'],

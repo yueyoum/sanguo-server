@@ -2,6 +2,72 @@
 
 DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
+
+#########################
+#      VIP              #
+#########################
+# VIP定义表， 充值获得元宝： 对应多少VIP等级
+VIP_DEFINE_TABLE = {
+    0: 0,
+    6: 1,
+    30: 2,
+    100: 3,
+    300: 4,
+    500: 5,
+    1000: 6,
+    2000: 7,
+    3000: 8,
+    4000: 9,
+    5000: 10,
+    7000: 11,
+    10000: 12,
+    15000: 13,
+}
+
+
+# VIP功能
+def _set_vip_function(*args):
+    # 参数列表
+    # 收费征收次数
+    # 挂机时间
+    # 好友数量
+    # 比武次数购买上限
+    # 精英挑战购买次数
+    # 掠夺次数
+    # 掠夺资源加成
+    # 招降概率加成
+    return {
+        'levy': args[0],
+        'hang': args[1],
+        'friends': args[2],
+        'arena': args[3],
+        'elite_stage': args[4],
+        'plunder': args[5],
+        'plunder_addition': args[6],
+        'prisoner': args[7],
+    }
+
+
+# VIP功能表，VIP等级，可以干什么事情
+VIP_FUNCTION_TABLE = {
+    0:  _set_vip_function(1, 12, 10, 0, 0, 10, 0 ,0),
+    1:  _set_vip_function(1, 12, 10, 0, 0, 10, 0 ,0),
+    2:  _set_vip_function(1, 12, 10, 0, 0, 10, 0 ,0),
+    3:  _set_vip_function(1, 12, 10, 0, 0, 10, 0 ,0),
+    4:  _set_vip_function(1, 12, 10, 0, 0, 10, 0 ,0),
+    5:  _set_vip_function(1, 12, 10, 0, 0, 10, 0 ,0),
+    6:  _set_vip_function(1, 12, 10, 0, 0, 10, 0 ,0),
+    7:  _set_vip_function(1, 12, 10, 0, 0, 10, 0 ,0),
+    8:  _set_vip_function(1, 12, 10, 0, 0, 10, 0 ,0),
+    9:  _set_vip_function(1, 12, 10, 0, 0, 10, 0 ,0),
+    10: _set_vip_function(1, 12, 10, 0, 0, 10, 0 ,0),
+    11: _set_vip_function(1, 12, 10, 0, 0, 10, 0 ,0),
+    12: _set_vip_function(1, 12, 10, 0, 0, 10, 0 ,0),
+    13: _set_vip_function(1, 12, 10, 0, 0, 10, 0 ,0),
+}
+
+
+
 # 次数限制，每天可以做多少次
 COUNTER = {
     'arena': 5,          # 比武次数 免费
@@ -162,7 +228,8 @@ MAIL_KEEP_DAYS = 7
 TEAMBATTLE_INCR_COST = 100
 
 #########################
-#      激活码            #
+#      激活码           #
 #########################
 ACTIVATECODE_MAIL_TITLE = u'激活码领取成功'
 ACTIVATECODE_MAIL_CONTENT = u'激活码领取成功'
+
