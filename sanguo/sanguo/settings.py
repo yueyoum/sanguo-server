@@ -181,7 +181,7 @@ LOGGING = {
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['console', 'mail_admins'],
             'level': 'ERROR',
             'propagate': True,
         },
@@ -217,8 +217,6 @@ CACHE_SECONDS = int( tree.find('cache/seconds').text )
 
 HUB_HOST = tree.find('hub/host').text
 HUB_PORT = int( tree.find('hub/port').text )
-
-NODE_ID = int( tree.find('node/id').text )
 
 LOG_MAN_HOST = tree.find('log/host').text
 LOG_MAN_PORT = int( tree.find('log/port').text )

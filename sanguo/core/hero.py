@@ -6,12 +6,12 @@ __date__ = '12/30/13'
 
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoHero, MongoAchievement, MongoHeroSoul, MongoCharacter
+from core.drives import document_ids
 from core.signals import hero_add_signal, hero_del_signal, hero_changed_signal, hero_step_up_signal, hero_to_soul_signal
 from core.formation import Formation
 from core.exception import SanguoException
 from core.resource import Resource
 from utils import cache
-from utils.functional import id_generator
 from core.msgpipe import publish_to_char
 from utils import pack_msg
 from preset.settings import HERO_MAX_STEP, HERO_START_STEP, HERO_STEP_UP_SOCKET_AMOUNT
@@ -404,7 +404,8 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
     id_range = []
     if hero_original_ids:
         length = len(hero_original_ids)
-        id_range = id_generator('charhero', length)
+        new_max_id = document_ids.inc('charhero', length)
+        id_range = range(new_max_id-length+1, new_max_id+1)
         for i, _id in enumerate(id_range):
             MongoHero(id=_id, char=char_id, oid=hero_original_ids[i], step=HERO_START_STEP, progress=0).save()
 
