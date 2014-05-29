@@ -4,6 +4,7 @@ import random
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoPrison, MongoEmbededPrisoner
 from core.exception import SanguoException
+from core.character import Char
 from core.hero import save_hero
 from core.msgpipe import publish_to_char
 from core.task import Task
@@ -17,7 +18,7 @@ from preset.settings import (
     PRISONER_KILL_GOT_SOUL,
 )
 import protomsg
-from preset.data import HEROS, TREASURES
+from preset.data import HEROS, TREASURES, VIP_FUNCTION
 from preset import errormsg
 
 
@@ -92,6 +93,9 @@ class Prison(object):
         with resource.check(stuffs=using_stuffs):
             got = False
             prob = self.p.prisoners[str_id].prob + treasures_prob
+            char = Char(self.char_id).mc
+            vip_plus = VIP_FUNCTION[char.vip].prisoner_get
+            prob += vip_plus
             if prob >= random.randint(1, 100):
                 # got it
                 save_hero(self.char_id, self.p.prisoners[str_id].oid)

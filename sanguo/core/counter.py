@@ -1,8 +1,12 @@
 from mongoengine import DoesNotExist
 
+
 from core.mongoscheme import MongoCounter
 from core.exception import CounterOverFlow
+from core.character import Char
+
 from preset.settings import COUNTER
+from preset.data import VIP_FUNCTION
 
 
 class Counter(object):
@@ -18,7 +22,13 @@ class Counter(object):
 
     @property
     def max_value(self):
-        return COUNTER[self.func_name]
+        value = COUNTER[self.func_name]
+        if value:
+            return value
+
+        char = Char(self.char_id).mc
+        vip = VIP_FUNCTION[char.vip]
+        return getattr(vip, self.func_name)
 
     @property
     def cur_value(self):
@@ -29,9 +39,10 @@ class Counter(object):
         value = self.max_value - self.cur_value
         return value if value >=0 else 0
 
-    def incr(self, value=1):
-        if self.remained_value < value:
-            raise CounterOverFlow()
+    def incr(self, value=1, dirty=False):
+        if not dirty:
+            if self.remained_value < value:
+                raise CounterOverFlow()
 
         self.c.counter[self.func_name] += value
         self.c.save()

@@ -14,4 +14,4 @@ def cancel(jobid):
 def hang_job(char_id, seconds):
     from core.stage import Hang
     hang = Hang(char_id)
-    hang.finish(actual_seconds=seconds)
+    hang.task_job(actual_seconds=seconds)

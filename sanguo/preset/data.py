@@ -58,6 +58,7 @@ EFFECTS = object_maker(_find_file('effects.json'))
 SKILLS = object_maker(_find_file('skills.json'))
 SKILL_EFFECT = object_maker(_find_file('skill_effect.json'))
 TASKS = object_maker(_find_file('tasks.json'))
+VIP_FUNCTION = object_maker(_find_file('vip.json'))
 
 
 def _got_package():
@@ -189,7 +190,7 @@ for k, v in STAGE_ACTIVITY.iteritems():
 
 STAGE_ELITE_CONDITION = {}
 for k, v in STAGE_ELITE.iteritems():
-    STAGE_ELITE_CONDITION.setdefault(v.open_condition, []).append(k)
+    STAGE_ELITE_CONDITION.setdefault(v.open_condition, []).append(v)
 
 TREASURES = {}
 for d in STUFFS.values():
@@ -269,3 +270,9 @@ for k, v in TASKS.iteritems():
         TASKS_FIRST_IDS.append(k)
 
 
+VIP_DEFINE = []
+for k, v in VIP_FUNCTION.iteritems():
+    VIP_DEFINE.append((v.sycee, k))
+VIP_DEFINE.sort(key=lambda item: item[0])
+
+VIP_MAX_LEVEL = VIP_FUNCTION.keys().sort()[-1]

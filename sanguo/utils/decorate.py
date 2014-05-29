@@ -38,10 +38,10 @@ def message_response(message_name):
     return deco
 
 
-def operate_guard(func_name, interval, keep_result=False):
+def operate_guard(func_name, interval, keep_result=False, char_id_name='_char_id'):
     def deco(func):
         def wrap(request, *args, **kwargs):
-            char_id = getattr(request, '_char_id', None)
+            char_id = getattr(request, char_id_name, None)
             if not char_id:
                 return func(request, *args, **kwargs)
 

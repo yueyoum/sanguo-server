@@ -15,7 +15,7 @@ import world_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='battle.proto',
   package='Sanguo.protocol.battle',
-  serialized_pb='\n\x0c\x62\x61ttle.proto\x12\x16Sanguo.protocol.battle\x1a\x0bworld.proto\"!\n\x05Stage\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04star\x18\x02 \x02(\x08\"T\n\x12\x41lreadyStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12-\n\x06stages\x18\x02 \x03(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"\x87\x01\n\x12\x43urrentStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x05stage\x18\x02 \x02(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\x12\x32\n\x05\x66uncs\x18\x03 \x03(\x0e\x32#.Sanguo.protocol.world.FunctionType\"O\n\x0eNewStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x05stage\x18\x02 \x02(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"?\n\x1d\x45liteStageRemainedTimesNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\r\n\x05times\x18\x02 \x02(\x05\"/\n\nEliteStage\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x15\n\rcurrent_times\x18\x02 \x02(\x05\"W\n\x10\x45liteStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x06stages\x18\x02 \x03(\x0b\x32\".Sanguo.protocol.battle.EliteStage\"Y\n\x13NewEliteStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\x05stage\x18\x02 \x02(\x0b\x32\".Sanguo.protocol.battle.EliteStage\"\\\n\x16UpdateEliteStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\x05stage\x18\x02 \x02(\x0b\x32\".Sanguo.protocol.battle.EliteStage\"4\n\x0f\x45litePVERequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08stage_id\x18\x02 \x02(\x05\"\xa3\x01\n\x10\x45litePVEResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08stage_id\x18\x03 \x01(\x05\x12.\n\x06\x62\x61ttle\x18\x04 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\x12/\n\x04\x64rop\x18\x05 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\"c\n ActivityStageRemainedTimesNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x16\n\x0etype_one_times\x18\x02 \x02(\x05\x12\x16\n\x0etype_two_times\x18\x03 \x02(\x05\"3\n\x13\x41\x63tivityStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"6\n\x16NewActivityStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"<\n\x17\x41\x63tivityStagePVERequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08stage_id\x18\x02 \x02(\x05\"\xab\x01\n\x18\x41\x63tivityStagePVEResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08stage_id\x18\x03 \x01(\x05\x12.\n\x06\x62\x61ttle\x18\x04 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\x12/\n\x04\x64rop\x18\x05 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\"\xc7\x01\n\nBattleHero\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x13\n\x0boriginal_id\x18\x02 \x02(\x05\x12\n\n\x02hp\x18\x03 \x02(\x05\x12\r\n\x05\x61nger\x18\x04 \x02(\x05\x12\x0e\n\x06max_hp\x18\x05 \x02(\x05\x12\x11\n\tmax_anger\x18\x06 \x02(\x05\x12\x37\n\x02ht\x18\x07 \x02(\x0e\x32+.Sanguo.protocol.battle.BattleHero.HeroType\"!\n\x08HeroType\x12\x08\n\x04HERO\x10\x01\x12\x0b\n\x07MONSTER\x10\x02\"\xc9\x03\n\x04Step\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x33\n\x06\x61\x63tion\x18\x02 \x01(\x0b\x32#.Sanguo.protocol.battle.Step.Action\x12<\n\x0bhero_notify\x18\x03 \x03(\x0b\x32\'.Sanguo.protocol.battle.Step.HeroNotify\x1a\x85\x01\n\x06\x41\x63tion\x12\x10\n\x08skill_id\x18\x01 \x02(\x05\x12;\n\x07targets\x18\x02 \x03(\x0b\x32*.Sanguo.protocol.battle.Step.Action.Target\x1a,\n\x06Target\x12\x11\n\ttarget_id\x18\x01 \x02(\x05\x12\x0f\n\x07is_crit\x18\x02 \x02(\x08\x1a\xb9\x01\n\nHeroNotify\x12\x11\n\ttarget_id\x18\x01 \x02(\x05\x12\n\n\x02hp\x18\x02 \x02(\x05\x12\r\n\x05\x61nger\x18\x03 \x02(\x05\x12:\n\x04\x61\x64\x64s\x18\x04 \x03(\x0b\x32,.Sanguo.protocol.battle.Step.HeroNotify.Buff\x12\x0f\n\x07removes\x18\x05 \x03(\x05\x12\r\n\x05value\x18\x06 \x01(\x05\x1a!\n\x04\x42uff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05value\x18\x02 \x01(\x05\"\xb8\x01\n\x06Ground\x12\x36\n\nself_heros\x18\x01 \x03(\x0b\x32\".Sanguo.protocol.battle.BattleHero\x12\x37\n\x0brival_heros\x18\x02 \x03(\x0b\x32\".Sanguo.protocol.battle.BattleHero\x12\x10\n\x08self_win\x18\x03 \x02(\x08\x12+\n\x05steps\x18\x04 \x03(\x0b\x32\x1c.Sanguo.protocol.battle.Step\"\x8d\x02\n\x06\x42\x61ttle\x12\x12\n\nself_power\x18\x01 \x02(\x05\x12\x13\n\x0brival_power\x18\x02 \x02(\x05\x12\x11\n\tself_name\x18\x03 \x02(\t\x12\x12\n\nrival_name\x18\x04 \x02(\t\x12\x34\n\x0c\x66irst_ground\x18\x05 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x35\n\rsecond_ground\x18\x06 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x34\n\x0cthird_ground\x18\x07 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x10\n\x08self_win\x18\x08 \x02(\x08\"/\n\nPVERequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08stage_id\x18\x02 \x02(\x05\"\x9e\x01\n\x0bPVEResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08stage_id\x18\x03 \x01(\x05\x12.\n\x06\x62\x61ttle\x18\x04 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\x12/\n\x04\x64rop\x18\x05 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\"\xea\x02\n\nHangNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x15\n\rremained_time\x18\x02 \x02(\x05\x12\x39\n\x04hang\x18\x03 \x01(\x0b\x32+.Sanguo.protocol.battle.HangNotify.HangInfo\x12;\n\x04logs\x18\x04 \x03(\x0b\x32-.Sanguo.protocol.battle.HangNotify.PlunderLog\x1a\x80\x01\n\x08HangInfo\x12\x10\n\x08stage_id\x18\x01 \x02(\x05\x12\x12\n\nstart_time\x18\x02 \x02(\x05\x12\x11\n\tused_time\x18\x03 \x02(\x05\x12\x10\n\x08\x66inished\x18\x04 \x02(\x08\x12\x14\n\x0crewared_gold\x18\x05 \x02(\x05\x12\x13\n\x0brewared_exp\x18\x06 \x02(\x05\x1a\x39\n\nPlunderLog\x12\x10\n\x08\x61ttacker\x18\x01 \x02(\t\x12\x0b\n\x03win\x18\x02 \x02(\x08\x12\x0c\n\x04gold\x18\x03 \x02(\x05\"0\n\x0bHangRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08stage_id\x18\x02 \x02(\x05\",\n\x0cHangResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"$\n\x11HangCancelRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"2\n\x12HangCancelResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"M\n\rPlunderNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x1b\n\x13remained_free_times\x18\x02 \x02(\x05\x12\x0e\n\x06points\x18\x03 \x02(\x05\"[\n\x07Plunder\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x0c\n\x04gold\x18\x03 \x02(\x05\x12\r\n\x05power\x18\x04 \x02(\x05\x12\x19\n\x11hero_original_ids\x18\x05 \x03(\x05\"%\n\x12PlunderListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"f\n\x13PlunderListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x31\n\x08plunders\x18\x03 \x03(\x0b\x32\x1f.Sanguo.protocol.battle.Plunder\"-\n\x0ePlunderRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"_\n\x0fPlunderResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12.\n\x06\x62\x61ttle\x18\x03 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\"a\n\x17PlunderGetRewardRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x35\n\x02tp\x18\x02 \x02(\x0e\x32).Sanguo.protocol.battle.PlunderRewardType\"\xa2\x01\n\x18PlunderGetRewardResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x35\n\x02tp\x18\x03 \x01(\x0e\x32).Sanguo.protocol.battle.PlunderRewardType\x12\x31\n\x06reward\x18\x04 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\"A\n\x08Prisoner\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0b\n\x03oid\x18\x02 \x02(\x05\x12\x0c\n\x04prob\x18\x03 \x02(\x05\x12\x0e\n\x06\x61\x63tive\x18\x04 \x02(\x08\"Y\n\x12PrisonerListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x08prisoner\x18\x02 \x03(\x0b\x32 .Sanguo.protocol.battle.Prisoner\"[\n\x14UpdatePrisonerNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x08prisoner\x18\x02 \x03(\x0b\x32 .Sanguo.protocol.battle.Prisoner\"X\n\x11NewPrisonerNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x08prisoner\x18\x02 \x03(\x0b\x32 .Sanguo.protocol.battle.Prisoner\"4\n\x14RemovePrisonerNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"G\n\x12PrisonerGetRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x14\n\x0ctreasure_ids\x18\x03 \x03(\x05\"D\n\x13PrisonerGetResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x0f\n\x07success\x18\x03 \x01(\x08\"5\n\x16PrisonerReleaseRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"j\n\x17PrisonerReleaseResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x31\n\x06reward\x18\x03 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\"2\n\x13PrisonerKillRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"g\n\x14PrisonerKillResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x31\n\x06reward\x18\x03 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\"\xa4\x02\n\x0b\x41renaNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tweek_rank\x18\x02 \x02(\x05\x12\x10\n\x08\x64\x61y_rank\x18\x03 \x02(\x05\x12\x12\n\nweek_score\x18\x04 \x02(\x05\x12\x11\n\tday_score\x18\x05 \x02(\x05\x12\x1b\n\x13remained_free_times\x18\x06 \x02(\x05\x12\x1c\n\x14remained_sycee_times\x18\x07 \x02(\x05\x12>\n\x05\x63hars\x18\x08 \x03(\x0b\x32/.Sanguo.protocol.battle.ArenaNotify.NBCharacter\x12\x12\n\narena_cost\x18\t \x02(\x05\x1a)\n\x0bNBCharacter\x12\x0c\n\x04rank\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\"$\n\x11\x41renaPanelRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"f\n\x12\x41renaPanelResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x32\n\x05panel\x18\x03 \x01(\x0b\x32#.Sanguo.protocol.battle.ArenaNotify\"\x1f\n\x0c\x41renaRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"]\n\rArenaResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12.\n\x06\x62\x61ttle\x18\x03 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\"\x9d\x02\n\nTeamBattle\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0f\n\x07\x62oss_id\x18\x02 \x02(\x05\x12\x12\n\nboss_power\x18\x03 \x02(\x05\x12\x12\n\nself_power\x18\x04 \x02(\x05\x12\x10\n\x08start_at\x18\x05 \x02(\x05\x12\x15\n\rstep_progress\x18\x06 \x02(\x02\x12\x43\n\x06status\x18\x07 \x02(\x0e\x32\x33.Sanguo.protocol.battle.TeamBattle.TeamBattleStatus\x12\x31\n\x06reward\x18\t \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\")\n\x10TeamBattleStatus\x12\t\n\x05\x44OING\x10\x02\x12\n\n\x06REWARD\x10\x03\"\\\n\x10TeamBattleNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x37\n\x0bteam_battle\x18\x02 \x01(\x0b\x32\".Sanguo.protocol.battle.TeamBattle\"I\n\x16TeamBattleStartRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x12\n\nfriend_ids\x18\x03 \x03(\x05\"7\n\x17TeamBattleStartResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c*J\n\x11PlunderRewardType\x12\x10\n\x0cPLUNDER_HERO\x10\x01\x12\x11\n\rPLUNDER_STUFF\x10\x02\x12\x10\n\x0cPLUNDER_GOLD\x10\x03')
+  serialized_pb='\n\x0c\x62\x61ttle.proto\x12\x16Sanguo.protocol.battle\x1a\x0bworld.proto\"!\n\x05Stage\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04star\x18\x02 \x02(\x08\"T\n\x12\x41lreadyStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12-\n\x06stages\x18\x02 \x03(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"\x87\x01\n\x12\x43urrentStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x05stage\x18\x02 \x02(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\x12\x32\n\x05\x66uncs\x18\x03 \x03(\x0e\x32#.Sanguo.protocol.world.FunctionType\"O\n\x0eNewStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x05stage\x18\x02 \x02(\x0b\x32\x1d.Sanguo.protocol.battle.Stage\"\xa0\x01\n\x1d\x45liteStageRemainedTimesNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x16\n\x0emax_free_times\x18\x02 \x02(\x05\x12\x16\n\x0e\x63ur_free_times\x18\x03 \x02(\x05\x12\x15\n\rmax_buy_times\x18\x04 \x02(\x05\x12\x15\n\rcur_buy_times\x18\x05 \x02(\x05\x12\x10\n\x08\x62uy_cost\x18\x06 \x02(\x05\"?\n\nEliteStage\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x15\n\rcurrent_times\x18\x02 \x02(\x05\x12\x0e\n\x06\x61\x63tive\x18\x03 \x02(\x08\"W\n\x10\x45liteStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x06stages\x18\x02 \x03(\x0b\x32\".Sanguo.protocol.battle.EliteStage\"Y\n\x13NewEliteStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\x05stage\x18\x02 \x02(\x0b\x32\".Sanguo.protocol.battle.EliteStage\"\\\n\x16UpdateEliteStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\x05stage\x18\x02 \x02(\x0b\x32\".Sanguo.protocol.battle.EliteStage\"4\n\x0f\x45litePVERequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08stage_id\x18\x02 \x02(\x05\"\xa3\x01\n\x10\x45litePVEResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08stage_id\x18\x03 \x01(\x05\x12.\n\x06\x62\x61ttle\x18\x04 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\x12/\n\x04\x64rop\x18\x05 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\"c\n ActivityStageRemainedTimesNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x16\n\x0etype_one_times\x18\x02 \x02(\x05\x12\x16\n\x0etype_two_times\x18\x03 \x02(\x05\"3\n\x13\x41\x63tivityStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"6\n\x16NewActivityStageNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"<\n\x17\x41\x63tivityStagePVERequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08stage_id\x18\x02 \x02(\x05\"\xab\x01\n\x18\x41\x63tivityStagePVEResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08stage_id\x18\x03 \x01(\x05\x12.\n\x06\x62\x61ttle\x18\x04 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\x12/\n\x04\x64rop\x18\x05 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\"\xc7\x01\n\nBattleHero\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x13\n\x0boriginal_id\x18\x02 \x02(\x05\x12\n\n\x02hp\x18\x03 \x02(\x05\x12\r\n\x05\x61nger\x18\x04 \x02(\x05\x12\x0e\n\x06max_hp\x18\x05 \x02(\x05\x12\x11\n\tmax_anger\x18\x06 \x02(\x05\x12\x37\n\x02ht\x18\x07 \x02(\x0e\x32+.Sanguo.protocol.battle.BattleHero.HeroType\"!\n\x08HeroType\x12\x08\n\x04HERO\x10\x01\x12\x0b\n\x07MONSTER\x10\x02\"\xc9\x03\n\x04Step\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x33\n\x06\x61\x63tion\x18\x02 \x01(\x0b\x32#.Sanguo.protocol.battle.Step.Action\x12<\n\x0bhero_notify\x18\x03 \x03(\x0b\x32\'.Sanguo.protocol.battle.Step.HeroNotify\x1a\x85\x01\n\x06\x41\x63tion\x12\x10\n\x08skill_id\x18\x01 \x02(\x05\x12;\n\x07targets\x18\x02 \x03(\x0b\x32*.Sanguo.protocol.battle.Step.Action.Target\x1a,\n\x06Target\x12\x11\n\ttarget_id\x18\x01 \x02(\x05\x12\x0f\n\x07is_crit\x18\x02 \x02(\x08\x1a\xb9\x01\n\nHeroNotify\x12\x11\n\ttarget_id\x18\x01 \x02(\x05\x12\n\n\x02hp\x18\x02 \x02(\x05\x12\r\n\x05\x61nger\x18\x03 \x02(\x05\x12:\n\x04\x61\x64\x64s\x18\x04 \x03(\x0b\x32,.Sanguo.protocol.battle.Step.HeroNotify.Buff\x12\x0f\n\x07removes\x18\x05 \x03(\x05\x12\r\n\x05value\x18\x06 \x01(\x05\x1a!\n\x04\x42uff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05value\x18\x02 \x01(\x05\"\xb8\x01\n\x06Ground\x12\x36\n\nself_heros\x18\x01 \x03(\x0b\x32\".Sanguo.protocol.battle.BattleHero\x12\x37\n\x0brival_heros\x18\x02 \x03(\x0b\x32\".Sanguo.protocol.battle.BattleHero\x12\x10\n\x08self_win\x18\x03 \x02(\x08\x12+\n\x05steps\x18\x04 \x03(\x0b\x32\x1c.Sanguo.protocol.battle.Step\"\x8d\x02\n\x06\x42\x61ttle\x12\x12\n\nself_power\x18\x01 \x02(\x05\x12\x13\n\x0brival_power\x18\x02 \x02(\x05\x12\x11\n\tself_name\x18\x03 \x02(\t\x12\x12\n\nrival_name\x18\x04 \x02(\t\x12\x34\n\x0c\x66irst_ground\x18\x05 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x35\n\rsecond_ground\x18\x06 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x34\n\x0cthird_ground\x18\x07 \x02(\x0b\x32\x1e.Sanguo.protocol.battle.Ground\x12\x10\n\x08self_win\x18\x08 \x02(\x08\"/\n\nPVERequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08stage_id\x18\x02 \x02(\x05\"\x9e\x01\n\x0bPVEResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08stage_id\x18\x03 \x01(\x05\x12.\n\x06\x62\x61ttle\x18\x04 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\x12/\n\x04\x64rop\x18\x05 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\"\xea\x02\n\nHangNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x15\n\rremained_time\x18\x02 \x02(\x05\x12\x39\n\x04hang\x18\x03 \x01(\x0b\x32+.Sanguo.protocol.battle.HangNotify.HangInfo\x12;\n\x04logs\x18\x04 \x03(\x0b\x32-.Sanguo.protocol.battle.HangNotify.PlunderLog\x1a\x80\x01\n\x08HangInfo\x12\x10\n\x08stage_id\x18\x01 \x02(\x05\x12\x12\n\nstart_time\x18\x02 \x02(\x05\x12\x11\n\tused_time\x18\x03 \x02(\x05\x12\x10\n\x08\x66inished\x18\x04 \x02(\x08\x12\x14\n\x0crewared_gold\x18\x05 \x02(\x05\x12\x13\n\x0brewared_exp\x18\x06 \x02(\x05\x1a\x39\n\nPlunderLog\x12\x10\n\x08\x61ttacker\x18\x01 \x02(\t\x12\x0b\n\x03win\x18\x02 \x02(\x08\x12\x0c\n\x04gold\x18\x03 \x02(\x05\"0\n\x0bHangRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08stage_id\x18\x02 \x02(\x05\",\n\x0cHangResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"$\n\x11HangCancelRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"2\n\x12HangCancelResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"M\n\rPlunderNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x1b\n\x13remained_free_times\x18\x02 \x02(\x05\x12\x0e\n\x06points\x18\x03 \x02(\x05\"[\n\x07Plunder\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x0c\n\x04gold\x18\x03 \x02(\x05\x12\r\n\x05power\x18\x04 \x02(\x05\x12\x19\n\x11hero_original_ids\x18\x05 \x03(\x05\"%\n\x12PlunderListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"f\n\x13PlunderListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x31\n\x08plunders\x18\x03 \x03(\x0b\x32\x1f.Sanguo.protocol.battle.Plunder\"-\n\x0ePlunderRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"_\n\x0fPlunderResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12.\n\x06\x62\x61ttle\x18\x03 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\"a\n\x17PlunderGetRewardRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x35\n\x02tp\x18\x02 \x02(\x0e\x32).Sanguo.protocol.battle.PlunderRewardType\"\xa2\x01\n\x18PlunderGetRewardResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x35\n\x02tp\x18\x03 \x01(\x0e\x32).Sanguo.protocol.battle.PlunderRewardType\x12\x31\n\x06reward\x18\x04 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\"A\n\x08Prisoner\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0b\n\x03oid\x18\x02 \x02(\x05\x12\x0c\n\x04prob\x18\x03 \x02(\x05\x12\x0e\n\x06\x61\x63tive\x18\x04 \x02(\x08\"Y\n\x12PrisonerListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x08prisoner\x18\x02 \x03(\x0b\x32 .Sanguo.protocol.battle.Prisoner\"[\n\x14UpdatePrisonerNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x08prisoner\x18\x02 \x03(\x0b\x32 .Sanguo.protocol.battle.Prisoner\"X\n\x11NewPrisonerNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x08prisoner\x18\x02 \x03(\x0b\x32 .Sanguo.protocol.battle.Prisoner\"4\n\x14RemovePrisonerNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"G\n\x12PrisonerGetRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x14\n\x0ctreasure_ids\x18\x03 \x03(\x05\"D\n\x13PrisonerGetResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x0f\n\x07success\x18\x03 \x01(\x08\"5\n\x16PrisonerReleaseRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"j\n\x17PrisonerReleaseResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x31\n\x06reward\x18\x03 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\"2\n\x13PrisonerKillRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"g\n\x14PrisonerKillResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x31\n\x06reward\x18\x03 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\"\xa4\x02\n\x0b\x41renaNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tweek_rank\x18\x02 \x02(\x05\x12\x10\n\x08\x64\x61y_rank\x18\x03 \x02(\x05\x12\x12\n\nweek_score\x18\x04 \x02(\x05\x12\x11\n\tday_score\x18\x05 \x02(\x05\x12\x1b\n\x13remained_free_times\x18\x06 \x02(\x05\x12\x1c\n\x14remained_sycee_times\x18\x07 \x02(\x05\x12>\n\x05\x63hars\x18\x08 \x03(\x0b\x32/.Sanguo.protocol.battle.ArenaNotify.NBCharacter\x12\x12\n\narena_cost\x18\t \x02(\x05\x1a)\n\x0bNBCharacter\x12\x0c\n\x04rank\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\"$\n\x11\x41renaPanelRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"f\n\x12\x41renaPanelResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x32\n\x05panel\x18\x03 \x01(\x0b\x32#.Sanguo.protocol.battle.ArenaNotify\"\x1f\n\x0c\x41renaRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"]\n\rArenaResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12.\n\x06\x62\x61ttle\x18\x03 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\"\x9d\x02\n\nTeamBattle\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0f\n\x07\x62oss_id\x18\x02 \x02(\x05\x12\x12\n\nboss_power\x18\x03 \x02(\x05\x12\x12\n\nself_power\x18\x04 \x02(\x05\x12\x10\n\x08start_at\x18\x05 \x02(\x05\x12\x15\n\rstep_progress\x18\x06 \x02(\x02\x12\x43\n\x06status\x18\x07 \x02(\x0e\x32\x33.Sanguo.protocol.battle.TeamBattle.TeamBattleStatus\x12\x31\n\x06reward\x18\t \x01(\x0b\x32!.Sanguo.protocol.world.Attachment\")\n\x10TeamBattleStatus\x12\t\n\x05\x44OING\x10\x02\x12\n\n\x06REWARD\x10\x03\"\\\n\x10TeamBattleNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x37\n\x0bteam_battle\x18\x02 \x01(\x0b\x32\".Sanguo.protocol.battle.TeamBattle\"I\n\x16TeamBattleStartRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x12\n\nfriend_ids\x18\x03 \x03(\x05\"7\n\x17TeamBattleStartResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c*J\n\x11PlunderRewardType\x12\x10\n\x0cPLUNDER_HERO\x10\x01\x12\x11\n\rPLUNDER_STUFF\x10\x02\x12\x10\n\x0cPLUNDER_GOLD\x10\x03')
 
 _PLUNDERREWARDTYPE = _descriptor.EnumDescriptor(
   name='PlunderRewardType',
@@ -38,8 +38,8 @@ _PLUNDERREWARDTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=5989,
-  serialized_end=6063,
+  serialized_start=6103,
+  serialized_end=6177,
 )
 
 PlunderRewardType = enum_type_wrapper.EnumTypeWrapper(_PLUNDERREWARDTYPE)
@@ -65,8 +65,8 @@ _BATTLEHERO_HEROTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1614,
-  serialized_end=1647,
+  serialized_start=1728,
+  serialized_end=1761,
 )
 
 _TEAMBATTLE_TEAMBATTLESTATUS = _descriptor.EnumDescriptor(
@@ -86,8 +86,8 @@ _TEAMBATTLE_TEAMBATTLESTATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=5720,
-  serialized_end=5761,
+  serialized_start=5834,
+  serialized_end=5875,
 )
 
 
@@ -253,8 +253,36 @@ _ELITESTAGEREMAINEDTIMESNOTIFY = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='times', full_name='Sanguo.protocol.battle.EliteStageRemainedTimesNotify.times', index=1,
+      name='max_free_times', full_name='Sanguo.protocol.battle.EliteStageRemainedTimesNotify.max_free_times', index=1,
       number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='cur_free_times', full_name='Sanguo.protocol.battle.EliteStageRemainedTimesNotify.cur_free_times', index=2,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='max_buy_times', full_name='Sanguo.protocol.battle.EliteStageRemainedTimesNotify.max_buy_times', index=3,
+      number=4, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='cur_buy_times', full_name='Sanguo.protocol.battle.EliteStageRemainedTimesNotify.cur_buy_times', index=4,
+      number=5, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='buy_cost', full_name='Sanguo.protocol.battle.EliteStageRemainedTimesNotify.buy_cost', index=5,
+      number=6, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -268,8 +296,8 @@ _ELITESTAGEREMAINEDTIMESNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=393,
-  serialized_end=456,
+  serialized_start=394,
+  serialized_end=554,
 )
 
 
@@ -294,6 +322,13 @@ _ELITESTAGE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='active', full_name='Sanguo.protocol.battle.EliteStage.active', index=2,
+      number=3, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -303,8 +338,8 @@ _ELITESTAGE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=458,
-  serialized_end=505,
+  serialized_start=556,
+  serialized_end=619,
 )
 
 
@@ -338,8 +373,8 @@ _ELITESTAGENOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=507,
-  serialized_end=594,
+  serialized_start=621,
+  serialized_end=708,
 )
 
 
@@ -373,8 +408,8 @@ _NEWELITESTAGENOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=596,
-  serialized_end=685,
+  serialized_start=710,
+  serialized_end=799,
 )
 
 
@@ -408,8 +443,8 @@ _UPDATEELITESTAGENOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=687,
-  serialized_end=779,
+  serialized_start=801,
+  serialized_end=893,
 )
 
 
@@ -443,8 +478,8 @@ _ELITEPVEREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=781,
-  serialized_end=833,
+  serialized_start=895,
+  serialized_end=947,
 )
 
 
@@ -499,8 +534,8 @@ _ELITEPVERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=836,
-  serialized_end=999,
+  serialized_start=950,
+  serialized_end=1113,
 )
 
 
@@ -541,8 +576,8 @@ _ACTIVITYSTAGEREMAINEDTIMESNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1001,
-  serialized_end=1100,
+  serialized_start=1115,
+  serialized_end=1214,
 )
 
 
@@ -576,8 +611,8 @@ _ACTIVITYSTAGENOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1102,
-  serialized_end=1153,
+  serialized_start=1216,
+  serialized_end=1267,
 )
 
 
@@ -611,8 +646,8 @@ _NEWACTIVITYSTAGENOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1155,
-  serialized_end=1209,
+  serialized_start=1269,
+  serialized_end=1323,
 )
 
 
@@ -646,8 +681,8 @@ _ACTIVITYSTAGEPVEREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1211,
-  serialized_end=1271,
+  serialized_start=1325,
+  serialized_end=1385,
 )
 
 
@@ -702,8 +737,8 @@ _ACTIVITYSTAGEPVERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1274,
-  serialized_end=1445,
+  serialized_start=1388,
+  serialized_end=1559,
 )
 
 
@@ -773,8 +808,8 @@ _BATTLEHERO = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1448,
-  serialized_end=1647,
+  serialized_start=1562,
+  serialized_end=1761,
 )
 
 
@@ -808,8 +843,8 @@ _STEP_ACTION_TARGET = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1875,
-  serialized_end=1919,
+  serialized_start=1989,
+  serialized_end=2033,
 )
 
 _STEP_ACTION = _descriptor.Descriptor(
@@ -842,8 +877,8 @@ _STEP_ACTION = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1786,
-  serialized_end=1919,
+  serialized_start=1900,
+  serialized_end=2033,
 )
 
 _STEP_HERONOTIFY_BUFF = _descriptor.Descriptor(
@@ -876,8 +911,8 @@ _STEP_HERONOTIFY_BUFF = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2074,
-  serialized_end=2107,
+  serialized_start=2188,
+  serialized_end=2221,
 )
 
 _STEP_HERONOTIFY = _descriptor.Descriptor(
@@ -938,8 +973,8 @@ _STEP_HERONOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1922,
-  serialized_end=2107,
+  serialized_start=2036,
+  serialized_end=2221,
 )
 
 _STEP = _descriptor.Descriptor(
@@ -979,8 +1014,8 @@ _STEP = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1650,
-  serialized_end=2107,
+  serialized_start=1764,
+  serialized_end=2221,
 )
 
 
@@ -1028,8 +1063,8 @@ _GROUND = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2110,
-  serialized_end=2294,
+  serialized_start=2224,
+  serialized_end=2408,
 )
 
 
@@ -1105,8 +1140,8 @@ _BATTLE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2297,
-  serialized_end=2566,
+  serialized_start=2411,
+  serialized_end=2680,
 )
 
 
@@ -1140,8 +1175,8 @@ _PVEREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2568,
-  serialized_end=2615,
+  serialized_start=2682,
+  serialized_end=2729,
 )
 
 
@@ -1196,8 +1231,8 @@ _PVERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2618,
-  serialized_end=2776,
+  serialized_start=2732,
+  serialized_end=2890,
 )
 
 
@@ -1259,8 +1294,8 @@ _HANGNOTIFY_HANGINFO = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2954,
-  serialized_end=3082,
+  serialized_start=3068,
+  serialized_end=3196,
 )
 
 _HANGNOTIFY_PLUNDERLOG = _descriptor.Descriptor(
@@ -1300,8 +1335,8 @@ _HANGNOTIFY_PLUNDERLOG = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3084,
-  serialized_end=3141,
+  serialized_start=3198,
+  serialized_end=3255,
 )
 
 _HANGNOTIFY = _descriptor.Descriptor(
@@ -1348,8 +1383,8 @@ _HANGNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2779,
-  serialized_end=3141,
+  serialized_start=2893,
+  serialized_end=3255,
 )
 
 
@@ -1383,8 +1418,8 @@ _HANGREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3143,
-  serialized_end=3191,
+  serialized_start=3257,
+  serialized_end=3305,
 )
 
 
@@ -1418,8 +1453,8 @@ _HANGRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3193,
-  serialized_end=3237,
+  serialized_start=3307,
+  serialized_end=3351,
 )
 
 
@@ -1446,8 +1481,8 @@ _HANGCANCELREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3239,
-  serialized_end=3275,
+  serialized_start=3353,
+  serialized_end=3389,
 )
 
 
@@ -1481,8 +1516,8 @@ _HANGCANCELRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3277,
-  serialized_end=3327,
+  serialized_start=3391,
+  serialized_end=3441,
 )
 
 
@@ -1523,8 +1558,8 @@ _PLUNDERNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3329,
-  serialized_end=3406,
+  serialized_start=3443,
+  serialized_end=3520,
 )
 
 
@@ -1579,8 +1614,8 @@ _PLUNDER = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3408,
-  serialized_end=3499,
+  serialized_start=3522,
+  serialized_end=3613,
 )
 
 
@@ -1607,8 +1642,8 @@ _PLUNDERLISTREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3501,
-  serialized_end=3538,
+  serialized_start=3615,
+  serialized_end=3652,
 )
 
 
@@ -1649,8 +1684,8 @@ _PLUNDERLISTRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3540,
-  serialized_end=3642,
+  serialized_start=3654,
+  serialized_end=3756,
 )
 
 
@@ -1684,8 +1719,8 @@ _PLUNDERREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3644,
-  serialized_end=3689,
+  serialized_start=3758,
+  serialized_end=3803,
 )
 
 
@@ -1726,8 +1761,8 @@ _PLUNDERRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3691,
-  serialized_end=3786,
+  serialized_start=3805,
+  serialized_end=3900,
 )
 
 
@@ -1761,8 +1796,8 @@ _PLUNDERGETREWARDREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3788,
-  serialized_end=3885,
+  serialized_start=3902,
+  serialized_end=3999,
 )
 
 
@@ -1810,8 +1845,8 @@ _PLUNDERGETREWARDRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3888,
-  serialized_end=4050,
+  serialized_start=4002,
+  serialized_end=4164,
 )
 
 
@@ -1859,8 +1894,8 @@ _PRISONER = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4052,
-  serialized_end=4117,
+  serialized_start=4166,
+  serialized_end=4231,
 )
 
 
@@ -1894,8 +1929,8 @@ _PRISONERLISTNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4119,
-  serialized_end=4208,
+  serialized_start=4233,
+  serialized_end=4322,
 )
 
 
@@ -1929,8 +1964,8 @@ _UPDATEPRISONERNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4210,
-  serialized_end=4301,
+  serialized_start=4324,
+  serialized_end=4415,
 )
 
 
@@ -1964,8 +1999,8 @@ _NEWPRISONERNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4303,
-  serialized_end=4391,
+  serialized_start=4417,
+  serialized_end=4505,
 )
 
 
@@ -1999,8 +2034,8 @@ _REMOVEPRISONERNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4393,
-  serialized_end=4445,
+  serialized_start=4507,
+  serialized_end=4559,
 )
 
 
@@ -2041,8 +2076,8 @@ _PRISONERGETREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4447,
-  serialized_end=4518,
+  serialized_start=4561,
+  serialized_end=4632,
 )
 
 
@@ -2083,8 +2118,8 @@ _PRISONERGETRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4520,
-  serialized_end=4588,
+  serialized_start=4634,
+  serialized_end=4702,
 )
 
 
@@ -2118,8 +2153,8 @@ _PRISONERRELEASEREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4590,
-  serialized_end=4643,
+  serialized_start=4704,
+  serialized_end=4757,
 )
 
 
@@ -2160,8 +2195,8 @@ _PRISONERRELEASERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4645,
-  serialized_end=4751,
+  serialized_start=4759,
+  serialized_end=4865,
 )
 
 
@@ -2195,8 +2230,8 @@ _PRISONERKILLREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4753,
-  serialized_end=4803,
+  serialized_start=4867,
+  serialized_end=4917,
 )
 
 
@@ -2237,8 +2272,8 @@ _PRISONERKILLRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4805,
-  serialized_end=4908,
+  serialized_start=4919,
+  serialized_end=5022,
 )
 
 
@@ -2272,8 +2307,8 @@ _ARENANOTIFY_NBCHARACTER = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5162,
-  serialized_end=5203,
+  serialized_start=5276,
+  serialized_end=5317,
 )
 
 _ARENANOTIFY = _descriptor.Descriptor(
@@ -2355,8 +2390,8 @@ _ARENANOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4911,
-  serialized_end=5203,
+  serialized_start=5025,
+  serialized_end=5317,
 )
 
 
@@ -2383,8 +2418,8 @@ _ARENAPANELREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5205,
-  serialized_end=5241,
+  serialized_start=5319,
+  serialized_end=5355,
 )
 
 
@@ -2425,8 +2460,8 @@ _ARENAPANELRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5243,
-  serialized_end=5345,
+  serialized_start=5357,
+  serialized_end=5459,
 )
 
 
@@ -2453,8 +2488,8 @@ _ARENAREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5347,
-  serialized_end=5378,
+  serialized_start=5461,
+  serialized_end=5492,
 )
 
 
@@ -2495,8 +2530,8 @@ _ARENARESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5380,
-  serialized_end=5473,
+  serialized_start=5494,
+  serialized_end=5587,
 )
 
 
@@ -2573,8 +2608,8 @@ _TEAMBATTLE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5476,
-  serialized_end=5761,
+  serialized_start=5590,
+  serialized_end=5875,
 )
 
 
@@ -2608,8 +2643,8 @@ _TEAMBATTLENOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5763,
-  serialized_end=5855,
+  serialized_start=5877,
+  serialized_end=5969,
 )
 
 
@@ -2650,8 +2685,8 @@ _TEAMBATTLESTARTREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5857,
-  serialized_end=5930,
+  serialized_start=5971,
+  serialized_end=6044,
 )
 
 
@@ -2685,8 +2720,8 @@ _TEAMBATTLESTARTRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5932,
-  serialized_end=5987,
+  serialized_start=6046,
+  serialized_end=6101,
 )
 
 _ALREADYSTAGENOTIFY.fields_by_name['stages'].message_type = _STAGE

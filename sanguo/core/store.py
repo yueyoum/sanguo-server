@@ -12,7 +12,7 @@ from core.exception import SanguoException
 from core.resource import Resource
 
 from utils import pack_msg
-from utils.api import api_store_buy, api_store_get
+from utils.api import api_store_buy, api_store_get, APIFailure
 
 from protomsg import StoreNotify
 from preset import errormsg
@@ -29,7 +29,16 @@ class Store(object):
             self.mc_limit = MongoStoreCharLimit(id=self.char_id)
 
     def get_new_store(self):
-        data = api_store_get({})
+        try:
+            data = api_store_get({})
+        except APIFailure:
+            raise SanguoException(
+                errormsg.SERVER_FAULT,
+                self.char_id,
+                "Store",
+                "APIFailure. api_store_get"
+            )
+
         store = data['data']['store']
         return {int(k): v for k, v in store.iteritems()}
 
@@ -121,7 +130,16 @@ class Store(object):
                 'goods_amount': amount,
             }
 
-            res = api_store_buy(data)
+            try:
+                res = api_store_buy(data)
+            except APIFailure:
+                raise SanguoException(
+                    errormsg.SERVER_FAULT,
+                    self.char_id,
+                    "Store",
+                    "APIFailure. api_store_buy"
+                )
+
             if res['ret'] != 0:
                 raise SanguoException(
                     res['ret'],

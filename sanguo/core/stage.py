@@ -1,39 +1,52 @@
 # -*- coding: utf-8 -*-
 import json
 
+import arrow
+from django.conf import settings
 from mongoengine import DoesNotExist
-from core.mongoscheme import MongoStage, MongoEmbededPlunderLog, MongoHang, MongoHangDoing
 
+from core.mongoscheme import MongoStage, MongoEmbededPlunderLog, MongoHang, MongoHangDoing
 from core.msgpipe import publish_to_char
 from core.attachment import Attachment, standard_drop_to_attachment_protomsg, make_standard_drop_from_template, get_drop
 from core.achievement import Achievement
 from core.exception import SanguoException
 from core.battle import PVE, ElitePVE, ActivityPVE
 from core.character import Char
-# from core.timercheck import TimerCheckAbstractBase, timercheck
 from core.functionopen import FunctionOpen
 from core.mail import Mail
 from core.signals import pve_finished_signal
 from core.counter import Counter
 from core.resource import Resource
-
 from worker import tasks
-
-from utils import pack_msg, timezone
+from utils import pack_msg
+from utils.decorate import operate_guard
 
 from preset.settings import (
-    DATETIME_FORMAT,
-    HANG_SECONDS,
     PLUNDER_DEFENSE_SUCCESS_GOLD,
     PLUNDER_DEFENSE_FAILURE_GOLD,
     PLUNDER_DEFENSE_SUCCESS_MAX_TIMES,
     PLUNDER_DEFENSE_FAILURE_MAX_TIMES,
     HANG_RESET_MAIL_TITLE,
     HANG_RESET_MAIL_CONTENT,
+    STAGE_ELITE_BUY_COST,
 )
-from preset.data import STAGES, STAGE_ELITE, STAGE_ELITE_CONDITION, STAGE_ACTIVITY, STAGE_ACTIVITY_CONDITION
+from preset.data import (
+    STAGES,
+    STAGE_ELITE,
+    STAGE_ELITE_CONDITION,
+    STAGE_ACTIVITY,
+    STAGE_ACTIVITY_CONDITION,
+    VIP_MAX_LEVEL,
+    VIP_FUNCTION,
+)
+
+
 from preset import errormsg
 import protomsg
+
+
+HANG_MAX_SECONDS_FUNCTION = lambda vip: VIP_FUNCTION[vip].hang * 3600
+
 
 
 def max_star_stage_id(char_id):
@@ -200,7 +213,7 @@ class Hang(object):
             self.hang = MongoHang.objects.get(id=self.char_id)
         except DoesNotExist:
             self.hang = MongoHang(id=self.char_id)
-            self.hang.remained = HANG_SECONDS
+            self.hang.used = 0
             self.hang.save()
 
         try:
@@ -209,27 +222,23 @@ class Hang(object):
             self.hang_doing = None
 
 
-    def cronjob(self):
-        remained = self.hang.remained
-        self.hang.remained = HANG_SECONDS
+    def cron_job(self):
+        # 由系统的定时任务触发
+        # linux cronjob 每天定时执行
+        self.hang.used = 0
         self.hang.save()
 
         if self.hang_doing:
             stage_id = self.hang_doing.stage_id
             if not self.hang_doing.finished:
                 # 到结算点就终止
-                self.finish(remained=HANG_SECONDS)
-                # 下面的代码是自动开始新的挂机
-                # tasks.cancel(self.hang_doing.jobid)
-                # newjob = tasks.hang_job.apply_async((self.char_id, HANG_SECONDS), countdown=HANG_SECONDS)
-                # self.hang_doing.day_start = timezone.utc_timestamp()
-                # self.hang_doing.jobid = newjob.id
-                # self.hang_doing.save()
+                self.finish(set_hang=False)
         else:
             stage_id = max_star_stage_id(self.char_id)
 
         self.send_notify()
 
+        remained = self.get_hang_remained()
         if remained and stage_id:
             stage = STAGES[stage_id]
             exp = remained / 15 * stage.normal_exp
@@ -239,7 +248,45 @@ class Hang(object):
             standard_drop['gold'] = int(gold)
 
             m = Mail(self.char_id)
-            m.add(HANG_RESET_MAIL_TITLE, HANG_RESET_MAIL_CONTENT, timezone.localnow().strftime(DATETIME_FORMAT), json.dumps(standard_drop))
+            m.add(
+                HANG_RESET_MAIL_TITLE,
+                HANG_RESET_MAIL_CONTENT,
+                arrow.utcnow().to(settings.TIME_ZONE).format('YYYY-MM-DD HH:mm:ss'),
+                json.dumps(standard_drop)
+            )
+
+
+    def task_job(self, actual_seconds):
+        # 由每个玩家的定时任务触发。
+        # 定时任务是当时挂机时开启的，会在当时的剩余时间跑完后到达这里。
+        # 因为VIP的提升导致的剩余时间增加
+        # 所以这里得再次检测是否有多余的剩余时间
+        if not self.hang_doing:
+            return
+
+        remained = self.get_hang_remained()
+        if remained <= 0:
+            self.finish(actual_seconds=actual_seconds)
+            return
+
+        newjob = tasks.hang_job.apply_async((self.char_id, actual_seconds+remained), countdown=remained)
+        self.hang_doing.jobid = newjob.id
+        self.hang_doing.save()
+
+
+    def get_hang_remained(self, char=None):
+        if not char:
+            char = Char(self.char_id).mc
+        vip = char.vip
+        max_seconds = HANG_MAX_SECONDS_FUNCTION(vip)
+        remained = max_seconds - self.hang.used
+        if remained > 0:
+            if self.hang_doing and not self.hang_doing.finished:
+                remained = remained - (arrow.utcnow().timestamp - self.hang_doing.start)
+
+        if remained <= 0:
+            remained = 0
+        return remained
 
 
     def start(self, stage_id):
@@ -251,24 +298,31 @@ class Hang(object):
                 "Hang Multi"
             )
 
-        if self.hang.remained <= 0:
+        char = Char(self.char_id).mc
+        remained_time = self.get_hang_remained(char)
+
+        if remained_time <= 0:
+            if char.vip < VIP_MAX_LEVEL:
+                raise SanguoException(
+                    errormsg.HANG_NO_TIME,
+                    self.char_id,
+                    "Hang Start",
+                    "Hang No Time Available. but can increase vip. current vip: {0}. max vip: {1}".format(char.vip, VIP_MAX_LEVEL)
+                )
             raise SanguoException(
-                errormsg.HANG_NO_TIME,
+                errormsg.HANG_NO_TIME_FINAL,
                 self.char_id,
                 "Hang Start",
-                "Hang No Time Available"
+                "Hang No Time Available. VIP reach max level {0}".format(VIP_MAX_LEVEL)
             )
 
-        char = Char(self.char_id)
-        char_level = char.cacheobj.level
-        now = timezone.utc_timestamp()
-
-        job = tasks.hang_job.apply_async((self.char_id, self.hang.remained), countdown=self.hang.remained)
+        now = arrow.utcnow().timestamp
+        job = tasks.hang_job.apply_async((self.char_id, remained_time), countdown=remained_time)
 
         hang_doing = MongoHangDoing(
             id=self.char_id,
             jobid=job.id,
-            char_level=char_level,
+            char_level=char.level,
             stage_id=stage_id,
             start=now,
             finished=False,
@@ -280,13 +334,6 @@ class Hang(object):
         hang_doing.save()
         self.hang_doing = hang_doing
         self.send_notify()
-
-
-    def remined_when_hanging(self):
-        remained_seconds = self.hang.remained - (timezone.utc_timestamp() - self.hang_doing.start)
-        if remained_seconds <= 0:
-            remained_seconds = 0
-        return remained_seconds
 
 
     def cancel(self):
@@ -311,7 +358,7 @@ class Hang(object):
         self.finish()
 
 
-    def finish(self, actual_seconds=None, remained=None):
+    def finish(self, actual_seconds=None, set_hang=True):
         if not self.hang_doing:
             raise SanguoException(
                 errormsg.HANG_NOT_EXIST,
@@ -321,10 +368,11 @@ class Hang(object):
             )
 
         if not actual_seconds:
-            actual_seconds = timezone.utc_timestamp() - self.hang_doing.start
+            actual_seconds = arrow.utcnow().timestamp - self.hang_doing.start
 
-        self.hang.remained = remained or self.remined_when_hanging()
-        self.hang.save()
+        if set_hang:
+            self.hang.used += actual_seconds
+            self.hang.save()
 
         self.hang_doing.finished = True
         self.hang_doing.actual_seconds = actual_seconds
@@ -409,16 +457,15 @@ class Hang(object):
 
     def send_notify(self):
         msg = protomsg.HangNotify()
+        msg.remained_time = self.get_hang_remained()
 
         if self.hang_doing:
             msg.hang.stage_id = self.hang_doing.stage_id
             msg.hang.start_time = self.hang_doing.start
             if self.hang_doing.finished:
                 msg.hang.used_time = self.hang_doing.actual_seconds
-                msg.remained_time = self.hang.remained
             else:
-                msg.hang.used_time = timezone.utc_timestamp() - self.hang_doing.start
-                msg.remained_time = self.remined_when_hanging()
+                msg.hang.used_time = arrow.utcnow().timestamp - self.hang_doing.start
 
             msg.hang.finished = self.hang_doing.finished
 
@@ -432,8 +479,7 @@ class Hang(object):
                 msg_log.attacker = l.name
                 msg_log.win = l.gold > 0
                 msg_log.gold = abs(l.gold)
-        else:
-            msg.remained_time = self.hang.remained
+
 
         publish_to_char(self.char_id, pack_msg(msg))
 
@@ -447,16 +493,10 @@ class EliteStage(object):
             self.stage = MongoStage(id=self.char_id)
             self.stage.stage_new = 1
             self.stage.elites = {}
+            self.stage.pre_elites = []
             self.stage.activities = []
             self.stage.save()
 
-        self.check()
-
-    def check(self):
-        for k, v in STAGE_ELITE_CONDITION.iteritems():
-            for _v in v:
-                if str(k) in self.stage.stages and str(_v) not in self.stage.elites:
-                    self.enable(_v)
 
     def enable_by_condition_id(self, _id):
         if _id not in STAGE_ELITE_CONDITION:
@@ -465,7 +505,8 @@ class EliteStage(object):
             self.enable(v)
 
 
-    def enable(self, _id):
+    def enable(self, stage):
+        _id = stage.id
         str_id = str(_id)
         if _id not in STAGE_ELITE:
             raise SanguoException(
@@ -475,16 +516,20 @@ class EliteStage(object):
                 "EliteStage {0} not exist".format(_id)
             )
 
-        if str_id in self.stage.elites:
+        if str_id in self.stage.elites or _id in self.stage.pre_elites:
             return
 
-        self.stage.elites[str_id] = 0
+        if stage.first:
+            self.stage.elites[str_id] = 0
+        else:
+            self.stage.pre_elites.append(_id)
         self.stage.save()
 
-        msg = protomsg.NewEliteStageNotify()
-        msg.stage.id = _id
-        msg.stage.current_times = 0
-        publish_to_char(self.char_id, pack_msg(msg))
+        self.send_update_notify(_id)
+
+
+    def get_buy_cost(self):
+        return STAGE_ELITE_BUY_COST
 
 
     def battle(self, _id):
@@ -503,6 +548,13 @@ class EliteStage(object):
         try:
             times = self.stage.elites[str_id]
         except KeyError:
+            if _id in self.stage.pre_elites:
+                raise SanguoException(
+                    errormsg.STAGE_ELITE_NOT_ACTIVE,
+                    self.char_id,
+                    "StageElite Battle",
+                    "StageElite {0} not active".format(_id)
+                )
             raise SanguoException(
                 errormsg.STAGE_ELITE_NOT_OPEN,
                 self.char_id,
@@ -518,30 +570,50 @@ class EliteStage(object):
                 "StageElite {0} no times".format(_id)
             )
 
+
         counter = Counter(self.char_id, 'stage_elite')
         if counter.remained_value <= 0:
-            raise SanguoException(
-                errormsg.STAGE_ELITE_TOTAL_NO_TIMES,
-                self.char_id,
-                "StageElite Battle",
-                "stageElite no total times. battle {0}".format(_id)
-            )
+            counter = Counter(self.char_id, 'stage_elite_buy')
+            if counter.remained_value <= 0:
+                char = Char(self.char_id).mc
+                if char.vip < VIP_MAX_LEVEL:
+                    raise SanguoException(
+                        errormsg.STAGE_ELITE_TOTAL_NO_TIMES,
+                        self.char_id,
+                        "StageElite Battle",
+                        "stageElite no total times. vip current: {0}, max: {1}".format(char.vip, VIP_MAX_LEVEL)
+                    )
+                raise SanguoException(
+                    errormsg.STAGE_ELITE_TOTAL_NO_TIMES_FINAL,
+                    self.char_id,
+                    "StageElite Battle",
+                    "StageElite no total times. vip reached max level {0}".format(VIP_MAX_LEVEL)
+                )
+
+            resource = Resource(self.char_id, "StageElite Battle Buy", "stage {0}".format(_id))
+            resource.check_and_remove(sycee=-self.get_buy_cost())
 
         battle_msg = protomsg.Battle()
         b = ElitePVE(self.char_id, _id, battle_msg)
         b.start()
 
+        updated_stages = [_id]
+
         if battle_msg.self_win:
             self.stage.elites[str_id] += 1
+            if self.this_stage.next:
+                if self.this_stage.next in self.stage.pre_elites:
+                    self.stage.pre_elites.remove(self.this_stage.next)
+                if str(self.this_stage.next) not in self.stage.elites:
+                    self.stage.elites[str(self.this_stage.next)] = 0
+                    updated_stages.append(self.this_stage.next)
             self.stage.save()
 
-            msg = protomsg.UpdateEliteStageNotify()
-            msg.stage.id = _id
-            msg.stage.current_times = self.stage.elites[str_id]
-            publish_to_char(self.char_id, pack_msg(msg))
+            for us in updated_stages:
+                self.send_update_notify(us)
 
-            counter.incr()
-            self.send_remained_times_notify(times=counter.remained_value)
+            counter.incr(dirty=True)
+            self.send_remained_times_notify()
 
         return battle_msg
 
@@ -567,23 +639,41 @@ class EliteStage(object):
         return standard_drop
 
 
+    def send_update_notify(self, _id):
+        msg = protomsg.UpdateAchievementNotify()
+        msg.stage.id = _id
+        msg.stage.current_times = self.stage.elites.get(str(_id), 0)
+        msg.stage.active = str(_id) in self.stage.elites
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
     def send_notify(self):
         msg = protomsg.EliteStageNotify()
         for _id, times in self.stage.elites.iteritems():
             s = msg.stages.add()
             s.id = int(_id)
             s.current_times = times
+            s.active = True
+
+        for _id in self.stage.pre_elites:
+            s = msg.stages.add()
+            s.id = _id
+            s.current_times = 0
+            s.active = False
 
         publish_to_char(self.char_id, pack_msg(msg))
 
 
-    def send_remained_times_notify(self, times=None):
-        if not times:
-            c = Counter(self.char_id, 'stage_elite')
-            times = c.remained_value
-
+    def send_remained_times_notify(self):
         msg = protomsg.EliteStageRemainedTimesNotify()
-        msg.times = times
+        free_counter = Counter(self.char_id, 'stage_elite')
+        msg.max_free_times = free_counter.max_value
+        msg.cur_free_times = free_counter.cur_value
+
+        buy_counter = Counter(self.char_id, 'stage_elite_buy')
+        msg.max_buy_times = buy_counter.max_value
+        msg.cur_buy_times = buy_counter.cur_value
+
         publish_to_char(self.char_id, pack_msg(msg))
 
 
@@ -625,6 +715,15 @@ class ActivityStage(object):
         msg.ids.extend(enabled)
         publish_to_char(self.char_id, pack_msg(msg))
 
+
+    @operate_guard('activate_pve_1', 5, keep_result=False, char_id_name='char_id')
+    def battle_type_one(self, _id):
+        return self.battle(_id)
+
+
+    @operate_guard('activate_pve_2', 5, keep_result=False, char_id_name='char_id')
+    def battle_type_two(self, _id):
+        return self.battle(_id)
 
 
     def battle(self, _id):
@@ -700,166 +799,4 @@ class ActivityStage(object):
         msg.type_two_times = counter.remained_value
 
         publish_to_char(self.char_id, pack_msg(msg))
-
-
-
-
-
-#
-#
-# class TeamBattle(TimerCheckAbstractBase):
-#     def __init__(self, char_id):
-#         self.char_id = char_id
-#         try:
-#             self.mongo_tb = MongoTeamBattle.objects.get(id=char_id)
-#         except DoesNotExist:
-#             self.mongo_tb = None
-#
-#
-#     def check(self):
-#         if not self.mongo_tb or self.mongo_tb.status != 2:
-#             return
-#
-#         time_diff = timezone.utc_timestamp() - self.mongo_tb.start_at
-#         if time_diff >= STAGE_CHALLENGE[self.mongo_tb.battle_id].time_limit or time_diff * self.mongo_tb.step >= 1:
-#             # FINISH
-#             self.mongo_tb.status = 3
-#             self.mongo_tb.save()
-#             self.send_notify()
-#
-#             attachment = Attachment(self.char_id)
-#             attachment.save_to_prize(7)
-#
-#
-#     def start(self, _id, friend_ids):
-#         if self.mongo_tb:
-#             raise InvalidOperate("TeamBattle Start. Char {0} Try to start battle {1}. But last battle NOT complete".format(
-#                 self.char_id, _id
-#             ))
-#
-#         try:
-#             this_stage = STAGE_CHALLENGE[_id]
-#         except KeyError:
-#             raise InvalidOperate("TeamBattle Start. Char {0} Try to start a NONE exists battle {1}".format(_id))
-#
-#         char = Char(self.char_id)
-#         char_level = char.cacheobj.level
-#         if char_level < this_stage.char_level_needs:
-#             raise InvalidOperate("TeamBattle Start. Char {0} Try to start battle {1}. But level not needs. {2}".format(
-#                 self.char_id, _id, char_level
-#             ))
-#
-#         need_stuff_id = this_stage.open_condition_id
-#         need_stuff_amount = this_stage.open_condition_amount
-#
-#         item = Item(self.char_id)
-#         if not item.has_stuff(need_stuff_id, need_stuff_amount):
-#             raise StuffNotEnough("TeamBattle Start. Char {0} Try to start battle {1}. But stuff not enough".format(self.char_id, _id))
-#
-#         choosing_bosses = []
-#         for k, v in HEROS.iteritems():
-#             if v.grade == this_stage.level:
-#                 choosing_bosses.append(k)
-#
-#         boss_id = random.choice(choosing_bosses)
-#
-#         def _get_boss_power(p):
-#             if ',' in p:
-#                 a, b = p.split(',')
-#                 a, b = int(a), int(b)
-#                 power_range = range(a, b+1)
-#                 return random.choice(power_range)
-#             return int(p)
-#
-#         boss_power = _get_boss_power(this_stage.power_range)
-#
-#
-#         friend_power = 0
-#         if friend_ids:
-#             if len(friend_ids) > this_stage.aid_limit:
-#                 raise InvalidOperate("TeamBattle Start. Char {0} Friend amount > aid limit".format(self.char_id))
-#
-#             f = Friend(self.char_id)
-#             for fid in friend_ids:
-#                 if not f.is_friend(fid):
-#                     raise InvalidOperate("TeamBattle Start. Char {0} has no friend {1}".format(self.char_id, fid))
-#
-#                 c = Char(fid)
-#                 friend_power += c.power
-#
-#             achievement = Achievement(self.char_id)
-#             achievement.trig(17, 1)
-#
-#         item.stuff_remove(need_stuff_id, need_stuff_amount)
-#
-#
-#         self.mongo_tb = MongoTeamBattle(id=self.char_id)
-#         self.mongo_tb.battle_id = _id
-#         self.mongo_tb.boss_id = boss_id
-#         self.mongo_tb.boss_power = boss_power
-#         self.mongo_tb.self_power = char.power + friend_power
-#         self.mongo_tb.start_at = timezone.utc_timestamp()
-#         self.mongo_tb.total_seconds = this_stage.time_limit
-#         self.mongo_tb.status = 2
-#         self.mongo_tb.friend_ids = friend_ids
-#
-#         step = random.uniform(1, 1.05) * self.mongo_tb.self_power / self.mongo_tb.boss_power * (1.0 / this_stage.time_limit)
-#         self.mongo_tb.step = step
-#         self.mongo_tb.save()
-#
-#         self.send_notify()
-#
-#
-#     def get_reward(self):
-#         if not self.mongo_tb:
-#             raise InvalidOperate("TeamBattle Get Reward. Char {0} Try to get reward. But no battle exists".format(self.char_id))
-#
-#         if self.mongo_tb.status != 3:
-#             raise InvalidOperate("TeamBattle Get Reward. Char {0} Try to get reward. But battle {1} status = {2}".format(
-#                 self.char_id, self.mongo_tb.battle_id, self.mongo_tb.status
-#             ))
-#
-#         this_stage = STAGE_CHALLENGE[self.mongo_tb.battle_id]
-#         # FIXME
-#         reward_gold = this_stage.reward_gold
-#         reward_hero_id = self.mongo_tb.boss_id
-#
-#         # for fid in self.mongo_tb.friend_ids:
-#         #     c = Char(fid)
-#         #     c.update(gold=reward_gold, des='TeamBattle Reward as friend')
-#
-#         c = Char(self.char_id)
-#         c.update(gold=reward_gold, des='TeamBattle Reward as Host')
-#         save_hero(self.char_id, reward_hero_id)
-#
-#         self.mongo_tb.delete()
-#         self.mongo_tb = None
-#         self.send_notify()
-#
-#         msg = MsgAttachment()
-#         msg.gold = reward_gold
-#         msg.heros.append(reward_hero_id)
-#         return msg
-#
-#
-#     def send_notify(self):
-#         msg = protomsg.TeamBattleNotify()
-#         if self.mongo_tb:
-#             msg.team_battle.id = self.mongo_tb.battle_id
-#             msg.team_battle.boss_id = self.mongo_tb.boss_id
-#             msg.team_battle.boss_power = self.mongo_tb.boss_power
-#             msg.team_battle.self_power = self.mongo_tb.self_power
-#
-#             msg.team_battle.start_at = self.mongo_tb.start_at
-#             msg.team_battle.step_progress = self.mongo_tb.step
-#
-#             msg.team_battle.status = self.mongo_tb.status
-#
-#             if self.mongo_tb.status == 3:
-#                 this_stage = STAGE_CHALLENGE[self.mongo_tb.battle_id]
-#                 # FIXME
-#                 msg.team_battle.reward.gold = this_stage.reward_gold
-#                 msg.team_battle.reward.heros.append(self.mongo_tb.boss_id)
-#
-#         publish_to_char(self.char_id, pack_msg(msg))
 

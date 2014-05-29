@@ -10,8 +10,8 @@ from utils import timezone
 from libs import crypto, pack_msg
 
 from protomsg import StartGameResponse, SyncResponse, BindAccountResponse
-
-from utils.api import api_account_login, api_account_bind
+from utils.api import api_account_login, api_account_bind, APIFailure
+from preset import errormsg
 
 @message_response("StartGameResponse")
 def login(request):
@@ -27,8 +27,15 @@ def login(request):
         data['method'] = 'anonymous'
         data['token'] = req.anonymous.device_token
 
-
-    res = api_account_login(data)
+    try:
+        res = api_account_login(data)
+    except APIFailure:
+        raise SanguoException(
+            errormsg.SERVER_FAULT,
+            0,
+            'Login',
+            'APIFailure. api_account_login'
+        )
 
     if res['ret'] != 0:
         raise SanguoException(
@@ -91,7 +98,16 @@ def bind(request):
         'token': req.device_token
     }
 
-    res = api_account_bind(data)
+    try:
+        res = api_account_bind(data)
+    except APIFailure:
+        raise SanguoException(
+            errormsg.SERVER_FAULT,
+            request._char_id,
+            'Account Bind',
+            'APIFailure. api_acount_bind'
+        )
+
     if res['ret'] != 0:
         raise SanguoException(
             res['ret'],

@@ -17,7 +17,7 @@ from core.formation import Formation
 import protomsg
 from protomsg import FRIEND_NOT, FRIEND_OK, FRIEND_ACK, FRIEND_APPLY
 
-from preset.settings import MAX_FRIENDS_AMOUNT
+from preset.data import VIP_FUNCTION, VIP_MAX_LEVEL
 from preset import errormsg
 from utils import pack_msg
 
@@ -47,7 +47,7 @@ class Friend(object):
 
     @property
     def max_amount(self):
-        return MAX_FRIENDS_AMOUNT
+        return VIP_FUNCTION[self.char.mc.vip].friends
 
     @property
     def cur_amount(self):
@@ -78,6 +78,23 @@ class Friend(object):
 
         return res
 
+    def check_max_amount(self, func_name):
+        if self.cur_amount >= self.max_amount:
+            if self.char.mc.vip < VIP_MAX_LEVEL:
+                raise SanguoException(
+                    errormsg.FRIEND_FULL,
+                    self.char_id,
+                    func_name,
+                    "friends full. vip current: {0}, max: {1}".format(self.char.mc.vip, VIP_MAX_LEVEL)
+                )
+            raise SanguoException(
+                errormsg.FRIEND_FULL_FINAL,
+                self.char_id,
+                func_name,
+                "friends full. vip reach max level {0}".format(VIP_MAX_LEVEL)
+            )
+
+
 
     def add(self, target_id=None, target_name=None):
         if not target_id and not target_name:
@@ -88,13 +105,7 @@ class Friend(object):
                 "no target_id and no target_name"
             )
 
-        if self.cur_amount >= self.max_amount:
-            raise SanguoException(
-                errormsg.FRIEND_FULL,
-                self.char_id,
-                "Friend Add",
-                "friend full, can not add"
-            )
+        self.check_max_amount("Friend Add")
 
         if target_id:
             try:
@@ -234,13 +245,7 @@ class Friend(object):
                 "character {0} not in accept list".format(target_id)
             )
 
-        if self.cur_amount >= self.max_amount:
-            raise SanguoException(
-                errormsg.FRIEND_FULL,
-                self.char_id,
-                "Friend Accept",
-                "friend full, can not accept"
-            )
+        self.check_max_amount("Friend Accept")
 
         self.mf.accepting.remove(target_id)
         self.mf.friends[str(target_id)] = FRIEND_OK

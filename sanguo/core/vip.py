@@ -3,17 +3,13 @@
 __author__ = 'Wang Chao'
 __date__ = '5/26/14'
 
+import copy
+from preset.data import VIP_DEFINE
 
-from preset.settings import VIP_FUNCTION_TABLE, VIP_DEFINE_TABLE
-
-VIP_DEFINE_TUPLE = VIP_DEFINE_TABLE.items()
-VIP_DEFINE_TUPLE.sort(reverse=True)
-
+VIP_DEFINE_REVERSED = copy.deepcopy(VIP_DEFINE)
+VIP_DEFINE_REVERSED.sort(reverse=True)
 
 def get_vip_level(total_purchase_got):
-    for k, v in VIP_DEFINE_TUPLE:
+    for k, v in VIP_DEFINE_REVERSED:
         if total_purchase_got >= k:
             return v
-
-def get_vip_func_value(vip_level, func_name):
-    return VIP_FUNCTION_TABLE[vip_level][func_name]

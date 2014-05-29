@@ -11,7 +11,7 @@ def reset():
     for mh in MongoHang.objects.all():
         h = Hang(mh.id)
         try:
-            h.cronjob()
+            h.cron_job()
         except:
             e = traceback.format_exc()
             logger.write("==== Exception ====")

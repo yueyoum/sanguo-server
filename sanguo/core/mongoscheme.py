@@ -84,6 +84,7 @@ class MongoStage(Document):
     stage_new = IntField()
     # 开启的精英关卡, key 为关卡ID， value 为今日打的次数
     elites = DictField()
+    pre_elites = ListField()
     # 开启的活动关卡
     activities = ListField(IntField())
 
@@ -168,8 +169,8 @@ class MongoEmbededPlunderLog(EmbeddedDocument):
 
 class MongoHang(Document):
     id = IntField(primary_key=True)
-    # 当日剩余时间
-    remained = IntField()
+    # 当日已经用掉的时间
+    used = IntField(default=0)
 
     meta = {
         'collection': 'hang',
@@ -341,7 +342,7 @@ class MongoArena(Document):
     id = IntField(primary_key=True)
     # 每个人自己的排名
     # 由定时任务每天更新，同时也可以统计每天的名字变化
-    rank = IntField()
+    rank = IntField(default=0)
     # 连续胜利场次
     continues_win = IntField(default=0)
 
@@ -392,10 +393,4 @@ class MongoTeamBattle(Document):
     meta = {
         'collection': 'teambattle'
     }
-
-
-class MongoLevy(Document):
-    id = IntField(primary_key=True)
-    # 每次次数
-    times = IntField(default=0)
 

@@ -24,6 +24,7 @@ from protomsg import PlunderNotify
 from core.msgpipe import publish_to_char
 from utils import pack_msg
 from preset.settings import (
+    PLUNDER_LEVEL_DIFF,
     PLUNDER_GET_OFFICIAL_EXP_WHEN_WIN,
     PLUNDER_POINT,
     PLUNDER_DEFENSE_FAILURE_GOLD,
@@ -32,10 +33,8 @@ from preset.settings import (
 )
 from protomsg import PLUNDER_HERO, PLUNDER_STUFF, PLUNDER_GOLD
 from preset import errormsg
-from preset.data import STAGES
+from preset.data import STAGES, VIP_MAX_LEVEL, VIP_FUNCTION
 
-
-PLUNDER_LEVEL_DIFF = 10
 
 class Plunder(object):
     def __init__(self, char_id):
@@ -143,11 +142,19 @@ class Plunder(object):
 
         counter = Counter(self.char_id, 'plunder')
         if counter.remained_value <= 0:
+            char = Char(self.char_id).mc
+            if char.vip < VIP_MAX_LEVEL:
+                raise SanguoException(
+                    errormsg.PLUNDER_NO_TIMES,
+                    self.char_id,
+                    "Plunder Battle",
+                    "Plunder no times. vip current: {0}, max: {1}".format(char.vip, VIP_MAX_LEVEL)
+                )
             raise SanguoException(
-                errormsg.PLUNDER_NO_TIMES,
+                errormsg.PLUNDER_NO_TIMES_FINAL,
                 self.char_id,
-                "Plunder Plunder",
-                "Plunder no times"
+                "Plunder Battle",
+                "Plunder no times. vip reach max level {0}".format(VIP_MAX_LEVEL)
             )
 
         msg = MsgBattle()
@@ -225,6 +232,9 @@ class Plunder(object):
         standard_drop = make_standard_drop_from_template()
         plunder_gold = self.mongo_plunder.chars[str(self.mongo_plunder.target_char)].gold
 
+        char = Char(self.char_id).mc
+        vip_plus = VIP_FUNCTION[char.vip].plunder_addition
+
         got_hero_id = 0
         if tp == PLUNDER_HERO:
             f = Formation(self.mongo_plunder.target_char)
@@ -240,11 +250,11 @@ class Plunder(object):
                 max_star_stage = 1
 
             drop_ids = [int(i) for i in STAGES[max_star_stage].normal_drop.split(',')]
-            drop = get_drop(drop_ids, multi=PLUNDER_GOT_ITEMS_HOUR * 3600 / 15)
+            drop = get_drop(drop_ids, multi=int(PLUNDER_GOT_ITEMS_HOUR * 3600 * (1+vip_plus/100.0) / 15))
             standard_drop.update(drop)
 
         elif tp == PLUNDER_GOLD:
-            standard_drop['gold'] = plunder_gold
+            standard_drop['gold'] = int(plunder_gold * (1+vip_plus/100.0))
 
         resource = Resource(self.char_id, "Plunder Reward")
         resource.add(**standard_drop)
@@ -256,8 +266,8 @@ class Plunder(object):
 
 
     def send_notify(self):
-        free_count = Counter(self.char_id, 'plunder')
+        counter = Counter(self.char_id, 'plunder')
         msg = PlunderNotify()
-        msg.remained_free_times = free_count.remained_value
+        msg.remained_free_times = counter.remained_value
         msg.points = self.mongo_plunder.points
         publish_to_char(self.char_id, pack_msg(msg))

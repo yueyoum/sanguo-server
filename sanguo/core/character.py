@@ -138,7 +138,8 @@ class Char(object):
 
     def send_notify(self, char=None, opended_funcs=None):
         if not char:
-            char = self.cacheobj
+            char = self.mc
+
         msg = protomsg.CharacterNotify()
         msg.char.id = char.id
         msg.char.name = char.name
@@ -153,6 +154,7 @@ class Char(object):
 
         msg.char.power = self.power
         msg.char.vip = char.vip
+        msg.char.purchase_got = char.purchase_got
 
         if opended_funcs:
             msg.funcs.extend(opended_funcs)

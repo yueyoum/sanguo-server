@@ -4,16 +4,13 @@ __author__ = 'Wang Chao'
 __date__ = '4/3/14'
 
 from functools import partial
-
-import requests
-
 from django.conf import settings
+
+from libs.apiclient import APIFailure, HTTPAPIClient
 
 HUB_URL = "http://{0}:{1}".format(settings.HUB_HOST, settings.HUB_PORT)
 
-def apicall(data, cmd):
-    x = requests.post('{0}{1}'.format(HUB_URL, cmd), data)
-    return x.json()
+apicall = HTTPAPIClient()
 
 
 api_server_report = partial(apicall, cmd='/api/server-list/report/')

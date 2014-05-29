@@ -8,10 +8,11 @@ from core.exception import SanguoException
 from core.signals import login_signal
 from protomsg import CreateCharacterResponse
 from libs import crypto, pack_msg
+
 from utils.decorate import message_response
+from utils.api import api_character_create, APIFailure
 
-
-from utils.api import api_character_create
+from preset import errormsg
 
 @message_response("CreateCharacterResponse")
 def create_character(request):
@@ -23,7 +24,16 @@ def create_character(request):
         'name': req.name
     }
 
-    res = api_character_create(data)
+    try:
+        res = api_character_create(data)
+    except APIFailure:
+        raise SanguoException(
+            errormsg.SERVER_FAULT,
+            0,
+            'Character Create',
+            'APIFailure, api_character_create'
+        )
+
     if res['ret'] != 0:
         raise SanguoException(
             res['ret'],

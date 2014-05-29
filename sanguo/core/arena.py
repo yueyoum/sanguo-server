@@ -7,7 +7,7 @@ import random
 
 from mongoengine import DoesNotExist, Q
 from core.msgpipe import publish_to_char
-from utils import pack_msg
+from core.character import Char
 from core.battle import PVP
 from core.counter import Counter
 from core.mongoscheme import MongoArenaTopRanks, MongoArena, MongoArenaDay, MongoArenaWeek, MongoCharacter
@@ -16,16 +16,26 @@ from core.achievement import Achievement
 from core.task import Task
 from core.resource import Resource
 from preset.settings import ARENA_COST_SYCEE, ARENA_GET_SCORE_WHEN_LOST, ARENA_GET_SCORE_WHEN_WIN, COUNTER
+from preset.data import VIP_MAX_LEVEL
+
+from utils import pack_msg
+
 import protomsg
 from preset import errormsg
 
 
-DAY_MAX_SCORE = (COUNTER['arena'] + COUNTER['arena_sycee']) * ARENA_GET_SCORE_WHEN_WIN
+DAY_MAX_SCORE = (COUNTER['arena'] + COUNTER['arena_buy']) * ARENA_GET_SCORE_WHEN_WIN
 
 
 class Arena(object):
     def __init__(self, char_id):
         self.char_id = char_id
+        try:
+            self.mongo_arena = MongoArena.objects.get(id=char_id)
+        except DoesNotExist:
+            self.mongo_arena = MongoArena(id=char_id)
+            self.mongo_arena.save()
+
         try:
             self.mongo_day = MongoArenaDay.objects.get(id=char_id)
         except DoesNotExist:
@@ -59,8 +69,8 @@ class Arena(object):
         return c.remained_value
 
     @property
-    def remained_sycee_times(self):
-        c = Counter(self.char_id, 'arena_sycee')
+    def remained_buy_times(self):
+        c = Counter(self.char_id, 'arena_buy')
         return c.remained_value
 
 
@@ -70,7 +80,7 @@ class Arena(object):
         msg.week_score = self.week_score
         msg.day_score = self.day_score
         msg.remained_free_times = self.remained_free_times
-        msg.remained_sycee_times = self.remained_sycee_times
+        msg.remained_sycee_times = self.remained_buy_times
         msg.arena_cost = ARENA_COST_SYCEE
 
         top_ranks = MongoArenaTopRanks.objects.all()
@@ -125,17 +135,27 @@ class Arena(object):
             # 免费次数
             counter.incr()
         except CounterOverFlow:
-            counter = Counter(self.char_id, 'arena_sycee')
+            counter = Counter(self.char_id, 'arena_buy')
+
             try:
                 # 花费元宝次数
                 counter.incr()
             except CounterOverFlow:
+                char = Char(self.char_id).mc
+                if char.vip < VIP_MAX_LEVEL:
+                    raise SanguoException(
+                        errormsg.ARENA_NO_TIMES,
+                        self.char_id,
+                        "Arena Battle",
+                        "arena no times. vip current: {0}, max {1}".format(char.vip, VIP_MAX_LEVEL)
+                    )
                 raise SanguoException(
-                    errormsg.ARENA_NO_TIMES,
+                    errormsg.ARENA_NO_TIMES_FINAL,
                     self.char_id,
                     "Arena Battle",
-                    "arena no times"
+                    "arena no times. vip reach max level {0}".format(VIP_MAX_LEVEL)
                 )
+
             else:
                 resource = Resource(self.char_id, "Arena Battle", "battle for no free times")
                 resource.check_and_remove(sycee=-ARENA_COST_SYCEE)
@@ -148,23 +168,15 @@ class Arena(object):
 
         achievement = Achievement(self.char_id)
 
-        try:
-            mongo_arena = MongoArena.objects.get(id=self.char_id)
-        except DoesNotExist:
-            mongo_arena = MongoArena(id=self.char_id)
-            mongo_arena.rank = 0
-            mongo_arena.continues_win = 0
-
         if msg.self_win:
             score = ARENA_GET_SCORE_WHEN_WIN
             achievement.trig(11, 1)
-            mongo_arena.continues_win += 1
+            self.mongo_arena.continues_win += 1
         else:
             score = ARENA_GET_SCORE_WHEN_LOST
-            mongo_arena.continues_win = 0
+            self.mongo_arena.continues_win = 0
 
-        mongo_arena.save()
-
+        self.mongo_arena.save()
 
         if score:
             self.mongo_day.score += score

@@ -5,13 +5,13 @@
     "fields": {
         "levy": 1, 
         "sycee": 0, 
-        "prisoner_get": 0, 
+        "stage_elite_buy": 0, 
         "des": "xx", 
         "hang": 12, 
         "plunder": 10, 
+        "prisoner_get": 0, 
         "plunder_addition": 0, 
         "arena_buy": 0, 
-        "stage_elite": 0, 
         "friends": 10
     }
 },
@@ -21,13 +21,13 @@
     "fields": {
         "levy": 2, 
         "sycee": 60, 
-        "prisoner_get": 0, 
+        "stage_elite_buy": 2, 
         "des": "xx", 
         "hang": 14, 
         "plunder": 10, 
+        "prisoner_get": 0, 
         "plunder_addition": 0, 
         "arena_buy": 0, 
-        "stage_elite": 2, 
         "friends": 20
     }
 },
@@ -37,13 +37,13 @@
     "fields": {
         "levy": 5, 
         "sycee": 330, 
-        "prisoner_get": 3, 
+        "stage_elite_buy": 2, 
         "des": "xx", 
         "hang": 14, 
         "plunder": 10, 
+        "prisoner_get": 3, 
         "plunder_addition": 5, 
         "arena_buy": 0, 
-        "stage_elite": 2, 
         "friends": 25
     }
 }

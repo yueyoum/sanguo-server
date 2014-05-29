@@ -15,17 +15,17 @@ from core.attachment import get_drop_from_raw_package
 from core.mail import Mail
 
 from utils.decorate import message_response, operate_guard
-from utils.api import api_activatecode_use
+from utils.api import api_activatecode_use, APIFailure
 
 from utils import timezone
 from libs import crypto, pack_msg
 from protomsg import SyncResponse, ResumeResponse
 
 from preset.settings import ACTIVATECODE_MAIL_TITLE, ACTIVATECODE_MAIL_CONTENT
+from preset import errormsg
 
 
 @message_response("SyncResponse")
-@operate_guard('sync', 3, keep_result=False)
 def sync(request):
     msg = SyncResponse()
     msg.ret = 0
@@ -98,7 +98,16 @@ def activatecode_use(request):
         'code_id': code_id
     }
 
-    res = api_activatecode_use(data)
+    try:
+        res = api_activatecode_use(data)
+    except APIFailure:
+        raise SanguoException(
+            errormsg.SERVER_FAULT,
+            char_id,
+            "ActivateCode Use",
+            "APIFailure. api_activatecode_use"
+        )
+
     if res['ret'] != 0:
         raise SanguoException(
             res['ret'],
@@ -120,4 +129,3 @@ def activatecode_use(request):
     )
 
     return None
-
