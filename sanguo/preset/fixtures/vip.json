@@ -1,0 +1,50 @@
+[
+{
+    "pk": 0, 
+    "model": "vip.vip", 
+    "fields": {
+        "levy": 1, 
+        "sycee": 0, 
+        "prisoner_get": 0, 
+        "des": "xx", 
+        "hang": 12, 
+        "plunder": 10, 
+        "plunder_addition": 0, 
+        "arena_buy": 0, 
+        "stage_elite": 0, 
+        "friends": 10
+    }
+},
+{
+    "pk": 1, 
+    "model": "vip.vip", 
+    "fields": {
+        "levy": 2, 
+        "sycee": 60, 
+        "prisoner_get": 0, 
+        "des": "xx", 
+        "hang": 14, 
+        "plunder": 10, 
+        "plunder_addition": 0, 
+        "arena_buy": 0, 
+        "stage_elite": 2, 
+        "friends": 20
+    }
+},
+{
+    "pk": 2, 
+    "model": "vip.vip", 
+    "fields": {
+        "levy": 5, 
+        "sycee": 330, 
+        "prisoner_get": 3, 
+        "des": "xx", 
+        "hang": 14, 
+        "plunder": 10, 
+        "plunder_addition": 5, 
+        "arena_buy": 0, 
+        "stage_elite": 2, 
+        "friends": 25
+    }
+}
+]

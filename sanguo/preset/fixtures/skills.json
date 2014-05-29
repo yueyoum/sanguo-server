@@ -25,7 +25,7 @@
     "fields": {
         "cast_effect": "SF_arrow", 
         "hits": 1, 
-        "hit_effect": "", 
+        "hit_effect": "H_arrow", 
         "name": "\u666e\u901a\u653b\u51fb\uff08\u8fdc\u7a0b\uff09", 
         "anger_self_team": 0, 
         "des": "", 
@@ -45,7 +45,7 @@
     "fields": {
         "cast_effect": "SF_fire", 
         "hits": 1, 
-        "hit_effect": "", 
+        "hit_effect": "H_fire", 
         "name": "\u706b \u5355\u4f53", 
         "anger_self_team": 0, 
         "des": "", 
@@ -83,9 +83,9 @@
     "pk": 5, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "SF_electricity", 
+        "cast_effect": "SP_electricity", 
         "hits": 1, 
-        "hit_effect": "", 
+        "hit_effect": "H_electricity", 
         "name": "\u95ea\u7535 \u5355\u4f53", 
         "anger_self_team": 0, 
         "des": "", 
@@ -365,7 +365,7 @@
     "fields": {
         "cast_effect": "SF_arrow", 
         "hits": 1, 
-        "hit_effect": "", 
+        "hit_effect": "H_arrow", 
         "name": "\u767e\u6b65\u7a7f\u6768", 
         "anger_self_team": 0, 
         "des": "\u968f\u673a\u76ee\u6807\u9ad8\u4f24\u5bb3220%", 
@@ -385,7 +385,7 @@
     "fields": {
         "cast_effect": "SF_arrow", 
         "hits": 1, 
-        "hit_effect": "", 
+        "hit_effect": "H_arrow", 
         "name": "\u4e71\u7bad", 
         "anger_self_team": 0, 
         "des": "\u968f\u673a\u76ee\u6807\u9ad8\u4f24\u5bb3160%", 
@@ -405,7 +405,7 @@
     "fields": {
         "cast_effect": "SF_arrow", 
         "hits": 2, 
-        "hit_effect": "", 
+        "hit_effect": "H_arrow", 
         "name": "\u6697\u5668\u00b7\u98de\u5200", 
         "anger_self_team": 0, 
         "des": "\u968f\u673a\u76ee\u6807\u4e2d\u4f24\u5bb3130%\uff0c\u53d1\u52a8\u6982\u7387\u9ad8", 
@@ -423,7 +423,7 @@
     "pk": 40, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "SP_bagua", 
+        "cast_effect": "BUFF_fire", 
         "hits": 1, 
         "hit_effect": "", 
         "name": "\u5978\u96c4", 
@@ -443,7 +443,7 @@
     "pk": 41, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "SP_bagua", 
+        "cast_effect": "BUFF_fire", 
         "hits": 1, 
         "hit_effect": "", 
         "name": "\u4ec1\u541b", 
@@ -463,7 +463,7 @@
     "pk": 42, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "SP_bagua", 
+        "cast_effect": "BUFF_fire", 
         "hits": 1, 
         "hit_effect": "", 
         "name": "\u57fa\u4e1a", 
@@ -483,7 +483,7 @@
     "pk": 43, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "SP_bagua", 
+        "cast_effect": "BUFF_fire", 
         "hits": 1, 
         "hit_effect": "", 
         "name": "\u7fa4\u96c4", 
@@ -503,7 +503,7 @@
     "pk": 44, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "SP_bagua", 
+        "cast_effect": "BUFF_attack", 
         "hits": 1, 
         "hit_effect": "", 
         "name": "\u9635\u6cd5\u00b7\u636e\u5b88", 
@@ -523,7 +523,7 @@
     "pk": 45, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "SP_bagua", 
+        "cast_effect": "BUFF_attack", 
         "hits": 1, 
         "hit_effect": "", 
         "name": "\u9635\u6cd5\u00b7\u5f3a\u653b", 
@@ -543,7 +543,7 @@
     "pk": 46, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "SP_bagua", 
+        "cast_effect": "BUFF_attack", 
         "hits": 1, 
         "hit_effect": "", 
         "name": "\u9635\u6cd5\u00b7\u638e\u89d2\u4e4b\u52bf", 
@@ -563,15 +563,15 @@
     "pk": 48, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "SF_electricity", 
+        "cast_effect": "SP_electricity", 
         "hits": 1, 
-        "hit_effect": "", 
+        "hit_effect": "H_electricity", 
         "name": "\u843d\u77f3", 
         "anger_self_team": 0, 
         "des": "AOE 140%", 
         "anger_self": 25, 
         "trig_start": 1, 
-        "cast_type": 3, 
+        "cast_type": 2, 
         "trig_cooldown": 3, 
         "anger_rival_team": 20, 
         "mode": 1, 
@@ -585,13 +585,13 @@
     "fields": {
         "cast_effect": "SF_fire", 
         "hits": 1, 
-        "hit_effect": "", 
+        "hit_effect": "H_fire", 
         "name": "\u706b\u653b", 
         "anger_self_team": 0, 
         "des": "AOE 150%", 
         "anger_self": 0, 
         "trig_start": 2, 
-        "cast_type": 3, 
+        "cast_type": 2, 
         "trig_cooldown": 3, 
         "anger_rival_team": 20, 
         "mode": 1, 
@@ -603,10 +603,10 @@
     "pk": 50, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "", 
+        "cast_effect": "SP_water", 
         "hits": 1, 
-        "hit_effect": "", 
-        "name": "\u6c34\u653b (\u65e0\u7279\u6548)", 
+        "hit_effect": "H_water", 
+        "name": "\u6c34\u653b", 
         "anger_self_team": 0, 
         "des": "AOE 120%\uff0c\u91ca\u653e\u9891\u7387\u9ad8", 
         "anger_self": 50, 
@@ -631,7 +631,7 @@
         "des": "AOE 140%\uff0c\u91ca\u653e\u6982\u7387\u9ad8", 
         "anger_self": 50, 
         "trig_start": 1, 
-        "cast_type": 2, 
+        "cast_type": 3, 
         "trig_cooldown": 2, 
         "anger_rival_team": 20, 
         "mode": 1, 
@@ -645,7 +645,7 @@
     "fields": {
         "cast_effect": "SP_fire", 
         "hits": 1, 
-        "hit_effect": "", 
+        "hit_effect": "H_fire", 
         "name": "\u53ec\u5524\u00b7\u5929\u706b", 
         "anger_self_team": 0, 
         "des": "AOE 180%", 
@@ -665,7 +665,7 @@
     "fields": {
         "cast_effect": "SP_electricity", 
         "hits": 1, 
-        "hit_effect": "", 
+        "hit_effect": "H_electricity", 
         "name": "\u53ec\u5524\u00b7\u96f7\u7535", 
         "anger_self_team": 0, 
         "des": "AOE 170%\uff0c\u4e24\u76ee\u6807\uff0c\u91ca\u653e\u6982\u7387\u9ad8", 
@@ -703,7 +703,7 @@
     "pk": 57, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "", 
+        "cast_effect": "BUFF_attack", 
         "hits": 1, 
         "hit_effect": "H_dizzy", 
         "name": "\u6d1b\u795e ", 
@@ -723,7 +723,7 @@
     "pk": 58, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "", 
+        "cast_effect": "BUFF_attack", 
         "hits": 1, 
         "hit_effect": "H_flower", 
         "name": "\u80e1\u7b33", 
@@ -743,7 +743,7 @@
     "pk": 59, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "", 
+        "cast_effect": "BUFF_attack", 
         "hits": 1, 
         "hit_effect": "H_flower", 
         "name": "\u65e0\u534e", 
@@ -763,7 +763,7 @@
     "pk": 60, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "SP_bagua", 
+        "cast_effect": "BUFF_attack", 
         "hits": 1, 
         "hit_effect": "", 
         "name": "\u6c5f\u4e1c\u4e8c\u4e54", 
@@ -783,7 +783,7 @@
     "pk": 61, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "SP_bagua", 
+        "cast_effect": "BUFF_attack", 
         "hits": 1, 
         "hit_effect": "", 
         "name": "\u667a\u8c0b", 
@@ -803,7 +803,7 @@
     "pk": 65, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "", 
+        "cast_effect": "BUFF_fire", 
         "hits": 1, 
         "hit_effect": "", 
         "name": "\u95ed\u6708", 
@@ -823,7 +823,7 @@
     "pk": 66, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "", 
+        "cast_effect": "BUFF_fire", 
         "hits": 1, 
         "hit_effect": "", 
         "name": "\u66b4\u6012", 
@@ -843,7 +843,7 @@
     "pk": 67, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "", 
+        "cast_effect": "BUFF_fire", 
         "hits": 1, 
         "hit_effect": "", 
         "name": "\u6b66\u5723", 
@@ -863,7 +863,7 @@
     "pk": 68, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "", 
+        "cast_effect": "BUFF_fire", 
         "hits": 1, 
         "hit_effect": "", 
         "name": "\u5de8\u529b", 
@@ -883,7 +883,7 @@
     "pk": 69, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "", 
+        "cast_effect": "BUFF_fire", 
         "hits": 1, 
         "hit_effect": "", 
         "name": "\u7834\u91dc\u6c89\u821f", 
@@ -943,7 +943,7 @@
     "pk": 72, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "", 
+        "cast_effect": "BUFF_fire", 
         "hits": 1, 
         "hit_effect": "", 
         "name": "\u821e\u59ec", 
