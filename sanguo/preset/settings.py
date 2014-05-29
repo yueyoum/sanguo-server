@@ -13,7 +13,7 @@ COUNTER = {
     'gethero': 1,                       # 抽将次数
     'official_reward': 1,               # 官职每日登录领取奖励次数
 
-    'stage_elite': 3,                   # 精英关卡总次数
+    'stage_elite': 10,                  # 精英关卡总次数
     'stage_elite_buy': 0,               # 精英关卡购买次数 VIP
 
     'stage_active_type_one': 3,         # 活动产金币关卡总次数

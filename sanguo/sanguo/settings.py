@@ -7,7 +7,7 @@ TMP_PATH = os.path.normpath(os.path.join(BASE_DIR, '../tmp'))
 LOG_PATH = os.path.normpath(os.path.join(BASE_DIR, 'logs'))
 BATTLE_RECORD_PATH = os.path.normpath(os.path.join(BASE_DIR, 'battle_record'))
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = False
 
 ADMINS = (
