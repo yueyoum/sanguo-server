@@ -42,6 +42,7 @@ def cmd(request):
 
     if req.tp == 11:
         fo = FunctionOpen(char_id)
-        fo._open(req.param)
+        fo._open_all()
+        fo.send_notify()
 
     return HttpResponse('', content_type='text/plain')

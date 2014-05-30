@@ -31,11 +31,9 @@ class FunctionOpen(object):
             self.mf.freeze.extend(FUNCTION_DEFINE.keys())
             self.mf.save()
 
-    def _open(self, fun_id):
-        self.mf.freeze.remove(fun_id)
+    def _open_all(self):
+        self.mf.freeze = []
         self.mf.save()
-        self.send_notify()
-
 
     def trig(self, char_level, stage_id=None):
         try:
