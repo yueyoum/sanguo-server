@@ -673,6 +673,7 @@ class EliteStage(object):
         buy_counter = Counter(self.char_id, 'stage_elite_buy')
         msg.max_buy_times = buy_counter.max_value
         msg.cur_buy_times = buy_counter.cur_value
+        msg.buy_cost = self.get_buy_cost()
 
         publish_to_char(self.char_id, pack_msg(msg))
 
