@@ -275,4 +275,7 @@ for k, v in VIP_FUNCTION.iteritems():
     VIP_DEFINE.append((v.sycee, k))
 VIP_DEFINE.sort(key=lambda item: item[0])
 
-VIP_MAX_LEVEL = VIP_FUNCTION.keys().sort()[-1]
+_vip_levels = VIP_FUNCTION.keys()
+_vip_levels.sort()
+
+VIP_MAX_LEVEL = _vip_levels[-1]
