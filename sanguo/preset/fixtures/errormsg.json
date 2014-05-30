@@ -649,22 +649,33 @@
     }
 },
 {
-    "pk": 804, 
+    "pk": 805, 
     "model": "errormsg.errormsg", 
     "fields": {
-        "error_index": "STAGE_ELITE_NOT_ACTIVE", 
-        "text_zh": "\u8bf7\u5148\u901a\u8fc7\u524d\u9762\u7684\u5173\u5361", 
+        "error_index": "STAGE_ELITE_TOTAL_NO_TIMES_FINAL", 
+        "text_zh": "\u7cbe\u82f1\u5173\u5361\u603b\u6b21\u6570\u5df2\u7528\u5b8c", 
         "link_to": null, 
         "des": "", 
         "area": ""
     }
 },
 {
-    "pk": 805, 
+    "pk": 806, 
     "model": "errormsg.errormsg", 
     "fields": {
-        "error_index": "STAGE_ELITE_TOTAL_NO_TIMES_FINAL", 
-        "text_zh": "\u7cbe\u82f1\u5173\u5361\u603b\u6b21\u6570\u5df2\u7528\u5b8c", 
+        "error_index": "STAGE_ELITE_RESET_FULL", 
+        "text_zh": "\u6b64\u5173\u5361\u91cd\u7f6e\u6b21\u6570\u5df2\u7528\u5b8c", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 807, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STAGE_ELITE_RESET_TOTAL_FULL", 
+        "text_zh": "\u603b\u91cd\u7f6e\u6b21\u6570\u5df2\u7528\u5b8c", 
         "link_to": null, 
         "des": "", 
         "area": ""

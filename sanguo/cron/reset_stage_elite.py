@@ -9,6 +9,8 @@ def reset():
     for ms in MongoStage.objects.all():
         for k in ms.elites.keys():
             ms.elites[k] = 0
+
+        ms.elites_buy = {}
         ms.save()
 
     logger.write("Done")

@@ -84,7 +84,8 @@ class MongoStage(Document):
     stage_new = IntField()
     # 开启的精英关卡, key 为关卡ID， value 为今日打的次数
     elites = DictField()
-    pre_elites = ListField()
+    # 精英小关卡购买记录 key 为 ID, value 为购买次数
+    elites_buy = DictField()
     # 开启的活动关卡
     activities = ListField(IntField())
 

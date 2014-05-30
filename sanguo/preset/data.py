@@ -190,7 +190,9 @@ for k, v in STAGE_ACTIVITY.iteritems():
 
 STAGE_ELITE_CONDITION = {}
 for k, v in STAGE_ELITE.iteritems():
-    STAGE_ELITE_CONDITION.setdefault(v.open_condition, []).append(v)
+    # STAGE_ELITE_CONDITION.setdefault(v.open_condition, []).append(v)
+    if v.open_condition:
+        STAGE_ELITE_CONDITION[v.open_condition] = k
 
 TREASURES = {}
 for d in STUFFS.values():

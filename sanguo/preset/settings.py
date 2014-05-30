@@ -14,7 +14,7 @@ COUNTER = {
     'official_reward': 1,               # 官职每日登录领取奖励次数
 
     'stage_elite': 10,                  # 精英关卡总次数
-    'stage_elite_buy': 0,               # 精英关卡购买次数 VIP
+    'stage_elite_buy_total': 0,         # 精英关卡总重置次数 VIP
 
     'stage_active_type_one': 3,         # 活动产金币关卡总次数
     'stage_active_type_two': 3,         # 活动产宝石宝物关卡总次数
@@ -172,7 +172,10 @@ ARENA_GET_SCORE_WHEN_LOST = 1
 #########################
 #      精英关卡         #
 #########################
-STAGE_ELITE_BUY_COST = 10
+# 重置小关卡花费
+STAGE_ELITE_RESET_COST = 10
+# 重置总次数花费
+STAGE_ELITE_TOTAL_RESET_COST = 20
 
 
 

@@ -591,7 +591,7 @@
         "des": "AOE 150%", 
         "anger_self": 0, 
         "trig_start": 2, 
-        "cast_type": 2, 
+        "cast_type": 3, 
         "trig_cooldown": 3, 
         "anger_rival_team": 20, 
         "mode": 1, 

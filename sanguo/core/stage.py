@@ -28,7 +28,8 @@ from preset.settings import (
     PLUNDER_DEFENSE_FAILURE_MAX_TIMES,
     HANG_RESET_MAIL_TITLE,
     HANG_RESET_MAIL_CONTENT,
-    STAGE_ELITE_BUY_COST,
+    STAGE_ELITE_RESET_COST,
+    STAGE_ELITE_TOTAL_RESET_COST,
 )
 from preset.data import (
     STAGES,
@@ -493,7 +494,7 @@ class EliteStage(object):
             self.stage = MongoStage(id=self.char_id)
             self.stage.stage_new = 1
             self.stage.elites = {}
-            self.stage.pre_elites = []
+            self.stage.elites_buy = {}
             self.stage.activities = []
             self.stage.save()
 
@@ -501,12 +502,10 @@ class EliteStage(object):
     def enable_by_condition_id(self, _id):
         if _id not in STAGE_ELITE_CONDITION:
             return
-        for v in STAGE_ELITE_CONDITION[_id]:
-            self.enable(v)
+        self.enable(STAGE_ELITE_CONDITION[_id])
 
 
-    def enable(self, stage):
-        _id = stage.id
+    def enable(self, _id):
         str_id = str(_id)
         if _id not in STAGE_ELITE:
             raise SanguoException(
@@ -516,20 +515,71 @@ class EliteStage(object):
                 "EliteStage {0} not exist".format(_id)
             )
 
-        if str_id in self.stage.elites or _id in self.stage.pre_elites:
+        if str_id in self.stage.elites:
             return
 
-        if stage.first:
-            self.stage.elites[str_id] = 0
-        else:
-            self.stage.pre_elites.append(_id)
+        self.stage.elites[str_id] = 0
         self.stage.save()
+        self.send_new_notify(_id)
+
+
+    def get_reset_cost(self):
+        return STAGE_ELITE_RESET_COST
+
+    def get_total_reset_cost(self):
+        return STAGE_ELITE_TOTAL_RESET_COST
+
+
+    def reset_one(self, _id):
+        str_id = str(_id)
+        if str_id not in self.stage.elites:
+            raise SanguoException(
+                errormsg.STAGE_ELITE_NOT_OPEN,
+                self.char_id,
+                "Elite Reset One",
+                "reset a not opened stage {0}".format(_id)
+            )
+
+        reset_times = self.stage.elites_buy.get(str(_id), 0)
+        char = Char(self.char_id).mc
+        reset_total = VIP_FUNCTION[char.vip]['elite_stage_buy']
+        if reset_times >= reset_total:
+            raise SanguoException(
+                errormsg.STAGE_ELITE_RESET_FULL,
+                self.char_id,
+                "Elite Reset One",
+                "reset {0}".format(_id)
+            )
+
+        cost = self.get_reset_cost()
+
+        resource = Resource(self.char_id, "Elite Reset One", "reset {0}".format(_id))
+        with resource.check(sycee=-cost):
+            self.stage.elites[str(_id)] = 0
+            self.stage.elites_buy[str(_id)] = reset_times + 1
+            self.stage.save()
 
         self.send_update_notify(_id)
 
 
-    def get_buy_cost(self):
-        return STAGE_ELITE_BUY_COST
+    def reset_total(self):
+        counter = Counter(self.char_id, 'stage_elite_buy_total')
+        if counter.remained_value <= 0:
+            raise SanguoException(
+                errormsg.STAGE_ELITE_RESET_TOTAL_FULL,
+                self.char_id,
+                "Elite Reset Total",
+                "reset total"
+            )
+
+        cost = self.get_total_reset_cost()
+
+        resource = Resource(self.char_id, "Elite Reset Total", "")
+        with resource.check(sycee=-cost):
+            counter = Counter(self.char_id, 'stage_elite')
+            counter.reset()
+
+        self.send_remained_times_notify()
 
 
     def battle(self, _id):
@@ -548,13 +598,6 @@ class EliteStage(object):
         try:
             times = self.stage.elites[str_id]
         except KeyError:
-            if _id in self.stage.pre_elites:
-                raise SanguoException(
-                    errormsg.STAGE_ELITE_NOT_ACTIVE,
-                    self.char_id,
-                    "StageElite Battle",
-                    "StageElite {0} not active".format(_id)
-                )
             raise SanguoException(
                 errormsg.STAGE_ELITE_NOT_OPEN,
                 self.char_id,
@@ -570,49 +613,31 @@ class EliteStage(object):
                 "StageElite {0} no times".format(_id)
             )
 
-
         counter = Counter(self.char_id, 'stage_elite')
         if counter.remained_value <= 0:
-            counter = Counter(self.char_id, 'stage_elite_buy')
-            if counter.remained_value <= 0:
-                char = Char(self.char_id).mc
-                if char.vip < VIP_MAX_LEVEL:
-                    raise SanguoException(
-                        errormsg.STAGE_ELITE_TOTAL_NO_TIMES,
-                        self.char_id,
-                        "StageElite Battle",
-                        "stageElite no total times. vip current: {0}, max: {1}".format(char.vip, VIP_MAX_LEVEL)
-                    )
-                raise SanguoException(
-                    errormsg.STAGE_ELITE_TOTAL_NO_TIMES_FINAL,
-                    self.char_id,
-                    "StageElite Battle",
-                    "StageElite no total times. vip reached max level {0}".format(VIP_MAX_LEVEL)
-                )
-
-            resource = Resource(self.char_id, "StageElite Battle Buy", "stage {0}".format(_id))
-            resource.check_and_remove(sycee=-self.get_buy_cost())
+            raise SanguoException(
+                errormsg.STAGE_ELITE_TOTAL_NO_TIMES,
+                self.char_id,
+                "StageElite Battle",
+                "stageElite no total times."
+            )
 
         battle_msg = protomsg.Battle()
         b = ElitePVE(self.char_id, _id, battle_msg)
         b.start()
 
-        updated_stages = [_id]
-
         if battle_msg.self_win:
             self.stage.elites[str_id] += 1
             if self.this_stage.next:
-                if self.this_stage.next in self.stage.pre_elites:
-                    self.stage.pre_elites.remove(self.this_stage.next)
+
                 if str(self.this_stage.next) not in self.stage.elites:
                     self.stage.elites[str(self.this_stage.next)] = 0
-                    updated_stages.append(self.this_stage.next)
+                    self.send_new_notify(self.this_stage.next)
             self.stage.save()
 
-            for us in updated_stages:
-                self.send_update_notify(us)
+            self.send_update_notify(_id)
 
-            counter.incr(dirty=True)
+            counter.incr()
             self.send_remained_times_notify()
 
         return battle_msg
@@ -639,11 +664,19 @@ class EliteStage(object):
         return standard_drop
 
 
-    def send_update_notify(self, _id):
-        msg = protomsg.UpdateAchievementNotify()
+    def send_new_notify(self, _id):
+        msg = protomsg.NewEliteStageNotify()
         msg.stage.id = _id
-        msg.stage.current_times = self.stage.elites.get(str(_id), 0)
-        msg.stage.active = str(_id) in self.stage.elites
+        msg.stage.current_times = self.stage.elites[str(_id)]
+        msg.stage.max_times = STAGE_ELITE[_id].times
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
+    def send_update_notify(self, _id):
+        msg = protomsg.UpdateEliteStageNotify()
+        msg.stage.id = _id
+        msg.stage.current_times = self.stage.elites[str(_id)]
+        msg.stage.max_times = STAGE_ELITE[_id].times
         publish_to_char(self.char_id, pack_msg(msg))
 
 
@@ -653,13 +686,6 @@ class EliteStage(object):
             s = msg.stages.add()
             s.id = int(_id)
             s.current_times = times
-            s.active = True
-
-        for _id in self.stage.pre_elites:
-            s = msg.stages.add()
-            s.id = _id
-            s.current_times = 0
-            s.active = False
 
         publish_to_char(self.char_id, pack_msg(msg))
 
@@ -670,11 +696,8 @@ class EliteStage(object):
         msg.max_free_times = free_counter.max_value
         msg.cur_free_times = free_counter.cur_value
 
-        buy_counter = Counter(self.char_id, 'stage_elite_buy')
-        msg.max_buy_times = buy_counter.max_value
-        msg.cur_buy_times = buy_counter.cur_value
-        msg.buy_cost = self.get_buy_cost()
-
+        msg.reset_cost = self.get_reset_cost()
+        msg.total_reset_cost = self.get_total_reset_cost()
         publish_to_char(self.char_id, pack_msg(msg))
 
 
