@@ -10,6 +10,8 @@ BATTLE_RECORD_PATH = os.path.normpath(os.path.join(BASE_DIR, 'battle_record'))
 DEBUG = False
 TEMPLATE_DEBUG = False
 
+ALLOWED_HOSTS = '*'
+
 ADMINS = (
     ('Wang Chao', 'my_sting@163.com'),
 )

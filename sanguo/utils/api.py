@@ -13,12 +13,12 @@ HUB_URL = "http://{0}:{1}".format(settings.HUB_HOST, settings.HUB_PORT)
 apicall = HTTPAPIClient()
 
 
-api_server_report = partial(apicall, cmd='/api/server-list/report/')
-api_account_login = partial(apicall, cmd='/api/account/login/')
-api_account_bind = partial(apicall, cmd='/api/account/bind/')
-api_character_create = partial(apicall, cmd='/api/character/create/')
+api_server_report = partial(apicall, cmd=HUB_URL + '/api/server-list/report/')
+api_account_login = partial(apicall, cmd=HUB_URL + '/api/account/login/')
+api_account_bind = partial(apicall, cmd=HUB_URL + '/api/account/bind/')
+api_character_create = partial(apicall, cmd=HUB_URL + '/api/character/create/')
 
-api_store_get = partial(apicall, cmd='/api/store/get/')
-api_store_buy = partial(apicall, cmd='/api/store/buy/')
+api_store_get = partial(apicall, cmd=HUB_URL + '/api/store/get/')
+api_store_buy = partial(apicall, cmd=HUB_URL + '/api/store/buy/')
 
-api_activatecode_use = partial(apicall, cmd='/api/activatecode/use/')
+api_activatecode_use = partial(apicall, cmd=HUB_URL + '/api/activatecode/use/')
