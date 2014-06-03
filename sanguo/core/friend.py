@@ -119,7 +119,7 @@ class Friend(object):
                 )
         else:
             try:
-                c = MongoCharacter.objects.get(server_id=self.char.mc.server_id, name=target_name)
+                c = MongoCharacter.objects.get(name=target_name, server_id=self.char.mc.server_id)
             except DoesNotExist:
                 raise SanguoException(
                     errormsg.CHARACTER_NOT_FOUND,

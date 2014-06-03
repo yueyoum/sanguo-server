@@ -33,8 +33,14 @@ class MongoCharacter(Document):
 
     meta = {
         'collection': 'character',
-        'indexes': ['server_id', 'level'],
+        'indexes': [
+            'level',
+            ('server_id', 'level'),     # find by server_id. find by level range in server_id
+            ('name', 'server_id'),      # find by name. find by name and server_id
+            ],
     }
+
+MongoCharacter.ensure_indexes()
 
 
 class MongoEmbeddedEquipment(EmbeddedDocument):
