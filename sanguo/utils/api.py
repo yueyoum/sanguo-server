@@ -6,11 +6,12 @@ __date__ = '4/3/14'
 from functools import partial
 from django.conf import settings
 
-from libs.apiclient import APIFailure, HTTPAPIClient
+from libs.apiclient import APIFailure, HTTPAPIClient, HTTPSAPIClient
 
 HUB_URL = "http://{0}:{1}".format(settings.HUB_HOST, settings.HUB_PORT)
 
-apicall = HTTPAPIClient()
+HTTPSAPIClient.install_pem('/opt/ca/client.pem')
+apicall = HTTPSAPIClient()
 
 
 api_server_report = partial(apicall, cmd=HUB_URL + '/api/server-list/report/')
