@@ -24,9 +24,9 @@ class UnpackAndVerifyData(RequestFilter):
         if request.path.startswith('/api/'):
             return
 
-        # if request._char_id:
-        #     timercheck.check(request._char_id)
-        if request._server_id and request._char_id:
+        server_id = getattr(request, '_server_id', None)
+        char_id = getattr(request, 'char_id', None)
+        if server_id and char_id:
             ap = ActivePlayers(request._server_id)
             ap.set(request._char_id)
 
