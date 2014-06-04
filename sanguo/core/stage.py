@@ -668,7 +668,6 @@ class EliteStage(object):
         msg = protomsg.NewEliteStageNotify()
         msg.stage.id = _id
         msg.stage.current_times = self.stage.elites[str(_id)]
-        msg.stage.max_times = STAGE_ELITE[_id].times
         publish_to_char(self.char_id, pack_msg(msg))
 
 
@@ -676,7 +675,6 @@ class EliteStage(object):
         msg = protomsg.UpdateEliteStageNotify()
         msg.stage.id = _id
         msg.stage.current_times = self.stage.elites[str(_id)]
-        msg.stage.max_times = STAGE_ELITE[_id].times
         publish_to_char(self.char_id, pack_msg(msg))
 
 
