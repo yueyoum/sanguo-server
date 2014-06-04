@@ -8,7 +8,7 @@ from django.conf import settings
 
 from libs.apiclient import APIFailure, HTTPAPIClient, HTTPSAPIClient
 
-HUB_URL = "http://{0}:{1}".format(settings.HUB_HOST, settings.HUB_PORT)
+HUB_URL = "https://{0}:{1}".format(settings.HUB_HOST, settings.HUB_HTTPS_PORT)
 
 HTTPSAPIClient.install_pem('/opt/ca/client.pem')
 apicall = HTTPSAPIClient()

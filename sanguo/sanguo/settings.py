@@ -218,7 +218,7 @@ CRYPTO_PREFIX = tree.find('crypto/prefix').text
 CACHE_SECONDS = int( tree.find('cache/seconds').text )
 
 HUB_HOST = tree.find('hub/host').text
-HUB_PORT = int( tree.find('hub/port').text )
+HUB_HTTPS_PORT = int( tree.find('hub/port/https').text )
 
 LOG_MAN_HOST = tree.find('log/host').text
 LOG_MAN_PORT = int( tree.find('log/port').text )
