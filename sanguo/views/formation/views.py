@@ -3,21 +3,24 @@
 from core.formation import Formation
 from utils.decorate import message_response
 
-@message_response("SetSocketResponse")
-def set_socket(request):
+
+@message_response("SetSocketHeroResponse")
+def up_hero(request):
     req = request._proto
     char_id = request._char_id
+
     f = Formation(char_id)
+    f.up_hero(req.socket_id, req.hero_id)
 
-    f.set_socket(
-        socket_id=req.socket.id,
-        hero_id=req.socket.hero_id,
-        weapon_id=req.socket.weapon_id,
-        armor_id=req.socket.armor_id,
-        jewelry_id=req.socket.jewelry_id
-    )
 
-    return None
+@message_response("SetSocketEquipmentResponse")
+def up_equipment(request):
+    req = request._proto
+    char_id = request._char_id
+
+    f = Formation(char_id)
+    f.up_equipment(req.socket_id, req.equipment_id)
+
 
 
 @message_response("SetFormationResponse")
@@ -29,4 +32,3 @@ def set_formation(request):
 
     socket_ids = [int(s) for s in req.socket_ids]
     f.save_formation(socket_ids)
-    return None

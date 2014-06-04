@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='formation.proto',
   package='Sanguo.protocol.formation',
-  serialized_pb='\n\x0f\x66ormation.proto\x12\x19Sanguo.protocol.formation\"^\n\x06Socket\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0f\n\x07hero_id\x18\x02 \x02(\x05\x12\x11\n\tweapon_id\x18\x03 \x02(\x05\x12\x10\n\x08\x61rmor_id\x18\x04 \x02(\x05\x12\x12\n\njewelry_id\x18\x05 \x02(\x05\"V\n\x0f\x41\x64\x64SocketNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x07sockets\x18\x02 \x03(\x0b\x32!.Sanguo.protocol.formation.Socket\"Y\n\x12UpdateSocketNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x07sockets\x18\x02 \x03(\x0b\x32!.Sanguo.protocol.formation.Socket\"V\n\x10SetSocketRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\x06socket\x18\x02 \x02(\x0b\x32!.Sanguo.protocol.formation.Socket\"1\n\x11SetSocketResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\":\n\x13SetFormationRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nsocket_ids\x18\x02 \x03(\x05\"4\n\x14SetFormationResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"S\n\x0cSocketNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x07sockets\x18\x02 \x03(\x0b\x32!.Sanguo.protocol.formation.Socket\"6\n\x0f\x46ormationNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nsocket_ids\x18\x02 \x03(\x05')
+  serialized_pb='\n\x0f\x66ormation.proto\x12\x19Sanguo.protocol.formation\"^\n\x06Socket\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0f\n\x07hero_id\x18\x02 \x02(\x05\x12\x11\n\tweapon_id\x18\x03 \x02(\x05\x12\x10\n\x08\x61rmor_id\x18\x04 \x02(\x05\x12\x12\n\njewelry_id\x18\x05 \x02(\x05\"V\n\x0f\x41\x64\x64SocketNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x07sockets\x18\x02 \x03(\x0b\x32!.Sanguo.protocol.formation.Socket\"Y\n\x12UpdateSocketNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x07sockets\x18\x02 \x03(\x0b\x32!.Sanguo.protocol.formation.Socket\"K\n\x14SetSocketHeroRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tsocket_id\x18\x02 \x02(\x05\x12\x0f\n\x07hero_id\x18\x03 \x02(\x05\"5\n\x15SetSocketHeroResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"U\n\x19SetSocketEquipmentRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tsocket_id\x18\x02 \x02(\x05\x12\x14\n\x0c\x65quipment_id\x18\x03 \x02(\x05\":\n\x1aSetSocketEquipmentResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\":\n\x13SetFormationRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nsocket_ids\x18\x02 \x03(\x05\"4\n\x14SetFormationResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"S\n\x0cSocketNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x07sockets\x18\x02 \x03(\x0b\x32!.Sanguo.protocol.formation.Socket\"6\n\x0f\x46ormationNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nsocket_ids\x18\x02 \x03(\x05')
 
 
 
@@ -144,24 +144,31 @@ _UPDATESOCKETNOTIFY = _descriptor.Descriptor(
 )
 
 
-_SETSOCKETREQUEST = _descriptor.Descriptor(
-  name='SetSocketRequest',
-  full_name='Sanguo.protocol.formation.SetSocketRequest',
+_SETSOCKETHEROREQUEST = _descriptor.Descriptor(
+  name='SetSocketHeroRequest',
+  full_name='Sanguo.protocol.formation.SetSocketHeroRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='session', full_name='Sanguo.protocol.formation.SetSocketRequest.session', index=0,
+      name='session', full_name='Sanguo.protocol.formation.SetSocketHeroRequest.session', index=0,
       number=1, type=12, cpp_type=9, label=2,
       has_default_value=False, default_value="",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='socket', full_name='Sanguo.protocol.formation.SetSocketRequest.socket', index=1,
-      number=2, type=11, cpp_type=10, label=2,
-      has_default_value=False, default_value=None,
+      name='socket_id', full_name='Sanguo.protocol.formation.SetSocketHeroRequest.socket_id', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='hero_id', full_name='Sanguo.protocol.formation.SetSocketHeroRequest.hero_id', index=2,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -175,26 +182,26 @@ _SETSOCKETREQUEST = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=321,
-  serialized_end=407,
+  serialized_end=396,
 )
 
 
-_SETSOCKETRESPONSE = _descriptor.Descriptor(
-  name='SetSocketResponse',
-  full_name='Sanguo.protocol.formation.SetSocketResponse',
+_SETSOCKETHERORESPONSE = _descriptor.Descriptor(
+  name='SetSocketHeroResponse',
+  full_name='Sanguo.protocol.formation.SetSocketHeroResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ret', full_name='Sanguo.protocol.formation.SetSocketResponse.ret', index=0,
+      name='ret', full_name='Sanguo.protocol.formation.SetSocketHeroResponse.ret', index=0,
       number=1, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='session', full_name='Sanguo.protocol.formation.SetSocketResponse.session', index=1,
+      name='session', full_name='Sanguo.protocol.formation.SetSocketHeroResponse.session', index=1,
       number=2, type=12, cpp_type=9, label=2,
       has_default_value=False, default_value="",
       message_type=None, enum_type=None, containing_type=None,
@@ -209,8 +216,85 @@ _SETSOCKETRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=409,
-  serialized_end=458,
+  serialized_start=398,
+  serialized_end=451,
+)
+
+
+_SETSOCKETEQUIPMENTREQUEST = _descriptor.Descriptor(
+  name='SetSocketEquipmentRequest',
+  full_name='Sanguo.protocol.formation.SetSocketEquipmentRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.formation.SetSocketEquipmentRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='socket_id', full_name='Sanguo.protocol.formation.SetSocketEquipmentRequest.socket_id', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='equipment_id', full_name='Sanguo.protocol.formation.SetSocketEquipmentRequest.equipment_id', index=2,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=453,
+  serialized_end=538,
+)
+
+
+_SETSOCKETEQUIPMENTRESPONSE = _descriptor.Descriptor(
+  name='SetSocketEquipmentResponse',
+  full_name='Sanguo.protocol.formation.SetSocketEquipmentResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.formation.SetSocketEquipmentResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.formation.SetSocketEquipmentResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=540,
+  serialized_end=598,
 )
 
 
@@ -244,8 +328,8 @@ _SETFORMATIONREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=460,
-  serialized_end=518,
+  serialized_start=600,
+  serialized_end=658,
 )
 
 
@@ -279,8 +363,8 @@ _SETFORMATIONRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=520,
-  serialized_end=572,
+  serialized_start=660,
+  serialized_end=712,
 )
 
 
@@ -314,8 +398,8 @@ _SOCKETNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=574,
-  serialized_end=657,
+  serialized_start=714,
+  serialized_end=797,
 )
 
 
@@ -349,19 +433,20 @@ _FORMATIONNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=659,
-  serialized_end=713,
+  serialized_start=799,
+  serialized_end=853,
 )
 
 _ADDSOCKETNOTIFY.fields_by_name['sockets'].message_type = _SOCKET
 _UPDATESOCKETNOTIFY.fields_by_name['sockets'].message_type = _SOCKET
-_SETSOCKETREQUEST.fields_by_name['socket'].message_type = _SOCKET
 _SOCKETNOTIFY.fields_by_name['sockets'].message_type = _SOCKET
 DESCRIPTOR.message_types_by_name['Socket'] = _SOCKET
 DESCRIPTOR.message_types_by_name['AddSocketNotify'] = _ADDSOCKETNOTIFY
 DESCRIPTOR.message_types_by_name['UpdateSocketNotify'] = _UPDATESOCKETNOTIFY
-DESCRIPTOR.message_types_by_name['SetSocketRequest'] = _SETSOCKETREQUEST
-DESCRIPTOR.message_types_by_name['SetSocketResponse'] = _SETSOCKETRESPONSE
+DESCRIPTOR.message_types_by_name['SetSocketHeroRequest'] = _SETSOCKETHEROREQUEST
+DESCRIPTOR.message_types_by_name['SetSocketHeroResponse'] = _SETSOCKETHERORESPONSE
+DESCRIPTOR.message_types_by_name['SetSocketEquipmentRequest'] = _SETSOCKETEQUIPMENTREQUEST
+DESCRIPTOR.message_types_by_name['SetSocketEquipmentResponse'] = _SETSOCKETEQUIPMENTRESPONSE
 DESCRIPTOR.message_types_by_name['SetFormationRequest'] = _SETFORMATIONREQUEST
 DESCRIPTOR.message_types_by_name['SetFormationResponse'] = _SETFORMATIONRESPONSE
 DESCRIPTOR.message_types_by_name['SocketNotify'] = _SOCKETNOTIFY
@@ -385,17 +470,29 @@ class UpdateSocketNotify(_message.Message):
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.formation.UpdateSocketNotify)
 
-class SetSocketRequest(_message.Message):
+class SetSocketHeroRequest(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _SETSOCKETREQUEST
+  DESCRIPTOR = _SETSOCKETHEROREQUEST
 
-  # @@protoc_insertion_point(class_scope:Sanguo.protocol.formation.SetSocketRequest)
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.formation.SetSocketHeroRequest)
 
-class SetSocketResponse(_message.Message):
+class SetSocketHeroResponse(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _SETSOCKETRESPONSE
+  DESCRIPTOR = _SETSOCKETHERORESPONSE
 
-  # @@protoc_insertion_point(class_scope:Sanguo.protocol.formation.SetSocketResponse)
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.formation.SetSocketHeroResponse)
+
+class SetSocketEquipmentRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _SETSOCKETEQUIPMENTREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.formation.SetSocketEquipmentRequest)
+
+class SetSocketEquipmentResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _SETSOCKETEQUIPMENTRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.formation.SetSocketEquipmentResponse)
 
 class SetFormationRequest(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType

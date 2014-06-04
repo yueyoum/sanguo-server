@@ -213,7 +213,7 @@ def char_initialize(account_id, server_id, char_id, name):
             weapon, armor, jewelry = init_heros_equips[index]
         except IndexError:
             weapon, armor, jewelry = 0, 0, 0
-        _sid = f.save_socket(hero=_id, weapon=weapon, armor=armor, jewelry=jewelry, send_notify=False)
+        _sid = f.initialize_socket(hero=_id, weapon=weapon, armor=armor, jewelry=jewelry, send_notify=False)
         socket_ids.append(_sid)
 
 

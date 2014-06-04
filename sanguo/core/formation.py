@@ -35,6 +35,12 @@ for _e in EQUIPMENTS.values():
         ALL_JEWELRY[_e.id] = _e
 
 
+TP_TABLE = {
+    1: 'weapon',
+    2: 'armor',
+    3: 'jewelry',
+}
+
 class Formation(object):
     def __init__(self, char_id):
         self.char_id = char_id
@@ -88,14 +94,12 @@ class Formation(object):
             self._msg_socket(msg_s, socket_id, socket)
 
         # put socket in formation
-        old_formations = self.formation.formation[:]
-        for index, sid in enumerate(old_formations):
+        for index, sid in enumerate(self.formation.formation):
             if not new_socket_ids:
                 break
 
             if sid == 0:
-                self.formation.formation.pop(index)
-                self.formation.formation.insert(index, new_socket_ids[0])
+                self.formation.formation[index] = new_socket_ids[0]
                 new_socket_ids.pop(0)
 
         self.formation.save()
@@ -104,155 +108,146 @@ class Formation(object):
         return True
 
 
-    def set_socket(self, socket_id, hero_id, weapon_id, armor_id, jewelry_id):
-        # 由客户端操作来设置socket
-        from core.item import Item
+    def _first_up_hero(self, _socket_id, hero_id):
+        # 第一次上人要依次挨着 socket 放置。所以client传来的socket_id无用。
+        # 需要自己取出空着的最考前的socket
+        socket_id = None
+        socket_ids = self.all_socket_ids()
+        socket_ids.sort()
+        for sid in socket_ids:
+            s = self.formation.sockets[str(sid)]
+            if not s.hero:
+                socket_id = sid
+                break
+
+        # XXX
+        assert socket_id is not None
+
+        self.formation.sockets[str(socket_id)].hero = hero_id
+        self.formation.save()
+        self.send_socket_changed_notify(socket_id, self.formation.sockets[str(socket_id)])
+
+
+    def _replace_hero(self, socket_id, hero_id):
+        off_hero = self.formation.sockets[str(socket_id)].hero
+        hero_changed_signal.send(
+            sender=None,
+            hero_id=off_hero,
+        )
+
+        self.formation.sockets[str(socket_id)].hero = hero_id
+        self.formation.save()
+
+        socket_changed_signal.send(
+            sender=None,
+            socket_obj=self.formation.sockets[str(socket_id)]
+        )
+
+        self.send_socket_changed_notify(socket_id, self.formation.sockets[str(socket_id)])
+
+
+    def up_hero(self, socket_id, hero_id):
+        # 上人
         from core.hero import char_heros_dict
 
-        item = Item(self.char_id)
-
-        if str(socket_id) not in self.formation.sockets:
+        try:
+            this_socket = self.formation.sockets[str(socket_id)]
+        except KeyError:
             raise SanguoException(
                 errormsg.FORMATION_NONE_EXIST_SOCKET,
                 self.char_id,
-                "Formation Set Socket",
+                "Formation Up Hero",
                 "Socket {0} not exist".format(socket_id)
             )
 
         char_heros = char_heros_dict(self.char_id)
-
-        # 首先检测是否拥有
-        if hero_id and hero_id not in char_heros:
+        if hero_id not in char_heros:
             raise SanguoException(
                 errormsg.HERO_NOT_EXSIT,
                 self.char_id,
-                "Formation Set Socket",
+                "Formation Up Hero",
                 "Set Socket, Hero {0} not belong to self".format(hero_id)
             )
 
-        for i in [weapon_id, armor_id, jewelry_id]:
-            if i and not item.has_equip(i):
-                raise SanguoException(
-                    errormsg.EQUIPMENT_NOT_EXIST,
-                    self.char_id,
-                    "Formation Set Socket",
-                    "Set Socket, Equipment {0} not belong to self".format(i)
-                )
 
-
-        # 对于第一次上人的情况特殊处理
-        this_socket = self.formation.sockets[str(socket_id)]
-        # print "set socket debug"
-        # print this_socket.hero
-        # print this_socket.weapon
-        # print this_socket.armor
-        # print this_socket.jewelry
-        # print '-------'
-        # print hero_id
-        # print weapon_id
-        # print armor_id
-        # print jewelry_id
-        if not this_socket.hero and not this_socket.weapon and not this_socket.armor and not this_socket.jewelry and hero_id and not weapon_id and not armor_id and not jewelry_id:
-            # first time pick up a hero in this socket
-            # 要把这个人往前放
-            # print "xxxxxxxx"
-            socket_ids = self.all_socket_ids()
-            socket_ids.sort()
-            for sid in socket_ids:
-                s = self.formation.sockets[str(sid)]
-                # print sid, s.hero
-                if not s.hero:
-                    self.save_socket(sid, hero_id, s.weapon, s.armor, s.jewelry)
-                    return
-
-        # 然后检测装备类型
-        def _equip_test(tp, e):
-            if not e:
-                return
-
-            # 装备类型不能放错
-            e_oid = item.item.equipments[str(e)].oid
-            this_e = EQUIPMENTS[e_oid]
-            if this_e.tp != tp:
-                raise SanguoException(
-                    errormsg.FORMATION_SET_SOCKET_INVALUE_EQUIP_TYPE,
-                    self.char_id,
-                    "Formation Set Socket",
-                    "Set Socket. Equipment {0} type {1} not match. expected {2}".format(e, this_e.tp, tp)
-                )
-
-        _equip_test(1, weapon_id)
-        _equip_test(2, armor_id)
-        _equip_test(3, jewelry_id)
-
-
-        # 最后检测其他socket
-        changed_sockets = []
-
-        off_hero_id = None
-
-        # 不能重复放置
-        for k, s in self.formation.sockets.iteritems():
+        for k, v in self.formation.sockets.iteritems():
             if int(k) == socket_id:
-                if s.hero and s.hero != hero_id:
-                    off_hero_id = s.hero
                 continue
 
-            if hero_id and s.hero:
-                if s.hero == hero_id:
-                    # 同一个武将上到多个socket
-                    raise SanguoException(
-                        errormsg.FORMATION_SET_SOCKET_HERO_IN_MULTI_SOCKET,
-                        self.char_id,
-                        "Formation Set Socket",
-                        "Set Socket. hero {0} alreay in socket {1}".format(hero_id, k)
-                    )
+            if v.hero == hero_id:
+                # 同一个武将上到多个socket
+                raise SanguoException(
+                    errormsg.FORMATION_SET_SOCKET_HERO_IN_MULTI_SOCKET,
+                    self.char_id,
+                    "Formation Up Hero",
+                    "Set Socket. hero {0} already in socket {1}".format(hero_id, k)
+                )
 
-                # 同名武将不能重复上阵
-                if char_heros[s.hero].oid == char_heros[hero_id].oid:
-                    raise SanguoException(
-                        errormsg.FORMATION_SET_SOCKET_SAME_HERO,
-                        self.char_id,
-                        "Formation Set Socket",
-                        "Set Socket. same hero can not in formation at same time"
+            # 同名武将不能重复上阵
+            if char_heros[v.hero].oid == char_heros[hero_id].oid:
+                raise SanguoException(
+                    errormsg.FORMATION_SET_SOCKET_SAME_HERO,
+                    self.char_id,
+                    "Formation Up Hero",
+                    "Set Socket. same hero can not in formation at same time"
 
-                    )
+                )
 
-            if weapon_id and s.weapon and s.weapon == weapon_id:
-                changed_sockets.append((int(k), s.hero, 0, s.armor, s.jewelry))
-
-            if armor_id and s.armor and s.armor == armor_id:
-                changed_sockets.append((int(k), s.hero, s.weapon, 0, s.jewelry))
-
-            if jewelry_id and s.jewelry and s.jewelry == jewelry_id:
-                changed_sockets.append((int(k), s.hero, s.weapon, s.armor, 0))
+        if not this_socket.hero:
+            # 第一次上人
+            self._first_up_hero(socket_id, hero_id)
+        else:
+            self._replace_hero(socket_id, hero_id)
 
 
-        self.save_socket(
-            socket_id=socket_id,
-            hero=hero_id,
-            weapon=weapon_id,
-            armor=armor_id,
-            jewelry=jewelry_id
-        )
 
-        for socket_id, hero_id, weapon_id, armor_id, jewelry_id in changed_sockets:
-            self.save_socket(
-                socket_id=socket_id,
-                hero=hero_id,
-                weapon=weapon_id,
-                armor=armor_id,
-                jewelry=jewelry_id,
+    def up_equipment(self, socket_id, equipment_id):
+        # 上装备
+        from core.item import Item
+
+        try:
+            this_socket = self.formation.sockets[str(socket_id)]
+        except KeyError:
+            raise SanguoException(
+                errormsg.FORMATION_NONE_EXIST_SOCKET,
+                self.char_id,
+                "Formation Up Equipment",
+                "Socket {0} not exist".format(socket_id)
             )
 
-        if off_hero_id:
-            hero_changed_signal.send(
-                sender=None,
-                hero_id=off_hero_id,
+        item = Item(self.char_id)
+        try:
+            this_equipment = item.item.equipments[str(equipment_id)]
+        except KeyError:
+            raise SanguoException(
+                errormsg.EQUIPMENT_NOT_EXIST,
+                self.char_id,
+                "Formation Up Equipment",
+                "Set Socket, Equipment {0} not belong to self".format(equipment_id)
             )
 
+        tp = EQUIPMENTS[this_equipment.oid].tp
+        tp_name = TP_TABLE[tp]
 
-    def save_socket(self, socket_id=None, hero=0, weapon=0, armor=0, jewelry=0, send_notify=True):
+        setattr(this_socket, tp_name, equipment_id)
+        changed_socket = [(socket_id, this_socket)]
+
+        for k, v in self.formation.sockets.iteritems():
+            if int(k) == socket_id:
+                continue
+
+            if getattr(v, tp_name) == equipment_id:
+                setattr(v, tp_name, 0)
+                changed_socket.append((int(k), v))
+                break
+
+        self.formation.save()
+
+        for k, v in changed_socket:
+            self.send_socket_changed_notify(k, v)
+
+
+    def initialize_socket(self, socket_id=None, hero=0, weapon=0, armor=0, jewelry=0):
         if not socket_id:
             socket_id = self.max_socket_id() + 1
             socket = MongoSocket()
@@ -275,14 +270,6 @@ class Formation(object):
         self.formation.sockets[str(socket_id)] = socket
         self.formation.save()
 
-        if send_notify:
-            socket_changed_signal.send(
-                sender=None,
-                socket_obj=socket
-            )
-
-            self._send_socket_changed_notify(socket_id, socket)
-
         return socket_id
 
 
@@ -294,6 +281,8 @@ class Formation(object):
                 "Formation Save Formation",
                 "Save Formation. But request formation length is {0}".format(len(socket_ids))
             )
+
+        request_socket_amount = 0
 
         all_ids = self.all_socket_ids()
         for _id in socket_ids:
@@ -307,6 +296,17 @@ class Formation(object):
                     "Formation Save Formation",
                     "Save Formation. {0} not in socket ids {1}".format(_id, all_ids)
                 )
+
+            request_socket_amount += 1
+
+
+        if request_socket_amount != self.opened_socket_amount():
+            raise SanguoException(
+                errormsg.FORMATION_SOCKET_AMOUNT_NOT_MATCH,
+                self.char_id,
+                "Formation Save Formation",
+                "Save Formation. socket amount not match"
+            )
 
         for i in range(0, 9, 3):
             no_hero = True
@@ -326,7 +326,6 @@ class Formation(object):
                     "Formation Save Formation",
                     "Save Formation. Line {0} has no hero".format(i)
                 )
-
 
         self.formation.formation = socket_ids
         self.formation.save()
@@ -443,14 +442,19 @@ class Formation(object):
         standard_drop['des'] = ''
         resource_logger(self.char_id, standard_drop)
 
-        self._send_socket_changed_notify(socket_id, self.formation.sockets[str(socket_id)])
+        self.send_socket_changed_notify(socket_id, self.formation.sockets[str(socket_id)])
 
 
-    def _send_socket_changed_notify(self, socket_id, socket):
+    def send_socket_changed_notify(self, socket_id, socket):
         msg = protomsg.UpdateSocketNotify()
         s = msg.sockets.add()
         self._msg_socket(s, socket_id, socket)
         publish_to_char(self.char_id, pack_msg(msg))
+
+        socket_changed_signal.send(
+            sender=None,
+            socket_obj=socket
+        )
 
 
     def _msg_socket(self, msg, _id, socket):

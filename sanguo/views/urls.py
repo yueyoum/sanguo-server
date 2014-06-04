@@ -14,7 +14,8 @@ urlpatterns = patterns('',
                        url(r'^arena/panel/$', 'views.arena.views.arena_panel'),
 
                        url(r'^formation/set/$', 'views.formation.views.set_formation'),
-                       url(r'^socket/set/$', 'views.formation.views.set_socket'),
+                       url(r'^socket/set/hero/$', 'views.formation.views.up_hero'),
+                       url(r'^socket/set/equipment/$', 'views.formation.views.up_equipment'),
 
                        url(r'^hero/stepup/$', 'views.hero.views.step_up'),
                        url(r'^hero/recruit/$', 'views.hero.views.recruit'),
