@@ -156,7 +156,12 @@ class Task(object):
             this_task = TASKS[t]
             msg_t = msg.tasks.add()
             msg_t.id = t
-            msg_t.current_times = self.task.tasks[str(this_task.tp)]
+
+            current_times = self.task.tasks[str(this_task.tp)]
+            if current_times > this_task.times:
+                current_times = this_task.times
+
+            msg_t.current_times = current_times
 
             if t in self.task.complete:
                 status = MsgTask.COMPLETE
