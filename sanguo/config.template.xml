@@ -10,12 +10,6 @@
         <db>0</db>
     </redis>
 
-    <mongodb>
-        <host>127.0.0.1</host>
-        <port>27017</port>
-        <db>sanguo</db>
-    </mongodb>
-
     <cache>
         <seconds>3600</seconds>
     </cache>
@@ -33,9 +27,17 @@
         <prefix>ok</prefix>
     </crypto>
 
+    <mongodb>
+        <host>127.0.0.1</host>
+        <port>27017</port>
+        <db>sanguo</db>
+    </mongodb>
+
     <hub>
         <host>127.0.0.1</host>
-        <port>8020</port>
+        <port>
+            <https>8020</https>
+        </port>
     </hub>
 
     <log>
