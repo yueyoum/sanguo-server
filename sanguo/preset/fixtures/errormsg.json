@@ -286,6 +286,17 @@
     }
 },
 {
+    "pk": 155, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "SERVER_NOT_EXIST", 
+        "text_zh": "\u6240\u9009\u670d\u52a1\u5668\u4e0d\u5b58\u5728", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
     "pk": 160, 
     "model": "errormsg.errormsg", 
     "fields": {
@@ -301,7 +312,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "CHAR_NAME_TOO_LONG", 
-        "text_zh": "\u89d2\u8272\u540d\u4e0d\u80fd\u591a\u4e8e\u4e03\u4e2a\u5b57\u7b26", 
+        "text_zh": "\u89d2\u8272\u540d\u592a\u957f", 
         "link_to": null, 
         "des": "", 
         "area": ""

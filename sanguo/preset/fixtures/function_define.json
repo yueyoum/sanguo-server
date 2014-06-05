@@ -140,6 +140,16 @@
     }
 },
 {
+    "pk": 20, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 5, 
+        "name": "\u6218\u6597\u52a0\u901f", 
+        "text": ""
+    }
+},
+{
     "pk": 50, 
     "model": "config.functiondefine", 
     "fields": {
