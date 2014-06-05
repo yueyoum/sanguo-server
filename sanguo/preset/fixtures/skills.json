@@ -303,9 +303,9 @@
     "pk": 29, 
     "model": "skill.skill", 
     "fields": {
-        "cast_effect": "", 
+        "cast_effect": "Buff_dun", 
         "hits": 1, 
-        "hit_effect": "H_attack", 
+        "hit_effect": "", 
         "name": "\u91d1\u521a", 
         "anger_self_team": 0, 
         "des": "\u9632\u5fa1\u59ff\u6001\uff0c\u5927\u5e45\u63d0\u5347\u9632\u5fa1\u529b", 

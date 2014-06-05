@@ -528,6 +528,17 @@
     }
 },
 {
+    "pk": 506, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FORMATION_SOCKET_AMOUNT_NOT_MATCH", 
+        "text_zh": "\u9635\u6cd5\u9519\u8bef\uff0c\u63d2\u69fd\u6570\u91cf\u4e0d\u5339\u914d", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
     "pk": 600, 
     "model": "errormsg.errormsg", 
     "fields": {
