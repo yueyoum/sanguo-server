@@ -16,6 +16,8 @@ def character_initialize(request):
     try:
         char_initialize(account_id, server_id, char_id, name)
     except:
+        import traceback
+        traceback.print_exc()
         ret = 1
 
     return HttpResponse(json.dumps({'ret': ret}), content_type='application/json')
