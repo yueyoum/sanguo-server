@@ -174,6 +174,9 @@ class Formation(object):
             if int(k) == socket_id:
                 continue
 
+            if not v.hero:
+                continue
+
             if v.hero == hero_id:
                 # 同一个武将上到多个socket
                 raise SanguoException(
