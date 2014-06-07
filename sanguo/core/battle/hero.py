@@ -119,7 +119,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
     def set_hp(self, value):
         self.damage_value = value
-        self.hp -= value
+        self.hp += value
         self.hp = int(self.hp)
         if self.hp <= 0:
             self.hp = 0
@@ -182,30 +182,6 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
 
     def find_skill(self, skills):
-        # 计算是否触发技能
-        # if not skills:
-        #     return None
-
-        # skill_probs = [[s.prob, s] for s in skills]
-        #
-        # for i in range(1, len(skill_probs)):
-        #    skill_probs[i][0] += skill_probs[i-1][0]
-        #
-        # prob = randint(1, 100)
-        # for _p, skill in skill_probs:
-        #    if prob <= _p:
-        #        return skill
-        # return None
-
-        # if not skills:
-        #     return []
-        #
-        # active_skills = []
-        # for s in skills:
-        #     if (self._round - s.trig_start) % s.trig_cooldown == 0:
-        #         active_skills.append(s)
-        # return active_skills
-
         logger.debug("%d find skill. anger = %d" % (self.id, self.anger))
         if not skills:
             return [self.default_skill]
@@ -215,7 +191,6 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
             return skills
 
         return [self.default_skill]
-
 
 
 
@@ -239,40 +214,25 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         except DizzinessEvent:
             logger.debug("%d: dizziness, return" % self.id)
             return
-        #
-        # hero_noti = msg.hero_notify.add()
-        # hero_noti.target_id = self.id
-        # hero_noti.hp = self.hp
 
-        # skill = self.find_skill(self.attack_skills)
-        #
-        # if skill is None:
-        #     logger.debug("%d: normal action" % self.id)
-        #     self.normal_action(target, msg)
-        # else:
-        #     logger.debug("%d: skill action %d" % (self.id, skill.id))
-        #     self.skill_action(target, skill, msg)
-
-        # skills = self.find_skill(self.attack_skills)
-        #
-        # if not skills:
-        #     logger.debug("%d: normal action" % self.id)
-        #     self.normal_action(target, msg)
-        # else:
-        #     logger.debug("%d: skill action" % self.id)
-        #     for skill in skills:
-        #         logger.debug("%d: skill action %d. rounds = %d" % (self.id, skill.id, self._round))
-        #         self.skill_action(target, skill, msg)
 
         skills = self.find_skill(self.attack_skills)
         for skill in skills:
             logger.debug("%d: skill action %d" % (self.id, skill.id))
             self.skill_action(target, skill, msg)
 
+        msg.dead_ids.extend(self.find_dead_target_ids_in_one_step(msg))
 
-    #
-    # def normal_action(self, target, msg):
-    #     self._one_action(target, self.using_attack, msg)
+
+    def find_dead_target_ids_in_one_step(self, step_msg):
+        # 遍历这个step消息中的所有hero_notify,找到每个hero_notify 中 target_id 的最后hp
+        # 以这个来判断target_id是否死亡
+        res = {}
+        for hn in step_msg.hero_notify:
+            res[hn.target_id] = hn.hp
+
+        deads = [k for k, v in res.iteritems() if v == 0]
+        return deads
 
 
     def real_damage_value(self, damage, target):
@@ -414,10 +374,9 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
                 raise Exception("Skill Action: Unsupported Zero rounds effect: {0}".format(eff.id))
 
             if eff.id == 1:
-                # value = self.using_attack
-                raise Exception("Skill Action: Unsupported Eff id: 1")
-            elif eff.id == 2:
                 value = self.using_attack * eff.value  / 100.0
+            elif eff.id == 2:
+                value = -(self.using_attack * eff.value  / 100.0)
 
             targets = self.get_effect_target(eff, target)
             logger.debug("Eff: {0}, targets: {1}".format(eff.id, [i.id for i in targets]))
