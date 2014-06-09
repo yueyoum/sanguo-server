@@ -223,15 +223,19 @@ HUB_HTTPS_PORT = int( tree.find('hub/port/https').text )
 LOG_MAN_HOST = tree.find('log/host').text
 LOG_MAN_PORT = int( tree.find('log/port').text )
 
+TIMER_REGISTER = tree.find('timer/register').text
+TIMER_UNREGISTER = tree.find('timer/unregister').text
+TIMER_CALLBACK = tree.find('timer/callback').text
 
-CELERY_IMPORTS = ('worker.tasks',)
-CELERY_ENABLE_UTC = True
-CELERY_TIMEZONE = TIME_ZONE
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-BROKER_URL = tree.find('celery/broker').text
 
+# CELERY_IMPORTS = ('worker.tasks',)
+# CELERY_ENABLE_UTC = True
+# CELERY_TIMEZONE = TIME_ZONE
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+# BROKER_URL = tree.find('celery/broker').text
+#
 
 del et
 del tree

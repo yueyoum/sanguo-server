@@ -78,4 +78,5 @@ urlpatterns += patterns('',
                         url(r'^api/character/initialize/$', 'views.api.character.views.character_initialize'),
                         url(r'^api/mail/send/$', 'views.api.mail.views.send_mail'),
                         url(r'^api/purchase/done/$', 'views.api.purchase.views.purchase_done'),
+                        url(r'^api/callback/timer/$', 'views.api.callback.views.timer_notify'),
 )

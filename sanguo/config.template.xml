@@ -45,8 +45,10 @@
         <port>10099</port>
     </log>
 
-    <celery>
-        <broker>redis://127.0.0.1:6380/1</broker>
-    </celery>
+    <timer>
+        <register>https://127.0.0.1:9995/register/</register>
+        <unregister>https://127.0.0.1:9995/unregister/</unregister>
+        <callback>https://127.0.0.1:9996/api/callback/timer/</callback>
+    </timer>
 </config>
 

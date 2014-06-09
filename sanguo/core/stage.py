@@ -17,7 +17,7 @@ from core.mail import Mail
 from core.signals import pve_finished_signal
 from core.counter import Counter
 from core.resource import Resource
-from worker import tasks
+from core import timer
 from utils import pack_msg
 from utils.decorate import operate_guard
 
@@ -47,7 +47,6 @@ import protomsg
 
 
 HANG_MAX_SECONDS_FUNCTION = lambda vip: VIP_FUNCTION[vip].hang * 3600
-
 
 
 def max_star_stage_id(char_id):
@@ -257,7 +256,7 @@ class Hang(object):
             )
 
 
-    def task_job(self, actual_seconds):
+    def timer_notify(self, actual_seconds):
         # 由每个玩家的定时任务触发。
         # 定时任务是当时挂机时开启的，会在当时的剩余时间跑完后到达这里。
         # 因为VIP的提升导致的剩余时间增加
@@ -268,11 +267,15 @@ class Hang(object):
         remained = self.get_hang_remained()
         if remained <= 0:
             self.finish(actual_seconds=actual_seconds)
-            return
+        else:
+            data = {
+                'char_id': self.char_id,
+                'seconds': actual_seconds + remained,
+            }
 
-        newjob = tasks.hang_job.apply_async((self.char_id, actual_seconds+remained), countdown=remained)
-        self.hang_doing.jobid = newjob.id
-        self.hang_doing.save()
+            key = timer.register(data, remained)
+            self.hang_doing.jobid = key
+            self.hang_doing.save()
 
 
     def get_hang_remained(self, char=None):
@@ -318,11 +321,15 @@ class Hang(object):
             )
 
         now = arrow.utcnow().timestamp
-        job = tasks.hang_job.apply_async((self.char_id, remained_time), countdown=remained_time)
+        data = {
+            'char_id': self.char_id,
+            'seconds': remained_time
+        }
+        key = timer.register(data, remained_time)
 
         hang_doing = MongoHangDoing(
             id=self.char_id,
-            jobid=job.id,
+            jobid=key,
             char_level=char.level,
             stage_id=stage_id,
             start=now,
@@ -354,8 +361,7 @@ class Hang(object):
                 "Hang cancel. But hang already finished"
             )
 
-        tasks.cancel(self.hang_doing.jobid)
-
+        timer.unregister(self.hang_doing.jobid)
         self.finish()
 
 
