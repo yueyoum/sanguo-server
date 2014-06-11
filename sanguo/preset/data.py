@@ -189,10 +189,38 @@ for k, v in STAGE_ACTIVITY.iteritems():
 
 
 STAGE_ELITE_CONDITION = {}
-for k, v in STAGE_ELITE.iteritems():
-    # STAGE_ELITE_CONDITION.setdefault(v.open_condition, []).append(v)
-    if v.open_condition:
-        STAGE_ELITE_CONDITION[v.open_condition] = k
+for k, v in STAGE_ELITE.items():
+    if getattr(v, 'previous', None) is None:
+        setattr(v, 'previous', None)
+
+    if v.next:
+        STAGE_ELITE[v.next].previous = k
+
+    STAGE_ELITE_CONDITION.setdefault(v.open_condition, []).append(v)
+
+def _make_elite_in_chain(stages):
+    stages_dict = {s.id: s for s in stages}
+    stage_ids = [s.id for s in stages]
+
+    def _find_first_stage():
+        for s in stages:
+            if not s.previous:
+                return s
+
+            if s.previous not in stage_ids:
+                return s
+
+    first_stage = _find_first_stage()
+    re_sorted = [first_stage]
+    while len(re_sorted) < len(stages):
+        re_sorted.append(stages_dict[re_sorted[-1].next])
+
+    return re_sorted
+
+for k, v in STAGE_ELITE_CONDITION.items():
+    STAGE_ELITE_CONDITION[k] = _make_elite_in_chain(v)
+
+
 
 TREASURES = {}
 for d in STUFFS.values():

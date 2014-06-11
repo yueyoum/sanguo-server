@@ -5,8 +5,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 0, 
+        "text": "\u88c5\u5907\u5f3a\u5316\u529f\u80fd\u5f00\u542f", 
         "name": "\u88c5\u5907\u5f3a\u5316", 
-        "text": "\u88c5\u5907\u5f3a\u5316\u529f\u80fd\u5f00\u542f"
+        "icon": ""
     }
 },
 {
@@ -15,8 +16,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 0, 
+        "text": "\u88c5\u5907\u5f3a\u5316\u529f\u80fd\u5f00\u542f", 
         "name": "\u88c5\u5907\u8fdb\u9636", 
-        "text": "\u88c5\u5907\u5f3a\u5316\u529f\u80fd\u5f00\u542f"
+        "icon": ""
     }
 },
 {
@@ -25,8 +27,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 0, 
+        "text": "", 
         "name": "\u6b66\u5c06\u8fdb\u9636", 
-        "text": ""
+        "icon": ""
     }
 },
 {
@@ -35,8 +38,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 0, 
+        "text": "\u5b9d\u77f3\u9576\u5d4c\u529f\u80fd\u5f00\u542f", 
         "name": "\u5b9d\u77f3\u9576\u5d4c", 
-        "text": "\u5b9d\u77f3\u9576\u5d4c\u529f\u80fd\u5f00\u542f"
+        "icon": ""
     }
 },
 {
@@ -45,8 +49,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 0, 
+        "text": "", 
         "name": "\u65e5\u5e38\u4efb\u52a1", 
-        "text": ""
+        "icon": ""
     }
 },
 {
@@ -55,8 +60,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 0, 
+        "text": "", 
         "name": "\u6210\u5c31\u4efb\u52a1", 
-        "text": ""
+        "icon": ""
     }
 },
 {
@@ -65,8 +71,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 20, 
+        "text": "\u6302\u673a\u529f\u80fd\u5f00\u542f\uff0c\u8fbe\u6210\u4e09\u661f\u8bc4\u4ef7\u7684\u5173\u5361\u53ef\u901a\u8fc7\u6302\u673a\u81ea\u52a8\u6218\u6597", 
         "name": "\u6302\u673a\u529f\u80fd", 
-        "text": "\u6302\u673a\u529f\u80fd\u5f00\u542f\uff0c\u8fbe\u6210\u4e09\u661f\u8bc4\u4ef7\u7684\u5173\u5361\u53ef\u901a\u8fc7\u6302\u673a\u81ea\u52a8\u6218\u6597"
+        "icon": ""
     }
 },
 {
@@ -75,8 +82,9 @@
     "fields": {
         "char_level": 20, 
         "stage_id": 0, 
+        "text": "\u6bd4\u6b66\u529f\u80fd\u5f00\u542f\uff0c\u901a\u8fc7\u6bd4\u6b66\u53ef\u63d0\u5347\u5b98\u804c\u7b49\u7ea7\uff0c\u6bcf\u5929\u8fd8\u53ef\u9886\u53d6\u6392\u540d\u5956\u52b1", 
         "name": "\u6bd4\u6b66\u529f\u80fd", 
-        "text": "\u6bd4\u6b66\u529f\u80fd\u5f00\u542f\uff0c\u901a\u8fc7\u6bd4\u6b66\u53ef\u63d0\u5347\u5b98\u804c\u7b49\u7ea7\uff0c\u6bcf\u5929\u8fd8\u53ef\u9886\u53d6\u6392\u540d\u5956\u52b1"
+        "icon": ""
     }
 },
 {
@@ -85,8 +93,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 30, 
+        "text": "\u63a0\u593a\u529f\u80fd\u5f00\u542f\uff0c\u901a\u8fc7\u63a0\u593a\u5176\u5b83\u73a9\u5bb6\u53ef\u83b7\u5f97\u4e30\u5bcc\u5956\u52b1", 
         "name": "\u63a0\u593a\u529f\u80fd", 
-        "text": "\u63a0\u593a\u529f\u80fd\u5f00\u542f\uff0c\u901a\u8fc7\u63a0\u593a\u5176\u5b83\u73a9\u5bb6\u53ef\u83b7\u5f97\u4e30\u5bcc\u5956\u52b1"
+        "icon": ""
     }
 },
 {
@@ -95,8 +104,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 0, 
+        "text": "", 
         "name": "\u5b98\u804c\u529f\u80fd", 
-        "text": ""
+        "icon": ""
     }
 },
 {
@@ -105,8 +115,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 10, 
+        "text": "\u7cbe\u82f1\u526f\u672c\u5f00\u542f\uff0c\u53ef\u5728\u51fa\u5f81\u4e2d\u9009\u62e9\u7cbe\u82f1\u96be\u5ea6\u7684\u5173\u5361\u8fdb\u884c\u6311\u6218", 
         "name": "\u7cbe\u82f1\u526f\u672c", 
-        "text": "\u7cbe\u82f1\u526f\u672c\u5f00\u542f\uff0c\u53ef\u5728\u51fa\u5f81\u4e2d\u9009\u62e9\u7cbe\u82f1\u96be\u5ea6\u7684\u5173\u5361\u8fdb\u884c\u6311\u6218"
+        "icon": ""
     }
 },
 {
@@ -115,8 +126,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 0, 
+        "text": "", 
         "name": "\u597d\u53cb\u529f\u80fd", 
-        "text": ""
+        "icon": ""
     }
 },
 {
@@ -125,8 +137,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 0, 
+        "text": "", 
         "name": "\u731b\u5c06\u6311\u6218", 
-        "text": ""
+        "icon": ""
     }
 },
 {
@@ -135,8 +148,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 0, 
+        "text": "\u70b9\u5c06\u529f\u80fd\u5f00\u542f\uff0c\u901a\u8fc7\u70b9\u5c06\u53ef\u4ee5\u83b7\u53d6\u66f4\u591a\u7684\u6b66\u5c06", 
         "name": "\u70b9\u5c06", 
-        "text": "\u70b9\u5c06\u529f\u80fd\u5f00\u542f\uff0c\u901a\u8fc7\u70b9\u5c06\u53ef\u4ee5\u83b7\u53d6\u66f4\u591a\u7684\u6b66\u5c06"
+        "icon": ""
     }
 },
 {
@@ -145,8 +159,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 5, 
+        "text": "", 
         "name": "\u6218\u6597\u52a0\u901f", 
-        "text": ""
+        "icon": ""
     }
 },
 {
@@ -155,8 +170,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 10, 
+        "text": " \u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u4e94\u4eba", 
         "name": "\u4e0a\u9635\u4e94\u4eba", 
-        "text": " \u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u4e94\u4eba"
+        "icon": ""
     }
 },
 {
@@ -165,8 +181,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 20, 
+        "text": " \u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u516d\u4eba", 
         "name": "\u4e0a\u9635\u516d\u4eba", 
-        "text": " \u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u516d\u4eba"
+        "icon": ""
     }
 },
 {
@@ -175,8 +192,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 30, 
+        "text": "\u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u4e03\u4eba", 
         "name": "\u4e0a\u9635\u4e03\u4eba", 
-        "text": "\u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u4e03\u4eba"
+        "icon": ""
     }
 },
 {
@@ -185,8 +203,9 @@
     "fields": {
         "char_level": 0, 
         "stage_id": 40, 
+        "text": "\u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u516b\u4eba", 
         "name": "\u4e0a\u9635\u516b\u4eba", 
-        "text": "\u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u516b\u4eba"
+        "icon": ""
     }
 }
 ]

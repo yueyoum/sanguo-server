@@ -5,7 +5,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u9ec4\u5dfe\u519b\uff08\u5f31\uff09", 
-        "skills": "28", 
+        "skills": "26", 
         "tp_name": "\u653b", 
         "image": "\u9ec4\u5dfe\u519b", 
         "tp": 1, 
@@ -24,7 +24,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u9ec4\u5dfe\u519b\uff08\u4e2d\uff09", 
-        "skills": "28", 
+        "skills": "26", 
         "tp_name": "\u653b", 
         "image": "\u9ec4\u5dfe\u519b", 
         "tp": 1, 
@@ -43,7 +43,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u5200\u5175\uff08\u5f31\uff09", 
-        "skills": "28", 
+        "skills": "26", 
         "tp_name": "\u653b", 
         "image": "\u5200\u5175", 
         "tp": 1, 
@@ -62,7 +62,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u5200\u5175\uff08\u4e2d\uff09", 
-        "skills": "28", 
+        "skills": "26", 
         "tp_name": "\u653b", 
         "image": "\u5200\u5175", 
         "tp": 1, 
@@ -81,7 +81,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u5200\u5175\uff08\u5f3a\uff09", 
-        "skills": "28", 
+        "skills": "26", 
         "tp_name": "\u653b", 
         "image": "\u5200\u5175", 
         "tp": 1, 
@@ -214,7 +214,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u653b\u51fb\u578b\u6742\u6b66\u5c06\uff08\u91cd\u51fb\uff09", 
-        "skills": "28", 
+        "skills": "27", 
         "tp_name": "\u653b", 
         "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "tp": 1, 
@@ -252,7 +252,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u653b\u51fb\u578b\u6742\u6b66\u5c06\uff08\u91cd\u51fb+\u5f3a\u653b\uff09", 
-        "skills": "28,45", 
+        "skills": "26,45", 
         "tp_name": "\u653b", 
         "image": "\u6b66\u5c06_\u82f1\u4fca", 
         "tp": 1, 
@@ -290,7 +290,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u9632\u5fa1\u578b\u6742\u6b66\u5c06\uff08\u91cd\u51fb+\u636e\u5b88\uff09", 
-        "skills": "28,44", 
+        "skills": "26,44", 
         "tp_name": "\u9632", 
         "image": "\u6b66\u5c06\u51f6\u608d", 
         "tp": 2, 
@@ -309,7 +309,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u7cbe\u82f1\u6b66\u5c06\uff08\u731b\u51fb\uff09", 
-        "skills": "27", 
+        "skills": "27,46", 
         "tp_name": "\u9632", 
         "image": "\u6b66\u5c06\u6742boss", 
         "tp": 2, 
@@ -328,7 +328,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u7b56\u7565\u578b\u6b66\u5c06-\u5f31\uff08\u706b\u653b\uff09", 
-        "skills": "49", 
+        "skills": "48", 
         "tp_name": "\u7b56", 
         "image": "\u9752\u5e74\u6587\u5b98", 
         "tp": 3, 
@@ -366,7 +366,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u7b56\u7565\u578b\u6b66\u5c06-\u5f3a\uff08\u706b\u653b\uff09", 
-        "skills": "49", 
+        "skills": "50", 
         "tp_name": "\u7b56", 
         "image": "\u6587\u5b98\u8001\u5e74", 
         "tp": 3, 
@@ -499,7 +499,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u8bb8\u891a", 
-        "skills": "26,68", 
+        "skills": "25,68", 
         "tp_name": "\u653b", 
         "image": "\u8bb8\u891a", 
         "tp": 1, 
@@ -518,7 +518,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u5f20\u8fbd", 
-        "skills": "26,46", 
+        "skills": "25,46", 
         "tp_name": "\u9632", 
         "image": "\u5f20\u8fbd", 
         "tp": 2, 
@@ -537,7 +537,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u9c8d\u4e09\u5a18", 
-        "skills": "20,72", 
+        "skills": "21", 
         "tp_name": "\u653b", 
         "image": "\u9c8d\u4e09\u5a18", 
         "tp": 1, 
@@ -556,7 +556,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u5f90\u5eb6", 
-        "skills": "48,71", 
+        "skills": "48,70", 
         "tp_name": "\u7b56", 
         "image": "\u5f90\u5eb6", 
         "tp": 3, 
@@ -594,7 +594,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u5e9e\u5fb7", 
-        "skills": "36,45", 
+        "skills": "25,45", 
         "tp_name": "\u653b", 
         "image": "\u5e9e\u5fb7", 
         "tp": 1, 
@@ -632,7 +632,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u5218\u5907", 
-        "skills": "25,41", 
+        "skills": "28,41", 
         "tp_name": "\u9632", 
         "image": "\u5218\u5907", 
         "tp": 2, 
@@ -670,7 +670,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u5f20\u98de", 
-        "skills": "27,69", 
+        "skills": "25,69", 
         "tp_name": "\u653b", 
         "image": "\u5f20\u98de", 
         "tp": 1, 
@@ -784,7 +784,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u5173\u94f6\u5c4f", 
-        "skills": "21,72", 
+        "skills": "21", 
         "tp_name": "\u9632", 
         "image": "\u5173\u94f6\u5c4f", 
         "tp": 2, 
@@ -822,7 +822,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u5b59\u6743", 
-        "skills": "25,42", 
+        "skills": "28,42", 
         "tp_name": "\u9632", 
         "image": "\u5b59\u6743", 
         "tp": 2, 
@@ -1259,7 +1259,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u4e50\u8fdb", 
-        "skills": "26,45", 
+        "skills": "25,45", 
         "tp_name": "\u9632", 
         "image": "\u4e50\u8fdb", 
         "tp": 2, 
@@ -1278,7 +1278,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u674e\u5178", 
-        "skills": "28,46", 
+        "skills": "25,46", 
         "tp_name": "\u9632", 
         "image": "\u674e\u5178", 
         "tp": 2, 
@@ -1316,7 +1316,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u5218\u7985", 
-        "skills": "25,41", 
+        "skills": "28,41", 
         "tp_name": "\u9632", 
         "image": "\u5218\u7985", 
         "tp": 2, 
@@ -1373,7 +1373,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u5b5f\u83b7", 
-        "skills": "26,68", 
+        "skills": "25,68", 
         "tp_name": "\u653b", 
         "image": "\u5b5f\u83b7", 
         "tp": 1, 
@@ -1430,7 +1430,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u6c99\u6469\u67ef", 
-        "skills": "28", 
+        "skills": "25", 
         "tp_name": "\u653b", 
         "image": "\u6c99\u6469\u67ef", 
         "tp": 1, 
@@ -1449,7 +1449,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u5468\u4ed3", 
-        "skills": "28", 
+        "skills": "27", 
         "tp_name": "\u9632", 
         "image": "\u5468\u4ed3", 
         "tp": 2, 
@@ -1506,7 +1506,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u7a0b\u666e", 
-        "skills": "28", 
+        "skills": "25", 
         "tp_name": "\u653b", 
         "image": "\u7a0b\u666e", 
         "tp": 1, 
@@ -1525,7 +1525,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u5f90\u76db", 
-        "skills": "28", 
+        "skills": "25", 
         "tp_name": "\u653b", 
         "image": "\u5f90\u76db", 
         "tp": 1, 
@@ -1544,7 +1544,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u66f9\u6d2a", 
-        "skills": "33", 
+        "skills": "33,45", 
         "tp_name": "\u653b", 
         "image": "\u66f9\u6d2a", 
         "tp": 1, 
@@ -1582,7 +1582,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u8bf8\u845b\u747e", 
-        "skills": "50", 
+        "skills": "49", 
         "tp_name": "\u7b56", 
         "image": "\u8bf8\u845b\u747e", 
         "tp": 3, 
@@ -1601,7 +1601,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u53f8\u9a6c\u5e08", 
-        "skills": "48", 
+        "skills": "45", 
         "tp_name": "\u7b56", 
         "image": "\u53f8\u9a6c\u5e08", 
         "tp": 3, 
@@ -1848,7 +1848,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u9a6c\u817e", 
-        "skills": "32", 
+        "skills": "32,43", 
         "tp_name": "\u653b", 
         "image": "\u9a6c\u817e", 
         "tp": 1, 
@@ -2038,7 +2038,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u725b\u91d1", 
-        "skills": "28", 
+        "skills": "26", 
         "tp_name": "\u9632", 
         "image": "\u725b\u91d1", 
         "tp": 2, 
@@ -2095,7 +2095,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u6f58\u748b", 
-        "skills": "28", 
+        "skills": "26", 
         "tp_name": "\u653b", 
         "image": "\u6f58\u748b", 
         "tp": 1, 
@@ -2114,7 +2114,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u5f20\u4efb", 
-        "skills": "28", 
+        "skills": "26", 
         "tp_name": "\u653b", 
         "image": "\u5f20\u4efb", 
         "tp": 1, 
@@ -2228,7 +2228,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u5f20\u82de", 
-        "skills": "27", 
+        "skills": "27,68", 
         "tp_name": "\u653b", 
         "image": "\u5f20\u82de", 
         "tp": 1, 
@@ -2247,7 +2247,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u5218\u5c01", 
-        "skills": "28", 
+        "skills": "26", 
         "tp_name": "\u653b", 
         "image": "\u5218\u5c01", 
         "tp": 1, 
@@ -2266,7 +2266,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u4e01\u5949", 
-        "skills": "28", 
+        "skills": "26", 
         "tp_name": "\u9632", 
         "image": "\u4e01\u5949", 
         "tp": 2, 
@@ -2285,7 +2285,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u90ed\u6c5c", 
-        "skills": "28", 
+        "skills": "26", 
         "tp_name": "\u653b", 
         "image": "\u90ed\u6c5c", 
         "tp": 1, 
@@ -2304,7 +2304,7 @@
     "fields": {
         "dodge": 0, 
         "name": "\u674e\u5f02", 
-        "skills": "28", 
+        "skills": "26", 
         "tp_name": "\u653b", 
         "image": "\u674e\u5f02", 
         "tp": 1, 

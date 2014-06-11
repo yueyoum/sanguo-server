@@ -509,13 +509,15 @@ class EliteStage(object):
             self.stage.save()
 
 
-    def enable_by_condition_id(self, _id):
-        if _id not in STAGE_ELITE_CONDITION:
+    def enable_by_condition_id(self, stage_id):
+        if stage_id not in STAGE_ELITE_CONDITION:
             return
-        self.enable(STAGE_ELITE_CONDITION[_id])
 
+        for s in STAGE_ELITE_CONDITION[stage_id]:
+            self.enable(s)
 
-    def enable(self, _id):
+    def enable(self, s):
+        _id = s.id
         str_id = str(_id)
         if _id not in STAGE_ELITE:
             raise SanguoException(
@@ -526,6 +528,9 @@ class EliteStage(object):
             )
 
         if str_id in self.stage.elites:
+            return
+
+        if s.previous and str(s.previous) not in self.stage.elites:
             return
 
         self.stage.elites[str_id] = 0
