@@ -142,12 +142,13 @@ class Stage(object):
 
                         self.send_new_stage_notify()
 
+        self.stage.save()
 
+        if battle_msg.self_win:
             # 开启精英关卡
             elite = EliteStage(self.char_id)
             elite.enable_by_condition_id(stage_id)
 
-        self.stage.save()
 
         pve_finished_signal.send(
             sender=None,
