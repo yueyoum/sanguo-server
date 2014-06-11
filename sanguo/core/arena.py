@@ -105,7 +105,7 @@ class Arena(object):
             if score_diff >= DAY_MAX_SCORE:
                 break
 
-            choosing = MongoArenaDay.objects.filter(Q(score__gte=my_score-score_diff) & Q(score__lte=my_score+score_diff) & Q(id__ne=self.char_id))
+            choosing = MongoArenaDay.objects.filter(Q(score__gte=my_score) & Q(score__lte=my_score+score_diff) & Q(id__ne=self.char_id))
             if choosing:
                 break
 
