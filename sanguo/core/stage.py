@@ -513,8 +513,15 @@ class EliteStage(object):
         if stage_id not in STAGE_ELITE_CONDITION:
             return
 
-        for s in STAGE_ELITE_CONDITION[stage_id]:
-            self.enable(s)
+        self.enable(STAGE_ELITE_CONDITION[stage_id][0])
+
+    def enable_next_elite_stage(self, _id):
+        s = STAGE_ELITE[_id]
+        if not s.next:
+            return
+
+        self.enable(STAGE_ELITE[s.next])
+
 
     def enable(self, s):
         _id = s.id
@@ -528,6 +535,9 @@ class EliteStage(object):
             )
 
         if str_id in self.stage.elites:
+            return
+
+        if str(s.open_condition) not in self.stage.stages:
             return
 
         if s.previous and str(s.previous) not in self.stage.elites:
@@ -620,6 +630,15 @@ class EliteStage(object):
                 "StageElite {0} not open".format(_id)
             )
 
+        if str(self.this_stage.open_condition) not in self.stage.stages:
+            if self.this_stage.previous and str(self.this_stage.previous) not in self.stage.elites:
+                raise SanguoException(
+                    errormsg.STAGE_ELITE_NOT_OPEN,
+                    self.char_id,
+                    "StageElite Battle",
+                    "StageElite {0} not open. XXX check source core/stage/EliteStage Open".format(_id)
+                )
+
         if times >= self.this_stage.times:
             raise SanguoException(
                 errormsg.STAGE_ELITE_NO_TIMES,
@@ -654,6 +673,7 @@ class EliteStage(object):
 
             counter.incr()
             self.send_remained_times_notify()
+            self.enable_next_elite_stage(_id)
 
         return battle_msg
 
