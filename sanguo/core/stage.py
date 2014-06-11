@@ -261,13 +261,17 @@ class Hang(object):
         # 定时任务是当时挂机时开启的，会在当时的剩余时间跑完后到达这里。
         # 因为VIP的提升导致的剩余时间增加
         # 所以这里得再次检测是否有多余的剩余时间
-        if not self.hang_doing:
+        if not self.hang_doing or self.hang_doing.finished:
+            # cron_job可能会提前结束本次挂机，并重置可用挂机时间
+            # 所以如果当notify达到时，发现挂机是 finished 就直接返回
             return
 
         remained = self.get_hang_remained()
         if remained <= 0:
             self.finish(actual_seconds=actual_seconds)
         else:
+            # 当 notify 达到，发现还有剩余时间（目前是由VIP升级导致的）
+            # 那么再开启一个新的timer，callback_data中的seconds就是本次notify的seconds+新的剩余时间
             data = {
                 'char_id': self.char_id,
                 'seconds': actual_seconds + remained,
