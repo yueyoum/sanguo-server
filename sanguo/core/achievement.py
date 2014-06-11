@@ -165,8 +165,7 @@ class Achievement(object):
 
         if ach.next:
             index = self.achievement.display.index(achievement_id)
-            self.achievement.display.pop(index)
-            self.achievement.display.insert(index, ach.next)
+            self.achievement.display[index] = ach.next
 
             updated_achs.append(ACHIEVEMENTS[ach.next])
 
@@ -213,7 +212,7 @@ class Achievement(object):
 
     def _fill_up_achievement_msg(self, msg, ach):
         msg.id = ach.id
-        if ach.id in self.achievement.finished:
+        if ach.id in self.achievement.finished and ach.id in self.achievement.display:
             status = MsgAchievement.REWARD
         elif ach.id in self.achievement.complete:
             status = MsgAchievement.COMPLETE
