@@ -188,6 +188,7 @@ for k, v in STAGE_ACTIVITY.iteritems():
     STAGE_ACTIVITY_CONDITION.setdefault(v.char_level, []).append(k)
 
 
+STAGE_ELITE_FIRST_ID = sorted(STAGE_ELITE.keys())[0]
 STAGE_ELITE_CONDITION = {}
 for k, v in STAGE_ELITE.items():
     if getattr(v, 'previous', None) is None:

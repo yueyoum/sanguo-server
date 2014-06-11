@@ -35,6 +35,7 @@ from preset.data import (
     STAGES,
     STAGE_ELITE,
     STAGE_ELITE_CONDITION,
+    STAGE_ELITE_FIRST_ID,
     STAGE_ACTIVITY,
     STAGE_ACTIVITY_CONDITION,
     VIP_MAX_LEVEL,
@@ -508,6 +509,8 @@ class EliteStage(object):
             self.stage.elites_buy = {}
             self.stage.activities = []
             self.stage.save()
+
+        self.enable(STAGE_ELITE[STAGE_ELITE_FIRST_ID])
 
 
     def enable_by_condition_id(self, stage_id):
