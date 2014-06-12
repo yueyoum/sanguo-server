@@ -14,9 +14,77 @@ import world_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='daily.proto',
   package='Sanguo.protocol.daily',
-  serialized_pb='\n\x0b\x64\x61ily.proto\x12\x15Sanguo.protocol.daily\x1a\x0bworld.proto\"Q\n\rCheckInNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63heckin\x18\x02 \x02(\x08\x12\x0c\n\x04\x64\x61ys\x18\x03 \x02(\x05\x12\x10\n\x08max_days\x18\x04 \x02(\x05\"!\n\x0e\x43heckInRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"b\n\x0f\x43heckInResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x31\n\x06reward\x18\x03 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment')
+  serialized_pb='\n\x0b\x64\x61ily.proto\x12\x15Sanguo.protocol.daily\x1a\x0bworld.proto\"\xc9\x01\n\x0b\x43heckInItem\x12\n\n\x02id\x18\x01 \x02(\x05\x12@\n\x06status\x18\x02 \x02(\x0e\x32\x30.Sanguo.protocol.daily.CheckInItem.CheckInStatus\x12\x33\n\x04objs\x18\x03 \x03(\x0b\x32%.Sanguo.protocol.world.ResourceObject\"7\n\rCheckInStatus\x12\n\n\x06SIGNED\x10\x01\x12\x0c\n\x08SIGNABLE\x10\x02\x12\x0c\n\x08UNSIGNED\x10\x03\"S\n\rCheckInNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x31\n\x05items\x18\x02 \x03(\x0b\x32\".Sanguo.protocol.daily.CheckInItem\"X\n\x13\x43heckInUpdateNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x30\n\x04item\x18\x02 \x02(\x0b\x32\".Sanguo.protocol.daily.CheckInItem\"!\n\x0e\x43heckInRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"b\n\x0f\x43heckInResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x31\n\x06reward\x18\x03 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment')
 
 
+
+_CHECKINITEM_CHECKINSTATUS = _descriptor.EnumDescriptor(
+  name='CheckInStatus',
+  full_name='Sanguo.protocol.daily.CheckInItem.CheckInStatus',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='SIGNED', index=0, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SIGNABLE', index=1, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UNSIGNED', index=2, number=3,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=198,
+  serialized_end=253,
+)
+
+
+_CHECKINITEM = _descriptor.Descriptor(
+  name='CheckInItem',
+  full_name='Sanguo.protocol.daily.CheckInItem',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='Sanguo.protocol.daily.CheckInItem.id', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='status', full_name='Sanguo.protocol.daily.CheckInItem.status', index=1,
+      number=2, type=14, cpp_type=8, label=2,
+      has_default_value=False, default_value=1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='objs', full_name='Sanguo.protocol.daily.CheckInItem.objs', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _CHECKINITEM_CHECKINSTATUS,
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=52,
+  serialized_end=253,
+)
 
 
 _CHECKINNOTIFY = _descriptor.Descriptor(
@@ -34,23 +102,9 @@ _CHECKINNOTIFY = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='checkin', full_name='Sanguo.protocol.daily.CheckInNotify.checkin', index=1,
-      number=2, type=8, cpp_type=7, label=2,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='days', full_name='Sanguo.protocol.daily.CheckInNotify.days', index=2,
-      number=3, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='max_days', full_name='Sanguo.protocol.daily.CheckInNotify.max_days', index=3,
-      number=4, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
+      name='items', full_name='Sanguo.protocol.daily.CheckInNotify.items', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -63,8 +117,43 @@ _CHECKINNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=51,
-  serialized_end=132,
+  serialized_start=255,
+  serialized_end=338,
+)
+
+
+_CHECKINUPDATENOTIFY = _descriptor.Descriptor(
+  name='CheckInUpdateNotify',
+  full_name='Sanguo.protocol.daily.CheckInUpdateNotify',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.daily.CheckInUpdateNotify.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='item', full_name='Sanguo.protocol.daily.CheckInUpdateNotify.item', index=1,
+      number=2, type=11, cpp_type=10, label=2,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=340,
+  serialized_end=428,
 )
 
 
@@ -91,8 +180,8 @@ _CHECKINREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=134,
-  serialized_end=167,
+  serialized_start=430,
+  serialized_end=463,
 )
 
 
@@ -133,20 +222,39 @@ _CHECKINRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=169,
-  serialized_end=267,
+  serialized_start=465,
+  serialized_end=563,
 )
 
+_CHECKINITEM.fields_by_name['status'].enum_type = _CHECKINITEM_CHECKINSTATUS
+_CHECKINITEM.fields_by_name['objs'].message_type = world_pb2._RESOURCEOBJECT
+_CHECKINITEM_CHECKINSTATUS.containing_type = _CHECKINITEM;
+_CHECKINNOTIFY.fields_by_name['items'].message_type = _CHECKINITEM
+_CHECKINUPDATENOTIFY.fields_by_name['item'].message_type = _CHECKINITEM
 _CHECKINRESPONSE.fields_by_name['reward'].message_type = world_pb2._ATTACHMENT
+DESCRIPTOR.message_types_by_name['CheckInItem'] = _CHECKINITEM
 DESCRIPTOR.message_types_by_name['CheckInNotify'] = _CHECKINNOTIFY
+DESCRIPTOR.message_types_by_name['CheckInUpdateNotify'] = _CHECKINUPDATENOTIFY
 DESCRIPTOR.message_types_by_name['CheckInRequest'] = _CHECKINREQUEST
 DESCRIPTOR.message_types_by_name['CheckInResponse'] = _CHECKINRESPONSE
+
+class CheckInItem(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _CHECKINITEM
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.daily.CheckInItem)
 
 class CheckInNotify(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _CHECKINNOTIFY
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.daily.CheckInNotify)
+
+class CheckInUpdateNotify(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _CHECKINUPDATENOTIFY
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.daily.CheckInUpdateNotify)
 
 class CheckInRequest(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType

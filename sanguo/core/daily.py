@@ -15,11 +15,35 @@ from core.attachment import Attachment, standard_drop_to_attachment_protomsg
 from core.achievement import Achievement
 from core.resource import Resource
 from utils import pack_msg
-from protomsg import CheckInNotify, CheckInResponse
+from utils.api import api_get_checkin_data
+
+from protomsg import CheckInNotify, CheckInResponse, CheckInUpdateNotify, CheckInItem
 from preset.data import GEMS, OFFICIAL
 from preset import errormsg
 
 MAX_DAYS = 7
+
+
+CHECKIN_DATA = {}
+# {
+#   index_number: {
+#     'icons': [(icon_one_type, icon_one_id, icon_one_amount), ...],
+#     'package': package
+#   },
+#   ...
+# }
+
+
+def get_checkin_data():
+    api_get_checkin_data(data={})
+
+get_checkin_data()
+
+
+def receive_checkin_data(data):
+    global CHECKIN_DATA
+    CHECKIN_DATA = data
+
 
 
 class CheckIn(object):
@@ -30,7 +54,7 @@ class CheckIn(object):
         except DoesNotExist:
             self.c = MongoCheckIn(id=char_id)
             self.c.has_checked = False
-            self.c.days = 0
+            self.c.day = 1
             self.c.save()
 
 
@@ -42,28 +66,20 @@ class CheckIn(object):
                 "CheckIn checkin",
                 "already checkin",
             )
+
         self.c.has_checked = True
 
-        self.c.days += 1
+        day = self.c.day
+        resource_add = CHECKIN_DATA[day]['package']
 
-        resource_add = {}
-        resource_add['sycee'] = 100
-
-        if self.c.days == MAX_DAYS:
-            resource_add['stuffs'] = [(22, 5)]
-
-            level_three_gems = []
-            for g in GEMS.values():
-                if g.level == 3:
-                    level_three_gems.append(g.id)
-
-            gid = random.choice(level_three_gems)
-            resource_add['gems'] = [(gid, 1)]
-            self.c.days = 0
+        if self.c.day == MAX_DAYS:
+            self.c.day = 1
+        else:
+            self.c.day += 1
 
         self.c.save()
 
-        resource = Resource(self.char_id, "Daily Checkin", 'checkin reward')
+        resource = Resource(self.char_id, "Daily Checkin", 'checkin reward. day {0}'.format(day))
         standard_drop = resource.add(**resource_add)
 
         msg = CheckInResponse()
@@ -73,6 +89,7 @@ class CheckIn(object):
         achievement = Achievement(self.char_id)
         achievement.trig(34, 1)
 
+        self.send_update_notify(day)
         return msg
 
 
@@ -83,13 +100,38 @@ class CheckIn(object):
         self.send_notify()
 
 
-    def send_notify(self):
-        m = CheckInNotify()
-        m.checkin = self.c.has_checked
-        m.days = self.c.days
-        m.max_days = MAX_DAYS
+    def _fill_up_one_item(self, item, k):
+        item.id = k
+        if k < self.c.day:
+            status = CheckInItem.SIGNED
+        elif k == self.c.day:
+            if self.c.has_checked:
+                status = CheckInItem.SIGNED
+            else:
+                status = CheckInItem.SIGNABLE
+        else:
+            status = CheckInItem.UNSIGNED
 
-        publish_to_char(self.char_id, pack_msg(m))
+        item.status = status
+
+        for _tp, _id, _amount in CHECKIN_DATA[k]['icons']:
+            obj = item.objs.add()
+            obj.tp, obj.id, obj.amount = _tp, _id, _amount
+
+
+    def send_update_notify(self, k):
+        msg = CheckInUpdateNotify()
+        self._fill_up_one_item(msg.item, k)
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
+    def send_notify(self):
+        msg = CheckInNotify()
+        for k in CHECKIN_DATA.keys():
+            item = msg.items.add()
+            self._fill_up_one_item(item, k)
+
+        publish_to_char(self.char_id, pack_msg(msg))
 
 
 class OfficalDailyReward(object):

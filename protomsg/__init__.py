@@ -124,6 +124,7 @@ RESPONSE_NOTIFY_TYPE = {
     "DeleteMailResponse": 2104,
     "GetAttachmentResponse": 2106,
     "CheckInNotify": 3000,
+    "CheckInUpdateNotify": 3003,
     "CheckInResponse": 3002,
     "TaskNotify": 3100,
     "AchievementNotify": 3200,

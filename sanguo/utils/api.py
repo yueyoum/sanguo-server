@@ -23,3 +23,5 @@ api_store_get = partial(apicall, cmd=HUB_URL + '/api/store/get/')
 api_store_buy = partial(apicall, cmd=HUB_URL + '/api/store/buy/')
 
 api_activatecode_use = partial(apicall, cmd=HUB_URL + '/api/activatecode/use/')
+
+api_get_checkin_data = partial(apicall, cmd=HUB_URL + '/api/checkin/get/')

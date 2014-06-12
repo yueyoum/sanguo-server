@@ -1,0 +1,74 @@
+[
+{
+    "pk": 1, 
+    "model": "config.resourcetype", 
+    "fields": {
+        "name": "\u7ecf\u9a8c", 
+        "icon": "Icon_EXP"
+    }
+},
+{
+    "pk": 2, 
+    "model": "config.resourcetype", 
+    "fields": {
+        "name": "\u5b98\u804c\u7ecf\u9a8c", 
+        "icon": ""
+    }
+},
+{
+    "pk": 3, 
+    "model": "config.resourcetype", 
+    "fields": {
+        "name": "\u91d1\u5e01", 
+        "icon": "Icon_\u94f6\u4e242"
+    }
+},
+{
+    "pk": 4, 
+    "model": "config.resourcetype", 
+    "fields": {
+        "name": "\u5143\u5b9d", 
+        "icon": ""
+    }
+},
+{
+    "pk": 5, 
+    "model": "config.resourcetype", 
+    "fields": {
+        "name": "\u82f1\u96c4", 
+        "icon": ""
+    }
+},
+{
+    "pk": 6, 
+    "model": "config.resourcetype", 
+    "fields": {
+        "name": "\u5361\u9b42", 
+        "icon": ""
+    }
+},
+{
+    "pk": 7, 
+    "model": "config.resourcetype", 
+    "fields": {
+        "name": "\u88c5\u5907", 
+        "icon": ""
+    }
+},
+{
+    "pk": 8, 
+    "model": "config.resourcetype", 
+    "fields": {
+        "name": "\u5b9d\u77f3", 
+        "icon": "Icon_\u5b9d\u77f32"
+    }
+},
+{
+    "pk": 9, 
+    "model": "config.resourcetype", 
+    "fields": {
+        "name": "\u9053\u5177", 
+        "icon": "Icon_\u6750\u6599"
+    }
+}
+]
