@@ -71,7 +71,7 @@ class CheckIn(object):
         self.c.has_checked = True
 
         day = self.c.day
-        resource_add = CHECKIN_DATA[day]['package']
+        resource_add = CHECKIN_DATA[str(day)]['package']
 
         if self.c.day == MAX_DAYS:
             self.c.day = 1
@@ -115,7 +115,7 @@ class CheckIn(object):
 
         item.status = status
 
-        for _tp, _id, _amount in CHECKIN_DATA[k]['icons']:
+        for _tp, _id, _amount in CHECKIN_DATA[str(k)]['icons']:
             obj = item.objs.add()
             obj.tp, obj.id, obj.amount = _tp, _id, _amount
 
