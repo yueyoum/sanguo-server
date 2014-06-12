@@ -33,9 +33,10 @@ CHECKIN_DATA = {}
 #   ...
 # }
 
-
 def get_checkin_data():
-    api_get_checkin_data(data={})
+    global CHECKIN_DATA
+    res = api_get_checkin_data(data={})
+    CHECKIN_DATA = res['data']['checkin']
 
 get_checkin_data()
 
