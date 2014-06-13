@@ -11,5 +11,4 @@ from libs import pack_msg
 def checkin(request):
     c = CheckIn(request._char_id)
     msg = c.checkin()
-    c.send_notify()
     return pack_msg(msg)
