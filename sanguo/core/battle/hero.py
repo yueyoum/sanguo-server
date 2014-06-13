@@ -58,6 +58,10 @@ class EffectManager(DotEffectMixin, StepHeroNotifyMixin):
         cleaned_effs = defaultdict(lambda: [])
 
         for h, effs in self.effect_targets.iteritems():
+            if h.die:
+                # 对于死亡的人物是忽略掉，还是彻底的从effect_targets中移除？
+                continue
+
             for e in effs[:]:
                 e.rounds -= 1
                 if e.rounds <= 0:
@@ -215,24 +219,11 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
             logger.debug("%d: dizziness, return" % self.id)
             return
 
-
         skills = self.find_skill(self.attack_skills)
         for skill in skills:
             logger.debug("%d: skill action %d" % (self.id, skill.id))
-            self.skill_action(target, skill, msg)
-
-        msg.dead_ids.extend(self.find_dead_target_ids_in_one_step(msg))
-
-
-    def find_dead_target_ids_in_one_step(self, step_msg):
-        # 遍历这个step消息中的所有hero_notify,找到每个hero_notify 中 target_id 的最后hp
-        # 以这个来判断target_id是否死亡
-        res = {}
-        for hn in step_msg.hero_notify:
-            res[hn.target_id] = hn.hp
-
-        deads = [k for k, v in res.iteritems() if v == 0]
-        return deads
+            _dead_ids = self.skill_action(target, skill, msg)
+            msg.dead_ids.extend(_dead_ids)
 
 
     def real_damage_value(self, damage, target):
@@ -369,6 +360,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
                 self.add_anger_to_target(skill, t, msg)
 
+        dead_ids = []
         for eff in zero_rounds_effects:
             if eff.id not in [1, 2]:
                 raise Exception("Skill Action: Unsupported Zero rounds effect: {0}".format(eff.id))
@@ -382,9 +374,16 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
             logger.debug("Eff: {0}, targets: {1}".format(eff.id, [i.id for i in targets]))
 
             for t in targets:
-                self._one_action(t, value, msg, eff)
+                if t.die:
+                    continue
 
-                self.add_anger_to_target(skill, t, msg)
+                self._one_action(t, value, msg, eff)
+                if t.die:
+                    dead_ids.append(t.id)
+                else:
+                    self.add_anger_to_target(skill, t, msg)
+
+        return dead_ids
 
 
     def add_anger_to_target(self, skill, target, msg):
