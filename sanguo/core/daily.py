@@ -11,7 +11,7 @@ from core.msgpipe import publish_to_char
 from core.exception import SanguoException
 from core.character import Char
 from core.counter import Counter
-from core.attachment import Attachment, standard_drop_to_attachment_protomsg
+from core.attachment import Attachment, standard_drop_to_attachment_protomsg, get_drop_from_raw_package
 from core.achievement import Achievement
 from core.resource import Resource
 from utils import pack_msg
@@ -71,7 +71,6 @@ class CheckIn(object):
         self.c.has_checked = True
 
         day = self.c.day
-        resource_add = CHECKIN_DATA[str(day)]['package']
 
         if self.c.day == MAX_DAYS:
             self.c.day = 1
@@ -81,6 +80,9 @@ class CheckIn(object):
         self.c.save()
 
         resource = Resource(self.char_id, "Daily Checkin", 'checkin reward. day {0}'.format(day))
+        resource_add = CHECKIN_DATA[str(day)]['package']
+        resource_add = get_drop_from_raw_package(resource_add)
+
         standard_drop = resource.add(**resource_add)
 
         msg = CheckInResponse()
@@ -102,6 +104,7 @@ class CheckIn(object):
 
 
     def _fill_up_one_item(self, item, k):
+        k = int(k)
         item.id = k
         if k < self.c.day:
             status = CheckInItem.SIGNED

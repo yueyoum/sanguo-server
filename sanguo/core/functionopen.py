@@ -48,14 +48,19 @@ class FunctionOpen(object):
 
         opened_funcs = []
         for func_id in self.mf.freeze[:]:
-            this_func = FUNCTION_DEFINE[func_id]
+            try:
+                this_func = FUNCTION_DEFINE[func_id]
+            except KeyError:
+                self.mf.freeze.remove(func_id)
+                continue
+
             if char_level >= this_func.char_level and str(this_func.stage_id) in passed_stages:
                 # OPEN
                 self.mf.freeze.remove(func_id)
                 opened_funcs.append(func_id)
 
-        if opened_funcs:
-            self.mf.save()
+
+        self.mf.save()
 
         f = Formation(self.char_id)
         for of in opened_funcs[:]:
