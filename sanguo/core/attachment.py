@@ -96,7 +96,34 @@ def standard_drop_to_attachment_protomsg(data, is_prepare=False):
     return msg
 
 
+def get_drop_from_mode_two_package(package):
+    # 只生成一样东西
+    # 或者什么也没有
+    drop = make_standard_drop_from_template()
+
+    def _make(name):
+        this = random.choice(package[name])
+        a, b = divmod(this['prob'], DROP_PROB_BASE)
+        a = int(a)
+        if b > random.randint(0, DROP_PROB_BASE):
+            a += 1
+        if a >= 1:
+            drop[name] = [(this['id'], 1)]
+            return True
+        return False
+
+    names = ['heros', 'souls', 'equipments', 'gems', 'stuffs']
+    index = 0
+    while not _make(names[index]):
+        index += 1
+
+    return drop
+
+
 def get_drop_from_raw_package(package, multi=1, gaussian=False):
+    if package.get('mode', 1) == 2:
+        return get_drop_from_mode_two_package(package)
+
     gold = package['gold']
     sycee = package['sycee']
     exp = package['exp']
@@ -147,7 +174,6 @@ def get_drop_from_raw_package(package, multi=1, gaussian=False):
 
 
 
-
 def get_drop(drop_ids, multi=1, gaussian=False):
     # 从pakcage中解析并计算掉落，返回为 dict
     # package 格式
@@ -186,46 +212,29 @@ def get_drop(drop_ids, multi=1, gaussian=False):
     #     'stuffs': [(id, amount)...]
     # }
 
-    gold = 0
-    sycee = 0
-    exp = 0
-    official_exp = 0
-    heros = []
-    souls = []
-    equipments = []
-    gems = []
-    stuffs = []
+    drop = make_standard_drop_from_template()
 
     for d in drop_ids:
         if d == 0:
             # 一般不会为0，0实在策划填写编辑器的时候本来为空，却填了个0
             continue
 
-        p = copy.deepcopy(PACKAGES[d])
-        gold += p['gold']
-        sycee += p['sycee']
-        exp += p['exp']
-        official_exp += p['official_exp']
+        pack = copy.deepcopy(PACKAGES[d])
 
-        heros.extend(p['heros'])
-        souls.extend(p['souls'])
-        equipments.extend(p['equipments'])
-        gems.extend(p['gems'])
-        stuffs.extend(p['stuffs'])
+        p = get_drop_from_raw_package(pack, multi=multi, gaussian=gaussian)
 
-    package = {
-        'gold': gold,
-        'sycee': sycee,
-        'exp': exp,
-        'official_exp': official_exp,
-        'heros': heros,
-        'souls': souls,
-        'equipments': equipments,
-        'gems': gems,
-        'stuffs': stuffs,
-    }
+        drop['gold'] += p['gold']
+        drop['sycee'] += p['sycee']
+        drop['exp'] += p['exp']
+        drop['official_exp'] += p['official_exp']
 
-    return get_drop_from_raw_package(package, multi=multi, gaussian=gaussian)
+        drop['heros'].extend(p['heros'])
+        drop['souls'].extend(p['souls'])
+        drop['equipments'].extend(p['equipments'])
+        drop['gems'].extend(p['gems'])
+        drop['stuffs'].extend(p['stuffs'])
+
+    return drop
 
 
 class Attachment(object):
