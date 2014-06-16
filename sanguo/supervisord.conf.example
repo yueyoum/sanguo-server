@@ -1,9 +1,0 @@
-[program:celery]
-directory = /PATH/
-command = /PATH/start_celery.sh
-autostart = false
-redirect_stderr = true
-stdout_logfile = /PATH/logs/
-stdout_logfile_maxbytes = 50MB
-stdout_logfile_backups = 10
-
