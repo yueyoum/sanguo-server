@@ -20,6 +20,7 @@ from core.resource import Resource
 from core import timer
 from utils import pack_msg
 from utils.decorate import operate_guard
+from utils.api import APIFailure
 
 
 from preset.settings import (
@@ -335,7 +336,16 @@ class Hang(object):
             'char_id': self.char_id,
             'seconds': remained_time
         }
-        key = timer.register(data, remained_time)
+
+        try:
+            key = timer.register(data, remained_time)
+        except APIFailure:
+            raise SanguoException(
+                errormsg.SERVER_FAULT,
+                self.char_id,
+                "Hang Start",
+                "api failure"
+            )
 
         hang_doing = MongoHangDoing(
             id=self.char_id,
@@ -371,7 +381,16 @@ class Hang(object):
                 "Hang cancel. But hang already finished"
             )
 
-        timer.unregister(self.hang_doing.jobid)
+        try:
+            timer.unregister(self.hang_doing.jobid)
+        except APIFailure:
+            raise SanguoException(
+                errormsg.SERVER_FAULT,
+                self.char_id,
+                "Hang Cancel",
+                "api failure"
+            )
+
         self.finish()
 
 

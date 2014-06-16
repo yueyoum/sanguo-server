@@ -227,7 +227,6 @@ LOG_MAN_PORT = int( tree.find('log/port').text )
 
 TIMER_REGISTER = tree.find('timer/register').text
 TIMER_UNREGISTER = tree.find('timer/unregister').text
-TIMER_CALLBACK = tree.find('timer/callback').text
 
 
 del et
