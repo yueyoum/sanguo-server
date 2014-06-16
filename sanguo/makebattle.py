@@ -31,9 +31,9 @@ class MyHero(InBattleHero):
         self.id = _id
         self.real_id = _id
         self.original_id = _id
-        self.level = 1
+        self.level = 99
 
-        self.attack, self.defense, self.hp = cal_hero_property(_id, 1, 0)
+        self.attack, self.defense, self.hp = cal_hero_property(_id, self.level, 5)
         self.crit = HEROS[_id].crit
         self.dodge = 0
         self.anger = HEROS[_id].anger
@@ -77,8 +77,10 @@ def write_msg(file_name, msg):
     with open(file_name, 'wb') as f:
         f.write(msg.SerializeToString())
 
-
-if __name__ == '__main__':
+def run():
     msg = make_battle()
     write_msg('/tmp/battle.bin', msg)
+
+if __name__ == '__main__':
+    run()
 
