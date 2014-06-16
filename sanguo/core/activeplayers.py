@@ -26,15 +26,9 @@ class ActivePlayers(object):
 
     def clean(self):
         now = arrow.utcnow().timestamp
-        players = redis_client_two.zrange(self.key, 0, -1, withscores=True)
-
-        expired = []
-        for p, t in players:
-            if now - t > PLAYER_ON_LINE_TIME_TO_ALIVE:
-                expired.append(int(p))
-
-        redis_client_two.zrem(self.key, *expired)
-        return len(expired)
+        limit = now - PLAYER_ON_LINE_TIME_TO_ALIVE
+        cleaned_amount = redis_client_two.zremrangebyscore(self.key, '-inf', limit)
+        return cleaned_amount
 
 
     @classmethod
