@@ -10,3 +10,5 @@
 0 0 * * * /PATH/clean_mail.sh
 # 每天00:00 清理历史战斗录像
 0 0 * * * /PATH/clean_battle_record.sh
+# 每隔一定时间清理在线用户
+*/30 * * * * /PATH/clean_active_players.sh

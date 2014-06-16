@@ -3,36 +3,39 @@
 __author__ = 'Wang Chao'
 __date__ = '2/24/14'
 
-from core.drives import redis_client_two
-from utils.timezone import utc_timestamp
+import arrow
 
-from preset.data import SERVERS
+from core.server import SERVERS
+from core.drives import redis_client_two
+
+from preset.settings import PLAYER_ON_LINE_TIME_TO_ALIVE
 
 ACTIVE_USER_KEY = 'active_players'
-ACTIVE_TIME_DIFF = 30 * 60
 
 class ActivePlayers(object):
     def __init__(self, server_id):
         self.key = '{0}:{1}'.format(ACTIVE_USER_KEY, server_id)
 
     def set(self, char_id):
-        redis_client_two.zadd(self.key, char_id, utc_timestamp())
+        now = arrow.utcnow().timestamp
+        redis_client_two.zadd(self.key, char_id, now)
 
     def get_list(self):
         players = redis_client_two.zrange(self.key, 0, -1)
         return [int(i) for i in players]
 
     def clean(self):
-        now = utc_timestamp()
+        now = arrow.utcnow().timestamp
         players = redis_client_two.zrange(self.key, 0, -1, withscores=True)
 
         expired = []
         for p, t in players:
-            if now - t > ACTIVE_TIME_DIFF:
+            if now - t > PLAYER_ON_LINE_TIME_TO_ALIVE:
                 expired.append(int(p))
 
         redis_client_two.zrem(self.key, *expired)
         return len(expired)
+
 
     @classmethod
     def clean_all(cls):

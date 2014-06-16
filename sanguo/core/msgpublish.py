@@ -50,17 +50,17 @@ class ChatMessagePublish(object):
             self.to_char(cid, text)
 
 
-
-class BroadcastMessagePublish(object):
-    def to_server(self, server_id, tid, *args):
-        ap = ActivePlayers(server_id)
-        active_list = ap.get_list()
-
-        for cid in active_list:
-            msg = BroadcastNotify()
-            b_msg = msg.msgs.add()
-            b_msg.id = tid
-            for a in args:
-                b_msg.args.append(a)
-
-            publish_to_char(cid, pack_msg(msg))
+#
+# class BroadcastMessagePublish(object):
+#     def to_server(self, server_id, tid, *args):
+#         ap = ActivePlayers(server_id)
+#         active_list = ap.get_list()
+#
+#         for cid in active_list:
+#             msg = BroadcastNotify()
+#             b_msg = msg.msgs.add()
+#             b_msg.id = tid
+#             for a in args:
+#                 b_msg.args.append(a)
+#
+#             publish_to_char(cid, pack_msg(msg))

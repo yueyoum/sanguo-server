@@ -13,7 +13,7 @@ HUB_URL = "https://{0}:{1}".format(settings.HUB_HOST, settings.HUB_HTTPS_PORT)
 HTTPSAPIClient.install_pem('/opt/ca/client.pem')
 apicall = HTTPSAPIClient()
 
-
+api_server_list = partial(apicall, cmd=HUB_URL + '/api/server-list/')
 api_server_report = partial(apicall, cmd=HUB_URL + '/api/server-list/report/')
 api_account_login = partial(apicall, cmd=HUB_URL + '/api/account/login/')
 api_account_bind = partial(apicall, cmd=HUB_URL + '/api/account/bind/')

@@ -202,6 +202,8 @@ DATETIME_FORMAT = "Y-m-d H:i:s"
 import xml.etree.ElementTree as et
 tree = et.ElementTree(file=os.path.join(BASE_DIR, "config.xml"))
 
+NODE_ID = int(tree.find('node/id').text)
+
 ENABLE_BATTLE_LOG = tree.find('battle/log').text == "true"
 
 REDIS_HOST = tree.find('redis/host').text
@@ -227,15 +229,6 @@ TIMER_REGISTER = tree.find('timer/register').text
 TIMER_UNREGISTER = tree.find('timer/unregister').text
 TIMER_CALLBACK = tree.find('timer/callback').text
 
-
-# CELERY_IMPORTS = ('worker.tasks',)
-# CELERY_ENABLE_UTC = True
-# CELERY_TIMEZONE = TIME_ZONE
-# CELERY_ACCEPT_CONTENT = ['json']
-# CELERY_TASK_SERIALIZER = 'json'
-# CELERY_RESULT_SERIALIZER = 'json'
-# BROKER_URL = tree.find('celery/broker').text
-#
 
 del et
 del tree

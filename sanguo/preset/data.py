@@ -41,7 +41,6 @@ def _find_file(fixture_name):
 FUNCTION_DEFINE = object_maker(_find_file('function_define.json'))
 CHARINIT = object_maker(_find_file('charinit.json'))[1]
 ARENA_REWARD = object_maker(_find_file('arena_reward.json'))
-SERVERS = object_maker(_find_file('servers.json'))
 ACHIEVEMENTS = object_maker(_find_file('achievements.json'))
 OFFICIAL = object_maker(_find_file('official.json'))
 HEROS = object_maker(_find_file('heros.json'))

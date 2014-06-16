@@ -241,3 +241,14 @@ OPERATE_INTERVAL_FRIEND_REFRESH = 5        # 刷新自己好友状态间隔
 
 OPERATE_INTERVAL_PLUNDER_LIST = 5          # 获取掠夺列表间隔
 OPERATE_INTERVAL_PLUNDER_BATTLE = 5        # 掠夺战斗间隔
+
+
+#########################
+#      其他             #
+#########################
+
+# 在线用户生存期
+# 因为http协议不能记录登录用户，所以在用户最后一次操作后的生存期时间内，都认为此用户在线
+# 目前这个用于发送聊天。只给在线用户发送
+PLAYER_ON_LINE_TIME_TO_ALIVE = 60 * 60
+
