@@ -47,7 +47,7 @@ urlpatterns = patterns('',
                        url(r'^prionser/release/$', 'views.prison.views.prisoner_release'),
                        url(r'^prionser/kill/$', 'views.prison.views.prisoner_kill'),
 
-                       url(r'^friend/player-list/$', 'views.friend.views.player_list'),
+                       url(r'^friend/player-list/$', 'views.friend.views.candidate_list'),
                        url(r'^friend/add/$', 'views.friend.views.add'),
                        url(r'^friend/cancel/$', 'views.friend.views.cancel'),
                        url(r'^friend/accept/$', 'views.friend.views.accept'),
@@ -61,7 +61,6 @@ urlpatterns = patterns('',
 
                        url(r'daily/checkin/$', 'views.daily.views.checkin'),
 
-                       # url(r'^teambattle/start/$', 'views.teambattle.views.start'),
 
                        url(r'^store/panel/$', 'views.store.views.panel'),
                        url(r'^store/buy/$', 'views.store.views.buy'),

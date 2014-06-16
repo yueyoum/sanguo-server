@@ -7,7 +7,7 @@ __date__ = '12/31/13'
 from mongoengine import DoesNotExist
 
 from core.mongoscheme import MongoFriend, MongoCharacter
-from core.character import Char
+from core.character import Char, get_char_ids_by_level_range
 from core.hero import Hero
 from core.msgpipe import publish_to_char
 from core.exception import SanguoException
@@ -18,6 +18,7 @@ import protomsg
 from protomsg import FRIEND_NOT, FRIEND_OK, FRIEND_ACK, FRIEND_APPLY
 
 from preset.data import VIP_FUNCTION, VIP_MAX_LEVEL
+from preset.settings import FRIEND_CANDIDATE_LEVEL_DIFF
 from preset import errormsg
 from utils import pack_msg
 
@@ -62,6 +63,25 @@ class Friend(object):
             if f == FRIEND_OK:
                 amount += 1
         return amount
+
+
+    def candidate_list(self, level_diff=FRIEND_CANDIDATE_LEVEL_DIFF):
+        # 候选人列表
+        level = self.char.mc.level
+        char_ids = get_char_ids_by_level_range(self.char.mc.server_id, level-level_diff, level+level_diff)
+
+        res = []
+        for c in char_ids:
+            if c == self.char_id:
+                continue
+            if self.is_general_friend(c):
+                continue
+
+            res.append(c)
+            if len(res) >= 5:
+                break
+
+        return res
 
     def friends_list(self):
         """

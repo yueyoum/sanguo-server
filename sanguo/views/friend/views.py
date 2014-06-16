@@ -4,36 +4,21 @@ __author__ = 'Wang Chao'
 __date__ = '12/31/13'
 
 from core.friend import Friend
-from core.character import Char, get_char_ids_by_level_range
 from libs import pack_msg
 from utils.decorate import message_response, operate_guard
+from preset.settings import OPERATE_INTERVAL_FRIEND_CANDIDATE_LIST, OPERATE_INTERVAL_FRIEND_REFRESH
 
 import protomsg
 from protomsg import FRIEND_NOT
 
-LEVEL_DIFF = 10
 
 @message_response("PlayerListResponse")
-@operate_guard('friend_player_list', 10, keep_result=True)
-def player_list(request):
+@operate_guard('friend_candidate_list', OPERATE_INTERVAL_FRIEND_CANDIDATE_LIST, keep_result=True)
+def candidate_list(request):
     char_id = request._char_id
-    server_id = request._server_id
-    char = Char(char_id)
-    level = char.cacheobj.level
-
-    char_ids = get_char_ids_by_level_range(server_id, level-LEVEL_DIFF, level+LEVEL_DIFF)
 
     f = Friend(char_id)
-    res = []
-    for c in char_ids:
-        if c == char_id:
-            continue
-        if f.is_general_friend(c):
-            continue
-
-        res.append(c)
-        if len(res) >= 5:
-            break
+    res = f.candidate_list()
 
     response = protomsg.PlayerListResponse()
     response.ret = 0
@@ -85,7 +70,7 @@ def refuse(request):
 
 
 @message_response("FriendRefreshResponse")
-@operate_guard('friend_refresh', 10, keep_result=True)
+@operate_guard('friend_refresh', OPERATE_INTERVAL_FRIEND_REFRESH, keep_result=True)
 def refresh(request):
     f = Friend(request._char_id)
     f.send_friends_notify()

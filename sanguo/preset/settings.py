@@ -200,12 +200,16 @@ DEMAGE_VALUE_ADJUST = {
 #########################
 #      好友             #
 #########################
+FRIEND_CANDIDATE_LEVEL_DIFF = 10        # 好友候选人等级差
 
+
+#########################
+#      聊天             #
+#########################
 # 邮件可以保存多少天
 MAIL_KEEP_DAYS = 7
 
-# 猛将挑战增加一分钟需要多少元宝
-TEAMBATTLE_INCR_COST = 100
+
 
 #########################
 #      激活码           #
@@ -213,3 +217,27 @@ TEAMBATTLE_INCR_COST = 100
 ACTIVATECODE_MAIL_TITLE = u'激活码领取成功'
 ACTIVATECODE_MAIL_CONTENT = u'激活码领取成功'
 
+
+#########################
+#      聊天             #
+#########################
+CHAT_MESSAGE_MAX_LENGTH = 50            # 发送消息长度。多少个字
+
+
+
+#########################
+#      操作间隔时间 秒   #
+#########################
+OPERATE_INTERVAL_PVE = 5                # 普通关卡战斗间隔
+OPERATE_INTERVAL_PVE_ELITE = 5          # 精英关卡战斗间隔
+OPERATE_INTERVAL_PVE_ACTIVITY_GOLD = 5  # 活动关卡金币间隔
+OPERATE_INTERVAL_PVE_ACTIVITY_GEM = 5   # 活动关卡宝石间隔
+
+OPERATE_INTERVAL_ARENA_PANEL = 5        # 竞技厂刷新面板间隔
+OPERATE_INTERVAL_CHAT_SEND = 15         # 聊天发送间隔
+
+OPERATE_INTERVAL_FRIEND_CANDIDATE_LIST = 5 # 添加好友的候选列表刷新间隔
+OPERATE_INTERVAL_FRIEND_REFRESH = 5        # 刷新自己好友状态间隔
+
+OPERATE_INTERVAL_PLUNDER_LIST = 5          # 获取掠夺列表间隔
+OPERATE_INTERVAL_PLUNDER_BATTLE = 5        # 掠夺战斗间隔

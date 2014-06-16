@@ -21,6 +21,7 @@ from core import timer
 from utils import pack_msg
 from utils.decorate import operate_guard
 
+
 from preset.settings import (
     PLUNDER_DEFENSE_SUCCESS_GOLD,
     PLUNDER_DEFENSE_FAILURE_GOLD,
@@ -30,6 +31,9 @@ from preset.settings import (
     HANG_RESET_MAIL_CONTENT,
     STAGE_ELITE_RESET_COST,
     STAGE_ELITE_TOTAL_RESET_COST,
+
+    OPERATE_INTERVAL_PVE_ACTIVITY_GEM,
+    OPERATE_INTERVAL_PVE_ACTIVITY_GOLD,
 )
 from preset.data import (
     STAGES,
@@ -777,12 +781,12 @@ class ActivityStage(object):
         publish_to_char(self.char_id, pack_msg(msg))
 
 
-    @operate_guard('activate_pve_1', 5, keep_result=False, char_id_name='char_id')
+    @operate_guard('activate_pve_1', OPERATE_INTERVAL_PVE_ACTIVITY_GOLD, keep_result=False, char_id_name='char_id')
     def battle_type_one(self, _id):
         return self.battle(_id)
 
 
-    @operate_guard('activate_pve_2', 5, keep_result=False, char_id_name='char_id')
+    @operate_guard('activate_pve_2', OPERATE_INTERVAL_PVE_ACTIVITY_GEM, keep_result=False, char_id_name='char_id')
     def battle_type_two(self, _id):
         return self.battle(_id)
 

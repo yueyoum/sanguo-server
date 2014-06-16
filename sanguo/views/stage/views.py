@@ -8,6 +8,7 @@ from core.attachment import standard_drop_to_attachment_protomsg
 from libs import pack_msg
 from utils.decorate import message_response, operate_guard, function_check
 from preset.data import STAGE_ACTIVITY
+from preset.settings import OPERATE_INTERVAL_PVE, OPERATE_INTERVAL_PVE_ELITE
 
 import protomsg
 
@@ -23,7 +24,6 @@ def activity_pve(request):
     else:
         battle_msg = stage.battle_type_two(req.stage_id)
 
-    battle_msg = stage.battle(req.stage_id)
     if battle_msg.self_win:
         drop = stage.save_drop()
     else:
@@ -41,7 +41,7 @@ def activity_pve(request):
 
 
 @message_response("ElitePVEResponse")
-@operate_guard('elite_pve', 15, keep_result=False)
+@operate_guard('elite_pve', OPERATE_INTERVAL_PVE_ELITE, keep_result=False)
 @function_check(11)
 def elite_pve(request):
     req = request._proto
@@ -65,7 +65,7 @@ def elite_pve(request):
 
 
 @message_response("PVEResponse")
-@operate_guard('pve', 15, keep_result=False)
+@operate_guard('pve', OPERATE_INTERVAL_PVE, keep_result=False)
 def pve(request):
     req = request._proto
     stage = Stage(request._char_id)

@@ -14,7 +14,7 @@ from core.exception import SanguoException
 from core.attachment import get_drop_from_raw_package
 from core.mail import Mail
 
-from utils.decorate import message_response, operate_guard
+from utils.decorate import message_response
 from utils.api import api_activatecode_use, APIFailure
 
 from utils import timezone
@@ -34,7 +34,6 @@ def sync(request):
 
 
 @message_response("ResumeResponse")
-@operate_guard('resume', 3, keep_result=False)
 def resume(request):
     req = request._proto
     sync = SyncResponse()

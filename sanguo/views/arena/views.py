@@ -2,6 +2,7 @@
 
 from core.arena import Arena
 from utils.decorate import message_response, operate_guard, function_check
+from preset.settings import OPERATE_INTERVAL_ARENA_PANEL
 
 from libs import pack_msg
 from protomsg import ArenaPanelResponse, ArenaResponse
@@ -11,7 +12,7 @@ __date__ = '1/22/14'
 
 
 @message_response("ArenaPanelResponse")
-@operate_guard('arena_panel', 10, keep_result=True)
+@operate_guard('arena_panel', OPERATE_INTERVAL_ARENA_PANEL, keep_result=True)
 @function_check(8)
 def arena_panel(request):
     arena = Arena(request._char_id)
