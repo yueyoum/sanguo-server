@@ -37,6 +37,7 @@ from preset.settings import (
     OPERATE_INTERVAL_PVE_ACTIVITY_GOLD,
 )
 from preset.data import (
+    STAGE_TYPE,
     STAGES,
     STAGE_ELITE,
     STAGE_ELITE_CONDITION,
@@ -58,6 +59,30 @@ HANG_MAX_SECONDS_FUNCTION = lambda vip: VIP_FUNCTION[vip].hang * 3600
 def max_star_stage_id(char_id):
     s = MongoStage.objects.get(id=char_id)
     return s.max_star_stage
+
+
+def drop_after_stage_type(stage_id, drop):
+    stage = STAGES[stage_id]
+    if not stage.tp:
+        return drop
+
+    value = STAGE_TYPE[stage.tp].value
+    if not value:
+        return drop
+
+    # XXX
+    if STAGE_TYPE[stage.tp].resource == 1:
+        drop['exp'] = int(drop['exp'] * (1 + value / 100.0))
+        return drop
+
+    if STAGE_TYPE[stage.tp].resource == 3:
+        drop['gold'] = int(drop['gold'] * (1 + value / 100.0))
+        return drop
+
+    return drop
+
+
+
 
 class Stage(object):
     def __init__(self, char_id):
@@ -188,6 +213,8 @@ class Stage(object):
         if star:
             perpare_drop['gold'] += this_stage.star_gold
             perpare_drop['exp'] += this_stage.star_exp
+
+        perpare_drop = drop_after_stage_type(stage_id, perpare_drop)
 
         resource = Resource(self.char_id, "Stage Drop", "stage {0}".format(stage_id))
         standard_drop = resource.add(**perpare_drop)
@@ -481,6 +508,8 @@ class Hang(object):
         self.hang_doing.delete()
         self.hang_doing = None
         self.send_notify()
+
+        prepare_drop = drop_after_stage_type(stage_id, prepare_drop)
 
         resource = Resource(self.char_id, "Hang Reward", "actual seconds = {0}, times = {1}".format(actual_seconds, times))
         standard_drop = resource.add(**prepare_drop)

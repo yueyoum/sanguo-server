@@ -9,6 +9,8 @@
         "tp": 1, 
         "sell_gold": 200, 
         "value": 0, 
+        "packages": "", 
+        "quality": 0, 
         "icon": "\u9ec4\u94dc"
     }
 },
@@ -22,6 +24,8 @@
         "tp": 1, 
         "sell_gold": 1000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 0, 
         "icon": "\u73cd\u73e0"
     }
 },
@@ -35,6 +39,8 @@
         "tp": 1, 
         "sell_gold": 500, 
         "value": 0, 
+        "packages": "", 
+        "quality": 1, 
         "icon": "\u9752\u94dc"
     }
 },
@@ -48,6 +54,8 @@
         "tp": 1, 
         "sell_gold": 2000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 1, 
         "icon": "\u7425\u73c0"
     }
 },
@@ -61,6 +69,8 @@
         "tp": 1, 
         "sell_gold": 800, 
         "value": 0, 
+        "packages": "", 
+        "quality": 2, 
         "icon": "\u94c1\u952d"
     }
 },
@@ -74,6 +84,8 @@
         "tp": 1, 
         "sell_gold": 3000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 2, 
         "icon": "\u91d1\u7802"
     }
 },
@@ -87,6 +99,8 @@
         "tp": 1, 
         "sell_gold": 1200, 
         "value": 0, 
+        "packages": "", 
+        "quality": 3, 
         "icon": "\u94a2\u94c1"
     }
 },
@@ -100,6 +114,8 @@
         "tp": 1, 
         "sell_gold": 5000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 3, 
         "icon": "\u6c34\u6676"
     }
 },
@@ -113,6 +129,8 @@
         "tp": 1, 
         "sell_gold": 1500, 
         "value": 0, 
+        "packages": "", 
+        "quality": 4, 
         "icon": "\u94a8\u91d1"
     }
 },
@@ -126,6 +144,8 @@
         "tp": 1, 
         "sell_gold": 8000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 4, 
         "icon": "\u7fe1\u7fe0"
     }
 },
@@ -139,6 +159,8 @@
         "tp": 1, 
         "sell_gold": 2000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 5, 
         "icon": "\u9ed1\u94c1\u952d"
     }
 },
@@ -152,6 +174,8 @@
         "tp": 1, 
         "sell_gold": 15000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 6, 
         "icon": "\u8d64\u8102\u77f3"
     }
 },
@@ -165,6 +189,8 @@
         "tp": 1, 
         "sell_gold": 15000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 6, 
         "icon": "\u51dd\u795e\u77f3"
     }
 },
@@ -178,6 +204,8 @@
         "tp": 1, 
         "sell_gold": 15000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 6, 
         "icon": "\u8840\u708e\u77f3"
     }
 },
@@ -191,6 +219,8 @@
         "tp": 1, 
         "sell_gold": 15000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 6, 
         "icon": "\u6708\u5bd2\u77f3"
     }
 },
@@ -204,6 +234,8 @@
         "tp": 1, 
         "sell_gold": 15000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 6, 
         "icon": "\u5f02\u517d\u5de8\u9aa8"
     }
 },
@@ -217,6 +249,8 @@
         "tp": 1, 
         "sell_gold": 15000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 6, 
         "icon": "\u5f02\u517d\u9cde\u7532"
     }
 },
@@ -230,6 +264,8 @@
         "tp": 1, 
         "sell_gold": 15000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 6, 
         "icon": "\u5f02\u517d\u67d4\u76ae"
     }
 },
@@ -243,6 +279,8 @@
         "tp": 1, 
         "sell_gold": 15000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 6, 
         "icon": "\u732e\u5e1d\u8bcf\u4e66"
     }
 },
@@ -256,6 +294,8 @@
         "tp": 1, 
         "sell_gold": 15000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 6, 
         "icon": "\u9ed1\u6a80\u6728\u7247"
     }
 },
@@ -269,6 +309,8 @@
         "tp": 1, 
         "sell_gold": 15000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 6, 
         "icon": "\u5357\u6d77\u73cd\u73e0"
     }
 },
@@ -282,6 +324,8 @@
         "tp": 1, 
         "sell_gold": 10000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 5, 
         "icon": "\u732e\u5e1d\u8bcf\u4e66"
     }
 },
@@ -295,6 +339,8 @@
         "tp": 1, 
         "sell_gold": 10000, 
         "value": 0, 
+        "packages": "", 
+        "quality": 5, 
         "icon": "\u6311\u6218\u4e66"
     }
 },
@@ -308,6 +354,8 @@
         "tp": 2, 
         "sell_gold": 1000, 
         "value": 1, 
+        "packages": "", 
+        "quality": 1, 
         "icon": "\u5b9d\u7269-\u9526\u56ca"
     }
 },
@@ -321,6 +369,8 @@
         "tp": 2, 
         "sell_gold": 1500, 
         "value": 2, 
+        "packages": "", 
+        "quality": 2, 
         "icon": "\u5b9d\u7269-\u5982\u610f"
     }
 },
@@ -334,6 +384,8 @@
         "tp": 2, 
         "sell_gold": 5000, 
         "value": 3, 
+        "packages": "", 
+        "quality": 3, 
         "icon": "\u5b9d\u7269-\u6f06\u5668"
     }
 },
@@ -347,6 +399,8 @@
         "tp": 2, 
         "sell_gold": 10000, 
         "value": 8, 
+        "packages": "", 
+        "quality": 4, 
         "icon": "\u5b9d\u7269-\u9f0e"
     }
 },
@@ -360,7 +414,69 @@
         "tp": 2, 
         "sell_gold": 20000, 
         "value": 30, 
+        "packages": "", 
+        "quality": 5, 
         "icon": "\u5b9d\u7269-\u5b9d\u5370"
+    }
+},
+{
+    "pk": 29, 
+    "model": "item.stuff", 
+    "fields": {
+        "name": "\u6b66\u5c06\u5c06\u9b42\u5b9d\u7bb1\uff08\u91d1\uff09", 
+        "des": "\u7532\u6b66\u5c06", 
+        "buy_sycee": 0, 
+        "tp": 3, 
+        "sell_gold": 0, 
+        "value": null, 
+        "packages": "", 
+        "quality": 5, 
+        "icon": "\u6b66\u5c06\u5b9d\u7bb1\uff08\u91d1\uff09"
+    }
+},
+{
+    "pk": 30, 
+    "model": "item.stuff", 
+    "fields": {
+        "name": "\u94f6\u4e24\u888b", 
+        "des": "", 
+        "buy_sycee": 0, 
+        "tp": 3, 
+        "sell_gold": 0, 
+        "value": null, 
+        "packages": "", 
+        "quality": 1, 
+        "icon": "\u94f6\u4e24\u888b"
+    }
+},
+{
+    "pk": 31, 
+    "model": "item.stuff", 
+    "fields": {
+        "name": "\u94f6\u4e24\u7bb1", 
+        "des": "", 
+        "buy_sycee": 0, 
+        "tp": 3, 
+        "sell_gold": 0, 
+        "value": null, 
+        "packages": "", 
+        "quality": 2, 
+        "icon": "\u94f6\u4e24\u7bb1"
+    }
+},
+{
+    "pk": 32, 
+    "model": "item.stuff", 
+    "fields": {
+        "name": "\u8d22\u5b9d\u7bb1", 
+        "des": "", 
+        "buy_sycee": 0, 
+        "tp": 3, 
+        "sell_gold": 0, 
+        "value": null, 
+        "packages": "", 
+        "quality": 3, 
+        "icon": "\u8d22\u5b9d\u7bb1"
     }
 }
 ]

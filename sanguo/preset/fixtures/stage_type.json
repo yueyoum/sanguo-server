@@ -1,0 +1,56 @@
+[
+{
+    "pk": 0, 
+    "model": "stage.stagetype", 
+    "fields": {
+        "des": "\u666e\u901a", 
+        "resource": 1, 
+        "value": 0
+    }
+},
+{
+    "pk": 1, 
+    "model": "stage.stagetype", 
+    "fields": {
+        "des": "\u7ecf\u9a8c\u83b7\u5f97+15%", 
+        "resource": 1, 
+        "value": 15
+    }
+},
+{
+    "pk": 2, 
+    "model": "stage.stagetype", 
+    "fields": {
+        "des": "\u91d1\u5e01\u4ea7\u91cf+20%", 
+        "resource": 3, 
+        "value": 20
+    }
+},
+{
+    "pk": 3, 
+    "model": "stage.stagetype", 
+    "fields": {
+        "des": "\u5b9d\u77f3\u4ea7\u51fa+20%", 
+        "resource": 8, 
+        "value": 20
+    }
+},
+{
+    "pk": 4, 
+    "model": "stage.stagetype", 
+    "fields": {
+        "des": "\u6750\u6599\u4ea7\u51fa+20%", 
+        "resource": 9, 
+        "value": 20
+    }
+},
+{
+    "pk": 5, 
+    "model": "stage.stagetype", 
+    "fields": {
+        "des": "\u6709\u5361\u9b42\u788e\u7247\u4ea7\u51fa", 
+        "resource": 6, 
+        "value": 0
+    }
+}
+]
