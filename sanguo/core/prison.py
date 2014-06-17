@@ -86,11 +86,7 @@ class Prison(object):
                     "treasure {0} not exist".format(tid)
                 )
 
-
-        using_stuffs = [(tid, 1) for tid in treasures]
-
-        resource = Resource(self.char_id, "Prisoner Get")
-        with resource.check(stuffs=using_stuffs):
+        def _get():
             got = False
             prob = self.p.prisoners[str_id].prob + treasures_prob
             char = Char(self.char_id).mc
@@ -117,6 +113,15 @@ class Prison(object):
                 publish_to_char(self.char_id, pack_msg(msg))
 
             self.p.save()
+            return got
+
+        using_stuffs = [(tid, 1) for tid in treasures]
+        if using_stuffs:
+            resource = Resource(self.char_id, "Prisoner Get")
+            with resource.check(stuffs=using_stuffs):
+                got = _get()
+        else:
+            got = _get()
 
         t = Task(self.char_id)
         t.trig(5)
