@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 import protomsg
 
-from core.msgpipe import message_get, message_clean
+from core.msgpipe import message_get
 from core.activeplayers import ActivePlayers
 
 ### FOR DEBUG
@@ -28,9 +28,6 @@ class UnpackAndVerifyData(RequestFilter):
         if server_id and char_id:
             ap = ActivePlayers(request._server_id)
             ap.set(request._char_id)
-
-        if char_id and request.path == '/player/login/':
-            message_clean(char_id)
 
 
 class PackMessageData(object):

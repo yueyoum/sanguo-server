@@ -4,7 +4,7 @@ import protomsg
 from core.character import Char
 from core.task import Task
 
-from core.msgpipe import publish_to_char
+from core.msgpipe import publish_to_char, message_clean
 from core.prison import Prison
 from core.plunder import Plunder
 from core.friend import Friend
@@ -61,6 +61,8 @@ def update_hero_notify(char_id, objs):
 
 
 def login_notify(char_id):
+    message_clean(char_id)
+
     hero_objs = char_heros_obj(char_id)
 
     Char(char_id).send_notify()
