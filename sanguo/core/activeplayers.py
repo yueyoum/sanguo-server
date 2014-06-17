@@ -24,6 +24,10 @@ class ActivePlayers(object):
         players = redis_client_two.zrange(self.key, 0, -1)
         return [int(i) for i in players]
 
+    @property
+    def amount(self):
+        return redis_client_two.zcard(self.key)
+
     def clean(self):
         now = arrow.utcnow().timestamp
         limit = now - PLAYER_ON_LINE_TIME_TO_ALIVE
@@ -34,10 +38,15 @@ class ActivePlayers(object):
     @classmethod
     def clean_all(cls):
         server_ids = SERVERS.keys()
-        amount = 0
+
+        result = {}
         for sid in server_ids:
             ap = cls(sid)
             res = ap.clean()
-            amount += res
-        return amount
 
+            result[sid] = {
+                'cleaned': res,
+                'remained': ap.amount
+            }
+
+        return result

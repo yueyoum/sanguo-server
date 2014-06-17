@@ -12,11 +12,10 @@ def clean():
     logger = Logger("clean_active_players.log")
     logger.write("Start.")
 
-    amount = ActivePlayers.clean_all()
+    result = ActivePlayers.clean_all()
 
-    logger.write("Complete. Cleaned Amount: {0}".format(amount))
+    logger.write("Complete. {0}".format(result))
     logger.close()
 
 if __name__ == '__main__':
     clean()
-
