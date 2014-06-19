@@ -49,4 +49,4 @@ class Counter(object):
 
     def reset(self):
         self.c.counter[self.func_name] = 0
-        self.c.counter.save()
+        self.c.save()
