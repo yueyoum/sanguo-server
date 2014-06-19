@@ -63,6 +63,19 @@ def elite_pve(request):
     return pack_msg(response)
 
 
+@message_response("EliteStageResetResponse")
+def elite_reset(request):
+    req = request._proto
+    stage = EliteStage(request._char_id)
+    stage.reset_one(req.id)
+    return None
+
+@message_response("EliteStageResetTotalResponse")
+def elite_reset_total(request):
+    stage = EliteStage(request._char_id)
+    stage.reset_total()
+    return None
+
 
 @message_response("PVEResponse")
 @operate_guard('pve', OPERATE_INTERVAL_PVE, keep_result=False)
