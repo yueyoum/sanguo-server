@@ -4,15 +4,6 @@
 
 class StepHeroNotifyMixin(object):
     def fill_up_heor_notify(self, step_msg, target, eff):
-        for index, h in enumerate(step_msg.hero_notify):
-            if h.target_id == target.id:
-                step_msg.hero_notify[index].hp = target.hp
-                step_msg.hero_notify[index].anger = target.anger
-                new = step_msg.hero_notify[index].adds.add()
-                new.id = eff.id
-                new.value = eff.value
-                return
-
         hero_noti = step_msg.hero_notify.add()
         hero_noti.target_id = target.id
         hero_noti.hp = target.hp
@@ -73,4 +64,3 @@ class ActiveEffectMixin(object):
             raise TypeError("using_effects, Unsupported eff: %d" % eff.id)
 
         self._using_eff_value(eff, target, attr_name, plus)
-    
