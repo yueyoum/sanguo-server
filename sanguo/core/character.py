@@ -161,7 +161,7 @@ class Char(object):
         msg.char.vip = char.vip
         msg.char.purchase_got = char.purchase_got
 
-        msg.leader = self.leader
+        msg.char.leader = self.leader
 
         if opended_funcs:
             msg.funcs.extend(opended_funcs)
