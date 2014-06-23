@@ -51,6 +51,14 @@ class Formation(object):
             self.formation.formation = [0] * 9
             self.formation.save()
 
+    def get_leader_id(self):
+        return self.formation.sockets['1'].hero
+
+    def get_leader_oid(self):
+        _id = self.get_leader_id()
+        h = MongoHero.objects.get(id=_id)
+        return h.oid
+
     def all_socket_ids(self):
         ids = self.formation.sockets.keys()
         return [int(i) for i in ids]

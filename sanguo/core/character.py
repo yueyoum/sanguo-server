@@ -80,6 +80,11 @@ class Char(object):
             p += h.power
         return p
 
+    @property
+    def leader(self):
+        f = Formation(self.id)
+        return f.get_leader_id()
+
 
     def update(self, gold=0, sycee=0, exp=0, official_exp=0, purchase_got=0, purchase_actual_got=0):
         opended_funcs = []
@@ -155,6 +160,8 @@ class Char(object):
         msg.char.power = self.power
         msg.char.vip = char.vip
         msg.char.purchase_got = char.purchase_got
+
+        msg.leader = self.leader
 
         if opended_funcs:
             msg.funcs.extend(opended_funcs)

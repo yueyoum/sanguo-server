@@ -14,7 +14,7 @@ import world_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='character.proto',
   package='Sanguo.protocol.character',
-  serialized_pb='\n\x0f\x63haracter.proto\x12\x19Sanguo.protocol.character\x1a\x0bworld.proto\"\xf3\x01\n\tCharacter\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x0c\n\x04gold\x18\x03 \x02(\x05\x12\r\n\x05sycee\x18\x04 \x02(\x05\x12\r\n\x05level\x18\x05 \x02(\x05\x12\x13\n\x0b\x63urrent_exp\x18\x06 \x02(\x05\x12\x16\n\x0enext_level_exp\x18\x07 \x02(\x05\x12\x10\n\x08official\x18\x08 \x02(\x05\x12\x14\n\x0cofficial_exp\x18\t \x02(\x05\x12\x19\n\x11next_official_exp\x18\n \x02(\x05\x12\r\n\x05power\x18\x0b \x02(\x05\x12\x0b\n\x03vip\x18\x0c \x02(\x05\x12\x14\n\x0cpurchase_got\x18\r \x02(\x05\"\x8a\x01\n\x0f\x43haracterNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x04\x63har\x18\x02 \x02(\x0b\x32$.Sanguo.protocol.character.Character\x12\x32\n\x05\x66uncs\x18\x03 \x03(\x0e\x32#.Sanguo.protocol.world.FunctionType\"7\n\x16\x43reateCharacterRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0c\n\x04name\x18\x02 \x02(\t\"7\n\x17\x43reateCharacterResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\x0f\x63haracter.proto\x12\x19Sanguo.protocol.character\x1a\x0bworld.proto\"\x83\x02\n\tCharacter\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x0c\n\x04gold\x18\x03 \x02(\x05\x12\r\n\x05sycee\x18\x04 \x02(\x05\x12\r\n\x05level\x18\x05 \x02(\x05\x12\x13\n\x0b\x63urrent_exp\x18\x06 \x02(\x05\x12\x16\n\x0enext_level_exp\x18\x07 \x02(\x05\x12\x10\n\x08official\x18\x08 \x02(\x05\x12\x14\n\x0cofficial_exp\x18\t \x02(\x05\x12\x19\n\x11next_official_exp\x18\n \x02(\x05\x12\r\n\x05power\x18\x0b \x02(\x05\x12\x0b\n\x03vip\x18\x0c \x02(\x05\x12\x14\n\x0cpurchase_got\x18\r \x02(\x05\x12\x0e\n\x06leader\x18\x0e \x02(\x05\"\x8a\x01\n\x0f\x43haracterNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x04\x63har\x18\x02 \x02(\x0b\x32$.Sanguo.protocol.character.Character\x12\x32\n\x05\x66uncs\x18\x03 \x03(\x0e\x32#.Sanguo.protocol.world.FunctionType\"7\n\x16\x43reateCharacterRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0c\n\x04name\x18\x02 \x02(\t\"7\n\x17\x43reateCharacterResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
 
 
 
@@ -117,6 +117,13 @@ _CHARACTER = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='leader', full_name='Sanguo.protocol.character.Character.leader', index=13,
+      number=14, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -127,7 +134,7 @@ _CHARACTER = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=60,
-  serialized_end=303,
+  serialized_end=319,
 )
 
 
@@ -168,8 +175,8 @@ _CHARACTERNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=306,
-  serialized_end=444,
+  serialized_start=322,
+  serialized_end=460,
 )
 
 
@@ -203,8 +210,8 @@ _CREATECHARACTERREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=446,
-  serialized_end=501,
+  serialized_start=462,
+  serialized_end=517,
 )
 
 
@@ -238,8 +245,8 @@ _CREATECHARACTERRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=503,
-  serialized_end=558,
+  serialized_start=519,
+  serialized_end=574,
 )
 
 _CHARACTERNOTIFY.fields_by_name['char'].message_type = _CHARACTER

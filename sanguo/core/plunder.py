@@ -52,7 +52,7 @@ class Plunder(object):
 
     def get_plunder_list(self):
         """
-        @return: [[id, name, power, formation, is_robot, gold], ...]
+        @return: [[id, name, power, leader, formation, is_robot, gold], ...]
         @rtype: list
         """
         char = Char(self.char_id)
@@ -81,7 +81,7 @@ class Plunder(object):
         for i in ids:
             char = Char(i)
             f = Formation(i)
-            res.append([i, char.cacheobj.name, char.power, f.in_formation_hero_original_ids(), False])
+            res.append([i, char.cacheobj.name, char.power, f.get_leader_oid(), f.in_formation_hero_original_ids(), False])
 
         robot_ids = []
         robot_amount = 10 - len(ids)
@@ -107,7 +107,7 @@ class Plunder(object):
         for i in robot_ids:
             char = Char(i)
             f = Formation(i)
-            res.append([i, char.cacheobj.name, char.power, f.in_formation_hero_original_ids(), True])
+            res.append([i, char.cacheobj.name, char.power, f.get_leader_oid(), f.in_formation_hero_original_ids(), True])
 
         final_ids = [r[0] for r in res]
         this_stages = MongoStage.objects.filter(id__in=final_ids)
