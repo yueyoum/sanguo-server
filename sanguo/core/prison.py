@@ -161,16 +161,20 @@ class Prison(object):
     def kill(self, _id):
         p = self._abandon(_id, action="Prisoner Kill")
         quality = HEROS[p.oid].quality
-        souls = [(22, PRISONER_KILL_GOT_SOUL[quality])]
+        prob = random.randint(1, 100)
+        if prob <= 33:
+            soul_amount = 1
+        elif prob <= 66:
+            soul_amount = 2
+        else:
+            soul_amount = 3
+
+        souls = [(p.oid, soul_amount)]
 
         treasures = [(random.choice(PRISONER_KILL_GOT_TREASURE[quality]), 1)]
 
-        stuffs = []
-        stuffs.extend(souls)
-        stuffs.extend(treasures)
-
         resource = Resource(self.char_id, "Prisoner Kill")
-        standard_drop = resource.add(stuffs=stuffs)
+        standard_drop = resource.add(stuffs=treasures, souls=souls)
         return standard_drop_to_attachment_protomsg(standard_drop)
 
 
