@@ -138,7 +138,7 @@ class CheckIn(object):
         publish_to_char(self.char_id, pack_msg(msg))
 
 
-class OfficalDailyReward(object):
+class OfficialDailyReward(object):
     def __init__(self, char_id):
         self.char_id = char_id
 
@@ -161,7 +161,7 @@ class OfficalDailyReward(object):
             raise SanguoException(
                 errormsg.OFFICAL_ALREADY_GET_REWARD,
                 self.char_id,
-                "OfficalDailyReward Get Reward",
+                "OfficialDailyReward Get Reward",
                 "already got"
             )
 
@@ -172,7 +172,7 @@ class OfficalDailyReward(object):
             raise SanguoException(
                 errormsg.OFFICAL_ZERO_GET_REWARD,
                 self.char_id,
-                "OfficalDailyReward Get Reward",
+                "OfficialDailyReward Get Reward",
                 "char official level = 0"
             )
 

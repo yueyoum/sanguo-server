@@ -11,6 +11,7 @@ python cron/reset_checkin.py
 python cron/reset_stage_elite.py
 python cron/reset_task.py
 python cron/reset_store_player_limit.py
+python cron/reset_prize.py
 
 exit 0
 

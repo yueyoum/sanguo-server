@@ -1,12 +1,12 @@
 from core.signals import login_signal
 
 from core.notify import login_notify
-from core.daily import OfficalDailyReward
+from core.daily import OfficialDailyReward
 
 
 def login(account_id, server_id, char_id, **kwargs):
     if char_id:
-        od = OfficalDailyReward(char_id)
+        od = OfficialDailyReward(char_id)
         od.check()
         login_notify(char_id)
 

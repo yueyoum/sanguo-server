@@ -282,8 +282,8 @@ class Attachment(object):
             att_msg = task.get_reward(param)
         elif prize_id == 6:
             # 官职每日登录
-            from core.daily import OfficalDailyReward
-            od = OfficalDailyReward(self.char_id)
+            from core.daily import OfficialDailyReward
+            od = OfficialDailyReward(self.char_id)
             att_msg = od.get_reward()
         elif prize_id == 7:
             # 团队本
