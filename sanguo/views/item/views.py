@@ -8,7 +8,7 @@ from utils.decorate import message_response, function_check
 from core.item import Item
 from libs import pack_msg
 
-from protomsg import StrengthEquipResponse
+from protomsg import StrengthEquipResponse, StuffUseResponse
 
 
 @message_response("StrengthEquipResponse")
@@ -70,3 +70,17 @@ def special_buy(request):
     item = Item(request._char_id)
     item.special_buy(req.socket_id, req.tp)
     return None
+
+
+@message_response("StuffUseResponse")
+def stuff_use(request):
+    req = request._proto
+    item = Item(request._char_id)
+
+    res = item.stuff_use(req.id, req.amount)
+    response = StuffUseResponse()
+    response.ret = 0
+    if res:
+        response.attachment.MergeFrom(res)
+
+    return pack_msg(res)

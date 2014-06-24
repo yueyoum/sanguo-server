@@ -726,6 +726,45 @@ class Item(MessageEquipmentMixin):
         resource.add(gold=gold)
 
 
+
+    def stuff_use(self, _id, amount):
+        from core.attachment import get_drop, standard_drop_to_attachment_protomsg
+        from core.resource import Resource
+        try:
+            s = STUFFS[_id]
+        except KeyError:
+            raise SanguoException(
+                errormsg.STUFF_NOT_EXIST,
+                self.char_id,
+                "Stuff Use",
+                "stuff {0} not exist".format(_id)
+            )
+
+        # XXX
+        if s.tp != 3:
+            raise SanguoException(
+                errormsg.STUFF_CAN_NOT_USE,
+                self.char_id,
+                "Stuff Use",
+                "stuff {0} tp is {1}. Can not use".format(_id, s.tp)
+            )
+
+        # XXX 忽略amount，只能一个一个用
+        self.stuff_remove(_id, amount)
+
+        packages = s.packages
+        if not packages:
+            return None
+
+        package_ids = [int(i) for i in packages.split(',')]
+        standard_drops = get_drop(package_ids)
+
+        resource = Resource(self.char_id, "Stuff Use", "use {0}".format(_id))
+        resource.add(**standard_drops)
+        return standard_drop_to_attachment_protomsg(standard_drops)
+
+
+
     def send_equip_notify(self):
         msg = protomsg.EquipNotify()
         for _id, data in self.item.equipments.iteritems():
