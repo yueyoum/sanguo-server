@@ -9,6 +9,7 @@
         "tp": 1, 
         "times": 3, 
         "next_task": null, 
+        "link": "PVELevelFrame", 
         "first": true
     }
 },
@@ -22,6 +23,7 @@
         "tp": 2, 
         "times": 5, 
         "next_task": null, 
+        "link": "ArenaFrame", 
         "first": true
     }
 },
@@ -35,6 +37,7 @@
         "tp": 3, 
         "times": 5, 
         "next_task": null, 
+        "link": "RobberyFrame", 
         "first": true
     }
 },
@@ -48,6 +51,7 @@
         "tp": 4, 
         "times": 1, 
         "next_task": null, 
+        "link": "", 
         "first": true
     }
 },
@@ -61,6 +65,7 @@
         "tp": 5, 
         "times": 1, 
         "next_task": null, 
+        "link": "", 
         "first": true
     }
 }

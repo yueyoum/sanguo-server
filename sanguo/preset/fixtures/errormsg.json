@@ -231,6 +231,17 @@
     }
 },
 {
+    "pk": 144, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STUFF_CAN_NOT_USE", 
+        "text_zh": "\u6b64\u9053\u5177\u4e0d\u80fd\u4f7f\u7528", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
     "pk": 150, 
     "model": "errormsg.errormsg", 
     "fields": {

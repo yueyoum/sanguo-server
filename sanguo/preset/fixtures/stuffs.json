@@ -3,8 +3,8 @@
     "pk": 1, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u9ec4\u94dc", 
-        "des": "\u6253\u90201\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
+        "name": "\u9ec4\u94dc\uff08\u6750\u6599\uff09", 
+        "des": "\u666e\u901a\u9ec4\u94dc\uff0c\u786c\u5ea6\u8f83\u4f4e", 
         "buy_sycee": 0, 
         "tp": 1, 
         "sell_gold": 200, 
@@ -18,8 +18,8 @@
     "pk": 2, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u73cd\u73e0", 
-        "des": "\u6253\u90201\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
+        "name": "\u73cd\u73e0\uff08\u6750\u6599\uff09", 
+        "des": "\u5149\u6cfd\u8f83\u597d\u7684\u73cd\u73e0", 
         "buy_sycee": 0, 
         "tp": 1, 
         "sell_gold": 1000, 
@@ -33,8 +33,8 @@
     "pk": 3, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u9752\u94dc", 
-        "des": "\u6253\u90202\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
+        "name": "\u9752\u94dc\uff08\u6750\u6599\uff09", 
+        "des": "\u9752\u94dc\u97e7\u6027\u548c\u5f3a\u5ea6\u90fd\u6bd4\u9ec4\u94dc\u4f18\u826f", 
         "buy_sycee": 0, 
         "tp": 1, 
         "sell_gold": 500, 
@@ -48,8 +48,8 @@
     "pk": 4, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u7425\u73c0", 
-        "des": "\u6253\u90202\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
+        "name": "\u7425\u73c0\uff08\u6750\u6599\uff09", 
+        "des": "\u8272\u6cfd\u901a\u900f\u7684\u7425\u73c0", 
         "buy_sycee": 0, 
         "tp": 1, 
         "sell_gold": 2000, 
@@ -63,7 +63,7 @@
     "pk": 5, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u70bc\u94c1", 
+        "name": "\u751f\u94c1\uff08\u6750\u6599\uff09", 
         "des": "\u6253\u90203\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -78,7 +78,7 @@
     "pk": 6, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u7802\u91d1", 
+        "name": "\u7802\u91d1\uff08\u6750\u6599\uff09", 
         "des": "\u6253\u90203\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -93,7 +93,7 @@
     "pk": 7, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u94a2\u94c1", 
+        "name": "\u94a2\u94c1\uff08\u6750\u6599\uff09", 
         "des": "\u6253\u90204\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -108,7 +108,7 @@
     "pk": 8, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u6c34\u6676", 
+        "name": "\u6c34\u6676\uff08\u6750\u6599\uff09", 
         "des": "\u6253\u90204\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -123,7 +123,7 @@
     "pk": 9, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u94a8\u94c1", 
+        "name": "\u94a8\u94c1\uff08\u6750\u6599\uff09", 
         "des": "\u6253\u90205\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -138,7 +138,7 @@
     "pk": 10, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u7fe1\u7fe0", 
+        "name": "\u7fe1\u7fe0\uff08\u6750\u6599\uff09", 
         "des": "\u6253\u90205\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -153,7 +153,7 @@
     "pk": 11, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u9ed1\u94c1", 
+        "name": "\u9ed1\u94c1\uff08\u6750\u6599\uff09", 
         "des": "\u6253\u90206\u9636\u88c5\u5907\u6240\u9700\u7684\u6750\u6599", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -168,7 +168,7 @@
     "pk": 12, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u8d64\u51dd\u77f3", 
+        "name": "\u8d64\u51dd\u77f3\uff08\u6750\u6599\uff09", 
         "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u5251\u3001\u5f13\u7c7b\u6b66\u5668", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -183,7 +183,7 @@
     "pk": 13, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u51dd\u795e\u77f3", 
+        "name": "\u51dd\u795e\u77f3\uff08\u6750\u6599\uff09", 
         "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u5200\u3001\u65a7\u7c7b\u6b66\u5668", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -198,7 +198,7 @@
     "pk": 14, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u8840\u708e\u77f3", 
+        "name": "\u8840\u708e\u77f3\uff08\u6750\u6599\uff09", 
         "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u67aa\u3001\u621f\u7c7b\u6b66\u5668", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -213,7 +213,7 @@
     "pk": 15, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u6708\u5bd2\u77f3", 
+        "name": "\u6708\u5bd2\u77f3\uff08\u6750\u6599\uff09", 
         "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u6247\u3001\u7b1b\u7c7b\u6b66\u5668", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -228,7 +228,7 @@
     "pk": 16, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u5f02\u517d\u5de8\u9aa8", 
+        "name": "\u5f02\u517d\u5de8\u9aa8\uff08\u6750\u6599\uff09", 
         "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u94e0", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -243,7 +243,7 @@
     "pk": 17, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u5f02\u517d\u9cde\u7532", 
+        "name": "\u5f02\u517d\u9cde\u7532\uff08\u6750\u6599\uff09", 
         "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u7532", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -258,7 +258,7 @@
     "pk": 18, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u5f02\u517d\u67d4\u76ae", 
+        "name": "\u5f02\u517d\u67d4\u76ae\uff08\u6750\u6599\uff09", 
         "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u888d", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -273,7 +273,7 @@
     "pk": 19, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u58a8\u5bb6\u5320\u4e66", 
+        "name": "\u58a8\u5bb6\u5320\u4e66\uff08\u6750\u6599\uff09", 
         "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u519b\u5370", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -288,7 +288,7 @@
     "pk": 20, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u9ed1\u6a80\u6728\u7247", 
+        "name": "\u9ed1\u6a80\u6728\u7247\uff08\u6750\u6599\uff09", 
         "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u5175\u4e66", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -303,7 +303,7 @@
     "pk": 21, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u5357\u6d77\u73cd\u73e0", 
+        "name": "\u5357\u6d77\u73cd\u73e0\uff08\u6750\u6599\uff09", 
         "des": "\u53ef\u7528\u4e8e\u6253\u90206\u9636\u9970\u54c1", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -334,7 +334,7 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u6311\u6218\u4e66", 
-        "des": "\u53c2\u4e0e\u201c\u6d3b\u52a8-\u731b\u5c06\u6311\u6218\u201d\u6240\u9700\u7684\u9053\u5177", 
+        "des": "\u53c2\u4e0e\u201c\u731b\u5c06\u6311\u6218\u201d\u6240\u9700\u7684\u9053\u5177", 
         "buy_sycee": 0, 
         "tp": 1, 
         "sell_gold": 10000, 
@@ -348,7 +348,7 @@
     "pk": 24, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u9526\u56ca", 
+        "name": "\u9526\u56ca\uff08\u5b9d\u7269\uff09", 
         "des": "", 
         "buy_sycee": 0, 
         "tp": 2, 
@@ -363,7 +363,7 @@
     "pk": 25, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u7389\u5982\u610f", 
+        "name": "\u7389\u5982\u610f\uff08\u5b9d\u7269\uff09", 
         "des": "", 
         "buy_sycee": 0, 
         "tp": 2, 
@@ -378,7 +378,7 @@
     "pk": 26, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u6f06\u5668", 
+        "name": "\u6f06\u5668\uff08\u5b9d\u7269\uff09", 
         "des": "", 
         "buy_sycee": 0, 
         "tp": 2, 
@@ -393,7 +393,7 @@
     "pk": 27, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u5b9d\u9f0e", 
+        "name": "\u5b9d\u9f0e\uff08\u5b9d\u7269\uff09", 
         "des": "", 
         "buy_sycee": 0, 
         "tp": 2, 
@@ -408,7 +408,7 @@
     "pk": 28, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u5b9d\u5370", 
+        "name": "\u5b9d\u5370\uff08\u5b9d\u7269\uff09", 
         "des": "", 
         "buy_sycee": 0, 
         "tp": 2, 

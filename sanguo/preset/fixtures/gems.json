@@ -228,13 +228,13 @@
     "pk": 16, 
     "model": "item.gem", 
     "fields": {
-        "name": "6\u7ea7\u653b\u51fb\u5b9d\u77f3", 
+        "name": "6\u7ea7\u751f\u547d\u5b9d\u77f3", 
         "level": 6, 
-        "tp_name": "\u7ea2", 
-        "value": 60, 
-        "used_for": "attack", 
-        "merge_to": 7, 
-        "used_for_name": "\u653b\u51fb", 
+        "tp_name": "\u9ec4", 
+        "value": 149, 
+        "used_for": "hp", 
+        "merge_to": 17, 
+        "used_for_name": "\u751f\u547d\u4e0a\u9650", 
         "sell_gold": 150000, 
         "icon": "\u9ec4\u5b9d\u77f36"
     }
