@@ -250,19 +250,23 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         return value
 
 
-    def _one_action(self, target, value, msg, eff=None):
+    def _one_action(self, target, value, msg, eff):
         target.active_property_effects()
-        msg_target = msg.action.targets.add()
-        msg_target.target_id = target.id
-        msg_target.is_crit = False
+
+        is_crit = False
         if self.using_crit >= randint(1, 100):
-            msg_target.is_crit = True
+            is_crit = True
             value *= 2
 
-        text = "{0} => {1}, Eff: {2}, Crit: {3}".format(self.id, target.id, eff.id if eff else 'None', msg_target.is_crit)
+        text = "{0} => {1}, Eff: {2}, Crit: {3}".format(self.id, target.id, eff.id if eff else 'None', is_crit)
         logger.debug(text)
 
-        if not eff or eff.id == 2:
+        if eff.is_hit_target:
+            msg_target = msg.action.targets.add()
+            msg_target.target_id = target.id
+            msg_target.is_crit = is_crit
+
+        if eff.id == 2:
             value = self.real_damage_value(value, target) * uniform(0.97, 1.03)
 
         hero_noti = msg.hero_notify.add()
@@ -274,11 +278,6 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         hero_noti.hp = target.hp
         hero_noti.value = value
         hero_noti.anger = target.anger
-
-        if eff:
-            e = hero_noti.adds.add()
-            e.id =eff.id
-            e.value = eff.value
 
         text = 'Value: {0}, Hp: {1}, Anger: {2}, Eff: {3}'.format(value, target.hp, target.anger, eff.id if eff else 'None')
         logger.debug(text)

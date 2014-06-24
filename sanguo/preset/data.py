@@ -230,22 +230,23 @@ for d in STUFFS.values():
 
 
 class UsingEffect(object):
-    __slots__ = ['id', 'target', 'value', 'rounds']
-    def __init__(self, id, target, value, rounds):
+    __slots__ = ['id', 'target', 'value', 'rounds', 'is_hit_target']
+    def __init__(self, id, target, value, rounds, is_hit_target):
         self.id = id
         self.target = target
         self.value = value
         self.rounds =  rounds
+        self.is_hit_target = is_hit_target
 
     def copy(self):
-        return UsingEffect(self.id, self.target, self.value, self.rounds)
+        return UsingEffect(self.id, self.target, self.value, self.rounds, self.is_hit_target)
 
 
 def _get_skill_effects(sid):
     res = []
     for se in SKILL_EFFECT.values():
         if se.skill == sid:
-            res.append(UsingEffect(se.effect, se.target, se.value, se.rounds))
+            res.append(UsingEffect(se.effect, se.target, se.value, se.rounds, se.is_hit_target))
     return res
 
 for s in SKILLS.values():
