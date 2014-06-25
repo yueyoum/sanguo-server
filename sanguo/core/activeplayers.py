@@ -50,3 +50,17 @@ class ActivePlayers(object):
             }
 
         return result
+
+
+PLAYER_LOGIN_ID_KEY = 'login_id:{0}'
+class Player(object):
+    __slots__ = ['char_id', 'key']
+    def __init__(self, char_id):
+        self.char_id = char_id
+        self.key = PLAYER_LOGIN_ID_KEY.format(char_id)
+
+    def set_login_id(self, login_id):
+        redis_client_two.setex(self.key, login_id, 3600)
+
+    def get_login_id(self):
+        return redis_client_two.get(self.key)

@@ -8,6 +8,7 @@ from core.exception import SanguoException
 from core.signals import login_signal
 from protomsg import CreateCharacterResponse
 from libs import crypto, pack_msg
+from libs.session import session_dumps
 
 from utils.decorate import message_response
 from utils.api import api_character_create, APIFailure
@@ -53,8 +54,14 @@ def create_character(request):
 
     request._char_id = char_id
 
-    new_session = '%d:%d:%d' % (request._account_id, request._server_id, char_id)
-    new_session = crypto.encrypt(new_session)
+    game_session = request._game_session
+    game_session._char_id = char_id
+
+    new_session = crypto.encrypt(session_dumps(game_session))
+
+    #
+    # new_session = '%d:%d:%d' % (request._account_id, request._server_id, char_id)
+    # new_session = crypto.encrypt(new_session)
 
     response = CreateCharacterResponse()
     response.ret = 0

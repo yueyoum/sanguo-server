@@ -4,7 +4,9 @@ from django.http import HttpResponse
 import protomsg
 
 from core.msgpipe import message_get
-from core.activeplayers import ActivePlayers
+from core.activeplayers import ActivePlayers, Player
+from core.exception import SanguoException
+from preset import errormsg
 
 ### FOR DEBUG
 from utils import app_test_helper
@@ -24,7 +26,18 @@ class UnpackAndVerifyData(RequestFilter):
             return
 
         server_id = getattr(request, '_server_id', None)
-        char_id = getattr(request, 'char_id', None)
+        char_id = getattr(request, '_char_id', None)
+        if char_id:
+            p = Player(char_id)
+            login_id = p.get_login_id()
+            if login_id and login_id != request._game_session.login_id:
+                raise SanguoException(
+                    errormsg.LOGIN_RE,
+                    char_id,
+                    "Any",
+                    "need re login"
+                )
+
         if server_id and char_id:
             ap = ActivePlayers(request._server_id)
             ap.set(request._char_id)

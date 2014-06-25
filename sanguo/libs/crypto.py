@@ -2,7 +2,8 @@
 import time
 
 from Crypto.Cipher import AES
-from Crypto import Random
+# from Crypto import Random
+# Random.get_random_bytes(SIZE)
 
 from django.conf import settings
 
@@ -16,46 +17,40 @@ class ExpiredText(Exception):
 
 
 BLOCK_SIZE = 16
-KEY = settings.CRYPTO_KEY or Random.get_random_bytes(BLOCK_SIZE)
-PREFIX = settings.CRYPTO_PREFIX or Random.get_random_bytes(4)
+MODE = AES.MODE_ECB
+
+KEY = settings.CRYPTO_KEY
 
 
-def encrypt(text, key=KEY, prefix=PREFIX):
-    prefix = prefix.replace('|', '_')
-    text = '%s|%s|' % (prefix, text)
+def encrypt(text, key=KEY):
     length = len(text)
     a, b = divmod(length, BLOCK_SIZE)
-    rest = (a + 1) * BLOCK_SIZE - length
+    rest = (a + 1) * BLOCK_SIZE - length - 1
 
-    text = '%s%s' % (text, rest * ' ')
+    text = '%s|%s' % (text, rest * '*')
 
-    obj = AES.new(key, AES.MODE_ECB)
+    obj = AES.new(key, MODE)
     return obj.encrypt(text)
 
 
-def decrypt(text, key=KEY, prefix=PREFIX):
+def decrypt(text, key=KEY):
     if len(text) % BLOCK_SIZE != 0:
         raise BadEncryptedText()
 
-    obj = AES.new(key, AES.MODE_ECB)
+    obj = AES.new(key, MODE)
     result = obj.decrypt(text)
 
-    prefix = prefix.replace('|', '_')
-    if not result.startswith(prefix):
-        raise BadEncryptedText()
-
     head, tail = result.rsplit('|', 1)
-    p, real_text = head.split('|', 1)
-    return real_text
+    return head
 
 
-def encrypt_with_expire(text, key=KEY, prefix=PREFIX):
+def encrypt_with_expire(text, key=KEY):
     expire = int(time.time())
-    return encrypt('%s|%d' % (text, expire), key=key, prefix=prefix)
+    return encrypt('%s|%d' % (text, expire), key=key)
 
 
-def decrypt_with_expire(text, expire_in, key=KEY, prefix=PREFIX):
-    result = decrypt(text, key=key, prefix=prefix)
+def decrypt_with_expire(text, expire_in, key=KEY):
+    result = decrypt(text, key=key)
     real_text, start_at = result.rsplit('|', 1)
     if int(time.time()) > int(start_at) + expire_in:
         raise ExpiredText()

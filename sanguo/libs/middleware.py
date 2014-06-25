@@ -12,6 +12,7 @@ from libs import (
     unpack_msg,
     crypto,
 )
+from libs.session import session_loads
 
 import protomsg
 from protomsg import COMMAND_REQUEST, COMMAND_TYPE
@@ -65,20 +66,25 @@ class RequestFilter(object):
                         return HttpResponse(status=403)
 
                 request._proto = p
-                request._session = decrypted_session
+                request._game_session = session_loads(decrypted_session)
 
-                splited_session = decrypted_session.split(':')
-                len_of_splited_session = len(splited_session)
-                if len_of_splited_session == 1:
-                    request._account_id = None
-                    request._server_id = None
-                    request._char_id = None
-                elif len_of_splited_session == 2:
-                    request._account_id = int(splited_session[0])
-                    request._server_id = int(splited_session[1])
-                    request._char_id = None
-                else:
-                    request._account_id = int(splited_session[0])
-                    request._server_id = int(splited_session[1])
-                    request._char_id = int(splited_session[2])
-                    print "CHAR ID =", request._char_id
+                request._account_id = request._game_session.account_id
+                request._server_id = request._game_session.server_id
+                request._char_id = request._game_session._char_id
+
+                print "CHAR ID =", request._char_id
+
+                # len_of_splited_session = len(splited_session)
+                # if len_of_splited_session == 1:
+                #     request._account_id = None
+                #     request._server_id = None
+                #     request._char_id = None
+                # elif len_of_splited_session == 2:
+                #     request._account_id = int(splited_session[0])
+                #     request._server_id = int(splited_session[1])
+                #     request._char_id = None
+                # else:
+                #     request._account_id = int(splited_session[0])
+                #     request._server_id = int(splited_session[1])
+                #     request._char_id = int(splited_session[2])
+                #     print "CHAR ID =", request._char_id

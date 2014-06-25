@@ -5,9 +5,11 @@ __date__ = '4/9/14'
 
 from core.exception import SanguoException
 from core.signals import login_signal
+from core.activeplayers import Player
 from utils.decorate import message_response
 from utils import timezone
 from libs import crypto, pack_msg
+from libs.session import GameSession, session_dumps
 
 from protomsg import StartGameResponse, SyncResponse, BindAccountResponse
 from utils.api import api_account_login, api_account_bind, APIFailure
@@ -61,16 +63,22 @@ def login(request):
 
     if char_id:
         request._char_id = char_id
-        session_str = '{0}:{1}:{2}'.format(
-            request._account_id,
-            request._server_id,
-            request._char_id
-        )
+        # session_str = '{0}:{1}:{2}'.format(
+        #     request._account_id,
+        #     request._server_id,
+        #     request._char_id
+        # )
     else:
         request._char_id = None
-        session_str = '{0}:{1}'.format(request._account_id, request._server_id)
+        # session_str = '{0}:{1}'.format(request._account_id, request._server_id)
 
-    session = crypto.encrypt(session_str)
+    session = GameSession(request._account_id, request._server_id, request._char_id)
+
+    if char_id:
+        Player(char_id).set_login_id(session.login_id)
+
+    request._game_session = session
+    session = crypto.encrypt(session_dumps(session))
 
     response = StartGameResponse()
     response.ret = 0

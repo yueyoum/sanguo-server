@@ -69,7 +69,7 @@ class MyBattle(Battle):
 
 def make_battle():
     msg = MsgBattle()
-    b = MyBattle(1, 2, msg)
+    b = MyBattle(1, 20000, msg)
     b.start()
     return msg
 
