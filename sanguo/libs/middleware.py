@@ -73,7 +73,7 @@ class RequestFilter(object):
 
                 request._account_id = request._game_session.account_id
                 request._server_id = request._game_session.server_id
-                request._char_id = request._game_session._char_id
+                request._char_id = request._game_session.char_id
 
                 print "CHAR ID =", request._char_id
 
