@@ -638,6 +638,17 @@
     }
 },
 {
+    "pk": 705, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HANG_GOING", 
+        "text_zh": "\u6302\u673a\u4e2d\uff0c\u65e0\u6cd5\u6218\u6597", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
     "pk": 800, 
     "model": "errormsg.errormsg", 
     "fields": {
