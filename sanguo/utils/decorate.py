@@ -99,3 +99,19 @@ def function_check(func_id):
         return wrap
     return deco
 
+
+def passport(callable_checker, error_code, func_name, char_id_attr_name='char_id'):
+    def deco(func):
+        def wrap(obj, *args, **kwargs):
+            char_id = getattr(obj, char_id_attr_name)
+            if not callable_checker(char_id):
+                raise SanguoException(
+                    error_code,
+                    char_id,
+                    func_name,
+                    "passport not ok"
+                )
+
+            return func(obj, *args, **kwargs)
+        return wrap
+    return deco

@@ -19,7 +19,8 @@ from core.counter import Counter
 from core.resource import Resource
 from core import timer
 from utils import pack_msg
-from utils.decorate import operate_guard
+from utils.decorate import operate_guard, passport
+from utils.checkers import not_hang_going
 from utils.api import APIFailure
 
 
@@ -101,7 +102,7 @@ class Stage(object):
         self.first = False
         self.first_star = False
 
-
+    @passport(not_hang_going, errormsg.HANG_GOING, "Stage Battle")
     def battle(self, stage_id):
         try:
             this_stage = STAGES[stage_id]
@@ -662,7 +663,7 @@ class EliteStage(object):
 
         self.send_remained_times_notify()
 
-
+    @passport(not_hang_going, errormsg.HANG_GOING, "Elite Stage Battle")
     def battle(self, _id):
         str_id = str(_id)
 
@@ -839,6 +840,7 @@ class ActivityStage(object):
         return self.battle(_id)
 
 
+    @passport(not_hang_going, errormsg.HANG_GOING, "Activate Stage Battle")
     def battle(self, _id):
         try:
             self.this_stage = STAGE_ACTIVITY[_id]
