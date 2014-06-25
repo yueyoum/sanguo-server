@@ -12,7 +12,7 @@ from libs import (
     unpack_msg,
     crypto,
 )
-from libs.session import session_loads
+from libs.session import session_loads, EmptyGameSession
 
 import protomsg
 from protomsg import COMMAND_REQUEST, COMMAND_TYPE
@@ -57,16 +57,19 @@ class RequestFilter(object):
                 print p
 
                 game_session = p.session
-                decrypted_session = ""
-                if msg_id not in MSG_TYPE_EMPTY_SESSION:
+
+                if msg_id in MSG_TYPE_EMPTY_SESSION:
+                    decrypted_session = EmptyGameSession
+                else:
                     try:
                         decrypted_session = crypto.decrypt(game_session)
                     except crypto.BadEncryptedText:
                         print "BAD SESSION"
                         return HttpResponse(status=403)
+                    decrypted_session = session_loads(decrypted_session)
 
                 request._proto = p
-                request._game_session = session_loads(decrypted_session)
+                request._game_session = decrypted_session
 
                 request._account_id = request._game_session.account_id
                 request._server_id = request._game_session.server_id

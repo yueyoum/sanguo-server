@@ -15,6 +15,10 @@ class GameSession(object):
         self.char_id = char_id
         self.login_id = os.urandom(10)
 
+
+EmptyGameSession = GameSession(0, 0, 0)
+
+
 def session_dumps(obj):
     return cPickle.dumps(obj, 2)
 
