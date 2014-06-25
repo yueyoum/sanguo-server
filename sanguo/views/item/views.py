@@ -83,4 +83,4 @@ def stuff_use(request):
     if res:
         response.attachment.MergeFrom(res)
 
-    return pack_msg(res)
+    return pack_msg(response)
