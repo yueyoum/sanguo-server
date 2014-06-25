@@ -55,7 +55,7 @@ def create_character(request):
     request._char_id = char_id
 
     game_session = request._game_session
-    game_session._char_id = char_id
+    game_session.char_id = char_id
 
     new_session = crypto.encrypt(session_dumps(game_session))
 
