@@ -425,6 +425,14 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
 
 
 def recruit_hero(char_id, _id):
+    if _id not in HEROS:
+        raise SanguoException(
+            errormsg.SOUL_CAN_NOT_RECRUIT,
+            char_id,
+            "Recruit Hero",
+            "Soul {0} not exist".format(_id)
+        )
+
     char_hero_oids = get_char_hero_oids(char_id)
     if _id in char_hero_oids:
         raise SanguoException(
@@ -433,6 +441,7 @@ def recruit_hero(char_id, _id):
             "Recruit Hero",
             "Hero {0} already exist".format(_id)
         )
+
 
     soul_amount = external_calculate.Hero.step_up_using_soul_amount(HEROS[_id].quality)
     hs = HeroSoul(char_id)
