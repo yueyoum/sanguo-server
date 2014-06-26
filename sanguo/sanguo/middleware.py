@@ -19,10 +19,6 @@ from libs.middleware import RequestFilter
 from libs import NUM_FIELD
 
 
-def make_response_data(amount, data):
-    return '%s%s' % (NUM_FIELD.pack(amount), data)
-
-
 class UnpackAndVerifyData(RequestFilter):
     def process_request(self, request):
         super(UnpackAndVerifyData, self).process_request(request)
@@ -41,7 +37,7 @@ class UnpackAndVerifyData(RequestFilter):
                 msg.ret = errormsg.LOGIN_RE
                 data = pack_msg(msg)
                 print "NEED RE LOGIN"
-                return HttpResponse(make_response_data(1, data), content_type='text/plain')
+                return HttpResponse(data, content_type='text/plain')
 
         if server_id and char_id:
             ap = ActivePlayers(request._server_id)
@@ -64,11 +60,18 @@ class PackMessageData(object):
 
         if not response.content:
             num_of_msgs = len(other_msgs)
-            data = make_response_data(num_of_msgs, ''.join(other_msgs))
+            data = '%s%s' % (
+                NUM_FIELD.pack(num_of_msgs),
+                ''.join(other_msgs)
+            )
         else:
             ret_msg_amount = getattr(response, '_msg_amount', 1)
             num_of_msgs = len(other_msgs) + ret_msg_amount
-            data = make_response_data(num_of_msgs, '%s%s' % (response.content, ''.join(other_msgs)))
+            data = '%s%s%s' % (
+                NUM_FIELD.pack(num_of_msgs),
+                response.content,
+                ''.join(other_msgs)
+            )
 
         # FOR DEBUG
         # print repr(data)
