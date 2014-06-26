@@ -5,8 +5,9 @@ import protomsg
 
 from core.msgpipe import message_get
 from core.activeplayers import ActivePlayers, Player
-from core.exception import SanguoException
 from preset import errormsg
+from utils import pack_msg
+from protomsg import CommandResponse
 
 ### FOR DEBUG
 from utils import app_test_helper
@@ -16,6 +17,10 @@ RESPONSE_NOTIFY_TYPE_REV = {v: k for k, v in protomsg.RESPONSE_NOTIFY_TYPE.items
 
 from libs.middleware import RequestFilter
 from libs import NUM_FIELD
+
+
+def make_response_data(amount, data):
+    return '%s%s' % (NUM_FIELD.pack(amount), data)
 
 
 class UnpackAndVerifyData(RequestFilter):
@@ -31,12 +36,12 @@ class UnpackAndVerifyData(RequestFilter):
             p = Player(char_id)
             login_id = p.get_login_id()
             if login_id and login_id != request._game_session.login_id:
-                raise SanguoException(
-                    errormsg.LOGIN_RE,
-                    char_id,
-                    "Any",
-                    "need re login"
-                )
+                # NEED RE LOGIN
+                msg = CommandResponse()
+                msg.ret = errormsg.LOGIN_RE
+                data = pack_msg(msg)
+                print "NEED RE LOGIN"
+                return HttpResponse(make_response_data(1, data), content_type='text/plain')
 
         if server_id and char_id:
             ap = ActivePlayers(request._server_id)
@@ -59,18 +64,11 @@ class PackMessageData(object):
 
         if not response.content:
             num_of_msgs = len(other_msgs)
-            data = '%s%s' % (
-                NUM_FIELD.pack(num_of_msgs),
-                ''.join(other_msgs)
-            )
+            data = make_response_data(num_of_msgs, ''.join(other_msgs))
         else:
             ret_msg_amount = getattr(response, '_msg_amount', 1)
             num_of_msgs = len(other_msgs) + ret_msg_amount
-            data = '%s%s%s' % (
-                NUM_FIELD.pack(num_of_msgs),
-                response.content,
-                ''.join(other_msgs)
-            )
+            data = make_response_data(num_of_msgs, '%s%s' % (response.content, ''.join(other_msgs)))
 
         # FOR DEBUG
         # print repr(data)
