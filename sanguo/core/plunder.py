@@ -122,7 +122,7 @@ class Plunder(object):
             got_gold = int(got_gold)
             r.append(got_gold)
 
-        for _id, _, _, _, is_robot, gold in res:
+        for _id, _, _, _, _, is_robot, gold in res:
             c = MongoEmbededPlunderChars()
             c.is_robot = is_robot
             c.gold = gold
