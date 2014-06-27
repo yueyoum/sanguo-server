@@ -8,6 +8,7 @@ from mongoengine import DoesNotExist
 from mongoscheme import MongoFunctionOpen, MongoCharacter, MongoStage
 from core.formation import Formation
 from core.msgpipe import publish_to_char
+from core.signals import func_opened_signal
 
 from preset.data import FUNCTION_DEFINE
 from utils import pack_msg
@@ -68,6 +69,12 @@ class FunctionOpen(object):
                 opened = f.open_socket(FUNC_SOCKET_AMOUNT_TABLE[of])
                 if not opened:
                     opened_funcs.remove(of)
+
+        func_opened_signal.send(
+            sender=None,
+            char_id=self.char_id,
+            func_ids=opened_funcs
+        )
 
         return opened_funcs
 

@@ -15,6 +15,7 @@ from core.exception import SanguoException
 from core.resource import Resource
 from utils import pack_msg
 from utils.log import system_logger
+from utils.checkers import func_opened
 
 from protomsg import Task as MsgTask
 from protomsg import TaskNotify
@@ -154,6 +155,10 @@ class Task(object):
         msg = TaskNotify()
         for t in self.task.doing:
             this_task = TASKS[t]
+            if this_task.func and not func_opened(self.char_id, this_task.func):
+                # 对于没有开放功能的任务不显示
+                continue
+
             msg_t = msg.tasks.add()
             msg_t.id = t
 

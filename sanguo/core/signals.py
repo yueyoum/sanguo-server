@@ -25,3 +25,5 @@ hero_del_signal = Signal(providing_args=['char_id', 'hero_ids'])
 hero_to_soul_signal = Signal(providing_args=['char_id', 'souls'])
 
 equip_changed_signal = Signal(providing_args=['char_id', 'equip_obj'])
+
+func_opened_signal = Signal(providing_args=['char_id', 'func_ids'])

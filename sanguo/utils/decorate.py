@@ -3,10 +3,10 @@ import logging
 from django.http import HttpResponse
 
 from core.exception import SanguoException
-from core.mongoscheme import MongoFunctionOpen
 from utils import cache
 from utils import pack_msg
 from utils.timezone import localnow
+from utils.checkers import func_opened
 import protomsg
 from preset import errormsg
 
@@ -83,12 +83,12 @@ def operate_guard(func_name, interval, keep_result=False, char_id_name='_char_id
     return deco
 
 
-def function_check(func_id):
+def function_check(func_id, mute=False):
     def deco(func):
         def wrap(request, *args, **kwargs):
-            fo = MongoFunctionOpen.objects.get(id=request._char_id)
-            if func_id in fo.freeze:
-                # FIXME error code
+            if not func_opened(request._char_id, func_id):
+                if mute:
+                    return None
                 raise SanguoException(
                     errormsg.FUNC_FREEZE,
                     request._char_id,
