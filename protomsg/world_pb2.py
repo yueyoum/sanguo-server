@@ -14,7 +14,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='world.proto',
   package='Sanguo.protocol.world',
-  serialized_pb='\n\x0bworld.proto\x12\x15Sanguo.protocol.world\"\xad\x01\n\x06Server\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12:\n\x06status\x18\x03 \x02(\x0e\x32*.Sanguo.protocol.world.Server.ServerStatus\x12\x11\n\thave_char\x18\x04 \x02(\x08\":\n\x0cServerStatus\x12\x08\n\x04GOOD\x10\x01\x12\x08\n\x04\x42USY\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\x12\x0c\n\x08MAINTAIN\x10\x04\"\x1e\n\x0bSyncRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"C\n\x0cSyncResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x15\n\rutc_timestamp\x18\x03 \x02(\x03\"3\n\rResumeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tserver_id\x18\x02 \x02(\x05\".\n\x0eResumeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"/\n\x0f\x43ommandResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"7\n\x13VersionCheckRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07version\x18\x02 \x02(\x05\"4\n\x14VersionCheckResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xb5\x04\n\nAttachment\x12\x0c\n\x04gold\x18\x01 \x01(\x05\x12\r\n\x05sycee\x18\x02 \x01(\x05\x12\x0b\n\x03\x65xp\x18\x03 \x01(\x05\x12\x14\n\x0cofficial_exp\x18\x04 \x01(\x05\x12\x35\n\x05heros\x18\x05 \x03(\x0b\x32&.Sanguo.protocol.world.Attachment.Hero\x12\x39\n\x05souls\x18\x06 \x03(\x0b\x32*.Sanguo.protocol.world.Attachment.HeroSoul\x12?\n\nequipments\x18\x07 \x03(\x0b\x32+.Sanguo.protocol.world.Attachment.Equipment\x12\x33\n\x04gems\x18\x08 \x03(\x0b\x32%.Sanguo.protocol.world.Attachment.Gem\x12\x37\n\x06stuffs\x18\t \x03(\x0b\x32\'.Sanguo.protocol.world.Attachment.Stuff\x1a\x39\n\tEquipment\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05level\x18\x02 \x02(\x05\x12\x11\n\x06\x61mount\x18\x03 \x01(\x05:\x01\x31\x1a$\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x11\n\x06\x61mount\x18\x02 \x01(\x05:\x01\x31\x1a&\n\x05Stuff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x11\n\x06\x61mount\x18\x02 \x01(\x05:\x01\x31\x1a\x12\n\x04Hero\x12\n\n\x02id\x18\x01 \x02(\x05\x1a)\n\x08HeroSoul\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x11\n\x06\x61mount\x18\x02 \x01(\x05:\x01\x31\"\xad\x02\n\x0bSellRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12@\n\x08\x65lements\x18\x02 \x03(\x0b\x32..Sanguo.protocol.world.SellRequest.SellElement\x1a\xca\x01\n\x0bSellElement\x12\x43\n\x02tp\x18\x01 \x02(\x0e\x32\x37.Sanguo.protocol.world.SellRequest.SellElement.SellType\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x03 \x02(\x05\"Z\n\x08SellType\x12\r\n\tSELL_HERO\x10\x01\x12\r\n\tSELL_SOUL\x10\x02\x12\x12\n\x0eSELL_EQUIPMENT\x10\x03\x12\x0c\n\x08SELL_GEM\x10\x04\x12\x0e\n\nSELL_STUFF\x10\x05\",\n\x0cSellResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"[\n\x14\x46reezeFunctionNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x05\x66uncs\x18\x02 \x03(\x0e\x32#.Sanguo.protocol.world.FunctionType\":\n\x16\x41\x63tivateCodeUseRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63ode_id\x18\x02 \x02(\t\"7\n\x17\x41\x63tivateCodeUseResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"8\n\x0eResourceObject\x12\n\n\x02tp\x18\x01 \x02(\x05\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x03 \x02(\x05*\x98\x03\n\x0c\x46unctionType\x12\x1b\n\x17\x46UNC_EQUIPMENT_STRENGTH\x10\x01\x12\x17\n\x13\x46UNC_EQUIPMENT_STEP\x10\x02\x12\x12\n\x0e\x46UNC_HERO_STEP\x10\x03\x12\x12\n\x0e\x46UNC_GEM_EMBED\x10\x04\x12\r\n\tFUNC_TASK\x10\x05\x12\x14\n\x10\x46UNC_ACHIEVEMENT\x10\x06\x12\r\n\tFUNC_HANG\x10\x07\x12\x0e\n\nFUNC_ARENA\x10\x08\x12\x10\n\x0c\x46UNC_PLUNDER\x10\t\x12\x11\n\rFUNC_OFFICIAL\x10\n\x12\x14\n\x10\x46UNC_STAGE_ELITE\x10\x0b\x12\x0f\n\x0b\x46UNC_FRIEND\x10\x0c\x12\x14\n\x10\x46UNC_TEAM_BATTLE\x10\r\x12\x11\n\rFUNC_GET_HERO\x10\x0e\x12\x18\n\x14\x46UNC_BATTLE_SPEED_UP\x10\x14\x12\x14\n\x10\x46UNC_SOCKET_FIVE\x10\x32\x12\x13\n\x0f\x46UNC_SOCKET_SIX\x10\x33\x12\x15\n\x11\x46UNC_SOCKET_SEVEN\x10\x34\x12\x15\n\x11\x46UNC_SOCKET_EIGHT\x10\x35')
+  serialized_pb='\n\x0bworld.proto\x12\x15Sanguo.protocol.world\"\xad\x01\n\x06Server\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12:\n\x06status\x18\x03 \x02(\x0e\x32*.Sanguo.protocol.world.Server.ServerStatus\x12\x11\n\thave_char\x18\x04 \x02(\x08\":\n\x0cServerStatus\x12\x08\n\x04GOOD\x10\x01\x12\x08\n\x04\x42USY\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\x12\x0c\n\x08MAINTAIN\x10\x04\"\x1e\n\x0bSyncRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"C\n\x0cSyncResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x15\n\rutc_timestamp\x18\x03 \x02(\x03\"3\n\rResumeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tserver_id\x18\x02 \x02(\x05\".\n\x0eResumeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"/\n\x0fReLoginResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"/\n\x0f\x43ommandResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"7\n\x13VersionCheckRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07version\x18\x02 \x02(\x05\"4\n\x14VersionCheckResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xb5\x04\n\nAttachment\x12\x0c\n\x04gold\x18\x01 \x01(\x05\x12\r\n\x05sycee\x18\x02 \x01(\x05\x12\x0b\n\x03\x65xp\x18\x03 \x01(\x05\x12\x14\n\x0cofficial_exp\x18\x04 \x01(\x05\x12\x35\n\x05heros\x18\x05 \x03(\x0b\x32&.Sanguo.protocol.world.Attachment.Hero\x12\x39\n\x05souls\x18\x06 \x03(\x0b\x32*.Sanguo.protocol.world.Attachment.HeroSoul\x12?\n\nequipments\x18\x07 \x03(\x0b\x32+.Sanguo.protocol.world.Attachment.Equipment\x12\x33\n\x04gems\x18\x08 \x03(\x0b\x32%.Sanguo.protocol.world.Attachment.Gem\x12\x37\n\x06stuffs\x18\t \x03(\x0b\x32\'.Sanguo.protocol.world.Attachment.Stuff\x1a\x39\n\tEquipment\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05level\x18\x02 \x02(\x05\x12\x11\n\x06\x61mount\x18\x03 \x01(\x05:\x01\x31\x1a$\n\x03Gem\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x11\n\x06\x61mount\x18\x02 \x01(\x05:\x01\x31\x1a&\n\x05Stuff\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x11\n\x06\x61mount\x18\x02 \x01(\x05:\x01\x31\x1a\x12\n\x04Hero\x12\n\n\x02id\x18\x01 \x02(\x05\x1a)\n\x08HeroSoul\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x11\n\x06\x61mount\x18\x02 \x01(\x05:\x01\x31\"\xad\x02\n\x0bSellRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12@\n\x08\x65lements\x18\x02 \x03(\x0b\x32..Sanguo.protocol.world.SellRequest.SellElement\x1a\xca\x01\n\x0bSellElement\x12\x43\n\x02tp\x18\x01 \x02(\x0e\x32\x37.Sanguo.protocol.world.SellRequest.SellElement.SellType\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x03 \x02(\x05\"Z\n\x08SellType\x12\r\n\tSELL_HERO\x10\x01\x12\r\n\tSELL_SOUL\x10\x02\x12\x12\n\x0eSELL_EQUIPMENT\x10\x03\x12\x0c\n\x08SELL_GEM\x10\x04\x12\x0e\n\nSELL_STUFF\x10\x05\",\n\x0cSellResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"[\n\x14\x46reezeFunctionNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x32\n\x05\x66uncs\x18\x02 \x03(\x0e\x32#.Sanguo.protocol.world.FunctionType\":\n\x16\x41\x63tivateCodeUseRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63ode_id\x18\x02 \x02(\t\"7\n\x17\x41\x63tivateCodeUseResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"8\n\x0eResourceObject\x12\n\n\x02tp\x18\x01 \x02(\x05\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x03 \x02(\x05*\x98\x03\n\x0c\x46unctionType\x12\x1b\n\x17\x46UNC_EQUIPMENT_STRENGTH\x10\x01\x12\x17\n\x13\x46UNC_EQUIPMENT_STEP\x10\x02\x12\x12\n\x0e\x46UNC_HERO_STEP\x10\x03\x12\x12\n\x0e\x46UNC_GEM_EMBED\x10\x04\x12\r\n\tFUNC_TASK\x10\x05\x12\x14\n\x10\x46UNC_ACHIEVEMENT\x10\x06\x12\r\n\tFUNC_HANG\x10\x07\x12\x0e\n\nFUNC_ARENA\x10\x08\x12\x10\n\x0c\x46UNC_PLUNDER\x10\t\x12\x11\n\rFUNC_OFFICIAL\x10\n\x12\x14\n\x10\x46UNC_STAGE_ELITE\x10\x0b\x12\x0f\n\x0b\x46UNC_FRIEND\x10\x0c\x12\x14\n\x10\x46UNC_TEAM_BATTLE\x10\r\x12\x11\n\rFUNC_GET_HERO\x10\x0e\x12\x18\n\x14\x46UNC_BATTLE_SPEED_UP\x10\x14\x12\x14\n\x10\x46UNC_SOCKET_FIVE\x10\x32\x12\x13\n\x0f\x46UNC_SOCKET_SIX\x10\x33\x12\x15\n\x11\x46UNC_SOCKET_SEVEN\x10\x34\x12\x15\n\x11\x46UNC_SOCKET_EIGHT\x10\x35')
 
 _FUNCTIONTYPE = _descriptor.EnumDescriptor(
   name='FunctionType',
@@ -101,8 +101,8 @@ _FUNCTIONTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1763,
-  serialized_end=2171,
+  serialized_start=1812,
+  serialized_end=2220,
 )
 
 FunctionType = enum_type_wrapper.EnumTypeWrapper(_FUNCTIONTYPE)
@@ -185,8 +185,8 @@ _SELLREQUEST_SELLELEMENT_SELLTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1356,
-  serialized_end=1446,
+  serialized_start=1405,
+  serialized_end=1495,
 )
 
 
@@ -380,6 +380,41 @@ _RESUMERESPONSE = _descriptor.Descriptor(
 )
 
 
+_RELOGINRESPONSE = _descriptor.Descriptor(
+  name='ReLoginResponse',
+  full_name='Sanguo.protocol.world.ReLoginResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.world.ReLoginResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.world.ReLoginResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=416,
+  serialized_end=463,
+)
+
+
 _COMMANDRESPONSE = _descriptor.Descriptor(
   name='CommandResponse',
   full_name='Sanguo.protocol.world.CommandResponse',
@@ -410,8 +445,8 @@ _COMMANDRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=416,
-  serialized_end=463,
+  serialized_start=465,
+  serialized_end=512,
 )
 
 
@@ -445,8 +480,8 @@ _VERSIONCHECKREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=465,
-  serialized_end=520,
+  serialized_start=514,
+  serialized_end=569,
 )
 
 
@@ -480,8 +515,8 @@ _VERSIONCHECKRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=522,
-  serialized_end=574,
+  serialized_start=571,
+  serialized_end=623,
 )
 
 
@@ -522,8 +557,8 @@ _ATTACHMENT_EQUIPMENT = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=944,
-  serialized_end=1001,
+  serialized_start=993,
+  serialized_end=1050,
 )
 
 _ATTACHMENT_GEM = _descriptor.Descriptor(
@@ -556,8 +591,8 @@ _ATTACHMENT_GEM = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1003,
-  serialized_end=1039,
+  serialized_start=1052,
+  serialized_end=1088,
 )
 
 _ATTACHMENT_STUFF = _descriptor.Descriptor(
@@ -590,8 +625,8 @@ _ATTACHMENT_STUFF = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1041,
-  serialized_end=1079,
+  serialized_start=1090,
+  serialized_end=1128,
 )
 
 _ATTACHMENT_HERO = _descriptor.Descriptor(
@@ -617,8 +652,8 @@ _ATTACHMENT_HERO = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1081,
-  serialized_end=1099,
+  serialized_start=1130,
+  serialized_end=1148,
 )
 
 _ATTACHMENT_HEROSOUL = _descriptor.Descriptor(
@@ -651,8 +686,8 @@ _ATTACHMENT_HEROSOUL = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1101,
-  serialized_end=1142,
+  serialized_start=1150,
+  serialized_end=1191,
 )
 
 _ATTACHMENT = _descriptor.Descriptor(
@@ -734,8 +769,8 @@ _ATTACHMENT = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=577,
-  serialized_end=1142,
+  serialized_start=626,
+  serialized_end=1191,
 )
 
 
@@ -777,8 +812,8 @@ _SELLREQUEST_SELLELEMENT = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1244,
-  serialized_end=1446,
+  serialized_start=1293,
+  serialized_end=1495,
 )
 
 _SELLREQUEST = _descriptor.Descriptor(
@@ -811,8 +846,8 @@ _SELLREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1145,
-  serialized_end=1446,
+  serialized_start=1194,
+  serialized_end=1495,
 )
 
 
@@ -846,8 +881,8 @@ _SELLRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1448,
-  serialized_end=1492,
+  serialized_start=1497,
+  serialized_end=1541,
 )
 
 
@@ -881,8 +916,8 @@ _FREEZEFUNCTIONNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1494,
-  serialized_end=1585,
+  serialized_start=1543,
+  serialized_end=1634,
 )
 
 
@@ -916,8 +951,8 @@ _ACTIVATECODEUSEREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1587,
-  serialized_end=1645,
+  serialized_start=1636,
+  serialized_end=1694,
 )
 
 
@@ -951,8 +986,8 @@ _ACTIVATECODEUSERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1647,
-  serialized_end=1702,
+  serialized_start=1696,
+  serialized_end=1751,
 )
 
 
@@ -993,8 +1028,8 @@ _RESOURCEOBJECT = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1704,
-  serialized_end=1760,
+  serialized_start=1753,
+  serialized_end=1809,
 )
 
 _SERVER.fields_by_name['status'].enum_type = _SERVER_SERVERSTATUS
@@ -1019,6 +1054,7 @@ DESCRIPTOR.message_types_by_name['SyncRequest'] = _SYNCREQUEST
 DESCRIPTOR.message_types_by_name['SyncResponse'] = _SYNCRESPONSE
 DESCRIPTOR.message_types_by_name['ResumeRequest'] = _RESUMEREQUEST
 DESCRIPTOR.message_types_by_name['ResumeResponse'] = _RESUMERESPONSE
+DESCRIPTOR.message_types_by_name['ReLoginResponse'] = _RELOGINRESPONSE
 DESCRIPTOR.message_types_by_name['CommandResponse'] = _COMMANDRESPONSE
 DESCRIPTOR.message_types_by_name['VersionCheckRequest'] = _VERSIONCHECKREQUEST
 DESCRIPTOR.message_types_by_name['VersionCheckResponse'] = _VERSIONCHECKRESPONSE
@@ -1059,6 +1095,12 @@ class ResumeResponse(_message.Message):
   DESCRIPTOR = _RESUMERESPONSE
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.world.ResumeResponse)
+
+class ReLoginResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _RELOGINRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.world.ReLoginResponse)
 
 class CommandResponse(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType

@@ -7,7 +7,7 @@ from core.msgpipe import message_get
 from core.activeplayers import ActivePlayers, Player
 from preset import errormsg
 from utils import pack_msg
-from protomsg import CommandResponse
+from protomsg import ReLoginResponse
 
 ### FOR DEBUG
 from utils import app_test_helper
@@ -33,7 +33,7 @@ class UnpackAndVerifyData(RequestFilter):
             login_id = p.get_login_id()
             if login_id and login_id != request._game_session.login_id:
                 # NEED RE LOGIN
-                msg = CommandResponse()
+                msg = ReLoginResponse()
                 msg.ret = errormsg.LOGIN_RE
                 data = pack_msg(msg)
                 print "NEED RE LOGIN"
