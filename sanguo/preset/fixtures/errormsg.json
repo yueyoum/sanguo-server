@@ -71,7 +71,7 @@
     "fields": {
         "error_index": "LOGIN_RE", 
         "text_zh": "\u4f60\u7684\u5e10\u53f7\u5728\u522b\u5904\u767b\u5f55\uff0c\u8bf7\u91cd\u65b0\u767b\u5f55", 
-        "link_to": null, 
+        "link_to": 100, 
         "des": "", 
         "area": ""
     }
