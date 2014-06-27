@@ -62,6 +62,7 @@ def update_hero_notify(char_id, objs):
 
 def login_notify(char_id):
     message_clean(char_id)
+    FunctionOpen(char_id).send_notify()
 
     hero_objs = char_heros_obj(char_id)
 
@@ -110,6 +111,5 @@ def login_notify(char_id):
     Task(char_id).send_notify()
     Achievement(char_id).send_notify()
     HeroSoul(char_id).send_notify()
-    FunctionOpen(char_id).send_notify()
     Levy(char_id).send_notify()
     Attachment(char_id).send_notify()
