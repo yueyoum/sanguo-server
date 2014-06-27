@@ -21,14 +21,15 @@ def plunder_list(request):
     response = PlunderListResponse()
     response.ret = 0
 
-    for _id, name, power, leader, formation, is_robot, gold in res:
+    for _id, name, power, leader, formation, is_hang in res:
         plunder = response.plunders.add()
         plunder.id = _id
         plunder.name = name
-        plunder.gold = gold
+        plunder.gold = 0
         plunder.power = power
         plunder.leader = leader
         plunder.hero_original_ids.extend(formation)
+        # plunder.hang = is_hang
 
     return pack_msg(response)
 
