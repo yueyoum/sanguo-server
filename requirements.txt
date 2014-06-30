@@ -9,5 +9,4 @@ redis==2.8.0
 requests==2.2.1
 msgpack-python==0.4.2
 arrow==0.4.2
-celery==3.1.6
 pyzmq==14.2.0

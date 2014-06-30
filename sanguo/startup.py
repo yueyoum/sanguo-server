@@ -36,8 +36,6 @@ def server_register():
 
 
 def main():
-    print "in main"
-    print FUNCS
     for f in FUNCS:
         f()
 
