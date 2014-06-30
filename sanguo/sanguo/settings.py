@@ -227,6 +227,7 @@ TIMER_UNREGISTER = tree.find('timer/unregister').text
 
 SERVER_ID = int( tree.find('server/id').text )
 SERVER_NAME = tree.find('server/name').text
+SERVER_HOST = tree.find('server/name').text
 LISTEN_PORT_HTTP = int( tree.find('server/port/http').text )
 LISTEN_PORT_HTTPS = int( tree.find('server/port/https').text )
 

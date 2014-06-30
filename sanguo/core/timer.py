@@ -13,7 +13,7 @@ from utils.api import apicall
 TIMER_REGISTER = settings.TIMER_REGISTER
 TIMER_UNREGISTER = settings.TIMER_UNREGISTER
 
-SELF_HTTPS_URL = u'https://{0}:{1}'.format(server.ip, server.port_https)
+SELF_HTTPS_URL = u'https://{0}:{1}'.format(server.host, server.port_https)
 CALLBACK_HANG_URL = SELF_HTTPS_URL + '/api/timer/hang/'
 
 

@@ -25,7 +25,7 @@ def server_register():
     data = {
         'id': server.id,
         'name': server.name,
-        'ip': server.ip,
+        'host': server.host,
         'port': server.port,
         'port_https': server.port_https,
     }
