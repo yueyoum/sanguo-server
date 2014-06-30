@@ -56,21 +56,13 @@ def login(request):
 
     login_signal.send(
         sender=None,
-        account_id=request._account_id,
-        server_id=request._server_id,
         char_id=char_id
     )
 
     if char_id:
         request._char_id = char_id
-        # session_str = '{0}:{1}:{2}'.format(
-        #     request._account_id,
-        #     request._server_id,
-        #     request._char_id
-        # )
     else:
         request._char_id = None
-        # session_str = '{0}:{1}'.format(request._account_id, request._server_id)
 
     session = GameSession(request._account_id, request._server_id, request._char_id)
 
@@ -113,7 +105,7 @@ def bind(request):
             errormsg.SERVER_FAULT,
             request._char_id,
             'Account Bind',
-            'APIFailure. api_acount_bind'
+            'APIFailure. api_account_bind'
         )
 
     if res['ret'] != 0:

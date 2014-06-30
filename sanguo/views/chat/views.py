@@ -12,9 +12,8 @@ from preset.settings import OPERATE_INTERVAL_CHAT_SEND
 @operate_guard('chat', OPERATE_INTERVAL_CHAT_SEND, keep_result=False)
 def send(request):
     req = request._proto
-    server_id = request._server_id
     char_id = request._char_id
 
-    cp = ChatMessagePublish(server_id, char_id)
+    cp = ChatMessagePublish(char_id)
     cp.to_server(req.msg)
     return None

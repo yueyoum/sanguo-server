@@ -4,7 +4,7 @@ from core.notify import login_notify
 from core.daily import OfficialDailyReward
 
 
-def login(account_id, server_id, char_id, **kwargs):
+def login(char_id, **kwargs):
     if char_id:
         od = OfficialDailyReward(char_id)
         od.check()

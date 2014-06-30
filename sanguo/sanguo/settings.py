@@ -202,8 +202,6 @@ DATETIME_FORMAT = "Y-m-d H:i:s"
 import xml.etree.ElementTree as et
 tree = et.ElementTree(file=os.path.join(BASE_DIR, "config.xml"))
 
-NODE_ID = int(tree.find('node/id').text)
-
 ENABLE_BATTLE_LOG = tree.find('battle/log').text == "true"
 
 REDIS_HOST = tree.find('redis/host').text
@@ -215,7 +213,6 @@ MONGODB_PORT = int( tree.find('mongodb/port').text )
 MONGODB_DB = tree.find('mongodb/db').text
 
 CRYPTO_KEY = tree.find('crypto/key').text
-CRYPTO_PREFIX = tree.find('crypto/prefix').text
 
 CACHE_SECONDS = int( tree.find('cache/seconds').text )
 
@@ -228,6 +225,10 @@ LOG_MAN_PORT = int( tree.find('log/port').text )
 TIMER_REGISTER = tree.find('timer/register').text
 TIMER_UNREGISTER = tree.find('timer/unregister').text
 
+SERVER_ID = int( tree.find('server/id').text )
+SERVER_NAME = tree.find('server/name').text
+LISTEN_PORT_HTTP = int( tree.find('server/port/http').text )
+LISTEN_PORT_HTTPS = int( tree.find('server/port/https').text )
 
 del et
 del tree

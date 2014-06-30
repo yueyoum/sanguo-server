@@ -76,18 +76,3 @@ class RequestFilter(object):
                 request._char_id = request._game_session.char_id
 
                 print "CHAR ID =", request._char_id
-
-                # len_of_splited_session = len(splited_session)
-                # if len_of_splited_session == 1:
-                #     request._account_id = None
-                #     request._server_id = None
-                #     request._char_id = None
-                # elif len_of_splited_session == 2:
-                #     request._account_id = int(splited_session[0])
-                #     request._server_id = int(splited_session[1])
-                #     request._char_id = None
-                # else:
-                #     request._account_id = int(splited_session[0])
-                #     request._server_id = int(splited_session[1])
-                #     request._char_id = int(splited_session[2])
-                #     print "CHAR ID =", request._char_id

@@ -2,10 +2,6 @@ from django.conf import settings
 from django.conf.urls import patterns, include, url
 
 
-from core.drives import redis_client
-redis_client.ping()
-
-import callbacks.signals
 
 urlpatterns = patterns('',
                        # Examples:

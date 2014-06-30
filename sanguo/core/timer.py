@@ -6,15 +6,14 @@ __date__ = '14-6-9'
 import json
 from django.conf import settings
 
-from core.server import SERVERS
+from core.server import server
 
 from utils.api import apicall
 
 TIMER_REGISTER = settings.TIMER_REGISTER
 TIMER_UNREGISTER = settings.TIMER_UNREGISTER
 
-_server = SERVERS.values()[0]
-SELF_HTTPS_URL = u'https://{0}:{1}'.format(_server['host'], _server['port_https'])
+SELF_HTTPS_URL = u'https://{0}:{1}'.format(server.ip, server.port_https)
 CALLBACK_HANG_URL = SELF_HTTPS_URL + '/api/timer/hang/'
 
 

@@ -4,19 +4,15 @@ __author__ = 'Wang Chao'
 __date__ = '14-6-16'
 
 from django.conf import settings
-from utils.api import api_server_list
+from libs.functional import get_ipv4_address
 
-NODE_ID = settings.NODE_ID
+class _Server(object):
+    __slots__ = ['id', 'name', 'ip', 'port', 'port_https']
+    def __init__(self):
+        self.id = settings.SERVER_ID
+        self.name = settings.SERVER_NAME
+        self.ip = get_ipv4_address()
+        self.port = settings.LISTEN_PORT_HTTP
+        self.port_https = settings.LISTEN_PORT_HTTPS
 
-SERVERS = {}
-
-def get_server_list():
-    global SERVERS
-    res = api_server_list({})
-    ALL_SERVERS = res['data']
-    SERVERS = {}
-    for k, v in ALL_SERVERS.iteritems():
-        if v['node'] == NODE_ID:
-            SERVERS[int(k)] = v
-
-get_server_list()
+server = _Server()

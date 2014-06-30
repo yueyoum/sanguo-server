@@ -63,11 +63,11 @@ class Plunder(object):
         min_level = max(5, char_level-5)
         max_level = char_level + 5
 
-        choosing_list = get_char_ids_by_level_range(cache_char.server_id, min_level, max_level, exclude_char_ids=[self.char_id])
+        choosing_list = get_char_ids_by_level_range(min_level, max_level, exclude_char_ids=[self.char_id])
         if len(choosing_list) < 10:
             min_level = 5
             max_level = char_level + 10
-            choosing_list = get_char_ids_by_level_range(cache_char.server_id, min_level, max_level, exclude_char_ids=[self.char_id])
+            choosing_list = get_char_ids_by_level_range(min_level, max_level, exclude_char_ids=[self.char_id])
 
         random.shuffle(choosing_list)
         ids = choosing_list[:10]

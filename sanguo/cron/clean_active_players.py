@@ -12,7 +12,7 @@ def clean():
     logger = Logger("clean_active_players.log")
     logger.write("Start.")
 
-    result = ActivePlayers.clean_all()
+    result = ActivePlayers().clean()
 
     logger.write("Complete. {0}".format(result))
     logger.close()

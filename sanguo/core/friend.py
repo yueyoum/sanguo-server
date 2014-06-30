@@ -68,12 +68,10 @@ class Friend(object):
     def candidate_list(self, level_diff=FRIEND_CANDIDATE_LEVEL_DIFF):
         # 候选人列表
         level = self.char.mc.level
-        char_ids = get_char_ids_by_level_range(self.char.mc.server_id, level-level_diff, level+level_diff)
+        char_ids = get_char_ids_by_level_range(level-level_diff, level+level_diff, exclude_char_ids=[self.char_id])
 
         res = []
         for c in char_ids:
-            if c == self.char_id:
-                continue
             if self.is_general_friend(c):
                 continue
 

@@ -19,6 +19,7 @@ from utils.api import api_activatecode_use, APIFailure
 
 from utils import timezone
 from libs import crypto, pack_msg
+from libs.session import GameSession, session_dumps
 from protomsg import SyncResponse, ResumeResponse
 
 from preset.settings import ACTIVATECODE_MAIL_TITLE, ACTIVATECODE_MAIL_CONTENT
@@ -42,13 +43,11 @@ def resume(request):
 
     login_signal.send(
         sender=None,
-        account_id=request._account_id,
-        server_id=request._server_id,
         char_id=request._char_id,
     )
 
-    new_session = '%d:%d:%d' % (request._account_id, req.server_id, request._char_id)
-    new_session = crypto.encrypt(new_session)
+    new_session = GameSession(request._account_id, req.server_id, request._char_id)
+    new_session = crypto.encrypt(session_dumps(new_session))
 
     response = ResumeResponse()
     response.ret = 0

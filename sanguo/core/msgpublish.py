@@ -7,6 +7,7 @@ from core.character import Char
 from core.msgpipe import publish_to_char
 from core.activeplayers import ActivePlayers
 from core.exception import SanguoException
+from core.server import server
 
 from utils import pack_msg
 from preset.settings import CHAT_MESSAGE_MAX_LENGTH
@@ -16,10 +17,10 @@ from protomsg import ChatMessageNotify, BroadcastNotify
 
 
 class ChatMessagePublish(object):
-    def __init__(self, server_id, char_id):
+    __slots__ = ['char_id', 'server_id', 'cache_char']
+    def __init__(self, char_id):
         self.char_id = char_id
-        self.server_id = server_id
-
+        self.server_id = server.id
         self.cache_char = Char(char_id).cacheobj
 
     def check(self, text):
@@ -31,8 +32,9 @@ class ChatMessagePublish(object):
                 "message too long"
             )
 
-    def to_char(self, target_char_id, text):
-        self.check(text)
+    def to_char(self, target_char_id, text, check=True):
+        if check:
+            self.check(text)
         msg = ChatMessageNotify()
         chat_msg = msg.msgs.add()
         chat_msg.char.id = self.cache_char.id
@@ -44,23 +46,8 @@ class ChatMessagePublish(object):
 
     def to_server(self, text):
         self.check(text)
-        ap = ActivePlayers(self.server_id)
+        ap = ActivePlayers()
         active_list = ap.get_list()
         for cid in active_list:
-            self.to_char(cid, text)
+            self.to_char(cid, text, check=False)
 
-
-#
-# class BroadcastMessagePublish(object):
-#     def to_server(self, server_id, tid, *args):
-#         ap = ActivePlayers(server_id)
-#         active_list = ap.get_list()
-#
-#         for cid in active_list:
-#             msg = BroadcastNotify()
-#             b_msg = msg.msgs.add()
-#             b_msg.id = tid
-#             for a in args:
-#                 b_msg.args.append(a)
-#
-#             publish_to_char(cid, pack_msg(msg))

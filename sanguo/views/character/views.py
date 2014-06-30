@@ -47,8 +47,6 @@ def create_character(request):
 
     login_signal.send(
         sender=None,
-        account_id=request._account_id,
-        server_id=request._server_id,
         char_id=char_id
     )
 
@@ -58,10 +56,6 @@ def create_character(request):
     game_session.char_id = char_id
 
     new_session = crypto.encrypt(session_dumps(game_session))
-
-    #
-    # new_session = '%d:%d:%d' % (request._account_id, request._server_id, char_id)
-    # new_session = crypto.encrypt(new_session)
 
     response = CreateCharacterResponse()
     response.ret = 0
