@@ -72,6 +72,9 @@ urlpatterns = patterns('',
 
                        url(r'^char/create/$', 'views.character.views.create_character'),
                        url(r'^activatecode/use/$', 'views.world.views.activatecode_use'),
+
+                       url(r'^purchase/products/$', 'views.purchase.views.products'),
+                       url(r'^purchase/verify/$', 'views.purchase.views.verify'),
 )
 
 
@@ -79,7 +82,6 @@ urlpatterns = patterns('',
 urlpatterns += patterns('',
                         url(r'^api/character/initialize/$', 'views.api.character.views.character_initialize'),
                         url(r'^api/mail/send/$', 'views.api.mail.views.send_mail'),
-                        url(r'^api/purchase/done/$', 'views.api.purchase.views.purchase_done'),
                         url(r'^api/timer/hang/$', 'views.api.callback.views.timer_notify'),
                         url(r'^api/checkin/send/$', 'views.api.checkin.views.recv_checkin_data')
 )
