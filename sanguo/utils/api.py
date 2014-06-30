@@ -15,6 +15,8 @@ apicall = HTTPSAPIClient()
 
 api_server_list = partial(apicall, cmd=HUB_URL + '/api/server-list/')
 api_server_report = partial(apicall, cmd=HUB_URL + '/api/server-list/report/')
+api_server_register = partial(apicall, cmd=HUB_URL + '/api/server-list/register/')
+
 api_account_login = partial(apicall, cmd=HUB_URL + '/api/account/login/')
 api_account_bind = partial(apicall, cmd=HUB_URL + '/api/account/bind/')
 api_character_create = partial(apicall, cmd=HUB_URL + '/api/character/create/')
