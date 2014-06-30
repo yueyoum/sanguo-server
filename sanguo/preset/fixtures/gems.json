@@ -11,6 +11,7 @@
         "merge_to": 2, 
         "used_for_name": "\u653b\u51fb", 
         "sell_gold": 1000, 
+        "quality": 0, 
         "icon": "\u7ea2\u5b9d\u77f31"
     }
 },
@@ -26,6 +27,7 @@
         "merge_to": 3, 
         "used_for_name": "\u653b\u51fb", 
         "sell_gold": 5000, 
+        "quality": 0, 
         "icon": "\u7ea2\u5b9d\u77f32"
     }
 },
@@ -41,6 +43,7 @@
         "merge_to": 4, 
         "used_for_name": "\u653b\u51fb", 
         "sell_gold": 12000, 
+        "quality": 0, 
         "icon": "\u7ea2\u5b9d\u77f33"
     }
 },
@@ -56,6 +59,7 @@
         "merge_to": 5, 
         "used_for_name": "\u653b\u51fb", 
         "sell_gold": 30000, 
+        "quality": 0, 
         "icon": "\u7ea2\u5b9d\u77f34"
     }
 },
@@ -71,6 +75,7 @@
         "merge_to": 6, 
         "used_for_name": "\u653b\u51fb", 
         "sell_gold": 65000, 
+        "quality": 0, 
         "icon": "\u7ea2\u5b9d\u77f35"
     }
 },
@@ -86,6 +91,7 @@
         "merge_to": 7, 
         "used_for_name": "\u653b\u51fb", 
         "sell_gold": 150000, 
+        "quality": 0, 
         "icon": "\u7ea2\u5b9d\u77f36"
     }
 },
@@ -101,6 +107,7 @@
         "merge_to": 8, 
         "used_for_name": "\u653b\u51fb", 
         "sell_gold": 400000, 
+        "quality": 0, 
         "icon": "\u7ea2\u5b9d\u77f37"
     }
 },
@@ -116,6 +123,7 @@
         "merge_to": 9, 
         "used_for_name": "\u653b\u51fb", 
         "sell_gold": 750000, 
+        "quality": 0, 
         "icon": "\u7ea2\u5b9d\u77f38"
     }
 },
@@ -131,6 +139,7 @@
         "merge_to": 10, 
         "used_for_name": "\u653b\u51fb", 
         "sell_gold": 1200000, 
+        "quality": 0, 
         "icon": "\u7ea2\u5b9d\u77f39"
     }
 },
@@ -146,6 +155,7 @@
         "merge_to": null, 
         "used_for_name": "\u653b\u51fb", 
         "sell_gold": 2880000, 
+        "quality": 0, 
         "icon": "\u7ea2\u5b9d\u77f310"
     }
 },
@@ -161,6 +171,7 @@
         "merge_to": 12, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
         "sell_gold": 1000, 
+        "quality": 0, 
         "icon": "\u9ec4\u5b9d\u77f31"
     }
 },
@@ -176,6 +187,7 @@
         "merge_to": 13, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
         "sell_gold": 5000, 
+        "quality": 0, 
         "icon": "\u9ec4\u5b9d\u77f32"
     }
 },
@@ -191,6 +203,7 @@
         "merge_to": 14, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
         "sell_gold": 12000, 
+        "quality": 0, 
         "icon": "\u9ec4\u5b9d\u77f33"
     }
 },
@@ -206,6 +219,7 @@
         "merge_to": 15, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
         "sell_gold": 30000, 
+        "quality": 0, 
         "icon": "\u9ec4\u5b9d\u77f34"
     }
 },
@@ -221,6 +235,7 @@
         "merge_to": 16, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
         "sell_gold": 65000, 
+        "quality": 0, 
         "icon": "\u9ec4\u5b9d\u77f35"
     }
 },
@@ -236,6 +251,7 @@
         "merge_to": 17, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
         "sell_gold": 150000, 
+        "quality": 0, 
         "icon": "\u9ec4\u5b9d\u77f36"
     }
 },
@@ -251,6 +267,7 @@
         "merge_to": 18, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
         "sell_gold": 400000, 
+        "quality": 0, 
         "icon": "\u9ec4\u5b9d\u77f37"
     }
 },
@@ -266,6 +283,7 @@
         "merge_to": 19, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
         "sell_gold": 750000, 
+        "quality": 0, 
         "icon": "\u9ec4\u5b9d\u77f38"
     }
 },
@@ -281,6 +299,7 @@
         "merge_to": 20, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
         "sell_gold": 1200000, 
+        "quality": 0, 
         "icon": "\u9ec4\u5b9d\u77f39"
     }
 },
@@ -296,6 +315,7 @@
         "merge_to": null, 
         "used_for_name": "\u751f\u547d\u4e0a\u9650", 
         "sell_gold": 2880000, 
+        "quality": 0, 
         "icon": "\u9ec4\u5b9d\u77f310"
     }
 },
@@ -311,6 +331,7 @@
         "merge_to": 22, 
         "used_for_name": "\u9632\u5fa1", 
         "sell_gold": 1000, 
+        "quality": 0, 
         "icon": "\u7d2b\u5b9d\u77f31"
     }
 },
@@ -326,6 +347,7 @@
         "merge_to": 23, 
         "used_for_name": "\u9632\u5fa1", 
         "sell_gold": 5000, 
+        "quality": 0, 
         "icon": "\u7d2b\u5b9d\u77f32"
     }
 },
@@ -341,6 +363,7 @@
         "merge_to": 24, 
         "used_for_name": "\u9632\u5fa1", 
         "sell_gold": 12000, 
+        "quality": 0, 
         "icon": "\u7d2b\u5b9d\u77f33"
     }
 },
@@ -356,6 +379,7 @@
         "merge_to": 25, 
         "used_for_name": "\u9632\u5fa1", 
         "sell_gold": 30000, 
+        "quality": 0, 
         "icon": "\u7d2b\u5b9d\u77f34"
     }
 },
@@ -371,6 +395,7 @@
         "merge_to": 26, 
         "used_for_name": "\u9632\u5fa1", 
         "sell_gold": 65000, 
+        "quality": 0, 
         "icon": "\u7d2b\u5b9d\u77f35"
     }
 },
@@ -386,6 +411,7 @@
         "merge_to": 27, 
         "used_for_name": "\u9632\u5fa1", 
         "sell_gold": 150000, 
+        "quality": 0, 
         "icon": "\u7d2b\u5b9d\u77f36"
     }
 },
@@ -401,6 +427,7 @@
         "merge_to": 28, 
         "used_for_name": "\u9632\u5fa1", 
         "sell_gold": 400000, 
+        "quality": 0, 
         "icon": "\u7d2b\u5b9d\u77f37"
     }
 },
@@ -416,6 +443,7 @@
         "merge_to": 29, 
         "used_for_name": "\u9632\u5fa1", 
         "sell_gold": 750000, 
+        "quality": 0, 
         "icon": "\u7d2b\u5b9d\u77f38"
     }
 },
@@ -431,6 +459,7 @@
         "merge_to": 30, 
         "used_for_name": "\u9632\u5fa1", 
         "sell_gold": 1200000, 
+        "quality": 0, 
         "icon": "\u7d2b\u5b9d\u77f39"
     }
 },
@@ -446,6 +475,7 @@
         "merge_to": null, 
         "used_for_name": "\u9632\u5fa1", 
         "sell_gold": 2880000, 
+        "quality": 0, 
         "icon": "\u7d2b\u5b9d\u77f310"
     }
 },
@@ -461,6 +491,7 @@
         "merge_to": 32, 
         "used_for_name": "\u66b4\u51fb", 
         "sell_gold": 1000, 
+        "quality": 0, 
         "icon": "\u7eff\u5b9d\u77f31"
     }
 },
@@ -476,6 +507,7 @@
         "merge_to": 33, 
         "used_for_name": "\u66b4\u51fb", 
         "sell_gold": 5000, 
+        "quality": 0, 
         "icon": "\u7eff\u5b9d\u77f32"
     }
 },
@@ -491,6 +523,7 @@
         "merge_to": 34, 
         "used_for_name": "\u66b4\u51fb", 
         "sell_gold": 12000, 
+        "quality": 0, 
         "icon": "\u7eff\u5b9d\u77f33"
     }
 },
@@ -506,6 +539,7 @@
         "merge_to": 35, 
         "used_for_name": "\u66b4\u51fb", 
         "sell_gold": 30000, 
+        "quality": 0, 
         "icon": "\u7eff\u5b9d\u77f34"
     }
 },
@@ -521,6 +555,7 @@
         "merge_to": 36, 
         "used_for_name": "\u66b4\u51fb", 
         "sell_gold": 65000, 
+        "quality": 0, 
         "icon": "\u7eff\u5b9d\u77f35"
     }
 },
@@ -536,6 +571,7 @@
         "merge_to": 37, 
         "used_for_name": "\u66b4\u51fb", 
         "sell_gold": 150000, 
+        "quality": 0, 
         "icon": "\u7eff\u5b9d\u77f36"
     }
 },
@@ -551,6 +587,7 @@
         "merge_to": 38, 
         "used_for_name": "\u66b4\u51fb", 
         "sell_gold": 400000, 
+        "quality": 0, 
         "icon": "\u7eff\u5b9d\u77f37"
     }
 },
@@ -566,6 +603,7 @@
         "merge_to": 39, 
         "used_for_name": "\u66b4\u51fb", 
         "sell_gold": 750000, 
+        "quality": 0, 
         "icon": "\u7eff\u5b9d\u77f38"
     }
 },
@@ -581,6 +619,7 @@
         "merge_to": 40, 
         "used_for_name": "\u66b4\u51fb", 
         "sell_gold": 1200000, 
+        "quality": 0, 
         "icon": "\u7eff\u5b9d\u77f39"
     }
 },
@@ -596,6 +635,7 @@
         "merge_to": null, 
         "used_for_name": "\u66b4\u51fb", 
         "sell_gold": 2880000, 
+        "quality": 0, 
         "icon": "\u7eff\u5b9d\u77f310"
     }
 }

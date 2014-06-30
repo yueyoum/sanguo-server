@@ -1274,5 +1274,27 @@
         "des": "", 
         "area": ""
     }
+},
+{
+    "pk": 4100, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "PURCHASE_APPLE_ERROR", 
+        "text_zh": "\u82f9\u679c\u670d\u52a1\u5668\u9519\u8bef\uff0c\u65e0\u6cd5\u9a8c\u8bc1\u60a8\u7684\u8d2d\u4e70\u8bf7\u6c42", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 4101, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "PURCHASE_VERIFY_ERROR", 
+        "text_zh": "\u9a8c\u8bc1\u9519\u8bef\uff0c\u65e0\u6548\u8d2d\u4e70", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
 }
 ]

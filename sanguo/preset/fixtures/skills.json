@@ -35,7 +35,7 @@
         "name": "\u666e\u901a\u653b\u51fb\uff08\u8fdc\u7a0b\uff09", 
         "anger_self_team": 0, 
         "war_cry": false, 
-        "skill_range": 1, 
+        "skill_range": 2, 
         "des": "", 
         "anger_self": 32, 
         "prob": 100, 
