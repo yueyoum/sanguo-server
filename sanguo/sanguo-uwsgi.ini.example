@@ -3,7 +3,7 @@ chdir = /PATH
 pythonpath = ..
 virtualenv = ../env
 env = DJANGO_SETTINGS_MODULE=sanguo.settings
-module = django.core.handlers.wsgi:WSGIHandler()
+module = sanguo.wsgi:application
 socket = 127.0.0.1:7999
 listen = 2048
 max-requests = 50000
