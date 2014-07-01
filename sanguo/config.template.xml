@@ -63,8 +63,7 @@
     </timer>
 
     <mailgun>
-        <key>xxx</key>
-        <domain>xxx</domain>
+        <key>key-9jmdddog2rhqf8j-no9fq-mpiqcdo851</key>
+        <domain>sandbox0bcd8cad030d405f863c68bf70fa83f9.mailgun.org</domain>
     </mailgun>
 </config>
-

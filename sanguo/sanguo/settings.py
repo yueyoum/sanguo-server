@@ -237,5 +237,5 @@ MAILGUN_SERVER_NAME = tree.find('mailgun/domain').text
 del et
 del tree
 
-SERVER_EMAIL = 'server{0} <server@sanguo.com>'.format(SERVER_ID)
+SERVER_EMAIL = 'server{0} <server{0}@sanguo.com>'.format(SERVER_ID)
 EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
