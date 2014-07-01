@@ -36,7 +36,7 @@ class LogManHandler(logging.Handler):
             print "NOT SUPPORTED LOG TYPE ID", record.log_type_id
             return
 
-        sock.send(data)
+        # sock.send(data)
 
 
 def _make_system_data(record):

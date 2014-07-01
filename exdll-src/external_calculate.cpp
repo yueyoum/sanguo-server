@@ -13,7 +13,8 @@ const int Hero::step_up_gold_table[] = {10000, 5000, 1000};
 int Hero::_calculate(int m, int level, int step, int quality, float growing)
 {
     float step_adjust = pow(step_diff, step);
-    float value = m * (step+1) * (4-quality) * 1.2 + level * growing * step_adjust;
+    float value = m * (step+1) * (4-quality) * 2.4 + level * growing * step_adjust;
+    // 1.2 => 2.4
     return int(value);
 }
 
