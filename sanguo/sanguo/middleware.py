@@ -40,7 +40,7 @@ class UnpackAndVerifyData(RequestFilter):
                 return HttpResponse(data, content_type='text/plain')
 
         if server_id and char_id:
-            ap = ActivePlayers(request._server_id)
+            ap = ActivePlayers()
             ap.set(request._char_id)
 
 
