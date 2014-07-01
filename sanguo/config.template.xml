@@ -61,5 +61,10 @@
         <register>https://127.0.0.1:9995/register/</register>
         <unregister>https://127.0.0.1:9995/unregister/</unregister>
     </timer>
+
+    <mailgun>
+        <key>xxx</key>
+        <domain>xxx</domain>
+    </mailgun>
 </config>
 

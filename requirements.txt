@@ -10,3 +10,4 @@ requests==2.2.1
 msgpack-python==0.4.2
 arrow==0.4.2
 pyzmq==14.2.0
+django-mailgun==0.2.2

@@ -231,5 +231,11 @@ SERVER_HOST = tree.find('server/host').text
 LISTEN_PORT_HTTP = int( tree.find('server/port/http').text )
 LISTEN_PORT_HTTPS = int( tree.find('server/port/https').text )
 
+MAILGUN_ACCESS_KEY = tree.find('mailgun/key').text
+MAILGUN_SERVER_NAME = tree.find('mailgun/domain').text
+
 del et
 del tree
+
+SERVER_EMAIL = 'server{0} <server@sanguo.com>'.format(SERVER_ID)
+EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
