@@ -4,7 +4,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u9ec4\u5dfe\u519b\uff08\u5f31\uff09", 
+        "name": "\u9ec4\u5dfe\u519b", 
         "skills": "26", 
         "tp_name": "\u653b", 
         "image": "\u9ec4\u5dfe\u519b", 
@@ -23,7 +23,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u9ec4\u5dfe\u519b\uff08\u4e2d\uff09", 
+        "name": "\u9ec4\u5dfe\u519b", 
         "skills": "26", 
         "tp_name": "\u653b", 
         "image": "\u9ec4\u5dfe\u519b", 
@@ -42,7 +42,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u5200\u5175\uff08\u5f31\uff09", 
+        "name": "\u6734\u5200\u5175", 
         "skills": "26", 
         "tp_name": "\u653b", 
         "image": "\u5200\u5175", 
@@ -61,7 +61,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u5200\u5175\uff08\u4e2d\uff09", 
+        "name": "\u5927\u5200\u65b9\u9635", 
         "skills": "26", 
         "tp_name": "\u653b", 
         "image": "\u5200\u5175", 
@@ -80,7 +80,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u5200\u5175\uff08\u5f3a\uff09", 
+        "name": "\u7cbe\u82f1\u77ed\u5175", 
         "skills": "26", 
         "tp_name": "\u653b", 
         "image": "\u5200\u5175", 
@@ -99,7 +99,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u9a91\u5175\uff08\u5f31\uff09", 
+        "name": "\u4fa6\u5bdf\u9a91\u5175", 
         "skills": "33", 
         "tp_name": "\u653b", 
         "image": "\u9a91\u5175", 
@@ -118,7 +118,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u9a91\u5175\uff08\u4e2d\uff09", 
+        "name": "\u9a91\u5175\u5c0f\u961f", 
         "skills": "33", 
         "tp_name": "\u653b", 
         "image": "\u9a91\u5175", 
@@ -137,7 +137,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u9a91\u5175\uff08\u5f3a\uff09", 
+        "name": "\u91cd\u7532\u9a91\u5175", 
         "skills": "33", 
         "tp_name": "\u653b", 
         "image": "\u9a91\u5175", 
@@ -156,7 +156,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u5f13\u624b\uff08\u5f31\uff09", 
+        "name": "\u54e8\u5175", 
         "skills": "36", 
         "tp_name": "\u653b", 
         "image": "\u5f13\u624b", 
@@ -175,7 +175,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u5f13\u624b\uff08\u4e2d\uff09", 
+        "name": "\u52b2\u5f29\u624b", 
         "skills": "36", 
         "tp_name": "\u653b", 
         "image": "\u5f13\u624b", 
@@ -194,7 +194,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u5f13\u624b\uff08\u5f3a\uff09", 
+        "name": "\u795e\u5c04\u624b", 
         "skills": "36", 
         "tp_name": "\u653b", 
         "image": "\u5f13\u624b", 
@@ -213,7 +213,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u653b\u51fb\u578b\u6742\u6b66\u5c06\uff08\u91cd\u51fb\uff09", 
+        "name": "\u9aa0\u9a91", 
         "skills": "27", 
         "tp_name": "\u653b", 
         "image": "\u6b66\u5c06_\u82f1\u4fca", 
@@ -232,7 +232,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u653b\u51fb\u578b\u6742\u6b66\u5c06\uff08\u9a91\u5175\u51b2\u950b\uff09", 
+        "name": "\u7a81\u51fb\u9a91\u5c06", 
         "skills": "33", 
         "tp_name": "\u653b", 
         "image": "\u6b66\u5c06_\u82f1\u4fca", 
@@ -251,7 +251,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u653b\u51fb\u578b\u6742\u6b66\u5c06\uff08\u91cd\u51fb+\u5f3a\u653b\uff09", 
+        "name": "\u5947\u88ad\u7edf\u5e05", 
         "skills": "26,45", 
         "tp_name": "\u653b", 
         "image": "\u6b66\u5c06_\u82f1\u4fca", 
@@ -270,7 +270,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u9632\u5fa1\u578b\u6742\u6b66\u5c06\uff08\u91d1\u521a\uff09", 
+        "name": "\u51c9\u5dde\u94c1\u9a91", 
         "skills": "29", 
         "tp_name": "\u9632", 
         "image": "\u6b66\u5c06\u51f6\u608d", 
@@ -289,7 +289,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u9632\u5fa1\u578b\u6742\u6b66\u5c06\uff08\u91cd\u51fb+\u636e\u5b88\uff09", 
+        "name": "\u91cd\u88c5\u864e\u536b\u519b", 
         "skills": "26,44", 
         "tp_name": "\u9632", 
         "image": "\u6b66\u5c06\u51f6\u608d", 
@@ -308,7 +308,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u7cbe\u82f1\u6b66\u5c06\uff08\u731b\u51fb\uff09", 
+        "name": "\u864e\u8c79\u9a91", 
         "skills": "27,46", 
         "tp_name": "\u9632", 
         "image": "\u6b66\u5c06\u6742boss", 
@@ -327,7 +327,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u7b56\u7565\u578b\u6b66\u5c06-\u5f31\uff08\u706b\u653b\uff09", 
+        "name": "\u843d\u65e5\u519b", 
         "skills": "48", 
         "tp_name": "\u7b56", 
         "image": "\u9752\u5e74\u6587\u5b98", 
@@ -346,7 +346,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u7b56\u7565\u578b\u6b66\u5c06-\u4e2d\uff08\u706b\u653b\uff09", 
+        "name": "\u5947\u95e8\u672f\u58eb", 
         "skills": "49", 
         "tp_name": "\u7b56", 
         "image": "\u4e2d\u5e74\u6587\u5b98", 
@@ -365,7 +365,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u7b56\u7565\u578b\u6b66\u5c06-\u5f3a\uff08\u706b\u653b\uff09", 
+        "name": "\u7cbe\u82f1\u5947\u95e8\u672f\u58eb", 
         "skills": "50", 
         "tp_name": "\u7b56", 
         "image": "\u6587\u5b98\u8001\u5e74", 
@@ -384,7 +384,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u5c71\u8d3c", 
+        "name": "\u6d41\u6d6a\u532a\u5175", 
         "skills": "19", 
         "tp_name": "\u653b", 
         "image": "\u5c71\u8d3c", 
@@ -422,7 +422,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u523a\u5ba2", 
+        "name": "\u5148\u767b\u6b7b\u58eb", 
         "skills": "38", 
         "tp_name": "\u653b", 
         "image": "\u7f8e\u7f8e\u59d0\u59b9", 

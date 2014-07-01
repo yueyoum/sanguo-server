@@ -1867,8 +1867,8 @@
         "growing": 18, 
         "slots": 0, 
         "cls": 12, 
-        "icon_large": "\u9752\u56ca\u4e66", 
-        "icon": "\u9752\u56ca\u4e66"
+        "icon_large": "\u5c06\u82d1\u5341\u516d\u7b56", 
+        "icon": "\u5c06\u82d1\u5341\u516d\u7b56"
     }
 },
 {
@@ -1891,8 +1891,8 @@
         "growing": 25, 
         "slots": 1, 
         "cls": 12, 
-        "icon_large": "\u592a\u5e73\u8981\u672f", 
-        "icon": "\u592a\u5e73\u8981\u672f"
+        "icon_large": "\u9752\u56ca\u4e66", 
+        "icon": "\u9752\u56ca\u4e66"
     }
 },
 {
@@ -1915,8 +1915,8 @@
         "growing": 31, 
         "slots": 2, 
         "cls": 12, 
-        "icon_large": "\u5b5f\u5fb7\u65b0\u4e66", 
-        "icon": "\u5b5f\u5fb7\u65b0\u4e66"
+        "icon_large": "\u592a\u5e73\u8981\u672f", 
+        "icon": "\u592a\u5e73\u8981\u672f"
     }
 },
 {
@@ -1939,8 +1939,8 @@
         "growing": 38, 
         "slots": 3, 
         "cls": 12, 
-        "icon_large": "\u9041\u7532\u5929\u4e66", 
-        "icon": "\u9041\u7532\u5929\u4e66"
+        "icon_large": "\u5b5f\u5fb7\u65b0\u4e66", 
+        "icon": "\u5b5f\u5fb7\u65b0\u4e66"
     }
 },
 {
@@ -1963,8 +1963,8 @@
         "growing": 44, 
         "slots": 4, 
         "cls": 12, 
-        "icon_large": "\u5c06\u82d1\u5341\u516d\u7b56", 
-        "icon": "\u5c06\u82d1\u5341\u516d\u7b56"
+        "icon_large": "\u5b59\u5b50\u5175\u6cd5", 
+        "icon": "\u5b59\u5b50\u5175\u6cd5"
     }
 },
 {
@@ -1987,8 +1987,8 @@
         "growing": 51, 
         "slots": 4, 
         "cls": 12, 
-        "icon_large": "\u5b59\u5b50\u5175\u6cd5", 
-        "icon": "\u5b59\u5b50\u5175\u6cd5"
+        "icon_large": "\u9041\u7532\u5929\u4e66", 
+        "icon": "\u9041\u7532\u5929\u4e66"
     }
 },
 {

@@ -729,9 +729,9 @@
         "star_drop": "803", 
         "first_exp": 5000, 
         "battle": 4, 
-        "first_drop": "", 
+        "first_drop": "3051", 
         "normal_exp": 24, 
-        "monsters": "6,0,6,7,117,7,7,175,7", 
+        "monsters": "6,151,6,7,117,7,7,175,7", 
         "name": "\u9a6c\u817e\u6765\u88ad"
     }
 },
