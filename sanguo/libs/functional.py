@@ -16,7 +16,7 @@ def get_ipv4_address(command_ifconfig='/sbin/ifconfig', interface='eth0'):
     if err:
         raise RuntimeError("Error: {0}, {1}".format(command_ifconfig, err))
 
-    pattern = re.compile('inet addr:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})')
+    pattern = re.compile('inet.+?:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})')
 
     def _find():
         lines = out.split('\n')

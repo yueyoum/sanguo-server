@@ -11,7 +11,7 @@ class _Server(object):
     def __init__(self):
         self.id = settings.SERVER_ID
         self.name = settings.SERVER_NAME
-        self.host = get_ipv4_address()
+        self.host = get_ipv4_address(interface=settings.SERVER_INTERFACE)
         self.port = settings.LISTEN_PORT_HTTP
         self.port_https = settings.LISTEN_PORT_HTTPS
 
