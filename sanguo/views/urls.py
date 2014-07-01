@@ -83,5 +83,7 @@ urlpatterns += patterns('',
                         url(r'^api/character/initialize/$', 'views.api.character.views.character_initialize'),
                         url(r'^api/mail/send/$', 'views.api.mail.views.send_mail'),
                         url(r'^api/timer/hang/$', 'views.api.callback.views.timer_notify'),
-                        url(r'^api/checkin/send/$', 'views.api.checkin.views.recv_checkin_data')
+                        url(r'^api/checkin/send/$', 'views.api.checkin.views.recv_checkin_data'),
+
+                        url(r'^api/ping/$', 'views.api.ping.views.ping'),
 )
