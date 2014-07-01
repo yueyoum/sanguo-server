@@ -224,11 +224,10 @@ def char_initialize(account_id, server_id, char_id, name):
         _sid = f.initialize_socket(hero=_id, weapon=weapon, armor=armor, jewelry=jewelry)
         socket_ids.append(_sid)
 
-
     socket_ids = [
-        socket_ids[0], socket_ids[3], 0,
-        socket_ids[1], 0, 0,
-        socket_ids[2], 0, 0,
+        socket_ids[3], socket_ids[0], 0,
+        0, socket_ids[1], 0,
+        0, socket_ids[2], 0
     ]
 
     f.save_formation(socket_ids, send_notify=False)
