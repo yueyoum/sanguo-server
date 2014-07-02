@@ -431,14 +431,14 @@
         "value": null, 
         "packages": "5004", 
         "quality": 5, 
-        "icon": "\u6b66\u5c06\u5b9d\u7bb1\uff08\u91d1\uff09"
+        "icon": "\u6b66\u5c06\u5c06\u9b42\u5b9d\u7bb1\uff08\u91d1\uff09"
     }
 },
 {
     "pk": 30, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u94f6\u4e24\u888b", 
+        "name": "\u5c0f\u94f6\u4e24\u7bb1", 
         "des": "", 
         "buy_sycee": 0, 
         "tp": 3, 

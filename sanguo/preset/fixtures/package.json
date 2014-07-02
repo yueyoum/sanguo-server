@@ -4624,9 +4624,24 @@
         "gold": 0, 
         "souls": [
             {
+                "amount": 3, 
+                "id": 34, 
+                "prob": 100000
+            }, 
+            {
                 "amount": 1, 
                 "id": 34, 
-                "prob": 450000
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 34, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 34, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 

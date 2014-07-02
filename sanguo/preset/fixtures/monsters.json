@@ -327,7 +327,7 @@
     "model": "hero.monster", 
     "fields": {
         "dodge": 0, 
-        "name": "\u843d\u65e5\u519b", 
+        "name": "\u95e8\u5ba2", 
         "skills": "48", 
         "tp_name": "\u7b56", 
         "image": "\u9752\u5e74\u6587\u5b98", 
