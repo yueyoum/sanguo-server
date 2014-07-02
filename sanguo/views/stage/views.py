@@ -108,7 +108,10 @@ def hang_start(request):
 @message_response("HangCancelResponse")
 def hang_cancel(request):
     hang = Hang(request._char_id)
-    hang.cancel()
+    msg = hang.cancel()
 
-    return None
+    response = protomsg.HangCancelResponse()
+    response.ret = 0
+    response.drop.MergeFrom(msg)
+    return pack_msg(response)
 

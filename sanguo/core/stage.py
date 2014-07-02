@@ -419,10 +419,10 @@ class Hang(object):
                 "api failure"
             )
 
-        self.finish()
+        return self.finish(send_attachment=True)
 
 
-    def finish(self, actual_seconds=None, set_hang=True):
+    def finish(self, actual_seconds=None, set_hang=True, send_attachment=False):
         if not self.hang_doing:
             raise SanguoException(
                 errormsg.HANG_NOT_EXIST,
@@ -442,14 +442,20 @@ class Hang(object):
         self.hang_doing.actual_seconds = actual_seconds
         self.hang_doing.save()
 
+        actual_hours = actual_seconds / 3600
+        achievement = Achievement(self.char_id)
+        achievement.trig(28, actual_hours)
+
+        if send_attachment:
+            return self.save_drop()
+
         self.send_notify()
 
         attachment = Attachment(self.char_id)
         attachment.save_to_prize(1)
+        return None
 
-        actual_hours = actual_seconds / 3600
-        achievement = Achievement(self.char_id)
-        achievement.trig(28, actual_hours)
+
 
 
     def plundered(self, who, self_win):
