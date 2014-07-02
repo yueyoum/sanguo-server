@@ -5,16 +5,13 @@ from mongoengine import DoesNotExist
 from core.mongoscheme import MongoSocket, MongoFormation, MongoHero
 from core.signals import socket_changed_signal, hero_changed_signal
 from core.exception import SanguoException
-from core.attachment import make_standard_drop_from_template
-from core.resource import resource_logger
 
 from utils import pack_msg
 from core.msgpipe import publish_to_char
 
 import protomsg
-from protomsg import SpecialEquipmentBuyRequest
 
-from preset.data import EQUIPMENTS, HEROS
+from preset.data import EQUIPMENTS
 from preset import errormsg
 
 ALL_INITIAL_EQUIPMENTS = {}
@@ -388,72 +385,6 @@ class Formation(object):
             if v.weapon == equip_id or v.armor == equip_id or v.jewelry == equip_id:
                 return v
         return None
-
-
-    def special_buy(self, socket_id, tp):
-        # FIXME
-        try:
-            this_socket = self.formation.sockets[str(socket_id)]
-        except KeyError:
-            raise SanguoException(
-                errormsg.FORMATION_NONE_EXIST_SOCKET,
-                self.char_id,
-                "Formation Special Buy",
-                "socket {0} not exist".format(socket_id)
-            )
-
-        if not this_socket.hero:
-            raise SanguoException(
-                errormsg.FORMATION_NO_HERO,
-                self.char_id,
-                "Formation Special Buy",
-                "socket {0} no hero".format(socket_id)
-            )
-
-
-        oid = MongoHero.objects.get(id=this_socket.hero).oid
-
-        this_hero = HEROS[oid]
-        special_cls = [int(i) for i in this_hero.special_equip_cls.split(',')]
-
-        def _find_speicial_id(equipments):
-            for e in equipments:
-                if e.step == 0 and e.cls in special_cls:
-                    return e.id
-
-            # FIXME
-            raise Exception("Special buy, not find. tp = {0}".format(tp))
-
-        from core.item import Item
-        item = Item(self.char_id)
-
-        if tp == SpecialEquipmentBuyRequest.SOCKET_WEAPON:
-            on_id = _find_speicial_id(ALL_WEAPONS.values())
-            new_id = item.equip_add(on_id)
-            self.formation.sockets[str(socket_id)].weapon = new_id
-        elif tp == SpecialEquipmentBuyRequest.SOCKET_ARMOR:
-            on_id = _find_speicial_id(ALL_ARMORS.values())
-            new_id = item.equip_add(on_id)
-            self.formation.sockets[str(socket_id)].armor = new_id
-        else:
-            on_id = _find_speicial_id(ALL_JEWELRY.values())
-            new_id = item.equip_add(on_id)
-            self.formation.sockets[str(socket_id)].jewelry = new_id
-
-        self.formation.save()
-        socket_changed_signal.send(
-            sender=None,
-            socket_obj=self.formation.sockets[str(socket_id)]
-        )
-
-        standard_drop = make_standard_drop_from_template()
-        standard_drop['equipments'] = [(new_id, 1, 1)]
-        standard_drop['income'] = 1
-        standard_drop['func_name'] = "Special Buy"
-        standard_drop['des'] = ''
-        resource_logger(self.char_id, standard_drop)
-
-        self.send_socket_changed_notify(socket_id, self.formation.sockets[str(socket_id)])
 
 
     def send_socket_changed_notify(self, socket_id, socket):

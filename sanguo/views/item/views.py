@@ -64,13 +64,6 @@ def merge(request):
     item.gem_merge(req.id)
     return None
 
-@message_response("SpecialEquipmentBuyResponse")
-def special_buy(request):
-    req = request._proto
-    item = Item(request._char_id)
-    item.special_buy(req.socket_id, req.tp)
-    return None
-
 
 @message_response("StuffUseResponse")
 def stuff_use(request):

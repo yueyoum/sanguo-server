@@ -27,7 +27,6 @@ urlpatterns = patterns('',
                        url(r'^equip/stepup/$', 'views.item.views.step_up_equip'),
                        url(r'^equip/embed/$', 'views.item.views.embed'),
                        url(r'^equip/unembed/$', 'views.item.views.unembed'),
-                       url(r'^equip/specialbuy/$', 'views.item.views.special_buy'),
                        url(r'^gem/merge/$', 'views.item.views.merge'),
                        url(r'^stuff/use/$', 'views.item.views.stuff_use'),
 
