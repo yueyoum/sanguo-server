@@ -7,7 +7,6 @@ from core.stage import Stage, Hang, EliteStage, ActivityStage
 from core.attachment import standard_drop_to_attachment_protomsg
 from libs import pack_msg
 from utils.decorate import message_response, operate_guard, function_check
-from preset.data import STAGE_ACTIVITY
 from preset.settings import OPERATE_INTERVAL_PVE, OPERATE_INTERVAL_PVE_ELITE
 
 import protomsg
@@ -18,11 +17,7 @@ def activity_pve(request):
     req = request._proto
     stage = ActivityStage(request._char_id)
 
-    s = STAGE_ACTIVITY[req.stage_id]
-    if s.tp == 1:
-        battle_msg = stage.battle_type_one(req.stage_id)
-    else:
-        battle_msg = stage.battle_type_two(req.stage_id)
+    battle_msg = stage.battle(req.stage_id)
 
     if battle_msg.self_win:
         drop = stage.save_drop()

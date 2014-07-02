@@ -8,6 +8,8 @@ from utils.decorate import message_response, function_check
 from core.hero import Hero, char_heros_dict, recruit_hero
 from core.exception import SanguoException
 from preset import errormsg
+from utils import pack_msg
+from protomsg import HeroStepUpResponse
 
 
 @message_response("HeroStepUpResponse")
@@ -29,7 +31,11 @@ def step_up(request):
 
     h = Hero(_id)
     h.step_up()
-    return None
+
+    response = HeroStepUpResponse()
+    response.ret = 0
+    response.id = _id
+    return pack_msg(response)
 
 @message_response("HeroRecruitResponse")
 def recruit(request):

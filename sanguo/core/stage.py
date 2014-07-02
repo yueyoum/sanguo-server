@@ -830,17 +830,9 @@ class ActivityStage(object):
         publish_to_char(self.char_id, pack_msg(msg))
 
 
-    @operate_guard('activate_pve_1', OPERATE_INTERVAL_PVE_ACTIVITY_GOLD, keep_result=False, char_id_name='char_id')
-    def battle_type_one(self, _id):
-        return self.battle(_id)
-
-
-    @operate_guard('activate_pve_2', OPERATE_INTERVAL_PVE_ACTIVITY_GEM, keep_result=False, char_id_name='char_id')
-    def battle_type_two(self, _id):
-        return self.battle(_id)
-
 
     @passport(not_hang_going, errormsg.HANG_GOING, "Activate Stage Battle")
+    @operate_guard('activate_pve', 6, keep_result=False, char_id_name='char_id')
     def battle(self, _id):
         try:
             self.this_stage = STAGE_ACTIVITY[_id]
