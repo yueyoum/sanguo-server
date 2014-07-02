@@ -3,11 +3,12 @@
 __author__ = 'Wang Chao'
 __date__ = '4/9/14'
 
+import arrow
+
 from core.exception import SanguoException
 from core.signals import login_signal
 from core.activeplayers import Player
 from utils.decorate import message_response
-from utils import timezone
 from libs import crypto, pack_msg
 from libs.session import GameSession, session_dumps
 
@@ -83,7 +84,7 @@ def login(request):
 
     sync = SyncResponse()
     sync.ret = 0
-    sync.utc_timestamp = timezone.utc_timestamp()
+    sync.utc_timestamp = arrow.utcnow().timestamp
 
     return [pack_msg(response, session), pack_msg(sync)]
 

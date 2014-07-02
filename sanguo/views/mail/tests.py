@@ -3,6 +3,7 @@
 __author__ = 'Wang Chao'
 __date__ = '1/2/14'
 
+import arrow
 from django.test import TestCase
 
 from core.mail import Mail
@@ -10,7 +11,6 @@ from core.character import char_initialize
 
 from utils import app_test_helper
 from libs import crypto
-from utils import timezone
 
 import protomsg
 
@@ -76,7 +76,7 @@ class MailTest(TestCase):
 
     def test_open_mail_normal(self):
         m = Mail(self.char_id)
-        mid = m.add('xxx', 'yyy', timezone.utc_timestamp())
+        mid = m.add('xxx', 'yyy', arrow.utcnow().timestamp)
         self.assertEqual(m.mail.mails[str(mid)].has_read, False)
 
         self._open(mid)
@@ -92,7 +92,7 @@ class MailTest(TestCase):
 
 
     def test_delete_mail_normal(self):
-        mid = Mail(self.char_id).add('xxx', 'yyy', timezone.utc_timestamp())
+        mid = Mail(self.char_id).add('xxx', 'yyy', arrow.utcnow().timestamp)
         self._delete(mid)
 
         self.assertEqual(Mail(self.char_id).count(), 0)

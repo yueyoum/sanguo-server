@@ -3,11 +3,12 @@
 import os
 import logging
 
+import arrow
+
 from django.conf import settings
 
 
 from core.battle.battle_field import BattleField
-from utils.timezone import localnow
 from protomsg import BattleHero as BattleHeroMsg
 
 logger = logging.getLogger('battle')
@@ -228,7 +229,7 @@ class Battle(object):
 
         # record battle msg to file
         record_name = '{0}-{1}-{2}-{3}.bin'.format(
-            localnow().strftime('%y%m%d:%H%M%S'),
+            arrow.utcnow().to(settings.TIME_ZONE).format("YYYYMMDD:HHmmss"),
             self.BATTLE_TYPE,
             self.my_id,
             self.rival_id

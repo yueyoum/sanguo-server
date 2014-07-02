@@ -4,6 +4,7 @@ __author__ = 'Wang Chao'
 __date__ = '1/23/14'
 
 import random
+import arrow
 
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoHeroPanel, MongoEmbeddedHeroPanelHero
@@ -13,7 +14,6 @@ from core.hero import save_hero
 from core.resource import Resource
 from core.msgpipe import publish_to_char
 from utils import pack_msg
-from utils import timezone
 from preset import errormsg
 import protomsg
 from preset.settings import (
@@ -50,7 +50,7 @@ class HeroPanel(object):
 
         last_refresh = self.panel.last_refresh
 
-        time_passed = timezone.utc_timestamp() - last_refresh
+        time_passed = arrow.utcnow().timestamp - last_refresh
         seconds = GET_HERO_REFRESH - time_passed
         if seconds < 0:
             seconds = 0
@@ -186,7 +186,7 @@ class HeroPanel(object):
         panel.got_good_hero = False
 
         if reset_time:
-            panel.last_refresh = timezone.utc_timestamp()
+            panel.last_refresh = arrow.utcnow().timestamp
         else:
             panel.last_refresh = self.panel.last_refresh
 

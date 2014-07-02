@@ -1,11 +1,12 @@
 import logging
 
+import arrow
 from django.http import HttpResponse
+from django.conf import settings
 
 from core.exception import SanguoException
 from utils import cache
 from utils import pack_msg
-from utils.timezone import localnow
 from utils.checkers import func_opened
 import protomsg
 from preset import errormsg
@@ -13,6 +14,8 @@ from preset import errormsg
 from libs.decorate import json_return
 
 logger = logging.getLogger('sanguo')
+
+TIME_ZONE = settings.TIME_ZONE
 
 def message_response(message_name):
     def deco(func):
@@ -55,7 +58,7 @@ def operate_guard(func_name, interval, keep_result=False, char_id_name='_char_id
                         'char_id': char_id,
                         'func_name': func_name,
                         'error_msg': 'Operate Too Fast, Return from cache',
-                        'occurred_at': localnow().strftime('%Y-%m-%d %H:%M:%S'),
+                        'occurred_at': arrow.utcnow().to(TIME_ZONE).format('YYYY-MM-DD HH:mm:ss')
                     }
 
                     logger.info("Operate Guard. Char {0} operate {1} too fast. Return result from cache.".format(char_id, func_name),

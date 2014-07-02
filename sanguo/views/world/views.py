@@ -17,7 +17,6 @@ from core.mail import Mail
 from utils.decorate import message_response
 from utils.api import api_activatecode_use, APIFailure
 
-from utils import timezone
 from libs import crypto, pack_msg
 from libs.session import GameSession, session_dumps
 from protomsg import SyncResponse, ResumeResponse
@@ -30,7 +29,7 @@ from preset import errormsg
 def sync(request):
     msg = SyncResponse()
     msg.ret = 0
-    msg.utc_timestamp = timezone.utc_timestamp()
+    msg.utc_timestamp = arrow.utcnow().timestamp
     return pack_msg(msg)
 
 
@@ -39,7 +38,7 @@ def resume(request):
     req = request._proto
     sync = SyncResponse()
     sync.ret = 0
-    sync.utc_timestamp = timezone.utc_timestamp()
+    sync.utc_timestamp = arrow.utcnow().timestamp
 
     login_signal.send(
         sender=None,

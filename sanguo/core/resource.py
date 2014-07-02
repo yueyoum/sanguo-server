@@ -6,13 +6,16 @@ __date__ = '4/29/14'
 import logging
 from contextlib import contextmanager
 
+import arrow
+from django.conf import settings
+
 from core.exception import SanguoException
-from utils.timezone import localnow
 
 from preset.errormsg import GOLD_NOT_ENOUGH, SYCEE_NOT_ENOUGH, STUFF_NOT_ENOUGH, GEM_NOT_ENOUGH, SOUL_NOT_ENOUGH, EQUIPMENT_NOT_EXIST
 
 logger = logging.getLogger('sanguo')
 
+TIME_ZONE = settings.TIME_ZONE
 
 # 对于要消耗的资源进行检查，
 # 目前系统不支持消耗卡牌，经验，官职经验，所以不支持消耗这些资源
@@ -222,7 +225,7 @@ def resource_logger(char_id, data):
     extra = {
         'log_type_id': 2,
         'char_id': char_id,
-        'occurred_at': localnow().strftime('%Y-%m-%d %H:%M:%S'),
+        'occurred_at': arrow.utcnow().to(TIME_ZONE).format('YYYY-MM-DD HH:mm:ss'),
     }
 
     extra.update(data)

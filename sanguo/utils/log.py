@@ -10,8 +10,8 @@ import logging
 import zmq
 import msgpack
 
+import arrow
 from django.conf import settings
-from utils.timezone import localnow
 
 
 fmt = struct.Struct('>i')
@@ -25,6 +25,7 @@ sock.connect("tcp://{0}:{1}".format(settings.LOG_MAN_HOST, settings.LOG_MAN_PORT
 
 logger = logging.getLogger('sanguo')
 
+TIME_ZONE = settings.TIME_ZONE
 
 class LogManHandler(logging.Handler):
     def emit(self, record):
@@ -81,11 +82,10 @@ def system_logger(error_id, char_id, func_name, error_msg):
         'char_id': char_id,
         'func_name': func_name,
         'error_msg': error_msg,
-        'occurred_at': localnow().strftime('%Y-%m-%d %H:%M:%S'),
+        'occurred_at': arrow.utcnow().to(TIME_ZONE).format('YYYY-MM-DD HH:mm:ss'),
     }
 
     logger.debug("Error_id: {0}. Char_id: {1}. Func_name: {2}. Msg: {3}".format(
                 error_id, char_id, func_name, error_msg),
                 extra=extra
                 )
-
