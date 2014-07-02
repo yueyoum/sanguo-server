@@ -22,7 +22,7 @@ def clean():
     for m in mails:
         char_mail = Mail(m.id, mailobj=m)
         for k, v in m.mails.items():
-            create_at = arrow.get(v.create_at).replace(tzinfo=pytz.utc)
+            create_at = arrow.get(v.create_at, 'YYYY-MM-DD HH:mm:ss').replace(tzinfo=pytz.utc)
             if create_at < DIFF:
                 char_mail.delete(k)
                 amount += 1
