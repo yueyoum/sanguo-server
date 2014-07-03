@@ -729,7 +729,7 @@
         "star_drop": "801", 
         "first_exp": 5000, 
         "battle": 4, 
-        "first_drop": "3051", 
+        "first_drop": "502", 
         "normal_exp": 24, 
         "monsters": "6,0,6,7,117,7,7,175,7", 
         "name": "\u9a6c\u817e\u6765\u88ad"
@@ -2318,7 +2318,7 @@
         "battle": 11, 
         "first_drop": "", 
         "normal_exp": 38, 
-        "monsters": "4,11,4,7,13,7,24,15,16", 
+        "monsters": "4,11,4,7,13,7,23,15,16", 
         "name": "\u591c\u88ad"
     }
 },
@@ -3440,7 +3440,7 @@
         "star_exp": 0, 
         "tp": 2, 
         "first_gold": 0, 
-        "star_drop": "811480", 
+        "star_drop": "811,480", 
         "first_exp": 16000, 
         "battle": 15, 
         "first_drop": "", 

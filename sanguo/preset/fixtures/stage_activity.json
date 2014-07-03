@@ -182,7 +182,7 @@
         "battle_name": "\u6d1b\u9633\u4e4b\u6218", 
         "char_level": 10, 
         "normal_exp": 0, 
-        "monsters": "5,98,5,11,73,11,18,68,18", 
+        "monsters": "5,198,5,11,173,11,18,168,18", 
         "name": "\u96be\u5ea6\u4e00"
     }
 },
@@ -199,7 +199,7 @@
         "battle_name": "\u6d1b\u9633\u4e4b\u6218", 
         "char_level": 20, 
         "normal_exp": 0, 
-        "monsters": "5,98,5,11,73,11,18,68,18", 
+        "monsters": "5,198,5,11,173,11,18,168,18", 
         "name": "\u96be\u5ea6\u4e8c"
     }
 },
@@ -216,7 +216,7 @@
         "battle_name": "\u6d1b\u9633\u4e4b\u6218", 
         "char_level": 30, 
         "normal_exp": 0, 
-        "monsters": "5,98,5,11,73,11,18,68,18", 
+        "monsters": "5,198,5,11,173,11,18,168,18", 
         "name": "\u96be\u5ea6\u4e09"
     }
 },
@@ -233,7 +233,7 @@
         "battle_name": "\u6d1b\u9633\u4e4b\u6218", 
         "char_level": 40, 
         "normal_exp": 0, 
-        "monsters": "5,98,5,11,73,11,18,68,18", 
+        "monsters": "5,198,5,11,173,11,18,168,18", 
         "name": "\u96be\u5ea6\u56db"
     }
 },
@@ -250,7 +250,7 @@
         "battle_name": "\u6d1b\u9633\u4e4b\u6218", 
         "char_level": 50, 
         "normal_exp": 0, 
-        "monsters": "5,98,5,11,73,11,18,68,18", 
+        "monsters": "5,198,5,11,173,11,18,168,18", 
         "name": "\u96be\u5ea6\u4e94"
     }
 }

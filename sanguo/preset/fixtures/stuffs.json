@@ -349,7 +349,7 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u9526\u56ca", 
-        "des": "", 
+        "des": "\u5176\u5185\u88c5\u6709\u519b\u5e08\u732e\u4e0a\u7684\u5999\u8ba1", 
         "buy_sycee": 0, 
         "tp": 2, 
         "sell_gold": 1000, 
@@ -364,7 +364,7 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u7389\u5982\u610f", 
-        "des": "", 
+        "des": "\u8c61\u5f81\u5409\u7965\u7684\u73a9\u8d4f\u4e4b\u7269", 
         "buy_sycee": 0, 
         "tp": 2, 
         "sell_gold": 1500, 
@@ -379,7 +379,7 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u6f06\u5668", 
-        "des": "", 
+        "des": "\u6587\u4eba\u96c5\u58eb\u559c\u7231\u4e4b\u7269", 
         "buy_sycee": 0, 
         "tp": 2, 
         "sell_gold": 5000, 
@@ -394,7 +394,7 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u5b9d\u9f0e", 
-        "des": "", 
+        "des": "\u795e\u58eb\u70bc\u4e39\u5360\u535c\u6240\u7528\u4e4b\u7269", 
         "buy_sycee": 0, 
         "tp": 2, 
         "sell_gold": 10000, 
@@ -409,7 +409,7 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u5b9d\u5370", 
-        "des": "", 
+        "des": "\u5929\u4e0b\u7fa4\u96c4\u4e89\u593a\u7684\u81f3\u9ad8\u8c61\u5f81", 
         "buy_sycee": 0, 
         "tp": 2, 
         "sell_gold": 20000, 
@@ -424,7 +424,7 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u6b66\u5c06\u5c06\u9b42\u5b9d\u7bb1\uff08\u91d1\uff09", 
-        "des": "\u7532\u6b66\u5c06", 
+        "des": "\u53ef\u83b7\u5f97\u795e\u79d8\u6b66\u5c06\u5c06\u9b42", 
         "buy_sycee": 0, 
         "tp": 3, 
         "sell_gold": 0, 
@@ -439,7 +439,7 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u5c0f\u94f6\u4e24\u7bb1", 
-        "des": "", 
+        "des": "\u88c5\u6709\u4e07\u4e24\u94f6\u4e24\u7684\u5b9d\u7bb1", 
         "buy_sycee": 0, 
         "tp": 3, 
         "sell_gold": 0, 
@@ -454,7 +454,7 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u94f6\u4e24\u7bb1", 
-        "des": "", 
+        "des": "\u88c5\u6709\u4e94\u4e07\u4e24\u94f6\u4e24\u7684\u5b9d\u7bb1", 
         "buy_sycee": 0, 
         "tp": 3, 
         "sell_gold": 0, 
@@ -469,7 +469,7 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u8d22\u5b9d\u7bb1", 
-        "des": "", 
+        "des": "\u88c5\u6709\u5341\u516b\u4e07\u94f6\u4e24\u7684\u5b9d\u7bb1", 
         "buy_sycee": 0, 
         "tp": 3, 
         "sell_gold": 0, 
