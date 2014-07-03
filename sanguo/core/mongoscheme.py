@@ -345,7 +345,7 @@ class MongoArenaWeek(Document):
 class MongoArena(Document):
     id = IntField(primary_key=True)
     # 每个人自己的排名
-    # 由定时任务每天更新，同时也可以统计每天的名字变化
+    # 由定时任务每天更新，同时也统计每天的名次变化
     rank = IntField(default=0)
     # 连续胜利场次
     continues_win = IntField(default=0)

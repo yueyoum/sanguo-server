@@ -42,6 +42,8 @@ class Task(object):
 
 
     def check(self):
+        attachment = Attachment(self.char_id)
+
         for t in self.task.doing:
             if t in self.task.complete:
                 continue
@@ -54,10 +56,17 @@ class Task(object):
                 if t not in self.task.finished:
                     self.task.finished.append(t)
 
-                attachment = Attachment(self.char_id)
                 attachment.save_to_prize(5)
 
         self.task.save()
+
+        # XXX
+        # BUG 一些时候没有任务可领奖，但是 attachment 中 还有 5 prize，
+        # 不知道为何……
+        if not self.task.finished:
+            if 5 in attachment.attachment.prize_ids:
+                attachment.attachment.prize_ids.remove(5)
+                attachment.attachment.save()
 
 
     def trig(self, tp, times=1):

@@ -16,5 +16,6 @@ def prize_get(request):
     response = PrizeResponse()
     response.ret = 0
     response.prize.MergeFrom(req.prize)
-    response.drop.MergeFrom(att_msg)
+    if att_msg:
+        response.drop.MergeFrom(att_msg)
     return pack_msg(response)

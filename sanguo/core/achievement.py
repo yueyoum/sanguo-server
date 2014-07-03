@@ -20,7 +20,6 @@ from preset.data import ACHIEVEMENTS, ACHIEVEMENT_CONDITIONS, ACHIEVEMENT_FIRST_
 from preset import errormsg
 
 
-
 class Achievement(object):
     def __init__(self, char_id):
         self.char_id = char_id
@@ -33,6 +32,16 @@ class Achievement(object):
             self.achievement.finished = []
             self.achievement.complete = []
             self.achievement.save()
+
+        self.check()
+
+
+    def check(self):
+        if not self.achievement.finished:
+            attachment = Attachment(self.char_id)
+            if 4 in attachment.attachment.prize_ids:
+                attachment.attachment.prize_ids.remove(4)
+                attachment.attachment.save()
 
 
 
