@@ -404,7 +404,7 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
     id_range = []
     if hero_original_ids:
         length = len(hero_original_ids)
-        new_max_id = document_ids.inc('charhero', length)
+        new_max_id = int(document_ids.inc('charhero', length))
         id_range = range(new_max_id-length+1, new_max_id+1)
         for i, _id in enumerate(id_range):
             MongoHero(id=_id, char=char_id, oid=hero_original_ids[i], step=HERO_START_STEP, progress=0).save()

@@ -29,7 +29,7 @@ def plunder_list(request):
         plunder.power = power
         plunder.leader = leader
         plunder.hero_original_ids.extend(formation)
-        # plunder.hang = is_hang
+        plunder.hang = is_hang
 
     return pack_msg(response)
 

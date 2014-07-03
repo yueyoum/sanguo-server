@@ -341,7 +341,7 @@ class Item(MessageEquipmentMixin):
                 "Equipment {0} NOT exist".format(oid)
             )
 
-        new_id = document_ids.inc('equipment')
+        new_id = int(document_ids.inc('equipment'))
         me = MongoEmbeddedEquipment()
         me.oid = oid
         me.level = level
