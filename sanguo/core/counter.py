@@ -10,7 +10,6 @@ from preset.data import VIP_FUNCTION
 
 
 class Counter(object):
-    __slots__ = ['char_id', 'func_name']
     def __init__(self, char_id, func_name):
         self.char_id = char_id
         self.func_name = func_name
@@ -53,7 +52,6 @@ class Counter(object):
 
 
 class ActivityStageCount(Counter):
-    __slots__ = ['char_id', 'func_name']
     def __init__(self, char_id):
         super(ActivityStageCount, self).__init__(char_id, None)
 
