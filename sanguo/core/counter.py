@@ -10,6 +10,7 @@ from preset.data import VIP_FUNCTION
 
 
 class Counter(object):
+    __slots__ = ['char_id', 'func_name']
     def __init__(self, char_id, func_name):
         self.char_id = char_id
         self.func_name = func_name
@@ -32,21 +33,34 @@ class Counter(object):
 
     @property
     def cur_value(self):
-        return self.c.counter[self.func_name]
+        return self.c.counter.get(self.func_name, 0)
 
     @property
     def remained_value(self):
         value = self.max_value - self.cur_value
         return value if value >=0 else 0
 
-    def incr(self, value=1, dirty=False):
-        if not dirty:
-            if self.remained_value < value:
-                raise CounterOverFlow()
+    def incr(self, value=1):
+        if self.remained_value < value:
+            raise CounterOverFlow()
 
-        self.c.counter[self.func_name] += value
+        self.c.counter[self.func_name] = self.c.counter.get(self.func_name, 0) + value
         self.c.save()
 
     def reset(self):
         self.c.counter[self.func_name] = 0
         self.c.save()
+
+
+class ActivityStageCount(Counter):
+    __slots__ = ['char_id', 'func_name']
+    def __init__(self, char_id):
+        super(ActivityStageCount, self).__init__(char_id, None)
+
+    def make_func_name(self, tp):
+        self.func_name = 'activity_stage_{0}'.format(tp)
+
+    @property
+    def max_value(self):
+        return 3
+

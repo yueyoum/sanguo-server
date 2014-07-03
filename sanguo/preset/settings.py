@@ -16,14 +16,12 @@ COUNTER = {
     'stage_elite': 10,                  # 精英关卡总次数
     'stage_elite_buy_total': 0,         # 精英关卡总重置次数 VIP
 
-    'stage_active_type_one': 3,         # 活动产金币关卡总次数
-    'stage_active_type_two': 3,         # 活动产宝石宝物关卡总次数
-
     'levy': 0,                          # 征收次数 VIP
 }
 # 挂机时间是特殊处理的，所以不写在COUNTER里
 # 其他一些和VIP相关的功能不是次数限制，所以也不在这里
-
+# 活动关卡的总次数是用的 core.counter.ActivityStageCounter 来特殊处理的
+# 是为了兼容以后再加新的活动关卡类型
 
 
 #########################
@@ -230,8 +228,7 @@ CHAT_MESSAGE_MAX_LENGTH = 50            # 发送消息长度。多少个字
 #########################
 OPERATE_INTERVAL_PVE = 5                # 普通关卡战斗间隔
 OPERATE_INTERVAL_PVE_ELITE = 5          # 精英关卡战斗间隔
-OPERATE_INTERVAL_PVE_ACTIVITY_GOLD = 5  # 活动关卡金币间隔
-OPERATE_INTERVAL_PVE_ACTIVITY_GEM = 5   # 活动关卡宝石间隔
+OPERATE_INTERVAL_PVE_ACTIVITY = 5       # 活动关卡间隔
 
 OPERATE_INTERVAL_ARENA_PANEL = 5        # 竞技厂刷新面板间隔
 OPERATE_INTERVAL_CHAT_SEND = 15         # 聊天发送间隔

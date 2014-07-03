@@ -229,7 +229,7 @@ class MongoPrison(Document):
 
 class MongoCounter(Document):
     id = IntField(primary_key=True)
-    # key 是 preset.settings.COUNTER 中的key，值也是剩余的至
+    # key 是 preset.settings.COUNTER 中的key，值表示已经进行了多少次
     counter = DictField()
 
     meta = {

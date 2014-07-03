@@ -1,102 +1,20 @@
-* 2014-03-26
+*   2014-07-02
 
-    add Dialog Model
-    
+    架构更改
+    去掉dispatch. server-list, register 会直接达到hub，其他请求会达到各自server，
+    然后通过api与hub交互
 
-* 2014-03-25
+    sanguo_hub 表删除server, server_node, django_admin_log表，并重新syncdb
 
-    alter table battle add column des longtext not null;
-    alter table stage drop column des;
-    alter table monster drop column avatar;
+    由于没有了 dispatch， 要重新规划端口
 
-    alter table gem add column sell_gold int(11) not null;
+    每个server单独一个目录，不同的配置，单独起一个web server
+    现在不同的server链接同一个mongodb 中的不同db
 
+    但 document_ids （用来产生唯一ID） 不同的server还是需要同一个db （sanguo_unique_ids， 写死在代码中）
+    所以要注意mongodb中的修改
 
-
-* 2014-03-21
-
-    alter table stuff add column tp int(11) not null;
-    alter table stuff add column value int(11);
-
-    Add FunctionOpen Model
-
-
-* 2014-03-19
-
-    New Achievement
-
-    alter table achievement add column first tinyint(1) not null;
-    alter table achievement add column next int(11);
-    alter table achievement add column equipments varchar(255) not null;
-    alter table achievement add column gems varchar(255) not null;
-    alter table achievement add column stuffs varchar(255) not null;
-
-
-* 2014-03-12
-
-    New Achievement
-
-
-* 2014-03-11
-
-    StoreBuyLog 添加 order_id, status
-    alter table store_log add column order_id varchar(255) not null;
-    alter table store_log add column status int(11) not null;
-
-
-* 2014-03-06
-
-    Official Model删除 exp_needs 列。 用公式计算。
-    添加 offical 为0 的配置
-
-
-* 2014-03-05
-
-    关卡掉落表从以前的drops改为 装备掉落，宝石掉落，材料掉落
-    alter talbe stagedrop drop column drops;
-    alter talbe stagedrop add column equips;
-    alter talbe stagedrop add column gems;
-    alter talbe stagedrop add column stuffs;
-
-    Fix. 修复在并发情况下可能会因为同服重名的情况而报错
-    在 preset.settings 中增加各种设定，并应用于逻辑中
-
-
-* 2014-03-04
-
-    MongoEmbededMail 中 create_at 由以前的DateTimeField 改为 IntField.
-    直接保存UTC时间戳
-
-    去掉Character Model中的 renown. 去掉此属性
-    去掉Character Model中的 score.  保存在redis的zset中
-
-    alter table char_ drop column renown;
-    alter table char_ drop column score_day;
-    alter table char_ drop column score_week;
-
-    去掉Account Model中 platform
-    alter table account drop column platform;
-
-    给 Monster 加上 default_skill 和 anger
-    alter table monster add column default_skill int(11) not null;
-    alter table monster add column anger int(11) not null;
-    update monster set default_skill = 0;
-    update monster set anger = 50;
-
-    添加新的错误代码1100： PVE等级限制
-
-
-* 2014-03-03
-
-    调整Hero Model, 从以前的专属装备ID，改为专属装备类别。
-
-    alter table hero change special_equip_id special_equip_cls varchar(255) not null;
-    alter table hero modify special_addition varchar(255) not null;
-
-    Hero增加怒气属性
-    alter table hero add column anger int(11) not null;
-
-    Skill技能用怒气来触发
-    alter table skill add column anger_self int(11) not null;
-    alter table skill add column anger_self_team int(11) not null;
-    alter table skill add column anger_rival_team int(11) not null;
+    > use sanguo_unique_ids
+    switched to db sanguo_unique_ids
+    > db.ids.insert({_id: 'equipment', 'id': NUMBER})
+    > db.ids.insert({_id: 'charhero', 'id': NUMBER})

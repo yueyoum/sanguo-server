@@ -184,8 +184,11 @@ def HERO_GET_BY_GRADE(grade, amount=1):
     return res
 
 STAGE_ACTIVITY_CONDITION = {}
+STAGE_ACTIVITY_TPS = []
 for k, v in STAGE_ACTIVITY.iteritems():
     STAGE_ACTIVITY_CONDITION.setdefault(v.char_level, []).append(k)
+    if v.tp not in STAGE_ACTIVITY_TPS:
+        STAGE_ACTIVITY_TPS.append(v.tp)
 
 
 STAGE_ELITE_FIRST_ID = sorted(STAGE_ELITE.keys())[0]

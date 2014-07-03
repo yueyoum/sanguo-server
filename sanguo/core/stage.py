@@ -15,7 +15,7 @@ from core.character import Char
 from core.functionopen import FunctionOpen
 from core.mail import Mail
 from core.signals import pve_finished_signal
-from core.counter import Counter
+from core.counter import Counter, ActivityStageCount
 from core.resource import Resource
 from core import timer
 from utils import pack_msg
@@ -34,8 +34,7 @@ from preset.settings import (
     STAGE_ELITE_RESET_COST,
     STAGE_ELITE_TOTAL_RESET_COST,
 
-    OPERATE_INTERVAL_PVE_ACTIVITY_GEM,
-    OPERATE_INTERVAL_PVE_ACTIVITY_GOLD,
+    OPERATE_INTERVAL_PVE_ACTIVITY,
 )
 from preset.data import (
     STAGE_TYPE,
@@ -45,6 +44,7 @@ from preset.data import (
     STAGE_ELITE_FIRST_ID,
     STAGE_ACTIVITY,
     STAGE_ACTIVITY_CONDITION,
+    STAGE_ACTIVITY_TPS,
     VIP_MAX_LEVEL,
     VIP_FUNCTION,
 )
@@ -630,7 +630,7 @@ class EliteStage(object):
 
         reset_times = self.stage.elites_buy.get(str(_id), 0)
         char = Char(self.char_id).mc
-        reset_total = VIP_FUNCTION[char.vip]['elite_stage_buy']
+        reset_total = VIP_FUNCTION[char.vip].stage_elite_buy
         if reset_times >= reset_total:
             raise SanguoException(
                 errormsg.STAGE_ELITE_RESET_FULL,
@@ -836,9 +836,8 @@ class ActivityStage(object):
         publish_to_char(self.char_id, pack_msg(msg))
 
 
-
     @passport(not_hang_going, errormsg.HANG_GOING, "Activate Stage Battle")
-    @operate_guard('activate_pve', 6, keep_result=False, char_id_name='char_id')
+    @operate_guard('activate_pve', OPERATE_INTERVAL_PVE_ACTIVITY, keep_result=False, char_id_name='char_id')
     def battle(self, _id):
         try:
             self.this_stage = STAGE_ACTIVITY[_id]
@@ -858,12 +857,9 @@ class ActivityStage(object):
                 "StageActivity {0} not open".format(_id)
             )
 
-        if self.this_stage.tp == 1:
-            func_name = 'stage_active_type_one'
-        else:
-            func_name = 'stage_active_type_two'
+        counter = ActivityStageCount(self.char_id)
+        counter.make_func_name(self.this_stage.tp)
 
-        counter = Counter(self.char_id, func_name)
         if counter.remained_value <= 0:
             raise SanguoException(
                 errormsg.STAGE_ACTIVITY_TOTAL_NO_TIMES,
@@ -905,11 +901,12 @@ class ActivityStage(object):
     def send_remained_times_notify(self):
         msg = protomsg.ActivityStageRemainedTimesNotify()
 
-        counter = Counter(self.char_id, 'stage_active_type_one')
-        msg.type_one_times = counter.remained_value
-
-        counter.func_name = 'stage_active_type_two'
-        msg.type_two_times = counter.remained_value
+        counter = ActivityStageCount(self.char_id)
+        for tp in STAGE_ACTIVITY_TPS:
+            msg_time = msg.remained_times.add()
+            counter.make_func_name(tp)
+            msg_time.tp = tp
+            msg_time.times = counter.remained_value
 
         publish_to_char(self.char_id, pack_msg(msg))
 
