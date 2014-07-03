@@ -42,7 +42,16 @@ class Store(object):
         store = data['data']['store']
         return {int(k): v for k, v in store.iteritems()}
 
+
     def buy(self, _id, amount):
+        if amount < 1:
+            raise SanguoException(
+                errormsg.STORE_INVALID_BUY_AMOUNT,
+                self.char_id,
+                "Store Buy",
+                "invalid amount {0}".format(amount)
+            )
+
         store = self.get_new_store()
 
         try:
