@@ -30,7 +30,6 @@ def object_maker(fixture_file):
 
     return res
 
-
 def _find_file(fixture_name):
     for f in FIXTURES_FILES:
         if f.endswith(fixture_name):
@@ -40,7 +39,8 @@ def _find_file(fixture_name):
 
 FUNCTION_DEFINE = object_maker(_find_file('function_define.json'))
 CHARINIT = object_maker(_find_file('charinit.json'))[1]
-ARENA_REWARD = object_maker(_find_file('arena_reward.json'))
+ARENA_DAY_REWARD = object_maker(_find_file('arena_day_reward.json'))
+ARENA_WEEK_REWARD = object_maker(_find_file('arena_week_reward.json'))
 ACHIEVEMENTS = object_maker(_find_file('achievements.json'))
 OFFICIAL = object_maker(_find_file('official.json'))
 HEROS = object_maker(_find_file('heros.json'))
@@ -59,6 +59,12 @@ SKILLS = object_maker(_find_file('skills.json'))
 SKILL_EFFECT = object_maker(_find_file('skill_effect.json'))
 TASKS = object_maker(_find_file('tasks.json'))
 VIP_FUNCTION = object_maker(_find_file('vip.json'))
+
+ARENA_DAY_REWARD_TUPLE = ARENA_DAY_REWARD.items()
+ARENA_DAY_REWARD_TUPLE.sort(key=lambda item: item[0])
+
+ARENA_WEEK_REWARD_TUPLE = ARENA_WEEK_REWARD.items()
+ARENA_WEEK_REWARD_TUPLE.sort(key=lambda item: item[0])
 
 
 def _got_package():

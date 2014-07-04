@@ -5,43 +5,30 @@ __date__ = '1/22/14'
 
 import random
 
-from mongoengine import DoesNotExist, Q
+from mongoengine import DoesNotExist
+from core.drives import redis_client_two
+from core.server import server
 from core.msgpipe import publish_to_char
 from core.character import Char
 from core.battle import PVP
 from core.counter import Counter
-from core.mongoscheme import MongoArenaTopRanks, MongoArena, MongoArenaDay, MongoArenaWeek, MongoCharacter
+from core.mongoscheme import MongoArenaTopRanks, MongoArenaWeek
 from core.exception import CounterOverFlow, SanguoException
 from core.achievement import Achievement
 from core.task import Task
 from core.resource import Resource
-from preset.settings import ARENA_COST_SYCEE, ARENA_GET_SCORE_WHEN_LOST, ARENA_GET_SCORE_WHEN_WIN, COUNTER
+from preset.settings import ARENA_COST_SYCEE, ARENA_GET_SCORE_WHEN_LOST, ARENA_GET_SCORE_WHEN_WIN
 from preset.data import VIP_MAX_LEVEL
-
 from utils import pack_msg
-
 import protomsg
 from preset import errormsg
 
 
-DAY_MAX_SCORE = (COUNTER['arena'] + COUNTER['arena_buy']) * ARENA_GET_SCORE_WHEN_WIN
-
+REDIS_DAY_KEY = 'arena:day:{0}'.format(server.id)
 
 class Arena(object):
     def __init__(self, char_id):
         self.char_id = char_id
-        try:
-            self.mongo_arena = MongoArena.objects.get(id=char_id)
-        except DoesNotExist:
-            self.mongo_arena = MongoArena(id=char_id)
-            self.mongo_arena.save()
-
-        try:
-            self.mongo_day = MongoArenaDay.objects.get(id=char_id)
-        except DoesNotExist:
-            self.mongo_day = MongoArenaDay(id=char_id)
-            self.mongo_day.score = 0
-            self.mongo_day.save()
 
         try:
             self.mongo_week = MongoArenaWeek.objects.get(id=char_id)
@@ -51,17 +38,25 @@ class Arena(object):
             self.mongo_week.rank = 0
             self.mongo_week.save()
 
+
     @property
     def day_score(self):
-        return self.mongo_day.score
+        score = redis_client_two.zscore(REDIS_DAY_KEY, self.char_id)
+        return int(score) if score else 0
+
+    @property
+    def day_rank(self):
+        rank = redis_client_two.zrank(REDIS_DAY_KEY, self.char_id)
+        return rank+1 if rank else 0
+
+    @property
+    def week_score(self):
+        return self.mongo_week.score
 
     @property
     def week_rank(self):
         return self.mongo_week.rank
 
-    @property
-    def week_score(self):
-        return self.mongo_week.score
 
     @property
     def remained_free_times(self):
@@ -73,10 +68,13 @@ class Arena(object):
         c = Counter(self.char_id, 'arena_buy')
         return c.remained_value
 
+    def inc_day_score(self, score):
+        redis_client_two.zincry(REDIS_DAY_KEY, self.char_id, score)
+
 
     def _fill_up_panel_msg(self, msg):
         msg.week_rank = self.week_rank
-        msg.day_rank = 0
+        msg.day_rank = self.day_rank
         msg.week_score = self.week_score
         msg.day_score = self.day_score
         msg.remained_free_times = self.remained_free_times
@@ -98,39 +96,27 @@ class Arena(object):
 
     def choose_rival(self):
         my_score = self.day_score
-        choosing = []
+        choosing = redis_client_two.zrangebyscore(REDIS_DAY_KEY, my_score, my_score)
+        choosing.remove(self.char_id)
+        if choosing:
+            return int(random.choice(choosing))
 
-        score_diff = 2
-        while True:
-            if score_diff >= DAY_MAX_SCORE:
-                break
-
-            choosing = MongoArenaDay.objects.filter(Q(score__gte=my_score) & Q(score__lte=my_score+score_diff) & Q(id__ne=self.char_id))
-            if choosing:
-                break
-
-            score_diff += 2
-
-        choosing = [c.id for c in choosing if c.id != self.char_id]
-
-        if not choosing:
-            char_count = MongoCharacter.objects.count()
-            id_list = random.sample(range(1, char_count+1), min(char_count, 100))
-            choosing = MongoCharacter.objects.filter(id__in=id_list)
-            choosing = [c.id for c in choosing]
-            if self.char_id in choosing:
-                choosing.remove(self.char_id)
-
-            if not choosing:
-                choosing = MongoCharacter.objects.all()
-                choosing = [c.id for c in choosing]
-                choosing.remove(self.char_id)
-
-        return random.choice(choosing)
-
+        choosing = redis_client_two.zrangebyscore(REDIS_DAY_KEY, my_score+1, '+inf')
+        if choosing:
+            return int(choosing[0])
+        return None
 
     def battle(self):
         counter = Counter(self.char_id, 'arena')
+        rival_id = self.choose_rival()
+        if not rival_id:
+            raise SanguoException(
+                errormsg.ARENA_NO_RIVAL,
+                self.char_id,
+                "Arena Battle",
+                "no rival."
+            )
+
         try:
             # 免费次数
             counter.incr()
@@ -160,7 +146,6 @@ class Arena(object):
                 resource = Resource(self.char_id, "Arena Battle", "battle for no free times")
                 resource.check_and_remove(sycee=-ARENA_COST_SYCEE)
 
-        rival_id = self.choose_rival()
 
         msg = protomsg.Battle()
         b = PVP(self.char_id, rival_id, msg)
@@ -171,16 +156,12 @@ class Arena(object):
         if msg.self_win:
             score = ARENA_GET_SCORE_WHEN_WIN
             achievement.trig(11, 1)
-            self.mongo_arena.continues_win += 1
         else:
             score = ARENA_GET_SCORE_WHEN_LOST
-            self.mongo_arena.continues_win = 0
 
-        self.mongo_arena.save()
+        self.inc_day_score(score)
 
-        if score:
-            self.mongo_day.score += score
-            self.mongo_day.save()
+        achievement.trig(10, self.day_rank)
 
         t = Task(self.char_id)
         t.trig(2)

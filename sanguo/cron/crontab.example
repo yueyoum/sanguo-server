@@ -2,10 +2,10 @@
 0 0 * * * /PATH/reset.sh
 # 每天08:00点重置挂机剩余时间
 0 8 * * * /PATH/reset_hang.sh
-# 每天21:00 重置比武日积分
-0 21 * * * /PATH/reset_arena_day.sh
-# 每天21:30 重置比武周积分
-30 21 * * * /PATH/reset_arena_week.sh
+# 周一到周六 21:00 重置比武日积分
+0 21 * * 1,2,3,4,5,6 /PATH/reset_arena_day.sh
+# 周日 21:30 重置比武周积分
+30 21 * * 0 /PATH/reset_arena_week.sh
 # 每天00:00 清理过期邮件
 0 0 * * * /PATH/clean_mail.sh
 # 每天00:00 清理历史战斗录像

@@ -1,0 +1,42 @@
+[
+{
+    "pk": 1, 
+    "model": "config.arenaweekreward", 
+    "fields": {
+        "rank_des": "1~3", 
+        "stuff_id": 0
+    }
+},
+{
+    "pk": 4, 
+    "model": "config.arenaweekreward", 
+    "fields": {
+        "rank_des": "4~10", 
+        "stuff_id": 0
+    }
+},
+{
+    "pk": 11, 
+    "model": "config.arenaweekreward", 
+    "fields": {
+        "rank_des": "11~100", 
+        "stuff_id": 0
+    }
+},
+{
+    "pk": 101, 
+    "model": "config.arenaweekreward", 
+    "fields": {
+        "rank_des": "101~500", 
+        "stuff_id": 0
+    }
+},
+{
+    "pk": 501, 
+    "model": "config.arenaweekreward", 
+    "fields": {
+        "rank_des": "501~", 
+        "stuff_id": 0
+    }
+}
+]

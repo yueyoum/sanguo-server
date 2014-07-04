@@ -3,52 +3,96 @@
 __author__ = 'Wang Chao'
 __date__ = '2/19/14'
 
-from mongoengine import DoesNotExist
 
 from _base import Logger
 
-from core.attachment import Attachment
+from mongoengine import DoesNotExist
+import arrow
+
+from core.attachment import standard_drop_to_attachment_protomsg
 from core.mongoscheme import MongoArenaTopRanks, MongoArenaWeek
 from core.character import Char
-from core.achievement import Achievement
+from core.mail import Mail
 
-from preset.data import ARENA_REWARD
+from preset.data import ARENA_DAY_REWARD_TUPLE, ARENA_WEEK_REWARD_TUPLE
+from preset.settings import MAIL_ARENA_WEEK_REWARD_CONTENT, MAIL_ARENA_WEEK_REWARD_TITLE
 
-def _get_reward(rank):
-    for k, v in ARENA_REWARD.items():
-        if rank >= k:
-            return v
+def _set_mongo_week(char_id, rank):
+    try:
+        week = MongoArenaWeek.objects.get(id=char_id)
+    except DoesNotExist:
+        week = MongoArenaWeek(id=char_id)
+
+    week.score = 0
+    week.rank = rank
+    week.save()
 
 
-TOP_RANKS = [1, 2, 3]
+def _set_top_ranks(*top_ids):
+    for index, _id in enumerate([top_ids]):
+        name = Char(_id).mc.name
+        rank = index + 1
+        try:
+            top = MongoArenaTopRanks.objects.get(id=rank)
+        except DoesNotExist:
+            top = MongoArenaTopRanks(id=rank)
+
+        top.name = name
+        top.save()
+
+
+def _get_reward_by_rank(rank):
+    data = {}
+    for _rank, _reward in ARENA_DAY_REWARD_TUPLE:
+        if rank >= _rank:
+            data = {'sycee': _reward.sycee*2, 'gold': _reward.gold*2}
+            break
+
+    for _rank, _reward in ARENA_WEEK_REWARD_TUPLE:
+        if rank >= _rank:
+            data.update({'stuffs': [(_reward, 1)]})
+            break
+
+    if data:
+        return standard_drop_to_attachment_protomsg(data)
+    return None
+
+
 def reset():
     amount = MongoArenaWeek.objects.count()
 
     logger = Logger("reset_arena_week.log")
     logger.write("Reset Arena Week: Start. chars amount: {0}".format(amount))
 
-    data = MongoArenaWeek.objects.all()
-    MongoArenaWeek.objects.delete()
+    mongo_week_data = MongoArenaWeek.objects.all()
 
+    week_data = []
+    for d in mongo_week_data:
+        week_data.append((d.id, d.score))
 
-    for d in data:
-        reward = _get_reward(d.rank)
-        gold = reward.week_gold
-        attachment = Attachment(d.id)
-        attachment.save_to_attachment(3, gold=gold)
+    week_data.sort(key=lambda item: -item[1])
+    for index, data in enumerate(week_data):
+        rank = index + 1
+        char_id = data[0]
 
-        achievement = Achievement(d.id)
-        achievement.trig(10, d.rank)
+        _set_mongo_week(char_id, rank)
 
-        if d.rank in TOP_RANKS:
-            try:
-                top = MongoArenaTopRanks.objects.get(id=d.rank)
-            except DoesNotExist:
-                top = MongoArenaTopRanks(id=d.rank)
+    #  设置完MongoWeek 后，设置TopRanks
+    top_ids = [_id for _id in week_data[:3]]
+    _set_top_ranks(*top_ids)
 
-            char_name = Char(d.id).cacheobj.name
-            top.name = char_name
-            top.save()
+    # 最后发送奖励
+    for index, data in enumerate(week_data):
+        rank = index + 1
+        char_id = data[0]
+
+        attachment = _get_reward_by_rank(rank)
+        if not attachment:
+            continue
+
+        mail = Mail(char_id)
+        create_at = arrow.utcnow().format('YYYY-MM-DD HH:mm:ss')
+        mail.add(MAIL_ARENA_WEEK_REWARD_TITLE, MAIL_ARENA_WEEK_REWARD_CONTENT, create_at, attachment=attachment)
 
     logger.write("Reset Arena Week: Complete")
     logger.close()

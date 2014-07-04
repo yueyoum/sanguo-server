@@ -935,6 +935,17 @@
     }
 },
 {
+    "pk": 1502, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "ARENA_NO_RIVAL", 
+        "text_zh": "\u81ea\u5df1\u73b0\u5728\u7684\u6392\u540d\u5df2\u7ecf\u662f\u7b2c\u4e00\u540d\uff0c\u6ca1\u6709\u5bf9\u624b", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
     "pk": 1600, 
     "model": "errormsg.errormsg", 
     "fields": {
@@ -1083,6 +1094,17 @@
     "fields": {
         "error_index": "STORE_BUY_FAILURE", 
         "text_zh": "\u5546\u57ce\u8d2d\u4e70\u5931\u8d25", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 3006, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STORE_INVALID_BUY_AMOUNT", 
+        "text_zh": "\u9519\u8bef\u7684\u5546\u54c1\u8d2d\u4e70\u6570\u91cf", 
         "link_to": null, 
         "des": "", 
         "area": ""

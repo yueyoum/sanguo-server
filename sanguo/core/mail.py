@@ -4,15 +4,15 @@ __author__ = 'Wang Chao'
 __date__ = '1/2/14'
 
 import json
-import datetime
 
+import arrow
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoMail, MongoEmbededMail
 from core.msgpipe import publish_to_char
 from core.attachment import standard_drop_to_attachment_protomsg
 from core.resource import Resource
 from core.exception import SanguoException
-from preset.settings import MAIL_KEEP_DAYS, DATETIME_FORMAT as FORMAT
+from preset.settings import MAIL_KEEP_DAYS
 from utils import pack_msg
 import protomsg
 from preset import errormsg
@@ -129,9 +129,7 @@ class Mail(object):
                     standard_drop_to_attachment_protomsg(json.loads(v.attachment), is_prepare=True)
                 )
 
-            create_at = datetime.datetime.strptime(v.create_at, FORMAT)
-            m.start_at = int(create_at.strftime('%s'))
-            # m.start_at = v.create_at
+            m.start_at = arrow.get(v.create_at, "YYYY-MM-DD HH:mm:ss").timestamp
             m.max_days = MAIL_KEEP_DAYS
 
         publish_to_char(self.char_id, pack_msg(msg))

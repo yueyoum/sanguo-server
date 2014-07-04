@@ -321,38 +321,21 @@ class MongoArenaTopRanks(Document):
         'collection': 'arena_top_ranks'
     }
 
-class MongoArenaDay(Document):
-    id = IntField(primary_key=True)
-    score = IntField()
-
-    meta = {
-        'collection': 'arena_day',
-        'indexes': ['score',]
-    }
-
-MongoArenaDay.ensure_indexes()
-
 
 class MongoArenaWeek(Document):
     id = IntField(primary_key=True)
-    score = IntField()
-    rank = IntField()
+    score = IntField(default=0)
+    rank = IntField(default=0)
+    # score 是每天的天积分累加的
+    # rank 是上周的根据 score 的排名
+    # 每天有定时任务把 天积分累加到这里的 score 上
+    # 然后每周的定时任务会按照 这些score排名，并设置 rank,
+    # 然后将score清空，最后把排名前三的设置到 TopRanks
 
     meta = {
         'collection': 'arena_week'
     }
 
-class MongoArena(Document):
-    id = IntField(primary_key=True)
-    # 每个人自己的排名
-    # 由定时任务每天更新，同时也统计每天的名次变化
-    rank = IntField(default=0)
-    # 连续胜利场次
-    continues_win = IntField(default=0)
-
-    meta = {
-        'collection': 'arena'
-    }
 
 
 class MongoAttachment(Document):

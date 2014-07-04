@@ -1,0 +1,142 @@
+[
+{
+    "pk": 1, 
+    "model": "config.arenadayreward", 
+    "fields": {
+        "rank_des": "\u7b2c1\u540d", 
+        "sycee": 400, 
+        "name": "\u4e1e\u76f8", 
+        "gold": 80000
+    }
+},
+{
+    "pk": 2, 
+    "model": "config.arenadayreward", 
+    "fields": {
+        "rank_des": "\u7b2c2\u540d", 
+        "sycee": 350, 
+        "name": "\u5927\u90fd\u7763", 
+        "gold": 60000
+    }
+},
+{
+    "pk": 3, 
+    "model": "config.arenadayreward", 
+    "fields": {
+        "rank_des": "\u7b2c3\u540d", 
+        "sycee": 300, 
+        "name": "\u5927\u53f8\u9a6c", 
+        "gold": 50000
+    }
+},
+{
+    "pk": 4, 
+    "model": "config.arenadayreward", 
+    "fields": {
+        "rank_des": "\u7b2c4\u540d", 
+        "sycee": 250, 
+        "name": "", 
+        "gold": 45000
+    }
+},
+{
+    "pk": 5, 
+    "model": "config.arenadayreward", 
+    "fields": {
+        "rank_des": "\u7b2c5\u540d", 
+        "sycee": 200, 
+        "name": "", 
+        "gold": 40000
+    }
+},
+{
+    "pk": 6, 
+    "model": "config.arenadayreward", 
+    "fields": {
+        "rank_des": "6~10\u540d", 
+        "sycee": 150, 
+        "name": "", 
+        "gold": 35000
+    }
+},
+{
+    "pk": 11, 
+    "model": "config.arenadayreward", 
+    "fields": {
+        "rank_des": "11~50", 
+        "sycee": 100, 
+        "name": "", 
+        "gold": 30000
+    }
+},
+{
+    "pk": 51, 
+    "model": "config.arenadayreward", 
+    "fields": {
+        "rank_des": "51~100", 
+        "sycee": 85, 
+        "name": "", 
+        "gold": 25000
+    }
+},
+{
+    "pk": 101, 
+    "model": "config.arenadayreward", 
+    "fields": {
+        "rank_des": "101~200", 
+        "sycee": 65, 
+        "name": "", 
+        "gold": 20000
+    }
+},
+{
+    "pk": 201, 
+    "model": "config.arenadayreward", 
+    "fields": {
+        "rank_des": "201~500", 
+        "sycee": 55, 
+        "name": "", 
+        "gold": 18000
+    }
+},
+{
+    "pk": 501, 
+    "model": "config.arenadayreward", 
+    "fields": {
+        "rank_des": "501~1000", 
+        "sycee": 50, 
+        "name": "", 
+        "gold": 15000
+    }
+},
+{
+    "pk": 1001, 
+    "model": "config.arenadayreward", 
+    "fields": {
+        "rank_des": "1001~2000", 
+        "sycee": 45, 
+        "name": "", 
+        "gold": 12000
+    }
+},
+{
+    "pk": 2001, 
+    "model": "config.arenadayreward", 
+    "fields": {
+        "rank_des": "2001~5000", 
+        "sycee": 40, 
+        "name": "", 
+        "gold": 10000
+    }
+},
+{
+    "pk": 5001, 
+    "model": "config.arenadayreward", 
+    "fields": {
+        "rank_des": "5001~", 
+        "sycee": 30, 
+        "name": "", 
+        "gold": 5000
+    }
+}
+]

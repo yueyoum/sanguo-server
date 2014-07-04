@@ -115,8 +115,7 @@ EQUIP_MAX_STEP= 6
 #      挂机             #
 #########################
 
-HANG_RESET_MAIL_TITLE = u'挂机清算补偿'
-HANG_RESET_MAIL_CONTENT = u'挂机清算补偿'
+
 
 
 #########################
@@ -202,18 +201,28 @@ FRIEND_CANDIDATE_LEVEL_DIFF = 10        # 好友候选人等级差
 
 
 #########################
-#      聊天             #
+#      邮件             #
 #########################
 # 邮件可以保存多少天
 MAIL_KEEP_DAYS = 7
-
+# 激活码
+ACTIVATECODE_MAIL_TITLE = u'激活码领取成功'
+ACTIVATECODE_MAIL_CONTENT = u'激活码领取成功'
+# 挂机
+HANG_RESET_MAIL_TITLE = u'挂机清算补偿'
+HANG_RESET_MAIL_CONTENT = u'挂机清算补偿'
+# 比武日奖励
+MAIL_ARENA_DAY_REWARD_TITLE = u'比武每日奖励'
+MAIL_ARENA_DAY_REWARD_CONTENT = u'比武每日奖励'
+# 比武周奖励
+MAIL_ARENA_WEEK_REWARD_TITLE = u'比武每周奖励'
+MAIL_ARENA_WEEK_REWARD_CONTENT = u'比武每周奖励'
 
 
 #########################
 #      激活码           #
 #########################
-ACTIVATECODE_MAIL_TITLE = u'激活码领取成功'
-ACTIVATECODE_MAIL_CONTENT = u'激活码领取成功'
+
 
 
 #########################
