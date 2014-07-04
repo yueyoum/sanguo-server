@@ -46,7 +46,7 @@ class Arena(object):
 
     @property
     def day_rank(self):
-        rank = redis_client_two.zrank(REDIS_DAY_KEY, self.char_id)
+        rank = redis_client_two.zrevrank(REDIS_DAY_KEY, self.char_id)
         return rank+1 if rank else 0
 
     @property
@@ -69,14 +69,15 @@ class Arena(object):
         return c.remained_value
 
     def inc_day_score(self, score):
-        redis_client_two.zincry(REDIS_DAY_KEY, self.char_id, score)
+        new_score =redis_client_two.zincry(REDIS_DAY_KEY, self.char_id, score)
+        return int(new_score)
 
 
-    def _fill_up_panel_msg(self, msg):
+    def _fill_up_panel_msg(self, msg, day_score=None):
         msg.week_rank = self.week_rank
         msg.day_rank = self.day_rank
         msg.week_score = self.week_score
-        msg.day_score = self.day_score
+        msg.day_score = day_score or self.day_score
         msg.remained_free_times = self.remained_free_times
         msg.remained_sycee_times = self.remained_buy_times
         msg.arena_cost = ARENA_COST_SYCEE
@@ -88,9 +89,9 @@ class Arena(object):
             char.name = t.name
 
 
-    def send_notify(self):
+    def send_notify(self, day_score=None):
         msg = protomsg.ArenaNotify()
-        self._fill_up_panel_msg(msg)
+        self._fill_up_panel_msg(msg, day_score=day_score)
         publish_to_char(self.char_id, pack_msg(msg))
 
 
@@ -159,12 +160,12 @@ class Arena(object):
         else:
             score = ARENA_GET_SCORE_WHEN_LOST
 
-        self.inc_day_score(score)
+        new_day_score = self.inc_day_score(score)
 
         achievement.trig(10, self.day_rank)
 
         t = Task(self.char_id)
         t.trig(2)
 
-        self.send_notify()
+        self.send_notify(day_score=new_day_score)
         return msg
