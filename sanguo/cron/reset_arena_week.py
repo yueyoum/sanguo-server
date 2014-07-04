@@ -6,10 +6,11 @@ __date__ = '2/19/14'
 
 from _base import Logger
 
+import json
 from mongoengine import DoesNotExist
 import arrow
 
-from core.attachment import standard_drop_to_attachment_protomsg
+from core.attachment import make_standard_drop_from_template
 from core.mongoscheme import MongoArenaTopRanks, MongoArenaWeek
 from core.character import Char
 from core.mail import Mail
@@ -29,7 +30,7 @@ def _set_mongo_week(char_id, rank):
 
 
 def _set_top_ranks(*top_ids):
-    for index, _id in enumerate([top_ids]):
+    for index, _id in enumerate(top_ids):
         name = Char(_id).mc.name
         rank = index + 1
         try:
@@ -42,19 +43,21 @@ def _set_top_ranks(*top_ids):
 
 
 def _get_reward_by_rank(rank):
-    data = {}
+    data = make_standard_drop_from_template()
     for _rank, _reward in ARENA_DAY_REWARD_TUPLE:
         if rank >= _rank:
-            data = {'sycee': _reward.sycee*2, 'gold': _reward.gold*2}
+            data['sycee'] = _reward.sycee * 2
+            data['gold'] = _reward.gold * 2
             break
 
     for _rank, _reward in ARENA_WEEK_REWARD_TUPLE:
-        if rank >= _rank:
-            data.update({'stuffs': [(_reward, 1)]})
+        if rank >= _rank and _reward.stuff_id:
+            data['stuffs'] = [(_reward.stuff_id, 1)]
+            data.update({'stuffs': [(_reward.stuff_id, 1)]})
             break
 
     if data:
-        return standard_drop_to_attachment_protomsg(data)
+        return json.dumps(data)
     return None
 
 
@@ -78,7 +81,7 @@ def reset():
         _set_mongo_week(char_id, rank)
 
     #  设置完MongoWeek 后，设置TopRanks
-    top_ids = [_id for _id in week_data[:3]]
+    top_ids = [_id for _id, _ in week_data[:3]]
     _set_top_ranks(*top_ids)
 
     # 最后发送奖励

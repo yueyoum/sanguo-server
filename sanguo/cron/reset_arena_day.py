@@ -6,12 +6,13 @@ __date__ = '2/19/14'
 
 from _base import Logger
 
+import json
 from mongoengine import DoesNotExist
 import arrow
 
 from core.drives import redis_client_two
 from core.character import Char
-from core.attachment import standard_drop_to_attachment_protomsg
+from core.attachment import make_standard_drop_from_template
 from core.mongoscheme import MongoArenaWeek
 from core.mail import Mail
 from core.arena import REDIS_DAY_KEY
@@ -36,9 +37,10 @@ def _add_to_week(char_id, score):
 def _get_reward_by_rank(rank):
     for _rank, _reward in ARENA_DAY_REWARD_TUPLE:
         if rank >= _rank:
-            data = {'sycee': _reward.sycee, 'gold': _reward.gold}
-            drop = standard_drop_to_attachment_protomsg(data)
-            return drop.SerializeToString()
+            data = make_standard_drop_from_template()
+            data['sycee'] = _reward.sycee
+            data['gold'] = _reward.gold
+            return json.dumps(data)
 
     return None
 
