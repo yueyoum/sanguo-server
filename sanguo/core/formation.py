@@ -238,7 +238,7 @@ class Formation(object):
         tp_name = TP_TABLE[tp]
 
         setattr(this_socket, tp_name, equipment_id)
-        changed_socket = [(socket_id, this_socket)]
+        changed_socket = []
 
         for k, v in self.formation.sockets.iteritems():
             if int(k) == socket_id:
@@ -248,6 +248,8 @@ class Formation(object):
                 setattr(v, tp_name, 0)
                 changed_socket.append((int(k), v))
                 break
+
+        changed_socket.append((socket_id, this_socket))
 
         self.formation.save()
 
