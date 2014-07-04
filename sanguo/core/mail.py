@@ -126,7 +126,7 @@ class Mail(object):
             m.has_read = v.has_read
             if v.attachment:
                 m.attachment.MergeFrom(
-                    standard_drop_to_attachment_protomsg(json.loads(v.attachment), is_prepare=True)
+                    standard_drop_to_attachment_protomsg(json.loads(v.attachment))
                 )
 
             m.start_at = arrow.get(v.create_at, "YYYY-MM-DD HH:mm:ss").timestamp

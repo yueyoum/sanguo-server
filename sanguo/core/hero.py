@@ -363,8 +363,23 @@ class HeroSoul(object):
 
         publish_to_char(self.char_id, pack_msg(msg))
 
-class SaveHeroResult(object):
+class _SaveHeroResult(object):
     __slots__ = ['id_range', 'actual_heros', 'to_souls']
+
+class _FakeSaveHeroResult(object):
+    __slots__ = ['id_range', 'actual_heros', 'to_souls']
+    def __init__(self):
+        self.id_range = []
+        self.actual_heros = []
+        self.to_souls = []
+
+    def __bool__(self):
+        return False
+    __nonzero__ = __bool__
+
+
+FakeSaveHeroResult = _FakeSaveHeroResult()
+
 
 
 def get_char_hero_oids(char_id):
@@ -417,9 +432,9 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
             send_notify=add_notify,
         )
 
-    res = SaveHeroResult()
+    res = _SaveHeroResult()
     res.id_range = id_range
-    res.actual_heros = hero_original_ids
+    res.actual_heros = [(oid, 1) for oid in hero_original_ids]
     res.to_souls = souls.items()
     return res
 
@@ -449,23 +464,3 @@ def recruit_hero(char_id, _id):
 
     save_hero(char_id, [_id])
 
-
-
-def delete_hero(char_id, ids):
-    # XXX
-    # 只能删除背包中的英雄，不能删除在阵法中的。注意！
-    """
-
-    @param char_id: char id
-    @type char_id: int
-    @param ids: hero ids
-    @type ids: list | tuple
-    """
-    for i in ids:
-        MongoHero.objects(id=i).delete()
-
-    hero_del_signal.send(
-        sender=None,
-        char_id=char_id,
-        hero_ids=ids
-    )

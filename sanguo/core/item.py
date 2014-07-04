@@ -752,11 +752,11 @@ class Item(MessageEquipmentMixin):
             return None
 
         package_ids = [int(i) for i in packages.split(',')]
-        standard_drops = get_drop(package_ids)
+        prepare_drop = get_drop(package_ids)
 
         resource = Resource(self.char_id, "Stuff Use", "use {0}".format(_id))
-        resource.add(**standard_drops)
-        return standard_drop_to_attachment_protomsg(standard_drops)
+        standard_drop = resource.add(**prepare_drop)
+        return standard_drop_to_attachment_protomsg(standard_drop)
 
 
 

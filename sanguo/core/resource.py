@@ -165,7 +165,7 @@ class Resource(object):
 
     def add(self, **kwargs):
         from core.character import Char
-        from core.hero import save_hero, HeroSoul
+        from core.hero import save_hero, HeroSoul, FakeSaveHeroResult
         from core.item import Item
 
         data = _get_resource_data(**kwargs)
@@ -184,6 +184,8 @@ class Resource(object):
             for _id, _amount in data['heros']:
                 heros.extend([_id] * _amount)
             sh_res = save_hero(self.char_id, heros)
+        else:
+            sh_res = FakeSaveHeroResult
     
         if data['souls']:
             hs = HeroSoul(self.char_id)

@@ -23,11 +23,19 @@ from preset.data import PACKAGES
 from preset.settings import DROP_PROB_BASE
 
 
-# drop 分为三个阶段，三种状态
+# drop 分为三个阶段
 # package_drop 编辑器数据，包含prob。 这个只能用于 get_drop
-# prepare_drop 从 get_drop 获取，这个用于 Resource.add
-# standard_drop 从 Resource.add 获取，这个也是最终用于填充Attachment消息的drop
-# standard_drop 与 prepare_drop 的唯一区别在于，prepare_drop 中的 heros 格式为 [(id, amount)...]. 但standard_drop为 [id,id...]
+# prepare_drop 从 get_drop 获取，这个用于 Resource.add 的参数
+# standard_drop 从 Resource.add 获取，是其返回. 这个也是最终用于填充Attachment消息的drop
+#
+# 在修改了 Attachment 消息后 （Hero中也添加了 amount）
+# 这里 prepare_drop 和 standard_drop 已经统一了。
+# 现在它们的区分就是 prepare_drop 中的 heros [(id, amount)] amount 可能 > 1
+# 但 standard_drop 中的 amount 一定为 1
+# 也就是 prepare_drop 是原始数据，里面可能包含多个 一样的 hero
+# 但是在save的时候 最多只有一个hero save成功，其他的全部变成 同名卡魂。
+# 所以 Resource.add 返回的 standard_drop 就是处理过后的 prepare_drop
+# hero amount一定为1, 并且可能会多添加一些 souls
 
 def make_standard_drop_from_template():
     return {
@@ -42,14 +50,14 @@ def make_standard_drop_from_template():
         'stuffs': [],
     }
 
-def standard_drop_to_attachment_protomsg(data, is_prepare=False):
+def standard_drop_to_attachment_protomsg(data):
     # data is dict, {
     # 'gold': 0,
     # 'sycee': 0,
     # 'exp': 0,
     # 'official_exp': 0,
-    # 'heros': [id, id...],
-    # 'souls': [(id, amount), ...]
+    # 'heros': [(id, amount), ...],
+    # 'souls': [(id, amount), ...],
     # 'equipments': [(id, level, amount), ...],
     # 'gems': [(id, amount), ...],
     # 'stuffs': [(id, amount), ...]
@@ -61,16 +69,10 @@ def standard_drop_to_attachment_protomsg(data, is_prepare=False):
     msg.exp = data.get('exp', 0)
     msg.official_exp = data.get('official_exp', 0)
 
-    if is_prepare:
-        heros = []
-        for _hid, _amount in data.get('heros', []):
-            heros.extend([_hid] * _amount)
-    else:
-        heros = data.get('heros', [])
-
-    for x in heros:
+    for _id, _amount in data.get('heros', []):
         msg_h = msg.heros.add()
-        msg_h.id = x
+        msg_h.id = _id
+        msg_h.amount = _amount
 
     for _id, _amount in data.get('souls', []):
         msg_soul = msg.souls.add()
@@ -102,13 +104,19 @@ def get_drop_from_mode_two_package(package):
     drop = make_standard_drop_from_template()
 
     def _make(name):
+        if not package[name]:
+            return False
+
         this = random.choice(package[name])
         a, b = divmod(this['prob'], DROP_PROB_BASE)
         a = int(a)
         if b > random.randint(0, DROP_PROB_BASE):
             a += 1
         if a >= 1:
-            drop[name] = [(this['id'], 1)]
+            if name == 'equipment':
+                drop[name] = [(this['id'], this['level'], 1)]
+            else:
+                drop[name] = [(this['id'], 1)]
             return True
         return False
 
@@ -233,6 +241,31 @@ def get_drop(drop_ids, multi=1, gaussian=False):
         drop['equipments'].extend(p['equipments'])
         drop['gems'].extend(p['gems'])
         drop['stuffs'].extend(p['stuffs'])
+
+    def _merge(items):
+        result = {}
+        for item in items:
+            result[item['id']] = result.get(item['id'], 0) + item['amount']
+
+        return result.items()
+
+    def _merge_equipment(items):
+        result = []
+        for item in items:
+            _id, level, amount = item['id'], item['level'], item['amount']
+            for res in result:
+                if res[0] == _id and res[1] == level:
+                    res[2] += amount
+                    break
+            else:
+                result.append((_id, level, amount))
+        return result
+
+    drop['heros'] = _merge(drop['heros'])
+    drop['souls'] = _merge(drop['souls'])
+    drop['gems'] = _merge(drop['gems'])
+    drop['stuffs'] = _merge(drop['stuffs'])
+    drop['equipments'] = _merge_equipment(drop['equipments'])
 
     return drop
 
