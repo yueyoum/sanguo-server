@@ -6,7 +6,6 @@ __date__ = '1/14/14'
 import random
 
 from mongoengine import DoesNotExist
-from core.drives import document_ids
 from core.mongoscheme import MongoItem, MongoEmbeddedEquipment
 from core.exception import SanguoException
 from core.msgpipe import publish_to_char
@@ -17,6 +16,7 @@ from core.achievement import Achievement
 from core.task import Task
 from core.resource import Resource
 from utils import pack_msg
+from utils.functional import id_generator
 import protomsg
 from preset.settings import EQUIP_MAX_LEVEL
 from preset.data import EQUIPMENTS, GEMS, STUFFS
@@ -341,7 +341,7 @@ class Item(MessageEquipmentMixin):
                 "Equipment {0} NOT exist".format(oid)
             )
 
-        new_id = int(document_ids.inc('equipment'))
+        new_id = id_generator('equipment')[0]
         me = MongoEmbeddedEquipment()
         me.oid = oid
         me.level = level

@@ -65,7 +65,7 @@ def _init():
             port=settings.MONGODB_PORT
     )
 
-    document_ids = _DocumentIds(mongodb_client['sanguo_unique_ids'])
+    document_ids = _DocumentIds(mongodb_client_db)
 
 
 _init()
