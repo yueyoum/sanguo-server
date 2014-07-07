@@ -245,14 +245,14 @@ def get_drop(drop_ids, multi=1, gaussian=False):
     def _merge(items):
         result = {}
         for item in items:
-            result[item['id']] = result.get(item['id'], 0) + item['amount']
+            result[item[0]] = result.get(item[0], 0) + item[1]
 
         return result.items()
 
     def _merge_equipment(items):
         result = []
         for item in items:
-            _id, level, amount = item['id'], item['level'], item['amount']
+            _id, level, amount = item
             for res in result:
                 if res[0] == _id and res[1] == level:
                     res[2] += amount
