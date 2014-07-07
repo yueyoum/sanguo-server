@@ -90,6 +90,8 @@ class MongoStage(Document):
     stage_new = IntField()
     # 开启的精英关卡, key 为关卡ID， value 为今日打的次数
     elites = DictField()
+    # 精英关卡的星级，key 为关卡ID， value True表示三星
+    elites_star = DictField()
     # 精英小关卡购买记录 key 为 ID, value 为购买次数
     elites_buy = DictField()
     # 开启的活动关卡

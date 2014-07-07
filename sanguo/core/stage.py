@@ -96,6 +96,7 @@ class Stage(object):
             self.stage.max_star_stage = 0
             self.stage.stage_new = 1
             self.stage.elites = {}
+            self.stage.elites_star = {}
             self.stage.activities = []
             self.stage.save()
 
@@ -565,6 +566,7 @@ class EliteStage(object):
             self.stage = MongoStage(id=self.char_id)
             self.stage.stage_new = 1
             self.stage.elites = {}
+            self.stage.elites_star = {}
             self.stage.elites_buy = {}
             self.stage.activities = []
             self.stage.save()
@@ -723,6 +725,15 @@ class EliteStage(object):
         b = ElitePVE(self.char_id, _id, battle_msg)
         b.start()
 
+        star = False
+        if battle_msg.first_ground.self_win and battle_msg.second_ground.self_win and battle_msg.third_ground.self_win:
+            star = True
+
+        if not self.stage.elites_star.get(str_id, False):
+            self.stage.elites_star[str_id] = star
+
+        self.stage.save()
+
         if battle_msg.self_win:
             self.stage.elites[str_id] += 1
             if self.this_stage.next:
@@ -807,6 +818,8 @@ class ActivityStage(object):
             self.stage = MongoStage(id=self.char_id)
             self.stage.stage_new = 1
             self.stage.elites = {}
+            self.stage.elites_star = {}
+            self.stage.elites_buy = {}
             self.stage.activities = []
             self.stage.save()
 
