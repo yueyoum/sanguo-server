@@ -507,7 +507,7 @@ class Hang(object):
         drop_gold = stage.normal_gold * times
         drop_gold = self._actual_gold(drop_gold)
 
-        drop_ids = [int(i) for i in stage.normal_drop.split(',')]
+        drop_ids = [int(i) for i in stage.normal_drop.split(',') if i.isdigit()]
         prepare_drop = get_drop(drop_ids, multi=times, gaussian=True)
 
         prepare_drop['exp'] += drop_exp
@@ -761,7 +761,7 @@ class EliteStage(object):
         exp = this_stage.normal_exp
         gold = this_stage.normal_gold
 
-        drop_ids = [int(i) for i in this_stage.normal_drop.split(',')]
+        drop_ids = [int(i) for i in this_stage.normal_drop.split(',') if i.isdigit()]
 
         prepare_drop = get_drop(drop_ids)
         prepare_drop['gold'] += gold
@@ -897,7 +897,7 @@ class ActivityStage(object):
             prepare_drop = make_standard_drop_from_template()
             prepare_drop['gold'] = self.this_stage.normal_gold
         else:
-            prepare_drop = get_drop([int(i) for i in self.this_stage.normal_drop.split(',')])
+            prepare_drop = get_drop([int(i) for i in self.this_stage.normal_drop.split(',') if i.isdigit()])
 
         resource = Resource(self.char_id, "ActivityStage Drop", "stage {0}".format(self.this_stage.id))
         standard_drop = resource.add(**prepare_drop)
