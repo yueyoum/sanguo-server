@@ -4,11 +4,12 @@ from django.http import HttpResponse
 
 
 from core.character import char_initialize
+from core.server import server
 
 
 def character_initialize(request):
     account_id = int(request.POST['account_id'])
-    server_id = int(request.POST['server_id'])
+    server_id = server.id
     char_id=  int(request.POST['char_id'])
     name = request.POST['name']
 

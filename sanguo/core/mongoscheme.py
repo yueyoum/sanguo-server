@@ -33,11 +33,7 @@ class MongoCharacter(Document):
 
     meta = {
         'collection': 'character',
-        'indexes': [
-            'level',
-            ('server_id', 'level'),     # find by server_id. find by level range in server_id
-            ('name', 'server_id'),      # find by name. find by name and server_id
-            ],
+        'indexes': ['level', 'name'],
     }
 
 MongoCharacter.ensure_indexes()

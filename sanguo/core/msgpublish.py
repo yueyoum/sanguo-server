@@ -7,7 +7,6 @@ from core.character import Char
 from core.msgpipe import publish_to_char
 from core.activeplayers import ActivePlayers
 from core.exception import SanguoException
-from core.server import server
 
 from utils import pack_msg
 from preset.settings import CHAT_MESSAGE_MAX_LENGTH
@@ -17,10 +16,9 @@ from protomsg import ChatMessageNotify, BroadcastNotify
 
 
 class ChatMessagePublish(object):
-    __slots__ = ['char_id', 'server_id', 'cache_char']
+    __slots__ = ['char_id', 'cache_char']
     def __init__(self, char_id):
         self.char_id = char_id
-        self.server_id = server.id
         self.cache_char = Char(char_id).cacheobj
 
     def check(self, text):

@@ -238,8 +238,7 @@ def char_initialize(account_id, server_id, char_id, name):
         item.stuff_add(CHARINIT.decoded_stuffs, send_notify=False)
 
 
-def get_char_ids_by_level_range(min_level, max_level, exclude_char_ids=None, server_id=None):
-    server_id = server_id or server.id
-    chars = MongoCharacter.objects.filter(Q(server_id=server_id) & Q(level__gte=min_level) & Q(level__lte=max_level))
+def get_char_ids_by_level_range(min_level, max_level, exclude_char_ids=None):
+    chars = MongoCharacter.objects.filter(Q(level__gte=min_level) & Q(level__lte=max_level))
     excluded = exclude_char_ids or []
     return [c.id for c in chars if c.id not in excluded]

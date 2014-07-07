@@ -8,6 +8,7 @@ import arrow
 from core.exception import SanguoException
 from core.signals import login_signal
 from core.activeplayers import Player
+from core.server import server
 from utils.decorate import message_response
 from libs import crypto, pack_msg
 from libs.session import GameSession, session_dumps
@@ -20,7 +21,7 @@ from preset import errormsg
 def login(request):
     req = request._proto
     data = {}
-    data['server_id'] = req.server_id
+    data['server_id'] = server.id
 
     if req.regular.email:
         data['method'] = 'regular'
@@ -53,7 +54,7 @@ def login(request):
     new_token = res['data']['new_token']
 
     request._account_id = account_id
-    request._server_id = req.server_id
+    request._server_id = server.id
 
     login_signal.send(
         sender=None,

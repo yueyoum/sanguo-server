@@ -15,14 +15,12 @@ def send_mail(request):
     data = request.body
     data = json.loads(data)
 
-    sid = data.get('server_id', None)
-    if sid:
-        chars = MongoCharacter.objects.filter(server_id=sid)
-        cids = [c.id for c in chars]
+    char_ids = data.get('char_id', None)
+    if char_ids:
+        cids = char_ids
     else:
-        cids = data.get('char_id', None)
-        if not cids:
-            return {'ret': 1}
+        chars = MongoCharacter.objects.all()
+        cids = [c.id for c in chars]
 
     mail_name = data['mail']['name']
     mail_content = data['mail']['content']
