@@ -18,7 +18,7 @@ def products(request):
     data = get_purchase_products()
     for k, v in data.iteritems():
         p = response.products.add()
-        p.id = int(k)
+        p.id = k
         p.name = v['name']
         p.des = v['des']
 

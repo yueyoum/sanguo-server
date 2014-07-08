@@ -223,7 +223,8 @@ def char_initialize(account_id, server_id, char_id, name):
 
     socket_ids = FORMATION_INIT_TABLE[:]
     for index, oid in enumerate(socket_ids):
-        socket_ids[index] = hero_oid_socket_id_table[oid]
+        if oid:
+            socket_ids[index] = hero_oid_socket_id_table[oid]
 
     if FORMATION_INIT_OPENED_SOCKETS > len(hero_ids):
         for i in range(FORMATION_INIT_OPENED_SOCKETS - len(hero_ids)):
