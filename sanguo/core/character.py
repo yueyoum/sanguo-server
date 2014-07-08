@@ -1,23 +1,18 @@
 # -*- coding: utf-8 -*-
 
-
-from django.conf import settings
-
 from mongoengine import Q
 
-from core.hero import save_hero, Hero
-from core.mongoscheme import MongoHero, MongoCharacter, MongoStage
+from core.hero import save_hero, Hero, HeroSoul
+from core.mongoscheme import MongoCharacter
 from core.signals import char_level_up_signal, char_official_up_signal, char_gold_changed_signal, char_sycee_changed_signal
 from core.formation import Formation
 from core.functionopen import FunctionOpen
 from core.vip import get_vip_level
 from core.msgpipe import publish_to_char
-from core.server import server
-
 
 from utils import pack_msg
 
-from preset.data import CHARINIT
+from preset.settings import CHARACTER_INIT, FORMATION_INIT_TABLE, FORMATION_INIT_OPENED_SOCKETS
 
 import protomsg
 
@@ -175,67 +170,70 @@ def char_initialize(account_id, server_id, char_id, name):
     mc.account_id = account_id
     mc.server_id = server_id
     mc.name = name
-    mc.gold = CHARINIT.gold
-    mc.sycee = CHARINIT.sycee
+    mc.gold = CHARACTER_INIT['gold']
+    mc.sycee = CHARACTER_INIT['sycee']
     mc.save()
 
     from core.item import Item
-
-    init_heros = CHARINIT.decoded_heros
-
-    init_heros_ids = init_heros.keys()
-
-    transformed_init_heros = {}
-
     item = Item(char_id)
-    for k, v in init_heros.iteritems():
-        weapon, armor, jewelry = v
+    # save equipment
+    for _id, _amount in CHARACTER_INIT['equipment']:
+        for _x in range(_amount):
+            item.equip_add(_id, notify=False)
+    # save gem
+    if CHARACTER_INIT['gem']:
+        item.gem_add(CHARACTER_INIT['gem'], send_notify=False)
+    # save stuff
+    if CHARACTER_INIT['stuff']:
+        item.stuff_add(CHARACTER_INIT['stuff'], send_notify=False)
+    # save hero
+    if CHARACTER_INIT['hero']:
+        save_hero(char_id, CHARACTER_INIT['hero'], add_notify=False)
+    # save souls:
+    if CHARACTER_INIT['souls']:
+        s = HeroSoul(char_id)
+        s.add_soul(CHARACTER_INIT['souls'])
+
+    # hero in formation!
+    in_formaiton_heros = CHARACTER_INIT['hero_in_formation']
+
+    final_in_formation_heros = {}
+    for k, v in in_formaiton_heros.iteritems():
         new_ids = []
-        if not weapon:
-            new_ids.append(0)
-        else:
-            new_ids.append(item.equip_add(weapon, notify=False))
-        if not armor:
-            new_ids.append(0)
-        else:
-            new_ids.append(item.equip_add(armor, notify=False))
-        if not jewelry:
-            new_ids.append(0)
-        else:
-            new_ids.append(item.equip_add(jewelry, notify=False))
+        for _equip_id in v:
+            if not _equip_id:
+                new_ids.append(0)
+            else:
+                new_ids.append(item.equip_add(_equip_id, notify=False))
 
-        transformed_init_heros[k] = new_ids
+        final_in_formation_heros[k] = new_ids
 
-    init_heros_equips = transformed_init_heros.values()
+    hero_ids = save_hero(char_id, final_in_formation_heros.keys(), add_notify=False).id_range
+    hero_new_id_to_oid_table = dict(zip(hero_ids, final_in_formation_heros.keys()))
 
-    hero_ids = save_hero(char_id, init_heros_ids, add_notify=False).id_range
-
+    hero_oid_socket_id_table = {}
     f = Formation(char_id)
 
-    hero_ids = hero_ids + (4-len(hero_ids)) * [0]
+    for hid in hero_ids:
+        this_oid = hero_new_id_to_oid_table[hid]
+        weapon, armor, jewelry = final_in_formation_heros[this_oid]
 
+        _sid = f.initialize_socket(hero=hid, weapon=weapon, armor=armor, jewelry=jewelry)
+        hero_oid_socket_id_table[this_oid] = _sid
 
-    socket_ids = []
-    for index, _id in enumerate(hero_ids):
-        try:
-            weapon, armor, jewelry = init_heros_equips[index]
-        except IndexError:
-            weapon, armor, jewelry = 0, 0, 0
-        _sid = f.initialize_socket(hero=_id, weapon=weapon, armor=armor, jewelry=jewelry)
-        socket_ids.append(_sid)
+    socket_ids = FORMATION_INIT_TABLE[:]
+    for index, oid in enumerate(socket_ids):
+        socket_ids[index] = hero_oid_socket_id_table[oid]
 
-    socket_ids = [
-        socket_ids[3], socket_ids[0], 0,
-        0, socket_ids[1], 0,
-        0, socket_ids[2], 0
-    ]
+    if FORMATION_INIT_OPENED_SOCKETS > len(hero_ids):
+        for i in range(FORMATION_INIT_OPENED_SOCKETS - len(hero_ids)):
+            _sid = f.initialize_socket()
+            for index, sid in enumerate(socket_ids):
+                if sid == 0:
+                    socket_ids[index] = _sid
+                    break
 
     f.save_formation(socket_ids, send_notify=False)
-
-    if CHARINIT.decoded_gems:
-        item.gem_add(CHARINIT.decoded_gems, send_notify=False)
-    if CHARINIT.decoded_stuffs:
-        item.stuff_add(CHARINIT.decoded_stuffs, send_notify=False)
 
 
 def get_char_ids_by_level_range(min_level, max_level, exclude_char_ids=None):

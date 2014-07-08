@@ -38,7 +38,6 @@ def _find_file(fixture_name):
     raise Exception("Can not find {0}".format(fixture_name))
 
 FUNCTION_DEFINE = object_maker(_find_file('function_define.json'))
-CHARINIT = object_maker(_find_file('charinit.json'))[1]
 ARENA_DAY_REWARD = object_maker(_find_file('arena_day_reward.json'))
 ARENA_WEEK_REWARD = object_maker(_find_file('arena_week_reward.json'))
 ACHIEVEMENTS = object_maker(_find_file('achievements.json'))
@@ -82,32 +81,6 @@ PACKAGES = _got_package()
 for k, v in FUNCTION_DEFINE.items():
     if v.char_level == 0 and v.stage_id == 0:
         FUNCTION_DEFINE.pop(k)
-
-
-def _parse_char_init():
-    decoded_heros = {}
-    if CHARINIT.heros:
-        for hero in CHARINIT.heros.split('|'):
-            hero_id, equips = hero.split(':')
-            equip_ids = [int(i) for i in equips.split(',')]
-            decoded_heros[int(hero_id)] = equip_ids
-    CHARINIT.decoded_heros = decoded_heros
-
-    decoded_gems = []
-    if CHARINIT.gems:
-        for gems in CHARINIT.gems.split(','):
-            gid, amount = gems.split(':')
-            decoded_gems.append((int(gid), int(amount)))
-    CHARINIT.decoded_gems = decoded_gems
-
-    decoded_stuffs = []
-    if CHARINIT.stuffs:
-        for stuff in CHARINIT.stuffs.split(','):
-            sid, amount = stuff.split(':')
-            decoded_stuffs.append((int(sid), int(amount)))
-    CHARINIT.decoded_stuffs = decoded_stuffs
-
-_parse_char_init()
 
 
 
