@@ -226,7 +226,7 @@ class Plunder(object):
 
         self.send_notify()
         if got_hero_id:
-            standard_drop['heros'] = [got_hero_id]
+            standard_drop['heros'] = [(got_hero_id, 1)]
         return standard_drop_to_attachment_protomsg(standard_drop)
 
 
