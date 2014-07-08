@@ -16,7 +16,8 @@ from preset import errormsg
 from preset.settings import LEVY_COST_SYCEE, LEVY_CRIT_PROB_TABLE, LEVY_GOT_GOLD_FUNCTION
 from preset.data import VIP_MAX_LEVEL
 
-LEVY_COST_SYCEE_REV = LEVY_COST_SYCEE.sort(key = lambda item: -item[0])
+LEVY_COST_SYCEE_REV = list(LEVY_COST_SYCEE)
+LEVY_COST_SYCEE_REV.sort(key = lambda item: -item[0])
 
 class Levy(object):
     def __init__(self, char_id):
