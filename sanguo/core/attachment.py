@@ -22,6 +22,14 @@ from preset import errormsg
 from preset.data import PACKAGES
 from preset.settings import DROP_PROB_BASE
 
+from preset.settings import (
+    REWARD_DROP_PROB_MULTIPLE,
+    REWARD_EXP_MULTIPLE,
+    REWARD_GOLD_MULTIPLE,
+    REWARD_OFFICAL_EXP_MULTIPLE,
+    REWARD_SYCEE_MULTIPLE,
+)
+
 
 # drop 分为三个阶段
 # package_drop 编辑器数据，包含prob。 这个只能用于 get_drop
@@ -108,7 +116,7 @@ def get_drop_from_mode_two_package(package):
             return False
 
         this = random.choice(package[name])
-        a, b = divmod(this['prob'], DROP_PROB_BASE)
+        a, b = divmod(this['prob'] * REWARD_DROP_PROB_MULTIPLE, DROP_PROB_BASE)
         a = int(a)
         if b > random.randint(0, DROP_PROB_BASE):
             a += 1
@@ -145,7 +153,7 @@ def get_drop_from_raw_package(package, multi=1, gaussian=False):
     def _make(items):
         final_items = []
         for item in items:
-            prob = item['prob'] * multi
+            prob = item['prob'] * multi * REWARD_DROP_PROB_MULTIPLE
             if gaussian:
                 prob = prob * (1 + GAUSSIAN_TABLE[round(random.uniform(0.01, 0.99), 2)] * 0.08)
 
@@ -169,10 +177,10 @@ def get_drop_from_raw_package(package, multi=1, gaussian=False):
     stuffs = _make(stuffs)
 
     return {
-        'gold': gold * multi,
-        'sycee': sycee * multi,
-        'exp': exp * multi,
-        'official_exp': official_exp * multi,
+        'gold': gold * multi * REWARD_GOLD_MULTIPLE,
+        'sycee': sycee * multi * REWARD_SYCEE_MULTIPLE,
+        'exp': exp * multi * REWARD_EXP_MULTIPLE,
+        'official_exp': official_exp * multi * REWARD_OFFICAL_EXP_MULTIPLE,
         'heros': [(x['id'], x['amount']) for x in heros],
         'souls': [(x['id'], x['amount']) for x in souls],
         'equipments': [(x['id'], x['level'], x['amount']) for x in equipments],

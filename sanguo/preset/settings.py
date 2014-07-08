@@ -19,7 +19,7 @@ CHARACTER_INIT = {
     'souls': [],         # [(id,amount), (id,amount)...]
 }
 
-# 阵法  上面 在阵法中武将的 位置.
+# 阵法  上面 `在阵法中武将的` 位置.
 # 这两处的武将ID必须一一对应
 FORMATION_INIT_TABLE = [
     0, 48, 0,            # 第一军
@@ -29,6 +29,17 @@ FORMATION_INIT_TABLE = [
 
 # 初始开启的阵法插槽
 FORMATION_INIT_OPENED_SOCKETS = 4
+
+
+#########################
+#      奖励倍数          #
+#########################
+REWARD_GOLD_MULTIPLE = 1              # 得金币倍数
+REWARD_SYCEE_MULTIPLE = 1             # 得元宝倍数
+REWARD_EXP_MULTIPLE = 1               # 得经验倍数
+REWARD_OFFICAL_EXP_MULTIPLE = 1       # 得官职经验倍数
+REWARD_DROP_PROB_MULTIPLE = 1         # 掉率倍数
+
 
 
 #########################
