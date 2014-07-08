@@ -193,8 +193,7 @@ PRISONER_START_PROB = 10
 PRISONER_RELEASE_GOT_TREASURE = {3: [24], 2: [25], 1: [26]}
 # 斩首获得宝物 key: quality, value: 宝物ID列表
 PRISONER_KILL_GOT_TREASURE = {3: [24], 2: [25], 1: [26]}
-# 斩首获得通用卡魂 key: quality, value: amount
-PRISONER_KILL_GOT_SOUL = {3: 1, 2: 2, 1: 3}
+
 
 
 #########################

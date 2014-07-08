@@ -15,7 +15,6 @@ from preset.settings import (
     PRISONER_START_PROB,
     PRISONER_RELEASE_GOT_TREASURE,
     PRISONER_KILL_GOT_TREASURE,
-    PRISONER_KILL_GOT_SOUL,
 )
 import protomsg
 from preset.data import HEROS, TREASURES, VIP_FUNCTION
@@ -31,6 +30,13 @@ class Prison(object):
             self.p = MongoPrison(id=self.char_id)
             self.p.save()
 
+    def prisoner_prob(self):
+        char = Char(self.char_id).mc
+        vip_plus = VIP_FUNCTION[char.vip].prisoner_get
+        return PRISONER_START_PROB + vip_plus
+
+
+
     def prisoner_add(self, oid, gold):
         prisoner_ids = [int(i) for i in self.p.prisoners.keys()]
 
@@ -40,9 +46,10 @@ class Prison(object):
                 break
             new_prisoner_id += 1
 
+        start_prob = self.prisoner_prob()
         p = MongoEmbededPrisoner()
         p.oid = oid
-        p.prob = PRISONER_START_PROB
+        p.prob = start_prob
         p.active = True
         p.gold = gold
 
@@ -51,7 +58,7 @@ class Prison(object):
 
         msg = protomsg.NewPrisonerNotify()
         msg_p = msg.prisoner.add()
-        self._fill_up_prisoner_msg(msg_p, new_prisoner_id, oid, PRISONER_START_PROB, True)
+        self._fill_up_prisoner_msg(msg_p, new_prisoner_id, oid, start_prob, True)
 
         publish_to_char(self.char_id, pack_msg(msg))
 
@@ -89,9 +96,6 @@ class Prison(object):
         def _get():
             got = False
             prob = self.p.prisoners[str_id].prob + treasures_prob
-            char = Char(self.char_id).mc
-            vip_plus = VIP_FUNCTION[char.vip].prisoner_get
-            prob += vip_plus
             if prob >= random.randint(1, 100):
                 # got it
                 save_hero(self.char_id, self.p.prisoners[str_id].oid)
