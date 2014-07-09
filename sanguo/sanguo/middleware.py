@@ -25,6 +25,8 @@ class UnpackAndVerifyData(RequestFilter):
         super(UnpackAndVerifyData, self).process_request(request)
 
         if not server.active:
+            if request.path == '/api/server/feedback/':
+                return
             return HttpResponse(status=502)
 
         if request.path.startswith('/api/'):
