@@ -6,7 +6,6 @@ from django.conf import settings
 
 
 redis_client = None
-redis_client_two = None
 mongodb_client = None
 mongodb_client_db = None
 document_ids = None
@@ -29,7 +28,6 @@ class _DocumentIds(object):
 
 def _init():
     global redis_client
-    global redis_client_two
     global mongodb_client
     global mongodb_client_db
     global document_ids
@@ -44,14 +42,6 @@ def _init():
     )
 
     redis_client = redis.Redis(connection_pool=_redis_pool)
-
-    _redis_pool_two = redis.ConnectionPool(
-        host=settings.REDIS_HOST,
-        port=settings.REDIS_PORT,
-        db=settings.REDIS_DB+2
-    )
-
-    redis_client_two = redis.Redis(connection_pool=_redis_pool_two)
 
     mongodb_client = pymongo.MongoClient(
         host=settings.MONGODB_HOST,

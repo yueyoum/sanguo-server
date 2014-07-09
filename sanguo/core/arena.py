@@ -6,7 +6,7 @@ __date__ = '1/22/14'
 import random
 
 from mongoengine import DoesNotExist
-from core.drives import redis_client_two
+from core.drives import redis_client
 from core.server import server
 from core.msgpipe import publish_to_char
 from core.character import Char
@@ -41,12 +41,12 @@ class Arena(object):
 
     @property
     def day_score(self):
-        score = redis_client_two.zscore(REDIS_DAY_KEY, self.char_id)
+        score = redis_client.zscore(REDIS_DAY_KEY, self.char_id)
         return int(score) if score else 0
 
     @property
     def day_rank(self):
-        rank = redis_client_two.zrevrank(REDIS_DAY_KEY, self.char_id)
+        rank = redis_client.zrevrank(REDIS_DAY_KEY, self.char_id)
         return rank+1 if rank else 0
 
     @property
@@ -69,7 +69,7 @@ class Arena(object):
         return c.remained_value
 
     def inc_day_score(self, score):
-        new_score =redis_client_two.zincry(REDIS_DAY_KEY, self.char_id, score)
+        new_score =redis_client.zincry(REDIS_DAY_KEY, self.char_id, score)
         return int(new_score)
 
 
@@ -97,12 +97,12 @@ class Arena(object):
 
     def choose_rival(self):
         my_score = self.day_score
-        choosing = redis_client_two.zrangebyscore(REDIS_DAY_KEY, my_score, my_score)
+        choosing = redis_client.zrangebyscore(REDIS_DAY_KEY, my_score, my_score)
         choosing.remove(self.char_id)
         if choosing:
             return int(random.choice(choosing))
 
-        choosing = redis_client_two.zrangebyscore(REDIS_DAY_KEY, my_score+1, '+inf')
+        choosing = redis_client.zrangebyscore(REDIS_DAY_KEY, my_score+1, '+inf')
         if choosing:
             return int(choosing[0])
         return None

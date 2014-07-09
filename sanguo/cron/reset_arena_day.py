@@ -10,7 +10,7 @@ import json
 from mongoengine import DoesNotExist
 import arrow
 
-from core.drives import redis_client_two
+from core.drives import redis_client
 from core.character import Char
 from core.attachment import make_standard_drop_from_template
 from core.mongoscheme import MongoArenaWeek
@@ -48,11 +48,11 @@ def _get_reward_by_rank(rank):
 def reset():
     logger = Logger('reset_arena_day.log')
 
-    amount = redis_client_two.zcard(REDIS_DAY_KEY)
+    amount = redis_client.zcard(REDIS_DAY_KEY)
     logger.write("Reset Arena Day: Start. chars amount: {0}".format(amount))
 
-    arena_day_scores = redis_client_two.zrange(REDIS_DAY_KEY, 0, -1, withscores=True)
-    redis_client_two.delete(REDIS_DAY_KEY)
+    arena_day_scores = redis_client.zrange(REDIS_DAY_KEY, 0, -1, withscores=True)
+    redis_client.delete(REDIS_DAY_KEY)
 
     chars_data = []
 
