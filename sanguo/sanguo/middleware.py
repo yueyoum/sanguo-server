@@ -3,6 +3,7 @@ from django.http import HttpResponse
 
 import protomsg
 
+from core.server import server
 from core.msgpipe import message_get
 from core.activeplayers import ActivePlayers, Player
 from preset import errormsg
@@ -21,6 +22,9 @@ from libs import NUM_FIELD
 
 class UnpackAndVerifyData(RequestFilter):
     def process_request(self, request):
+        if not server.active:
+            return HttpResponse(status=502)
+
         super(UnpackAndVerifyData, self).process_request(request)
 
         if request.path.startswith('/api/'):

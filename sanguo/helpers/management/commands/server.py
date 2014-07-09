@@ -3,7 +3,8 @@
 __author__ = 'Wang Chao'
 __date__ = '14-7-8'
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
+from core.server import server
 
 class Command(BaseCommand):
     help = """server stuffs. args:
@@ -42,14 +43,15 @@ class Command(BaseCommand):
 
         total_amount = MongoCharacter.objects.count()
         active_amount = ActivePlayers().amount
-        self.stdout.write("Total amount {0}. Active amount {1}".format(total_amount, active_amount))
+        self.stdout.write("Active: {0}. Total amount {1}. Active amount {2}".format(server.active, total_amount, active_amount))
 
 
     def _cmd_down(self):
-        from startup import server_register
-        server_register(status=4)
+        from utils.api import api_server_change
+        api_server_change(data={'server_id': server.id, 'status': 4})
 
 
     def _cmd_up(self):
-        from startup import server_register
-        server_register(status=1)
+        from utils.api import api_server_change
+        api_server_change(data={'server_id': server.id, 'status': 1})
+
