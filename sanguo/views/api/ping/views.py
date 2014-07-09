@@ -24,6 +24,7 @@ def ping(request):
     return {
         'ret': 0,
         'data': {
-            'status': status
+            'active_amount': amount,
+            'status': status,
         }
     }
