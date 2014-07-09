@@ -66,4 +66,10 @@
         <key>key-9jmdddog2rhqf8j-no9fq-mpiqcdo851</key>
         <domain>sandbox0bcd8cad030d405f863c68bf70fa83f9.mailgun.org</domain>
     </mailgun>
+
+    <!-- 这里填写的 admin 是当服务器报错后 会收到邮件的人 -->
+    <!-- 如果有多个，就重复多个<admin /> -->
+    <admins>
+        <admin name="Wang Chao" email="my_sting@163.com" />
+    </admins>
 </config>

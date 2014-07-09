@@ -12,11 +12,6 @@ TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = '*'
 
-ADMINS = (
-    ('Wang Chao', 'my_sting@163.com'),
-)
-
-MANAGERS = ADMINS
 
 DATABASES = {
     # 'default': {
@@ -235,6 +230,15 @@ LISTEN_PORT_HTTPS = int( tree.find('server/port/https').text )
 MAILGUN_ACCESS_KEY = tree.find('mailgun/key').text
 MAILGUN_SERVER_NAME = tree.find('mailgun/domain').text
 
+_CONFIG_ADMINS = tree.find('admins')
+ADMINS = ()
+for _admin in _CONFIG_ADMINS.getchildren():
+    attrib = _admin.attrib
+    ADMINS += ((attrib['name'], attrib['email']),)
+
+MANAGERS = ADMINS
+
+del _CONFIG_ADMINS
 del et
 del tree
 
