@@ -43,7 +43,7 @@ class Command(BaseCommand):
 
         total_amount = MongoCharacter.objects.count()
         active_amount = ActivePlayers().amount
-        self.stdout.write("Active: {0}. Total amount {1}. Active amount {2}".format(server.active, total_amount, active_amount))
+        self.stdout.write("Total amount {0}. Active amount {1}".format(total_amount, active_amount))
 
 
     def _cmd_down(self):

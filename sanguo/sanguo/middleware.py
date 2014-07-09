@@ -22,10 +22,10 @@ from libs import NUM_FIELD
 
 class UnpackAndVerifyData(RequestFilter):
     def process_request(self, request):
+        super(UnpackAndVerifyData, self).process_request(request)
+
         if not server.active:
             return HttpResponse(status=502)
-
-        super(UnpackAndVerifyData, self).process_request(request)
 
         if request.path.startswith('/api/'):
             return
