@@ -35,6 +35,9 @@ def step_up(request):
     response = HeroStepUpResponse()
     response.ret = 0
     response.id = _id
+    response.step = h.step
+    response.max_socket_amount = h.max_socket_amount
+    response.current_socket_amount = h.current_socket_amount
     return pack_msg(response)
 
 @message_response("HeroRecruitResponse")

@@ -252,6 +252,7 @@ class Hero(FightPowerMixin):
                 new_step=self.hero.step
             )
 
+        self.step = self.hero.step
         self.hero.save()
         hero_changed_signal.send(
             sender=None,
