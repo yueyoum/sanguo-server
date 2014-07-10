@@ -3,6 +3,8 @@
     去掉redis_client_two, 全部用redis_client
     timerush 中的配置 也用 redis db 0
 
+    在 hub 上添加 production， hub 要 syncdb, 并且执行 loadconfig store
+
 
 *   2014-07-06
 

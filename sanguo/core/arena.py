@@ -98,7 +98,8 @@ class Arena(object):
     def choose_rival(self):
         my_score = self.day_score
         choosing = redis_client.zrangebyscore(REDIS_DAY_KEY, my_score, my_score)
-        choosing.remove(self.char_id)
+        if self.char_id in choosing:
+            choosing.remove(self.char_id)
         if choosing:
             return int(random.choice(choosing))
 
