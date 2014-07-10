@@ -163,14 +163,17 @@ EQUIP_MAX_STEP= 6
 #########################
 #      掠夺             #
 #########################
-# 掠夺选取对手的等级差异范围
-PLUNDER_LEVEL_DIFF = 10
 # 掠夺失败获得官职经验
 PLUNDER_GET_OFFICIAL_EXP_WHEN_LOST = 2
 # 掠夺胜利获得官职经验
 PLUNDER_GET_OFFICIAL_EXP_WHEN_WIN = 5
-# 掠夺点数（战功）
-PLUNDER_POINT = {2: 1, 3: 2}
+
+# 掠夺点数（战功）  难度: {几星: 得多少分}
+PLUNDER_GOT_POINT = {
+    1: {2: 1, 3: 2},
+    2: {2: 2, 3: 3},
+    3: {2: 3, 3: 5},
+}
 # 防御成功获得金币
 PLUNDER_DEFENSE_SUCCESS_GOLD = 1000
 # 防御失败损失金币

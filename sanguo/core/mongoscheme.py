@@ -144,12 +144,16 @@ class MongoHeroSoul(Document):
     }
 
 
+class MongoPlunderChar(EmbeddedDocument):
+    is_hang = BooleanField()
+    color = IntField()
+
 
 class MongoPlunder(Document):
     id = IntField(primary_key=True)
     points = IntField()
-    # char key 为 char_id， value 为 boolean 表示是否是 玩家
-    chars = DictField()
+    # char key 为 char_id
+    chars = MapField(EmbeddedDocumentField(MongoPlunderChar))
 
     # 记录下上次打赢的是谁，以便获取战俘
     target_char = IntField()

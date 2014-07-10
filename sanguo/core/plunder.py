@@ -10,7 +10,7 @@ from mongoscheme import Q, DoesNotExist
 from core.character import Char, get_char_ids_by_level_range
 from core.battle import PVP
 from core.stage import Hang, max_star_stage_id
-from core.mongoscheme import MongoHangDoing, MongoPlunder, MongoStage
+from core.mongoscheme import MongoHangDoing, MongoPlunder, MongoStage, MongoPlunderChar
 from core.exception import SanguoException
 from core.counter import Counter
 from core.task import Task
@@ -25,9 +25,8 @@ from core.msgpipe import publish_to_char
 from utils import pack_msg
 from utils.checkers import not_hang_going
 from preset.settings import (
-    PLUNDER_LEVEL_DIFF,
     PLUNDER_GET_OFFICIAL_EXP_WHEN_WIN,
-    PLUNDER_POINT,
+    PLUNDER_GOT_POINT,
     PLUNDER_DEFENSE_FAILURE_GOLD,
     PLUNDER_REWARD_NEEDS_POINT,
     PLUNDER_GOT_ITEMS_HOUR,
@@ -78,10 +77,22 @@ class Plunder(object):
             f = Formation(i)
             res.append([i, char.mc.name, char.power, f.get_leader_oid(), f.in_formation_hero_original_ids(), not not_hang_going(i)])
 
+        self_power = float(Char(self.char_id).power)
+
+        def _get_color(p):
+            percent = p / self_power
+            if percent <= 0.9:
+                return 1
+            if percent <= 1.1:
+                return 2
+            return 3
 
         self.mongo_plunder.chars = {}
-        for _id, _, _, _, _, is_hang in res:
-            self.mongo_plunder.chars[str(_id)] = is_hang
+        for _id, _, power, _, _, is_hang in res:
+            mpc = MongoPlunderChar()
+            mpc.is_hang = is_hang
+            mpc.color = _get_color(power)
+            self.mongo_plunder.chars[str(_id)] = mpc
         self.mongo_plunder.save()
         return res
 
@@ -116,7 +127,7 @@ class Plunder(object):
         pvp = PVP(self.char_id, _id, msg)
         pvp.start()
 
-        if self.mongo_plunder.chars[str(_id)]:
+        if self.mongo_plunder.chars[str(_id)].is_hang:
             char = Char(self.char_id)
             h = Hang(_id)
             h.plundered(char.cacheobj.name, not msg.self_win)
@@ -132,7 +143,8 @@ class Plunder(object):
         if msg.third_ground.self_win:
             ground_win_times += 1
 
-        got_point = PLUNDER_POINT.get(ground_win_times, 0)
+        got_point = PLUNDER_GOT_POINT[self.mongo_plunder.chars[str(_id)].color].get(ground_win_times, 0)
+
         if got_point:
             self.mongo_plunder.points += got_point
 
