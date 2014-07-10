@@ -89,9 +89,6 @@ class CheckIn(object):
         msg.ret = 0
         msg.reward.MergeFrom(standard_drop_to_attachment_protomsg(standard_drop))
 
-        achievement = Achievement(self.char_id)
-        achievement.trig(34, 1)
-
         self.send_update_notify(day)
         return msg
 
