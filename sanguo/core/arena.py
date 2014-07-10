@@ -47,7 +47,7 @@ class Arena(object):
     @property
     def day_rank(self):
         rank = redis_client.zrevrank(REDIS_DAY_KEY, self.char_id)
-        return rank+1 if rank else 0
+        return rank+1 if rank is not None else 0
 
     @property
     def week_score(self):
@@ -69,7 +69,7 @@ class Arena(object):
         return c.remained_value
 
     def inc_day_score(self, score):
-        new_score =redis_client.zincry(REDIS_DAY_KEY, self.char_id, score)
+        new_score =redis_client.zincrby(REDIS_DAY_KEY, self.char_id, score)
         return int(new_score)
 
 
