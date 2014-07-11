@@ -187,7 +187,7 @@ PLUNDER_DEFENSE_FAILURE_MAX_TIMES = 10
 # 掠夺获取收益各档所需点数
 PLUNDER_REWARD_NEEDS_POINT = {1:3, 2: 2, 3: 1}
 # 掠夺获取道具按照多少小时计算
-PLUNDER_GOT_ITEMS_HOUR = 8
+PLUNDER_GOT_ITEMS_HOUR = 2
 
 #########################
 #      战俘             #
