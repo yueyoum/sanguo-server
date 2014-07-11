@@ -158,6 +158,7 @@ class Equipment(MessageEquipmentMixin):
         with resource.check(gold=-all_gold_needs):
             self.mongo_item.save()
 
+        Task(self.char_id).trig(8)
         return equip_msgs
 
 

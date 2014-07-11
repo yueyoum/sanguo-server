@@ -17,6 +17,7 @@ from core.mail import Mail
 from core.signals import pve_finished_signal
 from core.counter import Counter, ActivityStageCount
 from core.resource import Resource
+from core.task import Task
 from core import timer
 from utils import pack_msg
 from utils.decorate import operate_guard, passport
@@ -53,6 +54,9 @@ from preset.data import (
 from preset import errormsg
 import protomsg
 
+
+STAGE_ELITE_TOTAL_RESET_COST.sort(key=lambda item: -item[0])
+STAGE_ELITE_RESET_COST.sort(key=lambda item: -item[0])
 
 HANG_MAX_SECONDS_FUNCTION = lambda vip: VIP_FUNCTION[vip].hang * 3600
 
@@ -611,11 +615,24 @@ class EliteStage(object):
         self.send_new_notify(_id)
 
 
-    def get_reset_cost(self):
-        return STAGE_ELITE_RESET_COST
+    def get_reset_cost(self, _id):
+        buy_times = self.stage.elites_buy.get(str(_id), 0)
+        buy_times += 1
+        for t, cost in STAGE_ELITE_RESET_COST:
+            if buy_times >= t:
+                return cost
+
+        return 0
 
     def get_total_reset_cost(self):
-        return STAGE_ELITE_TOTAL_RESET_COST
+        counter = Counter(self.char_id, 'stage_elite_buy_total')
+        buy_times = counter.cur_value
+        buy_times += 1
+        for t, cost in STAGE_ELITE_TOTAL_RESET_COST:
+            if buy_times >= t:
+                return cost
+
+        return 0
 
 
     def reset_one(self, _id):
@@ -630,8 +647,8 @@ class EliteStage(object):
 
         reset_times = self.stage.elites_buy.get(str(_id), 0)
         char = Char(self.char_id).mc
-        reset_total = VIP_FUNCTION[char.vip].stage_elite_buy
-        if reset_times >= reset_total:
+        can_reset_times = VIP_FUNCTION[char.vip].stage_elite_buy
+        if reset_times >= can_reset_times:
             raise SanguoException(
                 errormsg.STAGE_ELITE_RESET_FULL,
                 self.char_id,
@@ -639,7 +656,7 @@ class EliteStage(object):
                 "reset {0}".format(_id)
             )
 
-        cost = self.get_reset_cost()
+        cost = self.get_reset_cost(_id)
 
         resource = Resource(self.char_id, "Elite Reset One", "reset {0}".format(_id))
         with resource.check(sycee=-cost):
@@ -651,8 +668,8 @@ class EliteStage(object):
 
 
     def reset_total(self):
-        counter = Counter(self.char_id, 'stage_elite_buy_total')
-        if counter.remained_value <= 0:
+        counter_buy = Counter(self.char_id, 'stage_elite_buy_total')
+        if counter_buy.remained_value <= 0:
             raise SanguoException(
                 errormsg.STAGE_ELITE_RESET_TOTAL_FULL,
                 self.char_id,
@@ -664,6 +681,7 @@ class EliteStage(object):
 
         resource = Resource(self.char_id, "Elite Reset Total", "")
         with resource.check(sycee=-cost):
+            counter_buy.incr()
             counter = Counter(self.char_id, 'stage_elite')
             counter.reset()
 
@@ -747,6 +765,8 @@ class EliteStage(object):
             self.send_remained_times_notify()
             self.enable_next_elite_stage(_id)
 
+            Task(self.char_id).trig(6)
+
         return battle_msg
 
 
@@ -773,24 +793,21 @@ class EliteStage(object):
 
     def send_new_notify(self, _id):
         msg = protomsg.NewEliteStageNotify()
-        msg.stage.id = _id
-        msg.stage.current_times = self.stage.elites[str(_id)]
+        self._msg_one_stage(msg.stage, _id)
         publish_to_char(self.char_id, pack_msg(msg))
 
 
     def send_update_notify(self, _id):
         msg = protomsg.UpdateEliteStageNotify()
-        msg.stage.id = _id
-        msg.stage.current_times = self.stage.elites[str(_id)]
+        self._msg_one_stage(msg.stage, _id)
         publish_to_char(self.char_id, pack_msg(msg))
 
 
     def send_notify(self):
         msg = protomsg.EliteStageNotify()
-        for _id, times in self.stage.elites.iteritems():
+        for _id in self.stage.elites.keys():
             s = msg.stages.add()
-            s.id = int(_id)
-            s.current_times = times
+            self._msg_one_stage(s, int(_id))
 
         publish_to_char(self.char_id, pack_msg(msg))
 
@@ -801,10 +818,14 @@ class EliteStage(object):
         msg.max_free_times = free_counter.max_value
         msg.cur_free_times = free_counter.cur_value
 
-        msg.reset_cost = self.get_reset_cost()
         msg.total_reset_cost = self.get_total_reset_cost()
         publish_to_char(self.char_id, pack_msg(msg))
 
+
+    def _msg_one_stage(self, msg, _id):
+        msg.id = _id
+        msg.current_times = self.stage.elites[str(_id)]
+        msg.reset_cost = self.get_reset_cost(_id)
 
 
 class ActivityStage(object):

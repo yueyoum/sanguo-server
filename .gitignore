@@ -4,6 +4,7 @@
 *.bak
 *.swp
 *.log
+*.orig
 .idea
 
 crontab

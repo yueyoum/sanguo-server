@@ -10,6 +10,9 @@ def reset():
         for k in ms.elites.keys():
             ms.elites[k] = 0
 
+        for k in ms.elites_buy.keys():
+            ms.elites_buy[k] = 0
+
         ms.elites_buy = {}
         ms.save()
 
@@ -19,4 +22,3 @@ def reset():
 
 if __name__ == '__main__':
     reset()
-

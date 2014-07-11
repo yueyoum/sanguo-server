@@ -28,7 +28,7 @@
     "model": "config.resourcetype", 
     "fields": {
         "name": "\u5143\u5b9d", 
-        "icon": ""
+        "icon": "Icon_\u5143\u5b9d"
     }
 },
 {

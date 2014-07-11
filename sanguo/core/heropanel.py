@@ -12,6 +12,7 @@ from core.counter import Counter
 from core.exception import SanguoException, CounterOverFlow
 from core.hero import save_hero
 from core.resource import Resource
+from core.task import Task
 from core.msgpipe import publish_to_char
 from utils import pack_msg
 from preset import errormsg
@@ -157,6 +158,8 @@ class HeroPanel(object):
             save_hero(self.char_id, hero.oid)
 
         self.send_notify()
+
+        Task(self.char_id).trig(7)
         return hero.oid
 
 

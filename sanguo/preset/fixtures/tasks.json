@@ -3,11 +3,11 @@
     "pk": 2, 
     "model": "task.task", 
     "fields": {
-        "sycee": 20, 
-        "name": "\u901a\u8fc7\u4efb\u610f\u5173\u5361", 
-        "gold": 5000, 
+        "sycee": 10, 
+        "name": "\u666e\u901a\u5173\u5361", 
+        "gold": null, 
         "tp": 1, 
-        "times": 3, 
+        "times": 5, 
         "next_task": null, 
         "func": null, 
         "link": "PVELevelFrame", 
@@ -18,8 +18,8 @@
     "pk": 6, 
     "model": "task.task", 
     "fields": {
-        "sycee": 20, 
-        "name": "\u8fdb\u884c\u6bd4\u6b66\u6218\u6597", 
+        "sycee": 10, 
+        "name": "\u6bd4\u6b66\u6218\u6597", 
         "gold": 5000, 
         "tp": 2, 
         "times": 5, 
@@ -33,8 +33,8 @@
     "pk": 9, 
     "model": "task.task", 
     "fields": {
-        "sycee": 20, 
-        "name": "\u8fdb\u884c\u63a0\u593a\u6218\u6597", 
+        "sycee": 10, 
+        "name": "\u63a0\u593a\u6218\u6597", 
         "gold": 5000, 
         "tp": 3, 
         "times": 5, 
@@ -49,8 +49,8 @@
     "model": "task.task", 
     "fields": {
         "sycee": 10, 
-        "name": "\u8fdb\u884c\u5b9d\u77f3\u5408\u6210", 
-        "gold": 5000, 
+        "name": "\u5b9d\u77f3\u5408\u6210", 
+        "gold": 1000, 
         "tp": 4, 
         "times": 1, 
         "next_task": null, 
@@ -64,12 +64,57 @@
     "model": "task.task", 
     "fields": {
         "sycee": 10, 
-        "name": "\u8fdb\u884c\u6b66\u5c06\u529d\u964d", 
+        "name": "\u6b66\u5c06\u529d\u964d", 
         "gold": 5000, 
         "tp": 5, 
         "times": 1, 
         "next_task": null, 
-        "func": null, 
+        "func": 9, 
+        "link": "RobberyFrame", 
+        "first": true
+    }
+},
+{
+    "pk": 16, 
+    "model": "task.task", 
+    "fields": {
+        "sycee": 10, 
+        "name": "\u7cbe\u82f1\u526f\u672c", 
+        "gold": null, 
+        "tp": 6, 
+        "times": 10, 
+        "next_task": null, 
+        "func": 11, 
+        "link": "PVELevelFrame", 
+        "first": true
+    }
+},
+{
+    "pk": 17, 
+    "model": "task.task", 
+    "fields": {
+        "sycee": 0, 
+        "name": "\u6bcf\u65e5\u70b9\u5c06", 
+        "gold": 2000, 
+        "tp": 7, 
+        "times": 1, 
+        "next_task": null, 
+        "func": 14, 
+        "link": "HeroDrawFrame", 
+        "first": true
+    }
+},
+{
+    "pk": 18, 
+    "model": "task.task", 
+    "fields": {
+        "sycee": 0, 
+        "name": "\u88c5\u5907\u5f3a\u5316", 
+        "gold": 5000, 
+        "tp": 8, 
+        "times": 3, 
+        "next_task": null, 
+        "func": 1, 
         "link": "", 
         "first": true
     }
