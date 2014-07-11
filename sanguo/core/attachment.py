@@ -316,11 +316,17 @@ class Attachment(object):
             from core.achievement import Achievement
             ach = Achievement(self.char_id)
             att_msg = ach.get_reward(param)
+            if ach.has_prizes():
+                prize_id = None
+
         elif prize_id == 5:
             # 任务
             from core.task import Task
             task = Task(self.char_id)
             att_msg = task.get_reward(param)
+            if task.has_prizes():
+                prize_id = None
+
         elif prize_id == 6:
             # 官职每日登录
             # from core.daily import OfficialDailyReward
@@ -329,9 +335,8 @@ class Attachment(object):
             att_msg = None
         elif prize_id == 7:
             # 团队本
-            from core.stage import TeamBattle
-            tb = TeamBattle(self.char_id)
-            att_msg = tb.get_reward()
+            att_msg = None
+
         else:
             try:
                 attachment = self.attachment.attachments[str(prize_id)]
@@ -353,10 +358,11 @@ class Attachment(object):
             att_msg = standard_drop_to_attachment_protomsg(standard_drop)
 
         # 删除此prize_id
-        if prize_id in self.attachment.prize_ids:
-            self.attachment.prize_ids.remove(prize_id)
-        if str(prize_id) in self.attachment.attachments:
-            self.attachment.attachments.pop(str(prize_id))
+        if prize_id:
+            if prize_id in self.attachment.prize_ids:
+                self.attachment.prize_ids.remove(prize_id)
+            if str(prize_id) in self.attachment.attachments:
+                self.attachment.attachments.pop(str(prize_id))
 
         self.attachment.save()
         self.send_notify()
