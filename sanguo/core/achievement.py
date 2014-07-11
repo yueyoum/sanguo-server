@@ -43,6 +43,9 @@ class Achievement(object):
                 attachment.attachment.prize_ids.remove(4)
                 attachment.attachment.save()
 
+    def has_prizes(self):
+        # 是否有可领取奖励
+        return len(self.achievement.finished) > 0
 
 
     def trig(self, condition_id, new_value, send_notify=True):

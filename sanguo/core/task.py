@@ -68,6 +68,10 @@ class Task(object):
                 attachment.attachment.prize_ids.remove(5)
                 attachment.attachment.save()
 
+    def has_prizes(self):
+        # 是否有可领取的奖励
+        return len(self.task.finished) > 0
+
 
     def trig(self, tp, times=1):
         if tp not in TASKS_ALL_TP:
