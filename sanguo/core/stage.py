@@ -153,18 +153,10 @@ class Stage(object):
         self.star = star
 
         if battle_msg.self_win:
-            # 当前关卡通知
-            msg = protomsg.CurrentStageNotify()
-            opened_func = FunctionOpen(self.char_id).trig_by_stage_id(stage_id)
-            self._msg_stage(msg.stage, stage_id, star)
-            msg.funcs.extend(opened_func)
-            publish_to_char(self.char_id, pack_msg(msg))
-
-            if str(stage_id) not in self.stage.stages:
+            # 当前关卡星设置
+            old_star = self.stage.stages.get(str(stage_id), False)
+            if not old_star:
                 self.stage.stages[str(stage_id)] = star
-            else:
-                if not self.stage.stages[str(stage_id)]:
-                    self.stage.stages[str(stage_id)] = star
 
             # 设置新关卡
             stage_new = getattr(this_stage, 'next', None)
@@ -172,8 +164,14 @@ class Stage(object):
                 if str(stage_new) not in self.stage.stages:
                     if self.stage.stage_new != stage_new:
                         self.stage.stage_new = stage_new
-
                         self.send_new_stage_notify()
+
+            # 发送通知
+            msg = protomsg.CurrentStageNotify()
+            opened_func = FunctionOpen(self.char_id).trig_by_stage_id(stage_id)
+            self._msg_stage(msg.stage, stage_id, old_star or star)
+            msg.funcs.extend(opened_func)
+            publish_to_char(self.char_id, pack_msg(msg))
 
         self.stage.save()
 
