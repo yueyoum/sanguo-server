@@ -806,7 +806,7 @@ class EliteStage(object):
         msg = protomsg.EliteStageNotify()
         for _id in self.stage.elites.keys():
             s = msg.stages.add()
-            self._msg_one_stage(s, _id)
+            self._msg_one_stage(s, int(_id))
 
         publish_to_char(self.char_id, pack_msg(msg))
 
