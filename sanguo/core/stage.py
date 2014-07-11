@@ -17,6 +17,7 @@ from core.mail import Mail
 from core.signals import pve_finished_signal
 from core.counter import Counter, ActivityStageCount
 from core.resource import Resource
+from core.task import Task
 from core import timer
 from utils import pack_msg
 from utils.decorate import operate_guard, passport
@@ -765,6 +766,8 @@ class EliteStage(object):
             counter.incr()
             self.send_remained_times_notify()
             self.enable_next_elite_stage(_id)
+
+            Task(self.char_id).trig(6)
 
         return battle_msg
 
