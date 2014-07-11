@@ -3,7 +3,7 @@
 from mongoengine import DoesNotExist
 
 from core.mongoscheme import MongoSocket, MongoFormation, MongoHero
-from core.signals import socket_changed_signal, hero_changed_signal
+from core.signals import socket_changed_signal, hero_changed_signal, socket_hero_changed_signal
 from core.exception import SanguoException
 
 from utils import pack_msg
@@ -207,6 +207,12 @@ class Formation(object):
         else:
             self._replace_hero(socket_id, hero_id)
 
+        socket_hero_changed_signal.send(
+            sender=None,
+            char_id=self.char_id,
+            socket_id=socket_id,
+            hero_id=hero_id,
+        )
 
 
     def up_equipment(self, socket_id, equipment_id):
