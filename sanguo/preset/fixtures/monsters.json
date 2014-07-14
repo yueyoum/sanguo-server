@@ -1075,11 +1075,11 @@
         "tp": 1, 
         "anger": 50, 
         "default_skill": 0, 
-        "attack": 15.0, 
+        "attack": 17.0, 
         "defense": 6.0, 
         "crit": 15, 
         "quality": 2, 
-        "hp": 60.0
+        "hp": 65.0
     }
 },
 {
