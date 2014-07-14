@@ -4624,28 +4624,23 @@
         "gold": 0, 
         "souls": [
             {
-                "amount": 3, 
+                "amount": 4, 
                 "id": 34, 
                 "prob": 100000
             }, 
             {
-                "amount": 1, 
-                "id": 34, 
-                "prob": 50000
+                "amount": 4, 
+                "id": 37, 
+                "prob": 100000
             }, 
             {
-                "amount": 1, 
-                "id": 34, 
-                "prob": 50000
-            }, 
-            {
-                "amount": 1, 
-                "id": 34, 
-                "prob": 50000
+                "amount": 4, 
+                "id": 7, 
+                "prob": 100000
             }
         ], 
         "equipments": [], 
-        "mode": 1, 
+        "mode": 2, 
         "exp": 0, 
         "stuffs": [], 
         "official_exp": 0

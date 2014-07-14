@@ -424,7 +424,7 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u6b66\u5c06\u5c06\u9b42\u5b9d\u7bb1\uff08\u91d1\uff09", 
-        "des": "\u53ef\u83b7\u5f97\u795e\u79d8\u6b66\u5c06\u5c06\u9b42", 
+        "des": "\u53ef\u83b7\u5f97\u5415\u5e03\u3001\u6b65\u7ec3\u5e08\u3001\u5f90\u5eb6", 
         "buy_sycee": 0, 
         "tp": 3, 
         "sell_gold": 0, 
