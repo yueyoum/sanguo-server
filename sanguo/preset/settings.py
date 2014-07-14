@@ -286,18 +286,18 @@ CHAT_MESSAGE_MAX_LENGTH = 50            # 发送消息长度。多少个字
 #########################
 #      操作间隔时间 秒   #
 #########################
-OPERATE_INTERVAL_PVE = 5                # 普通关卡战斗间隔
-OPERATE_INTERVAL_PVE_ELITE = 5          # 精英关卡战斗间隔
-OPERATE_INTERVAL_PVE_ACTIVITY = 5       # 活动关卡间隔
+OPERATE_INTERVAL_PVE = 2                # 普通关卡战斗间隔
+OPERATE_INTERVAL_PVE_ELITE = 2          # 精英关卡战斗间隔
+OPERATE_INTERVAL_PVE_ACTIVITY = 2       # 活动关卡间隔
 
-OPERATE_INTERVAL_ARENA_PANEL = 5        # 竞技厂刷新面板间隔
-OPERATE_INTERVAL_CHAT_SEND = 15         # 聊天发送间隔
+OPERATE_INTERVAL_ARENA_PANEL = 2        # 竞技厂刷新面板间隔
+OPERATE_INTERVAL_CHAT_SEND = 2         # 聊天发送间隔
 
-OPERATE_INTERVAL_FRIEND_CANDIDATE_LIST = 5 # 添加好友的候选列表刷新间隔
-OPERATE_INTERVAL_FRIEND_REFRESH = 5        # 刷新自己好友状态间隔
+OPERATE_INTERVAL_FRIEND_CANDIDATE_LIST = 2 # 添加好友的候选列表刷新间隔
+OPERATE_INTERVAL_FRIEND_REFRESH = 2        # 刷新自己好友状态间隔
 
-OPERATE_INTERVAL_PLUNDER_LIST = 5          # 获取掠夺列表间隔
-OPERATE_INTERVAL_PLUNDER_BATTLE = 5        # 掠夺战斗间隔
+OPERATE_INTERVAL_PLUNDER_LIST = 2          # 获取掠夺列表间隔
+OPERATE_INTERVAL_PLUNDER_BATTLE = 2        # 掠夺战斗间隔
 
 
 #########################
