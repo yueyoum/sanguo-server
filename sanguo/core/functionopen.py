@@ -35,6 +35,7 @@ class FunctionOpen(object):
     def _open_all(self):
         self.mf.freeze = []
         self.mf.save()
+        Formation(self.char_id).open_socket(max(FUNC_SOCKET_AMOUNT_TABLE.values()))
 
     def trig(self, char_level, stage_id=None):
         try:
