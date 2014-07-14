@@ -14,15 +14,15 @@ from preset.data import HEROS
 from protomsg import Battle as MsgBattle
 
 MY_HEROS = [
-    4, 5, 2,
-    1, 30, 8,
+    4, 1, 2,
+    5, 30, 8,
     28, 0, 56
 ]
 
 RIVAL_HEROS = [
-    13, 12, 15,
+    13, 11, 15,
     36, 0, 17,
-    11, 14, 6
+    12, 14, 6
 ]
 
 class MyHero(InBattleHero):
