@@ -14,6 +14,7 @@ from core.attachment import make_standard_drop_from_template
 from core.mongoscheme import MongoArenaTopRanks, MongoArenaWeek
 from core.character import Char
 from core.mail import Mail
+from core.achievement import Achievement
 
 from preset.data import ARENA_DAY_REWARD_TUPLE, ARENA_WEEK_REWARD_TUPLE
 from preset.settings import MAIL_ARENA_WEEK_REWARD_CONTENT, MAIL_ARENA_WEEK_REWARD_TITLE
@@ -27,6 +28,8 @@ def _set_mongo_week(char_id, rank):
     week.score = 0
     week.rank = rank
     week.save()
+
+    Achievement(char_id).trig(10, rank)
 
 
 def _set_top_ranks(*top_ids):
@@ -68,10 +71,7 @@ def reset():
     logger.write("Reset Arena Week: Start. chars amount: {0}".format(amount))
 
     mongo_week_data = MongoArenaWeek.objects.all()
-
-    week_data = []
-    for d in mongo_week_data:
-        week_data.append((d.id, d.score))
+    week_data = [(d.id, d.score) for d in mongo_week_data]
 
     week_data.sort(key=lambda item: -item[1])
     for index, data in enumerate(week_data):

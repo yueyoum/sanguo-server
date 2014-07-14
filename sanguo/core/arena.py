@@ -163,8 +163,6 @@ class Arena(object):
 
         new_day_score = self.inc_day_score(score)
 
-        achievement.trig(10, self.day_rank)
-
         t = Task(self.char_id)
         t.trig(2)
 
