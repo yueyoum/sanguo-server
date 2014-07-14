@@ -4,11 +4,18 @@ from mongoengine import Q
 
 from core.hero import save_hero, Hero, HeroSoul
 from core.mongoscheme import MongoCharacter
-from core.signals import char_level_up_signal, char_official_up_signal, char_gold_changed_signal, char_sycee_changed_signal
 from core.formation import Formation
 from core.functionopen import FunctionOpen
 from core.vip import get_vip_level
 from core.msgpipe import publish_to_char
+from core.signals import (
+    char_level_up_signal,
+    char_official_up_signal,
+    char_gold_changed_signal,
+    char_sycee_changed_signal,
+    vip_changed_signal,
+)
+
 
 from utils import pack_msg
 
@@ -83,6 +90,12 @@ class Char(object):
 
 
     def update(self, gold=0, sycee=0, exp=0, official_exp=0, purchase_got=0, purchase_actual_got=0):
+        # purchase_got 充值获得元宝
+        # purchase_actual_got 充值实际获得元宝
+        # 比如 有个 商品 是 充1元，得1元宝，但现在做活动，买一送一，也就是充1元，得2元宝
+        # 这里的 purchase_got = 1, purchase_actual_got = 2
+        # 用户的 元宝 多2, 但是记录 purchase_got 还是加1
+        # VIP 也是用 累加的 purchase_got来计算的
         opended_funcs = []
         char = MongoCharacter.objects.get(id=self.id)
         if gold:
@@ -129,13 +142,23 @@ class Char(object):
 
         # VIP
         total_purchase_got = char.purchase_got + purchase_got
-        vip = get_vip_level(total_purchase_got)
         char.purchase_got = total_purchase_got
-        char.vip = vip
 
+        old_vip = char.vip
+        new_vip = get_vip_level(total_purchase_got)
+
+        char.vip = new_vip
         char.save()
+
         self.send_notify(char=char, opended_funcs=opended_funcs)
 
+        if old_vip != new_vip:
+            vip_changed_signal.send(
+                sender=None,
+                char_id=self.id,
+                old_vip=old_vip,
+                new_vip=new_vip
+            )
 
     def send_notify(self, char=None, opended_funcs=None):
         if not char:

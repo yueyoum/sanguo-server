@@ -30,9 +30,27 @@ class Prison(object):
             self.p = MongoPrison(id=self.char_id)
             self.p.save()
 
-    def prisoner_prob(self):
-        char = Char(self.char_id).mc
-        vip_plus = VIP_FUNCTION[char.vip].prisoner_get
+    def vip_changed(self, new_vip):
+        new_prob = self.prisoner_prob(new_vip)
+
+        changed = False
+        for p in self.p.prisoners:
+            if not p.active:
+                continue
+
+            p.prob = new_prob
+            changed = True
+
+        if changed:
+            self.p.save()
+            self.send_prisoners_notify()
+
+
+    def prisoner_prob(self, vip=None):
+        if vip is None:
+            vip = Char(self.char_id).mc.vip
+
+        vip_plus = VIP_FUNCTION[vip].prisoner_get
         return PRISONER_START_PROB + vip_plus
 
 
