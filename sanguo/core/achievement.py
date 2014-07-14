@@ -45,7 +45,14 @@ class Achievement(object):
 
     def has_prizes(self):
         # 是否有可领取奖励
-        return len(self.achievement.finished) > 0
+        if not self.achievement.finished:
+            return False
+
+        for i in self.achievement.finished:
+            if i in self.achievement.display:
+                return True
+
+        return False
 
 
     def trig(self, condition_id, new_value, send_notify=True):

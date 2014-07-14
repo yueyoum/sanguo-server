@@ -70,7 +70,13 @@ class Task(object):
 
     def has_prizes(self):
         # 是否有可领取的奖励
-        return len(self.task.finished) > 0
+        if not self.task.finished:
+            return False
+
+        for i in self.task.finished:
+            if i in self.task.doing:
+                return True
+        return False
 
 
     def trig(self, tp, times=1):
