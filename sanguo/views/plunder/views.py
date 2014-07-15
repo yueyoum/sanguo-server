@@ -6,6 +6,7 @@ __date__ = '1/21/14'
 from libs import pack_msg
 from utils.decorate import message_response, operate_guard, function_check
 from core.plunder import Plunder
+from core.attachment import standard_drop_to_attachment_protomsg
 from preset.settings import OPERATE_INTERVAL_PLUNDER_BATTLE, OPERATE_INTERVAL_PLUNDER_LIST
 from protomsg import PlunderListResponse, PlunderResponse, PlunderGetRewardResponse
 
@@ -42,11 +43,12 @@ def plunder(request):
     char_id = request._char_id
 
     p = Plunder(char_id)
-    msg = p.plunder(req.id)
+    msg, drop = p.plunder(req.id)
 
     response = PlunderResponse()
     response.ret = 0
     response.battle.MergeFrom(msg)
+    response.drop.MergeFrom(standard_drop_to_attachment_protomsg(drop))
 
     return pack_msg(response)
 

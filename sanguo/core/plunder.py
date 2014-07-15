@@ -156,14 +156,15 @@ class Plunder(object):
             drop_gold = PLUNDER_DEFENSE_FAILURE_GOLD
 
             resource = Resource(self.char_id, "Plunder")
-            resource.add(gold=drop_gold, official_exp=drop_official_exp)
+            standard_drop = resource.add(gold=drop_gold, official_exp=drop_official_exp)
         else:
             self.mongo_plunder.target_char = 0
+            standard_drop = make_standard_drop_from_template()
 
         self.mongo_plunder.got_reward = []
         self.mongo_plunder.save()
         self.send_notify()
-        return msg
+        return (msg, standard_drop)
 
 
     def get_reward(self, tp):
