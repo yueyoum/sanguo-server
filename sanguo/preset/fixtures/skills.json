@@ -560,7 +560,7 @@
         "name": "\u767e\u6b65\u7a7f\u6768", 
         "anger_self_team": 0, 
         "war_cry": true, 
-        "skill_range": 1, 
+        "skill_range": 2, 
         "des": "\u767e\u6b65\u7a7f\u6768\uff1a\u968f\u673a\u72d9\u51fb\u5355\u4e2a\u654c\u4eba\uff0c\u9020\u6210\u5927\u91cf\u4f24\u5bb3\u3002", 
         "anger_self": 0, 
         "prob": 25, 

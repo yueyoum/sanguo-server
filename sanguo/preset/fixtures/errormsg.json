@@ -88,6 +88,17 @@
     }
 },
 {
+    "pk": 106, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "SESSION_EXPIRE", 
+        "text_zh": "\u8bf7\u91cd\u65b0\u767b\u5f55", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
     "pk": 110, 
     "model": "errormsg.errormsg", 
     "fields": {
