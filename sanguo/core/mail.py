@@ -34,25 +34,43 @@ class Mail(object):
     def count(self):
         return len(self.mail.mails)
 
-    def add(self, name, content, create_at=None, attachment='', send_notify=True):
+
+    def _get_mail_id(self):
+        mail_ids = [int(i) for i in self.mail.mails.keys()]
+        if not mail_ids:
+            mail_id = 1
+        else:
+            mail_id = max(mail_ids) + 1
+
+        return mail_id
+
+    def _make_mail_obj(self, name, only_one):
+        mail_id = self._get_mail_id()
+        if not only_one:
+            return (mail_id, MongoEmbededMail())
+
+        for k, v in self.mail.mails.iteritems():
+            if v.name == name:
+                return (int(k), v)
+
+        return (mail_id, MongoEmbededMail())
+
+
+    def add(self, name, content, create_at=None, attachment='', only_one=False, send_notify=True):
         if not isinstance(name, unicode):
             name = name.decode('utf-8')
 
         if not isinstance(content, unicode):
             content = content.decode('utf-8')
 
-        m = MongoEmbededMail()
+        mail_id, m = self._make_mail_obj(name, only_one)
+
         m.name = name
         m.content = content
         m.attachment = attachment
         m.has_read = False
         m.create_at = create_at or arrow.utcnow().format('YYYY-MM-DD HH:mm:ss')
 
-        mail_ids = [int(i) for i in self.mail.mails.keys()]
-        if not mail_ids:
-            mail_id = 1
-        else:
-            mail_id = max(mail_ids) + 1
 
         self.mail.mails[str(mail_id)] = m
         self.mail.save()

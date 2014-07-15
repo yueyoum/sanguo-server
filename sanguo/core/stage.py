@@ -283,7 +283,8 @@ class Hang(object):
             mail.add(
                 HANG_RESET_MAIL_TITLE,
                 HANG_RESET_MAIL_CONTENT,
-                attachment=json.dumps(standard_drop)
+                attachment=json.dumps(standard_drop),
+                only_one=True,
             )
 
 
