@@ -206,10 +206,8 @@ PRISONER_KILL_GOT_TREASURE = {3: [24], 2: [25], 1: [26]}
 #########################
 # 比武超过免费次数后每次比武消耗元宝
 ARENA_COST_SYCEE = 20
-# 比武胜利获得积分
-ARENA_GET_SCORE_WHEN_WIN = 2
-# 比武失败获得积分
-ARENA_GET_SCORE_WHEN_LOST = 1
+# 比武前三名缓存时间 秒
+ARENA_TOP_RANKS_CACHE = 10
 
 
 #########################

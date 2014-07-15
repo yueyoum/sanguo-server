@@ -88,6 +88,10 @@ class Char(object):
         f = Formation(self.id)
         return f.get_leader_id()
 
+    @property
+    def leader_oid(self):
+        return Formation(self.id).get_leader_oid()
+
 
     def update(self, gold=0, sycee=0, exp=0, official_exp=0, purchase_got=0, purchase_actual_got=0):
         # purchase_got 充值获得元宝

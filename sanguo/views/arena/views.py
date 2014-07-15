@@ -19,7 +19,7 @@ def arena_panel(request):
     response = ArenaPanelResponse()
     response.ret = 0
 
-    arena._fill_up_panel_msg(response.panel)
+    arena.fill_up_panel_msg(response.panel)
     return pack_msg(response)
 
 

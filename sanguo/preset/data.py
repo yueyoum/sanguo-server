@@ -60,10 +60,10 @@ TASKS = object_maker(_find_file('tasks.json'))
 VIP_FUNCTION = object_maker(_find_file('vip.json'))
 
 ARENA_DAY_REWARD_TUPLE = ARENA_DAY_REWARD.items()
-ARENA_DAY_REWARD_TUPLE.sort(key=lambda item: item[0])
+ARENA_DAY_REWARD_TUPLE.sort(key=lambda item: -item[0])
 
 ARENA_WEEK_REWARD_TUPLE = ARENA_WEEK_REWARD.items()
-ARENA_WEEK_REWARD_TUPLE.sort(key=lambda item: item[0])
+ARENA_WEEK_REWARD_TUPLE.sort(key=lambda item: -item[0])
 
 
 def _got_package():

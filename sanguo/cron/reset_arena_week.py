@@ -3,52 +3,23 @@
 __author__ = 'Wang Chao'
 __date__ = '2/19/14'
 
+import json
 
 from _base import Logger
-
-import json
-from mongoengine import DoesNotExist
 import arrow
-
 from core.attachment import make_standard_drop_from_template
-from core.mongoscheme import MongoArenaTopRanks, MongoArenaWeek
 from core.character import Char
 from core.mail import Mail
-from core.achievement import Achievement
-
+from core.arena import REDIS_ARENA_KEY
+from core.drives import redis_client
 from preset.data import ARENA_DAY_REWARD_TUPLE, ARENA_WEEK_REWARD_TUPLE
 from preset.settings import MAIL_ARENA_WEEK_REWARD_CONTENT, MAIL_ARENA_WEEK_REWARD_TITLE
 
-def _set_mongo_week(char_id, rank):
-    try:
-        week = MongoArenaWeek.objects.get(id=char_id)
-    except DoesNotExist:
-        week = MongoArenaWeek(id=char_id)
 
-    week.score = 0
-    week.rank = rank
-    week.save()
-
-    Achievement(char_id).trig(10, rank)
-
-
-def _set_top_ranks(*top_ids):
-    for index, _id in enumerate(top_ids):
-        name = Char(_id).mc.name
-        rank = index + 1
-        try:
-            top = MongoArenaTopRanks.objects.get(id=rank)
-        except DoesNotExist:
-            top = MongoArenaTopRanks(id=rank)
-
-        top.name = name
-        top.save()
-
-
-def _get_reward_by_rank(rank):
+def _get_reward_by_rank(score, rank):
     data = make_standard_drop_from_template()
     for _rank, _reward in ARENA_DAY_REWARD_TUPLE:
-        if rank >= _rank:
+        if score >= _rank:
             data['sycee'] = _reward.sycee * 2
             data['gold'] = _reward.gold * 2
             break
@@ -56,7 +27,6 @@ def _get_reward_by_rank(rank):
     for _rank, _reward in ARENA_WEEK_REWARD_TUPLE:
         if rank >= _rank and _reward.stuff_id:
             data['stuffs'] = [(_reward.stuff_id, 1)]
-            data.update({'stuffs': [(_reward.stuff_id, 1)]})
             break
 
     if data:
@@ -65,31 +35,26 @@ def _get_reward_by_rank(rank):
 
 
 def reset():
-    amount = MongoArenaWeek.objects.count()
+    amount = redis_client.zcard(REDIS_ARENA_KEY)
 
     logger = Logger("reset_arena_week.log")
     logger.write("Reset Arena Week: Start. chars amount: {0}".format(amount))
 
-    mongo_week_data = MongoArenaWeek.objects.all()
-    week_data = [(d.id, d.score) for d in mongo_week_data]
+    score_data = redis_client.zrevrange(REDIS_ARENA_KEY, 0, -1, withscores=True)
 
-    week_data.sort(key=lambda item: -item[1])
-    for index, data in enumerate(week_data):
+    data = []
+    for char_id, score in score_data:
+        data.append( (int(char_id), score, Char(int(char_id)).power) )
+
+    data.sort(key=lambda item: (-item[1], -item[2]))
+
+
+    # 发送奖励
+    for index, data in enumerate(data):
         rank = index + 1
         char_id = data[0]
 
-        _set_mongo_week(char_id, rank)
-
-    #  设置完MongoWeek 后，设置TopRanks
-    top_ids = [_id for _id, _ in week_data[:3]]
-    _set_top_ranks(*top_ids)
-
-    # 最后发送奖励
-    for index, data in enumerate(week_data):
-        rank = index + 1
-        char_id = data[0]
-
-        attachment = _get_reward_by_rank(rank)
+        attachment = _get_reward_by_rank(data[1], rank)
         if not attachment:
             continue
 

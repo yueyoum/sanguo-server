@@ -118,3 +118,17 @@ def passport(callable_checker, error_code, func_name, char_id_attr_name='char_id
             return func(obj, *args, **kwargs)
         return wrap
     return deco
+
+
+def cache_it(redis_key, ttl):
+    def deco(func):
+        def wrap(*args, **kwargs):
+            data = cache.get(redis_key)
+            if data:
+                return data
+
+            data = func(*args, **kwargs)
+            cache.set(redis_key, data, expire=ttl)
+            return data
+        return wrap
+    return deco

@@ -3,7 +3,6 @@
 __author__ = 'Wang Chao'
 __date__ = '1/22/14'
 
-import random
 
 from mongoengine import DoesNotExist
 from core.drives import redis_client
@@ -12,50 +11,62 @@ from core.msgpipe import publish_to_char
 from core.character import Char
 from core.battle import PVP
 from core.counter import Counter
-from core.mongoscheme import MongoArenaTopRanks, MongoArenaWeek
+from core.mongoscheme import MongoArena
 from core.exception import CounterOverFlow, SanguoException
 from core.achievement import Achievement
 from core.task import Task
 from core.resource import Resource
-from preset.settings import ARENA_COST_SYCEE, ARENA_GET_SCORE_WHEN_LOST, ARENA_GET_SCORE_WHEN_WIN
+from preset.settings import ARENA_COST_SYCEE, ARENA_TOP_RANKS_CACHE
 from preset.data import VIP_MAX_LEVEL
 from utils import pack_msg
+from utils.decorate import cache_it
 import protomsg
 from preset import errormsg
 
 
-REDIS_DAY_KEY = 'arena:day:{0}'.format(server.id)
+DEFAULT_SCORE = 1500
+
+REDIS_ARENA_KEY = "arena:{0}".format(server.id)
+
+
+def calculate_score(my_score, rival_score, win):
+    p = 1.0 / (1 + pow(10, (-(my_score-rival_score)) / 400.0))
+    w = 1 if win else 0
+
+    if my_score < 2000:
+        k = 30
+    elif my_score < 2400:
+        k = 130 - my_score / 20.0
+    else:
+        k = 10
+
+    score = my_score + k * (w - p)
+    return int(score)
+
 
 class Arena(object):
     def __init__(self, char_id):
         self.char_id = char_id
 
         try:
-            self.mongo_week = MongoArenaWeek.objects.get(id=char_id)
+            self.mongo_arena = MongoArena.objects.get(id=char_id)
         except DoesNotExist:
-            self.mongo_week = MongoArenaWeek(id=char_id)
-            self.mongo_week.score = 0
-            self.mongo_week.rank = 0
-            self.mongo_week.save()
+            self.mongo_arena = MongoArena(id=char_id)
+            self.mongo_arena.score = DEFAULT_SCORE
+            self.mongo_arena.save()
 
+        if not self.score:
+            redis_client.zadd(REDIS_ARENA_KEY, self.char_id, self.mongo_arena.score)
 
     @property
-    def day_score(self):
-        score = redis_client.zscore(REDIS_DAY_KEY, self.char_id)
+    def score(self):
+        score = redis_client.zscore(REDIS_ARENA_KEY, self.char_id)
         return int(score) if score else 0
 
     @property
-    def day_rank(self):
-        rank = redis_client.zrevrank(REDIS_DAY_KEY, self.char_id)
+    def rank(self):
+        rank = redis_client.zrevrank(REDIS_ARENA_KEY, self.char_id)
         return rank+1 if rank is not None else 0
-
-    @property
-    def week_score(self):
-        return self.mongo_week.score
-
-    @property
-    def week_rank(self):
-        return self.mongo_week.rank
 
 
     @property
@@ -68,48 +79,59 @@ class Arena(object):
         c = Counter(self.char_id, 'arena_buy')
         return c.remained_value
 
-    def inc_day_score(self, score):
-        new_score =redis_client.zincrby(REDIS_DAY_KEY, self.char_id, score)
-        return int(new_score)
+    def set_score(self, score):
+        redis_client.zadd(REDIS_ARENA_KEY, self.char_id, score)
+        self.mongo_arena.score = score
+        self.mongo_arena.save()
 
 
-    def _fill_up_panel_msg(self, msg, day_score=None):
-        msg.week_rank = self.week_rank
-        msg.day_rank = self.day_rank
-        msg.week_score = self.week_score
-        msg.day_score = day_score or self.day_score
+    @cache_it('_redis_arena_top_cache', ARENA_TOP_RANKS_CACHE)
+    def get_top_ranks(self):
+        # return [(char_id, score, power, name,  leader), ...]
+        top_data = redis_client.zrevrank(REDIS_ARENA_KEY, 0, 2, withscores=True)
+        tops = []
+        for _id, _score in top_data:
+            char = Char(int(_id))
+            tops.append( (int(_id), _score, char.power, char.mc.name, char.leader_oid) )
+
+        tops.sort(key=lambda item: (-item[1], -item[2]))
+        return tops
+
+
+    def fill_up_panel_msg(self, msg, score=None):
+        msg.score = score or self.score
+        msg.rank = self.rank
         msg.remained_free_times = self.remained_free_times
         msg.remained_sycee_times = self.remained_buy_times
         msg.arena_cost = ARENA_COST_SYCEE
 
-        top_ranks = MongoArenaTopRanks.objects.all()
-        for t in top_ranks:
+        top_ranks = self.get_top_ranks()
+
+        for index, top in enumerate(top_ranks):
             char = msg.chars.add()
-            char.rank = t.id
-            char.name = t.name
+            char.rank = index + 1
+            char.name = top[3]
+            char.leader = top[4]
+            char.power = top[2]
 
 
-    def send_notify(self, day_score=None):
+    def send_notify(self, score=None):
         msg = protomsg.ArenaNotify()
-        self._fill_up_panel_msg(msg, day_score=day_score)
+        self.fill_up_panel_msg(msg, score=score)
         publish_to_char(self.char_id, pack_msg(msg))
 
 
     def choose_rival(self):
-        my_score = self.day_score
-        choosing = redis_client.zrangebyscore(REDIS_DAY_KEY, my_score, my_score)
-        if str(self.char_id) in choosing:
-            choosing.remove(str(self.char_id))
+        my_score = self.score
+        choosing = redis_client.zrangebyscore(REDIS_ARENA_KEY, my_score, '+inf')
         if choosing:
-            return int(random.choice(choosing))
-
-        choosing = redis_client.zrangebyscore(REDIS_DAY_KEY, my_score+1, '+inf')
-        if choosing:
+            if str(self.char_id) in choosing:
+                choosing.remove(str(self.char_id))
             return int(choosing[0])
         return None
 
+
     def battle(self):
-        counter = Counter(self.char_id, 'arena')
         rival_id = self.choose_rival()
         if not rival_id:
             raise SanguoException(
@@ -119,6 +141,7 @@ class Arena(object):
                 "no rival."
             )
 
+        counter = Counter(self.char_id, 'arena')
         try:
             # 免费次数
             counter.incr()
@@ -153,18 +176,28 @@ class Arena(object):
         b = PVP(self.char_id, rival_id, msg)
         b.start()
 
-        achievement = Achievement(self.char_id)
 
         if msg.self_win:
-            score = ARENA_GET_SCORE_WHEN_WIN
+            achievement = Achievement(self.char_id)
             achievement.trig(11, 1)
-        else:
-            score = ARENA_GET_SCORE_WHEN_LOST
 
-        new_day_score = self.inc_day_score(score)
+        self_score = self.score
+        rival_arena = Arena(rival_id)
+        rival_score = rival_arena.score
+
+        new_score = calculate_score(self_score, rival_score, msg.self_win)
+        self.set_score(new_score)
 
         t = Task(self.char_id)
         t.trig(2)
 
-        self.send_notify(day_score=new_day_score)
+        self.send_notify(score=new_score)
+
+        rival_arena.be_beaten(rival_score, self_score, not msg.self_win)
+
         return msg
+
+
+    def be_beaten(self, self_score, rival_score,  win):
+        score = calculate_score(self_score, rival_score, win)
+        self.set_score(score)
