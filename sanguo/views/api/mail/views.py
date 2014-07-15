@@ -29,6 +29,6 @@ def send_mail(request):
 
     for cid in cids:
         m = Mail(cid)
-        m.add(mail_name, mail_content, mail_send_at, attachment)
+        m.add(mail_name, mail_content, create_at=mail_send_at, attachment=attachment)
 
     return {'ret': 0}

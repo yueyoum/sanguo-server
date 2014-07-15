@@ -7,6 +7,7 @@ from core.signals import func_opened_signal
 
 from preset.data import TASKS
 from core.task import Task
+from core.functionopen import FUNCTIONS
 
 
 def _func_opened(char_id, func_ids, **kwargs):
@@ -19,6 +20,11 @@ def _func_opened(char_id, func_ids, **kwargs):
 
     if need_task_notify:
         Task(char_id).send_notify()
+
+    for _id in func_ids:
+        Func = FUNCTIONS.get(_id, None)
+        if Func:
+            Func(char_id).send_notify()
 
 func_opened_signal.connect(
     _func_opened,

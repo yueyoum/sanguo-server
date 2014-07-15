@@ -2,9 +2,7 @@
 import json
 
 import arrow
-from django.conf import settings
 from mongoengine import DoesNotExist
-
 from core.mongoscheme import MongoStage, MongoEmbededPlunderLog, MongoHang, MongoHangDoing
 from core.msgpipe import publish_to_char
 from core.attachment import Attachment, standard_drop_to_attachment_protomsg, make_standard_drop_from_template, get_drop
@@ -23,8 +21,6 @@ from utils import pack_msg
 from utils.decorate import operate_guard, passport
 from utils.checkers import not_hang_going
 from utils.api import APIFailure
-
-
 from preset.settings import (
     PLUNDER_DEFENSE_SUCCESS_GOLD,
     PLUNDER_DEFENSE_FAILURE_GOLD,
@@ -49,8 +45,6 @@ from preset.data import (
     VIP_MAX_LEVEL,
     VIP_FUNCTION,
 )
-
-
 from preset import errormsg
 import protomsg
 
@@ -285,12 +279,11 @@ class Hang(object):
             standard_drop['exp'] = int(exp)
             standard_drop['gold'] = int(gold)
 
-            m = Mail(self.char_id)
-            m.add(
+            mail = Mail(self.char_id)
+            mail.add(
                 HANG_RESET_MAIL_TITLE,
                 HANG_RESET_MAIL_CONTENT,
-                arrow.utcnow().to(settings.TIME_ZONE).format('YYYY-MM-DD HH:mm:ss'),
-                json.dumps(standard_drop)
+                attachment=json.dumps(standard_drop)
             )
 
 

@@ -34,7 +34,7 @@ class Mail(object):
     def count(self):
         return len(self.mail.mails)
 
-    def add(self, name, content, create_at, attachment=''):
+    def add(self, name, content, create_at=None, attachment='', send_notify=True):
         if not isinstance(name, unicode):
             name = name.decode('utf-8')
 
@@ -46,7 +46,7 @@ class Mail(object):
         m.content = content
         m.attachment = attachment
         m.has_read = False
-        m.create_at = create_at
+        m.create_at = create_at or arrow.utcnow().format('YYYY-MM-DD HH:mm:ss')
 
         mail_ids = [int(i) for i in self.mail.mails.keys()]
         if not mail_ids:
@@ -56,7 +56,8 @@ class Mail(object):
 
         self.mail.mails[str(mail_id)] = m
         self.mail.save()
-        self.send_mail_notify()
+        if send_notify:
+            self.send_notify()
         return mail_id
 
     def delete(self, mail_id):
@@ -72,7 +73,7 @@ class Mail(object):
             )
 
         self.mail.save()
-        self.send_mail_notify()
+        self.send_notify()
 
     def open(self, mail_id):
         try:
@@ -86,7 +87,7 @@ class Mail(object):
             )
 
         self.mail.save()
-        self.send_mail_notify()
+        self.send_notify()
 
     def get_attachment(self, mail_id):
         if str(mail_id) not in self.mail.mails:
@@ -112,11 +113,11 @@ class Mail(object):
         self.mail.mails[str(mail_id)].attachment = ''
         self.mail.mails[str(mail_id)].has_read = True
         self.mail.save()
-        self.send_mail_notify()
+        self.send_notify()
         return attachment
 
 
-    def send_mail_notify(self):
+    def send_notify(self):
         msg = protomsg.MailNotify()
         for k, v in self.mail.mails.iteritems():
             m = msg.mails.add()

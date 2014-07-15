@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from utils import pack_msg
 import protomsg
 
@@ -62,7 +64,8 @@ def update_hero_notify(char_id, objs):
 
 def login_notify(char_id):
     message_clean(char_id)
-    FunctionOpen(char_id).send_notify()
+    function_open = FunctionOpen(char_id)
+    function_open.send_notify()
 
     hero_objs = char_heros_obj(char_id)
 
@@ -83,17 +86,16 @@ def login_notify(char_id):
     p = Prison(char_id)
     p.send_prisoners_notify()
 
-    Arena(char_id).send_notify()
+    if Arena.FUNC_ID not in function_open.mf.freeze:
+        arena = Arena(char_id)
+        arena.send_notify()
+        arena.login_process()
 
     f = Friend(char_id)
     f.send_friends_notify()
     f.send_friends_amount_notify()
 
-    m = Mail(char_id)
-    m.send_mail_notify()
-
     CheckIn(char_id).send_notify()
-
 
     stage = Stage(char_id)
     stage.send_already_stage_notify()
@@ -113,3 +115,6 @@ def login_notify(char_id):
     HeroSoul(char_id).send_notify()
     Levy(char_id).send_notify()
     Attachment(char_id).send_notify()
+
+    # mail notify 要放在最后，因为 其他功能初始化时可能会产生登录邮件
+    Mail(char_id).send_notify()

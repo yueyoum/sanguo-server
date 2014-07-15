@@ -3,6 +3,7 @@
 __author__ = 'Wang Chao'
 __date__ = '1/22/14'
 
+import random
 
 from mongoengine import DoesNotExist
 from core.drives import redis_client
@@ -11,22 +12,29 @@ from core.msgpipe import publish_to_char
 from core.character import Char
 from core.battle import PVP
 from core.counter import Counter
-from core.mongoscheme import MongoArena
+from core.mongoscheme import MongoArena, MongoEmbeddedArenaBeatenRecord
 from core.exception import CounterOverFlow, SanguoException
 from core.achievement import Achievement
 from core.task import Task
 from core.resource import Resource
-from preset.settings import ARENA_COST_SYCEE, ARENA_TOP_RANKS_CACHE
 from preset.data import VIP_MAX_LEVEL
 from utils import pack_msg
 from utils.decorate import cache_it
 import protomsg
 from preset import errormsg
 
+from preset.settings import (
+    ARENA_COST_SYCEE,
+    ARENA_DEFAULT_SCORE,
+    ARENA_CD,
+    ARENA_TOP_RANKS_CACHE,
+    MAIL_ARENA_BEATEN_TITLE,
+    MAIl_ARENA_BEATEN_CONTENT_TEMPLATE
+)
 
-DEFAULT_SCORE = 1500
 
 REDIS_ARENA_KEY = "arena:{0}".format(server.id)
+REDIS_ARENA_BATTLE_CD_KEY = lambda _id: "arena:cd:{0}".format(_id)
 
 
 def calculate_score(my_score, rival_score, win):
@@ -45,6 +53,7 @@ def calculate_score(my_score, rival_score, win):
 
 
 class Arena(object):
+    FUNC_ID = 8
     def __init__(self, char_id):
         self.char_id = char_id
 
@@ -52,7 +61,7 @@ class Arena(object):
             self.mongo_arena = MongoArena.objects.get(id=char_id)
         except DoesNotExist:
             self.mongo_arena = MongoArena(id=char_id)
-            self.mongo_arena.score = DEFAULT_SCORE
+            self.mongo_arena.score = ARENA_DEFAULT_SCORE
             self.mongo_arena.save()
 
         if not self.score:
@@ -88,7 +97,7 @@ class Arena(object):
     @cache_it('_redis_arena_top_cache', ARENA_TOP_RANKS_CACHE)
     def get_top_ranks(self):
         # return [(char_id, score, power, name,  leader), ...]
-        top_data = redis_client.zrevrank(REDIS_ARENA_KEY, 0, 2, withscores=True)
+        top_data = redis_client.zrevrange(REDIS_ARENA_KEY, 0, 2, withscores=True)
         tops = []
         for _id, _score in top_data:
             char = Char(int(_id))
@@ -123,7 +132,35 @@ class Arena(object):
 
     def choose_rival(self):
         my_score = self.score
-        choosing = redis_client.zrangebyscore(REDIS_ARENA_KEY, my_score, '+inf')
+
+        def _find(low_score, high_score):
+            choosing = redis_client.zrangebyscore(REDIS_ARENA_KEY, low_score, high_score)
+            if not choosing:
+                return None
+
+            if str(self.char_id) in choosing:
+                choosing.remove(str(self.char_id))
+
+            while choosing:
+                got = random.choice(choosing)
+                # check cd
+                if redis_client.ttl(REDIS_ARENA_BATTLE_CD_KEY(got)) is not None:
+                    choosing.remove(got)
+                    continue
+
+                return int(got)
+
+            return None
+
+        got = _find(int(my_score * 0.95), int(my_score * 1.05))
+        if got:
+            return got
+
+        got = _find(int(my_score * 0.8), int(my_score * 1.2))
+        if got:
+            return got
+
+        choosing = redis_client.zrangebyscore(REDIS_ARENA_KEY, int(my_score * 1.2), '+inf')
         if choosing:
             if str(self.char_id) in choosing:
                 choosing.remove(str(self.char_id))
@@ -171,6 +208,8 @@ class Arena(object):
                 resource = Resource(self.char_id, "Arena Battle", "battle for no free times")
                 resource.check_and_remove(sycee=-ARENA_COST_SYCEE)
 
+        # set battle cd
+        redis_client.setex(REDIS_ARENA_BATTLE_CD_KEY(rival_id), 1, ARENA_CD)
 
         msg = protomsg.Battle()
         b = PVP(self.char_id, rival_id, msg)
@@ -193,11 +232,47 @@ class Arena(object):
 
         self.send_notify(score=new_score)
 
-        rival_arena.be_beaten(rival_score, self_score, not msg.self_win)
+        rival_arena.be_beaten(rival_score, self_score, not msg.self_win, self.char_id)
 
         return msg
 
 
-    def be_beaten(self, self_score, rival_score,  win):
+    def be_beaten(self, self_score, rival_score, win, rival_id):
         score = calculate_score(self_score, rival_score, win)
         self.set_score(score)
+
+        rival_name = Char(rival_id).mc.name
+
+        record = MongoEmbeddedArenaBeatenRecord()
+        record.name = rival_name
+        record.old_score = self_score
+        record.new_score = score
+
+        self.mongo_arena.beaten_record.append(record)
+        self.mongo_arena.save()
+
+
+    def login_process(self):
+        from core.mail import Mail
+
+        if not self.mongo_arena.beaten_record:
+            return
+
+        names = []
+        for record in self.mongo_arena.beaten_record:
+            if len(names) >= 3:
+                names.append(u'等')
+                break
+
+            names.append(record.name)
+
+        old_score = self.mongo_arena.beaten_record[0].old_score
+        new_score = self.mongo_arena.beaten_record[-1].new_score
+
+        content = MAIl_ARENA_BEATEN_CONTENT_TEMPLATE.format(u','.join(names), old_score, new_score)
+
+        Mail(self.char_id).add(MAIL_ARENA_BEATEN_TITLE, content, send_notify=False)
+
+        self.mongo_arena.beaten_record = []
+        self.mongo_arena.save()
+

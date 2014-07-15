@@ -22,6 +22,18 @@ FUNC_SOCKET_AMOUNT_TABLE = {
 }
 
 
+FUNCTIONS = {}
+def _set_functions():
+    from core.arena import Arena
+
+    global FUNCTIONS
+    FUNCTIONS[Arena.FUNC_ID] = Arena
+
+_set_functions()
+
+
+
+
 class FunctionOpen(object):
     def __init__(self, char_id):
         self.char_id = char_id
@@ -35,6 +47,7 @@ class FunctionOpen(object):
     def _open_all(self):
         self.mf.freeze = []
         self.mf.save()
+        self.send_notify()
         Formation(self.char_id).open_socket(max(FUNC_SOCKET_AMOUNT_TABLE.values()))
 
     def trig(self, char_level, stage_id=None):

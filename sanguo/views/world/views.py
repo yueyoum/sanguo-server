@@ -121,7 +121,6 @@ def activatecode_use(request):
     mail.add(
         ACTIVATECODE_MAIL_TITLE,
         ACTIVATECODE_MAIL_CONTENT,
-        arrow.utcnow().format('YYYY-MM-DD HH:mm:ss'),
         attachment=json.dumps(drop)
     )
 

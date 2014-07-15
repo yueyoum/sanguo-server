@@ -6,7 +6,6 @@ __date__ = '2/19/14'
 import json
 
 from _base import Logger
-import arrow
 from core.attachment import make_standard_drop_from_template
 from core.character import Char
 from core.mail import Mail
@@ -59,8 +58,7 @@ def reset():
             continue
 
         mail = Mail(char_id)
-        create_at = arrow.utcnow().format('YYYY-MM-DD HH:mm:ss')
-        mail.add(MAIL_ARENA_WEEK_REWARD_TITLE, MAIL_ARENA_WEEK_REWARD_CONTENT, create_at, attachment=attachment)
+        mail.add(MAIL_ARENA_WEEK_REWARD_TITLE, MAIL_ARENA_WEEK_REWARD_CONTENT, attachment=attachment)
 
     logger.write("Reset Arena Week: Complete")
     logger.close()

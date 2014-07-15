@@ -313,9 +313,16 @@ class MongoAchievement(Document):
         'collection': 'achievement'
     }
 
+class MongoEmbeddedArenaBeatenRecord(EmbeddedDocument):
+    name = StringField()
+    old_score = IntField()
+    new_score = IntField()
+
+
 class MongoArena(Document):
     id = IntField(primary_key=True)
     score = IntField()
+    beaten_record = ListField(EmbeddedDocumentField(MongoEmbeddedArenaBeatenRecord))
 
     meta = {
         'collection': 'arena',

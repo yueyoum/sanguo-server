@@ -208,7 +208,10 @@ PRISONER_KILL_GOT_TREASURE = {3: [24], 2: [25], 1: [26]}
 ARENA_COST_SYCEE = 20
 # 比武前三名缓存时间 秒
 ARENA_TOP_RANKS_CACHE = 10
-
+# 比武同一个人被打CD， 秒
+ARENA_CD = 60
+# 竞技场初始积分
+ARENA_DEFAULT_SCORE = 1500
 
 #########################
 #      精英关卡         #
@@ -266,7 +269,9 @@ MAIL_ARENA_DAY_REWARD_CONTENT = u'比武每日奖励'
 # 比武周奖励
 MAIL_ARENA_WEEK_REWARD_TITLE = u'比武每周奖励'
 MAIL_ARENA_WEEK_REWARD_CONTENT = u'比武每周奖励'
-
+# 比武被打
+MAIL_ARENA_BEATEN_TITLE = u'比武被干'
+MAIl_ARENA_BEATEN_CONTENT_TEMPLATE = u'你被 {0} 干了，积分从 {1} 变成了 {2}'
 
 #########################
 #      激活码           #
