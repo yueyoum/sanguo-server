@@ -22,17 +22,6 @@ FUNC_SOCKET_AMOUNT_TABLE = {
 }
 
 
-FUNCTIONS = {}
-def _set_functions():
-    from core.arena import Arena
-
-    global FUNCTIONS
-    FUNCTIONS[Arena.FUNC_ID] = Arena
-
-_set_functions()
-
-
-
 
 class FunctionOpen(object):
     def __init__(self, char_id):
