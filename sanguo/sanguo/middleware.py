@@ -32,20 +32,25 @@ class UnpackAndVerifyData(RequestFilter):
         if request.path.startswith('/api/'):
             return
 
-        server_id = getattr(request, '_server_id', None)
         char_id = getattr(request, '_char_id', None)
         if char_id:
             p = Player(char_id)
             login_id = p.get_login_id()
-            if login_id and login_id != request._game_session.login_id:
+            if not login_id:
+                msg = ReLoginResponse()
+                msg.ret = errormsg.SESSION_EXPIRE
+                data = pack_msg(msg)
+                return HttpResponse(data, content_type='text/plain')
+
+            if login_id != request._game_session.login_id:
                 # NEED RE LOGIN
                 msg = ReLoginResponse()
                 msg.ret = errormsg.LOGIN_RE
                 data = pack_msg(msg)
-                print "NEED RE LOGIN"
                 return HttpResponse(data, content_type='text/plain')
 
-        if server_id and char_id:
+            p.refresh()
+
             ap = ActivePlayers()
             ap.set(request._char_id)
 

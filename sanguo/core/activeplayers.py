@@ -8,7 +8,7 @@ import arrow
 from core.server import server
 from core.drives import redis_client
 
-from preset.settings import PLAYER_ON_LINE_TIME_TO_ALIVE
+from preset.settings import PLAYER_ON_LINE_TIME_TO_ALIVE, PLAYER_SESSION_EXPIRE
 
 ACTIVE_USER_KEY = 'active_players'
 
@@ -43,7 +43,10 @@ class Player(object):
         self.key = PLAYER_LOGIN_ID_KEY.format(char_id)
 
     def set_login_id(self, login_id):
-        redis_client.setex(self.key, login_id, 3600)
+        redis_client.setex(self.key, login_id, PLAYER_SESSION_EXPIRE)
 
     def get_login_id(self):
         return redis_client.get(self.key)
+
+    def refresh(self):
+        redis_client.expire(self.key, PLAYER_SESSION_EXPIRE)
