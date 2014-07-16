@@ -357,7 +357,7 @@
     "fields": {
         "condition_name": "\u4e09\u661f\u8bc4\u4ef7", 
         "buff_value": null, 
-        "sycee": 20, 
+        "sycee": 10, 
         "name": "\u8fd0\u7b79\u5e37\u5e44", 
         "package": "", 
         "tp_name": "\u6218\u6597\u7ecf\u5386", 
@@ -379,7 +379,7 @@
     "fields": {
         "condition_name": "\u4e09\u661f\u8bc4\u4ef7", 
         "buff_value": null, 
-        "sycee": 50, 
+        "sycee": 20, 
         "name": "\u8fd0\u7b79\u5e37\u5e44", 
         "package": "", 
         "tp_name": "\u6218\u6597\u7ecf\u5386", 
@@ -401,7 +401,7 @@
     "fields": {
         "condition_name": "\u4e09\u661f\u8bc4\u4ef7", 
         "buff_value": null, 
-        "sycee": 100, 
+        "sycee": 50, 
         "name": "\u8fd0\u7b79\u5e37\u5e44", 
         "package": "", 
         "tp_name": "\u6218\u6597\u7ecf\u5386", 
@@ -423,7 +423,7 @@
     "fields": {
         "condition_name": "\u4e09\u661f\u8bc4\u4ef7", 
         "buff_value": null, 
-        "sycee": 200, 
+        "sycee": 100, 
         "name": "\u8fd0\u7b79\u5e37\u5e44", 
         "package": "", 
         "tp_name": "\u6218\u6597\u7ecf\u5386", 
@@ -1061,7 +1061,7 @@
     "fields": {
         "condition_name": "\u541b\u4e3b\u7b49\u7ea7", 
         "buff_value": null, 
-        "sycee": 50, 
+        "sycee": 20, 
         "name": "\u9738\u4e1a\u4e4b\u8def", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1083,7 +1083,7 @@
     "fields": {
         "condition_name": "\u541b\u4e3b\u7b49\u7ea7", 
         "buff_value": null, 
-        "sycee": 100, 
+        "sycee": 50, 
         "name": "\u9738\u4e1a\u4e4b\u8def", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1127,7 +1127,7 @@
     "fields": {
         "condition_name": "\u541b\u4e3b\u7b49\u7ea7", 
         "buff_value": null, 
-        "sycee": 100, 
+        "sycee": 200, 
         "name": "\u9738\u4e1a\u4e4b\u8def", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1149,7 +1149,7 @@
     "fields": {
         "condition_name": "\u541b\u4e3b\u7b49\u7ea7", 
         "buff_value": null, 
-        "sycee": 100, 
+        "sycee": 300, 
         "name": "\u9738\u4e1a\u4e4b\u8def", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1171,7 +1171,7 @@
     "fields": {
         "condition_name": "\u541b\u4e3b\u7b49\u7ea7", 
         "buff_value": null, 
-        "sycee": 100, 
+        "sycee": 400, 
         "name": "\u9738\u4e1a\u4e4b\u8def", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1193,7 +1193,7 @@
     "fields": {
         "condition_name": "\u541b\u4e3b\u7b49\u7ea7", 
         "buff_value": null, 
-        "sycee": 200, 
+        "sycee": 500, 
         "name": "\u9738\u4e1a\u4e4b\u8def", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1215,7 +1215,7 @@
     "fields": {
         "condition_name": "\u541b\u4e3b\u7b49\u7ea7", 
         "buff_value": null, 
-        "sycee": 200, 
+        "sycee": 600, 
         "name": "\u9738\u4e1a\u4e4b\u8def", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1237,7 +1237,7 @@
     "fields": {
         "condition_name": "\u541b\u4e3b\u7b49\u7ea7", 
         "buff_value": null, 
-        "sycee": 500, 
+        "sycee": 800, 
         "name": "\u9738\u4e1a\u4e4b\u8def", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1281,7 +1281,7 @@
     "fields": {
         "condition_name": "\u5bf9\u5e94\u5b98\u804c", 
         "buff_value": null, 
-        "sycee": 20, 
+        "sycee": 10, 
         "name": "\u5e73\u6b65\u9752\u4e91", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1303,7 +1303,7 @@
     "fields": {
         "condition_name": "\u5bf9\u5e94\u5b98\u804c", 
         "buff_value": null, 
-        "sycee": 50, 
+        "sycee": 20, 
         "name": "\u5e73\u6b65\u9752\u4e91", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1325,7 +1325,7 @@
     "fields": {
         "condition_name": "\u5bf9\u5e94\u5b98\u804c", 
         "buff_value": null, 
-        "sycee": 50, 
+        "sycee": 20, 
         "name": "\u5e73\u6b65\u9752\u4e91", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1831,7 +1831,7 @@
     "fields": {
         "condition_name": "\u8fdb\u9636\u64cd\u4f5c", 
         "buff_value": null, 
-        "sycee": 20, 
+        "sycee": 10, 
         "name": "\u5343\u9524\u767e\u70bc", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1853,7 +1853,7 @@
     "fields": {
         "condition_name": "\u8fdb\u9636\u64cd\u4f5c", 
         "buff_value": null, 
-        "sycee": 50, 
+        "sycee": 20, 
         "name": "\u5343\u9524\u767e\u70bc", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1875,7 +1875,7 @@
     "fields": {
         "condition_name": "\u8fdb\u9636\u64cd\u4f5c", 
         "buff_value": null, 
-        "sycee": 100, 
+        "sycee": 50, 
         "name": "\u5343\u9524\u767e\u70bc", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1897,7 +1897,7 @@
     "fields": {
         "condition_name": "\u8fdb\u9636\u64cd\u4f5c", 
         "buff_value": null, 
-        "sycee": 200, 
+        "sycee": 100, 
         "name": "\u5343\u9524\u767e\u70bc", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1919,7 +1919,7 @@
     "fields": {
         "condition_name": "\u516d\u9636\u88c5\u5907\u6570\u91cf", 
         "buff_value": null, 
-        "sycee": 100, 
+        "sycee": 20, 
         "name": "\u795e\u5175\u5229\u5668", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1941,7 +1941,7 @@
     "fields": {
         "condition_name": "\u516d\u9636\u88c5\u5907\u6570\u91cf", 
         "buff_value": null, 
-        "sycee": 200, 
+        "sycee": 50, 
         "name": "\u795e\u5175\u5229\u5668", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1963,7 +1963,7 @@
     "fields": {
         "condition_name": "\u516d\u9636\u88c5\u5907\u6570\u91cf", 
         "buff_value": null, 
-        "sycee": 500, 
+        "sycee": 100, 
         "name": "\u795e\u5175\u5229\u5668", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -1985,7 +1985,7 @@
     "fields": {
         "condition_name": "\u5728\u4e00\u4ef6\u88c5\u5907\u4e0a\u9576\u5d4c\u7684\u5b9d\u77f3\u6570\u91cf", 
         "buff_value": null, 
-        "sycee": 20, 
+        "sycee": 10, 
         "name": "\u73e0\u5149\u5b9d\u6c14", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -2007,7 +2007,7 @@
     "fields": {
         "condition_name": "\u5728\u4e00\u4ef6\u88c5\u5907\u4e0a\u9576\u5d4c\u7684\u5b9d\u77f3\u6570\u91cf", 
         "buff_value": null, 
-        "sycee": 50, 
+        "sycee": 20, 
         "name": "\u73e0\u5149\u5b9d\u6c14", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -2029,7 +2029,7 @@
     "fields": {
         "condition_name": "\u5728\u4e00\u4ef6\u88c5\u5907\u4e0a\u9576\u5d4c\u7684\u5b9d\u77f3\u6570\u91cf", 
         "buff_value": null, 
-        "sycee": 100, 
+        "sycee": 50, 
         "name": "\u73e0\u5149\u5b9d\u6c14", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -2051,7 +2051,7 @@
     "fields": {
         "condition_name": "\u5728\u4e00\u4ef6\u88c5\u5907\u4e0a\u9576\u5d4c\u7684\u5b9d\u77f3\u6570\u91cf", 
         "buff_value": null, 
-        "sycee": 200, 
+        "sycee": 100, 
         "name": "\u73e0\u5149\u5b9d\u6c14", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -2073,7 +2073,7 @@
     "fields": {
         "condition_name": "\u5b9d\u77f3\u5408\u6210\u64cd\u4f5c", 
         "buff_value": null, 
-        "sycee": 20, 
+        "sycee": 10, 
         "name": "\u7cbe\u96d5\u7ec6\u7422", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -2095,7 +2095,7 @@
     "fields": {
         "condition_name": "\u5b9d\u77f3\u5408\u6210\u64cd\u4f5c", 
         "buff_value": null, 
-        "sycee": 50, 
+        "sycee": 20, 
         "name": "\u7cbe\u96d5\u7ec6\u7422", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -2117,7 +2117,7 @@
     "fields": {
         "condition_name": "\u5b9d\u77f3\u5408\u6210\u64cd\u4f5c", 
         "buff_value": null, 
-        "sycee": 100, 
+        "sycee": 50, 
         "name": "\u7cbe\u96d5\u7ec6\u7422", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -2139,7 +2139,7 @@
     "fields": {
         "condition_name": "\u5b9d\u77f3\u5408\u6210\u64cd\u4f5c", 
         "buff_value": null, 
-        "sycee": 200, 
+        "sycee": 100, 
         "name": "\u7cbe\u96d5\u7ec6\u7422", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -2623,7 +2623,7 @@
     "fields": {
         "condition_name": "\u5b8c\u6210\u6240\u6709\u65e5\u5e38", 
         "buff_value": null, 
-        "sycee": 50, 
+        "sycee": 20, 
         "name": "\u7cbe\u76ca\u6c42\u7cbe", 
         "package": "", 
         "tp_name": "\u7279\u6b8a\u4e8b\u4ef6", 
@@ -2645,7 +2645,7 @@
     "fields": {
         "condition_name": "\u5b8c\u6210\u6240\u6709\u65e5\u5e38", 
         "buff_value": null, 
-        "sycee": 100, 
+        "sycee": 50, 
         "name": "\u7cbe\u76ca\u6c42\u7cbe", 
         "package": "", 
         "tp_name": "\u7279\u6b8a\u4e8b\u4ef6", 
@@ -2667,7 +2667,7 @@
     "fields": {
         "condition_name": "\u5b8c\u6210\u6240\u6709\u65e5\u5e38", 
         "buff_value": null, 
-        "sycee": 150, 
+        "sycee": 100, 
         "name": "\u7cbe\u76ca\u6c42\u7cbe", 
         "package": "", 
         "tp_name": "\u7279\u6b8a\u4e8b\u4ef6", 

@@ -902,6 +902,8 @@ class ActivityStage(object):
             counter.incr()
             self.send_remained_times_notify()
 
+            Task(self.char_id).trig(9)
+
         return battle_msg
 
 

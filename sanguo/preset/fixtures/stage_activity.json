@@ -173,7 +173,7 @@
     "pk": 301, 
     "model": "stage.activelystage", 
     "fields": {
-        "normal_drop": "202", 
+        "normal_drop": "200,201", 
         "normal_gold": 0, 
         "bg": "\u57ce\u4e0b", 
         "strength_modulus": 1.6, 
@@ -190,7 +190,7 @@
     "pk": 302, 
     "model": "stage.activelystage", 
     "fields": {
-        "normal_drop": "203", 
+        "normal_drop": "200,202", 
         "normal_gold": 0, 
         "bg": "\u57ce\u4e0b", 
         "strength_modulus": 1.9, 
@@ -207,7 +207,7 @@
     "pk": 303, 
     "model": "stage.activelystage", 
     "fields": {
-        "normal_drop": "204", 
+        "normal_drop": "203,204", 
         "normal_gold": 0, 
         "bg": "\u57ce\u4e0b", 
         "strength_modulus": 2.2, 
@@ -224,7 +224,7 @@
     "pk": 304, 
     "model": "stage.activelystage", 
     "fields": {
-        "normal_drop": "205", 
+        "normal_drop": "204,205", 
         "normal_gold": 0, 
         "bg": "\u57ce\u4e0b", 
         "strength_modulus": 2.5, 
@@ -241,7 +241,7 @@
     "pk": 305, 
     "model": "stage.activelystage", 
     "fields": {
-        "normal_drop": "206", 
+        "normal_drop": "205,206", 
         "normal_gold": 0, 
         "bg": "\u57ce\u4e0b", 
         "strength_modulus": 2.8, 

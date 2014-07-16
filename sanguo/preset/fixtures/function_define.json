@@ -154,6 +154,17 @@
     }
 },
 {
+    "pk": 15, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "char_level": 0, 
+        "stage_id": 0, 
+        "text": "", 
+        "name": "\u6d3b\u52a8\u526f\u672c", 
+        "icon": ""
+    }
+},
+{
     "pk": 20, 
     "model": "config.functiondefine", 
     "fields": {

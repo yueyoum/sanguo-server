@@ -118,5 +118,20 @@
         "link": "", 
         "first": true
     }
+},
+{
+    "pk": 19, 
+    "model": "task.task", 
+    "fields": {
+        "sycee": 0, 
+        "name": "\u6d3b\u52a8\u526f\u672c", 
+        "gold": 5000, 
+        "tp": 9, 
+        "times": 3, 
+        "next_task": null, 
+        "func": 15, 
+        "link": "ActivityFrame", 
+        "first": true
+    }
 }
 ]
