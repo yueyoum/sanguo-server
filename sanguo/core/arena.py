@@ -144,7 +144,7 @@ class Arena(object):
             while choosing:
                 got = random.choice(choosing)
                 # check cd
-                if redis_client.ttl(REDIS_ARENA_BATTLE_CD_KEY(got)) is not None:
+                if redis_client.ttl(REDIS_ARENA_BATTLE_CD_KEY(got)) > 0:
                     choosing.remove(got)
                     continue
 
