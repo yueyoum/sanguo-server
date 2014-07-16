@@ -121,7 +121,7 @@ def get_drop_from_mode_two_package(package):
         if b > random.randint(0, DROP_PROB_BASE):
             a += 1
         if a >= 1:
-            if name == 'equipment':
+            if name == 'equipments':
                 drop[name] = [(this['id'], this['level'], 1)]
             else:
                 drop[name] = [(this['id'], 1)]
