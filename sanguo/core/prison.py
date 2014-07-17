@@ -34,7 +34,7 @@ class Prison(object):
         new_prob = self.prisoner_prob(new_vip)
 
         changed = False
-        for p in self.p.prisoners:
+        for p in self.p.prisoners.values():
             if not p.active:
                 continue
 
