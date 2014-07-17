@@ -353,7 +353,7 @@
         "buy_sycee": 0, 
         "tp": 2, 
         "sell_gold": 1000, 
-        "value": 1, 
+        "value": 5, 
         "packages": "", 
         "quality": 1, 
         "icon": "\u5b9d\u7269-\u9526\u56ca"
@@ -368,7 +368,7 @@
         "buy_sycee": 0, 
         "tp": 2, 
         "sell_gold": 1500, 
-        "value": 2, 
+        "value": 10, 
         "packages": "", 
         "quality": 2, 
         "icon": "\u5b9d\u7269-\u5982\u610f"
@@ -383,7 +383,7 @@
         "buy_sycee": 0, 
         "tp": 2, 
         "sell_gold": 5000, 
-        "value": 3, 
+        "value": 15, 
         "packages": "", 
         "quality": 3, 
         "icon": "\u5b9d\u7269-\u6f06\u5668"
@@ -395,10 +395,10 @@
     "fields": {
         "name": "\u5b9d\u9f0e", 
         "des": "\u795e\u58eb\u70bc\u4e39\u5360\u535c\u6240\u7528\u4e4b\u7269", 
-        "buy_sycee": 0, 
+        "buy_sycee": 300, 
         "tp": 2, 
         "sell_gold": 10000, 
-        "value": 15, 
+        "value": 20, 
         "packages": "", 
         "quality": 4, 
         "icon": "\u5b9d\u7269-\u9f0e"
@@ -410,10 +410,10 @@
     "fields": {
         "name": "\u5b9d\u5370", 
         "des": "\u5929\u4e0b\u7fa4\u96c4\u4e89\u593a\u7684\u81f3\u9ad8\u8c61\u5f81", 
-        "buy_sycee": 0, 
+        "buy_sycee": 600, 
         "tp": 2, 
         "sell_gold": 20000, 
-        "value": 30, 
+        "value": 28, 
         "packages": "", 
         "quality": 5, 
         "icon": "\u5b9d\u7269-\u5b9d\u5370"

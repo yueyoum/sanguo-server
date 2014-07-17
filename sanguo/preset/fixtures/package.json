@@ -1295,22 +1295,42 @@
             {
                 "amount": 1, 
                 "id": 1, 
-                "prob": 25000
+                "prob": 50000
             }, 
             {
                 "amount": 1, 
                 "id": 11, 
-                "prob": 25000
+                "prob": 50000
             }, 
             {
                 "amount": 1, 
                 "id": 21, 
-                "prob": 25000
+                "prob": 50000
             }, 
             {
                 "amount": 1, 
                 "id": 31, 
-                "prob": 25000
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 1, 
+                "prob": 30000
+            }, 
+            {
+                "amount": 1, 
+                "id": 11, 
+                "prob": 30000
+            }, 
+            {
+                "amount": 1, 
+                "id": 21, 
+                "prob": 30000
+            }, 
+            {
+                "amount": 1, 
+                "id": 31, 
+                "prob": 30000
             }
         ], 
         "sycee": 0, 
@@ -1344,6 +1364,26 @@
                 "amount": 1, 
                 "id": 31, 
                 "prob": 40000
+            }, 
+            {
+                "amount": 1, 
+                "id": 2, 
+                "prob": 30000
+            }, 
+            {
+                "amount": 1, 
+                "id": 12, 
+                "prob": 30000
+            }, 
+            {
+                "amount": 1, 
+                "id": 32, 
+                "prob": 30000
+            }, 
+            {
+                "amount": 1, 
+                "id": 22, 
+                "prob": 30000
             }
         ], 
         "sycee": 0, 
@@ -1360,43 +1400,43 @@
         "gems": [
             {
                 "amount": 1, 
-                "id": 1, 
-                "prob": 25000
-            }, 
-            {
-                "amount": 1, 
-                "id": 11, 
-                "prob": 25000
-            }, 
-            {
-                "amount": 1, 
-                "id": 21, 
-                "prob": 25000
-            }, 
-            {
-                "amount": 1, 
-                "id": 31, 
-                "prob": 25000
-            }, 
-            {
-                "amount": 1, 
                 "id": 2, 
-                "prob": 15000
+                "prob": 65000
             }, 
             {
                 "amount": 1, 
                 "id": 12, 
-                "prob": 15000
+                "prob": 65000
             }, 
             {
                 "amount": 1, 
                 "id": 22, 
-                "prob": 15000
+                "prob": 65000
             }, 
             {
                 "amount": 1, 
                 "id": 32, 
-                "prob": 15000
+                "prob": 65000
+            }, 
+            {
+                "amount": 1, 
+                "id": 2, 
+                "prob": 20000
+            }, 
+            {
+                "amount": 1, 
+                "id": 12, 
+                "prob": 20000
+            }, 
+            {
+                "amount": 1, 
+                "id": 22, 
+                "prob": 20000
+            }, 
+            {
+                "amount": 1, 
+                "id": 32, 
+                "prob": 20000
             }
         ], 
         "sycee": 0, 
@@ -1414,22 +1454,42 @@
             {
                 "amount": 1, 
                 "id": 2, 
-                "prob": 35000
+                "prob": 65000
             }, 
             {
                 "amount": 1, 
                 "id": 12, 
-                "prob": 35000
+                "prob": 65000
             }, 
             {
                 "amount": 1, 
                 "id": 22, 
-                "prob": 35000
+                "prob": 65000
             }, 
             {
                 "amount": 1, 
                 "id": 32, 
-                "prob": 35000
+                "prob": 65000
+            }, 
+            {
+                "amount": 1, 
+                "id": 2, 
+                "prob": 5000
+            }, 
+            {
+                "amount": 1, 
+                "id": 12, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 22, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 32, 
+                "prob": 50000
             }
         ], 
         "sycee": 0, 
@@ -1447,42 +1507,42 @@
             {
                 "amount": 1, 
                 "id": 2, 
-                "prob": 20000
+                "prob": 70000
             }, 
             {
                 "amount": 1, 
                 "id": 12, 
-                "prob": 20000
+                "prob": 70000
             }, 
             {
                 "amount": 1, 
                 "id": 22, 
-                "prob": 20000
+                "prob": 70000
             }, 
             {
                 "amount": 1, 
                 "id": 32, 
-                "prob": 20000
+                "prob": 70000
             }, 
             {
                 "amount": 1, 
                 "id": 3, 
-                "prob": 10000
+                "prob": 30000
             }, 
             {
                 "amount": 1, 
                 "id": 13, 
-                "prob": 10000
+                "prob": 30000
             }, 
             {
                 "amount": 1, 
                 "id": 23, 
-                "prob": 10000
+                "prob": 30000
             }, 
             {
                 "amount": 1, 
                 "id": 33, 
-                "prob": 10000
+                "prob": 30000
             }
         ], 
         "sycee": 0, 

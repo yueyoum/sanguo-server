@@ -8,9 +8,9 @@ CHARACTER_INIT = {
     'gold': 0,          # 金币
     'sycee': 0,         # 元宝
     'hero_in_formation': {      # 在阵法中武将及其装备
-        48: (8, 64, 78),        # 武将ID: (武器ID， 防具ID， 饰品ID). 装备一定要填满3个，没有的用0代替
-        51: (22, 71, 92),
-        74: (1, 71, 92),
+        48: (8, 64, 0),        # 武将ID: (武器ID， 防具ID， 饰品ID). 装备一定要填满3个，没有的用0代替
+        51: (22, 71, 0),
+        74: (1, 71, 0),
     },
     'hero': [],          # [id,id...]   不在阵法中的武将
     'equipment': [],     # [(id,amount), (id,amount)...]
@@ -135,10 +135,10 @@ GET_HERO_FORCE_REFRESH_COST = 100
 # 抽卡得甲卡概率概率
 # 抽的次数： 得甲卡概率
 GET_HERO_QUALITY_ONE_PROB = {
-    1: 1 * 2,
-    2: 3 * 2,
-    3: 6 * 2,
-    4: 12 * 2,
+    1: 1 * 1.5,
+    2: 3 * 1.5,
+    3: 6 * 1.5,
+    4: 12 * 1.5,
     5: 30 * 1.5,
     6: 100,
 }
@@ -166,9 +166,11 @@ EQUIP_MAX_STEP= 6
 #      掠夺             #
 #########################
 # 掠夺失败获得官职经验
-PLUNDER_GET_OFFICIAL_EXP_WHEN_LOST = 2
+PLUNDER_GET_OFFICIAL_EXP_WHEN_LOST = 0
+# 原2
 # 掠夺胜利获得官职经验
-PLUNDER_GET_OFFICIAL_EXP_WHEN_WIN = 5
+PLUNDER_GET_OFFICIAL_EXP_WHEN_WIN = 0
+# 原5
 
 # 掠夺点数（战功）  难度: {几星: 得多少分}
 PLUNDER_GOT_POINT = {
@@ -177,7 +179,7 @@ PLUNDER_GOT_POINT = {
     3: {2: 3, 3: 5},
 }
 # 防御成功获得金币
-PLUNDER_DEFENSE_SUCCESS_GOLD = 1000
+PLUNDER_DEFENSE_SUCCESS_GOLD = 2500
 # 防御失败损失金币
 PLUNDER_DEFENSE_FAILURE_GOLD = 1000
 # 最大防御成功次数
@@ -185,7 +187,7 @@ PLUNDER_DEFENSE_SUCCESS_MAX_TIMES = 10
 # 最大防御失败次数
 PLUNDER_DEFENSE_FAILURE_MAX_TIMES = 10
 # 掠夺获取收益各档所需点数
-PLUNDER_REWARD_NEEDS_POINT = {1:3, 2: 2, 3: 1}
+PLUNDER_REWARD_NEEDS_POINT = {1:6, 2: 2, 3: 1}
 # 掠夺获取道具按照多少小时计算
 PLUNDER_GOT_ITEMS_HOUR = 2
 
