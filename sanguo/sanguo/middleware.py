@@ -24,13 +24,11 @@ class UnpackAndVerifyData(RequestFilter):
     def process_request(self, request):
         super(UnpackAndVerifyData, self).process_request(request)
 
-        if not server.active:
-            if request.path == '/api/server/feedback/':
-                return
-            return HttpResponse(status=502)
-
         if request.path.startswith('/api/'):
             return
+
+        if not server.active:
+            return HttpResponse(status=502)
 
         char_id = getattr(request, '_char_id', None)
         if char_id:

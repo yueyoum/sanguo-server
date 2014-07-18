@@ -7,6 +7,7 @@ __date__ = '4/9/14'
 from core.exception import SanguoException
 from core.signals import login_signal
 from core.server import server
+from core.activeplayers import Player
 from protomsg import CreateCharacterResponse
 from libs import crypto, pack_msg
 from libs.session import session_dumps
@@ -57,6 +58,8 @@ def create_character(request):
     game_session.char_id = char_id
 
     new_session = crypto.encrypt(session_dumps(game_session))
+
+    Player(char_id).set_login_id(game_session.login_id)
 
     response = CreateCharacterResponse()
     response.ret = 0
