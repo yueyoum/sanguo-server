@@ -13,6 +13,7 @@ from core.exception import SanguoException
 
 from core.attachment import get_drop_from_raw_package
 from core.mail import Mail
+from core.activeplayers import Player
 
 from utils.decorate import message_response
 from utils.api import api_activatecode_use, APIFailure
@@ -45,8 +46,10 @@ def resume(request):
         char_id=request._char_id,
     )
 
-    new_session = GameSession(request._account_id, req.server_id, request._char_id)
+    new_session = GameSession(request._account_id, request._server_id, request._char_id)
     new_session = crypto.encrypt(session_dumps(new_session))
+
+    Player(request._char_id).set_login_id(new_session.login_id)
 
     response = ResumeResponse()
     response.ret = 0
