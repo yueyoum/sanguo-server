@@ -717,7 +717,7 @@
     "model": "stage.stage", 
     "fields": {
         "normal_drop": "2,102", 
-        "star_gold": 3500, 
+        "star_gold": 1000, 
         "normal_gold": 15, 
         "bg": "\u5c71\u8def\u573a\u666f", 
         "open_condition": 31, 
@@ -725,7 +725,7 @@
         "level": 17, 
         "star_exp": 0, 
         "tp": 0, 
-        "first_gold": 0, 
+        "first_gold": 5000, 
         "star_drop": "801", 
         "first_exp": 5000, 
         "battle": 4, 
