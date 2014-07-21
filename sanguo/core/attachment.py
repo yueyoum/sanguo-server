@@ -111,27 +111,33 @@ def get_drop_from_mode_two_package(package):
     # 或者什么也没有
     drop = make_standard_drop_from_template()
 
-    def _make(name):
+    def _all_items(name):
         if not package[name]:
-            return False
+            return []
 
-        this = random.choice(package[name])
-        a, b = divmod(this['prob'] * REWARD_DROP_PROB_MULTIPLE, DROP_PROB_BASE)
-        a = int(a)
-        if b > random.randint(0, DROP_PROB_BASE):
-            a += 1
-        if a >= 1:
-            if name == 'equipments':
-                drop[name] = [(this['id'], this['level'], 1)]
-            else:
-                drop[name] = [(this['id'], 1)]
-            return True
-        return False
+        return [(name, p) for p in package[name]]
 
     names = ['heros', 'souls', 'equipments', 'gems', 'stuffs']
-    index = 0
-    while not _make(names[index]):
-        index += 1
+    items = []
+    for name in names:
+        items.extend(_all_items(name))
+
+    if not items:
+        return drop
+
+    name, item = random.choice(items)
+    a, b = divmod(item['prob'] * REWARD_DROP_PROB_MULTIPLE, DROP_PROB_BASE)
+    a = int(a)
+    if b > random.randint(0, DROP_PROB_BASE):
+        a += 1
+
+    if a < 1:
+        return drop
+
+    if name == 'equipments':
+        drop[name]  = [(item['id'], item['level'], a)]
+    else:
+        drop[name] = [(item['id'], a)]
 
     return drop
 
