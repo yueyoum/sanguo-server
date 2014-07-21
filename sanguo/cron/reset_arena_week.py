@@ -6,26 +6,22 @@ __date__ = '2/19/14'
 import json
 
 from _base import Logger
-from core.attachment import make_standard_drop_from_template
+from core.attachment import get_drop
 from core.character import Char
 from core.mail import Mail
 from core.arena import REDIS_ARENA_KEY
 from core.drives import redis_client
-from preset.data import ARENA_DAY_REWARD_TUPLE, ARENA_WEEK_REWARD_TUPLE
+from preset.data import ARENA_WEEK_REWARD_TUPLE
 from preset.settings import MAIL_ARENA_WEEK_REWARD_CONTENT, MAIL_ARENA_WEEK_REWARD_TITLE
 
 
 def _get_reward_by_rank(score, rank):
-    data = make_standard_drop_from_template()
-    for _rank, _reward in ARENA_DAY_REWARD_TUPLE:
-        if score >= _rank:
-            data['sycee'] = _reward.sycee * 2
-            data['gold'] = _reward.gold * 2
-            break
+    data = None
 
     for _rank, _reward in ARENA_WEEK_REWARD_TUPLE:
-        if rank >= _rank and _reward.stuff_id:
-            data['stuffs'] = [(_reward.stuff_id, 1)]
+        if rank >= _rank and _reward.packages:
+            drop_ids = [int(i) for i in _reward.packages]
+            data = get_drop(drop_ids)
             break
 
     if data:
