@@ -19,13 +19,13 @@ from protomsg import COMMAND_REQUEST, COMMAND_TYPE
 
 class RequestFilter(object):
     def process_request(self, request):
-        if request.method != METHOD_POST:
-            return HttpResponse(status=403)
-
         path = request.path
 
-        if path.startswith('/api/'):
+        if path.startswith('/api/') or path.startswith('/system/'):
             return None
+
+        if request.method != METHOD_POST:
+            return HttpResponse(status=403)
 
         data = request.body
 
