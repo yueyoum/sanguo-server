@@ -950,7 +950,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "ARENA_NO_RIVAL", 
-        "text_zh": "\u81ea\u5df1\u73b0\u5728\u7684\u6392\u540d\u5df2\u7ecf\u662f\u7b2c\u4e00\u540d\uff0c\u6ca1\u6709\u5bf9\u624b", 
+        "text_zh": "\u627e\u4e0d\u5230\u5bf9\u624b", 
         "link_to": null, 
         "des": "", 
         "area": ""

@@ -4,7 +4,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 2, 
-        "stuff_needs": "2:1,1:1", 
+        "stuff_needs": "2:2,1:2", 
         "gem_addition": 0, 
         "name": "\u94a2\u5200", 
         "tp_name": "\u6b66\u5668", 
@@ -28,7 +28,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 3, 
-        "stuff_needs": "4:1,3:2", 
+        "stuff_needs": "4:3,3:10", 
         "gem_addition": 30, 
         "name": "\u767e\u6218\u5200", 
         "tp_name": "\u6b66\u5668", 
@@ -52,7 +52,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 4, 
-        "stuff_needs": "6:1,5:3", 
+        "stuff_needs": "6:4,5:15", 
         "gem_addition": 60, 
         "name": "\u767e\u8f9f\u5b9d\u5200", 
         "tp_name": "\u6b66\u5668", 
@@ -76,7 +76,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 5, 
-        "stuff_needs": "8:1,7:5", 
+        "stuff_needs": "8:5,7:25", 
         "gem_addition": 100, 
         "name": "\u601d\u53ec\u5200", 
         "tp_name": "\u6b66\u5668", 
@@ -100,7 +100,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 6, 
-        "stuff_needs": "10:1,9:10", 
+        "stuff_needs": "10:5,9:50", 
         "gem_addition": 150, 
         "name": "\u4e03\u5b9d\u5200", 
         "tp_name": "\u6b66\u5668", 
@@ -124,7 +124,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 7, 
-        "stuff_needs": "12:1,11:20", 
+        "stuff_needs": "12:5,11:100", 
         "gem_addition": 200, 
         "name": "\u9752\u9f99\u5043\u6708\u5200", 
         "tp_name": "\u6b66\u5668", 
@@ -172,7 +172,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 9, 
-        "stuff_needs": "2:1,1:1", 
+        "stuff_needs": "2:2,1:2", 
         "gem_addition": 0, 
         "name": "\u94c1\u5251", 
         "tp_name": "\u6b66\u5668", 
@@ -196,7 +196,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 10, 
-        "stuff_needs": "4:1,3:2", 
+        "stuff_needs": "4:3,3:10", 
         "gem_addition": 30, 
         "name": "\u53cc\u80a1\u5251", 
         "tp_name": "\u6b66\u5668", 
@@ -211,8 +211,8 @@
         "growing": 11, 
         "slots": 1, 
         "cls": 2, 
-        "icon_large": "\u601d\u53ec\u5251", 
-        "icon": "\u601d\u53ec\u5251"
+        "icon_large": "\u53cc\u80a1\u5251", 
+        "icon": "\u53cc\u80a1\u5251"
     }
 },
 {
@@ -220,7 +220,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 11, 
-        "stuff_needs": "6:1,5:3", 
+        "stuff_needs": "6:4,5:15", 
         "gem_addition": 60, 
         "name": "\u4e03\u661f\u5251", 
         "tp_name": "\u6b66\u5668", 
@@ -244,7 +244,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 12, 
-        "stuff_needs": "8:1,7:5", 
+        "stuff_needs": "8:5,7:25", 
         "gem_addition": 100, 
         "name": "\u5b5f\u5fb7\u5251", 
         "tp_name": "\u6b66\u5668", 
@@ -268,7 +268,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 13, 
-        "stuff_needs": "10:1,9:10", 
+        "stuff_needs": "10:5,9:50", 
         "gem_addition": 150, 
         "name": "\u9752\u91ed\u5251", 
         "tp_name": "\u6b66\u5668", 
@@ -283,8 +283,8 @@
         "growing": 23, 
         "slots": 4, 
         "cls": 2, 
-        "icon_large": "\u53cc\u80a1\u5251", 
-        "icon": "\u53cc\u80a1\u5251"
+        "icon_large": "\u601d\u53ec\u5251", 
+        "icon": "\u601d\u53ec\u5251"
     }
 },
 {
@@ -292,7 +292,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 14, 
-        "stuff_needs": "12:1,11:20", 
+        "stuff_needs": "12:5,11:100", 
         "gem_addition": 200, 
         "name": "\u9738\u738b\u501a\u5929\u5251", 
         "tp_name": "\u6b66\u5668", 
@@ -340,7 +340,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 16, 
-        "stuff_needs": "2:1,1:1", 
+        "stuff_needs": "2:2,1:2", 
         "gem_addition": 0, 
         "name": "\u957f\u77db", 
         "tp_name": "\u6b66\u5668", 
@@ -364,7 +364,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 17, 
-        "stuff_needs": "4:1,3:2", 
+        "stuff_needs": "4:3,3:10", 
         "gem_addition": 30, 
         "name": "\u53cc\u6781\u77db", 
         "tp_name": "\u6b66\u5668", 
@@ -388,7 +388,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 18, 
-        "stuff_needs": "6:1,5:3", 
+        "stuff_needs": "6:4,5:15", 
         "gem_addition": 60, 
         "name": "\u7709\u5c16\u77db", 
         "tp_name": "\u6b66\u5668", 
@@ -412,7 +412,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 19, 
-        "stuff_needs": "8:1,7:5", 
+        "stuff_needs": "8:5,7:25", 
         "gem_addition": 100, 
         "name": "\u4e09\u5c16\u53cc\u5203\u77db", 
         "tp_name": "\u6b66\u5668", 
@@ -436,7 +436,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 20, 
-        "stuff_needs": "10:1,9:10", 
+        "stuff_needs": "10:5,9:50", 
         "gem_addition": 150, 
         "name": "\u94c1\u810a\u86c7\u77db", 
         "tp_name": "\u6b66\u5668", 
@@ -460,7 +460,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 21, 
-        "stuff_needs": "12:1,11:20", 
+        "stuff_needs": "12:5,11:100", 
         "gem_addition": 200, 
         "name": "\u4e08\u516b\u86c7\u77db", 
         "tp_name": "\u6b66\u5668", 
@@ -508,7 +508,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 23, 
-        "stuff_needs": "2:1,1:1", 
+        "stuff_needs": "2:2,1:2", 
         "gem_addition": 0, 
         "name": "\u94f6\u67aa", 
         "tp_name": "\u6b66\u5668", 
@@ -532,7 +532,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 24, 
-        "stuff_needs": "4:1,3:2", 
+        "stuff_needs": "4:3,3:10", 
         "gem_addition": 30, 
         "name": "\u5bd2\u94c1\u67aa", 
         "tp_name": "\u6b66\u5668", 
@@ -556,7 +556,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 25, 
-        "stuff_needs": "6:1,5:3", 
+        "stuff_needs": "6:4,5:15", 
         "gem_addition": 60, 
         "name": "\u7eff\u6c89\u67aa", 
         "tp_name": "\u6b66\u5668", 
@@ -580,7 +580,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 26, 
-        "stuff_needs": "8:1,7:5", 
+        "stuff_needs": "8:5,7:25", 
         "gem_addition": 100, 
         "name": "\u864e\u5934\u6e5b\u91d1\u67aa", 
         "tp_name": "\u6b66\u5668", 
@@ -604,7 +604,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 27, 
-        "stuff_needs": "10:1,9:10", 
+        "stuff_needs": "10:5,9:50", 
         "gem_addition": 150, 
         "name": "\u9738\u738b\u67aa", 
         "tp_name": "\u6b66\u5668", 
@@ -628,7 +628,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 28, 
-        "stuff_needs": "12:1,11:20", 
+        "stuff_needs": "12:5,11:100", 
         "gem_addition": 200, 
         "name": "\u9f99\u80c6\u4eae\u94f6\u67aa", 
         "tp_name": "\u6b66\u5668", 
@@ -676,7 +676,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 30, 
-        "stuff_needs": "2:1,1:1", 
+        "stuff_needs": "2:2,1:2", 
         "gem_addition": 0, 
         "name": "\u94c1\u621f", 
         "tp_name": "\u6b66\u5668", 
@@ -700,7 +700,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 31, 
-        "stuff_needs": "4:1,3:2", 
+        "stuff_needs": "4:3,3:10", 
         "gem_addition": 30, 
         "name": "\u6218\u621f", 
         "tp_name": "\u6b66\u5668", 
@@ -724,7 +724,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 32, 
-        "stuff_needs": "6:1,5:3", 
+        "stuff_needs": "6:4,5:15", 
         "gem_addition": 60, 
         "name": "\u6708\u7259\u621f", 
         "tp_name": "\u6b66\u5668", 
@@ -748,7 +748,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 33, 
-        "stuff_needs": "8:1,7:5", 
+        "stuff_needs": "8:5,7:25", 
         "gem_addition": 100, 
         "name": "\u6076\u6765\u94c1\u621f", 
         "tp_name": "\u6b66\u5668", 
@@ -772,7 +772,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 34, 
-        "stuff_needs": "10:1,9:10", 
+        "stuff_needs": "10:5,9:50", 
         "gem_addition": 150, 
         "name": "\u9738\u738b\u621f", 
         "tp_name": "\u6b66\u5668", 
@@ -796,7 +796,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 35, 
-        "stuff_needs": "12:1,11:20", 
+        "stuff_needs": "12:5,11:100", 
         "gem_addition": 200, 
         "name": "\u65b9\u5929\u753b\u621f", 
         "tp_name": "\u6b66\u5668", 
@@ -844,7 +844,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 37, 
-        "stuff_needs": "2:1,1:1", 
+        "stuff_needs": "2:2,1:2", 
         "gem_addition": 0, 
         "name": "\u7fbd\u6247", 
         "tp_name": "\u6b66\u5668", 
@@ -868,7 +868,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 38, 
-        "stuff_needs": "4:1,3:2", 
+        "stuff_needs": "4:3,3:10", 
         "gem_addition": 30, 
         "name": "\u6a80\u9999\u7fbd\u6247", 
         "tp_name": "\u6b66\u5668", 
@@ -892,7 +892,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 39, 
-        "stuff_needs": "6:1,5:3", 
+        "stuff_needs": "6:4,5:15", 
         "gem_addition": 60, 
         "name": "\u53e4\u7fbd\u6247", 
         "tp_name": "\u6b66\u5668", 
@@ -916,7 +916,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 40, 
-        "stuff_needs": "8:1,7:5", 
+        "stuff_needs": "8:5,7:25", 
         "gem_addition": 100, 
         "name": "\u98de\u971e\u6247", 
         "tp_name": "\u6b66\u5668", 
@@ -940,7 +940,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 41, 
-        "stuff_needs": "10:1,9:10", 
+        "stuff_needs": "10:5,9:50", 
         "gem_addition": 150, 
         "name": "\u4e94\u795e\u6247", 
         "tp_name": "\u6b66\u5668", 
@@ -964,7 +964,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 42, 
-        "stuff_needs": "12:1,11:20", 
+        "stuff_needs": "12:5,11:100", 
         "gem_addition": 200, 
         "name": "\u5929\u821e\u6247", 
         "tp_name": "\u6b66\u5668", 
@@ -1012,7 +1012,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 44, 
-        "stuff_needs": "2:1,1:1", 
+        "stuff_needs": "2:2,1:2", 
         "gem_addition": 0, 
         "name": "\u957f\u5f13", 
         "tp_name": "\u6b66\u5668", 
@@ -1036,7 +1036,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 45, 
-        "stuff_needs": "4:1,3:2", 
+        "stuff_needs": "4:3,3:10", 
         "gem_addition": 30, 
         "name": "\u6218\u5f13", 
         "tp_name": "\u6b66\u5668", 
@@ -1060,7 +1060,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 46, 
-        "stuff_needs": "6:1,5:3", 
+        "stuff_needs": "6:4,5:15", 
         "gem_addition": 60, 
         "name": "\u843d\u65e5\u5f13", 
         "tp_name": "\u6b66\u5668", 
@@ -1084,7 +1084,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 47, 
-        "stuff_needs": "8:1,7:5", 
+        "stuff_needs": "8:5,7:25", 
         "gem_addition": 100, 
         "name": "\u4e07\u77f3\u5f13", 
         "tp_name": "\u6b66\u5668", 
@@ -1108,7 +1108,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 48, 
-        "stuff_needs": "10:1,9:10", 
+        "stuff_needs": "10:5,9:50", 
         "gem_addition": 150, 
         "name": "\u9738\u738b\u5f13", 
         "tp_name": "\u6b66\u5668", 
@@ -1132,7 +1132,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 49, 
-        "stuff_needs": "12:1,11:20", 
+        "stuff_needs": "12:5,11:100", 
         "gem_addition": 200, 
         "name": "\u8bf8\u845b\u8fde\u5f29", 
         "tp_name": "\u6b66\u5668", 
@@ -1180,7 +1180,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 51, 
-        "stuff_needs": "2:1,1:1", 
+        "stuff_needs": "2:2,1:2", 
         "gem_addition": 0, 
         "name": "\u957f\u7b1b", 
         "tp_name": "\u6b66\u5668", 
@@ -1204,7 +1204,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 52, 
-        "stuff_needs": "4:1,3:2", 
+        "stuff_needs": "4:3,3:10", 
         "gem_addition": 30, 
         "name": "\u94a2\u7b1b", 
         "tp_name": "\u6b66\u5668", 
@@ -1228,7 +1228,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 53, 
-        "stuff_needs": "6:1,5:3", 
+        "stuff_needs": "6:4,5:15", 
         "gem_addition": 60, 
         "name": "\u661f\u8292", 
         "tp_name": "\u6b66\u5668", 
@@ -1252,7 +1252,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 54, 
-        "stuff_needs": "8:1,7:5", 
+        "stuff_needs": "8:5,7:25", 
         "gem_addition": 100, 
         "name": "\u9e23\u714c", 
         "tp_name": "\u6b66\u5668", 
@@ -1276,7 +1276,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 55, 
-        "stuff_needs": "10:1,9:10", 
+        "stuff_needs": "10:5,9:50", 
         "gem_addition": 150, 
         "name": "\u5996\u65cb", 
         "tp_name": "\u6b66\u5668", 
@@ -1300,7 +1300,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 56, 
-        "stuff_needs": "12:1,11:20", 
+        "stuff_needs": "12:5,11:100", 
         "gem_addition": 200, 
         "name": "\u6e38\u6708", 
         "tp_name": "\u6b66\u5668", 
@@ -1348,7 +1348,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 58, 
-        "stuff_needs": "2:1,1:1", 
+        "stuff_needs": "2:2,1:2", 
         "gem_addition": 0, 
         "name": "\u94c1\u94e0", 
         "tp_name": "\u9632\u5177", 
@@ -1372,7 +1372,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 59, 
-        "stuff_needs": "4:1,3:2", 
+        "stuff_needs": "4:3,3:10", 
         "gem_addition": 30, 
         "name": "\u94dc\u955c\u94e0", 
         "tp_name": "\u9632\u5177", 
@@ -1396,9 +1396,9 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 60, 
-        "stuff_needs": "6:1,5:3", 
+        "stuff_needs": "6:4,5:15", 
         "gem_addition": 60, 
-        "name": "\u79e6\u5c06\u519b\u94e0\u7532", 
+        "name": "\u79e6\u5c06\u519b\u94e0", 
         "tp_name": "\u9632\u5177", 
         "hp": 0, 
         "des": "\u7531\u79e6\u65f6\u5c06\u519b\u6240\u7a7f\u94e0\u7532\u4eff\u5236\u800c\u6210\uff0c\u7a7f\u8005\u9632\u5fa1\u529b\u5927\u5927\u63d0\u9ad8", 
@@ -1420,7 +1420,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 61, 
-        "stuff_needs": "8:1,7:5", 
+        "stuff_needs": "8:5,7:25", 
         "gem_addition": 100, 
         "name": "\u9ed1\u5149\u94e0", 
         "tp_name": "\u9632\u5177", 
@@ -1444,7 +1444,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 62, 
-        "stuff_needs": "10:1,9:10", 
+        "stuff_needs": "10:5,9:50", 
         "gem_addition": 150, 
         "name": "\u4eae\u94f6\u94e0", 
         "tp_name": "\u9632\u5177", 
@@ -1468,7 +1468,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 63, 
-        "stuff_needs": "12:1,11:20", 
+        "stuff_needs": "12:5,11:100", 
         "gem_addition": 200, 
         "name": "\u7384\u5929\u8fde\u73af\u94e0", 
         "tp_name": "\u9632\u5177", 
@@ -1516,7 +1516,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 65, 
-        "stuff_needs": "2:1,1:1", 
+        "stuff_needs": "2:2,1:2", 
         "gem_addition": 0, 
         "name": "\u9526\u888d", 
         "tp_name": "\u9632\u5177", 
@@ -1540,7 +1540,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 66, 
-        "stuff_needs": "4:1,3:2", 
+        "stuff_needs": "4:3,3:10", 
         "gem_addition": 30, 
         "name": "\u8c0b\u58eb\u888d", 
         "tp_name": "\u9632\u5177", 
@@ -1564,7 +1564,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 67, 
-        "stuff_needs": "6:1,5:3", 
+        "stuff_needs": "6:4,5:15", 
         "gem_addition": 60, 
         "name": "\u592a\u5e73\u9053\u888d", 
         "tp_name": "\u9632\u5177", 
@@ -1588,7 +1588,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 68, 
-        "stuff_needs": "8:1,7:5", 
+        "stuff_needs": "8:5,7:25", 
         "gem_addition": 100, 
         "name": "\u9b3c\u624d\u519b\u5e08\u888d", 
         "tp_name": "\u9632\u5177", 
@@ -1612,7 +1612,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 69, 
-        "stuff_needs": "10:1,9:10", 
+        "stuff_needs": "10:5,9:50", 
         "gem_addition": 150, 
         "name": "\u51a2\u864e\u9e64\u6c05\u888d", 
         "tp_name": "\u9632\u5177", 
@@ -1636,7 +1636,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 70, 
-        "stuff_needs": "12:1,11:20", 
+        "stuff_needs": "12:5,11:100", 
         "gem_addition": 200, 
         "name": "\u5367\u9f99\u516b\u5366\u888d", 
         "tp_name": "\u9632\u5177", 
@@ -1684,7 +1684,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 72, 
-        "stuff_needs": "2:1,1:1", 
+        "stuff_needs": "2:2,1:2", 
         "gem_addition": 0, 
         "name": "\u8f7b\u7532", 
         "tp_name": "\u9632\u5177", 
@@ -1708,7 +1708,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 73, 
-        "stuff_needs": "4:1,3:2", 
+        "stuff_needs": "4:3,3:10", 
         "gem_addition": 30, 
         "name": "\u786c\u76ae\u7532", 
         "tp_name": "\u9632\u5177", 
@@ -1732,7 +1732,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 74, 
-        "stuff_needs": "6:1,5:3", 
+        "stuff_needs": "6:4,5:15", 
         "gem_addition": 60, 
         "name": "\u4e4c\u6cb9\u85e4\u7532", 
         "tp_name": "\u9632\u5177", 
@@ -1756,7 +1756,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 75, 
-        "stuff_needs": "8:1,7:5", 
+        "stuff_needs": "8:5,7:25", 
         "gem_addition": 100, 
         "name": "\u4e4c\u6728\u7532", 
         "tp_name": "\u9632\u5177", 
@@ -1780,7 +1780,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 76, 
-        "stuff_needs": "10:1,9:10", 
+        "stuff_needs": "10:5,9:50", 
         "gem_addition": 150, 
         "name": "\u91d1\u4e1d\u7532", 
         "tp_name": "\u9632\u5177", 
@@ -1804,7 +1804,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 77, 
-        "stuff_needs": "12:1,11:20", 
+        "stuff_needs": "12:5,11:100", 
         "gem_addition": 200, 
         "name": "\u98de\u5c06\u7532", 
         "tp_name": "\u9632\u5177", 
@@ -1852,7 +1852,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 79, 
-        "stuff_needs": "2:1,1:1", 
+        "stuff_needs": "2:2,1:2", 
         "gem_addition": 0, 
         "name": "\u8bf4\u6587\u89e3\u5b57", 
         "tp_name": "\u9970\u54c1", 
@@ -1876,7 +1876,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 80, 
-        "stuff_needs": "4:1,3:2", 
+        "stuff_needs": "4:3,3:10", 
         "gem_addition": 30, 
         "name": "\u9752\u56ca\u4e66", 
         "tp_name": "\u9970\u54c1", 
@@ -1900,7 +1900,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 81, 
-        "stuff_needs": "6:1,5:3", 
+        "stuff_needs": "6:4,5:15", 
         "gem_addition": 60, 
         "name": "\u592a\u5e73\u8981\u672f", 
         "tp_name": "\u9970\u54c1", 
@@ -1924,7 +1924,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 82, 
-        "stuff_needs": "8:1,7:5", 
+        "stuff_needs": "8:5,7:25", 
         "gem_addition": 100, 
         "name": "\u5b5f\u5fb7\u65b0\u4e66", 
         "tp_name": "\u9970\u54c1", 
@@ -1948,7 +1948,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 83, 
-        "stuff_needs": "10:1,9:10", 
+        "stuff_needs": "10:5,9:50", 
         "gem_addition": 150, 
         "name": "\u5b59\u5b50\u5175\u6cd5", 
         "tp_name": "\u9970\u54c1", 
@@ -1972,7 +1972,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 84, 
-        "stuff_needs": "12:1,11:20", 
+        "stuff_needs": "12:5,11:100", 
         "gem_addition": 200, 
         "name": "\u9041\u7532\u5929\u4e66", 
         "tp_name": "\u9970\u54c1", 
@@ -2020,7 +2020,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 86, 
-        "stuff_needs": "2:1,1:1", 
+        "stuff_needs": "2:2,1:2", 
         "gem_addition": 0, 
         "name": "\u7389\u956f", 
         "tp_name": "\u9970\u54c1", 
@@ -2044,7 +2044,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 87, 
-        "stuff_needs": "4:1,3:2", 
+        "stuff_needs": "4:3,3:10", 
         "gem_addition": 30, 
         "name": "\u739b\u7459\u956f", 
         "tp_name": "\u9970\u54c1", 
@@ -2068,7 +2068,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 88, 
-        "stuff_needs": "6:1,5:3", 
+        "stuff_needs": "6:4,5:15", 
         "gem_addition": 60, 
         "name": "\u91d1\u8749\u7389\u956f", 
         "tp_name": "\u9970\u54c1", 
@@ -2092,7 +2092,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 89, 
-        "stuff_needs": "8:1,7:5", 
+        "stuff_needs": "8:5,7:25", 
         "gem_addition": 100, 
         "name": "\u5357\u73e0\u956f", 
         "tp_name": "\u9970\u54c1", 
@@ -2116,7 +2116,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 90, 
-        "stuff_needs": "10:1,9:10", 
+        "stuff_needs": "10:5,9:50", 
         "gem_addition": 150, 
         "name": "\u51e4\u51f0\u624b\u956f", 
         "tp_name": "\u9970\u54c1", 
@@ -2140,7 +2140,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 91, 
-        "stuff_needs": "12:1,11:20", 
+        "stuff_needs": "12:5,11:100", 
         "gem_addition": 200, 
         "name": "\u767d\u7389\u54cd\u94c3\u956f", 
         "tp_name": "\u9970\u54c1", 
@@ -2188,7 +2188,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 93, 
-        "stuff_needs": "2:1,1:1", 
+        "stuff_needs": "2:2,1:2", 
         "gem_addition": 0, 
         "name": "\u5c06\u5370", 
         "tp_name": "\u9970\u54c1", 
@@ -2212,7 +2212,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 94, 
-        "stuff_needs": "4:1,3:2", 
+        "stuff_needs": "4:3,3:10", 
         "gem_addition": 30, 
         "name": "\u731b\u864e\u5c06\u5370", 
         "tp_name": "\u9970\u54c1", 
@@ -2236,7 +2236,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 95, 
-        "stuff_needs": "6:1,5:3", 
+        "stuff_needs": "6:4,5:15", 
         "gem_addition": 60, 
         "name": "\u6012\u72ee\u5c06\u5370", 
         "tp_name": "\u9970\u54c1", 
@@ -2260,7 +2260,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 96, 
-        "stuff_needs": "8:1,7:5", 
+        "stuff_needs": "8:5,7:25", 
         "gem_addition": 100, 
         "name": "\u7384\u6b66\u5c06\u5370", 
         "tp_name": "\u9970\u54c1", 
@@ -2284,7 +2284,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 97, 
-        "stuff_needs": "10:1,9:10", 
+        "stuff_needs": "10:5,9:50", 
         "gem_addition": 150, 
         "name": "\u9e92\u9e9f\u5c06\u5370", 
         "tp_name": "\u9970\u54c1", 
@@ -2308,7 +2308,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 98, 
-        "stuff_needs": "12:1,11:20", 
+        "stuff_needs": "12:5,11:100", 
         "gem_addition": 200, 
         "name": "\u9752\u9f99\u5370", 
         "tp_name": "\u9970\u54c1", 

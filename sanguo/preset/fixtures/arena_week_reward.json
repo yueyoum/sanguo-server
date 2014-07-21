@@ -3,8 +3,24 @@
     "pk": 1, 
     "model": "config.arenaweekreward", 
     "fields": {
-        "rank_des": "1~3", 
-        "stuff_id": 0
+        "rank_des": "1", 
+        "packages": ""
+    }
+},
+{
+    "pk": 2, 
+    "model": "config.arenaweekreward", 
+    "fields": {
+        "rank_des": "2", 
+        "packages": ""
+    }
+},
+{
+    "pk": 3, 
+    "model": "config.arenaweekreward", 
+    "fields": {
+        "rank_des": "3", 
+        "packages": ""
     }
 },
 {
@@ -12,15 +28,23 @@
     "model": "config.arenaweekreward", 
     "fields": {
         "rank_des": "4~10", 
-        "stuff_id": 0
+        "packages": ""
     }
 },
 {
     "pk": 11, 
     "model": "config.arenaweekreward", 
     "fields": {
-        "rank_des": "11~100", 
-        "stuff_id": 0
+        "rank_des": "11~50", 
+        "packages": ""
+    }
+},
+{
+    "pk": 51, 
+    "model": "config.arenaweekreward", 
+    "fields": {
+        "rank_des": "51~100", 
+        "packages": ""
     }
 },
 {
@@ -28,15 +52,23 @@
     "model": "config.arenaweekreward", 
     "fields": {
         "rank_des": "101~500", 
-        "stuff_id": 0
+        "packages": ""
     }
 },
 {
     "pk": 501, 
     "model": "config.arenaweekreward", 
     "fields": {
-        "rank_des": "501~", 
-        "stuff_id": 0
+        "rank_des": "501~1000", 
+        "packages": ""
+    }
+},
+{
+    "pk": 1001, 
+    "model": "config.arenaweekreward", 
+    "fields": {
+        "rank_des": ">1001", 
+        "packages": ""
     }
 }
 ]

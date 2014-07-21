@@ -41,7 +41,7 @@
         "anger": 50, 
         "crit": 0, 
         "quality": 1, 
-        "des_prof": "\u5200\u4e13\u7cbe:\u88c5\u5907\u5200\u7c7b\u6b66\u5668\u63d0\u5347\u653b\u51fb\u603b\u503c2%\r\n\u7532\u4e13\u7cbe:\u88c5\u5907\u7532\u7c7b\u9632\u5177\u63d0\u5347\u9632\u5fa1\u603b\u503c4%\r\n\u956f\u4e13\u7cbe:\u88c5\u5907\u956f\u7c7b\u9970\u54c1\u63d0\u5347\u751f\u547d\u603b\u503c2%", 
+        "des_prof": "\u5200\u4e13\u7cbe:\u88c5\u5907\u5200\u7c7b\u6b66\u5668\u63d0\u5347\u653b\u51fb\u603b\u503c20%\r\n\u7532\u4e13\u7cbe:\u88c5\u5907\u7532\u7c7b\u9632\u5177\u63d0\u5347\u9632\u5fa1\u603b\u503c4%\r\n\u5370\u4e13\u7cbe:\u88c5\u5907\u5370\u7c7b\u9970\u54c1\u63d0\u5347\u751f\u547d\u603b\u503c2%", 
         "special_addition": "20,4,2", 
         "tp": 1, 
         "country_name": "\u9b4f", 
@@ -57,7 +57,7 @@
         "hp_growing": 54.89, 
         "avatar": "\u590f\u4faf\u60c7", 
         "country": 1, 
-        "special_equip_cls": "1,11,13", 
+        "special_equip_cls": "1,11,14", 
         "contribution": 300
     }
 },
