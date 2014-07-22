@@ -30,6 +30,10 @@ from preset.settings import (
     PLUNDER_DEFENSE_FAILURE_GOLD,
     PLUNDER_REWARD_NEEDS_POINT,
     PLUNDER_GOT_ITEMS_HOUR,
+
+    GET_HERO_QUALITY_ONE_POOL,
+    GET_HERO_QUALITY_TWO_POOL,
+    GET_HERO_QUALITY_THREE_POOL,
 )
 from protomsg import PLUNDER_HERO, PLUNDER_STUFF, PLUNDER_GOLD
 from preset import errormsg
@@ -213,13 +217,27 @@ class Plunder(object):
 
         plunder_gold = _get_gold()
 
+        def _get_prisoner(target_char_id):
+            f = Formation(target_char_id)
+            heros = f.in_formation_hero_original_ids()
+            heros = [hid for hid in heros if hid]
+
+            while heros:
+                hid = random.choice(heros)
+                heros.remove(hid)
+                if hid in GET_HERO_QUALITY_ONE_POOL or hid in GET_HERO_QUALITY_TWO_POOL or hid in GET_HERO_QUALITY_THREE_POOL:
+                    continue
+
+                return hid
+
+            return 0
+
         got_hero_id = 0
         if tp == PLUNDER_HERO:
-            f = Formation(self.mongo_plunder.target_char)
-            heros = f.in_formation_hero_original_ids()
-            got_hero_id = random.choice([hid for hid in heros if hid])
-            p = Prison(self.char_id)
-            p.prisoner_add(got_hero_id, plunder_gold/2)
+            got_hero_id = _get_prisoner(self.mongo_plunder.target_char)
+            if got_hero_id:
+                p = Prison(self.char_id)
+                p.prisoner_add(got_hero_id, plunder_gold/2)
 
         elif tp == PLUNDER_STUFF:
             stage = Stage(self.mongo_plunder.target_char)
