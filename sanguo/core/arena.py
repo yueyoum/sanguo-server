@@ -29,7 +29,8 @@ from preset.settings import (
     ARENA_CD,
     ARENA_TOP_RANKS_CACHE,
     MAIL_ARENA_BEATEN_TITLE,
-    MAIl_ARENA_BEATEN_CONTENT_TEMPLATE
+    MAIl_ARENA_BEATEN_LOST_TEMPLATE,
+    MAIl_ARENA_BEATEN_WIN_TEMPLATE,
 )
 
 
@@ -258,18 +259,18 @@ class Arena(object):
         if not self.mongo_arena.beaten_record:
             return
 
-        names = []
-        for record in self.mongo_arena.beaten_record:
-            if len(names) >= 3:
-                names.append(u'等')
-                break
+        def _make_content(record):
+            if record.old_score > record.new_score:
+                template = MAIl_ARENA_BEATEN_LOST_TEMPLATE
+                des = '-{0}'.format(abs(record.old_score - record.new_score))
+            else:
+                template = MAIl_ARENA_BEATEN_WIN_TEMPLATE
+                des = '+{0}'.format(abs(record.old_score - record.new_score))
 
-            names.append(record.name)
+            return template.format(record.name, record.old_score, record.new_score, des)
 
-        old_score = self.mongo_arena.beaten_record[0].old_score
-        new_score = self.mongo_arena.beaten_record[-1].new_score
-
-        content = MAIl_ARENA_BEATEN_CONTENT_TEMPLATE.format(u','.join(names), old_score, new_score)
+        contents = [_make_content(record) for record in self.mongo_arena.beaten_record]
+        content = u'\n'.join(contents)
 
         Mail(self.char_id).add(MAIL_ARENA_BEATEN_TITLE, content, send_notify=False)
 

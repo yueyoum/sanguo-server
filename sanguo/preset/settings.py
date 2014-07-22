@@ -272,8 +272,9 @@ MAIL_ARENA_DAY_REWARD_CONTENT = u'比武每日奖励'
 MAIL_ARENA_WEEK_REWARD_TITLE = u'比武每周奖励'
 MAIL_ARENA_WEEK_REWARD_CONTENT = u'比武每周奖励'
 # 比武被打
-MAIL_ARENA_BEATEN_TITLE = u'比武被干'
-MAIl_ARENA_BEATEN_CONTENT_TEMPLATE = u'你被 {0} 干了，积分从 {1} 变成了 {2}'
+MAIL_ARENA_BEATEN_TITLE = u'比武挑战记录'
+MAIl_ARENA_BEATEN_WIN_TEMPLATE = u'{0}在比武厂挑战了你，你击败了对手，你的积分从{1}变成了{2} ({3})'
+MAIl_ARENA_BEATEN_LOST_TEMPLATE = u'{0}在比武厂挑战了你，将你击败，你的积分从{1}变成了{2} ({3})'
 
 #########################
 #      激活码           #
