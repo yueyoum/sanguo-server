@@ -27,6 +27,8 @@ class Store(object):
             self.mc_limit = MongoStoreCharLimit.objects.get(id=self.char_id)
         except DoesNotExist:
             self.mc_limit = MongoStoreCharLimit(id=self.char_id)
+            self.mc_limit.limits = {}
+            self.mc_limit.save()
 
     def get_new_store(self):
         try:
@@ -67,11 +69,14 @@ class Store(object):
         char = Char(self.char_id)
         mc = char.mc
 
-        # TODO check vip
-        # if this_goods['vip_condition'] > mc.vip:
-        #     raise InvalidOperate("Store Buy. Char {0} Try to buy {1}. But vip test not passed. {2} < {3}".format(
-        #         self.char_id, _id, mc.vip, this_goods['vip_condition']
-        #     ))
+        # check vip
+        if this_goods['vip_condition'] > mc.vip:
+            raise SanguoException(
+                errormsg.STORE_GOODS_VIP_CONDITION,
+                self.char_id,
+                "Store Buy",
+                "{0} has vip condition {1}. greater than char vip {2}".format(_id, this_goods['vip_condition'], mc.vip)
+            )
 
         # check level
         if this_goods['level_condition'] > mc.level:
@@ -92,7 +97,6 @@ class Store(object):
                     "{0} amount not enough. remained {1}, buy amount {2}".format(_id, this_goods['total_amount_run_time'], amount)
                 )
 
-
         # check limit
         if this_goods['has_limit_amount']:
             remained_amount = self.get_limit_remained_amount(_id, this_goods['limit_amount'])
@@ -107,29 +111,12 @@ class Store(object):
         # check gold or sycee
         wealth_needs = this_goods['sell_price'] * amount
 
-        resource = Resource(self.char_id, "Store Buy", 'buy {0}, amount: {1}'.format(_id, amount))
         if this_goods['sell_type'] == 1:
             resource_need = {'gold': -wealth_needs}
         else:
             resource_need = {'sycee': -wealth_needs}
 
-        if this_goods['sell_type'] == 1:
-            if mc.gold < wealth_needs:
-                raise SanguoException(
-                    errormsg.GOLD_NOT_ENOUGH,
-                    self.char_id,
-                    "Store Buy",
-                    "gold not enough",
-                )
-        else:
-            if mc.sycee < wealth_needs:
-                raise SanguoException(
-                    errormsg.SYCEE_NOT_ENOUGH,
-                    self.char_id,
-                    "Store Buy",
-                    "sycee not enough"
-                )
-
+        resource = Resource(self.char_id, "Store Buy", 'buy {0}, amount: {1}'.format(_id, amount))
         with resource.check(**resource_need):
             # 本地server检查完毕，然后通过API通知HUB购买。
             # 对于有total amount限制的物品，HUB可能返回错误
@@ -173,7 +160,7 @@ class Store(object):
             if this_goods['item_tp'] == 1:
                 resource_add['heros'] = [(this_goods['item_id'], amount)]
             elif this_goods['item_tp'] == 2:
-                resource_add['equipments'] = [this_goods['item_id']] * amount
+                resource_add['equipments'] = [(this_goods['item_id'], 1, amount)]
             elif this_goods['item_tp'] == 3:
                 resource_add['gems'] = [(this_goods['item_id'], amount)]
             else:
@@ -231,9 +218,7 @@ class Store(object):
             if v['vip_condition'] > 0:
                 g.conditions.append(3)
                 g.vip_condition.vip = v['vip_condition']
-                # TODO
-                # g.vip_condition.can_buy = mc.vip >= v['vip_condition']
-                g.vip_condition.can_buy = False
+                g.vip_condition.can_buy = mc.vip >= v['vip_condition']
 
         return msg
 
