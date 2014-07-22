@@ -355,7 +355,7 @@
         "sell_gold": 1000, 
         "value": 5, 
         "packages": "", 
-        "quality": 1, 
+        "quality": 2, 
         "icon": "\u5b9d\u7269-\u9526\u56ca"
     }
 },
@@ -370,7 +370,7 @@
         "sell_gold": 1500, 
         "value": 10, 
         "packages": "", 
-        "quality": 2, 
+        "quality": 3, 
         "icon": "\u5b9d\u7269-\u5982\u610f"
     }
 },
@@ -385,7 +385,7 @@
         "sell_gold": 5000, 
         "value": 15, 
         "packages": "", 
-        "quality": 3, 
+        "quality": 4, 
         "icon": "\u5b9d\u7269-\u6f06\u5668"
     }
 },
@@ -400,7 +400,7 @@
         "sell_gold": 10000, 
         "value": 20, 
         "packages": "", 
-        "quality": 4, 
+        "quality": 5, 
         "icon": "\u5b9d\u7269-\u9f0e"
     }
 },
@@ -415,7 +415,7 @@
         "sell_gold": 20000, 
         "value": 28, 
         "packages": "", 
-        "quality": 5, 
+        "quality": 6, 
         "icon": "\u5b9d\u7269-\u5b9d\u5370"
     }
 },
@@ -487,7 +487,7 @@
         "des": "\u53ef\u968f\u673a\u83b7\u5f97\u5b9d\u77f3\u3001\u6750\u6599", 
         "buy_sycee": 0, 
         "tp": 3, 
-        "sell_gold": 10000, 
+        "sell_gold": 20000, 
         "value": null, 
         "packages": "5005", 
         "quality": 5, 

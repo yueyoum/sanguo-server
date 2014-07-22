@@ -1122,6 +1122,17 @@
     }
 },
 {
+    "pk": 3007, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "STORE_CAN_NOT_BUY", 
+        "text_zh": "\u6b64\u5546\u54c1\u65e0\u6cd5\u8d2d\u4e70", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
     "pk": 3100, 
     "model": "errormsg.errormsg", 
     "fields": {
