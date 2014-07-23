@@ -183,7 +183,7 @@
     "pk": 13, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u8d64\u51dd\u77f3", 
+        "name": "\u8d64\u8102\u77f3", 
         "des": "\u4f20\u8bf4\u53ef\u632f\u594b\u9f13\u821e\u58eb\u6c14", 
         "buy_sycee": 0, 
         "tp": 1, 
@@ -191,7 +191,7 @@
         "value": 0, 
         "packages": "", 
         "quality": 6, 
-        "icon": "\u8d64\u51dd\u77f3"
+        "icon": "\u8d64\u8102\u77f3"
     }
 },
 {
