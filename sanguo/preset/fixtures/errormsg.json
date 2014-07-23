@@ -847,6 +847,17 @@
     }
 },
 {
+    "pk": 1106, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "PLUNDER_GET_REWARD_NO_PRISONER", 
+        "text_zh": "\u6ca1\u6709\u5f97\u5230\u6218\u4fd8", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
     "pk": 1200, 
     "model": "errormsg.errormsg", 
     "fields": {
