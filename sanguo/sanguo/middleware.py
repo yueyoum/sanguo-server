@@ -32,22 +32,23 @@ class UnpackAndVerifyData(RequestFilter):
 
         char_id = getattr(request, '_char_id', None)
         if char_id:
-            p = Player(char_id)
-            login_id = p.get_login_id()
-            if not login_id:
-                msg = ReLoginResponse()
-                msg.ret = errormsg.SESSION_EXPIRE
-                data = pack_msg(msg)
-                return HttpResponse(data, content_type='text/plain')
+            if request.path != '/resume/':
+                p = Player(char_id)
+                login_id = p.get_login_id()
+                if not login_id:
+                    msg = ReLoginResponse()
+                    msg.ret = errormsg.SESSION_EXPIRE
+                    data = pack_msg(msg)
+                    return HttpResponse(data, content_type='text/plain')
 
-            if login_id != request._game_session.login_id:
-                # NEED RE LOGIN
-                msg = ReLoginResponse()
-                msg.ret = errormsg.LOGIN_RE
-                data = pack_msg(msg)
-                return HttpResponse(data, content_type='text/plain')
+                if login_id != request._game_session.login_id:
+                    # NEED RE LOGIN
+                    msg = ReLoginResponse()
+                    msg.ret = errormsg.LOGIN_RE
+                    data = pack_msg(msg)
+                    return HttpResponse(data, content_type='text/plain')
 
-            p.refresh()
+                p.refresh()
 
             ap = ActivePlayers()
             ap.set(request._char_id)
