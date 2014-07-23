@@ -93,6 +93,19 @@ class HeroPanel(object):
                 return False
         return True
 
+    def get_hero_cost(self, incr=False):
+        counter = Counter(self.char_id, 'gethero')
+
+        if incr:
+            try:
+                counter.incr()
+                return 0
+            except CounterOverFlow:
+                return GET_HERO_COST
+        else:
+            if counter.remained_value > 0:
+                return 0
+            return GET_HERO_COST
 
     def open(self, _id):
         if str(_id) not in self.panel.panel:
@@ -129,14 +142,7 @@ class HeroPanel(object):
 
             none_opened_other_heros.append((k, v))
 
-        counter = Counter(self.char_id, 'gethero')
-        try:
-            counter.incr()
-            using_sycee = 0
-        except CounterOverFlow:
-            # 没有免费次数了，需要用元宝
-            using_sycee = GET_HERO_COST
-
+        using_sycee = self.get_hero_cost(incr=True)
 
         resource = Resource(self.char_id, "HeroPanel Open")
         with resource.check(sycee=-using_sycee):
@@ -231,7 +237,7 @@ class HeroPanel(object):
         msg = protomsg.GetHeroPanelNotify()
         msg.refresh_seconds = self.refresh_seconds
         msg.free_times = self.free_times
-        msg.open_sycee = GET_HERO_COST
+        msg.open_sycee = self.get_hero_cost(incr=False)
         msg.refresh_sycee = GET_HERO_FORCE_REFRESH_COST
 
         for k, v in self.panel.panel.iteritems():
