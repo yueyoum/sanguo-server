@@ -6,6 +6,10 @@ __date__ = '14-7-23'
 
 def make_account_dict_from_message(msg):
     # msg is message Login which is defined in account.proto
+    if msg.tp == 0:
+        return {
+            'method': 'noaccount'
+        }
     if msg.tp == 1:
         return {
             'method': 'anonymous',

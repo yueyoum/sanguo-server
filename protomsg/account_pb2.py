@@ -14,7 +14,7 @@ import world_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='account.proto',
   package='Sanguo.protocol.account',
-  serialized_pb='\n\raccount.proto\x12\x17Sanguo.protocol.account\x1a\x0bworld.proto\"&\n\x0e\x41nonymousLogin\x12\x14\n\x0c\x64\x65vice_token\x18\x01 \x02(\t\"/\n\x0cRegularLogin\x12\r\n\x05\x65mail\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\":\n\nThirdLogin\x12\x10\n\x08platform\x18\x01 \x02(\t\x12\x0b\n\x03uid\x18\x02 \x02(\t\x12\r\n\x05param\x18\x03 \x01(\t\"\x99\x02\n\x05Login\x12\x34\n\x02tp\x18\x01 \x02(\x0e\x32(.Sanguo.protocol.account.Login.LoginType\x12:\n\tanonymous\x18\x02 \x01(\x0b\x32\'.Sanguo.protocol.account.AnonymousLogin\x12\x36\n\x07regular\x18\x03 \x01(\x0b\x32%.Sanguo.protocol.account.RegularLogin\x12\x32\n\x05third\x18\x04 \x01(\x0b\x32#.Sanguo.protocol.account.ThirdLogin\"2\n\tLoginType\x12\r\n\tANONYMOUS\x10\x01\x12\x0b\n\x07REGULAR\x10\x02\x12\t\n\x05THIRD\x10\x03\"R\n\x10StartGameRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12-\n\x05login\x18\x02 \x02(\x0b\x32\x1e.Sanguo.protocol.account.Login\"~\n\x11StartGameResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x01(\x0c\x12-\n\x05login\x18\x03 \x01(\x0b\x32\x1e.Sanguo.protocol.account.Login\x12\x1c\n\x14need_create_new_char\x18\x04 \x01(\x08\"V\n\x14GetServerListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12-\n\x05login\x18\x02 \x02(\x0b\x32\x1e.Sanguo.protocol.account.Login\"\x91\x01\n\x15GetServerListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12*\n\x03top\x18\x03 \x02(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12.\n\x07servers\x18\x04 \x03(\x0b\x32\x1d.Sanguo.protocol.world.Server\"C\n\x0fRegisterRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\r\n\x05\x65mail\x18\x02 \x02(\t\x12\x10\n\x08password\x18\x03 \x02(\t\"\xad\x01\n\x10RegisterResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x10\n\x08password\x18\x04 \x01(\t\x12*\n\x03top\x18\x05 \x01(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12.\n\x07servers\x18\x06 \x03(\x0b\x32\x1d.Sanguo.protocol.world.Server\"\\\n\x12\x42indAccountRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\r\n\x05\x65mail\x18\x02 \x02(\t\x12\x10\n\x08password\x18\x03 \x02(\t\x12\x14\n\x0c\x64\x65vice_token\x18\x04 \x02(\t\"T\n\x13\x42indAccountResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x10\n\x08password\x18\x04 \x01(\t')
+  serialized_pb='\n\raccount.proto\x12\x17Sanguo.protocol.account\x1a\x0bworld.proto\"&\n\x0e\x41nonymousLogin\x12\x14\n\x0c\x64\x65vice_token\x18\x01 \x02(\t\"/\n\x0cRegularLogin\x12\r\n\x05\x65mail\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\":\n\nThirdLogin\x12\x10\n\x08platform\x18\x01 \x02(\t\x12\x0b\n\x03uid\x18\x02 \x02(\t\x12\r\n\x05param\x18\x03 \x01(\t\"\xa8\x02\n\x05Login\x12\x34\n\x02tp\x18\x01 \x02(\x0e\x32(.Sanguo.protocol.account.Login.LoginType\x12:\n\tanonymous\x18\x02 \x01(\x0b\x32\'.Sanguo.protocol.account.AnonymousLogin\x12\x36\n\x07regular\x18\x03 \x01(\x0b\x32%.Sanguo.protocol.account.RegularLogin\x12\x32\n\x05third\x18\x04 \x01(\x0b\x32#.Sanguo.protocol.account.ThirdLogin\"A\n\tLoginType\x12\r\n\tNOACCOUNT\x10\x00\x12\r\n\tANONYMOUS\x10\x01\x12\x0b\n\x07REGULAR\x10\x02\x12\t\n\x05THIRD\x10\x03\"R\n\x10StartGameRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12-\n\x05login\x18\x02 \x02(\x0b\x32\x1e.Sanguo.protocol.account.Login\"~\n\x11StartGameResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x01(\x0c\x12-\n\x05login\x18\x03 \x01(\x0b\x32\x1e.Sanguo.protocol.account.Login\x12\x1c\n\x14need_create_new_char\x18\x04 \x01(\x08\"V\n\x14GetServerListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12-\n\x05login\x18\x02 \x02(\x0b\x32\x1e.Sanguo.protocol.account.Login\"\x91\x01\n\x15GetServerListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12*\n\x03top\x18\x03 \x02(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12.\n\x07servers\x18\x04 \x03(\x0b\x32\x1d.Sanguo.protocol.world.Server\"C\n\x0fRegisterRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\r\n\x05\x65mail\x18\x02 \x02(\t\x12\x10\n\x08password\x18\x03 \x02(\t\"\xad\x01\n\x10RegisterResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x10\n\x08password\x18\x04 \x01(\t\x12*\n\x03top\x18\x05 \x01(\x0b\x32\x1d.Sanguo.protocol.world.Server\x12.\n\x07servers\x18\x06 \x03(\x0b\x32\x1d.Sanguo.protocol.world.Server\"\\\n\x12\x42indAccountRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\r\n\x05\x65mail\x18\x02 \x02(\t\x12\x10\n\x08password\x18\x03 \x02(\t\x12\x14\n\x0c\x64\x65vice_token\x18\x04 \x02(\t\"T\n\x13\x42indAccountResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x10\n\x08password\x18\x04 \x01(\t')
 
 
 
@@ -25,22 +25,26 @@ _LOGIN_LOGINTYPE = _descriptor.EnumDescriptor(
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='ANONYMOUS', index=0, number=1,
+      name='NOACCOUNT', index=0, number=0,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='REGULAR', index=1, number=2,
+      name='ANONYMOUS', index=1, number=1,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='THIRD', index=2, number=3,
+      name='REGULAR', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='THIRD', index=3, number=3,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=436,
-  serialized_end=486,
+  serialized_end=501,
 )
 
 
@@ -159,7 +163,7 @@ _LOGIN = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='tp', full_name='Sanguo.protocol.account.Login.tp', index=0,
       number=1, type=14, cpp_type=8, label=2,
-      has_default_value=False, default_value=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -195,7 +199,7 @@ _LOGIN = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=205,
-  serialized_end=486,
+  serialized_end=501,
 )
 
 
@@ -229,8 +233,8 @@ _STARTGAMEREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=488,
-  serialized_end=570,
+  serialized_start=503,
+  serialized_end=585,
 )
 
 
@@ -278,8 +282,8 @@ _STARTGAMERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=572,
-  serialized_end=698,
+  serialized_start=587,
+  serialized_end=713,
 )
 
 
@@ -313,8 +317,8 @@ _GETSERVERLISTREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=700,
-  serialized_end=786,
+  serialized_start=715,
+  serialized_end=801,
 )
 
 
@@ -362,8 +366,8 @@ _GETSERVERLISTRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=789,
-  serialized_end=934,
+  serialized_start=804,
+  serialized_end=949,
 )
 
 
@@ -404,8 +408,8 @@ _REGISTERREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=936,
-  serialized_end=1003,
+  serialized_start=951,
+  serialized_end=1018,
 )
 
 
@@ -467,8 +471,8 @@ _REGISTERRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1006,
-  serialized_end=1179,
+  serialized_start=1021,
+  serialized_end=1194,
 )
 
 
@@ -516,8 +520,8 @@ _BINDACCOUNTREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1181,
-  serialized_end=1273,
+  serialized_start=1196,
+  serialized_end=1288,
 )
 
 
@@ -565,8 +569,8 @@ _BINDACCOUNTRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1275,
-  serialized_end=1359,
+  serialized_start=1290,
+  serialized_end=1374,
 )
 
 _LOGIN.fields_by_name['tp'].enum_type = _LOGIN_LOGINTYPE
