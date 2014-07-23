@@ -33,6 +33,8 @@ urlpatterns = patterns('',
                        url(r'^pve/$', 'views.stage.views.pve'),
                        url(r'^hang/$', 'views.stage.views.hang_start'),
                        url(r'^hang/cancel/$', 'views.stage.views.hang_cancel'),
+                       url(r'^hang/sync/$', 'views.stage.views.hang_sync'),
+
                        url(r'^elitepve/$', 'views.stage.views.elite_pve'),
                        url(r'^elite/reset/$', 'views.stage.views.elite_reset'),
                        url(r'^elite/reset/total/$', 'views.stage.views.elite_reset_total'),

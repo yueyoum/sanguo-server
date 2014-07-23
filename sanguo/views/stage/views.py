@@ -115,3 +115,8 @@ def hang_cancel(request):
     response.drop.MergeFrom(msg)
     return pack_msg(response)
 
+
+@message_response("HangSyncResponse")
+def hang_sync(request):
+    Hang(request._char_id).send_notify()
+    return None
