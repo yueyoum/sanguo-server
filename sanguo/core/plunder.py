@@ -6,11 +6,11 @@ __date__ = '1/22/14'
 
 import random
 
-from mongoscheme import Q, DoesNotExist
+from mongoscheme import DoesNotExist
 from core.character import Char, get_char_ids_by_level_range
 from core.battle import PVP
 from core.stage import Hang, max_star_stage_id
-from core.mongoscheme import MongoHangDoing, MongoPlunder, MongoStage, MongoPlunderChar
+from core.mongoscheme import MongoPlunder, MongoPlunderChar
 from core.exception import SanguoException
 from core.counter import Counter
 from core.task import Task
@@ -18,7 +18,7 @@ from core.formation import Formation
 from core.prison import Prison
 from core.stage import Stage
 from core.resource import Resource
-from core.attachment import make_standard_drop_from_template, get_drop, standard_drop_to_attachment_protomsg
+from core.attachment import make_standard_drop_from_template, get_drop
 from protomsg import Battle as MsgBattle
 from protomsg import PlunderNotify
 from core.msgpipe import publish_to_char
@@ -204,8 +204,6 @@ class Plunder(object):
         char = Char(self.char_id).mc
         vip_plus = VIP_FUNCTION[char.vip].plunder_addition
 
-        standard_drop = make_standard_drop_from_template()
-
         def _get_gold():
             max_star_stage = max_star_stage_id(self.char_id)
             if not max_star_stage:
@@ -214,8 +212,6 @@ class Plunder(object):
             gold = STAGES[max_star_stage].normal_gold
             gold = gold * 400 * random.uniform(1.0, 1.2) * (1+vip_plus/100.0)
             return int(gold)
-
-        plunder_gold = _get_gold()
 
         def _get_prisoner(target_char_id):
             f = Formation(target_char_id)
@@ -226,11 +222,12 @@ class Plunder(object):
                 hid = random.choice(heros)
                 heros.remove(hid)
                 if hid in GET_HERO_QUALITY_ONE_POOL or hid in GET_HERO_QUALITY_TWO_POOL or hid in GET_HERO_QUALITY_THREE_POOL:
-                    continue
-
-                return hid
+                    return hid
 
             return 0
+
+        plunder_gold = _get_gold()
+        standard_drop = make_standard_drop_from_template()
 
         got_hero_id = 0
         if tp == PLUNDER_HERO:
@@ -258,7 +255,7 @@ class Plunder(object):
         self.send_notify()
         if got_hero_id:
             standard_drop['heros'] = [(got_hero_id, 1)]
-        return standard_drop_to_attachment_protomsg(standard_drop)
+        return standard_drop
 
 
     def send_notify(self):
