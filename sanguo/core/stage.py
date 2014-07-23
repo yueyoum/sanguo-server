@@ -681,7 +681,7 @@ class EliteStage(object):
 
         self.send_remained_times_notify()
 
-    @passport(not_hang_going, errormsg.HANG_GOING, "Elite Stage Battle")
+    # @passport(not_hang_going, errormsg.HANG_GOING, "Elite Stage Battle")
     def battle(self, _id):
         str_id = str(_id)
 
@@ -862,7 +862,7 @@ class ActivityStage(object):
         publish_to_char(self.char_id, pack_msg(msg))
 
 
-    @passport(not_hang_going, errormsg.HANG_GOING, "Activate Stage Battle")
+    # @passport(not_hang_going, errormsg.HANG_GOING, "Activate Stage Battle")
     @operate_guard('activate_pve', OPERATE_INTERVAL_PVE_ACTIVITY, keep_result=False, char_id_name='char_id')
     def battle(self, _id):
         try:
