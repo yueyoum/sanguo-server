@@ -36,7 +36,6 @@ def sync(request):
 
 @message_response("ResumeResponse")
 def resume(request):
-    req = request._proto
     sync = SyncResponse()
     sync.ret = 0
     sync.utc_timestamp = arrow.utcnow().timestamp
@@ -47,13 +46,13 @@ def resume(request):
     )
 
     new_session = GameSession(request._account_id, request._server_id, request._char_id)
-    new_session = crypto.encrypt(session_dumps(new_session))
+    encrypted_session = crypto.encrypt(session_dumps(new_session))
 
     Player(request._char_id).set_login_id(new_session.login_id)
 
     response = ResumeResponse()
     response.ret = 0
-    return [pack_msg(response, new_session), pack_msg(sync)]
+    return [pack_msg(response, encrypted_session), pack_msg(sync)]
 
 
 
