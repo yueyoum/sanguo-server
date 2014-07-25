@@ -144,6 +144,7 @@ RESPONSE_NOTIFY_TYPE = {
     "LevyResponse": 4102,
     "GetProductsResponse": 4201,
     "BuyVerityResponse": 4203,
+    "PurchaseStatusNotify": 4220,
 }
 
 REQUEST_TYPE = {
