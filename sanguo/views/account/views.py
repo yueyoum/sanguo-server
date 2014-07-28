@@ -35,7 +35,7 @@ def login(request):
     account_data['server_id'] = server.id
 
     try:
-        res = api_account_login(account_data)
+        res = api_account_login(data=account_data)
     except APIFailure:
         raise SanguoException(
             errormsg.SERVER_FAULT,

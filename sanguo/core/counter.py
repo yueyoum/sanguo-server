@@ -33,7 +33,8 @@ class Counter(object):
 
     @property
     def cur_value(self):
-        return self.c.counter.get(self.func_name, 0)
+        value = self.c.counter.get(self.func_name, 0)
+        return int(value)
 
     @property
     def remained_value(self):
