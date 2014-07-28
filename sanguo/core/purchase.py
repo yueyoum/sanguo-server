@@ -63,6 +63,7 @@ class PurchaseAction(object):
         try:
             self.mongo_record = MongoPurchaseRecord.objects.get(id=char_id)
         except DoesNotExist:
+            self.mongo_record = MongoPurchaseRecord(id=char_id)
             self.mongo_record.times = {}
             self.mongo_record.save()
 
