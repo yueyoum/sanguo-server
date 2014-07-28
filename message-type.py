@@ -69,7 +69,7 @@ def set_request_type(xml_src, des):
 
 
 def set_type_command(xml_src, des):
-    PATTERN = re.compile('\<protocol\s+name="(?:[a-zA-Z]+Request)"\s+type="(\d+)"\s+command="(/[a-z\-/]+/)".+\>')
+    PATTERN = re.compile('\<protocol\s+name="(?:\w+Request)"\s+type="(\d+)"\s+command="(/[\w/\-]+/)".+\>')
 
     type_command = []
     type_command.append("TYPE_COMMAND = {\n")

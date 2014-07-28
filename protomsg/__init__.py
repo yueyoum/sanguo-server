@@ -336,6 +336,8 @@ TYPE_COMMAND = {
    4101: "/levy/",
    4200: "/purchase/products/",
    4202: "/purchase/verify/",
+   4210: "/purchase91/orderid/",
+   4212: "/purchase91/confirm/",
 }
 
 COMMAND_TYPE = {v: k for k, v in TYPE_COMMAND.iteritems()}
