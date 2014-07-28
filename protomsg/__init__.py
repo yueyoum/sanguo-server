@@ -144,6 +144,8 @@ RESPONSE_NOTIFY_TYPE = {
     "LevyResponse": 4102,
     "GetProductsResponse": 4201,
     "BuyVerityResponse": 4203,
+    "Purchase91GetOrderIdResponse": 4211,
+    "Purchase91ConfirmResponse": 4213,
     "PurchaseStatusNotify": 4220,
 }
 
@@ -209,6 +211,8 @@ REQUEST_TYPE = {
     4101: "LevyRequest",
     4200: "GetProductsRequest",
     4202: "BuyVerityRequest",
+    4210: "Purchase91GetOrderIdRequest",
+    4212: "Purchase91ConfirmRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -273,6 +277,8 @@ REQUEST_TYPE_REV = {
     "LevyRequest": 4101,
     "GetProductsRequest": 4200,
     "BuyVerityRequest": 4202,
+    "Purchase91GetOrderIdRequest": 4210,
+    "Purchase91ConfirmRequest": 4212,
 }
 
 TYPE_COMMAND = {
