@@ -11,6 +11,10 @@ class MongoPurchaseRecord(Document):
     yueka_sycee = IntField(default=0)
     yueka_remained_days = IntField(default=0)
 
+    # lock 用在多个进程同时处理 yueka_remained_days 用来互斥
+    # 以保证正确设置days
+    yueka_lock = BooleanField(default=False)
+
     has_unconfirmed = BooleanField(default=False)
 
     meta = {

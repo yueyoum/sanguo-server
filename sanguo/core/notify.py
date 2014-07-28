@@ -117,7 +117,10 @@ def login_notify(char_id):
     Levy(char_id).send_notify()
     Attachment(char_id).send_notify()
 
-    PurchaseAction(char_id).send_notify()
+    pa = PurchaseAction(char_id)
+    pa.send_notify()
+    pa.login_process()
+
 
     # mail notify 要放在最后，因为 其他功能初始化时可能会产生登录邮件
     Mail(char_id).send_notify()

@@ -4,13 +4,13 @@ __author__ = 'Wang Chao'
 __date__ = '14-6-30'
 
 
-from core.purchase import get_purchase_products, verify_buy
+from core.purchase import get_purchase_products, verify_buy, PurchaseAction
 from core.exception import SanguoException
 from utils.decorate import message_response
-from utils.api import api_purchase91_get_order_id, api_purchase91_confirm, api_purchase91_success91
+from utils.api import api_purchase91_get_order_id, api_purchase91_success91
 
 from libs import pack_msg
-from protomsg import GetProductsResponse, BuyVerityResponse, Purchase91GetOrderIdResponse, Purchase91ConfirmResponse
+from protomsg import GetProductsResponse, BuyVerityResponse, Purchase91GetOrderIdResponse
 from preset import errormsg
 
 from preset.data import PURCHASE
@@ -90,6 +90,8 @@ def get_91_order_id(request):
 def purchase_91_success_to_91(request):
     req = request._proto
 
+    PurchaseAction(request._char_id).set_has_unconfirmed()
+
     data = {'order_id': req.order_id}
     api_purchase91_success91(data=data)
     return None
@@ -97,18 +99,6 @@ def purchase_91_success_to_91(request):
 
 @message_response("Purchase91ConfirmResponse")
 def purchase_91_confirm(request):
-    res = api_purchase91_confirm(data={})
-    print "91 confirm"
-    print res
-
-    if res['ret'] == 0 and res['data']['goods_id']:
-        # TODO 给东西
-        pass
-
-    response = Purchase91ConfirmResponse()
-    response.ret = res['ret']
-    if res['ret']:
-        response.reason = res['data']['reason']
-
-    response.goods_id = res['data']['goods_id']
+    p = PurchaseAction(request._char_id)
+    response = p.check_confirm()
     return pack_msg(response)
