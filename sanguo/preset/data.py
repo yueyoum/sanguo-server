@@ -65,6 +65,8 @@ ARENA_DAY_REWARD_TUPLE.sort(key=lambda item: -item[0])
 ARENA_WEEK_REWARD_TUPLE = ARENA_WEEK_REWARD.items()
 ARENA_WEEK_REWARD_TUPLE.sort(key=lambda item: -item[0])
 
+PURCHASE = object_maker(_find_file('purchase.json'))
+PURCHASE_TYPE = object_maker(_find_file('purchase_type.json'))
 
 def _got_package():
     f = _find_file('package.json')
@@ -293,3 +295,8 @@ _vip_levels = VIP_FUNCTION.keys()
 _vip_levels.sort()
 
 VIP_MAX_LEVEL = _vip_levels[-1]
+
+
+# PURCHASE
+for v in PURCHASE.values():
+    v.tp_obj = PURCHASE_TYPE[v.tp]
