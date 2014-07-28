@@ -8,6 +8,7 @@ from mongoengine import DoesNotExist
 from core.resource import Resource
 from core.mongoscheme import MongoPurchaseRecord
 from core.msgpipe import publish_to_char
+from core.exception import SanguoException
 
 from utils.api import api_purchase_done, api_purchase_products, api_purchase_verify
 from utils import pack_msg
@@ -15,6 +16,7 @@ from utils import pack_msg
 from protomsg import PurchaseStatusNotify
 
 from preset.data import PURCHASE
+from preset import errormsg
 
 def get_purchase_products():
     res = api_purchase_products({})
@@ -65,10 +67,69 @@ class PurchaseAction(object):
         except DoesNotExist:
             self.mongo_record = MongoPurchaseRecord(id=char_id)
             self.mongo_record.times = {}
+            self.mongo_record.yueka_sycee = 0
+            self.mongo_record.yueka_remained_days = 0
+            self.mongo_record.has_unconfirmed = False
             self.mongo_record.save()
+
 
     def all_times(self):
         return {int(k): v for k, v in self.mongo_record.times.iteritems()}
+
+    def make_purchase(self, goods_id):
+        if goods_id not in PURCHASE:
+            raise SanguoException(
+                errormsg.PURCHASE_DOES_NOT_EXIST,
+                self.char_id,
+                "Purchase."
+                "goods_id {0} not exist".format(goods_id)
+            )
+
+        times = self.mongo_record.times.get(str(goods_id), 0)
+        self.mongo_record.times[str(goods_id)] = times + 1
+        self.mongo_record.save()
+
+        self.send_notify()
+
+
+    def send_reward(self, goods_id):
+        p = PURCHASE[goods_id]
+
+        is_first = self.mongo_record.times.get(str(goods_id), 1) == 1
+
+
+        if p.tp_obj.continued_days > 0:
+            self.send_reward_yueka(goods_id, is_first)
+        else:
+            self.send_reward_sycee(goods_id, is_first)
+
+        self.send_notify()
+
+
+    def send_reward_yueka(self, goods_id, is_first):
+        # 月卡
+        # XXX NOTE
+        # 系统只支持一种类型的月卡
+        self.send_reward_sycee(goods_id, is_first)
+
+        p = PURCHASE[goods_id]
+        self.mongo_record.yueka_sycee = p.tp_obj.day_sycee
+        self.mongo_record.yueka_remained_days += p.tp_obj.continued_days
+        self.mongo_record.save()
+
+
+
+    def send_reward_sycee(self, goods_id, is_first):
+        # 元宝
+        p = PURCHASE[goods_id]
+        addition = p.first_addition_sycee if is_first else p.addition_sycee
+
+        purchase_got = p.sycee
+        purchase_actual_got = purchase_got + addition
+
+        resource = Resource(self.char_id, "Purchase")
+        resource.add(purchase_got=purchase_got, purchase_actual_got=purchase_actual_got)
+
 
     def send_notify(self):
         msg = PurchaseStatusNotify()
@@ -78,6 +139,8 @@ class PurchaseAction(object):
             s = msg.status.add()
             s.id = _id
             s.first = _id in times
+
+        msg.yueka_remained_days = self.mongo_record.yueka_remained_days
 
         publish_to_char(self.char_id, pack_msg(msg))
 

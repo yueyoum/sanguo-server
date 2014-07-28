@@ -8,6 +8,11 @@ class MongoPurchaseRecord(Document):
     # times 记录每个商品购买的次数, key为商品ID, value为购买次数
     times = DictField()
 
+    yueka_sycee = IntField(default=0)
+    yueka_remained_days = IntField(default=0)
+
+    has_unconfirmed = BooleanField(default=False)
+
     meta = {
         'collection': 'pruchase_record'
     }

@@ -147,6 +147,7 @@ RESPONSE_NOTIFY_TYPE = {
     "Purchase91GetOrderIdResponse": 4211,
     "Purchase91ConfirmResponse": 4213,
     "PurchaseStatusNotify": 4220,
+    "Purchase91SuccessTo91Response": 4222,
 }
 
 REQUEST_TYPE = {
@@ -213,6 +214,7 @@ REQUEST_TYPE = {
     4202: "BuyVerityRequest",
     4210: "Purchase91GetOrderIdRequest",
     4212: "Purchase91ConfirmRequest",
+    4221: "Purchase91SuccessTo91Request",
 }
 
 REQUEST_TYPE_REV = {
@@ -279,6 +281,7 @@ REQUEST_TYPE_REV = {
     "BuyVerityRequest": 4202,
     "Purchase91GetOrderIdRequest": 4210,
     "Purchase91ConfirmRequest": 4212,
+    "Purchase91SuccessTo91Request": 4221,
 }
 
 TYPE_COMMAND = {
@@ -344,6 +347,7 @@ TYPE_COMMAND = {
    4202: "/purchase/verify/",
    4210: "/purchase91/orderid/",
    4212: "/purchase91/confirm/",
+   4221: "/purchase91/success91/",
 }
 
 COMMAND_TYPE = {v: k for k, v in TYPE_COMMAND.iteritems()}

@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='purchase.proto',
   package='Sanguo.protocol.purchase',
-  serialized_pb='\n\x0epurchase.proto\x12\x18Sanguo.protocol.purchase\"\xa3\x01\n\x14PurchaseStatusNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12M\n\x06status\x18\x02 \x03(\x0b\x32=.Sanguo.protocol.purchase.PurchaseStatusNotify.PurchaseStatus\x1a+\n\x0ePurchaseStatus\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05\x66irst\x18\x02 \x02(\x08\"%\n\x12GetProductsRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"\xae\x01\n\x13GetProductsResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12G\n\x08products\x18\x03 \x03(\x0b\x32\x35.Sanguo.protocol.purchase.GetProductsResponse.Product\x1a\x30\n\x07Product\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x0b\n\x03\x64\x65s\x18\x03 \x02(\t\"E\n\x10\x42uyVerityRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\x12\x0f\n\x07receipt\x18\x03 \x02(\t\"R\n\x11\x42uyVerityResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x11\n\tadd_sycee\x18\x04 \x01(\x05\"@\n\x1bPurchase91GetOrderIdRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08goods_id\x18\x02 \x02(\x05\"N\n\x1cPurchase91GetOrderIdResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08order_id\x18\x03 \x01(\t\"+\n\x18Purchase91ConfirmRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"\xdd\x01\n\x19Purchase91ConfirmResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12[\n\x06reason\x18\x03 \x01(\x0e\x32K.Sanguo.protocol.purchase.Purchase91ConfirmResponse.Purchase91FailureReason\x12\x10\n\x08goods_id\x18\x04 \x01(\x05\"3\n\x17Purchase91FailureReason\x12\x0b\n\x07WAITING\x10\x01\x12\x0b\n\x07\x46\x41ILURE\x10\x02')
+  serialized_pb='\n\x0epurchase.proto\x12\x18Sanguo.protocol.purchase\"\xc0\x01\n\x14PurchaseStatusNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12M\n\x06status\x18\x02 \x03(\x0b\x32=.Sanguo.protocol.purchase.PurchaseStatusNotify.PurchaseStatus\x12\x1b\n\x13yueka_remained_days\x18\x03 \x02(\x05\x1a+\n\x0ePurchaseStatus\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05\x66irst\x18\x02 \x02(\x08\"%\n\x12GetProductsRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"\xae\x01\n\x13GetProductsResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12G\n\x08products\x18\x03 \x03(\x0b\x32\x35.Sanguo.protocol.purchase.GetProductsResponse.Product\x1a\x30\n\x07Product\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x0b\n\x03\x64\x65s\x18\x03 \x02(\t\"E\n\x10\x42uyVerityRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\x12\x0f\n\x07receipt\x18\x03 \x02(\t\"R\n\x11\x42uyVerityResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x11\n\tadd_sycee\x18\x04 \x01(\x05\"@\n\x1bPurchase91GetOrderIdRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08goods_id\x18\x02 \x02(\x05\"N\n\x1cPurchase91GetOrderIdResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08order_id\x18\x03 \x01(\t\"A\n\x1cPurchase91SuccessTo91Request\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08order_id\x18\x02 \x02(\t\"=\n\x1dPurchase91SuccessTo91Response\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"+\n\x18Purchase91ConfirmRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"\xdd\x01\n\x19Purchase91ConfirmResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12[\n\x06reason\x18\x03 \x01(\x0e\x32K.Sanguo.protocol.purchase.Purchase91ConfirmResponse.Purchase91FailureReason\x12\x10\n\x08goods_id\x18\x04 \x01(\x05\"3\n\x17Purchase91FailureReason\x12\x0b\n\x07WAITING\x10\x01\x12\x0b\n\x07\x46\x41ILURE\x10\x02')
 
 
 
@@ -34,8 +34,8 @@ _PURCHASE91CONFIRMRESPONSE_PURCHASE91FAILUREREASON = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=943,
-  serialized_end=994,
+  serialized_start=1102,
+  serialized_end=1153,
 )
 
 
@@ -69,8 +69,8 @@ _PURCHASESTATUSNOTIFY_PURCHASESTATUS = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=165,
-  serialized_end=208,
+  serialized_start=194,
+  serialized_end=237,
 )
 
 _PURCHASESTATUSNOTIFY = _descriptor.Descriptor(
@@ -94,6 +94,13 @@ _PURCHASESTATUSNOTIFY = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='yueka_remained_days', full_name='Sanguo.protocol.purchase.PurchaseStatusNotify.yueka_remained_days', index=2,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -104,7 +111,7 @@ _PURCHASESTATUSNOTIFY = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=45,
-  serialized_end=208,
+  serialized_end=237,
 )
 
 
@@ -131,8 +138,8 @@ _GETPRODUCTSREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=210,
-  serialized_end=247,
+  serialized_start=239,
+  serialized_end=276,
 )
 
 
@@ -173,8 +180,8 @@ _GETPRODUCTSRESPONSE_PRODUCT = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=376,
-  serialized_end=424,
+  serialized_start=405,
+  serialized_end=453,
 )
 
 _GETPRODUCTSRESPONSE = _descriptor.Descriptor(
@@ -214,8 +221,8 @@ _GETPRODUCTSRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=250,
-  serialized_end=424,
+  serialized_start=279,
+  serialized_end=453,
 )
 
 
@@ -256,8 +263,8 @@ _BUYVERITYREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=426,
-  serialized_end=495,
+  serialized_start=455,
+  serialized_end=524,
 )
 
 
@@ -305,8 +312,8 @@ _BUYVERITYRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=497,
-  serialized_end=579,
+  serialized_start=526,
+  serialized_end=608,
 )
 
 
@@ -340,8 +347,8 @@ _PURCHASE91GETORDERIDREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=581,
-  serialized_end=645,
+  serialized_start=610,
+  serialized_end=674,
 )
 
 
@@ -382,8 +389,78 @@ _PURCHASE91GETORDERIDRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=647,
-  serialized_end=725,
+  serialized_start=676,
+  serialized_end=754,
+)
+
+
+_PURCHASE91SUCCESSTO91REQUEST = _descriptor.Descriptor(
+  name='Purchase91SuccessTo91Request',
+  full_name='Sanguo.protocol.purchase.Purchase91SuccessTo91Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.purchase.Purchase91SuccessTo91Request.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='order_id', full_name='Sanguo.protocol.purchase.Purchase91SuccessTo91Request.order_id', index=1,
+      number=2, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=756,
+  serialized_end=821,
+)
+
+
+_PURCHASE91SUCCESSTO91RESPONSE = _descriptor.Descriptor(
+  name='Purchase91SuccessTo91Response',
+  full_name='Sanguo.protocol.purchase.Purchase91SuccessTo91Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.purchase.Purchase91SuccessTo91Response.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.purchase.Purchase91SuccessTo91Response.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=823,
+  serialized_end=884,
 )
 
 
@@ -410,8 +487,8 @@ _PURCHASE91CONFIRMREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=727,
-  serialized_end=770,
+  serialized_start=886,
+  serialized_end=929,
 )
 
 
@@ -460,8 +537,8 @@ _PURCHASE91CONFIRMRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=773,
-  serialized_end=994,
+  serialized_start=932,
+  serialized_end=1153,
 )
 
 _PURCHASESTATUSNOTIFY_PURCHASESTATUS.containing_type = _PURCHASESTATUSNOTIFY;
@@ -477,6 +554,8 @@ DESCRIPTOR.message_types_by_name['BuyVerityRequest'] = _BUYVERITYREQUEST
 DESCRIPTOR.message_types_by_name['BuyVerityResponse'] = _BUYVERITYRESPONSE
 DESCRIPTOR.message_types_by_name['Purchase91GetOrderIdRequest'] = _PURCHASE91GETORDERIDREQUEST
 DESCRIPTOR.message_types_by_name['Purchase91GetOrderIdResponse'] = _PURCHASE91GETORDERIDRESPONSE
+DESCRIPTOR.message_types_by_name['Purchase91SuccessTo91Request'] = _PURCHASE91SUCCESSTO91REQUEST
+DESCRIPTOR.message_types_by_name['Purchase91SuccessTo91Response'] = _PURCHASE91SUCCESSTO91RESPONSE
 DESCRIPTOR.message_types_by_name['Purchase91ConfirmRequest'] = _PURCHASE91CONFIRMREQUEST
 DESCRIPTOR.message_types_by_name['Purchase91ConfirmResponse'] = _PURCHASE91CONFIRMRESPONSE
 
@@ -533,6 +612,18 @@ class Purchase91GetOrderIdResponse(_message.Message):
   DESCRIPTOR = _PURCHASE91GETORDERIDRESPONSE
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.purchase.Purchase91GetOrderIdResponse)
+
+class Purchase91SuccessTo91Request(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _PURCHASE91SUCCESSTO91REQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.purchase.Purchase91SuccessTo91Request)
+
+class Purchase91SuccessTo91Response(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _PURCHASE91SUCCESSTO91RESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.purchase.Purchase91SuccessTo91Response)
 
 class Purchase91ConfirmRequest(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
