@@ -3,9 +3,18 @@
 __author__ = 'Wang Chao'
 __date__ = '14-6-30'
 
-from core.resource import Resource
-from utils.api import api_purchase_done, api_purchase_products, api_purchase_verify
+from mongoengine import DoesNotExist
 
+from core.resource import Resource
+from core.mongoscheme import MongoPurchaseRecord
+from core.msgpipe import publish_to_char
+
+from utils.api import api_purchase_done, api_purchase_products, api_purchase_verify
+from utils import pack_msg
+
+from protomsg import PurchaseStatusNotify
+
+from preset.data import PURCHASE
 
 def get_purchase_products():
     res = api_purchase_products({})
@@ -45,3 +54,29 @@ def verify_buy(char_id, receipt):
     api_purchase_done({'log_id': log_id})
 
     return VerifyResult(0, product_id=product_id, name=name, add_sycee=actual_sycee)
+
+
+
+class PurchaseAction(object):
+    def __init__(self, char_id):
+        self.char_id = char_id
+        try:
+            self.mongo_record = MongoPurchaseRecord.objects.get(id=char_id)
+        except DoesNotExist:
+            self.mongo_record.times = {}
+            self.mongo_record.save()
+
+    def all_times(self):
+        return {int(k): v for k, v in self.mongo_record.times.iteritems()}
+
+    def send_notify(self):
+        msg = PurchaseStatusNotify()
+        times = self.all_times()
+
+        for _id in PURCHASE.keys():
+            s = msg.status.add()
+            s.id = _id
+            s.first = _id in times
+
+        publish_to_char(self.char_id, pack_msg(msg))
+
