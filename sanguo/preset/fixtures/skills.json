@@ -1286,7 +1286,7 @@
         "anger_self_team": 50, 
         "war_cry": false, 
         "skill_range": 2, 
-        "des": "\u821e\u59ec\uff1a\u63d0\u5347\u5168\u5c5e\u6027\uff0c\u589e\u52a0\u5168\u961f\u6012\u6c14", 
+        "des": "\u821e\u59ec\uff1a\u63d0\u5347\u5168\u5c5e\u6027", 
         "anger_self": 0, 
         "prob": 100, 
         "trig_start": 1, 

@@ -451,7 +451,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 62.0
     }
 },
@@ -470,7 +470,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 60.0
     }
 },
@@ -489,7 +489,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 59.0
     }
 },
@@ -508,7 +508,7 @@
         "attack": 15.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 54.0
     }
 },
@@ -527,7 +527,7 @@
         "attack": 15.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 62.0
     }
 },
@@ -546,7 +546,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 59.0
     }
 },
@@ -565,7 +565,7 @@
         "attack": 15.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 59.0
     }
 },
@@ -584,7 +584,7 @@
         "attack": 13.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 54.0
     }
 },
@@ -603,7 +603,7 @@
         "attack": 15.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 58.0
     }
 },
@@ -622,7 +622,7 @@
         "attack": 12.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 59.0
     }
 },
@@ -641,7 +641,7 @@
         "attack": 13.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 58.0
     }
 },
@@ -660,7 +660,7 @@
         "attack": 15.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 62.0
     }
 },
@@ -679,7 +679,7 @@
         "attack": 15.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 57.0
     }
 },
@@ -698,7 +698,7 @@
         "attack": 15.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 59.0
     }
 },
@@ -717,7 +717,7 @@
         "attack": 15.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 61.0
     }
 },
@@ -736,7 +736,7 @@
         "attack": 15.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 59.0
     }
 },
@@ -755,7 +755,7 @@
         "attack": 15.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 59.0
     }
 },
@@ -774,7 +774,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 58.0
     }
 },
@@ -793,7 +793,7 @@
         "attack": 14.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 56.0
     }
 },
@@ -812,7 +812,7 @@
         "attack": 15.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 58.0
     }
 },
@@ -831,7 +831,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 57.0
     }
 },
@@ -850,7 +850,7 @@
         "attack": 15.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 61.0
     }
 },
@@ -869,7 +869,7 @@
         "attack": 15.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 62.0
     }
 },
@@ -888,7 +888,7 @@
         "attack": 15.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 59.0
     }
 },
@@ -907,7 +907,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 62.0
     }
 },
@@ -926,7 +926,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 57.0
     }
 },
@@ -945,7 +945,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 60.0
     }
 },
@@ -964,7 +964,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 61.0
     }
 },
@@ -983,7 +983,7 @@
         "attack": 14.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 56.0
     }
 },
@@ -1002,7 +1002,7 @@
         "attack": 15.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 61.0
     }
 },
@@ -1021,7 +1021,7 @@
         "attack": 14.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 50.0
     }
 },
@@ -1040,7 +1040,7 @@
         "attack": 14.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 56.0
     }
 },
@@ -1059,7 +1059,7 @@
         "attack": 13.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 55.0
     }
 },
@@ -1078,7 +1078,7 @@
         "attack": 17.0, 
         "defense": 6.0, 
         "crit": 15, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 65.0
     }
 },
@@ -1097,7 +1097,7 @@
         "attack": 14.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 52.0
     }
 },
@@ -1116,7 +1116,7 @@
         "attack": 15.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 62.0
     }
 },
@@ -1135,7 +1135,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 58.0
     }
 },
@@ -1154,7 +1154,7 @@
         "attack": 13.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 53.0
     }
 },
@@ -1173,7 +1173,7 @@
         "attack": 13.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 52.0
     }
 },
@@ -1249,7 +1249,7 @@
         "attack": 13.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 57.0
     }
 },
@@ -1268,7 +1268,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 57.0
     }
 },
@@ -1496,7 +1496,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 60.0
     }
 },
@@ -1876,7 +1876,7 @@
         "attack": 12.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 50.0
     }
 },
@@ -1895,7 +1895,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 59.0
     }
 },
@@ -1914,7 +1914,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 57.0
     }
 },
@@ -1933,7 +1933,7 @@
         "attack": 13.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 60.0
     }
 },
@@ -1952,7 +1952,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 60.0
     }
 },
@@ -1971,7 +1971,7 @@
         "attack": 14.0, 
         "defense": 4.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 44.0
     }
 },
@@ -1990,7 +1990,7 @@
         "attack": 13.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 49.0
     }
 },
@@ -2009,7 +2009,7 @@
         "attack": 15.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 49.0
     }
 },
@@ -2028,7 +2028,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 57.0
     }
 },
@@ -2047,7 +2047,7 @@
         "attack": 13.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 55.0
     }
 },
@@ -2066,7 +2066,7 @@
         "attack": 12.0, 
         "defense": 3.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 38.0
     }
 },
@@ -2085,7 +2085,7 @@
         "attack": 13.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 49.0
     }
 },
@@ -2104,7 +2104,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 58.0
     }
 },
@@ -2123,7 +2123,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 60.0
     }
 },
@@ -2142,7 +2142,7 @@
         "attack": 13.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 55.0
     }
 },
@@ -2180,7 +2180,7 @@
         "attack": 13.0, 
         "defense": 4.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 47.0
     }
 },
@@ -2199,7 +2199,7 @@
         "attack": 13.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 53.0
     }
 },
@@ -2218,7 +2218,7 @@
         "attack": 14.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 54.0
     }
 },
@@ -2256,7 +2256,7 @@
         "attack": 13.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 56.0
     }
 },
@@ -2275,7 +2275,7 @@
         "attack": 14.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 59.0
     }
 },
@@ -2294,7 +2294,7 @@
         "attack": 13.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 52.0
     }
 },
@@ -2313,7 +2313,7 @@
         "attack": 13.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 51.0
     }
 },
@@ -2332,7 +2332,7 @@
         "attack": 15.0, 
         "defense": 5.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 3, 
         "hp": 52.0
     }
 },
@@ -2351,7 +2351,7 @@
         "attack": 15.0, 
         "defense": 6.0, 
         "crit": 0, 
-        "quality": 2, 
+        "quality": 1, 
         "hp": 60.0
     }
 }

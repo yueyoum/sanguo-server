@@ -2161,7 +2161,7 @@
     "fields": {
         "condition_name": "\u901a\u8fc7\u5408\u6210\u5f97\u5230\u5bf9\u5e94\u7b49\u7ea7\u7684\u5b9d\u77f3", 
         "buff_value": null, 
-        "sycee": null, 
+        "sycee": 10, 
         "name": "\u7480\u74a8\u593a\u76ee", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -2183,7 +2183,7 @@
     "fields": {
         "condition_name": "\u901a\u8fc7\u5408\u6210\u5f97\u5230\u5bf9\u5e94\u7b49\u7ea7\u7684\u5b9d\u77f3", 
         "buff_value": null, 
-        "sycee": null, 
+        "sycee": 10, 
         "name": "\u7480\u74a8\u593a\u76ee", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -2205,7 +2205,7 @@
     "fields": {
         "condition_name": "\u901a\u8fc7\u5408\u6210\u5f97\u5230\u5bf9\u5e94\u7b49\u7ea7\u7684\u5b9d\u77f3", 
         "buff_value": null, 
-        "sycee": null, 
+        "sycee": 10, 
         "name": "\u7480\u74a8\u593a\u76ee", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -2227,7 +2227,7 @@
     "fields": {
         "condition_name": "\u901a\u8fc7\u5408\u6210\u5f97\u5230\u5bf9\u5e94\u7b49\u7ea7\u7684\u5b9d\u77f3", 
         "buff_value": null, 
-        "sycee": null, 
+        "sycee": 10, 
         "name": "\u7480\u74a8\u593a\u76ee", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -2249,7 +2249,7 @@
     "fields": {
         "condition_name": "\u901a\u8fc7\u5408\u6210\u5f97\u5230\u5bf9\u5e94\u7b49\u7ea7\u7684\u5b9d\u77f3", 
         "buff_value": null, 
-        "sycee": null, 
+        "sycee": 10, 
         "name": "\u7480\u74a8\u593a\u76ee", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -2271,7 +2271,7 @@
     "fields": {
         "condition_name": "\u901a\u8fc7\u5408\u6210\u5f97\u5230\u5bf9\u5e94\u7b49\u7ea7\u7684\u5b9d\u77f3", 
         "buff_value": null, 
-        "sycee": null, 
+        "sycee": 10, 
         "name": "\u7480\u74a8\u593a\u76ee", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -2293,7 +2293,7 @@
     "fields": {
         "condition_name": "\u901a\u8fc7\u5408\u6210\u5f97\u5230\u5bf9\u5e94\u7b49\u7ea7\u7684\u5b9d\u77f3", 
         "buff_value": null, 
-        "sycee": null, 
+        "sycee": 10, 
         "name": "\u7480\u74a8\u593a\u76ee", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -2315,7 +2315,7 @@
     "fields": {
         "condition_name": "\u901a\u8fc7\u5408\u6210\u5f97\u5230\u5bf9\u5e94\u7b49\u7ea7\u7684\u5b9d\u77f3", 
         "buff_value": null, 
-        "sycee": null, 
+        "sycee": 10, 
         "name": "\u7480\u74a8\u593a\u76ee", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -2337,7 +2337,7 @@
     "fields": {
         "condition_name": "\u901a\u8fc7\u5408\u6210\u5f97\u5230\u5bf9\u5e94\u7b49\u7ea7\u7684\u5b9d\u77f3", 
         "buff_value": null, 
-        "sycee": null, 
+        "sycee": 10, 
         "name": "\u7480\u74a8\u593a\u76ee", 
         "package": "", 
         "tp_name": "\u6210\u957f\u5386\u7a0b", 
@@ -2711,7 +2711,7 @@
     "fields": {
         "condition_name": "\u7d2f\u79ef\u6d88\u8d39", 
         "buff_value": 100, 
-        "sycee": null, 
+        "sycee": 10, 
         "name": "\u6325\u91d1\u5982\u571f", 
         "package": "", 
         "tp_name": "\u7279\u6b8a\u4e8b\u4ef6", 
@@ -2733,7 +2733,7 @@
     "fields": {
         "condition_name": "\u7d2f\u79ef\u6d88\u8d39", 
         "buff_value": 100, 
-        "sycee": null, 
+        "sycee": 10, 
         "name": "\u6325\u91d1\u5982\u571f", 
         "package": "", 
         "tp_name": "\u7279\u6b8a\u4e8b\u4ef6", 
@@ -2755,7 +2755,7 @@
     "fields": {
         "condition_name": "\u7d2f\u79ef\u6d88\u8d39", 
         "buff_value": 100, 
-        "sycee": null, 
+        "sycee": 10, 
         "name": "\u6325\u91d1\u5982\u571f", 
         "package": "", 
         "tp_name": "\u7279\u6b8a\u4e8b\u4ef6", 
@@ -2777,7 +2777,7 @@
     "fields": {
         "condition_name": "\u7d2f\u79ef\u6d88\u8d39", 
         "buff_value": 100, 
-        "sycee": null, 
+        "sycee": 10, 
         "name": "\u6325\u91d1\u5982\u571f", 
         "package": "", 
         "tp_name": "\u7279\u6b8a\u4e8b\u4ef6", 
@@ -5424,7 +5424,7 @@
         "des": "\u83b7\u5f97100\u540d\u6b66\u5c06", 
         "buff_used_for": "", 
         "tp": 1, 
-        "next": 10101, 
+        "next": null, 
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "100", 

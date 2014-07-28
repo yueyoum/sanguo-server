@@ -90,7 +90,7 @@
     "fields": {
         "normal_drop": "301,110", 
         "normal_gold": 0, 
-        "bg": "\u5c71\u8def\u573a\u666f ", 
+        "bg": "\u5c71\u8def\u573a\u666f", 
         "strength_modulus": 1.6, 
         "level": 12, 
         "tp": 2, 
@@ -107,7 +107,7 @@
     "fields": {
         "normal_drop": "301,111", 
         "normal_gold": 0, 
-        "bg": "\u5c71\u8def\u573a\u666f ", 
+        "bg": "\u5c71\u8def\u573a\u666f", 
         "strength_modulus": 1.9, 
         "level": 22, 
         "tp": 2, 
@@ -124,7 +124,7 @@
     "fields": {
         "normal_drop": "302,112", 
         "normal_gold": 0, 
-        "bg": "\u5c71\u8def\u573a\u666f ", 
+        "bg": "\u5c71\u8def\u573a\u666f", 
         "strength_modulus": 2.2, 
         "level": 32, 
         "tp": 2, 
@@ -141,7 +141,7 @@
     "fields": {
         "normal_drop": "302,113", 
         "normal_gold": 0, 
-        "bg": "\u5c71\u8def\u573a\u666f ", 
+        "bg": "\u5c71\u8def\u573a\u666f", 
         "strength_modulus": 2.5, 
         "level": 42, 
         "tp": 2, 
@@ -158,7 +158,7 @@
     "fields": {
         "normal_drop": "303,114", 
         "normal_gold": 0, 
-        "bg": "\u5c71\u8def\u573a\u666f ", 
+        "bg": "\u5c71\u8def\u573a\u666f", 
         "strength_modulus": 2.8, 
         "level": 52, 
         "tp": 2, 
