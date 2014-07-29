@@ -173,9 +173,9 @@ class Arena(object):
         need_sycee = 0
 
         counter = Counter(self.char_id, 'arena')
-        if counter.remained_value < 0:
+        if counter.remained_value <= 0:
             counter = Counter(self.char_id, 'arena_buy')
-            if counter.remained_value < 0:
+            if counter.remained_value <= 0:
                 char = Char(self.char_id).mc
                 if char.vip < VIP_MAX_LEVEL:
                     raise SanguoException(
