@@ -305,6 +305,9 @@ class Equipment(MessageEquipmentMixin):
 
         return attrs
 
+    def get_embedded_gems(self):
+        return self.mongo_item.equipments[str(self.equip_id)].gems
+
     def send_update_notify(self):
         msg = protomsg.UpdateEquipNotify()
         msg_equip = msg.equips.add()
@@ -433,14 +436,21 @@ class Item(MessageEquipmentMixin):
                     "Equipment {0} in Formation, Can not sell".format(_id)
                 )
 
+        off_gems = {}
+
         gold = 0
         for _id in ids:
             e = Equipment(self.char_id, _id, self.item)
             gold += e.sell_gold()
+            for gid in e.get_embedded_gems():
+                if gid:
+                    off_gems[gid] = off_gems.get(gid, 0) + 1
 
         resource = Resource(self.char_id, "Equipment Sell", "equipments {0}".format(ids))
         resource.check_and_remove(equipments=list(ids))
         resource.add(gold=gold)
+
+        self.gem_add(off_gems.items())
 
 
     def equip_embed(self, _id, slot_id, gem_id):
