@@ -170,26 +170,12 @@ class Arena(object):
 
 
     def battle(self):
-        rival_id = self.choose_rival()
-        if not rival_id:
-            raise SanguoException(
-                errormsg.ARENA_NO_RIVAL,
-                self.char_id,
-                "Arena Battle",
-                "no rival."
-            )
+        need_sycee = 0
 
         counter = Counter(self.char_id, 'arena')
-        try:
-            # 免费次数
-            counter.incr()
-        except CounterOverFlow:
+        if counter.remained_value < 0:
             counter = Counter(self.char_id, 'arena_buy')
-
-            try:
-                # 花费元宝次数
-                counter.incr()
-            except CounterOverFlow:
+            if counter.remained_value < 0:
                 char = Char(self.char_id).mc
                 if char.vip < VIP_MAX_LEVEL:
                     raise SanguoException(
@@ -204,10 +190,23 @@ class Arena(object):
                     "Arena Battle",
                     "arena no times. vip reach max level {0}".format(VIP_MAX_LEVEL)
                 )
-
             else:
-                resource = Resource(self.char_id, "Arena Battle", "battle for no free times")
-                resource.check_and_remove(sycee=-ARENA_COST_SYCEE)
+                need_sycee = ARENA_COST_SYCEE
+
+        rival_id = self.choose_rival()
+        if not rival_id:
+            raise SanguoException(
+                errormsg.ARENA_NO_RIVAL,
+                self.char_id,
+                "Arena Battle",
+                "no rival."
+            )
+
+        if need_sycee:
+            resource = Resource(self.char_id, "Arena Battle", "battle for no free times")
+            resource.check_and_remove(sycee=-need_sycee)
+
+        counter.incr()
 
         # set battle cd
         redis_client.setex(REDIS_ARENA_BATTLE_CD_KEY(rival_id), 1, ARENA_CD)
