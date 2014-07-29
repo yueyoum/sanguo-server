@@ -21,7 +21,7 @@ class RequestFilter(object):
     def process_request(self, request):
         path = request.path
 
-        if path.startswith('/api/') or path.startswith('/system/'):
+        if path.startswith('/api/') or path.startswith('/system/') or path.startswith('/callback/'):
             return None
 
         if request.method != METHOD_POST:
