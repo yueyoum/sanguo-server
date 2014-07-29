@@ -106,7 +106,7 @@ class PurchaseAction(object):
         response = Purchase91ConfirmResponse()
         response.ret = res['ret']
         if res['ret']:
-            response.reason = res['data']['reason']
+            response.reason = res['data']['status']
 
         response.goods_id = res['data']['goods_id']
         return response
