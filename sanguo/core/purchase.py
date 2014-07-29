@@ -93,7 +93,7 @@ class PurchaseAction(object):
 
 
     def check_confirm(self):
-        res = api_purchase91_confirm(data={})
+        res = api_purchase91_confirm(data={'char_id': self.char_id})
         print "91 confirm"
         print res
 

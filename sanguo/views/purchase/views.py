@@ -81,6 +81,8 @@ def get_91_order_id(request):
             "get order id failure."
         )
 
+    PurchaseAction(request._char_id).set_has_unconfirmed()
+
     response = Purchase91GetOrderIdResponse()
     response.ret = 0
     response.order_id = res['data']['order_id']
@@ -89,8 +91,6 @@ def get_91_order_id(request):
 @message_response("Purchase91SuccessTo91Response")
 def purchase_91_success_to_91(request):
     req = request._proto
-
-    PurchaseAction(request._char_id).set_has_unconfirmed()
 
     data = {'order_id': req.order_id}
     api_purchase91_success91(data=data)
