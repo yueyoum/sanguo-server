@@ -7,7 +7,7 @@ __date__ = '14-6-30'
 from core.purchase import get_purchase_products, verify_buy, PurchaseAction
 from core.exception import SanguoException
 from utils.decorate import message_response
-from utils.api import api_purchase91_get_order_id, api_purchase91_success91
+from utils.api import api_purchase91_get_order_id
 
 from libs import pack_msg
 from protomsg import GetProductsResponse, BuyVerityResponse, Purchase91GetOrderIdResponse
@@ -81,20 +81,11 @@ def get_91_order_id(request):
             "get order id failure."
         )
 
-    PurchaseAction(request._char_id).set_has_unconfirmed()
-
     response = Purchase91GetOrderIdResponse()
     response.ret = 0
     response.order_id = res['data']['order_id']
     return pack_msg(response)
 
-@message_response("Purchase91SuccessTo91Response")
-def purchase_91_success_to_91(request):
-    req = request._proto
-
-    data = {'order_id': req.order_id}
-    api_purchase91_success91(data=data)
-    return None
 
 
 @message_response("Purchase91ConfirmResponse")

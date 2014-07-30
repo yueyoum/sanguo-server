@@ -91,7 +91,7 @@ LEVY_COST_SYCEE = (
     (20, 80)
 )
 # 征收获得计算公式， 参数为 主公等级
-LEVY_GOT_GOLD_FUNCTION = lambda level: 10000 + (level * 2)
+LEVY_GOT_GOLD_FUNCTION = lambda level: 10000 + (level * 200)
 
 
 

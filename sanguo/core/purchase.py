@@ -11,6 +11,7 @@ from core.resource import Resource
 from core.mongoscheme import MongoPurchaseRecord
 from core.msgpipe import publish_to_char
 from core.exception import SanguoException
+from core.mail import Mail
 
 from utils.api import api_purchase_done, api_purchase_products, api_purchase_verify, api_purchase91_confirm
 from utils import pack_msg
@@ -79,7 +80,6 @@ class PurchaseAction(object):
             self.mongo_record.yueka_sycee = 0
             self.mongo_record.yueka_remained_days = 0
             self.mongo_record.yueka_lock = False
-            self.mongo_record.has_unconfirmed = False
             self.mongo_record.save()
 
 
@@ -87,21 +87,10 @@ class PurchaseAction(object):
         return {int(k): v for k, v in self.mongo_record.times.iteritems()}
 
 
-    def set_has_unconfirmed(self):
-        self.mongo_record.has_unconfirmed = True
-        self.mongo_record.save()
-
-
     def check_confirm(self):
         res = api_purchase91_confirm(data={'char_id': self.char_id})
         print "91 confirm"
         print res
-
-        self.mongo_record.has_unconfirmed = res['data']['has_unconfirmed']
-        self.mongo_record.save()
-
-        if res['ret'] == 0 and res['data']['goods_id']:
-            self.send_reward(res['data']['goods_id'])
 
         response = Purchase91ConfirmResponse()
         response.ret = res['ret']
@@ -110,16 +99,6 @@ class PurchaseAction(object):
 
         response.goods_id = res['data']['goods_id']
         return response
-
-
-    def send_confirm_response(self):
-        msg = self.check_confirm()
-        publish_to_char(self.char_id, pack_msg(msg))
-
-
-    def login_process(self):
-        if self.mongo_record.has_unconfirmed:
-            self.send_confirm_response()
 
 
     def send_reward(self, goods_id):
@@ -137,6 +116,11 @@ class PurchaseAction(object):
         self.mongo_record.save()
 
         self.send_notify()
+
+        title = u'购买成功'
+        content = u'获得了: {0}'.format(p.first_des if p.first_des else p.des)
+        mail = Mail(self.char_id)
+        mail.add(title, content)
 
 
     def send_reward_yueka(self, goods_id, is_first):

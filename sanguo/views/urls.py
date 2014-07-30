@@ -92,4 +92,6 @@ urlpatterns += patterns('',
 
                         url(r'^api/ping/$', 'views.api.ping.views.ping'),
                         url(r'^api/server/feedback/$', 'views.api.server.views.feedback'),
+
+                        url(r'^api/purchase91/done/$', 'views.api.purchase.views.purchase91_done'),
 )

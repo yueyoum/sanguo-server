@@ -15,10 +15,8 @@ class MongoPurchaseRecord(Document):
     # 以保证正确设置days
     yueka_lock = BooleanField(default=False)
 
-    has_unconfirmed = BooleanField(default=False)
-
     meta = {
-        'collection': 'pruchase_record'
+        'collection': 'purchase_record'
     }
 
 
