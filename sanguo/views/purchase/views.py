@@ -3,7 +3,7 @@
 __author__ = 'Wang Chao'
 __date__ = '14-6-30'
 
-
+from core.server import server
 from core.purchase import get_purchase_products, verify_buy, PurchaseAction
 from core.exception import SanguoException
 from utils.decorate import message_response
@@ -59,6 +59,7 @@ def get_91_order_id(request):
         )
 
     data = {
+        'server_id': server.id,
         'char_id': request._char_id,
         'goods_id': goods_id,
     }
