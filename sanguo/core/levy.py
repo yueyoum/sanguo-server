@@ -67,6 +67,7 @@ class Levy(object):
             resource.add(gold=got_gold)
 
         self.send_notify()
+        return got_gold
 
     def send_notify(self):
         msg = LevyNotify()
