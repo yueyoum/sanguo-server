@@ -5,7 +5,7 @@ urlpatterns = patterns('',
                        url(r'^resume/$', 'views.world.views.resume'),
                        url(r'^sell/$', 'views.world.views.sell'),
                        url(r'^chat/send/$', 'views.chat.views.send'),
-                       url(r'^test/$', 'views.cmd.cmd'),
+                       # url(r'^test/$', 'views.cmd.cmd'),
 
                        url(r'^player/login/$', 'views.account.views.login'),
                        url(r'^player/bind/$', 'views.account.views.bind'),
