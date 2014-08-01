@@ -38,7 +38,7 @@ def hero_notify(char_id, objs, message_name="HeroNotify"):
         g.attack = int(obj.attack)
         g.defense = int(obj.defense)
         g.hp = int(obj.hp)
-        g.cirt = int(obj.crit * 100)
+        g.cirt = int(obj.crit * 10)
 
         g.step = obj.step
         g.power = obj.power

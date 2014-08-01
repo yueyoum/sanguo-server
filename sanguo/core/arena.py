@@ -268,8 +268,19 @@ class Arena(object):
 
             return template.format(record.name, record.old_score, record.new_score, des)
 
-        contents = [_make_content(record) for record in self.mongo_arena.beaten_record]
-        content = u'\n'.join(contents)
+        contents = [_make_content(record) for record in self.mongo_arena.beaten_record[-1:-5:-1]]
+
+        content_header = u'共受到{0}次挑战，积分从{1}变成{2}\n'.format(
+            len(self.mongo_arena.beaten_record),
+            self.mongo_arena.beaten_record[0].old_score,
+            self.mongo_arena.beaten_record[-1].new_score,
+        )
+
+        content_body = u'\n'.join(contents)
+
+        content = content_header + content_body
+        if len(self.mongo_arena.beaten_record) > 4:
+            content += u'\n...'
 
         Mail(self.char_id).add(MAIL_ARENA_BEATEN_TITLE, content, send_notify=False)
 
