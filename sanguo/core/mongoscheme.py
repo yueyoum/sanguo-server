@@ -3,6 +3,23 @@
 import core.drives
 from mongoengine import *
 
+class MongoPurchaseRecord(Document):
+    id = IntField(primary_key=True)
+    # times 记录每个商品购买的次数, key为商品ID, value为购买次数
+    times = DictField()
+
+    yueka_sycee = IntField(default=0)
+    yueka_remained_days = IntField(default=0)
+
+    # lock 用在多个进程同时处理 yueka_remained_days 用来互斥
+    # 以保证正确设置days
+    yueka_lock = BooleanField(default=False)
+
+    meta = {
+        'collection': 'purchase_record'
+    }
+
+
 
 class MongoFunctionOpen(Document):
     id = IntField(primary_key=True)

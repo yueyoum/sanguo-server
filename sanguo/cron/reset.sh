@@ -12,6 +12,7 @@ python cron/reset_stage_elite.py
 python cron/reset_task.py
 python cron/reset_store_player_limit.py
 python cron/reset_prize.py
+python cron/set_yueka.py
 
 exit 0
 

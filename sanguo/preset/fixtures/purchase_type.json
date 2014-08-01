@@ -1,0 +1,20 @@
+[
+{
+    "pk": 1, 
+    "model": "purchase.purchasetype", 
+    "fields": {
+        "day_sycee": 0, 
+        "name": "\u5143\u5b9d", 
+        "continued_days": 0
+    }
+},
+{
+    "pk": 2, 
+    "model": "purchase.purchasetype", 
+    "fields": {
+        "day_sycee": 100, 
+        "name": "\u6708\u5361", 
+        "continued_days": 30
+    }
+}
+]

@@ -64,11 +64,11 @@ def get_reward(request):
     standard_drop = p.get_reward(req.tp)
 
     response = PlunderGetRewardResponse()
+    response.ret = 0
     response.tp = req.tp
 
-    if req.tp == PLUNDER_HERO:
-        if not standard_drop['heros']:
-            response.ret = errormsg.PLUNDER_GET_REWARD_NO_PRISONER
+    if req.tp == PLUNDER_HERO and not standard_drop['heros']:
+        response.ret = errormsg.PLUNDER_GET_REWARD_NO_PRISONER
     else:
         response.reward.MergeFrom(standard_drop_to_attachment_protomsg(standard_drop))
 

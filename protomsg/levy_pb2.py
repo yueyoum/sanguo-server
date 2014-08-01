@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='levy.proto',
   package='Sanguo.protocol.levy',
-  serialized_pb='\n\nlevy.proto\x12\x14Sanguo.protocol.levy\"W\n\nLevyNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\ncost_sycee\x18\x02 \x02(\x05\x12\x11\n\tcur_times\x18\x03 \x02(\x05\x12\x11\n\tmax_times\x18\x04 \x02(\x05\"\x1e\n\x0bLevyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\",\n\x0cLevyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\nlevy.proto\x12\x14Sanguo.protocol.levy\"W\n\nLevyNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\ncost_sycee\x18\x02 \x02(\x05\x12\x11\n\tcur_times\x18\x03 \x02(\x05\x12\x11\n\tmax_times\x18\x04 \x02(\x05\"\x1e\n\x0bLevyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\":\n\x0cLevyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x0c\n\x04gold\x18\x03 \x01(\x05')
 
 
 
@@ -116,6 +116,13 @@ _LEVYRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='gold', full_name='Sanguo.protocol.levy.LevyResponse.gold', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -126,7 +133,7 @@ _LEVYRESPONSE = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=157,
-  serialized_end=201,
+  serialized_end=215,
 )
 
 DESCRIPTOR.message_types_by_name['LevyNotify'] = _LEVYNOTIFY

@@ -1,0 +1,104 @@
+[
+{
+    "pk": 1, 
+    "model": "purchase.purchase", 
+    "fields": {
+        "sycee": 300, 
+        "name": "\u6708\u5361(30\u5929)", 
+        "first_addition_sycee": 0, 
+        "addition_sycee": 0, 
+        "des": "\u8d60\u9001300\u5143\u5b9d\r\n\u6bcf\u5929\u989d\u5916\u9886\u53d6100\u5143\u5b9d", 
+        "tp": 2, 
+        "rmb": 28, 
+        "rate": 10, 
+        "first_des": "", 
+        "ios_id": "1", 
+        "icon": ""
+    }
+},
+{
+    "pk": 2, 
+    "model": "purchase.purchase", 
+    "fields": {
+        "sycee": 6480, 
+        "name": "6480\u5143\u5b9d", 
+        "first_addition_sycee": 6480, 
+        "addition_sycee": 1200, 
+        "des": "\u989d\u5916\u8d60\u90011200\u5143\u5b9d", 
+        "tp": 1, 
+        "rmb": 648, 
+        "rate": 10, 
+        "first_des": "\u9996\u6b21\u989d\u5916\u8d60\u90016480\u5143\u5b9d", 
+        "ios_id": "2", 
+        "icon": ""
+    }
+},
+{
+    "pk": 3, 
+    "model": "purchase.purchase", 
+    "fields": {
+        "sycee": 3280, 
+        "name": "3280\u5143\u5b9d", 
+        "first_addition_sycee": 3280, 
+        "addition_sycee": 600, 
+        "des": "\u989d\u5916\u8d60\u9001600\u5143\u5b9d", 
+        "tp": 1, 
+        "rmb": 328, 
+        "rate": 10, 
+        "first_des": "\u9996\u6b21\u989d\u5916\u8d60\u90013280\u5143\u5b9d", 
+        "ios_id": "3", 
+        "icon": ""
+    }
+},
+{
+    "pk": 4, 
+    "model": "purchase.purchase", 
+    "fields": {
+        "sycee": 980, 
+        "name": "980\u5143\u5b9d", 
+        "first_addition_sycee": 980, 
+        "addition_sycee": 200, 
+        "des": "\u989d\u5916\u8d60\u9001200\u5143\u5b9d", 
+        "tp": 1, 
+        "rmb": 98, 
+        "rate": 10, 
+        "first_des": "\u9996\u6b21\u989d\u5916\u8d60\u9001980\u5143\u5b9d", 
+        "ios_id": "4", 
+        "icon": ""
+    }
+},
+{
+    "pk": 5, 
+    "model": "purchase.purchase", 
+    "fields": {
+        "sycee": 300, 
+        "name": "300\u5143\u5b9d", 
+        "first_addition_sycee": 30, 
+        "addition_sycee": 30, 
+        "des": "\u989d\u5916\u8d60\u900130\u5143\u5b9d", 
+        "tp": 1, 
+        "rmb": 30, 
+        "rate": 10, 
+        "first_des": "\u989d\u5916\u8d60\u900130\u5143\u5b9d", 
+        "ios_id": "5", 
+        "icon": ""
+    }
+},
+{
+    "pk": 6, 
+    "model": "purchase.purchase", 
+    "fields": {
+        "sycee": 60, 
+        "name": "60\u5143\u5b9d", 
+        "first_addition_sycee": 0, 
+        "addition_sycee": 0, 
+        "des": "", 
+        "tp": 1, 
+        "rmb": 6, 
+        "rate": 10, 
+        "first_des": "60\u5143\u5b9d", 
+        "ios_id": "6", 
+        "icon": ""
+    }
+}
+]

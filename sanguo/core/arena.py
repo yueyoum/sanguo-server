@@ -170,26 +170,12 @@ class Arena(object):
 
 
     def battle(self):
-        rival_id = self.choose_rival()
-        if not rival_id:
-            raise SanguoException(
-                errormsg.ARENA_NO_RIVAL,
-                self.char_id,
-                "Arena Battle",
-                "no rival."
-            )
+        need_sycee = 0
 
         counter = Counter(self.char_id, 'arena')
-        try:
-            # 免费次数
-            counter.incr()
-        except CounterOverFlow:
+        if counter.remained_value <= 0:
             counter = Counter(self.char_id, 'arena_buy')
-
-            try:
-                # 花费元宝次数
-                counter.incr()
-            except CounterOverFlow:
+            if counter.remained_value <= 0:
                 char = Char(self.char_id).mc
                 if char.vip < VIP_MAX_LEVEL:
                     raise SanguoException(
@@ -204,10 +190,23 @@ class Arena(object):
                     "Arena Battle",
                     "arena no times. vip reach max level {0}".format(VIP_MAX_LEVEL)
                 )
-
             else:
-                resource = Resource(self.char_id, "Arena Battle", "battle for no free times")
-                resource.check_and_remove(sycee=-ARENA_COST_SYCEE)
+                need_sycee = ARENA_COST_SYCEE
+
+        rival_id = self.choose_rival()
+        if not rival_id:
+            raise SanguoException(
+                errormsg.ARENA_NO_RIVAL,
+                self.char_id,
+                "Arena Battle",
+                "no rival."
+            )
+
+        if need_sycee:
+            resource = Resource(self.char_id, "Arena Battle", "battle for no free times")
+            resource.check_and_remove(sycee=-need_sycee)
+
+        counter.incr()
 
         # set battle cd
         redis_client.setex(REDIS_ARENA_BATTLE_CD_KEY(rival_id), 1, ARENA_CD)
@@ -269,8 +268,19 @@ class Arena(object):
 
             return template.format(record.name, record.old_score, record.new_score, des)
 
-        contents = [_make_content(record) for record in self.mongo_arena.beaten_record]
-        content = u'\n'.join(contents)
+        contents = [_make_content(record) for record in self.mongo_arena.beaten_record[-1:-5:-1]]
+
+        content_header = u'共受到{0}次挑战，积分从{1}变成{2}\n'.format(
+            len(self.mongo_arena.beaten_record),
+            self.mongo_arena.beaten_record[0].old_score,
+            self.mongo_arena.beaten_record[-1].new_score,
+        )
+
+        content_body = u'\n'.join(contents)
+
+        content = content_header + content_body
+        if len(self.mongo_arena.beaten_record) > 4:
+            content += u'\n...'
 
         Mail(self.char_id).add(MAIL_ARENA_BEATEN_TITLE, content, send_notify=False)
 

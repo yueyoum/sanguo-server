@@ -618,22 +618,22 @@
         "stuffs": [], 
         "official_exp": 0
     }, 
-    "2081": {
+    "33": {
         "gems": [], 
         "sycee": 0, 
         "heros": [], 
         "gold": 0, 
-        "souls": [
-            {
-                "amount": 1, 
-                "id": 81, 
-                "prob": 50000
-            }
-        ], 
+        "souls": [], 
         "equipments": [], 
         "mode": 1, 
         "exp": 0, 
-        "stuffs": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 33, 
+                "prob": 100000
+            }
+        ], 
         "official_exp": 0
     }, 
     "2082": {
@@ -1618,6 +1618,24 @@
             {
                 "amount": 1, 
                 "id": 52, 
+                "prob": 50000
+            }
+        ], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "2081": {
+        "gems": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [
+            {
+                "amount": 1, 
+                "id": 81, 
                 "prob": 50000
             }
         ], 
@@ -5033,6 +5051,51 @@
                 "amount": 4, 
                 "id": 7, 
                 "prob": 100000
+            }, 
+            {
+                "amount": 5, 
+                "id": 34, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 6, 
+                "id": 34, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 7, 
+                "id": 34, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 3, 
+                "id": 37, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 5, 
+                "id": 37, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 6, 
+                "id": 37, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 3, 
+                "id": 7, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 5, 
+                "id": 7, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 6, 
+                "id": 7, 
+                "prob": 100000
             }
         ], 
         "equipments": [], 
@@ -5569,6 +5632,89 @@
                 "amount": 1, 
                 "id": 4, 
                 "prob": 15000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "5006": {
+        "gems": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [], 
+        "equipments": [], 
+        "mode": 2, 
+        "exp": 0, 
+        "stuffs": [
+            {
+                "amount": 8, 
+                "id": 1, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 4, 
+                "id": 2, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 3, 
+                "id": 3, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 2, 
+                "id": 4, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 30, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 24, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "5007": {
+        "gems": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "5008": {
+        "gems": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 32, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 27, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 4, 
+                "id": 11, 
+                "prob": 100000
             }
         ], 
         "official_exp": 0

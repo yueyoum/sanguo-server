@@ -5,7 +5,7 @@ urlpatterns = patterns('',
                        url(r'^resume/$', 'views.world.views.resume'),
                        url(r'^sell/$', 'views.world.views.sell'),
                        url(r'^chat/send/$', 'views.chat.views.send'),
-                       url(r'^test/$', 'views.cmd.cmd'),
+                       # url(r'^test/$', 'views.cmd.cmd'),
 
                        url(r'^player/login/$', 'views.account.views.login'),
                        url(r'^player/bind/$', 'views.account.views.bind'),
@@ -76,6 +76,10 @@ urlpatterns = patterns('',
 
                        url(r'^purchase/products/$', 'views.purchase.views.products'),
                        url(r'^purchase/verify/$', 'views.purchase.views.verify'),
+
+                       #91
+                       url(r'^purchase91/orderid/$', 'views.purchase.views.get_91_order_id'),
+                       url(r'^purchase91/confirm/$', 'views.purchase.views.purchase_91_confirm'),
 )
 
 
@@ -88,4 +92,6 @@ urlpatterns += patterns('',
 
                         url(r'^api/ping/$', 'views.api.ping.views.ping'),
                         url(r'^api/server/feedback/$', 'views.api.server.views.feedback'),
+
+                        url(r'^api/purchase91/done/$', 'views.api.purchase.views.purchase91_done'),
 )

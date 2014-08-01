@@ -305,6 +305,9 @@ class Equipment(MessageEquipmentMixin):
 
         return attrs
 
+    def get_embedded_gems(self):
+        return self.mongo_item.equipments[str(self.equip_id)].gems
+
     def send_update_notify(self):
         msg = protomsg.UpdateEquipNotify()
         msg_equip = msg.equips.add()
@@ -409,8 +412,7 @@ class Item(MessageEquipmentMixin):
         equip.step_up()
 
 
-
-    def equip_sell(self, ids):
+    def equip_check_sell(self, ids):
         if not isinstance(ids, (set, list, tuple)):
             ids = [ids]
 
@@ -421,7 +423,7 @@ class Item(MessageEquipmentMixin):
                 raise SanguoException(
                     errormsg.EQUIPMENT_NOT_EXIST,
                     self.char_id,
-                    "Equipment Sell",
+                    "Equipment Check Sell",
                     "Equipment {0} NOT exist".format(_id)
                 )
 
@@ -429,18 +431,32 @@ class Item(MessageEquipmentMixin):
                 raise SanguoException(
                     errormsg.EQUIPMENT_CANNOT_SELL_FORMATION,
                     self.char_id,
-                    "Equipment Sell",
+                    "Equipment Check Sell",
                     "Equipment {0} in Formation, Can not sell".format(_id)
                 )
+
+
+    def equip_sell(self, ids):
+        if not isinstance(ids, (set, list, tuple)):
+            ids = [ids]
+
+        self.equip_check_sell(ids)
+
+        off_gems = {}
 
         gold = 0
         for _id in ids:
             e = Equipment(self.char_id, _id, self.item)
             gold += e.sell_gold()
+            for gid in e.get_embedded_gems():
+                if gid:
+                    off_gems[gid] = off_gems.get(gid, 0) + 1
 
         resource = Resource(self.char_id, "Equipment Sell", "equipments {0}".format(ids))
         resource.check_and_remove(equipments=list(ids))
         resource.add(gold=gold)
+
+        self.gem_add(off_gems.items())
 
 
     def equip_embed(self, _id, slot_id, gem_id):
@@ -567,8 +583,27 @@ class Item(MessageEquipmentMixin):
             publish_to_char(self.char_id, pack_msg(msg))
 
 
+    def gem_check_sell(self, _id, _amount):
+        if not self.has_gem(_id, _amount):
+            raise SanguoException(
+                errormsg.GEM_NOT_EXIST,
+                self.char_id,
+                "Gem Check Sell",
+                "Gem {0}, amount {1} not exist/enough".format(_id, _amount)
+            )
+
     def gem_sell(self, _id, amount):
-        gold = 10 * amount
+        try:
+            this_gem = GEMS[_id]
+        except KeyError:
+            raise SanguoException(
+                errormsg.GEM_NOT_EXIST,
+                self.char_id,
+                "Gem Sell",
+                "Gem {0} not exist".format(_id)
+            )
+
+        gold = this_gem.sell_gold * amount
 
         resource = Resource(self.char_id, "Gem Sell", "sell: {0}, amount {1}".format(_id, amount))
         resource.check_and_remove(gems=[(_id, amount)])
@@ -712,10 +747,28 @@ class Item(MessageEquipmentMixin):
 
             publish_to_char(self.char_id, pack_msg(msg))
 
+    def stuff_check_sell(self, _id, amount):
+        if not self.has_stuff(_id, amount):
+            raise SanguoException(
+                errormsg.STUFF_NOT_EXIST,
+                self.char_id,
+                "Stuff Check Sell",
+                "Stuff {0}, amount {1} not exist/enough".format(_id, amount)
+            )
+
 
     def stuff_sell(self, _id, amount):
-        # TODO get gold
-        gold = 10 * amount
+        try:
+            this_stuff = STUFFS[_id]
+        except KeyError:
+            raise SanguoException(
+                errormsg.STUFF_NOT_EXIST,
+                self.char_id,
+                "Stuff Sell",
+                "Stuff {0} not exist".format(_id)
+            )
+
+        gold = this_stuff.sell_gold * amount
 
         resource = Resource(self.char_id, "Stuff Sell", "sell {0}, amount: {1}".format(_id, amount))
         resource.check_and_remove(stuffs=[(_id, amount)])
@@ -724,7 +777,7 @@ class Item(MessageEquipmentMixin):
 
 
     def stuff_use(self, _id, amount):
-        from core.attachment import get_drop, standard_drop_to_attachment_protomsg
+        from core.attachment import get_drop, standard_drop_to_attachment_protomsg, is_empty_drop
         from core.resource import Resource
         try:
             s = STUFFS[_id]
@@ -754,6 +807,9 @@ class Item(MessageEquipmentMixin):
 
         package_ids = [int(i) for i in packages.split(',')]
         prepare_drop = get_drop(package_ids)
+        if is_empty_drop(prepare_drop) and s.default_package:
+            package_ids = [s.default_package]
+            prepare_drop = get_drop(package_ids)
 
         resource = Resource(self.char_id, "Stuff Use", "use {0}".format(_id))
         standard_drop = resource.add(**prepare_drop)

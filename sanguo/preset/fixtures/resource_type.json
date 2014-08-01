@@ -19,7 +19,7 @@
     "pk": 3, 
     "model": "config.resourcetype", 
     "fields": {
-        "name": "\u91d1\u5e01", 
+        "name": "\u94f6\u4e24", 
         "icon": "Icon_\u94f6\u4e242"
     }
 },

@@ -18,7 +18,7 @@ def import_all_protos(msg_path, des):
 
 
 def set_response_notify_type(xml_src, des):
-    PATTERN = re.compile('\<protocol\s+name="([a-zA-Z]+(?:Response|Notify))"\s+type="(\d+)".+\>')
+    PATTERN = re.compile('\<protocol\s+name="(\w+(?:Response|Notify))"\s+type="(\d+)".+\>')
 
     msg_type = []
     msg_type.append("RESPONSE_NOTIFY_TYPE = {\n")
@@ -38,8 +38,7 @@ def set_response_notify_type(xml_src, des):
 
 
 def set_request_type(xml_src, des):
-    # PATTERN = re.compile('\<protocol\s+name="([a-zA-Z]+Request)"\s+type="(\d+)".+?method="((?:0|1))".+\>')
-    PATTERN = re.compile('\<protocol\s+name="([a-zA-Z]+Request)"\s+type="(\d+)".+\>')
+    PATTERN = re.compile('\<protocol\s+name="(\w+Request)"\s+type="(\d+)".+\>')
 
     msg_type = []
     msg_type.append("REQUEST_TYPE = {\n")
@@ -69,7 +68,7 @@ def set_request_type(xml_src, des):
 
 
 def set_type_command(xml_src, des):
-    PATTERN = re.compile('\<protocol\s+name="(?:[a-zA-Z]+Request)"\s+type="(\d+)"\s+command="(/[a-z\-/]+/)".+\>')
+    PATTERN = re.compile('\<protocol\s+name="(?:\w+Request)"\s+type="(\d+)"\s+command="(/[\w/\-]+/)".+\>')
 
     type_command = []
     type_command.append("TYPE_COMMAND = {\n")

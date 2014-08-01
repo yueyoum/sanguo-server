@@ -21,7 +21,7 @@
     "pk": 2, 
     "model": "stage.stagetype", 
     "fields": {
-        "des": "\u91d1\u5e01\u4ea7\u91cf+20%", 
+        "des": "\u94f6\u4e24\u4ea7\u91cf+20%", 
         "resource": 3, 
         "value": 20
     }

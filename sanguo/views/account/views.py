@@ -12,27 +12,30 @@ from core.server import server
 from utils.decorate import message_response
 from libs import crypto, pack_msg
 from libs.session import GameSession, session_dumps
+from libs.helpers import make_account_dict_from_message
 
-from protomsg import StartGameResponse, SyncResponse, BindAccountResponse
+from protomsg import StartGameResponse, SyncResponse, BindAccountResponse, Login as LoginMsg
 from utils.api import api_account_login, api_account_bind, APIFailure
 from preset import errormsg
 
 @message_response("StartGameResponse")
 def login(request):
     req = request._proto
-    data = {}
-    data['server_id'] = server.id
-
-    if req.regular.email:
-        data['method'] = 'regular'
-        data['name'] = req.regular.email
-        data['password'] = req.regular.password
-    else:
-        data['method'] = 'anonymous'
-        data['token'] = req.anonymous.device_token
 
     try:
-        res = api_account_login(data)
+        account_data = make_account_dict_from_message(req.login)
+    except Exception as e:
+        raise SanguoException(
+            errormsg.BAD_MESSAGE,
+            0,
+            'Login',
+            e.args[0]
+        )
+
+    account_data['server_id'] = server.id
+
+    try:
+        res = api_account_login(data=account_data)
     except APIFailure:
         raise SanguoException(
             errormsg.SERVER_FAULT,
@@ -76,11 +79,8 @@ def login(request):
 
     response = StartGameResponse()
     response.ret = 0
-    if req.regular.email:
-        response.regular.MergeFrom(req.regular)
-    else:
-        response.anonymous.device_token = str(new_token)
 
+    response.login.MergeFrom(make_login_response_msg(req.login, new_token))
     response.need_create_new_char = char_id == 0
 
     sync = SyncResponse()
@@ -89,6 +89,14 @@ def login(request):
 
     return [pack_msg(response, session), pack_msg(sync)]
 
+
+def make_login_response_msg(req_msg, new_token):
+    if req_msg.tp != LoginMsg.NOACCOUNT:
+        return req_msg
+
+    req_msg.tp = LoginMsg.ANONYMOUS
+    req_msg.anonymous.device_token = str(new_token)
+    return req_msg
 
 
 @message_response("BindAccountResponse")
