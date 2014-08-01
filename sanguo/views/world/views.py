@@ -64,8 +64,30 @@ def sell(request):
 
     item = Item(char_id)
 
+    # check
     for ele in req.elements:
-        # XXX
+        if ele.tp == 1:
+            print "NOT SUPPORT SELL HERO"
+            continue
+
+        if ele.tp == 2:
+            print "NOT SUPPORT SELL SOUL"
+            continue
+
+        if ele.tp == 3:
+            item.equip_check_sell([ele.id])
+            continue
+
+        if ele.tp == 4:
+            item.gem_check_sell(ele.id, ele.amount)
+            continue
+
+        if ele.tp == 5:
+            item.stuff_check_sell(ele.id, ele.amount)
+            continue
+
+    # sell
+    for ele in req.elements:
         if ele.tp == 1:
             print "NOT SUPPORT SELL HERO"
             continue

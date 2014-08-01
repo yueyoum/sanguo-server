@@ -412,8 +412,7 @@ class Item(MessageEquipmentMixin):
         equip.step_up()
 
 
-
-    def equip_sell(self, ids):
+    def equip_check_sell(self, ids):
         if not isinstance(ids, (set, list, tuple)):
             ids = [ids]
 
@@ -424,7 +423,7 @@ class Item(MessageEquipmentMixin):
                 raise SanguoException(
                     errormsg.EQUIPMENT_NOT_EXIST,
                     self.char_id,
-                    "Equipment Sell",
+                    "Equipment Check Sell",
                     "Equipment {0} NOT exist".format(_id)
                 )
 
@@ -432,9 +431,16 @@ class Item(MessageEquipmentMixin):
                 raise SanguoException(
                     errormsg.EQUIPMENT_CANNOT_SELL_FORMATION,
                     self.char_id,
-                    "Equipment Sell",
+                    "Equipment Check Sell",
                     "Equipment {0} in Formation, Can not sell".format(_id)
                 )
+
+
+    def equip_sell(self, ids):
+        if not isinstance(ids, (set, list, tuple)):
+            ids = [ids]
+
+        self.equip_check_sell(ids)
 
         off_gems = {}
 
@@ -577,8 +583,27 @@ class Item(MessageEquipmentMixin):
             publish_to_char(self.char_id, pack_msg(msg))
 
 
+    def gem_check_sell(self, _id, _amount):
+        if not self.has_gem(_id, _amount):
+            raise SanguoException(
+                errormsg.GEM_NOT_EXIST,
+                self.char_id,
+                "Gem Check Sell",
+                "Gem {0}, amount {1} not exist/enough".format(_id, _amount)
+            )
+
     def gem_sell(self, _id, amount):
-        gold = 10 * amount
+        try:
+            this_gem = GEMS[_id]
+        except KeyError:
+            raise SanguoException(
+                errormsg.GEM_NOT_EXIST,
+                self.char_id,
+                "Gem Sell",
+                "Gem {0} not exist".format(_id)
+            )
+
+        gold = this_gem.sell_gold * amount
 
         resource = Resource(self.char_id, "Gem Sell", "sell: {0}, amount {1}".format(_id, amount))
         resource.check_and_remove(gems=[(_id, amount)])
@@ -722,10 +747,28 @@ class Item(MessageEquipmentMixin):
 
             publish_to_char(self.char_id, pack_msg(msg))
 
+    def stuff_check_sell(self, _id, amount):
+        if not self.has_stuff(_id, amount):
+            raise SanguoException(
+                errormsg.STUFF_NOT_EXIST,
+                self.char_id,
+                "Stuff Check Sell",
+                "Stuff {0}, amount {1} not exist/enough".format(_id, amount)
+            )
+
 
     def stuff_sell(self, _id, amount):
-        # TODO get gold
-        gold = 10 * amount
+        try:
+            this_stuff = STUFFS[_id]
+        except KeyError:
+            raise SanguoException(
+                errormsg.STUFF_NOT_EXIST,
+                self.char_id,
+                "Stuff Sell",
+                "Stuff {0} not exist".format(_id)
+            )
+
+        gold = this_stuff.sell_gold * amount
 
         resource = Resource(self.char_id, "Stuff Sell", "sell {0}, amount: {1}".format(_id, amount))
         resource.check_and_remove(stuffs=[(_id, amount)])
