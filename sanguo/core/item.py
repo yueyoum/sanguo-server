@@ -777,7 +777,7 @@ class Item(MessageEquipmentMixin):
 
 
     def stuff_use(self, _id, amount):
-        from core.attachment import get_drop, standard_drop_to_attachment_protomsg
+        from core.attachment import get_drop, standard_drop_to_attachment_protomsg, is_empty_drop
         from core.resource import Resource
         try:
             s = STUFFS[_id]
@@ -807,6 +807,9 @@ class Item(MessageEquipmentMixin):
 
         package_ids = [int(i) for i in packages.split(',')]
         prepare_drop = get_drop(package_ids)
+        if is_empty_drop(prepare_drop) and s.default_package:
+            package_ids = [s.default_package]
+            prepare_drop = get_drop(package_ids)
 
         resource = Resource(self.char_id, "Stuff Use", "use {0}".format(_id))
         standard_drop = resource.add(**prepare_drop)

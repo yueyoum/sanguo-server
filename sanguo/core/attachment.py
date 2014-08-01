@@ -58,6 +58,17 @@ def make_standard_drop_from_template():
         'stuffs': [],
     }
 
+
+def is_empty_drop(drop):
+    keys = make_standard_drop_from_template().keys()
+    for k in keys:
+        if drop.get('k', None):
+            return False
+
+    return True
+
+
+
 def standard_drop_to_attachment_protomsg(data):
     # data is dict, {
     # 'gold': 0,
