@@ -4,12 +4,13 @@
     "model": "purchase.purchase", 
     "fields": {
         "sycee": 300, 
-        "name": "", 
+        "name": "\u6708\u5361(30\u5929)", 
         "first_addition_sycee": 0, 
         "addition_sycee": 0, 
-        "des": "\u8d2d\u4e70\u83b7\u5f97300\u5143\u5b9d\u5e76\u8fde\u7eed30\u5929\u6bcf\u5929\u9886\u53d6100\u5143\u5b9d", 
+        "des": "\u8d60\u9001300\u5143\u5b9d\r\n\u6bcf\u5929\u989d\u5916\u9886\u53d6100\u5143\u5b9d", 
         "tp": 2, 
         "rmb": 28, 
+        "rate": 10, 
         "first_des": "", 
         "ios_id": "1", 
         "icon": ""
@@ -20,13 +21,14 @@
     "model": "purchase.purchase", 
     "fields": {
         "sycee": 6480, 
-        "name": "", 
+        "name": "6480\u5143\u5b9d", 
         "first_addition_sycee": 6480, 
         "addition_sycee": 1200, 
-        "des": "6480\u5143\u5b9d\uff08\u989d\u5916\u8d60\u90011200\u5143\u5b9d\uff09", 
+        "des": "\u989d\u5916\u8d60\u90011200\u5143\u5b9d", 
         "tp": 1, 
         "rmb": 648, 
-        "first_des": "6480\u5143\u5b9d\uff08\u9996\u6b21\u989d\u5916\u8d60\u90016480\u5143\u5b9d\uff09", 
+        "rate": 10, 
+        "first_des": "\u9996\u6b21\u989d\u5916\u8d60\u90016480\u5143\u5b9d", 
         "ios_id": "2", 
         "icon": ""
     }
@@ -36,13 +38,14 @@
     "model": "purchase.purchase", 
     "fields": {
         "sycee": 3280, 
-        "name": "", 
+        "name": "3280\u5143\u5b9d", 
         "first_addition_sycee": 3280, 
         "addition_sycee": 600, 
-        "des": "3280\u5143\u5b9d\uff08\u989d\u5916\u8d60\u9001600\u5143\u5b9d\uff09", 
+        "des": "\u989d\u5916\u8d60\u9001600\u5143\u5b9d", 
         "tp": 1, 
         "rmb": 328, 
-        "first_des": "3280\u5143\u5b9d\uff08\u9996\u6b21\u989d\u5916\u8d60\u90013280\u5143\u5b9d\uff09", 
+        "rate": 10, 
+        "first_des": "\u9996\u6b21\u989d\u5916\u8d60\u90013280\u5143\u5b9d", 
         "ios_id": "3", 
         "icon": ""
     }
@@ -52,13 +55,14 @@
     "model": "purchase.purchase", 
     "fields": {
         "sycee": 980, 
-        "name": "", 
+        "name": "980\u5143\u5b9d", 
         "first_addition_sycee": 980, 
         "addition_sycee": 200, 
-        "des": "980\u5143\u5b9d\uff08\u989d\u5916\u8d60\u9001200\u5143\u5b9d\uff09", 
+        "des": "\u989d\u5916\u8d60\u9001200\u5143\u5b9d", 
         "tp": 1, 
         "rmb": 98, 
-        "first_des": "980\u5143\u5b9d\uff08\u9996\u6b21\u989d\u5916\u8d60\u9001980\u5143\u5b9d\uff09", 
+        "rate": 10, 
+        "first_des": "\u9996\u6b21\u989d\u5916\u8d60\u9001980\u5143\u5b9d", 
         "ios_id": "4", 
         "icon": ""
     }
@@ -68,13 +72,14 @@
     "model": "purchase.purchase", 
     "fields": {
         "sycee": 300, 
-        "name": "", 
+        "name": "300\u5143\u5b9d", 
         "first_addition_sycee": 30, 
         "addition_sycee": 30, 
-        "des": "300\u5143\u5b9d\uff08\u989d\u5916\u8d60\u900130\u5143\u5b9d\uff09", 
+        "des": "\u989d\u5916\u8d60\u900130\u5143\u5b9d", 
         "tp": 1, 
         "rmb": 30, 
-        "first_des": "300\u5143\u5b9d\uff08\u989d\u5916\u8d60\u900130\u5143\u5b9d\uff09", 
+        "rate": 10, 
+        "first_des": "\u989d\u5916\u8d60\u900130\u5143\u5b9d", 
         "ios_id": "5", 
         "icon": ""
     }
@@ -84,12 +89,13 @@
     "model": "purchase.purchase", 
     "fields": {
         "sycee": 60, 
-        "name": "", 
+        "name": "60\u5143\u5b9d", 
         "first_addition_sycee": 0, 
         "addition_sycee": 0, 
-        "des": "60\u5143\u5b9d", 
+        "des": "", 
         "tp": 1, 
         "rmb": 6, 
+        "rate": 10, 
         "first_des": "60\u5143\u5b9d", 
         "ios_id": "6", 
         "icon": ""
