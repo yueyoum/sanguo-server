@@ -26,6 +26,15 @@ class DizzinessEvent(Exception):
     pass
 
 
+def _empty_step_msg_check(func):
+    def deco(self, *args, **kwargs):
+        msg = func(self, *args, **kwargs)
+        if not msg.action.IsInitialized() and len(msg.hero_notify) == 0 and len(msg.dead_ids) == 0:
+            # empty step msg, remove it
+            self.ground_msg.steps.remove(msg)
+        return msg
+    return deco
+
 
 class DotEffectMixin(object):
     def active_dot_effects(self, target, eff, msg):
@@ -197,7 +206,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         return [self.default_skill]
 
 
-
+    @_empty_step_msg_check
     def action(self, target):
         # self._round += 1
         # 英雄行动，首先清理本英雄所施加在其他人身上的效果
@@ -208,16 +217,16 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
         if self.die:
             logger.debug("%d: die, return" % self.id)
-            return
+            return msg
 
         try:
             self.active_initiative_effects(msg)
         except DieEvent:
             logger.debug("%d: die, return" % self.id)
-            return
+            return msg
         except DizzinessEvent:
             logger.debug("%d: dizziness, return" % self.id)
-            return
+            return msg
 
         skills = self.find_skill(self.attack_skills)
         for skill in skills:
@@ -225,9 +234,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
             _dead_ids = self.skill_action(target, skill, msg)
             msg.dead_ids.extend(_dead_ids)
 
-        if not msg.action.IsInitialized() and len(msg.hero_notify) == 0 and len(msg.dead_ids) == 0:
-            # empty step msg, remove it
-            self.ground_msg.steps.remove(msg)
+        return msg
 
 
     def real_damage_value(self, damage, target):
