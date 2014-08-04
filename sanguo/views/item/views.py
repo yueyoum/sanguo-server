@@ -8,7 +8,7 @@ from utils.decorate import message_response, function_check
 from core.item import Item
 from libs import pack_msg
 
-from protomsg import StrengthEquipResponse, StuffUseResponse
+from protomsg import StrengthEquipResponse, StuffUseResponse, MergeGemResponse
 
 
 @message_response("StrengthEquipResponse")
@@ -61,8 +61,12 @@ def unembed(request):
 def merge(request):
     req = request._proto
     item = Item(request._char_id)
-    item.gem_merge(req.id)
-    return None
+    new_id = item.gem_merge(req.id)
+
+    response = MergeGemResponse()
+    response.ret = 0
+    response.new_id = new_id
+    return pack_msg(response)
 
 
 @message_response("StuffUseResponse")

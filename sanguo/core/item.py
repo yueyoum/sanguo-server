@@ -648,6 +648,7 @@ class Item(MessageEquipmentMixin):
 
         t = Task(self.char_id)
         t.trig(4)
+        return to_id
 
 
     def stuff_add(self, add_stuffs, send_notify=True):
