@@ -225,6 +225,10 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
             _dead_ids = self.skill_action(target, skill, msg)
             msg.dead_ids.extend(_dead_ids)
 
+        if not msg.action.IsInitialized() and len(msg.hero_notify) == 0 and len(msg.dead_ids) == 0:
+            # empty step msg, remove it
+            self.ground_msg.steps.remove(msg)
+
 
     def real_damage_value(self, damage, target):
         m = 0.06  # 等级压制
