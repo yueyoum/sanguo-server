@@ -162,12 +162,7 @@ class Task(object):
 
 
     def all_complete(self):
-        for tid in self.task.doing:
-            this_task = TASKS[tid]
-            if this_task.next_task:
-                return False
-
-        return True
+        return set(self.task.doing) == set(self.task.complete)
 
 
     def send_notify(self):
