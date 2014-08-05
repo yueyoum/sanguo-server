@@ -62,7 +62,7 @@ def make_standard_drop_from_template():
 def is_empty_drop(drop):
     keys = make_standard_drop_from_template().keys()
     for k in keys:
-        if drop.get('k', None):
+        if drop.get(k, None):
             return False
 
     return True
