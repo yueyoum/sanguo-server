@@ -146,7 +146,7 @@
         "mode": 1, 
         "cast_animation": "Step_Forward", 
         "mode_name": "\u4e3b\u52a8", 
-        "attack_effect": "SF_SF_water"
+        "attack_effect": "SF_/SF_water"
     }
 },
 {
@@ -732,7 +732,7 @@
         "prepare_effect": "B_/B_buff", 
         "hits": 1, 
         "hit_effect": "BUFF_/BUFF_Rage", 
-        "name": "[4795ff]\u9635\u6cd5\u00b7\u636e\u5b88[-]", 
+        "name": "[4795ff]\u9635\u00b7\u636e\u5b88[-]", 
         "anger_self_team": 25, 
         "war_cry": false, 
         "skill_range": 2, 
@@ -757,7 +757,7 @@
         "prepare_effect": "B_/B_buff", 
         "hits": 1, 
         "hit_effect": "BUFF_/BUFF_Rage", 
-        "name": "[4795ff]\u9635\u6cd5\u00b7\u5f3a\u653b[-]", 
+        "name": "[4795ff]\u9635\u00b7\u5f3a\u653b[-]", 
         "anger_self_team": 10, 
         "war_cry": false, 
         "skill_range": 2, 
@@ -782,7 +782,7 @@
         "prepare_effect": "B_/B_buff", 
         "hits": 1, 
         "hit_effect": "BUFF_/BUFF_Rage", 
-        "name": "[4795ff]\u9635\u6cd5\u00b7\u638e\u89d2\u4e4b\u52bf[-]", 
+        "name": "[4795ff]\u9635\u00b7\u638e\u89d2[-]", 
         "anger_self_team": 25, 
         "war_cry": false, 
         "skill_range": 2, 
