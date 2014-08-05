@@ -1,0 +1,9 @@
+/PATH/xxx.log {
+    daily
+    dateext
+    copytruncate
+    nocompress
+    missingok
+    rotate 7
+    su developer developer
+}
