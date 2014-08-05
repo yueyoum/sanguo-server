@@ -301,7 +301,8 @@ class Equipment(MessageEquipmentMixin):
 
         # 暴击修正
         if 'crit' in attrs:
-            attrs['crit'] = int((1 - pow(0.99, attrs['crit'] / 10.0)) * 100)
+            crit = (1 - pow(0.99, attrs['crit'] / 10.0)) * 100
+            attrs['crit'] = round(crit, 2)
 
         return attrs
 

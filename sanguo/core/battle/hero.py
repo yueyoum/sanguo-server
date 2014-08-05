@@ -265,7 +265,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         target.active_property_effects()
 
         is_crit = False
-        if self.using_crit >= randint(1, 100):
+        if self.using_crit >= uniform(1, 100):
             is_crit = True
             value *= 2
 
