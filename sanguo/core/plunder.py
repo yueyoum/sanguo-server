@@ -101,6 +101,16 @@ class Plunder(object):
         return res
 
 
+    def _get_plunder_gold(self, char_id, vip_plus=0):
+        max_star_stage = max_star_stage_id(self.char_id)
+        if not max_star_stage:
+            return 0
+
+        gold = STAGES[max_star_stage].normal_gold
+        gold = gold * 400 * random.uniform(1.0, 1.2) * (1+vip_plus/100.0)
+        return int(gold)
+
+
     def plunder(self, _id):
         if str(_id) not in self.mongo_plunder.chars:
             raise SanguoException(
@@ -158,6 +168,8 @@ class Plunder(object):
 
             drop_official_exp = PLUNDER_GET_OFFICIAL_EXP_WHEN_WIN
             drop_gold = PLUNDER_DEFENSE_FAILURE_GOLD
+            if self.mongo_plunder.chars[str(_id)].is_hang:
+                drop_gold += self._get_plunder_gold(_id)
 
             resource = Resource(self.char_id, "Plunder")
             standard_drop = resource.add(gold=drop_gold, official_exp=drop_official_exp)
@@ -204,15 +216,6 @@ class Plunder(object):
         char = Char(self.char_id).mc
         vip_plus = VIP_FUNCTION[char.vip].plunder_addition
 
-        def _get_gold():
-            max_star_stage = max_star_stage_id(self.char_id)
-            if not max_star_stage:
-                return 0
-
-            gold = STAGES[max_star_stage].normal_gold
-            gold = gold * 400 * random.uniform(1.0, 1.2) * (1+vip_plus/100.0)
-            return int(gold)
-
         def _get_prisoner(target_char_id):
             f = Formation(target_char_id)
             heros = f.in_formation_hero_original_ids()
@@ -226,7 +229,7 @@ class Plunder(object):
 
             return 0
 
-        plunder_gold = _get_gold()
+        plunder_gold = self._get_plunder_gold(self.mongo_plunder.target_char, vip_plus)
         standard_drop = make_standard_drop_from_template()
 
         got_hero_id = 0
