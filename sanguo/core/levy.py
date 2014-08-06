@@ -10,6 +10,7 @@ from core.msgpipe import publish_to_char
 from core.exception import SanguoException
 from core.resource import Resource
 from core.counter import Counter
+from core.task import Task
 from utils import pack_msg
 from protomsg import LevyNotify
 from preset import errormsg
@@ -65,6 +66,9 @@ class Levy(object):
 
             self.counter.incr()
             resource.add(gold=got_gold)
+
+        t = Task(self.char_id)
+        t.trig(4)
 
         self.send_notify()
         return got_gold

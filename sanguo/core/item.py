@@ -647,8 +647,6 @@ class Item(MessageEquipmentMixin):
         achievement.trig(25, 1)
         achievement.trig(26, to_gem_obj.level)
 
-        t = Task(self.char_id)
-        t.trig(4)
         return to_id
 
 
