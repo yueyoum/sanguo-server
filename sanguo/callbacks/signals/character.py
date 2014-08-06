@@ -30,8 +30,9 @@ def _char_official_up(char_id, new_official, **kwargs):
 
 
 def _char_gold_changed(char_id, now_value, change_value, **kwargs):
-    achievement = Achievement(char_id)
-    achievement.trig(32, now_value)
+    if change_value < 0:
+        achievement = Achievement(char_id)
+        achievement.trig(32, change_value)
 
 
 def _char_sycee_changed(char_id, now_value, change_value, **kwargs):
