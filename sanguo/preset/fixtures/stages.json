@@ -3,7 +3,7 @@
     "pk": 1, 
     "model": "stage.stage", 
     "fields": {
-        "normal_drop": "1,101", 
+        "normal_drop": "1,101,5005,5005", 
         "star_gold": 2000, 
         "normal_gold": 8, 
         "bg": "\u539f\u91ce", 

@@ -23,7 +23,7 @@
     "pk": 3, 
     "model": "skill.effect", 
     "fields": {
-        "des": "\u653b\u51fb\u2191", 
+        "des": "\u653b\u51fbS", 
         "buff_icon": "", 
         "name": "\u70ed\u8840", 
         "special": "BUFF_/BUFF_attack"
@@ -33,7 +33,7 @@
     "pk": 4, 
     "model": "skill.effect", 
     "fields": {
-        "des": "\u653b\u51fb\u2193", 
+        "des": "\u653b\u51fbB", 
         "buff_icon": "", 
         "name": "\u8131\u529b", 
         "special": ""
@@ -43,7 +43,7 @@
     "pk": 5, 
     "model": "skill.effect", 
     "fields": {
-        "des": "\u9632\u5fa1\u2191", 
+        "des": "\u9632\u5fa1S", 
         "buff_icon": "", 
         "name": "\u56fa\u9632", 
         "special": "BUFF_/BUFF_Shield"
@@ -53,7 +53,7 @@
     "pk": 6, 
     "model": "skill.effect", 
     "fields": {
-        "des": "\u9632\u5fa1\u2193", 
+        "des": "\u9632\u5fa1B", 
         "buff_icon": "", 
         "name": "\u7834\u7532", 
         "special": ""
@@ -63,7 +63,7 @@
     "pk": 7, 
     "model": "skill.effect", 
     "fields": {
-        "des": "\u66b4\u51fb\u2191", 
+        "des": "\u66b4\u51fbS", 
         "buff_icon": "", 
         "name": "\u9f13\u821e", 
         "special": ""
@@ -73,7 +73,7 @@
     "pk": 8, 
     "model": "skill.effect", 
     "fields": {
-        "des": "\u66b4\u51fb\u2193", 
+        "des": "\u66b4\u51fbB", 
         "buff_icon": "", 
         "name": "\u865a\u5f31", 
         "special": ""
