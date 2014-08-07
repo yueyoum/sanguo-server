@@ -254,24 +254,24 @@
     "model": "skill.skill", 
     "fields": {
         "target_animation": "Multiple_Hit", 
-        "prepare_effect": "B_/B_fire", 
+        "prepare_effect": "", 
         "hits": 2, 
-        "hit_effect": "H_/H_attack03", 
+        "hit_effect": "", 
         "name": "[ffb902]\u771f\u00b7\u5043\u6708\u5200\u6cd5[-]", 
         "anger_self_team": 0, 
         "war_cry": false, 
-        "skill_range": 1, 
-        "des": "[ffb902]\u771f\u00b7\u5043\u6708\u5200\u6cd5[-]\uff1a\u5bf9\u76ee\u6807\u654c\u4eba\u9020\u6210\u4e2d\u91cf\u4f24\u5bb3\u5e76\u964d\u4f4e\u9632\u5fa1\uff0c\u6548\u679c\u53ef\u53e0\u52a0\u3002", 
-        "anger_self": 40, 
+        "skill_range": 2, 
+        "des": "[ffb902]\u771f\u00b7\u5043\u6708\u5200\u6cd5[-]\uff1a\u5bf9\u654c\u65b9\u5168\u4f53\u9020\u6210\u4e2d\u91cf\u4f24\u5bb3\u5e76\u964d\u4f4e\u9632\u5fa1\uff0c\u6548\u679c\u53ef\u53e0\u52a0\u3002", 
+        "anger_self": 0, 
         "prob": 100, 
         "trig_start": 1, 
-        "cast_type": 1, 
+        "cast_type": 2, 
         "trig_cooldown": 2, 
         "anger_rival_team": -20, 
         "mode": 1, 
-        "cast_animation": "Swing", 
+        "cast_animation": "Step_Forward", 
         "mode_name": "\u4e3b\u52a8", 
-        "attack_effect": ""
+        "attack_effect": "SP_/SP_qinglong"
     }
 },
 {
@@ -279,24 +279,24 @@
     "model": "skill.skill", 
     "fields": {
         "target_animation": "Multiple_Hit", 
-        "prepare_effect": "B_/B_fire", 
+        "prepare_effect": "", 
         "hits": 2, 
-        "hit_effect": "H_/H_attack04", 
+        "hit_effect": "", 
         "name": "[ffb902]\u5043\u6708\u5200\u6cd5[-]", 
         "anger_self_team": 0, 
         "war_cry": false, 
-        "skill_range": 1, 
-        "des": "[ffb902]\u5043\u6708\u5200\u6cd5[-]\uff1a\u5bf9\u76ee\u6807\u654c\u4eba\u9020\u6210\u4e2d\u91cf\u4f24\u5bb3\u5e76\u964d\u4f4e\u9632\u5fa1\uff0c\u6548\u679c\u53ef\u53e0\u52a0\u3002", 
-        "anger_self": 30, 
+        "skill_range": 2, 
+        "des": "[ffb902]\u5043\u6708\u5200\u6cd5[-]\uff1a\u5bf9\u654c\u519b\u5168\u4f53\u9020\u6210\u4e2d\u91cf\u4f24\u5bb3\u5e76\u964d\u4f4e\u9632\u5fa1\uff0c\u6548\u679c\u53ef\u53e0\u52a0\u3002", 
+        "anger_self": 0, 
         "prob": 80, 
         "trig_start": 2, 
-        "cast_type": 1, 
+        "cast_type": 2, 
         "trig_cooldown": 2, 
         "anger_rival_team": -20, 
         "mode": 1, 
-        "cast_animation": "Swing", 
+        "cast_animation": "Step_Forward", 
         "mode_name": "\u4e3b\u52a8", 
-        "attack_effect": ""
+        "attack_effect": "SP_/SP_qinglong"
     }
 },
 {
@@ -354,9 +354,9 @@
     "model": "skill.skill", 
     "fields": {
         "target_animation": "Normal_Hit", 
-        "prepare_effect": "B_/B_H+B+M", 
+        "prepare_effect": "", 
         "hits": 1, 
-        "hit_effect": "H_/H_dizzy", 
+        "hit_effect": "", 
         "name": "[ffb902]\u864e\u5578[-]", 
         "anger_self_team": 0, 
         "war_cry": true, 
@@ -365,13 +365,13 @@
         "anger_self": 0, 
         "prob": 25, 
         "trig_start": 1, 
-        "cast_type": 1, 
+        "cast_type": 2, 
         "trig_cooldown": 3, 
         "anger_rival_team": 25, 
         "mode": 1, 
         "cast_animation": "Step_Forward", 
         "mode_name": "\u4e3b\u52a8", 
-        "attack_effect": ""
+        "attack_effect": "SP_/SP_baihu"
     }
 },
 {
@@ -611,7 +611,7 @@
         "anger_self_team": 0, 
         "war_cry": false, 
         "skill_range": 2, 
-        "des": "[ffb902]\u6697\u5668\u00b7\u98de\u5200[-]\uff1a\u968f\u673a\u5bf9\u5355\u4e2a\u654c\u4eba\u6295\u63b7\u6697\u5668\uff0c\u4e0d\u6d88\u8017\u6012\u6c14\u3002", 
+        "des": "[ffb902]\u6697\u5668\u00b7\u98de\u5200[-]\uff1a\u5411\u654c\u4eba\u6295\u63b7\u65cb\u8f6c\u7684\u98de\u5200\uff0c\u4e0d\u6d88\u8017\u6012\u6c14\u3002", 
         "anger_self": 100, 
         "prob": 75, 
         "trig_start": 1, 

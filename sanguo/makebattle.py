@@ -21,8 +21,8 @@ MY_HEROS = [
 
 RIVAL_HEROS = [
     13, 11, 15,
-    36, 0, 17,
-    12, 14, 6
+    12, 0, 17,
+    36, 14, 6
 ]
 
 class MyHero(InBattleHero):

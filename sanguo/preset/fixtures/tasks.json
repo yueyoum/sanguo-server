@@ -49,7 +49,7 @@
     "model": "task.task", 
     "fields": {
         "sycee": 10, 
-        "name": "\u5b9d\u77f3\u5408\u6210", 
+        "name": "\u5f81\u6536", 
         "gold": 1000, 
         "tp": 4, 
         "times": 1, 
