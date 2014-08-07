@@ -283,7 +283,7 @@ def get_drop(drop_ids, multi=1, gaussian=False):
                     res[2] += amount
                     break
             else:
-                result.append((_id, level, amount))
+                result.append([_id, level, amount])
         return result
 
     drop['heros'] = _merge(drop['heros'])
