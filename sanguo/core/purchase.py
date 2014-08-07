@@ -117,7 +117,7 @@ class PurchaseAction(object):
 
         self.send_notify()
 
-        title = u'购买成功'
+        title = u'充值成功'
         content = u'获得了: {0}'.format(p.first_des if p.first_des else p.des)
         mail = Mail(self.char_id)
         mail.add(title, content)
