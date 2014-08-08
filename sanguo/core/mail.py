@@ -69,7 +69,7 @@ class Mail(object):
         m.content = content
         m.attachment = attachment
         m.has_read = False
-        m.create_at = create_at or arrow.utcnow().format('YYYY-MM-DD HH:mm:ss')
+        m.create_at = arrow.utcnow().format('YYYY-MM-DD HH:mm:ss')
 
 
         self.mail.mails[str(mail_id)] = m

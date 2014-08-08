@@ -20,7 +20,7 @@ def send_yueka_reward(char_id, sycee, remained_days):
 
     content = MAIL_YUEKA_CONTENT_TEMPLATE.format(sycee, remained_days)
 
-    Mail(char_id).add(MAIL_YUEKA_TITLE, content, attachment=json.dumps(standard_drop))
+    Mail(char_id).add(MAIL_YUEKA_TITLE, content, attachment=json.dumps(standard_drop), only_one=True)
 
 
 def set_yueka():
@@ -39,7 +39,7 @@ def set_yueka():
             except YuekaLockTimeOut:
                 logger.write(traceback.format_exc())
 
-    logger.write(" finish")
+    logger.write("finish")
     logger.close()
 
 if __name__ == '__main__':
