@@ -3,7 +3,7 @@
     "pk": 1, 
     "model": "stage.stage", 
     "fields": {
-        "normal_drop": "1,101,5005,5005", 
+        "normal_drop": "1,101", 
         "star_gold": 2000, 
         "normal_gold": 8, 
         "bg": "\u539f\u91ce", 
@@ -223,7 +223,7 @@
         "star_drop": "464", 
         "first_exp": 2000, 
         "battle": 1, 
-        "first_drop": "", 
+        "first_drop": "509", 
         "normal_exp": 12, 
         "monsters": "1,0,1,1,0,1,0,178,0", 
         "name": "\u5b9b\u57ce\u6b7c\u706d\u6218"
@@ -453,7 +453,7 @@
         "star_drop": "802", 
         "first_exp": 3000, 
         "battle": 2, 
-        "first_drop": "", 
+        "first_drop": "505", 
         "normal_exp": 15, 
         "monsters": "0,134,0,0,200,0,0,168,0", 
         "name": "\u706b\u70e7\u6d1b\u9633"
@@ -683,7 +683,7 @@
         "star_drop": "802", 
         "first_exp": 4000, 
         "battle": 3, 
-        "first_drop": "", 
+        "first_drop": "521", 
         "normal_exp": 17, 
         "monsters": "7,0,7,142,0,157,126,0,155", 
         "name": "\u7389\u73ba\u4e4b\u707e"

@@ -56,7 +56,7 @@
         "des": "\u9632\u5fa1B", 
         "buff_icon": "", 
         "name": "\u7834\u7532", 
-        "special": ""
+        "special": "BUFF_/BUFF_BrokenShield"
     }
 },
 {
@@ -85,7 +85,7 @@
     "fields": {
         "des": "\u6655\u7729", 
         "buff_icon": "", 
-        "name": "\u91cd\u51fb", 
+        "name": "\u6655\u7729", 
         "special": ""
     }
 },
