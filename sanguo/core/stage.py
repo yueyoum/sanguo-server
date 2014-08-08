@@ -270,6 +270,10 @@ class Hang(object):
 
         self.send_notify()
 
+        char = Char(self.char_id)
+        if char.mc.vip < 1:
+            return
+
         remained = self.get_hang_remained()
         if remained and stage_id:
             stage = STAGES[stage_id]
