@@ -213,7 +213,7 @@ ARENA_TOP_RANKS_CACHE = 10
 # 比武同一个人被打CD， 秒
 ARENA_CD = 60
 # 竞技场初始积分
-ARENA_DEFAULT_SCORE = 1500
+ARENA_DEFAULT_SCORE = 1400
 
 #########################
 #      精英关卡         #
@@ -225,7 +225,7 @@ STAGE_ELITE_RESET_COST = [
 ]
 # 重置总次数花费   (第几次重置， 花费)
 STAGE_ELITE_TOTAL_RESET_COST = [
-    (1, 100), (2, 200), (3, 200), (4, 400)
+    (1, 50), (2, 100), (3, 200), (4, 400)
 ]
 
 
@@ -273,8 +273,8 @@ MAIL_ARENA_WEEK_REWARD_TITLE = u'比武每周奖励'
 MAIL_ARENA_WEEK_REWARD_CONTENT = u'比武每周奖励'
 # 比武被打
 MAIL_ARENA_BEATEN_TITLE = u'比武挑战记录'
-MAIl_ARENA_BEATEN_WIN_TEMPLATE = u'{0}在比武厂挑战了你，你击败了对手，你的积分从{1}变成了{2} ({3})'
-MAIl_ARENA_BEATEN_LOST_TEMPLATE = u'{0}在比武厂挑战了你，将你击败，你的积分从{1}变成了{2} ({3})'
+MAIl_ARENA_BEATEN_WIN_TEMPLATE = u'{0}在比武擂台中挑战了你，你击败了对手，你的积分从{1}变成了{2} ({3})'
+MAIl_ARENA_BEATEN_LOST_TEMPLATE = u'{0}在比武擂台中挑战了你，将你击败，你的积分从{1}变成了{2} ({3})'
 # 月卡
 MAIL_YUEKA_TITLE = u'月卡奖励'
 MAIL_YUEKA_CONTENT_TEMPLATE = u'获得{0}元宝，月卡还剩余{1}天'
@@ -300,7 +300,7 @@ OPERATE_INTERVAL_PVE = 2                # 普通关卡战斗间隔
 OPERATE_INTERVAL_PVE_ELITE = 2          # 精英关卡战斗间隔
 OPERATE_INTERVAL_PVE_ACTIVITY = 2       # 活动关卡间隔
 
-OPERATE_INTERVAL_ARENA_PANEL = 2        # 竞技厂刷新面板间隔
+OPERATE_INTERVAL_ARENA_PANEL = 2        # 比武擂台刷新面板间隔
 OPERATE_INTERVAL_CHAT_SEND = 2         # 聊天发送间隔
 
 OPERATE_INTERVAL_FRIEND_CANDIDATE_LIST = 2 # 添加好友的候选列表刷新间隔
