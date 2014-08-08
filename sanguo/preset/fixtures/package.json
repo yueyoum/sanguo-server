@@ -9,6 +9,16 @@
                 "amount": 1, 
                 "id": 48, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 48, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 48, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -160,6 +170,16 @@
                 "amount": 1, 
                 "id": 55, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 55, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 55, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -178,6 +198,16 @@
                 "amount": 1, 
                 "id": 56, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 56, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 56, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -192,6 +222,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 57, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 57, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 57, 
@@ -394,6 +434,16 @@
                 "amount": 1, 
                 "id": 68, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 68, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 68, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -408,6 +458,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 69, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 69, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 69, 
@@ -430,6 +490,16 @@
                 "amount": 1, 
                 "id": 70, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 70, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 70, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -444,6 +514,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 71, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 71, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 71, 
@@ -466,6 +546,16 @@
                 "amount": 1, 
                 "id": 72, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 72, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 72, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -480,6 +570,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 73, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 73, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 73, 
@@ -502,6 +602,16 @@
                 "amount": 1, 
                 "id": 74, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 74, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 74, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -516,6 +626,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 75, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 75, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 75, 
@@ -538,6 +658,16 @@
                 "amount": 1, 
                 "id": 76, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 76, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 76, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -552,6 +682,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 77, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 77, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 77, 
@@ -574,6 +714,16 @@
                 "amount": 1, 
                 "id": 78, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 78, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 78, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -592,6 +742,16 @@
                 "amount": 1, 
                 "id": 79, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 79, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 79, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -606,6 +766,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 80, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 80, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 80, 
@@ -646,6 +816,16 @@
                 "amount": 1, 
                 "id": 82, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 82, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 82, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -660,6 +840,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 83, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 83, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 83, 
@@ -682,6 +872,16 @@
                 "amount": 1, 
                 "id": 84, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 84, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 84, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -696,6 +896,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 85, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 85, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 85, 
@@ -718,6 +928,16 @@
                 "amount": 1, 
                 "id": 86, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 86, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 86, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -732,6 +952,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 87, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 87, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 87, 
@@ -754,6 +984,16 @@
                 "amount": 1, 
                 "id": 88, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 88, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 88, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -768,6 +1008,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 89, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 89, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 89, 
@@ -790,6 +1040,16 @@
                 "amount": 1, 
                 "id": 90, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 90, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 90, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -804,6 +1064,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 91, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 91, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 91, 
@@ -826,6 +1096,16 @@
                 "amount": 1, 
                 "id": 92, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 92, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 92, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -840,6 +1120,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 93, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 93, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 93, 
@@ -862,6 +1152,16 @@
                 "amount": 1, 
                 "id": 94, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 94, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 94, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -876,6 +1176,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 95, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 95, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 95, 
@@ -898,6 +1208,16 @@
                 "amount": 1, 
                 "id": 96, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 96, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 96, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -912,6 +1232,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 97, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 97, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 97, 
@@ -934,6 +1264,16 @@
                 "amount": 1, 
                 "id": 98, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 98, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 98, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -948,6 +1288,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 99, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 99, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 99, 
@@ -970,6 +1320,16 @@
                 "amount": 1, 
                 "id": 100, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 100, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 100, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -984,6 +1344,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 58, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 58, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 58, 
@@ -1006,6 +1376,16 @@
                 "amount": 1, 
                 "id": 59, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 59, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 59, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -1020,6 +1400,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 60, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 60, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 60, 
@@ -1042,6 +1432,16 @@
                 "amount": 1, 
                 "id": 61, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 61, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 61, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -1056,6 +1456,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 62, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 62, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 62, 
@@ -1078,6 +1488,16 @@
                 "amount": 1, 
                 "id": 63, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 63, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 63, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -1096,6 +1516,16 @@
                 "amount": 1, 
                 "id": 64, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 64, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 64, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -1110,6 +1540,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 49, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 49, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 49, 
@@ -1198,6 +1638,16 @@
                 "amount": 1, 
                 "id": 65, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 65, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 65, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -1278,6 +1728,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 66, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 66, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 66, 
@@ -1565,6 +2025,16 @@
                 "amount": 1, 
                 "id": 67, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 67, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 67, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -1579,6 +2049,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 50, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 50, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 50, 
@@ -1601,6 +2081,16 @@
                 "amount": 1, 
                 "id": 51, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 51, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 51, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -1619,6 +2109,16 @@
                 "amount": 1, 
                 "id": 52, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 52, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 52, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -1633,6 +2133,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 81, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 81, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 81, 
@@ -2077,6 +2587,16 @@
                 "amount": 1, 
                 "id": 53, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 53, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 53, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -2091,6 +2611,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 54, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 54, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 54, 
@@ -7559,6 +8089,16 @@
                 "amount": 1, 
                 "id": 1, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 1, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 1, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -7573,6 +8113,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 2, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 2, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 2, 
@@ -7595,6 +8145,16 @@
                 "amount": 1, 
                 "id": 3, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 3, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 3, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -7609,6 +8169,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 4, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 4, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 4, 
@@ -7631,6 +8201,16 @@
                 "amount": 1, 
                 "id": 5, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 5, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 5, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -7645,6 +8225,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 6, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 6, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 6, 
@@ -7667,6 +8257,16 @@
                 "amount": 1, 
                 "id": 7, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 7, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 7, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -7681,6 +8281,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 8, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 8, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 8, 
@@ -7703,6 +8313,16 @@
                 "amount": 1, 
                 "id": 9, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 9, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 9, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -7717,6 +8337,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 10, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 10, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 10, 
@@ -7739,6 +8369,16 @@
                 "amount": 1, 
                 "id": 11, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 11, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 11, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -7753,6 +8393,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 12, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 12, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 12, 
@@ -7775,6 +8425,16 @@
                 "amount": 1, 
                 "id": 13, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 13, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 13, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -7789,6 +8449,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 14, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 14, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 14, 
@@ -7811,6 +8481,16 @@
                 "amount": 1, 
                 "id": 15, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 15, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 15, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -7825,6 +8505,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 16, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 16, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 16, 
@@ -7847,6 +8537,16 @@
                 "amount": 1, 
                 "id": 17, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 17, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 17, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -7861,6 +8561,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 18, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 18, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 18, 
@@ -7883,6 +8593,16 @@
                 "amount": 1, 
                 "id": 19, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 19, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 19, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -7897,6 +8617,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 20, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 20, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 20, 
@@ -7919,6 +8649,16 @@
                 "amount": 1, 
                 "id": 21, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 21, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 21, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -7933,6 +8673,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 22, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 22, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 22, 
@@ -7955,6 +8705,16 @@
                 "amount": 1, 
                 "id": 23, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 23, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 23, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -7969,6 +8729,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 24, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 24, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 24, 
@@ -7991,6 +8761,16 @@
                 "amount": 1, 
                 "id": 25, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 25, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 25, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -8005,6 +8785,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 26, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 26, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 26, 
@@ -8027,6 +8817,16 @@
                 "amount": 1, 
                 "id": 27, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 27, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 27, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -8041,6 +8841,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 28, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 28, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 28, 
@@ -8063,6 +8873,16 @@
                 "amount": 1, 
                 "id": 29, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 29, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 29, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -8077,6 +8897,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 30, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 30, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 30, 
@@ -8099,6 +8929,16 @@
                 "amount": 1, 
                 "id": 31, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 31, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 31, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -8113,6 +8953,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 32, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 32, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 32, 
@@ -8135,6 +8985,16 @@
                 "amount": 1, 
                 "id": 33, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 33, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 33, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -8149,6 +9009,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 34, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 34, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 34, 
@@ -8171,6 +9041,16 @@
                 "amount": 1, 
                 "id": 35, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 35, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 35, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -8185,6 +9065,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 36, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 36, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 36, 
@@ -8207,6 +9097,16 @@
                 "amount": 1, 
                 "id": 37, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 37, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 37, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -8221,6 +9121,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 38, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 38, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 38, 
@@ -8243,6 +9153,16 @@
                 "amount": 1, 
                 "id": 39, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 39, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 39, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -8257,6 +9177,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 40, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 40, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 40, 
@@ -8279,6 +9209,16 @@
                 "amount": 1, 
                 "id": 41, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 41, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 41, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -8293,6 +9233,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 42, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 42, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 42, 
@@ -8315,6 +9265,16 @@
                 "amount": 1, 
                 "id": 43, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 43, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 43, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -8329,6 +9289,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 44, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 44, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 44, 
@@ -8351,6 +9321,16 @@
                 "amount": 1, 
                 "id": 45, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 45, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 45, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -8369,6 +9349,16 @@
                 "amount": 1, 
                 "id": 46, 
                 "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 46, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 46, 
+                "prob": 50000
             }
         ], 
         "equipments": [], 
@@ -8383,6 +9373,16 @@
         "heros": [], 
         "gold": 0, 
         "souls": [
+            {
+                "amount": 1, 
+                "id": 47, 
+                "prob": 50000
+            }, 
+            {
+                "amount": 1, 
+                "id": 47, 
+                "prob": 100000
+            }, 
             {
                 "amount": 1, 
                 "id": 47, 

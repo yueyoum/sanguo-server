@@ -309,6 +309,8 @@ OPERATE_INTERVAL_FRIEND_REFRESH = 2        # 刷新自己好友状态间隔
 OPERATE_INTERVAL_PLUNDER_LIST = 2          # 获取掠夺列表间隔
 OPERATE_INTERVAL_PLUNDER_BATTLE = 2        # 掠夺战斗间隔
 
+HANG_INTERVAL = 15                       # 挂机间隔
+
 
 #########################
 #      其他             #

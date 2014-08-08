@@ -627,6 +627,17 @@
     }
 },
 {
+    "pk": 706, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HANG_IN_CD", 
+        "text_zh": "\u6302\u673a\u95f4\u9694\u5728CD\u4e2d\uff0c\u7a0d\u540e\u518d\u8bd5", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
     "pk": 800, 
     "model": "errormsg.errormsg", 
     "fields": {

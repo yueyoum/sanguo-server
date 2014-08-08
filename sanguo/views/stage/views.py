@@ -7,7 +7,8 @@ from core.stage import Stage, Hang, EliteStage, ActivityStage
 from core.attachment import standard_drop_to_attachment_protomsg
 from libs import pack_msg
 from utils.decorate import message_response, operate_guard, function_check
-from preset.settings import OPERATE_INTERVAL_PVE, OPERATE_INTERVAL_PVE_ELITE
+from preset.settings import OPERATE_INTERVAL_PVE, OPERATE_INTERVAL_PVE_ELITE, HANG_INTERVAL
+from preset import errormsg
 
 import protomsg
 
@@ -96,6 +97,7 @@ def pve(request):
 
 @message_response("HangResponse")
 @function_check(7)
+@operate_guard('hang', HANG_INTERVAL, keep_result=False, error_code=errormsg.HANG_IN_CD)
 def hang_start(request):
     req = request._proto
     char_id = request._char_id

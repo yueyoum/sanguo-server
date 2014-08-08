@@ -420,10 +420,10 @@ class Hang(object):
                 "api failure"
             )
 
-        return self.finish(send_attachment=True)
+        return self.finish(send_attachment=True, addition_seconds=15)
 
 
-    def finish(self, actual_seconds=None, set_hang=True, send_attachment=False):
+    def finish(self, actual_seconds=None, set_hang=True, send_attachment=False, addition_seconds=0):
         if not self.hang_doing:
             raise SanguoException(
                 errormsg.HANG_NOT_EXIST,
@@ -434,6 +434,8 @@ class Hang(object):
 
         if not actual_seconds:
             actual_seconds = arrow.utcnow().timestamp - self.hang_doing.start
+
+        actual_seconds += addition_seconds
 
         if set_hang:
             self.hang.used += actual_seconds
