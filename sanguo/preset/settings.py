@@ -296,9 +296,9 @@ CHAT_MESSAGE_MAX_LENGTH = 50            # 发送消息长度。多少个字
 #########################
 #      操作间隔时间 秒   #
 #########################
-OPERATE_INTERVAL_PVE = 15                # 普通关卡战斗间隔
-OPERATE_INTERVAL_PVE_ELITE = 15          # 精英关卡战斗间隔
-OPERATE_INTERVAL_PVE_ACTIVITY = 15       # 活动关卡间隔
+OPERATE_INTERVAL_PVE = 5                # 普通关卡战斗间隔
+OPERATE_INTERVAL_PVE_ELITE = 5          # 精英关卡战斗间隔
+OPERATE_INTERVAL_PVE_ACTIVITY = 5       # 活动关卡间隔
 
 OPERATE_INTERVAL_ARENA_PANEL = 2        # 比武擂台刷新面板间隔
 OPERATE_INTERVAL_CHAT_SEND = 2         # 聊天发送间隔
