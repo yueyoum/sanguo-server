@@ -389,3 +389,26 @@ class MongoTeamBattle(Document):
         'collection': 'teambattle'
     }
 
+
+
+def purge_char(char_id):
+    char_field_records = {'MongoHero'}
+
+    from mongoengine.base.metaclasses import TopLevelDocumentMetaclass
+    records = globals()
+    final_records = {}
+    for name, obj in records.iteritems():
+        if name.startswith('Mongo') and isinstance(obj, TopLevelDocumentMetaclass):
+            final_records[name] = obj
+
+    print final_records
+    for name, obj in final_records.iteritems():
+        if name in char_field_records:
+            obj.objects.filter(char=char_id).delete()
+        else:
+            try:
+                x = obj.objects.get(id=char_id)
+                x.delete()
+            except:
+                pass
+
