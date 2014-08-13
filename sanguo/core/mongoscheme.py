@@ -392,6 +392,7 @@ class MongoTeamBattle(Document):
 
 
 def purge_char(char_id):
+    char_id = int(char_id)
     char_field_records = {'MongoHero'}
 
     from mongoengine.base.metaclasses import TopLevelDocumentMetaclass
@@ -411,3 +412,16 @@ def purge_char(char_id):
             except:
                 pass
 
+    # special case
+    for m in MongoFriend.objects.all():
+
+        _changed = False
+        if str(char_id) in m.friends:
+            m.friends.pop(str(char_id))
+            _changed = True
+        if char_id in m.accepting:
+            m.accepting.remove(char_id)
+            _changed = True
+
+        if _changed:
+            m.save()
