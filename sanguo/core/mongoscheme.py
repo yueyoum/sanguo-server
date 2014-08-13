@@ -401,7 +401,6 @@ def purge_char(char_id):
         if name.startswith('Mongo') and isinstance(obj, TopLevelDocumentMetaclass):
             final_records[name] = obj
 
-    print final_records
     for name, obj in final_records.iteritems():
         if name in char_field_records:
             obj.objects.filter(char=char_id).delete()
