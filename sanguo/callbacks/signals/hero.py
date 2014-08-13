@@ -13,6 +13,7 @@ from core.notify import (
     update_hero_notify,
     )
 
+from core.character import Char
 from core.hero import Hero, char_heros_dict
 from core.achievement import Achievement
 from preset.data import HEROS
@@ -68,6 +69,8 @@ def _hero_change(hero_id, **kwargs):
         hero.char_id,
         [hero,]
     )
+    
+    Char(hero.char_id).send_notify()
 
 def _hero_to_soul(char_id, souls, **kwargs):
     for _id, _amount in souls:
