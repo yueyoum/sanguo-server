@@ -89,6 +89,9 @@ class CheckIn(object):
 
     def daily_reset(self):
         # 每日可签到标志重置
+        if not self.c.has_checked:
+            return
+
         self.c.has_checked = False
 
         if self.c.day == MAX_DAYS:
