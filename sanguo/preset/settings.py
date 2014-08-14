@@ -208,8 +208,6 @@ PLUNDER_GOT_ITEMS_HOUR = 2
 PRISONER_START_PROB = 10
 # 释放获得宝物 key: quality, value: 宝物ID列表
 PRISONER_RELEASE_GOT_TREASURE = {3: [24], 2: [25], 1: [26]}
-# 斩首获得宝物 key: quality, value: 宝物ID列表
-PRISONER_KILL_GOT_TREASURE = {3: [24], 2: [25], 1: [26]}
 
 
 
