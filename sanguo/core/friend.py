@@ -11,8 +11,8 @@ from core.character import Char, get_char_ids_by_level_range
 from core.hero import Hero
 from core.msgpipe import publish_to_char
 from core.exception import SanguoException
-from core.achievement import Achievement
 from core.formation import Formation
+from core.signals import new_friend_got_signal
 
 import protomsg
 from protomsg import FRIEND_NOT, FRIEND_OK, FRIEND_ACK, FRIEND_APPLY
@@ -277,17 +277,29 @@ class Friend(object):
         self._msg_friend(msg.friend, target_id, FRIEND_OK)
         publish_to_char(self.char_id, pack_msg(msg))
 
+        new_friend_got_signal.send(
+            sender=None,
+            char_id=self.char_id,
+            new_friend_id=target_id,
+            total_friends_amount=self.real_cur_amount
+        )
+
+
 
     def someone_accept_me(self, from_id):
         self.mf.friends[str(from_id)] = FRIEND_OK
         self.mf.save()
 
-        achievement = Achievement(self.char_id)
-        achievement.trig(27, self.real_cur_amount)
-
         msg = protomsg.UpdateFriendNotify()
         self._msg_friend(msg.friend, from_id, FRIEND_OK)
         publish_to_char(self.char_id, pack_msg(msg))
+
+        new_friend_got_signal.send(
+            sender=None,
+            char_id=self.char_id,
+            new_friend_id=from_id,
+            total_friends_amount=self.real_cur_amount
+        )
 
 
     def refuse(self, target_id):

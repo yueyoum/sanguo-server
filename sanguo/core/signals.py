@@ -25,3 +25,5 @@ equip_changed_signal = Signal(providing_args=['char_id', 'equip_obj'])
 func_opened_signal = Signal(providing_args=['char_id', 'func_ids'])
 
 vip_changed_signal = Signal(providing_args=['char_id', 'old_vip', 'new_vip'])
+
+new_friend_got_signal = Signal(providing_args=['char_id', 'new_friend_id', 'total_friends_amount'])
