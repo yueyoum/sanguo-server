@@ -19,6 +19,7 @@ from core.prison import Prison
 from core.stage import Stage
 from core.resource import Resource
 from core.attachment import make_standard_drop_from_template, get_drop
+from core.achievement import Achievement
 from protomsg import Battle as MsgBattle
 from protomsg import PlunderNotify
 from core.msgpipe import publish_to_char
@@ -173,6 +174,9 @@ class Plunder(object):
 
             resource = Resource(self.char_id, "Plunder")
             standard_drop = resource.add(gold=drop_gold, official_exp=drop_official_exp)
+
+            achievement = Achievement(self.char_id)
+            achievement.trig(12, 1)
         else:
             self.mongo_plunder.target_char = 0
             standard_drop = make_standard_drop_from_template()
@@ -238,6 +242,9 @@ class Plunder(object):
             if got_hero_id:
                 p = Prison(self.char_id)
                 p.prisoner_add(got_hero_id, plunder_gold/2)
+
+                achievement = Achievement(self.char_id)
+                achievement.trig(13, 1)
 
         elif tp == PLUNDER_STUFF:
             stage = Stage(self.mongo_plunder.target_char)

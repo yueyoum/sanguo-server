@@ -10,6 +10,7 @@ from core.msgpipe import publish_to_char
 from core.task import Task
 from core.resource import Resource
 from core.attachment import standard_drop_to_attachment_protomsg
+from core.achievement import Achievement
 from utils import pack_msg
 from preset.settings import (
     PRISONER_START_PROB,
@@ -147,6 +148,10 @@ class Prison(object):
         t = Task(self.char_id)
         t.trig(5)
 
+        if got:
+            achievement = Achievement(self.char_id)
+            achievement.trig(14, 1)
+
         return got
 
 
@@ -171,11 +176,16 @@ class Prison(object):
 
     def release(self, _id):
         p = self._abandon(_id, action="Prisoner Release")
+
         got_gold = p.gold
         got_treasure = random.choice(PRISONER_RELEASE_GOT_TREASURE[HEROS[p.oid].quality])
 
         resource = Resource(self.char_id, "Prisoner Release")
         standard_drop = resource.add(gold=got_gold, stuffs=[(got_treasure, 1)])
+
+        achievement = Achievement(self.char_id)
+        achievement.trig(16, 1)
+
         return standard_drop_to_attachment_protomsg(standard_drop)
 
 
@@ -187,6 +197,10 @@ class Prison(object):
 
         resource = Resource(self.char_id, "Prisoner Kill")
         standard_drop = resource.add(souls=souls)
+
+        achievement = Achievement(self.char_id)
+        achievement.trig(15, 1)
+
         return standard_drop_to_attachment_protomsg(standard_drop)
 
 
