@@ -153,6 +153,16 @@ GET_HERO_QUALITY_ONE_PROB = {
 EQUIP_MAX_LEVEL = 99
 # 装备最高阶数 (初始第0阶)
 EQUIP_MAX_STEP= 6
+# 售卖品阶基础值
+EQUIP_SELL_QUALITY_BASE = {
+    0: 1000,
+    1: 2400,
+    2: 10000,
+    3: 24000,
+    4: 50000,
+    5: 100000,
+    6: 500000,
+}
 
 
 #########################

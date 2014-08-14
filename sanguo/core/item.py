@@ -18,7 +18,7 @@ from core.resource import Resource
 from utils import pack_msg
 from utils.functional import id_generator
 import protomsg
-from preset.settings import EQUIP_MAX_LEVEL
+from preset.settings import EQUIP_MAX_LEVEL, EQUIP_SELL_QUALITY_BASE
 from preset.data import EQUIPMENTS, GEMS, STUFFS
 from preset import errormsg
 from dll import external_calculate
@@ -245,13 +245,16 @@ class Equipment(MessageEquipmentMixin):
 
     def sell_gold(self):
         # 出售价格 金币
+        step = EQUIPMENTS[self.oid].step
+        base = EQUIP_SELL_QUALITY_BASE[step]
         total_gold = 100 * (1 - pow(1.08, self.level)) / (1 - 1.08)
-        return int(total_gold * 0.7)
+        total = total_gold + base
+        return int(total)
 
     def level_up_need_gold(self):
         # 强化升级所需金币
         # gold = pow(1.08, self.level) * 100
-        gold = 1.08 * (self.level - 1) * 200 + 100
+        gold = pow(1.08, (self.level - 1)) * 200 + 100
         return int(gold)
 
 
