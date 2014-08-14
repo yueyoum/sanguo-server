@@ -4,6 +4,7 @@ __author__ = 'Wang Chao'
 __date__ = '14-6-30'
 
 import time
+import json
 
 from mongoengine import DoesNotExist
 
@@ -12,6 +13,7 @@ from core.mongoscheme import MongoPurchaseRecord
 from core.msgpipe import publish_to_char
 from core.exception import SanguoException
 from core.mail import Mail
+from core.attachment import get_drop
 
 from utils.api import api_purchase_done, api_purchase_products, api_purchase_verify, api_purchase91_confirm
 from utils import pack_msg
@@ -19,6 +21,7 @@ from utils import pack_msg
 from protomsg import PurchaseStatusNotify, Purchase91ConfirmResponse
 
 from preset.data import PURCHASE
+from preset.settings import PURCHASE_FIRST_REWARD_PACKAGE_IDS, MAIL_PURCHASE_FIRST_CONTENT, MAIL_PURCHASE_FIRST_TITLE
 from preset import errormsg
 
 def get_purchase_products():
@@ -104,6 +107,8 @@ class PurchaseAction(object):
     def send_reward(self, goods_id):
         p = PURCHASE[goods_id]
 
+        first = len(self.mongo_record.times) == 0
+
         buy_times = self.mongo_record.times.get(str(goods_id), 0)
         is_first = buy_times == 0
 
@@ -121,6 +126,21 @@ class PurchaseAction(object):
         content = u'获得了: {0}'.format(p.first_des if p.first_des else p.des)
         mail = Mail(self.char_id)
         mail.add(title, content)
+
+        # 首冲奖励
+        if first:
+            self.send_first_reward()
+
+
+    def send_first_reward(self):
+        standard_drop = get_drop(PURCHASE_FIRST_REWARD_PACKAGE_IDS)
+
+        mail = Mail(self.char_id)
+        mail.add(
+            MAIL_PURCHASE_FIRST_TITLE,
+            MAIL_PURCHASE_FIRST_CONTENT,
+            attachment=json.dumps(standard_drop)
+        )
 
 
     def send_reward_yueka(self, goods_id, is_first):

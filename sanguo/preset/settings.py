@@ -286,7 +286,9 @@ MAIl_ARENA_BEATEN_LOST_TEMPLATE = u'{0}在比武擂台中挑战了你，将你�
 # 月卡
 MAIL_YUEKA_TITLE = u'月卡奖励'
 MAIL_YUEKA_CONTENT_TEMPLATE = u'获得{0}元宝，月卡还剩余{1}天'
-
+# 首充
+MAIL_PURCHASE_FIRST_TITLE = u'首充大礼包'
+MAIL_PURCHASE_FIRST_CONTENT = u'附件包括：玄武武将x1，方正红宝石x1，方正黄晶石x1，方正玉石x1'
 
 #########################
 #      激活码           #
@@ -337,3 +339,10 @@ PLAYER_SESSION_EXPIRE = 3600
 # 状态对应关系 1 - 良好, 2 - 繁忙, 3 - 爆满, 4 - 维护
 # 这里设置的就是 当在线人数超过N的时候，此服务器状态就是S。 要按照人数多少从多到少设置
 SERVER_STATUS = ((1000, 3), (10, 2))
+
+
+#########################
+#      充值             #
+#########################
+# 首充奖励物品包
+PURCHASE_FIRST_REWARD_PACKAGE_IDS = [6000,]
