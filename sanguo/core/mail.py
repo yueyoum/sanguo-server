@@ -133,7 +133,7 @@ class Mail(object):
         self.mail.mails[str(mail_id)].has_read = True
         self.mail.save()
         self.send_notify()
-        return attachment
+        return standard_drop
 
 
     def send_notify(self):
