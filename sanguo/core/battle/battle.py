@@ -136,17 +136,18 @@ class Ground(object):
         second_action_team = self.rival_heros
 
         battle_field = BattleField(first_action_team, second_action_team, self.msg)
-        for i in range(30):
+        while True:
             _dead, _team = self.is_team_dead()
             if _dead:
                 self.msg.self_win = _team == 2
                 break
 
+            if battle_field.table_rounds >= 30:
+                self.msg.self_win = False
+                break
+
             battle_field.action()
 
-        if i == 29:
-            # self.msg.self_win = self.team_hp(self.my_heros) >= self.team_hp(self.rival_heros)
-            self.msg.self_win = False
 
         logger.debug("Win = %s" % self.msg.self_win)
         return self.msg.self_win

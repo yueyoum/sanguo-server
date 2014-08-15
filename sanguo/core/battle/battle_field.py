@@ -50,7 +50,7 @@ class HeapEffects(StepHeroNotifyMixin):
 
 
 class BattleField(ActiveEffectMixin):
-    __slots__ = ['team_one', 'team_two', 'current_pos', 'msg']
+    __slots__ = ['team_one', 'team_two', 'current_pos', 'table_rounds', 'msg']
 
     def __init__(self, team_one, team_two, msg):
         self.team_one = team_one
@@ -87,6 +87,7 @@ class BattleField(ActiveEffectMixin):
                 )
 
         self.current_pos = 0
+        self.table_rounds = 0
 
 
     def active_passive_effects(self, msg):
@@ -191,6 +192,7 @@ class BattleField(ActiveEffectMixin):
         self.current_pos += 1
         if self.current_pos >= 3:
             self.current_pos = 0
+            self.table_rounds += 1
 
     def action(self):
         hero_pairs = self.find_hero_pairs()
