@@ -126,7 +126,8 @@ class Mail(object):
 
         resource = Resource(self.char_id, "Mail Attachment")
         attachment = json.loads(self.mail.mails[str(mail_id)].attachment)
-        resource.add(**attachment)
+        standard_drop = get_drop_from_raw_package(attachment)
+        resource.add(**standard_drop)
 
         self.mail.mails[str(mail_id)].attachment = ''
         self.mail.mails[str(mail_id)].has_read = True
