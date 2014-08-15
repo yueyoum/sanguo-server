@@ -145,7 +145,8 @@ class Ground(object):
             battle_field.action()
 
         if i == 29:
-            self.msg.self_win = self.team_hp(self.my_heros) >= self.team_hp(self.rival_heros)
+            # self.msg.self_win = self.team_hp(self.my_heros) >= self.team_hp(self.rival_heros)
+            self.msg.self_win = False
 
         logger.debug("Win = %s" % self.msg.self_win)
         return self.msg.self_win
