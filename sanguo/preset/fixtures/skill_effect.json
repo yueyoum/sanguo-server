@@ -591,9 +591,9 @@
     "pk": 72, 
     "model": "skill.skilleffect", 
     "fields": {
-        "target": 6, 
-        "effect": 9, 
-        "value": 100, 
+        "target": 1, 
+        "effect": 2, 
+        "value": 10, 
         "skill": 57, 
         "is_hit_target": true, 
         "rounds": 1
@@ -861,6 +861,30 @@
         "skill": 29, 
         "is_hit_target": false, 
         "rounds": 3
+    }
+},
+{
+    "pk": 99, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "target": 1, 
+        "effect": 9, 
+        "value": 100, 
+        "skill": 57, 
+        "is_hit_target": false, 
+        "rounds": 1
+    }
+},
+{
+    "pk": 100, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "target": 1, 
+        "effect": 6, 
+        "value": 30, 
+        "skill": 57, 
+        "is_hit_target": false, 
+        "rounds": 1
     }
 }
 ]

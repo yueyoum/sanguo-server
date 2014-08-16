@@ -8132,6 +8132,30 @@
         "stuffs": [], 
         "official_exp": 0
     }, 
+    "6001": {
+        "gems": [], 
+        "sycee": 100, 
+        "heros": [], 
+        "gold": 10000, 
+        "souls": [], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "6002": {
+        "gems": [], 
+        "sycee": 200, 
+        "heros": [], 
+        "gold": 50000, 
+        "souls": [], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
     "2001": {
         "gems": [], 
         "sycee": 0, 

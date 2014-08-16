@@ -46,7 +46,7 @@
         "des": "\u9632\u5fa1S", 
         "buff_icon": "", 
         "name": "\u56fa\u9632", 
-        "special": "BUFF_/BUFF_Shield"
+        "special": "BUFF_/BUFF_Defense"
     }
 },
 {
@@ -86,7 +86,7 @@
         "des": "\u6655\u7729", 
         "buff_icon": "", 
         "name": "\u6655\u7729", 
-        "special": ""
+        "special": "BUFF_/BUFF_dizzy"
     }
 },
 {
@@ -107,6 +107,16 @@
         "buff_icon": "", 
         "name": "\u55dc\u8840", 
         "special": ""
+    }
+},
+{
+    "pk": 12, 
+    "model": "skill.effect", 
+    "fields": {
+        "des": "", 
+        "buff_icon": "", 
+        "name": "\u65e0\u53cc\u89c9\u9192", 
+        "special": "BUFF_/fire"
     }
 }
 ]

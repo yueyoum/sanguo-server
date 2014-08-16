@@ -470,13 +470,13 @@
         "package": "", 
         "tp_name": "\u6218\u6597\u7ecf\u5386", 
         "reward_des": "\u5143\u5b9d100", 
-        "des": "\u5728\u6bd4\u6b66\u6392\u540d\u4e2d\u4f4d\u5217\u524d1000", 
+        "des": "\u5728\u6bd4\u6b66\u5468\u6392\u540d\u4e2d\u4f4d\u5217\u524d\u4e00\u5343", 
         "buff_used_for": "", 
         "tp": 2, 
         "next": 91, 
         "buff_name": "", 
         "mode": 5, 
-        "condition_value": "100", 
+        "condition_value": "1000", 
         "open": true, 
         "condition_id": 10, 
         "first": true
@@ -493,13 +493,13 @@
         "package": "", 
         "tp_name": "\u6218\u6597\u7ecf\u5386", 
         "reward_des": "\u5143\u5b9d200", 
-        "des": "\u5728\u6bd4\u6b66\u6392\u540d\u4e2d\u4f4d\u5217\u524d200", 
+        "des": "\u5728\u6bd4\u6b66\u5468\u6392\u540d\u4e2d\u4f4d\u5217\u524d\u4e24\u767e", 
         "buff_used_for": "", 
         "tp": 2, 
         "next": 92, 
         "buff_name": "", 
         "mode": 5, 
-        "condition_value": "50", 
+        "condition_value": "200", 
         "open": true, 
         "condition_id": 10, 
         "first": false
@@ -516,7 +516,7 @@
         "package": "", 
         "tp_name": "\u6218\u6597\u7ecf\u5386", 
         "reward_des": "\u5143\u5b9d500", 
-        "des": "\u5728\u6bd4\u6b66\u6392\u540d\u4e2d\u4f4d\u5217\u524d10", 
+        "des": "\u5728\u6bd4\u6b66\u5468\u6392\u540d\u4e2d\u4f4d\u5217\u524d\u5341", 
         "buff_used_for": "", 
         "tp": 2, 
         "next": 93, 
@@ -539,7 +539,7 @@
         "package": "", 
         "tp_name": "\u6218\u6597\u7ecf\u5386", 
         "reward_des": "\u5143\u5b9d1000", 
-        "des": "\u53d6\u5f97\u6bd4\u6b66\u6392\u540d\u7b2c1\u540d", 
+        "des": "\u53d6\u5f97\u6bd4\u6b66\u5468\u6392\u540d\u7b2c\u4e00\u540d", 
         "buff_used_for": "", 
         "tp": 2, 
         "next": null, 
@@ -1351,9 +1351,9 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "2", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
-        "first": true
+        "first": false
     }
 },
 {
@@ -1374,7 +1374,7 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "3", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
         "first": false
     }
@@ -1397,7 +1397,7 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "4", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
         "first": false
     }
@@ -1420,7 +1420,7 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "5", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
         "first": false
     }
@@ -1443,7 +1443,7 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "6", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
         "first": false
     }
@@ -1466,7 +1466,7 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "7", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
         "first": false
     }
@@ -1489,7 +1489,7 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "8", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
         "first": false
     }
@@ -1512,7 +1512,7 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "9", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
         "first": false
     }
@@ -1535,7 +1535,7 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "10", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
         "first": false
     }
@@ -1558,7 +1558,7 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "11", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
         "first": false
     }
@@ -1581,7 +1581,7 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "12", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
         "first": false
     }
@@ -1604,7 +1604,7 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "13", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
         "first": false
     }
@@ -1627,7 +1627,7 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "14", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
         "first": false
     }
@@ -1650,7 +1650,7 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "15", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
         "first": false
     }
@@ -1673,7 +1673,7 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "16", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
         "first": false
     }
@@ -1696,7 +1696,7 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "17", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
         "first": false
     }
@@ -1719,7 +1719,7 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "18", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
         "first": false
     }
@@ -1742,7 +1742,7 @@
         "buff_name": "", 
         "mode": 4, 
         "condition_value": "19", 
-        "open": true, 
+        "open": false, 
         "condition_id": 19, 
         "first": false
     }

@@ -70,9 +70,9 @@
     "model": "config.functiondefine", 
     "fields": {
         "char_level": 0, 
-        "stage_id": 1, 
-        "text": "\u59d4\u4efb\u6218\u6597\u529f\u80fd\u5f00\u542f", 
-        "name": "\u59d4\u4efb\u529f\u80fd", 
+        "stage_id": 12, 
+        "text": "\u6302\u673a\u529f\u80fd\u5f00\u542f", 
+        "name": "\u6302\u673a\u529f\u80fd", 
         "icon": ""
     }
 },
@@ -92,7 +92,7 @@
     "model": "config.functiondefine", 
     "fields": {
         "char_level": 0, 
-        "stage_id": 6, 
+        "stage_id": 14, 
         "text": "\u63a0\u593a\u529f\u80fd\u5f00\u542f", 
         "name": "\u63a0\u593a\u529f\u80fd", 
         "icon": ""
