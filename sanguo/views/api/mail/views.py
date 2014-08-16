@@ -8,6 +8,7 @@ import json
 from utils.decorate import json_return
 from core.mongoscheme import MongoCharacter
 from core.mail import Mail
+from core.attachment import get_drop_from_raw_package
 
 
 @json_return
@@ -25,7 +26,9 @@ def send_mail(request):
     mail_name = data['mail']['name']
     mail_content = data['mail']['content']
     mail_send_at = data['mail']['send_at']
-    attachment = json.dumps(data['mail']['attachment'])
+    attachment = json.dumps(
+        get_drop_from_raw_package(data['mail']['attachment'])
+    )
 
     for cid in cids:
         m = Mail(cid)

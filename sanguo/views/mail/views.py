@@ -30,9 +30,9 @@ def delete(request):
 def get_attachment(request):
     mail_id = request._proto.id
     m = Mail(request._char_id)
-    standard_drop = m.get_attachment(mail_id)
+    attachment = m.get_attachment(mail_id)
 
     response = GetAttachmentResponse()
     response.ret = 0
-    response.attachment.MergeFrom(standard_drop_to_attachment_protomsg(standard_drop))
+    response.attachment.MergeFrom(standard_drop_to_attachment_protomsg(attachment))
     return pack_msg(response)

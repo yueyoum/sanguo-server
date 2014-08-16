@@ -9,7 +9,7 @@ import arrow
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoMail, MongoEmbededMail
 from core.msgpipe import publish_to_char
-from core.attachment import standard_drop_to_attachment_protomsg, get_drop_from_raw_package
+from core.attachment import standard_drop_to_attachment_protomsg
 from core.resource import Resource
 from core.exception import SanguoException
 from preset.settings import MAIL_KEEP_DAYS
@@ -126,14 +126,13 @@ class Mail(object):
 
         resource = Resource(self.char_id, "Mail Attachment")
         attachment = json.loads(self.mail.mails[str(mail_id)].attachment)
-        standard_drop = get_drop_from_raw_package(attachment)
-        resource.add(**standard_drop)
+        resource.add(**attachment)
 
         self.mail.mails[str(mail_id)].attachment = ''
         self.mail.mails[str(mail_id)].has_read = True
         self.mail.save()
         self.send_notify()
-        return standard_drop
+        return attachment
 
 
     def send_notify(self):
@@ -146,10 +145,8 @@ class Mail(object):
             m.content = v.content
             m.has_read = v.has_read
             if v.attachment:
-
-                standard_drop = get_drop_from_raw_package(json.loads(v.attachment))
                 m.attachment.MergeFrom(
-                    standard_drop_to_attachment_protomsg(standard_drop)
+                    standard_drop_to_attachment_protomsg(json.loads(v.attachment))
                 )
 
             m.start_at = arrow.get(v.create_at, "YYYY-MM-DD HH:mm:ss").timestamp
