@@ -26,9 +26,12 @@ def send_mail(request):
     mail_name = data['mail']['name']
     mail_content = data['mail']['content']
     mail_send_at = data['mail']['send_at']
-    attachment = json.dumps(
-        get_drop_from_raw_package(data['mail']['attachment'])
-    )
+
+    attachment = data['mail'].get('attachment', '')
+    if attachment:
+        attachment = json.dumps(
+            get_drop_from_raw_package(data['mail']['attachment'])
+        )
 
     for cid in cids:
         m = Mail(cid)
