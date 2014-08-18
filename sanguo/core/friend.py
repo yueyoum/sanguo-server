@@ -181,6 +181,8 @@ class Friend(object):
         self._msg_friend(msg.friend, from_id, FRIEND_APPLY)
         publish_to_char(self.char_id, pack_msg(msg))
 
+        self.send_friends_amount_notify()
+
 
     def terminate(self, target_id):
         t = str(target_id)
@@ -253,6 +255,8 @@ class Friend(object):
         msg.id = from_id
         publish_to_char(self.char_id, pack_msg(msg))
 
+        self.send_friends_amount_notify()
+
 
     def accept(self, target_id):
         if target_id not in self.mf.accepting:
@@ -284,6 +288,8 @@ class Friend(object):
             total_friends_amount=self.real_cur_amount
         )
 
+        self.send_friends_amount_notify()
+
 
 
     def someone_accept_me(self, from_id):
@@ -300,6 +306,8 @@ class Friend(object):
             new_friend_id=from_id,
             total_friends_amount=self.real_cur_amount
         )
+
+        self.send_friends_amount_notify()
 
 
     def refuse(self, target_id):
@@ -320,6 +328,7 @@ class Friend(object):
         msg = protomsg.RemoveFriendNotify()
         msg.id = target_id
         publish_to_char(self.char_id, pack_msg(msg))
+        self.send_friends_amount_notify()
 
 
     def someone_refuse_me(self, from_id):
@@ -329,6 +338,8 @@ class Friend(object):
         msg = protomsg.RemoveFriendNotify()
         msg.id = from_id
         publish_to_char(self.char_id, pack_msg(msg))
+
+        self.send_friends_amount_notify()
 
 
     def _msg_friend(self, msg, fid, status):
