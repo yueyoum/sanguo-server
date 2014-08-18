@@ -204,7 +204,7 @@ class PurchaseAction(object):
         for _id in PURCHASE.keys():
             s = msg.status.add()
             s.id = _id
-            s.first = _id in times
+            s.first = _id not in times
 
         msg.yueka_remained_days = self.mongo_record.yueka_remained_days
 
