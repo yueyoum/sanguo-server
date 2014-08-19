@@ -399,9 +399,9 @@
     "pk": 56, 
     "model": "skill.skilleffect", 
     "fields": {
-        "target": 3, 
+        "target": 6, 
         "effect": 2, 
-        "value": 150, 
+        "value": 180, 
         "skill": 54, 
         "is_hit_target": true, 
         "rounds": 0
