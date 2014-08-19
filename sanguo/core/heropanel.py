@@ -117,12 +117,13 @@ class HeroPanel(object):
             )
 
         if self.panel.panel[str(_id)].opened:
-            raise SanguoException(
-                errormsg.HEROPANEL_SOCKET_ALREADY_OPENED,
-                self.char_id,
-                "HeroPanel Open",
-                "HeroPanel Socket {0} already opended".format(_id)
-            )
+            # raise SanguoException(
+            #     errormsg.HEROPANEL_SOCKET_ALREADY_OPENED,
+            #     self.char_id,
+            #     "HeroPanel Open",
+            #     "HeroPanel Socket {0} already opended".format(_id)
+            # )
+            return None
 
         none_opended_heros = self.none_opened_heros()
         if not none_opended_heros:

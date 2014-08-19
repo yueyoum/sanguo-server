@@ -27,6 +27,10 @@ def open(request):
 
     response = GetHeroResponse()
     response.ret = 0
+
+    if not hero_oid:
+        return pack_msg(response)
+
     response.id = req.id
     response.hero_oid = hero_oid
     return pack_msg(response)
