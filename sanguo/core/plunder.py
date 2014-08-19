@@ -32,9 +32,7 @@ from preset.settings import (
     PLUNDER_REWARD_NEEDS_POINT,
     PLUNDER_GOT_ITEMS_HOUR,
 
-    GET_HERO_QUALITY_ONE_POOL,
-    GET_HERO_QUALITY_TWO_POOL,
-    GET_HERO_QUALITY_THREE_POOL,
+    PRISONER_POOL,
 )
 from protomsg import PLUNDER_HERO, PLUNDER_STUFF, PLUNDER_GOLD
 from preset import errormsg
@@ -228,7 +226,7 @@ class Plunder(object):
             while heros:
                 hid = random.choice(heros)
                 heros.remove(hid)
-                if hid in GET_HERO_QUALITY_ONE_POOL or hid in GET_HERO_QUALITY_TWO_POOL or hid in GET_HERO_QUALITY_THREE_POOL:
+                if hid in PRISONER_POOL:
                     return hid
 
             return 0
