@@ -80,24 +80,25 @@ class Plunder(object):
             f = Formation(i)
             res.append([i, char.mc.name, char.power, f.get_leader_oid(), f.in_formation_hero_original_ids(), not not_hang_going(i)])
 
-        self_power = float(Char(self.char_id).power)
-
-        def _get_color(p):
-            percent = p / self_power
-            if percent <= 0.9:
-                return 1
-            if percent <= 1.1:
-                return 2
-            return 3
-
         self.mongo_plunder.chars = {}
         for _id, _, power, _, _, is_hang in res:
             mpc = MongoPlunderChar()
             mpc.is_hang = is_hang
-            mpc.color = _get_color(power)
             self.mongo_plunder.chars[str(_id)] = mpc
         self.mongo_plunder.save()
         return res
+
+
+    def _get_plunder_color(self, target_id):
+        self_power = float(Char(self.char_id).power)
+        p = float(Char(target_id).power)
+
+        percent = p / self_power
+        if percent <= 0.9:
+            return 1
+        if percent <= 1.1:
+            return 2
+        return 3
 
 
     def _get_plunder_gold(self, char_id, vip_plus=0):
@@ -156,7 +157,8 @@ class Plunder(object):
         if msg.third_ground.self_win:
             ground_win_times += 1
 
-        got_point = PLUNDER_GOT_POINT[self.mongo_plunder.chars[str(_id)].color].get(ground_win_times, 0)
+        color = self._get_plunder_color(_id)
+        got_point = PLUNDER_GOT_POINT[color].get(ground_win_times, 0)
 
         if got_point:
             self.mongo_plunder.points += got_point

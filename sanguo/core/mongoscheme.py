@@ -163,8 +163,6 @@ class MongoHeroSoul(Document):
 
 class MongoPlunderChar(EmbeddedDocument):
     is_hang = BooleanField()
-    color = IntField()
-
 
 class MongoPlunder(Document):
     id = IntField(primary_key=True)
