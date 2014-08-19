@@ -121,7 +121,8 @@ HERO_STEP_UP_SOCKET_AMOUNT = {0: 1, 1: 2, 2: 3, 3: 4, 4: 5}
 # 取出貂蝉、吕布
 GET_HERO_QUALITY_ONE_POOL = [1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,36,37,38,39,4,43,44,5,56,6,7,8,83,9]
 # 抽奖，乙品质武将池
-GET_HERO_QUALITY_TWO_POOL = [40,41,42,45,46,47,48,49,50,51,52,53,54,55,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,91]
+GET_HERO_QUALITY_TWO_POOL = [40,41,42,45,46,47,49,50,52,53,54,55,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,75,91]
+#取消新手 48,51,74
 # 抽奖，丙品质武将池
 GET_HERO_QUALITY_THREE_POOL = [100,76,77,78,79,80,81,82,84,85,86,87,88,89,90,92,93,94,95,96,97,98,99]
 # 抽奖多少几率产生两个甲品质卡 (基数为100)
@@ -233,7 +234,7 @@ STAGE_ELITE_RESET_COST = [
 ]
 # 重置总次数花费   (第几次重置， 花费)
 STAGE_ELITE_TOTAL_RESET_COST = [
-    (1, 50), (2, 100), (3, 200), (4, 400)
+    (1, 50), (2, 100), (3, 100), (4, 200), (5, 200), (6, 400)
 ]
 
 
@@ -247,9 +248,9 @@ STAGE_ELITE_TOTAL_RESET_COST = [
 # 4: 君主
 # 5: 其他
 DEMAGE_VALUE_ADJUST = {
-    1: {1: 0,     2: -0.05, 3: 0.05,  4: 0,     5: -0.05},
-    2: {1: 0.05,  2: 0,     3: -0.05, 4: 0,     5: -0.05},
-    3: {1: -0.05, 2: 0.05,  3: 0,     4: 0,     5: -0.05},
+    1: {1: 0,     2: -0.07, 3: 0.07,  4: 0,     5: -0.05},
+    2: {1: 0.07,  2: 0,     3: -0.07, 4: 0,     5: -0.05},
+    3: {1: -0.07, 2: 0.07,  3: 0,     4: 0,     5: -0.05},
     4: {1: 0,     2: 0,     3: 0,     4: 0,     5: 0.05 },
     5: {1: 0,     2: 0,     3: 0,     4: -0.05, 5: 0    },
 }
@@ -269,10 +270,10 @@ FRIEND_CANDIDATE_LEVEL_DIFF = 10        # 好友候选人等级差
 MAIL_KEEP_DAYS = 7
 # 激活码
 ACTIVATECODE_MAIL_TITLE = u'激活码领取成功'
-ACTIVATECODE_MAIL_CONTENT = u'激活码领取成功'
+ACTIVATECODE_MAIL_CONTENT = u'激活码领取成功，请从附件领取奖励。'
 # 挂机
 HANG_RESET_MAIL_TITLE = u'昨日挂机补偿'
-HANG_RESET_MAIL_CONTENT = u'昨日挂机补偿'
+HANG_RESET_MAIL_CONTENT = u'主公，昨日您未使用完你的挂机时间，系统发放了一定的补偿。今天要记得安排哦！ ————珠儿'
 # 比武日奖励
 MAIL_ARENA_DAY_REWARD_TITLE = u'比武每日奖励'
 MAIL_ARENA_DAY_REWARD_CONTENT = u'比武每日奖励'
@@ -281,14 +282,14 @@ MAIL_ARENA_WEEK_REWARD_TITLE = u'比武每周奖励'
 MAIL_ARENA_WEEK_REWARD_CONTENT = u'比武每周奖励'
 # 比武被打
 MAIL_ARENA_BEATEN_TITLE = u'比武挑战记录'
-MAIl_ARENA_BEATEN_WIN_TEMPLATE = u'{0}在比武擂台中挑战了你，你击败了对手，你的积分从{1}变成了{2} ({3})'
-MAIl_ARENA_BEATEN_LOST_TEMPLATE = u'{0}在比武擂台中挑战了你，将你击败，你的积分从{1}变成了{2} ({3})'
+MAIl_ARENA_BEATEN_WIN_TEMPLATE = u'报～{0}在比武擂台中挑战我军，已被我军击退，主公的积分从{1}变成了{2} ({3})'
+MAIl_ARENA_BEATEN_LOST_TEMPLATE = u'报～{0}在比武擂台中挑战我军，我军暂时落败，公主的积分从{1}变成了{2} ({3})'
 # 月卡
 MAIL_YUEKA_TITLE = u'月卡奖励'
-MAIL_YUEKA_CONTENT_TEMPLATE = u'获得{0}元宝，月卡还剩余{1}天'
+MAIL_YUEKA_CONTENT_TEMPLATE = u'您获得了今日奖励的{0}元宝，月卡奖励还有{1}天可以领取哦。'
 # 首充
 MAIL_PURCHASE_FIRST_TITLE = u'首充大礼包'
-MAIL_PURCHASE_FIRST_CONTENT = u'附件包括：玄武武将x1，方正红宝石x1，方正黄晶石x1，方正玉石x1'
+MAIL_PURCHASE_FIRST_CONTENT = u'为了感谢您的充值，特为您送首充大礼包！礼品包括：玄武将印x1，方正红宝石x1，方正黄晶石x1，方正玉石x1，都在附件中哦，请主公查收。'
 
 #########################
 #      激活码           #

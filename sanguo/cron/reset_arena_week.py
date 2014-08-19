@@ -20,7 +20,7 @@ def _get_reward_by_rank(score, rank):
 
     for _rank, _reward in ARENA_WEEK_REWARD_TUPLE:
         if rank >= _rank and _reward.packages:
-            drop_ids = [int(i) for i in _reward.packages]
+            drop_ids = [int(i) for i in _reward.packages.split(',')]
             data = get_drop(drop_ids)
             break
 
