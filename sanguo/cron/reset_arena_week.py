@@ -11,6 +11,7 @@ from core.character import Char
 from core.mail import Mail
 from core.arena import REDIS_ARENA_KEY
 from core.drives import redis_client
+from core.achievement import Achievement
 from preset.data import ARENA_WEEK_REWARD_TUPLE
 from preset.settings import MAIL_ARENA_WEEK_REWARD_CONTENT, MAIL_ARENA_WEEK_REWARD_TITLE
 
@@ -48,6 +49,9 @@ def reset():
     for index, data in enumerate(data):
         rank = index + 1
         char_id = data[0]
+
+        achievement = Achievement(char_id)
+        achievement.trig(10, rank)
 
         attachment = _get_reward_by_rank(data[1], rank)
         if not attachment:
