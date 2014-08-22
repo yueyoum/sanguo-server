@@ -28,7 +28,7 @@
         "tp": 1, 
         "rmb": 648, 
         "rate": 10, 
-        "first_des": "\u9996\u6b21\u989d\u5916\u8d60\u90016480\u5143\u5b9d", 
+        "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u90016480\u5143\u5b9d", 
         "ios_id": "2", 
         "icon": ""
     }
@@ -45,7 +45,7 @@
         "tp": 1, 
         "rmb": 328, 
         "rate": 10, 
-        "first_des": "\u9996\u6b21\u989d\u5916\u8d60\u90013280\u5143\u5b9d", 
+        "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u90013280\u5143\u5b9d", 
         "ios_id": "3", 
         "icon": ""
     }
@@ -62,7 +62,7 @@
         "tp": 1, 
         "rmb": 98, 
         "rate": 10, 
-        "first_des": "\u9996\u6b21\u989d\u5916\u8d60\u9001980\u5143\u5b9d", 
+        "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u9001980\u5143\u5b9d", 
         "ios_id": "4", 
         "icon": ""
     }
@@ -73,13 +73,13 @@
     "fields": {
         "sycee": 300, 
         "name": "300\u5143\u5b9d", 
-        "first_addition_sycee": 30, 
+        "first_addition_sycee": 300, 
         "addition_sycee": 30, 
         "des": "\u989d\u5916\u8d60\u900130\u5143\u5b9d", 
         "tp": 1, 
         "rmb": 30, 
         "rate": 10, 
-        "first_des": "\u989d\u5916\u8d60\u900130\u5143\u5b9d", 
+        "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u9001300\u5143\u5b9d", 
         "ios_id": "5", 
         "icon": ""
     }
@@ -90,13 +90,13 @@
     "fields": {
         "sycee": 60, 
         "name": "60\u5143\u5b9d", 
-        "first_addition_sycee": 0, 
+        "first_addition_sycee": 60, 
         "addition_sycee": 0, 
         "des": "60\u5143\u5b9d", 
         "tp": 1, 
         "rmb": 6, 
         "rate": 10, 
-        "first_des": "60\u5143\u5b9d", 
+        "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u900160\u5143\u5b9d", 
         "ios_id": "6", 
         "icon": ""
     }

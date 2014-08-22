@@ -115,13 +115,13 @@
         "anger_self": 32, 
         "prob": 20, 
         "trig_start": 1, 
-        "cast_type": 3, 
+        "cast_type": 1, 
         "trig_cooldown": 1, 
         "anger_rival_team": 20, 
         "mode": 1, 
         "cast_animation": "Step_Forward", 
         "mode_name": "\u4e3b\u52a8", 
-        "attack_effect": "SF_/SF_electricity"
+        "attack_effect": ""
     }
 },
 {
