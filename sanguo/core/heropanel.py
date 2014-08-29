@@ -39,7 +39,7 @@ class HeroPanel(object):
         try:
             self.panel = MongoHeroPanel.objects.get(id=self.char_id)
         except DoesNotExist:
-            self.panel = self.make_new_panel()
+            self.panel = self.make_new_panel(is_first_time=True)
 
 
     @property
@@ -149,7 +149,12 @@ class HeroPanel(object):
         with resource.check(sycee=-using_sycee):
             if none_opened_good_hero:
                 # 还没有取到甲卡
-                prob = GET_HERO_QUALITY_ONE_PROB[self.open_times + 1]
+                if self.panel.refresh_times == 0:
+                    # 新角色第一次抽卡，给好卡
+                    prob = 100
+                else:
+                    prob = GET_HERO_QUALITY_ONE_PROB[self.open_times + 1]
+
                 if random.randint(1, 100) <= prob:
                     # 取得甲卡
                     socket_id, hero = none_opened_good_hero
@@ -190,48 +195,78 @@ class HeroPanel(object):
         self.send_notify()
 
 
-    def make_new_panel(self, reset_time=True):
+    def make_new_panel(self, reset_time=True, is_first_time=False):
         panel = MongoHeroPanel()
         panel.id = self.char_id
-        panel.got_good_hero = False
 
         if reset_time:
             panel.last_refresh = arrow.utcnow().timestamp
         else:
             panel.last_refresh = self.panel.last_refresh
 
-        good_hero_amount = 1
-        if random.randint(1, 100) <= GET_HERO_TWO_QUALITY_ONE_HEROS:
-            good_hero_amount = 2
-
-        heros = []
-
-        while len(heros) < good_hero_amount:
-            choose_good_hero = random.choice(GET_HERO_QUALITY_ONE_POOL)
-            if choose_good_hero not in heros:
-                heros.append(choose_good_hero)
-
-        while len(heros) < 6:
-            choose_other_hero = random.choice(MERGED_OTHER_HERO_POOL)
-            if choose_other_hero not in heros:
-                heros.append(choose_other_hero)
+        if is_first_time:
+            panel.refresh_times = 0
+            heros = self._first_time_hero_lists()
+        else:
+            panel.refresh_times += 1
+            heros = self._other_times_hero_list()
 
         embedded_hero_objs = []
-        embedded_hero_objs.append(
-            MongoEmbeddedHeroPanelHero(oid=heros[0], good=True, opened=False)
-        )
-        for h in heros[1:]:
+        for oid, good in heros:
             embedded_hero_objs.append(
-                MongoEmbeddedHeroPanelHero(oid=h, good=False, opened=False)
+                MongoEmbeddedHeroPanelHero(oid=oid, good=good, opened=False)
             )
-
-        random.shuffle(embedded_hero_objs)
 
         for index, i in enumerate(embedded_hero_objs):
             panel.panel[str(index+1)] = i
 
         panel.save()
         return panel
+
+
+    def _first_time_hero_lists(self):
+        """
+        新手第一次抽奖的武将包需要设定为 2张随机金卡（甲），3张银卡（乙），1张铜卡（丙）。
+        武将从设定的武将池里生成。
+        新手引导的第一次免费抽奖，直接2张金卡中选择一张抽中。
+        """
+        quality_one_heros = random.sample(GET_HERO_QUALITY_ONE_POOL, 2)
+        quality_two_heros = random.sample(GET_HERO_QUALITY_TWO_POOL, 3)
+        quality_three_heros = random.sample(GET_HERO_QUALITY_THREE_POOL, 1)
+
+        heros = []
+
+        for h in quality_one_heros:
+            heros.append((h, True))
+
+        for h in quality_two_heros:
+            heros.append((h, False))
+
+        for h in quality_three_heros:
+            heros.append((h, False))
+
+        random.shuffle(heros)
+        return heros
+
+
+    def _other_times_hero_list(self):
+        good_hero_amount = 1
+        if random.randint(1, 100) <= GET_HERO_TWO_QUALITY_ONE_HEROS:
+            good_hero_amount = 2
+
+        quality_one_heros = random.sample(GET_HERO_QUALITY_ONE_POOL, good_hero_amount)
+        quality_other_heros = random.sample(MERGED_OTHER_HERO_POOL, 6-good_hero_amount)
+
+        heros = []
+
+        for h in quality_one_heros:
+            heros.append((h, True))
+
+        for h in quality_other_heros:
+            heros.append((h, False))
+
+        random.shuffle(heros)
+        return heros
 
 
     def send_notify(self):

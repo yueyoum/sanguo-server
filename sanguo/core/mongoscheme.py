@@ -126,6 +126,8 @@ class MongoHeroPanel(Document):
     panel = MapField(EmbeddedDocumentField(MongoEmbeddedHeroPanelHero))
     # 上次刷新的时间戳
     last_refresh = IntField()
+    # 刷新次数，0表示刚刚初始化
+    refresh_times = IntField(default=0)
 
     meta = {
         'collection': 'heropanel'
