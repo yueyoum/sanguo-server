@@ -11,6 +11,7 @@ from libs import (
     MSG_TYPE_EMPTY_SESSION,
     unpack_msg,
     crypto,
+    MAX_NUM_FIELD_AMOUNT,
 )
 from libs.session import session_loads, EmptyGameSession
 
@@ -30,9 +31,13 @@ class RequestFilter(object):
         data = request.body
 
         num_of_msgs = NUM_FIELD.unpack(data[:4])[0]
+        if num_of_msgs > MAX_NUM_FIELD_AMOUNT:
+            print "NUM_OF_MSGS TOO BIG! {0} > {1}".format(num_of_msgs, MAX_NUM_FIELD_AMOUNT)
+            return HttpResponse(status=403)
+
         data = data[4:]
 
-        for i in range(num_of_msgs):
+        for i in xrange(num_of_msgs):
             msg_id, msg, data = unpack_msg(data)
             if msg_id == 51:
                 # TODO Check Version

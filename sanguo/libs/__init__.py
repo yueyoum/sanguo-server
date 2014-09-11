@@ -15,7 +15,8 @@ MSG_TYPE_EMPTY_SESSION = {100, 102, 105, 4200, 4202}
 MSG_TYPE_VERSION_CHECKER = 51
 MSG_TYPE_START_GAME = 100
 
-
+# 最大消息个数，超过就直接返回403
+MAX_NUM_FIELD_AMOUNT = 10
 
 def unpack_msg(res):
     msg_id = NUM_FIELD.unpack(res[:4])[0]
