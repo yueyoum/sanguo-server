@@ -93,6 +93,12 @@ class HeroPanel(object):
                 return False
         return True
 
+    def has_got_good_hero(self):
+        for v in self.panel.panel.values():
+            if v.opened and v.good:
+                return True
+        return False
+
     def get_hero_cost(self, incr=False):
         counter = Counter(self.char_id, 'gethero')
 
@@ -125,8 +131,7 @@ class HeroPanel(object):
             # )
             return None
 
-        none_opended_heros = self.none_opened_heros()
-        if not none_opended_heros:
+        if self.all_opended():
             raise SanguoException(
                 errormsg.HEROPANEL_ALL_OPENED,
                 self.char_id,
@@ -134,20 +139,13 @@ class HeroPanel(object):
                 "all opened."
             )
 
-        none_opened_good_hero = None
-        none_opened_other_heros = []
-        for k, v in none_opended_heros:
-            if v.good:
-                none_opened_good_hero = (k, v)
-                continue
-
-            none_opened_other_heros.append((k, v))
+        none_opened_heros = self.none_opened_heros()
 
         using_sycee = self.get_hero_cost(incr=True)
 
         resource = Resource(self.char_id, "HeroPanel Open")
         with resource.check(sycee=-using_sycee):
-            if none_opened_good_hero:
+            if not self.has_got_good_hero():
                 # 还没有取到甲卡
                 if self.panel.refresh_times == 0:
                     # 新角色第一次抽卡，给好卡
@@ -157,11 +155,16 @@ class HeroPanel(object):
 
                 if random.randint(1, 100) <= prob:
                     # 取得甲卡
-                    socket_id, hero = none_opened_good_hero
+                    for k, v in none_opened_heros:
+                        if v.good:
+                            socket_id, hero = k, v
+                            break
+                    else:
+                        socket_id, hero = random.choice(none_opened_heros)
                 else:
-                    socket_id, hero = random.choice(none_opened_other_heros)
+                    socket_id, hero = random.choice(none_opened_heros)
             else:
-                socket_id, hero = random.choice(none_opened_other_heros)
+                socket_id, hero = random.choice(none_opened_heros)
 
             self.panel.panel[str(_id)], self.panel.panel[socket_id] = self.panel.panel[socket_id], self.panel.panel[str(_id)]
 
