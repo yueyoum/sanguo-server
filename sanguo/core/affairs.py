@@ -143,6 +143,14 @@ class Affairs(_GetRealGoldMixin):
                 "hang at none exist city id {0}".format(city_id)
             )
 
+        if city_id not in self.mongo_affairs.opened:
+            raise SanguoException(
+                errormsg.INVALID_OPERATE,
+                self.char_id,
+                "Start Hang",
+                "city id {0} not opened".format(city_id)
+            )
+
         if self.mongo_affairs.hang_city_id:
             # 上次有挂机，先结算
             drop_msg = self.get_hang_reward(auto_start=False)
@@ -187,7 +195,7 @@ class Affairs(_GetRealGoldMixin):
         reward_exp = passed_time / 15 * battle_data.normal_exp
 
         if battle_data.normal_drop:
-            drops = get_drop([int(i) for i in battle_data.normal_drop], multi=passed_time/15)
+            drops = get_drop([int(i) for i in battle_data.normal_drop.split(',')], multi=passed_time/15)
         else:
             drops = make_standard_drop_from_template()
 
