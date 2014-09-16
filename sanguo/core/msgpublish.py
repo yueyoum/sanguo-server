@@ -3,12 +3,15 @@
 __author__ = 'Wang Chao'
 __date__ = '2/25/14'
 
+import sys
+
 from core.character import Char
 from core.msgpipe import publish_to_char
 from core.activeplayers import ActivePlayers
 from core.exception import SanguoException
 
 from utils import pack_msg
+from utils.api import api_system_broadcast_get, APIFailure
 from preset.settings import CHAT_MESSAGE_MAX_LENGTH
 from preset import errormsg
 
@@ -48,4 +51,26 @@ class ChatMessagePublish(object):
         active_list = ap.get_list()
         for cid in active_list:
             self.to_char(cid, text, check=False)
+
+
+class SystemBroadcast(object):
+    def __init__(self, char_id):
+        self.char_id = char_id
+
+
+    def send_global_broadcast(self):
+        try:
+            data = api_system_broadcast_get({})
+        except APIFailure:
+            sys.stderr.write("API_SYSTEM_BROADCAST_GET FAILURE\n\n")
+            return
+
+        text = data['data']
+        msg = BroadcastNotify()
+        msg.text = text
+
+        publish_to_char(self.char_id, pack_msg(msg))
+
+    def send(self, text):
+        pass
 

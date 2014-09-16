@@ -33,3 +33,5 @@ api_purchase_done = partial(apicall, cmd=HUB_URL + '/api/purchase/done/')
 
 api_purchase91_get_order_id = partial(apicall, cmd=HUB_URL + '/api/purchase91/orderid/')
 api_purchase91_confirm = partial(apicall, cmd=HUB_URL + '/api/purchase91/confirm/')
+
+api_system_broadcast_get = partial(apicall, cmd=HUB_URL + '/api/system/broadcast/')

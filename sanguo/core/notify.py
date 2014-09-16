@@ -7,6 +7,7 @@ from core.character import Char
 from core.task import Task
 
 from core.msgpipe import publish_to_char, message_clean
+from core.msgpublish import SystemBroadcast
 from core.prison import Prison
 from core.plunder import Plunder
 from core.friend import Friend
@@ -118,6 +119,8 @@ def login_notify(char_id):
     Attachment(char_id).send_notify()
 
     PurchaseAction(char_id).send_notify()
+
+    SystemBroadcast(char_id).send_global_broadcast()
 
     # mail notify 要放在最后，因为 其他功能初始化时可能会产生登录邮件
     Mail(char_id).send_notify()
