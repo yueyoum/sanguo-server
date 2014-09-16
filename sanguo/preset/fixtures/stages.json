@@ -11,6 +11,7 @@
         "strength_modulus": 1.0, 
         "level": 2, 
         "star_exp": 0, 
+        "battle_start": true, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "", 
@@ -19,6 +20,7 @@
         "first_drop": "408", 
         "normal_exp": 10, 
         "monsters": "0,1,0,0,1,0,0,1,0", 
+        "battle_end": false, 
         "name": "\u6dbf\u90e1\u4e4b\u6218"
     }
 },
@@ -34,6 +36,7 @@
         "strength_modulus": 1.0, 
         "level": 2, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "801", 
@@ -42,6 +45,7 @@
         "first_drop": "", 
         "normal_exp": 11, 
         "monsters": "0,2,0,0,18,0,0,2,0", 
+        "battle_end": false, 
         "name": "\u9752\u5ddd\u4e4b\u56f4"
     }
 },
@@ -57,6 +61,7 @@
         "strength_modulus": 1.1, 
         "level": 3, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "401", 
@@ -65,6 +70,7 @@
         "first_drop": "", 
         "normal_exp": 11, 
         "monsters": "0,2,0,0,2,0,0,2,0", 
+        "battle_end": false, 
         "name": "\u988d\u5ddd\u4e4b\u6218"
     }
 },
@@ -80,6 +86,7 @@
         "strength_modulus": 1.1, 
         "level": 3, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "", 
@@ -88,6 +95,7 @@
         "first_drop": "801,802,801,802", 
         "normal_exp": 11, 
         "monsters": "0,3,0,0,3,0,0,9,0", 
+        "battle_end": false, 
         "name": "\u66f2\u9633\u4e4b\u6218"
     }
 },
@@ -103,6 +111,7 @@
         "strength_modulus": 1.1, 
         "level": 4, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "801", 
@@ -111,6 +120,7 @@
         "first_drop": "911", 
         "normal_exp": 11, 
         "monsters": "0,2,0,0,2,0,0,2,0", 
+        "battle_end": false, 
         "name": "\u5e7f\u5b97\u4e4b\u6218"
     }
 },
@@ -126,6 +136,7 @@
         "strength_modulus": 1.2, 
         "level": 4, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "457", 
@@ -134,6 +145,7 @@
         "first_drop": "921", 
         "normal_exp": 11, 
         "monsters": "0,6,0,9,0,9,0,168,0", 
+        "battle_end": false, 
         "name": "\u5de8\u9e7f\u9047\u8463\u5353"
     }
 },
@@ -149,6 +161,7 @@
         "strength_modulus": 1.2, 
         "level": 5, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "801", 
@@ -157,6 +170,7 @@
         "first_drop": "931", 
         "normal_exp": 12, 
         "monsters": "0,2,0,1,0,1,0,15,0", 
+        "battle_end": false, 
         "name": "\u9633\u57ce\u4e4b\u6218"
     }
 },
@@ -172,6 +186,7 @@
         "strength_modulus": 1.2, 
         "level": 5, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "415,802", 
@@ -180,6 +195,7 @@
         "first_drop": "", 
         "normal_exp": 12, 
         "monsters": "3,0,3,0,14,0,0,155,0", 
+        "battle_end": false, 
         "name": "\u5b9b\u57ce\u9047\u5b59\u5019"
     }
 },
@@ -195,6 +211,7 @@
         "strength_modulus": 1.2, 
         "level": 6, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "801", 
@@ -203,6 +220,7 @@
         "first_drop": "901,901,901,901", 
         "normal_exp": 12, 
         "monsters": "0,2,0,1,0,1,0,18,0", 
+        "battle_end": false, 
         "name": "\u5357\u9633\u4e4b\u6218"
     }
 },
@@ -218,6 +236,7 @@
         "strength_modulus": 1.0, 
         "level": 6, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "464", 
@@ -226,6 +245,7 @@
         "first_drop": "509,911", 
         "normal_exp": 12, 
         "monsters": "1,0,1,1,0,1,0,178,0", 
+        "battle_end": true, 
         "name": "\u5b9b\u57ce\u6b7c\u706d\u6218"
     }
 },
@@ -241,6 +261,7 @@
         "strength_modulus": 1.3, 
         "level": 7, 
         "star_exp": 0, 
+        "battle_start": true, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "802", 
@@ -249,6 +270,7 @@
         "first_drop": "931", 
         "normal_exp": 13, 
         "monsters": "0,4,0,3,0,3,0,15,0", 
+        "battle_end": false, 
         "name": "\u8ba8\u4f10\u8463\u5353\u8054\u76df"
     }
 },
@@ -264,6 +286,7 @@
         "strength_modulus": 1.3, 
         "level": 7, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "801", 
@@ -272,6 +295,7 @@
         "first_drop": "931", 
         "normal_exp": 13, 
         "monsters": "0,157,0,0,142,0,0,155,0", 
+        "battle_end": false, 
         "name": "\u9633\u4eba\u4e4b\u6218"
     }
 },
@@ -287,6 +311,7 @@
         "strength_modulus": 1.4, 
         "level": 8, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "801", 
@@ -295,6 +320,7 @@
         "first_drop": "921", 
         "normal_exp": 13, 
         "monsters": "3,0,3,3,0,3,0,19,0", 
+        "battle_end": false, 
         "name": "\u6df7\u6218\u7267\u91ce"
     }
 },
@@ -310,6 +336,7 @@
         "strength_modulus": 1.4, 
         "level": 8, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "422", 
@@ -318,6 +345,7 @@
         "first_drop": "911", 
         "normal_exp": 13, 
         "monsters": "0,6,0,0,6,0,0,177,0", 
+        "battle_end": false, 
         "name": "\u5317\u6d77\u516c\u5b59\u74d2"
     }
 },
@@ -333,6 +361,7 @@
         "strength_modulus": 1.4, 
         "level": 9, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "802", 
@@ -341,6 +370,7 @@
         "first_drop": "901", 
         "normal_exp": 14, 
         "monsters": "9,0,9,9,0,9,9,0,9", 
+        "battle_end": false, 
         "name": "\u5c71\u8def\u4f0f\u5175"
     }
 },
@@ -356,6 +386,7 @@
         "strength_modulus": 1.5, 
         "level": 11, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "801", 
@@ -364,6 +395,7 @@
         "first_drop": "921", 
         "normal_exp": 14, 
         "monsters": "0,13,0,0,5,0,0,149,0", 
+        "battle_end": false, 
         "name": "\u6c5c\u6c34\u5173\u534e\u96c4"
     }
 },
@@ -379,6 +411,7 @@
         "strength_modulus": 1.5, 
         "level": 12, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "802", 
@@ -387,6 +420,7 @@
         "first_drop": "931", 
         "normal_exp": 14, 
         "monsters": "0,4,0,0,4,0,3,0,3", 
+        "battle_end": false, 
         "name": "\u8fdb\u519b\u864e\u7262\u5173"
     }
 },
@@ -402,6 +436,7 @@
         "strength_modulus": 1.5, 
         "level": 15, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "429", 
@@ -410,6 +445,7 @@
         "first_drop": "921", 
         "normal_exp": 14, 
         "monsters": "0,6,0,0,6,0,0,134,0", 
+        "battle_end": false, 
         "name": "\u864e\u7262\u5173\u5415\u5e03"
     }
 },
@@ -425,6 +461,7 @@
         "strength_modulus": 1.6, 
         "level": 11, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "802", 
@@ -433,6 +470,7 @@
         "first_drop": "911", 
         "normal_exp": 15, 
         "monsters": "0,5,0,3,0,3,9,0,9", 
+        "battle_end": false, 
         "name": "\u8fdb\u519b\u6d1b\u9633"
     }
 },
@@ -448,14 +486,16 @@
         "strength_modulus": 1.3, 
         "level": 11, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "802", 
         "first_exp": 3000, 
         "battle": 2, 
-        "first_drop": "505", 
+        "first_drop": "505,911", 
         "normal_exp": 15, 
         "monsters": "0,134,0,0,200,0,0,168,0", 
+        "battle_end": true, 
         "name": "\u706b\u70e7\u6d1b\u9633"
     }
 },
@@ -471,6 +511,7 @@
         "strength_modulus": 1.4, 
         "level": 12, 
         "star_exp": 0, 
+        "battle_start": true, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "802", 
@@ -479,6 +520,7 @@
         "first_drop": "921", 
         "normal_exp": 15, 
         "monsters": "6,0,6,6,0,6,6,0,6", 
+        "battle_end": false, 
         "name": "\u8365\u9633\u8ffd\u5175"
     }
 },
@@ -494,6 +536,7 @@
         "strength_modulus": 1.4, 
         "level": 12, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 3, 
         "first_gold": 0, 
         "star_drop": "801", 
@@ -502,6 +545,7 @@
         "first_drop": "931", 
         "normal_exp": 15, 
         "monsters": "6,0,6,7,0,7,0,159,0", 
+        "battle_end": false, 
         "name": "\u66f9\u6d2a\u6551\u4e3b"
     }
 },
@@ -517,6 +561,7 @@
         "strength_modulus": 1.5, 
         "level": 13, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "408", 
@@ -525,6 +570,7 @@
         "first_drop": "931", 
         "normal_exp": 16, 
         "monsters": "4,0,4,0,7,10,4,0,4", 
+        "battle_end": false, 
         "name": "\u5180\u5dde\u4e4b\u4e89"
     }
 },
@@ -540,6 +586,7 @@
         "strength_modulus": 1.5, 
         "level": 13, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 3, 
         "first_gold": 0, 
         "star_drop": "415", 
@@ -548,6 +595,7 @@
         "first_drop": "921", 
         "normal_exp": 16, 
         "monsters": "7,0,7,0,165,0,0,166,0", 
+        "battle_end": false, 
         "name": "\u8881\u7ecd\u541e\u5180\u5dde"
     }
 },
@@ -563,6 +611,7 @@
         "strength_modulus": 1.5, 
         "level": 14, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "801", 
@@ -571,6 +620,7 @@
         "first_drop": "901", 
         "normal_exp": 16, 
         "monsters": "3,9,3,3,9,3,9,3,0", 
+        "battle_end": false, 
         "name": "\u8881\u7ecd\u80cc\u8bfa"
     }
 },
@@ -586,6 +636,7 @@
         "strength_modulus": 1.6, 
         "level": 14, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "801", 
@@ -594,6 +645,7 @@
         "first_drop": "911", 
         "normal_exp": 16, 
         "monsters": "6,0,6,0,115,0,0,177,0", 
+        "battle_end": false, 
         "name": "\u754c\u6865\u4e4b\u6218"
     }
 },
@@ -609,6 +661,7 @@
         "strength_modulus": 1.6, 
         "level": 15, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "802", 
@@ -617,6 +670,7 @@
         "first_drop": "901", 
         "normal_exp": 16, 
         "monsters": "0,13,0,0,16,0,3,18,3", 
+        "battle_end": false, 
         "name": "\u8944\u9633\u590d\u4ec7\u6218"
     }
 },
@@ -632,6 +686,7 @@
         "strength_modulus": 1.6, 
         "level": 15, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "471", 
@@ -640,6 +695,7 @@
         "first_drop": "921", 
         "normal_exp": 17, 
         "monsters": "0,13,0,9,15,9,9,187,9", 
+        "battle_end": false, 
         "name": "\u8346\u5dde\u7267\u5218\u8868"
     }
 },
@@ -655,6 +711,7 @@
         "strength_modulus": 1.7, 
         "level": 16, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "801", 
@@ -663,6 +720,7 @@
         "first_drop": "931", 
         "normal_exp": 17, 
         "monsters": "9,0,9,9,0,9,9,0,9", 
+        "battle_end": false, 
         "name": "\u5c98\u5c71\u4e4b\u6218"
     }
 },
@@ -678,14 +736,16 @@
         "strength_modulus": 1.4, 
         "level": 16, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "802", 
         "first_exp": 4000, 
         "battle": 3, 
-        "first_drop": "521", 
+        "first_drop": "521,911", 
         "normal_exp": 17, 
         "monsters": "7,0,7,142,0,157,126,0,155", 
+        "battle_end": true, 
         "name": "\u7389\u73ba\u4e4b\u707e"
     }
 },
@@ -701,6 +761,7 @@
         "strength_modulus": 1.5, 
         "level": 17, 
         "star_exp": 0, 
+        "battle_start": true, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "422", 
@@ -709,6 +770,7 @@
         "first_drop": "902", 
         "normal_exp": 17, 
         "monsters": "3,0,3,3,0,3,9,15,9", 
+        "battle_end": false, 
         "name": "\u5927\u7834\u6731\u96bd"
     }
 },
@@ -724,14 +786,16 @@
         "strength_modulus": 1.5, 
         "level": 17, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 5000, 
         "star_drop": "801", 
         "first_exp": 5000, 
         "battle": 4, 
-        "first_drop": "502", 
+        "first_drop": "502,922", 
         "normal_exp": 18, 
         "monsters": "6,0,6,7,117,7,7,175,7", 
+        "battle_end": false, 
         "name": "\u9a6c\u817e\u6765\u88ad"
     }
 },
@@ -747,6 +811,7 @@
         "strength_modulus": 1.5, 
         "level": 18, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "457", 
@@ -755,6 +820,7 @@
         "first_drop": "912", 
         "normal_exp": 18, 
         "monsters": "4,0,4,4,0,4,3,16,3", 
+        "battle_end": false, 
         "name": "\u9a6c\u817e\u4e3e\u4e49"
     }
 },
@@ -770,6 +836,7 @@
         "strength_modulus": 1.6, 
         "level": 18, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "801", 
@@ -778,6 +845,7 @@
         "first_drop": "922", 
         "normal_exp": 18, 
         "monsters": "6,0,6,6,0,6,14,198,13", 
+        "battle_end": false, 
         "name": "\u636e\u5b88\u8fb9\u5173"
     }
 },
@@ -793,6 +861,7 @@
         "strength_modulus": 1.6, 
         "level": 19, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "802", 
@@ -801,6 +870,7 @@
         "first_drop": "932", 
         "normal_exp": 18, 
         "monsters": "3,5,3,3,9,3,9,20,9", 
+        "battle_end": false, 
         "name": "\u5bff\u9633\u5e73\u4e71"
     }
 },
@@ -816,6 +886,7 @@
         "strength_modulus": 1.7, 
         "level": 19, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "803", 
@@ -824,6 +895,7 @@
         "first_drop": "902", 
         "normal_exp": 19, 
         "monsters": "3,0,3,9,19,9,12,0,12", 
+        "battle_end": false, 
         "name": "\u957f\u5b89\u57ce\u5916"
     }
 },
@@ -839,6 +911,7 @@
         "strength_modulus": 1.7, 
         "level": 20, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "802", 
@@ -847,6 +920,7 @@
         "first_drop": "902", 
         "normal_exp": 19, 
         "monsters": "6,0,6,6,13,6,6,13,6", 
+        "battle_end": false, 
         "name": "\u957f\u5b89\u4e4b\u6218"
     }
 },
@@ -862,6 +936,7 @@
         "strength_modulus": 1.7, 
         "level": 20, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "436", 
@@ -870,6 +945,7 @@
         "first_drop": "912", 
         "normal_exp": 19, 
         "monsters": "4,0,4,6,0,6,3,16,3", 
+        "battle_end": false, 
         "name": "\u52e4\u738b\u4e4b\u6218"
     }
 },
@@ -885,6 +961,7 @@
         "strength_modulus": 1.8, 
         "level": 21, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "803", 
@@ -893,6 +970,7 @@
         "first_drop": "932", 
         "normal_exp": 19, 
         "monsters": "0,17,0,6,6,6,4,10,4", 
+        "battle_end": false, 
         "name": "\u527f\u706d\u4e71\u515a"
     }
 },
@@ -908,6 +986,7 @@
         "strength_modulus": 1.4, 
         "level": 21, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "464", 
@@ -916,6 +995,7 @@
         "first_drop": "922", 
         "normal_exp": 20, 
         "monsters": "7,0,14,15,0,11,18,173,18", 
+        "battle_end": true, 
         "name": "\u738b\u5141\u7684\u6bc1\u706d"
     }
 },
@@ -931,6 +1011,7 @@
         "strength_modulus": 1.6, 
         "level": 22, 
         "star_exp": 0, 
+        "battle_start": true, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "803", 
@@ -939,6 +1020,7 @@
         "first_drop": "912", 
         "normal_exp": 20, 
         "monsters": "4,0,4,10,143,10,6,6,6", 
+        "battle_end": false, 
         "name": "\u5f90\u5dde\u5305\u56f4\u6218"
     }
 },
@@ -954,6 +1036,7 @@
         "strength_modulus": 1.6, 
         "level": 22, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "443", 
@@ -962,6 +1045,7 @@
         "first_drop": "932", 
         "normal_exp": 20, 
         "monsters": "4,0,4,4,4,4,3,141,3", 
+        "battle_end": false, 
         "name": "\u5077\u88ad\u5156\u5dde"
     }
 },
@@ -977,6 +1061,7 @@
         "strength_modulus": 1.6, 
         "level": 23, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "803", 
@@ -985,6 +1070,7 @@
         "first_drop": "902", 
         "normal_exp": 20, 
         "monsters": "6,17,6,6,0,6,6,141,6", 
+        "battle_end": false, 
         "name": "\u7a81\u88ad\u6fee\u9633"
     }
 },
@@ -1000,6 +1086,7 @@
         "strength_modulus": 1.7, 
         "level": 23, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 3, 
         "first_gold": 0, 
         "star_drop": "802", 
@@ -1008,6 +1095,7 @@
         "first_drop": "932", 
         "normal_exp": 21, 
         "monsters": "3,145,3,6,102,6,159,0,101", 
+        "battle_end": false, 
         "name": "\u66f9\u64cd\u4e2d\u8ba1"
     }
 },
@@ -1023,6 +1111,7 @@
         "strength_modulus": 1.7, 
         "level": 24, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "801", 
@@ -1031,6 +1120,7 @@
         "first_drop": "922", 
         "normal_exp": 21, 
         "monsters": "6,0,6,144,0,143,7,102,7", 
+        "battle_end": false, 
         "name": "\u6fee\u9633\u4e4b\u6218"
     }
 },
@@ -1046,6 +1136,7 @@
         "strength_modulus": 1.7, 
         "level": 24, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "803", 
@@ -1054,6 +1145,7 @@
         "first_drop": "912", 
         "normal_exp": 21, 
         "monsters": "21,21,21,22,21,22,3,104,3", 
+        "battle_end": false, 
         "name": "\u864e\u75f4\u8bb8\u891a"
     }
 },
@@ -1069,6 +1161,7 @@
         "strength_modulus": 1.8, 
         "level": 25, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "803", 
@@ -1077,6 +1170,7 @@
         "first_drop": "902", 
         "normal_exp": 21, 
         "monsters": "9,9,9,9,9,9,0,134,0", 
+        "battle_end": false, 
         "name": "\u7591\u5175\u8bf1\u5415\u5e03"
     }
 },
@@ -1092,6 +1186,7 @@
         "strength_modulus": 1.8, 
         "level": 25, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "803", 
@@ -1100,6 +1195,7 @@
         "first_drop": "932", 
         "normal_exp": 21, 
         "monsters": "102,0,103,144,0,145,104,0,101", 
+        "battle_end": false, 
         "name": "\u5b9a\u9676\u6b7c\u654c\u6218"
     }
 },
@@ -1115,6 +1211,7 @@
         "strength_modulus": 1.9, 
         "level": 26, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "802", 
@@ -1123,6 +1220,7 @@
         "first_drop": "912", 
         "normal_exp": 22, 
         "monsters": "6,18,9,4,15,5,12,6,8", 
+        "battle_end": false, 
         "name": "\u5c71\u8def\u6df7\u6218"
     }
 },
@@ -1138,6 +1236,7 @@
         "strength_modulus": 1.5, 
         "level": 26, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "492", 
@@ -1146,6 +1245,7 @@
         "first_drop": "932", 
         "normal_exp": 22, 
         "monsters": "7,102,7,9,103,9,6,101,6", 
+        "battle_end": true, 
         "name": "\u5156\u5dde\u4e4b\u6218"
     }
 },
@@ -1161,6 +1261,7 @@
         "strength_modulus": 2.3, 
         "level": 27, 
         "star_exp": 0, 
+        "battle_start": true, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "401", 
@@ -1169,6 +1270,7 @@
         "first_drop": "902", 
         "normal_exp": 22, 
         "monsters": "4,22,4,4,10,10,5,5,5", 
+        "battle_end": false, 
         "name": "\u7fa4\u9f99\u65e0\u9996"
     }
 },
@@ -1184,6 +1286,7 @@
         "strength_modulus": 2.4, 
         "level": 27, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "803", 
@@ -1192,6 +1295,7 @@
         "first_drop": "912", 
         "normal_exp": 22, 
         "monsters": "4,13,4,4,16,4,4,198,4", 
+        "battle_end": false, 
         "name": "\u90ed\u6c5c\u52ab\u9a7e"
     }
 },
@@ -1207,6 +1311,7 @@
         "strength_modulus": 2.4, 
         "level": 28, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "803", 
@@ -1215,6 +1320,7 @@
         "first_drop": "932", 
         "normal_exp": 23, 
         "monsters": "7,7,7,6,13,6,7,14,7", 
+        "battle_end": false, 
         "name": "\u6e2d\u5357\u4e4b\u6218"
     }
 },
@@ -1230,6 +1336,7 @@
         "strength_modulus": 2.5, 
         "level": 28, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "804", 
@@ -1238,6 +1345,7 @@
         "first_drop": "902", 
         "normal_exp": 23, 
         "monsters": "6,6,6,6,17,6,6,156,6", 
+        "battle_end": false, 
         "name": "\u5f90\u6643\u6551\u9a7e"
     }
 },
@@ -1253,6 +1361,7 @@
         "strength_modulus": 2.6, 
         "level": 29, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "803", 
@@ -1261,6 +1370,7 @@
         "first_drop": "932", 
         "normal_exp": 23, 
         "monsters": "21,5,21,4,22,4,15,0,20", 
+        "battle_end": false, 
         "name": "\u674e\u4e50\u4e4b\u4e71"
     }
 },
@@ -1276,6 +1386,7 @@
         "strength_modulus": 2.7, 
         "level": 29, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "803", 
@@ -1284,6 +1395,7 @@
         "first_drop": "902", 
         "normal_exp": 23, 
         "monsters": "6,198,6,7,0,7,6,5,6", 
+        "battle_end": false, 
         "name": "\u4e09\u8d3c\u6270\u541b"
     }
 },
@@ -1299,6 +1411,7 @@
         "strength_modulus": 2.6, 
         "level": 30, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "804", 
@@ -1307,6 +1420,7 @@
         "first_drop": "912", 
         "normal_exp": 24, 
         "monsters": "4,4,4,4,9,4,4,12,4", 
+        "battle_end": false, 
         "name": "\u6c60\u9633\u4e4b\u6218"
     }
 },
@@ -1322,6 +1436,7 @@
         "strength_modulus": 2.7, 
         "level": 30, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "803", 
@@ -1330,6 +1445,7 @@
         "first_drop": "902", 
         "normal_exp": 24, 
         "monsters": "5,5,5,5,10,5,5,104,5", 
+        "battle_end": false, 
         "name": "\u864e\u75f4\u663e\u5a01"
     }
 },
@@ -1345,6 +1461,7 @@
         "strength_modulus": 2.9, 
         "level": 31, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "803", 
@@ -1353,6 +1470,7 @@
         "first_drop": "932", 
         "normal_exp": 24, 
         "monsters": "7,0,7,6,0,6,10,198,10", 
+        "battle_end": false, 
         "name": "\u66f9\u519b\u6551\u9a7e"
     }
 },
@@ -1368,6 +1486,7 @@
         "strength_modulus": 2.3, 
         "level": 31, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 3, 
         "first_gold": 0, 
         "star_drop": "804", 
@@ -1376,6 +1495,7 @@
         "first_drop": "912", 
         "normal_exp": 24, 
         "monsters": "102,0,103,10,145,10,144,101,104", 
+        "battle_end": true, 
         "name": "\u79fb\u9a7e\u8bb8\u90fd"
     }
 },
@@ -1391,6 +1511,7 @@
         "strength_modulus": 2.4, 
         "level": 32, 
         "star_exp": 0, 
+        "battle_start": true, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1399,6 +1520,7 @@
         "first_drop": "922", 
         "normal_exp": 25, 
         "monsters": "6,6,6,5,10,5,5,12,5", 
+        "battle_end": false, 
         "name": "\u725b\u6e1a\u4e4b\u6218"
     }
 },
@@ -1414,6 +1536,7 @@
         "strength_modulus": 3.9, 
         "level": 32, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1422,6 +1545,7 @@
         "first_drop": "912", 
         "normal_exp": 25, 
         "monsters": "0,13,0,0,122,0,0,124,0", 
+        "battle_end": false, 
         "name": "\u795e\u4ead\u5cad\u5b64\u80c6\u592a\u53f2\u6148"
     }
 },
@@ -1437,6 +1561,7 @@
         "strength_modulus": 2.5, 
         "level": 33, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "422", 
@@ -1445,6 +1570,7 @@
         "first_drop": "932", 
         "normal_exp": 25, 
         "monsters": "9,9,9,6,5,6,6,6,6", 
+        "battle_end": false, 
         "name": "\u795e\u4ead\u5cad\u8ffd\u5175"
     }
 },
@@ -1460,6 +1586,7 @@
         "strength_modulus": 2.6, 
         "level": 33, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1468,6 +1595,7 @@
         "first_drop": "902", 
         "normal_exp": 25, 
         "monsters": "6,157,6,6,13,6,6,122,6", 
+        "battle_end": false, 
         "name": "\u6c5f\u4e1c\u5b59\u90ce"
     }
 },
@@ -1483,6 +1611,7 @@
         "strength_modulus": 2.6, 
         "level": 34, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1491,6 +1620,7 @@
         "first_drop": "932", 
         "normal_exp": 26, 
         "monsters": "3,14,3,3,16,3,10,18,10", 
+        "battle_end": false, 
         "name": "\u6cfe\u53bf\u4e4b\u6218"
     }
 },
@@ -1506,6 +1636,7 @@
         "strength_modulus": 2.7, 
         "level": 34, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "457", 
@@ -1514,6 +1645,7 @@
         "first_drop": "922", 
         "normal_exp": 26, 
         "monsters": "10,15,10,6,13,6,4,142,4", 
+        "battle_end": false, 
         "name": "\u9ec4\u76d6\u88ad\u5609\u5174"
     }
 },
@@ -1529,6 +1661,7 @@
         "strength_modulus": 2.7, 
         "level": 35, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1537,6 +1670,7 @@
         "first_drop": "912", 
         "normal_exp": 26, 
         "monsters": "7,13,7,5,15,5,6,13,6", 
+        "battle_end": false, 
         "name": "\u4f1a\u7a3d\u4e4b\u6218"
     }
 },
@@ -1552,6 +1686,7 @@
         "strength_modulus": 2.8, 
         "level": 35, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1560,6 +1695,7 @@
         "first_drop": "902", 
         "normal_exp": 26, 
         "monsters": "7,11,11,11,13,11,4,126,4", 
+        "battle_end": false, 
         "name": "\u5468\u6cf0\u5ba3\u57ce\u6551\u4e3b"
     }
 },
@@ -1575,6 +1711,7 @@
         "strength_modulus": 2.8, 
         "level": 36, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1583,6 +1720,7 @@
         "first_drop": "932", 
         "normal_exp": 26, 
         "monsters": "10,10,10,21,10,21,22,15,10", 
+        "battle_end": false, 
         "name": "\u5434\u90e1\u4e4b\u6218"
     }
 },
@@ -1598,6 +1736,7 @@
         "strength_modulus": 2.5, 
         "level": 36, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "492", 
@@ -1606,6 +1745,7 @@
         "first_drop": "912", 
         "normal_exp": 27, 
         "monsters": "7,0,7,7,13,7,6,122,6", 
+        "battle_end": true, 
         "name": "\u5c71\u9634\u4e4b\u6218"
     }
 },
@@ -1621,6 +1761,7 @@
         "strength_modulus": 2.6, 
         "level": 37, 
         "star_exp": 0, 
+        "battle_start": true, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1629,6 +1770,7 @@
         "first_drop": "903", 
         "normal_exp": 27, 
         "monsters": "4,8,4,4,15,4,10,19,10", 
+        "battle_end": false, 
         "name": "\u8fdb\u519b\u5357\u9633"
     }
 },
@@ -1644,6 +1786,7 @@
         "strength_modulus": 2.6, 
         "level": 37, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1652,6 +1795,7 @@
         "first_drop": "933", 
         "normal_exp": 27, 
         "monsters": "7,7,7,7,13,7,7,184,7", 
+        "battle_end": false, 
         "name": "\u7eaa\u7075\u6765\u72af"
     }
 },
@@ -1667,6 +1811,7 @@
         "strength_modulus": 2.7, 
         "level": 38, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "450", 
@@ -1675,6 +1820,7 @@
         "first_drop": "903", 
         "normal_exp": 27, 
         "monsters": "4,16,4,11,16,11,4,15,4", 
+        "battle_end": false, 
         "name": "\u5357\u9633\u963b\u51fb"
     }
 },
@@ -1690,6 +1836,7 @@
         "strength_modulus": 2.7, 
         "level": 38, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1698,6 +1845,7 @@
         "first_drop": "933", 
         "normal_exp": 28, 
         "monsters": "4,11,4,4,113,4,7,111,7", 
+        "battle_end": false, 
         "name": "\u9a71\u864e\u541e\u72fc"
     }
 },
@@ -1713,6 +1861,7 @@
         "strength_modulus": 2.8, 
         "level": 39, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 0, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1721,6 +1870,7 @@
         "first_drop": "913", 
         "normal_exp": 28, 
         "monsters": "4,4,4,11,11,11,5,115,5", 
+        "battle_end": false, 
         "name": "\u5c6f\u5175\u6dee\u9634"
     }
 },
@@ -1736,6 +1886,7 @@
         "strength_modulus": 2.8, 
         "level": 39, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 3, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1744,6 +1895,7 @@
         "first_drop": "913", 
         "normal_exp": 28, 
         "monsters": "4,4,4,4,4,4,4,113,4", 
+        "battle_end": false, 
         "name": "\u9189\u68d2\u66f9\u8c79"
     }
 },
@@ -1759,6 +1911,7 @@
         "strength_modulus": 2.9, 
         "level": 40, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1767,6 +1920,7 @@
         "first_drop": "903", 
         "normal_exp": 28, 
         "monsters": "4,9,4,5,5,5,5,5,5", 
+        "battle_end": false, 
         "name": "\u5f15\u519b\u5f90\u5dde"
     }
 },
@@ -1782,6 +1936,7 @@
         "strength_modulus": 2.9, 
         "level": 40, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "408", 
@@ -1790,6 +1945,7 @@
         "first_drop": "933", 
         "normal_exp": 29, 
         "monsters": "7,13,7,7,17,7,7,15,7", 
+        "battle_end": false, 
         "name": "\u591c\u88ad\u5f90\u5dde"
     }
 },
@@ -1805,6 +1961,7 @@
         "strength_modulus": 3.0, 
         "level": 41, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1813,6 +1970,7 @@
         "first_drop": "903", 
         "normal_exp": 29, 
         "monsters": "7,4,9,8,4,15,3,7,3", 
+        "battle_end": false, 
         "name": "\u9003\u5175"
     }
 },
@@ -1828,6 +1986,7 @@
         "strength_modulus": 2.6, 
         "level": 41, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 3, 
         "first_gold": 0, 
         "star_drop": "806", 
@@ -1836,6 +1995,7 @@
         "first_drop": "903", 
         "normal_exp": 29, 
         "monsters": "0,112,7,3,113,3,9,111,9", 
+        "battle_end": true, 
         "name": "\u8ffd\u51fb\u5218\u5907"
     }
 },
@@ -1851,6 +2011,7 @@
         "strength_modulus": 2.7, 
         "level": 42, 
         "star_exp": 0, 
+        "battle_start": true, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1859,6 +2020,7 @@
         "first_drop": "933", 
         "normal_exp": 29, 
         "monsters": "5,143,5,4,9,4,4,101,4", 
+        "battle_end": false, 
         "name": "\u8d3e\u8be9\u8bc6\u8bc8"
     }
 },
@@ -1874,6 +2036,7 @@
         "strength_modulus": 2.7, 
         "level": 42, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 3, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1882,6 +2045,7 @@
         "first_drop": "913", 
         "normal_exp": 30, 
         "monsters": "7,13,7,5,15,5,16,187,16", 
+        "battle_end": false, 
         "name": "\u5b89\u4f17\u4e4b\u6218"
     }
 },
@@ -1897,6 +2061,7 @@
         "strength_modulus": 2.8, 
         "level": 43, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "401", 
@@ -1905,6 +2070,7 @@
         "first_drop": "913", 
         "normal_exp": 30, 
         "monsters": "7,7,7,7,15,7,7,101,7", 
+        "battle_end": false, 
         "name": "\u8d3e\u8be9\u795e\u7b97"
     }
 },
@@ -1920,6 +2086,7 @@
         "strength_modulus": 2.8, 
         "level": 43, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1928,6 +2095,7 @@
         "first_drop": "923", 
         "normal_exp": 30, 
         "monsters": "7,13,7,5,11,5,5,105,5", 
+        "battle_end": false, 
         "name": "\u5c0f\u6c9b\u544a\u6025"
     }
 },
@@ -1943,6 +2111,7 @@
         "strength_modulus": 2.9, 
         "level": 44, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1951,6 +2120,7 @@
         "first_drop": "913", 
         "normal_exp": 30, 
         "monsters": "13,15,13,11,11,11,13,17,13", 
+        "battle_end": false, 
         "name": "\u5c0f\u6c9b\u4e4b\u6218"
     }
 },
@@ -1966,6 +2136,7 @@
         "strength_modulus": 3.2, 
         "level": 44, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1974,6 +2145,7 @@
         "first_drop": "923", 
         "normal_exp": 31, 
         "monsters": "7,0,7,7,0,7,3,102,3", 
+        "battle_end": false, 
         "name": "\u5556\u775b\u590f\u4faf"
     }
 },
@@ -1989,6 +2161,7 @@
         "strength_modulus": 3.0, 
         "level": 45, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -1997,6 +2170,7 @@
         "first_drop": "923", 
         "normal_exp": 31, 
         "monsters": "7,7,7,7,164,7,7,13,7", 
+        "battle_end": false, 
         "name": "\u9ad8\u987a\u7834\u66f9"
     }
 },
@@ -2012,6 +2186,7 @@
         "strength_modulus": 3.0, 
         "level": 45, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "472", 
@@ -2020,6 +2195,7 @@
         "first_drop": "913", 
         "normal_exp": 31, 
         "monsters": "4,112,4,4,113,4,7,111,7", 
+        "battle_end": false, 
         "name": "\u5415\u5e03\u7834\u5173\u5f20"
     }
 },
@@ -2035,6 +2211,7 @@
         "strength_modulus": 3.1, 
         "level": 46, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "805", 
@@ -2043,6 +2220,7 @@
         "first_drop": "923", 
         "normal_exp": 31, 
         "monsters": "11,11,11,5,19,5,5,20,5", 
+        "battle_end": false, 
         "name": "\u9648\u767b\u53cd\u95f4"
     }
 },
@@ -2058,6 +2236,7 @@
         "strength_modulus": 2.9, 
         "level": 46, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "806", 
@@ -2066,6 +2245,7 @@
         "first_drop": "913", 
         "normal_exp": 31, 
         "monsters": "7,105,7,164,0,167,134,0,135", 
+        "battle_end": true, 
         "name": "\u5415\u5e03\u6b92\u547d\u767d\u95e8\u697c"
     }
 },
@@ -2081,6 +2261,7 @@
         "strength_modulus": 2.8, 
         "level": 47, 
         "star_exp": 0, 
+        "battle_start": true, 
         "tp": 3, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2089,6 +2270,7 @@
         "first_drop": "903", 
         "normal_exp": 32, 
         "monsters": "5,19,5,7,13,7,5,15,5", 
+        "battle_end": false, 
         "name": "\u5c0f\u6c9b\u4e4b\u4e89"
     }
 },
@@ -2104,6 +2286,7 @@
         "strength_modulus": 2.9, 
         "level": 47, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2112,6 +2295,7 @@
         "first_drop": "903", 
         "normal_exp": 32, 
         "monsters": "7,7,7,7,13,7,7,184,7", 
+        "battle_end": false, 
         "name": "\u7eaa\u7075\u6765\u72af"
     }
 },
@@ -2127,6 +2311,7 @@
         "strength_modulus": 2.9, 
         "level": 48, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "459", 
@@ -2135,6 +2320,7 @@
         "first_drop": "903", 
         "normal_exp": 32, 
         "monsters": "21,7,7,7,13,7,7,113,7", 
+        "battle_end": false, 
         "name": "\u5f20\u98de\u5077\u9a6c"
     }
 },
@@ -2150,6 +2336,7 @@
         "strength_modulus": 3.0, 
         "level": 48, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2158,6 +2345,7 @@
         "first_drop": "913", 
         "normal_exp": 32, 
         "monsters": "7,184,7,5,5,5,15,176,15", 
+        "battle_end": false, 
         "name": "\u8881\u672f\u6012\u653b\u5f90\u5dde"
     }
 },
@@ -2173,6 +2361,7 @@
         "strength_modulus": 3.0, 
         "level": 49, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2181,6 +2370,7 @@
         "first_drop": "923", 
         "normal_exp": 33, 
         "monsters": "7,113,7,11,115,11,5,111,5", 
+        "battle_end": false, 
         "name": "\u5c0f\u6c9b\u5218\u5907"
     }
 },
@@ -2196,6 +2386,7 @@
         "strength_modulus": 3.1, 
         "level": 49, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 3, 
         "first_gold": 0, 
         "star_drop": "466", 
@@ -2204,6 +2395,7 @@
         "first_drop": "913", 
         "normal_exp": 33, 
         "monsters": "5,20,5,11,17,11,7,184,7", 
+        "battle_end": false, 
         "name": "\u518d\u6218\u5f90\u5dde"
     }
 },
@@ -2219,6 +2411,7 @@
         "strength_modulus": 3.1, 
         "level": 50, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2227,6 +2420,7 @@
         "first_drop": "913", 
         "normal_exp": 33, 
         "monsters": "7,13,7,15,19,15,14,14,16", 
+        "battle_end": false, 
         "name": "\u8881\u672f\u8d77\u4e03\u519b"
     }
 },
@@ -2242,6 +2436,7 @@
         "strength_modulus": 3.2, 
         "level": 50, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "445", 
@@ -2250,6 +2445,7 @@
         "first_drop": "913", 
         "normal_exp": 33, 
         "monsters": "13,17,13,16,16,16,17,176,17", 
+        "battle_end": false, 
         "name": "\u8881\u672f\u8ba8\u4f10\u6218"
     }
 },
@@ -2265,6 +2461,7 @@
         "strength_modulus": 3.2, 
         "level": 51, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2273,6 +2470,7 @@
         "first_drop": "913", 
         "normal_exp": 34, 
         "monsters": "7,184,7,13,15,13,15,176,15", 
+        "battle_end": false, 
         "name": "\u8881\u672f\u7684\u6bc1\u706d"
     }
 },
@@ -2288,6 +2486,7 @@
         "strength_modulus": 2.8, 
         "level": 51, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "808", 
@@ -2296,6 +2495,7 @@
         "first_drop": "913", 
         "normal_exp": 34, 
         "monsters": "4,4,4,9,103,9,5,102,5", 
+        "battle_end": true, 
         "name": "\u5f90\u5dde\u6ca6\u9677"
     }
 },
@@ -2311,6 +2511,7 @@
         "strength_modulus": 2.9, 
         "level": 52, 
         "star_exp": 0, 
+        "battle_start": true, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2319,6 +2520,7 @@
         "first_drop": "923", 
         "normal_exp": 34, 
         "monsters": "4,11,4,7,13,7,23,15,16", 
+        "battle_end": false, 
         "name": "\u591c\u88ad"
     }
 },
@@ -2334,6 +2536,7 @@
         "strength_modulus": 3.0, 
         "level": 52, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 3, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2342,6 +2545,7 @@
         "first_drop": "923", 
         "normal_exp": 34, 
         "monsters": "7,7,7,5,5,5,6,112,6", 
+        "battle_end": false, 
         "name": "\u65a9\u8f66\u80c4"
     }
 },
@@ -2357,6 +2561,7 @@
         "strength_modulus": 3.0, 
         "level": 53, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2365,6 +2570,7 @@
         "first_drop": "903", 
         "normal_exp": 35, 
         "monsters": "9,11,9,13,13,13,19,20,19", 
+        "battle_end": false, 
         "name": "\u8fdb\u519b\u5b98\u6e21"
     }
 },
@@ -2380,6 +2586,7 @@
         "strength_modulus": 3.1, 
         "level": 53, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "494", 
@@ -2388,6 +2595,7 @@
         "first_drop": "903", 
         "normal_exp": 35, 
         "monsters": "8,8,8,8,13,8,8,165,8", 
+        "battle_end": false, 
         "name": "\u767d\u9a6c"
     }
 },
@@ -2403,6 +2611,7 @@
         "strength_modulus": 3.2, 
         "level": 54, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2411,6 +2620,7 @@
         "first_drop": "913", 
         "normal_exp": 35, 
         "monsters": "5,9,5,7,15,7,13,17,13", 
+        "battle_end": false, 
         "name": "\u9ece\u9633\u4e4b\u6218"
     }
 },
@@ -2426,6 +2636,7 @@
         "strength_modulus": 3.2, 
         "level": 54, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2434,6 +2645,7 @@
         "first_drop": "923", 
         "normal_exp": 35, 
         "monsters": "7,13,7,7,13,7,7,166,7", 
+        "battle_end": false, 
         "name": "\u5ef6\u6d25\u4e4b\u6218"
     }
 },
@@ -2449,6 +2661,7 @@
         "strength_modulus": 3.3, 
         "level": 55, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "431", 
@@ -2457,6 +2670,7 @@
         "first_drop": "923", 
         "normal_exp": 36, 
         "monsters": "10,15,10,5,15,5,17,16,17", 
+        "battle_end": false, 
         "name": "\u8881\u7ecd\u8d25\u9000"
     }
 },
@@ -2472,6 +2686,7 @@
         "strength_modulus": 3.3, 
         "level": 55, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2480,6 +2695,7 @@
         "first_drop": "913", 
         "normal_exp": 36, 
         "monsters": "21,22,21,23,22,23,3,154,3", 
+        "battle_end": false, 
         "name": "\u9ed1\u9762\u5468\u4ed3"
     }
 },
@@ -2495,6 +2711,7 @@
         "strength_modulus": 3.4, 
         "level": 56, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2503,6 +2720,7 @@
         "first_drop": "903", 
         "normal_exp": 36, 
         "monsters": "13,15,19,14,16,14,5,20,5", 
+        "battle_end": false, 
         "name": "\u8fc7\u5173\u65a9\u5c06"
     }
 },
@@ -2518,6 +2736,7 @@
         "strength_modulus": 2.9, 
         "level": 56, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "808", 
@@ -2526,6 +2745,7 @@
         "first_drop": "933", 
         "normal_exp": 36, 
         "monsters": "21,22,21,21,22,21,21,113,21", 
+        "battle_end": true, 
         "name": "\u53e4\u57ce\u5f20\u98de"
     }
 },
@@ -2541,6 +2761,7 @@
         "strength_modulus": 3.2, 
         "level": 57, 
         "star_exp": 0, 
+        "battle_start": true, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2549,6 +2770,7 @@
         "first_drop": "903", 
         "normal_exp": 36, 
         "monsters": "7,0,7,7,15,7,3,112,3", 
+        "battle_end": false, 
         "name": "\u6b66\u9633\u4e4b\u6218"
     }
 },
@@ -2564,6 +2786,7 @@
         "strength_modulus": 3.1, 
         "level": 57, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "452", 
@@ -2572,6 +2795,7 @@
         "first_drop": "923", 
         "normal_exp": 37, 
         "monsters": "21,21,21,4,111,4,21,22,21", 
+        "battle_end": false, 
         "name": "\u6c5d\u5357\u4e4b\u6218"
     }
 },
@@ -2587,6 +2811,7 @@
         "strength_modulus": 3.2, 
         "level": 58, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "410", 
@@ -2595,6 +2820,7 @@
         "first_drop": "913", 
         "normal_exp": 37, 
         "monsters": "7,7,7,7,7,7,7,13,7", 
+        "battle_end": false, 
         "name": "\u65a9\u8521\u9633"
     }
 },
@@ -2610,6 +2836,7 @@
         "strength_modulus": 3.2, 
         "level": 58, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2618,6 +2845,7 @@
         "first_drop": "933", 
         "normal_exp": 37, 
         "monsters": "5,11,5,11,15,11,13,16,13", 
+        "battle_end": false, 
         "name": "\u5180\u5dde\u4e4b\u6218"
     }
 },
@@ -2633,6 +2861,7 @@
         "strength_modulus": 3.3, 
         "level": 59, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2641,6 +2870,7 @@
         "first_drop": "903", 
         "normal_exp": 37, 
         "monsters": "7,156,7,5,5,5,11,15,11", 
+        "battle_end": false, 
         "name": "\u5077\u88ad\u97e9\u731b"
     }
 },
@@ -2656,6 +2886,7 @@
         "strength_modulus": 3.3, 
         "level": 59, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2664,6 +2895,7 @@
         "first_drop": "923", 
         "normal_exp": 38, 
         "monsters": "23,17,23,23,13,23,7,122,7", 
+        "battle_end": false, 
         "name": "\u6697\u6740\u5b59\u7b56"
     }
 },
@@ -2679,6 +2911,7 @@
         "strength_modulus": 3.4, 
         "level": 60, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "487", 
@@ -2687,6 +2920,7 @@
         "first_drop": "913", 
         "normal_exp": 38, 
         "monsters": "7,13,7,5,15,5,11,18,11", 
+        "battle_end": false, 
         "name": "\u5180\u5317\u4e4b\u6218"
     }
 },
@@ -2702,6 +2936,7 @@
         "strength_modulus": 3.4, 
         "level": 60, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2710,6 +2945,7 @@
         "first_drop": "923", 
         "normal_exp": 38, 
         "monsters": "8,13,8,5,15,5,12,156,12", 
+        "battle_end": false, 
         "name": "\u591c\u88ad\u4e4c\u5de2"
     }
 },
@@ -2725,6 +2961,7 @@
         "strength_modulus": 3.5, 
         "level": 61, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "807", 
@@ -2733,6 +2970,7 @@
         "first_drop": "903", 
         "normal_exp": 38, 
         "monsters": "8,102,8,143,15,144,156,101,103", 
+        "battle_end": false, 
         "name": "\u51b3\u6218\u5b98\u6e21"
     }
 },
@@ -2748,6 +2986,7 @@
         "strength_modulus": 3.0, 
         "level": 61, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "808", 
@@ -2756,6 +2995,7 @@
         "first_drop": "934", 
         "normal_exp": 39, 
         "monsters": "13,17,13,14,16,14,15,171,15", 
+        "battle_end": true, 
         "name": "\u4ed3\u4ead\u8881\u7ecd\u6b7c\u706d\u6218"
     }
 },
@@ -2771,6 +3011,7 @@
         "strength_modulus": 3.2, 
         "level": 62, 
         "star_exp": 0, 
+        "battle_start": true, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "809", 
@@ -2779,6 +3020,7 @@
         "first_drop": "934", 
         "normal_exp": 39, 
         "monsters": "7,13,7,7,13,7,5,141,5", 
+        "battle_end": false, 
         "name": "\u65b0\u91ce\u9000\u654c"
     }
 },
@@ -2794,6 +3036,7 @@
         "strength_modulus": 3.3, 
         "level": 62, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 3, 
         "first_gold": 0, 
         "star_drop": "459", 
@@ -2802,6 +3045,7 @@
         "first_drop": "924", 
         "normal_exp": 39, 
         "monsters": "7,13,7,7,141,7,5,145,5", 
+        "battle_end": false, 
         "name": "\u516b\u95e8\u91d1\u9501"
     }
 },
@@ -2817,6 +3061,7 @@
         "strength_modulus": 3.3, 
         "level": 63, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "809", 
@@ -2825,6 +3070,7 @@
         "first_drop": "904", 
         "normal_exp": 39, 
         "monsters": "1,15,5,5,141,5,11,145,11", 
+        "battle_end": false, 
         "name": "\u591c\u88ad\u65b0\u91ce"
     }
 },
@@ -2840,6 +3086,7 @@
         "strength_modulus": 3.4, 
         "level": 63, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "809", 
@@ -2848,6 +3095,7 @@
         "first_drop": "924", 
         "normal_exp": 40, 
         "monsters": "11,17,11,8,145,8,5,141,5", 
+        "battle_end": false, 
         "name": "\u7834\u8ba1\u593a\u6a0a\u57ce"
     }
 },
@@ -2863,6 +3111,7 @@
         "strength_modulus": 3.4, 
         "level": 64, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "809", 
@@ -2871,6 +3120,7 @@
         "first_drop": "914", 
         "normal_exp": 40, 
         "monsters": "5,102,5,11,143,11,11,145,11", 
+        "battle_end": false, 
         "name": "\u535a\u671b\u5761\u4e4b\u6218"
     }
 },
@@ -2886,6 +3136,7 @@
         "strength_modulus": 3.5, 
         "level": 64, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "459", 
@@ -2894,6 +3145,7 @@
         "first_drop": "914", 
         "normal_exp": 40, 
         "monsters": "8,102,8,8,143,8,8,145,8", 
+        "battle_end": false, 
         "name": "\u706b\u70e7\u535a\u671b\u5761"
     }
 },
@@ -2909,6 +3161,7 @@
         "strength_modulus": 3.5, 
         "level": 65, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "809", 
@@ -2917,6 +3170,7 @@
         "first_drop": "934", 
         "normal_exp": 40, 
         "monsters": "5,17,5,8,16,8,11,19,11", 
+        "battle_end": false, 
         "name": "\u8346\u5dde\u4e4b\u6218"
     }
 },
@@ -2932,6 +3186,7 @@
         "strength_modulus": 3.6, 
         "level": 65, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "809", 
@@ -2940,6 +3195,7 @@
         "first_drop": "914", 
         "normal_exp": 41, 
         "monsters": "8,102,8,145,13,143,13,141,13", 
+        "battle_end": false, 
         "name": "\u706b\u70e7\u65b0\u91ce"
     }
 },
@@ -2955,6 +3211,7 @@
         "strength_modulus": 3.6, 
         "level": 66, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 3, 
         "first_gold": 0, 
         "star_drop": "809", 
@@ -2963,6 +3220,7 @@
         "first_drop": "934", 
         "normal_exp": 41, 
         "monsters": "11,145,11,8,102,8,5,143,5", 
+        "battle_end": false, 
         "name": "\u706b\u70e7\u6a0a\u57ce"
     }
 },
@@ -2978,6 +3236,7 @@
         "strength_modulus": 3.2, 
         "level": 66, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "810", 
@@ -2986,6 +3245,7 @@
         "first_drop": "904", 
         "normal_exp": 41, 
         "monsters": "13,14,13,102,145,143,8,141,8", 
+        "battle_end": true, 
         "name": "\u6c34\u6df9\u767d\u6cb3"
     }
 },
@@ -3001,6 +3261,7 @@
         "strength_modulus": 3.3, 
         "level": 67, 
         "star_exp": 0, 
+        "battle_start": true, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "809", 
@@ -3009,6 +3270,7 @@
         "first_drop": "914", 
         "normal_exp": 41, 
         "monsters": "5,15,5,5,188,5,5,127,5", 
+        "battle_end": false, 
         "name": "\u6c5f\u590f\u53e3\u4e4b\u6218"
     }
 },
@@ -3024,6 +3286,7 @@
         "strength_modulus": 3.4, 
         "level": 67, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 3, 
         "first_gold": 0, 
         "star_drop": "809", 
@@ -3032,6 +3295,7 @@
         "first_drop": "914", 
         "normal_exp": 41, 
         "monsters": "10,17,10,8,180,8,8,136,8", 
+        "battle_end": false, 
         "name": "\u8944\u9633\u4e4b\u6218"
     }
 },
@@ -3047,6 +3311,7 @@
         "strength_modulus": 3.9, 
         "level": 68, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "809", 
@@ -3055,6 +3320,7 @@
         "first_drop": "934", 
         "normal_exp": 42, 
         "monsters": "3,8,11,13,0,5,0,111,0", 
+        "battle_end": false, 
         "name": "\u666f\u5c71\u4e4b\u6218"
     }
 },
@@ -3070,6 +3336,7 @@
         "strength_modulus": 5.5, 
         "level": 68, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "809", 
@@ -3078,6 +3345,7 @@
         "first_drop": "934", 
         "normal_exp": 42, 
         "monsters": "0,13,0,0,18,0,0,115,0", 
+        "battle_end": false, 
         "name": "\u5b50\u9f99\u5355\u9a91\u6551\u4e3b"
     }
 },
@@ -3093,6 +3361,7 @@
         "strength_modulus": 3.5, 
         "level": 69, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "431", 
@@ -3101,6 +3370,7 @@
         "first_drop": "914", 
         "normal_exp": 42, 
         "monsters": "8,13,8,11,16,11,8,14,8", 
+        "battle_end": false, 
         "name": "\u957f\u7248\u6865\u4e4b\u63f4"
     }
 },
@@ -3116,6 +3386,7 @@
         "strength_modulus": 5.6, 
         "level": 69, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "809", 
@@ -3124,6 +3395,7 @@
         "first_drop": "914", 
         "normal_exp": 42, 
         "monsters": "0,8,0,0,13,0,0,113,0", 
+        "battle_end": false, 
         "name": "\u5f20\u98de\u5927\u95f9\u957f\u7248"
     }
 },
@@ -3139,6 +3411,7 @@
         "strength_modulus": 3.6, 
         "level": 70, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 3, 
         "first_gold": 0, 
         "star_drop": "809", 
@@ -3147,6 +3420,7 @@
         "first_drop": "934", 
         "normal_exp": 43, 
         "monsters": "5,11,5,8,13,8,8,112,8", 
+        "battle_end": false, 
         "name": "\u6c49\u6d25\u4e4b\u6218"
     }
 },
@@ -3162,6 +3436,7 @@
         "strength_modulus": 3.7, 
         "level": 70, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "809", 
@@ -3170,6 +3445,7 @@
         "first_drop": "924", 
         "normal_exp": 43, 
         "monsters": "8,13,8,8,112,8,15,114,15", 
+        "battle_end": false, 
         "name": "\u6c5f\u590f\u63f4\u5175"
     }
 },
@@ -3185,6 +3461,7 @@
         "strength_modulus": 3.7, 
         "level": 71, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "809", 
@@ -3193,6 +3470,7 @@
         "first_drop": "934", 
         "normal_exp": 43, 
         "monsters": "8,8,8,11,5,11,8,13,8", 
+        "battle_end": false, 
         "name": "\u6c5f\u9675\u4e4b\u6218"
     }
 },
@@ -3208,6 +3486,7 @@
         "strength_modulus": 3.3, 
         "level": 71, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "810", 
@@ -3216,6 +3495,7 @@
         "first_drop": "904", 
         "normal_exp": 43, 
         "monsters": "8,113,8,13,115,8,112,111,114", 
+        "battle_end": true, 
         "name": "\u590f\u53e3\u4e4b\u6218"
     }
 },
@@ -3231,6 +3511,7 @@
         "strength_modulus": 3.5, 
         "level": 72, 
         "star_exp": 0, 
+        "battle_start": true, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "438", 
@@ -3239,6 +3520,7 @@
         "first_drop": "905", 
         "normal_exp": 44, 
         "monsters": "5,11,5,8,8,8,13,17,13", 
+        "battle_end": false, 
         "name": "\u5b54\u660e\u4e0b\u6c5f\u4e1c"
     }
 },
@@ -3254,6 +3536,7 @@
         "strength_modulus": 3.5, 
         "level": 72, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "811", 
@@ -3262,6 +3545,7 @@
         "first_drop": "935", 
         "normal_exp": 44, 
         "monsters": "8,13,8,14,15,14,17,141,17", 
+        "battle_end": false, 
         "name": "\u5468\u745c\u65a9\u66f9\u4f7f"
     }
 },
@@ -3277,6 +3561,7 @@
         "strength_modulus": 3.6, 
         "level": 73, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 3, 
         "first_gold": 0, 
         "star_drop": "811", 
@@ -3285,6 +3570,7 @@
         "first_drop": "915", 
         "normal_exp": 44, 
         "monsters": "8,13,8,11,16,11,15,20,15", 
+        "battle_end": false, 
         "name": "\u518d\u6218\u4e09\u6c5f"
     }
 },
@@ -3300,6 +3586,7 @@
         "strength_modulus": 3.6, 
         "level": 73, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "424", 
@@ -3308,6 +3595,7 @@
         "first_drop": "905", 
         "normal_exp": 44, 
         "monsters": "13,102,103,144,105,156,143,101,141", 
+        "battle_end": false, 
         "name": "\u8d64\u58c1\u521d\u6218"
     }
 },
@@ -3323,6 +3611,7 @@
         "strength_modulus": 3.7, 
         "level": 74, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "811", 
@@ -3331,6 +3620,7 @@
         "first_drop": "925", 
         "normal_exp": 45, 
         "monsters": "11,11,11,11,11,11,11,11,11", 
+        "battle_end": false, 
         "name": "\u8349\u8239\u501f\u7bad"
     }
 },
@@ -3346,6 +3636,7 @@
         "strength_modulus": 3.7, 
         "level": 74, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "811", 
@@ -3354,6 +3645,7 @@
         "first_drop": "935", 
         "normal_exp": 45, 
         "monsters": "20,18,17,19,20,19,18,191,18", 
+        "battle_end": false, 
         "name": "\u820c\u6218\u7fa4\u5112"
     }
 },
@@ -3369,6 +3661,7 @@
         "strength_modulus": 3.8, 
         "level": 75, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 1, 
         "first_gold": 0, 
         "star_drop": "811", 
@@ -3377,6 +3670,7 @@
         "first_drop": "925", 
         "normal_exp": 45, 
         "monsters": "5,13,5,11,16,11,13,17,13", 
+        "battle_end": false, 
         "name": "\u796d\u4e1c\u98ce"
     }
 },
@@ -3392,6 +3686,7 @@
         "strength_modulus": 3.8, 
         "level": 75, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 3, 
         "first_gold": 0, 
         "star_drop": "811", 
@@ -3400,6 +3695,7 @@
         "first_drop": "905", 
         "normal_exp": 45, 
         "monsters": "5,20,5,19,20,19,13,20,13", 
+        "battle_end": false, 
         "name": "\u8fde\u73af\u8ba1"
     }
 },
@@ -3415,6 +3711,7 @@
         "strength_modulus": 3.9, 
         "level": 76, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 4, 
         "first_gold": 0, 
         "star_drop": "811", 
@@ -3423,6 +3720,7 @@
         "first_drop": "925", 
         "normal_exp": 46, 
         "monsters": "5,15,5,5,123,5,5,142,5", 
+        "battle_end": false, 
         "name": "\u82e6\u8089\u8ba1"
     }
 },
@@ -3438,6 +3736,7 @@
         "strength_modulus": 3.4, 
         "level": 76, 
         "star_exp": 0, 
+        "battle_start": false, 
         "tp": 2, 
         "first_gold": 0, 
         "star_drop": "811,480", 
@@ -3446,6 +3745,7 @@
         "first_drop": "915", 
         "normal_exp": 46, 
         "monsters": "145,144,143,104,130,105,102,101,103", 
+        "battle_end": true, 
         "name": "\u706b\u70e7\u8d64\u58c1"
     }
 }
