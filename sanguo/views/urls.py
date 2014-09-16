@@ -31,9 +31,10 @@ urlpatterns = patterns('',
                        url(r'^stuff/use/$', 'views.item.views.stuff_use'),
 
                        url(r'^pve/$', 'views.stage.views.pve'),
-                       url(r'^hang/$', 'views.stage.views.hang_start'),
-                       url(r'^hang/cancel/$', 'views.stage.views.hang_cancel'),
-                       url(r'^hang/sync/$', 'views.stage.views.hang_sync'),
+
+                       url(r'^hang/start/$', 'views.affairs.views.hang_start'),
+                       url(r'^hang/sync/$', 'views.affairs.views.hang_sync'),
+                       url(r'^hang/getreward/$', 'views.affairs.views.hang_get_reward'),
 
                        url(r'^elitepve/$', 'views.stage.views.elite_pve'),
                        url(r'^elite/reset/$', 'views.stage.views.elite_reset'),
@@ -87,7 +88,6 @@ urlpatterns = patterns('',
 urlpatterns += patterns('',
                         url(r'^api/character/initialize/$', 'views.api.character.views.character_initialize'),
                         url(r'^api/mail/send/$', 'views.api.mail.views.send_mail'),
-                        url(r'^api/timer/hang/$', 'views.api.callback.views.timer_notify'),
                         url(r'^api/checkin/send/$', 'views.api.checkin.views.recv_checkin_data'),
 
                         url(r'^api/ping/$', 'views.api.ping.views.ping'),

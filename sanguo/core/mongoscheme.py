@@ -390,6 +390,30 @@ class MongoTeamBattle(Document):
     }
 
 
+class MongoEmbeddedHangLog(EmbeddedDocument):
+    timestamp = IntField()
+    tp = IntField()
+    who = StringField()
+    gold = IntField(default=0)
+    item_text = StringField(default="")
+
+class MongoAffairs(Document):
+    id = IntField(primary_key=True)
+    # 开启的战役/城镇
+    opened = ListField(IntField())
+
+    hang_city_id = IntField(default=0)
+    hang_start_at = IntField(default=0)
+
+    logs = ListField(EmbeddedDocumentField(MongoEmbeddedHangLog))
+
+    meta = {
+        'collection': 'affairs'
+    }
+
+
+
+
 
 def purge_char(char_id):
     char_id = int(char_id)

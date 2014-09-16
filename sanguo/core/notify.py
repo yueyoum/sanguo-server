@@ -14,7 +14,7 @@ from core.friend import Friend
 from core.mail import Mail
 from core.daily import CheckIn
 
-from core.stage import Stage, Hang, EliteStage, ActivityStage
+from core.stage import Stage, EliteStage, ActivityStage
 
 from core.formation import Formation
 from core.item import Item
@@ -26,6 +26,8 @@ from core.functionopen import FunctionOpen
 from core.levy import Levy
 from core.attachment import Attachment
 from core.purchase import PurchaseAction
+
+from core.affairs import Affairs
 
 
 def hero_notify(char_id, objs, message_name="HeroNotify"):
@@ -80,8 +82,6 @@ def login_notify(char_id):
     f.send_socket_notify()
     f.send_formation_notify()
 
-    hang = Hang(char_id)
-    hang.send_notify()
 
     Plunder(char_id).send_notify()
 
@@ -121,6 +121,10 @@ def login_notify(char_id):
     PurchaseAction(char_id).send_notify()
 
     SystemBroadcast(char_id).send_global_broadcast()
+
+    affairs = Affairs(char_id)
+    affairs.send_city_notify()
+    affairs.send_hang_notify()
 
     # mail notify 要放在最后，因为 其他功能初始化时可能会产生登录邮件
     Mail(char_id).send_notify()

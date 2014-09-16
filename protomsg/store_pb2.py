@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='store.proto',
   package='Sanguo.protocol.store',
-  serialized_pb='\n\x0bstore.proto\x12\x15Sanguo.protocol.store\"\x97\x07\n\x05Goods\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x33\n\x03tag\x18\x02 \x02(\x0e\x32&.Sanguo.protocol.store.Goods.GOODS_TAG\x12\x37\n\x07item_tp\x18\x03 \x02(\x0e\x32&.Sanguo.protocol.store.Goods.ITEM_TYPE\x12\x0f\n\x07item_id\x18\x04 \x02(\x05\x12\x37\n\x07sell_tp\x18\x05 \x02(\x0e\x32&.Sanguo.protocol.store.Goods.SELL_TYPE\x12\x16\n\x0eoriginal_price\x18\x06 \x02(\x05\x12\x12\n\nsell_price\x18\x07 \x02(\x05\x12?\n\nconditions\x18\x08 \x03(\x0e\x32+.Sanguo.protocol.store.Goods.GoodsCondition\x12I\n\x0ftotal_condition\x18\t \x01(\x0b\x32\x30.Sanguo.protocol.store.Goods.GoodsTotalCondition\x12I\n\x0flimit_condition\x18\n \x01(\x0b\x32\x30.Sanguo.protocol.store.Goods.GoodsLimitCondition\x12\x45\n\rvip_condition\x18\x0b \x01(\x0b\x32..Sanguo.protocol.store.Goods.GoodsVIPCondition\x1a%\n\x13GoodsTotalCondition\x12\x0e\n\x06\x61mount\x18\x01 \x02(\x05\x1a%\n\x13GoodsLimitCondition\x12\x0e\n\x06\x61mount\x18\x01 \x02(\x05\x1a\x31\n\x11GoodsVIPCondition\x12\x0b\n\x03vip\x18\x01 \x02(\x05\x12\x0f\n\x07\x63\x61n_buy\x18\x02 \x02(\x08\"6\n\tGOODS_TAG\x12\x0c\n\x08TAG_SALE\x10\x01\x12\x0e\n\nTAG_NORMAL\x10\x02\x12\x0b\n\x07TAG_VIP\x10\x03\"L\n\tITEM_TYPE\x12\x0e\n\nGOODS_HERO\x10\x01\x12\x0f\n\x0bGOODS_EQUIP\x10\x02\x12\r\n\tGOODS_GEM\x10\x03\x12\x0f\n\x0bGOODS_STUFF\x10\x04\"*\n\tSELL_TYPE\x12\r\n\tSELL_GOLD\x10\x01\x12\x0e\n\nSELL_SYCEE\x10\x02\"M\n\x0eGoodsCondition\x12\x13\n\x0f\x43ONDITION_TOTAL\x10\x01\x12\x13\n\x0f\x43ONDITION_LIMIT\x10\x02\x12\x11\n\rCONDITION_VIP\x10\x03\"K\n\x0bStoreNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x05goods\x18\x02 \x03(\x0b\x32\x1c.Sanguo.protocol.store.Goods\"$\n\x11StorePanelRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"e\n\x12StorePanelResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x31\n\x05panel\x18\x03 \x02(\x0b\x32\".Sanguo.protocol.store.StoreNotify\">\n\x0fStoreBuyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x03 \x02(\x05\"0\n\x10StoreBuyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\x0bstore.proto\x12\x15Sanguo.protocol.store\"\x97\x07\n\x05Goods\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x33\n\x03tag\x18\x02 \x02(\x0e\x32&.Sanguo.protocol.store.Goods.GOODS_TAG\x12\x37\n\x07item_tp\x18\x03 \x02(\x0e\x32&.Sanguo.protocol.store.Goods.ITEM_TYPE\x12\x0f\n\x07item_id\x18\x04 \x02(\x05\x12\x37\n\x07sell_tp\x18\x05 \x02(\x0e\x32&.Sanguo.protocol.store.Goods.SELL_TYPE\x12\x16\n\x0eoriginal_price\x18\x06 \x02(\x05\x12\x12\n\nsell_price\x18\x07 \x02(\x05\x12?\n\nconditions\x18\x08 \x03(\x0e\x32+.Sanguo.protocol.store.Goods.GoodsCondition\x12I\n\x0ftotal_condition\x18\t \x01(\x0b\x32\x30.Sanguo.protocol.store.Goods.GoodsTotalCondition\x12I\n\x0flimit_condition\x18\n \x01(\x0b\x32\x30.Sanguo.protocol.store.Goods.GoodsLimitCondition\x12\x45\n\rvip_condition\x18\x0b \x01(\x0b\x32..Sanguo.protocol.store.Goods.GoodsVIPCondition\x1a%\n\x13GoodsTotalCondition\x12\x0e\n\x06\x61mount\x18\x01 \x02(\x05\x1a%\n\x13GoodsLimitCondition\x12\x0e\n\x06\x61mount\x18\x01 \x02(\x05\x1a\x31\n\x11GoodsVIPCondition\x12\x0b\n\x03vip\x18\x01 \x02(\x05\x12\x0f\n\x07\x63\x61n_buy\x18\x02 \x02(\x08\"6\n\tGOODS_TAG\x12\x0c\n\x08TAG_SALE\x10\x01\x12\x0e\n\nTAG_NORMAL\x10\x02\x12\x0b\n\x07TAG_VIP\x10\x03\"L\n\tITEM_TYPE\x12\x0e\n\nGOODS_HERO\x10\x01\x12\x0f\n\x0bGOODS_EQUIP\x10\x02\x12\r\n\tGOODS_GEM\x10\x03\x12\x0f\n\x0bGOODS_STUFF\x10\x04\"*\n\tSELL_TYPE\x12\r\n\tSELL_GOLD\x10\x01\x12\x0e\n\nSELL_SYCEE\x10\x02\"M\n\x0eGoodsCondition\x12\x13\n\x0f\x43ONDITION_TOTAL\x10\x01\x12\x13\n\x0f\x43ONDITION_LIMIT\x10\x02\x12\x11\n\rCONDITION_VIP\x10\x03\"K\n\x0bStoreNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x05goods\x18\x02 \x03(\x0b\x32\x1c.Sanguo.protocol.store.Goods\"$\n\x11StorePanelRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"e\n\x12StorePanelResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x31\n\x05panel\x18\x03 \x02(\x0b\x32\".Sanguo.protocol.store.StoreNotify\">\n\x0fStoreBuyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x0e\n\x06\x61mount\x18\x03 \x02(\x05\"[\n\x10StoreBuyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\n\n\x02id\x18\x03 \x01(\x05\x12\x0e\n\x06\x61mount\x18\x04 \x01(\x05\x12\r\n\x05sycee\x18\x05 \x01(\x05')
 
 
 
@@ -476,6 +476,27 @@ _STOREBUYRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='Sanguo.protocol.store.StoreBuyResponse.id', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='amount', full_name='Sanguo.protocol.store.StoreBuyResponse.amount', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sycee', full_name='Sanguo.protocol.store.StoreBuyResponse.sycee', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -486,7 +507,7 @@ _STOREBUYRESPONSE = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=1242,
-  serialized_end=1290,
+  serialized_end=1333,
 )
 
 _GOODS_GOODSTOTALCONDITION.containing_type = _GOODS;

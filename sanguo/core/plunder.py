@@ -9,7 +9,7 @@ import random
 from mongoscheme import DoesNotExist
 from core.character import Char, get_char_ids_by_level_range
 from core.battle import PVP
-from core.stage import Hang, max_star_stage_id
+from core.stage import max_star_stage_id
 from core.mongoscheme import MongoPlunder, MongoPlunderChar
 from core.exception import SanguoException
 from core.counter import Counter
@@ -141,10 +141,8 @@ class Plunder(object):
         pvp = PVP(self.char_id, _id, msg)
         pvp.start()
 
-        if self.mongo_plunder.chars[str(_id)].is_hang:
-            char = Char(self.char_id)
-            h = Hang(_id)
-            h.plundered(char.cacheobj.name, not msg.self_win)
+        # if self.mongo_plunder.chars[str(_id)].is_hang:
+        #     char = Char(self.char_id)
 
         t = Task(self.char_id)
         t.trig(3)

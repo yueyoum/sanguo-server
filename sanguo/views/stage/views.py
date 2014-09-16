@@ -3,12 +3,11 @@
 __author__ = 'Wang Chao'
 __date__ = '4/9/14'
 
-from core.stage import Stage, Hang, EliteStage, ActivityStage
+from core.stage import Stage, EliteStage, ActivityStage
 from core.attachment import standard_drop_to_attachment_protomsg
 from libs import pack_msg
 from utils.decorate import message_response, operate_guard, function_check
-from preset.settings import OPERATE_INTERVAL_PVE, OPERATE_INTERVAL_PVE_ELITE, HANG_INTERVAL
-from preset import errormsg
+from preset.settings import OPERATE_INTERVAL_PVE, OPERATE_INTERVAL_PVE_ELITE
 
 import protomsg
 
@@ -94,31 +93,3 @@ def pve(request):
 
     return pack_msg(response)
 
-
-@message_response("HangResponse")
-@function_check(7)
-@operate_guard('hang', HANG_INTERVAL, keep_result=False, error_code=errormsg.HANG_IN_CD)
-def hang_start(request):
-    req = request._proto
-    char_id = request._char_id
-
-    hang = Hang(char_id)
-    hang.start(req.stage_id)
-    return None
-
-
-@message_response("HangCancelResponse")
-def hang_cancel(request):
-    hang = Hang(request._char_id)
-    msg = hang.cancel()
-
-    response = protomsg.HangCancelResponse()
-    response.ret = 0
-    response.drop.MergeFrom(msg)
-    return pack_msg(response)
-
-
-@message_response("HangSyncResponse")
-def hang_sync(request):
-    Hang(request._char_id).send_notify()
-    return None

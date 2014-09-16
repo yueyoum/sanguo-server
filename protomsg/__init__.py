@@ -1,3 +1,4 @@
+from affairs_pb2 import *
 from account_pb2 import *
 from hero_pb2 import *
 from cmd_pb2 import *
@@ -57,10 +58,6 @@ RESPONSE_NOTIFY_TYPE = {
     "AlreadyStageNotify": 500,
     "CurrentStageNotify": 501,
     "NewStageNotify": 502,
-    "HangNotify": 510,
-    "HangResponse": 512,
-    "HangCancelResponse": 514,
-    "HangSyncResponse": 516,
     "PVEResponse": 601,
     "EliteStageNotify": 650,
     "NewEliteStageNotify": 651,
@@ -147,6 +144,11 @@ RESPONSE_NOTIFY_TYPE = {
     "Purchase91GetOrderIdResponse": 4211,
     "Purchase91ConfirmResponse": 4213,
     "PurchaseStatusNotify": 4220,
+    "CityNotify": 5000,
+    "HangNotify": 5001,
+    "HangSyncResponse": 5003,
+    "HangGetRewardResponse": 5005,
+    "HangStartResponse": 5007,
 }
 
 REQUEST_TYPE = {
@@ -168,9 +170,6 @@ REQUEST_TYPE = {
     400: "SetFormationRequest",
     410: "SetSocketHeroRequest",
     412: "SetSocketEquipmentRequest",
-    511: "HangRequest",
-    513: "HangCancelRequest",
-    515: "HangSyncRequest",
     600: "PVERequest",
     653: "ElitePVERequest",
     656: "EliteStageResetRequest",
@@ -213,6 +212,9 @@ REQUEST_TYPE = {
     4202: "BuyVerityRequest",
     4210: "Purchase91GetOrderIdRequest",
     4212: "Purchase91ConfirmRequest",
+    5002: "HangSyncRequest",
+    5004: "HangGetRewardRequest",
+    5006: "HangStartRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -234,9 +236,6 @@ REQUEST_TYPE_REV = {
     "SetFormationRequest": 400,
     "SetSocketHeroRequest": 410,
     "SetSocketEquipmentRequest": 412,
-    "HangRequest": 511,
-    "HangCancelRequest": 513,
-    "HangSyncRequest": 515,
     "PVERequest": 600,
     "ElitePVERequest": 653,
     "EliteStageResetRequest": 656,
@@ -279,6 +278,9 @@ REQUEST_TYPE_REV = {
     "BuyVerityRequest": 4202,
     "Purchase91GetOrderIdRequest": 4210,
     "Purchase91ConfirmRequest": 4212,
+    "HangSyncRequest": 5002,
+    "HangGetRewardRequest": 5004,
+    "HangStartRequest": 5006,
 }
 
 TYPE_COMMAND = {
@@ -299,9 +301,6 @@ TYPE_COMMAND = {
    400: "/formation/set/",
    410: "/socket/set/hero/",
    412: "/socket/set/equipment/",
-   511: "/hang/",
-   513: "/hang/cancel/",
-   515: "/hang/sync/",
    600: "/pve/",
    653: "/elitepve/",
    656: "/elite/reset/",
@@ -344,6 +343,9 @@ TYPE_COMMAND = {
    4202: "/purchase/verify/",
    4210: "/purchase91/orderid/",
    4212: "/purchase91/confirm/",
+   5002: "/hang/sync/",
+   5004: "/hang/getreward/",
+   5006: "/hang/start/",
 }
 
 COMMAND_TYPE = {v: k for k, v in TYPE_COMMAND.iteritems()}

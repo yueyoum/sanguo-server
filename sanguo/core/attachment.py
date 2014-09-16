@@ -19,7 +19,7 @@ from utils import pack_msg
 from protomsg import PrizeNotify, Attachment as MsgAttachment
 
 from preset import errormsg
-from preset.data import PACKAGES
+from preset.data import PACKAGES, EQUIPMENTS, GEMS, STUFFS
 from preset.settings import DROP_PROB_BASE
 
 from preset.settings import (
@@ -115,6 +115,25 @@ def standard_drop_to_attachment_protomsg(data):
         msg_s.amount = _amount
 
     return msg
+
+
+def standard_drop_to_readable_text(data, sign='x', only_items=True):
+    # Now only support items. (equipment, gem, stuff)
+    results = []
+    for _id, _level, _amount in data.get('equipments', []):
+        text = u'{0}{1}{2}'.format(EQUIPMENTS[_id].name, sign, _amount)
+        results.append(text)
+
+    for _id, _amount in data.get('gems', []):
+        text = u'{0}{1}{2}'.format(GEMS[_id].name, sign, _amount)
+        results.append(text)
+
+    for _id, _amount in data.get('stuffs', []):
+        text = u'{0}{1}{2}'.format(STUFFS[_id].name, sign, _amount)
+        results.append(text)
+
+    return ', '.join(results)
+
 
 
 def get_drop_from_mode_two_package(package):
@@ -323,12 +342,8 @@ class Attachment(object):
         self.send_notify()
 
     def get_attachment(self, prize_id, param=0):
-        if prize_id == 1:
-            # 挂机
-            from core.stage import Hang
-            h = Hang(self.char_id)
-            att_msg = h.save_drop()
-        elif prize_id == 4:
+        # prizie_id == 1 挂机不在这里
+        if prize_id == 4:
             # 成就
             from core.achievement import Achievement
             ach = Achievement(self.char_id)
