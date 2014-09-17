@@ -258,8 +258,10 @@ class MongoCounter(Document):
 
 class MongoFriend(Document):
     id = IntField(primary_key=True)
-    # 已加好友和自己发出的申请
-    friends = DictField()
+    # 已经是好友的
+    friends = ListField(IntField())
+    # 自己发出申请等待对方确认的
+    pending = ListField(IntField())
     # 别人发来的申请需要我接受的
     accepting = ListField(IntField())
 
@@ -440,8 +442,11 @@ def purge_char(char_id):
     for m in MongoFriend.objects.all():
 
         _changed = False
-        if str(char_id) in m.friends:
-            m.friends.pop(str(char_id))
+        if char_id in m.friends:
+            m.friends.remove(char_id)
+            _changed = True
+        if char_id in m.pending:
+            m.pending.remove(char_id)
             _changed = True
         if char_id in m.accepting:
             m.accepting.remove(char_id)
