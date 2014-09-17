@@ -32,18 +32,19 @@ class Friend(object):
             self.mf = MongoFriend.objects.get(id=self.char_id)
         except DoesNotExist:
             self.mf = MongoFriend(id=self.char_id)
-            self.mf.friends = {}
+            self.mf.friends = []
+            self.mf.pending = []
             self.mf.accepting = []
             self.mf.save()
 
     def is_friend(self, target_id):
         # 真正的好友，对方接受了我的好友申请的
-        t = str(target_id)
-        return t in self.mf.friends and self.mf.friends[t] == FRIEND_OK
+        return int(target_id) in self.mf.friends
 
     def is_general_friend(self, target_id):
         # 广义好友，只要是自己或者对方发过好友申请的都算
-        return str(target_id) in self.mf.friends or target_id in self.mf.accepting
+        target_id = int(target_id)
+        return target_id in self.mf.friends or target_id in self.mf.pending or target_id in self.mf.accepting
 
 
     @property
@@ -52,17 +53,11 @@ class Friend(object):
 
     @property
     def cur_amount(self):
-        fs = self.mf.friends
-        return len(fs)
+        return len(self.mf.friends) + len(self.mf.pending)
 
     @property
     def real_cur_amount(self):
-        fs = self.mf.friends.values()
-        amount = 0
-        for f in fs:
-            if f == FRIEND_OK:
-                amount += 1
-        return amount
+        return len(self.mf.friends)
 
 
     def candidate_list(self, level_diff=FRIEND_CANDIDATE_LEVEL_DIFF):
@@ -81,15 +76,18 @@ class Friend(object):
 
         return res
 
+
     def friends_list(self):
         """
         @return: All Friends List. Format: [(id, status), (id, status)...]
         @rtype: list
         """
         res = []
-        fs = self.mf.friends
-        for k, v in fs.iteritems():
-            res.append((int(k), v))
+        for i in self.mf.friends:
+            res.append((i, FRIEND_OK))
+
+        for i in self.mf.pending:
+            res.append((i, FRIEND_ACK))
 
         for i in self.mf.accepting:
             res.append((i, FRIEND_APPLY))
@@ -115,6 +113,7 @@ class Friend(object):
 
 
     def add(self, target_id=None, target_name=None):
+        # 发出好友申请
         if not target_id and not target_name:
             raise SanguoException(
                 errormsg.BAD_MESSAGE,
@@ -146,17 +145,23 @@ class Friend(object):
                     u"can not found character {0} in server {1}".format(target_name, self.char.mc.server_id)
                 )
 
-        if str(c.id) in self.mf.friends:
-            if self.mf.friends[str(c.id)] == FRIEND_OK:
-                raise SanguoException(
-                    errormsg.FRIEND_ALREADY_ADD,
-                    self.char_id,
-                    "Friend Add",
-                    "character {0} already has beed added".format(c.id)
-                )
+        if c.id in self.mf.friends:
+            raise SanguoException(
+                errormsg.FRIEND_ALREADY_ADD,
+                self.char_id,
+                "Friend Add",
+                "character {0} already has beed added".format(c.id)
+            )
+
+        if c.id in self.mf.pending:
             return
 
-        self.mf.friends[str(c.id)] = FRIEND_ACK
+        if c.id in self.mf.accepting:
+            # 如果要加的好友以前已经给我发过好友申请，那么就是直接接受
+            self.accept(c.id)
+            return
+
+        self.mf.pending.append(c.id)
         self.mf.save()
 
         target_char_friend = Friend(c.id)
@@ -171,7 +176,8 @@ class Friend(object):
 
 
     def someone_add_me(self, from_id):
-        if from_id in self.mf.accepting or str(from_id) in self.mf.friends:
+        from_id = int(from_id)
+        if from_id in self.mf.accepting or from_id in self.mf.pending or from_id in self.mf.accepting:
             return
 
         self.mf.accepting.append(from_id)
@@ -185,8 +191,9 @@ class Friend(object):
 
 
     def terminate(self, target_id):
-        t = str(target_id)
-        if t not in self.mf.friends or self.mf.friends[t] != FRIEND_OK:
+        # 终止好友关系
+        target_id = int(target_id)
+        if target_id not in self.mf.friends:
             raise SanguoException(
                 errormsg.FRIEND_NOT_OK,
                 self.char_id,
@@ -194,12 +201,11 @@ class Friend(object):
                 "character {0} is not friend".format(target_id)
             )
 
-        self.mf.friends.pop(t)
+        self.mf.friends.remove(target_id)
         self.mf.save()
 
         target_char_friend = Friend(target_id)
         target_char_friend.someone_terminate_me(self.char_id)
-
 
         msg = protomsg.RemoveFriendNotify()
         msg.id = target_id
@@ -209,11 +215,11 @@ class Friend(object):
 
 
     def someone_terminate_me(self, from_id):
-        t = str(from_id)
-        if t not in self.mf.friends:
+        from_id = int(from_id)
+        if from_id not in self.mf.friends:
             return
 
-        self.mf.friends.pop(t)
+        self.mf.friends.remove(from_id)
         self.mf.save()
 
         msg = protomsg.RemoveFriendNotify()
@@ -224,8 +230,9 @@ class Friend(object):
 
 
     def cancel(self, target_id):
-        t = str(target_id)
-        if t not in self.mf.friends or self.mf.friends[t] != FRIEND_ACK:
+        # 取消好友申请
+        target_id = int(target_id)
+        if target_id not in self.mf.pending:
             raise SanguoException(
                 errormsg.FRIEND_NOT_ACK,
                 self.char_id,
@@ -233,7 +240,7 @@ class Friend(object):
                 "not ack for character {0}".format(target_id)
             )
 
-        self.mf.friends.pop(t)
+        self.mf.pending.remove(target_id)
         self.mf.save()
 
         target_char_friend = Friend(target_id)
@@ -259,6 +266,8 @@ class Friend(object):
 
 
     def accept(self, target_id):
+        # 接受对方的好友申请
+        target_id = int(target_id)
         if target_id not in self.mf.accepting:
             raise SanguoException(
                 errormsg.FRIEND_NOT_IN_ACCEPT_LIST,
@@ -270,8 +279,7 @@ class Friend(object):
         self.check_max_amount("Friend Accept")
 
         self.mf.accepting.remove(target_id)
-        self.mf.friends[str(target_id)] = FRIEND_OK
-
+        self.mf.friends.append(target_id)
         self.mf.save()
 
         target_char_friend = Friend(target_id)
@@ -293,7 +301,11 @@ class Friend(object):
 
 
     def someone_accept_me(self, from_id):
-        self.mf.friends[str(from_id)] = FRIEND_OK
+        from_id = int(from_id)
+        if from_id in self.mf.pending:
+            self.mf.pending.remove(from_id)
+        if from_id not in self.mf.friends:
+            self.mf.friends.append(from_id)
         self.mf.save()
 
         msg = protomsg.UpdateFriendNotify()
@@ -311,6 +323,8 @@ class Friend(object):
 
 
     def refuse(self, target_id):
+        # 拒绝对方的好友申请
+        target_id = int(target_id)
         if target_id not in self.mf.accepting:
             raise SanguoException(
                 errormsg.FRIEND_NOT_IN_ACCEPT_LIST,
@@ -332,7 +346,9 @@ class Friend(object):
 
 
     def someone_refuse_me(self, from_id):
-        self.mf.friends.pop(str(from_id))
+        from_id = int(from_id)
+        if from_id in self.mf.pending:
+            self.mf.pending.remove(from_id)
         self.mf.save()
 
         msg = protomsg.RemoveFriendNotify()
@@ -380,3 +396,4 @@ class Friend(object):
             self._msg_friend(f, k, v)
 
         publish_to_char(self.char_id, pack_msg(msg))
+
