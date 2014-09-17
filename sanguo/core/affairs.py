@@ -12,13 +12,14 @@ from core.mongoscheme import MongoAffairs, MongoEmbeddedHangLog
 from core.exception import SanguoException
 from core.attachment import get_drop, make_standard_drop_from_template, standard_drop_to_attachment_protomsg
 from core.resource import Resource
+from core.character import Char
 
 from core.msgpipe import publish_to_char
 
 from utils import pack_msg
 
 from preset import errormsg
-from preset.data import BATTLES
+from preset.data import BATTLES, VIP_DEFINE
 from preset.settings import PLUNDER_LOG_TEMPLATE, HANG_REWARD_ADDITIONAL
 
 from protomsg import City as CityMsg, CityNotify, HangNotify
@@ -187,7 +188,11 @@ class Affairs(_GetRealGoldMixin):
         else:
             _add = 1
 
-        passed_time = int(ho.passed_time * _add)
+        char = Char(self.char_id)
+        vip_level = char.mc.vip
+        vip_add = VIP_DEFINE[vip_level].hang_addition
+
+        passed_time = int(ho.passed_time * _add * (1 + vip_add / 100.0))
 
         reward_gold = passed_time / 15 * battle_data.normal_gold
         reward_gold = self.get_real_gold(reward_gold, self.mongo_affairs.logs)
