@@ -265,6 +265,13 @@ class MongoFriend(Document):
     # 别人发来的申请需要我接受的
     accepting = ListField(IntField())
 
+    # 赠送掠夺次数的好友列表
+    plunder_gives = ListField(IntField())
+    # 获取掠夺次数的好友列表
+    plunder_gots = ListField(IntField())
+    # 谁送我的掠夺次数
+    plunder_senders = ListField(IntField())
+
     meta = {
         'collection': 'friend'
     }
@@ -452,5 +459,11 @@ def purge_char(char_id):
             m.accepting.remove(char_id)
             _changed = True
 
+        if char_id in m.plunder_gives(char_id):
+            m.plunder_gives.remove(char_id)
+        if char_id in m.plunder_gots(char_id):
+            m.plunder_gots.remove(char_id)
+
         if _changed:
             m.save()
+

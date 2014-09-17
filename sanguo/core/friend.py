@@ -16,6 +16,7 @@ from core.signals import new_friend_got_signal
 
 import protomsg
 from protomsg import FRIEND_NOT, FRIEND_OK, FRIEND_ACK, FRIEND_APPLY
+from protomsg import Friend as MsgFriend
 
 from preset.data import VIP_FUNCTION, VIP_MAX_LEVEL
 from preset.settings import FRIEND_CANDIDATE_LEVEL_DIFF
@@ -35,6 +36,10 @@ class Friend(object):
             self.mf.friends = []
             self.mf.pending = []
             self.mf.accepting = []
+
+            self.mf.plunder_gives = []
+            self.mf.plunder_gots = []
+            self.mf.plunder_senders = []
             self.mf.save()
 
     def is_friend(self, target_id):
@@ -285,9 +290,7 @@ class Friend(object):
         target_char_friend = Friend(target_id)
         target_char_friend.someone_accept_me(self.char_id)
 
-        msg = protomsg.UpdateFriendNotify()
-        self._msg_friend(msg.friend, target_id, FRIEND_OK)
-        publish_to_char(self.char_id, pack_msg(msg))
+        self.send_update_friend_notify(target_id)
 
         new_friend_got_signal.send(
             sender=None,
@@ -308,9 +311,7 @@ class Friend(object):
             self.mf.friends.append(from_id)
         self.mf.save()
 
-        msg = protomsg.UpdateFriendNotify()
-        self._msg_friend(msg.friend, from_id, FRIEND_OK)
-        publish_to_char(self.char_id, pack_msg(msg))
+        self.send_update_friend_notify(from_id)
 
         new_friend_got_signal.send(
             sender=None,
@@ -382,6 +383,20 @@ class Friend(object):
 
         msg.leader = leader_oid
 
+        if status == FRIEND_OK and fid not in self.mf.plunder_gives:
+            msg.can_give_plunder_times = True
+        else:
+            msg.can_give_plunder_times = False
+
+        if fid in self.mf.plunder_senders:
+            msg.got_plunder_times_status = MsgFriend.CAN_GET
+        elif fid in self.mf.plunder_gots:
+            msg.got_plunder_times_status = MsgFriend.ALREADY_GET
+        else:
+            msg.got_plunder_times_status = MsgFriend.CAN_NOT_GET
+
+
+
     def send_friends_amount_notify(self):
         msg = protomsg.FriendsAmountNotify()
         msg.max_amount = self.max_amount
@@ -397,3 +412,78 @@ class Friend(object):
 
         publish_to_char(self.char_id, pack_msg(msg))
 
+
+    def send_update_friend_notify(self, friend_id, status=FRIEND_OK):
+        msg = protomsg.UpdateFriendNotify()
+        self._msg_friend(msg.friend, friend_id, status)
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
+    # 行军令相关
+    def give_plunder_times(self, target_id):
+        target_id = int(target_id)
+        if target_id not in self.mf.friends:
+            raise SanguoException(
+                errormsg.FRIEND_GIVE_PLUNDER_TIMES_NOT_FRIEND,
+                self.char_id,
+                "Friend Give Plunder Times",
+                "{0} has no friend {1}".format(self.char_id, target_id)
+            )
+
+        if target_id in self.mf.plunder_gives:
+            raise SanguoException(
+                errormsg.FRIEND_GIVE_PLUNDER_TIMES_ALREADY_GIVE,
+                self.char_id,
+                "Friend Give Plunder Times",
+                "{0} already give to {1}".format(self.char_id, target_id)
+            )
+
+        self.mf.plunder_gives.append(target_id)
+        self.mf.save()
+
+        self.send_update_friend_notify(target_id)
+
+        f = Friend(target_id)
+        f.someone_give_me_plunder_times(self.char_id)
+
+
+    def someone_give_me_plunder_times(self, from_id):
+        from_id = int(from_id)
+        if from_id in self.mf.plunder_senders:
+            return
+
+        self.mf.plunder_senders.append(from_id)
+        self.mf.save()
+
+        self.send_update_friend_notify(from_id)
+
+    def get_plunder_times(self, sender_id):
+        if sender_id not in self.mf.plunder_senders:
+            raise SanguoException(
+                errormsg.FRIEND_GET_PLUNDER_TIMES_NOT_EXIST,
+                self.char_id,
+                "Friend Get Plunder Times",
+                "{0} try to get plunder times, buy {1} not give".format(self.char_id, sender_id)
+            )
+
+        if sender_id in self.mf.plunder_gots:
+            raise SanguoException(
+                errormsg.FRIEND_GET_PLUNDER_TIMES_ALREADY_GOT,
+                self.char_id,
+                "Friend Get Plunder Times",
+                "{0} try to get plunder times, buy already got from {1}".format(self.char_id, sender_id)
+            )
+
+
+        self.mf.plunder_senders.remove(sender_id)
+        self.mf.plunder_gots.append(sender_id)
+        self.mf.save()
+
+        self.send_update_friend_notify(sender_id)
+
+
+    def daily_plunder_times_reset(self):
+        self.mf.plunder_gives = []
+        self.mf.plunder_gots = []
+        self.mf.save()
+        self.send_friends_notify()

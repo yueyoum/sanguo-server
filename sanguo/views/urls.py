@@ -59,6 +59,8 @@ urlpatterns = patterns('',
                        url(r'^friend/refuse/$', 'views.friend.views.refuse'),
                        url(r'^friend/terminate/$', 'views.friend.views.terminate'),
                        url(r'^friend/refresh/$', 'views.friend.views.refresh'),
+                       url(r'^friend/giveplundertimes/', 'views.friend.views.give_plunder_times'),
+                       url(r'^friend/getplundertimes/', 'views.friend.views.get_plunder_times'),
 
                        url(r'^mail/open/$', 'views.mail.views.open'),
                        url(r'^mail/delete/$', 'views.mail.views.delete'),

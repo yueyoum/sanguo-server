@@ -75,3 +75,19 @@ def refresh(request):
     f = Friend(request._char_id)
     f.send_friends_notify()
     return None
+
+
+@message_response("FriendGivePlunderTimesResponse")
+def give_plunder_times(request):
+    req = request._proto
+    f = Friend(request._char_id)
+    f.give_plunder_times(req.friend_id)
+    return None
+
+@message_response("GetFriendGivePlunderTimesResponse")
+def get_plunder_times(request):
+    req = request._proto
+    f = Friend(request._char_id)
+    f.get_plunder_times(req.friend_id)
+    return None
+

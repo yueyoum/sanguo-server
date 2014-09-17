@@ -14,7 +14,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='friend.proto',
   package='Sanguo.protocol.friend',
-  serialized_pb='\n\x0c\x66riend.proto\x12\x16Sanguo.protocol.friend\"\xab\x01\n\x06\x46riend\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\r\n\x05level\x18\x03 \x02(\x05\x12\x10\n\x08official\x18\x04 \x02(\x05\x12\r\n\x05power\x18\x05 \x01(\x05\x12\x34\n\x06status\x18\x06 \x02(\x0e\x32$.Sanguo.protocol.friend.FriendStatus\x12\x11\n\tformation\x18\x07 \x03(\x05\x12\x0e\n\x06leader\x18\x08 \x02(\x05\"Q\n\rFriendsNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12/\n\x07\x66riends\x18\x02 \x03(\x0b\x32\x1e.Sanguo.protocol.friend.Friend\"\'\n\x14\x46riendRefreshRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"5\n\x15\x46riendRefreshResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"R\n\x0fNewFriendNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12.\n\x06\x66riend\x18\x02 \x02(\x0b\x32\x1e.Sanguo.protocol.friend.Friend\"1\n\x12RemoveFriendNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"U\n\x12UpdateFriendNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12.\n\x06\x66riend\x18\x02 \x02(\x0b\x32\x1e.Sanguo.protocol.friend.Friend\"N\n\x13\x46riendsAmountNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nmax_amount\x18\x02 \x02(\x05\x12\x12\n\ncur_amount\x18\x03 \x02(\x05\"$\n\x11PlayerListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"c\n\x12PlayerListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12/\n\x07players\x18\x03 \x03(\x0b\x32\x1e.Sanguo.protocol.friend.Friend\"=\n\x10\x46riendAddRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x01(\x05\x12\x0c\n\x04name\x18\x03 \x01(\t\"1\n\x11\x46riendAddResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"5\n\x16\x46riendTerminateRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"7\n\x17\x46riendTerminateResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"2\n\x13\x46riendCancelRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"4\n\x14\x46riendCancelResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"2\n\x13\x46riendAcceptRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"4\n\x14\x46riendAcceptResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"2\n\x13\x46riendRefuseRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"4\n\x14\x46riendRefuseResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c*O\n\x0c\x46riendStatus\x12\x0e\n\nFRIEND_NOT\x10\x01\x12\r\n\tFRIEND_OK\x10\x02\x12\x0e\n\nFRIEND_ACK\x10\x03\x12\x10\n\x0c\x46RIEND_APPLY\x10\x04')
+  serialized_pb='\n\x0c\x66riend.proto\x12\x16Sanguo.protocol.friend\"\xf7\x02\n\x06\x46riend\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\r\n\x05level\x18\x03 \x02(\x05\x12\x10\n\x08official\x18\x04 \x02(\x05\x12\r\n\x05power\x18\x05 \x01(\x05\x12\x34\n\x06status\x18\x06 \x02(\x0e\x32$.Sanguo.protocol.friend.FriendStatus\x12\x11\n\tformation\x18\x07 \x03(\x05\x12\x0e\n\x06leader\x18\x08 \x02(\x05\x12\x1e\n\x16\x63\x61n_give_plunder_times\x18\t \x02(\x08\x12\\\n\x18got_plunder_times_status\x18\n \x02(\x0e\x32:.Sanguo.protocol.friend.Friend.FriendGotPlunderTimesStatus\"L\n\x1b\x46riendGotPlunderTimesStatus\x12\x0b\n\x07\x43\x41N_GET\x10\x01\x12\x0f\n\x0b\x41LREADY_GET\x10\x02\x12\x0f\n\x0b\x43\x41N_NOT_GET\x10\x03\"Q\n\rFriendsNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12/\n\x07\x66riends\x18\x02 \x03(\x0b\x32\x1e.Sanguo.protocol.friend.Friend\"\'\n\x14\x46riendRefreshRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"5\n\x15\x46riendRefreshResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"R\n\x0fNewFriendNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12.\n\x06\x66riend\x18\x02 \x02(\x0b\x32\x1e.Sanguo.protocol.friend.Friend\"1\n\x12RemoveFriendNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"U\n\x12UpdateFriendNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12.\n\x06\x66riend\x18\x02 \x02(\x0b\x32\x1e.Sanguo.protocol.friend.Friend\"N\n\x13\x46riendsAmountNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nmax_amount\x18\x02 \x02(\x05\x12\x12\n\ncur_amount\x18\x03 \x02(\x05\"$\n\x11PlayerListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"c\n\x12PlayerListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12/\n\x07players\x18\x03 \x03(\x0b\x32\x1e.Sanguo.protocol.friend.Friend\"=\n\x10\x46riendAddRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x01(\x05\x12\x0c\n\x04name\x18\x03 \x01(\t\"1\n\x11\x46riendAddResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"5\n\x16\x46riendTerminateRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"7\n\x17\x46riendTerminateResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"2\n\x13\x46riendCancelRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"4\n\x14\x46riendCancelResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"2\n\x13\x46riendAcceptRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"4\n\x14\x46riendAcceptResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"2\n\x13\x46riendRefuseRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"4\n\x14\x46riendRefuseResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"C\n\x1d\x46riendGivePlunderTimesRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tfriend_id\x18\x02 \x02(\x05\">\n\x1e\x46riendGivePlunderTimesResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"F\n GetFriendGivePlunderTimesRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x11\n\tfriend_id\x18\x02 \x02(\x05\"A\n!GetFriendGivePlunderTimesResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c*O\n\x0c\x46riendStatus\x12\x0e\n\nFRIEND_NOT\x10\x01\x12\r\n\tFRIEND_OK\x10\x02\x12\x0e\n\nFRIEND_ACK\x10\x03\x12\x10\n\x0c\x46RIEND_APPLY\x10\x04')
 
 _FRIENDSTATUS = _descriptor.EnumDescriptor(
   name='FriendStatus',
@@ -41,8 +41,8 @@ _FRIENDSTATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1378,
-  serialized_end=1457,
+  serialized_start=1854,
+  serialized_end=1933,
 )
 
 FriendStatus = enum_type_wrapper.EnumTypeWrapper(_FRIENDSTATUS)
@@ -51,6 +51,31 @@ FRIEND_OK = 2
 FRIEND_ACK = 3
 FRIEND_APPLY = 4
 
+
+_FRIEND_FRIENDGOTPLUNDERTIMESSTATUS = _descriptor.EnumDescriptor(
+  name='FriendGotPlunderTimesStatus',
+  full_name='Sanguo.protocol.friend.Friend.FriendGotPlunderTimesStatus',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='CAN_GET', index=0, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ALREADY_GET', index=1, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CAN_NOT_GET', index=2, number=3,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=340,
+  serialized_end=416,
+)
 
 
 _FRIEND = _descriptor.Descriptor(
@@ -116,17 +141,32 @@ _FRIEND = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='can_give_plunder_times', full_name='Sanguo.protocol.friend.Friend.can_give_plunder_times', index=8,
+      number=9, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='got_plunder_times_status', full_name='Sanguo.protocol.friend.Friend.got_plunder_times_status', index=9,
+      number=10, type=14, cpp_type=8, label=2,
+      has_default_value=False, default_value=1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
+    _FRIEND_FRIENDGOTPLUNDERTIMESSTATUS,
   ],
   options=None,
   is_extendable=False,
   extension_ranges=[],
   serialized_start=41,
-  serialized_end=212,
+  serialized_end=416,
 )
 
 
@@ -160,8 +200,8 @@ _FRIENDSNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=214,
-  serialized_end=295,
+  serialized_start=418,
+  serialized_end=499,
 )
 
 
@@ -188,8 +228,8 @@ _FRIENDREFRESHREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=297,
-  serialized_end=336,
+  serialized_start=501,
+  serialized_end=540,
 )
 
 
@@ -223,8 +263,8 @@ _FRIENDREFRESHRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=338,
-  serialized_end=391,
+  serialized_start=542,
+  serialized_end=595,
 )
 
 
@@ -258,8 +298,8 @@ _NEWFRIENDNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=393,
-  serialized_end=475,
+  serialized_start=597,
+  serialized_end=679,
 )
 
 
@@ -293,8 +333,8 @@ _REMOVEFRIENDNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=477,
-  serialized_end=526,
+  serialized_start=681,
+  serialized_end=730,
 )
 
 
@@ -328,8 +368,8 @@ _UPDATEFRIENDNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=528,
-  serialized_end=613,
+  serialized_start=732,
+  serialized_end=817,
 )
 
 
@@ -370,8 +410,8 @@ _FRIENDSAMOUNTNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=615,
-  serialized_end=693,
+  serialized_start=819,
+  serialized_end=897,
 )
 
 
@@ -398,8 +438,8 @@ _PLAYERLISTREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=695,
-  serialized_end=731,
+  serialized_start=899,
+  serialized_end=935,
 )
 
 
@@ -440,8 +480,8 @@ _PLAYERLISTRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=733,
-  serialized_end=832,
+  serialized_start=937,
+  serialized_end=1036,
 )
 
 
@@ -482,8 +522,8 @@ _FRIENDADDREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=834,
-  serialized_end=895,
+  serialized_start=1038,
+  serialized_end=1099,
 )
 
 
@@ -517,8 +557,8 @@ _FRIENDADDRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=897,
-  serialized_end=946,
+  serialized_start=1101,
+  serialized_end=1150,
 )
 
 
@@ -552,8 +592,8 @@ _FRIENDTERMINATEREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=948,
-  serialized_end=1001,
+  serialized_start=1152,
+  serialized_end=1205,
 )
 
 
@@ -587,8 +627,8 @@ _FRIENDTERMINATERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1003,
-  serialized_end=1058,
+  serialized_start=1207,
+  serialized_end=1262,
 )
 
 
@@ -622,8 +662,8 @@ _FRIENDCANCELREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1060,
-  serialized_end=1110,
+  serialized_start=1264,
+  serialized_end=1314,
 )
 
 
@@ -657,8 +697,8 @@ _FRIENDCANCELRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1112,
-  serialized_end=1164,
+  serialized_start=1316,
+  serialized_end=1368,
 )
 
 
@@ -692,8 +732,8 @@ _FRIENDACCEPTREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1166,
-  serialized_end=1216,
+  serialized_start=1370,
+  serialized_end=1420,
 )
 
 
@@ -727,8 +767,8 @@ _FRIENDACCEPTRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1218,
-  serialized_end=1270,
+  serialized_start=1422,
+  serialized_end=1474,
 )
 
 
@@ -762,8 +802,8 @@ _FRIENDREFUSEREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1272,
-  serialized_end=1322,
+  serialized_start=1476,
+  serialized_end=1526,
 )
 
 
@@ -797,11 +837,153 @@ _FRIENDREFUSERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1324,
-  serialized_end=1376,
+  serialized_start=1528,
+  serialized_end=1580,
+)
+
+
+_FRIENDGIVEPLUNDERTIMESREQUEST = _descriptor.Descriptor(
+  name='FriendGivePlunderTimesRequest',
+  full_name='Sanguo.protocol.friend.FriendGivePlunderTimesRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.friend.FriendGivePlunderTimesRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='friend_id', full_name='Sanguo.protocol.friend.FriendGivePlunderTimesRequest.friend_id', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1582,
+  serialized_end=1649,
+)
+
+
+_FRIENDGIVEPLUNDERTIMESRESPONSE = _descriptor.Descriptor(
+  name='FriendGivePlunderTimesResponse',
+  full_name='Sanguo.protocol.friend.FriendGivePlunderTimesResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.friend.FriendGivePlunderTimesResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.friend.FriendGivePlunderTimesResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1651,
+  serialized_end=1713,
+)
+
+
+_GETFRIENDGIVEPLUNDERTIMESREQUEST = _descriptor.Descriptor(
+  name='GetFriendGivePlunderTimesRequest',
+  full_name='Sanguo.protocol.friend.GetFriendGivePlunderTimesRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.friend.GetFriendGivePlunderTimesRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='friend_id', full_name='Sanguo.protocol.friend.GetFriendGivePlunderTimesRequest.friend_id', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1715,
+  serialized_end=1785,
+)
+
+
+_GETFRIENDGIVEPLUNDERTIMESRESPONSE = _descriptor.Descriptor(
+  name='GetFriendGivePlunderTimesResponse',
+  full_name='Sanguo.protocol.friend.GetFriendGivePlunderTimesResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.friend.GetFriendGivePlunderTimesResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.friend.GetFriendGivePlunderTimesResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1787,
+  serialized_end=1852,
 )
 
 _FRIEND.fields_by_name['status'].enum_type = _FRIENDSTATUS
+_FRIEND.fields_by_name['got_plunder_times_status'].enum_type = _FRIEND_FRIENDGOTPLUNDERTIMESSTATUS
+_FRIEND_FRIENDGOTPLUNDERTIMESSTATUS.containing_type = _FRIEND;
 _FRIENDSNOTIFY.fields_by_name['friends'].message_type = _FRIEND
 _NEWFRIENDNOTIFY.fields_by_name['friend'].message_type = _FRIEND
 _UPDATEFRIENDNOTIFY.fields_by_name['friend'].message_type = _FRIEND
@@ -826,6 +1008,10 @@ DESCRIPTOR.message_types_by_name['FriendAcceptRequest'] = _FRIENDACCEPTREQUEST
 DESCRIPTOR.message_types_by_name['FriendAcceptResponse'] = _FRIENDACCEPTRESPONSE
 DESCRIPTOR.message_types_by_name['FriendRefuseRequest'] = _FRIENDREFUSEREQUEST
 DESCRIPTOR.message_types_by_name['FriendRefuseResponse'] = _FRIENDREFUSERESPONSE
+DESCRIPTOR.message_types_by_name['FriendGivePlunderTimesRequest'] = _FRIENDGIVEPLUNDERTIMESREQUEST
+DESCRIPTOR.message_types_by_name['FriendGivePlunderTimesResponse'] = _FRIENDGIVEPLUNDERTIMESRESPONSE
+DESCRIPTOR.message_types_by_name['GetFriendGivePlunderTimesRequest'] = _GETFRIENDGIVEPLUNDERTIMESREQUEST
+DESCRIPTOR.message_types_by_name['GetFriendGivePlunderTimesResponse'] = _GETFRIENDGIVEPLUNDERTIMESRESPONSE
 
 class Friend(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
@@ -946,6 +1132,30 @@ class FriendRefuseResponse(_message.Message):
   DESCRIPTOR = _FRIENDREFUSERESPONSE
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.friend.FriendRefuseResponse)
+
+class FriendGivePlunderTimesRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _FRIENDGIVEPLUNDERTIMESREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.friend.FriendGivePlunderTimesRequest)
+
+class FriendGivePlunderTimesResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _FRIENDGIVEPLUNDERTIMESRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.friend.FriendGivePlunderTimesResponse)
+
+class GetFriendGivePlunderTimesRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _GETFRIENDGIVEPLUNDERTIMESREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.friend.GetFriendGivePlunderTimesRequest)
+
+class GetFriendGivePlunderTimesResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _GETFRIENDGIVEPLUNDERTIMESRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.friend.GetFriendGivePlunderTimesResponse)
 
 
 # @@protoc_insertion_point(module_scope)
