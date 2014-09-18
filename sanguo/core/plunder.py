@@ -60,7 +60,7 @@ class PlunderRival(object):
         else:
             rival_id = 0
 
-        return cls(rival_id)
+        return cls(rival_id, city_id)
 
     def __init__(self, char_id, city_id):
         self.city_id = city_id
@@ -123,7 +123,7 @@ class Plunder(object):
             self.mongo_plunder = MongoPlunder.objects.get(id=self.char_id)
         except DoesNotExist:
             self.mongo_plunder = MongoPlunder(id=self.char_id)
-            self.mongo_plunder.current_times = 0
+            self.mongo_plunder.current_times = self.max_plunder_times()
             self.mongo_plunder.save()
 
 
@@ -181,7 +181,7 @@ class Plunder(object):
             if self.mongo_plunder.current_times < 0:
                 self.mongo_plunder.current_times = 0
 
-            if not allow_overflow:
+            if not allow_overflow and change_value > 0:
                 max_times = self.max_plunder_times()
                 if self.mongo_plunder.current_times > max_times:
                     self.mongo_plunder.current_times = max_times
@@ -225,12 +225,13 @@ class Plunder(object):
         t.trig(3)
 
         if msg.self_win:
-            self.clean_plunder_target()
             standard_drop = self._get_plunder_reward(
                 self.mongo_plunder.char_city_id,
                 self.mongo_plunder.char_gold,
                 self.mongo_plunder.char_hero_original_ids
             )
+
+            self.clean_plunder_target()
 
             achievement = Achievement(self.char_id)
             achievement.trig(12, 1)
