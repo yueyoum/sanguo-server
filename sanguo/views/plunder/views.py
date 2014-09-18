@@ -14,7 +14,7 @@ from protomsg import PlunderResponse, PlunderRefreshResponse
 from preset import errormsg
 
 
-@message_response("PlunderListResponse")
+@message_response("PlunderRefreshResponse")
 @operate_guard('plunder_refresh', OPERATE_INTERVAL_PLUNDER_REFRESH, keep_result=False)
 @function_check(9)
 def plunder_refresh(request):
