@@ -11,6 +11,7 @@ from core.plunder import Plunder
 
 def main():
     logger = Logger('add_plunder_times.log')
+    logger.write("start")
     chars = MongoCharacter.objects.all()
     for char in chars:
         plunder = Plunder(char.id)
