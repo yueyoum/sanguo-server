@@ -179,33 +179,6 @@ HANG_REWARD_ADDITIONAL = (
 #########################
 #      掠夺             #
 #########################
-# 掠夺失败获得官职经验
-PLUNDER_GET_OFFICIAL_EXP_WHEN_LOST = 0
-# 原2
-# 掠夺胜利获得官职经验
-PLUNDER_GET_OFFICIAL_EXP_WHEN_WIN = 0
-# 原5
-
-# 掠夺点数（战功）  难度: {几星: 得多少分}
-PLUNDER_GOT_POINT = {
-    1: {2: 1, 3: 2},
-    2: {2: 2, 3: 3},
-    3: {2: 3, 3: 5},
-}
-# 防御成功获得金币
-PLUNDER_DEFENSE_SUCCESS_GOLD = 2500
-# 防御失败损失金币
-PLUNDER_DEFENSE_FAILURE_GOLD = 1000
-# 最大防御成功次数
-PLUNDER_DEFENSE_SUCCESS_MAX_TIMES = 10
-# 最大防御失败次数
-PLUNDER_DEFENSE_FAILURE_MAX_TIMES = 10
-# 掠夺获取收益各档所需点数
-PLUNDER_REWARD_NEEDS_POINT = {1:6, 2: 2, 3: 1}
-# 掠夺获取道具按照多少小时计算
-PLUNDER_GOT_ITEMS_HOUR = 2
-
-
 ### NEW ###
 # 掠夺日志
 PLUNDER_LOG_TEMPLATE = {
@@ -291,9 +264,6 @@ MAIL_KEEP_DAYS = 7
 # 激活码
 ACTIVATECODE_MAIL_TITLE = u'激活码领取成功'
 ACTIVATECODE_MAIL_CONTENT = u'激活码领取成功，请从附件领取奖励。'
-# 挂机
-HANG_RESET_MAIL_TITLE = u'昨日挂机补偿'
-HANG_RESET_MAIL_CONTENT = u'主公，昨日您未使用完你的挂机时间，系统发放了一定的补偿。今天要记得安排哦！ ————珠儿'
 # 比武日奖励
 MAIL_ARENA_DAY_REWARD_TITLE = u'比武每日奖励'
 MAIL_ARENA_DAY_REWARD_CONTENT = u'比武每日奖励'

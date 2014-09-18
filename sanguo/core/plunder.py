@@ -8,40 +8,27 @@ import time
 import random
 
 from mongoscheme import DoesNotExist
-from core.character import Char, get_char_ids_by_level_range
+from core.character import Char
 from core.battle import PVPFromRivalCache
-from core.stage import max_star_stage_id
 from core.mongoscheme import MongoPlunder, MongoAffairs
 from core.exception import SanguoException
-from core.counter import Counter
 from core.task import Task
-from core.formation import Formation
 from core.prison import Prison
-from core.stage import Stage
 from core.resource import Resource
 from core.attachment import make_standard_drop_from_template, get_drop
 from core.achievement import Achievement
 from core.formation import Formation
 from core.signals import plunder_finished_signal
-
 from protomsg import Battle as MsgBattle
 from protomsg import PlunderNotify
 from protomsg import Plunder as MsgPlunder
-
 from core.msgpipe import publish_to_char
 from utils import pack_msg
-from utils.checkers import not_hang_going
 from preset.settings import (
-    PLUNDER_GET_OFFICIAL_EXP_WHEN_WIN,
-    PLUNDER_GOT_POINT,
-    PLUNDER_DEFENSE_FAILURE_GOLD,
-    PLUNDER_REWARD_NEEDS_POINT,
-    PLUNDER_GOT_ITEMS_HOUR,
-
     PRISONER_POOL,
 )
 from preset import errormsg
-from preset.data import STAGES, VIP_MAX_LEVEL, VIP_FUNCTION, BATTLES
+from preset.data import VIP_FUNCTION, BATTLES
 
 
 class PlunderCurrentTimeOut(Exception):
@@ -93,7 +80,7 @@ class PlunderRival(object):
         ho = affairs.get_hang_obj()
         gold = ho.gold
 
-        result = min(1, (level - self.level) * 0.1) * 0.25
+        result = min(1, (1 - (level - self.level) * 0.1)) * 0.25
         return int(result * gold)
 
 
@@ -224,6 +211,8 @@ class Plunder(object):
         t = Task(self.char_id)
         t.trig(3)
 
+        to_char_id = self.mongo_plunder.char_id
+
         if msg.self_win:
             standard_drop = self._get_plunder_reward(
                 self.mongo_plunder.char_city_id,
@@ -244,7 +233,7 @@ class Plunder(object):
         plunder_finished_signal.send(
             sender=None,
             from_char_id=self.char_id,
-            to_char_id=self.mongo_plunder.char_id,
+            to_char_id=to_char_id,
             from_win=msg.self_win,
             standard_drop=standard_drop
         )

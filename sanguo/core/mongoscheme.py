@@ -187,50 +187,6 @@ class MongoPlunder(Document):
     }
 
 
-class MongoEmbededPlunderLog(EmbeddedDocument):
-    name = StringField()
-    gold = IntField()
-
-
-
-class MongoHang(Document):
-    id = IntField(primary_key=True)
-    # 当日已经用掉的时间
-    used = IntField(default=0)
-
-    meta = {
-        'collection': 'hang',
-    }
-
-
-class MongoHangDoing(Document):
-    id = IntField(primary_key=True)
-    jobid = StringField()
-
-    char_level = IntField()
-    stage_id = IntField()
-    # 开始的UTC 时间戳
-    start = IntField()
-
-    finished = BooleanField()
-    # 实际挂机时间
-    actual_seconds = IntField()
-
-    # 被掠夺日志
-    logs = ListField(EmbeddedDocumentField(MongoEmbededPlunderLog))
-
-    plunder_win_times = IntField()
-    plunder_lose_times = IntField()
-
-    meta = {
-        'collection': 'hang_doing',
-        'indexes': ['char_level',]
-    }
-
-MongoHangDoing.ensure_indexes()
-
-
-
 
 class MongoEmbededPrisoner(EmbeddedDocument):
     oid = IntField()
