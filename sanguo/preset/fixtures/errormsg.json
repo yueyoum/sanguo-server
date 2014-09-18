@@ -795,8 +795,8 @@
     "pk": 1100, 
     "model": "errormsg.errormsg", 
     "fields": {
-        "error_index": "PLUNDER_NOT_IN_LIST", 
-        "text_zh": "\u8981\u63a0\u593a\u7684\u5bf9\u8c61\u4e0d\u5728\u63a0\u593a\u5217\u8868\u4e2d", 
+        "error_index": "PLUNDER_NO_RIVAL", 
+        "text_zh": "\u6ca1\u6709\u627e\u5230\u63a0\u593a\u5bf9\u8c61", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -841,17 +841,6 @@
     "fields": {
         "error_index": "PLUNDER_GET_REWARD_POINTS_NOT_ENOUGH", 
         "text_zh": "\u79ef\u5206\u4e0d\u8db3\u9009\u53d6\u8be5\u5956\u52b1", 
-        "link_to": null, 
-        "des": "", 
-        "area": ""
-    }
-},
-{
-    "pk": 1105, 
-    "model": "errormsg.errormsg", 
-    "fields": {
-        "error_index": "PLUNDER_NO_TIMES_FINAL", 
-        "text_zh": "\u4eca\u65e5\u63a0\u593a\u6b21\u6570\u5df2\u7ecf\u7528\u5b8c", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -1215,6 +1204,50 @@
     "fields": {
         "error_index": "FRIEND_FULL_FINAL", 
         "text_zh": "\u597d\u53cb\u5df2\u6ee1", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 3110, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FRIEND_GIVE_PLUNDER_TIMES_NOT_FRIEND", 
+        "text_zh": "\u4e0d\u662f\u597d\u53cb\uff0c\u65e0\u6cd5\u8d60\u9001\u884c\u519b\u4ee4", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 3111, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FRIEND_GIVE_PLUNDER_TIMES_ALREADY_GIVE", 
+        "text_zh": "\u5f53\u5929\u5df2\u7ecf\u5411\u6b64\u597d\u53cb\u8d60\u9001\u8fc7\u884c\u519b\u4ee4", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 3112, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FRIEND_GET_PLUNDER_TIMES_NOT_EXIST", 
+        "text_zh": "\u5bf9\u65b9\u6ca1\u6709\u5411\u4f60\u8d60\u9001\u884c\u519b\u4ee4\uff0c\u65e0\u6cd5\u83b7\u53d6", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 3113, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FRIEND_GET_PLUNDER_TIMES_ALREADY_GOT", 
+        "text_zh": "\u5f53\u5929\u5df2\u7ecf\u4ece\u6b21\u597d\u53cb\u83b7\u53d6\u8fc7\u4e00\u6b21\u884c\u519b\u4ee4", 
         "link_to": null, 
         "des": "", 
         "area": ""
