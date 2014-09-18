@@ -5,35 +5,30 @@ __date__ = '1/21/14'
 
 from libs import pack_msg
 from utils.decorate import message_response, operate_guard, function_check
+from core.character import Char
 from core.plunder import Plunder
 from core.attachment import standard_drop_to_attachment_protomsg
-from preset.settings import OPERATE_INTERVAL_PLUNDER_BATTLE, OPERATE_INTERVAL_PLUNDER_LIST
-from protomsg import PlunderListResponse, PlunderResponse, PlunderGetRewardResponse
-from protomsg import PLUNDER_HERO
+from preset.settings import OPERATE_INTERVAL_PLUNDER_BATTLE, OPERATE_INTERVAL_PLUNDER_REFRESH
+from protomsg import PlunderResponse, PlunderRefreshResponse
 
 from preset import errormsg
 
 
 @message_response("PlunderListResponse")
-@operate_guard('plunder_list', OPERATE_INTERVAL_PLUNDER_LIST, keep_result=True)
+@operate_guard('plunder_refresh', OPERATE_INTERVAL_PLUNDER_REFRESH, keep_result=False)
 @function_check(9)
-def plunder_list(request):
+def plunder_refresh(request):
+    req = request._proto
     char_id = request._char_id
     p = Plunder(char_id)
-    res = p.get_plunder_list()
+    target = p.get_plunder_target(req.city_id)
 
-    response = PlunderListResponse()
-    response.ret = 0
-
-    for _id, name, power, leader, formation, is_hang in res:
-        plunder = response.plunders.add()
-        plunder.id = _id
-        plunder.name = name
-        plunder.gold = 0
-        plunder.power = power
-        plunder.leader = leader
-        plunder.hero_original_ids.extend(formation)
-        plunder.hang = is_hang
+    response = PlunderRefreshResponse()
+    if not target:
+        response.ret = errormsg.PLUNDER_NO_RIVAL
+    else:
+        response.ret = 0
+        response.plunder.MergeFrom(target.make_plunder_msg(Char(char_id).mc.level))
 
     return pack_msg(response)
 
@@ -42,34 +37,14 @@ def plunder_list(request):
 @operate_guard('plunder', OPERATE_INTERVAL_PLUNDER_BATTLE, keep_result=False)
 @function_check(9)
 def plunder(request):
-    req = request._proto
     char_id = request._char_id
 
     p = Plunder(char_id)
-    msg, drop = p.plunder(req.id)
+    msg, drop = p.plunder()
 
     response = PlunderResponse()
     response.ret = 0
     response.battle.MergeFrom(msg)
     response.drop.MergeFrom(standard_drop_to_attachment_protomsg(drop))
-
-    return pack_msg(response)
-
-@message_response("PlunderGetRewardResponse")
-def get_reward(request):
-    req = request._proto
-    char_id = request._char_id
-
-    p = Plunder(char_id)
-    standard_drop = p.get_reward(req.tp)
-
-    response = PlunderGetRewardResponse()
-    response.ret = 0
-    response.tp = req.tp
-
-    if req.tp == PLUNDER_HERO and not standard_drop['heros']:
-        response.ret = errormsg.PLUNDER_GET_REWARD_NO_PRISONER
-    else:
-        response.reward.MergeFrom(standard_drop_to_attachment_protomsg(standard_drop))
 
     return pack_msg(response)

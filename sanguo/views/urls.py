@@ -43,9 +43,8 @@ urlpatterns = patterns('',
 
                        url(r'^prize/$', 'views.prize.views.prize_get'),
 
-                       url(r'^plunder/list/$', 'views.plunder.views.plunder_list'),
+                       url(r'^plunder/refresh/$', 'views.plunder.views.plunder_refresh'),
                        url(r'^plunder/$', 'views.plunder.views.plunder'),
-                       url(r'^plunder/getreward/$', 'views.plunder.views.get_reward'),
 
                        url(r'^prisoner/get/$', 'views.prison.views.prisoner_get'),
                        # FIXME

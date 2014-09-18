@@ -13,6 +13,7 @@ from core.msgpipe import publish_to_char
 from core.exception import SanguoException
 from core.formation import Formation
 from core.signals import new_friend_got_signal
+from core.plunder import Plunder
 
 import protomsg
 from protomsg import FRIEND_NOT, FRIEND_OK, FRIEND_ACK, FRIEND_APPLY
@@ -478,6 +479,9 @@ class Friend(object):
         self.mf.plunder_senders.remove(sender_id)
         self.mf.plunder_gots.append(sender_id)
         self.mf.save()
+
+        p = Plunder(self.char_id)
+        p.change_current_plunder_times(change_value=1, allow_overflow=True)
 
         self.send_update_friend_notify(sender_id)
 

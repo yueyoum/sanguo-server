@@ -10,7 +10,7 @@ from django.conf import settings
 
 from core.mongoscheme import MongoAffairs, MongoEmbeddedHangLog
 from core.exception import SanguoException
-from core.attachment import get_drop, make_standard_drop_from_template, standard_drop_to_attachment_protomsg
+from core.attachment import get_drop, make_standard_drop_from_template, standard_drop_to_attachment_protomsg, standard_drop_to_readable_text
 from core.resource import Resource
 from core.character import Char
 
@@ -19,7 +19,7 @@ from core.msgpipe import publish_to_char
 from utils import pack_msg
 
 from preset import errormsg
-from preset.data import BATTLES, VIP_DEFINE
+from preset.data import BATTLES, VIP_FUNCTION
 from preset.settings import PLUNDER_LOG_TEMPLATE, HANG_REWARD_ADDITIONAL
 
 from protomsg import City as CityMsg, CityNotify, HangNotify
@@ -42,7 +42,7 @@ class _GetRealGoldMixin(object):
 
 
 class HangObject(_GetRealGoldMixin):
-    __slots__ = ['city_id', 'start_time', 'logs', 'finished', 'passed_time', 'max_time']
+    __slots__ = ['city_id', 'start_time', 'logs', 'finished', 'passed_time', 'max_time', 'gold']
     def __init__(self, city_id, start_time, logs):
         self.city_id = city_id
         self.start_time = start_time
@@ -55,6 +55,9 @@ class HangObject(_GetRealGoldMixin):
         self.finished = time_diff >= self.max_time
 
         self.passed_time = self.max_time if self.finished else time_diff
+
+        gold = self.passed_time / 15 * BATTLES[self.city_id].normal_gold
+        self.gold = self.get_real_gold(gold, self.logs)
 
 
     def _utc_to_HH_mm(self, timestamp):
@@ -97,8 +100,7 @@ class HangObject(_GetRealGoldMixin):
         msg.start_time = self.start_time
         msg.finished = self.finished
 
-        gold = self.passed_time / 15 * BATTLES[self.city_id].normal_gold
-        msg.gold = self.get_real_gold(gold, self.logs)
+        msg.gold = self.gold
 
         logs = self.make_logs()
         msg.logs.extend(logs)
@@ -167,6 +169,10 @@ class Affairs(_GetRealGoldMixin):
         return drop_msg
 
 
+    def get_hang_obj(self):
+        return HangObject(self.mongo_affairs.hang_city_id, self.mongo_affairs.hang_start_at, self.mongo_affairs.logs)
+
+
     def get_hang_reward(self, auto_start=True):
         """立即保存掉落，并且返回attachment消息"""
         if not self.mongo_affairs.hang_city_id:
@@ -177,8 +183,7 @@ class Affairs(_GetRealGoldMixin):
                 "hang not exist"
             )
 
-        ho = HangObject(self.mongo_affairs.hang_city_id, self.mongo_affairs.hang_start_at, self.mongo_affairs.logs)
-
+        ho = self.get_hang_obj()
         battle_data = BATTLES[self.mongo_affairs.hang_city_id]
 
         percent = ho.passed_time / float(ho.max_time)
@@ -190,7 +195,7 @@ class Affairs(_GetRealGoldMixin):
 
         char = Char(self.char_id)
         vip_level = char.mc.vip
-        vip_add = VIP_DEFINE[vip_level].hang_addition
+        vip_add = VIP_FUNCTION[vip_level].hang_addition
 
         passed_time = int(ho.passed_time * _add * (1 + vip_add / 100.0))
 
@@ -218,10 +223,32 @@ class Affairs(_GetRealGoldMixin):
 
 
 
-    def got_plundered(self, self_win, who):
-        pass
+    def got_plundered(self, from_char_id, from_win, standard_drop):
+        from_char = Char(from_char_id)
+        from_name = from_char.mc.name
 
+        if from_win:
+            tp = 1
+        else:
+            tp = 2
 
+        gold = standard_drop['gold']
+        item_text = standard_drop_to_readable_text(standard_drop, sign='-')
+
+        log = MongoEmbeddedHangLog()
+        log.timestamp = arrow.utcnow().timestamp
+        log.tp = tp
+        log.who =from_name
+        log.gold = gold
+        log.item_text = item_text
+
+        self.mongo_affairs.logs.append(log)
+
+        if len(self.mongo_affairs.logs) > 20:
+            self.mongo_affairs.logs.pop(0)
+
+        self.mongo_affairs.save()
+        self.send_hang_notify()
 
 
     def send_city_notify(self):

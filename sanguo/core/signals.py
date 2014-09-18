@@ -6,7 +6,7 @@ login_signal = Signal(providing_args=['char_id'])
 socket_changed_signal = Signal(providing_args=['socket_obj'])
 socket_hero_changed_signal = Signal(providing_args=['char_id', 'socket_id', 'hero_id'])
 pve_finished_signal = Signal(providing_args=['char_id', 'stage_id', 'win', 'star'])
-plunder_finished_signal = Signal(providing_args=['from_char_id', 'to_char_id', 'is_crit'])
+plunder_finished_signal = Signal(providing_args=['from_char_id', 'to_char_id', 'from_win', 'standard_drop'])
 
 
 char_level_up_signal = Signal(providing_args=['char_id', 'new_level'])

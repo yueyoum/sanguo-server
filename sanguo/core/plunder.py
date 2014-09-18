@@ -4,13 +4,14 @@
 __author__ = 'Wang Chao'
 __date__ = '1/22/14'
 
+import time
 import random
 
 from mongoscheme import DoesNotExist
 from core.character import Char, get_char_ids_by_level_range
-from core.battle import PVP
+from core.battle import PVPFromRivalCache
 from core.stage import max_star_stage_id
-from core.mongoscheme import MongoPlunder, MongoPlunderChar
+from core.mongoscheme import MongoPlunder, MongoAffairs
 from core.exception import SanguoException
 from core.counter import Counter
 from core.task import Task
@@ -20,8 +21,13 @@ from core.stage import Stage
 from core.resource import Resource
 from core.attachment import make_standard_drop_from_template, get_drop
 from core.achievement import Achievement
+from core.formation import Formation
+from core.signals import plunder_finished_signal
+
 from protomsg import Battle as MsgBattle
 from protomsg import PlunderNotify
+from protomsg import Plunder as MsgPlunder
+
 from core.msgpipe import publish_to_char
 from utils import pack_msg
 from utils.checkers import not_hang_going
@@ -34,228 +40,254 @@ from preset.settings import (
 
     PRISONER_POOL,
 )
-from protomsg import PLUNDER_HERO, PLUNDER_STUFF, PLUNDER_GOLD
 from preset import errormsg
-from preset.data import STAGES, VIP_MAX_LEVEL, VIP_FUNCTION
+from preset.data import STAGES, VIP_MAX_LEVEL, VIP_FUNCTION, BATTLES
+
+
+class PlunderCurrentTimeOut(Exception):
+    pass
+
+
+class PlunderRival(object):
+    __slots__ = ['char_id', 'name', 'level', 'power', 'leader', 'formation', 'hero_original_ids', 'city_id']
+
+    @classmethod
+    def search(cls, city_id):
+        affairs = MongoAffairs.objects.filter(hang_city_id=city_id)
+        if affairs:
+            rival = random.choice(affairs)
+            rival_id = rival.id
+        else:
+            rival_id = 0
+
+        return cls(rival_id)
+
+    def __init__(self, char_id, city_id):
+        self.city_id = city_id
+        if char_id:
+            char = Char(char_id)
+            self.char_id = char_id
+            self.name = char.mc.name
+            self.level = char.mc.level
+            self.power = char.power
+            self.leader = char.leader_oid
+
+            f = Formation(char_id)
+            self.formation = f.in_formation_hero_ids()
+            self.hero_original_ids = f.in_formation_hero_original_ids()
+        else:
+            self.char_id = 0
+            self.name = ""
+            self.level = 0
+            self.power = 0
+            self.leader = 0
+            self.formation = []
+            self.hero_original_ids = []
+
+    def get_plunder_gold(self, level):
+        from core.affairs import Affairs
+        if not self.char_id:
+            return 0
+
+        affairs = Affairs(self.char_id)
+        ho = affairs.get_hang_obj()
+        gold = ho.gold
+
+        result = min(1, (level - self.level) * 0.1) * 0.25
+        return int(result * gold)
+
+
+    def make_plunder_msg(self, level):
+        msg = MsgPlunder()
+        msg.id = self.char_id
+        msg.name = self.name
+        msg.level = self.level
+        msg.gold = self.get_plunder_gold(level)
+        msg.power = self.power
+        msg.leader = self.leader
+        msg.hero_original_ids.extend(self.hero_original_ids)
+        return msg
+
+    def __bool__(self):
+        return self.char_id != 0
+    __nonzero__ = __bool__
 
 
 class Plunder(object):
     def __init__(self, char_id):
         self.char_id = char_id
+        self.load_mongo_record()
+
+    def load_mongo_record(self):
         try:
             self.mongo_plunder = MongoPlunder.objects.get(id=self.char_id)
         except DoesNotExist:
             self.mongo_plunder = MongoPlunder(id=self.char_id)
-            self.mongo_plunder.points = 0
-            self.mongo_plunder.chars = {}
-            self.mongo_plunder.target_char = 0
-            self.mongo_plunder.got_reward = []
+            self.mongo_plunder.current_times = 0
             self.mongo_plunder.save()
 
 
-    def get_plunder_list(self):
+    def get_plunder_target(self, city_id):
         """
-        @return: [[id, name, power, leader, formation, is_hang], ...]
-        @rtype: list
+        @:rtype: PlunderRival
         """
+        gold_needs = BATTLES[city_id].refresh_cost_gold
+        resource = Resource(self.char_id, "Plunder Refresh")
+        with resource.check(gold=-gold_needs):
+            target = PlunderRival.search(city_id)
+            self.mongo_plunder.char_id = target.char_id
+            self.mongo_plunder.char_name = target.name
+            self.mongo_plunder.char_gold = target.get_plunder_gold(Char(self.char_id).mc.level)
+            self.mongo_plunder.char_power = target.power
+            self.mongo_plunder.char_leader = target.leader
+            self.mongo_plunder.char_formation = target.formation
+            self.mongo_plunder.char_hero_original_ids = target.hero_original_ids
+            self.mongo_plunder.char_city_id = target.city_id
+            self.mongo_plunder.save()
+
+            return target
+
+    def max_plunder_times(self):
         char = Char(self.char_id)
-        cache_char = char.mc
-        char_level = cache_char.level
+        return VIP_FUNCTION[char.mc.vip].plunder
 
-        min_level = max(5, char_level-5)
-        max_level = char_level + 5
 
-        choosing_list = get_char_ids_by_level_range(min_level, max_level, exclude_char_ids=[self.char_id])
-        if len(choosing_list) < 10:
-            min_level = 5
-            max_level = char_level + 10
-            choosing_list = get_char_ids_by_level_range(min_level, max_level, exclude_char_ids=[self.char_id])
-
-        random.shuffle(choosing_list)
-        ids = choosing_list[:10]
-
-        res = []
-        for i in ids:
-            char = Char(i)
-            f = Formation(i)
-            res.append([i, char.mc.name, char.power, f.get_leader_oid(), f.in_formation_hero_original_ids(), not not_hang_going(i)])
-
-        self.mongo_plunder.chars = {}
-        for _id, _, power, _, _, is_hang in res:
-            mpc = MongoPlunderChar()
-            mpc.is_hang = is_hang
-            self.mongo_plunder.chars[str(_id)] = mpc
+    def clean_plunder_target(self):
+        self.mongo_plunder.char_id = 0
+        self.mongo_plunder.char_name = ""
+        self.mongo_plunder.char_gold = 0
+        self.mongo_plunder.char_power = 0
+        self.mongo_plunder.char_leader = 0
+        self.mongo_plunder.char_formation = []
+        self.mongo_plunder.char_hero_original_ids = []
+        self.mongo_plunder.char_city_id = 0
         self.mongo_plunder.save()
-        return res
 
 
-    def _get_plunder_color(self, target_id):
-        self_power = float(Char(self.char_id).power)
-        p = float(Char(target_id).power)
+    def change_current_plunder_times(self, change_value, allow_overflow=False):
+        for i in range(10):
+            self.load_mongo_record()
+            if not self.mongo_plunder.current_times_lock:
+                self.mongo_plunder.current_times_lock = True
+                self.mongo_plunder.save()
+                break
+            else:
+                time.sleep(0.2)
+        else:
+            raise PlunderCurrentTimeOut()
 
-        percent = p / self_power
-        if percent <= 0.9:
-            return 1
-        if percent <= 1.1:
-            return 2
-        return 3
+        try:
+            self.mongo_plunder.current_times += change_value
+            if self.mongo_plunder.current_times < 0:
+                self.mongo_plunder.current_times = 0
+
+            if not allow_overflow:
+                max_times = self.max_plunder_times()
+                if self.mongo_plunder.current_times > max_times:
+                    self.mongo_plunder.current_times = max_times
+        finally:
+            self.mongo_plunder.current_times_lock = False
+            self.mongo_plunder.save()
+            self.send_notify()
 
 
-    def _get_plunder_gold(self, char_id, vip_plus=0):
-        max_star_stage = max_star_stage_id(self.char_id)
-        if not max_star_stage:
-            return 0
-
-        gold = STAGES[max_star_stage].normal_gold
-        gold = gold * 400 * random.uniform(1.0, 1.2) * (1+vip_plus/100.0)
-        return int(gold)
-
-
-    def plunder(self, _id):
-        if str(_id) not in self.mongo_plunder.chars:
+    def plunder(self):
+        if not self.mongo_plunder.char_id:
             raise SanguoException(
-                errormsg.PLUNDER_NOT_IN_LIST,
-                self.char_id,
-                "Plunder Plunder",
-                "Plunder, {0} not in plunder list".format(_id)
-            )
-
-        counter = Counter(self.char_id, 'plunder')
-        if counter.remained_value <= 0:
-            char = Char(self.char_id).mc
-            if char.vip < VIP_MAX_LEVEL:
-                raise SanguoException(
-                    errormsg.PLUNDER_NO_TIMES,
-                    self.char_id,
-                    "Plunder Battle",
-                    "Plunder no times. vip current: {0}, max: {1}".format(char.vip, VIP_MAX_LEVEL)
-                )
-            raise SanguoException(
-                errormsg.PLUNDER_NO_TIMES_FINAL,
+                errormsg.PLUNDER_NO_RIVAL,
                 self.char_id,
                 "Plunder Battle",
-                "Plunder no times. vip reach max level {0}".format(VIP_MAX_LEVEL)
+                "no rival target"
             )
 
-        msg = MsgBattle()
-        pvp = PVP(self.char_id, _id, msg)
-        pvp.start()
+        if self.mongo_plunder.current_times <= 0:
+            raise SanguoException(
+                errormsg.PLUNDER_NO_TIMES,
+                self.char_id,
+                "Plunder Battle",
+                "no times"
+            )
 
-        # if self.mongo_plunder.chars[str(_id)].is_hang:
-        #     char = Char(self.char_id)
+        self.change_current_plunder_times(change_value=-1)
+
+
+        msg = MsgBattle()
+        pvp = PVPFromRivalCache(
+            self.char_id,
+            self.mongo_plunder.char_id,
+            msg,
+            self.mongo_plunder.char_name,
+            self.mongo_plunder.char_formation
+        )
+        pvp.start()
 
         t = Task(self.char_id)
         t.trig(3)
 
-        ground_win_times = 0
-        if msg.first_ground.self_win:
-            ground_win_times += 1
-        if msg.second_ground.self_win:
-            ground_win_times += 1
-        if msg.third_ground.self_win:
-            ground_win_times += 1
-
-        color = self._get_plunder_color(_id)
-        got_point = PLUNDER_GOT_POINT[color].get(ground_win_times, 0)
-
-        if got_point:
-            self.mongo_plunder.points += got_point
-
         if msg.self_win:
-            counter.incr()
-            self.mongo_plunder.target_char = _id
-
-            drop_official_exp = PLUNDER_GET_OFFICIAL_EXP_WHEN_WIN
-            drop_gold = PLUNDER_DEFENSE_FAILURE_GOLD
-            if self.mongo_plunder.chars[str(_id)].is_hang:
-                drop_gold += self._get_plunder_gold(_id)
-
-            resource = Resource(self.char_id, "Plunder")
-            standard_drop = resource.add(gold=drop_gold, official_exp=drop_official_exp)
+            self.clean_plunder_target()
+            standard_drop = self._get_plunder_reward(
+                self.mongo_plunder.char_city_id,
+                self.mongo_plunder.char_gold,
+                self.mongo_plunder.char_hero_original_ids
+            )
 
             achievement = Achievement(self.char_id)
             achievement.trig(12, 1)
         else:
-            self.mongo_plunder.target_char = 0
             standard_drop = make_standard_drop_from_template()
 
-        self.mongo_plunder.got_reward = []
         self.mongo_plunder.save()
         self.send_notify()
+
+        plunder_finished_signal.send(
+            sender=None,
+            from_char_id=self.char_id,
+            to_char_id=self.mongo_plunder.char_id,
+            from_win=msg.self_win,
+            standard_drop=standard_drop
+        )
+
         return (msg, standard_drop)
 
 
-    def get_reward(self, tp):
-        if not self.mongo_plunder.target_char:
-            raise SanguoException(
-                errormsg.PLUNDER_GET_REWARD_NO_TARGET,
-                self.char_id,
-                "Plunder Get Reward",
-                "no Target char"
-            )
-
-        if tp in self.mongo_plunder.got_reward:
-            raise SanguoException(
-                errormsg.PLUNDER_GET_REWARD_ALREADY_GOT,
-                self.char_id,
-                "Plunder Get Reward",
-                "tp {0} already got".format(tp)
-            )
-
-        need_points = PLUNDER_REWARD_NEEDS_POINT[tp]
-        if self.mongo_plunder.points < need_points:
-            raise SanguoException(
-                errormsg.PLUNDER_GET_REWARD_POINTS_NOT_ENOUGH,
-                self.char_id,
-                "Plunder Get Reward",
-                "points not enough. {0} < {1}".format(self.mongo_plunder.points, need_points)
-            )
-
-        self.mongo_plunder.points -= need_points
-        self.mongo_plunder.got_reward.append(tp)
-        self.mongo_plunder.save()
-
-        char = Char(self.char_id).mc
-        vip_plus = VIP_FUNCTION[char.vip].plunder_addition
-
-        def _get_prisoner(target_char_id):
-            f = Formation(target_char_id)
-            heros = f.in_formation_hero_original_ids()
-            heros = [hid for hid in heros if hid]
+    def _get_plunder_reward(self, city_id, gold, hero_original_ids):
+        def _get_prisoner():
+            prison = 0
+            heros = [hid for hid in hero_original_ids if hid]
 
             while heros:
                 hid = random.choice(heros)
                 heros.remove(hid)
                 if hid in PRISONER_POOL:
-                    return hid
+                    prison = hid
+                    break
 
+            if random.randint(1, 100) <= 15:
+                return prison
             return 0
 
-        plunder_gold = self._get_plunder_gold(self.mongo_plunder.target_char, vip_plus)
+        char = Char(self.char_id).mc
+        vip_plus = VIP_FUNCTION[char.vip].plunder_addition
+
         standard_drop = make_standard_drop_from_template()
+        standard_drop['gold'] = int(gold * (1 + vip_plus / 100.0))
 
-        got_hero_id = 0
-        if tp == PLUNDER_HERO:
-            got_hero_id = _get_prisoner(self.mongo_plunder.target_char)
-            if got_hero_id:
-                p = Prison(self.char_id)
-                p.prisoner_add(got_hero_id, plunder_gold/2)
+        # 战俘
+        got_hero_id = _get_prisoner()
+        if got_hero_id:
+            p = Prison(self.char_id)
+            p.prisoner_add(got_hero_id, gold/2)
 
-                achievement = Achievement(self.char_id)
-                achievement.trig(13, 1)
+            achievement = Achievement(self.char_id)
+            achievement.trig(13, 1)
 
-        elif tp == PLUNDER_STUFF:
-            stage = Stage(self.mongo_plunder.target_char)
-            max_star_stage = stage.stage.max_star_stage
-            if not max_star_stage:
-                max_star_stage = 1
-
-            drop_ids = [int(i) for i in STAGES[max_star_stage].normal_drop.split(',')]
-            drop = get_drop(drop_ids, multi=int(PLUNDER_GOT_ITEMS_HOUR * 3600 * (1+vip_plus/100.0) / 15))
+        # 掉落
+        city = BATTLES[city_id]
+        if city.normal_drop:
+            drop_ids = [int(i) for i in city.normal_drop.split(',')]
+            drop = get_drop(drop_ids, multi=int(4 * 30 * 60 / 15))
             standard_drop.update(drop)
-
-        elif tp == PLUNDER_GOLD:
-            standard_drop['gold'] = plunder_gold
 
         resource = Resource(self.char_id, "Plunder Reward")
         resource.add(**standard_drop)
@@ -263,12 +295,13 @@ class Plunder(object):
         self.send_notify()
         if got_hero_id:
             standard_drop['heros'] = [(got_hero_id, 1)]
+
         return standard_drop
 
 
     def send_notify(self):
-        counter = Counter(self.char_id, 'plunder')
+        self.load_mongo_record()
         msg = PlunderNotify()
-        msg.remained_free_times = counter.remained_value
-        msg.points = self.mongo_plunder.points
+        msg.current_times = self.mongo_plunder.current_times
+        msg.max_times = self.max_plunder_times()
         publish_to_char(self.char_id, pack_msg(msg))

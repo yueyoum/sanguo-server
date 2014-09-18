@@ -163,25 +163,28 @@ class MongoHeroSoul(Document):
     }
 
 
-class MongoPlunderChar(EmbeddedDocument):
-    is_hang = BooleanField()
-
 class MongoPlunder(Document):
     id = IntField(primary_key=True)
-    points = IntField()
-    # char key 为 char_id
-    chars = MapField(EmbeddedDocumentField(MongoPlunderChar))
+    points = IntField(default=0)
 
-    # 记录下上次打赢的是谁，以便获取战俘
-    target_char = IntField()
-    # 记录下都领取过哪些类型的奖励，防止多次重复领取
-    got_reward = ListField()
+    # 可用次数
+    current_times = IntField(default=0)
+    # 用来设置次数的锁
+    current_times_lock = BooleanField(default=False)
+
+    # 刷新出的对手
+    char_id = IntField(default=0)
+    char_name = StringField(default="")
+    char_gold = IntField(default=0)
+    char_power = IntField(default=0)
+    char_leader = IntField(default=0)
+    char_formation = ListField(IntField())
+    char_hero_original_ids =ListField(IntField())
+    char_city_id = IntField(default=0)
 
     meta = {
         'collection': 'plunder'
     }
-
-
 
 
 class MongoEmbededPlunderLog(EmbeddedDocument):
@@ -417,9 +420,11 @@ class MongoAffairs(Document):
     logs = ListField(EmbeddedDocumentField(MongoEmbeddedHangLog))
 
     meta = {
-        'collection': 'affairs'
+        'collection': 'affairs',
+        'indexes': ['hang_city_id', ]
     }
 
+MongoAffairs.ensure_indexes()
 
 
 

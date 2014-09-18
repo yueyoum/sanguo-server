@@ -51,7 +51,6 @@ COUNTER = {
     'arena': 5,                         # 比武次数 免费
     'arena_buy': 0,                     # 比武次数 购买 VIP
 
-    'plunder': 0,                       # 掠夺次数 VIP
     'gethero': 1,                       # 抽将次数
     'official_reward': 1,               # 官职每日登录领取奖励次数
 
@@ -67,6 +66,8 @@ COUNTER = {
 
 # 精英关卡单个副本的重置次数是按照每个关卡单独计算的
 # 所以将其放在 MongoStage 中记录
+
+# 掠夺次数不再每日清零，所以也不在这里
 
 #########################
 #      征收             #
@@ -336,7 +337,7 @@ OPERATE_INTERVAL_CHAT_SEND = 2         # 聊天发送间隔
 OPERATE_INTERVAL_FRIEND_CANDIDATE_LIST = 2 # 添加好友的候选列表刷新间隔
 OPERATE_INTERVAL_FRIEND_REFRESH = 2        # 刷新自己好友状态间隔
 
-OPERATE_INTERVAL_PLUNDER_LIST = 2          # 获取掠夺列表间隔
+OPERATE_INTERVAL_PLUNDER_REFRESH = 2          # 掠夺刷新间隔
 OPERATE_INTERVAL_PLUNDER_BATTLE = 2        # 掠夺战斗间隔
 
 HANG_INTERVAL = 15                       # 挂机间隔
