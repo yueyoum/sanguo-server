@@ -152,6 +152,10 @@ class Plunder(object):
 
 
     def change_current_plunder_times(self, change_value, allow_overflow=False):
+        max_times = self.max_plunder_times()
+        if not allow_overflow and self.mongo_plunder.current_times > max_times:
+            return
+
         for i in range(10):
             self.load_mongo_record()
             if not self.mongo_plunder.current_times_lock:

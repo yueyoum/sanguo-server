@@ -11,5 +11,8 @@
 # 每隔一定时间清理在线用户
 */30 * * * * /PATH/clean_active_players.sh
 
+# 整点和半点增加掠夺次数，2:00~8:00不增加
+*/30 0-2,8-23 * * * /PATH/add_plunder_times.sh
+
 # 每天日志 logrotate
 0 0 * * * /usr/sbin/logrotate -f /etc/logrotate.d/sango-server-1
