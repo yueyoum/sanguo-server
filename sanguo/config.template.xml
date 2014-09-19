@@ -29,6 +29,10 @@
         <log>false</log>
     </battle>
 
+    <!--测试模式是否开启-->
+    <!--开启后客户端可以向/test发送命令，随意给自己添加物品-->
+    <testmode>false</testmode>
+
 
     <!--下面这些配置对于每个server都要保持一致-->
 

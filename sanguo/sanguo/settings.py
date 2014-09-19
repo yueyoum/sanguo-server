@@ -199,6 +199,7 @@ import xml.etree.ElementTree as et
 tree = et.ElementTree(file=os.path.join(BASE_DIR, "config.xml"))
 
 ENABLE_BATTLE_LOG = tree.find('battle/log').text == "true"
+ENABLE_TEST_MODE = tree.find('testmode').text == "true"
 
 REDIS_HOST = tree.find('redis/host').text
 REDIS_PORT = int( tree.find('redis/port').text )

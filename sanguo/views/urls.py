@@ -1,11 +1,11 @@
 from django.conf.urls import patterns, url
+from django.conf import settings
 
 urlpatterns = patterns('',
                        url(r'^sync/$', 'views.world.views.sync'),
                        url(r'^resume/$', 'views.world.views.resume'),
                        url(r'^sell/$', 'views.world.views.sell'),
                        url(r'^chat/send/$', 'views.chat.views.send'),
-                       # url(r'^test/$', 'views.cmd.cmd'),
 
                        url(r'^player/login/$', 'views.account.views.login'),
                        url(r'^player/bind/$', 'views.account.views.bind'),
@@ -84,6 +84,11 @@ urlpatterns = patterns('',
                        url(r'^purchase91/confirm/$', 'views.purchase.views.purchase_91_confirm'),
 )
 
+# testmode
+if settings.ENABLE_TEST_MODE:
+    urlpatterns += patterns('',
+                            url(r'^test/$', 'views.cmd.cmd'),
+                            )
 
 # API
 urlpatterns += patterns('',
