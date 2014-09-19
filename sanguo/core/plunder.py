@@ -108,10 +108,34 @@ class Plunder(object):
     def load_mongo_record(self):
         try:
             self.mongo_plunder = MongoPlunder.objects.get(id=self.char_id)
+            self.set_default_value()
         except DoesNotExist:
             self.mongo_plunder = MongoPlunder(id=self.char_id)
             self.mongo_plunder.current_times = self.max_plunder_times()
             self.mongo_plunder.save()
+
+
+    def set_default_value(self):
+        # 后面新增加的fileds需要初始化数值的。 比如 current_times
+        data = {
+            'current_times': self.max_plunder_times(),
+            'current_times_lock': False,
+            'char_id': 0,
+            'char_name': "",
+            'char_gold': 0,
+            'char_power': 0,
+            'char_leader': 0,
+            'char_formation': [],
+            'char_hero_original_ids': [],
+            'char_city_id': 0
+        }
+
+        record = self.mongo_plunder._get_collection().find_one()
+        for k, v in data.iteritems():
+            if k not in record:
+                setattr(self.mongo_plunder, k, v)
+
+        self.mongo_plunder.save()
 
 
     def get_plunder_target(self, city_id):
