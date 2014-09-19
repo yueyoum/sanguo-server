@@ -187,6 +187,17 @@ PLUNDER_LOG_TEMPLATE = {
     3: u"{0} 粮仓装满了",                    # 粮仓满了
 }
 
+# 掠夺日志最大条数
+PLUNDER_LOG_MAX_AMOUNT = 20
+# 掠夺应两计算参数
+# min(1, (1 - (self_level - rival_level) * level_adjust)) * base_adjust
+PLUNDER_GOT_GOLD_PARAM_LEVEL_ADJUST = 0.1
+PLUNDER_GOT_GOLD_PARAM_BASE_ADJUST = 0.25
+
+# 得战俘概率 %
+PLUNDER_GET_PRISONER_PROB = 15
+# 得物品按照多少分钟计算
+PLUNDER_GET_DROPS_MINUTES = 30
 
 
 #########################
@@ -309,8 +320,6 @@ OPERATE_INTERVAL_FRIEND_REFRESH = 2        # 刷新自己好友状态间隔
 
 OPERATE_INTERVAL_PLUNDER_REFRESH = 2          # 掠夺刷新间隔
 OPERATE_INTERVAL_PLUNDER_BATTLE = 2        # 掠夺战斗间隔
-
-HANG_INTERVAL = 15                       # 挂机间隔
 
 
 #########################

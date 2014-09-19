@@ -21,7 +21,11 @@ from utils import pack_msg
 
 from preset import errormsg
 from preset.data import BATTLES, VIP_FUNCTION
-from preset.settings import PLUNDER_LOG_TEMPLATE, HANG_REWARD_ADDITIONAL
+from preset.settings import (
+    PLUNDER_LOG_TEMPLATE,
+    HANG_REWARD_ADDITIONAL,
+    PLUNDER_LOG_MAX_AMOUNT,
+)
 
 from protomsg import City as CityMsg, CityNotify, HangNotify
 
@@ -249,7 +253,7 @@ class Affairs(_GetRealGoldMixin):
 
         self.mongo_affairs.logs.append(log)
 
-        if len(self.mongo_affairs.logs) > 20:
+        if len(self.mongo_affairs.logs) > PLUNDER_LOG_MAX_AMOUNT:
             self.mongo_affairs.logs.pop(0)
 
         self.mongo_affairs.save()

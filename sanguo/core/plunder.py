@@ -26,6 +26,10 @@ from core.msgpipe import publish_to_char
 from utils import pack_msg
 from preset.settings import (
     PRISONER_POOL,
+    PLUNDER_GOT_GOLD_PARAM_LEVEL_ADJUST,
+    PLUNDER_GOT_GOLD_PARAM_BASE_ADJUST,
+    PLUNDER_GET_DROPS_MINUTES,
+    PLUNDER_GET_PRISONER_PROB,
 )
 from preset import errormsg
 from preset.data import VIP_FUNCTION, BATTLES
@@ -80,7 +84,7 @@ class PlunderRival(object):
         ho = affairs.get_hang_obj()
         gold = ho.gold
 
-        result = min(1, (1 - (level - self.level) * 0.1)) * 0.25
+        result = min(1, (1 - (level - self.level) * PLUNDER_GOT_GOLD_PARAM_LEVEL_ADJUST)) * PLUNDER_GOT_GOLD_PARAM_BASE_ADJUST
         return int(result * gold)
 
 
@@ -281,7 +285,7 @@ class Plunder(object):
                     prison = hid
                     break
 
-            if random.randint(1, 100) <= 15:
+            if random.randint(1, 100) <= PLUNDER_GET_PRISONER_PROB:
                 return prison
             return 0
 
@@ -304,7 +308,7 @@ class Plunder(object):
         city = BATTLES[city_id]
         if city.normal_drop:
             drop_ids = [int(i) for i in city.normal_drop.split(',')]
-            drop = get_drop(drop_ids, multi=int(4 * 30 * 60 / 15))
+            drop = get_drop(drop_ids, multi=int(4 * PLUNDER_GET_DROPS_MINUTES * 60 / 15))
             standard_drop.update(drop)
 
         resource = Resource(self.char_id, "Plunder Reward")
