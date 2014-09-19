@@ -51,17 +51,6 @@
         </port>
     </hub>
 
-    <!--logman的地址-->
-    <log>
-        <host>127.0.0.1</host>
-        <port>10099</port>
-    </log>
-
-    <timer>
-        <register>https://127.0.0.1:9995/register/</register>
-        <unregister>https://127.0.0.1:9995/unregister/</unregister>
-    </timer>
-
     <mailgun>
         <key>key-9jmdddog2rhqf8j-no9fq-mpiqcdo851</key>
         <domain>sandbox0bcd8cad030d405f863c68bf70fa83f9.mailgun.org</domain>

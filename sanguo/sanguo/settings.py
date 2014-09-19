@@ -215,11 +215,6 @@ CACHE_SECONDS = int( tree.find('cache/seconds').text )
 HUB_HOST = tree.find('hub/host').text
 HUB_HTTPS_PORT = int( tree.find('hub/port/https').text )
 
-LOG_MAN_HOST = tree.find('log/host').text
-LOG_MAN_PORT = int( tree.find('log/port').text )
-
-TIMER_REGISTER = tree.find('timer/register').text
-TIMER_UNREGISTER = tree.find('timer/unregister').text
 
 SERVER_ID = int( tree.find('server/id').text )
 SERVER_NAME = tree.find('server/name').text
