@@ -13,6 +13,7 @@ from core.exception import SanguoException
 from core.attachment import get_drop, make_standard_drop_from_template, standard_drop_to_attachment_protomsg, standard_drop_to_readable_text
 from core.resource import Resource
 from core.character import Char
+from core.achievement import Achievement
 
 from core.msgpipe import publish_to_char
 
@@ -218,6 +219,10 @@ class Affairs(_GetRealGoldMixin):
         if auto_start:
             # 领取奖励后自动开始
             self.start_hang(self.mongo_affairs.hang_city_id)
+
+        achievement = Achievement(self.char_id)
+        achievement.trig(28, ho.passed_time / 3600)
+        achievement.trig(29, reward_exp)
 
         return standard_drop_to_attachment_protomsg(standard_drop)
 
