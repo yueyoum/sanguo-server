@@ -134,7 +134,7 @@ class Plunder(object):
             'char_city_id': 0
         }
 
-        record = self.mongo_plunder._get_collection().find_one()
+        record = self.mongo_plunder._get_collection().find_one({'_id': self.char_id})
         for k, v in data.iteritems():
             if k not in record:
                 setattr(self.mongo_plunder, k, v)
