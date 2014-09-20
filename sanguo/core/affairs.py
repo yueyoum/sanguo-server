@@ -8,7 +8,7 @@ from mongoengine import DoesNotExist
 
 from django.conf import settings
 
-from core.mongoscheme import MongoAffairs, MongoEmbeddedHangLog
+from core.mongoscheme import MongoAffairs, MongoEmbeddedHangLog, MongoStage
 from core.exception import SanguoException
 from core.attachment import get_drop, make_standard_drop_from_template, standard_drop_to_attachment_protomsg, standard_drop_to_readable_text
 from core.resource import Resource
@@ -113,6 +113,24 @@ class HangObject(_GetRealGoldMixin):
 
 
 
+def _get_opended_cities(char_id):
+    from core.stage import Stage
+    from preset.data import STAGES
+
+    stages = Stage(char_id).stage.stages.keys()
+    stages = [int(i) for i in stages]
+
+    opened = set()
+    for sid in stages:
+        this_stage = STAGES[sid]
+        if this_stage.battle_end:
+            opened.add(sid)
+
+    opened = list(opened)
+    opened.sort()
+    return opened
+
+
 class Affairs(_GetRealGoldMixin):
     def __init__(self, char_id):
         self.char_id = char_id
@@ -126,20 +144,42 @@ class Affairs(_GetRealGoldMixin):
             self.mongo_affairs.logs = []
             self.mongo_affairs.save()
 
+        self.set_default_value()
+
+
+    def set_default_value(self):
+        if self.mongo_affairs.opened:
+            return
+
+        opened = _get_opended_cities(self.char_id)
+        if opened:
+            self.mongo_affairs.opened = opened
+            self.mongo_affairs.hang_city_id = opened[-1]
+            self.mongo_affairs.hang_start_at = arrow.utcnow().timestamp
+            self.mongo_affairs.save()
+
 
     def open_city(self, city_id):
         # 开启城镇
-        if city_id not in BATTLES:
-            return False
+        need_opened = []
+        for cid in CITY_IDS:
+            if cid > city_id:
+                # XXX 这里默认city_id是从小到大的！
+                break
 
-        if city_id in self.mongo_affairs.opened:
-            return False
+            need_opened.append(cid)
 
-        self.mongo_affairs.opened.append(city_id)
+        opened = False
+        for cid in need_opened:
+            if cid in self.mongo_affairs.opened:
+                continue
+
+            self.mongo_affairs.opened.append(cid)
+            opened = True
+
         self.mongo_affairs.save()
         self.send_city_notify()
-        return True
-
+        return opened
 
 
     def start_hang(self, city_id, get_reward=True):
