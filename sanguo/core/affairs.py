@@ -124,7 +124,7 @@ def _get_opended_cities(char_id):
     for sid in stages:
         this_stage = STAGES[sid]
         if this_stage.battle_end:
-            opened.add(sid)
+            opened.add(this_stage.battle)
 
     opened = list(opened)
     opened.sort()
