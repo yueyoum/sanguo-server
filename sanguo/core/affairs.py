@@ -142,7 +142,7 @@ class Affairs(_GetRealGoldMixin):
 
 
 
-    def start_hang(self, city_id):
+    def start_hang(self, city_id, get_reward=True):
         if city_id not in BATTLES:
             raise SanguoException(
                 errormsg.INVALID_OPERATE,
@@ -159,9 +159,12 @@ class Affairs(_GetRealGoldMixin):
                 "city id {0} not opened".format(city_id)
             )
 
-        if self.mongo_affairs.hang_city_id:
-            # 上次有挂机，先结算
-            drop_msg = self.get_hang_reward(auto_start=False)
+        if get_reward:
+            if self.mongo_affairs.hang_city_id:
+                # 上次有挂机，先结算
+                drop_msg = self.get_hang_reward(auto_start=False)
+            else:
+                drop_msg = None
         else:
             drop_msg = None
 
@@ -222,7 +225,7 @@ class Affairs(_GetRealGoldMixin):
 
         if auto_start:
             # 领取奖励后自动开始
-            self.start_hang(self.mongo_affairs.hang_city_id)
+            self.start_hang(self.mongo_affairs.hang_city_id, get_reward=False)
 
         achievement = Achievement(self.char_id)
         achievement.trig(28, ho.passed_time / 3600)

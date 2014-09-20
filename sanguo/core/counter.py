@@ -5,7 +5,7 @@ from core.mongoscheme import MongoCounter
 from core.exception import CounterOverFlow
 from core.character import Char
 
-from preset.settings import COUNTER
+from preset.settings import COUNTER, ACTIVITY_STAGE_MAX_TIMES
 from preset.data import VIP_FUNCTION
 
 
@@ -63,5 +63,5 @@ class ActivityStageCount(Counter):
 
     @property
     def max_value(self):
-        return 3
+        return ACTIVITY_STAGE_MAX_TIMES
 
