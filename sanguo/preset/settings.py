@@ -70,7 +70,15 @@ COUNTER = {
 # 掠夺次数不再每日清零，所以也不在这里
 
 #########################
-#      征收             #
+#      角色              #
+#########################
+# 角色最大等级，0为不限制
+CHARACTER_MAX_LEVEL = 75
+
+
+
+#########################
+#      征收              #
 #########################
 # 征收暴击机率. (机率，暴击倍数). 机率以100为基准。1 表示1%的几率
 LEVY_CRIT_PROB_TABLE = (
@@ -201,7 +209,7 @@ PLUNDER_GOT_GOLD_PARAM_BASE_ADJUST = 0.25
 # 得战俘概率 %
 PLUNDER_GET_PRISONER_PROB = 15
 # 得物品按照多少分钟计算
-PLUNDER_GET_DROPS_MINUTES = 30
+PLUNDER_GET_DROPS_MINUTES = 15
 
 
 #########################

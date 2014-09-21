@@ -19,7 +19,12 @@ from core.signals import (
 
 from utils import pack_msg
 
-from preset.settings import CHARACTER_INIT, FORMATION_INIT_TABLE, FORMATION_INIT_OPENED_SOCKETS
+from preset.settings import (
+    CHARACTER_INIT,
+    CHARACTER_MAX_LEVEL,
+    FORMATION_INIT_TABLE,
+    FORMATION_INIT_OPENED_SOCKETS,
+)
 
 import protomsg
 
@@ -121,17 +126,18 @@ class Char(object):
                 change_value=sycee
             )
 
-        if exp:
-            old_level = char.level
-            char.exp, char.level = char_level_up(char.exp, char.level, exp)
+        if not CHARACTER_MAX_LEVEL or char.level < CHARACTER_MAX_LEVEL:
+            if exp:
+                old_level = char.level
+                char.exp, char.level = char_level_up(char.exp, char.level, exp)
 
-            if char.level != old_level:
-                char_level_up_signal.send(
-                    sender=None,
-                    char_id=self.id,
-                    new_level=char.level,
-                )
-                opended_funcs = FunctionOpen(self.id).trig_by_char_level(char.level)
+                if char.level != old_level:
+                    char_level_up_signal.send(
+                        sender=None,
+                        char_id=self.id,
+                        new_level=char.level,
+                    )
+                    opended_funcs = FunctionOpen(self.id).trig_by_char_level(char.level)
 
         if official_exp:
             old_official_level = char.official

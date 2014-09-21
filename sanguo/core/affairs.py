@@ -25,6 +25,7 @@ from preset.settings import (
     PLUNDER_LOG_TEMPLATE,
     HANG_REWARD_ADDITIONAL,
     PLUNDER_LOG_MAX_AMOUNT,
+    PLUNDER_GET_DROPS_MINUTES,
 )
 
 from protomsg import City as CityMsg, CityNotify, HangNotify
@@ -253,7 +254,16 @@ class Affairs(_GetRealGoldMixin):
         reward_exp = passed_time / 15 * battle_data.normal_exp
 
         if battle_data.normal_drop:
-            drops = get_drop([int(i) for i in battle_data.normal_drop.split(',')], multi=passed_time/15)
+            # 模拟损失物品
+            total_time = BATTLES[self.mongo_affairs.hang_city_id].total_hours * 3600
+            drop_time = total_time
+            for log in self.mongo_affairs.logs:
+                if log.tp == 1:
+                    drop_time -= PLUNDER_GET_DROPS_MINUTES * 60
+
+            drop_time_adjusted = max(int(total_time * 0.25), drop_time)
+
+            drops = get_drop([int(i) for i in battle_data.normal_drop.split(',')], multi=drop_time_adjusted/15)
         else:
             drops = make_standard_drop_from_template()
 
