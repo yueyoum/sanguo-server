@@ -255,13 +255,12 @@ class Affairs(_GetRealGoldMixin):
 
         if battle_data.normal_drop:
             # 模拟损失物品
-            total_time = BATTLES[self.mongo_affairs.hang_city_id].total_hours * 3600
-            drop_time = total_time
+            drop_time = passed_time
             for log in self.mongo_affairs.logs:
                 if log.tp == 1:
                     drop_time -= PLUNDER_GET_DROPS_MINUTES * 60
 
-            drop_time_adjusted = max(int(total_time * 0.25), drop_time)
+            drop_time_adjusted = max(int(passed_time * 0.25), drop_time)
 
             drops = get_drop([int(i) for i in battle_data.normal_drop.split(',')], multi=drop_time_adjusted/15)
         else:
