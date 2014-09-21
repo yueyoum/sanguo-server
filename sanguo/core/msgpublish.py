@@ -71,7 +71,7 @@ class SystemBroadcast(object):
 
         msg = BroadcastNotify()
         for item in data['data']:
-            self._fill_up_msg(msg, item['text'], item['play_times'])
+            self._fill_up_msg(msg, item['content'], item['play_times'])
 
         publish_to_char(self.char_id, pack_msg(msg))
 
