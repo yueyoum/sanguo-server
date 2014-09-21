@@ -57,6 +57,10 @@ class SystemBroadcast(object):
     def __init__(self, char_id):
         self.char_id = char_id
 
+    def _fill_up_msg(self, msg, text, repeated_times):
+        m = msg.msgs.add()
+        m.text = text
+        m.repeated_times = repeated_times
 
     def send_global_broadcast(self):
         try:
@@ -65,12 +69,12 @@ class SystemBroadcast(object):
             sys.stderr.write("API_SYSTEM_BROADCAST_GET FAILURE\n\n")
             return
 
-        text = data['data']
         msg = BroadcastNotify()
-        msg.text = text
+        for item in data['data']:
+            self._fill_up_msg(msg, item['text'], item['play_times'])
 
         publish_to_char(self.char_id, pack_msg(msg))
 
-    def send(self, text):
+    def send_server_broadcast(self, text, repeated_times):
         pass
 
