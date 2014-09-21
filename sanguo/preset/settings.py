@@ -202,8 +202,6 @@ PLUNDER_LOG_TEMPLATE = {
 # 掠夺日志最大条数
 PLUNDER_LOG_MAX_AMOUNT = 20
 # 掠夺应两计算参数
-# min(1, (1 - (self_level - rival_level) * level_adjust)) * base_adjust
-PLUNDER_GOT_GOLD_PARAM_LEVEL_ADJUST = 0.1
 PLUNDER_GOT_GOLD_PARAM_BASE_ADJUST = 0.25
 
 # 得战俘概率 %

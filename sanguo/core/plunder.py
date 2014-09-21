@@ -26,7 +26,6 @@ from core.msgpipe import publish_to_char
 from utils import pack_msg
 from preset.settings import (
     PRISONER_POOL,
-    PLUNDER_GOT_GOLD_PARAM_LEVEL_ADJUST,
     PLUNDER_GOT_GOLD_PARAM_BASE_ADJUST,
     PLUNDER_GET_DROPS_MINUTES,
     PLUNDER_GET_PRISONER_PROB,
@@ -84,7 +83,13 @@ class PlunderRival(object):
         ho = affairs.get_hang_obj()
         gold = ho.gold
 
-        result = min(1, (1 - (level - self.level) * PLUNDER_GOT_GOLD_PARAM_LEVEL_ADJUST)) * PLUNDER_GOT_GOLD_PARAM_BASE_ADJUST
+        level_diff = self.level - level
+        if level_diff > 8:
+            level_diff = 8
+        if level_diff < -8:
+            level_diff = -8
+
+        result = level_diff * 0.025 + PLUNDER_GOT_GOLD_PARAM_BASE_ADJUST
         return int(result * gold)
 
 
@@ -309,6 +314,7 @@ class Plunder(object):
         if city.normal_drop:
             drop_ids = [int(i) for i in city.normal_drop.split(',')]
             drop = get_drop(drop_ids, multi=int(4 * PLUNDER_GET_DROPS_MINUTES * 60 / 15))
+            drop.pop('gold')
             standard_drop.update(drop)
 
         resource = Resource(self.char_id, "Plunder Reward")
