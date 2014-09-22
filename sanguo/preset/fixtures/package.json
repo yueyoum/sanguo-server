@@ -155,7 +155,70 @@
             {
                 "amount": 1, 
                 "id": 11, 
-                "prob": 905
+                "prob": 600
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "7": {
+        "gems": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 12, 
+                "prob": 15
+            }, 
+            {
+                "amount": 1, 
+                "id": 13, 
+                "prob": 15
+            }, 
+            {
+                "amount": 1, 
+                "id": 14, 
+                "prob": 15
+            }, 
+            {
+                "amount": 1, 
+                "id": 15, 
+                "prob": 15
+            }, 
+            {
+                "amount": 1, 
+                "id": 16, 
+                "prob": 15
+            }, 
+            {
+                "amount": 1, 
+                "id": 17, 
+                "prob": 15
+            }, 
+            {
+                "amount": 1, 
+                "id": 18, 
+                "prob": 15
+            }, 
+            {
+                "amount": 1, 
+                "id": 19, 
+                "prob": 15
+            }, 
+            {
+                "amount": 1, 
+                "id": 20, 
+                "prob": 15
+            }, 
+            {
+                "amount": 1, 
+                "id": 21, 
+                "prob": 15
             }
         ], 
         "official_exp": 0
