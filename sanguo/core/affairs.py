@@ -162,21 +162,30 @@ class Affairs(_GetRealGoldMixin):
 
     def open_city(self, city_id):
         # 开启城镇
-        need_opened = []
-        for cid in CITY_IDS:
-            if cid > city_id:
-                # XXX 这里默认city_id是从小到大的！
-                break
 
-            need_opened.append(cid)
+        # 因为从signals调用 open_city的时候
+        # 对Affairs初始化时，会先把 1 开启，
+        # 然后这里判断就是 没有开启……
+        # 这里特殊处理
 
-        opened = False
-        for cid in need_opened:
-            if cid in self.mongo_affairs.opened:
-                continue
-
-            self.mongo_affairs.opened.append(cid)
+        if city_id == FIRST_CITY_ID and len(self.mongo_affairs.opened) == 1 and self.mongo_affairs.opened[0] == FIRST_CITY_ID:
             opened = True
+        else:
+            need_opened = []
+            for cid in CITY_IDS:
+                if cid > city_id:
+                    # XXX 这里默认city_id是从小到大的！
+                    break
+
+                need_opened.append(cid)
+
+            opened = False
+            for cid in need_opened:
+                if cid in self.mongo_affairs.opened:
+                    continue
+
+                self.mongo_affairs.opened.append(cid)
+                opened = True
 
         self.mongo_affairs.save()
         self.send_city_notify()
