@@ -4,6 +4,7 @@
 __author__ = 'Wang Chao'
 __date__ = '12/31/13'
 
+import random
 from mongoengine import DoesNotExist
 
 from core.mongoscheme import MongoFriend, MongoCharacter
@@ -14,13 +15,14 @@ from core.exception import SanguoException
 from core.formation import Formation
 from core.signals import new_friend_got_signal
 from core.plunder import Plunder
+from core.activeplayers import ActivePlayers
 
 import protomsg
 from protomsg import FRIEND_NOT, FRIEND_OK, FRIEND_ACK, FRIEND_APPLY
 from protomsg import Friend as MsgFriend
 
 from preset.data import VIP_FUNCTION, VIP_MAX_LEVEL
-from preset.settings import FRIEND_CANDIDATE_LEVEL_DIFF
+from preset.settings import FRIEND_CANDIDATE_LEVEL_DIFF, FRIEND_CANDIDATE_LIST_AMOUNT
 from preset import errormsg
 from utils import pack_msg
 
@@ -68,19 +70,44 @@ class Friend(object):
 
     def candidate_list(self, level_diff=FRIEND_CANDIDATE_LEVEL_DIFF):
         # 候选人列表
-        level = self.char.mc.level
-        char_ids = get_char_ids_by_level_range(level-level_diff, level+level_diff, exclude_char_ids=[self.char_id])
 
-        res = []
-        for c in char_ids:
+        # 先从最近活跃用户找，如果没有再通找
+        ap = ActivePlayers()
+        ap_list = ap.get_list()
+
+        random.shuffle(ap_list)
+
+        char_ids = []
+        for c in ap_list:
+            if c == self.char_id:
+                continue
             if self.is_general_friend(c):
                 continue
 
-            res.append(c)
-            if len(res) >= 5:
+            char_ids.append(c)
+            if len(char_ids) >= FRIEND_CANDIDATE_LIST_AMOUNT:
                 break
 
-        return res
+        if len(char_ids) >= FRIEND_CANDIDATE_LIST_AMOUNT:
+            return char_ids
+
+
+        # 数量不够，补充
+        level = self.char.mc.level
+        supply_char_ids = get_char_ids_by_level_range(level-level_diff, level+level_diff, exclude_char_ids=[self.char_id])
+
+        for c in supply_char_ids:
+            if self.is_general_friend(c):
+                continue
+
+            if c in char_ids:
+                continue
+
+            char_ids.append(c)
+            if len(char_ids) >= FRIEND_CANDIDATE_LIST_AMOUNT:
+                break
+
+        return char_ids
 
 
     def friends_list(self):

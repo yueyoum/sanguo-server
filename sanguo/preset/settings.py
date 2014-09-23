@@ -274,6 +274,7 @@ DEMAGE_VALUE_ADJUST = {
 #########################
 #      好友             #
 #########################
+FRIEND_CANDIDATE_LIST_AMOUNT = 5        # 好友候选人列表人数数量
 FRIEND_CANDIDATE_LEVEL_DIFF = 10        # 好友候选人等级差
 
 
