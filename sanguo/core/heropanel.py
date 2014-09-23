@@ -140,6 +140,12 @@ class HeroPanel(object):
             )
 
         none_opened_heros = self.none_opened_heros()
+        none_opened_other_heros = [(socket_id, h) for socket_id, h in none_opened_heros if not h.good]
+
+        def _random_get():
+            if none_opened_other_heros:
+                return random.choice(none_opened_other_heros)
+            return random.choice(none_opened_heros)
 
         using_sycee = self.get_hero_cost(incr=True)
 
@@ -160,11 +166,11 @@ class HeroPanel(object):
                             socket_id, hero = k, v
                             break
                     else:
-                        socket_id, hero = random.choice(none_opened_heros)
+                        socket_id, hero = _random_get()
                 else:
-                    socket_id, hero = random.choice(none_opened_heros)
+                    socket_id, hero = _random_get()
             else:
-                socket_id, hero = random.choice(none_opened_heros)
+                socket_id, hero = _random_get()
 
             self.panel.panel[str(_id)], self.panel.panel[socket_id] = self.panel.panel[socket_id], self.panel.panel[str(_id)]
 
