@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-# test from huxiao 923
+# 
 #########################
 #       初始化           #
 #########################
 #  角色
 CHARACTER_INIT = {
-    'gold': 0,          # 金币
+    'gold': 0,          # 银两
     'sycee': 0,         # 元宝
     'hero_in_formation': {      # 在阵法中武将及其装备
         48: (8, 64, 0),        # 武将ID: (武器ID， 防具ID， 饰品ID). 装备一定要填满3个，没有的用0代替
@@ -34,7 +34,7 @@ FORMATION_INIT_OPENED_SOCKETS = 4
 #########################
 #      奖励倍数          #
 #########################
-REWARD_GOLD_MULTIPLE = 1              # 得金币倍数
+REWARD_GOLD_MULTIPLE = 1              # 得银两倍数
 REWARD_SYCEE_MULTIPLE = 1             # 得元宝倍数
 REWARD_EXP_MULTIPLE = 1               # 得经验倍数
 REWARD_OFFICAL_EXP_MULTIPLE = 1       # 得官职经验倍数
@@ -113,6 +113,7 @@ DROP_PROB_BASE = 100000
 #    活动关卡            #
 #########################
 ACTIVITY_STAGE_MAX_TIMES = 3
+############################################### 国庆期间调整为 6次 2014/10/1 - 2014/10/7##################################################
 
 
 #########################
@@ -149,14 +150,13 @@ GET_HERO_FORCE_REFRESH_COST = 100
 # 抽卡得甲卡概率概率
 # 抽的次数： 得甲卡概率
 GET_HERO_QUALITY_ONE_PROB = {
-    1: 1 * 1.5,
-    2: 3 * 1.5,
-    3: 6 * 1.5,
-    4: 12 * 1.5,
-    5: 30 * 1.5,
+    1: 2,
+    2: 5,
+    3: 10,
+    4: 20,
+    5: 40,
     6: 100,
 }
-
 
 
 
@@ -222,7 +222,7 @@ PRISONER_POOL = [
 # 战俘初始劝降几率
 PRISONER_START_PROB = 10
 # 释放获得宝物 key: quality, value: 宝物ID列表
-PRISONER_RELEASE_GOT_TREASURE = {3: [24], 2: [25], 1: [26]}
+PRISONER_RELEASE_GOT_TREASURE = {3: [24], 2: [25], 1: [25]}
 
 
 
@@ -262,9 +262,9 @@ STAGE_ELITE_TOTAL_RESET_COST = [
 # 4: 君主
 # 5: 其他
 DEMAGE_VALUE_ADJUST = {
-    1: {1: 0,     2: -0.07, 3: 0.07,  4: 0,     5: -0.05},
-    2: {1: 0.07,  2: 0,     3: -0.07, 4: 0,     5: -0.05},
-    3: {1: -0.07, 2: 0.07,  3: 0,     4: 0,     5: -0.05},
+    1: {1: 0,     2: -0.15, 3: 0.10,  4: 0,     5: -0.05},
+    2: {1: 0.05,  2: 0,     3: -0.10, 4: 0,     5: -0.05},
+    3: {1: -0.10, 2: 0.05,  3: 0,     4: 0,     5: -0.05},
     4: {1: 0,     2: 0,     3: 0,     4: 0,     5: 0.05 },
     5: {1: 0,     2: 0,     3: 0,     4: -0.05, 5: 0    },
 }
@@ -295,7 +295,7 @@ MAIL_ARENA_WEEK_REWARD_CONTENT = u'比武每周奖励'
 # 比武被打
 MAIL_ARENA_BEATEN_TITLE = u'比武挑战记录'
 MAIl_ARENA_BEATEN_WIN_TEMPLATE = u'报～{0}在比武擂台中挑战我军，已被我军击退，主公的积分从{1}变成了{2} ({3})'
-MAIl_ARENA_BEATEN_LOST_TEMPLATE = u'报～{0}在比武擂台中挑战我军，我军暂时落败，公主的积分从{1}变成了{2} ({3})'
+MAIl_ARENA_BEATEN_LOST_TEMPLATE = u'报～{0}在比武擂台中挑战我军，我军暂时落败，主公的积分从{1}变成了{2} ({3})'
 # 月卡
 MAIL_YUEKA_TITLE = u'月卡奖励'
 MAIL_YUEKA_CONTENT_TEMPLATE = u'您获得了今日奖励的{0}元宝，月卡奖励还有{1}天可以领取哦。'
