@@ -42,12 +42,17 @@ class PlunderRival(object):
     __slots__ = ['char_id', 'name', 'level', 'power', 'leader', 'formation', 'hero_original_ids', 'city_id']
 
     @classmethod
-    def search(cls, city_id):
+    def search(cls, city_id, exclude_char_id=None):
         affairs = MongoAffairs.objects.filter(hang_city_id=city_id)
-        if affairs:
-            rival = random.choice(affairs)
-            rival_id = rival.id
-        else:
+        affair_ids = [a.id for a in affairs]
+
+        rival_id = 0
+        while affair_ids:
+            rival_id = random.choice(affair_ids)
+            if rival_id != exclude_char_id:
+                break
+
+            affair_ids.remove(rival_id)
             rival_id = 0
 
         return cls(rival_id, city_id)
@@ -154,7 +159,7 @@ class Plunder(object):
         gold_needs = BATTLES[city_id].refresh_cost_gold
         resource = Resource(self.char_id, "Plunder Refresh")
         with resource.check(gold=-gold_needs):
-            target = PlunderRival.search(city_id)
+            target = PlunderRival.search(city_id, exclude_char_id=self.char_id)
             self.mongo_plunder.char_id = target.char_id
             self.mongo_plunder.char_name = target.name
             self.mongo_plunder.char_gold = target.get_plunder_gold(Char(self.char_id).mc.level)
