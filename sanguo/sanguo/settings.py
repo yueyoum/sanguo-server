@@ -201,6 +201,8 @@ tree = et.ElementTree(file=os.path.join(BASE_DIR, "config.xml"))
 ENABLE_BATTLE_LOG = tree.find('battle/log').text == "true"
 ENABLE_TEST_MODE = tree.find('testmode').text == "true"
 
+EMAIL_NAME = tree.find('email/name').text
+
 REDIS_HOST = tree.find('redis/host').text
 REDIS_PORT = int( tree.find('redis/port').text )
 REDIS_DB = int( tree.find('redis/db').text )
@@ -238,5 +240,5 @@ del _CONFIG_ADMINS
 del et
 del tree
 
-SERVER_EMAIL = 'server{0} <server{0}@sanguo.com>'.format(SERVER_ID)
+SERVER_EMAIL = '{0}.{1} <{0}.{1}@sanguo.com>'.format(EMAIL_NAME, SERVER_ID)
 EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
