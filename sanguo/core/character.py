@@ -156,19 +156,20 @@ class Char(object):
 
         old_vip = char.vip
         new_vip = get_vip_level(total_purchase_got)
+        if new_vip > old_vip:
+            char.vip = new_vip
 
-        char.vip = new_vip
-        char.save()
-
-        self.send_notify(char=char, opended_funcs=opended_funcs)
-
-        if old_vip != new_vip:
             vip_changed_signal.send(
                 sender=None,
                 char_id=self.id,
                 old_vip=old_vip,
                 new_vip=new_vip
             )
+
+        char.save()
+
+        self.send_notify(char=char, opended_funcs=opended_funcs)
+
 
     def send_notify(self, char=None, opended_funcs=None):
         if not char:
