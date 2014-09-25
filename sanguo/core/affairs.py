@@ -244,7 +244,7 @@ class Affairs(_GetRealGoldMixin):
         ho = self.get_hang_obj()
         battle_data = BATTLES[self.mongo_affairs.hang_city_id]
 
-        percent = ho.passed_time / float(ho.max_time)
+        percent = ho.passed_time / float(ho.max_time) * 100
         for _pre, _add in HANG_REWARD_ADDITIONAL:
             if percent >= _pre:
                 break
