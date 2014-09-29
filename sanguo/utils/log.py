@@ -87,6 +87,6 @@ def system_logger(error_id, char_id, func_name, error_msg):
     }
 
     logger.debug("Error_id: {0}. Char_id: {1}. Func_name: {2}. Msg: {3}".format(
-                error_id, char_id, func_name, error_msg),
+                error_id, char_id, func_name, error_msg.encode('utf-8')),
                 extra=extra
                 )
