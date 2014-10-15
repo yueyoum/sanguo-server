@@ -174,6 +174,7 @@ class Char(object):
         if purchase_got > 0:
             new_purchase_signal.send(
                 sender=None,
+                char_id=self.id,
                 new_got=purchase_got,
                 total_got=total_purchase_got
             )
