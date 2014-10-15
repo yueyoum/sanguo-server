@@ -506,7 +506,7 @@
         "target_animation": "Normal_Hit", 
         "prepare_effect": "", 
         "hits": 1, 
-        "hit_effect": "H_/H_attack", 
+        "hit_effect": "H_/H_xiliangtieji", 
         "name": "[ffb902]\u897f\u51c9\u94c1\u9a91[-]", 
         "anger_self_team": 0, 
         "war_cry": true, 

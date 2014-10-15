@@ -1,5 +1,21 @@
 [
 {
+    "pk": 0, 
+    "model": "stage.battle", 
+    "fields": {
+        "normal_drop": "", 
+        "city_tp": 2, 
+        "name": "\u5e8f\u7ae0", 
+        "des": "\u9f99\u9b42\u7684\u65ad\u88c2\u3002\u3002\u3002", 
+        "total_hours": 8, 
+        "refresh_cost_gold": 100, 
+        "city_name": "\u6751\u843d", 
+        "level_limit": 0, 
+        "normal_exp": 8, 
+        "normal_gold": 6
+    }
+},
+{
     "pk": 1, 
     "model": "stage.battle", 
     "fields": {

@@ -89,7 +89,7 @@
     "fields": {
         "target": 1, 
         "effect": 2, 
-        "value": 140, 
+        "value": 175, 
         "skill": 25, 
         "is_hit_target": true, 
         "rounds": 0
@@ -113,7 +113,7 @@
     "fields": {
         "target": 6, 
         "effect": 2, 
-        "value": 110, 
+        "value": 130, 
         "skill": 27, 
         "is_hit_target": true, 
         "rounds": 0
@@ -125,7 +125,7 @@
     "fields": {
         "target": 1, 
         "effect": 2, 
-        "value": 120, 
+        "value": 130, 
         "skill": 28, 
         "is_hit_target": true, 
         "rounds": 0

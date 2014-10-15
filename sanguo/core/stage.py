@@ -38,7 +38,6 @@ import protomsg
 STAGE_ELITE_TOTAL_RESET_COST.sort(key=lambda item: -item[0])
 STAGE_ELITE_RESET_COST.sort(key=lambda item: -item[0])
 
-HANG_MAX_SECONDS_FUNCTION = lambda vip: VIP_FUNCTION[vip].hang * 3600
 
 
 def max_star_stage_id(char_id):

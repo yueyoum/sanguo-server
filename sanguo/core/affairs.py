@@ -8,7 +8,7 @@ from mongoengine import DoesNotExist
 
 from django.conf import settings
 
-from core.mongoscheme import MongoAffairs, MongoEmbeddedHangLog, MongoStage
+from core.mongoscheme import MongoAffairs, MongoEmbeddedHangLog
 from core.exception import SanguoException
 from core.attachment import get_drop, make_standard_drop_from_template, standard_drop_to_attachment_protomsg, standard_drop_to_readable_text
 from core.resource import Resource
@@ -32,7 +32,6 @@ from protomsg import City as CityMsg, CityNotify, HangNotify
 
 CITY_IDS = BATTLES.keys()
 CITY_IDS.sort()
-FIRST_CITY_ID = CITY_IDS[0]
 
 TIME_ZONE = settings.TIME_ZONE
 
@@ -121,10 +120,10 @@ def _get_opended_cities(char_id):
     stages = Stage(char_id).stage.stages.keys()
     stages = [int(i) for i in stages]
 
-    opened = set()
+    opened = {0}
     for sid in stages:
         this_stage = STAGES[sid]
-        if this_stage.battle_end:
+        if this_stage.battle_open:
             opened.add(this_stage.battle)
 
     opened = list(opened)
@@ -150,6 +149,9 @@ class Affairs(_GetRealGoldMixin):
 
     def set_default_value(self):
         if self.mongo_affairs.opened:
+            if 0 not in self.mongo_affairs.opened:
+                self.mongo_affairs.opened.insert(0, 0)
+                self.mongo_affairs.save()
             return
 
         opened = _get_opended_cities(self.char_id)
@@ -162,34 +164,23 @@ class Affairs(_GetRealGoldMixin):
 
     def open_city(self, city_id):
         # 开启城镇
+        need_opened = []
+        for cid in CITY_IDS:
+            if cid > city_id:
+                # XXX 这里默认city_id是从小到大的！
+                break
 
-        # 因为从signals调用 open_city的时候
-        # 对Affairs初始化时，会先把 1 开启，
-        # 然后这里判断就是 没有开启……
-        # 这里特殊处理
+            need_opened.append(cid)
 
-        if city_id == FIRST_CITY_ID and len(self.mongo_affairs.opened) == 1 and self.mongo_affairs.opened[0] == FIRST_CITY_ID:
+        for cid in need_opened:
+            if cid in self.mongo_affairs.opened:
+                continue
+
+            self.mongo_affairs.opened.append(cid)
             opened = True
-        else:
-            need_opened = []
-            for cid in CITY_IDS:
-                if cid > city_id:
-                    # XXX 这里默认city_id是从小到大的！
-                    break
-
-                need_opened.append(cid)
-
-            opened = False
-            for cid in need_opened:
-                if cid in self.mongo_affairs.opened:
-                    continue
-
-                self.mongo_affairs.opened.append(cid)
-                opened = True
 
         self.mongo_affairs.save()
         self.send_city_notify()
-        return opened
 
 
     def start_hang(self, city_id, get_reward=True):
@@ -210,11 +201,7 @@ class Affairs(_GetRealGoldMixin):
             )
 
         if get_reward:
-            if self.mongo_affairs.hang_city_id:
-                # 上次有挂机，先结算
-                drop_msg = self.get_hang_reward(auto_start=False)
-            else:
-                drop_msg = None
+            drop_msg = self.get_hang_reward(auto_start=False)
         else:
             drop_msg = None
 
@@ -233,13 +220,13 @@ class Affairs(_GetRealGoldMixin):
 
     def get_hang_reward(self, auto_start=True):
         """立即保存掉落，并且返回attachment消息"""
-        if not self.mongo_affairs.hang_city_id:
-            raise SanguoException(
-                errormsg.HANG_NOT_EXIST,
-                self.char_id,
-                "Get Hang Reward",
-                "hang not exist"
-            )
+        # if not self.mongo_affairs.hang_city_id:
+        #     raise SanguoException(
+        #         errormsg.HANG_NOT_EXIST,
+        #         self.char_id,
+        #         "Get Hang Reward",
+        #         "hang not exist"
+        #     )
 
         ho = self.get_hang_obj()
         battle_data = BATTLES[self.mongo_affairs.hang_city_id]
@@ -332,11 +319,7 @@ class Affairs(_GetRealGoldMixin):
 
 
     def send_hang_notify(self):
-        if not self.mongo_affairs.hang_city_id:
-            return
-
         ho = HangObject(self.mongo_affairs.hang_city_id, self.mongo_affairs.hang_start_at, self.mongo_affairs.logs)
         msg = ho.make_hang_notify()
         publish_to_char(self.char_id, pack_msg(msg))
-
 

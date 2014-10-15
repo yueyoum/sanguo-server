@@ -7,7 +7,7 @@ from core.signals import (
 from core.achievement import Achievement
 from core.task import Task
 
-from core.affairs import Affairs, FIRST_CITY_ID
+from core.affairs import Affairs
 
 from preset.data import STAGES
 
@@ -24,14 +24,11 @@ def pve_finish(char_id, stage_id, win, star, **kwargs):
         achievement.trig(8, 1)
 
 
-    # 城镇
-    # 自动开启第一个城镇，并且自动开始挂机
+    # 开启城镇
     if win:
-        if STAGES[stage_id].battle_end:
+        if STAGES[stage_id].battle_open:
             affairs = Affairs(char_id)
-            new_opened = affairs.open_city(STAGES[stage_id].battle)
-            if STAGES[stage_id].battle == FIRST_CITY_ID and new_opened:
-                affairs.start_hang(FIRST_CITY_ID)
+            affairs.open_city(STAGES[stage_id].battle)
 
 
 pve_finished_signal.connect(
