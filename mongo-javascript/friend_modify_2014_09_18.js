@@ -14,5 +14,5 @@ var mf = function(obj) {
 }
 
 var main = function() {
-    db.friend.find.forEach(mf);
+    db.friend.find().forEach(mf);
 }
