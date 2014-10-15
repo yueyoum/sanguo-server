@@ -47,6 +47,8 @@ class MongoCharacter(Document):
     # 充值真实获得
     purchase_got = IntField(default=0)
     vip = IntField(default=0)
+    # 用来标识已经领取的VIP奖励
+    vip_has_reward = ListField(IntField())
 
     meta = {
         'collection': 'character',

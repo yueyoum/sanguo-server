@@ -4,6 +4,7 @@ from utils import pack_msg
 import protomsg
 
 from core.character import Char
+from core.vip import VIP
 from core.task import Task
 
 from core.msgpipe import publish_to_char, message_clean
@@ -74,6 +75,7 @@ def login_notify(char_id):
     hero_objs = char_heros_obj(char_id)
 
     Char(char_id).send_notify()
+    VIP(char_id).send_notify()
 
     hero_notify(char_id, hero_objs)
     Item(char_id).send_notify()

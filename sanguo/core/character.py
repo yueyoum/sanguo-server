@@ -14,6 +14,7 @@ from core.signals import (
     char_gold_changed_signal,
     char_sycee_changed_signal,
     vip_changed_signal,
+    new_purchase_signal,
 )
 
 
@@ -170,6 +171,13 @@ class Char(object):
 
         self.send_notify(char=char, opended_funcs=opended_funcs)
 
+        if purchase_got > 0:
+            new_purchase_signal.send(
+                sender=None,
+                new_got=purchase_got,
+                total_got=total_purchase_got
+            )
+
 
     def send_notify(self, char=None, opended_funcs=None):
         if not char:
@@ -186,11 +194,7 @@ class Char(object):
         msg.char.official = char.official
         msg.char.official_exp = char.official_exp
         msg.char.next_official_exp = official_update_exp(char.level)
-
         msg.char.power = self.power
-        msg.char.vip = char.vip
-        msg.char.purchase_got = char.purchase_got
-
         msg.char.leader = self.leader
 
         if opended_funcs:

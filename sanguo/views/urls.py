@@ -65,7 +65,7 @@ urlpatterns = patterns('',
                        url(r'^mail/delete/$', 'views.mail.views.delete'),
                        url(r'^mail/getattachment/$', 'views.mail.views.get_attachment'),
 
-                       url(r'daily/checkin/$', 'views.daily.views.checkin'),
+                       url(r'^daily/checkin/$', 'views.daily.views.checkin'),
 
 
                        url(r'^store/panel/$', 'views.store.views.panel'),
@@ -82,6 +82,9 @@ urlpatterns = patterns('',
                        #91
                        url(r'^purchase91/orderid/$', 'views.purchase.views.get_91_order_id'),
                        url(r'^purchase91/confirm/$', 'views.purchase.views.purchase_91_confirm'),
+
+
+                       url(r'^vip/getreward/$', 'views.vip.views.vip_get_reward'),
 )
 
 # testmode

@@ -14,6 +14,7 @@ from store_pb2 import *
 from character_pb2 import *
 from item_pb2 import *
 from levy_pb2 import *
+from vip_pb2 import *
 from formation_pb2 import *
 from friend_pb2 import *
 from battle_pb2 import *
@@ -150,6 +151,8 @@ RESPONSE_NOTIFY_TYPE = {
     "HangSyncResponse": 5003,
     "HangGetRewardResponse": 5005,
     "HangStartResponse": 5007,
+    "VIPNotify": 5100,
+    "VIPGetRewardResponse": 5102,
 }
 
 REQUEST_TYPE = {
@@ -217,6 +220,7 @@ REQUEST_TYPE = {
     5002: "HangSyncRequest",
     5004: "HangGetRewardRequest",
     5006: "HangStartRequest",
+    5101: "VIPGetRewardRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -284,6 +288,7 @@ REQUEST_TYPE_REV = {
     "HangSyncRequest": 5002,
     "HangGetRewardRequest": 5004,
     "HangStartRequest": 5006,
+    "VIPGetRewardRequest": 5101,
 }
 
 TYPE_COMMAND = {
@@ -350,6 +355,7 @@ TYPE_COMMAND = {
    5002: "/hang/sync/",
    5004: "/hang/getreward/",
    5006: "/hang/start/",
+   5101: "/vip/getreward/",
 }
 
 COMMAND_TYPE = {v: k for k, v in TYPE_COMMAND.iteritems()}

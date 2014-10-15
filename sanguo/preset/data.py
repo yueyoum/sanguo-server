@@ -58,6 +58,7 @@ SKILLS = object_maker(_find_file('skills.json'))
 SKILL_EFFECT = object_maker(_find_file('skill_effect.json'))
 TASKS = object_maker(_find_file('tasks.json'))
 VIP_FUNCTION = object_maker(_find_file('vip.json'))
+VIP_REWARD = object_maker(_find_file('vip_reward.json'))
 
 ARENA_DAY_REWARD_TUPLE = ARENA_DAY_REWARD.items()
 ARENA_DAY_REWARD_TUPLE.sort(key=lambda item: -item[0])
