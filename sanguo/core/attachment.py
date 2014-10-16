@@ -164,10 +164,12 @@ def get_drop_from_mode_two_package(package):
     if a < 1:
         return drop
 
+    amount = item['amount'] * a
+
     if name == 'equipments':
-        drop[name]  = [(item['id'], item['level'], a)]
+        drop[name]  = [(item['id'], item['level'], amount)]
     else:
-        drop[name] = [(item['id'], a)]
+        drop[name] = [(item['id'], amount)]
 
     return drop
 
