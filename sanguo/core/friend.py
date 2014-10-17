@@ -343,6 +343,7 @@ class Friend(object):
             total_friends_amount=self.real_cur_amount
         )
 
+        self.send_remove_friend_notify([target_id])
         self.send_friends_amount_notify()
 
 
