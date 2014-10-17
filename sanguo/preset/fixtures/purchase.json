@@ -12,7 +12,7 @@
         "rmb": 28, 
         "rate": 10, 
         "first_des": "\u8d60\u9001300\u5143\u5b9d\u6bcf\u5929\u989d\u5916\u9886\u53d6100\u5143\u5b9d", 
-        "ios_id": "1", 
+        "ios_id": "com.mztimes.sanguo.international.monthgold", 
         "icon": ""
     }
 },
@@ -29,7 +29,7 @@
         "rmb": 648, 
         "rate": 10, 
         "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u90016480\u5143\u5b9d", 
-        "ios_id": "2", 
+        "ios_id": "com.mztimes.sanguo.international.6480gold", 
         "icon": ""
     }
 },
@@ -46,7 +46,7 @@
         "rmb": 328, 
         "rate": 10, 
         "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u90013280\u5143\u5b9d", 
-        "ios_id": "3", 
+        "ios_id": "com.mztimes.sanguo.international.3280gold", 
         "icon": ""
     }
 },
@@ -63,7 +63,7 @@
         "rmb": 98, 
         "rate": 10, 
         "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u9001980\u5143\u5b9d", 
-        "ios_id": "4", 
+        "ios_id": "com.mztimes.sanguo.international.980gold", 
         "icon": ""
     }
 },
@@ -80,7 +80,7 @@
         "rmb": 30, 
         "rate": 10, 
         "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u9001300\u5143\u5b9d", 
-        "ios_id": "5", 
+        "ios_id": "com.mztimes.sanguo.international.300gold", 
         "icon": ""
     }
 },
@@ -97,7 +97,7 @@
         "rmb": 6, 
         "rate": 10, 
         "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u900160\u5143\u5b9d", 
-        "ios_id": "6", 
+        "ios_id": "com.mztimes.sanguo.international.60gold", 
         "icon": ""
     }
 }

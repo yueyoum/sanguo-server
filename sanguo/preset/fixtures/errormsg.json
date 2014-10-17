@@ -1221,6 +1221,17 @@
     }
 },
 {
+    "pk": 3106, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "FRIEND_OTHER_SIDE_IS_FULL", 
+        "text_zh": "\u5bf9\u65b9\u597d\u53cb\u5df2\u6ee1\uff0c\u65e0\u6cd5\u6dfb\u52a0\u5bf9\u65b9\u3002", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
     "pk": 3110, 
     "model": "errormsg.errormsg", 
     "fields": {
