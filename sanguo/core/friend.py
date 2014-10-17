@@ -16,13 +16,20 @@ from core.formation import Formation
 from core.signals import new_friend_got_signal
 from core.plunder import Plunder
 from core.activeplayers import ActivePlayers
+from core.mail import Mail
 
 import protomsg
 from protomsg import FRIEND_NOT, FRIEND_OK, FRIEND_ACK, FRIEND_APPLY
 from protomsg import Friend as MsgFriend
 
 from preset.data import VIP_FUNCTION, VIP_MAX_LEVEL
-from preset.settings import FRIEND_CANDIDATE_LEVEL_DIFF, FRIEND_CANDIDATE_LIST_AMOUNT
+from preset.settings import (
+    FRIEND_CANDIDATE_LEVEL_DIFF,
+    FRIEND_CANDIDATE_LIST_AMOUNT,
+    MAIL_FRIEND_REFUSE_TITLE,
+    MAIL_PURCHASE_FIRST_CONTENT,
+)
+
 from preset import errormsg
 from utils import pack_msg
 
@@ -119,29 +126,34 @@ class Friend(object):
         for i in self.mf.friends:
             res.append((i, FRIEND_OK))
 
-        for i in self.mf.pending:
-            res.append((i, FRIEND_ACK))
+        # for i in self.mf.pending:
+        #     res.append((i, FRIEND_ACK))
 
         for i in self.mf.accepting:
             res.append((i, FRIEND_APPLY))
 
         return res
 
-    def check_max_amount(self, func_name):
-        if self.cur_amount >= self.max_amount:
-            if self.char.mc.vip < VIP_MAX_LEVEL:
+    def check_max_amount(self, func_name, raise_exception=True):
+        if raise_exception:
+            if self.real_cur_amount >= self.max_amount:
+                if self.char.mc.vip < VIP_MAX_LEVEL:
+                    raise SanguoException(
+                        errormsg.FRIEND_FULL,
+                        self.char_id,
+                        func_name,
+                        "friends full. vip current: {0}, max: {1}".format(self.char.mc.vip, VIP_MAX_LEVEL)
+                    )
                 raise SanguoException(
-                    errormsg.FRIEND_FULL,
+                    errormsg.FRIEND_FULL_FINAL,
                     self.char_id,
                     func_name,
-                    "friends full. vip current: {0}, max: {1}".format(self.char.mc.vip, VIP_MAX_LEVEL)
+                    "friends full. vip reach max level {0}".format(VIP_MAX_LEVEL)
                 )
-            raise SanguoException(
-                errormsg.FRIEND_FULL_FINAL,
-                self.char_id,
-                func_name,
-                "friends full. vip reach max level {0}".format(VIP_MAX_LEVEL)
-            )
+        else:
+            if self.real_cur_amount >= self.max_amount:
+                return False
+            return True
 
 
 
@@ -154,8 +166,6 @@ class Friend(object):
                 "Friend Add",
                 "no target_id and no target_name"
             )
-
-        self.check_max_amount("Friend Add")
 
         if target_id:
             try:
@@ -186,6 +196,8 @@ class Friend(object):
                 "character {0} already has beed added".format(c.id)
             )
 
+        self.check_max_amount("Friend Add")
+
         if c.id in self.mf.pending:
             return
 
@@ -200,12 +212,8 @@ class Friend(object):
         target_char_friend = Friend(c.id)
         target_char_friend.someone_add_me(self.char_id)
 
-        # notify
-        msg = protomsg.NewFriendNotify()
-        self._msg_friend(msg.friend, c.id, FRIEND_ACK)
-        publish_to_char(self.char_id, pack_msg(msg))
-
-        self.send_friends_amount_notify()
+        # self.send_new_friend_notify(c.id)
+        # self.send_friends_amount_notify()
 
 
     def someone_add_me(self, from_id):
@@ -216,11 +224,8 @@ class Friend(object):
         self.mf.accepting.append(from_id)
         self.mf.save()
 
-        msg = protomsg.NewFriendNotify()
-        self._msg_friend(msg.friend, from_id, FRIEND_APPLY)
-        publish_to_char(self.char_id, pack_msg(msg))
-
-        self.send_friends_amount_notify()
+        # self.send_new_friend_notify(from_id, status=FRIEND_APPLY)
+        # self.send_friends_amount_notify()
 
 
     def terminate(self, target_id):
@@ -240,10 +245,7 @@ class Friend(object):
         target_char_friend = Friend(target_id)
         target_char_friend.someone_terminate_me(self.char_id)
 
-        msg = protomsg.RemoveFriendNotify()
-        msg.id = target_id
-        publish_to_char(self.char_id, pack_msg(msg))
-
+        self.send_remove_friend_notify([target_id])
         self.send_friends_amount_notify()
 
 
@@ -255,10 +257,7 @@ class Friend(object):
         self.mf.friends.remove(from_id)
         self.mf.save()
 
-        msg = protomsg.RemoveFriendNotify()
-        msg.id = from_id
-        publish_to_char(self.char_id, pack_msg(msg))
-
+        self.send_remove_friend_notify([from_id])
         self.send_friends_amount_notify()
 
 
@@ -279,10 +278,8 @@ class Friend(object):
         target_char_friend = Friend(target_id)
         target_char_friend.someone_cancel_me(self.char_id)
 
-        msg = protomsg.RemoveFriendNotify()
-        msg.id = target_id
-        publish_to_char(self.char_id, pack_msg(msg))
-        self.send_friends_amount_notify()
+        # self.send_remove_friend_notify([target_id])
+        # self.send_friends_amount_notify()
 
     def someone_cancel_me(self, from_id):
         if from_id not in self.mf.accepting:
@@ -291,11 +288,8 @@ class Friend(object):
         self.mf.accepting.remove(from_id)
         self.mf.save()
 
-        msg = protomsg.RemoveFriendNotify()
-        msg.id = from_id
-        publish_to_char(self.char_id, pack_msg(msg))
-
-        self.send_friends_amount_notify()
+        # self.send_remove_friend_notify([from_id])
+        # self.send_friends_amount_notify()
 
 
     def accept(self, target_id):
@@ -309,7 +303,29 @@ class Friend(object):
                 "character {0} not in accept list".format(target_id)
             )
 
-        self.check_max_amount("Friend Accept")
+        # 检查对方好友是否已满
+        target_char_friend = Friend(target_id)
+        if not target_char_friend.check_max_amount("Friend Accept By Other", raise_exception=False):
+            # 对方满了
+            # 并且删除此人的申请
+            self.mf.accepting.remove(target_id)
+            self.mf.save()
+            raise SanguoException(
+                errormsg.FRIEND_OTHER_SIDE_IS_FULL,
+                self.char_id,
+                "Friend Accept",
+                "other side {0} firend is full".format(target_id)
+            )
+
+
+        # 然后检查自己好友是否已满
+        try:
+            self.check_max_amount("Friend Accept")
+        except SanguoException as e:
+            # 满了就清空所有申请
+            self.mf.accepting = []
+            self.mf.save()
+            raise e
 
         self.mf.accepting.remove(target_id)
         self.mf.friends.append(target_id)
@@ -318,7 +334,7 @@ class Friend(object):
         target_char_friend = Friend(target_id)
         target_char_friend.someone_accept_me(self.char_id)
 
-        self.send_update_friend_notify(target_id)
+        self.send_new_friend_notify(target_id)
 
         new_friend_got_signal.send(
             sender=None,
@@ -339,7 +355,7 @@ class Friend(object):
             self.mf.friends.append(from_id)
         self.mf.save()
 
-        self.send_update_friend_notify(from_id)
+        self.send_new_friend_notify(from_id)
 
         new_friend_got_signal.send(
             sender=None,
@@ -368,9 +384,7 @@ class Friend(object):
         target_char_friend = Friend(target_id)
         target_char_friend.someone_refuse_me(self.char_id)
 
-        msg = protomsg.RemoveFriendNotify()
-        msg.id = target_id
-        publish_to_char(self.char_id, pack_msg(msg))
+        self.send_remove_friend_notify([target_id])
         self.send_friends_amount_notify()
 
 
@@ -380,10 +394,15 @@ class Friend(object):
             self.mf.pending.remove(from_id)
         self.mf.save()
 
-        msg = protomsg.RemoveFriendNotify()
-        msg.id = from_id
-        publish_to_char(self.char_id, pack_msg(msg))
+        from_char = Char(from_id)
 
+        mail = Mail(self.char_id)
+        mail.add(
+            MAIL_FRIEND_REFUSE_TITLE,
+            MAIL_PURCHASE_FIRST_CONTENT.format(from_char.mc.name)
+        )
+
+        self.send_remove_friend_notify([from_id])
         self.send_friends_amount_notify()
 
 
@@ -428,7 +447,7 @@ class Friend(object):
     def send_friends_amount_notify(self):
         msg = protomsg.FriendsAmountNotify()
         msg.max_amount = self.max_amount
-        msg.cur_amount = self.cur_amount
+        msg.cur_amount = self.real_cur_amount
         publish_to_char(self.char_id, pack_msg(msg))
 
 
@@ -441,10 +460,21 @@ class Friend(object):
         publish_to_char(self.char_id, pack_msg(msg))
 
 
+    def send_new_friend_notify(self, friend_id, status=FRIEND_OK):
+        msg = protomsg.NewFriendNotify()
+        self._msg_friend(msg.friend, friend_id, status)
+        publish_to_char(self.char_id, pack_msg(msg))
+
     def send_update_friend_notify(self, friend_id, status=FRIEND_OK):
         msg = protomsg.UpdateFriendNotify()
         self._msg_friend(msg.friend, friend_id, status)
         publish_to_char(self.char_id, pack_msg(msg))
+
+    def send_remove_friend_notify(self, friend_ids):
+        for i in friend_ids:
+            msg = protomsg.RemoveFriendNotify()
+            msg.id = i
+            publish_to_char(self.char_id, pack_msg(msg))
 
 
     # 行军令相关

@@ -302,6 +302,11 @@ MAIL_YUEKA_CONTENT_TEMPLATE = u'您获得了今日奖励的{0}元宝，月卡奖
 # 首充
 MAIL_PURCHASE_FIRST_TITLE = u'首充大礼包'
 MAIL_PURCHASE_FIRST_CONTENT = u'为了感谢您的充值，特为您送首充大礼包！礼品包括：玄武将印x1，方正红宝石x1，方正黄晶石x1，方正玉石x1，都在附件中哦，请主公查收。'
+# 好友系统
+# 好友申请被拒绝后的邮件
+MAIL_FRIEND_REFUSE_TITLE = u'好友系统'
+MAIL_FRIEND_REFUSE_CONTENT = u'{0} 拒绝了您的好友申请'
+
 
 #########################
 #      激活码           #
