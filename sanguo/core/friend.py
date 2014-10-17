@@ -126,8 +126,8 @@ class Friend(object):
         for i in self.mf.friends:
             res.append((i, FRIEND_OK))
 
-        # for i in self.mf.pending:
-        #     res.append((i, FRIEND_ACK))
+        for i in self.mf.pending:
+            res.append((i, FRIEND_ACK))
 
         for i in self.mf.accepting:
             res.append((i, FRIEND_APPLY))
@@ -212,7 +212,7 @@ class Friend(object):
         target_char_friend = Friend(c.id)
         target_char_friend.someone_add_me(self.char_id)
 
-        # self.send_new_friend_notify(c.id)
+        self.send_new_friend_notify(c.id, status=FRIEND_ACK)
         # self.send_friends_amount_notify()
 
 
@@ -224,7 +224,7 @@ class Friend(object):
         self.mf.accepting.append(from_id)
         self.mf.save()
 
-        # self.send_new_friend_notify(from_id, status=FRIEND_APPLY)
+        self.send_new_friend_notify(from_id, status=FRIEND_APPLY)
         # self.send_friends_amount_notify()
 
 
@@ -278,7 +278,7 @@ class Friend(object):
         target_char_friend = Friend(target_id)
         target_char_friend.someone_cancel_me(self.char_id)
 
-        # self.send_remove_friend_notify([target_id])
+        self.send_remove_friend_notify([target_id])
         # self.send_friends_amount_notify()
 
     def someone_cancel_me(self, from_id):
@@ -288,7 +288,7 @@ class Friend(object):
         self.mf.accepting.remove(from_id)
         self.mf.save()
 
-        # self.send_remove_friend_notify([from_id])
+        self.send_remove_friend_notify([from_id])
         # self.send_friends_amount_notify()
 
 
