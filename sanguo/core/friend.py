@@ -334,7 +334,6 @@ class Friend(object):
         target_char_friend = Friend(target_id)
         target_char_friend.someone_accept_me(self.char_id)
 
-        self.send_new_friend_notify(target_id)
 
         new_friend_got_signal.send(
             sender=None,
@@ -343,7 +342,7 @@ class Friend(object):
             total_friends_amount=self.real_cur_amount
         )
 
-        self.send_remove_friend_notify([target_id])
+        self.send_update_friend_notify(target_id)
         self.send_friends_amount_notify()
 
 
