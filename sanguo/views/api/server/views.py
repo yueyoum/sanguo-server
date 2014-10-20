@@ -31,5 +31,5 @@ def version_change(request):
     version.set_version(version_text)
 
     if index == 0:
-        api_version_back(data={'version': version})
+        api_version_back(data={'version': version_text})
     return {'ret': 0}
