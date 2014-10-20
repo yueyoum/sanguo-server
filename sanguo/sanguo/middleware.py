@@ -1,4 +1,5 @@
 
+from django.conf import settings
 from django.http import HttpResponse
 
 import protomsg
@@ -8,7 +9,7 @@ from core.msgpipe import message_get
 from core.activeplayers import ActivePlayers, Player
 from preset import errormsg
 from utils import pack_msg
-from protomsg import ReLoginResponse
+from protomsg import ReLoginResponse, VersionCheckResponse
 
 ### FOR DEBUG
 from utils import app_test_helper
@@ -18,11 +19,18 @@ RESPONSE_NOTIFY_TYPE_REV = {v: k for k, v in protomsg.RESPONSE_NOTIFY_TYPE.items
 
 from libs.middleware import RequestFilter
 from libs import NUM_FIELD
+from libs.exception import VersionCheckFailure
 
 
 class UnpackAndVerifyData(RequestFilter):
     def process_request(self, request):
-        super(UnpackAndVerifyData, self).process_request(request)
+        try:
+            super(UnpackAndVerifyData, self).process_request(request)
+        except VersionCheckFailure:
+            version_msg = VersionCheckResponse()
+            version_msg.ret = 0
+            version_msg.version = settings.SERVER_VERSION
+            return HttpResponse(pack_msg(version_msg), content_type='text/plain')
 
         if request.path.startswith('/api/'):
             return

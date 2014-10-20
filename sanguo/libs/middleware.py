@@ -16,6 +16,7 @@ from libs import (
     MAX_NUM_FIELD_AMOUNT,
 )
 from libs.session import session_loads, EmptyGameSession
+from libs.exception import VersionCheckFailure
 
 import protomsg
 from protomsg import COMMAND_REQUEST, COMMAND_TYPE
@@ -54,10 +55,7 @@ class RequestFilter(object):
                     print "==== client: {0} ====".format(proto.version)
                     print "==== server: {0} ====".format(settings.SERVER_VERSION)
 
-                    version_msg = protomsg.VersionCheckResponse()
-                    version_msg.ret = 0
-                    version_msg.version = settings.SERVER_VERSION
-                    return HttpResponse(pack_msg(version_msg), content_type='text/plain')
+                    raise VersionCheckFailure()
 
             else:
                 if getattr(request, '_proto', None) is not None:
