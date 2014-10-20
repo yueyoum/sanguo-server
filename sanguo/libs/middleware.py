@@ -19,7 +19,7 @@ from libs.session import session_loads, EmptyGameSession
 from libs.exception import VersionCheckFailure
 
 import protomsg
-from protomsg import COMMAND_REQUEST, COMMAND_TYPE
+from protomsg import COMMAND_REQUEST, COMMAND_TYPE, VersionCheckResponse
 
 class RequestFilter(object):
     def process_request(self, request):
@@ -96,3 +96,14 @@ class RequestFilter(object):
                 request._char_id = request._game_session.char_id
 
                 print "CHAR ID =", request._char_id
+
+
+class RequestFilterWrapperForVersionCheck(RequestFilter):
+    def process_request(self, request):
+        try:
+            super(RequestFilterWrapperForVersionCheck, self).process_request(request)
+        except VersionCheckFailure:
+            version_msg = VersionCheckResponse()
+            version_msg.ret = 0
+            version_msg.version = settings.SERVER_VERSION
+            return HttpResponse(pack_msg(version_msg), content_type='text/plain')
