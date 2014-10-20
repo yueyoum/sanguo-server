@@ -8,8 +8,8 @@ Functions decorated by `startup` in this file will execute first when server sta
 """
 
 
-from django.conf import settings
 from core.server import server
+from core.version import version
 from utils.api import api_server_register, APIFailure
 
 FUNCS = []
@@ -36,11 +36,7 @@ def server_register(status=1):
     if res['ret'] != 0:
         raise APIFailure("api_server_register, error: {0}".format(res))
 
-    version = res['data']['version']
-    settings.SERVER_VERSION = version
-
-    print "==== START ===="
-    print "version: {0}".format(settings.SERVER_VERSION)
+    version.set_version(res['data']['version'])
 
 
 def main():

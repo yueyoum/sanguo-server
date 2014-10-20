@@ -4,7 +4,6 @@ __author__ = 'Wang Chao'
 __date__ = '4/10/14'
 
 from django.http import HttpResponse
-from django.conf import settings
 
 from libs import (
     NUM_FIELD,
@@ -17,6 +16,8 @@ from libs import (
 )
 from libs.session import session_loads, EmptyGameSession
 from libs.exception import VersionCheckFailure
+
+from core.version import version
 
 import protomsg
 from protomsg import COMMAND_REQUEST, COMMAND_TYPE, VersionCheckResponse
@@ -50,10 +51,10 @@ class RequestFilter(object):
                     print "PARSE VERSION_CHECK_REQUEST ERROR"
                     return HttpResponse(status=403)
 
-                if proto.version != settings.SERVER_VERSION:
+                if proto.version != version.version:
                     print "==== VERSION CHECK FAILURE ===="
                     print "==== client: {0} ====".format(proto.version)
-                    print "==== server: {0} ====".format(settings.SERVER_VERSION)
+                    print "==== server: {0} ====".format(version.version)
 
                     raise VersionCheckFailure()
 
@@ -105,5 +106,5 @@ class RequestFilterWrapperForVersionCheck(RequestFilter):
         except VersionCheckFailure:
             version_msg = VersionCheckResponse()
             version_msg.ret = 0
-            version_msg.version = settings.SERVER_VERSION
+            version_msg.version = version.version
             return HttpResponse(pack_msg(version_msg), content_type='text/plain')

@@ -1,10 +1,10 @@
 
-from django.conf import settings
 from django.http import HttpResponse
 
 import protomsg
 
 from core.server import server
+from core.version import version
 from core.msgpipe import message_get
 from core.activeplayers import ActivePlayers, Player
 from preset import errormsg
@@ -29,7 +29,7 @@ class UnpackAndVerifyData(RequestFilter):
         except VersionCheckFailure:
             version_msg = VersionCheckResponse()
             version_msg.ret = 0
-            version_msg.version = settings.SERVER_VERSION
+            version_msg.version = version.version
             return HttpResponse(pack_msg(version_msg), content_type='text/plain')
 
         if request.path.startswith('/api/'):

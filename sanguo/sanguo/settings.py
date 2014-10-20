@@ -242,5 +242,3 @@ del tree
 
 SERVER_EMAIL = '{0}.{1} <{0}.{1}@sanguo.com>'.format(EMAIL_NAME, SERVER_ID)
 EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
-
-SERVER_VERSION = "0.0.0.0"
