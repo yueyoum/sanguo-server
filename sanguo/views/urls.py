@@ -102,4 +102,7 @@ urlpatterns += patterns('',
                         url(r'^api/server/feedback/$', 'views.api.server.views.feedback'),
 
                         url(r'^api/purchase91/done/$', 'views.api.purchase.views.purchase91_done'),
+
+                        # update the whole server version!
+                        url(r'^api/server/version/$', 'views.api.server.views.version_change'),
 )

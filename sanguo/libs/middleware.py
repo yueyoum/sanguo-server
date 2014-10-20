@@ -4,11 +4,13 @@ __author__ = 'Wang Chao'
 __date__ = '4/10/14'
 
 from django.http import HttpResponse
+from django.conf import settings
 
 from libs import (
     NUM_FIELD,
     METHOD_POST,
     MSG_TYPE_EMPTY_SESSION,
+    pack_msg,
     unpack_msg,
     crypto,
     MAX_NUM_FIELD_AMOUNT,
@@ -40,8 +42,23 @@ class RequestFilter(object):
         for i in xrange(num_of_msgs):
             msg_id, msg, data = unpack_msg(data)
             if msg_id == 51:
-                # TODO Check Version
-                pass
+                proto = protomsg.VersionCheckRequest()
+                try:
+                    proto.ParseFromString(msg)
+                except:
+                    print "PARSE VERSION_CHECK_REQUEST ERROR"
+                    return HttpResponse(status=403)
+
+                if proto.version != settings.SERVER_VERSION:
+                    print "==== VERSION CHECK FAILURE ===="
+                    print "==== client: {0} ====".format(proto.version)
+                    print "==== server: {0} ====".format(settings.SERVER_VERSION)
+
+                    version_msg = protomsg.VersionCheckResponse()
+                    version_msg.ret = 0
+                    version_msg.version = settings.SERVER_VERSION
+                    return HttpResponse(pack_msg(version_msg), content_type='text/plain')
+
             else:
                 if getattr(request, '_proto', None) is not None:
                     continue
