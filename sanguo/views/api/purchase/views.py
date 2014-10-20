@@ -5,7 +5,7 @@ __date__ = '14-7-30'
 
 
 from utils.decorate import json_return
-from core.purchase import PurchaseAction
+from core.purchase import PurchaseAction91
 
 @json_return
 def purchase91_done(request):
@@ -15,7 +15,7 @@ def purchase91_done(request):
     except:
         return {'ret': 1}
 
-    p = PurchaseAction(char_id)
+    p = PurchaseAction91(char_id)
     p.send_reward(goods_id)
 
     return {'ret': 0}

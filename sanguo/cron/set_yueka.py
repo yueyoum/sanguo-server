@@ -8,7 +8,7 @@ from _base import Logger
 import traceback
 import json
 from core.mongoscheme import MongoPurchaseRecord
-from core.purchase import PurchaseAction, YuekaLockTimeOut
+from core.purchase import BasePurchaseAction, YuekaLockTimeOut
 from core.attachment import make_standard_drop_from_template
 from core.mail import Mail
 
@@ -33,7 +33,7 @@ def set_yueka():
             # 发送奖励，并且days-1
             send_yueka_reward(record.id, record.yueka_sycee, record.yueka_remained_days-1)
 
-            pa = PurchaseAction(record.id)
+            pa = BasePurchaseAction(record.id)
             try:
                 pa.set_yueka_remained_days(-1)
             except YuekaLockTimeOut:

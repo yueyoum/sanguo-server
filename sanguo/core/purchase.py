@@ -7,69 +7,26 @@ import time
 import json
 
 from mongoengine import DoesNotExist
-
+from core.server import server
 from core.resource import Resource
 from core.mongoscheme import MongoPurchaseRecord
 from core.msgpipe import publish_to_char
 from core.exception import SanguoException
 from core.mail import Mail
 from core.attachment import get_drop
-
-from utils.api import api_purchase_done, api_purchase_products, api_purchase_verify, api_purchase91_confirm
+from utils.api import api_purchase_verify, api_purchase91_confirm
 from utils import pack_msg
-
 from protomsg import PurchaseStatusNotify, Purchase91ConfirmResponse
-
 from preset.data import PURCHASE
 from preset.settings import PURCHASE_FIRST_REWARD_PACKAGE_IDS, MAIL_PURCHASE_FIRST_CONTENT, MAIL_PURCHASE_FIRST_TITLE
 from preset import errormsg
-
-def get_purchase_products():
-    res = api_purchase_products({})
-    return res['data']['products']
-
-
-class VerifyResult(object):
-    __slots__ = ['ret', 'product_id', 'name', 'add_sycee']
-    def __init__(self, ret, product_id=None, name=None, add_sycee=None):
-        self.ret = ret
-        self.product_id = product_id
-        self.name = name
-        self.add_sycee = add_sycee
-
-
-def verify_buy(char_id, receipt):
-    data = {
-        'char_id': char_id,
-        'receipt': receipt,
-    }
-
-    # FIXME error handle
-    res = api_purchase_verify(data)
-    if res['ret'] != 0:
-        return VerifyResult(res['ret'])
-
-    log_id = res['data']['log_id']
-    char_id = res['data']['char_id']
-    product_id = res['data']['product_id']
-    name = res['data']['name']
-    sycee = res['data']['sycee']
-    actual_sycee = res['data']['actual_sycee']
-
-    resource = Resource(char_id, "Purchase Done", "purchase got: sycee {0}, actual sycee {1}".format(sycee, actual_sycee))
-    resource.add(purchase_got=sycee, purchase_actual_got=actual_sycee)
-
-    api_purchase_done({'log_id': log_id})
-
-    return VerifyResult(0, product_id=product_id, name=name, add_sycee=actual_sycee)
 
 
 class YuekaLockTimeOut(Exception):
     pass
 
 
-
-class PurchaseAction(object):
+class BasePurchaseAction(object):
     def __init__(self, char_id):
         self.char_id = char_id
         self.load_mongo_record()
@@ -89,19 +46,6 @@ class PurchaseAction(object):
     def all_times(self):
         return {int(k): v for k, v in self.mongo_record.times.iteritems()}
 
-
-    def check_confirm(self):
-        res = api_purchase91_confirm(data={'char_id': self.char_id})
-        print "91 confirm"
-        print res
-
-        response = Purchase91ConfirmResponse()
-        response.ret = res['ret']
-        if res['ret']:
-            response.reason = res['data']['status']
-
-        response.goods_id = res['data']['goods_id']
-        return response
 
 
     def send_reward(self, goods_id):
@@ -210,3 +154,40 @@ class PurchaseAction(object):
 
         publish_to_char(self.char_id, pack_msg(msg))
 
+
+class PurchaseAction91(BasePurchaseAction):
+    def check_confirm(self):
+        res = api_purchase91_confirm(data={'char_id': self.char_id})
+        print "91 confirm"
+        print res
+
+        response = Purchase91ConfirmResponse()
+        response.ret = res['ret']
+        if res['ret']:
+            response.reason = res['data']['status']
+
+        response.goods_id = res['data']['goods_id']
+        return response
+
+
+class PurchaseActionIOS(BasePurchaseAction):
+    def check_verify(self, receipt):
+        data = {
+            'server_id': server.id,
+            'char_id': self.char_id,
+            'receipt': receipt
+        }
+        res = api_purchase_verify(data)
+        if res['ret'] != 0:
+            raise SanguoException(
+                res['ret'],
+                self.char_id,
+                "Purchase IOS Verify",
+                "api_purchase_verify, ret = {0}".format(res['ret'])
+            )
+
+        # OK
+        goods_id = res['data']['goods_id']
+        self.send_reward(goods_id)
+
+        return goods_id

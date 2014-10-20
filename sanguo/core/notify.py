@@ -26,7 +26,7 @@ from core.hero import HeroSoul, char_heros_obj
 from core.functionopen import FunctionOpen
 from core.levy import Levy
 from core.attachment import Attachment
-from core.purchase import PurchaseAction
+from core.purchase import BasePurchaseAction
 
 from core.affairs import Affairs
 
@@ -120,7 +120,7 @@ def login_notify(char_id):
     Levy(char_id).send_notify()
     Attachment(char_id).send_notify()
 
-    PurchaseAction(char_id).send_notify()
+    BasePurchaseAction(char_id).send_notify()
 
     SystemBroadcast(char_id).send_global_broadcast()
 
