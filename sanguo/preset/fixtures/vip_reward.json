@@ -4,15 +4,15 @@
     "model": "vip.vipreward", 
     "fields": {
         "item_two_type": 9, 
-        "item_three_type": 7, 
-        "item_three_amount": 1, 
-        "item_one_id": 1, 
+        "item_three_type": 9, 
+        "item_three_amount": 2, 
+        "item_one_id": 94, 
         "package": 12001, 
-        "item_two_id": 2, 
-        "item_one_amount": 3000, 
+        "item_two_id": 1, 
+        "item_one_amount": 1, 
         "item_two_amount": 2, 
-        "item_three_id": 92, 
-        "item_one_type": 3
+        "item_three_id": 2, 
+        "item_one_type": 7
     }
 },
 {
@@ -21,14 +21,14 @@
     "fields": {
         "item_two_type": 9, 
         "item_three_type": 9, 
-        "item_three_amount": 4, 
-        "item_one_id": 1, 
+        "item_three_amount": 3, 
+        "item_one_id": 10, 
         "package": 12002, 
-        "item_two_id": 1, 
-        "item_one_amount": 4000, 
-        "item_two_amount": 4, 
-        "item_three_id": 2, 
-        "item_one_type": 3
+        "item_two_id": 3, 
+        "item_one_amount": 1, 
+        "item_two_amount": 10, 
+        "item_three_id": 4, 
+        "item_one_type": 7
     }
 },
 {
@@ -36,15 +36,15 @@
     "model": "vip.vipreward", 
     "fields": {
         "item_two_type": 9, 
-        "item_three_type": 7, 
-        "item_three_amount": 1, 
-        "item_one_id": 1, 
+        "item_three_type": 9, 
+        "item_three_amount": 6, 
+        "item_one_id": 80, 
         "package": 12003, 
-        "item_two_id": 4, 
-        "item_one_amount": 5000, 
-        "item_two_amount": 3, 
-        "item_three_id": 78, 
-        "item_one_type": 3
+        "item_two_id": 3, 
+        "item_one_amount": 1, 
+        "item_two_amount": 20, 
+        "item_three_id": 4, 
+        "item_one_type": 7
     }
 },
 {
@@ -53,14 +53,14 @@
     "fields": {
         "item_two_type": 9, 
         "item_three_type": 9, 
-        "item_three_amount": 3, 
-        "item_one_id": 1, 
+        "item_three_amount": 5, 
+        "item_one_id": 73, 
         "package": 12004, 
-        "item_two_id": 3, 
-        "item_one_amount": 6000, 
-        "item_two_amount": 10, 
-        "item_three_id": 4, 
-        "item_one_type": 3
+        "item_two_id": 5, 
+        "item_one_amount": 1, 
+        "item_two_amount": 15, 
+        "item_three_id": 6, 
+        "item_one_type": 7
     }
 },
 {
@@ -69,14 +69,14 @@
     "fields": {
         "item_two_type": 9, 
         "item_three_type": 9, 
-        "item_three_amount": 5, 
-        "item_one_id": 1, 
+        "item_three_amount": 10, 
+        "item_one_id": 60, 
         "package": 12005, 
         "item_two_id": 5, 
-        "item_one_amount": 7000, 
-        "item_two_amount": 20, 
+        "item_one_amount": 1, 
+        "item_two_amount": 30, 
         "item_three_id": 6, 
-        "item_one_type": 3
+        "item_one_type": 7
     }
 },
 {
@@ -84,15 +84,15 @@
     "model": "vip.vipreward", 
     "fields": {
         "item_two_type": 9, 
-        "item_three_type": 7, 
-        "item_three_amount": 1, 
-        "item_one_id": 1, 
+        "item_three_type": 9, 
+        "item_three_amount": 10, 
+        "item_one_id": 95, 
         "package": 12006, 
-        "item_two_id": 6, 
-        "item_one_amount": 8000, 
-        "item_two_amount": 5, 
-        "item_three_id": 94, 
-        "item_one_type": 3
+        "item_two_id": 7, 
+        "item_one_amount": 1, 
+        "item_two_amount": 30, 
+        "item_three_id": 8, 
+        "item_one_type": 7
     }
 },
 {
@@ -101,14 +101,14 @@
     "fields": {
         "item_two_type": 9, 
         "item_three_type": 9, 
-        "item_three_amount": 2, 
-        "item_one_id": 1, 
+        "item_three_amount": 20, 
+        "item_one_id": 68, 
         "package": 12007, 
         "item_two_id": 7, 
-        "item_one_amount": 9000, 
-        "item_two_amount": 10, 
+        "item_one_amount": 1, 
+        "item_two_amount": 60, 
         "item_three_id": 8, 
-        "item_one_type": 3
+        "item_one_type": 7
     }
 },
 {
@@ -117,14 +117,14 @@
     "fields": {
         "item_two_type": 9, 
         "item_three_type": 9, 
-        "item_three_amount": 3, 
-        "item_one_id": 1, 
+        "item_three_amount": 5, 
+        "item_one_id": 34, 
         "package": 12008, 
-        "item_two_id": 7, 
-        "item_one_amount": 10000, 
-        "item_two_amount": 15, 
-        "item_three_id": 8, 
-        "item_one_type": 3
+        "item_two_id": 9, 
+        "item_one_amount": 1, 
+        "item_two_amount": 10, 
+        "item_three_id": 10, 
+        "item_one_type": 5
     }
 },
 {
@@ -132,79 +132,79 @@
     "model": "vip.vipreward", 
     "fields": {
         "item_two_type": 9, 
-        "item_three_type": 7, 
-        "item_three_amount": 1, 
-        "item_one_id": 1, 
+        "item_three_type": 9, 
+        "item_three_amount": 10, 
+        "item_one_id": 88, 
         "package": 12009, 
-        "item_two_id": 10, 
-        "item_one_amount": 11000, 
-        "item_two_amount": 3, 
-        "item_three_id": 87, 
-        "item_one_type": 3
+        "item_two_id": 9, 
+        "item_one_amount": 1, 
+        "item_two_amount": 20, 
+        "item_three_id": 10, 
+        "item_one_type": 7
     }
 },
 {
     "pk": 10, 
     "model": "vip.vipreward", 
     "fields": {
-        "item_two_type": 7, 
+        "item_two_type": 9, 
         "item_three_type": 9, 
-        "item_three_amount": 1, 
-        "item_one_id": 1, 
+        "item_three_amount": 20, 
+        "item_one_id": 55, 
         "package": 12010, 
-        "item_two_id": 61, 
-        "item_one_amount": 12000, 
-        "item_two_amount": 1, 
+        "item_two_id": 9, 
+        "item_one_amount": 1, 
+        "item_two_amount": 40, 
         "item_three_id": 10, 
-        "item_one_type": 3
+        "item_one_type": 7
     }
 },
 {
     "pk": 11, 
     "model": "vip.vipreward", 
     "fields": {
-        "item_two_type": 7, 
+        "item_two_type": 9, 
         "item_three_type": 9, 
-        "item_three_amount": 20, 
-        "item_one_id": 1, 
+        "item_three_amount": 30, 
+        "item_one_id": 61, 
         "package": 12011, 
-        "item_two_id": 55, 
-        "item_one_amount": 13000, 
-        "item_two_amount": 1, 
-        "item_three_id": 9, 
-        "item_one_type": 3
+        "item_two_id": 9, 
+        "item_one_amount": 1, 
+        "item_two_amount": 60, 
+        "item_three_id": 10, 
+        "item_one_type": 7
     }
 },
 {
     "pk": 12, 
     "model": "vip.vipreward", 
     "fields": {
-        "item_two_type": 7, 
+        "item_two_type": 9, 
         "item_three_type": 9, 
-        "item_three_amount": 20, 
-        "item_one_id": 1, 
+        "item_three_amount": 40, 
+        "item_one_id": 49, 
         "package": 12012, 
-        "item_two_id": 49, 
-        "item_one_amount": 14000, 
-        "item_two_amount": 1, 
-        "item_three_id": 9, 
-        "item_one_type": 3
+        "item_two_id": 9, 
+        "item_one_amount": 1, 
+        "item_two_amount": 70, 
+        "item_three_id": 10, 
+        "item_one_type": 7
     }
 },
 {
     "pk": 13, 
     "model": "vip.vipreward", 
     "fields": {
-        "item_two_type": 7, 
+        "item_two_type": 9, 
         "item_three_type": 9, 
-        "item_three_amount": 3, 
-        "item_one_id": 1, 
+        "item_three_amount": 50, 
+        "item_one_id": 35, 
         "package": 12013, 
-        "item_two_id": 35, 
-        "item_one_amount": 15000, 
-        "item_two_amount": 1, 
+        "item_two_id": 9, 
+        "item_one_amount": 1, 
+        "item_two_amount": 80, 
         "item_three_id": 10, 
-        "item_one_type": 3
+        "item_one_type": 7
     }
 }
 ]

@@ -4,7 +4,7 @@
     "model": "stage.activelystage", 
     "fields": {
         "normal_drop": "0", 
-        "normal_gold": 20000, 
+        "normal_gold": 8000, 
         "bg": "\u519b\u8425\u573a\u666f", 
         "strength_modulus": 1.0, 
         "level": 9, 
@@ -21,7 +21,7 @@
     "model": "stage.activelystage", 
     "fields": {
         "normal_drop": "0", 
-        "normal_gold": 30000, 
+        "normal_gold": 12000, 
         "bg": "\u519b\u8425\u573a\u666f", 
         "strength_modulus": 1.7, 
         "level": 22, 
@@ -38,7 +38,7 @@
     "model": "stage.activelystage", 
     "fields": {
         "normal_drop": "0", 
-        "normal_gold": 40000, 
+        "normal_gold": 16000, 
         "bg": "\u519b\u8425\u573a\u666f", 
         "strength_modulus": 2.2, 
         "level": 32, 
@@ -55,7 +55,7 @@
     "model": "stage.activelystage", 
     "fields": {
         "normal_drop": "0", 
-        "normal_gold": 50000, 
+        "normal_gold": 22000, 
         "bg": "\u519b\u8425\u573a\u666f", 
         "strength_modulus": 2.5, 
         "level": 42, 
@@ -72,7 +72,7 @@
     "model": "stage.activelystage", 
     "fields": {
         "normal_drop": "0", 
-        "normal_gold": 60000, 
+        "normal_gold": 30000, 
         "bg": "\u519b\u8425\u573a\u666f", 
         "strength_modulus": 2.8, 
         "level": 52, 
