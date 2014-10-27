@@ -6,7 +6,7 @@
     <server>
         <id>1</id>
         <name>第一服</name>
-        <interface>eth0</interface>
+        <ip>1.1.1.1</ip>
         <port>
             <http>0000</http>
             <https>0000</https>

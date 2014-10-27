@@ -221,7 +221,7 @@ HUB_HTTPS_PORT = int( tree.find('hub/port/https').text )
 
 SERVER_ID = int( tree.find('server/id').text )
 SERVER_NAME = tree.find('server/name').text
-SERVER_INTERFACE = tree.find('server/interface').text
+SERVER_IP = tree.find('server/ip').text
 LISTEN_PORT_HTTP = int( tree.find('server/port/http').text )
 LISTEN_PORT_HTTPS = int( tree.find('server/port/https').text )
 
