@@ -1353,22 +1353,22 @@
     }
 },
 {
-    "pk": 4100, 
+    "pk": 4101, 
     "model": "errormsg.errormsg", 
     "fields": {
-        "error_index": "PURCHASE_ALREADY_VERIFIED", 
-        "text_zh": "\u8fd9\u4e2a\u8d2d\u4e70\u8bf7\u6c42\u5df2\u7ecf\u9a8c\u8bc1\u8fc7\uff0c\u65e0\u6cd5\u518d\u6b21\u9a8c\u8bc1", 
+        "error_index": "PURCHASE_VERIFY_ERROR", 
+        "text_zh": "\u9a8c\u8bc1\u9519\u8bef\uff0c\u65e0\u6548\u8d2d\u4e70", 
         "link_to": null, 
         "des": "", 
         "area": ""
     }
 },
 {
-    "pk": 4101, 
+    "pk": 4102, 
     "model": "errormsg.errormsg", 
     "fields": {
-        "error_index": "PURCHASE_VERIFY_ERROR", 
-        "text_zh": "\u9a8c\u8bc1\u9519\u8bef\uff0c\u65e0\u6548\u8d2d\u4e70", 
+        "error_index": "PURCHASE_VERIFY_TIMEOUT", 
+        "text_zh": "\u9a8c\u8bc1\u8d85\u65f6", 
         "link_to": null, 
         "des": "", 
         "area": ""
