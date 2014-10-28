@@ -1353,6 +1353,17 @@
     }
 },
 {
+    "pk": 4100, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "PURCHASE_ALREADY_VERIFIED", 
+        "text_zh": "\u5df2\u7ecf\u9a8c\u8bc1\u8fc7", 
+        "link_to": null, 
+        "des": "\u8fd9\u4e2a\u4e0d\u53d1\u7ed9\u5ba2\u6237\u7aef\uff0c\u53ea\u662fserver\u7528", 
+        "area": ""
+    }
+},
+{
     "pk": 4101, 
     "model": "errormsg.errormsg", 
     "fields": {

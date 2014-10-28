@@ -178,6 +178,10 @@ class PurchaseActionIOS(BasePurchaseAction):
             'receipt': receipt
         }
         res = api_purchase_verify(data)
+        if res['ret'] == errormsg.PURCHASE_ALREADY_VERIFIED:
+            # 已经验证过的，客户端当作成功返回，只是不给东西
+            return 0
+
         if res['ret'] != 0:
             raise SanguoException(
                 res['ret'],
