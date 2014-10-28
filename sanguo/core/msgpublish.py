@@ -22,7 +22,7 @@ class ChatMessagePublish(object):
     __slots__ = ['char_id', 'cache_char']
     def __init__(self, char_id):
         self.char_id = char_id
-        self.cache_char = Char(char_id).cacheobj
+        self.cache_char = Char(char_id).mc
 
     def check(self, text):
         if len(text) > CHAT_MESSAGE_MAX_LENGTH:
@@ -40,7 +40,7 @@ class ChatMessagePublish(object):
         chat_msg = msg.msgs.add()
         chat_msg.char.id = self.cache_char.id
         chat_msg.char.name = self.cache_char.name
-        chat_msg.char.official = self.cache_char.official
+        chat_msg.char.vip = self.cache_char.vip
         chat_msg.msg = text
         publish_to_char(target_char_id, pack_msg(msg))
 
