@@ -67,7 +67,7 @@ class BasePurchaseAction(object):
         self.send_notify()
 
         title = u'充值成功'
-        content = u'获得了: {0}'.format(p.first_des if p.first_des else p.des)
+        content = u'获得了: {0}'.format(p.first_des if is_first else p.des)
         mail = Mail(self.char_id)
         mail.add(title, content)
 
