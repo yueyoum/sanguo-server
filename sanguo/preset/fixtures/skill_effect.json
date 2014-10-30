@@ -934,5 +934,17 @@
         "is_hit_target": false, 
         "rounds": 0
     }
+},
+{
+    "pk": 105, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "target": 3, 
+        "effect": 4, 
+        "value": 15, 
+        "skill": 75, 
+        "is_hit_target": false, 
+        "rounds": 99
+    }
 }
 ]

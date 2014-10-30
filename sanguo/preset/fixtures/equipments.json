@@ -2644,5 +2644,32 @@
         "icon_large": "\u6b66\u5723\u7eaf\u91d1\u5370", 
         "icon": "\u6b66\u5723\u7eaf\u91d1\u5370"
     }
+},
+{
+    "pk": 99, 
+    "model": "item.equipment", 
+    "fields": {
+        "upgrade_to": null, 
+        "stuff_needs": "", 
+        "gem_addition": 300, 
+        "name": "\u81f3\u5c0a\u5370", 
+        "tip_des": "\u9644\u52a0\u751f\u547d\uff1a1500\r\n\u5b9d\u77f3\u52a0\u6210\uff1a300%\r\n\u4e0d\u53ef\u5f3a\u5316", 
+        "tp_name": "\u9970\u54c1", 
+        "hp": 1500, 
+        "des": "\u6bd4\u6b66\u6d3b\u52a8\u5468\u51a0\u519b\u5956\u52b1\uff01", 
+        "attack": 0, 
+        "tp": 3, 
+        "tip_type": "\u7279\u6b8a\u9970\u54c1", 
+        "growing": 0, 
+        "step": 4, 
+        "defense": 0, 
+        "step_name": "\u7d2b", 
+        "cls_name": "\u5370", 
+        "brief_des": "\uff08\u7279\u6b8a\u9970\u54c1\uff09\u5b9d\u77f3\u5c5e\u6027\u83b7\u5f97300%\u52a0\u6210", 
+        "slots": 4, 
+        "cls": 14, 
+        "icon_large": "\u6b66\u5723\u7eaf\u91d1\u5370", 
+        "icon": "\u6b66\u5723\u7eaf\u91d1\u5370"
+    }
 }
 ]
