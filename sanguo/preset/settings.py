@@ -236,7 +236,6 @@ ARENA_TOP_RANKS_CACHE = 10
 # 比武同一个人被打CD， 秒
 ARENA_CD = 60
 # 竞技场初始积分
-ARENA_DEFAULT_SCORE = 1400
 
 #########################
 #      精英关卡         #
@@ -294,8 +293,8 @@ MAIL_ARENA_WEEK_REWARD_TITLE = u'比武每周奖励'
 MAIL_ARENA_WEEK_REWARD_CONTENT = u'比武每周奖励'
 # 比武被打
 MAIL_ARENA_BEATEN_TITLE = u'比武挑战记录'
-MAIl_ARENA_BEATEN_WIN_TEMPLATE = u'报～{0}在比武擂台中挑战我军，已被我军击退，主公的积分从{1}变成了{2} ({3})'
-MAIl_ARENA_BEATEN_LOST_TEMPLATE = u'报～{0}在比武擂台中挑战我军，我军暂时落败，主公的积分从{1}变成了{2} ({3})'
+MAIl_ARENA_BEATEN_WIN_TEMPLATE = u'报～{0}在比武擂台中挑战我军，已被我军击退'
+MAIl_ARENA_BEATEN_LOST_TEMPLATE = u'报～{0}在比武擂台中挑战我军，我军暂时落败'
 # 月卡
 MAIL_YUEKA_TITLE = u'月卡奖励'
 MAIL_YUEKA_CONTENT_TEMPLATE = u'您获得了今日奖励的{0}元宝，月卡奖励还有{1}天可以领取哦。'

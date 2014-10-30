@@ -13,7 +13,7 @@ from core.character import Char
 from core.battle import PVP
 from core.counter import Counter
 from core.mongoscheme import MongoArena, MongoEmbeddedArenaBeatenRecord
-from core.exception import CounterOverFlow, SanguoException
+from core.exception import SanguoException
 from core.achievement import Achievement
 from core.task import Task
 from core.resource import Resource
@@ -25,7 +25,6 @@ from preset import errormsg
 
 from preset.settings import (
     ARENA_COST_SYCEE,
-    ARENA_DEFAULT_SCORE,
     ARENA_CD,
     ARENA_TOP_RANKS_CACHE,
     MAIL_ARENA_BEATEN_TITLE,
@@ -53,6 +52,20 @@ def calculate_score(my_score, rival_score, win):
     return int(score)
 
 
+def get_arena_init_score():
+    # 竞技场初始化积分
+    lowest = redis_client.zrange(REDIS_ARENA_KEY, 0, 0, withscores=True)
+    if not lowest:
+        return 1500
+
+    char_id, score = lowest[0]
+    score = int(score)
+    if score < 1000:
+        score = 1000
+    return score
+
+
+
 class Arena(object):
     FUNC_ID = 8
     def __init__(self, char_id):
@@ -62,7 +75,7 @@ class Arena(object):
             self.mongo_arena = MongoArena.objects.get(id=char_id)
         except DoesNotExist:
             self.mongo_arena = MongoArena(id=char_id)
-            self.mongo_arena.score = ARENA_DEFAULT_SCORE
+            self.mongo_arena.score = get_arena_init_score()
             self.mongo_arena.save()
 
         if not self.score:
@@ -215,24 +228,24 @@ class Arena(object):
         b = PVP(self.char_id, rival_id, msg)
         b.start()
 
+        t = Task(self.char_id)
+        t.trig(2)
 
         if msg.self_win:
             achievement = Achievement(self.char_id)
             achievement.trig(11, 1)
 
-        self_score = self.score
-        rival_arena = Arena(rival_id)
-        rival_score = rival_arena.score
+            # 只有打赢才设置积分
+            self_score = self.score
+            rival_arena = Arena(rival_id)
+            rival_score = rival_arena.score
 
-        new_score = calculate_score(self_score, rival_score, msg.self_win)
-        self.set_score(new_score)
+            new_score = calculate_score(self_score, rival_score, msg.self_win)
+            self.set_score(new_score)
 
-        t = Task(self.char_id)
-        t.trig(2)
+            self.send_notify(score=new_score)
 
-        self.send_notify(score=new_score)
-
-        rival_arena.be_beaten(rival_score, self_score, not msg.self_win, self.char_id)
+            rival_arena.be_beaten(rival_score, self_score, not msg.self_win, self.char_id)
 
         return msg
 
@@ -261,12 +274,13 @@ class Arena(object):
         def _make_content(record):
             if record.old_score > record.new_score:
                 template = MAIl_ARENA_BEATEN_LOST_TEMPLATE
-                des = '-{0}'.format(abs(record.old_score - record.new_score))
+                # des = '-{0}'.format(abs(record.old_score - record.new_score))
             else:
                 template = MAIl_ARENA_BEATEN_WIN_TEMPLATE
-                des = '+{0}'.format(abs(record.old_score - record.new_score))
+                # des = '+{0}'.format(abs(record.old_score - record.new_score))
 
-            return template.format(record.name, record.old_score, record.new_score, des)
+            # return template.format(record.name, record.old_score, record.new_score, des)
+            return template.format(record.name)
 
         contents = [_make_content(record) for record in self.mongo_arena.beaten_record[-1:-5:-1]]
 
