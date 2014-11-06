@@ -19,7 +19,6 @@ from core.task import Task
 from core.resource import Resource
 from preset.data import VIP_MAX_LEVEL
 from utils import pack_msg
-from utils.decorate import cache_it
 import protomsg
 from preset import errormsg
 
@@ -108,7 +107,6 @@ class Arena(object):
         self.mongo_arena.save()
 
 
-    @cache_it('_redis_arena_top_cache', ARENA_TOP_RANKS_CACHE)
     def get_top_ranks(self):
         # return [(char_id, score, power, name,  leader), ...]
         top_data = redis_client.zrevrange(REDIS_ARENA_KEY, 0, 2, withscores=True)
