@@ -6,6 +6,8 @@ __date__ = '14-11-4'
 import operator
 
 import arrow
+
+from django.conf import settings
 from mongoengine import DoesNotExist
 from core.exception import SanguoException
 from core.mongoscheme import MongoActivityStatic
@@ -44,7 +46,7 @@ class ActivityEntry(object):
                 second=0,
             )
         else:
-            start_time = server.opened_date
+            start_time = server.opened_date.replace(tzinfo=settings.TIME_ZONE)
 
         return start_time.replace(hours=+self.activity_data.total_continued_hours)
 

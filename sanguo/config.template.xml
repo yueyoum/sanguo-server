@@ -14,6 +14,8 @@
         <open>2014-01-01</open>
     </server>
 
+    <timezone>Asia/Shanghai</timezone>
+
     <redis>
         <host>127.0.0.1</host>
         <port>6380</port>
