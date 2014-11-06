@@ -1365,7 +1365,7 @@
         "anger_self": 0, 
         "prob": 100, 
         "trig_start": 1, 
-        "cast_type": 1, 
+        "cast_type": 2, 
         "trig_cooldown": 3, 
         "anger_rival_team": -50, 
         "mode": 2, 

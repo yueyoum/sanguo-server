@@ -1494,5 +1494,38 @@
         "des": "", 
         "area": ""
     }
+},
+{
+    "pk": 5600, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "ACTIVITY_ALREADY_GOT_REWARD", 
+        "text_zh": "\u5df2\u7ecf\u9886\u53d6\u8fc7\u5956\u52b1", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5601, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "ACTIVITY_CAN_NOT_GET_REWARD", 
+        "text_zh": "\u672a\u5b8c\u6210\uff0c\u4e0d\u80fd\u9886\u53d6\u5956\u52b1", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5602, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "ACTIVITY_GET_REWARD_TP_ERROR", 
+        "text_zh": "\u9886\u53d6\u9519\u8bef", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
 }
 ]
