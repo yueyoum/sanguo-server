@@ -277,8 +277,8 @@ class ActivityStatic(object):
                     continue
             else:
                 has_reward_go_got = False
-                for i in entry.get_condition_ids():
-                    if i in self.mongo_ac.can_get:
+                for _cid in entry.get_condition_ids():
+                    if _cid in self.mongo_ac.can_get:
                         has_reward_go_got = True
                         break
 
