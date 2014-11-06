@@ -84,6 +84,8 @@ urlpatterns = patterns('',
 
 
                        url(r'^vip/getreward/$', 'views.vip.views.vip_get_reward'),
+
+                       url(r'^activity/getreward/$', 'views.activity.views.get_reward'),
 )
 
 # testmode

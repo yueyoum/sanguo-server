@@ -12,6 +12,8 @@ from core.mongoscheme import MongoActivityStatic
 from core.server import server
 from core.msgpipe import publish_to_char
 from core.mail import Mail
+from core.attachment import get_drop, standard_drop_to_attachment_protomsg
+from core.resource import Resource
 from utils import pack_msg
 
 from preset.data import ACTIVITY_STATIC, ACTIVITY_STATIC_CONDITIONS, PACKAGES
@@ -226,6 +228,12 @@ class ActivityStatic(object):
         self.mongo_ac.save()
 
         self.send_update_notify([activity_id])
+
+        standard_drop = get_drop([ACTIVITY_STATIC_CONDITIONS[condition_id].package])
+        resource = Resource(self.char_id, "Activity Get Reward", "get condition id {0}".format(condition_id))
+        standard_drop = resource.add(**standard_drop)
+
+        return standard_drop_to_attachment_protomsg(standard_drop)
 
 
 
