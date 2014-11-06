@@ -272,8 +272,18 @@ class ActivityStatic(object):
         for i in activity_ids:
             entry = ActivityEntry(i)
 
-            if not entry.is_valid():
-                continue
+            if ACTIVITY_STATIC[i].tp == 4:
+                if not entry.is_valid():
+                    continue
+            else:
+                has_reward_go_got = False
+                for i in entry.get_condition_ids():
+                    if i in self.mongo_ac.can_get:
+                        has_reward_go_got = True
+                        break
+
+                if not has_reward_go_got and not entry.is_valid():
+                    continue
 
             msg_activity = msg.activities.add()
             self._msg_activity(msg_activity, i)
