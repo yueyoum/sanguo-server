@@ -260,10 +260,10 @@ class ActivityStatic(object):
 
 
     def send_update_notify(self, activity_ids):
-        self.send_notify(Msg=ActivityUpdateNotify, activity_ids=activity_ids)
+        self.send_notify(Msg=ActivityUpdateNotify, activity_ids=activity_ids, force_send=True)
 
 
-    def send_notify(self, Msg=ActivityNotify, activity_ids=None):
+    def send_notify(self, Msg=ActivityNotify, activity_ids=None, force_send=False):
         msg = Msg()
 
         if not activity_ids:
@@ -272,18 +272,19 @@ class ActivityStatic(object):
         for i in activity_ids:
             entry = ActivityEntry(i)
 
-            if ACTIVITY_STATIC[i].tp == 4:
-                if not entry.is_valid():
-                    continue
-            else:
-                has_reward_go_got = False
-                for _cid in entry.get_condition_ids():
-                    if _cid in self.mongo_ac.can_get:
-                        has_reward_go_got = True
-                        break
+            if not force_send:
+                if ACTIVITY_STATIC[i].tp == 4:
+                    if not entry.is_valid():
+                        continue
+                else:
+                    has_reward_go_got = False
+                    for _cid in entry.get_condition_ids():
+                        if _cid in self.mongo_ac.can_get:
+                            has_reward_go_got = True
+                            break
 
-                if not has_reward_go_got and not entry.is_valid():
-                    continue
+                    if not has_reward_go_got and not entry.is_valid():
+                        continue
 
             msg_activity = msg.activities.add()
             self._msg_activity(msg_activity, i)
