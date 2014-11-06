@@ -1,0 +1,66 @@
+[
+{
+    "pk": 1001, 
+    "model": "activity.activitystatic", 
+    "fields": {
+        "name": "\u51b2\u7ea7\u5927\u8d5b", 
+        "continued_days": 3, 
+        "current_des": "\u60a8\u5f53\u524d\u7684\u7b49\u7ea7\uff1a${0}", 
+        "start_time": null, 
+        "des": "\u8fbe\u5230\u7b49\u7ea7\u9886\u53d6\u5956\u52b1", 
+        "tp": 1, 
+        "condition_type": 1, 
+        "mode": 1, 
+        "continued_hours": 0, 
+        "conditions": "1001,1002,1003,1004"
+    }
+},
+{
+    "pk": 2001, 
+    "model": "activity.activitystatic", 
+    "fields": {
+        "name": "\u6536\u96c6\u91d1\u8272\u6b66\u5c06", 
+        "continued_days": 3, 
+        "current_des": "\u60a8\u5f53\u524d\u62e5\u6709\u91d1\u8272\u6b66\u5c06${0}", 
+        "start_time": null, 
+        "des": "\u83b7\u53d6\u91d1\u5c06\u9886\u53d6\u5927\u5956", 
+        "tp": 2, 
+        "condition_type": 1, 
+        "mode": 1, 
+        "continued_hours": 0, 
+        "conditions": "2001,2002,2003,2004"
+    }
+},
+{
+    "pk": 3001, 
+    "model": "activity.activitystatic", 
+    "fields": {
+        "name": "\u901a\u5173\u526f\u672c", 
+        "continued_days": 3, 
+        "current_des": "\u60a8\u5f53\u524d\u5df2\u901a\u5173${0}", 
+        "start_time": null, 
+        "des": "\u901a\u5173\u6218\u5f79\u9886\u53d6\u5927\u5956", 
+        "tp": 3, 
+        "condition_type": 1, 
+        "mode": 1, 
+        "continued_hours": 0, 
+        "conditions": "3001,3002,3003,3004"
+    }
+},
+{
+    "pk": 4001, 
+    "model": "activity.activitystatic", 
+    "fields": {
+        "name": "\u6bd4\u6b66\u7ade\u6280\uff0c\u8c01\u662f\u82f1\u96c4", 
+        "continued_days": 0, 
+        "current_des": "\u60a8\u5f53\u524d\u7684\u79ef\u5206\u6392\u540d\uff1a${0}", 
+        "start_time": null, 
+        "des": "\u6bd4\u6b66\u7ade\u6280\uff0c\u5927\u5956\u4e0d\u505c", 
+        "tp": 4, 
+        "condition_type": 2, 
+        "mode": 2, 
+        "continued_hours": 0, 
+        "conditions": "4001,4002,4003,4004"
+    }
+}
+]

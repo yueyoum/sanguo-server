@@ -11,6 +11,7 @@
             <http>0000</http>
             <https>0000</https>
         </port>
+        <open>2014-01-01</open>
     </server>
 
     <redis>

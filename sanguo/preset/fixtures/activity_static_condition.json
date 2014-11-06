@@ -1,0 +1,290 @@
+[
+{
+    "pk": 1001, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 1, 
+        "icon_one_id": 1, 
+        "package": 12004, 
+        "des": "\u541b\u4e3b\u7b49\u7ea7\u8fbe\u523020\u7ea7", 
+        "icon_three_type": 7, 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 20, 
+        "icon_two_id": 1, 
+        "icon_two_amount": 1
+    }
+},
+{
+    "pk": 1002, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 1, 
+        "icon_one_id": 1, 
+        "package": 12006, 
+        "des": "\u541b\u4e3b\u7b49\u7ea7\u8fbe\u523025\u7ea7", 
+        "icon_three_type": 7, 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 25, 
+        "icon_two_id": 1, 
+        "icon_two_amount": 1
+    }
+},
+{
+    "pk": 1003, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 2, 
+        "icon_one_id": 2, 
+        "package": 12007, 
+        "des": "\u541b\u4e3b\u7b49\u7ea7\u8fbe\u523030\u7ea7", 
+        "icon_three_type": 7, 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 30, 
+        "icon_two_id": 2, 
+        "icon_two_amount": 1
+    }
+},
+{
+    "pk": 1004, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 3, 
+        "icon_one_id": 3, 
+        "package": 12010, 
+        "des": "\u541b\u4e3b\u7b49\u7ea7\u8fbe\u523035\u7ea7", 
+        "icon_three_type": 7, 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 35, 
+        "icon_two_id": 3, 
+        "icon_two_amount": 1
+    }
+},
+{
+    "pk": 2001, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 3, 
+        "icon_one_id": 1, 
+        "package": 12002, 
+        "des": "\u83b7\u53d64\u4e2a\u91d1\u8272\u6b66\u5c06", 
+        "icon_three_type": 7, 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 4, 
+        "icon_two_id": 2, 
+        "icon_two_amount": 1
+    }
+},
+{
+    "pk": 2002, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 2, 
+        "icon_one_id": 3, 
+        "package": 12007, 
+        "des": "\u83b7\u53d65\u4e2a\u91d1\u8272\u6b66\u5c06", 
+        "icon_three_type": 7, 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 5, 
+        "icon_two_id": 1, 
+        "icon_two_amount": 1
+    }
+},
+{
+    "pk": 2003, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 3, 
+        "icon_one_id": 2, 
+        "package": 12010, 
+        "des": "\u83b7\u53d66\u4e2a\u91d1\u8272\u6b66\u5c06", 
+        "icon_three_type": 7, 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 6, 
+        "icon_two_id": 1, 
+        "icon_two_amount": 1
+    }
+},
+{
+    "pk": 2004, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 3, 
+        "icon_one_id": 3, 
+        "package": 12010, 
+        "des": "\u83b7\u53d68\u4e2a\u91d1\u8272\u6b66\u5c06", 
+        "icon_three_type": 7, 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 8, 
+        "icon_two_id": 3, 
+        "icon_two_amount": 1
+    }
+},
+{
+    "pk": 3001, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 3, 
+        "icon_one_id": 1, 
+        "package": 12008, 
+        "des": "\u901a\u5173\u957f\u5b89\u5175\u707e", 
+        "icon_three_type": 7, 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 4, 
+        "icon_two_id": 2, 
+        "icon_two_amount": 1
+    }
+},
+{
+    "pk": 3002, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 2, 
+        "icon_one_id": 3, 
+        "package": 12008, 
+        "des": "\u901a\u5173\u66f9\u64cd\u590d\u4ec7\u7ad9", 
+        "icon_three_type": 7, 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 5, 
+        "icon_two_id": 1, 
+        "icon_two_amount": 1
+    }
+},
+{
+    "pk": 3003, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 3, 
+        "icon_one_id": 2, 
+        "package": 12006, 
+        "des": "\u901a\u5173\u6c49\u5ef7\u4e4b\u4e89", 
+        "icon_three_type": 7, 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 6, 
+        "icon_two_id": 1, 
+        "icon_two_amount": 1
+    }
+},
+{
+    "pk": 3004, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 3, 
+        "icon_one_id": 1, 
+        "package": 12007, 
+        "des": "\u901a\u5173\u8bc4\u5b9a\u6c5f\u4e1c", 
+        "icon_three_type": 7, 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 7, 
+        "icon_two_id": 2, 
+        "icon_two_amount": 1
+    }
+},
+{
+    "pk": 4001, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 2, 
+        "icon_one_id": 1, 
+        "package": 12006, 
+        "des": "\u6bd4\u6b66\u79ef\u5206\u7b2c\u4e00\u540d", 
+        "icon_three_type": 7, 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 1, 
+        "icon_two_id": 3, 
+        "icon_two_amount": 1
+    }
+},
+{
+    "pk": 4002, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 3, 
+        "icon_one_id": 2, 
+        "package": 12006, 
+        "des": "\u6bd4\u6b66\u79ef\u5206\u7b2c\u4e8c\u540d", 
+        "icon_three_type": 7, 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 2, 
+        "icon_two_id": 1, 
+        "icon_two_amount": 1
+    }
+},
+{
+    "pk": 4003, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 3, 
+        "icon_one_id": 3, 
+        "package": 12005, 
+        "des": "\u6bd4\u6b66\u79ef\u5206\u7b2c\u4e09\u540d", 
+        "icon_three_type": 7, 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 3, 
+        "icon_two_id": 1, 
+        "icon_two_amount": 1
+    }
+},
+{
+    "pk": 4004, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 1, 
+        "icon_one_id": 1, 
+        "package": 12004, 
+        "des": "\u6bd4\u6b66\u79ef\u52064-10\u540d", 
+        "icon_three_type": 7, 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 10, 
+        "icon_two_id": 3, 
+        "icon_two_amount": 1
+    }
+}
+]

@@ -385,6 +385,25 @@ class MongoAffairs(Document):
 MongoAffairs.ensure_indexes()
 
 
+# 固定活动
+class MongoActivityStatic(Document):
+    id = IntField(primary_key=True)
+
+    # 可以领奖的条件
+    can_get = ListField(IntField())
+    # 用来标识对应活动领奖次数
+    # condition_id: times
+    # 现在一个条件只能领奖一次，但还是记录了领的次数，
+    # 防止以后出现可以领多次的情况出现
+    reward_times = DictField()
+
+    # 发送次数
+    # 与上面的reward_times一样，只是这个是系统主动发送的，并不是等待玩家来领取的
+    send_times = DictField()
+
+    meta = {
+        'collection': 'activity_static'
+    }
 
 
 def purge_char(char_id):

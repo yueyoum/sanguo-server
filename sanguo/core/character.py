@@ -15,6 +15,7 @@ from core.signals import (
     char_sycee_changed_signal,
     vip_changed_signal,
     new_purchase_signal,
+    SignalHeroWeGo,
 )
 
 
@@ -108,9 +109,13 @@ class Char(object):
         # VIP 也是用 累加的 purchase_got来计算的
         opended_funcs = []
         char = MongoCharacter.objects.get(id=self.id)
+
+        signal_go = SignalHeroWeGo()
+
         if gold:
             char.gold += gold
-            char_gold_changed_signal.send(
+            signal_go.add(
+                char_gold_changed_signal,
                 sender=None,
                 char_id=self.id,
                 now_value=char.gold,
@@ -120,7 +125,8 @@ class Char(object):
         sycee += purchase_actual_got
         if sycee:
             char.sycee += sycee
-            char_sycee_changed_signal.send(
+            signal_go.add(
+                char_sycee_changed_signal,
                 sender=None,
                 char_id=self.id,
                 now_value=char.sycee,
@@ -133,11 +139,13 @@ class Char(object):
                 char.exp, char.level = char_level_up(char.exp, char.level, exp)
 
                 if char.level != old_level:
-                    char_level_up_signal.send(
+                    signal_go.add(
+                        char_level_up_signal,
                         sender=None,
                         char_id=self.id,
                         new_level=char.level,
                     )
+
                     opended_funcs = FunctionOpen(self.id).trig_by_char_level(char.level)
 
         if official_exp:
@@ -145,11 +153,14 @@ class Char(object):
             char.official_exp, char.official = char_official_up(char.official_exp, char.official, official_exp)
 
             if char.official != old_official_level:
-                char_official_up_signal.send(
+
+                signal_go.add(
+                    char_official_up_signal,
                     sender=None,
                     char_id=self.id,
                     new_official=char.official
                 )
+
 
         # VIP
         total_purchase_got = char.purchase_got + purchase_got
@@ -160,7 +171,8 @@ class Char(object):
         if new_vip > old_vip:
             char.vip = new_vip
 
-            vip_changed_signal.send(
+            signal_go.add(
+                vip_changed_signal,
                 sender=None,
                 char_id=self.id,
                 old_vip=old_vip,
@@ -172,12 +184,15 @@ class Char(object):
         self.send_notify(char=char, opended_funcs=opended_funcs)
 
         if purchase_got > 0:
-            new_purchase_signal.send(
+            signal_go.add(
+                new_purchase_signal,
                 sender=None,
                 char_id=self.id,
                 new_got=purchase_got,
                 total_got=total_purchase_got
             )
+
+        signal_go.emit()
 
 
     def send_notify(self, char=None, opended_funcs=None):

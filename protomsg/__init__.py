@@ -19,6 +19,7 @@ from formation_pb2 import *
 from friend_pb2 import *
 from battle_pb2 import *
 from prize_pb2 import *
+from activity_pb2 import *
 
 RESPONSE_NOTIFY_TYPE = {
     "CommandResponse": 50,
@@ -152,6 +153,9 @@ RESPONSE_NOTIFY_TYPE = {
     "HangStartResponse": 5007,
     "VIPNotify": 5100,
     "VIPGetRewardResponse": 5102,
+    "ActivityNotify": 5200,
+    "ActivityUpdateNotify": 5201,
+    "ActivityGetRewardResponse": 5203,
 }
 
 REQUEST_TYPE = {
@@ -219,6 +223,7 @@ REQUEST_TYPE = {
     5004: "HangGetRewardRequest",
     5006: "HangStartRequest",
     5101: "VIPGetRewardRequest",
+    5202: "ActivityGetRewardRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -286,6 +291,7 @@ REQUEST_TYPE_REV = {
     "HangGetRewardRequest": 5004,
     "HangStartRequest": 5006,
     "VIPGetRewardRequest": 5101,
+    "ActivityGetRewardRequest": 5202,
 }
 
 TYPE_COMMAND = {
@@ -352,6 +358,7 @@ TYPE_COMMAND = {
    5004: "/hang/getreward/",
    5006: "/hang/start/",
    5101: "/vip/getreward/",
+   5202: "/activity/getreward/",
 }
 
 COMMAND_TYPE = {v: k for k, v in TYPE_COMMAND.iteritems()}

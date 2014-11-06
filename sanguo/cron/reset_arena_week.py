@@ -12,6 +12,7 @@ from core.mail import Mail
 from core.arena import REDIS_ARENA_KEY
 from core.drives import redis_client
 from core.achievement import Achievement
+from core.activity import ActivityStatic
 from preset.data import ARENA_WEEK_REWARD_TUPLE
 from preset.settings import MAIL_ARENA_WEEK_REWARD_CONTENT, MAIL_ARENA_WEEK_REWARD_TITLE
 
@@ -59,6 +60,8 @@ def reset():
 
         mail = Mail(char_id)
         mail.add(MAIL_ARENA_WEEK_REWARD_TITLE, MAIL_ARENA_WEEK_REWARD_CONTENT, attachment=attachment)
+
+        ActivityStatic(char_id).send_mail()
 
     logger.write("Reset Arena Week: Complete")
     logger.close()

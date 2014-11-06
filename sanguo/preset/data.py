@@ -69,6 +69,9 @@ ARENA_WEEK_REWARD_TUPLE.sort(key=lambda item: -item[0])
 PURCHASE = object_maker(_find_file('purchase.json'))
 PURCHASE_TYPE = object_maker(_find_file('purchase_type.json'))
 
+ACTIVITY_STATIC = object_maker(_find_file('activity_static.json'))
+ACTIVITY_STATIC_CONDITIONS = object_maker(_find_file('activity_static_condition.json'))
+
 def _got_package():
     f = _find_file('package.json')
     with open(f, 'r') as x:
@@ -301,3 +304,18 @@ VIP_MAX_LEVEL = _vip_levels[-1]
 # PURCHASE
 for v in PURCHASE.values():
     v.tp_obj = PURCHASE_TYPE[v.tp]
+
+
+# ACTIVITY
+for v in ACTIVITY_STATIC.values():
+    v.total_continued_hours = v.continued_days * 24 + v.continued_hours
+    condition_ids = [int(i) for i in v.conditions.split(',')]
+
+    condition_objs = []
+    for i in condition_ids:
+        _ac_con_obj = ACTIVITY_STATIC_CONDITIONS[i]
+        _ac_con_obj.activity_id = v.id
+        condition_objs.append(_ac_con_obj)
+
+    v.condition_objs = condition_objs
+

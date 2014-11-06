@@ -1,5 +1,19 @@
 from django.dispatch import Signal
 
+class SignalHeroWeGo(object):
+    __slots__ = ['_signals']
+    def __init__(self):
+        self._signals = []
+
+    def add(self, handler, **kwargs):
+        self._signals.append((handler, kwargs))
+
+    def emit(self):
+        for handler, kwargs in self._signals:
+            handler.send(**kwargs)
+
+
+
 register_signal = Signal(providing_args=['account_id'])
 login_signal = Signal(providing_args=['char_id'])
 

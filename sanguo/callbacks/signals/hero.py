@@ -16,6 +16,7 @@ from core.notify import (
 from core.character import Char
 from core.hero import Hero, char_heros_dict
 from core.achievement import Achievement
+from core.activity import ActivityStatic
 from preset.data import HEROS
 from preset.settings import HERO_MAX_STEP
 
@@ -56,6 +57,8 @@ def _hero_add(char_id, hero_ids, hero_original_ids, send_notify, **kwargs):
     achievement.trig(3, quality_two_heros_amount, send_notify=send_notify)
     achievement.trig(4, quality_three_heros_amount, send_notify=send_notify)
     achievement.trig(5, gender_female_heros_amount, send_notify=send_notify)
+
+    ActivityStatic(char_id).trig(2)
 
 def _hero_del(char_id, hero_ids, **kwargs):
     remove_hero_notify(char_id, hero_ids)

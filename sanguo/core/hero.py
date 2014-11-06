@@ -29,6 +29,13 @@ def char_heros_obj(char_id):
     heros = char_heros_dict(char_id)
     return [Hero.cache_obj(i) for i in heros.keys()]
 
+def char_heros_amount(char_id, filter_quality=None):
+    heros = char_heros_dict(char_id).values()
+    if filter_quality == None:
+        return len(heros)
+
+    filtered = [h for h in heros if HEROS[h.oid].quality == filter_quality]
+    return len(filtered)
 
 def cal_hero_property(original_id, level, step):
     """

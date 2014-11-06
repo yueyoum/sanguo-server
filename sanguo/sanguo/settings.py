@@ -2,6 +2,7 @@
 
 # Django settings for sanguo project.
 import os
+import arrow
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 TMP_PATH = os.path.normpath(os.path.join(BASE_DIR, '../tmp'))
 LOG_PATH = os.path.normpath(os.path.join(BASE_DIR, 'logs'))
@@ -224,6 +225,7 @@ SERVER_NAME = tree.find('server/name').text
 SERVER_IP = tree.find('server/ip').text
 LISTEN_PORT_HTTP = int( tree.find('server/port/http').text )
 LISTEN_PORT_HTTPS = int( tree.find('server/port/https').text )
+SERVER_OPEN_DATE = arrow.get( tree.find('server/open').text )
 
 MAILGUN_ACCESS_KEY = tree.find('mailgun/key').text
 MAILGUN_SERVER_NAME = tree.find('mailgun/domain').text

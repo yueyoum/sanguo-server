@@ -3,6 +3,7 @@ from core.notify import update_hero_notify
 from core.hero import Hero, char_heros_dict
 from core.achievement import Achievement
 from core.stage import ActivityStage
+from core.activity import ActivityStatic
 
 
 
@@ -22,6 +23,8 @@ def _char_level_up(char_id, new_level, **kwargs):
 
     activity_stage = ActivityStage(char_id)
     activity_stage.check(new_level)
+
+    ActivityStatic(char_id).trig(1)
 
 
 def _char_official_up(char_id, new_official, **kwargs):

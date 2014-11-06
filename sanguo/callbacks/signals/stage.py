@@ -8,6 +8,7 @@ from core.achievement import Achievement
 from core.task import Task
 
 from core.affairs import Affairs
+from core.activity import ActivityStatic
 
 from preset.data import STAGES
 
@@ -29,6 +30,10 @@ def pve_finish(char_id, stage_id, win, star, **kwargs):
         if STAGES[stage_id].battle_open:
             affairs = Affairs(char_id)
             affairs.open_city(STAGES[stage_id].battle)
+
+    # 判断活动
+    if win:
+        ActivityStatic(char_id).trig(3)
 
 
 pve_finished_signal.connect(
