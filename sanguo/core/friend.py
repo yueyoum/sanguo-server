@@ -310,6 +310,7 @@ class Friend(object):
             # 并且删除此人的申请
             self.mf.accepting.remove(target_id)
             self.mf.save()
+            self.send_remove_friend_notify([target_id])
             raise SanguoException(
                 errormsg.FRIEND_OTHER_SIDE_IS_FULL,
                 self.char_id,
@@ -323,6 +324,7 @@ class Friend(object):
             self.check_max_amount("Friend Accept")
         except SanguoException as e:
             # 满了就清空所有申请
+            self.send_remove_friend_notify(self.mf.accepting)
             self.mf.accepting = []
             self.mf.save()
             raise e
