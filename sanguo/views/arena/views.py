@@ -7,6 +7,7 @@ from preset.settings import OPERATE_INTERVAL_ARENA_PANEL
 from libs import pack_msg
 from protomsg import ArenaPanelResponse, ArenaResponse
 
+
 __author__ = 'Wang Chao'
 __date__ = '1/22/14'
 
@@ -15,11 +16,7 @@ __date__ = '1/22/14'
 @operate_guard('arena_panel', OPERATE_INTERVAL_ARENA_PANEL, keep_result=True)
 @function_check(8)
 def arena_panel(request):
-    arena = Arena(request._char_id)
-    response = ArenaPanelResponse()
-    response.ret = 0
-
-    arena.fill_up_panel_msg(response.panel)
+    response = Arena(request._char_id).make_panel_response()
     return pack_msg(response)
 
 

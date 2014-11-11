@@ -777,6 +777,24 @@ class Item(MessageEquipmentMixin):
         resource.add(gold=gold)
 
 
+    @classmethod
+    def get_sutff_drop(cls, _id):
+        # 获得宝箱中的 drop
+        from core.attachment import get_drop, is_empty_drop
+
+        s = STUFFS[_id]
+        packages = s.packages
+        if not packages:
+            return None
+
+        package_ids = [int(i) for i in packages.split(',')]
+        prepare_drop = get_drop(package_ids)
+        if is_empty_drop(prepare_drop) and s.default_package:
+            package_ids = [s.default_package]
+            prepare_drop = get_drop(package_ids)
+
+        return prepare_drop
+
 
     def stuff_use(self, _id, amount):
         from core.attachment import get_drop, standard_drop_to_attachment_protomsg, is_empty_drop
@@ -803,15 +821,9 @@ class Item(MessageEquipmentMixin):
         # XXX 忽略amount，只能一个一个用
         self.stuff_remove(_id, amount)
 
-        packages = s.packages
-        if not packages:
+        prepare_drop = self.get_sutff_drop(_id)
+        if not prepare_drop:
             return None
-
-        package_ids = [int(i) for i in packages.split(',')]
-        prepare_drop = get_drop(package_ids)
-        if is_empty_drop(prepare_drop) and s.default_package:
-            package_ids = [s.default_package]
-            prepare_drop = get_drop(package_ids)
 
         resource = Resource(self.char_id, "Stuff Use", "use {0}".format(_id))
         standard_drop = resource.add(**prepare_drop)

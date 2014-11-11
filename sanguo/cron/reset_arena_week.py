@@ -6,24 +6,23 @@ __date__ = '2/19/14'
 import json
 
 from _base import Logger
-from core.attachment import get_drop
 from core.character import Char
 from core.mail import Mail
 from core.arena import REDIS_ARENA_KEY
 from core.drives import redis_client
 from core.achievement import Achievement
 from core.activity import ActivityStatic
+from core.item import Item
 from preset.data import ARENA_WEEK_REWARD_TUPLE
-from preset.settings import MAIL_ARENA_WEEK_REWARD_CONTENT, MAIL_ARENA_WEEK_REWARD_TITLE
+from preset.settings import MAIL_ARENA_WEEK_REWARD_CONTENT, MAIL_ARENA_WEEK_REWARD_TITLE, ARENA_WEEKLY_REWARD_ONLY_RANKS
 
 
-def _get_reward_by_rank(score, rank):
+def _get_reward_by_rank(rank):
     data = None
 
     for _rank, _reward in ARENA_WEEK_REWARD_TUPLE:
-        if rank >= _rank and _reward.packages:
-            drop_ids = [int(i) for i in _reward.packages.split(',')]
-            data = get_drop(drop_ids)
+        if rank >= _rank:
+            data = Item.get_sutff_drop(_reward.stuff)
             break
 
     if data:
@@ -37,24 +36,24 @@ def reset():
     logger = Logger("reset_arena_week.log")
     logger.write("Reset Arena Week: Start. chars amount: {0}".format(amount))
 
-    score_data = redis_client.zrevrange(REDIS_ARENA_KEY, 0, -1, withscores=True)
+    score_data = redis_client.zrevrange(REDIS_ARENA_KEY, 0, ARENA_WEEKLY_REWARD_ONLY_RANKS-1, withscores=True)
 
-    data = []
+    rank_data = []
     for char_id, score in score_data:
-        data.append( (int(char_id), score, Char(int(char_id)).power) )
+        rank_data.append( (int(char_id), score, Char(int(char_id)).power) )
 
-    data.sort(key=lambda item: (-item[1], -item[2]))
+    rank_data.sort(key=lambda item: (-item[1], -item[2]))
 
 
     # 发送奖励
-    for index, data in enumerate(data):
+    for index, data in enumerate(rank_data):
         rank = index + 1
         char_id = data[0]
 
         achievement = Achievement(char_id)
         achievement.trig(10, rank)
 
-        attachment = _get_reward_by_rank(data[1], rank)
+        attachment = _get_reward_by_rank(rank)
         if not attachment:
             continue
 

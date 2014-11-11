@@ -231,11 +231,10 @@ PRISONER_RELEASE_GOT_TREASURE = {3: [24], 2: [25], 1: [25]}
 #########################
 # 比武超过免费次数后每次比武消耗元宝
 ARENA_COST_SYCEE = 20
-# 比武前三名缓存时间 秒
-ARENA_TOP_RANKS_CACHE = 10
 # 比武同一个人被打CD， 秒
 ARENA_CD = 60
-# 竞技场初始积分
+# 竞技场周排行榜前多少名才发送奖励
+ARENA_WEEKLY_REWARD_ONLY_RANKS = 100
 
 #########################
 #      精英关卡         #

@@ -8,7 +8,6 @@ import random
 from mongoengine import DoesNotExist
 from core.drives import redis_client
 from core.server import server
-from core.msgpipe import publish_to_char
 from core.character import Char
 from core.battle import PVP
 from core.counter import Counter
@@ -17,15 +16,15 @@ from core.exception import SanguoException
 from core.achievement import Achievement
 from core.task import Task
 from core.resource import Resource
+from core.msgfactory import create_character_infomation_message
 from preset.data import VIP_MAX_LEVEL
-from utils import pack_msg
+from utils.checkers import func_opened
 import protomsg
 from preset import errormsg
 
 from preset.settings import (
     ARENA_COST_SYCEE,
     ARENA_CD,
-    ARENA_TOP_RANKS_CACHE,
     MAIL_ARENA_BEATEN_TITLE,
     MAIl_ARENA_BEATEN_LOST_TEMPLATE,
     MAIl_ARENA_BEATEN_WIN_TEMPLATE,
@@ -69,16 +68,23 @@ class Arena(object):
     FUNC_ID = 8
     def __init__(self, char_id):
         self.char_id = char_id
+        self.initialize()
+
+    def initialize(self):
+        if not func_opened(self.char_id, Arena.FUNC_ID):
+            self.mongo_arena = None
+            return
 
         try:
-            self.mongo_arena = MongoArena.objects.get(id=char_id)
+            self.mongo_arena = MongoArena.objects.get(id=self.char_id)
         except DoesNotExist:
-            self.mongo_arena = MongoArena(id=char_id)
+            self.mongo_arena = MongoArena(id=self.char_id)
             self.mongo_arena.score = get_arena_init_score()
             self.mongo_arena.save()
 
         if not self.score:
             redis_client.zadd(REDIS_ARENA_KEY, self.char_id, self.mongo_arena.score)
+
 
     @property
     def score(self):
@@ -106,40 +112,36 @@ class Arena(object):
         self.mongo_arena.score = score
         self.mongo_arena.save()
 
-
-    def get_top_ranks(self):
-        # return [(char_id, score, power, name,  leader), ...]
-        top_data = redis_client.zrevrange(REDIS_ARENA_KEY, 0, 2, withscores=True)
-        tops = []
-        for _id, _score in top_data:
-            char = Char(int(_id))
-            tops.append( (int(_id), _score, char.power, char.mc.name, char.leader_oid) )
-
-        tops.sort(key=lambda item: (-item[1], -item[2]))
-        return tops
+    @classmethod
+    def get_top_ranks(cls, amount=10):
+        data = redis_client.zrevrange(REDIS_ARENA_KEY, 0, amount-1, withscores=True)
+        return [(int(char_id), int(score)) for char_id, score in data]
 
 
-    def fill_up_panel_msg(self, msg, score=None):
-        msg.score = score or self.score
+    def make_panel_response(self):
+        if self.mongo_arena is None:
+            return None
+
+        msg = protomsg.ArenaPanelResponse()
+        msg.ret = 0
+        msg.score = self.score
         msg.rank = self.rank
+
         msg.remained_free_times = self.remained_free_times
         msg.remained_sycee_times = self.remained_buy_times
         msg.arena_cost = ARENA_COST_SYCEE
 
         top_ranks = self.get_top_ranks()
+        for index, data in enumerate(top_ranks):
+            rank = index + 1
+            _cid, _score = data
 
-        for index, top in enumerate(top_ranks):
-            char = msg.chars.add()
-            char.rank = index + 1
-            char.name = top[3]
-            char.leader = top[4]
-            char.power = top[2]
+            board = msg.boards.add()
+            board.char.MergeFrom(create_character_infomation_message(_cid))
+            board.score = _score
+            board.rank = rank
 
-
-    def send_notify(self, score=None):
-        msg = protomsg.ArenaNotify()
-        self.fill_up_panel_msg(msg, score=score)
-        publish_to_char(self.char_id, pack_msg(msg))
+        return msg
 
 
     def choose_rival(self):
@@ -266,7 +268,7 @@ class Arena(object):
     def login_process(self):
         from core.mail import Mail
 
-        if not self.mongo_arena.beaten_record:
+        if self.mongo_arena or not self.mongo_arena.beaten_record:
             return
 
         def _make_content(record):

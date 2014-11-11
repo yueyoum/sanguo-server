@@ -91,10 +91,7 @@ def login_notify(char_id):
     p = Prison(char_id)
     p.send_prisoners_notify()
 
-    if Arena.FUNC_ID not in function_open.mf.freeze:
-        arena = Arena(char_id)
-        arena.send_notify()
-        arena.login_process()
+    Arena(char_id).login_process()
 
     f = Friend(char_id)
     f.send_friends_notify()
