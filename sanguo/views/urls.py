@@ -45,6 +45,7 @@ urlpatterns = patterns('',
 
                        url(r'^plunder/refresh/$', 'views.plunder.views.plunder_refresh'),
                        url(r'^plunder/$', 'views.plunder.views.plunder'),
+                       url(r'^plunder/leaderboard/$', 'views.plunder.views.get_leaderboard'),
 
                        url(r'^prisoner/get/$', 'views.prison.views.prisoner_get'),
                        # FIXME

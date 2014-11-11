@@ -8,6 +8,8 @@ import time
 import random
 
 from mongoscheme import DoesNotExist
+from core.drives import redis_client
+from core.server import server
 from core.character import Char
 from core.battle import PVPFromRivalCache
 from core.mongoscheme import MongoPlunder, MongoAffairs
@@ -23,6 +25,8 @@ from protomsg import Battle as MsgBattle
 from protomsg import PlunderNotify
 from protomsg import Plunder as MsgPlunder
 from core.msgpipe import publish_to_char
+from core.msgfactory import create_character_infomation_message
+
 from utils import pack_msg
 from preset.settings import (
     PRISONER_POOL,
@@ -32,6 +36,8 @@ from preset.settings import (
 )
 from preset import errormsg
 from preset.data import VIP_FUNCTION, BATTLES
+
+from protomsg import PlunderLeaderboardWeeklyNotify, GetPlunderLeaderboardResponse
 
 
 class PlunderCurrentTimeOut(Exception):
@@ -269,6 +275,8 @@ class Plunder(object):
 
             achievement = Achievement(self.char_id)
             achievement.trig(12, 1)
+
+            PlunderLeaderboardWeekly.incr(self.char_id)
         else:
             standard_drop = make_standard_drop_from_template()
 
@@ -340,4 +348,49 @@ class Plunder(object):
         msg = PlunderNotify()
         msg.current_times = self.mongo_plunder.current_times
         msg.max_times = self.max_plunder_times()
+        msg.success_times_weekly = PlunderLeaderboardWeekly.get_char_times(self.char_id)
         publish_to_char(self.char_id, pack_msg(msg))
+
+
+
+class PlunderLeaderboardWeekly(object):
+    REDIS_PLUNDER_LEADERBOARD_WEEKLY_KEY = '_plunder_leaderboard_weekly:{0}'.format(server.id)
+
+    @classmethod
+    def incr(cls, char_id, times=1):
+        redis_client.zincrby(cls.REDIS_PLUNDER_LEADERBOARD_WEEKLY_KEY, char_id, times)
+
+    @classmethod
+    def get_leaderboard(cls, length=10):
+        res = redis_client.zrevrange(cls.REDIS_PLUNDER_LEADERBOARD_WEEKLY_KEY, 0, length, withscores=True)
+        return [(int(char_id), times) for char_id, times in res]
+
+    @classmethod
+    def get_char_times(cls, char_id):
+        res = redis_client.zscore(char_id)
+        return res if res else 0
+
+    @classmethod
+    def clean(cls):
+        redis_client.delete(cls.REDIS_PLUNDER_LEADERBOARD_WEEKLY_KEY)
+
+
+    @classmethod
+    def _make_msg(cls, msg):
+        for cid, times in cls.get_leaderboard():
+            leader = msg.leaders.add()
+            leader.char.MergeFrom(create_character_infomation_message(cid))
+            leader.times = times
+
+    @classmethod
+    def send_notify(cls, char_id):
+        msg = PlunderLeaderboardWeeklyNotify()
+        cls._make_msg(msg)
+        publish_to_char(char_id, pack_msg(msg))
+
+    @classmethod
+    def make_get_response(cls):
+        msg = GetPlunderLeaderboardResponse()
+        msg.ret = 0
+        cls._make_msg(msg)
+        return msg

@@ -15,11 +15,13 @@ from character_pb2 import *
 from item_pb2 import *
 from levy_pb2 import *
 from vip_pb2 import *
+from common_pb2 import *
 from formation_pb2 import *
 from friend_pb2 import *
 from battle_pb2 import *
 from prize_pb2 import *
 from activity_pb2 import *
+from plunder_pb2 import *
 
 RESPONSE_NOTIFY_TYPE = {
     "CommandResponse": 50,
@@ -156,6 +158,8 @@ RESPONSE_NOTIFY_TYPE = {
     "ActivityNotify": 5200,
     "ActivityUpdateNotify": 5201,
     "ActivityGetRewardResponse": 5203,
+    "PlunderLeaderboardWeeklyNotify": 5300,
+    "GetPlunderLeaderboardResponse": 5302,
 }
 
 REQUEST_TYPE = {
@@ -224,6 +228,7 @@ REQUEST_TYPE = {
     5006: "HangStartRequest",
     5101: "VIPGetRewardRequest",
     5202: "ActivityGetRewardRequest",
+    5301: "GetPlunderLeaderboardRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -292,6 +297,7 @@ REQUEST_TYPE_REV = {
     "HangStartRequest": 5006,
     "VIPGetRewardRequest": 5101,
     "ActivityGetRewardRequest": 5202,
+    "GetPlunderLeaderboardRequest": 5301,
 }
 
 TYPE_COMMAND = {
@@ -359,6 +365,7 @@ TYPE_COMMAND = {
    5006: "/hang/start/",
    5101: "/vip/getreward/",
    5202: "/activity/getreward/",
+   5301: "/plunder/leaderboard/",
 }
 
 COMMAND_TYPE = {v: k for k, v in TYPE_COMMAND.iteritems()}

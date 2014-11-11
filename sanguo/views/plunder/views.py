@@ -6,7 +6,7 @@ __date__ = '1/21/14'
 from libs import pack_msg
 from utils.decorate import message_response, operate_guard, function_check
 from core.character import Char
-from core.plunder import Plunder
+from core.plunder import Plunder, PlunderLeaderboardWeekly
 from core.attachment import standard_drop_to_attachment_protomsg
 from preset.settings import OPERATE_INTERVAL_PLUNDER_BATTLE, OPERATE_INTERVAL_PLUNDER_REFRESH
 from protomsg import PlunderResponse, PlunderRefreshResponse
@@ -48,3 +48,9 @@ def plunder(request):
     response.drop.MergeFrom(standard_drop_to_attachment_protomsg(drop))
 
     return pack_msg(response)
+
+
+@message_response("GetPlunderLeaderboardResponse")
+def get_leaderboard(request):
+    msg = PlunderLeaderboardWeekly.make_get_response()
+    return pack_msg(msg)
