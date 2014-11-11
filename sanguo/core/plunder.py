@@ -363,17 +363,16 @@ class PlunderLeaderboardWeekly(object):
     @classmethod
     def get_leaderboard(cls, length=10):
         res = redis_client.zrevrange(cls.REDIS_PLUNDER_LEADERBOARD_WEEKLY_KEY, 0, length, withscores=True)
-        return [(int(char_id), times) for char_id, times in res]
+        return [(int(char_id), int(times)) for char_id, times in res]
 
     @classmethod
     def get_char_times(cls, char_id):
-        res = redis_client.zscore(char_id)
-        return res if res else 0
+        res = redis_client.zscore(cls.REDIS_PLUNDER_LEADERBOARD_WEEKLY_KEY, char_id)
+        return int(res) if res else 0
 
     @classmethod
     def clean(cls):
         redis_client.delete(cls.REDIS_PLUNDER_LEADERBOARD_WEEKLY_KEY)
-
 
     @classmethod
     def make_get_response(cls):
