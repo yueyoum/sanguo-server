@@ -10,7 +10,7 @@ from core.task import Task
 from core.msgpipe import publish_to_char, message_clean
 from core.msgpublish import SystemBroadcast
 from core.prison import Prison
-from core.plunder import Plunder, PlunderLeaderboardWeekly
+from core.plunder import Plunder
 from core.friend import Friend
 from core.mail import Mail
 from core.daily import CheckIn
@@ -87,7 +87,6 @@ def login_notify(char_id):
 
 
     Plunder(char_id).send_notify()
-    PlunderLeaderboardWeekly.send_notify(char_id)
 
     p = Prison(char_id)
     p.send_prisoners_notify()

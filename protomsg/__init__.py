@@ -158,7 +158,6 @@ RESPONSE_NOTIFY_TYPE = {
     "ActivityNotify": 5200,
     "ActivityUpdateNotify": 5201,
     "ActivityGetRewardResponse": 5203,
-    "PlunderLeaderboardWeeklyNotify": 5300,
     "GetPlunderLeaderboardResponse": 5302,
 }
 

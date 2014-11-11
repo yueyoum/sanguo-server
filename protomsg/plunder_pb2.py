@@ -14,79 +14,9 @@ import common_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='plunder.proto',
   package='Sanguo.protocol.plunder',
-  serialized_pb='\n\rplunder.proto\x12\x17Sanguo.protocol.plunder\x1a\x0c\x63ommon.proto\"Y\n\rPlunderLeader\x12\x39\n\x04\x63har\x18\x01 \x02(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\x12\r\n\x05times\x18\x02 \x02(\x05\"j\n\x1ePlunderLeaderboardWeeklyNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x37\n\x07leaders\x18\x02 \x03(\x0b\x32&.Sanguo.protocol.plunder.PlunderLeader\"/\n\x1cGetPlunderLeaderboardRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"v\n\x1dGetPlunderLeaderboardResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x37\n\x07leaders\x18\x03 \x03(\x0b\x32&.Sanguo.protocol.plunder.PlunderLeader')
+  serialized_pb='\n\rplunder.proto\x12\x17Sanguo.protocol.plunder\x1a\x0c\x63ommon.proto\"/\n\x1cGetPlunderLeaderboardRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"\xef\x01\n\x1dGetPlunderLeaderboardResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12U\n\x07leaders\x18\x03 \x03(\x0b\x32\x44.Sanguo.protocol.plunder.GetPlunderLeaderboardResponse.PlunderLeader\x1aY\n\rPlunderLeader\x12\x39\n\x04\x63har\x18\x01 \x02(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\x12\r\n\x05times\x18\x02 \x02(\x05')
 
 
-
-
-_PLUNDERLEADER = _descriptor.Descriptor(
-  name='PlunderLeader',
-  full_name='Sanguo.protocol.plunder.PlunderLeader',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='char', full_name='Sanguo.protocol.plunder.PlunderLeader.char', index=0,
-      number=1, type=11, cpp_type=10, label=2,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='times', full_name='Sanguo.protocol.plunder.PlunderLeader.times', index=1,
-      number=2, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=56,
-  serialized_end=145,
-)
-
-
-_PLUNDERLEADERBOARDWEEKLYNOTIFY = _descriptor.Descriptor(
-  name='PlunderLeaderboardWeeklyNotify',
-  full_name='Sanguo.protocol.plunder.PlunderLeaderboardWeeklyNotify',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='session', full_name='Sanguo.protocol.plunder.PlunderLeaderboardWeeklyNotify.session', index=0,
-      number=1, type=12, cpp_type=9, label=2,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='leaders', full_name='Sanguo.protocol.plunder.PlunderLeaderboardWeeklyNotify.leaders', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=147,
-  serialized_end=253,
-)
 
 
 _GETPLUNDERLEADERBOARDREQUEST = _descriptor.Descriptor(
@@ -112,10 +42,44 @@ _GETPLUNDERLEADERBOARDREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=255,
-  serialized_end=302,
+  serialized_start=56,
+  serialized_end=103,
 )
 
+
+_GETPLUNDERLEADERBOARDRESPONSE_PLUNDERLEADER = _descriptor.Descriptor(
+  name='PlunderLeader',
+  full_name='Sanguo.protocol.plunder.GetPlunderLeaderboardResponse.PlunderLeader',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='char', full_name='Sanguo.protocol.plunder.GetPlunderLeaderboardResponse.PlunderLeader.char', index=0,
+      number=1, type=11, cpp_type=10, label=2,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='times', full_name='Sanguo.protocol.plunder.GetPlunderLeaderboardResponse.PlunderLeader.times', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=256,
+  serialized_end=345,
+)
 
 _GETPLUNDERLEADERBOARDRESPONSE = _descriptor.Descriptor(
   name='GetPlunderLeaderboardResponse',
@@ -148,35 +112,21 @@ _GETPLUNDERLEADERBOARDRESPONSE = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[],
+  nested_types=[_GETPLUNDERLEADERBOARDRESPONSE_PLUNDERLEADER, ],
   enum_types=[
   ],
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=304,
-  serialized_end=422,
+  serialized_start=106,
+  serialized_end=345,
 )
 
-_PLUNDERLEADER.fields_by_name['char'].message_type = common_pb2._CHARACTERINFOMATION
-_PLUNDERLEADERBOARDWEEKLYNOTIFY.fields_by_name['leaders'].message_type = _PLUNDERLEADER
-_GETPLUNDERLEADERBOARDRESPONSE.fields_by_name['leaders'].message_type = _PLUNDERLEADER
-DESCRIPTOR.message_types_by_name['PlunderLeader'] = _PLUNDERLEADER
-DESCRIPTOR.message_types_by_name['PlunderLeaderboardWeeklyNotify'] = _PLUNDERLEADERBOARDWEEKLYNOTIFY
+_GETPLUNDERLEADERBOARDRESPONSE_PLUNDERLEADER.fields_by_name['char'].message_type = common_pb2._CHARACTERINFOMATION
+_GETPLUNDERLEADERBOARDRESPONSE_PLUNDERLEADER.containing_type = _GETPLUNDERLEADERBOARDRESPONSE;
+_GETPLUNDERLEADERBOARDRESPONSE.fields_by_name['leaders'].message_type = _GETPLUNDERLEADERBOARDRESPONSE_PLUNDERLEADER
 DESCRIPTOR.message_types_by_name['GetPlunderLeaderboardRequest'] = _GETPLUNDERLEADERBOARDREQUEST
 DESCRIPTOR.message_types_by_name['GetPlunderLeaderboardResponse'] = _GETPLUNDERLEADERBOARDRESPONSE
-
-class PlunderLeader(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _PLUNDERLEADER
-
-  # @@protoc_insertion_point(class_scope:Sanguo.protocol.plunder.PlunderLeader)
-
-class PlunderLeaderboardWeeklyNotify(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _PLUNDERLEADERBOARDWEEKLYNOTIFY
-
-  # @@protoc_insertion_point(class_scope:Sanguo.protocol.plunder.PlunderLeaderboardWeeklyNotify)
 
 class GetPlunderLeaderboardRequest(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
@@ -186,6 +136,12 @@ class GetPlunderLeaderboardRequest(_message.Message):
 
 class GetPlunderLeaderboardResponse(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
+
+  class PlunderLeader(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+    DESCRIPTOR = _GETPLUNDERLEADERBOARDRESPONSE_PLUNDERLEADER
+
+    # @@protoc_insertion_point(class_scope:Sanguo.protocol.plunder.GetPlunderLeaderboardResponse.PlunderLeader)
   DESCRIPTOR = _GETPLUNDERLEADERBOARDRESPONSE
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.plunder.GetPlunderLeaderboardResponse)

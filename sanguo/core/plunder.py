@@ -37,7 +37,7 @@ from preset.settings import (
 from preset import errormsg
 from preset.data import VIP_FUNCTION, BATTLES
 
-from protomsg import PlunderLeaderboardWeeklyNotify, GetPlunderLeaderboardResponse
+from protomsg import GetPlunderLeaderboardResponse
 
 
 class PlunderCurrentTimeOut(Exception):
@@ -376,21 +376,11 @@ class PlunderLeaderboardWeekly(object):
 
 
     @classmethod
-    def _make_msg(cls, msg):
+    def make_get_response(cls):
+        msg = GetPlunderLeaderboardResponse()
+        msg.ret = 0
         for cid, times in cls.get_leaderboard():
             leader = msg.leaders.add()
             leader.char.MergeFrom(create_character_infomation_message(cid))
             leader.times = times
-
-    @classmethod
-    def send_notify(cls, char_id):
-        msg = PlunderLeaderboardWeeklyNotify()
-        cls._make_msg(msg)
-        publish_to_char(char_id, pack_msg(msg))
-
-    @classmethod
-    def make_get_response(cls):
-        msg = GetPlunderLeaderboardResponse()
-        msg.ret = 0
-        cls._make_msg(msg)
         return msg
