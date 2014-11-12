@@ -14,6 +14,8 @@ python cron/reset_store_player_limit.py
 python cron/reset_prize.py
 python cron/set_yueka.py
 python cron/reset_friend_plunder_times.py
+python cron/clean_mail.py
+python cron/clean_battle_record.py
 
 exit 0
 
