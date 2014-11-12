@@ -17,5 +17,8 @@
 # 每周清理掠夺次数排行榜
 0 0 * * 0 /PATH/clean_plunder_board_weekly.sh
 
+# 每隔一段时间dumps redis中的重要数据
+*/10 * * * * /PATH/redis_dumps.sh
+
 # 每天日志 logrotate
 0 0 * * * /usr/sbin/logrotate -f /etc/logrotate.d/sango-server-1

@@ -18,6 +18,7 @@ from core.task import Task
 from core.resource import Resource
 from core.msgfactory import create_character_infomation_message
 from core.msgpipe import publish_to_char
+from core.support import RedisPersistence
 from preset.data import VIP_MAX_LEVEL
 from utils.checkers import func_opened
 from utils import pack_msg
@@ -64,6 +65,20 @@ def get_arena_init_score():
         score = 1000
     return score
 
+
+class ArenaScoreBoard(RedisPersistence):
+    REDISKEY = REDIS_ARENA_KEY
+    MONGOID = REDISKEY
+
+    @classmethod
+    def get_data_from_redis(cls):
+        data = redis_client.zrange(cls.REDISKEY, 0, -1, withscores=True)
+        return [(int(cid), int(score)) for cid, score in data]
+
+    @classmethod
+    def save_data_into_redis(cls, data):
+        for cid, score in data:
+            redis_client.zadd(cls.REDISKEY, cid, int(score))
 
 
 class Arena(object):

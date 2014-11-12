@@ -406,6 +406,16 @@ class MongoActivityStatic(Document):
     }
 
 
+# 持久化redis中的重要信息
+class MongoRedisPersistence(Document):
+    id = StringField(primary_key=True)
+    data = BinaryField()
+
+    meta = {
+        'collection': 'redis_persistence'
+    }
+
+
 def purge_char(char_id):
     char_id = int(char_id)
     char_field_records = {'MongoHero'}
