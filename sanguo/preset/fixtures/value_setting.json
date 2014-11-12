@@ -1,0 +1,9 @@
+[
+{
+    "pk": "plunder_circle_times", 
+    "model": "config.valuesetting", 
+    "fields": {
+        "value": 400
+    }
+}
+]

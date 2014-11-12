@@ -67,7 +67,7 @@ RESPONSE_NOTIFY_TYPE = {
     "NewEliteStageNotify": 651,
     "UpdateEliteStageNotify": 652,
     "ElitePVEResponse": 654,
-    "EliteStageRemainedTimesNotify": 655,
+    "EliteStageTimesNotify": 655,
     "EliteStageResetResponse": 657,
     "EliteStageResetTotalResponse": 659,
     "ActivityStageRemainedTimesNotify": 660,

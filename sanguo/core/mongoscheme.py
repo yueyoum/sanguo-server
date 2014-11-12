@@ -109,6 +109,8 @@ class MongoStage(Document):
     elites_star = DictField()
     # 精英小关卡购买记录 key 为 ID, value 为购买次数
     elites_buy = DictField()
+    # 经验关卡通过次数。用于一定次数后发武将卡
+    elites_times = IntField()
     # 开启的活动关卡
     activities = ListField(IntField())
 

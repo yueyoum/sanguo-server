@@ -72,6 +72,8 @@ PURCHASE_TYPE = object_maker(_find_file('purchase_type.json'))
 ACTIVITY_STATIC = object_maker(_find_file('activity_static.json'))
 ACTIVITY_STATIC_CONDITIONS = object_maker(_find_file('activity_static_condition.json'))
 
+VALUE_SETTING = object_maker(_find_file('value_setting.json'))
+
 def _got_package():
     f = _find_file('package.json')
     with open(f, 'r') as x:

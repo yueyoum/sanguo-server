@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import random
+
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoStage
 from core.msgpipe import publish_to_char
@@ -30,6 +32,7 @@ from preset.data import (
     STAGE_ACTIVITY_CONDITION,
     STAGE_ACTIVITY_TPS,
     VIP_FUNCTION,
+    VALUE_SETTING,
 )
 from preset import errormsg
 import protomsg
@@ -241,10 +244,13 @@ class EliteStage(object):
             self.stage.elites = {}
             self.stage.elites_star = {}
             self.stage.elites_buy = {}
+            self.stage.elites_times = 0
             self.stage.activities = []
             self.stage.save()
 
         self.enable(STAGE_ELITE[STAGE_ELITE_FIRST_ID])
+
+        self.is_circle_reward = False
 
 
     def enable_by_condition_id(self, stage_id):
@@ -356,7 +362,7 @@ class EliteStage(object):
             counter = Counter(self.char_id, 'stage_elite')
             counter.reset()
 
-        self.send_remained_times_notify()
+        self.send_times_notify()
 
     # @passport(not_hang_going, errormsg.HANG_GOING, "Elite Stage Battle")
     def battle(self, _id):
@@ -433,13 +439,24 @@ class EliteStage(object):
             self.send_update_notify(_id)
 
             counter.incr()
-            self.send_remained_times_notify()
+
+            self.set_circle_times()
+
+            self.send_times_notify()
             self.enable_next_elite_stage(_id)
 
             Task(self.char_id).trig(6)
 
         return battle_msg
 
+
+    def set_circle_times(self):
+        self.stage.elites_times += 1
+        if self.stage.elites_times >= VALUE_SETTING['plunder_circle_times'].value + 1:
+            self.stage.elites_times = 0
+            self.is_circle_reward = True
+
+        self.stage.save()
 
     def save_drop(self, _id=None):
         if _id:
@@ -455,6 +472,12 @@ class EliteStage(object):
         prepare_drop = get_drop(drop_ids)
         prepare_drop['gold'] += gold
         prepare_drop['exp'] += exp
+
+        if self.is_circle_reward:
+            drop_hero_ids = this_stage.drop_hero_ids
+            if drop_hero_ids:
+                _drop_id = random.choice([int(i) for i in drop_hero_ids.split(',')])
+                prepare_drop['heros'].extend((_drop_id, 1))
 
         resource = Resource(self.char_id, "EliteStage Drop", "stage {0}".format(this_stage.id))
         standard_drop = resource.add(**prepare_drop)
@@ -483,11 +506,14 @@ class EliteStage(object):
         publish_to_char(self.char_id, pack_msg(msg))
 
 
-    def send_remained_times_notify(self):
-        msg = protomsg.EliteStageRemainedTimesNotify()
+    def send_times_notify(self):
+        msg = protomsg.EliteStageTimesNotify()
         free_counter = Counter(self.char_id, 'stage_elite')
         msg.max_free_times = free_counter.max_value
         msg.cur_free_times = free_counter.cur_value
+
+        msg.cicle_max_times = VALUE_SETTING['plunder_circle_times'].value
+        msg.cicle_current_times = self.stage.elites_times
 
         msg.total_reset_cost = self.get_total_reset_cost()
         publish_to_char(self.char_id, pack_msg(msg))
