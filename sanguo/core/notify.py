@@ -91,7 +91,9 @@ def login_notify(char_id):
     p = Prison(char_id)
     p.send_prisoners_notify()
 
-    Arena(char_id).login_process()
+    a = Arena(char_id)
+    a.send_notify()
+    a.login_process()
 
     f = Friend(char_id)
     f.send_friends_notify()

@@ -17,8 +17,10 @@ from core.achievement import Achievement
 from core.task import Task
 from core.resource import Resource
 from core.msgfactory import create_character_infomation_message
+from core.msgpipe import publish_to_char
 from preset.data import VIP_MAX_LEVEL
 from utils.checkers import func_opened
+from utils import pack_msg
 import protomsg
 from preset import errormsg
 
@@ -117,6 +119,18 @@ class Arena(object):
         data = redis_client.zrevrange(REDIS_ARENA_KEY, 0, amount-1, withscores=True)
         return [(int(char_id), int(score)) for char_id, score in data]
 
+    def send_notify(self):
+        if self.mongo_arena is None:
+            return
+
+        msg = protomsg.ArenaNotify()
+        msg.score = self.score
+        msg.rank = self.rank
+        msg.remained_free_times = self.remained_free_times
+        msg.remained_sycee_times = self.remained_buy_times
+        msg.arena_cost = ARENA_COST_SYCEE
+
+        publish_to_char(self.char_id, pack_msg(msg))
 
     def make_panel_response(self):
         if self.mongo_arena is None:
@@ -124,12 +138,6 @@ class Arena(object):
 
         msg = protomsg.ArenaPanelResponse()
         msg.ret = 0
-        msg.score = self.score
-        msg.rank = self.rank
-
-        msg.remained_free_times = self.remained_free_times
-        msg.remained_sycee_times = self.remained_buy_times
-        msg.arena_cost = ARENA_COST_SYCEE
 
         top_ranks = self.get_top_ranks()
         for index, data in enumerate(top_ranks):
@@ -243,10 +251,10 @@ class Arena(object):
             new_score = calculate_score(self_score, rival_score, msg.self_win)
             self.set_score(new_score)
 
-            self.send_notify(score=new_score)
 
             rival_arena.be_beaten(rival_score, self_score, not msg.self_win, self.char_id)
 
+        self.send_notify()
         return msg
 
 

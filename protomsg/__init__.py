@@ -84,6 +84,7 @@ RESPONSE_NOTIFY_TYPE = {
     "NewPrisonerNotify": 707,
     "RemovePrisonerNotify": 708,
     "PrisonerGetResponse": 753,
+    "ArenaNotify": 800,
     "ArenaResponse": 802,
     "ArenaPanelResponse": 804,
     "TeamBattleNotify": 900,
