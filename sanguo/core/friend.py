@@ -17,6 +17,7 @@ from core.signals import new_friend_got_signal
 from core.plunder import Plunder
 from core.activeplayers import ActivePlayers
 from core.mail import Mail
+from core.msgfactory import create_character_infomation_message
 
 import protomsg
 from protomsg import FRIEND_NOT, FRIEND_OK, FRIEND_ACK, FRIEND_APPLY
@@ -409,28 +410,8 @@ class Friend(object):
 
 
     def _msg_friend(self, msg, fid, status):
-        char_f = Char(fid)
-        cache_f = char_f.cacheobj
-        msg.id = fid
-        msg.name = cache_f.name
-        msg.level = cache_f.level
-        msg.official = cache_f.official
-        if status == FRIEND_OK or status == FRIEND_NOT:
-            msg.power = char_f.power
-
+        msg.char.MergeFrom(create_character_infomation_message(fid))
         msg.status = status
-
-        f = Formation(fid)
-        in_formation_hero_ids = [h for h in f.in_formation_hero_ids() if h]
-        hero_list = [(Hero.cache_obj(hid).power, hid) for hid in in_formation_hero_ids]
-        hero_list.sort(key=lambda item: -item[0])
-        leader_oid = Hero.cache_obj(hero_list[0][1]).oid
-
-        if status == FRIEND_OK:
-            f = Formation(fid)
-            msg.formation.extend(f.in_formation_hero_original_ids())
-
-        msg.leader = leader_oid
 
         if status == FRIEND_OK and fid not in self.mf.plunder_gives:
             msg.can_give_plunder_times = True
