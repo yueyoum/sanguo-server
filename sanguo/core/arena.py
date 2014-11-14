@@ -260,6 +260,7 @@ class Arena(object):
         t = Task(self.char_id)
         t.trig(2)
 
+        adding_score = 0
         if msg.self_win:
             achievement = Achievement(self.char_id)
             achievement.trig(11, 1)
@@ -271,12 +272,12 @@ class Arena(object):
 
             new_score = calculate_score(self_score, rival_score, msg.self_win)
             self.set_score(new_score)
-
+            adding_score = need_sycee - self_score
 
             rival_arena.be_beaten(rival_score, self_score, not msg.self_win, self.char_id)
 
         self.send_notify()
-        return msg
+        return msg, adding_score
 
 
     def be_beaten(self, self_score, rival_score, win, rival_id):
