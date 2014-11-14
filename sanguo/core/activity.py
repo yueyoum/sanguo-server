@@ -62,6 +62,8 @@ class ActivityEntry(object):
     @property
     def ended(self):
         # 是否结束了
+        if self.activity_data.tp == 4:
+            return False
         return arrow.utcnow() > self.continued_to
 
     @property
