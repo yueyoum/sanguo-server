@@ -26,6 +26,9 @@ import protomsg
 from preset import errormsg
 
 from preset.settings import (
+    ARENA_INITIAL_SCORE,
+    ARENA_LOWEST_SCORE,
+    ARENA_RANK_LINE,
     ARENA_COST_SYCEE,
     ARENA_CD,
     MAIL_ARENA_BEATEN_TITLE,
@@ -57,12 +60,12 @@ def get_arena_init_score():
     # 竞技场初始化积分
     lowest = redis_client.zrange(REDIS_ARENA_KEY, 0, 0, withscores=True)
     if not lowest:
-        return 1500
+        return ARENA_INITIAL_SCORE
 
     char_id, score = lowest[0]
     score = int(score)
-    if score < 1000:
-        score = 1000
+    if score < ARENA_LOWEST_SCORE:
+        score = ARENA_COST_SYCEE
     return score
 
 
@@ -110,6 +113,9 @@ class Arena(object):
 
     @property
     def rank(self):
+        if self.score < ARENA_RANK_LINE:
+            return 5000
+
         rank = redis_client.zrevrank(REDIS_ARENA_KEY, self.char_id)
         return rank+1 if rank is not None else 0
 

@@ -235,6 +235,12 @@ ARENA_COST_SYCEE = 20
 ARENA_CD = 60
 # 竞技场周排行榜前多少名才发送奖励
 ARENA_WEEKLY_REWARD_ONLY_RANKS = 100
+# 比武初始积分
+ARENA_INITIAL_SCORE = 1500
+# 新用户最低积分
+ARENA_LOWEST_SCORE = 1200
+# 参与排名的积分线
+ARENA_RANK_LINE = 1550
 
 #########################
 #      精英关卡         #

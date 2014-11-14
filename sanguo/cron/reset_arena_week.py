@@ -14,7 +14,12 @@ from core.achievement import Achievement
 from core.activity import ActivityStatic
 from core.item import Item
 from preset.data import ARENA_WEEK_REWARD_TUPLE
-from preset.settings import MAIL_ARENA_WEEK_REWARD_CONTENT, MAIL_ARENA_WEEK_REWARD_TITLE, ARENA_WEEKLY_REWARD_ONLY_RANKS
+from preset.settings import (
+    MAIL_ARENA_WEEK_REWARD_CONTENT,
+    MAIL_ARENA_WEEK_REWARD_TITLE,
+    ARENA_WEEKLY_REWARD_ONLY_RANKS,
+    ARENA_RANK_LINE,
+)
 
 
 def _get_reward_by_rank(rank):
@@ -49,6 +54,10 @@ def reset():
     for index, data in enumerate(rank_data):
         rank = index + 1
         char_id = data[0]
+        score = data[1]
+
+        if score < ARENA_RANK_LINE:
+            continue
 
         achievement = Achievement(char_id)
         achievement.trig(10, rank)
