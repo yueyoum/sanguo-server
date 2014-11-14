@@ -291,7 +291,7 @@ class Arena(object):
     def login_process(self):
         from core.mail import Mail
 
-        if self.mongo_arena or not self.mongo_arena.beaten_record:
+        if not self.mongo_arena or not self.mongo_arena.beaten_record:
             return
 
         def _make_content(record):
