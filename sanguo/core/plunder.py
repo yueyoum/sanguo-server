@@ -21,9 +21,6 @@ from core.attachment import make_standard_drop_from_template, get_drop
 from core.achievement import Achievement
 from core.formation import Formation
 from core.signals import plunder_finished_signal
-from protomsg import Battle as MsgBattle
-from protomsg import PlunderNotify
-from protomsg import Plunder as MsgPlunder
 from core.msgpipe import publish_to_char
 from core.msgfactory import create_character_infomation_message
 from core.support import RedisPersistence
@@ -39,6 +36,9 @@ from preset import errormsg
 from preset.data import VIP_FUNCTION, BATTLES
 
 from protomsg import GetPlunderLeaderboardResponse
+from protomsg import Battle as MsgBattle
+from protomsg import PlunderNotify
+from protomsg import Plunder as MsgPlunder
 
 
 class PlunderCurrentTimeOut(Exception):
@@ -107,13 +107,8 @@ class PlunderRival(object):
 
     def make_plunder_msg(self, level):
         msg = MsgPlunder()
-        msg.id = self.char_id
-        msg.name = self.name
-        msg.level = self.level
+        msg.char.MergeFrom(create_character_infomation_message(self.char_id))
         msg.gold = self.get_plunder_gold(level)
-        msg.power = self.power
-        msg.leader = self.leader
-        msg.hero_original_ids.extend(self.hero_original_ids)
         return msg
 
     def __bool__(self):
