@@ -272,7 +272,7 @@ class Arena(object):
 
             new_score = calculate_score(self_score, rival_score, msg.self_win)
             self.set_score(new_score)
-            adding_score = need_sycee - self_score
+            adding_score = new_score - self_score
 
             rival_arena.be_beaten(rival_score, self_score, not msg.self_win, self.char_id)
 
