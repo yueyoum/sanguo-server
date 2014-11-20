@@ -8,11 +8,9 @@ import random
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoHorse, MongoEmbeddedHorse
 from core.exception import CounterOverFlow, SanguoException
-from core.counter import Counter
 from core.resource import Resource
 from core.msgpipe import publish_to_char
 from core.formation import Formation
-from core.item import Item
 from core.signals import socket_changed_signal
 
 from utils import pack_msg
@@ -95,6 +93,7 @@ class HorseStrengthFactory(object):
 class HorseFreeTimesManager(object):
     __slots__ = ['char_id', 'counter',]
     def __init__(self, char_id):
+        from core.counter import Counter
         self.char_id = char_id
         self.counter = Counter(char_id, 'horse_strength_free')
 
@@ -304,6 +303,8 @@ class Horse(object):
 
 
     def evolution(self, horse_id, horse_soul_id):
+        from core.item import Item
+
         try:
             h = self.mongo_horse.horses[str(horse_id)]
         except KeyError:
