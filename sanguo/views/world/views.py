@@ -14,6 +14,7 @@ from core.exception import SanguoException
 from core.attachment import get_drop_from_raw_package
 from core.mail import Mail
 from core.activeplayers import Player
+from core.horse import Horse
 
 from utils.decorate import message_response
 from utils.api import api_activatecode_use, APIFailure
@@ -62,6 +63,7 @@ def sell(request):
     char_id = request._char_id
 
     item = Item(char_id)
+    horse = Horse(char_id)
 
     # check
     for ele in req.elements:
@@ -85,6 +87,10 @@ def sell(request):
             item.stuff_check_sell(ele.id, ele.amount)
             continue
 
+        if ele.tp == 6:
+            horse.check_sell(ele.id)
+            continue
+
     # sell
     for ele in req.elements:
         if ele.tp == 1:
@@ -105,6 +111,10 @@ def sell(request):
 
         if ele.tp == 5:
             item.stuff_sell(ele.id, ele.amount)
+            continue
+
+        if ele.tp == 6:
+            horse.sell(ele.id)
             continue
 
     return None

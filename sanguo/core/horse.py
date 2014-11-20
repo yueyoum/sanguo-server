@@ -11,6 +11,7 @@ from core.exception import CounterOverFlow, SanguoException
 from core.counter import Counter
 from core.resource import Resource
 from core.msgpipe import publish_to_char
+from core.formation import Formation
 
 from utils import pack_msg
 from utils.functional import id_generator
@@ -160,6 +161,8 @@ class Horse(object):
             self.mongo_horse.strengthed_horse = {}
             self.mongo_horse.save()
 
+    def has_horse(self, horse_id):
+        return str(horse_id) in self.mongo_horse.horses
 
     def add(self, oid):
         assert oid in HORSE
@@ -188,17 +191,29 @@ class Horse(object):
         msg_h.MergeFrom(hobj.make_msg())
         publish_to_char(self.char_id, pack_msg(msg))
 
-    def sell(self, _id):
-        try:
-            h = self.mongo_horse.horses.pop(str(_id))
-        except KeyError:
+
+    def check_sell(self, horse_id):
+        if not self.has_horse(horse_id):
             raise SanguoException(
                 errormsg.HORSE_NOT_EXIST,
                 self.char_id,
-                "Horse Sell",
-                "Horse {0} Does Not Exist".format(_id)
+                "Horse Check Sell",
+                "horse {0} not exist".format(horse_id)
             )
 
+        f = Formation(self.char_id)
+        if f.find_socket_by_horse(horse_id):
+            raise SanguoException(
+                errormsg.HORSE_CAN_NOT_SELL_IN_FORMATION,
+                self.char_id,
+                "Horse Check Sell",
+                "horse {0} in formation, can not sell".format(horse_id)
+            )
+
+    def sell(self, _id):
+        self.check_sell(_id)
+
+        h = self.mongo_horse.horses.pop(str(_id))
         got_gold = HORSE[h.oid].sell_gold
 
         resource = Resource(self.char_id, "Horse Sell", "sell horse {0}".format(_id))
@@ -286,6 +301,7 @@ class Horse(object):
 
     def evolution(self, horse_id, horse_soul_id):
         pass
+
 
 
     def send_notify(self):
