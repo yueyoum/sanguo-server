@@ -12,6 +12,7 @@ from core.resource import Resource
 from core.msgpipe import publish_to_char
 from core.formation import Formation
 from core.signals import socket_changed_signal
+from core.common import FightPowerMixin
 
 from utils import pack_msg
 from utils.functional import id_generator
@@ -111,7 +112,7 @@ class HorseFreeTimesManager(object):
 
 
 
-class OneHorse(object):
+class OneHorse(FightPowerMixin):
     __slots__ = ['_id', 'oid', 'attack', 'defense', 'hp']
 
     def __init__(self, _id, oid, attack, defense, hp):
@@ -121,9 +122,6 @@ class OneHorse(object):
         self.defense = defense
         self.hp = hp
 
-    @property
-    def power(self):
-        return 0
 
     def strength(self, using_sycee=False):
         new_attack, new_defense, new_hp = HorseStrengthFactory.strength(

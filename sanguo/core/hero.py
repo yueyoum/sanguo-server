@@ -11,10 +11,13 @@ from core.formation import Formation
 from core.exception import SanguoException
 from core.resource import Resource
 from core.horse import Horse
-from utils import cache
 from core.msgpipe import publish_to_char
+from core.common import FightPowerMixin
+
+from utils import cache
 from utils import pack_msg
 from utils.functional import id_generator
+
 from preset.settings import HERO_MAX_STEP, HERO_START_STEP, HERO_STEP_UP_SOCKET_AMOUNT
 from preset.data import HEROS, ACHIEVEMENTS, MONSTERS, HORSE
 from preset import errormsg
@@ -67,13 +70,6 @@ def cal_monster_property(oid, level):
     return attack, defense, hp
 
 
-class FightPowerMixin(object):
-    @property
-    def power(self):
-        a = self.attack * 2.5 * (1 + self.crit / 200.0)
-        # b = (self.hp + self.defense * 5) * (1 + self.dodge / 2.0)
-        b = self.hp + self.defense * 5
-        return int(a + b)
 
 
 class Hero(FightPowerMixin):
