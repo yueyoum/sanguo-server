@@ -121,6 +121,7 @@ class OneHorse(FightPowerMixin):
         self.attack = attack
         self.defense = defense
         self.hp = hp
+        self.crit = HORSE[oid].crit
 
 
     def strength(self, using_sycee=False):
@@ -260,10 +261,10 @@ class Horse(object):
             # 这个时候就要根据method来确定是否using_sycee和 resource_needs了
             if method == 2:
                 using_sycee = False
-                resource_needs = {'gold': HORSE[h.oid].strength_gold_needs}
+                resource_needs = {'gold': -HORSE[h.oid].strength_gold_needs}
             else:
                 using_sycee = True
-                resource_needs = {'sycee': HORSE[h.oid].strength_sycee_needs}
+                resource_needs = {'sycee': -HORSE[h.oid].strength_sycee_needs}
         else:
             # 还有免费次数，直接按照免费来搞
             using_sycee = False

@@ -150,7 +150,7 @@ class Hero(FightPowerMixin):
 
         # 马
         if socket.horse:
-            horse = Horse(self.char_id).mongo_horse[str(socket.horse)]
+            horse = Horse(self.char_id).mongo_horse.horses[str(socket.horse)]
             self.attack += horse.attack
             self.defense += horse.defense
             self.hp += horse.hp
