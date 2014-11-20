@@ -12,12 +12,13 @@ from core.counter import Counter
 from core.resource import Resource
 from core.msgpipe import publish_to_char
 from core.formation import Formation
+from core.item import Item
 
 from utils import pack_msg
 from utils.functional import id_generator
 
 from preset import errormsg
-from preset.data import HORSE
+from preset.data import HORSE, STUFFS
 
 from protomsg import (
     HorseFreeStrengthTimesNotify,
@@ -242,7 +243,7 @@ class Horse(object):
 
         try:
             HorseFreeTimesManager(self.char_id).incr()
-        except OverflowError:
+        except CounterOverFlow:
             # 已经没有免费次数了
             if method == 1:
                 # 但还要免费强化，引发异常
@@ -293,15 +294,56 @@ class Horse(object):
         self.mongo_horse.strengthed_horse = {}
         self.mongo_horse.horses[str(_id)] = h
         self.mongo_horse.save()
+        self.send_update_notify(_id, h)
 
+
+    def evolution(self, horse_id, horse_soul_id):
+        try:
+            h = self.mongo_horse.horses[str(horse_id)]
+        except KeyError:
+            raise SanguoException(
+                errormsg.HORSE_NOT_EXIST,
+                self.char_id,
+                "Hero Evolution",
+                "horse {0} not exist".format(horse_id)
+            )
+
+        item = Item(self.char_id)
+        if not item.has_stuff(horse_soul_id):
+            raise SanguoException(
+                errormsg.STUFF_NOT_EXIST,
+                self.char_id,
+                "Hero Evolution",
+                "horse soul {0} not exist".format(horse_soul_id)
+            )
+
+        stuff = STUFFS[horse_soul_id]
+        if stuff.tp != 4:
+            raise SanguoException(
+                errormsg.INVALID_OPERATE,
+                self.char_id,
+                "Hero Evolution",
+                "stuff {0} tp {1} != 4".format(horse_soul_id, stuff.tp)
+            )
+
+        if stuff.value not in HORSE:
+            raise SanguoException(
+                errormsg.INVALID_OPERATE,
+                self.char_id,
+                "Hero Evolution",
+                "stuff value not in HORSE".format(stuff.value)
+            )
+
+        h.oid = stuff.value
+        self.mongo_horse.save()
+        self.send_update_notify(horse_id, h)
+
+
+    def send_update_notify(self, _id, h):
         hobj = OneHorse(int(_id), h.oid, h.attack, h.defense, h.hp)
         msg = HorsesUpdateNotify()
         msg.horse.MergeFrom(hobj.make_msg())
         publish_to_char(self.char_id, pack_msg(msg))
-
-    def evolution(self, horse_id, horse_soul_id):
-        pass
-
 
 
     def send_notify(self):
