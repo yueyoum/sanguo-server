@@ -4,7 +4,7 @@ from core.attachment import make_standard_drop_from_template
 from core.resource import Resource
 from core.functionopen import FunctionOpen
 
-from preset.data import HEROS, EQUIPMENTS, GEMS, STUFFS
+from preset.data import HEROS, EQUIPMENTS, GEMS, STUFFS, HORSE
 
 def cmd(request):
     req = request._proto
@@ -52,6 +52,11 @@ def cmd(request):
     elif req.tp == 10:
         drop['purchase_got'] = req.param
         drop['purchase_actual_got'] = req.param
+
+    elif req.tp == 12:
+        if req.param not in HORSE:
+            return HttpResponse('', content_type='text/plain')
+        drop['horses'].append((req.param, 1))
 
 
     resource = Resource(char_id, "CMD", "tp: {0}, param: {1}".format(req.tp, req.param))
