@@ -19,7 +19,7 @@ from utils import pack_msg
 from protomsg import PrizeNotify, Attachment as MsgAttachment
 
 from preset import errormsg
-from preset.data import PACKAGES, EQUIPMENTS, GEMS, STUFFS
+from preset.data import PACKAGES, EQUIPMENTS, GEMS, STUFFS, HORSE
 from preset.settings import DROP_PROB_BASE
 
 from preset.settings import (
@@ -56,6 +56,7 @@ def make_standard_drop_from_template():
         'equipments': [],
         'gems': [],
         'stuffs': [],
+        'horses': [],
     }
 
 
@@ -79,7 +80,8 @@ def standard_drop_to_attachment_protomsg(data):
     # 'souls': [(id, amount), ...],
     # 'equipments': [(id, level, amount), ...],
     # 'gems': [(id, amount), ...],
-    # 'stuffs': [(id, amount), ...]
+    # 'stuffs': [(id, amount), ...],
+    # 'horses': [(id, amount), ...],
     # }
 
     msg = MsgAttachment()
@@ -114,6 +116,11 @@ def standard_drop_to_attachment_protomsg(data):
         msg_s.id = _id
         msg_s.amount = _amount
 
+    for _id, _amount in data.get('horses', []):
+        msg_h = msg.horses.add()
+        msg_h.id = _id
+        msg_h.amount = _amount
+
     return msg
 
 
@@ -132,6 +139,10 @@ def standard_drop_to_readable_text(data, sign='x', only_items=True):
         text = u'{0}{1}{2}'.format(STUFFS[_id].name, sign, _amount)
         results.append(text)
 
+    for _id, _amount in data.get('horses', []):
+        text = u'{0}{1}{2}'.format(HORSE[_id].name, sign, _amount)
+        results.append(text)
+
     return ', '.join(results)
 
 
@@ -147,7 +158,7 @@ def get_drop_from_mode_two_package(package):
 
         return [(name, p) for p in package[name]]
 
-    names = ['heros', 'souls', 'equipments', 'gems', 'stuffs']
+    names = ['heros', 'souls', 'equipments', 'gems', 'stuffs', 'horses']
     items = []
     for name in names:
         items.extend(_all_items(name))
@@ -187,6 +198,7 @@ def get_drop_from_raw_package(package, multi=1, gaussian=False):
     equipments = package['equipments']
     gems = package['gems']
     stuffs = package['stuffs']
+    horses = package['horses']
 
     def _make(items):
         final_items = []
@@ -213,6 +225,7 @@ def get_drop_from_raw_package(package, multi=1, gaussian=False):
     equipments = _make(equipments)
     gems = _make(gems)
     stuffs = _make(stuffs)
+    horses = _make(horses)
 
     return {
         'gold': gold * multi * REWARD_GOLD_MULTIPLE,
@@ -224,6 +237,7 @@ def get_drop_from_raw_package(package, multi=1, gaussian=False):
         'equipments': [(x['id'], x['level'], x['amount']) for x in equipments],
         'gems': [(x['id'], x['amount']) for x in gems],
         'stuffs': [(x['id'], x['amount']) for x in stuffs],
+        'horses': [(x['id'], x['amount']) for x in horses],
     }
 
 
@@ -250,7 +264,10 @@ def get_drop(drop_ids, multi=1, gaussian=False):
     #     ],
     #     'stuffs': [
     #         {id: amount: prob:},...
-    #     ]
+    #     ],
+    #     'horses': [
+    #         {id: amount: prob:},...
+    #     ],
     # }
     #
     # 返回的是从prob概率计算后的 prepare_drop 格式
@@ -263,7 +280,8 @@ def get_drop(drop_ids, multi=1, gaussian=False):
     #     'souls': [(id, amount)...],
     #     'equipments': [(id, level, amount)...],
     #     'gems': [(id, amount)...],
-    #     'stuffs': [(id, amount)...]
+    #     'stuffs': [(id, amount)...],
+    #     'horses': [(id, amount)...],
     # }
 
     drop = make_standard_drop_from_template()
@@ -287,6 +305,7 @@ def get_drop(drop_ids, multi=1, gaussian=False):
         drop['equipments'].extend(p['equipments'])
         drop['gems'].extend(p['gems'])
         drop['stuffs'].extend(p['stuffs'])
+        drop['horses'].extend(p['horses'])
 
     def _merge(items):
         result = {}
@@ -311,6 +330,7 @@ def get_drop(drop_ids, multi=1, gaussian=False):
     drop['souls'] = _merge(drop['souls'])
     drop['gems'] = _merge(drop['gems'])
     drop['stuffs'] = _merge(drop['stuffs'])
+    drop['horses'] = _merge(drop['horses'])
     drop['equipments'] = _merge_equipment(drop['equipments'])
 
     return drop

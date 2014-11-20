@@ -11,7 +11,15 @@ from django.conf import settings
 
 from core.exception import SanguoException
 
-from preset.errormsg import GOLD_NOT_ENOUGH, SYCEE_NOT_ENOUGH, STUFF_NOT_ENOUGH, GEM_NOT_ENOUGH, SOUL_NOT_ENOUGH, EQUIPMENT_NOT_EXIST
+from preset.errormsg import (
+    GOLD_NOT_ENOUGH,
+    SYCEE_NOT_ENOUGH,
+    STUFF_NOT_ENOUGH,
+    GEM_NOT_ENOUGH,
+    SOUL_NOT_ENOUGH,
+    EQUIPMENT_NOT_EXIST,
+    HORSE_NOT_ENOUGH,
+)
 
 logger = logging.getLogger('sanguo')
 
@@ -84,6 +92,19 @@ def _check_stuffs(char_id, stuffs, func_name=""):
         item.stuff_remove(_id, _amount)
 
 
+def _check_horses(char_id, ids, func_name=""):
+    from core.horse import Horse
+    horse = Horse(char_id)
+    for _id in ids:
+        if not horse.has_horse(_id):
+            raise SanguoException(HORSE_NOT_ENOUGH, char_id, func_name, "horse {0} Not Enough/Exist".format(_id))
+
+    yield
+
+    for _id in ids:
+        horse.remove(_id)
+
+
 def _get_resource_data(**kwargs):
     data = {
         'exp': kwargs.get('exp', 0),
@@ -95,6 +116,7 @@ def _get_resource_data(**kwargs):
         'equipments': kwargs.get('equipments', []),
         'gems': kwargs.get('gems', []),
         'stuffs': kwargs.get('stuffs', []),
+        'horses': kwargs.get('horses', []),
     }
     return data
 
@@ -123,6 +145,9 @@ class Resource(object):
 
         if data['stuffs']:
             callbacks.append(_check_stuffs(self.char_id, data['stuffs'], func_name=self.func_name))
+
+        if data['horses']:
+            callbacks.append(_check_horses(self.char_id, data['horses'], func_name=self.func_name))
 
         for cb in callbacks:
             cb.next()
@@ -167,6 +192,7 @@ class Resource(object):
         from core.character import Char
         from core.hero import save_hero, HeroSoul, FakeSaveHeroResult
         from core.item import Item
+        from core.horse import Horse
 
         data = _get_resource_data(**kwargs)
         purchase_got = kwargs.get('purchase_got', 0)
@@ -201,6 +227,12 @@ class Resource(object):
     
         if data['stuffs']:
             item.stuff_add(data['stuffs'])
+
+        if data['horses']:
+            horse = Horse(self.char_id)
+            for _id, _amount in data['horses']:
+                for i in range(_amount):
+                    horse.add(_id)
     
         # normalize the data
         if data['heros']:

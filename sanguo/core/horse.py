@@ -180,7 +180,6 @@ class Horse(object):
         self.mongo_horse.horses[str(new_id)] = embedded_horse
         self.mongo_horse.save()
 
-        msg = HorsesAddNotify()
         hobj = OneHorse(
             new_id,
             embedded_horse.oid,
@@ -189,8 +188,17 @@ class Horse(object):
             embedded_horse.hp
         )
 
+        msg = HorsesAddNotify()
         msg_h = msg.horses.add()
         msg_h.MergeFrom(hobj.make_msg())
+        publish_to_char(self.char_id, pack_msg(msg))
+
+    def remove(self, _id):
+        self.mongo_horse.horses.pop(str(_id))
+        self.mongo_horse.save()
+
+        msg = HorsesRemoveNotify()
+        msg.ids.extend([_id])
         publish_to_char(self.char_id, pack_msg(msg))
 
 
@@ -215,17 +223,14 @@ class Horse(object):
     def sell(self, _id):
         self.check_sell(_id)
 
-        h = self.mongo_horse.horses.pop(str(_id))
+        h = self.mongo_horse.horses[str(_id)]
         got_gold = HORSE[h.oid].sell_gold
 
         resource = Resource(self.char_id, "Horse Sell", "sell horse {0}".format(_id))
         resource.add(gold=got_gold)
 
-        self.mongo_horse.save()
+        self.remove(_id)
 
-        msg = HorsesRemoveNotify()
-        msg.ids.extend([_id])
-        publish_to_char(self.char_id, pack_msg(msg))
 
 
     def strength(self, _id, method):
