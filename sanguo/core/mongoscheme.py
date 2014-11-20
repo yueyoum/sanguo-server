@@ -84,7 +84,7 @@ class MongoSocket(EmbeddedDocument):
     weapon = IntField(default=0)
     armor = IntField(default=0)
     jewelry = IntField(default=0)
-    hourse = IntField(default=0)
+    horse = IntField(default=0)
 
 
 
