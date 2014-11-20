@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.conf.urls import patterns, url
 from django.conf import settings
 
@@ -14,8 +16,7 @@ urlpatterns = patterns('',
                        url(r'^arena/panel/$', 'views.arena.views.arena_panel'),
 
                        url(r'^formation/set/$', 'views.formation.views.set_formation'),
-                       url(r'^socket/set/hero/$', 'views.formation.views.up_hero'),
-                       url(r'^socket/set/equipment/$', 'views.formation.views.up_equipment'),
+                       url(r'^socket/set/$', 'views.formation.views.set_socket'),
 
                        url(r'^hero/stepup/$', 'views.hero.views.step_up'),
                        url(r'^hero/recruit/$', 'views.hero.views.recruit'),
@@ -87,6 +88,12 @@ urlpatterns = patterns('',
                        url(r'^vip/getreward/$', 'views.vip.views.vip_get_reward'),
 
                        url(r'^activity/getreward/$', 'views.activity.views.get_reward'),
+
+                       # 坐骑
+                       url(r'^horse/strength/$', 'views.horse.views.strength'),
+                       url(r'^horse/strength/confirm/$', 'views.horse.views.strength_confirm'),
+                       url(r'^horse/evolution/$', 'views.horse.views.evolution'),
+
 )
 
 # testmode

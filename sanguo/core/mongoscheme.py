@@ -408,6 +408,26 @@ class MongoActivityStatic(Document):
     }
 
 
+# 坐骑
+class MongoEmbeddedHorse(EmbeddedDocument):
+    oid = IntField()
+    attack = IntField()
+    defense = IntField()
+    hp = IntField()
+
+
+class MongoHorse(Document):
+    id = IntField(primary_key=True)
+    horses = MapField(EmbeddedDocumentField(MongoEmbeddedHorse))
+
+    # 强化的马，确认后覆盖以前马的信息
+    strengthed_horse = MapField(EmbeddedDocumentField(MongoEmbeddedHorse))
+
+    meta = {
+        'collection': 'horse'
+    }
+
+
 # 持久化redis中的重要信息
 class MongoRedisPersistence(Document):
     id = StringField(primary_key=True)

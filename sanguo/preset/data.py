@@ -74,6 +74,8 @@ ACTIVITY_STATIC_CONDITIONS = object_maker(_find_file('activity_static_condition.
 
 VALUE_SETTING = object_maker(_find_file('value_setting.json'))
 
+HORSE = object_maker(_find_file('horse.json'))
+
 def _got_package():
     f = _find_file('package.json')
     with open(f, 'r') as x:

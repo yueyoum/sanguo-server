@@ -58,6 +58,7 @@ COUNTER = {
     'stage_elite_buy_total': 0,         # 精英关卡总重置次数 VIP
 
     'levy': 0,                          # 征收次数 VIP
+    'horse_strength_free': 0            # 免费培养马的次数
 }
 # 挂机时间是特殊处理的，所以不写在COUNTER里
 # 其他一些和VIP相关的功能不是次数限制，所以也不在这里

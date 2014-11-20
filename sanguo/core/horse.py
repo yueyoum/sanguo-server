@@ -1,0 +1,299 @@
+# -*- coding: utf-8 -*-
+
+__author__ = 'Wang Chao'
+__date__ = '14-11-20'
+
+import random
+
+from mongoengine import DoesNotExist
+from core.mongoscheme import MongoHorse, MongoEmbeddedHorse
+from core.exception import CounterOverFlow, SanguoException
+from core.counter import Counter
+from core.resource import Resource
+from core.msgpipe import publish_to_char
+
+from utils import pack_msg
+from utils.functional import id_generator
+
+from preset import errormsg
+from preset.data import HORSE
+
+from protomsg import (
+    HorseFreeStrengthTimesNotify,
+    HorsesNotify,
+    HorsesUpdateNotify,
+    HorsesAddNotify,
+    HorsesRemoveNotify,
+    Horse as MsgHorse
+)
+
+
+class HorseStrengthFactory(object):
+    X = 5
+    Y = 0.54
+    Z = 2
+
+    @classmethod
+    def normalize(cls, horse_oid, attack, defense, hp):
+        h = HORSE[horse_oid]
+        attack = int(attack)
+        defense = int(defense)
+        hp = int(hp)
+
+        if attack < 0:
+            attack = 0
+        if attack > h.attack_upper_limit:
+            attack = h.attack_upper_limit
+
+        if defense < 0:
+            defense = 0
+        if defense > h.defense_upper_limit:
+            defense = h.defense_upper_limit
+
+        if hp < 0:
+            hp = 0
+        if hp > h.hp_upper_limit:
+            hp = h.hp_upper_limit
+
+        return attack, defense, hp
+
+    @classmethod
+    def normal_strength(cls):
+        add_attack = random.randint(0, cls.X) - cls.Y * cls.X * 2
+        add_defense = random.randint(0, cls.X) - cls.Y * cls.X
+        add_hp = random.randint(0, cls.X * 5) - cls.Y * cls.X * 5
+
+        return add_attack, add_defense, add_hp
+
+    @classmethod
+    def sycee_strength(cls):
+        add_attack, add_defense, add_hp = cls.normal_strength()
+        add_attack += 2 * cls.Z
+        add_defense += cls.Z
+        add_hp += 5 * cls.Z
+
+        return add_attack, add_defense, add_hp
+
+    @classmethod
+    def strength(cls, horse_oid, old_attack, old_defense, old_hp, using_sycee=False):
+        if using_sycee:
+            method = cls.sycee_strength
+        else:
+            method = cls.normal_strength
+
+        add_attack, add_defense, add_hp = method()
+
+        new_attack = old_attack + add_attack
+        new_defense = old_defense + add_defense
+        new_hp = old_hp + add_hp
+        return cls.normalize(horse_oid, new_attack, new_defense, new_hp)
+
+
+class HorseFreeTimesManager(object):
+    __slots__ = ['char_id', 'counter',]
+    def __init__(self, char_id):
+        self.char_id = char_id
+        self.counter = Counter(char_id, 'horse_strength_free')
+
+    @property
+    def remained_times(self):
+        return self.counter.remained_value
+
+    def incr(self, value=1):
+        self.counter.incr(value)
+
+    def send_notify(self):
+        msg = HorseFreeStrengthTimesNotify()
+        msg.times = self.remained_times
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
+
+class OneHorse(object):
+    __slots__ = ['_id', 'oid', 'attack', 'defense', 'hp']
+
+    def __init__(self, _id, oid, attack, defense, hp):
+        self._id = _id
+        self.oid = oid
+        self.attack = attack
+        self.defense = defense
+        self.hp = hp
+
+    @property
+    def power(self):
+        return 0
+
+    def strength(self, using_sycee=False):
+        new_attack, new_defense, new_hp = HorseStrengthFactory.strength(
+            self.oid, self.attack, self.defense, self.hp, using_sycee=using_sycee
+        )
+        return OneHorse(self._id, self.oid, new_attack, new_defense, new_hp)
+
+    def to_mongo_record(self):
+        m = MongoEmbeddedHorse()
+        m.oid = self.oid
+        m.attack = self.attack
+        m.defense = self.defense
+        m.hp = self.hp
+        return m
+
+    def make_msg(self):
+        msg = MsgHorse()
+        msg.id = self._id
+        msg.oid = self.oid
+        msg.attack = self.attack
+        msg.defense = self.defense
+        msg.hp = self.hp
+        msg.power = self.power
+        return msg
+
+
+class Horse(object):
+    def __init__(self, char_id):
+        self.char_id = char_id
+
+        try:
+            self.mongo_horse = MongoHorse.objects.get(id=self.char_id)
+        except DoesNotExist:
+            self.mongo_horse = MongoHorse(id=self.char_id)
+            self.mongo_horse.horses = {}
+            self.mongo_horse.strengthed_horse = {}
+            self.mongo_horse.save()
+
+
+    def add(self, oid):
+        assert oid in HORSE
+
+        embedded_horse = MongoEmbeddedHorse()
+        embedded_horse.oid = oid
+        embedded_horse.attack = 0
+        embedded_horse.defense = 0
+        embedded_horse.hp = 0
+
+        new_id = id_generator('equipment')[0]
+
+        self.mongo_horse.horses[str(new_id)] = embedded_horse
+        self.mongo_horse.save()
+
+        msg = HorsesAddNotify()
+        hobj = OneHorse(
+            new_id,
+            embedded_horse.oid,
+            embedded_horse.attack,
+            embedded_horse.defense,
+            embedded_horse.hp
+        )
+
+        msg_h = msg.horses.add()
+        msg_h.MergeFrom(hobj.make_msg())
+        publish_to_char(self.char_id, pack_msg(msg))
+
+    def sell(self, _id):
+        try:
+            h = self.mongo_horse.horses.pop(str(_id))
+        except KeyError:
+            raise SanguoException(
+                errormsg.HORSE_NOT_EXIST,
+                self.char_id,
+                "Horse Sell",
+                "Horse {0} Does Not Exist".format(_id)
+            )
+
+        got_gold = HORSE[h.oid].sell_gold
+
+        resource = Resource(self.char_id, "Horse Sell", "sell horse {0}".format(_id))
+        resource.add(gold=got_gold)
+
+        self.mongo_horse.save()
+
+        msg = HorsesRemoveNotify()
+        msg.ids.extend([_id])
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
+    def strength(self, _id, method):
+        # method: 1 - free ,2 - gold, 3 - sycee
+
+        try:
+            h = self.mongo_horse.horses[str(_id)]
+        except KeyError:
+            raise SanguoException(
+                errormsg.HORSE_NOT_EXIST,
+                self.char_id,
+                "Horse Strength",
+                "horse {0} not exist".format(_id)
+            )
+
+
+        try:
+            HorseFreeTimesManager(self.char_id).incr()
+        except OverflowError:
+            # 已经没有免费次数了
+            if method == 1:
+                # 但还要免费强化，引发异常
+                raise SanguoException(
+                    errormsg.HORSE_STRENGTH_NO_FREE_TIMES,
+                    self.char_id,
+                    "Horse Strength",
+                    "strength {0} using free times. but no free times".format(_id)
+                )
+
+            # 这个时候就要根据method来确定是否using_sycee和 resource_needs了
+            if method == 2:
+                using_sycee = False
+                resource_needs = {'gold': HORSE[h.oid].strength_gold_needs}
+            else:
+                using_sycee = True
+                resource_needs = {'sycee': HORSE[h.oid].strength_sycee_needs}
+        else:
+            # 还有免费次数，直接按照免费来搞
+            using_sycee = False
+            resource_needs = {}
+
+        hobj = OneHorse(_id, h.oid, h.attack, h.defense, h.hp)
+
+        if resource_needs:
+            resource = Resource(self.char_id, "Horse Strength", "strength {0} with method {1}".format(_id, method))
+            with resource.check(**resource_needs):
+                new_hobj = hobj.strength(using_sycee)
+        else:
+            new_hobj = hobj.strength(using_sycee)
+
+        self.mongo_horse.strengthed_horse = {str(_id): new_hobj.to_mongo_record()}
+        self.mongo_horse.save()
+
+        return new_hobj
+
+    def strength_confirm(self):
+        try:
+            _id, h = self.mongo_horse.strengthed_horse.items()[0]
+        except IndexError:
+            raise SanguoException(
+                errormsg.INVALID_OPERATE,
+                self.char_id,
+                "Horse Strength Confirm",
+                "no data for confirm"
+            )
+
+        self.mongo_horse.strengthed_horse = {}
+        self.mongo_horse.horses[str(_id)] = h
+        self.mongo_horse.save()
+
+        hobj = OneHorse(int(_id), h.oid, h.attack, h.defense, h.hp)
+        msg = HorsesUpdateNotify()
+        msg.horse.MergeFrom(hobj.make_msg())
+        publish_to_char(self.char_id, pack_msg(msg))
+
+    def evolution(self, horse_id, horse_soul_id):
+        pass
+
+
+    def send_notify(self):
+        msg = HorsesNotify()
+        for k, v in self.mongo_horse.horses.iteritems():
+            hobj = OneHorse(int(k), v.oid, v.attack, v.defense, v.hp)
+            msg_h = msg.horses.add()
+            msg_h.MergeFrom(hobj.make_msg())
+
+        publish_to_char(self.char_id, pack_msg(msg))
+
