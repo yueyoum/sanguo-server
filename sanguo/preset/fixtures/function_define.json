@@ -3,10 +3,11 @@
     "pk": 1, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 0, 
-        "text": "\u88c5\u5907\u5f3a\u5316\u529f\u80fd\u5f00\u542f", 
         "name": "\u88c5\u5907\u5f3a\u5316", 
+        "open_condition_des": "", 
+        "text": "\u88c5\u5907\u5f3a\u5316\u529f\u80fd\u5f00\u542f", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -14,10 +15,11 @@
     "pk": 2, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 0, 
-        "text": "\u88c5\u5907\u8fdb\u9636\u529f\u80fd\u5f00\u542f", 
         "name": "\u88c5\u5907\u8fdb\u9636", 
+        "open_condition_des": "", 
+        "text": "\u88c5\u5907\u8fdb\u9636\u529f\u80fd\u5f00\u542f", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -25,10 +27,11 @@
     "pk": 3, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 0, 
-        "text": "", 
         "name": "\u6b66\u5c06\u8fdb\u9636", 
+        "open_condition_des": "", 
+        "text": "", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -36,10 +39,11 @@
     "pk": 4, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 0, 
-        "text": "", 
         "name": "\u5b9d\u77f3\u9576\u5d4c", 
+        "open_condition_des": "", 
+        "text": "", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -47,10 +51,11 @@
     "pk": 5, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 0, 
-        "text": "", 
         "name": "\u65e5\u5e38\u4efb\u52a1", 
+        "open_condition_des": "", 
+        "text": "", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -58,10 +63,11 @@
     "pk": 6, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 0, 
-        "text": "", 
         "name": "\u6210\u5c31\u4efb\u52a1", 
+        "open_condition_des": "", 
+        "text": "", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -69,10 +75,11 @@
     "pk": 7, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 0, 
-        "text": "\u5185\u653f\uff1a\u53ef\u9a7b\u624e\u57ce\u5e02\u201c${0}\u201d\u5f00\u653e", 
         "name": "\u6302\u673a\u529f\u80fd", 
+        "open_condition_des": "", 
+        "text": "\u5185\u653f\uff1a\u53ef\u9a7b\u624e\u57ce\u5e02\u201c${0}\u201d\u5f00\u653e", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -80,10 +87,11 @@
     "pk": 8, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 20, 
         "stage_id": 0, 
-        "text": "\u6bd4\u6b66\u529f\u80fd\u5f00\u542f", 
         "name": "\u6bd4\u6b66\u529f\u80fd", 
+        "open_condition_des": "\u541b\u4e3b\u7b49\u7ea720\u7ea7\u5f00\u542f", 
+        "text": "\u6bd4\u6b66\u529f\u80fd\u5f00\u542f", 
+        "char_level": 20, 
         "icon": ""
     }
 },
@@ -91,10 +99,11 @@
     "pk": 9, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 12, 
-        "text": "\u63a0\u593a\u529f\u80fd\u5f00\u542f", 
         "name": "\u63a0\u593a\u529f\u80fd", 
+        "open_condition_des": "\u901a\u5173\u526f\u672c[\u9633\u4eba\u4e4b\u6218]\u5f00\u542f", 
+        "text": "\u63a0\u593a\u529f\u80fd\u5f00\u542f", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -102,10 +111,11 @@
     "pk": 10, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 0, 
-        "text": "", 
         "name": "\u5b98\u804c\u529f\u80fd", 
+        "open_condition_des": "", 
+        "text": "", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -113,10 +123,11 @@
     "pk": 11, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 10, 
-        "text": "\u7cbe\u82f1\u526f\u672c\u5f00\u542f", 
         "name": "\u7cbe\u82f1\u526f\u672c", 
+        "open_condition_des": "\u901a\u5173\u526f\u672c[\u5b9b\u57ce\u6b7c\u706d\u6218]\u5f00\u542f", 
+        "text": "\u7cbe\u82f1\u526f\u672c\u5f00\u542f", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -124,10 +135,11 @@
     "pk": 12, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 0, 
-        "text": "", 
         "name": "\u597d\u53cb\u529f\u80fd", 
+        "open_condition_des": "", 
+        "text": "", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -135,10 +147,11 @@
     "pk": 13, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 0, 
-        "text": "", 
         "name": "\u731b\u5c06\u6311\u6218", 
+        "open_condition_des": "", 
+        "text": "", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -146,10 +159,11 @@
     "pk": 14, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 0, 
-        "text": "", 
         "name": "\u70b9\u5c06", 
+        "open_condition_des": "", 
+        "text": "", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -157,10 +171,11 @@
     "pk": 15, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 0, 
-        "text": "", 
         "name": "\u6d3b\u52a8\u526f\u672c", 
+        "open_condition_des": "", 
+        "text": "", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -168,10 +183,11 @@
     "pk": 20, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 1, 
-        "text": "\u6218\u6597\u52a0\u901f\u529f\u80fd\u5f00\u542f", 
         "name": "\u6218\u6597\u52a0\u901f", 
+        "open_condition_des": "", 
+        "text": "\u6218\u6597\u52a0\u901f\u529f\u80fd\u5f00\u542f", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -179,10 +195,11 @@
     "pk": 50, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 10, 
-        "text": " \u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u4e94\u4eba", 
         "name": "\u4e0a\u9635\u4e94\u4eba", 
+        "open_condition_des": "\u901a\u5173\u526f\u672c[\u5b8c\u6210\u6b7c\u706d\u6218]\u5f00\u542f", 
+        "text": " \u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u4e94\u4eba", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -190,10 +207,11 @@
     "pk": 51, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 20, 
-        "text": " \u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u516d\u4eba", 
         "name": "\u4e0a\u9635\u516d\u4eba", 
+        "open_condition_des": "\u901a\u5173\u526f\u672c[\u706b\u70e7\u6d1b\u9633]\u5f00\u542f", 
+        "text": " \u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u516d\u4eba", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -201,10 +219,11 @@
     "pk": 52, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 30, 
-        "text": "\u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u4e03\u4eba", 
         "name": "\u4e0a\u9635\u4e03\u4eba", 
+        "open_condition_des": "\u901a\u5173\u526f\u672c[\u7389\u73ba\u4e4b\u707e]\u5f00\u542f", 
+        "text": "\u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u4e03\u4eba", 
+        "char_level": 0, 
         "icon": ""
     }
 },
@@ -212,10 +231,11 @@
     "pk": 53, 
     "model": "config.functiondefine", 
     "fields": {
-        "char_level": 0, 
         "stage_id": 40, 
-        "text": "\u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u516b\u4eba", 
         "name": "\u4e0a\u9635\u516b\u4eba", 
+        "open_condition_des": "\u901a\u5173\u526f\u672c[\u738b\u5141\u7684\u6bc1\u706d]\u5f00\u542f", 
+        "text": "\u53c2\u6218\u4eba\u6570\u589e\u52a0\u81f3\u516b\u4eba", 
+        "char_level": 0, 
         "icon": ""
     }
 }

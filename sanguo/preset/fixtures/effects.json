@@ -3,6 +3,7 @@
     "pk": 1, 
     "model": "skill.effect", 
     "fields": {
+        "is_good_buff": true, 
         "des": "\u52a0\u8840", 
         "buff_icon": "", 
         "name": "\u6062\u590d", 
@@ -13,6 +14,7 @@
     "pk": 2, 
     "model": "skill.effect", 
     "fields": {
+        "is_good_buff": false, 
         "des": "\u4f24\u5bb3", 
         "buff_icon": "", 
         "name": "\u4f24\u5bb3", 
@@ -23,6 +25,7 @@
     "pk": 3, 
     "model": "skill.effect", 
     "fields": {
+        "is_good_buff": true, 
         "des": "\u653b\u51fbS", 
         "buff_icon": "", 
         "name": "\u70ed\u8840", 
@@ -33,6 +36,7 @@
     "pk": 4, 
     "model": "skill.effect", 
     "fields": {
+        "is_good_buff": false, 
         "des": "\u653b\u51fbB", 
         "buff_icon": "", 
         "name": "\u8131\u529b", 
@@ -43,6 +47,7 @@
     "pk": 5, 
     "model": "skill.effect", 
     "fields": {
+        "is_good_buff": true, 
         "des": "\u9632\u5fa1S", 
         "buff_icon": "", 
         "name": "\u56fa\u9632", 
@@ -53,6 +58,7 @@
     "pk": 6, 
     "model": "skill.effect", 
     "fields": {
+        "is_good_buff": false, 
         "des": "\u9632\u5fa1B", 
         "buff_icon": "", 
         "name": "\u7834\u7532", 
@@ -63,6 +69,7 @@
     "pk": 7, 
     "model": "skill.effect", 
     "fields": {
+        "is_good_buff": true, 
         "des": "\u66b4\u51fbS", 
         "buff_icon": "", 
         "name": "\u9f13\u821e", 
@@ -73,6 +80,7 @@
     "pk": 8, 
     "model": "skill.effect", 
     "fields": {
+        "is_good_buff": false, 
         "des": "\u66b4\u51fbB", 
         "buff_icon": "", 
         "name": "\u865a\u5f31", 
@@ -83,6 +91,7 @@
     "pk": 9, 
     "model": "skill.effect", 
     "fields": {
+        "is_good_buff": false, 
         "des": "\u6655\u7729", 
         "buff_icon": "", 
         "name": "\u6655\u7729", 
@@ -93,6 +102,7 @@
     "pk": 10, 
     "model": "skill.effect", 
     "fields": {
+        "is_good_buff": false, 
         "des": "\u53cd\u4f24", 
         "buff_icon": "", 
         "name": "\u53cd\u4f24", 
@@ -103,6 +113,7 @@
     "pk": 11, 
     "model": "skill.effect", 
     "fields": {
+        "is_good_buff": true, 
         "des": "\u5438\u8840", 
         "buff_icon": "", 
         "name": "\u55dc\u8840", 
@@ -113,6 +124,7 @@
     "pk": 12, 
     "model": "skill.effect", 
     "fields": {
+        "is_good_buff": true, 
         "des": "", 
         "buff_icon": "", 
         "name": "\u65e0\u53cc\u89c9\u9192", 

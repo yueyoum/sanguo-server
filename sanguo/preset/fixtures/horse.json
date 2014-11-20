@@ -1,0 +1,116 @@
+[
+{
+    "pk": 1, 
+    "model": "horse.horse", 
+    "fields": {
+        "hp_upper_limit": 350, 
+        "name": "\u9ec4\u9aa0\u9a6c", 
+        "level_needs": 25, 
+        "image": "", 
+        "des": "", 
+        "strength_gold_needs": 1000, 
+        "defense_upper_limit": 100, 
+        "attack_upper_limit": 200, 
+        "sell_gold": 1000, 
+        "avatar": "", 
+        "crit": 50, 
+        "quality": 2, 
+        "strength_sycee_needs": 10
+    }
+},
+{
+    "pk": 2, 
+    "model": "horse.horse", 
+    "fields": {
+        "hp_upper_limit": 400, 
+        "name": "\u6c57\u8840\u9a6c", 
+        "level_needs": 25, 
+        "image": "", 
+        "des": "", 
+        "strength_gold_needs": 2500, 
+        "defense_upper_limit": 120, 
+        "attack_upper_limit": 280, 
+        "sell_gold": 1000, 
+        "avatar": "", 
+        "crit": 80, 
+        "quality": 5, 
+        "strength_sycee_needs": 10
+    }
+},
+{
+    "pk": 3, 
+    "model": "horse.horse", 
+    "fields": {
+        "hp_upper_limit": 600, 
+        "name": "\u722a\u9ec4\u98de\u7535", 
+        "level_needs": 25, 
+        "image": "", 
+        "des": "", 
+        "strength_gold_needs": 6000, 
+        "defense_upper_limit": 150, 
+        "attack_upper_limit": 300, 
+        "sell_gold": 1000, 
+        "avatar": "", 
+        "crit": 100, 
+        "quality": 4, 
+        "strength_sycee_needs": 10
+    }
+},
+{
+    "pk": 4, 
+    "model": "horse.horse", 
+    "fields": {
+        "hp_upper_limit": 800, 
+        "name": "\u591c\u7167\u7389\u72ee\u5b50", 
+        "level_needs": 25, 
+        "image": "", 
+        "des": "", 
+        "strength_gold_needs": 10000, 
+        "defense_upper_limit": 200, 
+        "attack_upper_limit": 350, 
+        "sell_gold": 1000, 
+        "avatar": "", 
+        "crit": 120, 
+        "quality": 5, 
+        "strength_sycee_needs": 10
+    }
+},
+{
+    "pk": 5, 
+    "model": "horse.horse", 
+    "fields": {
+        "hp_upper_limit": 1600, 
+        "name": "\u7684\u5362", 
+        "level_needs": 25, 
+        "image": "", 
+        "des": "", 
+        "strength_gold_needs": 20000, 
+        "defense_upper_limit": 270, 
+        "attack_upper_limit": 300, 
+        "sell_gold": 1000, 
+        "avatar": "", 
+        "crit": 150, 
+        "quality": 6, 
+        "strength_sycee_needs": 10
+    }
+},
+{
+    "pk": 6, 
+    "model": "horse.horse", 
+    "fields": {
+        "hp_upper_limit": 1200, 
+        "name": "\u8d64\u5154", 
+        "level_needs": 25, 
+        "image": "", 
+        "des": "", 
+        "strength_gold_needs": 20000, 
+        "defense_upper_limit": 140, 
+        "attack_upper_limit": 750, 
+        "sell_gold": 1000, 
+        "avatar": "", 
+        "crit": 150, 
+        "quality": 6, 
+        "strength_sycee_needs": 10
+    }
+}
+]

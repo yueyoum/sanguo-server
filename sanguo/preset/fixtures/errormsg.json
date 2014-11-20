@@ -286,6 +286,50 @@
     }
 },
 {
+    "pk": 145, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HORSE_NOT_EXIST", 
+        "text_zh": "\u6b64\u5750\u9a91\u4e0d\u5b58\u5728", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 146, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HORSE_STRENGTH_NO_FREE_TIMES", 
+        "text_zh": "\u5750\u9a91\u514d\u8d39\u5f3a\u5316\u6b21\u6570\u5df2\u7ecf\u7528\u5b8c", 
+        "link_to": 1, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 147, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HORSE_CAN_NOT_SELL_IN_FORMATION", 
+        "text_zh": "\u6b64\u5750\u9a91\u5728\u4f7f\u7528\u4e2d\uff0c\u65e0\u6cd5\u51fa\u552e", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 148, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HORSE_NOT_ENOUGH", 
+        "text_zh": "\u5750\u9a91\u4e0d\u591f", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
     "pk": 150, 
     "model": "errormsg.errormsg", 
     "fields": {
