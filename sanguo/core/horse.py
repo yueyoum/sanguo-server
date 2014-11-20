@@ -13,6 +13,7 @@ from core.resource import Resource
 from core.msgpipe import publish_to_char
 from core.formation import Formation
 from core.item import Item
+from core.signals import socket_changed_signal
 
 from utils import pack_msg
 from utils.functional import id_generator
@@ -344,6 +345,15 @@ class Horse(object):
         msg = HorsesUpdateNotify()
         msg.horse.MergeFrom(hobj.make_msg())
         publish_to_char(self.char_id, pack_msg(msg))
+
+        f = Formation(self.char_id)
+        socket = f.find_socket_by_horse(_id)
+        if socket:
+            socket_changed_signal.send(
+                sender=None,
+                socket_obj=socket
+            )
+
 
 
     def send_notify(self):

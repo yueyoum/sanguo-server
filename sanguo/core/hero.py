@@ -10,12 +10,13 @@ from core.signals import hero_add_signal, hero_changed_signal, hero_step_up_sign
 from core.formation import Formation
 from core.exception import SanguoException
 from core.resource import Resource
+from core.horse import Horse
 from utils import cache
 from core.msgpipe import publish_to_char
 from utils import pack_msg
 from utils.functional import id_generator
 from preset.settings import HERO_MAX_STEP, HERO_START_STEP, HERO_STEP_UP_SOCKET_AMOUNT
-from preset.data import HEROS, ACHIEVEMENTS, MONSTERS
+from preset.data import HEROS, ACHIEVEMENTS, MONSTERS, HORSE
 from preset import errormsg
 import protomsg
 
@@ -150,6 +151,14 @@ class Hero(FightPowerMixin):
             for k, v in equip.gem_attributes.iteritems():
                 value = getattr(self, k)
                 setattr(self, k, value + v)
+
+        # 马
+        if socket.horse:
+            horse = Horse(self.char_id).mongo_horse[str(socket.horse)]
+            self.attack += horse.attack
+            self.defense += horse.defense
+            self.hp += horse.hp
+            self.crit += HORSE[horse.oid].crit
 
 
     def _add_achievement_buffs(self):
