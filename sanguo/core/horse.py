@@ -119,11 +119,8 @@ class OneHorse(FightPowerMixin):
     def __init__(self, _id, oid, attack, defense, hp):
         self._id = _id
         self.oid = oid
-        self.attack = attack
-        self.defense = defense
-        self.hp = hp
+        self.attack, self.defense, self.hp = HorseStrengthFactory.normalize(oid, attack, defense, hp)
         self.crit = HORSE[oid].crit
-
 
     def strength(self, using_sycee=False):
         new_attack, new_defense, new_hp = HorseStrengthFactory.strength(
