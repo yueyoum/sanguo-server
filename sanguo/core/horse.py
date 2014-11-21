@@ -158,6 +158,11 @@ class OneHorse(FightPowerMixin):
         msg.power = self.power
         return msg
 
+    def __str__(self):
+        return "_id:{0},oid:{1},attack:{2},defense:{3},hp:{4},power:{5}".format(
+            self._id, self.oid, self.attack, self.defense, self.hp, self.power
+        )
+
 
 class Horse(object):
     def __init__(self, char_id):
