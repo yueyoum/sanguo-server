@@ -104,6 +104,7 @@ class HorseFreeTimesManager(object):
 
     def incr(self, value=1):
         self.counter.incr(value)
+        self.send_notify()
 
     def send_notify(self):
         msg = HorseFreeStrengthTimesNotify()
