@@ -154,7 +154,7 @@ class Hero(FightPowerMixin):
             self.attack += horse.attack
             self.defense += horse.defense
             self.hp += horse.hp
-            self.crit += HORSE[horse.oid].crit
+            self.crit += int(HORSE[horse.oid].crit / 10)
 
 
     def _add_achievement_buffs(self):
