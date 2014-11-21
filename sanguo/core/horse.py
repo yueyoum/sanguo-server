@@ -61,7 +61,7 @@ class HorseStrengthFactory(object):
 
     @classmethod
     def normal_strength(cls):
-        add_attack = random.randint(0, cls.X) - cls.Y * cls.X * 2
+        add_attack = random.randint(0, cls.X * 2) - cls.Y * cls.X * 2
         add_defense = random.randint(0, cls.X) - cls.Y * cls.X
         add_hp = random.randint(0, cls.X * 5) - cls.Y * cls.X * 5
 
