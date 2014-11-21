@@ -358,6 +358,8 @@ class Horse(object):
                 "stuff value not in HORSE".format(stuff.value)
             )
 
+        item.stuff_remove(horse_soul_id, 1)
+
         h.oid = stuff.value
         self.mongo_horse.save()
         self.send_update_notify(horse_id, h)
