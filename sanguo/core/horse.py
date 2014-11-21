@@ -297,7 +297,7 @@ class Horse(object):
 
         return new_hobj
 
-    def strength_confirm(self):
+    def strength_confirm(self, cancel=False):
         try:
             _id, h = self.mongo_horse.strengthed_horse.items()[0]
         except IndexError:
@@ -309,9 +309,12 @@ class Horse(object):
             )
 
         self.mongo_horse.strengthed_horse = {}
-        self.mongo_horse.horses[str(_id)] = h
         self.mongo_horse.save()
-        self.send_update_notify(_id, h)
+
+        if not cancel:
+            self.mongo_horse.horses[str(_id)] = h
+            self.mongo_horse.save()
+            self.send_update_notify(_id, h)
 
 
     def evolution(self, horse_id, horse_soul_id):

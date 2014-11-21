@@ -24,9 +24,12 @@ def strength(request):
 
 @message_response("HorseStrengthConfirmResponse")
 def strength_confirm(request):
+    req = request._proto
     char_id = request._char_id
     h = Horse(char_id)
-    h.strength_confirm()
+
+    cancel = True if req.tp == 2 else False
+    h.strength_confirm(cancel)
     return None
 
 @message_response("HorseEvolutionResponse")
