@@ -129,7 +129,19 @@ class OneHorse(FightPowerMixin):
         new_attack, new_defense, new_hp = HorseStrengthFactory.strength(
             self.oid, self.attack, self.defense, self.hp, using_sycee=using_sycee
         )
-        return OneHorse(self._id, self.oid, new_attack, new_defense, new_hp)
+
+        new_horse = OneHorse(self._id, self.oid, new_attack, new_defense, new_hp)
+        if new_horse.power < self.power:
+            new_horse = OneHorse(
+                self._id,
+                self.oid,
+                (new_attack - self.attack) / 2,
+                (new_defense - self.defense) / 2,
+                (new_hp - self.hp) / 2
+            )
+
+        return new_horse
+
 
     def to_mongo_record(self):
         m = MongoEmbeddedHorse()
