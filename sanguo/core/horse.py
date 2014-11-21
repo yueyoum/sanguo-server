@@ -132,9 +132,9 @@ class OneHorse(FightPowerMixin):
             new_horse = OneHorse(
                 self._id,
                 self.oid,
-                (new_attack - self.attack) / 2,
-                (new_defense - self.defense) / 2,
-                (new_hp - self.hp) / 2
+                self.attack + (new_attack - self.attack) / 2,
+                self.defense + (new_defense - self.defense) / 2,
+                self.hp + (new_hp - self.hp) / 2
             )
 
         return new_horse
