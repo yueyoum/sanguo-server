@@ -1571,5 +1571,104 @@
         "des": "", 
         "area": ""
     }
+},
+{
+    "pk": 5700, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_NOT_EXIST", 
+        "text_zh": "\u6b64\u5de5\u4f1a\u4e0d\u5b58\u5728", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5701, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_NAME_TOO_LONG", 
+        "text_zh": "\u5de5\u4f1a\u540d\u5b57\u592a\u957f", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5702, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_DES_TOO_LONG", 
+        "text_zh": "\u63cf\u8ff0\u592a\u957f", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5703, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_NAME_ALREADY_EXIST", 
+        "text_zh": "\u6b64\u5de5\u4f1a\u540d\u5df2\u5b58\u5728", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5704, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_CANNOT_CREATE_ALREADY_IN", 
+        "text_zh": "\u5df2\u7ecf\u5728\u5de5\u4f1a\u4e2d\uff0c\u65e0\u6cd5\u5efa\u7acb", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5705, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_CANNOT_JOIN_ALREADY_IN", 
+        "text_zh": "\u5df2\u7ecf\u5728\u5de5\u4f1a\u4e2d\uff0c\u65e0\u6cd5\u52a0\u5165\u5176\u4ed6\u5de5\u4f1a", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5706, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_CANNOT_JOIN_FULL", 
+        "text_zh": "\u5de5\u4f1a\u4eba\u6ee1\u4e86\uff0c\u65e0\u6cd5\u52a0\u5165", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5707, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_CANNOT_AGREE_JOIN", 
+        "text_zh": "\u5bf9\u65b9\u5df2\u7ecf\u5728\u67d0\u5de5\u4f1a\u4e2d\uff0c\u65e0\u6cd5\u52a0\u5165", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5708, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_CANNOT_AGREE_NOT_APPLIED", 
+        "text_zh": "\u5bf9\u65b9\u6ca1\u6709\u63d0\u51fa\u7533\u8bf7\uff0c\u65e0\u6cd5\u52a0\u5165", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
 }
 ]

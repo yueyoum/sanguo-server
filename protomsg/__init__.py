@@ -17,6 +17,7 @@ from item_pb2 import *
 from levy_pb2 import *
 from vip_pb2 import *
 from common_pb2 import *
+from union_pb2 import *
 from formation_pb2 import *
 from friend_pb2 import *
 from battle_pb2 import *
@@ -166,6 +167,16 @@ RESPONSE_NOTIFY_TYPE = {
     "HorseEvolutionResponse": 5407,
     "HorseStrengthConfirmResponse": 5409,
     "HorseFreeStrengthTimesNotify": 5410,
+    "UnionNotify": 5500,
+    "UnionPersonalInformationNotify": 5501,
+    "UnionCreateResponse": 5503,
+    "UnionListNotify": 5504,
+    "UnionApplyResponse": 5506,
+    "UnionModifyResponse": 5508,
+    "UnionListResponse": 5510,
+    "UnionAgreeResponse": 5512,
+    "UnionRefuseResponse": 5514,
+    "UnionApplyListNotify": 5515,
 }
 
 REQUEST_TYPE = {
@@ -236,6 +247,12 @@ REQUEST_TYPE = {
     5404: "HorseStrengthRequest",
     5406: "HorseEvolutionRequest",
     5408: "HorseStrengthConfirmRequest",
+    5502: "UnionCreateRequest",
+    5505: "UnionApplyRequest",
+    5507: "UnionModifyRequest",
+    5509: "UnionListRequest",
+    5511: "UnionAgreeRequest",
+    5513: "UnionRefuseRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -306,6 +323,12 @@ REQUEST_TYPE_REV = {
     "HorseStrengthRequest": 5404,
     "HorseEvolutionRequest": 5406,
     "HorseStrengthConfirmRequest": 5408,
+    "UnionCreateRequest": 5502,
+    "UnionApplyRequest": 5505,
+    "UnionModifyRequest": 5507,
+    "UnionListRequest": 5509,
+    "UnionAgreeRequest": 5511,
+    "UnionRefuseRequest": 5513,
 }
 
 TYPE_COMMAND = {
@@ -375,6 +398,12 @@ TYPE_COMMAND = {
    5404: "/horse/strength/",
    5406: "/horse/evolution/",
    5408: "/horse/strength/confirm/",
+   5502: "/union/create/",
+   5505: "/union/apply/",
+   5507: "/union/modify/",
+   5509: "/union/list/",
+   5511: "/union/agree/",
+   5513: "/union/refuse/",
 }
 
 COMMAND_TYPE = {v: k for k, v in TYPE_COMMAND.iteritems()}

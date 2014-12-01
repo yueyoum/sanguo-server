@@ -429,6 +429,48 @@ class MongoHorse(Document):
     }
 
 
+# 工会
+class MongoUnion(Document):
+    id = IntField(primary_key=True) # 工会ID
+    owner = IntField()              # 所有者ID
+
+    name = StringField()
+    bulletin = StringField(default="")
+    level = IntField(default=0)
+    contribute_points = IntField(default=0)
+
+    meta = {
+        'collection': 'union',
+        'indexes': ['owner', 'name',]
+    }
+
+MongoUnion.ensure_indexes()
+
+class MongoUnionMember(Document):
+    id = IntField(primary_key=True)
+    # 申请的
+    applied = ListField(IntField())
+
+    # 加入的，如果那个union的owner就是自己的id，那么那个union就是自己建立的
+    joined = IntField(default=0)
+    # 工会币
+    coin = IntField(default=0)
+    # 贡献度
+    contribute_points = IntField(default=0)
+    # 职务
+    position = IntField(default=1)
+
+    # 签到次数
+    checkin_times = IntField(default=0)
+
+    meta = {
+        'collection': 'union_members',
+        'indexes': ['applied', 'joined',]
+    }
+
+MongoUnionMember.ensure_indexes()
+
+
 # 持久化redis中的重要信息
 class MongoRedisPersistence(Document):
     id = StringField(primary_key=True)

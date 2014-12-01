@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# 
+#
 #########################
 #       初始化           #
 #########################
@@ -370,3 +370,14 @@ SERVER_STATUS = ((100, 3), (10, 2))
 #########################
 # 首充奖励物品包
 PURCHASE_FIRST_REWARD_PACKAGE_IDS = [6000,]
+
+
+
+#########################
+#      工会             #
+#########################
+UNION_NAME_MAX_LENGTH = 8
+UNION_DES_MAX_LENGTH = 50
+UNION_DEFAULT_DES = u'欢迎加入工会。客服邮箱：abc@def.com'
+UNION_CREATE_NEEDS_SYCEE = 100
+

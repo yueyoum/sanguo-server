@@ -94,6 +94,14 @@ urlpatterns = patterns('',
                        url(r'^horse/strength/confirm/$', 'views.horse.views.strength_confirm'),
                        url(r'^horse/evolution/$', 'views.horse.views.evolution'),
 
+                       # 工会
+                       url(r'^union/create/$', 'views.union.views.create'),
+                       url(r'^union/modify/$', 'views.union.views.modify'),
+                       url(r'^union/apply/$', 'views.union.views.apply_join'),
+                       url(r'^union/agree/$', 'views.union.views.agree_join'),
+                       url(r'^union/refuse/$', 'views.union.views.refuse_join'),
+                       url(r'^union/list/$', 'views.union.views.get_list'),
+
 )
 
 # testmode
