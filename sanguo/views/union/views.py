@@ -78,7 +78,7 @@ def manage(request):
     char_id = request._char_id
 
     m = UnionManager(char_id)
-    if m.action == 1:
+    if req.action == 1:
         m.kickout(req.member_id)
     else:
         m.transfer(req.member_id)

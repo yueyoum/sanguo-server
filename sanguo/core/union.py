@@ -207,11 +207,11 @@ class Union(object):
         if not self.is_member(member_id):
             return
 
-        self.quit()
+        self.quit(member_id)
 
 
-    def quit(self):
-        UnionMember(self.char_id).quit_union()
+    def quit(self, member_id):
+        UnionMember(member_id).quit_union()
         if len(self.member_list) == 0:
             # delete this union
             self.mongo_union.delete()
@@ -394,7 +394,7 @@ class UnionManager(object):
     @_union_manager_check(True, errormsg.INVALID_OPERATE, "Union Quit", "has no union")
     def quit(self):
         # 主动退出
-        self.union.quit()
+        self.union.quit(self.char_id)
 
     @_union_manager_check(True, errormsg.INVALID_OPERATE, "Union Kickout", "has no union")
     def kickout(self, member_id):
