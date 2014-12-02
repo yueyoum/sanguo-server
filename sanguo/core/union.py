@@ -77,6 +77,14 @@ class UnionMember(object):
         # 是否申请过union_id的工会
         return union_id in self.mongo_union_member.applied
 
+    def apply_join(self, union_id):
+        # 申请加入
+        if union_id not in self.mongo_union_member.applied:
+            self.mongo_union_member.applied.append(union_id)
+            self.mongo_union_member.save()
+
+        UnionManager(self.char_id).send_list_notify()
+
     def join_union(self, union_id):
         # 加入工会的后续设置
         try:
@@ -183,7 +191,7 @@ class Union(object):
 
         for m in MongoUnionMember.objects.filter(joined=self.union_id):
             msg_member = msg.members.add()
-            msg_member.MergeFrom(UnionMember(m).make_member_message())
+            msg_member.MergeFrom(UnionMember(m.id).make_member_message())
 
         publish_to_char(self.char_id, pack_msg(msg))
 
@@ -288,7 +296,7 @@ class UnionManager(object):
                     "already in union: {0}".format(self.union.union_id)
                     )
 
-        UnionMember(self.char_id).join(union_id)
+        UnionMember(self.char_id).apply_join(union_id)
 
 
     def agree_join(self, char_id):
@@ -345,14 +353,14 @@ class UnionManager(object):
 
     def send_list_notify(self):
         all_unions = MongoUnion.objects.all()
-        all_unions.sort(key=lambda item: (-item.level, -item.contribute_points))
+        all_unions = sorted(all_unions, key=lambda item: (-item.level, -item.contribute_points))
 
         msg = protomsg.UnionListNotify()
         for u in all_unions:
             union = Union(self.char_id, u.id)
             msg_union = msg.unions.add()
             msg_union.union.MergeFrom(union.make_basic_information())
-            msg_union.union.applied = union.is_applied(self.char_id)
+            msg_union.applied = union.is_applied(self.char_id)
 
         publish_to_char(self.char_id, pack_msg(msg))
 
