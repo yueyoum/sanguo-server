@@ -198,7 +198,8 @@ class Union(object):
                     "full. {0} >= {1}".format(self.current_member_amount, self.max_member_amount)
                     )
 
-        UnionMember(self.char_id).join_union(self.union_id)
+        UnionMember(char_id).join_union(self.union_id)
+        self.send_notify()
 
     @_union_permission("Union Kickout")
     def kickout(self, member_id):
@@ -377,6 +378,8 @@ class UnionManager(object):
         self.union.add_member(char_id)
         self.send_apply_list_notify()
 
+        UnionManager(char_id).send_notify()
+
     @_union_manager_check(True, errormsg.INVALID_OPERATE, "Union Refuse Join", "has no union")
     def refuse_join(self, char_id):
         # 拒绝
@@ -386,6 +389,7 @@ class UnionManager(object):
             m.mongo_union_member.save()
 
         self.send_apply_list_notify()
+        UnionManager(char_id).send_list_notify()
 
     @_union_manager_check(True, errormsg.INVALID_OPERATE, "Union Quit", "has no union")
     def quit(self):
