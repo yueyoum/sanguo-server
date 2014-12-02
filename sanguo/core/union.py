@@ -181,7 +181,8 @@ class Union(object):
     def find_next_owner(self):
         # TODO
         members = self.member_list
-        members.remove(self.char_id)
+        if self.char_id in members:
+            members.remove(self.char_id)
         if members:
             return members[0]
         return None
