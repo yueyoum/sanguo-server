@@ -178,6 +178,15 @@ class Union(object):
         return char_id in self.member_list
 
 
+    def find_next_owner(self):
+        # TODO
+        members = self.member_list
+        members.remove(self.char_id)
+        if members:
+            return members[0]
+        return None
+
+
     @_union_permission("Union Add Member")
     def add_member(self, char_id):
         # 添加成员
@@ -218,8 +227,13 @@ class Union(object):
             self.mongo_union = None
 
         if self.mongo_union:
+            if member_id == self.mongo_union.owner:
+                # owner quit
+                next_owner = self.find_next_owner()
+                self.transfer(next_owner)
             self.send_notify()
         UnionManager(self.char_id).send_list_notify()
+
 
     @_union_permission("Union Transfer")
     def transfer(self, member_id):
