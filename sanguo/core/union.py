@@ -215,7 +215,10 @@ class Union(object):
         if len(self.member_list) == 0:
             # delete this union
             self.mongo_union.delete()
+            self.mongo_union = None
 
+        if self.mongo_union:
+            self.send_notify()
         UnionManager(self.char_id).send_list_notify()
 
     @_union_permission("Union Transfer")
