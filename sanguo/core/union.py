@@ -211,29 +211,39 @@ class Union(object):
         UnionMember(char_id).join_union(self.union_id)
         self.send_notify()
 
+
     @_union_permission("Union Kickout")
-    def kickout(self, member_id):
+    def kick_member(self, member_id):
         # 踢人
         if not self.is_member(member_id):
             return
 
-        self.quit(member_id)
-
-
-    def quit(self, member_id):
         UnionMember(member_id).quit_union()
-        if len(self.member_list) == 0:
-            # delete this union
-            self.mongo_union.delete()
-            self.mongo_union = None
+        self.send_notify()
 
-        if self.mongo_union:
-            if member_id == self.mongo_union.owner:
-                # owner quit
-                next_owner = self.find_next_owner()
-                self.transfer(next_owner)
-            self.send_notify()
-        UnionManager(self.char_id).send_list_notify()
+    @_union_permission("Union Quit")
+    def quit(self):
+        # 自己主动退出
+        if self.belong_to_self:
+            self._quit_owner()
+        else:
+            self._quit_member()
+
+        self.mongo_union = None
+
+    def _quit_owner(self):
+        # 会长退出
+        UnionMember(self.char_id).quit_union()
+        next_owner = self.find_next_owner()
+        if not next_owner:
+            self.mongo_union.delete()
+        else:
+            self.mongo_union.owner = next_owner
+            self.mongo_union.save()
+
+    def _quit_member(self):
+        # 成员退出
+        UnionMember(self.char_id).quit_union()
 
 
     @_union_permission("Union Transfer")
@@ -280,9 +290,9 @@ class Union(object):
         msg.union.MergeFrom(self.make_basic_information())
         msg.leader = self.mongo_union.owner
 
-        for m in MongoUnionMember.objects.filter(joined=self.union_id):
+        for mid in self.member_list:
             msg_member = msg.members.add()
-            msg_member.MergeFrom(UnionMember(m.id).make_member_message())
+            msg_member.MergeFrom(UnionMember(mid).make_member_message())
 
         publish_to_char(self.char_id, pack_msg(msg))
 
@@ -412,12 +422,12 @@ class UnionManager(object):
     @_union_manager_check(True, errormsg.INVALID_OPERATE, "Union Quit", "has no union")
     def quit(self):
         # 主动退出
-        self.union.quit(self.char_id)
+        self.union.quit()
 
     @_union_manager_check(True, errormsg.INVALID_OPERATE, "Union Kickout", "has no union")
     def kickout(self, member_id):
         # 踢人
-        self.union.kickout(member_id)
+        self.union.kick_member(member_id)
 
 
     @_union_manager_check(True, errormsg.INVALID_OPERATE, "Union Transfer", "has no union")
