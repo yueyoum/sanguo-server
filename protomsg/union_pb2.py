@@ -14,9 +14,30 @@ import common_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='union.proto',
   package='Sanguo.protocol.union',
-  serialized_pb='\n\x0bunion.proto\x12\x15Sanguo.protocol.union\x1a\x0c\x63ommon.proto\"\xa7\x01\n\x15UnionBasicInformation\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x10\n\x08\x62ulletin\x18\x03 \x02(\t\x12\r\n\x05level\x18\x04 \x02(\x05\x12\x19\n\x11\x63ontribute_points\x18\x05 \x02(\x05\x12\x1d\n\x15\x63urrent_member_amount\x18\x06 \x02(\x05\x12\x19\n\x11max_member_amount\x18\x07 \x02(\x05\"\xa3\x02\n\x0bUnionNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12;\n\x05union\x18\x02 \x02(\x0b\x32,.Sanguo.protocol.union.UnionBasicInformation\x12\x0e\n\x06leader\x18\x03 \x02(\x05\x12?\n\x07members\x18\x04 \x03(\x0b\x32..Sanguo.protocol.union.UnionNotify.UnionMember\x1au\n\x0bUnionMember\x12\x39\n\x04\x63har\x18\x01 \x02(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\x12\x10\n\x08position\x18\x02 \x02(\x05\x12\x19\n\x11\x63ontribute_points\x18\x03 \x02(\x05\"c\n\x14UnionApplyListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12:\n\x05\x63hars\x18\x02 \x03(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\"\x83\x01\n\x1eUnionPersonalInformationNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nunion_coin\x18\x02 \x02(\x05\x12\x1c\n\x14\x63heckin_total_amount\x18\x03 \x02(\x05\x12\x1e\n\x16\x63heckin_current_amount\x18\x04 \x02(\x05\"3\n\x12UnionCreateRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0c\n\x04name\x18\x02 \x02(\t\"3\n\x13UnionCreateResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xcd\x01\n\x0fUnionListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12G\n\x06unions\x18\x02 \x03(\x0b\x32\x37.Sanguo.protocol.union.UnionListNotify.UnionApplyStatus\x1a`\n\x10UnionApplyStatus\x12;\n\x05union\x18\x01 \x02(\x0b\x32,.Sanguo.protocol.union.UnionBasicInformation\x12\x0f\n\x07\x61pplied\x18\x02 \x02(\x08\"#\n\x10UnionListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"1\n\x11UnionListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x11UnionApplyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"2\n\x12UnionApplyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"5\n\x11UnionAgreeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\"2\n\x12UnionAgreeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"6\n\x12UnionRefuseRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\"3\n\x13UnionRefuseResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"C\n\x12UnionModifyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x10\n\x08\x62ulletin\x18\x03 \x02(\t\"3\n\x13UnionModifyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\x0bunion.proto\x12\x15Sanguo.protocol.union\x1a\x0c\x63ommon.proto\"\xa7\x01\n\x15UnionBasicInformation\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x10\n\x08\x62ulletin\x18\x03 \x02(\t\x12\r\n\x05level\x18\x04 \x02(\x05\x12\x19\n\x11\x63ontribute_points\x18\x05 \x02(\x05\x12\x1d\n\x15\x63urrent_member_amount\x18\x06 \x02(\x05\x12\x19\n\x11max_member_amount\x18\x07 \x02(\x05\"\xa3\x02\n\x0bUnionNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12;\n\x05union\x18\x02 \x02(\x0b\x32,.Sanguo.protocol.union.UnionBasicInformation\x12\x0e\n\x06leader\x18\x03 \x02(\x05\x12?\n\x07members\x18\x04 \x03(\x0b\x32..Sanguo.protocol.union.UnionNotify.UnionMember\x1au\n\x0bUnionMember\x12\x39\n\x04\x63har\x18\x01 \x02(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\x12\x10\n\x08position\x18\x02 \x02(\x05\x12\x19\n\x11\x63ontribute_points\x18\x03 \x02(\x05\"c\n\x14UnionApplyListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12:\n\x05\x63hars\x18\x02 \x03(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\"\x83\x01\n\x1eUnionPersonalInformationNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nunion_coin\x18\x02 \x02(\x05\x12\x1c\n\x14\x63heckin_total_amount\x18\x03 \x02(\x05\x12\x1e\n\x16\x63heckin_current_amount\x18\x04 \x02(\x05\"3\n\x12UnionCreateRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0c\n\x04name\x18\x02 \x02(\t\"3\n\x13UnionCreateResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xcd\x01\n\x0fUnionListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12G\n\x06unions\x18\x02 \x03(\x0b\x32\x37.Sanguo.protocol.union.UnionListNotify.UnionApplyStatus\x1a`\n\x10UnionApplyStatus\x12;\n\x05union\x18\x01 \x02(\x0b\x32,.Sanguo.protocol.union.UnionBasicInformation\x12\x0f\n\x07\x61pplied\x18\x02 \x02(\x08\"#\n\x10UnionListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"1\n\x11UnionListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x11UnionApplyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"2\n\x12UnionApplyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"5\n\x11UnionAgreeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\"2\n\x12UnionAgreeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"6\n\x12UnionRefuseRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\"3\n\x13UnionRefuseResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"C\n\x12UnionModifyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x10\n\x08\x62ulletin\x18\x03 \x02(\t\"3\n\x13UnionModifyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"#\n\x10UnionQuitRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"1\n\x11UnionQuitResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xc1\x01\n\x18UnionMemberManageRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12Q\n\x06\x61\x63tion\x18\x02 \x02(\x0e\x32\x41.Sanguo.protocol.union.UnionMemberManageRequest.UnionManageAction\x12\x11\n\tmember_id\x18\x03 \x02(\x05\".\n\x11UnionManageAction\x12\x0b\n\x07KICKOUT\x10\x01\x12\x0c\n\x08TRANSFER\x10\x02\"9\n\x19UnionMemberManageResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
 
 
+
+_UNIONMEMBERMANAGEREQUEST_UNIONMANAGEACTION = _descriptor.EnumDescriptor(
+  name='UnionManageAction',
+  full_name='Sanguo.protocol.union.UnionMemberManageRequest.UnionManageAction',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='KICKOUT', index=0, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='TRANSFER', index=1, number=2,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=1829,
+  serialized_end=1875,
+)
 
 
 _UNIONBASICINFORMATION = _descriptor.Descriptor(
@@ -751,6 +772,147 @@ _UNIONMODIFYRESPONSE = _descriptor.Descriptor(
   serialized_end=1591,
 )
 
+
+_UNIONQUITREQUEST = _descriptor.Descriptor(
+  name='UnionQuitRequest',
+  full_name='Sanguo.protocol.union.UnionQuitRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.union.UnionQuitRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1593,
+  serialized_end=1628,
+)
+
+
+_UNIONQUITRESPONSE = _descriptor.Descriptor(
+  name='UnionQuitResponse',
+  full_name='Sanguo.protocol.union.UnionQuitResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.union.UnionQuitResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.union.UnionQuitResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1630,
+  serialized_end=1679,
+)
+
+
+_UNIONMEMBERMANAGEREQUEST = _descriptor.Descriptor(
+  name='UnionMemberManageRequest',
+  full_name='Sanguo.protocol.union.UnionMemberManageRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.union.UnionMemberManageRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='action', full_name='Sanguo.protocol.union.UnionMemberManageRequest.action', index=1,
+      number=2, type=14, cpp_type=8, label=2,
+      has_default_value=False, default_value=1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='member_id', full_name='Sanguo.protocol.union.UnionMemberManageRequest.member_id', index=2,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _UNIONMEMBERMANAGEREQUEST_UNIONMANAGEACTION,
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1682,
+  serialized_end=1875,
+)
+
+
+_UNIONMEMBERMANAGERESPONSE = _descriptor.Descriptor(
+  name='UnionMemberManageResponse',
+  full_name='Sanguo.protocol.union.UnionMemberManageResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.union.UnionMemberManageResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.union.UnionMemberManageResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1877,
+  serialized_end=1934,
+)
+
 _UNIONNOTIFY_UNIONMEMBER.fields_by_name['char'].message_type = common_pb2._CHARACTERINFOMATION
 _UNIONNOTIFY_UNIONMEMBER.containing_type = _UNIONNOTIFY;
 _UNIONNOTIFY.fields_by_name['union'].message_type = _UNIONBASICINFORMATION
@@ -759,6 +921,8 @@ _UNIONAPPLYLISTNOTIFY.fields_by_name['chars'].message_type = common_pb2._CHARACT
 _UNIONLISTNOTIFY_UNIONAPPLYSTATUS.fields_by_name['union'].message_type = _UNIONBASICINFORMATION
 _UNIONLISTNOTIFY_UNIONAPPLYSTATUS.containing_type = _UNIONLISTNOTIFY;
 _UNIONLISTNOTIFY.fields_by_name['unions'].message_type = _UNIONLISTNOTIFY_UNIONAPPLYSTATUS
+_UNIONMEMBERMANAGEREQUEST.fields_by_name['action'].enum_type = _UNIONMEMBERMANAGEREQUEST_UNIONMANAGEACTION
+_UNIONMEMBERMANAGEREQUEST_UNIONMANAGEACTION.containing_type = _UNIONMEMBERMANAGEREQUEST;
 DESCRIPTOR.message_types_by_name['UnionBasicInformation'] = _UNIONBASICINFORMATION
 DESCRIPTOR.message_types_by_name['UnionNotify'] = _UNIONNOTIFY
 DESCRIPTOR.message_types_by_name['UnionApplyListNotify'] = _UNIONAPPLYLISTNOTIFY
@@ -776,6 +940,10 @@ DESCRIPTOR.message_types_by_name['UnionRefuseRequest'] = _UNIONREFUSEREQUEST
 DESCRIPTOR.message_types_by_name['UnionRefuseResponse'] = _UNIONREFUSERESPONSE
 DESCRIPTOR.message_types_by_name['UnionModifyRequest'] = _UNIONMODIFYREQUEST
 DESCRIPTOR.message_types_by_name['UnionModifyResponse'] = _UNIONMODIFYRESPONSE
+DESCRIPTOR.message_types_by_name['UnionQuitRequest'] = _UNIONQUITREQUEST
+DESCRIPTOR.message_types_by_name['UnionQuitResponse'] = _UNIONQUITRESPONSE
+DESCRIPTOR.message_types_by_name['UnionMemberManageRequest'] = _UNIONMEMBERMANAGEREQUEST
+DESCRIPTOR.message_types_by_name['UnionMemberManageResponse'] = _UNIONMEMBERMANAGERESPONSE
 
 class UnionBasicInformation(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
@@ -890,6 +1058,30 @@ class UnionModifyResponse(_message.Message):
   DESCRIPTOR = _UNIONMODIFYRESPONSE
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionModifyResponse)
+
+class UnionQuitRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _UNIONQUITREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionQuitRequest)
+
+class UnionQuitResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _UNIONQUITRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionQuitResponse)
+
+class UnionMemberManageRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _UNIONMEMBERMANAGEREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionMemberManageRequest)
+
+class UnionMemberManageResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _UNIONMEMBERMANAGERESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionMemberManageResponse)
 
 
 # @@protoc_insertion_point(module_scope)

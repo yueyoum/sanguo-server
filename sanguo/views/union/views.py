@@ -63,3 +63,24 @@ def get_list(request):
     m = UnionManager(char_id)
     m.send_list_notify()
     return None
+
+@message_response("UnionQuitResponse")
+def quit(request):
+    char_id = request._char_id
+
+    m = UnionManager(char_id)
+    m.quit()
+    return None
+
+@message_response("UnionMemberManageResponse")
+def manage(request):
+    req = request._proto
+    char_id = request._char_id
+
+    m = UnionManager(char_id)
+    if m.action == 1:
+        m.kickout(req.member_id)
+    else:
+        m.transfer(req.member_id)
+
+    return None

@@ -177,6 +177,8 @@ RESPONSE_NOTIFY_TYPE = {
     "UnionAgreeResponse": 5512,
     "UnionRefuseResponse": 5514,
     "UnionApplyListNotify": 5515,
+    "UnionQuitResponse": 5517,
+    "UnionMemberManageResponse": 5619,
 }
 
 REQUEST_TYPE = {
@@ -253,6 +255,8 @@ REQUEST_TYPE = {
     5509: "UnionListRequest",
     5511: "UnionAgreeRequest",
     5513: "UnionRefuseRequest",
+    5516: "UnionQuitRequest",
+    5618: "UnionMemberManageRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -329,6 +333,8 @@ REQUEST_TYPE_REV = {
     "UnionListRequest": 5509,
     "UnionAgreeRequest": 5511,
     "UnionRefuseRequest": 5513,
+    "UnionQuitRequest": 5516,
+    "UnionMemberManageRequest": 5618,
 }
 
 TYPE_COMMAND = {
@@ -404,6 +410,8 @@ TYPE_COMMAND = {
    5509: "/union/list/",
    5511: "/union/agree/",
    5513: "/union/refuse/",
+   5516: "/union/quit/",
+   5618: "/union/manage/",
 }
 
 COMMAND_TYPE = {v: k for k, v in TYPE_COMMAND.iteritems()}

@@ -7,6 +7,7 @@ Description:
 
 """
 
+
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoUnion, MongoUnionMember
 from core.exception import SanguoException
@@ -107,6 +108,30 @@ class UnionMember(object):
         self.mongo_union_member.save()
         self.send_personal_notify()
 
+    def quit_union(self):
+        # 退出工会
+        self.mongo_union_member.joined = 0
+        self.mongo_union_member.contribute_points = 0
+        self.mongo_union_member.position = 1
+        self.mongo_union_member.save()
+        self.send_personal_notify()
+
+
+
+def _union_permission(func_name):
+    def deco(func):
+        def wrap(self, *args, **kwargs):
+            if not self.belong_to_self:
+                raise SanguoException(
+                    errormsg.INVALID_OPERATE,
+                    self.char_id,
+                    func_name,
+                    "no permission"
+                )
+
+            return func(self, *args, **kwargs)
+        return wrap
+    return deco
 
 
 class Union(object):
@@ -129,6 +154,12 @@ class Union(object):
         return [i.id for i in mongo_members]
 
     @property
+    def member_list(self):
+        # 成员ID列表
+        members = MongoUnionMember.objects.filter(joined=self.union_id)
+        return [i.id for i in members]
+
+    @property
     def max_member_amount(self):
         # FIXME
         return 10
@@ -142,7 +173,12 @@ class Union(object):
         # 角色char_id是否申请过
         return UnionMember(char_id).is_applied(self.union_id)
 
+    def is_member(self, char_id):
+        # 角色char_id是否是成员
+        return char_id in self.member_list
 
+
+    @_union_permission("Union Add Member")
     def add_member(self, char_id):
         # 添加成员
         if not self.is_applied(char_id):
@@ -164,7 +200,34 @@ class Union(object):
 
         UnionMember(self.char_id).join_union(self.union_id)
 
+    @_union_permission("Union Kickout")
+    def kickout(self, member_id):
+        # 踢人
+        if not self.is_member(member_id):
+            return
 
+        UnionMember(self.char_id).quit_union()
+
+    @_union_permission("Union Transfer")
+    def transfer(self, member_id):
+        # 转让会长
+        if not self.is_member(member_id):
+            raise SanguoException(
+                errormsg.INVALID_OPERATE,
+                self.char_id,
+                "Union Transfer",
+                "{0} is not member of union {1}".format(member_id, self.union_id)
+            )
+
+        self.mongo_union.owner = member_id
+        self.mongo_union.save()
+        self.belong_to_self = False
+
+        self.send_notify()
+        Union(member_id, self.union_id).send_notify()
+
+
+    @_union_permission("Union Modify")
     def modify(self, bulletin):
         self.mongo_union.bulletin = bulletin
         self.mongo_union.save()
@@ -200,6 +263,27 @@ class Union(object):
         member.send_personal_notify()
 
 
+def _union_manager_check(union_need_exist, err_msg, func_name, des=""):
+    def deco(func):
+        def wrap(self, *args, **kwargs):
+            res = self.union is not None
+            error = False
+            if union_need_exist and not res:
+                error = True
+            if not union_need_exist and res:
+                error = True
+
+            if error:
+                raise SanguoException(
+                    err_msg,
+                    self.char_id,
+                    func_name,
+                    des
+                )
+
+            return func(self, *args, **kwargs)
+        return wrap
+    return deco
 
 class UnionManager(object):
     def __init__(self, char_id):
@@ -214,16 +298,8 @@ class UnionManager(object):
             self.union = None
 
 
+    @_union_manager_check(False, errormsg.UNION_CANNOT_CREATE_ALREADY_IN, "Union Create", "already in")
     def create(self,name):
-        if self.union:
-            raise SanguoException(
-                    errormsg.UNION_CANNOT_CREATE_ALREADY_IN,
-                    self.char_id,
-                    "Union Create",
-                    "already created"
-                    )
-
-
         if len(name) > UNION_NAME_MAX_LENGTH:
             raise SanguoException(
                     errormsg.UNION_NAME_TOO_LONG,
@@ -258,15 +334,8 @@ class UnionManager(object):
         Union(self.char_id, new_id).send_notify()
 
 
+    @_union_manager_check(True, errormsg.UNION_NOT_EXIST, "Union Modify", "has no union")
     def modify(self, union_id, bulletin):
-        if not self.union:
-            raise SanguoException(
-                    errormsg.UNION_NOT_EXIST,
-                    self.char_id,
-                    "Union Modify",
-                    "union not eixst: {0}".format(union_id)
-                    )
-
         if len(bulletin) > UNION_DES_MAX_LENGTH:
             raise SanguoException(
                     errormsg.UNION_DES_TOO_LONG,
@@ -275,40 +344,18 @@ class UnionManager(object):
                     "union des too long: {0}, {1}".format(union_id, bulletin.encode('utf-8'))
                     )
 
-        if not self.union.belong_to_self:
-            raise SanguoException(
-                    errormsg.INVALID_OPERATE,
-                    self.char_id,
-                    "Union Modify",
-                    "union {0} not belong to self".format(union_id)
-                    )
-
         self.union.modify(bulletin)
 
 
+    @_union_manager_check(False, errormsg.UNION_CANNOT_JOIN_ALREADY_IN, "Union Join", "already in")
     def apply_join(self, union_id):
         # 发出加入申请
-        if self.union:
-            raise SanguoException(
-                    errormsg.UNION_CANNOT_JOIN_ALREADY_IN,
-                    self.char_id,
-                    "Union Join",
-                    "already in union: {0}".format(self.union.union_id)
-                    )
-
         UnionMember(self.char_id).apply_join(union_id)
 
 
+    @_union_manager_check(True, errormsg.INVALID_OPERATE, "Union Agree Join", "has no union")
     def agree_join(self, char_id):
         # 接受加入申请
-        if not self.union or not self.union.belong_to_self:
-            raise SanguoException(
-                    errormsg.INVALID_OPERATE,
-                    self.char_id,
-                    "Union Apply Join",
-                    "char {0} has no union or not the owner".format(self.char_id)
-                    )
-
         um = UnionManager(char_id)
         if um.union:
             raise SanguoException(
@@ -321,16 +368,9 @@ class UnionManager(object):
         self.union.add_member(char_id)
         self.send_apply_list_notify()
 
+    @_union_manager_check(True, errormsg.INVALID_OPERATE, "Union Refuse Join", "has no union")
     def refuse_join(self, char_id):
         # 拒绝
-        if not self.union or not self.union.belong_to_self:
-            raise SanguoException(
-                errormsg.INVALID_OPERATE,
-                self.char_id,
-                "Union Refuse Join",
-                "char {0} has no union or not the owner".format(self.char_id)
-            )
-
         m = UnionMember(char_id)
         if self.union.union_id in m.mongo_union_member.applied:
             m.mongo_union_member.applied.remove(self.union.union_id)
@@ -338,13 +378,33 @@ class UnionManager(object):
 
         self.send_apply_list_notify()
 
+    @_union_manager_check(True, errormsg.INVALID_OPERATE, "Union Quit", "has no union")
+    def quit(self):
+        # 主动退出
+        UnionMember(self.char_id).quit_union()
 
-    def send_apply_list_notify(self):
+    @_union_manager_check(True, errormsg.INVALID_OPERATE, "Union Kickout", "has no union")
+    def kickout(self, member_id):
+        # 踢人
+        self.union.kickout(member_id)
+
+
+    @_union_manager_check(True, errormsg.INVALID_OPERATE, "Union Transfer", "has no union")
+    def transfer(self, member_id):
+        # 转让会长
+        self.union.transfer(member_id)
+        self.send_apply_list_notify(lists=[])
+
+
+    def send_apply_list_notify(self, lists=None):
         if not self.union or not self.union.belong_to_self:
             return
 
         msg = protomsg.UnionApplyListNotify()
-        for c in self.union.applied_list:
+        if lists is None:
+            lists = self.union.applied_list
+
+        for c in lists:
             msg_char = msg.chars.add()
             msg_char.MergeFrom(create_character_infomation_message(c))
 
