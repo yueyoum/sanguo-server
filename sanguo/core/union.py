@@ -16,6 +16,7 @@ from core.msgfactory import create_character_infomation_message
 from core.msgpipe import publish_to_char
 from core.resource import Resource
 from core.signals import global_buff_changed_signal
+from core.resource import Resource
 
 from utils import pack_msg
 from utils.functional import id_generator
@@ -29,7 +30,7 @@ from preset.settings import (
 
 from preset import errormsg
 
-from preset.data import UNION_STORE, HORSE, STUFFS
+from preset.data import UNION_STORE, UNION_CHECKIN, HORSE, STUFFS
 
 
 import protomsg
@@ -87,9 +88,20 @@ class UnionMember(object):
                 "reached max times"
             )
 
-        self.mongo_union_member.checkin_times += 1
-        self.mongo_union_member.last_checkin_timestamp = arrow.utcnow().timestamp
-        self.mongo_union_member.save()
+        c = UNION_CHECKIN[self.mongo_union_member.checkin_times]
+        if c.cost_type == 1:
+            needs = {'gold': c.cost_value}
+        else:
+            needs = {'sycee': c.cost_value}
+
+        resources = Resource(self.char_id, "Union Checkin")
+        with resources.check(**needs):
+            self.mongo_union_member.checkin_times += 1
+            self.mongo_union_member.last_checkin_timestamp = arrow.utcnow().timestamp
+
+            self.mongo_union_member.coin += c.got_coin
+            self.mongo_union_member.contribute_points += c.got_contributes
+            self.mongo_union_member.save()
         self.send_personal_notify()
 
 

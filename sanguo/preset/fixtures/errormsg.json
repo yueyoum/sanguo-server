@@ -1681,5 +1681,27 @@
         "des": "", 
         "area": ""
     }
+},
+{
+    "pk": 5710, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_STORE_BUY_REACH_MAX_TIMES", 
+        "text_zh": "\u6b64\u7269\u54c1\u5df2\u7ecf\u5230\u6700\u5927\u8d2d\u4e70\u6b21\u6570\uff0c\u8bf7\u660e\u5929\u518d\u4e70", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5711, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_CHECKIN_REACH_MAX_TIMES", 
+        "text_zh": "\u5de5\u4f1a\u7b7e\u5230\u6b21\u6570\u5df2\u7528\u5b8c", 
+        "link_to": 1, 
+        "des": "", 
+        "area": ""
+    }
 }
 ]
