@@ -462,6 +462,8 @@ class MongoUnionMember(Document):
 
     # 签到次数
     checkin_times = IntField(default=0)
+    # 上次签到时间戳
+    last_checkin_timestamp = IntField(default=0)
 
     # 购买buff的次数
     buy_buff_times = DictField()

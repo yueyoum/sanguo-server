@@ -14,7 +14,7 @@ import common_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='union.proto',
   package='Sanguo.protocol.union',
-  serialized_pb='\n\x0bunion.proto\x12\x15Sanguo.protocol.union\x1a\x0c\x63ommon.proto\"\xa7\x01\n\x15UnionBasicInformation\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x10\n\x08\x62ulletin\x18\x03 \x02(\t\x12\r\n\x05level\x18\x04 \x02(\x05\x12\x19\n\x11\x63ontribute_points\x18\x05 \x02(\x05\x12\x1d\n\x15\x63urrent_member_amount\x18\x06 \x02(\x05\x12\x19\n\x11max_member_amount\x18\x07 \x02(\x05\"\xa3\x02\n\x0bUnionNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12;\n\x05union\x18\x02 \x02(\x0b\x32,.Sanguo.protocol.union.UnionBasicInformation\x12\x0e\n\x06leader\x18\x03 \x02(\x05\x12?\n\x07members\x18\x04 \x03(\x0b\x32..Sanguo.protocol.union.UnionNotify.UnionMember\x1au\n\x0bUnionMember\x12\x39\n\x04\x63har\x18\x01 \x02(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\x12\x10\n\x08position\x18\x02 \x02(\x05\x12\x19\n\x11\x63ontribute_points\x18\x03 \x02(\x05\"c\n\x14UnionApplyListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12:\n\x05\x63hars\x18\x02 \x03(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\"\x83\x01\n\x1eUnionPersonalInformationNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nunion_coin\x18\x02 \x02(\x05\x12\x1c\n\x14\x63heckin_total_amount\x18\x03 \x02(\x05\x12\x1e\n\x16\x63heckin_current_amount\x18\x04 \x02(\x05\"3\n\x12UnionCreateRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0c\n\x04name\x18\x02 \x02(\t\"3\n\x13UnionCreateResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xcd\x01\n\x0fUnionListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12G\n\x06unions\x18\x02 \x03(\x0b\x32\x37.Sanguo.protocol.union.UnionListNotify.UnionApplyStatus\x1a`\n\x10UnionApplyStatus\x12;\n\x05union\x18\x01 \x02(\x0b\x32,.Sanguo.protocol.union.UnionBasicInformation\x12\x0f\n\x07\x61pplied\x18\x02 \x02(\x08\"#\n\x10UnionListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"1\n\x11UnionListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x11UnionApplyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"2\n\x12UnionApplyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"5\n\x11UnionAgreeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\"2\n\x12UnionAgreeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"6\n\x12UnionRefuseRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\"3\n\x13UnionRefuseResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"C\n\x12UnionModifyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x10\n\x08\x62ulletin\x18\x03 \x02(\t\"3\n\x13UnionModifyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"#\n\x10UnionQuitRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"1\n\x11UnionQuitResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xc1\x01\n\x18UnionMemberManageRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12Q\n\x06\x61\x63tion\x18\x02 \x02(\x0e\x32\x41.Sanguo.protocol.union.UnionMemberManageRequest.UnionManageAction\x12\x11\n\tmember_id\x18\x03 \x02(\x05\".\n\x11UnionManageAction\x12\x0b\n\x07KICKOUT\x10\x01\x12\x0c\n\x08TRANSFER\x10\x02\"9\n\x19UnionMemberManageResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xbd\x01\n\x10UnionStoreNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x43\n\x05\x62uffs\x18\x02 \x03(\x0b\x32\x34.Sanguo.protocol.union.UnionStoreNotify.BuyBuffTimes\x1aS\n\x0c\x42uyBuffTimes\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x11\n\tmax_times\x18\x02 \x02(\x05\x12\x11\n\tcur_times\x18\x03 \x02(\x05\x12\x11\n\tadd_value\x18\x04 \x02(\x05\"3\n\x14UnionStoreBuyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"5\n\x15UnionStoreBuyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\x0bunion.proto\x12\x15Sanguo.protocol.union\x1a\x0c\x63ommon.proto\"\xa7\x01\n\x15UnionBasicInformation\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x10\n\x08\x62ulletin\x18\x03 \x02(\t\x12\r\n\x05level\x18\x04 \x02(\x05\x12\x19\n\x11\x63ontribute_points\x18\x05 \x02(\x05\x12\x1d\n\x15\x63urrent_member_amount\x18\x06 \x02(\x05\x12\x19\n\x11max_member_amount\x18\x07 \x02(\x05\"\xa3\x02\n\x0bUnionNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12;\n\x05union\x18\x02 \x02(\x0b\x32,.Sanguo.protocol.union.UnionBasicInformation\x12\x0e\n\x06leader\x18\x03 \x02(\x05\x12?\n\x07members\x18\x04 \x03(\x0b\x32..Sanguo.protocol.union.UnionNotify.UnionMember\x1au\n\x0bUnionMember\x12\x39\n\x04\x63har\x18\x01 \x02(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\x12\x10\n\x08position\x18\x02 \x02(\x05\x12\x19\n\x11\x63ontribute_points\x18\x03 \x02(\x05\"c\n\x14UnionApplyListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12:\n\x05\x63hars\x18\x02 \x03(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\"\x83\x01\n\x1eUnionPersonalInformationNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nunion_coin\x18\x02 \x02(\x05\x12\x1c\n\x14\x63heckin_total_amount\x18\x03 \x02(\x05\x12\x1e\n\x16\x63heckin_current_amount\x18\x04 \x02(\x05\"3\n\x12UnionCreateRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0c\n\x04name\x18\x02 \x02(\t\"3\n\x13UnionCreateResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xcd\x01\n\x0fUnionListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12G\n\x06unions\x18\x02 \x03(\x0b\x32\x37.Sanguo.protocol.union.UnionListNotify.UnionApplyStatus\x1a`\n\x10UnionApplyStatus\x12;\n\x05union\x18\x01 \x02(\x0b\x32,.Sanguo.protocol.union.UnionBasicInformation\x12\x0f\n\x07\x61pplied\x18\x02 \x02(\x08\"#\n\x10UnionListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"1\n\x11UnionListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x11UnionApplyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"2\n\x12UnionApplyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"5\n\x11UnionAgreeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\"2\n\x12UnionAgreeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"6\n\x12UnionRefuseRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\"3\n\x13UnionRefuseResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"C\n\x12UnionModifyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x10\n\x08\x62ulletin\x18\x03 \x02(\t\"3\n\x13UnionModifyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"#\n\x10UnionQuitRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"1\n\x11UnionQuitResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xc1\x01\n\x18UnionMemberManageRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12Q\n\x06\x61\x63tion\x18\x02 \x02(\x0e\x32\x41.Sanguo.protocol.union.UnionMemberManageRequest.UnionManageAction\x12\x11\n\tmember_id\x18\x03 \x02(\x05\".\n\x11UnionManageAction\x12\x0b\n\x07KICKOUT\x10\x01\x12\x0c\n\x08TRANSFER\x10\x02\"9\n\x19UnionMemberManageResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"&\n\x13UnionCheckinRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"4\n\x14UnionCheckinResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xbd\x01\n\x10UnionStoreNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x43\n\x05\x62uffs\x18\x02 \x03(\x0b\x32\x34.Sanguo.protocol.union.UnionStoreNotify.BuyBuffTimes\x1aS\n\x0c\x42uyBuffTimes\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x11\n\tmax_times\x18\x02 \x02(\x05\x12\x11\n\tcur_times\x18\x03 \x02(\x05\x12\x11\n\tadd_value\x18\x04 \x02(\x05\"3\n\x14UnionStoreBuyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"5\n\x15UnionStoreBuyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
 
 
 
@@ -914,6 +914,69 @@ _UNIONMEMBERMANAGERESPONSE = _descriptor.Descriptor(
 )
 
 
+_UNIONCHECKINREQUEST = _descriptor.Descriptor(
+  name='UnionCheckinRequest',
+  full_name='Sanguo.protocol.union.UnionCheckinRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.union.UnionCheckinRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1936,
+  serialized_end=1974,
+)
+
+
+_UNIONCHECKINRESPONSE = _descriptor.Descriptor(
+  name='UnionCheckinResponse',
+  full_name='Sanguo.protocol.union.UnionCheckinResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.union.UnionCheckinResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.union.UnionCheckinResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1976,
+  serialized_end=2028,
+)
+
+
 _UNIONSTORENOTIFY_BUYBUFFTIMES = _descriptor.Descriptor(
   name='BuyBuffTimes',
   full_name='Sanguo.protocol.union.UnionStoreNotify.BuyBuffTimes',
@@ -958,8 +1021,8 @@ _UNIONSTORENOTIFY_BUYBUFFTIMES = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2043,
-  serialized_end=2126,
+  serialized_start=2137,
+  serialized_end=2220,
 )
 
 _UNIONSTORENOTIFY = _descriptor.Descriptor(
@@ -992,8 +1055,8 @@ _UNIONSTORENOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1937,
-  serialized_end=2126,
+  serialized_start=2031,
+  serialized_end=2220,
 )
 
 
@@ -1027,8 +1090,8 @@ _UNIONSTOREBUYREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2128,
-  serialized_end=2179,
+  serialized_start=2222,
+  serialized_end=2273,
 )
 
 
@@ -1062,8 +1125,8 @@ _UNIONSTOREBUYRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2181,
-  serialized_end=2234,
+  serialized_start=2275,
+  serialized_end=2328,
 )
 
 _UNIONNOTIFY_UNIONMEMBER.fields_by_name['char'].message_type = common_pb2._CHARACTERINFOMATION
@@ -1099,6 +1162,8 @@ DESCRIPTOR.message_types_by_name['UnionQuitRequest'] = _UNIONQUITREQUEST
 DESCRIPTOR.message_types_by_name['UnionQuitResponse'] = _UNIONQUITRESPONSE
 DESCRIPTOR.message_types_by_name['UnionMemberManageRequest'] = _UNIONMEMBERMANAGEREQUEST
 DESCRIPTOR.message_types_by_name['UnionMemberManageResponse'] = _UNIONMEMBERMANAGERESPONSE
+DESCRIPTOR.message_types_by_name['UnionCheckinRequest'] = _UNIONCHECKINREQUEST
+DESCRIPTOR.message_types_by_name['UnionCheckinResponse'] = _UNIONCHECKINRESPONSE
 DESCRIPTOR.message_types_by_name['UnionStoreNotify'] = _UNIONSTORENOTIFY
 DESCRIPTOR.message_types_by_name['UnionStoreBuyRequest'] = _UNIONSTOREBUYREQUEST
 DESCRIPTOR.message_types_by_name['UnionStoreBuyResponse'] = _UNIONSTOREBUYRESPONSE
@@ -1240,6 +1305,18 @@ class UnionMemberManageResponse(_message.Message):
   DESCRIPTOR = _UNIONMEMBERMANAGERESPONSE
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionMemberManageResponse)
+
+class UnionCheckinRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _UNIONCHECKINREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionCheckinRequest)
+
+class UnionCheckinResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _UNIONCHECKINRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionCheckinResponse)
 
 class UnionStoreNotify(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType

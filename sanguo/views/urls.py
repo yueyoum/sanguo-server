@@ -104,6 +104,7 @@ urlpatterns = patterns('',
                        url(r'^union/quit/$', 'views.union.views.quit'),
                        url(r'^union/manage/$', 'views.union.views.manage'),
                        url(r'^union/buy/$', 'views.union.views.store_buy'),
+                       url(r'^union/checkin/$', 'views.union.views.checkin'),
 
 )
 

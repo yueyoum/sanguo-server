@@ -7,6 +7,7 @@ Description:
 
 """
 
+import arrow
 
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoUnion, MongoUnionMember
@@ -68,6 +69,29 @@ class UnionMember(object):
     @property
     def checkin_current_amount(self):
         return self.mongo_union_member.checkin_times
+
+    def checkin(self):
+        if not self.mongo_union_member.joined:
+            raise SanguoException(
+                errormsg.INVALID_OPERATE,
+                self.char_id,
+                "Union Checkin",
+                "not join union"
+            )
+
+        if self.mongo_union_member.checkin_times >= self.checkin_total_amount:
+            raise SanguoException(
+                errormsg.UNION_CHECKIN_REACH_MAX_TIMES,
+                self.char_id,
+                "Union Checkin",
+                "reached max times"
+            )
+
+        self.mongo_union_member.checkin_times += 1
+        self.mongo_union_member.last_checkin_timestamp = arrow.utcnow().timestamp
+        self.mongo_union_member.save()
+        self.send_personal_notify()
+
 
     def make_member_message(self):
         msg = protomsg.UnionNotify.UnionMember()
@@ -578,7 +602,7 @@ class UnionStore(UnionLoadBase):
         cur_buy_times = self.buff_cur_buy_times
         if cur_buy_times[item_id] + amount > self.buff_max_buy_times:
             raise SanguoException(
-                errormsg.INVALID_OPERATE,
+                errormsg.UNION_STORE_BUY_REACH_MAX_TIMES,
                 self.char_id,
                 "UnionStore Buy",
                 "buff {0} has reached the max buy times {1}".format(item_id, self.buff_max_buy_times)
