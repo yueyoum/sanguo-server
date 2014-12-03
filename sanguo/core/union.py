@@ -44,7 +44,6 @@ UNION_STORE_BUFF_STORE_ID_DICT = {}
 for _k, _v in UNION_STORE.items():
     if _v.tp in BUFFS:
         UNION_STORE_BUFF_STORE_ID_DICT[_v.tp] = _k
-        break
 
 
 class UnionMember(object):
