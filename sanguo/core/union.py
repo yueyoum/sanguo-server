@@ -629,7 +629,7 @@ class UnionStore(UnionLoadBase):
 
         for i in BUFFS:
             msg_buff = msg.buffs.add()
-            msg_buff.id = UNION_STORE_BUFF_STORE_ID_DICT[i]
+            msg_buff.id = i
             msg_buff.max_times = max_times
             msg_buff.cur_times = cur_times[i]
             msg_buff.add_value = add_buffs[i]

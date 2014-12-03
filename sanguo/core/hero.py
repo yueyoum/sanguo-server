@@ -189,7 +189,7 @@ class Hero(FightPowerMixin):
         buffs = s.get_add_buffs_with_string_name()
         for k, v in buffs.iteritems():
             value = getattr(self, k)
-            new_value = value + k
+            new_value = int(value + v)
             setattr(self, k, new_value)
 
 
