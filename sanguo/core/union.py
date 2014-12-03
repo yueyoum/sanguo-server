@@ -151,6 +151,11 @@ class UnionMember(object):
         self.mongo_union_member.save()
         self.send_personal_notify()
 
+    def add_coin(self, coin):
+        self.mongo_union_member.coin += coin
+        self.mongo_union_member.save()
+        self.send_personal_notify()
+
 
 
 def _union_permission(func_name):
