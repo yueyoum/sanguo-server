@@ -1,4 +1,11 @@
-from core.signals import char_level_up_signal, char_official_up_signal, char_gold_changed_signal, char_sycee_changed_signal
+from core.signals import (
+    char_level_up_signal,
+    char_official_up_signal,
+    char_gold_changed_signal,
+    char_sycee_changed_signal,
+    global_buff_changed_signal,
+)
+
 from core.notify import update_hero_notify
 from core.hero import Hero, char_heros_dict
 from core.achievement import Achievement
@@ -6,13 +13,8 @@ from core.stage import ActivityStage
 from core.activity import ActivityStatic
 
 
-
-def _char_level_up(char_id, new_level, **kwargs):
+def _all_hero_changed(char_id):
     heros_dict = char_heros_dict(char_id)
-
-    achievement = Achievement(char_id)
-    achievement.trig(18, new_level)
-
     heros = []
     for hid in heros_dict.keys():
         h = Hero(hid)
@@ -21,6 +23,15 @@ def _char_level_up(char_id, new_level, **kwargs):
 
     update_hero_notify(char_id, heros)
 
+def _global_buff_changed(char_id, **kwargs):
+    _all_hero_changed(char_id)
+
+
+def _char_level_up(char_id, new_level, **kwargs):
+    _all_hero_changed(char_id)
+
+    achievement = Achievement(char_id)
+    achievement.trig(18, new_level)
     activity_stage = ActivityStage(char_id)
     activity_stage.check(new_level)
 
@@ -64,3 +75,7 @@ char_sycee_changed_signal.connect(
     dispatch_uid='callbacks.signals.character._char_sycee_changed'
 )
 
+global_buff_changed_signal.connect(
+    _global_buff_changed,
+    dispatch_uid='callbacks.signals.character._global_buff_changed'
+)

@@ -98,6 +98,7 @@ class Hero(FightPowerMixin):
 
         self._add_equip_attrs()
         self._add_achievement_buffs()
+        self._add_global_buffs()
 
     def _add_equip_attrs(self):
         from core.item import Equipment
@@ -179,6 +180,16 @@ class Hero(FightPowerMixin):
                 new_value = value * (1 + v / 10000.0)
 
             new_value = int(new_value)
+            setattr(self, k, new_value)
+
+
+    def _add_global_buffs(self):
+        from core.union import UnionStore
+        s = UnionStore(self.char_id)
+        buffs = s.get_add_buffs_with_string_name()
+        for k, v in buffs.iteritems():
+            value = getattr(self, k)
+            new_value = value + k
             setattr(self, k, new_value)
 
 

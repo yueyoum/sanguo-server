@@ -5,7 +5,7 @@ __date__ = '14-12-1'
 
 from utils.decorate import message_response
 
-from core.union import UnionManager
+from core.union import UnionManager, UnionStore
 
 @message_response("UnionCreateResponse")
 def create(request):
@@ -84,3 +84,13 @@ def manage(request):
         m.transfer(req.member_id)
 
     return None
+
+@message_response("UnionStoreBuyResponse")
+def store_buy(request):
+    req = request._proto
+    char_id = request._char_id
+
+    s = UnionStore(char_id)
+    s.buy(req.id, 1)
+    return None
+

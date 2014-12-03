@@ -463,6 +463,9 @@ class MongoUnionMember(Document):
     # 签到次数
     checkin_times = IntField(default=0)
 
+    # 购买buff的次数
+    buy_buff_times = DictField()
+
     meta = {
         'collection': 'union_members',
         'indexes': ['applied', 'joined',]

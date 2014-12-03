@@ -42,3 +42,5 @@ new_purchase_signal = Signal(providing_args=['char_id', 'new_got', 'total_got'])
 vip_changed_signal = Signal(providing_args=['char_id', 'old_vip', 'new_vip'])
 
 new_friend_got_signal = Signal(providing_args=['char_id', 'new_friend_id', 'total_friends_amount'])
+
+global_buff_changed_signal = Signal(providing_args=['char_id'])

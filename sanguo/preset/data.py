@@ -76,6 +76,9 @@ VALUE_SETTING = object_maker(_find_file('value_setting.json'))
 
 HORSE = object_maker(_find_file('horse.json'))
 
+UNION_STORE = object_maker(_find_file('union_store.json'))
+
+
 def _got_package():
     f = _find_file('package.json')
     with open(f, 'r') as x:

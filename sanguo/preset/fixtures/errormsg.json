@@ -1670,5 +1670,16 @@
         "des": "", 
         "area": ""
     }
+},
+{
+    "pk": 5709, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_COIN_NOT_ENOUGH", 
+        "text_zh": "\u5de5\u4f1a\u5e01\u4e0d\u8db3", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
 }
 ]
