@@ -576,7 +576,7 @@ class UnionStore(UnionLoadBase):
 
     def _buy_buff(self, _id, item_id, amount):
         cur_buy_times = self.buff_cur_buy_times
-        if cur_buy_times[item_id] + amount >= self.buff_max_buy_times:
+        if cur_buy_times[item_id] + amount > self.buff_max_buy_times:
             raise SanguoException(
                 errormsg.INVALID_OPERATE,
                 self.char_id,
