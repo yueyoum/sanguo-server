@@ -132,7 +132,7 @@ def get_records(request):
     response.ret = 0
     records = b.get_records()
     for r in records:
-        msg_r = response.record.add()
+        msg_r = response.records.add()
         msg_r.MergeFromString(r)
 
     return pack_msg(response)
