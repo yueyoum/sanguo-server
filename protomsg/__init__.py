@@ -182,6 +182,10 @@ RESPONSE_NOTIFY_TYPE = {
     "UnionStoreNotify": 5620,
     "UnionStoreBuyResponse": 5622,
     "UnionCheckinResponse": 5624,
+    "UnionBattleNotify": 5625,
+    "UnionBattleBoardResponse": 5627,
+    "UnionBattleStartResponse": 5629,
+    "UnionBattleRecordGetResponse": 5631,
 }
 
 REQUEST_TYPE = {
@@ -262,6 +266,9 @@ REQUEST_TYPE = {
     5618: "UnionMemberManageRequest",
     5621: "UnionStoreBuyRequest",
     5623: "UnionCheckinRequest",
+    5626: "UnionBattleBoardRequest",
+    5628: "UnionBattleStartRequest",
+    5630: "UnionBattleRecordGetRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -342,6 +349,9 @@ REQUEST_TYPE_REV = {
     "UnionMemberManageRequest": 5618,
     "UnionStoreBuyRequest": 5621,
     "UnionCheckinRequest": 5623,
+    "UnionBattleBoardRequest": 5626,
+    "UnionBattleStartRequest": 5628,
+    "UnionBattleRecordGetRequest": 5630,
 }
 
 TYPE_COMMAND = {
@@ -421,6 +431,9 @@ TYPE_COMMAND = {
    5618: "/union/manage/",
    5621: "/union/buy/",
    5623: "/union/checkin/",
+   5626: "/union/battle/board/",
+   5628: "/union/battle/start/",
+   5630: "/union/battle/record/",
 }
 
 COMMAND_TYPE = {v: k for k, v in TYPE_COMMAND.iteritems()}

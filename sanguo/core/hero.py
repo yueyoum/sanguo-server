@@ -31,7 +31,7 @@ def char_heros_dict(char_id):
 
 def char_heros_obj(char_id):
     heros = char_heros_dict(char_id)
-    return [Hero.cache_obj(i) for i in heros.keys()]
+    return [Hero(i) for i in heros.keys()]
 
 def char_heros_amount(char_id, filter_quality=None):
     heros = char_heros_dict(char_id).values()

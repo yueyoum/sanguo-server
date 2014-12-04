@@ -4,8 +4,12 @@ __author__ = 'Wang Chao'
 __date__ = '14-12-1'
 
 from utils.decorate import message_response
+from utils import pack_msg
 
-from core.union import UnionManager, UnionStore, UnionMember
+from core.union import UnionManager, UnionStore, UnionMember, UnionBattle
+
+from protomsg import UnionBattleStartResponse, UnionBattleRecordGetResponse
+
 
 @message_response("UnionCreateResponse")
 def create(request):
@@ -100,3 +104,37 @@ def checkin(request):
     m = UnionMember(char_id)
     m.checkin()
     return None
+
+
+@message_response("UnionBattleBoardResponse")
+def get_battle_board(request):
+    char_id = request._char_id
+    b = UnionBattle(char_id)
+    return pack_msg(b.make_board_msg())
+
+
+@message_response("UnionBattleStartResponse")
+def battle_start(request):
+    char_id = request._char_id
+    b = UnionBattle(char_id)
+
+    response = UnionBattleStartResponse()
+    response.ret = 0
+    response.record.MergeFrom(b.start_battle())
+    return pack_msg(response)
+
+@message_response("UnionBattleRecordGetResponse")
+def get_records(request):
+    char_id = request._char_id
+    b = UnionBattle(char_id)
+
+    response = UnionBattleRecordGetResponse()
+    response.ret = 0
+    records = b.get_records()
+    for r in records:
+        msg_r = response.record.add()
+        msg_r.MergeFromString(r)
+
+    return pack_msg(response)
+
+

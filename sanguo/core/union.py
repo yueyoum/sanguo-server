@@ -7,9 +7,10 @@ Description:
 
 """
 
+import random
 import arrow
 
-from mongoengine import DoesNotExist
+from mongoengine import DoesNotExist, Q
 from core.mongoscheme import MongoUnion, MongoUnionMember
 from core.exception import SanguoException
 from core.msgfactory import create_character_infomation_message
@@ -17,6 +18,7 @@ from core.msgpipe import publish_to_char
 from core.resource import Resource
 from core.signals import global_buff_changed_signal
 from core.resource import Resource
+from core.character import Char
 
 from utils import pack_msg
 from utils.functional import id_generator
@@ -263,6 +265,19 @@ class Union(object):
         return None
 
 
+    def get_battle_members(self):
+        # 获取可参加工会战的会员
+        now = arrow.utcnow().timestamp
+        hours24 = 24 * 3600
+        checkin_limit = now - hours24
+
+        members = []
+        for m in MongoUnionMember.objects.filter(joined=self.union_id):
+            if m.last_checkin_timestamp >= checkin_limit:
+                members.append(m.id)
+        return members
+
+
     @_union_permission("Union Add Member")
     def add_member(self, char_id):
         # 添加成员
@@ -377,6 +392,8 @@ class Union(object):
 
 
 def _union_manager_check(union_need_exist, err_msg, func_name, des=""):
+    # union_need_exist: True | False
+    # err_msg: None | Msg. 如果是None表示检测失败后就返回None，否则raise异常
     def deco(func):
         def wrap(self, *args, **kwargs):
             res = self.union is not None
@@ -387,6 +404,9 @@ def _union_manager_check(union_need_exist, err_msg, func_name, des=""):
                 error = True
 
             if error:
+                if err_msg is None:
+                    return None
+
                 raise SanguoException(
                     err_msg,
                     self.char_id,
@@ -672,4 +692,282 @@ class UnionStore(UnionLoadBase):
 
         publish_to_char(self.char_id, pack_msg(msg))
 
+
+class UnionBattleRecord(object):
+    # 战斗记录
+    class TeamEnd(Exception):
+        pass
+
+
+    class Team(object):
+        def __init__(self, team):
+            self.team = team
+            self.members = team[:]
+
+        def get(self):
+            try:
+                cid = self.team.pop(0)
+                c = Char(cid)
+                c.union_battle_power = c.power
+                return c
+            except IndexError:
+                raise UnionBattleRecord.TeamEnd()
+
+    def __init__(self, my_char_id, my_union_id, rival_char_id, rival_union_id):
+        self.my_char_id = my_char_id
+        self.rival_char_id = rival_char_id
+
+        self.my_union = Union(my_char_id, my_union_id)
+        self.rival_union = Union(rival_char_id, rival_union_id)
+
+
+        self.my_union_name = self.my_union.mongo_union.name
+        self.rival_union_name = self.rival_union.mongo_union.name
+
+        self.my_team = self.Team(self.my_union.get_battle_members())
+        self.rival_team = self.Team(self.rival_union.get_battle_members())
+
+        self.start_at = arrow.utcnow().timestamp
+        self.initiative = True
+
+        self.logs = []
+
+    def start(self):
+        my_char = self.my_team.get()
+        rival_char = self.rival_team.get()
+
+        while True:
+            if my_char.union_battle_power >= rival_char.union_battle_power:
+                new_union_battle_power = pow(
+                    pow(my_char.union_battle_power, 2) - pow(rival_char.union_battle_power, 2),
+                    0.5
+                ) + 1
+
+                percent = int( float(new_union_battle_power) / my_char.union_battle_power * 100 )
+
+                my_char.union_battle_power = new_union_battle_power
+
+                self.logs.append((
+                    my_char.mc.name, rival_char.mc.name, True, percent
+                ))
+
+
+                try:
+                    rival_char = self.rival_team.get()
+                except self.TeamEnd:
+                    self.win = True
+                    break
+
+            else:
+                new_union_battle_power = pow(
+                    pow(rival_char.union_battle_power, 2) - pow(my_char.union_battle_power, 2),
+                    0.5
+                ) + 1
+
+                percent = int( float(new_union_battle_power) / rival_char.union_battle_power * 100 )
+
+                rival_char.union_battle_power = new_union_battle_power
+
+                self.logs.append((
+                    my_char.mc.name, rival_char.mc.name, False, percent
+                ))
+
+                try:
+                    my_char = self.my_team.get()
+                except self.TeamEnd:
+                    self.win = False
+                    break
+
+
+    def make_record_msg(self):
+        msg = protomsg.UnionBattleRecord()
+        msg.rival_name = self.rival_union_name
+        msg.initiative = self.initiative
+        msg.win = self.win
+        msg.timestamp = self.start_at
+        # FIXME
+        self.score = 10
+
+        for name_1, name_2, win, hp in self.logs:
+            msg_log = msg.logs.add()
+            msg_log.my_name = name_1
+            msg_log.rival_name = name_2
+            msg_log.win = win
+            msg_log.hp = hp
+
+        return msg
+
+    def make_other_side_record_msg(self):
+        msg = protomsg.UnionBattleRecord()
+        msg.rival_name = self.my_union_name
+        msg.initiative = not self.initiative
+        msg.win = not self.win
+        msg.timestamp = self.start_at
+        # FIXME
+        self.score = -10
+
+        for name_1, name_2, win, hp in self.logs:
+            msg_log = msg.logs.add()
+            msg_log.my_name = name_2
+            msg_log.rival_name = name_1
+            msg_log.win = not win
+            msg_log.hp = hp
+
+        return msg
+
+
+    def save(self):
+        my_msg = self.make_record_msg()
+        rival_msg = self.make_other_side_record_msg()
+
+        if len(self.my_union.mongo_union.battle_records) >= 10:
+            self.my_union.mongo_union.battle_records.pop(0)
+        self.my_union.mongo_union.battle_records.append(my_msg.SerializeToString())
+
+        if len(self.rival_union.mongo_union.battle_records) >= 10:
+            self.rival_union.mongo_union.battle_records.pop(0)
+        self.rival_union.mongo_union.battle_records.append(rival_msg.SerializeToString())
+
+        return my_msg
+
+
+
+
+
+class UnionBattle(UnionLoadBase):
+    # def __init__(self, char_id):
+    #     super(UnionBattle, self).__init__(char_id)
+    #     # if not self.union.belong_to_self:
+    #     #     self.union = None
+
+    @staticmethod
+    def get_board():
+        unions = MongoUnion.objects.all().order_by('-score')
+
+        board = []
+        order = 1
+
+        for u in unions:
+            c = Char(u.owner)
+            data = {
+                'order': order,
+                'score': u.score,
+                'name': u.name,
+                'level': u.level,
+                'leader_name': c.mc.name,
+                'leader_avatar': c.leader_oid
+            }
+
+            board.append(data)
+            order += 1
+
+        return board
+
+    @property
+    def max_battle_times(self):
+        # TODO
+        return 10
+
+    @property
+    def cur_battle_times(self):
+        return self.union.mongo_union.battle_times
+
+    def find_rival(self):
+        score = self.union.mongo_union.score
+
+        def _find_rival(score_diff):
+            condition = Q(id__ne=self.union.union_id)
+            if score_diff is not None:
+                condition = condition & Q(score__gte=score-score_diff) & Q(score__lte=score+score_diff)
+
+            unions = MongoUnion.objects.filter(condition)
+            union_info_list = [(u.id, u.owner) for u in unions]
+            while union_info_list:
+                _uid, _owner = random.choice(union_info_list)
+                if Union(_owner, _uid).get_battle_members():
+                    return (_uid, _owner)
+
+                union_info_list.remove((_uid, _owner))
+            return None
+
+        rival_union = _find_rival(30)
+        if not rival_union:
+            rival_union = _find_rival(100)
+            if not rival_union:
+                rival_union = _find_rival(None)
+
+        return rival_union
+
+
+    @_union_manager_check(True, errormsg.UNION_NOT_EXIST, "UnionBattle Start", "has no union")
+    def start_battle(self):
+        if not self.union.belong_to_self:
+            raise SanguoException(
+                errormsg.INVALID_OPERATE,
+                self.char_id,
+                "UnionBattle Start",
+                "no permission"
+            )
+
+
+        self_members = self.union.get_battle_members()
+        if not self_members:
+            raise SanguoException(
+                errormsg.UNION_BATTLE_SELF_HAS_NO_BATTLE_MEMBERS,
+                self.char_id,
+                "UnionBattle Start",
+                "self has no battle members"
+            )
+
+        rival_union_info = self.find_rival()
+        if not rival_union_info:
+            raise SanguoException(
+                errormsg.UNION_BATTLE_NO_RIVAL,
+                self.char_id,
+                "UnionBattle Start",
+                "no rival"
+            )
+
+        print "rival_union_info:", rival_union_info
+
+        record = UnionBattleRecord(self.union.char_id, self.union.union_id, rival_union_info[1], rival_union_info[0])
+        record.start()
+        msg = record.save()
+
+        self.send_notify()
+        return msg
+
+    @_union_manager_check(True, errormsg.UNION_NOT_EXIST, "UnionBattle Start", "has no union")
+    def get_records(self):
+        return self.union.mongo_union.battle_records
+
+
+    @_union_manager_check(True, None, "UnionBattle")
+    def send_notify(self):
+        msg = protomsg.UnionBattleNotify()
+        msg.score = self.union.mongo_union.score
+
+        order = MongoUnion.objects.filter(score__gt=msg.score).count()
+
+        msg.order = order + 1
+        msg.in_battle_members = len(self.union.get_battle_members())
+        msg.remained_battle_times = self.max_battle_times - self.cur_battle_times
+
+        publish_to_char(self.char_id, pack_msg(msg))
+
+
+    @_union_manager_check(True, errormsg.UNION_NOT_EXIST, "UnionBattle Board")
+    def make_board_msg(self):
+        msg = protomsg.UnionBattleBoardResponse()
+        msg.ret = 0
+        for data in UnionBattle.get_board():
+            msg_union = msg.union.add()
+            msg_union.order = data['order']
+            msg_union.score = data['score']
+            msg_union.name = data['name']
+            msg_union.level = data['level']
+            msg_union.leader_name = data['leader_name']
+            msg_union.leader_avatar = data['leader_avatar']
+
+        return msg
 

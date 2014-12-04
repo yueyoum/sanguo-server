@@ -439,9 +439,14 @@ class MongoUnion(Document):
     level = IntField(default=0)
     contribute_points = IntField(default=0)
 
+    score = IntField(default=0)
+
+    battle_times = IntField(default=0)  # 工会战次数
+    battle_records = ListField(BinaryField())    # 战斗记录
+
     meta = {
         'collection': 'union',
-        'indexes': ['owner', 'name',]
+        'indexes': ['owner', 'name', 'score',]
     }
 
 MongoUnion.ensure_indexes()

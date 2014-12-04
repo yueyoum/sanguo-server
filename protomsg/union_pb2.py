@@ -14,7 +14,7 @@ import common_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='union.proto',
   package='Sanguo.protocol.union',
-  serialized_pb='\n\x0bunion.proto\x12\x15Sanguo.protocol.union\x1a\x0c\x63ommon.proto\"\xa7\x01\n\x15UnionBasicInformation\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x10\n\x08\x62ulletin\x18\x03 \x02(\t\x12\r\n\x05level\x18\x04 \x02(\x05\x12\x19\n\x11\x63ontribute_points\x18\x05 \x02(\x05\x12\x1d\n\x15\x63urrent_member_amount\x18\x06 \x02(\x05\x12\x19\n\x11max_member_amount\x18\x07 \x02(\x05\"\xa3\x02\n\x0bUnionNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12;\n\x05union\x18\x02 \x02(\x0b\x32,.Sanguo.protocol.union.UnionBasicInformation\x12\x0e\n\x06leader\x18\x03 \x02(\x05\x12?\n\x07members\x18\x04 \x03(\x0b\x32..Sanguo.protocol.union.UnionNotify.UnionMember\x1au\n\x0bUnionMember\x12\x39\n\x04\x63har\x18\x01 \x02(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\x12\x10\n\x08position\x18\x02 \x02(\x05\x12\x19\n\x11\x63ontribute_points\x18\x03 \x02(\x05\"c\n\x14UnionApplyListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12:\n\x05\x63hars\x18\x02 \x03(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\"\x83\x01\n\x1eUnionPersonalInformationNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nunion_coin\x18\x02 \x02(\x05\x12\x1c\n\x14\x63heckin_total_amount\x18\x03 \x02(\x05\x12\x1e\n\x16\x63heckin_current_amount\x18\x04 \x02(\x05\"3\n\x12UnionCreateRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0c\n\x04name\x18\x02 \x02(\t\"3\n\x13UnionCreateResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xcd\x01\n\x0fUnionListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12G\n\x06unions\x18\x02 \x03(\x0b\x32\x37.Sanguo.protocol.union.UnionListNotify.UnionApplyStatus\x1a`\n\x10UnionApplyStatus\x12;\n\x05union\x18\x01 \x02(\x0b\x32,.Sanguo.protocol.union.UnionBasicInformation\x12\x0f\n\x07\x61pplied\x18\x02 \x02(\x08\"#\n\x10UnionListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"1\n\x11UnionListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x11UnionApplyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"2\n\x12UnionApplyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"5\n\x11UnionAgreeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\"2\n\x12UnionAgreeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"6\n\x12UnionRefuseRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\"3\n\x13UnionRefuseResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"C\n\x12UnionModifyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x10\n\x08\x62ulletin\x18\x03 \x02(\t\"3\n\x13UnionModifyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"#\n\x10UnionQuitRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"1\n\x11UnionQuitResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xc1\x01\n\x18UnionMemberManageRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12Q\n\x06\x61\x63tion\x18\x02 \x02(\x0e\x32\x41.Sanguo.protocol.union.UnionMemberManageRequest.UnionManageAction\x12\x11\n\tmember_id\x18\x03 \x02(\x05\".\n\x11UnionManageAction\x12\x0b\n\x07KICKOUT\x10\x01\x12\x0c\n\x08TRANSFER\x10\x02\"9\n\x19UnionMemberManageResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"&\n\x13UnionCheckinRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"4\n\x14UnionCheckinResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xbd\x01\n\x10UnionStoreNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x43\n\x05\x62uffs\x18\x02 \x03(\x0b\x32\x34.Sanguo.protocol.union.UnionStoreNotify.BuyBuffTimes\x1aS\n\x0c\x42uyBuffTimes\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x11\n\tmax_times\x18\x02 \x02(\x05\x12\x11\n\tcur_times\x18\x03 \x02(\x05\x12\x11\n\tadd_value\x18\x04 \x02(\x05\"3\n\x14UnionStoreBuyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"5\n\x15UnionStoreBuyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\x0bunion.proto\x12\x15Sanguo.protocol.union\x1a\x0c\x63ommon.proto\"\xa7\x01\n\x15UnionBasicInformation\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x10\n\x08\x62ulletin\x18\x03 \x02(\t\x12\r\n\x05level\x18\x04 \x02(\x05\x12\x19\n\x11\x63ontribute_points\x18\x05 \x02(\x05\x12\x1d\n\x15\x63urrent_member_amount\x18\x06 \x02(\x05\x12\x19\n\x11max_member_amount\x18\x07 \x02(\x05\"\xa3\x02\n\x0bUnionNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12;\n\x05union\x18\x02 \x02(\x0b\x32,.Sanguo.protocol.union.UnionBasicInformation\x12\x0e\n\x06leader\x18\x03 \x02(\x05\x12?\n\x07members\x18\x04 \x03(\x0b\x32..Sanguo.protocol.union.UnionNotify.UnionMember\x1au\n\x0bUnionMember\x12\x39\n\x04\x63har\x18\x01 \x02(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\x12\x10\n\x08position\x18\x02 \x02(\x05\x12\x19\n\x11\x63ontribute_points\x18\x03 \x02(\x05\"c\n\x14UnionApplyListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12:\n\x05\x63hars\x18\x02 \x03(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\"\x83\x01\n\x1eUnionPersonalInformationNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nunion_coin\x18\x02 \x02(\x05\x12\x1c\n\x14\x63heckin_total_amount\x18\x03 \x02(\x05\x12\x1e\n\x16\x63heckin_current_amount\x18\x04 \x02(\x05\"3\n\x12UnionCreateRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0c\n\x04name\x18\x02 \x02(\t\"3\n\x13UnionCreateResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xcd\x01\n\x0fUnionListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12G\n\x06unions\x18\x02 \x03(\x0b\x32\x37.Sanguo.protocol.union.UnionListNotify.UnionApplyStatus\x1a`\n\x10UnionApplyStatus\x12;\n\x05union\x18\x01 \x02(\x0b\x32,.Sanguo.protocol.union.UnionBasicInformation\x12\x0f\n\x07\x61pplied\x18\x02 \x02(\x08\"#\n\x10UnionListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"1\n\x11UnionListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x11UnionApplyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"2\n\x12UnionApplyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"5\n\x11UnionAgreeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\"2\n\x12UnionAgreeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"6\n\x12UnionRefuseRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\"3\n\x13UnionRefuseResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"C\n\x12UnionModifyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x10\n\x08\x62ulletin\x18\x03 \x02(\t\"3\n\x13UnionModifyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"#\n\x10UnionQuitRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"1\n\x11UnionQuitResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xc1\x01\n\x18UnionMemberManageRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12Q\n\x06\x61\x63tion\x18\x02 \x02(\x0e\x32\x41.Sanguo.protocol.union.UnionMemberManageRequest.UnionManageAction\x12\x11\n\tmember_id\x18\x03 \x02(\x05\".\n\x11UnionManageAction\x12\x0b\n\x07KICKOUT\x10\x01\x12\x0c\n\x08TRANSFER\x10\x02\"9\n\x19UnionMemberManageResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"&\n\x13UnionCheckinRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"4\n\x14UnionCheckinResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xbd\x01\n\x10UnionStoreNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x43\n\x05\x62uffs\x18\x02 \x03(\x0b\x32\x34.Sanguo.protocol.union.UnionStoreNotify.BuyBuffTimes\x1aS\n\x0c\x42uyBuffTimes\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x11\n\tmax_times\x18\x02 \x02(\x05\x12\x11\n\tcur_times\x18\x03 \x02(\x05\x12\x11\n\tadd_value\x18\x04 \x02(\x05\"3\n\x14UnionStoreBuyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"5\n\x15UnionStoreBuyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"|\n\x11UnionBattleNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\r\n\x05order\x18\x02 \x02(\x05\x12\r\n\x05score\x18\x03 \x02(\x05\x12\x19\n\x11in_battle_members\x18\x04 \x02(\x05\x12\x1d\n\x15remained_battle_times\x18\x05 \x02(\x05\"*\n\x17UnionBattleBoardRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"\xf8\x01\n\x18UnionBattleBoardResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12I\n\x05union\x18\x03 \x03(\x0b\x32:.Sanguo.protocol.union.UnionBattleBoardResponse.UnionBoard\x1as\n\nUnionBoard\x12\r\n\x05order\x18\x01 \x02(\x05\x12\r\n\x05score\x18\x02 \x02(\x05\x12\x0c\n\x04name\x18\x03 \x02(\t\x12\r\n\x05level\x18\x04 \x02(\x05\x12\x13\n\x0bleader_name\x18\x05 \x02(\t\x12\x15\n\rleader_avatar\x18\x06 \x02(\x05\"\x81\x02\n\x11UnionBattleRecord\x12\x12\n\nrival_name\x18\x01 \x02(\t\x12\x12\n\ninitiative\x18\x02 \x02(\x08\x12\x0b\n\x03win\x18\x03 \x02(\x08\x12\x11\n\ttimestamp\x18\x04 \x02(\x05\x12\r\n\x05score\x18\x05 \x02(\x05\x12\x45\n\x04logs\x18\x06 \x03(\x0b\x32\x37.Sanguo.protocol.union.UnionBattleRecord.UnionBattleLog\x1aN\n\x0eUnionBattleLog\x12\x0f\n\x07my_name\x18\x01 \x02(\t\x12\x12\n\nrival_name\x18\x02 \x02(\t\x12\x0b\n\x03win\x18\x03 \x02(\x08\x12\n\n\x02hp\x18\x04 \x02(\x05\"*\n\x17UnionBattleStartRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"r\n\x18UnionBattleStartResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x38\n\x06record\x18\x03 \x01(\x0b\x32(.Sanguo.protocol.union.UnionBattleRecord\".\n\x1bUnionBattleRecordGetRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"w\n\x1cUnionBattleRecordGetResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x39\n\x07records\x18\x03 \x03(\x0b\x32(.Sanguo.protocol.union.UnionBattleRecord')
 
 
 
@@ -1129,6 +1129,445 @@ _UNIONSTOREBUYRESPONSE = _descriptor.Descriptor(
   serialized_end=2328,
 )
 
+
+_UNIONBATTLENOTIFY = _descriptor.Descriptor(
+  name='UnionBattleNotify',
+  full_name='Sanguo.protocol.union.UnionBattleNotify',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.union.UnionBattleNotify.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='order', full_name='Sanguo.protocol.union.UnionBattleNotify.order', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='score', full_name='Sanguo.protocol.union.UnionBattleNotify.score', index=2,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='in_battle_members', full_name='Sanguo.protocol.union.UnionBattleNotify.in_battle_members', index=3,
+      number=4, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='remained_battle_times', full_name='Sanguo.protocol.union.UnionBattleNotify.remained_battle_times', index=4,
+      number=5, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=2330,
+  serialized_end=2454,
+)
+
+
+_UNIONBATTLEBOARDREQUEST = _descriptor.Descriptor(
+  name='UnionBattleBoardRequest',
+  full_name='Sanguo.protocol.union.UnionBattleBoardRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.union.UnionBattleBoardRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=2456,
+  serialized_end=2498,
+)
+
+
+_UNIONBATTLEBOARDRESPONSE_UNIONBOARD = _descriptor.Descriptor(
+  name='UnionBoard',
+  full_name='Sanguo.protocol.union.UnionBattleBoardResponse.UnionBoard',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='order', full_name='Sanguo.protocol.union.UnionBattleBoardResponse.UnionBoard.order', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='score', full_name='Sanguo.protocol.union.UnionBattleBoardResponse.UnionBoard.score', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='Sanguo.protocol.union.UnionBattleBoardResponse.UnionBoard.name', index=2,
+      number=3, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='level', full_name='Sanguo.protocol.union.UnionBattleBoardResponse.UnionBoard.level', index=3,
+      number=4, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='leader_name', full_name='Sanguo.protocol.union.UnionBattleBoardResponse.UnionBoard.leader_name', index=4,
+      number=5, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='leader_avatar', full_name='Sanguo.protocol.union.UnionBattleBoardResponse.UnionBoard.leader_avatar', index=5,
+      number=6, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=2634,
+  serialized_end=2749,
+)
+
+_UNIONBATTLEBOARDRESPONSE = _descriptor.Descriptor(
+  name='UnionBattleBoardResponse',
+  full_name='Sanguo.protocol.union.UnionBattleBoardResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.union.UnionBattleBoardResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.union.UnionBattleBoardResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='union', full_name='Sanguo.protocol.union.UnionBattleBoardResponse.union', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_UNIONBATTLEBOARDRESPONSE_UNIONBOARD, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=2501,
+  serialized_end=2749,
+)
+
+
+_UNIONBATTLERECORD_UNIONBATTLELOG = _descriptor.Descriptor(
+  name='UnionBattleLog',
+  full_name='Sanguo.protocol.union.UnionBattleRecord.UnionBattleLog',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='my_name', full_name='Sanguo.protocol.union.UnionBattleRecord.UnionBattleLog.my_name', index=0,
+      number=1, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='rival_name', full_name='Sanguo.protocol.union.UnionBattleRecord.UnionBattleLog.rival_name', index=1,
+      number=2, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='win', full_name='Sanguo.protocol.union.UnionBattleRecord.UnionBattleLog.win', index=2,
+      number=3, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='hp', full_name='Sanguo.protocol.union.UnionBattleRecord.UnionBattleLog.hp', index=3,
+      number=4, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=2931,
+  serialized_end=3009,
+)
+
+_UNIONBATTLERECORD = _descriptor.Descriptor(
+  name='UnionBattleRecord',
+  full_name='Sanguo.protocol.union.UnionBattleRecord',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='rival_name', full_name='Sanguo.protocol.union.UnionBattleRecord.rival_name', index=0,
+      number=1, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='initiative', full_name='Sanguo.protocol.union.UnionBattleRecord.initiative', index=1,
+      number=2, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='win', full_name='Sanguo.protocol.union.UnionBattleRecord.win', index=2,
+      number=3, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timestamp', full_name='Sanguo.protocol.union.UnionBattleRecord.timestamp', index=3,
+      number=4, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='score', full_name='Sanguo.protocol.union.UnionBattleRecord.score', index=4,
+      number=5, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='logs', full_name='Sanguo.protocol.union.UnionBattleRecord.logs', index=5,
+      number=6, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_UNIONBATTLERECORD_UNIONBATTLELOG, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=2752,
+  serialized_end=3009,
+)
+
+
+_UNIONBATTLESTARTREQUEST = _descriptor.Descriptor(
+  name='UnionBattleStartRequest',
+  full_name='Sanguo.protocol.union.UnionBattleStartRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.union.UnionBattleStartRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3011,
+  serialized_end=3053,
+)
+
+
+_UNIONBATTLESTARTRESPONSE = _descriptor.Descriptor(
+  name='UnionBattleStartResponse',
+  full_name='Sanguo.protocol.union.UnionBattleStartResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.union.UnionBattleStartResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.union.UnionBattleStartResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='record', full_name='Sanguo.protocol.union.UnionBattleStartResponse.record', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3055,
+  serialized_end=3169,
+)
+
+
+_UNIONBATTLERECORDGETREQUEST = _descriptor.Descriptor(
+  name='UnionBattleRecordGetRequest',
+  full_name='Sanguo.protocol.union.UnionBattleRecordGetRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.union.UnionBattleRecordGetRequest.session', index=0,
+      number=1, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3171,
+  serialized_end=3217,
+)
+
+
+_UNIONBATTLERECORDGETRESPONSE = _descriptor.Descriptor(
+  name='UnionBattleRecordGetResponse',
+  full_name='Sanguo.protocol.union.UnionBattleRecordGetResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ret', full_name='Sanguo.protocol.union.UnionBattleRecordGetResponse.ret', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='session', full_name='Sanguo.protocol.union.UnionBattleRecordGetResponse.session', index=1,
+      number=2, type=12, cpp_type=9, label=2,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='records', full_name='Sanguo.protocol.union.UnionBattleRecordGetResponse.records', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3219,
+  serialized_end=3338,
+)
+
 _UNIONNOTIFY_UNIONMEMBER.fields_by_name['char'].message_type = common_pb2._CHARACTERINFOMATION
 _UNIONNOTIFY_UNIONMEMBER.containing_type = _UNIONNOTIFY;
 _UNIONNOTIFY.fields_by_name['union'].message_type = _UNIONBASICINFORMATION
@@ -1141,6 +1580,12 @@ _UNIONMEMBERMANAGEREQUEST.fields_by_name['action'].enum_type = _UNIONMEMBERMANAG
 _UNIONMEMBERMANAGEREQUEST_UNIONMANAGEACTION.containing_type = _UNIONMEMBERMANAGEREQUEST;
 _UNIONSTORENOTIFY_BUYBUFFTIMES.containing_type = _UNIONSTORENOTIFY;
 _UNIONSTORENOTIFY.fields_by_name['buffs'].message_type = _UNIONSTORENOTIFY_BUYBUFFTIMES
+_UNIONBATTLEBOARDRESPONSE_UNIONBOARD.containing_type = _UNIONBATTLEBOARDRESPONSE;
+_UNIONBATTLEBOARDRESPONSE.fields_by_name['union'].message_type = _UNIONBATTLEBOARDRESPONSE_UNIONBOARD
+_UNIONBATTLERECORD_UNIONBATTLELOG.containing_type = _UNIONBATTLERECORD;
+_UNIONBATTLERECORD.fields_by_name['logs'].message_type = _UNIONBATTLERECORD_UNIONBATTLELOG
+_UNIONBATTLESTARTRESPONSE.fields_by_name['record'].message_type = _UNIONBATTLERECORD
+_UNIONBATTLERECORDGETRESPONSE.fields_by_name['records'].message_type = _UNIONBATTLERECORD
 DESCRIPTOR.message_types_by_name['UnionBasicInformation'] = _UNIONBASICINFORMATION
 DESCRIPTOR.message_types_by_name['UnionNotify'] = _UNIONNOTIFY
 DESCRIPTOR.message_types_by_name['UnionApplyListNotify'] = _UNIONAPPLYLISTNOTIFY
@@ -1167,6 +1612,14 @@ DESCRIPTOR.message_types_by_name['UnionCheckinResponse'] = _UNIONCHECKINRESPONSE
 DESCRIPTOR.message_types_by_name['UnionStoreNotify'] = _UNIONSTORENOTIFY
 DESCRIPTOR.message_types_by_name['UnionStoreBuyRequest'] = _UNIONSTOREBUYREQUEST
 DESCRIPTOR.message_types_by_name['UnionStoreBuyResponse'] = _UNIONSTOREBUYRESPONSE
+DESCRIPTOR.message_types_by_name['UnionBattleNotify'] = _UNIONBATTLENOTIFY
+DESCRIPTOR.message_types_by_name['UnionBattleBoardRequest'] = _UNIONBATTLEBOARDREQUEST
+DESCRIPTOR.message_types_by_name['UnionBattleBoardResponse'] = _UNIONBATTLEBOARDRESPONSE
+DESCRIPTOR.message_types_by_name['UnionBattleRecord'] = _UNIONBATTLERECORD
+DESCRIPTOR.message_types_by_name['UnionBattleStartRequest'] = _UNIONBATTLESTARTREQUEST
+DESCRIPTOR.message_types_by_name['UnionBattleStartResponse'] = _UNIONBATTLESTARTRESPONSE
+DESCRIPTOR.message_types_by_name['UnionBattleRecordGetRequest'] = _UNIONBATTLERECORDGETREQUEST
+DESCRIPTOR.message_types_by_name['UnionBattleRecordGetResponse'] = _UNIONBATTLERECORDGETRESPONSE
 
 class UnionBasicInformation(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
@@ -1341,6 +1794,66 @@ class UnionStoreBuyResponse(_message.Message):
   DESCRIPTOR = _UNIONSTOREBUYRESPONSE
 
   # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionStoreBuyResponse)
+
+class UnionBattleNotify(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _UNIONBATTLENOTIFY
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionBattleNotify)
+
+class UnionBattleBoardRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _UNIONBATTLEBOARDREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionBattleBoardRequest)
+
+class UnionBattleBoardResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+
+  class UnionBoard(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+    DESCRIPTOR = _UNIONBATTLEBOARDRESPONSE_UNIONBOARD
+
+    # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionBattleBoardResponse.UnionBoard)
+  DESCRIPTOR = _UNIONBATTLEBOARDRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionBattleBoardResponse)
+
+class UnionBattleRecord(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+
+  class UnionBattleLog(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+    DESCRIPTOR = _UNIONBATTLERECORD_UNIONBATTLELOG
+
+    # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionBattleRecord.UnionBattleLog)
+  DESCRIPTOR = _UNIONBATTLERECORD
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionBattleRecord)
+
+class UnionBattleStartRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _UNIONBATTLESTARTREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionBattleStartRequest)
+
+class UnionBattleStartResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _UNIONBATTLESTARTRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionBattleStartResponse)
+
+class UnionBattleRecordGetRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _UNIONBATTLERECORDGETREQUEST
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionBattleRecordGetRequest)
+
+class UnionBattleRecordGetResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _UNIONBATTLERECORDGETRESPONSE
+
+  # @@protoc_insertion_point(class_scope:Sanguo.protocol.union.UnionBattleRecordGetResponse)
 
 
 # @@protoc_insertion_point(module_scope)

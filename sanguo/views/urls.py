@@ -105,6 +105,9 @@ urlpatterns = patterns('',
                        url(r'^union/manage/$', 'views.union.views.manage'),
                        url(r'^union/buy/$', 'views.union.views.store_buy'),
                        url(r'^union/checkin/$', 'views.union.views.checkin'),
+                       url(r'^union/battle/board/$', 'views.union.views.get_battle_board'),
+                       url(r'^union/battle/start/$', 'views.union.views.battle_start'),
+                       url(r'^union/battle/record/$', 'views.union.views.get_records'),
 
 )
 
