@@ -275,6 +275,11 @@ class Union(object):
         for m in MongoUnionMember.objects.filter(joined=self.union_id):
             if m.last_checkin_timestamp >= checkin_limit:
                 members.append(m.id)
+
+        if self.char_id in members:
+            members.remove(self.char_id)
+
+        members.insert(0, self.char_id)
         return members
 
 
@@ -786,7 +791,7 @@ class UnionBattleRecord(object):
         msg.win = self.win
         msg.timestamp = self.start_at
         # FIXME
-        self.score = 10
+        msg.score = 10
 
         for name_1, name_2, win, hp in self.logs:
             msg_log = msg.logs.add()
@@ -804,7 +809,7 @@ class UnionBattleRecord(object):
         msg.win = not self.win
         msg.timestamp = self.start_at
         # FIXME
-        self.score = -10
+        msg.score = -10
 
         for name_1, name_2, win, hp in self.logs:
             msg_log = msg.logs.add()
@@ -823,10 +828,12 @@ class UnionBattleRecord(object):
         if len(self.my_union.mongo_union.battle_records) >= 10:
             self.my_union.mongo_union.battle_records.pop(0)
         self.my_union.mongo_union.battle_records.append(my_msg.SerializeToString())
+        self.my_union.mongo_union.save()
 
         if len(self.rival_union.mongo_union.battle_records) >= 10:
             self.rival_union.mongo_union.battle_records.pop(0)
         self.rival_union.mongo_union.battle_records.append(rival_msg.SerializeToString())
+        self.rival_union.mongo_union.save()
 
         return my_msg
 
@@ -881,13 +888,8 @@ class UnionBattle(UnionLoadBase):
                 condition = condition & Q(score__gte=score-score_diff) & Q(score__lte=score+score_diff)
 
             unions = MongoUnion.objects.filter(condition)
-            union_info_list = [(u.id, u.owner) for u in unions]
-            while union_info_list:
-                _uid, _owner = random.choice(union_info_list)
-                if Union(_owner, _uid).get_battle_members():
-                    return (_uid, _owner)
-
-                union_info_list.remove((_uid, _owner))
+            if unions:
+                return random.choice(unions)
             return None
 
         rival_union = _find_rival(30)
@@ -910,17 +912,8 @@ class UnionBattle(UnionLoadBase):
             )
 
 
-        self_members = self.union.get_battle_members()
-        if not self_members:
-            raise SanguoException(
-                errormsg.UNION_BATTLE_SELF_HAS_NO_BATTLE_MEMBERS,
-                self.char_id,
-                "UnionBattle Start",
-                "self has no battle members"
-            )
-
-        rival_union_info = self.find_rival()
-        if not rival_union_info:
+        rival_union = self.find_rival()
+        if not rival_union:
             raise SanguoException(
                 errormsg.UNION_BATTLE_NO_RIVAL,
                 self.char_id,
@@ -928,9 +921,7 @@ class UnionBattle(UnionLoadBase):
                 "no rival"
             )
 
-        print "rival_union_info:", rival_union_info
-
-        record = UnionBattleRecord(self.union.char_id, self.union.union_id, rival_union_info[1], rival_union_info[0])
+        record = UnionBattleRecord(self.union.char_id, self.union.union_id, rival_union.owner, rival_union.id)
         record.start()
         msg = record.save()
 
