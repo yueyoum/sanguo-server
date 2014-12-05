@@ -991,12 +991,15 @@ class UnionBoss(UnionLoadBase):
     @property
     def max_times(self):
         # FIXME
-        return 3
+        return 10
 
     @property
     def cur_times(self):
         return self.union_member.mongo_union_member.boss_times
 
+    def incr_battle_times(self):
+        self.union_member.mongo_union_member.boss_times += 1
+        self.union_member.mongo_union_member.save()
 
     @_union_manager_check(True, errormsg.UNION_NOT_EXIST, "UnionBoss Start", "has no union")
     def start(self, boss_id):
@@ -1059,6 +1062,8 @@ class UnionBoss(UnionLoadBase):
 
         this_boss.logs.append(eubl)
         self.mongo_boss.save()
+
+        self.incr_battle_times()
 
         return msg
 
@@ -1136,7 +1141,7 @@ class BattleBoss(InBattleHero):
         self.anger = 0
         self.default_skill = info.default_skill
         self.skills = [info.skill]
-        self.skill_release_round = info.skill_rounds
+        self.skill_release_rounds = info.skill_rounds
         self.level = 0
 
         super(BattleBoss, self).__init__()

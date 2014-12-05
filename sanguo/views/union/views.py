@@ -158,9 +158,10 @@ def get_union_boss_log(request):
 
 @message_response("UnionBossStartResponse")
 def union_boss_start(request):
+    req = request._proto
     char_id = request._char_id
     b = UnionBoss(char_id)
-    b.start()
+    b.start(req.boss_id)
     return None
 
 @message_response("UnionBossBattleResponse")
@@ -174,6 +175,6 @@ def union_boss_battle(request):
     response = UnionBossBattleResponse()
     response.ret = 0
     response.battle.MergeFrom(msg)
-    return pack_msg(msg)
+    return pack_msg(response)
 
 
