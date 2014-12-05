@@ -108,6 +108,10 @@ urlpatterns = patterns('',
                        url(r'^union/battle/board/$', 'views.union.views.get_battle_board'),
                        url(r'^union/battle/start/$', 'views.union.views.battle_start'),
                        url(r'^union/battle/record/$', 'views.union.views.get_records'),
+                       url(r'^union/boss/$', 'views.union.views.get_union_boss'),
+                       url(r'^union/boss/log/$', 'views.union.views.get_union_boss_log'),
+                       url(r'^union/boss/start/$', 'views.union.views.union_boss_start'),
+                       url(r'^union/boss/battle/$', 'views.union.views.union_boss_battle'),
 
 )
 
