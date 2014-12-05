@@ -1725,5 +1725,27 @@
         "des": "", 
         "area": ""
     }
+},
+{
+    "pk": 5720, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_BOSS_NOT_STARTED", 
+        "text_zh": "\u6ca1\u6709\u6fc0\u6d3b\u4e0d\u80fd\u6253", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5721, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_BOSS_DEAD", 
+        "text_zh": "\u6b7b\u4e86\u4e0d\u80fd\u6253", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
 }
 ]
