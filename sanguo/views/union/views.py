@@ -6,9 +6,9 @@ __date__ = '14-12-1'
 from utils.decorate import message_response
 from utils import pack_msg
 
-from core.union import UnionManager, UnionStore, UnionMember, UnionBattle
+from core.union import UnionManager, UnionStore, UnionMember, UnionBattle, UnionBoss
 
-from protomsg import UnionBattleStartResponse, UnionBattleRecordGetResponse
+from protomsg import UnionBattleStartResponse, UnionBattleRecordGetResponse, UnionBossBattleResponse
 
 
 @message_response("UnionCreateResponse")
@@ -136,5 +136,44 @@ def get_records(request):
         msg_r.MergeFromString(r)
 
     return pack_msg(response)
+
+
+@message_response("UnionBossResponse")
+def get_union_boss(request):
+    char_id = request._char_id
+
+    b = UnionBoss(char_id)
+    msg = b.make_boss_response()
+    return pack_msg(msg)
+
+@message_response("UnionBossGetLogResponse")
+def get_union_boss_log(request):
+    req = request._proto
+    char_id = request._char_id
+
+    b = UnionBoss(char_id)
+    msg = b.make_log_message(req.boss_id)
+    return pack_msg(msg)
+
+
+@message_response("UnionBossStartResponse")
+def union_boss_start(request):
+    char_id = request._char_id
+    b = UnionBoss(char_id)
+    b.start()
+    return None
+
+@message_response("UnionBossBattleResponse")
+def union_boss_battle(request):
+    req = request._proto
+    char_id = request._char_id
+
+    b = UnionBoss(char_id)
+    msg = b.battle(req.boss_id)
+
+    response = UnionBossBattleResponse()
+    response.ret = 0
+    response.battle.MergeFrom(msg)
+    return pack_msg(msg)
 
 

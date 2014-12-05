@@ -78,6 +78,7 @@ HORSE = object_maker(_find_file('horse.json'))
 
 UNION_STORE = object_maker(_find_file('union_store.json'))
 UNION_CHECKIN = object_maker(_find_file('union_checkin.json'))
+UNION_BOSS = object_maker(_find_file('union_boss.json'))
 
 def _got_package():
     f = _find_file('package.json')

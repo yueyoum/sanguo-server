@@ -1,0 +1,202 @@
+[
+{
+    "pk": 1, 
+    "model": "union.unionboss", 
+    "fields": {
+        "union_level": 3, 
+        "name": "\u9b54\u795e\u5f20\u8fbd", 
+        "skill_rounds": 8, 
+        "default_skill": 27, 
+        "tp_name": "", 
+        "image": "\u5f20\u8fbd", 
+        "crit": 5, 
+        "attack": 1450, 
+        "defense": 950, 
+        "quality_name": "", 
+        "contribute_points": 200, 
+        "skill": 22, 
+        "quality": 0, 
+        "hp": 500000
+    }
+},
+{
+    "pk": 2, 
+    "model": "union.unionboss", 
+    "fields": {
+        "union_level": 4, 
+        "name": "\u9b54\u795e\u5b59\u7b56", 
+        "skill_rounds": 8, 
+        "default_skill": 23, 
+        "tp_name": "", 
+        "image": "\u5b59\u7b56", 
+        "crit": 5, 
+        "attack": 1400, 
+        "defense": 1000, 
+        "quality_name": "", 
+        "contribute_points": 220, 
+        "skill": 22, 
+        "quality": 0, 
+        "hp": 550000
+    }
+},
+{
+    "pk": 3, 
+    "model": "union.unionboss", 
+    "fields": {
+        "union_level": 5, 
+        "name": "\u9b54\u795e\u795d\u878d", 
+        "skill_rounds": 8, 
+        "default_skill": 38, 
+        "tp_name": "", 
+        "image": "\u795d\u878d\u592b\u4eba", 
+        "crit": 5, 
+        "attack": 1800, 
+        "defense": 1080, 
+        "quality_name": "", 
+        "contribute_points": 240, 
+        "skill": 22, 
+        "quality": 0, 
+        "hp": 620000
+    }
+},
+{
+    "pk": 4, 
+    "model": "union.unionboss", 
+    "fields": {
+        "union_level": 6, 
+        "name": "\u9b54\u795e\u5b59\u6743", 
+        "skill_rounds": 8, 
+        "default_skill": 28, 
+        "tp_name": "", 
+        "image": "\u5b59\u6743", 
+        "crit": 5, 
+        "attack": 2200, 
+        "defense": 1180, 
+        "quality_name": "", 
+        "contribute_points": 265, 
+        "skill": 22, 
+        "quality": 0, 
+        "hp": 680000
+    }
+},
+{
+    "pk": 5, 
+    "model": "union.unionboss", 
+    "fields": {
+        "union_level": 7, 
+        "name": "\u9b54\u795e\u8c82\u8749", 
+        "skill_rounds": 8, 
+        "default_skill": 56, 
+        "tp_name": "", 
+        "image": "\u8c82\u8749", 
+        "crit": 10, 
+        "attack": 1600, 
+        "defense": 1450, 
+        "quality_name": "", 
+        "contribute_points": 290, 
+        "skill": 22, 
+        "quality": 0, 
+        "hp": 750000
+    }
+},
+{
+    "pk": 6, 
+    "model": "union.unionboss", 
+    "fields": {
+        "union_level": 8, 
+        "name": "\u9b54\u795e\u5f20\u98de", 
+        "skill_rounds": 8, 
+        "default_skill": 25, 
+        "tp_name": "", 
+        "image": "\u5f20\u98de", 
+        "crit": 10, 
+        "attack": 2500, 
+        "defense": 1550, 
+        "quality_name": "", 
+        "contribute_points": 320, 
+        "skill": 22, 
+        "quality": 0, 
+        "hp": 840000
+    }
+},
+{
+    "pk": 7, 
+    "model": "union.unionboss", 
+    "fields": {
+        "union_level": 9, 
+        "name": "\u9b54\u795e\u8d75\u4e91", 
+        "skill_rounds": 8, 
+        "default_skill": 23, 
+        "tp_name": "", 
+        "image": "\u8d75\u4e91", 
+        "crit": 15, 
+        "attack": 3000, 
+        "defense": 1800, 
+        "quality_name": "", 
+        "contribute_points": 355, 
+        "skill": 22, 
+        "quality": 0, 
+        "hp": 920000
+    }
+},
+{
+    "pk": 8, 
+    "model": "union.unionboss", 
+    "fields": {
+        "union_level": 10, 
+        "name": "\u9b54\u795e\u5173\u7fbd", 
+        "skill_rounds": 8, 
+        "default_skill": 20, 
+        "tp_name": "", 
+        "image": "\u5173\u7fbd", 
+        "crit": 5, 
+        "attack": 2200, 
+        "defense": 2000, 
+        "quality_name": "", 
+        "contribute_points": 400, 
+        "skill": 22, 
+        "quality": 0, 
+        "hp": 1000000
+    }
+},
+{
+    "pk": 9, 
+    "model": "union.unionboss", 
+    "fields": {
+        "union_level": 0, 
+        "name": "\u9b54\u795e\u66f9\u64cd", 
+        "skill_rounds": 8, 
+        "default_skill": 36, 
+        "tp_name": "", 
+        "image": "\u66f9\u64cd", 
+        "crit": 10, 
+        "attack": 5500, 
+        "defense": 2400, 
+        "quality_name": "", 
+        "contribute_points": 500, 
+        "skill": 22, 
+        "quality": 0, 
+        "hp": 1200000
+    }
+},
+{
+    "pk": 10, 
+    "model": "union.unionboss", 
+    "fields": {
+        "union_level": 0, 
+        "name": "\u9b54\u795e\u5415\u5e03", 
+        "skill_rounds": 8, 
+        "default_skill": 22, 
+        "tp_name": "", 
+        "image": "\u5415\u5e03", 
+        "crit": 15, 
+        "attack": 4200, 
+        "defense": 2700, 
+        "quality_name": "", 
+        "contribute_points": 500, 
+        "skill": 22, 
+        "quality": 0, 
+        "hp": 1400000
+    }
+}
+]

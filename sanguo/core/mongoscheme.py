@@ -473,12 +473,37 @@ class MongoUnionMember(Document):
     # 购买buff的次数
     buy_buff_times = DictField()
 
+    # 挑战boss的次数
+    boss_times = IntField(default=0)
+
     meta = {
         'collection': 'union_members',
         'indexes': ['applied', 'joined',]
     }
 
 MongoUnionMember.ensure_indexes()
+
+
+# 开启的工会BOSS
+class MongoEmbeddedUnionBossLog(EmbeddedDocument):
+    char_id = IntField()
+    damage = IntField()     # 造成伤害
+
+class MongoEmbeddedUnionBoss(EmbeddedDocument):
+    start_at = IntField()
+    hp = IntField()         # 每被调整一次后剩余hp
+    killer = IntField()     # 击杀者ID
+    logs = ListField(EmbeddedDocumentField(MongoEmbeddedUnionBossLog))
+
+class MongoUnionBoss(Document):
+    # union id
+    id = IntField(primary_key=True)
+    # 开启的
+    opened = MapField(EmbeddedDocumentField(MongoEmbeddedUnionBoss))
+
+    meta = {
+        'collection': 'union_boss',
+    }
 
 
 # 持久化redis中的重要信息

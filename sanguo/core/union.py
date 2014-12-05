@@ -11,7 +11,7 @@ import random
 import arrow
 
 from mongoengine import DoesNotExist, Q
-from core.mongoscheme import MongoUnion, MongoUnionMember
+from core.mongoscheme import MongoUnion, MongoUnionMember, MongoUnionBoss, MongoEmbeddedUnionBoss, MongoEmbeddedUnionBossLog
 from core.exception import SanguoException
 from core.msgfactory import create_character_infomation_message
 from core.msgpipe import publish_to_char
@@ -19,6 +19,9 @@ from core.resource import Resource
 from core.signals import global_buff_changed_signal
 from core.resource import Resource
 from core.character import Char
+from core.battle import PVE
+from core.battle.hero import InBattleHero
+from core.battle.battle import Ground
 
 from utils import pack_msg
 from utils.functional import id_generator
@@ -32,7 +35,7 @@ from preset.settings import (
 
 from preset import errormsg
 
-from preset.data import UNION_STORE, UNION_CHECKIN, HORSE, STUFFS
+from preset.data import UNION_STORE, UNION_CHECKIN, UNION_BOSS, HORSE, STUFFS
 
 
 import protomsg
@@ -961,4 +964,258 @@ class UnionBattle(UnionLoadBase):
             msg_union.leader_avatar = data['leader_avatar']
 
         return msg
+
+
+
+
+class UnionBoss(UnionLoadBase):
+    def __init__(self, char_id):
+        super(UnionBoss, self).__init__(char_id)
+        if self.valid:
+            self.load_data()
+
+    def load_data(self):
+        try:
+            self.mongo_boss = MongoUnionBoss.objects.get(id=self.union.union_id)
+        except DoesNotExist:
+            self.mongo_boss = MongoUnionBoss(id=self.union.union_id)
+            self.mongo_boss.save()
+
+        self.union_member = UnionMember(self.char_id)
+
+
+    @property
+    def valid(self):
+        return self.union is not None
+
+    @property
+    def max_times(self):
+        # FIXME
+        return 3
+
+    @property
+    def cur_times(self):
+        return self.union_member.mongo_union_member.boss_times
+
+
+    @_union_manager_check(True, errormsg.UNION_NOT_EXIST, "UnionBoss Start", "has no union")
+    def start(self, boss_id):
+        try:
+            boss = UNION_BOSS[boss_id]
+        except KeyError:
+            raise SanguoException(
+                errormsg.INVALID_OPERATE,
+                self.char_id,
+                "UnionBoss Start",
+                "boss {0} not exist".format(boss_id)
+            )
+
+        # TODO union level check
+        meb = MongoEmbeddedUnionBoss()
+        meb.start_at = arrow.utcnow().timestamp
+        meb.hp = boss.hp
+        meb.killer = 0
+        meb.logs = []
+
+        self.mongo_boss.opened[str(boss_id)] = meb
+        self.mongo_boss.save()
+
+
+    @_union_manager_check(True, errormsg.UNION_NOT_EXIST, "UnionBoss Battle", "ha no union")
+    def battle(self, boss_id):
+        try:
+            this_boss = self.mongo_boss.opened[str(boss_id)]
+        except KeyError:
+            raise SanguoException(
+                errormsg.UNION_BOSS_NOT_STARTED,
+                self.char_id,
+                "UnionBoss Battle",
+                "boss not started {0}".format(boss_id)
+            )
+
+        if this_boss.hp <= 0:
+            raise SanguoException(
+                errormsg.UNION_BOSS_DEAD,
+                self.char_id,
+                "UnionBoss Battle",
+                "boss dead {0}".format(boss_id)
+            )
+
+        msg = protomsg.Battle()
+        battle = UnionBossBattle(self.char_id, boss_id, msg, this_boss.hp)
+        remained_hp = battle.start()
+
+        if remained_hp == 0:
+            killer = self.char_id
+        else:
+            killer = 0
+
+        this_boss.hp = remained_hp
+        this_boss.killer = killer
+
+        eubl = MongoEmbeddedUnionBossLog()
+        eubl.char_id = self.char_id
+        eubl.damage = battle.get_total_damage()
+
+        this_boss.logs.append(eubl)
+        self.mongo_boss.save()
+
+        return msg
+
+
+    @_union_manager_check(True, errormsg.UNION_NOT_EXIST, "UnionBoss Get Log", "has no union")
+    def make_log_message(self, boss_id):
+        try:
+            this_boss = self.mongo_boss.opened[str(boss_id)]
+        except KeyError:
+            raise SanguoException(
+                errormsg.INVALID_OPERATE,
+                self.char_id,
+                "UnionBoss Get Log",
+                "no log for boss {0}".format(boss_id)
+            )
+
+        hp = float(UNION_BOSS[boss_id].hp)
+
+        msg = protomsg.UnionBossGetLogResponse()
+        msg.ret = 0
+        msg.boss_id = boss_id
+        msg.killer = this_boss.killer or 0
+        for log in msg.logs:
+            msg_log = msg.logs.add()
+            msg_log.char_id = log.char_id
+            msg_log.char_name = Char(log.char_id).mc.name
+            msg_log.damage = log.damage
+            msg_log.precent = int(log.damage/hp * 100)
+
+        return msg
+
+
+
+    @_union_manager_check(True, errormsg.UNION_NOT_EXIST, "UnionBoss Response", "has no union")
+    def make_boss_response(self):
+        msg = protomsg.UnionBossResponse()
+        msg.ret = 0
+        msg.remained_times = self.max_times - self.cur_times
+
+        # FIXME filter by union level
+        for b in UNION_BOSS.keys():
+            msg_boss = msg.bosses.add()
+            msg_boss.id = b
+
+            if str(b) not in self.mongo_boss.opened:
+                msg_boss.hp = UNION_BOSS[b].hp
+                msg_boss.status = protomsg.UnionBossResponse.Boss.INACTIVE
+            else:
+                this_boss = self.mongo_boss.opened[str(b)]
+                msg_boss.hp = this_boss.hp
+
+                if this_boss.hp <= 0:
+                    msg_boss.status = protomsg.UnionBossResponse.Boss.DEAD
+                else:
+                    msg_boss.status = protomsg.UnionBossResponse.Boss.ACTIVE
+
+        return msg
+
+
+
+class BattleBoss(InBattleHero):
+    HERO_TYPE = 3
+    def __init__(self, boss_id):
+        info = UNION_BOSS[boss_id]
+        self.id = boss_id
+        self.real_id = boss_id
+        self.original_id = boss_id
+
+        self.attack = info.attack
+        self.defense = info.defense
+        self.hp = info.hp
+        self.crit = info.crit
+        self.dodge = 0
+
+        self.anger = 0
+        self.default_skill = info.default_skill
+        self.skills = [info.skill]
+        self.skill_release_round = info.skill_rounds
+        self.level = 0
+
+        super(BattleBoss, self).__init__()
+
+    def find_skill(self, skills):
+        if self._round / self.skill_release_rounds == 0:
+            return skills
+        return [self.default_skill]
+
+    def real_damage_value(self, damage, target):
+        return damage
+
+
+class UnionBossBattle(PVE):
+    BATTLE_TYPE = 'UNION_BOSS'
+    def __init__(self, my_id, rival_id, msg, boss_init_hp):
+        super(UnionBossBattle, self).__init__(my_id, rival_id, msg)
+        self.msg.rival_power /= 3
+        self.boss_init_hp = boss_init_hp
+
+    def load_rival_heros(self):
+        bosses = [
+            0, BattleBoss(self.rival_id), 0,
+            0, BattleBoss(self.rival_id), 0,
+            0, BattleBoss(self.rival_id), 0,
+        ]
+
+        rival_heros = []
+        for b in bosses:
+            if b == 0:
+                rival_heros.append(None)
+            else:
+                rival_heros.append(b)
+
+        return rival_heros
+
+    def get_rival_name(self):
+        return UNION_BOSS[self.rival_id].name
+
+    def start(self):
+        msgs = [self.msg.first_ground, self.msg.second_ground, self.msg.third_ground]
+        win_count = 0
+
+        def _recover_hp(i):
+            boss = self.rival_heros[i]
+            _hp = int( boss.total_damage_value * 0.05 )
+            boss.hp += _hp
+            return boss.hp
+
+        for index in range(3):
+            # index = 0, 1 ,2
+            # boss = self.rival_heros [1, 4, 7]
+            # old_boss = self.rival_heros [ (index-1)*3 + 1 ]
+            # cur_boss = self.rival_heros [ index*3 + 1 ]
+            my_heros = self.my_heros[index*3:index*3+3]
+            rival_heros = self.rival_heros[index*3:index*3+3]
+            if index == 0:
+                rival_heros[1].hp = self.boss_init_hp
+            else:
+                # 生命值继承自上一场战斗
+                rival_heros[1].hp = _recover_hp((index-1)*3+1)
+
+            g = Ground(my_heros, rival_heros, msgs[index])
+            g.index = index + 1
+            win = g.start()
+            if win:
+                win_count += 1
+
+        if win_count > 2:
+            self.msg.self_win = True
+        else:
+            self.msg.self_win = False
+
+        if self.msg.self_win:
+            return 0
+        return _recover_hp(7)
+
+    def get_total_damage(self):
+        return self.rival_heros[1].total_damage_value + \
+            self.rival_heros[4].total_damage_value + \
+            self.rival_heros[7].total_damage_value
 

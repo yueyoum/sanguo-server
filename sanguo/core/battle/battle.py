@@ -43,8 +43,10 @@ class Ground(object):
                     msg_h.max_anger = 100
                     if h.HERO_TYPE == 1:
                         msg_h.ht = BattleHeroMsg.HERO
-                    else:
+                    elif h.HERO_TYPE == 2:
                         msg_h.ht = BattleHeroMsg.MONSTER
+                    else:
+                        msg_h.ht = BattleHeroMsg.UNION_BOSS
 
 
         # 怒气并没有作为技能效果。是直接绑定在技能上的。所以这里得特殊处理怒气

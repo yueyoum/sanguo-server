@@ -186,6 +186,10 @@ RESPONSE_NOTIFY_TYPE = {
     "UnionBattleBoardResponse": 5627,
     "UnionBattleStartResponse": 5629,
     "UnionBattleRecordGetResponse": 5631,
+    "UnionBossResponse": 5633,
+    "UnionBossGetLogResponse": 5635,
+    "UnionBossStartResponse": 5637,
+    "UnionBossBattleResponse": 5639,
 }
 
 REQUEST_TYPE = {
@@ -269,6 +273,10 @@ REQUEST_TYPE = {
     5626: "UnionBattleBoardRequest",
     5628: "UnionBattleStartRequest",
     5630: "UnionBattleRecordGetRequest",
+    5632: "UnionBossRequest",
+    5634: "UnionBossGetLogRequest",
+    5636: "UnionBossStartRequest",
+    5638: "UnionBossBattleRequest",
 }
 
 REQUEST_TYPE_REV = {
@@ -352,6 +360,10 @@ REQUEST_TYPE_REV = {
     "UnionBattleBoardRequest": 5626,
     "UnionBattleStartRequest": 5628,
     "UnionBattleRecordGetRequest": 5630,
+    "UnionBossRequest": 5632,
+    "UnionBossGetLogRequest": 5634,
+    "UnionBossStartRequest": 5636,
+    "UnionBossBattleRequest": 5638,
 }
 
 TYPE_COMMAND = {
@@ -434,6 +446,10 @@ TYPE_COMMAND = {
    5626: "/union/battle/board/",
    5628: "/union/battle/start/",
    5630: "/union/battle/record/",
+   5632: "/union/boss/",
+   5634: "/union/boss/log/",
+   5636: "/union/boss/start/",
+   5638: "/union/boss/battle/",
 }
 
 COMMAND_TYPE = {v: k for k, v in TYPE_COMMAND.iteritems()}

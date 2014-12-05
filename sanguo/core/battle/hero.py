@@ -109,10 +109,11 @@ class EffectManager(DotEffectMixin, StepHeroNotifyMixin):
 
 class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
     def __init__(self):
-        # self._round = 0
+        self._round = 0
         self.die = False
         self.max_hp = self.hp
         self.damage_value = 0
+        self.total_damage_value = 0
         self.effect_manager = EffectManager()
 
 
@@ -131,6 +132,9 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         return '<%d, %d, %d>' % (self.id, self.real_id, self.original_id)
 
     def set_hp(self, value):
+        if value < 0:
+            self.total_damage_value += int(abs(value))
+
         self.damage_value = value
         self.hp += value
         self.hp = int(self.hp)
@@ -208,7 +212,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
     @_empty_step_msg_check
     def action(self, target):
-        # self._round += 1
+        self._round += 1
         # 英雄行动，首先清理本英雄所施加在其他人身上的效果
         msg = self.ground_msg.steps.add()
         msg.id = self.id
