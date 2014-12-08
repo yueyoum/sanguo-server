@@ -85,7 +85,7 @@ class UnionMember(object):
                 "not join union"
             )
 
-        if self.mongo_union_member.checkin_times >= self.checkin_total_amount:
+        if self.mongo_union_member.checkin_times + 1 > self.checkin_total_amount:
             raise SanguoException(
                 errormsg.UNION_CHECKIN_REACH_MAX_TIMES,
                 self.char_id,
@@ -93,7 +93,7 @@ class UnionMember(object):
                 "reached max times"
             )
 
-        c = UNION_CHECKIN[self.mongo_union_member.checkin_times]
+        c = UNION_CHECKIN[self.mongo_union_member.checkin_times+1]
         if c.cost_type == 1:
             needs = {'gold': c.cost_value}
         else:
@@ -475,6 +475,7 @@ class UnionManager(UnionLoadBase):
             UnionMember(self.char_id).join_union(new_id)
 
         Union(self.char_id, new_id).send_notify()
+        UnionBattle(self.char_id).send_notify()
 
 
     @_union_manager_check(True, errormsg.UNION_NOT_EXIST, "Union Modify", "has no union")
