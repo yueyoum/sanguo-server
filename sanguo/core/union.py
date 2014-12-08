@@ -93,11 +93,20 @@ class UnionMember(object):
                 "reached max times"
             )
 
-        c = UNION_CHECKIN[self.mongo_union_member.checkin_times+1]
+        try:
+            c = UNION_CHECKIN[self.mongo_union_member.checkin_times+1]
+        except KeyError:
+            raise SanguoException(
+                errormsg.UNION_CHECKIN_REACH_MAX_TIMES,
+                self.char_id,
+                "Union Checkin",
+                "reached max times. UNION_CHECKIN KeyError: {0}".format(self.mongo_union_member.checkin_times+1)
+            )
+
         if c.cost_type == 1:
-            needs = {'gold': c.cost_value}
+            needs = {'gold': -c.cost_value}
         else:
-            needs = {'sycee': c.cost_value}
+            needs = {'sycee': -c.cost_value}
 
         resources = Resource(self.char_id, "Union Checkin")
         with resources.check(**needs):
