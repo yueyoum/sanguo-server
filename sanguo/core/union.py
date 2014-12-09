@@ -1228,7 +1228,7 @@ class UnionBoss(UnionLoadBase):
         # FIXME
         member.add_coin(10, send_notify=False)
         member.add_contribute_points(10, send_notify=True)
-        self.union.add_contriute_points(10)
+        self.union.add_contribute_points(10)
 
 
     def boss_has_been_killed(self, boss_id):
