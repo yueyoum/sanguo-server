@@ -1,0 +1,38 @@
+[
+{
+    "pk": 1, 
+    "model": "union.unionbattlereward", 
+    "fields": {
+        "contribute_points": 50, 
+        "des": "\u7b2c\u4e00\u540d", 
+        "coin": 50
+    }
+},
+{
+    "pk": 2, 
+    "model": "union.unionbattlereward", 
+    "fields": {
+        "contribute_points": 40, 
+        "des": "\u7b2c\u4e8c\u540d", 
+        "coin": 40
+    }
+},
+{
+    "pk": 3, 
+    "model": "union.unionbattlereward", 
+    "fields": {
+        "contribute_points": 30, 
+        "des": "\u7b2c\u4e09\u540d", 
+        "coin": 30
+    }
+},
+{
+    "pk": 10, 
+    "model": "union.unionbattlereward", 
+    "fields": {
+        "contribute_points": 10, 
+        "des": "4-10\u540d", 
+        "coin": 10
+    }
+}
+]

@@ -12,7 +12,7 @@ from core.resource import Resource
 from core.exception import SanguoException
 from utils import pack_msg
 
-from preset.data import VIP_DEFINE, VIP_REWARD
+from preset.data import VIP_DEFINE, VIP_REWARD, VIP_FUNCTION
 from preset import errormsg
 
 from protomsg import VIPNotify
@@ -35,6 +35,10 @@ class VIP(object):
     def __init__(self, char_id):
         self.char_id = char_id
         self.mc = MongoCharacter.objects.get(id=char_id)
+
+    def get_max_times(self, func_name):
+        vip = VIP_FUNCTION[self.mc.vip]
+        return getattr(vip, func_name)
 
 
     def can_reward_vips(self):

@@ -1,0 +1,52 @@
+[
+{
+    "pk": 0, 
+    "model": "union.unionbossreward", 
+    "fields": {
+        "mail_title": "\u5de5\u4f1aBOSS\u51fb\u6740\u8005\u5956\u52b1", 
+        "des": "\u6700\u7ec8\u51fb\u6740", 
+        "coin": 600, 
+        "mail_content": "\u5de5\u4f1aBOSS\u51fb\u6740\u8005\u5956\u52b1"
+    }
+},
+{
+    "pk": 1, 
+    "model": "union.unionbossreward", 
+    "fields": {
+        "mail_title": "\u5de5\u4f1aBOSS\u4f24\u5bb3\u7b2c{0}\u540d\u5956\u52b1", 
+        "des": "\u7b2c\u4e00\u540d", 
+        "coin": 500, 
+        "mail_content": "\u5de5\u4f1aBOSS\u4f24\u5bb3\u7b2c{0}\u540d\u5956\u52b1"
+    }
+},
+{
+    "pk": 2, 
+    "model": "union.unionbossreward", 
+    "fields": {
+        "mail_title": "\u5de5\u4f1aBOSS\u4f24\u5bb3\u7b2c{0}\u540d\u5956\u52b1", 
+        "des": "\u7b2c\u4e8c\u540d", 
+        "coin": 400, 
+        "mail_content": "\u5de5\u4f1aBOSS\u4f24\u5bb3\u7b2c{0}\u540d\u5956\u52b1"
+    }
+},
+{
+    "pk": 3, 
+    "model": "union.unionbossreward", 
+    "fields": {
+        "mail_title": "\u5de5\u4f1aBOSS\u4f24\u5bb3\u7b2c{0}\u540d\u5956\u52b1", 
+        "des": "\u7b2c\u4e09\u540d", 
+        "coin": 300, 
+        "mail_content": "\u5de5\u4f1aBOSS\u4f24\u5bb3\u7b2c{0}\u540d\u5956\u52b1"
+    }
+},
+{
+    "pk": 10, 
+    "model": "union.unionbossreward", 
+    "fields": {
+        "mail_title": "\u5de5\u4f1aBOSS\u4f24\u5bb3\u7b2c{0}\u540d\u5956\u52b1", 
+        "des": "4-10\u540d", 
+        "coin": 200, 
+        "mail_content": "\u5de5\u4f1aBOSS\u4f24\u5bb3\u7b2c{0}\u540d\u5956\u52b1"
+    }
+}
+]

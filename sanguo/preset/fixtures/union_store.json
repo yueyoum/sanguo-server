@@ -3,6 +3,7 @@
     "pk": 1, 
     "model": "union.unionstore", 
     "fields": {
+        "max_buy_times": 15, 
         "des": "", 
         "value": 1, 
         "tp": 11, 
@@ -13,6 +14,7 @@
     "pk": 2, 
     "model": "union.unionstore", 
     "fields": {
+        "max_buy_times": 15, 
         "des": "", 
         "value": 1, 
         "tp": 12, 
@@ -23,6 +25,7 @@
     "pk": 3, 
     "model": "union.unionstore", 
     "fields": {
+        "max_buy_times": 15, 
         "des": "", 
         "value": 1, 
         "tp": 13, 
@@ -33,6 +36,7 @@
     "pk": 4, 
     "model": "union.unionstore", 
     "fields": {
+        "max_buy_times": 0, 
         "des": "", 
         "value": 1, 
         "tp": 10, 
@@ -43,6 +47,7 @@
     "pk": 5, 
     "model": "union.unionstore", 
     "fields": {
+        "max_buy_times": 0, 
         "des": "", 
         "value": 39, 
         "tp": 9, 
@@ -53,6 +58,7 @@
     "pk": 6, 
     "model": "union.unionstore", 
     "fields": {
+        "max_buy_times": 0, 
         "des": "", 
         "value": 40, 
         "tp": 9, 
@@ -63,6 +69,7 @@
     "pk": 7, 
     "model": "union.unionstore", 
     "fields": {
+        "max_buy_times": 0, 
         "des": "", 
         "value": 41, 
         "tp": 9, 
@@ -73,6 +80,7 @@
     "pk": 8, 
     "model": "union.unionstore", 
     "fields": {
+        "max_buy_times": 0, 
         "des": "", 
         "value": 42, 
         "tp": 9, 
@@ -83,6 +91,7 @@
     "pk": 9, 
     "model": "union.unionstore", 
     "fields": {
+        "max_buy_times": 0, 
         "des": "", 
         "value": 43, 
         "tp": 9, 

@@ -3,10 +3,9 @@ from mongoengine import DoesNotExist
 
 from core.mongoscheme import MongoCounter
 from core.exception import CounterOverFlow
-from core.character import Char
+from core.vip import VIP
 
 from preset.settings import COUNTER, ACTIVITY_STAGE_MAX_TIMES
-from preset.data import VIP_FUNCTION
 
 
 class Counter(object):
@@ -27,9 +26,8 @@ class Counter(object):
         if value:
             return value
 
-        char = Char(self.char_id).mc
-        vip = VIP_FUNCTION[char.vip]
-        return getattr(vip, self.func_name)
+        return VIP(self.char_id).get_max_times(self.func_name)
+
 
     @property
     def cur_value(self):

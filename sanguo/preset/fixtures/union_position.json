@@ -1,0 +1,58 @@
+[
+{
+    "pk": 1, 
+    "model": "union.unionposition", 
+    "fields": {
+        "name": "\u4f1a\u5458", 
+        "contributes_needs": 50
+    }
+},
+{
+    "pk": 2, 
+    "model": "union.unionposition", 
+    "fields": {
+        "name": "\u7cbe\u82f1", 
+        "contributes_needs": 50
+    }
+},
+{
+    "pk": 3, 
+    "model": "union.unionposition", 
+    "fields": {
+        "name": "\u957f\u8001", 
+        "contributes_needs": 50
+    }
+},
+{
+    "pk": 4, 
+    "model": "union.unionposition", 
+    "fields": {
+        "name": "\u5927\u957f\u8001", 
+        "contributes_needs": 124214
+    }
+},
+{
+    "pk": 5, 
+    "model": "union.unionposition", 
+    "fields": {
+        "name": "\u5927\u5927\u957f\u8001", 
+        "contributes_needs": 3214132
+    }
+},
+{
+    "pk": 6, 
+    "model": "union.unionposition", 
+    "fields": {
+        "name": "\u5927\u5927\u5927\u957f\u8001", 
+        "contributes_needs": 1431234
+    }
+},
+{
+    "pk": 7, 
+    "model": "union.unionposition", 
+    "fields": {
+        "name": "\u6781\u54c1\u957f\u8001", 
+        "contributes_needs": 1343423
+    }
+}
+]

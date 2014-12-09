@@ -1,0 +1,112 @@
+[
+{
+    "pk": 1, 
+    "model": "union.unionlevel", 
+    "fields": {
+        "union_battle_open": true, 
+        "union_boss_open": false, 
+        "member_limits": 15, 
+        "union_store_open": true, 
+        "contributes_needs": 50
+    }
+},
+{
+    "pk": 2, 
+    "model": "union.unionlevel", 
+    "fields": {
+        "union_battle_open": true, 
+        "union_boss_open": false, 
+        "member_limits": 20, 
+        "union_store_open": true, 
+        "contributes_needs": 50
+    }
+},
+{
+    "pk": 3, 
+    "model": "union.unionlevel", 
+    "fields": {
+        "union_battle_open": true, 
+        "union_boss_open": true, 
+        "member_limits": 25, 
+        "union_store_open": true, 
+        "contributes_needs": 50
+    }
+},
+{
+    "pk": 4, 
+    "model": "union.unionlevel", 
+    "fields": {
+        "union_battle_open": true, 
+        "union_boss_open": true, 
+        "member_limits": 30, 
+        "union_store_open": true, 
+        "contributes_needs": 20000000
+    }
+},
+{
+    "pk": 5, 
+    "model": "union.unionlevel", 
+    "fields": {
+        "union_battle_open": true, 
+        "union_boss_open": true, 
+        "member_limits": 30, 
+        "union_store_open": true, 
+        "contributes_needs": 20000000
+    }
+},
+{
+    "pk": 6, 
+    "model": "union.unionlevel", 
+    "fields": {
+        "union_battle_open": true, 
+        "union_boss_open": true, 
+        "member_limits": 30, 
+        "union_store_open": true, 
+        "contributes_needs": 20000000
+    }
+},
+{
+    "pk": 7, 
+    "model": "union.unionlevel", 
+    "fields": {
+        "union_battle_open": true, 
+        "union_boss_open": true, 
+        "member_limits": 30, 
+        "union_store_open": true, 
+        "contributes_needs": 20000000
+    }
+},
+{
+    "pk": 8, 
+    "model": "union.unionlevel", 
+    "fields": {
+        "union_battle_open": true, 
+        "union_boss_open": true, 
+        "member_limits": 30, 
+        "union_store_open": true, 
+        "contributes_needs": 20000000
+    }
+},
+{
+    "pk": 9, 
+    "model": "union.unionlevel", 
+    "fields": {
+        "union_battle_open": true, 
+        "union_boss_open": true, 
+        "member_limits": 30, 
+        "union_store_open": true, 
+        "contributes_needs": 20000000
+    }
+},
+{
+    "pk": 10, 
+    "model": "union.unionlevel", 
+    "fields": {
+        "union_battle_open": true, 
+        "union_boss_open": true, 
+        "member_limits": 30, 
+        "union_store_open": true, 
+        "contributes_needs": 20000000
+    }
+}
+]

@@ -7,6 +7,7 @@ Description:
 
 """
 
+import json
 import random
 import arrow
 
@@ -19,6 +20,10 @@ from core.resource import Resource
 from core.signals import global_buff_changed_signal
 from core.resource import Resource
 from core.character import Char
+from core.vip import VIP
+from core.mail import Mail
+from core.attachment import make_standard_drop_from_template
+from core.arena import calculate_score
 from core.battle import PVE
 from core.battle.hero import InBattleHero
 from core.battle.battle import Ground
@@ -31,11 +36,22 @@ from preset.settings import (
         UNION_DES_MAX_LENGTH,
         UNION_DEFAULT_DES,
         UNION_CREATE_NEEDS_SYCEE,
+        UNION_BATTLE_INITIAL_SCORE,
+        UNION_BATTLE_LOWEST_SCORE,
         )
 
 from preset import errormsg
 
-from preset.data import UNION_STORE, UNION_CHECKIN, UNION_BOSS, HORSE, STUFFS
+from preset.data import (
+    UNION_STORE,
+    UNION_CHECKIN,
+    UNION_BOSS,
+    UNION_BOSS_REWARD,
+    UNION_LEVEL,
+    UNION_POSITION,
+    HORSE,
+    STUFFS,
+)
 
 
 import protomsg
@@ -51,6 +67,27 @@ UNION_STORE_BUFF_STORE_ID_DICT = {}
 for _k, _v in UNION_STORE.items():
     if _v.tp in BUFFS:
         UNION_STORE_BUFF_STORE_ID_DICT[_v.tp] = _k
+
+
+MAX_UNION_LEVEL = max(UNION_LEVEL.keys())
+MAX_UNION_POSITION = max(UNION_POSITION.keys())
+
+UNION_BOSS_KILLER_REWARD = UNION_BOSS_REWARD.pop(0)
+
+
+
+def get_battle_init_score():
+    # 竞技场初始化积分
+    if MongoUnion.objects.count() == 0:
+        return UNION_BATTLE_INITIAL_SCORE
+    else:
+        score = MongoUnion.objects.all().order_by('score')[0].score
+        if score < UNION_BATTLE_LOWEST_SCORE:
+            score = UNION_BATTLE_LOWEST_SCORE
+        return score
+
+
+
 
 
 class UnionMember(object):
@@ -69,8 +106,7 @@ class UnionMember(object):
 
     @property
     def checkin_total_amount(self):
-        # FIXME
-        return 10
+        return VIP(self.char_id).get_max_times('union_checkin')
 
     @property
     def checkin_current_amount(self):
@@ -113,10 +149,13 @@ class UnionMember(object):
             self.mongo_union_member.checkin_times += 1
             self.mongo_union_member.last_checkin_timestamp = arrow.utcnow().timestamp
 
-            self.mongo_union_member.coin += c.got_coin
-            self.mongo_union_member.contribute_points += c.got_contributes
+            self.add_coin(c.got_coin, send_notify=False)
+            self.add_contribute_points(c.got_contributes, send_notify=False)
             self.mongo_union_member.save()
         self.send_personal_notify()
+
+
+        Union(self.char_id, self.mongo_union_member.joined).add_contribute_points(c.got_contributes)
 
 
     def make_member_message(self):
@@ -147,6 +186,8 @@ class UnionMember(object):
         if union_id not in self.mongo_union_member.applied:
             self.mongo_union_member.applied.append(union_id)
             self.mongo_union_member.save()
+            Union(self.char_id, union_id).send_notify(to_owner=True)
+
 
         UnionManager(self.char_id).send_list_notify()
 
@@ -200,8 +241,33 @@ class UnionMember(object):
         self.mongo_union_member.save()
         self.send_personal_notify()
 
-    def add_coin(self, coin):
+    def add_coin(self, coin, send_notify=True):
         self.mongo_union_member.coin += coin
+        self.mongo_union_member.save()
+        if send_notify:
+            self.send_personal_notify()
+
+    def add_contribute_points(self, point, send_notify=True):
+        self.mongo_union_member.contribute_points += point
+        to_next_position_contributes_needs = UNION_POSITION[self.mongo_union_member.position].contributes_needs
+
+        if self.mongo_union_member.position >= MAX_UNION_POSITION:
+            self.mongo_union_member.position = MAX_UNION_POSITION
+            if self.mongo_union_member.contribute_points >= to_next_position_contributes_needs:
+                self.mongo_union_member.contribute_points = to_next_position_contributes_needs
+        else:
+            if self.mongo_union_member.contribute_points >= to_next_position_contributes_needs:
+                self.mongo_union_member.contribute_points -= to_next_position_contributes_needs
+                self.mongo_union_member.position += 1
+
+        self.mongo_union_member.save()
+        if send_notify:
+            self.send_personal_notify()
+
+
+    def cron_job(self):
+        self.mongo_union_member.checkin_times = 0
+        self.mongo_union_member.boss_times = 0
         self.mongo_union_member.save()
         self.send_personal_notify()
 
@@ -250,8 +316,7 @@ class Union(object):
 
     @property
     def max_member_amount(self):
-        # FIXME
-        return 10
+        return UNION_LEVEL[self.mongo_union.level].member_limits
 
     @property
     def current_member_amount(self):
@@ -317,6 +382,7 @@ class Union(object):
 
         UnionMember(char_id).join_union(self.union_id)
         self.send_notify()
+        Union(char_id, self.union_id).send_notify()
 
 
     @_union_permission("Union Kickout")
@@ -328,7 +394,6 @@ class Union(object):
         UnionMember(member_id).quit_union()
         self.send_notify()
 
-    @_union_permission("Union Quit")
     def quit(self):
         # 自己主动退出
         if self.belong_to_self:
@@ -372,6 +437,24 @@ class Union(object):
         Union(member_id, self.union_id).send_notify()
 
 
+    def add_contribute_points(self, point):
+        self.mongo_union.contribute_points += point
+
+        to_next_level_contributes_needs = UNION_LEVEL[self.mongo_union.level].contributes_needs
+
+        if self.mongo_union.level >= MAX_UNION_LEVEL:
+            self.mongo_union.level = MAX_UNION_LEVEL
+            if self.mongo_union.contribute_points >= to_next_level_contributes_needs:
+                self.mongo_union.contribute_points = to_next_level_contributes_needs
+        else:
+            if self.mongo_union.contribute_points >= to_next_level_contributes_needs:
+                self.mongo_union.contribute_points -= to_next_level_contributes_needs
+                self.mongo_union.level += 1
+
+        self.mongo_union.save()
+        self.send_notify()
+
+
     @_union_permission("Union Modify")
     def modify(self, bulletin):
         self.mongo_union.bulletin = bulletin
@@ -392,7 +475,7 @@ class Union(object):
         return msg
 
 
-    def send_notify(self):
+    def send_notify(self, to_owner=False):
         msg = protomsg.UnionNotify()
         msg.union.MergeFrom(self.make_basic_information())
         msg.leader = self.mongo_union.owner
@@ -401,7 +484,11 @@ class Union(object):
             msg_member = msg.members.add()
             msg_member.MergeFrom(UnionMember(mid).make_member_message())
 
-        publish_to_char(self.char_id, pack_msg(msg))
+        if to_owner:
+            char_id = self.mongo_union.owner
+        else:
+            char_id = self.char_id
+        publish_to_char(char_id, pack_msg(msg))
 
     def send_personal_information_notify(self):
         member = UnionMember(self.char_id)
@@ -614,8 +701,11 @@ class UnionStore(UnionLoadBase):
 
     @property
     def buff_max_buy_times(self):
-        # TODO
-        return 10
+        max_times = {}
+        for i in BUFFS:
+            _id = UNION_STORE_BUFF_STORE_ID_DICT[i]
+            max_times[i] = UNION_STORE[_id].max_buy_times
+        return max_times
 
     @property
     def buff_cur_buy_times(self):
@@ -650,12 +740,13 @@ class UnionStore(UnionLoadBase):
 
     def _buy_buff(self, _id, item_id, amount):
         cur_buy_times = self.buff_cur_buy_times
-        if cur_buy_times[item_id] + amount > self.buff_max_buy_times:
+        max_buy_times = self.buff_max_buy_times
+        if cur_buy_times[item_id] + amount > max_buy_times[item_id]:
             raise SanguoException(
                 errormsg.UNION_STORE_BUY_REACH_MAX_TIMES,
                 self.char_id,
                 "UnionStore Buy",
-                "buff {0} has reached the max buy times {1}".format(item_id, self.buff_max_buy_times)
+                "buff {0} has reached the max buy times {1}".format(item_id, max_buy_times[item_id])
             )
 
         self.union_member.mongo_union_member.buy_buff_times[str(item_id)] = cur_buy_times[item_id] + amount
@@ -704,7 +795,7 @@ class UnionStore(UnionLoadBase):
         for i in BUFFS:
             msg_buff = msg.buffs.add()
             msg_buff.id = i
-            msg_buff.max_times = max_times
+            msg_buff.max_times = max_times[i]
             msg_buff.cur_times = cur_times[i]
             msg_buff.add_value = add_buffs[i]
 
@@ -727,6 +818,7 @@ class UnionBattleRecord(object):
                 cid = self.team.pop(0)
                 c = Char(cid)
                 c.union_battle_power = c.power
+                c.union_battle_power_original = c.power
                 return c
             except IndexError:
                 raise UnionBattleRecord.TeamEnd()
@@ -761,7 +853,7 @@ class UnionBattleRecord(object):
                     0.5
                 ) + 1
 
-                percent = int( float(new_union_battle_power) / my_char.union_battle_power * 100 )
+                percent = int( float(new_union_battle_power) / my_char.union_battle_power_original * 100 )
 
                 my_char.union_battle_power = new_union_battle_power
 
@@ -782,7 +874,7 @@ class UnionBattleRecord(object):
                     0.5
                 ) + 1
 
-                percent = int( float(new_union_battle_power) / rival_char.union_battle_power * 100 )
+                percent = int( float(new_union_battle_power) / rival_char.union_battle_power_original * 100 )
 
                 rival_char.union_battle_power = new_union_battle_power
 
@@ -796,6 +888,23 @@ class UnionBattleRecord(object):
                     self.win = False
                     break
 
+        # battle finish
+        self.my_new_score = self.my_union.mongo_union.score
+        self.rival_new_score = self.rival_union.mongo_union.score
+
+        if self.win:
+            self.my_new_score = calculate_score(
+                self.my_union.mongo_union.score,
+                self.rival_union.mongo_union.score,
+                self.win
+            )
+
+            self.rival_new_score = calculate_score(
+                self.rival_union.mongo_union.score,
+                self.my_union.mongo_union.score,
+                not self.win
+            )
+
 
     def make_record_msg(self):
         msg = protomsg.UnionBattleRecord()
@@ -803,8 +912,7 @@ class UnionBattleRecord(object):
         msg.initiative = self.initiative
         msg.win = self.win
         msg.timestamp = self.start_at
-        # FIXME
-        msg.score = 10
+        msg.score = self.my_new_score - self.my_union.mongo_union.score
 
         for name_1, name_2, win, hp in self.logs:
             msg_log = msg.logs.add()
@@ -821,8 +929,7 @@ class UnionBattleRecord(object):
         msg.initiative = not self.initiative
         msg.win = not self.win
         msg.timestamp = self.start_at
-        # FIXME
-        msg.score = -10
+        msg.score = self.rival_new_score - self.rival_union.mongo_union.score
 
         for name_1, name_2, win, hp in self.logs:
             msg_log = msg.logs.add()
@@ -841,11 +948,15 @@ class UnionBattleRecord(object):
         if len(self.my_union.mongo_union.battle_records) >= 10:
             self.my_union.mongo_union.battle_records.pop(0)
         self.my_union.mongo_union.battle_records.append(my_msg.SerializeToString())
+
+        self.my_union.mongo_union.score = self.my_new_score
         self.my_union.mongo_union.save()
 
         if len(self.rival_union.mongo_union.battle_records) >= 10:
             self.rival_union.mongo_union.battle_records.pop(0)
         self.rival_union.mongo_union.battle_records.append(rival_msg.SerializeToString())
+
+        self.rival_union.mongo_union.score = self.rival_new_score
         self.rival_union.mongo_union.save()
 
         return my_msg
@@ -853,13 +964,7 @@ class UnionBattleRecord(object):
 
 
 
-
 class UnionBattle(UnionLoadBase):
-    # def __init__(self, char_id):
-    #     super(UnionBattle, self).__init__(char_id)
-    #     # if not self.union.belong_to_self:
-    #     #     self.union = None
-
     @staticmethod
     def get_board():
         unions = MongoUnion.objects.all().order_by('-score')
@@ -885,8 +990,7 @@ class UnionBattle(UnionLoadBase):
 
     @property
     def max_battle_times(self):
-        # TODO
-        return 10
+        return 1
 
     @property
     def cur_battle_times(self):
@@ -939,11 +1043,33 @@ class UnionBattle(UnionLoadBase):
         msg = record.save()
 
         self.send_notify()
+
+        if msg.win:
+            self.after_battle_win()
+        else:
+            self.after_battle_lose()
+
         return msg
+
+
+    def after_battle_win(self):
+        # 打赢设置
+        pass
+
+    def after_battle_lose(self):
+        # 打输设置
+        pass
+
 
     @_union_manager_check(True, errormsg.UNION_NOT_EXIST, "UnionBattle Start", "has no union")
     def get_records(self):
         return self.union.mongo_union.battle_records
+
+
+    def cron_job(self):
+        self.union.mongo_union.battle_times = 0
+        self.union.mongo_union.save()
+        self.send_notify()
 
 
     @_union_manager_check(True, None, "UnionBattle")
@@ -1000,8 +1126,7 @@ class UnionBoss(UnionLoadBase):
 
     @property
     def max_times(self):
-        # FIXME
-        return 10
+        return 3
 
     @property
     def cur_times(self):
@@ -1023,7 +1148,22 @@ class UnionBoss(UnionLoadBase):
                 "boss {0} not exist".format(boss_id)
             )
 
-        # TODO union level check
+        if not self.union.belong_to_self:
+            raise SanguoException(
+                errormsg.INVALID_OPERATE,
+                self.char_id,
+                "UnionBoss Start",
+                "{0} not union owner".format(self.char_id)
+            )
+
+        if self.union.mongo_union.level < boss.union_level:
+            raise SanguoException(
+                errormsg.UNION_BOSS_LEVEL_NOT_ENOUGH,
+                self.char_id,
+                "UnionBoss Start",
+                "union level not enough. {0} < {1}".format(self.union.mongo_union.level, boss.union_level)
+            )
+
         meb = MongoEmbeddedUnionBoss()
         meb.start_at = arrow.utcnow().timestamp
         meb.hp = boss.hp
@@ -1075,7 +1215,57 @@ class UnionBoss(UnionLoadBase):
 
         self.incr_battle_times()
 
+        if killer:
+            self.boss_has_been_killed(boss_id)
+
         return msg
+
+
+    def boss_has_been_killed(self, boss_id):
+        # 击杀boss后发送奖励
+        logs = self.get_battle_members_in_ordered(boss_id)
+        member_ids = [log.char_id for log in logs]
+
+        killer = self.mongo_boss.opened[str(boss_id)].killer
+
+        m = Mail(killer)
+        drop = make_standard_drop_from_template()
+        drop['union_coin'] = UNION_BOSS_KILLER_REWARD.coin
+        m.add(
+            UNION_BOSS_KILLER_REWARD.mail_title,
+            UNION_BOSS_KILLER_REWARD.mail_content,
+            attachment=json.dumps(drop)
+            )
+
+        LOWEST_RANK = max(UNION_BOSS_REWARD.keys())
+        UNION_BOSS_REWARD_TUPLE = UNION_BOSS_REWARD.items().sort(key=lambda item: item[0])
+
+        for index, mid in enumerate(member_ids):
+            rank = index + 1
+            if rank > LOWEST_RANK:
+                break
+
+            m = Mail(mid)
+
+            for _rank, _reward in UNION_BOSS_REWARD_TUPLE:
+                if _rank >= rank:
+                    drop = make_standard_drop_from_template()
+                    drop['union_coin'] = _reward.coin
+                    m.add(
+                        _reward.mail_title.format(rank),
+                        _reward.mail_content.format(rank),
+                        attachment=json.dumps(drop)
+                    )
+
+                    break
+
+        # 工会获得贡献度
+        self.union.add_contribute_points(UNION_BOSS[boss_id].contribute_points)
+
+
+    def get_battle_members_in_ordered(self, boss_id):
+        this_boss = self.mongo_boss.opened[str(boss_id)]
+        return sorted(this_boss.logs, key=lambda item: -item.damage)
 
 
     @_union_manager_check(True, errormsg.UNION_NOT_EXIST, "UnionBoss Get Log", "has no union")
@@ -1096,7 +1286,7 @@ class UnionBoss(UnionLoadBase):
         msg.ret = 0
         msg.boss_id = boss_id
         msg.killer = this_boss.killer or 0
-        for log in msg.logs:
+        for log in self.get_battle_members_in_ordered(boss_id):
             msg_log = msg.logs.add()
             msg_log.char_id = log.char_id
             msg_log.char_name = Char(log.char_id).mc.name
@@ -1113,8 +1303,10 @@ class UnionBoss(UnionLoadBase):
         msg.ret = 0
         msg.remained_times = self.max_times - self.cur_times
 
-        # FIXME filter by union level
-        for b in UNION_BOSS.keys():
+        union_level = self.union.mongo_union.level
+        available_bosses = [k for k, v in UNION_BOSS.items() if union_level >= v.union_level]
+
+        for b in available_bosses:
             msg_boss = msg.bosses.add()
             msg_boss.id = b
 

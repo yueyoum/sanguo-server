@@ -65,7 +65,7 @@ def get_arena_init_score():
     char_id, score = lowest[0]
     score = int(score)
     if score < ARENA_LOWEST_SCORE:
-        score = ARENA_COST_SYCEE
+        score = ARENA_LOWEST_SCORE
     return score
 
 

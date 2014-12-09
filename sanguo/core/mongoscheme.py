@@ -436,7 +436,7 @@ class MongoUnion(Document):
 
     name = StringField()
     bulletin = StringField(default="")
-    level = IntField(default=0)
+    level = IntField(default=1)
     contribute_points = IntField(default=0)
 
     score = IntField(default=0)
