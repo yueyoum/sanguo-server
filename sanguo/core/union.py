@@ -1214,6 +1214,7 @@ class UnionBoss(UnionLoadBase):
         self.mongo_boss.save()
 
         self.incr_battle_times()
+        self.after_battle(eubl.damage)
 
         if killer:
             self.boss_has_been_killed(boss_id)
