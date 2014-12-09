@@ -1221,6 +1221,14 @@ class UnionBoss(UnionLoadBase):
         return msg
 
 
+    def after_battle(self, damage):
+        # 每次打完给予奖励
+        member = UnionMember(self.char_id)
+        # FIXME
+        member.add_coin(10, send_notify=False)
+        member.add_contribute_points(10, send_notify=True)
+
+
     def boss_has_been_killed(self, boss_id):
         # 击杀boss后发送奖励
         logs = self.get_battle_members_in_ordered(boss_id)
