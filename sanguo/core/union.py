@@ -592,6 +592,8 @@ class UnionManager(UnionLoadBase):
         # 发出加入申请
         UnionMember(self.char_id).apply_join(union_id)
 
+        owner = MongoUnion.objects.get(id=union_id).owner
+        UnionManager(owner).send_apply_list_notify()
 
     @_union_manager_check(True, errormsg.INVALID_OPERATE, "Union Agree Join", "has no union")
     def agree_join(self, char_id):
@@ -1193,6 +1195,9 @@ class UnionBoss(UnionLoadBase):
                 "UnionBoss Battle",
                 "boss dead {0}".format(boss_id)
             )
+
+        # TODO boss times limit
+
 
         msg = protomsg.Battle()
         battle = UnionBossBattle(self.char_id, boss_id, msg, this_boss.hp)
