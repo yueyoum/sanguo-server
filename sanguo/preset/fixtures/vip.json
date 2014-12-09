@@ -12,6 +12,7 @@
         "horse_strength_free": 0, 
         "stage_elite_buy_total": 1, 
         "plunder_addition": 0, 
+        "union_checkin": 5, 
         "arena_buy": 1, 
         "friends": 10, 
         "hang_addition": 0
@@ -30,6 +31,7 @@
         "horse_strength_free": 0, 
         "stage_elite_buy_total": 2, 
         "plunder_addition": 0, 
+        "union_checkin": 5, 
         "arena_buy": 2, 
         "friends": 11, 
         "hang_addition": 0
@@ -48,6 +50,7 @@
         "horse_strength_free": 0, 
         "stage_elite_buy_total": 2, 
         "plunder_addition": 5, 
+        "union_checkin": 5, 
         "arena_buy": 2, 
         "friends": 12, 
         "hang_addition": 0
@@ -66,6 +69,7 @@
         "horse_strength_free": 0, 
         "stage_elite_buy_total": 3, 
         "plunder_addition": 5, 
+        "union_checkin": 5, 
         "arena_buy": 2, 
         "friends": 13, 
         "hang_addition": 5
@@ -84,6 +88,7 @@
         "horse_strength_free": 0, 
         "stage_elite_buy_total": 3, 
         "plunder_addition": 5, 
+        "union_checkin": 5, 
         "arena_buy": 2, 
         "friends": 14, 
         "hang_addition": 6
@@ -102,6 +107,7 @@
         "horse_strength_free": 0, 
         "stage_elite_buy_total": 4, 
         "plunder_addition": 10, 
+        "union_checkin": 5, 
         "arena_buy": 2, 
         "friends": 15, 
         "hang_addition": 7
@@ -120,6 +126,7 @@
         "horse_strength_free": 0, 
         "stage_elite_buy_total": 4, 
         "plunder_addition": 10, 
+        "union_checkin": 5, 
         "arena_buy": 3, 
         "friends": 16, 
         "hang_addition": 8
@@ -138,6 +145,7 @@
         "horse_strength_free": 0, 
         "stage_elite_buy_total": 5, 
         "plunder_addition": 10, 
+        "union_checkin": 5, 
         "arena_buy": 3, 
         "friends": 17, 
         "hang_addition": 10
@@ -156,6 +164,7 @@
         "horse_strength_free": 0, 
         "stage_elite_buy_total": 5, 
         "plunder_addition": 10, 
+        "union_checkin": 5, 
         "arena_buy": 3, 
         "friends": 18, 
         "hang_addition": 11
@@ -174,6 +183,7 @@
         "horse_strength_free": 0, 
         "stage_elite_buy_total": 6, 
         "plunder_addition": 10, 
+        "union_checkin": 5, 
         "arena_buy": 3, 
         "friends": 20, 
         "hang_addition": 12
@@ -192,6 +202,7 @@
         "horse_strength_free": 0, 
         "stage_elite_buy_total": 6, 
         "plunder_addition": 15, 
+        "union_checkin": 5, 
         "arena_buy": 4, 
         "friends": 21, 
         "hang_addition": 15
@@ -210,6 +221,7 @@
         "horse_strength_free": 0, 
         "stage_elite_buy_total": 7, 
         "plunder_addition": 15, 
+        "union_checkin": 5, 
         "arena_buy": 4, 
         "friends": 22, 
         "hang_addition": 16
@@ -228,6 +240,7 @@
         "horse_strength_free": 0, 
         "stage_elite_buy_total": 7, 
         "plunder_addition": 15, 
+        "union_checkin": 5, 
         "arena_buy": 4, 
         "friends": 24, 
         "hang_addition": 18
@@ -246,6 +259,7 @@
         "horse_strength_free": 0, 
         "stage_elite_buy_total": 8, 
         "plunder_addition": 15, 
+        "union_checkin": 5, 
         "arena_buy": 4, 
         "friends": 25, 
         "hang_addition": 20
