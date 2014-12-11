@@ -32,7 +32,7 @@ class Union(object):
     def __new__(cls, char_id, union_id=None):
         try:
             char_union_id = MongoUnionMember.objects.get(id=char_id).joined
-            if not char_union_id:
+            if not char_union_id and not union_id:
                 return UnionDummy(char_id)
         except DoesNotExist:
             return UnionDummy(char_id)
@@ -40,8 +40,11 @@ class Union(object):
         if not union_id:
             return UnionOwner(char_id, char_union_id)
 
-        if char_union_id != union_id:
-            return UnionDummy(char_id)
+        # FIXME 本来是有这个判断的，但是目前为了省事，对于这个最后返回的是 UnionMember
+        # 其实应该为这个添加一个新类： UnionObserver
+        # 表示自己加入了一个工会，但是要查看其他工会的信息
+        # if char_union_id != union_id:
+        #     return UnionDummy(char_id)
 
         mongo_union = MongoUnion.objects.get(id=char_union_id)
         if char_id == mongo_union.owner:
