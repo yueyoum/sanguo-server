@@ -8,7 +8,7 @@ __date__ = '14-12-10'
 """
 
 import arrow
-
+from mongoengine import DoesNotExist
 from core.mongoscheme import MongoUnion, MongoUnionMember
 
 from core.exception import SanguoException
@@ -28,11 +28,13 @@ import protomsg
 MAX_UNION_LEVEL = max(UNION_LEVEL.keys())
 
 
-
 class Union(object):
     def __new__(cls, char_id, union_id=None):
         if not union_id:
-            union_id = MongoUnionMember.objects.get(id=char_id).joined
+            try:
+                union_id = MongoUnionMember.objects.get(id=char_id).joined
+            except DoesNotExist:
+                return UnionDummy(char_id)
             if not union_id:
                 return UnionDummy(char_id)
 
