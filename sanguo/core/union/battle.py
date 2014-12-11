@@ -19,21 +19,9 @@ from core.union.base import UnionLoadBase, union_instance_check
 
 from utils import pack_msg
 from preset import errormsg
-from preset.settings import UNION_BATTLE_INITIAL_SCORE, UNION_BATTLE_LOWEST_SCORE
 
 import protomsg
 
-
-
-def get_battle_init_score():
-    # 竞技场初始化积分
-    if MongoUnion.objects.count() == 0:
-        return UNION_BATTLE_INITIAL_SCORE
-    else:
-        score = MongoUnion.objects.all().order_by('score')[0].score
-        if score < UNION_BATTLE_LOWEST_SCORE:
-            score = UNION_BATTLE_LOWEST_SCORE
-        return score
 
 
 

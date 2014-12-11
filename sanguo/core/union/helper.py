@@ -16,6 +16,21 @@ from utils.functional import id_generator
 
 from preset import errormsg
 from preset.settings import UNION_NAME_MAX_LENGTH, UNION_CREATE_NEEDS_SYCEE, UNION_DEFAULT_DES
+from preset.settings import UNION_BATTLE_INITIAL_SCORE, UNION_BATTLE_LOWEST_SCORE
+
+
+
+def get_battle_init_score():
+    # 竞技场初始化积分
+    if MongoUnion.objects.count() == 0:
+        return UNION_BATTLE_INITIAL_SCORE
+    else:
+        score = MongoUnion.objects.all().order_by('score')[0].score
+        if score < UNION_BATTLE_LOWEST_SCORE:
+            score = UNION_BATTLE_LOWEST_SCORE
+        return score
+
+
 
 
 class UnionHelper(UnionLoadBase):
@@ -49,6 +64,7 @@ class UnionHelper(UnionLoadBase):
             mu.bulletin = UNION_DEFAULT_DES
             mu.level = 1
             mu.contribute_points = 0
+            mu.score = get_battle_init_score()
             mu.save()
             Member(self.char_id).join_union(new_id)
 
