@@ -244,6 +244,9 @@ class UnionOwner(UnionBase):
     def quit(self):
         # 主动退出
         super(UnionOwner, self).quit()
+
+        owner = self.mongo_union.owner
+
         next_owner = self.find_next_owner()
         if not next_owner:
             self.mongo_union.delete()
@@ -252,6 +255,7 @@ class UnionOwner(UnionBase):
             self.mongo_union.save()
 
         Union(self.char_id).send_notify()
+        Union(owner).send_notify()
 
 
     def transfer(self, member_id):
