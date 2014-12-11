@@ -186,6 +186,8 @@ class UnionOwner(UnionBase):
                     )
 
         self.add_member(char_id)
+        self.send_apply_list_notify()
+        UnionList.send_list_notify(char_id)
 
     def refuse_join(self, char_id):
         # 拒绝

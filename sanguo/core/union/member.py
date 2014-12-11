@@ -123,6 +123,16 @@ class Member(object):
         # 申请加入工会
         from core.union.union import Union, UnionList
 
+        try:
+            mongo_union = MongoUnion.objects.get(id=union_id)
+        except DoesNotExist:
+            raise SanguoException(
+                errormsg.UNION_NOT_EXIST,
+                self.char_id,
+                "Member Apply Union",
+                "union {0} not exist".format(union_id)
+            )
+
         if self.mongo_union_member.joined:
             raise SanguoException(
                 errormsg.UNION_CANNOT_APPLY_ALREADY_IN,
@@ -143,7 +153,9 @@ class Member(object):
         if union_id not in self.mongo_union_member.applied:
             self.mongo_union_member.applied.append(union_id)
             self.mongo_union_member.save()
-            Union(self.char_id, union_id).send_notify(to_owner=True)
+
+            Union(mongo_union.owner).send_apply_list_notify()
+
 
         UnionList.send_list_notify(self.char_id)
 
