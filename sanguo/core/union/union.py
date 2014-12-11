@@ -46,7 +46,7 @@ class Union(object):
         # if char_union_id != union_id:
         #     return UnionDummy(char_id)
 
-        mongo_union = MongoUnion.objects.get(id=char_union_id)
+        mongo_union = MongoUnion.objects.get(id=union_id)
         if char_id == mongo_union.owner:
             return UnionOwner(char_id, union_id)
         return UnionMember(char_id, union_id)
