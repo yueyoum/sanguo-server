@@ -6,7 +6,12 @@ __date__ = '14-12-1'
 from utils.decorate import message_response
 from utils import pack_msg
 
-from core.union import UnionManager, UnionStore, UnionMember, UnionBattle, UnionBoss
+from core.union.battle import UnionBattle
+from core.union.boss import UnionBoss
+from core.union.member import Member
+from core.union.union import Union, UnionList
+from core.union.helper import UnionHelper
+from core.union.store import UnionStore
 
 from protomsg import UnionBattleStartResponse, UnionBattleRecordGetResponse, UnionBossBattleResponse
 
@@ -16,8 +21,7 @@ def create(request):
     req = request._proto
     char_id = request._char_id
 
-    m = UnionManager(char_id)
-    m.create(req.name)
+    UnionHelper(char_id).create(req.name)
     return None
 
 
@@ -26,8 +30,7 @@ def modify(request):
     req = request._proto
     char_id = request._char_id
 
-    m = UnionManager(char_id)
-    m.modify(req.id, req.bulletin)
+    Union(char_id).modify(req.bulletin)
     return None
 
 
@@ -36,8 +39,7 @@ def apply_join(request):
     req = request._proto
     char_id = request._char_id
 
-    m = UnionManager(char_id)
-    m.apply_join(req.id)
+    Member(char_id).apply_union(req.id)
     return None
 
 
@@ -46,17 +48,16 @@ def agree_join(request):
     req = request._proto
     char_id = request._char_id
 
-    m = UnionManager(char_id)
-    m.agree_join(req.char_id)
+    Union(char_id).agree_join(req.char_id)
     return None
+
 
 @message_response("UnionRefuseResponse")
 def refuse_join(request):
     req = request._proto
     char_id = request._char_id
 
-    m = UnionManager(char_id)
-    m.refuse_join(req.char_id)
+    Union(char_id).refuse_join(req.char_id)
     return None
 
 
@@ -64,16 +65,14 @@ def refuse_join(request):
 def get_list(request):
     char_id = request._char_id
 
-    m = UnionManager(char_id)
-    m.send_list_notify()
+    UnionList.send_list_notify(char_id)
     return None
 
 @message_response("UnionQuitResponse")
 def quit(request):
     char_id = request._char_id
 
-    m = UnionManager(char_id)
-    m.quit()
+    Union(char_id).quit()
     return None
 
 @message_response("UnionMemberManageResponse")
@@ -81,11 +80,11 @@ def manage(request):
     req = request._proto
     char_id = request._char_id
 
-    m = UnionManager(char_id)
+    u = Union(char_id)
     if req.action == 1:
-        m.kickout(req.member_id)
+        u.kick_member(req.member_id)
     else:
-        m.transfer(req.member_id)
+        u.transfer(req.member_id)
 
     return None
 
@@ -94,15 +93,13 @@ def store_buy(request):
     req = request._proto
     char_id = request._char_id
 
-    s = UnionStore(char_id)
-    s.buy(req.id, 1)
+    UnionStore(char_id).buy(req.id, 1)
     return None
 
 @message_response("UnionCheckinResponse")
 def checkin(request):
     char_id = request._char_id
-    m = UnionMember(char_id)
-    m.checkin()
+    Member(char_id).checkin()
     return None
 
 
@@ -176,5 +173,4 @@ def union_boss_battle(request):
     response.ret = 0
     response.battle.MergeFrom(msg)
     return pack_msg(response)
-
 

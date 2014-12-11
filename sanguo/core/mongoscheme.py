@@ -491,8 +491,7 @@ class MongoEmbeddedUnionBossLog(EmbeddedDocument):
 
 class MongoEmbeddedUnionBoss(EmbeddedDocument):
     start_at = IntField()
-    hp = IntField()         # 每被调整一次后剩余hp
-    killer = IntField()     # 击杀者ID
+    hp = IntField()         # 每被挑战一次后剩余hp
     logs = ListField(EmbeddedDocumentField(MongoEmbeddedUnionBossLog))
 
 class MongoUnionBoss(Document):

@@ -565,7 +565,7 @@ class UnionManager(UnionLoadBase):
             mu.owner = self.char_id
             mu.name = name
             mu.bulletin = UNION_DEFAULT_DES
-            mu.level = 0
+            mu.level = 1
             mu.contribute_points = 0
             mu.save()
             UnionMember(self.char_id).join_union(new_id)
@@ -1300,13 +1300,15 @@ class UnionBoss(UnionLoadBase):
         msg = protomsg.UnionBossGetLogResponse()
         msg.ret = 0
         msg.boss_id = boss_id
-        msg.killer = this_boss.killer or 0
         for log in self.get_battle_members_in_ordered(boss_id):
             msg_log = msg.logs.add()
             msg_log.char_id = log.char_id
             msg_log.char_name = Char(log.char_id).mc.name
             msg_log.damage = log.damage
             msg_log.precent = int(log.damage/hp * 100)
+
+        if this_boss.hp <= 0:
+            this_boss.killer.MergeFrom(msg.logs[-1])
 
         return msg
 

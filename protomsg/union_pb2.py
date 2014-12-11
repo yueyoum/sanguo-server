@@ -16,7 +16,7 @@ import world_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='union.proto',
   package='Sanguo.protocol.union',
-  serialized_pb='\n\x0bunion.proto\x12\x15Sanguo.protocol.union\x1a\x0c\x63ommon.proto\x1a\x0c\x62\x61ttle.proto\x1a\x0bworld.proto\"\xa7\x01\n\x15UnionBasicInformation\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x10\n\x08\x62ulletin\x18\x03 \x02(\t\x12\r\n\x05level\x18\x04 \x02(\x05\x12\x19\n\x11\x63ontribute_points\x18\x05 \x02(\x05\x12\x1d\n\x15\x63urrent_member_amount\x18\x06 \x02(\x05\x12\x19\n\x11max_member_amount\x18\x07 \x02(\x05\"\xa3\x02\n\x0bUnionNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12;\n\x05union\x18\x02 \x02(\x0b\x32,.Sanguo.protocol.union.UnionBasicInformation\x12\x0e\n\x06leader\x18\x03 \x02(\x05\x12?\n\x07members\x18\x04 \x03(\x0b\x32..Sanguo.protocol.union.UnionNotify.UnionMember\x1au\n\x0bUnionMember\x12\x39\n\x04\x63har\x18\x01 \x02(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\x12\x10\n\x08position\x18\x02 \x02(\x05\x12\x19\n\x11\x63ontribute_points\x18\x03 \x02(\x05\"c\n\x14UnionApplyListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12:\n\x05\x63hars\x18\x02 \x03(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\"\x83\x01\n\x1eUnionPersonalInformationNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nunion_coin\x18\x02 \x02(\x05\x12\x1c\n\x14\x63heckin_total_amount\x18\x03 \x02(\x05\x12\x1e\n\x16\x63heckin_current_amount\x18\x04 \x02(\x05\"3\n\x12UnionCreateRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0c\n\x04name\x18\x02 \x02(\t\"3\n\x13UnionCreateResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xcd\x01\n\x0fUnionListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12G\n\x06unions\x18\x02 \x03(\x0b\x32\x37.Sanguo.protocol.union.UnionListNotify.UnionApplyStatus\x1a`\n\x10UnionApplyStatus\x12;\n\x05union\x18\x01 \x02(\x0b\x32,.Sanguo.protocol.union.UnionBasicInformation\x12\x0f\n\x07\x61pplied\x18\x02 \x02(\x08\"#\n\x10UnionListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"1\n\x11UnionListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x11UnionApplyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"2\n\x12UnionApplyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"5\n\x11UnionAgreeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\"2\n\x12UnionAgreeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"6\n\x12UnionRefuseRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\"3\n\x13UnionRefuseResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"C\n\x12UnionModifyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x10\n\x08\x62ulletin\x18\x03 \x02(\t\"3\n\x13UnionModifyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"#\n\x10UnionQuitRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"1\n\x11UnionQuitResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xc1\x01\n\x18UnionMemberManageRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12Q\n\x06\x61\x63tion\x18\x02 \x02(\x0e\x32\x41.Sanguo.protocol.union.UnionMemberManageRequest.UnionManageAction\x12\x11\n\tmember_id\x18\x03 \x02(\x05\".\n\x11UnionManageAction\x12\x0b\n\x07KICKOUT\x10\x01\x12\x0c\n\x08TRANSFER\x10\x02\"9\n\x19UnionMemberManageResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"&\n\x13UnionCheckinRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"4\n\x14UnionCheckinResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xbd\x01\n\x10UnionStoreNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x43\n\x05\x62uffs\x18\x02 \x03(\x0b\x32\x34.Sanguo.protocol.union.UnionStoreNotify.BuyBuffTimes\x1aS\n\x0c\x42uyBuffTimes\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x11\n\tmax_times\x18\x02 \x02(\x05\x12\x11\n\tcur_times\x18\x03 \x02(\x05\x12\x11\n\tadd_value\x18\x04 \x02(\x05\"3\n\x14UnionStoreBuyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"5\n\x15UnionStoreBuyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"|\n\x11UnionBattleNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\r\n\x05order\x18\x02 \x02(\x05\x12\r\n\x05score\x18\x03 \x02(\x05\x12\x19\n\x11in_battle_members\x18\x04 \x02(\x05\x12\x1d\n\x15remained_battle_times\x18\x05 \x02(\x05\"*\n\x17UnionBattleBoardRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"\xf8\x01\n\x18UnionBattleBoardResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12I\n\x05union\x18\x03 \x03(\x0b\x32:.Sanguo.protocol.union.UnionBattleBoardResponse.UnionBoard\x1as\n\nUnionBoard\x12\r\n\x05order\x18\x01 \x02(\x05\x12\r\n\x05score\x18\x02 \x02(\x05\x12\x0c\n\x04name\x18\x03 \x02(\t\x12\r\n\x05level\x18\x04 \x02(\x05\x12\x13\n\x0bleader_name\x18\x05 \x02(\t\x12\x15\n\rleader_avatar\x18\x06 \x02(\x05\"\x81\x02\n\x11UnionBattleRecord\x12\x12\n\nrival_name\x18\x01 \x02(\t\x12\x12\n\ninitiative\x18\x02 \x02(\x08\x12\x0b\n\x03win\x18\x03 \x02(\x08\x12\x11\n\ttimestamp\x18\x04 \x02(\x05\x12\r\n\x05score\x18\x05 \x02(\x05\x12\x45\n\x04logs\x18\x06 \x03(\x0b\x32\x37.Sanguo.protocol.union.UnionBattleRecord.UnionBattleLog\x1aN\n\x0eUnionBattleLog\x12\x0f\n\x07my_name\x18\x01 \x02(\t\x12\x12\n\nrival_name\x18\x02 \x02(\t\x12\x0b\n\x03win\x18\x03 \x02(\x08\x12\n\n\x02hp\x18\x04 \x02(\x05\"*\n\x17UnionBattleStartRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"r\n\x18UnionBattleStartResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x38\n\x06record\x18\x03 \x01(\x0b\x32(.Sanguo.protocol.union.UnionBattleRecord\".\n\x1bUnionBattleRecordGetRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"w\n\x1cUnionBattleRecordGetResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x39\n\x07records\x18\x03 \x03(\x0b\x32(.Sanguo.protocol.union.UnionBattleRecord\"#\n\x10UnionBossRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"\x9d\x02\n\x11UnionBossResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x16\n\x0eremained_times\x18\x03 \x02(\x05\x12=\n\x06\x62osses\x18\x04 \x03(\x0b\x32-.Sanguo.protocol.union.UnionBossResponse.Boss\x1a\x92\x01\n\x04\x42oss\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x44\n\x06status\x18\x02 \x02(\x0e\x32\x34.Sanguo.protocol.union.UnionBossResponse.Boss.Status\x12\n\n\x02hp\x18\x03 \x02(\x05\",\n\x06Status\x12\x0c\n\x08INACTIVE\x10\x01\x12\n\n\x06\x41\x43TIVE\x10\x02\x12\x08\n\x04\x44\x45\x41\x44\x10\x03\":\n\x16UnionBossGetLogRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x62oss_id\x18\x02 \x02(\x05\"\xa6\x02\n\x17UnionBossGetLogResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x0f\n\x07\x62oss_id\x18\x03 \x01(\x05\x12\x46\n\x06killer\x18\x04 \x01(\x0b\x32\x36.Sanguo.protocol.union.UnionBossGetLogResponse.BossLog\x12\x44\n\x04logs\x18\x05 \x03(\x0b\x32\x36.Sanguo.protocol.union.UnionBossGetLogResponse.BossLog\x1aN\n\x07\x42ossLog\x12\x0f\n\x07\x63har_id\x18\x01 \x02(\x05\x12\x11\n\tchar_name\x18\x02 \x02(\t\x12\x0e\n\x06\x64\x61mage\x18\x03 \x02(\x05\x12\x0f\n\x07precent\x18\x04 \x02(\x05\"9\n\x15UnionBossStartRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x62oss_id\x18\x02 \x02(\x05\"6\n\x16UnionBossStartResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\":\n\x16UnionBossBattleRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x62oss_id\x18\x02 \x02(\x05\"\x98\x01\n\x17UnionBossBattleResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12.\n\x06\x62\x61ttle\x18\x03 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\x12/\n\x04\x64rop\x18\x04 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment')
+  serialized_pb='\n\x0bunion.proto\x12\x15Sanguo.protocol.union\x1a\x0c\x63ommon.proto\x1a\x0c\x62\x61ttle.proto\x1a\x0bworld.proto\"\xb5\x01\n\x15UnionBasicInformation\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x10\n\x08\x62ulletin\x18\x03 \x02(\t\x12\r\n\x05level\x18\x04 \x02(\x05\x12\x19\n\x11\x63ontribute_points\x18\x05 \x02(\x05\x12\x0c\n\x04rank\x18\x06 \x02(\x05\x12\x1d\n\x15\x63urrent_member_amount\x18\x07 \x02(\x05\x12\x19\n\x11max_member_amount\x18\x08 \x02(\x05\"\xb5\x02\n\x0bUnionNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08in_union\x18\x02 \x02(\x08\x12;\n\x05union\x18\x03 \x01(\x0b\x32,.Sanguo.protocol.union.UnionBasicInformation\x12\x0e\n\x06leader\x18\x04 \x01(\x05\x12?\n\x07members\x18\x05 \x03(\x0b\x32..Sanguo.protocol.union.UnionNotify.UnionMember\x1au\n\x0bUnionMember\x12\x39\n\x04\x63har\x18\x01 \x02(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\x12\x10\n\x08position\x18\x02 \x02(\x05\x12\x19\n\x11\x63ontribute_points\x18\x03 \x02(\x05\"c\n\x14UnionApplyListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12:\n\x05\x63hars\x18\x02 \x03(\x0b\x32+.Sanguo.protocol.common.CharacterInfomation\"\x83\x01\n\x1eUnionPersonalInformationNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\nunion_coin\x18\x02 \x02(\x05\x12\x1c\n\x14\x63heckin_total_amount\x18\x03 \x02(\x05\x12\x1e\n\x16\x63heckin_current_amount\x18\x04 \x02(\x05\"3\n\x12UnionCreateRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0c\n\x04name\x18\x02 \x02(\t\"3\n\x13UnionCreateResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xcd\x01\n\x0fUnionListNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12G\n\x06unions\x18\x02 \x03(\x0b\x32\x37.Sanguo.protocol.union.UnionListNotify.UnionApplyStatus\x1a`\n\x10UnionApplyStatus\x12;\n\x05union\x18\x01 \x02(\x0b\x32,.Sanguo.protocol.union.UnionBasicInformation\x12\x0f\n\x07\x61pplied\x18\x02 \x02(\x08\"#\n\x10UnionListRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"1\n\x11UnionListResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"0\n\x11UnionApplyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"2\n\x12UnionApplyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"5\n\x11UnionAgreeRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\"2\n\x12UnionAgreeResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"6\n\x12UnionRefuseRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x63har_id\x18\x02 \x02(\x05\"3\n\x13UnionRefuseResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"C\n\x12UnionModifyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12\x10\n\x08\x62ulletin\x18\x03 \x02(\t\"3\n\x13UnionModifyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"#\n\x10UnionQuitRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"1\n\x11UnionQuitResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xc1\x01\n\x18UnionMemberManageRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12Q\n\x06\x61\x63tion\x18\x02 \x02(\x0e\x32\x41.Sanguo.protocol.union.UnionMemberManageRequest.UnionManageAction\x12\x11\n\tmember_id\x18\x03 \x02(\x05\".\n\x11UnionManageAction\x12\x0b\n\x07KICKOUT\x10\x01\x12\x0c\n\x08TRANSFER\x10\x02\"9\n\x19UnionMemberManageResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"&\n\x13UnionCheckinRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"4\n\x14UnionCheckinResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"\xbd\x01\n\x10UnionStoreNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x43\n\x05\x62uffs\x18\x02 \x03(\x0b\x32\x34.Sanguo.protocol.union.UnionStoreNotify.BuyBuffTimes\x1aS\n\x0c\x42uyBuffTimes\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x11\n\tmax_times\x18\x02 \x02(\x05\x12\x11\n\tcur_times\x18\x03 \x02(\x05\x12\x11\n\tadd_value\x18\x04 \x02(\x05\"3\n\x14UnionStoreBuyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\"5\n\x15UnionStoreBuyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"|\n\x11UnionBattleNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\r\n\x05order\x18\x02 \x02(\x05\x12\r\n\x05score\x18\x03 \x02(\x05\x12\x19\n\x11in_battle_members\x18\x04 \x02(\x05\x12\x1d\n\x15remained_battle_times\x18\x05 \x02(\x05\"*\n\x17UnionBattleBoardRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"\xf8\x01\n\x18UnionBattleBoardResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12I\n\x05union\x18\x03 \x03(\x0b\x32:.Sanguo.protocol.union.UnionBattleBoardResponse.UnionBoard\x1as\n\nUnionBoard\x12\r\n\x05order\x18\x01 \x02(\x05\x12\r\n\x05score\x18\x02 \x02(\x05\x12\x0c\n\x04name\x18\x03 \x02(\t\x12\r\n\x05level\x18\x04 \x02(\x05\x12\x13\n\x0bleader_name\x18\x05 \x02(\t\x12\x15\n\rleader_avatar\x18\x06 \x02(\x05\"\x81\x02\n\x11UnionBattleRecord\x12\x12\n\nrival_name\x18\x01 \x02(\t\x12\x12\n\ninitiative\x18\x02 \x02(\x08\x12\x0b\n\x03win\x18\x03 \x02(\x08\x12\x11\n\ttimestamp\x18\x04 \x02(\x05\x12\r\n\x05score\x18\x05 \x02(\x05\x12\x45\n\x04logs\x18\x06 \x03(\x0b\x32\x37.Sanguo.protocol.union.UnionBattleRecord.UnionBattleLog\x1aN\n\x0eUnionBattleLog\x12\x0f\n\x07my_name\x18\x01 \x02(\t\x12\x12\n\nrival_name\x18\x02 \x02(\t\x12\x0b\n\x03win\x18\x03 \x02(\x08\x12\n\n\x02hp\x18\x04 \x02(\x05\"*\n\x17UnionBattleStartRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"r\n\x18UnionBattleStartResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x38\n\x06record\x18\x03 \x01(\x0b\x32(.Sanguo.protocol.union.UnionBattleRecord\".\n\x1bUnionBattleRecordGetRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"w\n\x1cUnionBattleRecordGetResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x39\n\x07records\x18\x03 \x03(\x0b\x32(.Sanguo.protocol.union.UnionBattleRecord\"#\n\x10UnionBossRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"\x9d\x02\n\x11UnionBossResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x16\n\x0eremained_times\x18\x03 \x02(\x05\x12=\n\x06\x62osses\x18\x04 \x03(\x0b\x32-.Sanguo.protocol.union.UnionBossResponse.Boss\x1a\x92\x01\n\x04\x42oss\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x44\n\x06status\x18\x02 \x02(\x0e\x32\x34.Sanguo.protocol.union.UnionBossResponse.Boss.Status\x12\n\n\x02hp\x18\x03 \x02(\x05\",\n\x06Status\x12\x0c\n\x08INACTIVE\x10\x01\x12\n\n\x06\x41\x43TIVE\x10\x02\x12\x08\n\x04\x44\x45\x41\x44\x10\x03\":\n\x16UnionBossGetLogRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x62oss_id\x18\x02 \x02(\x05\"\xa6\x02\n\x17UnionBossGetLogResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x0f\n\x07\x62oss_id\x18\x03 \x01(\x05\x12\x46\n\x06killer\x18\x04 \x01(\x0b\x32\x36.Sanguo.protocol.union.UnionBossGetLogResponse.BossLog\x12\x44\n\x04logs\x18\x05 \x03(\x0b\x32\x36.Sanguo.protocol.union.UnionBossGetLogResponse.BossLog\x1aN\n\x07\x42ossLog\x12\x0f\n\x07\x63har_id\x18\x01 \x02(\x05\x12\x11\n\tchar_name\x18\x02 \x02(\t\x12\x0e\n\x06\x64\x61mage\x18\x03 \x02(\x05\x12\x0f\n\x07precent\x18\x04 \x02(\x05\"9\n\x15UnionBossStartRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x62oss_id\x18\x02 \x02(\x05\"6\n\x16UnionBossStartResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\":\n\x16UnionBossBattleRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07\x62oss_id\x18\x02 \x02(\x05\"\x98\x01\n\x17UnionBossBattleResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12.\n\x06\x62\x61ttle\x18\x03 \x01(\x0b\x32\x1e.Sanguo.protocol.battle.Battle\x12/\n\x04\x64rop\x18\x04 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment')
 
 
 
@@ -37,8 +37,8 @@ _UNIONMEMBERMANAGEREQUEST_UNIONMANAGEACTION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1856,
-  serialized_end=1902,
+  serialized_start=1888,
+  serialized_end=1934,
 )
 
 _UNIONBOSSRESPONSE_BOSS_STATUS = _descriptor.EnumDescriptor(
@@ -62,8 +62,8 @@ _UNIONBOSSRESPONSE_BOSS_STATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=3646,
-  serialized_end=3690,
+  serialized_start=3678,
+  serialized_end=3722,
 )
 
 
@@ -110,15 +110,22 @@ _UNIONBASICINFORMATION = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='current_member_amount', full_name='Sanguo.protocol.union.UnionBasicInformation.current_member_amount', index=5,
+      name='rank', full_name='Sanguo.protocol.union.UnionBasicInformation.rank', index=5,
       number=6, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='max_member_amount', full_name='Sanguo.protocol.union.UnionBasicInformation.max_member_amount', index=6,
+      name='current_member_amount', full_name='Sanguo.protocol.union.UnionBasicInformation.current_member_amount', index=6,
       number=7, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='max_member_amount', full_name='Sanguo.protocol.union.UnionBasicInformation.max_member_amount', index=7,
+      number=8, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -133,7 +140,7 @@ _UNIONBASICINFORMATION = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=80,
-  serialized_end=247,
+  serialized_end=261,
 )
 
 
@@ -174,8 +181,8 @@ _UNIONNOTIFY_UNIONMEMBER = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=424,
-  serialized_end=541,
+  serialized_start=456,
+  serialized_end=573,
 )
 
 _UNIONNOTIFY = _descriptor.Descriptor(
@@ -193,22 +200,29 @@ _UNIONNOTIFY = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='union', full_name='Sanguo.protocol.union.UnionNotify.union', index=1,
-      number=2, type=11, cpp_type=10, label=2,
+      name='in_union', full_name='Sanguo.protocol.union.UnionNotify.in_union', index=1,
+      number=2, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='union', full_name='Sanguo.protocol.union.UnionNotify.union', index=2,
+      number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='leader', full_name='Sanguo.protocol.union.UnionNotify.leader', index=2,
-      number=3, type=5, cpp_type=1, label=2,
+      name='leader', full_name='Sanguo.protocol.union.UnionNotify.leader', index=3,
+      number=4, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='members', full_name='Sanguo.protocol.union.UnionNotify.members', index=3,
-      number=4, type=11, cpp_type=10, label=3,
+      name='members', full_name='Sanguo.protocol.union.UnionNotify.members', index=4,
+      number=5, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -222,8 +236,8 @@ _UNIONNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=250,
-  serialized_end=541,
+  serialized_start=264,
+  serialized_end=573,
 )
 
 
@@ -257,8 +271,8 @@ _UNIONAPPLYLISTNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=543,
-  serialized_end=642,
+  serialized_start=575,
+  serialized_end=674,
 )
 
 
@@ -306,8 +320,8 @@ _UNIONPERSONALINFORMATIONNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=645,
-  serialized_end=776,
+  serialized_start=677,
+  serialized_end=808,
 )
 
 
@@ -341,8 +355,8 @@ _UNIONCREATEREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=778,
-  serialized_end=829,
+  serialized_start=810,
+  serialized_end=861,
 )
 
 
@@ -376,8 +390,8 @@ _UNIONCREATERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=831,
-  serialized_end=882,
+  serialized_start=863,
+  serialized_end=914,
 )
 
 
@@ -411,8 +425,8 @@ _UNIONLISTNOTIFY_UNIONAPPLYSTATUS = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=994,
-  serialized_end=1090,
+  serialized_start=1026,
+  serialized_end=1122,
 )
 
 _UNIONLISTNOTIFY = _descriptor.Descriptor(
@@ -445,8 +459,8 @@ _UNIONLISTNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=885,
-  serialized_end=1090,
+  serialized_start=917,
+  serialized_end=1122,
 )
 
 
@@ -473,8 +487,8 @@ _UNIONLISTREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1092,
-  serialized_end=1127,
+  serialized_start=1124,
+  serialized_end=1159,
 )
 
 
@@ -508,8 +522,8 @@ _UNIONLISTRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1129,
-  serialized_end=1178,
+  serialized_start=1161,
+  serialized_end=1210,
 )
 
 
@@ -543,8 +557,8 @@ _UNIONAPPLYREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1180,
-  serialized_end=1228,
+  serialized_start=1212,
+  serialized_end=1260,
 )
 
 
@@ -578,8 +592,8 @@ _UNIONAPPLYRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1230,
-  serialized_end=1280,
+  serialized_start=1262,
+  serialized_end=1312,
 )
 
 
@@ -613,8 +627,8 @@ _UNIONAGREEREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1282,
-  serialized_end=1335,
+  serialized_start=1314,
+  serialized_end=1367,
 )
 
 
@@ -648,8 +662,8 @@ _UNIONAGREERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1337,
-  serialized_end=1387,
+  serialized_start=1369,
+  serialized_end=1419,
 )
 
 
@@ -683,8 +697,8 @@ _UNIONREFUSEREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1389,
-  serialized_end=1443,
+  serialized_start=1421,
+  serialized_end=1475,
 )
 
 
@@ -718,8 +732,8 @@ _UNIONREFUSERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1445,
-  serialized_end=1496,
+  serialized_start=1477,
+  serialized_end=1528,
 )
 
 
@@ -760,8 +774,8 @@ _UNIONMODIFYREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1498,
-  serialized_end=1565,
+  serialized_start=1530,
+  serialized_end=1597,
 )
 
 
@@ -795,8 +809,8 @@ _UNIONMODIFYRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1567,
-  serialized_end=1618,
+  serialized_start=1599,
+  serialized_end=1650,
 )
 
 
@@ -823,8 +837,8 @@ _UNIONQUITREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1620,
-  serialized_end=1655,
+  serialized_start=1652,
+  serialized_end=1687,
 )
 
 
@@ -858,8 +872,8 @@ _UNIONQUITRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1657,
-  serialized_end=1706,
+  serialized_start=1689,
+  serialized_end=1738,
 )
 
 
@@ -901,8 +915,8 @@ _UNIONMEMBERMANAGEREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1709,
-  serialized_end=1902,
+  serialized_start=1741,
+  serialized_end=1934,
 )
 
 
@@ -936,8 +950,8 @@ _UNIONMEMBERMANAGERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1904,
-  serialized_end=1961,
+  serialized_start=1936,
+  serialized_end=1993,
 )
 
 
@@ -964,8 +978,8 @@ _UNIONCHECKINREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1963,
-  serialized_end=2001,
+  serialized_start=1995,
+  serialized_end=2033,
 )
 
 
@@ -999,8 +1013,8 @@ _UNIONCHECKINRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2003,
-  serialized_end=2055,
+  serialized_start=2035,
+  serialized_end=2087,
 )
 
 
@@ -1048,8 +1062,8 @@ _UNIONSTORENOTIFY_BUYBUFFTIMES = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2164,
-  serialized_end=2247,
+  serialized_start=2196,
+  serialized_end=2279,
 )
 
 _UNIONSTORENOTIFY = _descriptor.Descriptor(
@@ -1082,8 +1096,8 @@ _UNIONSTORENOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2058,
-  serialized_end=2247,
+  serialized_start=2090,
+  serialized_end=2279,
 )
 
 
@@ -1117,8 +1131,8 @@ _UNIONSTOREBUYREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2249,
-  serialized_end=2300,
+  serialized_start=2281,
+  serialized_end=2332,
 )
 
 
@@ -1152,8 +1166,8 @@ _UNIONSTOREBUYRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2302,
-  serialized_end=2355,
+  serialized_start=2334,
+  serialized_end=2387,
 )
 
 
@@ -1208,8 +1222,8 @@ _UNIONBATTLENOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2357,
-  serialized_end=2481,
+  serialized_start=2389,
+  serialized_end=2513,
 )
 
 
@@ -1236,8 +1250,8 @@ _UNIONBATTLEBOARDREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2483,
-  serialized_end=2525,
+  serialized_start=2515,
+  serialized_end=2557,
 )
 
 
@@ -1299,8 +1313,8 @@ _UNIONBATTLEBOARDRESPONSE_UNIONBOARD = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2661,
-  serialized_end=2776,
+  serialized_start=2693,
+  serialized_end=2808,
 )
 
 _UNIONBATTLEBOARDRESPONSE = _descriptor.Descriptor(
@@ -1340,8 +1354,8 @@ _UNIONBATTLEBOARDRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2528,
-  serialized_end=2776,
+  serialized_start=2560,
+  serialized_end=2808,
 )
 
 
@@ -1389,8 +1403,8 @@ _UNIONBATTLERECORD_UNIONBATTLELOG = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2958,
-  serialized_end=3036,
+  serialized_start=2990,
+  serialized_end=3068,
 )
 
 _UNIONBATTLERECORD = _descriptor.Descriptor(
@@ -1451,8 +1465,8 @@ _UNIONBATTLERECORD = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2779,
-  serialized_end=3036,
+  serialized_start=2811,
+  serialized_end=3068,
 )
 
 
@@ -1479,8 +1493,8 @@ _UNIONBATTLESTARTREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3038,
-  serialized_end=3080,
+  serialized_start=3070,
+  serialized_end=3112,
 )
 
 
@@ -1521,8 +1535,8 @@ _UNIONBATTLESTARTRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3082,
-  serialized_end=3196,
+  serialized_start=3114,
+  serialized_end=3228,
 )
 
 
@@ -1549,8 +1563,8 @@ _UNIONBATTLERECORDGETREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3198,
-  serialized_end=3244,
+  serialized_start=3230,
+  serialized_end=3276,
 )
 
 
@@ -1591,8 +1605,8 @@ _UNIONBATTLERECORDGETRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3246,
-  serialized_end=3365,
+  serialized_start=3278,
+  serialized_end=3397,
 )
 
 
@@ -1619,8 +1633,8 @@ _UNIONBOSSREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3367,
-  serialized_end=3402,
+  serialized_start=3399,
+  serialized_end=3434,
 )
 
 
@@ -1662,8 +1676,8 @@ _UNIONBOSSRESPONSE_BOSS = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3544,
-  serialized_end=3690,
+  serialized_start=3576,
+  serialized_end=3722,
 )
 
 _UNIONBOSSRESPONSE = _descriptor.Descriptor(
@@ -1710,8 +1724,8 @@ _UNIONBOSSRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3405,
-  serialized_end=3690,
+  serialized_start=3437,
+  serialized_end=3722,
 )
 
 
@@ -1745,8 +1759,8 @@ _UNIONBOSSGETLOGREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3692,
-  serialized_end=3750,
+  serialized_start=3724,
+  serialized_end=3782,
 )
 
 
@@ -1794,8 +1808,8 @@ _UNIONBOSSGETLOGRESPONSE_BOSSLOG = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3969,
-  serialized_end=4047,
+  serialized_start=4001,
+  serialized_end=4079,
 )
 
 _UNIONBOSSGETLOGRESPONSE = _descriptor.Descriptor(
@@ -1849,8 +1863,8 @@ _UNIONBOSSGETLOGRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3753,
-  serialized_end=4047,
+  serialized_start=3785,
+  serialized_end=4079,
 )
 
 
@@ -1884,8 +1898,8 @@ _UNIONBOSSSTARTREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4049,
-  serialized_end=4106,
+  serialized_start=4081,
+  serialized_end=4138,
 )
 
 
@@ -1919,8 +1933,8 @@ _UNIONBOSSSTARTRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4108,
-  serialized_end=4162,
+  serialized_start=4140,
+  serialized_end=4194,
 )
 
 
@@ -1954,8 +1968,8 @@ _UNIONBOSSBATTLEREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4164,
-  serialized_end=4222,
+  serialized_start=4196,
+  serialized_end=4254,
 )
 
 
@@ -2003,8 +2017,8 @@ _UNIONBOSSBATTLERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4225,
-  serialized_end=4377,
+  serialized_start=4257,
+  serialized_end=4409,
 )
 
 _UNIONNOTIFY_UNIONMEMBER.fields_by_name['char'].message_type = common_pb2._CHARACTERINFOMATION

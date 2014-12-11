@@ -32,7 +32,7 @@ from core.activity import ActivityStatic
 from core.horse import HorseFreeTimesManager, Horse
 
 from core.affairs import Affairs
-from core.union import UnionManager, UnionStore, UnionBattle
+from core import union
 
 
 def hero_notify(char_id, objs, message_name="HeroNotify"):
@@ -136,9 +136,7 @@ def login_notify(char_id):
     HorseFreeTimesManager(char_id).send_notify()
     Horse(char_id).send_notify()
 
-    UnionManager(char_id).send_notify()
-    UnionStore(char_id).send_notify()
-    UnionBattle(char_id).send_notify()
+    union.send_notify(char_id)
 
     # mail notify 要放在最后，因为 其他功能初始化时可能会产生登录邮件
     Mail(char_id).send_notify()
