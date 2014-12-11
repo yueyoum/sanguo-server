@@ -143,8 +143,6 @@ class UnionBoss(UnionLoadBase):
     def after_battle(self, boss_id, damage, kill=False):
         # 每次打完给予奖励
         member = Member(self.char_id)
-        # FIXME
-
         boss = UNION_BOSS[boss_id]
         contribute_points = int( float(damage)/boss.hp * boss.contribute_points )
         lowest = 1
@@ -291,7 +289,7 @@ class BattleBoss(InBattleHero):
         super(BattleBoss, self).__init__()
 
     def find_skill(self, skills):
-        if self._round / self.skill_release_rounds == 0:
+        if self._round % self.skill_release_rounds == 0:
             return skills
         return [self.default_skill]
 

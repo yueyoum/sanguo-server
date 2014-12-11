@@ -478,7 +478,7 @@ class MongoUnionMember(Document):
 
     meta = {
         'collection': 'union_members',
-        'indexes': ['applied', 'joined',]
+        'indexes': ['applied', 'joined', 'last_checkin_timestamp']
     }
 
 MongoUnionMember.ensure_indexes()

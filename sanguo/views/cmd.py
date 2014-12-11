@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from core.attachment import make_standard_drop_from_template
 from core.resource import Resource
 from core.functionopen import FunctionOpen
-from core.union import UnionMember
+from core.union.member import Member
 
 from preset.data import HEROS, EQUIPMENTS, GEMS, STUFFS, HORSE
 
@@ -60,7 +60,7 @@ def cmd(request):
         drop['horses'].append((req.param, 1))
 
     elif req.tp == 13:
-        UnionMember(char_id).add_coin(req.param)
+        Member(char_id).add_coin(req.param)
 
 
     resource = Resource(char_id, "CMD", "tp: {0}, param: {1}".format(req.tp, req.param))

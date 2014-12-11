@@ -8,7 +8,7 @@ __date__ = '14-12-10'
 """
 
 import arrow
-from mongoengine import DoesNotExist
+from mongoengine import DoesNotExist, Q
 from core.mongoscheme import MongoUnion, MongoUnionMember
 
 from core.exception import SanguoException
@@ -149,13 +149,12 @@ class UnionOwner(UnionBase):
 
 
     def find_next_owner(self):
-        # TODO
-        members = self.member_list
-        if self.char_id in members:
-            members.remove(self.char_id)
-        if members:
-            return members[0]
-        return None
+        timestamp = arrow.utcnow().timestamp - 3600 * 24 * 3
+        members = MongoUnionMember.objects.filter(Q(id__ne=self.char_id) & Q(last_checkin_timestamp__gte=timestamp)).order_by('-position')
+        if not members:
+            return None
+
+        return members[0].id
 
 
     def get_battle_members(self):
