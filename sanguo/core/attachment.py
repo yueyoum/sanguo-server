@@ -83,6 +83,10 @@ def standard_drop_to_attachment_protomsg(data):
     # 'stuffs': [(id, amount), ...],
     # 'horses': [(id, amount), ...],
     # }
+    # NEW ADDING:
+    # union_coin => stuff.1003
+    # union_contribute_points => stuff.1002
+
 
     msg = MsgAttachment()
     msg.gold = data.get('gold', 0)
@@ -111,7 +115,15 @@ def standard_drop_to_attachment_protomsg(data):
         msg_g.id = _id
         msg_g.amount = _amount
 
-    for _id, _amount in data.get('stuffs', []):
+    _stuffs = data.get('stuffs', [])
+    _union_coin_amount = data.get('union_coin', 0)
+    if _union_coin_amount:
+        _stuffs.append((1003, _union_coin_amount))
+    _union_contribute_points = data.get('_union_contribute_points', 0)
+    if _union_contribute_points:
+        _stuffs.append((1002, _union_contribute_points))
+
+    for _id, _amount in _stuffs:
         msg_s = msg.stuffs.add()
         msg_s.id = _id
         msg_s.amount = _amount

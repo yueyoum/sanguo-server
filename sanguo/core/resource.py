@@ -193,6 +193,7 @@ class Resource(object):
         from core.hero import save_hero, HeroSoul, FakeSaveHeroResult
         from core.item import Item
         from core.horse import Horse
+        from core.union.member import Member
 
         data = _get_resource_data(**kwargs)
         purchase_got = kwargs.get('purchase_got', 0)
@@ -204,6 +205,14 @@ class Resource(object):
                         purchase_got=purchase_got,
                         purchase_actual_got=purchase_actual_got,
                         )
+
+        union_coin = kwargs.get('union_coin', 0)
+        union_contribute_points = kwargs.get('union_contribute_points', 0)
+        if union_coin or union_contribute_points:
+            m = Member(self.char_id)
+            m.add_coin(union_coin, send_notify=False)
+            m.add_contribute_points(union_contribute_points)
+
     
         if data['heros']:
             heros = []
