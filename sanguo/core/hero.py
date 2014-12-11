@@ -184,7 +184,7 @@ class Hero(FightPowerMixin):
 
 
     def _add_global_buffs(self):
-        from core.union import UnionStore
+        from core.union.store import UnionStore
         s = UnionStore(self.char_id)
         buffs = s.get_add_buffs_with_string_name()
         for k, v in buffs.iteritems():

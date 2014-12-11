@@ -1,16 +1,5 @@
 [
 {
-    "pk": 0, 
-    "model": "errormsg.errormsg", 
-    "fields": {
-        "error_index": "NETWORK_DOWN", 
-        "text_zh": "\u7f51\u7edc\u4e0d\u7545\u901a\uff0c\u8bf7\u786e\u4fdd\u7f51\u7edc\u94fe\u63a5", 
-        "link_to": null, 
-        "des": "", 
-        "area": ""
-    }
-},
-{
     "pk": 99, 
     "model": "errormsg.errormsg", 
     "fields": {
@@ -1743,6 +1732,61 @@
     "fields": {
         "error_index": "UNION_BOSS_DEAD", 
         "text_zh": "\u6b7b\u4e86\u4e0d\u80fd\u6253", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5722, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_BOSS_LEVEL_NOT_ENOUGH", 
+        "text_zh": "\u5de5\u4f1a\u7b49\u7ea7\u4e0d\u8db3\uff0c\u65e0\u6cd5\u5f00\u542f\u6b64BOSS", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5723, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_CANNOT_APPLY_ALREADY_IN", 
+        "text_zh": "\u5df2\u7ecf\u5728\u5de5\u4f1a\u4e2d\uff0c\u65e0\u6cd5\u7533\u8bf7", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5724, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_CANNOT_APPLY_FULL", 
+        "text_zh": "\u7533\u8bf7\u6570\u91cf\u5230\u8fbe\u9650\u5236\uff0c\u65e0\u6cd5\u7533\u8bf7", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5725, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_BOSS_ONLY_OPENED_BY_OWNER", 
+        "text_zh": "\u53ea\u6709\u4f1a\u957f\u624d\u80fd\u5f00\u542fBOSS", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5726, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_BOSS_NO_TIMES", 
+        "text_zh": "\u6253BOSS\u6b21\u6570\u5df2\u7528\u5b8c", 
         "link_to": null, 
         "des": "", 
         "area": ""
