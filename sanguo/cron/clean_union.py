@@ -5,7 +5,8 @@ __date__ = '12/09/14'
 
 from _base import Logger
 
-from core.union import UnionBattle, UnionMember
+from core.union.battle import UnionBattle
+from core.union.member import Member
 from core.mongoscheme import MongoUnion, MongoUnionMember
 
 def clean():
@@ -14,7 +15,7 @@ def clean():
         UnionBattle(x.owner).cron_job()
 
     for x in MongoUnionMember.objects.all():
-        UnionMember(x.id).cron_job()
+        Member(x.id).cron_job()
 
     logger.write("Clean Union Complete.")
     logger.close()

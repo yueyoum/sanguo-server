@@ -92,7 +92,7 @@ class UnionBattle(UnionLoadBase):
         return rival_char_id
 
 
-    @union_instance_check(UnionOwner, errormsg.INVALID_OPERATE, "UnionBattle Start", "not owner")
+    @union_instance_check(UnionOwner, errormsg.UNION_BATTLE_ONLY_STARTED_BY_OWNER, "UnionBattle Start", "not owner")
     def start_battle(self):
         rival_char_id = self.find_rival_char_id()
         if not rival_char_id:

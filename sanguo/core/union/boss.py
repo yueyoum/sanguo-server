@@ -132,7 +132,7 @@ class UnionBoss(UnionLoadBase):
         self.mongo_boss.save()
 
         self.incr_battle_times()
-        self.after_battle(eubl.damage)
+        self.after_battle(boss_id, eubl.damage, remained_hp<=0)
 
         if remained_hp <= 0:
             self.boss_has_been_killed(boss_id)
@@ -140,13 +140,26 @@ class UnionBoss(UnionLoadBase):
         return msg
 
 
-    def after_battle(self, damage):
+    def after_battle(self, boss_id, damage, kill=False):
         # 每次打完给予奖励
         member = Member(self.char_id)
         # FIXME
-        member.add_coin(10, send_notify=False)
-        member.add_contribute_points(10, send_notify=True)
-        self.union.add_contribute_points(10)
+
+        boss = UNION_BOSS[boss_id]
+        contribute_points = int( float(damage)/boss.hp * boss.contribute_points )
+        lowest = 1
+        highest = int(boss.contribute_points * 0.05)
+        if contribute_points < lowest:
+            contribute_points = lowest
+        if contribute_points > highest:
+            contribute_points = highest
+
+        coin = 9 + contribute_points
+
+        member.add_coin(coin, send_notify=False)
+        member.add_contribute_points(contribute_points, send_notify=True)
+        if not kill:
+            self.union.add_contribute_points(contribute_points)
 
 
     def boss_has_been_killed(self, boss_id):

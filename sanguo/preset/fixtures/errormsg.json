@@ -1791,5 +1791,16 @@
         "des": "", 
         "area": ""
     }
+},
+{
+    "pk": 5727, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_BATTLE_ONLY_STARTED_BY_OWNER", 
+        "text_zh": "\u53ea\u6709\u4f1a\u957f\u624d\u80fd\u53d1\u8d77\u5de5\u4f1a\u6218", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
 }
 ]
