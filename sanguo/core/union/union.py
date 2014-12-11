@@ -30,24 +30,28 @@ MAX_UNION_LEVEL = max(UNION_LEVEL.keys())
 
 class Union(object):
     def __new__(cls, char_id, union_id=None):
-        if not union_id:
-            try:
-                union_id = MongoUnionMember.objects.get(id=char_id).joined
-            except DoesNotExist:
+        try:
+            char_union_id = MongoUnionMember.objects.get(id=char_id).joined
+            if not char_union_id:
                 return UnionDummy(char_id)
-            if not union_id:
-                return UnionDummy(char_id)
+        except DoesNotExist:
+            return UnionDummy(char_id)
 
-        mongo_union = MongoUnion.objects.get(id=union_id)
-        belong_to_self = char_id == mongo_union.owner
-        if belong_to_self:
-            return UnionOwner(char_id, union_id, mongo_union)
-        return UnionMember(char_id, union_id, mongo_union)
+        if not union_id:
+            return UnionOwner(char_id, char_union_id)
+
+        if char_union_id != union_id:
+            return UnionDummy(char_id)
+
+        mongo_union = MongoUnion.objects.get(id=char_union_id)
+        if char_id == mongo_union.owner:
+            return UnionOwner(char_id, union_id)
+        return UnionMember(char_id, union_id)
 
 
 
 class UnionBase(object):
-    def __init__(self, char_id, union_id, mongo_union):
+    def __init__(self, char_id, union_id):
         self.char_id = char_id
         self.union_id = union_id
         self.mongo_union = MongoUnion.objects.get(id=union_id)
