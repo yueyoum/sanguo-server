@@ -136,7 +136,7 @@ class UnionBattle(UnionLoadBase):
         self.union.mongo_union.save()
         self.send_notify()
 
-
+    @union_instance_check(UnionBase, errormsg.UNION_NOT_EXIST, "UnionBattle Get Order", "has no union")
     def get_order(self):
         score = self.union.mongo_union.score
         order = MongoUnion.objects.filter(score__gt=score).count()

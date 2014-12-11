@@ -7,9 +7,9 @@ from core.exception import SanguoException
 from core.union.union import Union
 
 class UnionLoadBase(object):
-    def __init__(self, char_id):
+    def __init__(self, char_id, union_id=None):
         self.char_id = char_id
-        self.union = Union(char_id)
+        self.union = Union(char_id, union_id=union_id)
 
 
 

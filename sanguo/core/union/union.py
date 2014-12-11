@@ -99,7 +99,7 @@ class UnionBase(object):
         msg.contribute_points = self.mongo_union.contribute_points
         msg.current_member_amount = self.current_member_amount
         msg.max_member_amount = self.max_member_amount
-        msg.rank = UnionBattle(self.char_id).get_order()
+        msg.rank = UnionBattle(self.char_id, self.union_id).get_order()
 
         return msg
 
