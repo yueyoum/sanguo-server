@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='horse.proto',
   package='Sanguo.protocol.horse',
-  serialized_pb='\n\x0bhorse.proto\x12\x15Sanguo.protocol.horse\">\n\x1cHorseFreeStrengthTimesNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\r\n\x05times\x18\x02 \x02(\x05\"\\\n\x05Horse\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0b\n\x03oid\x18\x02 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x03 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x04 \x02(\x05\x12\n\n\x02hp\x18\x05 \x02(\x05\x12\r\n\x05power\x18\x06 \x02(\x05\"M\n\x0cHorsesNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x06horses\x18\x02 \x03(\x0b\x32\x1c.Sanguo.protocol.horse.Horse\"R\n\x12HorsesUpdateNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x05horse\x18\x02 \x02(\x0b\x32\x1c.Sanguo.protocol.horse.Horse\"P\n\x0fHorsesAddNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x06horses\x18\x02 \x03(\x0b\x32\x1c.Sanguo.protocol.horse.Horse\"2\n\x12HorsesRemoveNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"\xba\x01\n\x14HorseStrengthRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12O\n\x06method\x18\x03 \x02(\x0e\x32?.Sanguo.protocol.horse.HorseStrengthRequest.HorseStrengthMethod\"4\n\x13HorseStrengthMethod\x12\x08\n\x04\x46REE\x10\x01\x12\x08\n\x04GOLD\x10\x02\x12\t\n\x05SYCEE\x10\x03\"f\n\x15HorseStrengthResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12/\n\tnew_horse\x18\x03 \x01(\x0b\x32\x1c.Sanguo.protocol.horse.Horse\"\xa2\x01\n\x1bHorseStrengthConfirmRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12J\n\x02tp\x18\x02 \x02(\x0e\x32>.Sanguo.protocol.horse.HorseStrengthConfirmRequest.ConfirmType\"&\n\x0b\x43onfirmType\x12\x0b\n\x07\x43ONFIRM\x10\x01\x12\n\n\x06\x43\x41NCEL\x10\x02\"<\n\x1cHorseStrengthConfirmResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"Q\n\x15HorseEvolutionRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08horse_id\x18\x02 \x02(\x05\x12\x15\n\rhorse_soul_id\x18\x03 \x02(\x05\"6\n\x16HorseEvolutionResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
+  serialized_pb='\n\x0bhorse.proto\x12\x15Sanguo.protocol.horse\">\n\x1cHorseFreeStrengthTimesNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\r\n\x05times\x18\x02 \x02(\x05\"\x95\x01\n\x05Horse\x12\n\n\x02id\x18\x01 \x02(\x05\x12\x0b\n\x03oid\x18\x02 \x02(\x05\x12\x0e\n\x06\x61ttack\x18\x03 \x02(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x04 \x02(\x05\x12\n\n\x02hp\x18\x05 \x02(\x05\x12\r\n\x05power\x18\x06 \x02(\x05\x12\x1a\n\x12strength_cost_gold\x18\x07 \x02(\x05\x12\x1b\n\x13strength_cost_sycee\x18\x08 \x02(\x05\"M\n\x0cHorsesNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x06horses\x18\x02 \x03(\x0b\x32\x1c.Sanguo.protocol.horse.Horse\"R\n\x12HorsesUpdateNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12+\n\x05horse\x18\x02 \x02(\x0b\x32\x1c.Sanguo.protocol.horse.Horse\"P\n\x0fHorsesAddNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12,\n\x06horses\x18\x02 \x03(\x0b\x32\x1c.Sanguo.protocol.horse.Horse\"2\n\x12HorsesRemoveNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0b\n\x03ids\x18\x02 \x03(\x05\"\xba\x01\n\x14HorseStrengthRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02id\x18\x02 \x02(\x05\x12O\n\x06method\x18\x03 \x02(\x0e\x32?.Sanguo.protocol.horse.HorseStrengthRequest.HorseStrengthMethod\"4\n\x13HorseStrengthMethod\x12\x08\n\x04\x46REE\x10\x01\x12\x08\n\x04GOLD\x10\x02\x12\t\n\x05SYCEE\x10\x03\"f\n\x15HorseStrengthResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12/\n\tnew_horse\x18\x03 \x01(\x0b\x32\x1c.Sanguo.protocol.horse.Horse\"\xa2\x01\n\x1bHorseStrengthConfirmRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12J\n\x02tp\x18\x02 \x02(\x0e\x32>.Sanguo.protocol.horse.HorseStrengthConfirmRequest.ConfirmType\"&\n\x0b\x43onfirmType\x12\x0b\n\x07\x43ONFIRM\x10\x01\x12\n\n\x06\x43\x41NCEL\x10\x02\"<\n\x1cHorseStrengthConfirmResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\"Q\n\x15HorseEvolutionRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08horse_id\x18\x02 \x02(\x05\x12\x15\n\rhorse_soul_id\x18\x03 \x02(\x05\"6\n\x16HorseEvolutionResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c')
 
 
 
@@ -38,8 +38,8 @@ _HORSESTRENGTHREQUEST_HORSESTRENGTHMETHOD = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=628,
-  serialized_end=680,
+  serialized_start=686,
+  serialized_end=738,
 )
 
 _HORSESTRENGTHCONFIRMREQUEST_CONFIRMTYPE = _descriptor.EnumDescriptor(
@@ -59,8 +59,8 @@ _HORSESTRENGTHCONFIRMREQUEST_CONFIRMTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=911,
-  serialized_end=949,
+  serialized_start=969,
+  serialized_end=1007,
 )
 
 
@@ -148,6 +148,20 @@ _HORSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='strength_cost_gold', full_name='Sanguo.protocol.horse.Horse.strength_cost_gold', index=6,
+      number=7, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='strength_cost_sycee', full_name='Sanguo.protocol.horse.Horse.strength_cost_sycee', index=7,
+      number=8, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -157,8 +171,8 @@ _HORSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=102,
-  serialized_end=194,
+  serialized_start=103,
+  serialized_end=252,
 )
 
 
@@ -192,8 +206,8 @@ _HORSESNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=196,
-  serialized_end=273,
+  serialized_start=254,
+  serialized_end=331,
 )
 
 
@@ -227,8 +241,8 @@ _HORSESUPDATENOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=275,
-  serialized_end=357,
+  serialized_start=333,
+  serialized_end=415,
 )
 
 
@@ -262,8 +276,8 @@ _HORSESADDNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=359,
-  serialized_end=439,
+  serialized_start=417,
+  serialized_end=497,
 )
 
 
@@ -297,8 +311,8 @@ _HORSESREMOVENOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=441,
-  serialized_end=491,
+  serialized_start=499,
+  serialized_end=549,
 )
 
 
@@ -340,8 +354,8 @@ _HORSESTRENGTHREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=494,
-  serialized_end=680,
+  serialized_start=552,
+  serialized_end=738,
 )
 
 
@@ -382,8 +396,8 @@ _HORSESTRENGTHRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=682,
-  serialized_end=784,
+  serialized_start=740,
+  serialized_end=842,
 )
 
 
@@ -418,8 +432,8 @@ _HORSESTRENGTHCONFIRMREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=787,
-  serialized_end=949,
+  serialized_start=845,
+  serialized_end=1007,
 )
 
 
@@ -453,8 +467,8 @@ _HORSESTRENGTHCONFIRMRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=951,
-  serialized_end=1011,
+  serialized_start=1009,
+  serialized_end=1069,
 )
 
 
@@ -495,8 +509,8 @@ _HORSEEVOLUTIONREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1013,
-  serialized_end=1094,
+  serialized_start=1071,
+  serialized_end=1152,
 )
 
 
@@ -530,8 +544,8 @@ _HORSEEVOLUTIONRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1096,
-  serialized_end=1150,
+  serialized_start=1154,
+  serialized_end=1208,
 )
 
 _HORSESNOTIFY.fields_by_name['horses'].message_type = _HORSE

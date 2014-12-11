@@ -122,6 +122,15 @@ class OneHorse(FightPowerMixin):
         self.attack, self.defense, self.hp = HorseStrengthFactory.normalize(oid, attack, defense, hp)
         self.crit = HORSE[oid].crit
 
+    @property
+    def strength_cost_gold(self):
+        return int(500 + pow(self.power, 2) / 1000)
+
+    @property
+    def strength_cost_sycee(self):
+        return HORSE[self.oid].strength_sycee_needs
+
+
     def strength(self, using_sycee=False):
         new_attack, new_defense, new_hp = HorseStrengthFactory.strength(
             self.oid, self.attack, self.defense, self.hp, using_sycee=using_sycee
@@ -156,6 +165,8 @@ class OneHorse(FightPowerMixin):
         msg.defense = self.defense
         msg.hp = self.hp
         msg.power = self.power
+        msg.strength_cost_gold = self.strength_cost_gold
+        msg.strength_cost_sycee = self.strength_cost_sycee
         return msg
 
     def __str__(self):
@@ -278,10 +289,10 @@ class Horse(object):
             # 这个时候就要根据method来确定是否using_sycee和 resource_needs了
             if method == 2:
                 using_sycee = False
-                resource_needs = {'gold': -int(500 + pow(hobj.power, 2) / 1000)}
+                resource_needs = {'gold': -hobj.strength_cost_gold}
             else:
                 using_sycee = True
-                resource_needs = {'sycee': -HORSE[h.oid].strength_sycee_needs}
+                resource_needs = {'sycee': -hobj.strength_cost_sycee}
         else:
             # 还有免费次数，直接按照免费来搞
             using_sycee = False
