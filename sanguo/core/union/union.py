@@ -50,6 +50,11 @@ class UnionBase(object):
         self.union_id = union_id
         self.mongo_union = MongoUnion.objects.get(id=union_id)
 
+    @property
+    def applied_list(self):
+        # 申请者ID列表
+        mongo_members = MongoUnionMember.objects.filter(applied=self.union_id)
+        return [i.id for i in mongo_members]
 
     @property
     def member_list(self):
@@ -64,6 +69,10 @@ class UnionBase(object):
     @property
     def current_member_amount(self):
         return MongoUnionMember.objects.filter(joined=self.union_id).count()
+
+    def is_applied(self, char_id):
+        # 角色char_id是否申请过
+        return char_id in self.applied_list
 
     def quit(self):
         # 主动退出
@@ -125,16 +134,6 @@ class UnionOwner(UnionBase):
     """
     工会相关，只有会长才能进行的操作
     """
-    @property
-    def applied_list(self):
-        # 申请者ID列表
-        mongo_members = MongoUnionMember.objects.filter(applied=self.union_id)
-        return [i.id for i in mongo_members]
-
-    def is_applied(self, char_id):
-        # 角色char_id是否申请过
-        return char_id in self.applied_list
-
     def is_member(self, char_id):
         # 角色char_id是否是成员
         return char_id in self.member_list
