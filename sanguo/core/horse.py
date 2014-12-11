@@ -259,6 +259,8 @@ class Horse(object):
                 "horse {0} not exist".format(_id)
             )
 
+        hobj = OneHorse(_id, h.oid, h.attack, h.defense, h.hp)
+
 
         try:
             HorseFreeTimesManager(self.char_id).incr()
@@ -276,7 +278,7 @@ class Horse(object):
             # 这个时候就要根据method来确定是否using_sycee和 resource_needs了
             if method == 2:
                 using_sycee = False
-                resource_needs = {'gold': -HORSE[h.oid].strength_gold_needs}
+                resource_needs = {'gold': -int(500 + pow(hobj.power, 2) / 1000)}
             else:
                 using_sycee = True
                 resource_needs = {'sycee': -HORSE[h.oid].strength_sycee_needs}
@@ -285,7 +287,6 @@ class Horse(object):
             using_sycee = False
             resource_needs = {}
 
-        hobj = OneHorse(_id, h.oid, h.attack, h.defense, h.hp)
 
         if resource_needs:
             resource = Resource(self.char_id, "Horse Strength", "strength {0} with method {1}".format(_id, method))
