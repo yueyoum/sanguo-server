@@ -109,7 +109,7 @@ class EffectManager(DotEffectMixin, StepHeroNotifyMixin):
 
 class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
     def __init__(self):
-        self._round = 0
+        self._round = 1
         self.die = False
         self.max_hp = self.hp
         self.damage_value = 0
@@ -293,7 +293,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         hero_noti.target_id = target.id
 
         value = int(value)
-        target.set_hp(value)
+        self._one_action_on_target(target, value)
 
         hero_noti.hp = target.hp
         hero_noti.value = value
@@ -301,6 +301,9 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
         text = 'Value: {0}, Hp: {1}, Anger: {2}, Eff: {3}'.format(value, target.hp, target.anger, eff.id if eff else 'None')
         logger.debug(text)
+
+    def _one_action_on_target(self, target, value):
+        target.set_hp(value)
 
 
     def get_effect_target(self, eff, target):
