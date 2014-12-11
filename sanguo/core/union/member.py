@@ -131,7 +131,7 @@ class Member(object):
                 "already in {0}".format(self.mongo_union_member.joined)
             )
 
-        if len(self.mongo_union_member.joined) >= 10:
+        if len(self.mongo_union_member.applied) >= 10:
             raise SanguoException(
                 errormsg.UNION_CANNOT_APPLY_FULL,
                 self.char_id,
