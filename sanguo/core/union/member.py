@@ -179,6 +179,7 @@ class Member(object):
         self.mongo_union_member.joined = union_id
         self.mongo_union_member.contribute_points = 0
         self.mongo_union_member.position = 1
+        self.mongo_union_member.last_checkin_timestamp = 0
         self.mongo_union_member.save()
         self.send_personal_notify()
 
@@ -187,6 +188,7 @@ class Member(object):
         self.mongo_union_member.joined = 0
         self.mongo_union_member.contribute_points = 0
         self.mongo_union_member.position = 1
+        self.mongo_union_member.last_checkin_timestamp = 0
         self.mongo_union_member.save()
         self.send_personal_notify()
 
