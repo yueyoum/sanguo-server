@@ -79,6 +79,10 @@ class UnionBase(object):
     def current_member_amount(self):
         return MongoUnionMember.objects.filter(joined=self.union_id).count()
 
+    @property
+    def next_level_contribute_points_needs(self):
+        return UNION_LEVEL[self.mongo_union.level].contributes_needs
+
     def is_applied(self, char_id):
         # 角色char_id是否申请过
         return char_id in self.applied_list
@@ -89,6 +93,24 @@ class UnionBase(object):
         Member(self.char_id).quit_union()
 
 
+    def add_contribute_points(self, point):
+        self.mongo_union.contribute_points += point
+
+        to_next_level_contributes_needs = self.next_level_contribute_points_needs
+
+        if self.mongo_union.level >= MAX_UNION_LEVEL:
+            self.mongo_union.level = MAX_UNION_LEVEL
+            if self.mongo_union.contribute_points >= to_next_level_contributes_needs:
+                self.mongo_union.contribute_points = to_next_level_contributes_needs
+        else:
+            if self.mongo_union.contribute_points >= to_next_level_contributes_needs:
+                self.mongo_union.contribute_points -= to_next_level_contributes_needs
+                self.mongo_union.level += 1
+
+        self.mongo_union.save()
+        self.send_notify()
+
+
     def make_basic_information(self):
         from core.union.battle import UnionBattle
         msg = protomsg.UnionBasicInformation()
@@ -97,6 +119,7 @@ class UnionBase(object):
         msg.bulletin = self.mongo_union.bulletin
         msg.level = self.mongo_union.level
         msg.contribute_points = self.mongo_union.contribute_points
+        msg.next_contribute_points = self.next_level_contribute_points_needs
         msg.current_member_amount = self.current_member_amount
         msg.max_member_amount = self.max_member_amount
         msg.rank = UnionBattle(self.char_id, self.union_id).get_order()
@@ -274,24 +297,6 @@ class UnionOwner(UnionBase):
         Union(member_id, self.union_id).send_notify()
 
 
-    def add_contribute_points(self, point):
-        self.mongo_union.contribute_points += point
-
-        to_next_level_contributes_needs = UNION_LEVEL[self.mongo_union.level].contributes_needs
-
-        if self.mongo_union.level >= MAX_UNION_LEVEL:
-            self.mongo_union.level = MAX_UNION_LEVEL
-            if self.mongo_union.contribute_points >= to_next_level_contributes_needs:
-                self.mongo_union.contribute_points = to_next_level_contributes_needs
-        else:
-            if self.mongo_union.contribute_points >= to_next_level_contributes_needs:
-                self.mongo_union.contribute_points -= to_next_level_contributes_needs
-                self.mongo_union.level += 1
-
-        self.mongo_union.save()
-        self.send_notify()
-
-
     def modify(self, bulletin):
         self.mongo_union.bulletin = bulletin
         self.mongo_union.save()
@@ -306,7 +311,6 @@ class UnionOwner(UnionBase):
             msg_char.MergeFrom(create_character_infomation_message(c))
 
         publish_to_char(self.char_id, pack_msg(msg))
-
 
 
 
