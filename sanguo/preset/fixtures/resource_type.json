@@ -70,5 +70,37 @@
         "name": "\u9053\u5177", 
         "icon": "Icon_\u6750\u6599"
     }
+},
+{
+    "pk": 10, 
+    "model": "config.resourcetype", 
+    "fields": {
+        "name": "\u9a6c", 
+        "icon": "\u9ec4\u9aa0"
+    }
+},
+{
+    "pk": 11, 
+    "model": "config.resourcetype", 
+    "fields": {
+        "name": "\u653b\u51fb", 
+        "icon": "\u653b\u51fb"
+    }
+},
+{
+    "pk": 12, 
+    "model": "config.resourcetype", 
+    "fields": {
+        "name": "\u9632\u5fa1", 
+        "icon": "\u9632\u5fa1"
+    }
+},
+{
+    "pk": 13, 
+    "model": "config.resourcetype", 
+    "fields": {
+        "name": "\u751f\u547d", 
+        "icon": "\u751f\u547d"
+    }
 }
 ]

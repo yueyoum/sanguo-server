@@ -3,18 +3,18 @@
     "pk": 1001, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 1, 
-        "icon_one_id": 1, 
-        "package": 12004, 
+        "icon_three_id": 20000, 
+        "icon_one_id": 12, 
+        "package": 20001, 
         "des": "\u541b\u4e3b\u7b49\u7ea7\u8fbe\u523020\u7ea7", 
-        "icon_three_type": 7, 
-        "icon_one_amount": 1, 
-        "icon_three_amount": 1, 
-        "icon_two_type": 7, 
-        "icon_one_type": 7, 
+        "icon_three_type": 3, 
+        "icon_one_amount": 120, 
+        "icon_three_amount": 20000, 
+        "icon_two_type": 4, 
+        "icon_one_type": 6, 
         "condition_value": 20, 
         "icon_two_id": 1, 
-        "icon_two_amount": 1
+        "icon_two_amount": 600
     }
 },
 {
@@ -22,17 +22,17 @@
     "model": "activity.activitystaticcondition", 
     "fields": {
         "icon_three_id": 1, 
-        "icon_one_id": 1, 
-        "package": 12006, 
+        "icon_one_id": 13, 
+        "package": 20002, 
         "des": "\u541b\u4e3b\u7b49\u7ea7\u8fbe\u523025\u7ea7", 
-        "icon_three_type": 7, 
-        "icon_one_amount": 1, 
-        "icon_three_amount": 1, 
-        "icon_two_type": 7, 
-        "icon_one_type": 7, 
+        "icon_three_type": 3, 
+        "icon_one_amount": 120, 
+        "icon_three_amount": 3000, 
+        "icon_two_type": 4, 
+        "icon_one_type": 6, 
         "condition_value": 25, 
         "icon_two_id": 1, 
-        "icon_two_amount": 1
+        "icon_two_amount": 400
     }
 },
 {
@@ -40,17 +40,17 @@
     "model": "activity.activitystaticcondition", 
     "fields": {
         "icon_three_id": 2, 
-        "icon_one_id": 2, 
-        "package": 12007, 
-        "des": "\u541b\u4e3b\u7b49\u7ea7\u8fbe\u523030\u7ea7", 
-        "icon_three_type": 7, 
-        "icon_one_amount": 1, 
-        "icon_three_amount": 1, 
-        "icon_two_type": 7, 
-        "icon_one_type": 7, 
-        "condition_value": 30, 
+        "icon_one_id": 15, 
+        "package": 20003, 
+        "des": "\u541b\u4e3b\u7b49\u7ea7\u8fbe\u523028\u7ea7", 
+        "icon_three_type": 3, 
+        "icon_one_amount": 120, 
+        "icon_three_amount": 40000, 
+        "icon_two_type": 4, 
+        "icon_one_type": 6, 
+        "condition_value": 28, 
         "icon_two_id": 2, 
-        "icon_two_amount": 1
+        "icon_two_amount": 500
     }
 },
 {
@@ -58,89 +58,89 @@
     "model": "activity.activitystaticcondition", 
     "fields": {
         "icon_three_id": 3, 
-        "icon_one_id": 3, 
-        "package": 12010, 
-        "des": "\u541b\u4e3b\u7b49\u7ea7\u8fbe\u523035\u7ea7", 
-        "icon_three_type": 7, 
-        "icon_one_amount": 1, 
-        "icon_three_amount": 1, 
-        "icon_two_type": 7, 
-        "icon_one_type": 7, 
-        "condition_value": 35, 
+        "icon_one_id": 12, 
+        "package": 20004, 
+        "des": "\u541b\u4e3b\u7b49\u7ea7\u8fbe\u523030\u7ea7", 
+        "icon_three_type": 3, 
+        "icon_one_amount": 120, 
+        "icon_three_amount": 50000, 
+        "icon_two_type": 4, 
+        "icon_one_type": 6, 
+        "condition_value": 30, 
         "icon_two_id": 3, 
-        "icon_two_amount": 1
+        "icon_two_amount": 600
     }
 },
 {
     "pk": 2001, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 3, 
-        "icon_one_id": 1, 
-        "package": 12002, 
+        "icon_three_id": 33, 
+        "icon_one_id": 3, 
+        "package": 20005, 
         "des": "\u83b7\u53d64\u4e2a\u91d1\u8272\u6b66\u5c06", 
-        "icon_three_type": 7, 
-        "icon_one_amount": 1, 
+        "icon_three_type": 8, 
+        "icon_one_amount": 3, 
         "icon_three_amount": 1, 
-        "icon_two_type": 7, 
-        "icon_one_type": 7, 
+        "icon_two_type": 8, 
+        "icon_one_type": 8, 
         "condition_value": 4, 
-        "icon_two_id": 2, 
-        "icon_two_amount": 1
+        "icon_two_id": 23, 
+        "icon_two_amount": 3
     }
 },
 {
     "pk": 2002, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 2, 
-        "icon_one_id": 3, 
-        "package": 12007, 
+        "icon_three_id": 34, 
+        "icon_one_id": 4, 
+        "package": 20006, 
         "des": "\u83b7\u53d65\u4e2a\u91d1\u8272\u6b66\u5c06", 
         "icon_three_type": 7, 
-        "icon_one_amount": 1, 
-        "icon_three_amount": 1, 
+        "icon_one_amount": 3, 
+        "icon_three_amount": 3, 
         "icon_two_type": 7, 
-        "icon_one_type": 7, 
+        "icon_one_type": 8, 
         "condition_value": 5, 
-        "icon_two_id": 1, 
-        "icon_two_amount": 1
+        "icon_two_id": 24, 
+        "icon_two_amount": 3
     }
 },
 {
     "pk": 2003, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 3, 
-        "icon_one_id": 2, 
-        "package": 12010, 
+        "icon_three_id": 35, 
+        "icon_one_id": 5, 
+        "package": 20007, 
         "des": "\u83b7\u53d66\u4e2a\u91d1\u8272\u6b66\u5c06", 
-        "icon_three_type": 7, 
-        "icon_one_amount": 1, 
-        "icon_three_amount": 1, 
-        "icon_two_type": 7, 
-        "icon_one_type": 7, 
+        "icon_three_type": 8, 
+        "icon_one_amount": 3, 
+        "icon_three_amount": 3, 
+        "icon_two_type": 8, 
+        "icon_one_type": 8, 
         "condition_value": 6, 
-        "icon_two_id": 1, 
-        "icon_two_amount": 1
+        "icon_two_id": 25, 
+        "icon_two_amount": 3
     }
 },
 {
     "pk": 2004, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 3, 
-        "icon_one_id": 3, 
-        "package": 12010, 
+        "icon_three_id": 36, 
+        "icon_one_id": 6, 
+        "package": 20008, 
         "des": "\u83b7\u53d68\u4e2a\u91d1\u8272\u6b66\u5c06", 
         "icon_three_type": 7, 
-        "icon_one_amount": 1, 
-        "icon_three_amount": 1, 
+        "icon_one_amount": 3, 
+        "icon_three_amount": 3, 
         "icon_two_type": 7, 
-        "icon_one_type": 7, 
+        "icon_one_type": 8, 
         "condition_value": 8, 
-        "icon_two_id": 3, 
-        "icon_two_amount": 1
+        "icon_two_id": 26, 
+        "icon_two_amount": 3
     }
 },
 {
