@@ -1802,5 +1802,16 @@
         "des": "", 
         "area": ""
     }
+},
+{
+    "pk": 5728, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_BATTLE_NO_TIMES", 
+        "text_zh": "\u5de5\u4f1a\u6218\u6b21\u6570\u5df2\u7ecf\u7528\u5b8c", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
 }
 ]
