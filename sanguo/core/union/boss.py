@@ -13,7 +13,7 @@ from core.union.base import UnionLoadBase, union_instance_check
 from core.union.union import UnionBase, UnionOwner
 from core.union.member import Member
 
-from core.attachment import make_standard_drop_from_template
+from core.attachment import make_standard_drop_from_template, standard_drop_to_attachment_protomsg
 from core.mail import Mail
 from core.character import Char
 
@@ -132,12 +132,12 @@ class UnionBoss(UnionLoadBase):
         self.mongo_boss.save()
 
         self.incr_battle_times()
-        self.after_battle(boss_id, eubl.damage, remained_hp<=0)
+        drop_msg = self.after_battle(boss_id, eubl.damage, remained_hp<=0)
 
         if remained_hp <= 0:
             self.boss_has_been_killed(boss_id)
 
-        return msg
+        return msg, drop_msg
 
 
     def after_battle(self, boss_id, damage, kill=False):
@@ -158,6 +158,11 @@ class UnionBoss(UnionLoadBase):
         member.add_contribute_points(contribute_points, send_notify=True)
         if not kill:
             self.union.add_contribute_points(contribute_points)
+
+        drop = make_standard_drop_from_template()
+        drop['union_coin'] = coin
+        drop['union_contribute_points'] = contribute_points
+        return standard_drop_to_attachment_protomsg(drop)
 
 
     def boss_has_been_killed(self, boss_id):

@@ -167,10 +167,11 @@ def union_boss_battle(request):
     char_id = request._char_id
 
     b = UnionBoss(char_id)
-    msg = b.battle(req.boss_id)
+    msg, drop_msg = b.battle(req.boss_id)
 
     response = UnionBossBattleResponse()
     response.ret = 0
     response.battle.MergeFrom(msg)
+    response.drop.MergeFrom(drop_msg)
     return pack_msg(response)
 
