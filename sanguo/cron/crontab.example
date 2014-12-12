@@ -6,6 +6,9 @@
 # 周日 21:30 发放比武周奖励
 30 21 * * 0 /PATH/reset_arena_week.sh
 
+# 每周工会战排名奖励
+0 0 * * 0 /PATH/union_reward_week.sh
+
 # 每隔一定时间清理在线用户
 */30 * * * * /PATH/clean_active_players.sh
 

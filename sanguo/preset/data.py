@@ -82,6 +82,7 @@ UNION_BOSS = object_maker(_find_file('union_boss.json'))
 UNION_BOSS_REWARD = object_maker(_find_file('union_boss_reward.json'))
 UNION_LEVEL = object_maker(_find_file('union_level.json'))
 UNION_POSITION = object_maker(_find_file('union_position.json'))
+UNION_BATTLE_REWARD = object_maker(_find_file('union_battle_reward.json'))
 
 def _got_package():
     f = _find_file('package.json')
