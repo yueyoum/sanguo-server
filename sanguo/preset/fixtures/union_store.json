@@ -3,7 +3,6 @@
     "pk": 1, 
     "model": "union.unionstore", 
     "fields": {
-        "max_buy_times": 15, 
         "des": "", 
         "value": 1, 
         "tp": 11, 
@@ -14,7 +13,6 @@
     "pk": 2, 
     "model": "union.unionstore", 
     "fields": {
-        "max_buy_times": 15, 
         "des": "", 
         "value": 1, 
         "tp": 12, 
@@ -25,7 +23,6 @@
     "pk": 3, 
     "model": "union.unionstore", 
     "fields": {
-        "max_buy_times": 15, 
         "des": "", 
         "value": 1, 
         "tp": 13, 
@@ -36,55 +33,50 @@
     "pk": 4, 
     "model": "union.unionstore", 
     "fields": {
-        "max_buy_times": 0, 
         "des": "", 
         "value": 1, 
         "tp": 10, 
-        "union_coin": 100
+        "union_coin": 200
     }
 },
 {
     "pk": 5, 
     "model": "union.unionstore", 
     "fields": {
-        "max_buy_times": 0, 
         "des": "", 
         "value": 39, 
         "tp": 9, 
-        "union_coin": 200
+        "union_coin": 750
     }
 },
 {
     "pk": 6, 
     "model": "union.unionstore", 
     "fields": {
-        "max_buy_times": 0, 
         "des": "", 
         "value": 40, 
         "tp": 9, 
-        "union_coin": 300
+        "union_coin": 1500
     }
 },
 {
     "pk": 7, 
     "model": "union.unionstore", 
     "fields": {
-        "max_buy_times": 0, 
         "des": "", 
         "value": 41, 
         "tp": 9, 
-        "union_coin": 500
+        "union_coin": 2500
     }
 },
 {
     "pk": 8, 
     "model": "union.unionstore", 
     "fields": {
-        "max_buy_times": 0, 
         "des": "", 
         "value": 42, 
         "tp": 9, 
-        "union_coin": 1000
+        "union_coin": 5000
     }
 }
 ]

@@ -82,6 +82,14 @@ class UnionBattle(UnionLoadBase):
 
     @union_instance_check(UnionOwner, errormsg.UNION_BATTLE_ONLY_STARTED_BY_OWNER, "UnionBattle Start", "not owner")
     def start_battle(self):
+        if self.cur_battle_times >= self.max_battle_times:
+            raise SanguoException(
+                errormsg.UNION_BATTLE_NO_TIMES,
+                self.char_id,
+                "UnionBattle Start",
+                "no times"
+            )
+
         rival_char_id = self.find_rival_char_id()
         if not rival_char_id:
             raise SanguoException(
@@ -95,7 +103,11 @@ class UnionBattle(UnionLoadBase):
         record.start()
         msg = record.save()
 
+        self.union.mongo_union.battle_times += 1
+        self.union.mongo_union.save()
+
         self.send_notify()
+        self.union.send_notify()
 
         if msg.win:
             self.after_battle_win()

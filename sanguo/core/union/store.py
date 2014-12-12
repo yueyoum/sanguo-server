@@ -16,7 +16,7 @@ from core.msgpipe import publish_to_char
 from utils import pack_msg
 
 
-from preset.data import UNION_STORE, STUFFS, HORSE
+from preset.data import UNION_STORE, STUFFS, HORSE, UNION_LEVEL
 from preset import errormsg
 
 import protomsg
@@ -57,11 +57,8 @@ class UnionStore(UnionLoadBase):
 
     @property
     def buff_max_buy_times(self):
-        max_times = {}
-        for i in BUFFS:
-            _id = UNION_STORE_BUFF_STORE_ID_DICT[i]
-            max_times[i] = UNION_STORE[_id].max_buy_times
-        return max_times
+        return UNION_LEVEL[self.union.mongo_union.level].buff_max_buy_times
+
 
     @property
     def buff_cur_buy_times(self):
@@ -97,12 +94,12 @@ class UnionStore(UnionLoadBase):
     def _buy_buff(self, _id, item_id, amount):
         cur_buy_times = self.buff_cur_buy_times
         max_buy_times = self.buff_max_buy_times
-        if cur_buy_times[item_id] + amount > max_buy_times[item_id]:
+        if cur_buy_times[item_id] + amount > max_buy_times:
             raise SanguoException(
                 errormsg.UNION_STORE_BUY_REACH_MAX_TIMES,
                 self.char_id,
                 "UnionStore Buy",
-                "buff {0} has reached the max buy times {1}".format(item_id, max_buy_times[item_id])
+                "buff {0} has reached the max buy times {1}".format(item_id, max_buy_times)
             )
 
         self.member.mongo_union_member.buy_buff_times[str(item_id)] = cur_buy_times[item_id] + amount
@@ -152,7 +149,7 @@ class UnionStore(UnionLoadBase):
         for i in BUFFS:
             msg_buff = msg.buffs.add()
             msg_buff.id = i
-            msg_buff.max_times = max_times[i]
+            msg_buff.max_times = max_times
             msg_buff.cur_times = cur_times[i]
             msg_buff.add_value = add_buffs[i]
 

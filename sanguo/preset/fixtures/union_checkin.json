@@ -4,7 +4,7 @@
     "model": "union.unioncheckin", 
     "fields": {
         "got_contributes": 10, 
-        "got_coin": 50, 
+        "got_coin": 100, 
         "cost_type": 1, 
         "cost_value": 2000
     }
@@ -14,7 +14,7 @@
     "model": "union.unioncheckin", 
     "fields": {
         "got_contributes": 10, 
-        "got_coin": 50, 
+        "got_coin": 100, 
         "cost_type": 2, 
         "cost_value": 100
     }
@@ -24,7 +24,7 @@
     "model": "union.unioncheckin", 
     "fields": {
         "got_contributes": 10, 
-        "got_coin": 50, 
+        "got_coin": 100, 
         "cost_type": 2, 
         "cost_value": 100
     }
@@ -34,7 +34,7 @@
     "model": "union.unioncheckin", 
     "fields": {
         "got_contributes": 10, 
-        "got_coin": 50, 
+        "got_coin": 200, 
         "cost_type": 2, 
         "cost_value": 200
     }
@@ -44,7 +44,7 @@
     "model": "union.unioncheckin", 
     "fields": {
         "got_contributes": 10, 
-        "got_coin": 50, 
+        "got_coin": 400, 
         "cost_type": 2, 
         "cost_value": 400
     }
