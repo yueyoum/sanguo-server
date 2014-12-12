@@ -3,7 +3,7 @@
     "pk": 1, 
     "model": "union.unionposition", 
     "fields": {
-        "name": "\u4f1a\u5458", 
+        "name": "\u5e03\u8863", 
         "contributes_needs": 50
     }
 },
@@ -11,48 +11,48 @@
     "pk": 2, 
     "model": "union.unionposition", 
     "fields": {
-        "name": "\u7cbe\u82f1", 
-        "contributes_needs": 50
+        "name": "\u5c0f\u540f", 
+        "contributes_needs": 200
     }
 },
 {
     "pk": 3, 
     "model": "union.unionposition", 
     "fields": {
-        "name": "\u957f\u8001", 
-        "contributes_needs": 50
+        "name": "\u53bf\u4ee4", 
+        "contributes_needs": 500
     }
 },
 {
     "pk": 4, 
     "model": "union.unionposition", 
     "fields": {
-        "name": "\u5927\u957f\u8001", 
-        "contributes_needs": 124214
+        "name": "\u592a\u5b88", 
+        "contributes_needs": 800
     }
 },
 {
     "pk": 5, 
     "model": "union.unionposition", 
     "fields": {
-        "name": "\u5927\u5927\u957f\u8001", 
-        "contributes_needs": 3214132
+        "name": "\u523a\u53f2", 
+        "contributes_needs": 1200
     }
 },
 {
     "pk": 6, 
     "model": "union.unionposition", 
     "fields": {
-        "name": "\u5927\u5927\u5927\u957f\u8001", 
-        "contributes_needs": 1431234
+        "name": "\u5c06\u519b", 
+        "contributes_needs": 2000
     }
 },
 {
     "pk": 7, 
     "model": "union.unionposition", 
     "fields": {
-        "name": "\u6781\u54c1\u957f\u8001", 
-        "contributes_needs": 1343423
+        "name": "\u53f8\u9a6c", 
+        "contributes_needs": 3500
     }
 }
 ]

@@ -163,7 +163,7 @@
     "pk": 9, 
     "model": "union.unionboss", 
     "fields": {
-        "union_level": 0, 
+        "union_level": 11, 
         "name": "\u9b54\u795e\u66f9\u64cd", 
         "skill_rounds": 8, 
         "default_skill": 36, 
@@ -183,7 +183,7 @@
     "pk": 10, 
     "model": "union.unionboss", 
     "fields": {
-        "union_level": 0, 
+        "union_level": 11, 
         "name": "\u9b54\u795e\u5415\u5e03", 
         "skill_rounds": 8, 
         "default_skill": 22, 

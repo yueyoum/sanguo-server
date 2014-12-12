@@ -3,28 +3,28 @@
     "pk": 1, 
     "model": "union.unioncheckin", 
     "fields": {
-        "got_contributes": 50, 
-        "got_coin": 10, 
+        "got_contributes": 10, 
+        "got_coin": 50, 
         "cost_type": 1, 
-        "cost_value": 5000
+        "cost_value": 2000
     }
 },
 {
     "pk": 2, 
     "model": "union.unioncheckin", 
     "fields": {
-        "got_contributes": 50, 
-        "got_coin": 10, 
+        "got_contributes": 10, 
+        "got_coin": 50, 
         "cost_type": 2, 
-        "cost_value": 50
+        "cost_value": 100
     }
 },
 {
     "pk": 3, 
     "model": "union.unioncheckin", 
     "fields": {
-        "got_contributes": 50, 
-        "got_coin": 10, 
+        "got_contributes": 10, 
+        "got_coin": 50, 
         "cost_type": 2, 
         "cost_value": 100
     }
@@ -33,20 +33,20 @@
     "pk": 4, 
     "model": "union.unioncheckin", 
     "fields": {
-        "got_contributes": 50, 
-        "got_coin": 10, 
+        "got_contributes": 10, 
+        "got_coin": 50, 
         "cost_type": 2, 
-        "cost_value": 300
+        "cost_value": 200
     }
 },
 {
     "pk": 5, 
     "model": "union.unioncheckin", 
     "fields": {
-        "got_contributes": 50, 
-        "got_coin": 10, 
+        "got_contributes": 10, 
+        "got_coin": 50, 
         "cost_type": 2, 
-        "cost_value": 500
+        "cost_value": 400
     }
 }
 ]
