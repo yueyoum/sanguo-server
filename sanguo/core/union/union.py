@@ -173,7 +173,7 @@ class UnionOwner(UnionBase):
 
     def find_next_owner(self):
         timestamp = arrow.utcnow().timestamp - 3600 * 24 * 3
-        condition = Q(id__ne=self.char_id) & Q(joined__eq=self.union_id) & Q(last_checkin_timestamp__gte=timestamp)
+        condition = Q(id__ne=self.char_id) & Q(joined=self.union_id) & Q(last_checkin_timestamp__gte=timestamp)
         members = MongoUnionMember.objects.filter(condition).order_by('-position')
         if not members:
             return None
