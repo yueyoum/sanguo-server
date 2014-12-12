@@ -103,6 +103,8 @@ class UnionBattle(UnionLoadBase):
         record.start()
         msg = record.save()
 
+        self.union.mongo_union = record.my_union.mongo_union
+
         self.union.mongo_union.battle_times += 1
         self.union.mongo_union.save()
 
