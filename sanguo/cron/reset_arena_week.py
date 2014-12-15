@@ -11,7 +11,7 @@ from cron.log import Logger
 from core.character import Char
 from core.mail import Mail
 from core.arena import REDIS_ARENA_KEY
-from core.drives import redis_client
+from core.drives import redis_client_persistence
 from core.achievement import Achievement
 from core.activity import ActivityStatic
 from core.item import Item
@@ -43,12 +43,12 @@ def _get_reward_by_rank(rank):
 
 @uwsgidecorators.cron(30, 21, -1, -1, 0)
 def reset(signum):
-    amount = redis_client.zcard(REDIS_ARENA_KEY)
+    amount = redis_client_persistence.zcard(REDIS_ARENA_KEY)
 
     logger = Logger("reset_arena_week.log")
     logger.write("Reset Arena Week: Start. chars amount: {0}".format(amount))
 
-    score_data = redis_client.zrevrange(REDIS_ARENA_KEY, 0, ARENA_WEEKLY_REWARD_ONLY_RANKS-1, withscores=True)
+    score_data = redis_client_persistence.zrevrange(REDIS_ARENA_KEY, 0, ARENA_WEEKLY_REWARD_ONLY_RANKS-1, withscores=True)
 
     rank_data = []
     for char_id, score in score_data:

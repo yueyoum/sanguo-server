@@ -8,7 +8,7 @@ import json
 import uwsgidecorators
 
 from cron.log import Logger
-from core.drives import redis_client
+from core.drives import redis_client_persistence
 from core.attachment import make_standard_drop_from_template
 from core.mail import Mail
 from core.arena import REDIS_ARENA_KEY
@@ -32,10 +32,10 @@ def _get_reward_by_score(score):
 def main(signum):
     logger = Logger('reset_arena_day.log')
 
-    amount = redis_client.zcard(REDIS_ARENA_KEY)
+    amount = redis_client_persistence.zcard(REDIS_ARENA_KEY)
     logger.write("Reset Arena Day: Start. chars amount: {0}".format(amount))
 
-    arena_scores = redis_client.zrange(REDIS_ARENA_KEY, 0, -1, withscores=True)
+    arena_scores = redis_client_persistence.zrange(REDIS_ARENA_KEY, 0, -1, withscores=True)
 
     for char_id, score in arena_scores:
         attachment = _get_reward_by_score(score)
