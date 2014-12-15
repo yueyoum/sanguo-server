@@ -7,6 +7,7 @@ import arrow
 
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoUnionMember, MongoUnion
+from core.attachment import make_standard_drop_from_template, standard_drop_to_attachment_protomsg
 
 from core.exception import SanguoException
 from core.vip import VIP
@@ -95,8 +96,12 @@ class Member(object):
             self.mongo_union_member.save()
         self.send_personal_notify()
 
-
         Union(self.char_id).add_contribute_points(c.got_contributes)
+
+        drop = make_standard_drop_from_template()
+        drop['union_coin'] = c.got_coin
+        drop['union_contribute_points'] = c.got_contributes
+        return standard_drop_to_attachment_protomsg(drop)
 
 
     def make_member_message(self):

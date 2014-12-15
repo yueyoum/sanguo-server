@@ -13,7 +13,7 @@ from core.union.union import Union, UnionList
 from core.union.helper import UnionHelper
 from core.union.store import UnionStore
 
-from protomsg import UnionBattleStartResponse, UnionBattleRecordGetResponse, UnionBossBattleResponse
+from protomsg import UnionBattleStartResponse, UnionBattleRecordGetResponse, UnionBossBattleResponse, UnionCheckinResponse
 
 
 @message_response("UnionCreateResponse")
@@ -99,8 +99,11 @@ def store_buy(request):
 @message_response("UnionCheckinResponse")
 def checkin(request):
     char_id = request._char_id
-    Member(char_id).checkin()
-    return None
+    drop_msg = Member(char_id).checkin()
+
+    response = UnionCheckinResponse()
+    response.drop.MergeFrom(drop_msg)
+    return pack_msg(response)
 
 
 @message_response("UnionBattleBoardResponse")
