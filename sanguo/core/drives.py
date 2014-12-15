@@ -4,8 +4,9 @@ from mongoengine import connect
 
 from django.conf import settings
 
-
+_initialized = False
 redis_client = None
+redis_client_persistence = None
 mongodb_client = None
 mongodb_client_db = None
 document_ids = None
@@ -27,21 +28,33 @@ class _DocumentIds(object):
 
 
 def _init():
+    global _initialized
     global redis_client
+    global redis_client_persistence
     global mongodb_client
     global mongodb_client_db
     global document_ids
 
-    if redis_client is not None:
+    if _initialized:
         return
 
+    _initialized = True
+
     _redis_pool = redis.ConnectionPool(
-        host=settings.REDIS_HOST,
-        port=settings.REDIS_PORT,
-        db=settings.REDIS_DB
+        host=settings.REDIS_CACHE_HOST,
+        port=settings.REDIS_CACHE_PORT,
+        db=0
     )
 
     redis_client = redis.Redis(connection_pool=_redis_pool)
+
+    _redis_pool_persistence = redis.ConnectionPool(
+        host=settings.REDIS_PERSISTENCE_HOST,
+        port=settings.REDIS_PERSISTENCE_PORT,
+        db=0
+    )
+
+    redis_client_persistence = redis.Redis(connection_pool=_redis_pool_persistence)
 
     mongodb_client = pymongo.MongoClient(
         host=settings.MONGODB_HOST,

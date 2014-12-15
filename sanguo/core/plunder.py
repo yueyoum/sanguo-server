@@ -8,7 +8,7 @@ import time
 import random
 
 from mongoscheme import DoesNotExist
-from core.drives import redis_client
+from core.drives import redis_client_persistence
 from core.server import server
 from core.character import Char
 from core.battle import PVPFromRivalCache
@@ -23,7 +23,6 @@ from core.formation import Formation
 from core.signals import plunder_finished_signal
 from core.msgpipe import publish_to_char
 from core.msgfactory import create_character_infomation_message
-from core.support import RedisPersistence
 
 from utils import pack_msg
 from preset.settings import (
@@ -349,37 +348,26 @@ class Plunder(object):
 
 
 
-class PlunderLeaderboardWeekly(RedisPersistence):
+class PlunderLeaderboardWeekly(object):
     REDISKEY = '_plunder_leaderboard_weekly:{0}'.format(server.id)
-    MONGOID = 'plunder_board:{0}'.format(server.id)
-
-    @classmethod
-    def get_data_from_redis(cls):
-        data = redis_client.zrange(cls.REDISKEY, 0, -1, withscores=True)
-        return [(int(char_id), int(times)) for char_id, times in data]
-
-    @classmethod
-    def save_data_into_redis(cls, data):
-        for char_id, times in data:
-            redis_client.zadd(cls.REDISKEY, char_id, int(times))
 
     @classmethod
     def incr(cls, char_id, times=1):
-        redis_client.zincrby(cls.REDISKEY, char_id, times)
+        redis_client_persistence.zincrby(cls.REDISKEY, char_id, times)
 
     @classmethod
     def get_leaderboard(cls, length=10):
-        res = redis_client.zrevrange(cls.REDISKEY, 0, length, withscores=True)
+        res = redis_client_persistence.zrevrange(cls.REDISKEY, 0, length, withscores=True)
         return [(int(char_id), int(times)) for char_id, times in res]
 
     @classmethod
     def get_char_times(cls, char_id):
-        res = redis_client.zscore(cls.REDISKEY, char_id)
+        res = redis_client_persistence.zscore(cls.REDISKEY, char_id)
         return int(res) if res else 0
 
     @classmethod
     def clean(cls):
-        redis_client.delete(cls.REDISKEY)
+        redis_client_persistence.delete(cls.REDISKEY)
 
     @classmethod
     def make_get_response(cls):

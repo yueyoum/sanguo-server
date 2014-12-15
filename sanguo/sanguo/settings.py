@@ -198,41 +198,44 @@ DATETIME_FORMAT = "Y-m-d H:i:s"
 # project settings
 import xml.etree.ElementTree as et
 tree = et.ElementTree(file=os.path.join(BASE_DIR, "config.xml"))
+doc = tree.getroot()
 
-TIME_ZONE = tree.find('timezone').text
+TIME_ZONE = doc.find('timezone').text
 
-ENABLE_BATTLE_LOG = tree.find('battle/log').text == "true"
-ENABLE_TEST_MODE = tree.find('testmode').text == "true"
+ENABLE_BATTLE_LOG = doc.find('battle/log').text == "true"
+ENABLE_TEST_MODE = doc.find('testmode').text == "true"
 
-EMAIL_NAME = tree.find('email/name').text
+EMAIL_NAME = doc.find('email/name').text
 
-REDIS_HOST = tree.find('redis/host').text
-REDIS_PORT = int( tree.find('redis/port').text )
-REDIS_DB = int( tree.find('redis/db').text )
+REDIS_CACHE_HOST = doc.find('redis[@type="cache"]/host').text
+REDIS_CACHE_PORT = int( doc.find('redis[@type="persistence"]/port').text )
 
-MONGODB_HOST = tree.find('mongodb/host').text
-MONGODB_PORT = int( tree.find('mongodb/port').text )
-MONGODB_DB = tree.find('mongodb/db').text
+REDIS_PERSISTENCE_HOST = doc.find('redis[@type="cache"]/host').text
+REDIS_PERSISTENCE_PORT = int( doc.find('redis[@type="persistence"]/port').text )
 
-CRYPTO_KEY = tree.find('crypto/key').text
+MONGODB_HOST = doc.find('mongodb/host').text
+MONGODB_PORT = int( doc.find('mongodb/port').text )
+MONGODB_DB = doc.find('mongodb/db').text
 
-CACHE_SECONDS = int( tree.find('cache/seconds').text )
+CRYPTO_KEY = doc.find('crypto/key').text
 
-HUB_HOST = tree.find('hub/host').text
-HUB_HTTPS_PORT = int( tree.find('hub/port/https').text )
+CACHE_SECONDS = int( doc.find('cache/seconds').text )
+
+HUB_HOST = doc.find('hub/host').text
+HUB_HTTPS_PORT = int( doc.find('hub/port/https').text )
 
 
-SERVER_ID = int( tree.find('server/id').text )
-SERVER_NAME = tree.find('server/name').text
-SERVER_IP = tree.find('server/ip').text
-LISTEN_PORT_HTTP = int( tree.find('server/port/http').text )
-LISTEN_PORT_HTTPS = int( tree.find('server/port/https').text )
-SERVER_OPEN_DATE = arrow.get( tree.find('server/open').text )
+SERVER_ID = int( doc.find('server/id').text )
+SERVER_NAME = doc.find('server/name').text
+SERVER_IP = doc.find('server/ip').text
+LISTEN_PORT_HTTP = int( doc.find('server/port/http').text )
+LISTEN_PORT_HTTPS = int( doc.find('server/port/https').text )
+SERVER_OPEN_DATE = arrow.get( doc.find('server/open').text )
 
-MAILGUN_ACCESS_KEY = tree.find('mailgun/key').text
-MAILGUN_SERVER_NAME = tree.find('mailgun/domain').text
+MAILGUN_ACCESS_KEY = doc.find('mailgun/key').text
+MAILGUN_SERVER_NAME = doc.find('mailgun/domain').text
 
-_CONFIG_ADMINS = tree.find('admins')
+_CONFIG_ADMINS = doc.find('admins')
 ADMINS = ()
 for _admin in _CONFIG_ADMINS.getchildren():
     attrib = _admin.attrib
@@ -242,6 +245,7 @@ MANAGERS = ADMINS
 
 del _CONFIG_ADMINS
 del et
+del doc
 del tree
 
 SERVER_EMAIL = '{0}.{1} <{0}.{1}@sanguo.com>'.format(EMAIL_NAME, SERVER_ID)

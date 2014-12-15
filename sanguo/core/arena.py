@@ -6,7 +6,7 @@ __date__ = '1/22/14'
 import random
 
 from mongoengine import DoesNotExist
-from core.drives import redis_client
+from core.drives import redis_client_persistence
 from core.server import server
 from core.character import Char
 from core.battle import PVP
@@ -18,7 +18,6 @@ from core.task import Task
 from core.resource import Resource
 from core.msgfactory import create_character_infomation_message
 from core.msgpipe import publish_to_char
-from core.support import RedisPersistence
 from preset.data import VIP_MAX_LEVEL
 from utils.checkers import func_opened
 from utils import pack_msg
@@ -58,7 +57,7 @@ def calculate_score(my_score, rival_score, win):
 
 def get_arena_init_score():
     # 竞技场初始化积分
-    lowest = redis_client.zrange(REDIS_ARENA_KEY, 0, 0, withscores=True)
+    lowest = redis_client_persistence.zrange(REDIS_ARENA_KEY, 0, 0, withscores=True)
     if not lowest:
         return ARENA_INITIAL_SCORE
 
@@ -67,21 +66,6 @@ def get_arena_init_score():
     if score < ARENA_LOWEST_SCORE:
         score = ARENA_LOWEST_SCORE
     return score
-
-
-class ArenaScoreBoard(RedisPersistence):
-    REDISKEY = REDIS_ARENA_KEY
-    MONGOID = REDISKEY
-
-    @classmethod
-    def get_data_from_redis(cls):
-        data = redis_client.zrange(cls.REDISKEY, 0, -1, withscores=True)
-        return [(int(cid), int(score)) for cid, score in data]
-
-    @classmethod
-    def save_data_into_redis(cls, data):
-        for cid, score in data:
-            redis_client.zadd(cls.REDISKEY, cid, int(score))
 
 
 class Arena(object):
@@ -103,12 +87,12 @@ class Arena(object):
             self.mongo_arena.save()
 
         if not self.score:
-            redis_client.zadd(REDIS_ARENA_KEY, self.char_id, self.mongo_arena.score)
+            redis_client_persistence.zadd(REDIS_ARENA_KEY, self.char_id, self.mongo_arena.score)
 
 
     @property
     def score(self):
-        score = redis_client.zscore(REDIS_ARENA_KEY, self.char_id)
+        score = redis_client_persistence.zscore(REDIS_ARENA_KEY, self.char_id)
         return int(score) if score else 0
 
     @property
@@ -116,7 +100,7 @@ class Arena(object):
         if self.score < ARENA_RANK_LINE:
             return 5000
 
-        rank = redis_client.zrevrank(REDIS_ARENA_KEY, self.char_id)
+        rank = redis_client_persistence.zrevrank(REDIS_ARENA_KEY, self.char_id)
         return rank+1 if rank is not None else 0
 
 
@@ -131,13 +115,13 @@ class Arena(object):
         return c.remained_value
 
     def set_score(self, score):
-        redis_client.zadd(REDIS_ARENA_KEY, self.char_id, score)
+        redis_client_persistence.zadd(REDIS_ARENA_KEY, self.char_id, score)
         self.mongo_arena.score = score
         self.mongo_arena.save()
 
     @classmethod
     def get_top_ranks(cls, amount=10):
-        data = redis_client.zrevrange(REDIS_ARENA_KEY, 0, amount-1, withscores=True)
+        data = redis_client_persistence.zrevrange(REDIS_ARENA_KEY, 0, amount-1, withscores=True)
         return [(int(char_id), int(score)) for char_id, score in data]
 
     def send_notify(self):
@@ -177,7 +161,7 @@ class Arena(object):
         my_score = self.score
 
         def _find(low_score, high_score):
-            choosing = redis_client.zrangebyscore(REDIS_ARENA_KEY, low_score, high_score)
+            choosing = redis_client_persistence.zrangebyscore(REDIS_ARENA_KEY, low_score, high_score)
             if not choosing:
                 return None
 
@@ -187,7 +171,7 @@ class Arena(object):
             while choosing:
                 got = random.choice(choosing)
                 # check cd
-                if redis_client.ttl(REDIS_ARENA_BATTLE_CD_KEY(got)) > 0:
+                if redis_client_persistence.ttl(REDIS_ARENA_BATTLE_CD_KEY(got)) > 0:
                     choosing.remove(got)
                     continue
 
@@ -203,7 +187,7 @@ class Arena(object):
         if got:
             return got
 
-        choosing = redis_client.zrangebyscore(REDIS_ARENA_KEY, int(my_score * 1.2), '+inf')
+        choosing = redis_client_persistence.zrangebyscore(REDIS_ARENA_KEY, int(my_score * 1.2), '+inf')
         if choosing:
             if str(self.char_id) in choosing:
                 choosing.remove(str(self.char_id))
@@ -251,7 +235,7 @@ class Arena(object):
         counter.incr()
 
         # set battle cd
-        redis_client.setex(REDIS_ARENA_BATTLE_CD_KEY(rival_id), 1, ARENA_CD)
+        redis_client_persistence.setex(REDIS_ARENA_BATTLE_CD_KEY(rival_id), 1, ARENA_CD)
 
         msg = protomsg.Battle()
         b = PVP(self.char_id, rival_id, msg)

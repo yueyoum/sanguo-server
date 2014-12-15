@@ -1,0 +1,5 @@
+port 6380
+daemonize yes
+save 600 1
+dbfilename sanguo.rdb
+dir /opt/rdb

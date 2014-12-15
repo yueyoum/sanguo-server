@@ -7,6 +7,8 @@
 *.orig
 .idea
 
+redis.*.conf
+
 crontab
 local_settings.py
 settings_local.py
