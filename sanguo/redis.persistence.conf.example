@@ -1,3 +1,4 @@
+bing 127.0.0.1
 port 6380
 daemonize yes
 save 600 1
