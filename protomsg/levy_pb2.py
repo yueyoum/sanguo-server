@@ -8,12 +8,13 @@ from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 
+import world_pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='levy.proto',
   package='Sanguo.protocol.levy',
-  serialized_pb='\n\nlevy.proto\x12\x14Sanguo.protocol.levy\"W\n\nLevyNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\ncost_sycee\x18\x02 \x02(\x05\x12\x11\n\tcur_times\x18\x03 \x02(\x05\x12\x11\n\tmax_times\x18\x04 \x02(\x05\"\x1e\n\x0bLevyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\":\n\x0cLevyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x0c\n\x04gold\x18\x03 \x01(\x05')
+  serialized_pb='\n\nlevy.proto\x12\x14Sanguo.protocol.levy\x1a\x0bworld.proto\"W\n\nLevyNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x12\n\ncost_sycee\x18\x02 \x02(\x05\x12\x11\n\tcur_times\x18\x03 \x02(\x05\x12\x11\n\tmax_times\x18\x04 \x02(\x05\"\x1e\n\x0bLevyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\"]\n\x0cLevyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12/\n\x04\x64rop\x18\x03 \x01(\x0b\x32!.Sanguo.protocol.world.Attachment')
 
 
 
@@ -62,8 +63,8 @@ _LEVYNOTIFY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=36,
-  serialized_end=123,
+  serialized_start=49,
+  serialized_end=136,
 )
 
 
@@ -90,8 +91,8 @@ _LEVYREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=125,
-  serialized_end=155,
+  serialized_start=138,
+  serialized_end=168,
 )
 
 
@@ -117,9 +118,9 @@ _LEVYRESPONSE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='gold', full_name='Sanguo.protocol.levy.LevyResponse.gold', index=2,
-      number=3, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      name='drop', full_name='Sanguo.protocol.levy.LevyResponse.drop', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -132,10 +133,11 @@ _LEVYRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=157,
-  serialized_end=215,
+  serialized_start=170,
+  serialized_end=263,
 )
 
+_LEVYRESPONSE.fields_by_name['drop'].message_type = world_pb2._ATTACHMENT
 DESCRIPTOR.message_types_by_name['LevyNotify'] = _LEVYNOTIFY
 DESCRIPTOR.message_types_by_name['LevyRequest'] = _LEVYREQUEST
 DESCRIPTOR.message_types_by_name['LevyResponse'] = _LEVYRESPONSE
