@@ -182,7 +182,8 @@ class UnionBoss(UnionLoadBase):
             )
 
         LOWEST_RANK = max(UNION_BOSS_REWARD.keys())
-        UNION_BOSS_REWARD_TUPLE = UNION_BOSS_REWARD.items().sort(key=lambda item: item[0])
+        UNION_BOSS_REWARD_TUPLE = UNION_BOSS_REWARD.items()
+        UNION_BOSS_REWARD_TUPLE.sort(key=lambda item: item[0])
 
         for index, mid in enumerate(member_ids):
             rank = index + 1
