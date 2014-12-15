@@ -293,7 +293,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         hero_noti.target_id = target.id
 
         value = int(value)
-        value = self._one_action_on_target(target, value)
+        target.set_hp(value)
 
         hero_noti.hp = target.hp
         hero_noti.value = value
@@ -302,10 +302,8 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         text = 'Value: {0}, Hp: {1}, Anger: {2}, Eff: {3}'.format(value, target.hp, target.anger, eff.id if eff else 'None')
         logger.debug(text)
 
-    def _one_action_on_target(self, target, value):
-        target.set_hp(value)
+    def _get_one_action_value(self, target, value):
         return value
-
 
     def get_effect_target(self, eff, target):
         def _team(hero):
@@ -399,6 +397,8 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
             for t in targets:
                 if t.die:
                     continue
+
+                value = self._get_one_action_value(t, value)
 
                 self._one_action(t, value, msg, eff)
                 if t.die:

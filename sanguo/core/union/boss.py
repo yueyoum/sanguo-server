@@ -301,9 +301,10 @@ class BattleBoss(InBattleHero):
     def real_damage_value(self, damage, target):
         return damage
 
-    def _one_action_on_target(self, target, value):
-        value = -target.hp
-        target.set_hp(value)
+
+    def _get_one_action_value(self, target, value):
+        if self._round % self.skill_release_rounds == 0:
+            return -target.hp
         return value
 
 
