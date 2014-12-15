@@ -1373,5 +1373,30 @@
         "mode_name": "\u88ab\u52a8", 
         "attack_effect": "SP_/SP_Rage"
     }
+},
+{
+    "pk": 1001, 
+    "model": "skill.skill", 
+    "fields": {
+        "target_animation": "", 
+        "prepare_effect": "B_/B_BOSS", 
+        "hits": 1, 
+        "hit_effect": "", 
+        "name": "\u9b54\u795e\u964d\u4e34", 
+        "anger_self_team": 0, 
+        "war_cry": true, 
+        "skill_range": 2, 
+        "des": "\u9b54\u795e\u964d\u4e34", 
+        "anger_self": 0, 
+        "prob": 100, 
+        "trig_start": 1, 
+        "cast_type": 2, 
+        "trig_cooldown": 1, 
+        "anger_rival_team": 0, 
+        "mode": 1, 
+        "cast_animation": "", 
+        "mode_name": "\u4e3b\u52a8", 
+        "attack_effect": "SP_/SP_BOSS"
+    }
 }
 ]

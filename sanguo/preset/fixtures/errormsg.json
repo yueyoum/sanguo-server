@@ -1566,7 +1566,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_NOT_EXIST", 
-        "text_zh": "\u6b64\u5de5\u4f1a\u4e0d\u5b58\u5728", 
+        "text_zh": "\u516c\u4f1a\u4e0d\u5b58\u5728", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -1577,7 +1577,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_NAME_TOO_LONG", 
-        "text_zh": "\u5de5\u4f1a\u540d\u5b57\u592a\u957f", 
+        "text_zh": "\u516c\u4f1a\u540d\u5b57\u592a\u957f", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -1599,7 +1599,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_NAME_ALREADY_EXIST", 
-        "text_zh": "\u6b64\u5de5\u4f1a\u540d\u5df2\u5b58\u5728", 
+        "text_zh": "\u6b64\u516c\u4f1a\u540d\u5df2\u88ab\u5360\u7528", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -1610,7 +1610,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_CANNOT_CREATE_ALREADY_IN", 
-        "text_zh": "\u5df2\u7ecf\u5728\u5de5\u4f1a\u4e2d\uff0c\u65e0\u6cd5\u5efa\u7acb", 
+        "text_zh": "\u5df2\u7ecf\u5728\u516c\u4f1a\u4e2d\uff0c\u65e0\u6cd5\u521b\u5efa\u516c\u4f1a", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -1621,7 +1621,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_CANNOT_JOIN_ALREADY_IN", 
-        "text_zh": "\u5df2\u7ecf\u5728\u5de5\u4f1a\u4e2d\uff0c\u65e0\u6cd5\u52a0\u5165\u5176\u4ed6\u5de5\u4f1a", 
+        "text_zh": "\u5df2\u7ecf\u5728\u516c\u4f1a\u4e2d\uff0c\u65e0\u6cd5\u52a0\u5165\u5176\u4ed6\u516c\u4f1a", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -1632,7 +1632,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_CANNOT_JOIN_FULL", 
-        "text_zh": "\u5de5\u4f1a\u4eba\u6ee1\u4e86\uff0c\u65e0\u6cd5\u52a0\u5165", 
+        "text_zh": "\u516c\u4f1a\u6210\u5458\u5df2\u6ee1\uff0c\u65e0\u6cd5\u52a0\u5165", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -1643,7 +1643,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_CANNOT_AGREE_JOIN", 
-        "text_zh": "\u5bf9\u65b9\u5df2\u7ecf\u5728\u67d0\u5de5\u4f1a\u4e2d\uff0c\u65e0\u6cd5\u52a0\u5165", 
+        "text_zh": "\u5bf9\u65b9\u5df2\u52a0\u5165\u5176\u4ed6\u516c\u4f1a\uff0c\u65e0\u6cd5\u52a0\u5165", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -1665,7 +1665,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_COIN_NOT_ENOUGH", 
-        "text_zh": "\u5de5\u4f1a\u5e01\u4e0d\u8db3", 
+        "text_zh": "\u516c\u4f1a\u5e01\u4e0d\u8db3", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -1808,7 +1808,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_BATTLE_NO_TIMES", 
-        "text_zh": "\u5de5\u4f1a\u6218\u6b21\u6570\u5df2\u7ecf\u7528\u5b8c", 
+        "text_zh": "\u516c\u4f1a\u6218\u6b21\u6570\u5df2\u7ecf\u7528\u5b8c", 
         "link_to": null, 
         "des": "", 
         "area": ""

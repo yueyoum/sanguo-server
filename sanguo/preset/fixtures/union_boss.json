@@ -14,7 +14,7 @@
         "defense": 950, 
         "quality_name": "\u7532", 
         "contribute_points": 200, 
-        "skill": 22, 
+        "skill": 1001, 
         "quality": 1, 
         "hp": 450000
     }
@@ -34,7 +34,7 @@
         "defense": 1000, 
         "quality_name": "\u7532", 
         "contribute_points": 220, 
-        "skill": 22, 
+        "skill": 1001, 
         "quality": 1, 
         "hp": 560000
     }
@@ -54,7 +54,7 @@
         "defense": 1080, 
         "quality_name": "\u7532", 
         "contribute_points": 240, 
-        "skill": 22, 
+        "skill": 1001, 
         "quality": 1, 
         "hp": 600000
     }
@@ -74,7 +74,7 @@
         "defense": 1180, 
         "quality_name": "\u7532", 
         "contribute_points": 265, 
-        "skill": 22, 
+        "skill": 1001, 
         "quality": 1, 
         "hp": 700000
     }
@@ -94,7 +94,7 @@
         "defense": 1450, 
         "quality_name": "\u7532", 
         "contribute_points": 290, 
-        "skill": 22, 
+        "skill": 1001, 
         "quality": 1, 
         "hp": 760000
     }
@@ -114,7 +114,7 @@
         "defense": 1550, 
         "quality_name": "\u7532", 
         "contribute_points": 320, 
-        "skill": 22, 
+        "skill": 1001, 
         "quality": 1, 
         "hp": 840000
     }
@@ -134,7 +134,7 @@
         "defense": 1800, 
         "quality_name": "\u7532", 
         "contribute_points": 355, 
-        "skill": 22, 
+        "skill": 1001, 
         "quality": 1, 
         "hp": 920000
     }
@@ -154,7 +154,7 @@
         "defense": 2000, 
         "quality_name": "\u7532", 
         "contribute_points": 400, 
-        "skill": 22, 
+        "skill": 1001, 
         "quality": 1, 
         "hp": 1000000
     }
@@ -174,7 +174,7 @@
         "defense": 2400, 
         "quality_name": "\u7532", 
         "contribute_points": 500, 
-        "skill": 22, 
+        "skill": 1001, 
         "quality": 1, 
         "hp": 1200000
     }
@@ -194,7 +194,7 @@
         "defense": 2700, 
         "quality_name": "\u7532", 
         "contribute_points": 500, 
-        "skill": 22, 
+        "skill": 1001, 
         "quality": 1, 
         "hp": 1400000
     }
