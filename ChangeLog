@@ -1,3 +1,19 @@
+*   2014-12-15
+
+    每个server会链接到两个 redis instance
+    一个就是一直在用的，现在这个只用作cache
+    另一个是有持久化配置的，保存一些需要持久化的数据
+
+    上线的时候需要启动新的redis-server，并且执行下面的命令把数据从以前的redis instance移动到新的redis instance
+    redis-cli --raw -p PORT dump KEY | head -c -1 | redis-cli -x -p PORT restore 0
+
+
+    此外中途有大量修改没有记录，大概有这些
+
+    - HUB 的mysql表中修改package
+    - SERVER 调整contab
+
+
 *   2014-07-9
 
     去掉redis_client_two, 全部用redis_client
