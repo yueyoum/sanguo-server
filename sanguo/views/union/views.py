@@ -102,6 +102,7 @@ def checkin(request):
     drop_msg = Member(char_id).checkin()
 
     response = UnionCheckinResponse()
+    response.ret = 0
     response.drop.MergeFrom(drop_msg)
     return pack_msg(response)
 
