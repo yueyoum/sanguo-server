@@ -40,14 +40,19 @@ class ChatMessagePublish(object):
         if not msgs:
             return
 
-        redis_client.delete(self.REDIS_KEY_TEMPLATE.format(self.char_id))
-
         msg = ChatMessageNotify()
         for x in msgs:
             msg_x = msg.msgs.add()
             msg_x.MergeFromString(x)
 
         publish_to_char(self.char_id, pack_msg(msg))
+
+    def send_to_char(self, target_char_id, msg_bin):
+        msg = ChatMessageNotify()
+        msg_x = msg.msgs.add()
+        msg_x.MergeFromString(msg_bin)
+
+        publish_to_char(target_char_id, pack_msg(msg))
 
     def put_in_char_msg_queue(self, target_char_id, text, check=True):
         if check:
@@ -63,7 +68,9 @@ class ChatMessagePublish(object):
         while redis_client.llen(redis_key) >= 20:
             redis_client.lpop(redis_key)
 
-        redis_client.rpush(redis_key, msg.SerializeToString())
+        msg_bin = msg.SerializeToString()
+        redis_client.rpush(redis_key, msg_bin)
+        self.send_to_char(target_char_id, msg_bin)
 
 
     def to_server(self, text):
