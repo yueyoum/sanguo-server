@@ -10,12 +10,12 @@
     然后删除 redis_persistence 的 cronjob,
     并写删除 mongodb 中的 redis_persistence: db.redis_persistence.drop()
 
+    删除 crontab， 现在使用uwsgi自己的cron系统
+
 
     此外中途有大量修改没有记录，大概有这些
 
     - HUB 的mysql表中修改package
-    - SERVER 调整contab
-
 
 *   2014-07-9
 
