@@ -8,7 +8,7 @@ from core.vip import VIP
 from core.task import Task
 
 from core.msgpipe import publish_to_char, message_clean
-from core.msgpublish import SystemBroadcast
+from core.msgpublish import SystemBroadcast, ChatMessagePublish
 from core.prison import Prison
 from core.plunder import Plunder
 from core.friend import Friend
@@ -126,6 +126,7 @@ def login_notify(char_id):
     BasePurchaseAction(char_id).send_notify()
 
     SystemBroadcast(char_id).send_global_broadcast()
+    ChatMessagePublish(char_id).send_notify()
 
     affairs = Affairs(char_id)
     affairs.send_city_notify()
