@@ -217,21 +217,14 @@ class Affairs(_GetRealGoldMixin):
     def get_hang_obj(self):
         return HangObject(self.mongo_affairs.hang_city_id, self.mongo_affairs.hang_start_at, self.mongo_affairs.logs)
 
-
-    def get_hang_reward(self, auto_start=True):
-        """立即保存掉落，并且返回attachment消息"""
-        # if not self.mongo_affairs.hang_city_id:
-        #     raise SanguoException(
-        #         errormsg.HANG_NOT_EXIST,
-        #         self.char_id,
-        #         "Get Hang Reward",
-        #         "hang not exist"
-        #     )
-
+    def get_drop(self, passed_time=None, multi=1):
         ho = self.get_hang_obj()
         battle_data = BATTLES[self.mongo_affairs.hang_city_id]
 
-        percent = ho.passed_time / float(ho.max_time) * 100
+        if not passed_time:
+            passed_time = ho.passed_time
+
+        percent = passed_time / float(ho.max_time) * 100
         for _pre, _add in HANG_REWARD_ADDITIONAL:
             if percent >= _pre:
                 break
@@ -258,12 +251,27 @@ class Affairs(_GetRealGoldMixin):
 
             drop_time_adjusted = max(int(passed_time * 0.25), drop_time)
 
-            drops = get_drop([int(i) for i in battle_data.normal_drop.split(',')], multi=drop_time_adjusted/15)
+            multi = int(drop_time_adjusted/15*multi)
+            drops = get_drop([int(i) for i in battle_data.normal_drop.split(',')], multi=multi)
         else:
             drops = make_standard_drop_from_template()
 
-        drops['exp'] += reward_exp
-        drops['gold'] += reward_gold
+        drops['exp'] = reward_exp
+        drops['gold'] = reward_gold
+        return drops
+
+
+    def get_hang_reward(self, auto_start=True):
+        """立即保存掉落，并且返回attachment消息"""
+        # if not self.mongo_affairs.hang_city_id:
+        #     raise SanguoException(
+        #         errormsg.HANG_NOT_EXIST,
+        #         self.char_id,
+        #         "Get Hang Reward",
+        #         "hang not exist"
+        #     )
+
+        drops = self.get_drop()
 
         resource = Resource(self.char_id, "Hang Reward")
         standard_drop = resource.add(**drops)
@@ -273,11 +281,10 @@ class Affairs(_GetRealGoldMixin):
             self.start_hang(self.mongo_affairs.hang_city_id, get_reward=False)
 
         achievement = Achievement(self.char_id)
-        achievement.trig(28, ho.passed_time / 3600)
-        achievement.trig(29, reward_exp)
+        achievement.trig(28, self.get_hang_obj().passed_time / 3600)
+        achievement.trig(29, drops['exp'])
 
         return standard_drop_to_attachment_protomsg(standard_drop)
-
 
 
     def got_plundered(self, from_char_id, from_win, standard_drop):
