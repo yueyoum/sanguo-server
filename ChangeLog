@@ -5,7 +5,7 @@
     另一个是有持久化配置的，保存一些需要持久化的数据
 
     上线的时候需要启动新的redis-server，并且执行下面的命令把数据从以前的redis instance移动到新的redis instance
-    redis-cli --raw -p PORT dump KEY | head -c -1 | redis-cli -x -p PORT restore 0
+    redis-cli --raw -p PORT dump KEY | head -c -1 | redis-cli -x -p PORT restore KEY 0
 
     然后删除 redis_persistence 的 cronjob,
     并写删除 mongodb 中的 redis_persistence: db.redis_persistence.drop()
