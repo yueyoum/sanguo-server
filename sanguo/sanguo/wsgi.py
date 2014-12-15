@@ -33,5 +33,6 @@ application = get_wsgi_application()
 # application = HelloWorldApplication(application)
 
 import callbacks.signals
+import cron
 from startup import main
 main()

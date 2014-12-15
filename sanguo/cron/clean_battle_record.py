@@ -1,14 +1,21 @@
+# -*- coding: utf-8 -*-
+
 import os
 import glob
 import datetime
 
-from _base import Logger
+from cron.log import Logger
+
+import uwsgidecorators
 
 from django.conf import settings
 
+# 每天0点清理战斗记录
+
 DAYS_DIFF = 7
 
-def clean():
+@uwsgidecorators.cron(0, 0, -1, -1, -1)
+def clean(signum):
     now = datetime.datetime.now()
     DAY = now - datetime.timedelta(days=DAYS_DIFF)
 
@@ -26,10 +33,5 @@ def clean():
     logger = Logger('clean_battle_record.log')
     logger.write("Clean Battle Record Done. Amount: {0}".format(amount))
     logger.close()
-
-
-if __name__ == '__main__':
-    clean()
-
 
 

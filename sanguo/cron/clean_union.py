@@ -3,13 +3,17 @@
 __author__ = 'Wang Chao'
 __date__ = '12/09/14'
 
-from _base import Logger
+import uwsgidecorators
+
+from cron.log import Logger
 
 from core.union.battle import UnionBattle
 from core.union.member import Member
 from core.mongoscheme import MongoUnion, MongoUnionMember
 
-def clean():
+# 每天0点清理
+@uwsgidecorators.cron(0, 0, -1, -1, -1)
+def clean(signum):
     logger = Logger("clean_union.log")
     for x in MongoUnion.objects.all():
         UnionBattle(x.owner).cron_job()
@@ -19,8 +23,3 @@ def clean():
 
     logger.write("Clean Union Complete.")
     logger.close()
-
-
-if __name__ == '__main__':
-    clean()
-

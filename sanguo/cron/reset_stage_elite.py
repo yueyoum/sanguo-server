@@ -1,9 +1,12 @@
-from _base import Logger
+# -*- coding:utf-8 -*-
+
+import uwsgidecorators
+from cron.log import Logger
 
 from core.mongoscheme import MongoStage
 
-
-def reset():
+@uwsgidecorators.cron(0, 0, -1, -1, -1)
+def reset(signum):
     logger = Logger('reset_stage_elite.log')
     logger.write("Reset Stage Elite Times Start")
     for ms in MongoStage.objects.all():
@@ -18,7 +21,3 @@ def reset():
 
     logger.write("Done")
     logger.close()
-
-
-if __name__ == '__main__':
-    reset()

@@ -3,7 +3,9 @@
 __author__ = 'Wang Chao'
 __date__ = '2/20/14'
 
-from _base import Logger
+import uwsgidecorators
+
+from cron.log import Logger
 
 import traceback
 import json
@@ -22,8 +24,8 @@ def send_yueka_reward(char_id, sycee, remained_days):
 
     Mail(char_id).add(MAIL_YUEKA_TITLE, content, attachment=json.dumps(standard_drop), only_one=True)
 
-
-def set_yueka():
+@uwsgidecorators.cron(0, 0, -1, -1, -1)
+def set_yueka(signum):
     records = MongoPurchaseRecord.objects.all()
     logger = Logger('set_yueka.log')
     logger.write("start")
@@ -41,6 +43,3 @@ def set_yueka():
 
     logger.write("finish")
     logger.close()
-
-if __name__ == '__main__':
-    set_yueka()

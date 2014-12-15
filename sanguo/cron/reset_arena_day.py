@@ -5,7 +5,9 @@ __date__ = '2/19/14'
 
 import json
 
-from _base import Logger
+import uwsgidecorators
+
+from cron.log import Logger
 from core.drives import redis_client
 from core.attachment import make_standard_drop_from_template
 from core.mail import Mail
@@ -25,8 +27,9 @@ def _get_reward_by_score(score):
 
     return None
 
+# 周一到周六21：00比武积分奖励
 
-def reset():
+def main(signum):
     logger = Logger('reset_arena_day.log')
 
     amount = redis_client.zcard(REDIS_ARENA_KEY)
@@ -46,5 +49,9 @@ def reset():
     logger.write("Reset Arena Day: Complete")
     logger.close()
 
-if __name__ == '__main__':
-    reset()
+uwsgidecorators.cron(30, 21, -1, -1, 1)(main)
+uwsgidecorators.cron(30, 21, -1, -1, 2)(main)
+uwsgidecorators.cron(30, 21, -1, -1, 3)(main)
+uwsgidecorators.cron(30, 21, -1, -1, 4)(main)
+uwsgidecorators.cron(30, 21, -1, -1, 5)(main)
+uwsgidecorators.cron(30, 21, -1, -1, 6)(main)

@@ -1,15 +1,16 @@
-from _base import Logger
+# -*- coding: utf-8 -*-
+
+import uwsgidecorators
+
+from cron.log import Logger
 
 from core.mongoscheme import MongoCounter
 
+# 每天0点清理次数
 
-def reset():
+@uwsgidecorators.cron(0, 0, -1, -1 ,-1)
+def reset(signum):
     MongoCounter.objects.delete()
     logger = Logger('reset_counter.log')
     logger.write("MongoCounter Clean Done")
     logger.close()
-
-
-if __name__ == '__main__':
-    reset()
-

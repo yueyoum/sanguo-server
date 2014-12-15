@@ -5,7 +5,9 @@ __date__ = '2/19/14'
 
 import json
 
-from _base import Logger
+import uwsgidecorators
+
+from cron.log import Logger
 from core.mail import Mail
 from core.mongoscheme import MongoUnion
 from core.union.union import Union
@@ -48,8 +50,8 @@ def _send_reward(rank, mongo_union):
             attachment=attachment
         )
 
-
-def reset():
+@uwsgidecorators.cron(0, 0, -1, -1, 0)
+def reset(signum):
     logger = Logger("union_reward_week.log")
 
     unions = MongoUnion.objects.all().order_by('-score')
@@ -64,7 +66,3 @@ def reset():
 
     logger.write("Union Reward Week: Complete")
     logger.close()
-
-
-if __name__ == '__main__':
-    reset()

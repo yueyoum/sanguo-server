@@ -3,16 +3,18 @@
 __author__ = 'Wang Chao'
 __date__ = '2/27/14'
 
-from _base import Logger
+import uwsgidecorators
+
+from cron.log import Logger
 
 from core.plunder import PlunderLeaderboardWeekly
 
-def clean():
+
+# 每周清理掠夺榜单
+
+@uwsgidecorators.cron(0, 0, -1, -1, 0)
+def clean(signum):
     logger = Logger("clean_plunder_board_weekly.log")
     PlunderLeaderboardWeekly.clean()
     logger.write("Clean Complete.")
     logger.close()
-
-if __name__ == '__main__':
-    clean()
-

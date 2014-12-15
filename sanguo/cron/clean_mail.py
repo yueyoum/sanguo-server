@@ -3,16 +3,21 @@
 __author__ = 'Wang Chao'
 __date__ = '2/27/14'
 
-from _base import Logger
+from cron.log import Logger
 import pytz
 import arrow
+
+import uwsgidecorators
 
 from core.mongoscheme import MongoMail
 from core.mail import Mail
 from preset.settings import MAIL_KEEP_DAYS
 
 
-def clean():
+# 每天0点清理过期邮件
+
+@uwsgidecorators.cron(0, 0, -1, -1, -1)
+def clean(signum):
     logger = Logger("clean_mail.log")
     logger.write("Clean Mail Start.")
 
@@ -32,8 +37,4 @@ def clean():
 
     logger.write("Clean Mail Complete. Cleaned Amount: {0}".format(amount))
     logger.close()
-
-
-if __name__ == '__main__':
-    clean()
 

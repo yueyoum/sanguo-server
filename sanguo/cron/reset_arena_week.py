@@ -5,7 +5,9 @@ __date__ = '2/19/14'
 
 import json
 
-from _base import Logger
+import uwsgidecorators
+
+from cron.log import Logger
 from core.character import Char
 from core.mail import Mail
 from core.arena import REDIS_ARENA_KEY
@@ -22,6 +24,9 @@ from preset.settings import (
 )
 
 
+# 周日21：30发送周比武奖励
+
+
 def _get_reward_by_rank(rank):
     data = None
 
@@ -35,7 +40,9 @@ def _get_reward_by_rank(rank):
     return None
 
 
-def reset():
+
+@uwsgidecorators.cron(30, 21, -1, -1, 0)
+def reset(signum):
     amount = redis_client.zcard(REDIS_ARENA_KEY)
 
     logger = Logger("reset_arena_week.log")
@@ -73,7 +80,3 @@ def reset():
 
     logger.write("Reset Arena Week: Complete")
     logger.close()
-
-
-if __name__ == '__main__':
-    reset()

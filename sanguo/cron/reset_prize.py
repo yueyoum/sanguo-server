@@ -3,13 +3,16 @@
 __author__ = 'Wang Chao'
 __date__ = '2/20/14'
 
-from _base import Logger
+import uwsgidecorators
+
+from cron.log import Logger
 from core.mongoscheme import MongoAttachment
 
 
 NEED_RESET_PRIZE_IDS = [4, 5]
 
-def reset():
+@uwsgidecorators.cron(0, 0, -1, -1, -1)
+def reset(signum):
     logger = Logger('reset_prize.log')
 
     for att in MongoAttachment.objects.all():
@@ -24,6 +27,3 @@ def reset():
 
     logger.write("Attachment Prize Reset Done")
     logger.close()
-
-if __name__ == '__main__':
-    reset()

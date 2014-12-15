@@ -3,12 +3,15 @@
 __author__ = 'Wang Chao'
 __date__ = '2/27/14'
 
+import uwsgidecorators
 
-from _base import Logger
-
+from cron.log import Logger
 from core.activeplayers import ActivePlayers
 
-def clean():
+# 每办小时清理在线用户
+
+@uwsgidecorators.cron(-30, -1, -1, -1, -1)
+def clean(signum):
     logger = Logger("clean_active_players.log")
     logger.write("Start.")
 
@@ -16,6 +19,3 @@ def clean():
 
     logger.write("Complete. {0}".format(result))
     logger.close()
-
-if __name__ == '__main__':
-    clean()
