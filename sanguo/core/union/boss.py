@@ -302,7 +302,9 @@ class BattleBoss(InBattleHero):
         return damage
 
     def _one_action_on_target(self, target, value):
-        target.set_hp(-target.hp)
+        value = -target.hp
+        target.set_hp(value)
+        return value
 
 
 class UnionBossBattle(PVE):
