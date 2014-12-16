@@ -22,7 +22,7 @@ from core.battle.battle import Ground
 from core.battle import PVE
 
 from preset import errormsg
-from preset.data import UNION_BOSS, UNION_BOSS_REWARD
+from preset.data import UNION_BOSS, UNION_BOSS_REWARD, UNION_LEVEL
 
 import protomsg
 
@@ -245,11 +245,16 @@ class UnionBoss(UnionLoadBase):
 
     @union_instance_check(UnionBase, errormsg.UNION_NOT_EXIST, "UnionBoss Response", "has no union")
     def make_boss_response(self):
+        union_level = self.union.mongo_union.level
+
         msg = protomsg.UnionBossResponse()
+        if not UNION_LEVEL[union_level].union_boss_open:
+            msg.ret = errormsg.UNION_BOSS_FREEZE
+            return msg
+
         msg.ret = 0
         msg.remained_times = self.max_times - self.cur_times
 
-        union_level = self.union.mongo_union.level
         available_bosses = [k for k, v in UNION_BOSS.items() if union_level >= v.union_level]
 
         for b in available_bosses:
