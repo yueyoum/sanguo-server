@@ -1687,7 +1687,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_CHECKIN_REACH_MAX_TIMES", 
-        "text_zh": "\u5de5\u4f1a\u7b7e\u5230\u6b21\u6570\u5df2\u7528\u5b8c", 
+        "text_zh": "\u516c\u4f1a\u7b7e\u5230\u6b21\u6570\u5df2\u7528\u5b8c", 
         "link_to": 1, 
         "des": "", 
         "area": ""
@@ -1698,7 +1698,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_BATTLE_NO_RIVAL", 
-        "text_zh": "\u5de5\u4f1a\u6218\u627e\u4e0d\u5230\u5bf9\u624b", 
+        "text_zh": "\u516c\u4f1a\u6218\u627e\u4e0d\u5230\u5bf9\u624b", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -1720,7 +1720,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_BOSS_NOT_STARTED", 
-        "text_zh": "\u6ca1\u6709\u6fc0\u6d3b\u4e0d\u80fd\u6253", 
+        "text_zh": "BOSS\u672a\u6fc0\u6d3b\u4e0d\u80fd\u8ba8\u4f10", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -1731,7 +1731,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_BOSS_DEAD", 
-        "text_zh": "\u6b7b\u4e86\u4e0d\u80fd\u6253", 
+        "text_zh": "\u516c\u4f1aBOSS\u5df2\u7ecf\u6b7b\u4ea1", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -1742,7 +1742,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_BOSS_LEVEL_NOT_ENOUGH", 
-        "text_zh": "\u5de5\u4f1a\u7b49\u7ea7\u4e0d\u8db3\uff0c\u65e0\u6cd5\u5f00\u542f\u6b64BOSS", 
+        "text_zh": "\u516c\u4f1a\u7b49\u7ea7\u4e0d\u8db3\uff0c\u65e0\u6cd5\u6d3b\u52a8\u6b64BOSS", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -1753,7 +1753,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_CANNOT_APPLY_ALREADY_IN", 
-        "text_zh": "\u5df2\u7ecf\u5728\u5de5\u4f1a\u4e2d\uff0c\u65e0\u6cd5\u7533\u8bf7", 
+        "text_zh": "\u60a8\u5df2\u7ecf\u5728\u516c\u4f1a\u4e2d\uff0c\u65e0\u6cd5\u7533\u8bf7", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -1775,7 +1775,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_BOSS_ONLY_OPENED_BY_OWNER", 
-        "text_zh": "\u53ea\u6709\u4f1a\u957f\u624d\u80fd\u5f00\u542fBOSS", 
+        "text_zh": "\u53ea\u6709\u4f1a\u957f\u624d\u80fd\u6fc0\u6d3bBOSS", 
         "link_to": null, 
         "des": "", 
         "area": ""

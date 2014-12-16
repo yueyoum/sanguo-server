@@ -238,5 +238,17 @@
         "char_level": 0, 
         "icon": ""
     }
+},
+{
+    "pk": 60, 
+    "model": "config.functiondefine", 
+    "fields": {
+        "stage_id": 0, 
+        "name": "\u516c\u4f1a\u529f\u80fd", 
+        "open_condition_des": "\u541b\u4e3b\u7b49\u7ea725\u7ea7\u5f00\u542f", 
+        "text": "\u516c\u4f1a\u529f\u80fd\u5f00\u542f", 
+        "char_level": 25, 
+        "icon": ""
+    }
 }
 ]
