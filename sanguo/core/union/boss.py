@@ -238,7 +238,7 @@ class UnionBoss(UnionLoadBase):
             msg_log.precent = int(log.damage/hp * 100)
 
         if this_boss.hp <= 0:
-            this_boss.killer.MergeFrom(msg.logs[-1])
+            msg_log.killer.MergeFrom(msg.logs[-1])
 
         return msg
 
