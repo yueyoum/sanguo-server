@@ -1742,7 +1742,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_BOSS_LEVEL_NOT_ENOUGH", 
-        "text_zh": "\u516c\u4f1a\u7b49\u7ea7\u4e0d\u8db3\uff0c\u65e0\u6cd5\u6d3b\u52a8\u6b64BOSS", 
+        "text_zh": "\u516c\u4f1a\u7b49\u7ea7\u4e0d\u8db3\uff0c\u65e0\u6cd5\u5f00\u542f\u6b64BOSS", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -1809,6 +1809,17 @@
     "fields": {
         "error_index": "UNION_BATTLE_NO_TIMES", 
         "text_zh": "\u516c\u4f1a\u6218\u6b21\u6570\u5df2\u7ecf\u7528\u5b8c", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5729, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_BOSS_FREEZE", 
+        "text_zh": "\u5de5\u4f1a\u7b49\u7ea7\u4e0d\u8db3\uff0c\u65e0\u6cd5\u8fdb\u5165\u5de5\u4f1aBOSS", 
         "link_to": null, 
         "des": "", 
         "area": ""
