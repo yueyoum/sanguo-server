@@ -6,7 +6,7 @@ import arrow
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 TMP_PATH = os.path.normpath(os.path.join(BASE_DIR, '../tmp'))
 LOG_PATH = os.path.normpath(os.path.join(BASE_DIR, 'logs'))
-BATTLE_RECORD_PATH = os.path.normpath(os.path.join(BASE_DIR, 'battle_record'))
+# BATTLE_RECORD_PATH = os.path.normpath(os.path.join(BASE_DIR, 'battle_record'))
 
 DEBUG = False
 TEMPLATE_DEBUG = False
