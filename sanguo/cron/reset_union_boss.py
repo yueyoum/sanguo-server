@@ -14,7 +14,7 @@ def reset(signum):
     logger.write("Start.")
 
     for mb in MongoUnionBoss.objects.all():
-        mb.opended = {}
+        mb.opened = {}
         mb.save()
 
     logger.write("Complete.")
