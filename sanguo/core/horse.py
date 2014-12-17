@@ -384,7 +384,7 @@ class Horse(object):
         publish_to_char(self.char_id, pack_msg(msg))
 
         f = Formation(self.char_id)
-        socket = f.find_socket_by_horse(_id)
+        socket = f.find_socket_by_horse(int(_id))
         if socket:
             socket_changed_signal.send(
                 sender=None,
