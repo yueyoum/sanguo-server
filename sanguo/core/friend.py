@@ -124,15 +124,31 @@ class Friend(object):
         @rtype: list
         """
         res = []
-        for i in self.mf.friends:
+        for i in self.mf.friends[:]:
+            try:
+                MongoCharacter.objects.get(id=i)
+            except DoesNotExist:
+                self.mf.friends.remove(i)
+
             res.append((i, FRIEND_OK))
 
-        for i in self.mf.pending:
+        for i in self.mf.pending[:]:
+            try:
+                MongoCharacter.objects.get(id=i)
+            except DoesNotExist:
+                self.mf.pending.remove(i)
+
             res.append((i, FRIEND_ACK))
 
-        for i in self.mf.accepting:
+        for i in self.mf.accepting[:]:
+            try:
+                MongoCharacter.objects.get(id=i)
+            except DoesNotExist:
+                self.mf.accepting.remove(i)
+
             res.append((i, FRIEND_APPLY))
 
+        self.mf.save()
         return res
 
     def check_max_amount(self, func_name, raise_exception=True):
