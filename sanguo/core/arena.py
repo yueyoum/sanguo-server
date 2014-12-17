@@ -149,6 +149,9 @@ class Arena(object):
             rank = index + 1
             _cid, _score = data
 
+            if _score < ARENA_RANK_LINE:
+                break
+
             board = msg.boards.add()
             board.char.MergeFrom(create_character_infomation_message(_cid))
             board.score = _score
