@@ -22,11 +22,10 @@ def startup(func):
 
 
 @startup
-def server_register(status=1):
+def server_register():
     data = {
         'id': server.id,
         'name': server.name,
-        'status': status,
         'host': server.host,
         'port': server.port,
         'port_https': server.port_https,

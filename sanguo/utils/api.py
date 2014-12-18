@@ -14,7 +14,6 @@ HTTPSAPIClient.install_pem('/opt/ca/client.pem')
 apicall = HTTPSAPIClient()
 
 api_server_register = partial(apicall, cmd=HUB_URL + '/api/server-list/register/')
-api_server_change = partial(apicall, cmd=HUB_URL + '/api/server/change/')
 
 api_account_login = partial(apicall, cmd=HUB_URL + '/api/account/login/')
 api_account_bind = partial(apicall, cmd=HUB_URL + '/api/account/bind/')
