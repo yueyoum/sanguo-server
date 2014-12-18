@@ -231,8 +231,7 @@ PRISONER_RELEASE_GOT_TREASURE = {3: [24], 2: [25], 1: [25]}
 ARENA_COST_SYCEE = 20
 # 比武同一个人被打CD， 秒
 ARENA_CD = 60
-# 竞技场周排行榜前多少名才发送奖励
-ARENA_WEEKLY_REWARD_ONLY_RANKS = 100
+
 # 比武初始积分
 ARENA_INITIAL_SCORE = 1500
 # 新用户最低积分

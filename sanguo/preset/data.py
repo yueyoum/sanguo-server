@@ -63,8 +63,6 @@ VIP_REWARD = object_maker(_find_file('vip_reward.json'))
 ARENA_DAY_REWARD_TUPLE = ARENA_DAY_REWARD.items()
 ARENA_DAY_REWARD_TUPLE.sort(key=lambda item: -item[0])
 
-ARENA_WEEK_REWARD_TUPLE = ARENA_WEEK_REWARD.items()
-ARENA_WEEK_REWARD_TUPLE.sort(key=lambda item: -item[0])
 
 PURCHASE = object_maker(_find_file('purchase.json'))
 PURCHASE_TYPE = object_maker(_find_file('purchase_type.json'))

@@ -15,14 +15,18 @@ from core.drives import redis_client_persistence
 from core.achievement import Achievement
 from core.activity import ActivityStatic
 from core.item import Item
-from preset.data import ARENA_WEEK_REWARD_TUPLE
+from preset.data import ARENA_WEEK_REWARD
 from preset.settings import (
     MAIL_ARENA_WEEK_REWARD_CONTENT,
     MAIL_ARENA_WEEK_REWARD_TITLE,
-    ARENA_WEEKLY_REWARD_ONLY_RANKS,
     ARENA_RANK_LINE,
 )
 
+
+ARENA_WEEK_REWARD_TUPLE = ARENA_WEEK_REWARD.items()
+ARENA_WEEK_REWARD_TUPLE.sort(key=lambda item: -item[0])
+
+ARENA_WEEK_REWARD_LOWEST_RANK = max(ARENA_WEEK_REWARD.keys())
 
 # 周日21：30发送周比武奖励
 
@@ -31,7 +35,7 @@ def _get_reward_by_rank(rank):
     data = None
 
     for _rank, _reward in ARENA_WEEK_REWARD_TUPLE:
-        if rank >= _rank:
+        if _rank >= rank:
             data = Item.get_sutff_drop(_reward.stuff)
             break
 
@@ -48,7 +52,7 @@ def reset(signum):
     logger = Logger("reset_arena_week.log")
     logger.write("Reset Arena Week: Start. chars amount: {0}".format(amount))
 
-    score_data = redis_client_persistence.zrevrange(REDIS_ARENA_KEY, 0, ARENA_WEEKLY_REWARD_ONLY_RANKS-1, withscores=True)
+    score_data = redis_client_persistence.zrevrange(REDIS_ARENA_KEY, 0, ARENA_WEEK_REWARD_LOWEST_RANK-1, withscores=True)
 
     rank_data = []
     for char_id, score in score_data:
