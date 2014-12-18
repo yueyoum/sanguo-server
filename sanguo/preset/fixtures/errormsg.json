@@ -1786,7 +1786,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_BOSS_NO_TIMES", 
-        "text_zh": "\u6253BOSS\u6b21\u6570\u5df2\u7528\u5b8c", 
+        "text_zh": "\u516c\u4f1aBOSS\u8ba8\u4f10\u6b21\u6570\u5df2\u7528\u5b8c", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -1797,7 +1797,7 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_BATTLE_ONLY_STARTED_BY_OWNER", 
-        "text_zh": "\u53ea\u6709\u4f1a\u957f\u624d\u80fd\u53d1\u8d77\u5de5\u4f1a\u6218", 
+        "text_zh": "\u53ea\u6709\u4f1a\u957f\u624d\u80fd\u53d1\u8d77\u516c\u4f1a\u6218", 
         "link_to": null, 
         "des": "", 
         "area": ""
@@ -1819,7 +1819,18 @@
     "model": "errormsg.errormsg", 
     "fields": {
         "error_index": "UNION_BOSS_FREEZE", 
-        "text_zh": "\u5de5\u4f1a\u7b49\u7ea7\u4e0d\u8db3\uff0c\u65e0\u6cd5\u8fdb\u5165\u5de5\u4f1aBOSS", 
+        "text_zh": "3\u7ea7\u516c\u4f1a\u624d\u80fd\u5f00\u542f\u516c\u4f1aBOSS", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5730, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "UNION_BOSS_LOCKED", 
+        "text_zh": "\u5de5\u4f1aBOSS\u6b63\u5728\u88ab\u522b\u4eba\u653b\u51fb\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5", 
         "link_to": null, 
         "des": "", 
         "area": ""

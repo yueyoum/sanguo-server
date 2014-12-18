@@ -4,6 +4,7 @@ __author__ = 'Wang Chao'
 __date__ = '14-12-10'
 
 import json
+import time
 import arrow
 
 from mongoengine import DoesNotExist
@@ -35,6 +36,7 @@ class UnionBoss(UnionLoadBase):
         super(UnionBoss, self).__init__(char_id)
         if isinstance(self.union, UnionBase):
             self.load_data()
+            self.member = Member(self.char_id)
 
 
     def load_data(self):
@@ -44,8 +46,6 @@ class UnionBoss(UnionLoadBase):
             self.mongo_boss = MongoUnionBoss(id=self.union.union_id)
             self.mongo_boss.opened = {}
             self.mongo_boss.save()
-
-        self.member = Member(self.char_id)
 
 
     @property
@@ -101,14 +101,6 @@ class UnionBoss(UnionLoadBase):
                 "boss not started {0}".format(boss_id)
             )
 
-        if this_boss.hp <= 0:
-            raise SanguoException(
-                errormsg.UNION_BOSS_DEAD,
-                self.char_id,
-                "UnionBoss Battle",
-                "boss dead {0}".format(boss_id)
-            )
-
         if self.cur_times >= self.max_times:
             raise SanguoException(
                 errormsg.UNION_BOSS_NO_TIMES,
@@ -117,27 +109,67 @@ class UnionBoss(UnionLoadBase):
                 "no times"
             )
 
+        for i in range(10):
+            self.load_data()
+            this_boss = self.mongo_boss.opened[str(boss_id)]
+            if this_boss.lock:
+                time.sleep(0.2)
+            else:
+                this_boss.lock = True
+                self.mongo_boss.save()
+                break
+        else:
+            raise SanguoException(
+                errormsg.UNION_BOSS_LOCKED,
+                self.char_id,
+                "UnionBoss Battle",
+                "boss locked {0}".format(boss_id)
+            )
+
+
+        if this_boss.hp <= 0:
+            this_boss.lock = False
+            self.mongo_boss.save()
+            raise SanguoException(
+                errormsg.UNION_BOSS_DEAD,
+                self.char_id,
+                "UnionBoss Battle",
+                "boss dead {0}".format(boss_id)
+            )
+
 
         msg = protomsg.Battle()
         battle = UnionBossBattle(self.char_id, boss_id, msg, this_boss.hp)
         remained_hp = battle.start()
+        damage = battle.get_total_damage()
 
         this_boss.hp = remained_hp
 
-        eubl = MongoEmbeddedUnionBossLog()
-        eubl.char_id = self.char_id
-        eubl.damage = battle.get_total_damage()
-
-        this_boss.logs.append(eubl)
+        self.save_battle_log(this_boss, damage)
+        if remained_hp <= 0:
+            this_boss.killer = self.char_id
+        this_boss.lock = False
         self.mongo_boss.save()
 
         self.incr_battle_times()
-        drop_msg = self.after_battle(boss_id, eubl.damage, remained_hp<=0)
+        drop_msg = self.after_battle(boss_id, damage, remained_hp<=0)
 
         if remained_hp <= 0:
             self.boss_has_been_killed(boss_id)
 
         return msg, drop_msg
+
+
+    def save_battle_log(self, this_boss, damage):
+        for log in this_boss.logs:
+            if log.char_id == self.char_id:
+                log.damage += damage
+                break
+        else:
+            boss_log = MongoEmbeddedUnionBossLog()
+            boss_log.char_id = self.char_id
+            boss_log.damage = damage
+            this_boss.logs.append(boss_log)
 
 
     def after_battle(self, boss_id, damage, kill=False):
@@ -237,9 +269,11 @@ class UnionBoss(UnionLoadBase):
             msg_log.damage = log.damage
             msg_log.precent = int(log.damage/hp * 100)
 
-        if this_boss.hp <= 0:
-            msg.killer.MergeFrom(msg.logs[-1])
-
+        if this_boss.killer:
+            for log in msg.logs:
+                if log.char_id == this_boss.killer:
+                    msg.killer.MergeFrom(log)
+                    break
         return msg
 
 
