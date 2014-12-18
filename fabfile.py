@@ -60,8 +60,7 @@ class Server(object):
     def restart(self):
         for d in self.dirs:
             with cd(os.path.join(self.parent_path, d)):
-                run("kill -HUP `cat sanguo/run/uwsgi.pid`")
-
+                run("./restart.sh")
 
 class Hub(object):
     def __init__(self, path):
