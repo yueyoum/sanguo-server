@@ -129,24 +129,24 @@ class Friend(object):
                 MongoCharacter.objects.get(id=i)
             except DoesNotExist:
                 self.mf.friends.remove(i)
-
-            res.append((i, FRIEND_OK))
+            else:
+                res.append((i, FRIEND_OK))
 
         for i in self.mf.pending[:]:
             try:
                 MongoCharacter.objects.get(id=i)
             except DoesNotExist:
                 self.mf.pending.remove(i)
-
-            res.append((i, FRIEND_ACK))
+            else:
+                res.append((i, FRIEND_ACK))
 
         for i in self.mf.accepting[:]:
             try:
                 MongoCharacter.objects.get(id=i)
             except DoesNotExist:
                 self.mf.accepting.remove(i)
-
-            res.append((i, FRIEND_APPLY))
+            else:
+                res.append((i, FRIEND_APPLY))
 
         self.mf.save()
         return res
