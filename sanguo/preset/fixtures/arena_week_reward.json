@@ -3,7 +3,7 @@
     "pk": 1, 
     "model": "config.arenaweekreward", 
     "fields": {
-        "rank_des": "\u7b2c\u4e00\u540d", 
+        "rank_des": "\u51a0\u519b\u5956\u52b1", 
         "stuff": 2001
     }
 },
@@ -11,7 +11,7 @@
     "pk": 2, 
     "model": "config.arenaweekreward", 
     "fields": {
-        "rank_des": "\u7b2c\u4e8c\u540d", 
+        "rank_des": "\u4e9a\u519b\u5956\u52b1", 
         "stuff": 2002
     }
 },
@@ -19,7 +19,7 @@
     "pk": 3, 
     "model": "config.arenaweekreward", 
     "fields": {
-        "rank_des": "\u7b2c\u4e09\u540d", 
+        "rank_des": "\u5b63\u519b\u5956\u52b1", 
         "stuff": 2003
     }
 },
@@ -27,7 +27,7 @@
     "pk": 10, 
     "model": "config.arenaweekreward", 
     "fields": {
-        "rank_des": "4-10\u540d", 
+        "rank_des": "4-10\u540d\u5956\u52b1", 
         "stuff": 2004
     }
 }

@@ -75,8 +75,8 @@
     "pk": 2001, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 33, 
-        "icon_one_id": 3, 
+        "icon_three_id": 35, 
+        "icon_one_id": 5, 
         "package": 20005, 
         "des": "\u83b7\u53d64\u4e2a\u91d1\u8272\u6b66\u5c06", 
         "icon_three_type": 8, 
@@ -85,7 +85,7 @@
         "icon_two_type": 8, 
         "icon_one_type": 8, 
         "condition_value": 4, 
-        "icon_two_id": 23, 
+        "icon_two_id": 25, 
         "icon_two_amount": 3
     }
 },
@@ -93,8 +93,8 @@
     "pk": 2002, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 34, 
-        "icon_one_id": 4, 
+        "icon_three_id": 36, 
+        "icon_one_id": 6, 
         "package": 20006, 
         "des": "\u83b7\u53d65\u4e2a\u91d1\u8272\u6b66\u5c06", 
         "icon_three_type": 8, 
@@ -103,7 +103,7 @@
         "icon_two_type": 8, 
         "icon_one_type": 8, 
         "condition_value": 5, 
-        "icon_two_id": 24, 
+        "icon_two_id": 26, 
         "icon_two_amount": 3
     }
 },
@@ -111,8 +111,8 @@
     "pk": 2003, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 35, 
-        "icon_one_id": 5, 
+        "icon_three_id": 37, 
+        "icon_one_id": 7, 
         "package": 20007, 
         "des": "\u83b7\u53d66\u4e2a\u91d1\u8272\u6b66\u5c06", 
         "icon_three_type": 8, 
@@ -121,7 +121,7 @@
         "icon_two_type": 8, 
         "icon_one_type": 8, 
         "condition_value": 6, 
-        "icon_two_id": 25, 
+        "icon_two_id": 27, 
         "icon_two_amount": 3
     }
 },
@@ -129,8 +129,8 @@
     "pk": 2004, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 36, 
-        "icon_one_id": 6, 
+        "icon_three_id": 38, 
+        "icon_one_id": 8, 
         "package": 20008, 
         "des": "\u83b7\u53d68\u4e2a\u91d1\u8272\u6b66\u5c06", 
         "icon_three_type": 8, 
@@ -139,7 +139,7 @@
         "icon_two_type": 8, 
         "icon_one_type": 8, 
         "condition_value": 8, 
-        "icon_two_id": 26, 
+        "icon_two_id": 28, 
         "icon_two_amount": 3
     }
 },
@@ -147,8 +147,8 @@
     "pk": 3001, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 33, 
-        "icon_one_id": 3, 
+        "icon_three_id": 35, 
+        "icon_one_id": 5, 
         "package": 20013, 
         "des": "\u901a\u5173\u957f\u5b89\u5175\u707e", 
         "icon_three_type": 8, 
@@ -157,7 +157,7 @@
         "icon_two_type": 8, 
         "icon_one_type": 8, 
         "condition_value": 4, 
-        "icon_two_id": 23, 
+        "icon_two_id": 25, 
         "icon_two_amount": 3
     }
 },
@@ -165,8 +165,8 @@
     "pk": 3002, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 34, 
-        "icon_one_id": 4, 
+        "icon_three_id": 36, 
+        "icon_one_id": 6, 
         "package": 20014, 
         "des": "\u901a\u5173\u66f9\u64cd\u590d\u4ec7\u6218", 
         "icon_three_type": 8, 
@@ -175,7 +175,7 @@
         "icon_two_type": 8, 
         "icon_one_type": 8, 
         "condition_value": 5, 
-        "icon_two_id": 24, 
+        "icon_two_id": 26, 
         "icon_two_amount": 3
     }
 },
@@ -183,8 +183,8 @@
     "pk": 3003, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 35, 
-        "icon_one_id": 5, 
+        "icon_three_id": 37, 
+        "icon_one_id": 7, 
         "package": 20015, 
         "des": "\u901a\u5173\u6c49\u5ef7\u4e4b\u4e89", 
         "icon_three_type": 8, 
@@ -193,7 +193,7 @@
         "icon_two_type": 8, 
         "icon_one_type": 8, 
         "condition_value": 6, 
-        "icon_two_id": 25, 
+        "icon_two_id": 27, 
         "icon_two_amount": 3
     }
 },
@@ -201,8 +201,8 @@
     "pk": 3004, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 36, 
-        "icon_one_id": 6, 
+        "icon_three_id": 38, 
+        "icon_one_id": 8, 
         "package": 20016, 
         "des": "\u901a\u5173\u5e73\u5b9a\u6c5f\u4e1c", 
         "icon_three_type": 8, 
@@ -211,7 +211,7 @@
         "icon_two_type": 8, 
         "icon_one_type": 8, 
         "condition_value": 7, 
-        "icon_two_id": 26, 
+        "icon_two_id": 28, 
         "icon_two_amount": 3
     }
 },
@@ -219,7 +219,7 @@
     "pk": 4001, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 7, 
+        "icon_three_id": 9, 
         "icon_one_id": 1, 
         "package": 20009, 
         "des": "\u6bd4\u6b66\u79ef\u5206\u7b2c\u4e00\u540d", 
@@ -247,7 +247,7 @@
         "icon_two_type": 8, 
         "icon_one_type": 4, 
         "condition_value": 2, 
-        "icon_two_id": 7, 
+        "icon_two_id": 8, 
         "icon_two_amount": 1
     }
 },
@@ -265,7 +265,7 @@
         "icon_two_type": 8, 
         "icon_one_type": 4, 
         "condition_value": 3, 
-        "icon_two_id": 6, 
+        "icon_two_id": 7, 
         "icon_two_amount": 1
     }
 },
@@ -283,7 +283,7 @@
         "icon_two_type": 8, 
         "icon_one_type": 4, 
         "condition_value": 10, 
-        "icon_two_id": 5, 
+        "icon_two_id": 6, 
         "icon_two_amount": 1
     }
 }

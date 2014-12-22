@@ -885,7 +885,7 @@
     "pk": 2004, 
     "model": "item.stuff", 
     "fields": {
-        "name": "\u6bd4\u6b66\u5468\u79ef\u52064-10\u540d\u5956\u52b1", 
+        "name": "4-10\u540d\u5956\u52b1", 
         "tip_des": "\u6bd4\u6b66\u5468\u79ef\u5206\u6392\u540d\u7b2c\u56db\u540d\u81f3\u7b2c\u5341\u540d\u5956\u52b1", 
         "tip_type": "\u6bd4\u6b66\u5468\u79ef\u52064-10\u540d\u5956\u52b1", 
         "des": "\u6bd4\u6b66\u5468\u79ef\u52064-10\u540d\u5956\u52b1", 
