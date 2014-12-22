@@ -38,7 +38,7 @@ class Union(object):
             return UnionDummy(char_id)
 
         if not union_id:
-            return UnionOwner(char_id, char_union_id)
+            union_id = char_union_id
 
         # FIXME 本来是有这个判断的，但是目前为了省事，对于这个最后返回的是 UnionMember
         # 其实应该为这个添加一个新类： UnionObserver
