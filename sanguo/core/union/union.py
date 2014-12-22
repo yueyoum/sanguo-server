@@ -92,6 +92,22 @@ class UnionBase(object):
         from core.union.member import Member
         Member(self.char_id).quit_union()
 
+    def get_battle_members(self):
+        # 获取可参加工会战的会员
+        now = arrow.utcnow().timestamp
+        hours24 = 24 * 3600
+        checkin_limit = now - hours24
+
+        members = []
+        for m in MongoUnionMember.objects.filter(joined=self.union_id):
+            if m.last_checkin_timestamp >= checkin_limit:
+                members.append(m.id)
+
+        if self.char_id in members:
+            members.remove(self.char_id)
+
+        members.insert(0, self.char_id)
+        return members
 
     def add_contribute_points(self, point):
         self.mongo_union.contribute_points += point
@@ -180,23 +196,6 @@ class UnionOwner(UnionBase):
 
         return members[0].id
 
-
-    def get_battle_members(self):
-        # 获取可参加工会战的会员
-        now = arrow.utcnow().timestamp
-        hours24 = 24 * 3600
-        checkin_limit = now - hours24
-
-        members = []
-        for m in MongoUnionMember.objects.filter(joined=self.union_id):
-            if m.last_checkin_timestamp >= checkin_limit:
-                members.append(m.id)
-
-        if self.char_id in members:
-            members.remove(self.char_id)
-
-        members.insert(0, self.char_id)
-        return members
 
     def agree_join(self, char_id):
         # 同意申请
