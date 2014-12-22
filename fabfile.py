@@ -69,7 +69,7 @@ class Hub(object):
 
     def restart(self):
         with cd(self.path):
-            run("kill -HUP `cat run/hub-uwsgi.pid`")
+            run("kill -HUP `cat run/uwsgi.pid`")
 
 
 
