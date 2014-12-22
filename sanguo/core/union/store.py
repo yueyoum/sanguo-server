@@ -68,6 +68,15 @@ class UnionStore(UnionLoadBase):
 
         return cur_times
 
+    @property
+    def buff_cur_buy_cost(self):
+        times = self.buff_cur_buy_times
+        costs = {}
+        for i in BUFFS:
+            costs[i] = 50 + (times[i]+1) * 50
+
+        return costs
+
     @union_instance_check(UnionBase, errormsg.UNION_NOT_EXIST, "UnionStore Buy", "has no union")
     def buy(self, _id, amount):
         try:
@@ -79,7 +88,12 @@ class UnionStore(UnionLoadBase):
                 "item {0} not exist".format(_id)
             )
 
-        self.member.check_coin(item.union_coin, raise_exception=True, func_name="UnionStore Buy")
+        if item.tp in BUFFS:
+            cost_coin = self.buff_cur_buy_cost[item.tp]
+        else:
+            cost_coin = item.union_coin
+
+        self.member.check_coin(cost_coin, raise_exception=True, func_name="UnionStore Buy")
 
         if item.tp in BUFFS:
             self._buy_buff(_id, item.tp, amount)
@@ -88,7 +102,7 @@ class UnionStore(UnionLoadBase):
         else:
             self._buy_items(_id, item.value, amount)
 
-        self.member.cost_coin(item.union_coin)
+        self.member.cost_coin(cost_coin)
 
 
     def _buy_buff(self, _id, item_id, amount):
@@ -143,6 +157,7 @@ class UnionStore(UnionLoadBase):
         msg = protomsg.UnionStoreNotify()
         max_times = self.buff_max_buy_times
         cur_times = self.buff_cur_buy_times
+        buy_cost = self.buff_cur_buy_cost
 
         add_buffs = self.get_add_buffs_with_resource_id()
 
@@ -152,6 +167,7 @@ class UnionStore(UnionLoadBase):
             msg_buff.max_times = max_times
             msg_buff.cur_times = cur_times[i]
             msg_buff.add_value = add_buffs[i]
+            msg_buff.cost = buy_cost[i]
 
         publish_to_char(self.char_id, pack_msg(msg))
 
