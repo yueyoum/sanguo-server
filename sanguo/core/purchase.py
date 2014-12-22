@@ -195,3 +195,6 @@ class PurchaseActionIOS(BasePurchaseAction):
         self.send_reward(goods_id)
 
         return goods_id
+
+class PurchaseActioinAiyingyong(BasePurchaseAction):
+    pass
