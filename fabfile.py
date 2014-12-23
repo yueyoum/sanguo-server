@@ -37,8 +37,8 @@ def push_hub(remote):
 
 
 class Server(object):
-    def __init__(self, local_branch, parent_path, dirs):
-        self.local_branch = local_branch
+    def __init__(self, parent_path, dirs):
+        self.local_branch = get_local_server_branch()
         self.parent_path = parent_path
         self.dirs = dirs
 
@@ -76,7 +76,6 @@ class Hub(object):
 @hosts("muzhi@192.168.1.100")
 def deploy_server_on_internal():
     server = Server(
-        get_local_server_branch(),
         "/opt/sanguo",
         ["server1",]
     )
@@ -85,13 +84,19 @@ def deploy_server_on_internal():
 @hosts("developer@114.215.129.77")
 def deploy_server_on_testing():
     server = Server(
-        get_local_server_branch(),
         "/opt/sanguo",
         ["server",]
     )
     server.run()
 
 
+@hosts("developer@115.28.201.238")
+def deploy_server_on_aliyun():
+    server = Server(
+        "/opt/sanguo",
+        ["server", "server2",]
+    )
+    server.run()
 
 
 # GET CFGDATA
@@ -127,7 +132,6 @@ def upload_cfgdata_to_internal(version):
     Hub("/opt/sanguo/hub").restart()
     sleep(1)
     Server(
-        get_local_server_branch(),
         "/opt/sanguo",
         ["server1",]
     ).restart()
@@ -140,9 +144,7 @@ def upload_cfgdata_to_testing(version):
     Hub("/opt/sanguo/hub").restart()
     sleep(1)
     Server(
-        get_local_server_branch(),
         "/opt/sanguo",
         ["server",]
     ).restart()
-
 
