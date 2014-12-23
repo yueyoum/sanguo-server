@@ -237,7 +237,7 @@ ARENA_INITIAL_SCORE = 1500
 # 新用户最低积分
 ARENA_LOWEST_SCORE = 1200
 # 参与排名的积分线
-ARENA_RANK_LINE = 1550
+ARENA_RANK_LINE = 1500
 
 #########################
 #      精英关卡         #
