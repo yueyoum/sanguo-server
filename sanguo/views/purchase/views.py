@@ -72,7 +72,7 @@ def get_91_order_id(request):
     return pack_msg(response)
 
 
-@message_response("Purchase91ConfirmResponse")
+@message_response("PurchaseConfirmResponse")
 def purchase_confirm(request):
     req = request._proto
     platform = req.platform
