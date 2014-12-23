@@ -133,6 +133,17 @@ def deploy_all_on_testing():
     server.run()
 
 
+@hosts("developer@115.28.201.238")
+def deploy_all_on_aliyun():
+    Hub("/opt/sanguo/hub").run()
+
+    server = Server(
+        "/opt/sanguo",
+        ["server", "server2",]
+    )
+    server.run()
+
+
 # GET CFGDATA
 def get_cfgdata():
     dir = "/tmp/smb"
