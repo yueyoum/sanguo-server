@@ -73,7 +73,7 @@ class UnionStore(UnionLoadBase):
         times = self.buff_cur_buy_times
         costs = {}
         for i in BUFFS:
-            costs[i] = 50 + (times[i]+1) * 50
+            costs[i] = 20 + (times[i]+1) * 20
 
         return costs
 
