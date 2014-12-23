@@ -82,7 +82,7 @@ urlpatterns = patterns('',
 
                        #91
                        url(r'^purchase91/orderid/$', 'views.purchase.views.get_91_order_id'),
-                       url(r'^purchase91/confirm/$', 'views.purchase.views.purchase_91_confirm'),
+                       url(r'^purchase/confirm/$', 'views.purchase.views.purchase_confirm'),
 
 
                        url(r'^vip/getreward/$', 'views.vip.views.vip_get_reward'),

@@ -14,9 +14,9 @@ from core.msgpipe import publish_to_char
 from core.exception import SanguoException
 from core.mail import Mail
 from core.attachment import get_drop
-from utils.api import api_purchase_verify, api_purchase91_confirm
+from utils.api import api_purchase_verify, api_purchase91_confirm, api_purchase_aiyingyong_confirm
 from utils import pack_msg
-from protomsg import PurchaseStatusNotify, Purchase91ConfirmResponse
+from protomsg import PurchaseStatusNotify, PurchaseConfirmResponse
 from preset.data import PURCHASE
 from preset.settings import PURCHASE_FIRST_REWARD_PACKAGE_IDS, MAIL_PURCHASE_FIRST_CONTENT, MAIL_PURCHASE_FIRST_TITLE
 from preset import errormsg
@@ -155,19 +155,35 @@ class BasePurchaseAction(object):
         publish_to_char(self.char_id, pack_msg(msg))
 
 
-class PurchaseAction91(BasePurchaseAction):
     def check_confirm(self):
-        res = api_purchase91_confirm(data={'char_id': self.char_id})
-        print "91 confirm"
+        # for third platform
+        api = self.get_confirm_api()
+
+        res = api(data={'char_id': self.char_id})
+        print "==== PURCHASE CONFIRM ===="
         print res
 
-        response = Purchase91ConfirmResponse()
+        response = PurchaseConfirmResponse()
         response.ret = res['ret']
         if res['ret']:
             response.reason = res['data']['status']
 
         response.goods_id = res['data']['goods_id']
         return response
+
+    def get_confirm_api(self):
+        raise NotImplementedError()
+
+
+
+class PurchaseAction91(BasePurchaseAction):
+    def get_confirm_api(self):
+        return api_purchase91_confirm
+
+
+class PurchaseActioinAiyingyong(BasePurchaseAction):
+    def get_confirm_api(self):
+        return api_purchase_aiyingyong_confirm
 
 
 class PurchaseActionIOS(BasePurchaseAction):
@@ -195,6 +211,3 @@ class PurchaseActionIOS(BasePurchaseAction):
         self.send_reward(goods_id)
 
         return goods_id
-
-class PurchaseActioinAiyingyong(BasePurchaseAction):
-    pass

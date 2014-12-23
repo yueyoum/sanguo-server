@@ -28,8 +28,9 @@ api_get_checkin_data = partial(apicall, cmd=HUB_URL + '/api/checkin/get/')
 
 api_purchase_verify = partial(apicall, cmd=HUB_URL + '/api/purchase/verify/')
 
-api_purchase91_get_order_id = partial(apicall, cmd=HUB_URL + '/api/purchase91/orderid/')
-api_purchase91_confirm = partial(apicall, cmd=HUB_URL + '/api/purchase91/confirm/')
+api_purchase91_get_order_id = partial(apicall, cmd=HUB_URL + '/api/purchase/91/orderid/')
+api_purchase91_confirm = partial(apicall, cmd=HUB_URL + '/api/purchase/91/confirm/')
+api_purchase_aiyingyong_confirm = partial(apicall, cmd=HUB_URL + '/api/purchase/aiyingyong/confirm/')
 
 api_system_broadcast_get = partial(apicall, cmd=HUB_URL + '/api/system/broadcast/')
 

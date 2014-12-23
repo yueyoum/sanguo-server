@@ -4,7 +4,7 @@ __author__ = 'Wang Chao'
 __date__ = '14-6-30'
 
 from core.server import server
-from core.purchase import PurchaseAction91, PurchaseActionIOS
+from core.purchase import PurchaseAction91, PurchaseActionIOS, PurchaseActioinAiyingyong
 from core.exception import SanguoException
 from utils.decorate import message_response
 from utils.api import api_purchase91_get_order_id
@@ -72,9 +72,17 @@ def get_91_order_id(request):
     return pack_msg(response)
 
 
-
 @message_response("Purchase91ConfirmResponse")
-def purchase_91_confirm(request):
-    p = PurchaseAction91(request._char_id)
-    response = p.check_confirm()
+def purchase_confirm(request):
+    req = request._proto
+    platform = req.platform
+
+    if platform == '91':
+        p = PurchaseAction91(request._char_id)
+        response = p.check_confirm()
+    else:
+        # aiyingyong
+        p = PurchaseActioinAiyingyong(request._char_id)
+        response = p.check_confirm()
+
     return pack_msg(response)
