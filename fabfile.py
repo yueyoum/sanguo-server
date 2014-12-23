@@ -67,9 +67,22 @@ class Hub(object):
         self.local_branch = get_local_hub_branch()
         self.path = path
 
+    def run(self):
+        self.pull()
+        self.restart()
+
+    def pull(self):
+        with cd(self.path):
+            result = run(CMD_GIT_BRANCH)
+            remote_branch = result.stdout
+            if self.local_branch != remote_branch:
+                abort("local branch: {0} != remote branch: {1}".format(self.local_branch, remote_branch))
+
+            run("git pull")
+
     def restart(self):
         with cd(self.path):
-            run("kill -HUP `cat run/uwsgi.pid`")
+            run("./restart.sh")
 
 
 
@@ -95,6 +108,27 @@ def deploy_server_on_aliyun():
     server = Server(
         "/opt/sanguo",
         ["server", "server2",]
+    )
+    server.run()
+
+
+@hosts("muzhi@192.168.1.100")
+def deploy_all_on_internal():
+    Hub("/opt/sanguo/hub").run()
+
+    server = Server(
+        "/opt/sanguo",
+        ["server1",]
+    )
+    server.run()
+
+@hosts("developer@114.215.129.77")
+def deploy_all_on_testing():
+    Hub("/opt/sanguo/hub").run()
+
+    server = Server(
+        "/opt/sanguo",
+        ["server",]
     )
     server.run()
 
