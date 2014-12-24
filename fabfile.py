@@ -88,61 +88,51 @@ class Hub(object):
 
 
 @hosts("muzhi@192.168.1.100")
-def deploy_server_on_internal():
-    server = Server(
-        "/opt/sanguo",
-        ["server1",]
-    )
-    server.run()
+def deploy_internal(target='all'):
+    hub = Hub("/opt/sanguo/hub")
+    server = Server("/opt/sanguo", ["server1"])
+
+    if target == 'hub':
+        hub.run()
+    elif target == 'server':
+        server.run()
+    elif target == 'all':
+        hub.run()
+        server.run()
+    else:
+        abort("wrong target!")
+
 
 @hosts("developer@114.215.129.77")
-def deploy_server_on_testing():
-    server = Server(
-        "/opt/sanguo",
-        ["server",]
-    )
-    server.run()
+def deploy_testing(target='all'):
+    hub = Hub("/opt/sanguo/hub")
+    server = Server("/opt/sanguo", ["server"])
+
+    if target == 'hub':
+        hub.run()
+    elif target == 'server':
+        server.run()
+    elif target == 'all':
+        hub.run()
+        server.run()
+    else:
+        abort("wrong target!")
 
 
 @hosts("developer@115.28.201.238")
-def deploy_server_on_aliyun():
-    server = Server(
-        "/opt/sanguo",
-        ["server", "server2",]
-    )
-    server.run()
+def deploy_91_ios(target='all'):
+    hub = Hub("/opt/sanguo/hub")
+    server = Server("/opt/sanguo", ["server", "server2",])
 
-
-@hosts("muzhi@192.168.1.100")
-def deploy_all_on_internal():
-    Hub("/opt/sanguo/hub").run()
-
-    server = Server(
-        "/opt/sanguo",
-        ["server1",]
-    )
-    server.run()
-
-@hosts("developer@114.215.129.77")
-def deploy_all_on_testing():
-    Hub("/opt/sanguo/hub").run()
-
-    server = Server(
-        "/opt/sanguo",
-        ["server",]
-    )
-    server.run()
-
-
-@hosts("developer@115.28.201.238")
-def deploy_all_on_aliyun():
-    Hub("/opt/sanguo/hub").run()
-
-    server = Server(
-        "/opt/sanguo",
-        ["server", "server2",]
-    )
-    server.run()
+    if target == 'hub':
+        hub.run()
+    elif target == 'server':
+        server.run()
+    elif target == 'all':
+        hub.run()
+        server.run()
+    else:
+        abort("wrong target!")
 
 
 # GET CFGDATA
