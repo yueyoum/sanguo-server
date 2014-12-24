@@ -46,8 +46,8 @@ class _GetRealGoldMixin(object):
         return gold
 
 
-class HangObject(_GetRealGoldMixin):
-    __slots__ = ['city_id', 'start_time', 'logs', 'finished', 'passed_time', 'max_time', 'gold']
+class HangObject(object):
+    __slots__ = ['city_id', 'start_time', 'logs', 'finished', 'passed_time', 'max_time']
     def __init__(self, city_id, start_time, logs):
         self.city_id = city_id
         self.start_time = start_time
@@ -60,9 +60,6 @@ class HangObject(_GetRealGoldMixin):
         self.finished = time_diff >= self.max_time
 
         self.passed_time = self.max_time if self.finished else time_diff
-
-        gold = self.passed_time / 15 * BATTLES[self.city_id].normal_gold
-        self.gold = self.get_real_gold(gold, self.logs)
 
 
     def _utc_to_HH_mm(self, timestamp):
@@ -99,13 +96,13 @@ class HangObject(_GetRealGoldMixin):
         return logs
 
 
-    def make_hang_notify(self):
+    def make_hang_notify(self, gold):
         msg = HangNotify()
         msg.city_id = self.city_id
         msg.start_time = self.start_time
         msg.finished = self.finished
 
-        msg.gold = self.gold
+        msg.gold = gold
 
         logs = self.make_logs()
         msg.logs.extend(logs)
@@ -327,6 +324,7 @@ class Affairs(_GetRealGoldMixin):
 
     def send_hang_notify(self):
         ho = HangObject(self.mongo_affairs.hang_city_id, self.mongo_affairs.hang_start_at, self.mongo_affairs.logs)
-        msg = ho.make_hang_notify()
+        gold = self.get_drop()['gold']
+        msg = ho.make_hang_notify(gold)
         publish_to_char(self.char_id, pack_msg(msg))
 
