@@ -1,12 +1,10 @@
-import json
 
-from django.http import HttpResponse
-
-
-from core.character import char_initialize
+from core.character import char_initialize, Char
 from core.server import server
 
+from utils.decorate import json_return
 
+@json_return
 def character_initialize(request):
     account_id = int(request.POST['account_id'])
     server_id = server.id
@@ -21,4 +19,18 @@ def character_initialize(request):
         traceback.print_exc()
         ret = 1
 
-    return HttpResponse(json.dumps({'ret': ret}), content_type='application/json')
+    return {'ret': ret}
+
+
+@json_return
+def character_information(request):
+    char_id = int(request.POST['char_id'])
+    char = Char(char_id).mc
+    return {
+        'gold': char.gold,
+        'sycee': char.sycee,
+        'level': char.level,
+        'exp': char.exp,
+        'vip': char.vip,
+    }
+

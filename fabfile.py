@@ -83,6 +83,7 @@ class Hub(object):
     def restart(self):
         with cd(self.path):
             run("./restart.sh")
+            run("./restart_admin.sh")
 
 
 
