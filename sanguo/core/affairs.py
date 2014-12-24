@@ -235,7 +235,7 @@ class Affairs(_GetRealGoldMixin):
         vip_level = char.mc.vip
         vip_add = VIP_FUNCTION[vip_level].hang_addition
 
-        passed_time = int(ho.passed_time * _add * (1 + vip_add / 100.0))
+        passed_time = int(passed_time * _add * (1 + vip_add / 100.0))
 
         reward_gold = passed_time / 15 * battle_data.normal_gold
         reward_gold = self.get_real_gold(reward_gold, self.mongo_affairs.logs)
