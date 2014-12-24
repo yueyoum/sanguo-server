@@ -91,8 +91,7 @@ class PlunderRival(object):
             return 0
 
         affairs = Affairs(self.char_id)
-        ho = affairs.get_hang_obj()
-        gold = ho.gold
+        gold = affairs.get_drop()['gold']
 
         level_diff = self.level - level
         if level_diff > 8:
