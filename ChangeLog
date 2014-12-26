@@ -1,3 +1,15 @@
+*   2014-12-26
+
+    测试服
+
+    根据域名来返回不同的server，
+    正常的就按照平时返回即可，
+    对于新版本客户端，根据域名在nginx中特殊配置，
+    然后返回不同的server list
+
+    HUB 中  Server添加is_test字段
+
+
 *   2014-12-15
 
     每个server会链接到两个 redis instance

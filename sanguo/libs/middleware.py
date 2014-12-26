@@ -51,7 +51,7 @@ class RequestFilter(object):
                     print "PARSE VERSION_CHECK_REQUEST ERROR"
                     return HttpResponse(status=403)
 
-                if proto.version != version.version:
+                if not version.is_valid(proto.version):
                     print "==== VERSION CHECK FAILURE ===="
                     print "==== client: {0} ====".format(proto.version)
                     print "==== server: {0} ====".format(version.version)
