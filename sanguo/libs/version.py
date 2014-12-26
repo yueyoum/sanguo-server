@@ -15,7 +15,7 @@ class Version(object):
         print "==== new: {0} ====".format(self.version)
 
     def _make_version_to_tuple(self, version):
-        return tuple([int(i) for i in version.split(',')])
+        return tuple([int(i) for i in version.split('.')])
 
     def is_valid(self, version):
         self_version = self._make_version_to_tuple(self.version)
