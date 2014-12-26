@@ -8,6 +8,7 @@
     然后返回不同的server list
 
     HUB 中  Server添加is_test字段
+    SERVER config 中添加 server/test 设置
 
 
 *   2014-12-15

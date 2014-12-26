@@ -29,6 +29,7 @@ def server_register():
         'host': server.host,
         'port': server.port,
         'port_https': server.port_https,
+        'is_test': 1 if server.test else 0,
     }
 
     res = api_server_register(data)

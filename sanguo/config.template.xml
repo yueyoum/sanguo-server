@@ -12,6 +12,8 @@
             <https>0000</https>
         </port>
         <open>2014-01-01</open>
+        <!-- 是否是测试服务器 -->
+        <test>false</test>
     </server>
 
     <timezone>Asia/Shanghai</timezone>

@@ -231,6 +231,7 @@ SERVER_IP = doc.find('server/ip').text
 LISTEN_PORT_HTTP = int( doc.find('server/port/http').text )
 LISTEN_PORT_HTTPS = int( doc.find('server/port/https').text )
 SERVER_OPEN_DATE = arrow.get( doc.find('server/open').text )
+SERVER_TEST = doc.find('server/test').text == 'true'
 
 MAILGUN_ACCESS_KEY = doc.find('mailgun/key').text
 MAILGUN_SERVER_NAME = doc.find('mailgun/domain').text
