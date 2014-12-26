@@ -136,6 +136,5 @@ urlpatterns += patterns('',
                         url(r'^api/purchase/91/done/$', 'views.api.purchase.views.purchase91_done'),
                         url(r'^api/purchase/aiyingyong/done/$', 'views.api.purchase.views.purchase_aiyingyong_done'),
 
-                        # update the whole server version!
-                        url(r'^api/server/version/$', 'views.api.server.views.version_change'),
+
 )

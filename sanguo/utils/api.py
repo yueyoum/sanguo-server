@@ -33,5 +33,3 @@ api_purchase91_confirm = partial(apicall, cmd=HUB_URL + '/api/purchase/91/confir
 api_purchase_aiyingyong_confirm = partial(apicall, cmd=HUB_URL + '/api/purchase/aiyingyong/confirm/')
 
 api_system_broadcast_get = partial(apicall, cmd=HUB_URL + '/api/system/broadcast/')
-
-api_version_back = partial(apicall, cmd=HUB_URL + '/api/version/back/')
