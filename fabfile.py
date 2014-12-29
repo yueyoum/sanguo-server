@@ -57,6 +57,11 @@ class Server(object):
 
                 run("git pull")
 
+    def patch(self, f):
+        for d in self.dirs:
+            with cd(os.path.join(self.parent_path, d)):
+                run("git apply {0}".format(f))
+
     def restart(self):
         for d in self.dirs:
             with cd(os.path.join(self.parent_path, d)):
@@ -192,3 +197,20 @@ def upload_to_internal(f):
 @hosts("developer@115.28.201.238")
 def upload_to_91_ios(f):
     put(f, "/tmp")
+
+
+@hosts("muzhi@192.168.1.100")
+def hotfix_on_internal(f):
+    remote_f = "/tmp/{0}".format(os.path.basename(f))
+    put(f, remote_f)
+    s = Server("/opt/sanguo", ["server1"])
+    s.patch(remote_f)
+    s.restart()
+
+@hosts("developer@115.28.201.238")
+def hotfix_on_91_ios(f):
+    remote_f = "/tmp/{0}".format(os.path.basename(f))
+    put(f, remote_f)
+    s = Server("/opt/sanguo", ["server", "server2"])
+    s.patch(remote_f)
+    s.restart()
