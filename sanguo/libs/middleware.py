@@ -3,6 +3,8 @@
 __author__ = 'Wang Chao'
 __date__ = '4/10/14'
 
+
+from hashlib import md5
 from django.http import HttpResponse
 
 from libs import (
@@ -108,3 +110,10 @@ class RequestFilterWrapperForVersionCheck(RequestFilter):
             version_msg.ret = 0
             version_msg.version = version.version
             return HttpResponse(pack_msg(version_msg), content_type='text/plain')
+
+
+class ContentMD5(object):
+    def process_response(self, request, response):
+        md5_value = md5(response.body).hexdigest()
+        response['Content-MD5'] = md5_value
+        return response

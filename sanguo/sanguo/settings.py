@@ -106,6 +106,7 @@ MIDDLEWARE_CLASSES = (
     # 'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'libs.middleware.ContentMD5',
     'sanguo.middleware.UnpackAndVerifyData',
     'sanguo.middleware.PackMessageData',
 )
