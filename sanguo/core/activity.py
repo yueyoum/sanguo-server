@@ -48,7 +48,27 @@ class ActivityEntry(object):
         else:
             start_time = server.opened_date.replace(tzinfo=settings.TIME_ZONE)
 
-        return start_time.replace(hours=+self.activity_data.total_continued_hours)
+        if self.activity_data.tp != 4:
+            return start_time.replace(hours=+self.activity_data.total_continued_hours)
+
+        # 周比武奖励，结束时间是开服后遇到的第一个周日24：00过后
+        start_weekday = start_time.weekday()
+        day_needs = 6 - start_weekday
+        if day_needs == 0:
+            # 如果是周日开服，就把结束日期放到下个周日
+            day_needs = 7
+        if day_needs == 1:
+            # 同上，放到下个周日
+            day_needs = 8
+
+        start_time = start_time.replace(days=day_needs)
+        return arrow.Arrow(
+            year=start_time.year,
+            month=start_time.month,
+            day=start_time.day,
+            minute=0,
+            second=0,
+        )
 
     @property
     def started(self):
@@ -62,8 +82,6 @@ class ActivityEntry(object):
     @property
     def ended(self):
         # 是否结束了
-        if self.activity_data.tp == 4:
-            return False
         return arrow.utcnow() > self.continued_to
 
     @property
