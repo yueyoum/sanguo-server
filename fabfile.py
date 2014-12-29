@@ -184,3 +184,11 @@ def upload_cfgdata_to_testing(version):
         ["server",]
     ).restart()
 
+
+@hosts("muzhi@192.168.1.100")
+def upload_to_internal(f):
+    put(f, "/tmp")
+
+@hosts("developer@115.28.201.238")
+def upload_to_91_ios(f):
+    put(f, "/tmp")
