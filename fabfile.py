@@ -140,6 +140,24 @@ def deploy_91_ios(target='all'):
         abort("wrong target!")
 
 
+@hosts("developer@120.27.28.159")
+def deploy_wp(target='all'):
+    hub = Hub("/opt/sanguo/hub")
+    server = Server("/opt/sanguo", ["server1",])
+
+    if target == 'hub':
+        hub.run()
+    elif target == 'server':
+        server.run()
+    elif target == 'all':
+        hub.run()
+        server.run()
+    else:
+        abort("wrong target!")
+
+
+
+
 # GET CFGDATA
 def get_cfgdata():
     dir = "/tmp/smb"
@@ -188,6 +206,21 @@ def upload_cfgdata_to_testing(version):
         "/opt/sanguo",
         ["server",]
     ).restart()
+
+
+@hosts("developer@120.27.28.159")
+def upload_cfgdata_to_wp(version):
+    Version("/opt/sanguo/update/config").run(version)
+    sleep(1)
+    Hub("/opt/sanguo/hub").restart()
+    sleep(1)
+    Server(
+        "/opt/sanguo",
+        ["server1",]
+    ).restart()
+
+
+
 
 
 @hosts("muzhi@192.168.1.100")
