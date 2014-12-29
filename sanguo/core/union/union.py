@@ -170,6 +170,14 @@ class UnionDummy(object):
         msg.in_union = False
         publish_to_char(self.char_id, pack_msg(msg))
 
+    def quit(self):
+        raise SanguoException(
+            errormsg.UNION_NOT_EXIST,
+            self.char_id,
+            "UnionDummy Quit",
+            "union not exist"
+        )
+
 
 class UnionMember(UnionBase):
     """
