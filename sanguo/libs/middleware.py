@@ -114,6 +114,9 @@ class RequestFilterWrapperForVersionCheck(RequestFilter):
 
 class ContentMD5(object):
     def process_response(self, request, response):
-        md5_value = md5(response.body).hexdigest()
+        if response.status_code != 200:
+            return response
+        
+        md5_value = md5(response.content).hexdigest()
         response['Content-MD5'] = md5_value
         return response
