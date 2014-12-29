@@ -61,6 +61,9 @@ class ActivityEntry(object):
             # 同上，放到下个周日
             day_needs = 8
 
+        # day_needs 还得+1, 要放到周一的00：00点
+        day_needs += 1
+
         start_time = start_time.replace(days=day_needs)
         return arrow.Arrow(
             year=start_time.year,
