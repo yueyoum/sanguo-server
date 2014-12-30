@@ -54,6 +54,7 @@ class Member(object):
     def checkin(self):
         # 签到
         from core.union.union import Union
+        from core.union.battle import UnionBattle
 
         if not self.mongo_union_member.joined:
             raise SanguoException(
@@ -97,6 +98,10 @@ class Member(object):
         self.send_personal_notify()
 
         Union(self.char_id).add_contribute_points(c.got_contributes)
+
+        UnionBattle(self.char_id).send_notify()
+        owner = MongoUnion.objects.get(id=self.mongo_union_member.joined).owner
+        UnionBattle(owner).send_notify()
 
         drop = make_standard_drop_from_template()
         drop['union_coin'] = c.got_coin
