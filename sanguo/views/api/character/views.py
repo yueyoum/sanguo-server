@@ -1,4 +1,7 @@
 
+from django import forms
+
+from core.mongoscheme import MongoCharacter
 from core.character import char_initialize, Char
 from core.server import server
 from core.union.union import Union, UnionDummy
@@ -66,3 +69,32 @@ def get_joined_union(request):
         'ret': 0,
         'data': data
     }
+
+
+class ModifyCharForm(forms.Form):
+    char_id = forms.IntegerField(required=True)
+    gold = forms.IntegerField(required=False)
+    sycee = forms.IntegerField(required=False)
+    level = forms.IntegerField(required=False)
+    vip = forms.IntegerField(required=False)
+
+
+@json_return
+def character_modify(request):
+    keys = ['gold', 'sycee', 'level', 'vip']
+
+    form = ModifyCharForm(request.POST)
+    if not form.is_valid():
+        return {'ret': 1}
+
+    char_id = form.cleaned_data['char_id']
+    mongo_char = MongoCharacter.objects.get(id=char_id)
+    for k in keys:
+        value = form.cleaned_data[k]
+        if value:
+            setattr(mongo_char, k, value)
+            mongo_char.save()
+            break
+
+    return {'ret': 0}
+
