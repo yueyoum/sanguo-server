@@ -91,7 +91,7 @@ def character_modify(request):
     mongo_char = MongoCharacter.objects.get(id=char_id)
     for k in keys:
         value = form.cleaned_data[k]
-        if value:
+        if value is not None:
             setattr(mongo_char, k, value)
             mongo_char.save()
             break
