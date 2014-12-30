@@ -73,15 +73,16 @@ def get_joined_union(request):
 
 class ModifyCharForm(forms.Form):
     char_id = forms.IntegerField(required=True)
-    gold = forms.IntegerField(required=False)
-    sycee = forms.IntegerField(required=False)
-    level = forms.IntegerField(required=False)
-    vip = forms.IntegerField(required=False)
+    # gold = forms.IntegerField(required=False)
+    # sycee = forms.IntegerField(required=False)
+    # level = forms.IntegerField(required=False)
+    # vip = forms.IntegerField(required=False)
+    name = forms.CharField(required=True)
+    value = forms.IntegerField(required=True)
 
 
 @json_return
 def character_modify(request):
-    keys = ['gold', 'sycee', 'level', 'vip']
 
     form = ModifyCharForm(request.POST)
     if not form.is_valid():
@@ -89,12 +90,7 @@ def character_modify(request):
 
     char_id = form.cleaned_data['char_id']
     mongo_char = MongoCharacter.objects.get(id=char_id)
-    for k in keys:
-        value = form.cleaned_data[k]
-        if value is not None:
-            setattr(mongo_char, k, value)
-            mongo_char.save()
-            break
-
+    setattr(mongo_char, form.cleaned_data['name'], form.cleaned_data['value'])
+    mongo_char.save()
     return {'ret': 0}
 
