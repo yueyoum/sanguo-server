@@ -104,10 +104,6 @@ class UnionBase(object):
             if m.last_checkin_timestamp >= checkin_limit:
                 members.append(m.id)
 
-        if self.char_id in members:
-            members.remove(self.char_id)
-
-        members.insert(0, self.char_id)
         return members
 
     def add_contribute_points(self, point):
@@ -309,6 +305,14 @@ class UnionOwner(UnionBase):
         self.mongo_union.bulletin = bulletin
         self.mongo_union.save()
         self.send_notify()
+
+
+    def get_battle_members(self):
+        members = super(UnionOwner, self).get_battle_members()
+        if self.char_id in members:
+            members.remove(self.char_id)
+
+        members.insert(0, self.char_id)
 
 
     def send_apply_list_notify(self):
