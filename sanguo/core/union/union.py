@@ -313,6 +313,7 @@ class UnionOwner(UnionBase):
             members.remove(self.char_id)
 
         members.insert(0, self.char_id)
+        return members
 
 
     def send_apply_list_notify(self):
