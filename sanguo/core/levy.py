@@ -15,7 +15,7 @@ from core.task import Task
 from utils import pack_msg
 from protomsg import LevyNotify
 from preset import errormsg
-from preset.settings import LEVY_COST_SYCEE, LEVY_CRIT_PROB_TABLE
+from preset.settings import LEVY_COST_SYCEE
 from preset.data import VIP_MAX_LEVEL
 
 LEVY_COST_SYCEE_REV = list(LEVY_COST_SYCEE)
@@ -34,9 +34,9 @@ class Levy(object):
     def get_max_times(self):
         return self.counter.max_value
 
-    def get_levy_drop(self, multi):
+    def get_levy_drop(self):
         a = Affairs(self.char_id)
-        return a.get_drop(passed_time=3600*2, multi=multi)
+        return a.get_drop(passed_time=3600*2)
 
     def levy(self):
         char = Char(self.char_id).mc
@@ -60,13 +60,7 @@ class Levy(object):
         cost_cyess = self.get_cost_sycee()
 
         with resource.check(sycee=-cost_cyess):
-            prob = random.randint(1, 100)
-            v = 1
-            for k, v in LEVY_CRIT_PROB_TABLE:
-                if prob <= k:
-                    break
-
-            drop = self.get_levy_drop(multi=v)
+            drop = self.get_levy_drop()
 
             self.counter.incr()
             standard_drop = resource.add(**drop)
