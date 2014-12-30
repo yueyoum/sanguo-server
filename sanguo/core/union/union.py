@@ -91,6 +91,7 @@ class UnionBase(object):
         # 主动退出
         from core.union.member import Member
         Member(self.char_id).quit_union()
+        Union(self.char_id).send_notify()
 
     def get_battle_members(self):
         # 获取可参加工会战的会员
@@ -284,7 +285,6 @@ class UnionOwner(UnionBase):
             self.mongo_union.owner = next_owner
             self.mongo_union.save()
 
-        Union(self.char_id).send_notify()
         Union(owner).send_notify()
 
 
