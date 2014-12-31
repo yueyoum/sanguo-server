@@ -271,7 +271,6 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
 
     def _one_action(self, target, value, msg, eff):
-        target.active_property_effects()
 
         is_crit = False
         if self.using_crit >= uniform(1, 100):
@@ -397,6 +396,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
                 if t.die:
                     continue
 
+                t.active_property_effects()
                 value = self._get_one_action_value(t, value, eff)
 
                 self._one_action(t, value, msg, eff)
