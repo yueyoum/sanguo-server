@@ -330,7 +330,7 @@ class BattleBoss(InBattleHero):
         self.skills = [info.skill]
         self.skill_release_rounds = info.skill_rounds
         self.level = 0
-        self.original_hp = info.crit
+        self.original_hp = info.hp
 
         super(BattleBoss, self).__init__()
 
