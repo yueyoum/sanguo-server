@@ -3,36 +3,36 @@
     "pk": 1, 
     "model": "union.unionbattlereward", 
     "fields": {
-        "contribute_points": 50, 
+        "contribute_points": 2000, 
         "des": "\u7b2c\u4e00\u540d", 
-        "coin": 50
+        "coin": 500
     }
 },
 {
     "pk": 2, 
     "model": "union.unionbattlereward", 
     "fields": {
-        "contribute_points": 40, 
+        "contribute_points": 1500, 
         "des": "\u7b2c\u4e8c\u540d", 
-        "coin": 40
+        "coin": 300
     }
 },
 {
     "pk": 3, 
     "model": "union.unionbattlereward", 
     "fields": {
-        "contribute_points": 30, 
+        "contribute_points": 1000, 
         "des": "\u7b2c\u4e09\u540d", 
-        "coin": 30
+        "coin": 200
     }
 },
 {
     "pk": 10, 
     "model": "union.unionbattlereward", 
     "fields": {
-        "contribute_points": 10, 
+        "contribute_points": 800, 
         "des": "4-10\u540d", 
-        "coin": 10
+        "coin": 150
     }
 }
 ]

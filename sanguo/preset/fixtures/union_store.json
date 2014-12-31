@@ -4,9 +4,9 @@
     "model": "union.unionstore", 
     "fields": {
         "des": "", 
-        "value": 1, 
+        "value": 20, 
         "tp": 11, 
-        "union_coin": 1000
+        "union_coin": 0
     }
 },
 {
@@ -14,9 +14,9 @@
     "model": "union.unionstore", 
     "fields": {
         "des": "", 
-        "value": 1, 
+        "value": 10, 
         "tp": 12, 
-        "union_coin": 1000
+        "union_coin": 0
     }
 },
 {
@@ -24,9 +24,9 @@
     "model": "union.unionstore", 
     "fields": {
         "des": "", 
-        "value": 1, 
+        "value": 50, 
         "tp": 13, 
-        "union_coin": 1000
+        "union_coin": 0
     }
 },
 {

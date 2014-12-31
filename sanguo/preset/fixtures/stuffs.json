@@ -688,9 +688,9 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u6c57\u8840\u9a6c\u9b42\u9b44", 
-        "tip_des": "\u53ef\u5c06\u5750\u9a91\u5e7b\u5316\u6210\u6c57\u8840\u5b9d\u9a6c", 
+        "tip_des": "\u5c06\u5750\u9a91\u5e7b\u5316\u6210\u6c57\u8840\u5b9d\u9a6c\u7684\u6750\u6599", 
         "tip_type": "\u6c57\u8840\u9a6c\u9b42\u9b44", 
-        "des": "", 
+        "des": "\u5c06\u5750\u9a91\u5e7b\u5316\u6210\u6c57\u8840\u5b9d\u9a6c\u7684\u6750\u6599", 
         "buy_sycee": 300, 
         "tp": 4, 
         "default_package": null, 
@@ -706,9 +706,9 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u722a\u9ec4\u98de\u7535\u9b42\u9b44", 
-        "tip_des": "\u53ef\u5c06\u5750\u9a91\u5e7b\u5316\u6210\u540d\u9a6c\u722a\u9ec4\u98de\u7535", 
+        "tip_des": "\u5c06\u5750\u9a91\u5e7b\u5316\u6210\u540d\u9a6c\u722a\u9ec4\u98de\u7535\u7684\u6750\u6599", 
         "tip_type": "\u722a\u9ec4\u98de\u7535\u9b42\u9b44", 
-        "des": "", 
+        "des": "\u5c06\u5750\u9a91\u5e7b\u5316\u6210\u540d\u9a6c\u722a\u9ec4\u98de\u7535\u7684\u6750\u6599", 
         "buy_sycee": 400, 
         "tp": 4, 
         "default_package": null, 
@@ -724,9 +724,9 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u591c\u7167\u7389\u72ee\u5b50\u9b42\u9b44", 
-        "tip_des": "\u53ef\u5c06\u5750\u9a91\u5e7b\u5316\u8d81\u540d\u9a6c\u591c\u7167\u7389\u72ee\u5b50", 
+        "tip_des": "\u5c06\u5750\u9a91\u5e7b\u5316\u6210\u540d\u9a6c\u591c\u7167\u7389\u72ee\u5b50\u7684\u6750\u6599", 
         "tip_type": "\u591c\u7167\u7389\u72ee\u5b50\u9b42\u9b44", 
-        "des": "", 
+        "des": "\u5c06\u5750\u9a91\u5e7b\u5316\u6210\u540d\u9a6c\u591c\u7167\u7389\u72ee\u5b50\u7684\u6750\u6599", 
         "buy_sycee": 500, 
         "tp": 4, 
         "default_package": null, 
@@ -742,9 +742,9 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u7684\u5362\u9b42\u9b44", 
-        "tip_des": "\u53ef\u52a0\u5de5\u5750\u9a91\u5e7b\u5316\u6210\u540d\u9a6c\u7684\u5362", 
+        "tip_des": "\u5c06\u5750\u9a91\u5e7b\u5316\u6210\u540d\u9a6c\u7684\u5362\u7684\u6750\u6599", 
         "tip_type": "\u7684\u5362\u9b42\u9b44", 
-        "des": "", 
+        "des": "\u5c06\u5750\u9a91\u5e7b\u5316\u6210\u540d\u9a6c\u7684\u5362\u7684\u6750\u6599", 
         "buy_sycee": 1000, 
         "tp": 4, 
         "default_package": null, 
@@ -832,7 +832,7 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u5468\u51a0\u519b\u5956\u52b1", 
-        "tip_des": "\u672c\u5468\u6bd4\u6b66\u79ef\u5206\u6392\u540d\u7b2c\u4e00\u7684\u5956\u52b1", 
+        "tip_des": "\u5f00\u542f\u53ef\u968f\u673a\u83b7\u5f974\u98975\u9636\u5b9d\u77f3\u3002", 
         "tip_type": "\u5468\u51a0\u519b\u5956\u52b1", 
         "des": "\u672c\u5468\u6bd4\u6b66\u79ef\u5206\u6392\u540d\u7b2c\u4e00\u7684\u5956\u52b1", 
         "buy_sycee": 0, 
@@ -850,7 +850,7 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u5468\u4e9a\u519b\u5956\u52b1", 
-        "tip_des": "\u5468\u6bd4\u6b66\u79ef\u5206\u7b2c\u4e8c\u540d\u5956\u52b1", 
+        "tip_des": "\u5f00\u542f\u53ef\u968f\u673a\u83b7\u5f973\u98975\u9636\u5b9d\u77f3\u3002", 
         "tip_type": "\u5468\u4e9a\u519b\u5b9d\u7bb1", 
         "des": "\u5468\u6bd4\u6b66\u79ef\u5206\u7b2c\u4e8c\u540d\u5956\u52b1", 
         "buy_sycee": 0, 
@@ -868,7 +868,7 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u5468\u5b63\u519b\u5956\u52b1", 
-        "tip_des": "\u5468\u6bd4\u6b66\u79ef\u5206\u7b2c\u4e09\u540d\u5956\u52b1", 
+        "tip_des": "\u5f00\u542f\u53ef\u968f\u673a\u83b7\u5f972\u98975\u9636\u5b9d\u77f3\u3002", 
         "tip_type": "\u5468\u5b63\u519b\u5956\u52b1", 
         "des": "\u5468\u6bd4\u6b66\u79ef\u5206\u7b2c\u4e09\u540d\u5956\u52b1", 
         "buy_sycee": 0, 
@@ -886,7 +886,7 @@
     "model": "item.stuff", 
     "fields": {
         "name": "4-10\u540d\u5956\u52b1", 
-        "tip_des": "\u6bd4\u6b66\u5468\u79ef\u5206\u6392\u540d\u7b2c\u56db\u540d\u81f3\u7b2c\u5341\u540d\u5956\u52b1", 
+        "tip_des": "\u5f00\u542f\u53ef\u968f\u673a\u5f973\u98974\u9636\u5b9d\u77f3\u3002", 
         "tip_type": "\u6bd4\u6b66\u5468\u79ef\u52064-10\u540d\u5956\u52b1", 
         "des": "\u6bd4\u6b66\u5468\u79ef\u52064-10\u540d\u5956\u52b1", 
         "buy_sycee": 0, 
