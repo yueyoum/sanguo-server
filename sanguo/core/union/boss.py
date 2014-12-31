@@ -109,7 +109,7 @@ class UnionBoss(UnionLoadBase):
                 "no times"
             )
 
-        for i in range(10):
+        for i in range(5):
             self.load_data()
             this_boss = self.mongo_boss.opened[str(boss_id)]
             if this_boss.lock:
@@ -139,18 +139,20 @@ class UnionBoss(UnionLoadBase):
 
 
         msg = protomsg.Battle()
-        battle = UnionBossBattle(self.char_id, boss_id, msg, this_boss.hp)
-        remained_hp = battle.start()
-        damage = battle.get_total_damage()
 
-        this_boss.hp = remained_hp
+        try:
+            battle = UnionBossBattle(self.char_id, boss_id, msg, this_boss.hp)
+            remained_hp = battle.start()
+            damage = battle.get_total_damage()
+
+            this_boss.hp = remained_hp
+            if remained_hp <= 0:
+                this_boss.killer = self.char_id
+        finally:
+            this_boss.lock = False
+            self.mongo_boss.save()
 
         self.save_battle_log(this_boss, damage)
-        if remained_hp <= 0:
-            this_boss.killer = self.char_id
-        this_boss.lock = False
-        self.mongo_boss.save()
-
         self.incr_battle_times()
         drop_msg = self.after_battle(boss_id, damage, remained_hp<=0)
 
