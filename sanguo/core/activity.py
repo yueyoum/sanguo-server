@@ -131,7 +131,7 @@ class ActivityEntry(object):
             return char_heros_amount(char_id, filter_quality=1)
 
         if self.activity_data.tp == 3:
-            return Stage(char_id).get_max_battle_id()
+            return Stage(char_id).get_passed_max_battle_id()
 
         if self.activity_data.tp == 4:
             return Arena(char_id).rank

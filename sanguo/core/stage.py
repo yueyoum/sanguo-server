@@ -97,6 +97,16 @@ class Stage(object):
         max_stage_id = max(stage_ids)
         return STAGES[max_stage_id].battle
 
+    def get_passed_max_battle_id(self):
+        stage_ids = [int(i) for i in self.stage.stages.keys()]
+        stage_ids.sort(reverse=True)
+        for s in stage_ids:
+            if STAGES[s].battle_end:
+                return STAGES[s].battle
+
+        return 0
+
+
     def battle(self, stage_id):
         try:
             this_stage = STAGES[stage_id]
