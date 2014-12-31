@@ -343,10 +343,10 @@ class BattleBoss(InBattleHero):
         return damage
 
 
-    def _get_one_action_value(self, target, value):
+    def _get_one_action_value(self, target, value, eff):
         if self._round % self.skill_release_rounds == 0:
             return -target.hp
-        return value
+        return super(BattleBoss, self)._get_one_action_value(target, value, eff)
 
 
 class UnionBossBattle(PVE):
