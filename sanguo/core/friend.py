@@ -434,12 +434,16 @@ class Friend(object):
         else:
             msg.can_give_plunder_times = False
 
-        if fid in self.mf.plunder_senders:
-            msg.got_plunder_times_status = MsgFriend.CAN_GET
-        elif fid in self.mf.plunder_gots:
-            msg.got_plunder_times_status = MsgFriend.ALREADY_GET
-        else:
+
+        if status != FRIEND_OK:
             msg.got_plunder_times_status = MsgFriend.CAN_NOT_GET
+        else:
+            if fid in self.mf.plunder_senders:
+                msg.got_plunder_times_status = MsgFriend.CAN_GET
+            elif fid in self.mf.plunder_gots:
+                msg.got_plunder_times_status = MsgFriend.ALREADY_GET
+            else:
+                msg.got_plunder_times_status = MsgFriend.CAN_NOT_GET
 
 
 
