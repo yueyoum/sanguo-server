@@ -248,7 +248,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         else:
             m = 0.06
 
-        damage_reduce = min(0.02 * target.using_defense / (self.level + 9) + m * (target.level - self.level), 0.85)
+        damage_reduce = min(0.015 * target.using_defense / (self.level + 9) + m * (target.level - self.level), 0.75)
         damage_reduce = max(damage_reduce, -0.15)
         value = damage * (1 - damage_reduce)
 
