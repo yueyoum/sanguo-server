@@ -220,6 +220,27 @@ class Hero(FightPowerMixin):
         return self.hero.progress
 
 
+    def get_step_up_gold_needs(self):
+        if self.model_hero.quality == 1:
+            return 10000
+        if self.model_hero.quality == 2:
+            return 5000
+        if self.model_hero.quality == 3:
+            return 1000
+
+        raise RuntimeError("Invalid Hero Quality: {0}".format(self.model_hero.quality))
+
+    def get_step_up_soul_needs(self):
+        if self.model_hero.quality == 1:
+            return 100
+        if self.model_hero.quality == 2:
+            return 60
+        if self.model_hero.quality == 3:
+            return 30
+
+        raise RuntimeError("Invalid Hero Quality: {0}".format(self.model_hero.quality))
+
+
     def step_up(self):
         # 升阶
         if self.step >= HERO_MAX_STEP:
@@ -231,19 +252,17 @@ class Hero(FightPowerMixin):
             )
 
         resource_needs = {}
-        cost_gold = external_calculate.Hero.step_up_using_gold(self.model_hero.quality)
+        cost_gold = self.get_step_up_gold_needs()
 
         resource_needs['gold'] = -cost_gold
-        soul_needs_amount = external_calculate.Hero.step_up_using_soul_amount(self.model_hero.quality)
+        soul_needs_amount = self.get_step_up_soul_needs()
+
+        resource_needs['souls'] = [(self.oid, soul_needs_amount)]
 
         hs = HeroSoul(self.char_id)
         self_soul_amount = hs.soul_amount(self.oid)
-
         common_soul_needs = soul_needs_amount - self_soul_amount
-        if common_soul_needs <= 0:
-            # don't need common soul
-            resource_needs['souls'] = [(self.oid, soul_needs_amount)]
-        else:
+        if common_soul_needs > 0:
             # need common soul
             resource_needs['stuffs'] = [(22, common_soul_needs)]
 
@@ -410,6 +429,13 @@ def get_char_hero_oids(char_id):
     heros = MongoHero.objects.filter(char=char_id)
     return [h.oid for h in heros]
 
+SAVE_HERO_TO_SOUL_TABLE = {
+    1: 40,
+    2: 20,
+    3: 10
+}
+
+
 def save_hero(char_id, hero_original_ids, add_notify=True):
     if not isinstance(hero_original_ids, (list, tuple)):
         hero_original_ids = [hero_original_ids]
@@ -429,7 +455,7 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
             souls[this_hero.id] = souls.get(this_hero.id, 0) + 1
 
         for k in souls.keys():
-            souls[k] *= external_calculate.Hero.step_up_using_soul_amount(HEROS[k].quality)
+            souls[k] *= SAVE_HERO_TO_SOUL_TABLE[ HEROS[k].quality ]
 
         hs = HeroSoul(char_id)
         hs.add_soul(souls.items())
