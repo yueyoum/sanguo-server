@@ -185,6 +185,7 @@ class UnionBattleRecord(object):
         def __init__(self, team):
             self.team = team
             self.members = team[:]
+            self.members_amount = len(self.members)
 
         def get(self):
             try:
@@ -287,6 +288,10 @@ class UnionBattleRecord(object):
         msg.timestamp = self.start_at
         msg.score = self.my_new_score - self.my_union.mongo_union.score
 
+        msg.self_amount = self.my_team.members_amount
+        msg.rival_amount = self.rival_team.members_amount
+
+
         for name_1, name_2, win, hp in self.logs:
             msg_log = msg.logs.add()
             msg_log.my_name = name_1
@@ -303,6 +308,9 @@ class UnionBattleRecord(object):
         msg.win = not self.win
         msg.timestamp = self.start_at
         msg.score = self.rival_new_score - self.rival_union.mongo_union.score
+
+        msg.self_amount = self.rival_team.members_amount
+        msg.rival_amount = self.my_team.members_amount
 
         for name_1, name_2, win, hp in self.logs:
             msg_log = msg.logs.add()
@@ -333,10 +341,6 @@ class UnionBattleRecord(object):
         self.rival_union.mongo_union.save()
 
         return my_msg
-
-
-
-
 
 
 
