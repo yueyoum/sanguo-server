@@ -15,11 +15,8 @@ from core.task import Task
 from utils import pack_msg
 from protomsg import LevyNotify
 from preset import errormsg
-from preset.settings import LEVY_COST_SYCEE
 from preset.data import VIP_MAX_LEVEL
 
-LEVY_COST_SYCEE_REV = list(LEVY_COST_SYCEE)
-LEVY_COST_SYCEE_REV.sort(key = lambda item: -item[0])
 
 class Levy(object):
     def __init__(self, char_id):
@@ -27,9 +24,7 @@ class Levy(object):
         self.counter = Counter(char_id, 'levy')
 
     def get_cost_sycee(self):
-        for t, s in LEVY_COST_SYCEE_REV:
-            if self.counter.cur_value >= t:
-                return s
+        return self.counter.cur_value * 20
 
     def get_max_times(self):
         return self.counter.max_value
