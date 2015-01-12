@@ -35,7 +35,7 @@
     "pk": 3001, 
     "model": "activity.activitystatic", 
     "fields": {
-        "name": "\u901a\u5173\u526f\u672c", 
+        "name": "\u901a\u5173\u526f\u672c\u9886\u5927\u5956", 
         "continued_days": 3, 
         "current_des": "\u60a8\u5f53\u524d\u5df2\u901a\u5173${0}", 
         "start_time": null, 
