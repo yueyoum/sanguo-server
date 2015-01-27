@@ -12,7 +12,7 @@ from core.drives import redis_client_persistence
 from core.server import server
 from core.character import Char
 from core.battle import PVPFromRivalCache
-from core.mongoscheme import MongoPlunder, MongoAffairs
+from core.mongoscheme import MongoPlunder, MongoAffairs, MongoCharacter
 from core.exception import SanguoException
 from core.task import Task
 from core.prison import Prison
@@ -225,6 +225,18 @@ class Plunder(object):
 
     def plunder(self):
         if not self.mongo_plunder.char_id:
+            raise SanguoException(
+                errormsg.PLUNDER_NO_RIVAL,
+                self.char_id,
+                "Plunder Battle",
+                "no rival target"
+            )
+
+        # for delete characters
+        try:
+            MongoCharacter.objects.get(id=self.mongo_plunder.char_id)
+        except DoesNotExist:
+            self.clean_plunder_target()
             raise SanguoException(
                 errormsg.PLUNDER_NO_RIVAL,
                 self.char_id,

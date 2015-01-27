@@ -509,9 +509,20 @@ class MongoUnionBoss(Document):
 
 
 
-# OUT OF DATA. NOT IN USE
 def purge_char(char_id):
+    import random
+    from core.union.union import Union, UnionOwner
+
     char_id = int(char_id)
+
+    # 工会特殊处理
+    u = Union(char_id)
+
+    if isinstance(u, UnionOwner):
+        # 要删除的人是会长
+        print "process union"
+        u.quit(find_all=True)
+
     char_field_records = {'MongoHero'}
 
     from mongoengine.base.metaclasses import TopLevelDocumentMetaclass
@@ -545,10 +556,15 @@ def purge_char(char_id):
             m.accepting.remove(char_id)
             _changed = True
 
-        if char_id in m.plunder_gives(char_id):
+        if char_id in m.plunder_gives:
             m.plunder_gives.remove(char_id)
-        if char_id in m.plunder_gots(char_id):
+            _changed = True
+        if char_id in m.plunder_gots:
             m.plunder_gots.remove(char_id)
+            _changed = True
+        if char_id in m.plunder_senders:
+            m.plunder_senders.remove(char_id)
+            _changed = True
 
         if _changed:
             m.save()

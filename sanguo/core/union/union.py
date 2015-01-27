@@ -7,6 +7,7 @@ __date__ = '14-12-10'
 工会自身
 """
 
+import random
 import arrow
 from mongoengine import DoesNotExist, Q
 from core.mongoscheme import MongoUnion, MongoUnionMember
@@ -192,14 +193,23 @@ class UnionOwner(UnionBase):
         return char_id in self.member_list
 
 
-    def find_next_owner(self):
+    def find_next_owner(self, find_all=False):
         timestamp = arrow.utcnow().timestamp - 3600 * 24 * 3
         condition = Q(id__ne=self.char_id) & Q(joined=self.union_id) & Q(last_checkin_timestamp__gte=timestamp)
         members = MongoUnionMember.objects.filter(condition).order_by('-position')
-        if not members:
+        if members:
+            return members[0].id
+
+        if not find_all:
             return None
 
-        return members[0].id
+        members = self.member_list
+        members.remove(self.char_id)
+        if members:
+            return random.choice(members)
+
+        return None
+
 
 
     def agree_join(self, char_id):
@@ -268,13 +278,13 @@ class UnionOwner(UnionBase):
         Union(member_id, self.union_id).send_notify()
 
 
-    def quit(self):
+    def quit(self, find_all=False):
         # 主动退出
         super(UnionOwner, self).quit()
 
         owner = self.mongo_union.owner
 
-        next_owner = self.find_next_owner()
+        next_owner = self.find_next_owner(find_all=find_all)
         if not next_owner:
             self.mongo_union.delete()
         else:
