@@ -369,18 +369,8 @@ class PlunderLeaderboardWeekly(object):
     @classmethod
     def get_leaderboard(cls, length=10):
         res = redis_client_persistence.zrevrange(cls.REDISKEY, 0, length, withscores=True)
+        return [(int(char_id), int(times)) for char_id, times in res]
 
-        result = []
-        for char_id, times in res:
-            char_id, times = int(char_id), int(times)
-            try:
-                MongoCharacter.objects.get(char_id)
-            except DoesNotExist:
-                redis_client_persistence.zrem(char_id)
-            else:
-                result.append((char_id, times))
-
-        return result
 
     @classmethod
     def get_char_times(cls, char_id):

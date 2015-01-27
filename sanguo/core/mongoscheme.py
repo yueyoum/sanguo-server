@@ -512,6 +512,13 @@ class MongoUnionBoss(Document):
 def purge_char(char_id):
     import random
     from core.union.union import Union, UnionOwner
+    from core.drives import redis_client_persistence
+    from core.plunder import PlunderLeaderboardWeekly
+    from core.arena import REDIS_ARENA_KEY
+
+    redis_client_persistence.zrem(PlunderLeaderboardWeekly.REDISKEY, char_id)
+    redis_client_persistence.zrem(REDIS_ARENA_KEY, char_id)
+
 
     char_id = int(char_id)
 
