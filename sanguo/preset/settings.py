@@ -294,6 +294,9 @@ MAIL_ACTIVITY_ARENA_CONTENT = u'恭喜您在比武大会，勇夺第一活动中
 # 工会站每周奖励
 MAIL_UNION_BATTLE_REWARD_TITLE = u'工会战周奖励'
 MAIL_UNION_BATTLE_REWARD_CONTENT = u'工会战周奖励'
+# VIP
+MAIL_VIP_CHANGED_TITLE = u'VIP变更通知'
+MAIL_VIP_CHANGED_CONTENT = u'恭喜您获得VIP{0}特权，快去VIP界面领取奖励吧'
 
 
 #########################
