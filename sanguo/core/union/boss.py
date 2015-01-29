@@ -159,6 +159,7 @@ class UnionBoss(UnionLoadBase):
         if remained_hp <= 0:
             self.boss_has_been_killed(boss_id)
 
+        self.mongo_boss.save()
         return msg, drop_msg
 
 
