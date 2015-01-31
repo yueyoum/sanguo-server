@@ -8,9 +8,8 @@ import uwsgidecorators
 from cron.log import Logger
 from core.activeplayers import ActivePlayers
 
-# 每办小时清理在线用户
 
-@uwsgidecorators.cron(-30, -1, -1, -1, -1)
+@uwsgidecorators.timer(300)
 def clean(signum):
     logger = Logger("clean_active_players.log")
     logger.write("Start.")
