@@ -143,7 +143,7 @@ def deploy_91_ios(target='all'):
 @hosts("developer@120.27.28.159")
 def deploy_wp(target='all'):
     hub = Hub("/opt/sanguo/hub")
-    server = Server("/opt/sanguo", ["server1", "server2"])
+    server = Server("/opt/sanguo", ["server1", "server2", "server3"])
 
     if target == 'hub':
         hub.run()
@@ -216,7 +216,7 @@ def upload_cfgdata_to_wp(version):
     sleep(1)
     Server(
         "/opt/sanguo",
-        ["server1",]
+        ["server1", "server2", "server3"]
     ).restart()
 
 
