@@ -33,7 +33,7 @@ ARENA_WEEK_REWARD_LOWEST_RANK = max(ARENA_WEEK_REWARD.keys())
 
 def _get_reward_by_rank(rank):
     for _rank, _reward in ARENA_WEEK_REWARD_TUPLE:
-        if _rank <= rank:
+        if rank <= _rank:
             drop = make_standard_drop_from_template()
             drop['stuffs'] = [(_reward.stuff, 1)]
             return drop
