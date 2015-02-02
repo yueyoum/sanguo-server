@@ -213,11 +213,13 @@ class ActivityStatic(object):
 
             p = passed_conditions[0]
 
+            standard_drop = get_drop([p.package])
+
             mail = Mail(self.char_id)
             mail.add(
                 MAIL_ACTIVITY_ARENA_TITLE.format(value),
                 MAIL_ACTIVITY_ARENA_CONTENT.format(value),
-                attachment=json.dumps(PACKAGES[p.package])
+                attachment=json.dumps(standard_drop)
             )
 
             self.mongo_ac.send_times[str(p.id)] = 1
