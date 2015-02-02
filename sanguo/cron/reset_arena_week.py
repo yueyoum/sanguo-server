@@ -13,8 +13,8 @@ from core.mail import Mail
 from core.arena import REDIS_ARENA_KEY
 from core.drives import redis_client_persistence
 from core.achievement import Achievement
+from core.attachment import make_standard_drop_from_template
 from core.activity import ActivityStatic
-from core.item import Item
 from preset.data import ARENA_WEEK_REWARD, ACTIVITY_STATIC, ACTIVITY_STATIC_CONDITIONS
 from preset.settings import (
     MAIL_ARENA_WEEK_REWARD_CONTENT,
@@ -24,7 +24,7 @@ from preset.settings import (
 
 
 ARENA_WEEK_REWARD_TUPLE = ARENA_WEEK_REWARD.items()
-ARENA_WEEK_REWARD_TUPLE.sort(key=lambda item: -item[0])
+ARENA_WEEK_REWARD_TUPLE.sort(key=lambda item: item[0])
 
 ARENA_WEEK_REWARD_LOWEST_RANK = max(ARENA_WEEK_REWARD.keys())
 
@@ -32,15 +32,12 @@ ARENA_WEEK_REWARD_LOWEST_RANK = max(ARENA_WEEK_REWARD.keys())
 
 
 def _get_reward_by_rank(rank):
-    data = None
-
     for _rank, _reward in ARENA_WEEK_REWARD_TUPLE:
-        if _rank >= rank:
-            data = Item.get_sutff_drop(_reward.stuff)
-            break
+        if _rank <= rank:
+            drop = make_standard_drop_from_template()
+            drop['stuffs'] = [(_reward.stuff, 1)]
+            return drop
 
-    if data:
-        return json.dumps(data)
     return None
 
 
@@ -77,12 +74,15 @@ def reset(signum):
         achievement = Achievement(char_id)
         achievement.trig(10, rank)
 
-        attachment = _get_reward_by_rank(rank)
-        if not attachment:
+        reward = _get_reward_by_rank(rank)
+        if not reward:
             continue
 
         mail = Mail(char_id)
-        mail.add(MAIL_ARENA_WEEK_REWARD_TITLE, MAIL_ARENA_WEEK_REWARD_CONTENT, attachment=attachment)
+        mail.add(
+            MAIL_ARENA_WEEK_REWARD_TITLE,
+            MAIL_ARENA_WEEK_REWARD_CONTENT,
+            attachment=json.dumps(reward))
 
     logger.write("Reset Arena Week: Complete")
     logger.close()
