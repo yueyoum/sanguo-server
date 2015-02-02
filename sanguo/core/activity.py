@@ -200,6 +200,8 @@ class ActivityStatic(object):
 
             value = entry.get_current_value(self.char_id)
             passed, not_passed = entry.select_conditions(value)
+            if not passed:
+                continue
 
             for i in self.mongo_ac.send_times.keys():
                 if int(i) in passed:
