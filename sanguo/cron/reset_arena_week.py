@@ -67,6 +67,8 @@ def reset(signum):
         char_id = data[0]
         score = data[1]
 
+        ActivityStatic(char_id).send_mail()
+
         if score < ARENA_RANK_LINE:
             continue
 
@@ -79,8 +81,6 @@ def reset(signum):
 
         mail = Mail(char_id)
         mail.add(MAIL_ARENA_WEEK_REWARD_TITLE, MAIL_ARENA_WEEK_REWARD_CONTENT, attachment=attachment)
-
-        ActivityStatic(char_id).send_mail()
 
     logger.write("Reset Arena Week: Complete")
     logger.close()

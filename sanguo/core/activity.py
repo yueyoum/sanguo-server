@@ -4,6 +4,7 @@ __author__ = 'Wang Chao'
 __date__ = '14-11-4'
 
 import operator
+import json
 
 import arrow
 
@@ -190,8 +191,8 @@ class ActivityStatic(object):
             if v.tp == 4:
                 activities.append(k)
 
-        for i in activities:
-            entry = ActivityEntry(i)
+        for ac in activities:
+            entry = ActivityEntry(ac)
 
             if not entry.is_valid():
                 # 这组活动不可用
@@ -214,7 +215,7 @@ class ActivityStatic(object):
             mail.add(
                 MAIL_ACTIVITY_ARENA_TITLE.format(value),
                 MAIL_ACTIVITY_ARENA_CONTENT.format(value),
-                attachment=PACKAGES[p.package]
+                attachment=json.dumps(PACKAGES[p.package])
             )
 
             self.mongo_ac.send_times[str(p.id)] = 1
