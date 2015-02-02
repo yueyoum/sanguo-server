@@ -15,7 +15,7 @@ from core.drives import redis_client_persistence
 from core.achievement import Achievement
 from core.activity import ActivityStatic
 from core.item import Item
-from preset.data import ARENA_WEEK_REWARD
+from preset.data import ARENA_WEEK_REWARD, ACTIVITY_STATIC, ACTIVITY_STATIC_CONDITIONS
 from preset.settings import (
     MAIL_ARENA_WEEK_REWARD_CONTENT,
     MAIL_ARENA_WEEK_REWARD_TITLE,
@@ -44,6 +44,17 @@ def _get_reward_by_rank(rank):
     return None
 
 
+def get_rank_data(lowest_rank):
+    score_data = redis_client_persistence.zrevrange(REDIS_ARENA_KEY, 0, lowest_rank-1, withscores=True)
+
+    rank_data = []
+    for char_id, score in score_data:
+        rank_data.append( (int(char_id), score, Char(int(char_id)).power) )
+
+    rank_data.sort(key=lambda item: (-item[1], -item[2]))
+    return rank_data
+
+
 
 @uwsgidecorators.cron(30, 21, -1, -1, 0)
 def reset(signum):
@@ -52,22 +63,13 @@ def reset(signum):
     logger = Logger("reset_arena_week.log")
     logger.write("Reset Arena Week: Start. chars amount: {0}".format(amount))
 
-    score_data = redis_client_persistence.zrevrange(REDIS_ARENA_KEY, 0, ARENA_WEEK_REWARD_LOWEST_RANK-1, withscores=True)
+    # 每周奖励
+    rank_data = get_rank_data(ARENA_WEEK_REWARD_LOWEST_RANK)
 
-    rank_data = []
-    for char_id, score in score_data:
-        rank_data.append( (int(char_id), score, Char(int(char_id)).power) )
-
-    rank_data.sort(key=lambda item: (-item[1], -item[2]))
-
-
-    # 发送奖励
     for index, data in enumerate(rank_data):
         rank = index + 1
         char_id = data[0]
         score = data[1]
-
-        ActivityStatic(char_id).send_mail()
 
         if score < ARENA_RANK_LINE:
             continue
@@ -84,3 +86,17 @@ def reset(signum):
 
     logger.write("Reset Arena Week: Complete")
     logger.close()
+
+    # 开服比武奖励
+    _activity_anera_values = []
+    for _ac in ACTIVITY_STATIC_CONDITIONS.values():
+        if ACTIVITY_STATIC[_ac.activity_id].tp == 4:
+            _activity_anera_values.append(_ac.condition_value)
+
+    LOWEST_RANK = max(_activity_anera_values)
+    rank_data = get_rank_data(LOWEST_RANK)
+    for index, data in enumerate(rank_data):
+        char_id = data[0]
+
+        ActivityStatic(char_id).send_mail()
+
