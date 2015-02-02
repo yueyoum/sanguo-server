@@ -487,7 +487,7 @@ class EliteStage(object):
             drop_hero_ids = this_stage.drop_hero_ids
             if drop_hero_ids:
                 _drop_id = random.choice([int(i) for i in drop_hero_ids.split(',')])
-                prepare_drop['heros'].extend((_drop_id, 1))
+                prepare_drop['heros'].append((_drop_id, 1))
 
         resource = Resource(self.char_id, "EliteStage Drop", "stage {0}".format(this_stage.id))
         standard_drop = resource.add(**prepare_drop)
