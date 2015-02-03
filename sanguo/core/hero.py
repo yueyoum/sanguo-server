@@ -14,7 +14,6 @@ from core.horse import Horse
 from core.msgpipe import publish_to_char
 from core.common import FightPowerMixin
 
-from utils import cache
 from utils import pack_msg
 from utils.functional import id_generator
 
@@ -191,21 +190,6 @@ class Hero(FightPowerMixin):
             value = getattr(self, k)
             new_value = int(value + v)
             setattr(self, k, new_value)
-
-
-    def save_cache(self):
-        cache.set('hero:{0}'.format(self.id), self)
-
-    @staticmethod
-    def cache_obj(hid):
-        h = cache.get('hero:{0}'.format(hid))
-        if h:
-            return h
-
-        h = Hero(hid)
-        h.save_cache()
-        return h
-
 
     @property
     def max_socket_amount(self):

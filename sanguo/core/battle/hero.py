@@ -433,7 +433,7 @@ class BattleHero(InBattleHero):
     HERO_TYPE = 1
 
     def __init__(self, _id):
-        hero = Hero.cache_obj(_id)
+        hero = Hero(_id)
         self.id = _id
         self.real_id = _id
         self.original_id = hero.oid

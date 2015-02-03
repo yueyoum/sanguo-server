@@ -7,20 +7,14 @@ from core.signals import (
 )
 
 from core.notify import update_hero_notify
-from core.hero import Hero, char_heros_dict
+from core.hero import char_heros_obj
 from core.achievement import Achievement
 from core.stage import ActivityStage
 from core.activity import ActivityStatic
 
 
 def _all_hero_changed(char_id):
-    heros_dict = char_heros_dict(char_id)
-    heros = []
-    for hid in heros_dict.keys():
-        h = Hero(hid)
-        h.save_cache()
-        heros.append(h)
-
+    heros = char_heros_obj(char_id)
     update_hero_notify(char_id, heros)
 
 def _global_buff_changed(char_id, **kwargs):
