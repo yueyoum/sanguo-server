@@ -311,6 +311,9 @@ class Affairs(_GetRealGoldMixin):
         self.mongo_affairs.save()
         self.send_hang_notify()
 
+        achievement = Achievement(self.char_id)
+        achievement.trig(33, 1)
+
 
     def send_city_notify(self):
         msg = CityNotify()
