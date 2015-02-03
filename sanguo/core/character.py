@@ -86,7 +86,7 @@ class Char(object):
         for hid in hero_ids:
             if hid == 0:
                 continue
-            h = Hero(hid)
+            h = Hero.cache_obj(hid)
             p += h.power
         return p
 

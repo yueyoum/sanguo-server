@@ -14,6 +14,7 @@ from core.horse import Horse
 from core.msgpipe import publish_to_char
 from core.common import FightPowerMixin
 
+from utils import cache
 from utils import pack_msg
 from utils.functional import id_generator
 
@@ -30,7 +31,13 @@ def char_heros_dict(char_id):
 
 def char_heros_obj(char_id):
     heros = char_heros_dict(char_id)
-    return [Hero(i) for i in heros.keys()]
+    result = []
+    for hid in heros.keys():
+        h = Hero(hid)
+        h.save_cache()
+        result.append(h)
+
+    return result
 
 def char_heros_amount(char_id, filter_quality=None):
     heros = char_heros_dict(char_id).values()
@@ -98,6 +105,22 @@ class Hero(FightPowerMixin):
         self._add_equip_attrs()
         self._add_achievement_buffs()
         self._add_global_buffs()
+
+
+    def save_cache(self):
+        cache.set('hero:{0}'.format(self.id), self)
+
+
+    @staticmethod
+    def cache_obj(hid):
+        h = cache.get('hero:{0}'.format(hid))
+        if h:
+            return h
+
+        h = Hero(hid)
+        h.save_cache()
+        return h
+
 
     def _add_equip_attrs(self):
         from core.item import Equipment

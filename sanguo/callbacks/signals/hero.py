@@ -28,7 +28,7 @@ from core.msgpipe import publish_to_char
 
 def _hero_add(char_id, hero_ids, hero_original_ids, send_notify, **kwargs):
     if send_notify:
-        heros = [Hero(i) for i in hero_ids]
+        heros = [Hero.cache_obj(i) for i in hero_ids]
         add_hero_notify(char_id, heros)
 
     heros_dict = char_heros_dict(char_id)
@@ -66,6 +66,7 @@ def _hero_del(char_id, hero_ids, **kwargs):
 
 def _hero_change(hero_id, **kwargs):
     hero = Hero(hero_id)
+    hero.save_cache()
 
     update_hero_notify(
         hero.char_id,
