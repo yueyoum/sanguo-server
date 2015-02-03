@@ -29,6 +29,7 @@ import protomsg
 
 
 UNION_BOSS_KILLER_REWARD = UNION_BOSS_REWARD.pop(0)
+UNION_BOSS_REWARD_LOWEST_RANK = max(UNION_BOSS_REWARD.keys())
 
 
 class UnionBoss(UnionLoadBase):
@@ -265,18 +266,28 @@ class UnionBoss(UnionLoadBase):
         msg = protomsg.UnionBossGetLogResponse()
         msg.ret = 0
         msg.boss_id = boss_id
+
+        logs = []
+
         for log in self.get_battle_members_in_ordered(boss_id):
-            msg_log = msg.logs.add()
+            msg_log = protomsg.UnionBossGetLogResponse.BossLog()
             msg_log.char_id = log.char_id
             msg_log.char_name = Char(log.char_id).mc.name
             msg_log.damage = log.damage
             msg_log.precent = int(log.damage/hp * 100)
 
+            logs.append(msg_log)
+
         if this_boss.killer:
-            for log in msg.logs:
+            for log in logs:
                 if log.char_id == this_boss.killer:
                     msg.killer.MergeFrom(log)
                     break
+
+        for log in logs[:UNION_BOSS_REWARD_LOWEST_RANK]:
+            msg_log = msg.logs.add()
+            msg_log.MergeFrom(log)
+
         return msg
 
 
