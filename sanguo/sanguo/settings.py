@@ -218,8 +218,6 @@ MONGODB_DB = doc.find('mongodb/db').text
 
 CRYPTO_KEY = doc.find('crypto/key').text
 
-CACHE_SECONDS = int( doc.find('cache/seconds').text )
-
 HUB_HOST = doc.find('hub/host').text
 HUB_HTTPS_PORT = int( doc.find('hub/port/https').text )
 

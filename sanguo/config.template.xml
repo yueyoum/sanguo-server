@@ -23,11 +23,6 @@
         <port>6379</port>
     </redis>
 
-    <!--在redis中cache数据的时间-->
-    <cache>
-        <seconds>3600</seconds>
-    </cache>
-
     <!--是否输出战斗log-->
     <battle>
         <log>false</log>

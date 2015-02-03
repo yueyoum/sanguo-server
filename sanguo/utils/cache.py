@@ -1,11 +1,10 @@
 import cPickle
 from cPickle import HIGHEST_PROTOCOL
 
-from django.conf import settings
 from core.drives import redis_client
 
 
-CACHE_SECONDS = settings.CACHE_SECONDS
+CACHE_SECONDS = 3600
 
 
 def set(key, obj, expire=CACHE_SECONDS):
