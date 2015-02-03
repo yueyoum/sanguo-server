@@ -338,7 +338,7 @@ OPERATE_INTERVAL_PLUNDER_BATTLE = 2        # 掠夺战斗间隔
 # 应用场景：
 #   1 发送聊天。只给在线用户发送
 #   2 统计服务器压力
-PLAYER_ON_LINE_TIME_TO_ALIVE = 60 * 30
+PLAYER_ON_LINE_TIME_TO_ALIVE = 60 * 10  # 10分钟
 # 过期强制登录
 PLAYER_SESSION_EXPIRE = 3600
 
