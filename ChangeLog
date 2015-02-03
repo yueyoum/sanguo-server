@@ -1,3 +1,13 @@
+*   2015-02-03
+
+    去掉 redis_persistence
+    更新重启服务器前首先运行：
+
+    python manage.py shell
+    from core.plunder import PlunderLeaderboardWeekly
+    PlunderLeaderboardWeekly.load_from_redis()
+
+
 *   2015-01-04
 
     UnionBattleRecord 添加了新的字段，为了兼容，更新前把以前旧的删除

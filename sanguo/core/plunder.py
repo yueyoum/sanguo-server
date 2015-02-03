@@ -8,11 +8,9 @@ import time
 import random
 
 from mongoscheme import DoesNotExist
-from core.drives import redis_client_persistence
-from core.server import server
 from core.character import Char
 from core.battle import PVPFromRivalCache
-from core.mongoscheme import MongoPlunder, MongoAffairs, MongoCharacter
+from core.mongoscheme import MongoPlunder, MongoAffairs, MongoCharacter, MongoPlunderBoard
 from core.exception import SanguoException
 from core.task import Task
 from core.prison import Prison
@@ -360,33 +358,62 @@ class Plunder(object):
 
 
 class PlunderLeaderboardWeekly(object):
-    REDISKEY = '_plunder_leaderboard_weekly:{0}'.format(server.id)
+    @staticmethod
+    def incr(char_id, times=1):
+        try:
+            board = MongoPlunderBoard.objects.get(id=char_id)
+        except DoesNotExist:
+            board = MongoPlunderBoard(id=char_id)
+            board.times = 0
 
-    @classmethod
-    def incr(cls, char_id, times=1):
-        redis_client_persistence.zincrby(cls.REDISKEY, char_id, times)
-
-    @classmethod
-    def get_leaderboard(cls, length=10):
-        res = redis_client_persistence.zrevrange(cls.REDISKEY, 0, length, withscores=True)
-        return [(int(char_id), int(times)) for char_id, times in res]
+        board.times += times
+        board.save()
 
 
-    @classmethod
-    def get_char_times(cls, char_id):
-        res = redis_client_persistence.zscore(cls.REDISKEY, char_id)
-        return int(res) if res else 0
+    @staticmethod
+    def get_leaderboard(length=10):
+        boards = MongoPlunderBoard.objects.order_by('-times').limit(length)
+        return [(b.id, b.times) for b in boards]
 
-    @classmethod
-    def clean(cls):
-        redis_client_persistence.delete(cls.REDISKEY)
 
-    @classmethod
-    def make_get_response(cls):
+    @staticmethod
+    def get_char_times(char_id):
+        try:
+            board = MongoPlunderBoard.objects.get(id=char_id)
+        except DoesNotExist:
+            board = MongoPlunderBoard(id=char_id)
+            board.times = 0
+            board.save()
+
+        return board.times
+
+    @staticmethod
+    def clean():
+        MongoPlunderBoard.drop_collection()
+
+    @staticmethod
+    def make_get_response():
         msg = GetPlunderLeaderboardResponse()
         msg.ret = 0
-        for cid, times in cls.get_leaderboard():
+        for cid, times in PlunderLeaderboardWeekly.get_leaderboard():
             leader = msg.leaders.add()
             leader.char.MergeFrom(create_character_infomation_message(cid))
             leader.times = times
         return msg
+
+
+    @staticmethod
+    def load_from_redis():
+        # 仅运行一次，用作将redis中的数据导入mongodb
+        # 因为已经清除redis_persistence的配置，所以这里写死，先前的配置是 127.0.0.1:6380
+        import redis
+        from core.server import server
+        REDISKEY = '_plunder_leaderboard_weekly:{0}'.format(server.id)
+
+        r = redis.Redis(host='127.0.0.1', port=6380)
+        data = r.zrange(REDISKEY, 0, -1, withscores=True)
+        for char_id, times in data:
+            char_id = int(char_id)
+            times = int(times)
+
+            PlunderLeaderboardWeekly.incr(char_id, times)

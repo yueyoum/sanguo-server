@@ -8,10 +8,10 @@ import json
 import uwsgidecorators
 
 from cron.log import Logger
-from core.drives import redis_client_persistence
+
+from core.arena import ArenaScoreManager
 from core.attachment import make_standard_drop_from_template
 from core.mail import Mail
-from core.arena import REDIS_ARENA_KEY
 from preset.data import ARENA_DAY_REWARD_TUPLE
 from preset.settings import MAIL_ARENA_DAY_REWARD_CONTENT, MAIL_ARENA_DAY_REWARD_TITLE
 
@@ -27,15 +27,14 @@ def _get_reward_by_score(score):
 
     return None
 
-# 周一到周六21：00比武积分奖励
+# 周一到周六21：30比武积分奖励
 
 def main(signum):
     logger = Logger('reset_arena_day.log')
 
-    amount = redis_client_persistence.zcard(REDIS_ARENA_KEY)
+    arena_scores = ArenaScoreManager.get_all()
+    amount = len(arena_scores)
     logger.write("Reset Arena Day: Start. chars amount: {0}".format(amount))
-
-    arena_scores = redis_client_persistence.zrange(REDIS_ARENA_KEY, 0, -1, withscores=True)
 
     for char_id, score in arena_scores:
         attachment = _get_reward_by_score(score)

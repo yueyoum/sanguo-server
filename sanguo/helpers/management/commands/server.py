@@ -4,7 +4,6 @@ __author__ = 'Wang Chao'
 __date__ = '14-7-8'
 
 from django.core.management.base import BaseCommand
-from core.server import server
 
 class Command(BaseCommand):
     help = """server stuffs. args:
@@ -25,11 +24,10 @@ class Command(BaseCommand):
             self.stdout.write(self.help)
 
     def _cmd_check(self):
-        from core.drives import redis_client, redis_client_persistence
+        from core.drives import redis_client
         from startup import main
 
         redis_client.ping()
-        redis_client_persistence.ping()
         main()
 
     def _cmd_status(self):

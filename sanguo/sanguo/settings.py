@@ -208,11 +208,9 @@ ENABLE_TEST_MODE = doc.find('testmode').text == "true"
 
 EMAIL_NAME = doc.find('email/name').text
 
-REDIS_CACHE_HOST = doc.find('redis[@type="cache"]/host').text
-REDIS_CACHE_PORT = int( doc.find('redis[@type="cache"]/port').text )
+REDIS_HOST = doc.find('redis/host').text
+REDIS_PORT = int( doc.find('redis/port').text )
 
-REDIS_PERSISTENCE_HOST = doc.find('redis[@type="persistence"]/host').text
-REDIS_PERSISTENCE_PORT = int( doc.find('redis[@type="persistence"]/port').text )
 
 MONGODB_HOST = doc.find('mongodb/host').text
 MONGODB_PORT = int( doc.find('mongodb/port').text )

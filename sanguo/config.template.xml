@@ -18,13 +18,9 @@
 
     <timezone>Asia/Shanghai</timezone>
 
-    <redis type="cache">
+    <redis>
         <host>127.0.0.1</host>
-        <port>6380</port>
-    </redis>
-    <redis type="persistence">
-        <host>127.0.0.1</host>
-        <port>6381</port>
+        <port>6379</port>
     </redis>
 
     <!--在redis中cache数据的时间-->

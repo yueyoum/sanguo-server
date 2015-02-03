@@ -8,10 +8,10 @@ import json
 import uwsgidecorators
 
 from cron.log import Logger
+
+from core.arena import ArenaScoreManager
 from core.character import Char
 from core.mail import Mail
-from core.arena import REDIS_ARENA_KEY
-from core.drives import redis_client_persistence
 from core.achievement import Achievement
 from core.attachment import make_standard_drop_from_template
 from core.activity import ActivityStatic
@@ -30,7 +30,6 @@ ARENA_WEEK_REWARD_LOWEST_RANK = max(ARENA_WEEK_REWARD.keys())
 
 # 周日21：30发送周比武奖励
 
-
 def _get_reward_by_rank(rank):
     for _rank, _reward in ARENA_WEEK_REWARD_TUPLE:
         if rank <= _rank:
@@ -42,11 +41,13 @@ def _get_reward_by_rank(rank):
 
 
 def get_rank_data(lowest_rank):
-    score_data = redis_client_persistence.zrevrange(REDIS_ARENA_KEY, 0, lowest_rank-1, withscores=True)
+    # lowest_rank 最低排名，可以视为按照score从高到底排序后，最多要取多少人
+    score_data = ArenaScoreManager.get_all_desc(lowest_rank)
 
+    # 对于相同积分的人，用战斗力排序
     rank_data = []
     for char_id, score in score_data:
-        rank_data.append( (int(char_id), score, Char(int(char_id)).power) )
+        rank_data.append( (char_id, score, Char(char_id).power) )
 
     rank_data.sort(key=lambda item: (-item[1], -item[2]))
     return rank_data
@@ -55,10 +56,7 @@ def get_rank_data(lowest_rank):
 
 @uwsgidecorators.cron(30, 21, -1, -1, 0)
 def reset(signum):
-    amount = redis_client_persistence.zcard(REDIS_ARENA_KEY)
-
     logger = Logger("reset_arena_week.log")
-    logger.write("Reset Arena Week: Start. chars amount: {0}".format(amount))
 
     # 每周奖励
     rank_data = get_rank_data(ARENA_WEEK_REWARD_LOWEST_RANK)
@@ -99,4 +97,3 @@ def reset(signum):
         char_id = data[0]
 
         ActivityStatic(char_id).send_mail()
-

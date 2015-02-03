@@ -5,9 +5,8 @@ __date__ = '1/22/14'
 
 import random
 
-from mongoengine import DoesNotExist
-from core.drives import redis_client_persistence
-from core.server import server
+from mongoengine import DoesNotExist, Q
+from core.drives import redis_client
 from core.character import Char
 from core.battle import PVP
 from core.counter import Counter
@@ -36,7 +35,6 @@ from preset.settings import (
 )
 
 
-REDIS_ARENA_KEY = "arena:{0}".format(server.id)
 REDIS_ARENA_BATTLE_CD_KEY = lambda _id: "arena:cd:{0}".format(_id)
 
 
@@ -55,17 +53,63 @@ def calculate_score(my_score, rival_score, win):
     return int(score)
 
 
-def get_arena_init_score():
-    # 竞技场初始化积分
-    lowest = redis_client_persistence.zrange(REDIS_ARENA_KEY, 0, 0, withscores=True)
-    if not lowest:
-        return ARENA_INITIAL_SCORE
 
-    char_id, score = lowest[0]
-    score = int(score)
-    if score < ARENA_LOWEST_SCORE:
-        score = ARENA_LOWEST_SCORE
-    return score
+class ArenaScoreManager(object):
+    @staticmethod
+    def get_init_score():
+        # 获得初始积分
+        lowest = MongoArena.objects.order_by('score').limit(1)
+        if not lowest:
+            return ARENA_INITIAL_SCORE
+
+        lowest = lowest[0]
+        score = int(lowest.score)
+        if score < ARENA_LOWEST_SCORE:
+            score = ARENA_LOWEST_SCORE
+        return score
+
+    @staticmethod
+    def get_all():
+        chars = MongoArena.objects.order_by('score')
+        return [(c.id, c.score) for c in chars]
+
+    @staticmethod
+    def get_all_desc(amount=None):
+        if amount is None:
+            chars = MongoArena.objects.order_by('-score')
+        else:
+            chars = MongoArena.objects.order_by('-score').limit(amount)
+
+        return [(c.id, c.score) for c in chars]
+
+    @staticmethod
+    def get_char_score(char_id):
+        return MongoArena.objects.get(id=char_id).score
+
+    @staticmethod
+    def get_char_rank(char_score):
+        rank = MongoArena.objects.filter(score__gt=char_score).count()
+        return rank + 1
+
+    @staticmethod
+    def get_top_ranks(amount=10):
+        ranks = MongoArena.objects.order_by('-score').limit(amount)
+        return [(r.id, r.score) for r in ranks]
+
+    @staticmethod
+    def get_chars_by_score(low_score=None, high_score=None):
+        condition = None
+        if low_score:
+            condition = Q(score__gte=low_score)
+        if high_score:
+            condition = condition & Q(score__lte=high_score)
+
+        if condition is None:
+            chars = MongoArena.objects.all()
+        else:
+            chars = MongoArena.objects.filter(condition)
+
+        return [c.id for c in chars]
 
 
 class Arena(object):
@@ -83,25 +127,20 @@ class Arena(object):
             self.mongo_arena = MongoArena.objects.get(id=self.char_id)
         except DoesNotExist:
             self.mongo_arena = MongoArena(id=self.char_id)
-            self.mongo_arena.score = get_arena_init_score()
+            self.mongo_arena.score = ArenaScoreManager.get_init_score()
             self.mongo_arena.save()
-
-        if not self.score:
-            redis_client_persistence.zadd(REDIS_ARENA_KEY, self.char_id, self.mongo_arena.score)
 
 
     @property
     def score(self):
-        score = redis_client_persistence.zscore(REDIS_ARENA_KEY, self.char_id)
-        return int(score) if score else 0
+        return self.mongo_arena.score
 
     @property
     def rank(self):
         if self.score < ARENA_RANK_LINE:
             return 5000
 
-        rank = redis_client_persistence.zrevrank(REDIS_ARENA_KEY, self.char_id)
-        return rank+1 if rank is not None else 0
+        return ArenaScoreManager.get_char_rank(self.score)
 
 
     @property
@@ -115,14 +154,12 @@ class Arena(object):
         return c.remained_value
 
     def set_score(self, score):
-        redis_client_persistence.zadd(REDIS_ARENA_KEY, self.char_id, score)
         self.mongo_arena.score = score
         self.mongo_arena.save()
 
     @classmethod
     def get_top_ranks(cls, amount=10):
-        data = redis_client_persistence.zrevrange(REDIS_ARENA_KEY, 0, amount-1, withscores=True)
-        return [(int(char_id), int(score)) for char_id, score in data]
+        return ArenaScoreManager.get_top_ranks(amount=amount)
 
     def send_notify(self):
         if self.mongo_arena is None:
@@ -164,21 +201,21 @@ class Arena(object):
         my_score = self.score
 
         def _find(low_score, high_score):
-            choosing = redis_client_persistence.zrangebyscore(REDIS_ARENA_KEY, low_score, high_score)
+            choosing = ArenaScoreManager.get_chars_by_score(low_score=low_score, high_score=high_score)
             if not choosing:
                 return None
 
-            if str(self.char_id) in choosing:
-                choosing.remove(str(self.char_id))
+            if self.char_id in choosing:
+                choosing.remove(self.char_id)
 
             while choosing:
                 got = random.choice(choosing)
                 # check cd
-                if redis_client_persistence.ttl(REDIS_ARENA_BATTLE_CD_KEY(got)) > 0:
+                if redis_client.ttl(REDIS_ARENA_BATTLE_CD_KEY(got)) > 0:
                     choosing.remove(got)
                     continue
 
-                return int(got)
+                return got
 
             return None
 
@@ -190,11 +227,11 @@ class Arena(object):
         if got:
             return got
 
-        choosing = redis_client_persistence.zrangebyscore(REDIS_ARENA_KEY, int(my_score * 1.2), '+inf')
+        choosing = ArenaScoreManager.get_chars_by_score(low_score=int(my_score * 1.2), high_score=None)
         if choosing:
-            if str(self.char_id) in choosing:
-                choosing.remove(str(self.char_id))
-            return int(choosing[0])
+            if self.char_id in choosing:
+                choosing.remove(self.char_id)
+            return choosing[0]
         return None
 
 
@@ -238,7 +275,7 @@ class Arena(object):
         counter.incr()
 
         # set battle cd
-        redis_client_persistence.setex(REDIS_ARENA_BATTLE_CD_KEY(rival_id), 1, ARENA_CD)
+        redis_client.setex(REDIS_ARENA_BATTLE_CD_KEY(rival_id), 1, ARENA_CD)
 
         msg = protomsg.Battle()
         b = PVP(self.char_id, rival_id, msg)
