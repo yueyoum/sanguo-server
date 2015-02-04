@@ -1,0 +1,65 @@
+[
+{
+    "pk": 1, 
+    "model": "wuxing.wuxinglevel", 
+    "fields": {
+        "exp": 10
+    }
+},
+{
+    "pk": 2, 
+    "model": "wuxing.wuxinglevel", 
+    "fields": {
+        "exp": 70
+    }
+},
+{
+    "pk": 3, 
+    "model": "wuxing.wuxinglevel", 
+    "fields": {
+        "exp": 180
+    }
+},
+{
+    "pk": 4, 
+    "model": "wuxing.wuxinglevel", 
+    "fields": {
+        "exp": 380
+    }
+},
+{
+    "pk": 5, 
+    "model": "wuxing.wuxinglevel", 
+    "fields": {
+        "exp": 750
+    }
+},
+{
+    "pk": 6, 
+    "model": "wuxing.wuxinglevel", 
+    "fields": {
+        "exp": 1430
+    }
+},
+{
+    "pk": 7, 
+    "model": "wuxing.wuxinglevel", 
+    "fields": {
+        "exp": 2740
+    }
+},
+{
+    "pk": 8, 
+    "model": "wuxing.wuxinglevel", 
+    "fields": {
+        "exp": 5370
+    }
+},
+{
+    "pk": 9, 
+    "model": "wuxing.wuxinglevel", 
+    "fields": {
+        "exp": 10910
+    }
+}
+]

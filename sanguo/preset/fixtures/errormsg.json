@@ -1,5 +1,16 @@
 [
 {
+    "pk": 0, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "NETOWRK_DEFAULT_ERROR", 
+        "text_zh": "\u4e3b\u516c\uff0c\u7f51\u7edc\u73af\u5883\u592a\u5dee\u4e86\uff0c\u5f71\u54cd\u6e38\u620f\u4f53\u9a8c\uff0c\u5148\u91cd\u8bd5\u4e00\u4e0b\u54e6", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
     "pk": 99, 
     "model": "errormsg.errormsg", 
     "fields": {
@@ -1831,6 +1842,28 @@
     "fields": {
         "error_index": "UNION_BOSS_LOCKED", 
         "text_zh": "\u5de5\u4f1aBOSS\u6b63\u5728\u88ab\u522b\u4eba\u653b\u51fb\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5800, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "WUXING_NOT_FOR_THIS_HERO", 
+        "text_zh": "\u6b66\u5c06\u6ca1\u6709\u6b64\u4e94\u884c\u5c5e\u6027", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
+    "pk": 5810, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "HERO_CANNOT_BREAK_IN_FORMATION", 
+        "text_zh": "\u6b64\u6b66\u5c06\u5728\u9635\u6cd5\u4e2d\uff0c\u65e0\u6cd5\u5206\u89e3", 
         "link_to": null, 
         "des": "", 
         "area": ""

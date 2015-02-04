@@ -1,0 +1,77 @@
+[
+{
+    "pk": 1, 
+    "model": "wuxing.wuxing", 
+    "fields": {
+        "to_4": 50, 
+        "to_5": 120, 
+        "to_2": 150, 
+        "to_3": 80, 
+        "to_1": 100, 
+        "des": "\u6bcf\u6b21\u653b\u51fb\u9020\u6210${0}\u70b9\u989d\u5916\u4f24\u5bb3\uff0c\u5bf9\u6728\u5c5e\u6027\u9020\u6210150%\u4f24\u5bb3\uff0c\u5bf9\u571f\u5c5e\u6027\u9020\u6210120%\u4f24\u5bb3\uff0c\u5bf9\u6c34\u5c5e\u6027\u9020\u621080%\u4f24\u5bb3\uff0c\u5bf9\u706b\u5c5e\u6027\u9020\u621050%\u4f24\u5bb3\u3002", 
+        "values": "80,174,268,362,456,550,644,738,832", 
+        "icon": "", 
+        "name": "\u91d1"
+    }
+},
+{
+    "pk": 2, 
+    "model": "wuxing.wuxing", 
+    "fields": {
+        "to_4": 80, 
+        "to_5": 150, 
+        "to_2": 100, 
+        "to_3": 120, 
+        "to_1": 50, 
+        "des": "\u6bcf\u6b21\u653b\u51fb\u9020\u6210${0}\u70b9\u989d\u5916\u4f24\u5bb3\uff0c\u5bf9\u571f\u5c5e\u6027\u9020\u6210150%\u4f24\u5bb3\uff0c\u5bf9\u6c34\u5c5e\u6027\u9020\u6210120%\u4f24\u5bb3\uff0c\u5bf9\u706b\u5c5e\u6027\u9020\u621080%\u4f24\u5bb3\uff0c\u5bf9\u91d1\u5c5e\u6027\u9020\u621050%\u4f24\u5bb3\u3002", 
+        "values": "120,190,260,330,400,470,540,610,680", 
+        "icon": "", 
+        "name": "\u6728"
+    }
+},
+{
+    "pk": 3, 
+    "model": "wuxing.wuxing", 
+    "fields": {
+        "to_4": 150, 
+        "to_5": 50, 
+        "to_2": 80, 
+        "to_3": 100, 
+        "to_1": 120, 
+        "des": "\u6bcf\u6b21\u653b\u51fb\u9020\u6210${0}\u70b9\u989d\u5916\u4f24\u5bb3\uff0c\u5bf9\u706b\u5c5e\u6027\u9020\u6210150%\u4f24\u5bb3\uff0c\u5bf9\u91d1\u5c5e\u6027\u9020\u6210120%\u4f24\u5bb3\uff0c\u5bf9\u6728\u5c5e\u6027\u9020\u621080%\u4f24\u5bb3\uff0c\u5bf9\u571f\u5c5e\u6027\u9020\u621050%\u4f24\u5bb3\u3002", 
+        "values": "140,205,270,335,400,465,530,595,660", 
+        "icon": "", 
+        "name": "\u6c34"
+    }
+},
+{
+    "pk": 4, 
+    "model": "wuxing.wuxing", 
+    "fields": {
+        "to_4": 100, 
+        "to_5": 80, 
+        "to_2": 120, 
+        "to_3": 50, 
+        "to_1": 150, 
+        "des": "\u6bcf\u6b21\u653b\u51fb\u9020\u6210${0}\u70b9\u989d\u5916\u4f24\u5bb3\uff0c\u5bf9\u91d1\u5c5e\u6027\u9020\u6210150%\u4f24\u5bb3\uff0c\u5bf9\u6728\u5c5e\u6027\u9020\u6210120%\u4f24\u5bb3\uff0c\u5bf9\u571f\u5c5e\u6027\u9020\u621080%\u4f24\u5bb3\uff0c\u5bf9\u6c34\u5c5e\u6027\u9020\u621050%\u4f24\u5bb3\u3002", 
+        "values": "40,81,122,163,204,245,286,327,368", 
+        "icon": "", 
+        "name": "\u706b"
+    }
+},
+{
+    "pk": 5, 
+    "model": "wuxing.wuxing", 
+    "fields": {
+        "to_4": 120, 
+        "to_5": 100, 
+        "to_2": 50, 
+        "to_3": 150, 
+        "to_1": 80, 
+        "des": "\u6bcf\u6b21\u653b\u51fb\u9020\u6210${0}\u70b9\u989d\u5916\u4f24\u5bb3\uff0c\u5bf9\u6c34\u5c5e\u6027\u9020\u6210150%\u4f24\u5bb3\uff0c\u5bf9\u706b\u5c5e\u6027\u9020\u6210120%\u4f24\u5bb3\uff0c\u5bf9\u91d1\u5c5e\u6027\u9020\u621080%\u4f24\u5bb3\uff0c\u5bf9\u6728\u5c5e\u6027\u9020\u621050%\u4f24\u5bb3\u3002", 
+        "values": "40,75,110,145,180,215,250,285,320", 
+        "icon": "", 
+        "name": "\u571f"
+    }
+}
+]
