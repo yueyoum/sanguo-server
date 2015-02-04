@@ -18,6 +18,8 @@ from core.signals import (
     SignalHeroWeGo,
 )
 
+from core.common import level_up
+
 
 from utils import pack_msg
 
@@ -42,17 +44,9 @@ def official_update_exp(level):
 
 
 
-def char_level_up(current_exp, current_level, add_exp):
-    new_exp = current_exp + add_exp
-    while True:
-        need_exp = level_update_exp(current_level)
-        if new_exp < need_exp:
-            break
+def char_level_up(current_level, current_exp, add_exp):
+    return level_up(current_level, current_exp, add_exp, level_update_exp)
 
-        current_level += 1
-        new_exp -= need_exp
-
-    return new_exp, current_level
 
 def char_official_up(current_official_exp, current_official, add_official_exp):
     new_official_exp = current_official_exp + add_official_exp
@@ -136,7 +130,7 @@ class Char(object):
         if not CHARACTER_MAX_LEVEL or char.level < CHARACTER_MAX_LEVEL:
             if exp:
                 old_level = char.level
-                char.exp, char.level = char_level_up(char.exp, char.level, exp)
+                char.level, char.exp = char_level_up(char.level, char.exp, exp)
 
                 if char.level != old_level:
                     signal_go.add(

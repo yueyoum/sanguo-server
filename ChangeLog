@@ -1,3 +1,9 @@
+*   2015-02-04
+
+    增加 五行系统
+    更新前先执行  python scripts/wuxing_init.py
+
+
 *   2015-02-03
 
     去掉 redis_persistence

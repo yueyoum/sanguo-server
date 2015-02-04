@@ -20,6 +20,9 @@ urlpatterns = patterns('',
 
                        url(r'^hero/stepup/$', 'views.hero.views.step_up'),
                        url(r'^hero/recruit/$', 'views.hero.views.recruit'),
+                       url(r'^hero/wuxing/update/$', 'views.hero.views.wuxing_update'),
+                       url(r'^hero/break/$', 'views.hero.views.hero_break'),
+
 
                        url(r'^hero/get/$', 'views.heropanel.views.open'),
                        url(r'^heropanel/refresh/$', 'views.heropanel.views.refresh'),

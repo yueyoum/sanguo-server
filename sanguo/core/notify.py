@@ -22,7 +22,7 @@ from core.item import Item
 from core.heropanel import HeroPanel
 from core.arena import Arena
 from core.achievement import Achievement
-from core.hero import HeroSoul, char_heros_obj
+from core.hero import HeroSoul, char_heros_obj, HeroWuXing
 from core.functionopen import FunctionOpen
 from core.levy import Levy
 from core.attachment import Attachment
@@ -50,9 +50,14 @@ def hero_notify(char_id, objs, message_name="HeroNotify"):
 
         g.step = obj.step
         g.power = obj.power
-        # FIXME
         g.max_socket_amount = obj.max_socket_amount
         g.current_socket_amount = obj.current_socket_amount
+
+        for k, v in obj.hero.wuxings.iteritems():
+            wuxing = HeroWuXing(int(k), v.level, v.exp)
+            msg_wuxing = g.wuxing.add()
+            msg_wuxing.MergeFrom(wuxing.to_proto())
+
 
     publish_to_char(char_id, pack_msg(data))
 

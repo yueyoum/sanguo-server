@@ -82,6 +82,11 @@ UNION_LEVEL = object_maker(_find_file('union_level.json'))
 UNION_POSITION = object_maker(_find_file('union_position.json'))
 UNION_BATTLE_REWARD = object_maker(_find_file('union_battle_reward.json'))
 
+
+WUXING = object_maker(_find_file('wuxing.json'))
+WUXING_LEVEL = object_maker(_find_file('wuxing_level.json'))
+WUXING_MAX_LEVEL = max(WUXING_LEVEL.keys()) + 1
+
 def _got_package():
     f = _find_file('package.json')
     with open(f, 'r') as x:
@@ -110,7 +115,11 @@ def _hero_special_equipments(self):
 
 for h in HEROS.values():
     h.special_equipments = _hero_special_equipments(h)
+    h.wuxings = [int(i) for i in h.tp.split(',')]
 
+
+for m in MONSTERS.values():
+    m.wuxings = [int(i) for i in m.tp.split(',')]
 
 def HERO_GET_BY_QUALITY(quality, amount=1):
     all_heros = HEROS.values()
@@ -329,3 +338,19 @@ for v in ACTIVITY_STATIC.values():
 
     v.condition_objs = condition_objs
 
+# WUXING
+for v in WUXING.values():
+    v.to = {
+        1: v.to_1,
+        2: v.to_2,
+        3: v.to_3,
+        4: v.to_4,
+        5: v.to_5,
+    }
+
+    values = [int(i) for i in v.values.split(',')]
+    v.max_level = len(values)
+
+    v.levels = {}
+    for index, i in enumerate(values):
+        v.levels[index+1] = i

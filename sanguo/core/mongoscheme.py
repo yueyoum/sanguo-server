@@ -139,6 +139,11 @@ class MongoHeroPanel(Document):
     }
 
 
+class MongoEmbeddedHeroWuxing(EmbeddedDocument):
+    level = IntField(default=1)
+    # 当前经验
+    exp = IntField(default=0)
+
 
 class MongoHero(Document):
     id = IntField(primary_key=True)
@@ -147,6 +152,8 @@ class MongoHero(Document):
     step = IntField(required=True)
     # 升阶是一点一点来的，而不是一下升上去的，progress记录了当前进度
     progress = IntField(required=True)
+
+    wuxings = MapField(EmbeddedDocumentField(MongoEmbeddedHeroWuxing))
 
     meta = {
         'collection': 'hero',
