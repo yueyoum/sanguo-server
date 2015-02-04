@@ -251,10 +251,9 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         damage_reduce = max(damage_reduce, -0.15)
         value = damage * (1 - damage_reduce)
 
-
         # 五行
         wuxing_value = self.wuxing_addition(target)
-        value = value + wuxing_value * (1 - damage_reduce)
+        value = value - wuxing_value * (1 - damage_reduce)
         return value
 
 
@@ -269,7 +268,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
         damages = []
         for self_wuxing, self_level in self.wuxings:
-            for target_wuxing in target.wuxings:
+            for target_wuxing, target_level in target.wuxings:
                 damage = _wuxing_damage(self_wuxing, self_level, target_wuxing)
                 damages.append(damage)
 

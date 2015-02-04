@@ -106,7 +106,6 @@ class HeroWuXing(object):
         msg.id = self.id
         msg.level = self.level
         msg.cur_exp = self.exp
-        msg.max_exp = self.max_exp
         return msg
 
 
@@ -552,7 +551,7 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
             mh = MongoHero(id=_id)
             mh.char = char_id
             mh.oid = hero_original_ids[i]
-            mh.step = HERO_START_STEP,
+            mh.step = HERO_START_STEP
             mh.progress = 0
 
             wuxing = {

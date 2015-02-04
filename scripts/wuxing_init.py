@@ -32,3 +32,5 @@ def init1():
         h.wuxings[str(wx)] = MongoEmbeddedHeroWuxing(level=1, exp=0)
         h.save()
 
+if __name__ == '__main__':
+    init1()

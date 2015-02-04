@@ -46,7 +46,7 @@ def recruit(request):
     return None
 
 
-@message_response("HeroWuXingUpdateResponse")
+@message_response("HeroWuxingUpdateResponse")
 def wuxing_update(request):
     req = request._proto
 

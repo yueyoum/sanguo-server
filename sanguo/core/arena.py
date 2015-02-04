@@ -133,7 +133,7 @@ class Arena(object):
 
     @property
     def score(self):
-        return self.mongo_arena.score
+        return self.mongo_arena.score if self.mongo_arena else 0
 
     @property
     def rank(self):
