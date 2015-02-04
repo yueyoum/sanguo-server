@@ -6,6 +6,7 @@ from core.signals import (
     global_buff_changed_signal,
 )
 
+from core.character import Char
 from core.notify import update_hero_notify
 from core.hero import char_heros_obj
 from core.achievement import Achievement
@@ -19,6 +20,7 @@ def _all_hero_changed(char_id):
 
 def _global_buff_changed(char_id, **kwargs):
     _all_hero_changed(char_id)
+    Char(char_id).send_notify()
 
 
 def _char_level_up(char_id, new_level, **kwargs):
