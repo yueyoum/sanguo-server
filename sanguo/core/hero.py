@@ -634,5 +634,5 @@ def break_hero(char_id, _id):
         hero_ids=[_id]
     )
 
-    HeroSoul(char_id).add_soul((_id, souls_amount))
+    HeroSoul(char_id).add_soul([(_id, souls_amount)])
 

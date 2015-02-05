@@ -249,7 +249,7 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
         damage_reduce = min(0.015 * target.using_defense / (self.level + 9) + m * (target.level - self.level), 0.75)
         damage_reduce = max(damage_reduce, -0.15)
-        value = damage * (1 - damage_reduce)
+        value = damage * (1 - damage_reduce) * 0.7
 
         # 五行
         wuxing_value = self.wuxing_addition(target)
