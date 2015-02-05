@@ -398,6 +398,11 @@ class HeroSoul(object):
     def add_soul(self, souls):
         new_souls = []
         update_souls = []
+
+        for _id, _ in souls:
+            if _id not in HEROS:
+                raise RuntimeError("soul {0} not exist".format(_id))
+
         for _id, amount in souls:
             str_id = str(_id)
             if str_id in self.mongo_hs.souls:
@@ -623,7 +628,8 @@ def break_hero(char_id, _id):
             "hero {0} in formation, cannot break".format(_id)
         )
 
-    quality = HEROS[h.oid].quality
+    oid = h.oid
+    quality = HEROS[oid].quality
     souls_amount = SAVE_HERO_TO_SOUL_TABLE[quality]
 
     MongoHero.objects.get(id=_id).delete()
@@ -634,5 +640,5 @@ def break_hero(char_id, _id):
         hero_ids=[_id]
     )
 
-    HeroSoul(char_id).add_soul([(_id, souls_amount)])
+    HeroSoul(char_id).add_soul([(oid, souls_amount)])
 
