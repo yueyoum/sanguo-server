@@ -134,7 +134,6 @@ class Hero(FightPowerMixin):
         self.skills = [int(i) for i in self.model_hero.skills.split(',')]
 
         self._add_equip_attrs()
-        self._add_achievement_buffs()
         self._add_global_buffs()
 
 
@@ -209,31 +208,6 @@ class Hero(FightPowerMixin):
             self.defense += horse.defense
             self.hp += horse.hp
             self.crit += int(HORSE[horse.oid].crit / 10)
-
-
-    def _add_achievement_buffs(self):
-        try:
-            mongo_ach = MongoAchievement.objects.get(id=self.char_id)
-        except DoesNotExist:
-            return
-
-        buffs = {}
-        for i in mongo_ach.complete:
-            ach = ACHIEVEMENTS[i]
-            if not ach.buff_used_for:
-                continue
-
-            buffs[ach.buff_used_for] = buffs.get(ach.buff_used_for, 0) + ach.buff_value
-
-        for k, v in buffs.iteritems():
-            value = getattr(self, k)
-            if k == 'crit':
-                new_value = value + v / 100
-            else:
-                new_value = value * (1 + v / 10000.0)
-
-            new_value = int(new_value)
-            setattr(self, k, new_value)
 
 
     def _add_global_buffs(self):
