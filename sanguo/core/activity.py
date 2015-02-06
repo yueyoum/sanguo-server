@@ -116,7 +116,6 @@ class ActivityBase(object):
             self.activity_data.interval_times,
         )
 
-
     @property
     def left_time(self):
         return self.activity_time.left_time
@@ -167,17 +166,23 @@ class ActivityType_4(ActivityBase):
     # 比武周排名
     def get_activity_time(self):
         # 如果是周六，周日开服，那么就当成下周一开服
+        # 并且肯定是continued到周日24：00
         t = super(ActivityType_4, self).get_activity_time()
         weekday = t.init_date.weekday()
         if weekday == 5 or weekday == 6:
             days = 7 - weekday
             new_start_time = t.init_date.replace(days=days).format('YYYY-MM-DD')
-            t = ActivityTime(
-                new_start_time,
-                self.activity_data.continued_days,
-                self.activity_data.interval_days,
-                self.activity_data.interval_times
-            )
+            continued_days = 7
+        else:
+            new_start_time = t.init_date.format('YYYY-MM-DD')
+            continued_days = 7 - weekday
+
+        t = ActivityTime(
+            new_start_time,
+            continued_days,
+            self.activity_data.interval_days,
+            self.activity_data.interval_times
+        )
 
         return t
 
@@ -356,7 +361,9 @@ class ActivityStatic(object):
         msg = Msg()
 
         if not activity_ids:
-            activity_ids = ACTIVITY_STATIC.keys()
+            # activity_ids = ACTIVITY_STATIC.keys()
+            # FOR TEST
+            activity_ids = [1001, 2001, 3001, 4001]
 
         for i in activity_ids:
             entry = ActivityEntry(i)
