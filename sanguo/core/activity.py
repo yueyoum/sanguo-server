@@ -56,7 +56,10 @@ class ActivityTime(object):
 
     def get_init_date(self):
         if self.start_time:
-            x = arrow.get(self.start_time)
+            if isinstance(self.start_time, arrow.Arrow):
+                x = self.start_time
+            else:
+                x = arrow.get(self.start_time)
             init_date = arrow.Arrow(
                 year=x.year,
                 month=x.month,
@@ -171,10 +174,10 @@ class ActivityType_4(ActivityBase):
         weekday = t.init_date.weekday()
         if weekday == 5 or weekday == 6:
             days = 7 - weekday
-            new_start_time = t.init_date.replace(days=days).format('YYYY-MM-DD')
+            new_start_time = t.init_date.replace(days=days).replace(tzinfo=settings.TIME_ZONE).to('UTC')
             continued_days = 7
         else:
-            new_start_time = t.init_date.format('YYYY-MM-DD')
+            new_start_time = t.init_date
             continued_days = 7 - weekday
 
         t = ActivityTime(
