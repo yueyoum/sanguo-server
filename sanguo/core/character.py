@@ -116,15 +116,25 @@ class Char(object):
                 change_value=gold
             )
 
-        sycee += purchase_actual_got
-        if sycee:
-            char.sycee += sycee
+        # 这里加上_cost_sycee是因为防止同时出现purchase_actual_got和消费的update
+        # 虽然逻辑上不可能，但是代码是可以这样调用的
+        # 所以为了清晰，这里加上_cost_sycee表示消费了多少元宝
+        _cost_sycee = 0
+        _add_sycee = 0
+        if sycee < 0:
+            _cost_sycee = abs(sycee)
+        else:
+            _add_sycee = sycee
+
+        if sycee or purchase_actual_got:
+            char.sycee += sycee + purchase_actual_got
             signal_go.add(
                 char_sycee_changed_signal,
                 sender=None,
                 char_id=self.id,
                 now_value=char.sycee,
-                change_value=sycee
+                cost_value=_cost_sycee,
+                add_value=_add_sycee+purchase_actual_got,
             )
 
         if not CHARACTER_MAX_LEVEL or char.level < CHARACTER_MAX_LEVEL:

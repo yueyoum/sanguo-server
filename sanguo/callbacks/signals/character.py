@@ -45,10 +45,10 @@ def _char_gold_changed(char_id, now_value, change_value, **kwargs):
         achievement.trig(32, abs(change_value))
 
 
-def _char_sycee_changed(char_id, now_value, change_value, **kwargs):
-    if change_value < 0:
+def _char_sycee_changed(char_id, now_value, cost_value, add_value, **kwargs):
+    if cost_value :
         achievement = Achievement(char_id)
-        achievement.trig(31, abs(change_value))
+        achievement.trig(31, abs(cost_value))
 
 
 char_level_up_signal.connect(

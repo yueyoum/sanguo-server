@@ -26,7 +26,7 @@ plunder_finished_signal = Signal(providing_args=['from_char_id', 'to_char_id', '
 char_level_up_signal = Signal(providing_args=['char_id', 'new_level'])
 char_official_up_signal = Signal(providing_args=['char_id', 'new_official'])
 char_gold_changed_signal = Signal(providing_args=['char_id', 'now_value', 'change_value'])
-char_sycee_changed_signal = Signal(providing_args=['char_id', 'now_value', 'change_value'])
+char_sycee_changed_signal = Signal(providing_args=['char_id', 'now_value', 'cost_value', 'add_value'])
 
 hero_step_up_signal = Signal(providing_args=['char_id', 'hero_id', 'new_step'])
 hero_changed_signal = Signal(providing_args=['hero_id'])
