@@ -67,6 +67,7 @@ class ActivityTime(object):
                 hour=x.hour,
                 minute=0,
                 second=0,
+                tzinfo=x.tzinfo,
             )
         else:
             init_date = server.opened_date.replace(tzinfo=settings.TIME_ZONE)
