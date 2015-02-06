@@ -327,7 +327,6 @@ for v in PURCHASE.values():
 
 # ACTIVITY
 for v in ACTIVITY_STATIC.values():
-    v.total_continued_hours = v.continued_days * 24 + v.continued_hours
     condition_ids = [int(i) for i in v.conditions.split(',')]
 
     condition_objs = []

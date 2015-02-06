@@ -3,64 +3,147 @@
     "pk": 1001, 
     "model": "activity.activitystatic", 
     "fields": {
+        "category": 1, 
         "name": "\u51b2\u7ea7\u5927\u8d5b", 
         "continued_days": 3, 
         "current_des": "\u60a8\u5f53\u524d\u7684\u7b49\u7ea7\uff1a${0}", 
         "start_time": null, 
         "des": "\u8fbe\u5230\u7b49\u7ea7\u9886\u53d6\u5956\u52b1", 
+        "interval_times": 0, 
         "tp": 1, 
+        "package": null, 
+        "trigger_action_condition_ids": "", 
         "condition_type": 1, 
         "mode": 1, 
-        "continued_hours": 0, 
-        "conditions": "1001,1002,1003,1004"
+        "trigger_action_name": "", 
+        "conditions": "1001,1002,1003,1004", 
+        "interval_days": 0
     }
 },
 {
     "pk": 2001, 
     "model": "activity.activitystatic", 
     "fields": {
+        "category": 1, 
         "name": "\u6536\u96c6\u91d1\u8272\u6b66\u5c06", 
         "continued_days": 3, 
         "current_des": "\u60a8\u5f53\u524d\u62e5\u6709\u91d1\u8272\u6b66\u5c06${0}", 
         "start_time": null, 
         "des": "\u83b7\u53d6\u91d1\u5c06\u9886\u53d6\u5927\u5956", 
+        "interval_times": 0, 
         "tp": 2, 
+        "package": null, 
+        "trigger_action_condition_ids": "", 
         "condition_type": 1, 
         "mode": 1, 
-        "continued_hours": 0, 
-        "conditions": "2001,2002,2003,2004"
+        "trigger_action_name": "", 
+        "conditions": "2001,2002,2003,2004", 
+        "interval_days": 0
     }
 },
 {
     "pk": 3001, 
     "model": "activity.activitystatic", 
     "fields": {
+        "category": 1, 
         "name": "\u901a\u5173\u526f\u672c\u9886\u5927\u5956", 
         "continued_days": 3, 
         "current_des": "\u60a8\u5f53\u524d\u5df2\u901a\u5173${0}", 
         "start_time": null, 
         "des": "\u901a\u5173\u6218\u5f79\u9886\u53d6\u5927\u5956", 
+        "interval_times": 0, 
         "tp": 3, 
+        "package": null, 
+        "trigger_action_condition_ids": "", 
         "condition_type": 1, 
         "mode": 1, 
-        "continued_hours": 0, 
-        "conditions": "3001,3002,3003,3004"
+        "trigger_action_name": "", 
+        "conditions": "3001,3002,3003,3004", 
+        "interval_days": 0
     }
 },
 {
     "pk": 4001, 
     "model": "activity.activitystatic", 
     "fields": {
+        "category": 1, 
         "name": "\u6bd4\u6b66\u7ade\u6280\uff0c\u8c01\u662f\u82f1\u96c4", 
         "continued_days": 0, 
         "current_des": "\u60a8\u5f53\u524d\u7684\u79ef\u5206\u6392\u540d\uff1a${0}", 
         "start_time": null, 
         "des": "\u6bd4\u6b66\u7ade\u6280\uff0c\u5927\u5956\u4e0d\u505c", 
+        "interval_times": 0, 
         "tp": 4, 
+        "package": null, 
+        "trigger_action_condition_ids": "", 
         "condition_type": 2, 
         "mode": 2, 
-        "continued_hours": 0, 
-        "conditions": "4001,4002,4003,4004"
+        "trigger_action_name": "", 
+        "conditions": "4001,4002,4003,4004", 
+        "interval_days": 0
+    }
+},
+{
+    "pk": 5001, 
+    "model": "activity.activitystatic", 
+    "fields": {
+        "category": 2, 
+        "name": "\u7d2f\u79ef\u5145\u503c\u9001\u6781\u54c1\u5b9d\u77f3", 
+        "continued_days": 8, 
+        "current_des": "\u5f53\u524d\u5df2\u7d2f\u79ef\u5145\u503c${0}", 
+        "start_time": "2015-02-05T16:00:00Z", 
+        "des": "\u7d2f\u79ef\u5145\u503c\u9001\u6781\u54c1\u5b9d\u77f3", 
+        "interval_times": 0, 
+        "tp": 11, 
+        "package": null, 
+        "trigger_action_condition_ids": "", 
+        "condition_type": 1, 
+        "mode": 2, 
+        "trigger_action_name": "", 
+        "conditions": "5001,5002,5003,5004", 
+        "interval_days": 0
+    }
+},
+{
+    "pk": 6001, 
+    "model": "activity.activitystatic", 
+    "fields": {
+        "category": 2, 
+        "name": "\u7d2f\u79ef\u6d88\u8d39\u5f97\u9b42\u5305", 
+        "continued_days": 8, 
+        "current_des": "\u5f53\u524d\u5df2\u6d88\u8d39${0}\u5143\u5b9d", 
+        "start_time": "2015-02-05T16:00:00Z", 
+        "des": "\u7d2f\u79ef\u6d88\u8d39\u5f97\u9b42\u5305", 
+        "interval_times": 0, 
+        "tp": 12, 
+        "package": null, 
+        "trigger_action_condition_ids": "", 
+        "condition_type": 1, 
+        "mode": 2, 
+        "trigger_action_name": "", 
+        "conditions": "6001,6002,6003,6004", 
+        "interval_days": 0
+    }
+},
+{
+    "pk": 7001, 
+    "model": "activity.activitystatic", 
+    "fields": {
+        "category": 2, 
+        "name": "\u5143\u5bb5\u6c64\u5706\u72c2\u6b22\u5927\u793c", 
+        "continued_days": 8, 
+        "current_des": "\u5f53\u524d\u62e5\u6709\u6c64\u5706${0}\u4e2a", 
+        "start_time": "2015-02-05T16:00:00Z", 
+        "des": "\u5143\u5bb5\u6c64\u5706\u72c2\u6b22\u5927\u793c", 
+        "interval_times": 0, 
+        "tp": 13, 
+        "package": null, 
+        "trigger_action_condition_ids": "", 
+        "condition_type": 1, 
+        "mode": 1, 
+        "trigger_action_name": "", 
+        "conditions": "7001,7002,7003,7004", 
+        "interval_days": 0
     }
 }
 ]

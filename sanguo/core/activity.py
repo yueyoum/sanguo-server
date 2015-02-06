@@ -27,18 +27,37 @@ from protomsg import ActivityNotify, ActivityUpdateNotify, ActivityEntry as Acti
 
 
 
-class ActivityEntry(object):
-    __slots__ = ['activity_id', 'activity_data']
-    def __init__(self, activity_id):
-        self.activity_id = activity_id
-        self.activity_data=  ACTIVITY_STATIC[activity_id]
+class ActivityTime(object):
+    def __init__(self, start_time, continued_days, interval_days, interval_times, now=None):
+        self.start_time = start_time
+        self.continued_days = continued_days
+        self.interval_days = interval_days
+        self.interval_times = interval_times
 
-    @property
-    def continued_to(self):
-        # 活动持续到什么时间
-        if self.activity_data.start_time:
-            x = arrow.get(self.activity_data.start_time)
-            start_time = arrow.Arrow(
+        if not now:
+            self.now = arrow.utcnow()
+        else:
+            self.now = arrow.get(now)
+
+        # 首次开始日期
+        self.init_date = self.get_init_date()
+        # 最近一次的开始日期
+        self.nearest_open_date = self.find_nearest_open_date()
+        # 最近一次的关闭日期
+        self.nearest_close_date = self.find_nearest_close_date()
+
+        # 距离最近一次活动关闭的剩余秒数
+        left_time = self.nearest_close_date.timestamp - self.now.timestamp
+        self.left_time = left_time if left_time > 0 else 0
+
+        # 是否处于活动时间范围内
+        self.is_valid = self.now >= self.nearest_open_date and self.now < self.nearest_close_date
+
+
+    def get_init_date(self):
+        if self.start_time:
+            x = arrow.get(self.start_time)
+            init_date = arrow.Arrow(
                 year=x.year,
                 month=x.month,
                 day=x.day,
@@ -47,54 +66,63 @@ class ActivityEntry(object):
                 second=0,
             )
         else:
-            start_time = server.opened_date.replace(tzinfo=settings.TIME_ZONE)
+            init_date = server.opened_date.replace(tzinfo=settings.TIME_ZONE)
 
-        if self.activity_data.tp != 4:
-            return start_time.replace(hours=+self.activity_data.total_continued_hours)
+        return init_date
 
-        # 周比武奖励，结束时间是开服后遇到的第一个周日24：00过后
-        start_weekday = start_time.weekday()
-        day_needs = 6 - start_weekday
-        if day_needs == 0:
-            # 如果是周日开服，就把结束日期放到下个周日
-            day_needs = 7
-        if day_needs == 1:
-            # 同上，放到下个周日
-            day_needs = 8
 
-        # day_needs 还得+1, 要放到周一的00：00点
-        day_needs += 1
+    def find_nearest_open_date(self):
+        if not self.interval_days:
+            return self.init_date
 
-        start_time = start_time.replace(days=day_needs)
-        return arrow.Arrow(
-            year=start_time.year,
-            month=start_time.month,
-            day=start_time.day,
-            minute=0,
-            second=0,
+        # 目前超过初始日期的天数
+        beyond_days = (self.now - self.init_date).days
+        # 活动一次开启间隔要持续的天数
+        total_days = self.continued_days + self.interval_days
+
+        # 和目前最近的开启日期，需要此活动开启的次数
+        open_times, _rest = divmod(beyond_days, total_days)
+
+        if not self.interval_times:
+            # 此活动无限重复
+            really_open_times = open_times
+        else:
+            if self.interval_times >= open_times:
+                really_open_times = open_times
+            else:
+                really_open_times = self.interval_times
+
+        return self.init_date.replace(days=really_open_times*total_days)
+
+
+    def find_nearest_close_date(self):
+        return self.nearest_open_date.replace(days=self.continued_days)
+
+
+
+
+class ActivityBase(object):
+    def __init__(self, activity_id):
+        self.activity_id = activity_id
+        self.activity_data = ACTIVITY_STATIC[activity_id]
+
+        self.activity_time = self.get_activity_time()
+
+    def get_activity_time(self):
+        return ActivityTime(
+            self.activity_data.start_time,
+            self.activity_data.continued_days,
+            self.activity_data.interval_days,
+            self.activity_data.interval_times,
         )
 
-    @property
-    def started(self):
-        # 是否开始了
-        if not self.activity_data.start_time:
-            return True
-
-        start_at = arrow.get(self.activity_data.start_time)
-        return arrow.utcnow() >= start_at
-
-    @property
-    def ended(self):
-        # 是否结束了
-        return arrow.utcnow() > self.continued_to
 
     @property
     def left_time(self):
-        t = self.continued_to.timestamp - arrow.utcnow().timestamp
-        return t if t > 0 else 0
+        return self.activity_time.left_time
 
     def is_valid(self):
-        return self.started and not self.ended
+        return self.activity_time.is_valid
 
     def get_condition_ids(self):
         return [obj.id for obj in self.activity_data.condition_objs]
@@ -112,32 +140,63 @@ class ActivityEntry(object):
 
         return passed, not_passed
 
+    def get_current_value(self, char_id):
+        raise NotImplementedError()
+
+
+class ActivityType_1(ActivityBase):
+    # 角色等级
+    def get_current_value(self, char_id):
+        from core.character import Char
+        return Char(char_id).mc.level
+
+class ActivityType_2(ActivityBase):
+    # 武将召唤（甲将数量）
+    def get_current_value(self, char_id):
+        from core.hero import char_heros_amount
+        return char_heros_amount(char_id, filter_quality=1)
+
+class ActivityType_3(ActivityBase):
+    # 通过战役
+    def get_current_value(self, char_id):
+        from core.stage import Stage
+        return Stage(char_id).get_passed_max_battle_id()
+
+
+class ActivityType_4(ActivityBase):
+    # 比武周排名
+    def get_activity_time(self):
+        # 如果是周六，周日开服，那么就当成下周一开服
+        t = super(ActivityType_4, self).get_activity_time()
+        weekday = t.init_date.weekday()
+        if weekday == 5 or weekday == 6:
+            days = 7 - weekday
+            new_start_time = t.init_date.replace(days=days).format('YYYY-MM-DD')
+            t = ActivityTime(
+                new_start_time,
+                self.activity_data.continued_days,
+                self.activity_data.interval_days,
+                self.activity_data.interval_times
+            )
+
+        return t
 
     def get_current_value(self, char_id):
-        # 当前值
-        # 1: 角色等级
-        # 2: 武将召唤（甲将数量）
-        # 3: 通过战役
-        # 4: 比武周排名
-
-        from core.character import Char
-        from core.hero import char_heros_amount
-        from core.stage import Stage
         from core.arena import Arena
+        return Arena(char_id).rank
 
-        if self.activity_data.tp == 1:
-            return Char(char_id).mc.level
 
-        if self.activity_data.tp == 2:
-            return char_heros_amount(char_id, filter_quality=1)
-
-        if self.activity_data.tp == 3:
-            return Stage(char_id).get_passed_max_battle_id()
-
-        if self.activity_data.tp == 4:
-            return Arena(char_id).rank
-
-        raise RuntimeError("Unknown Activity tp: {0}".format(self.activity_data.tp))
+class ActivityEntry(object):
+    def __new__(cls, activity_id):
+        data = ACTIVITY_STATIC[activity_id]
+        if data.tp == 1:
+            return ActivityType_1(activity_id)
+        if data.tp == 2:
+            return ActivityType_2(activity_id)
+        if data.tp == 3:
+            return ActivityType_3(activity_id)
+        if data.tp == 4:
+            return ActivityType_4(activity_id)
 
 
 
