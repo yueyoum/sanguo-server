@@ -50,7 +50,7 @@ def _send_reward(rank, mongo_union):
             attachment=attachment
         )
 
-@uwsgidecorators.cron(0, 0, -1, -1, 0)
+@uwsgidecorators.cron(0, 0, -1, -1, 1)
 def reset(signum):
     logger = Logger("union_reward_week.log")
 
