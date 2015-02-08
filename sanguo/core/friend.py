@@ -9,10 +9,8 @@ from mongoengine import DoesNotExist
 
 from core.mongoscheme import MongoFriend, MongoCharacter
 from core.character import Char, get_char_ids_by_level_range
-from core.hero import Hero
 from core.msgpipe import publish_to_char
 from core.exception import SanguoException
-from core.formation import Formation
 from core.signals import new_friend_got_signal
 from core.plunder import Plunder
 from core.activeplayers import ActivePlayers
@@ -28,7 +26,7 @@ from preset.settings import (
     FRIEND_CANDIDATE_LEVEL_DIFF,
     FRIEND_CANDIDATE_LIST_AMOUNT,
     MAIL_FRIEND_REFUSE_TITLE,
-    MAIL_PURCHASE_FIRST_CONTENT,
+    MAIL_FRIEND_REFUSE_CONTENT,
 )
 
 from preset import errormsg
@@ -215,34 +213,36 @@ class Friend(object):
 
         self.check_max_amount("Friend Add")
 
-        if c.id in self.mf.pending:
-            return
-
         if c.id in self.mf.accepting:
             # 如果要加的好友以前已经给我发过好友申请，那么就是直接接受
             self.accept(c.id)
             return
 
-        self.mf.pending.append(c.id)
+        if c.id not in self.mf.pending:
+            self.mf.pending.append(c.id)
+            self.send_new_friend_notify(c.id, status=FRIEND_ACK)
+
         self.mf.save()
 
         target_char_friend = Friend(c.id)
         target_char_friend.someone_add_me(self.char_id)
 
-        self.send_new_friend_notify(c.id, status=FRIEND_ACK)
-        # self.send_friends_amount_notify()
 
 
     def someone_add_me(self, from_id):
         from_id = int(from_id)
-        if from_id in self.mf.accepting or from_id in self.mf.pending or from_id in self.mf.accepting:
+        if from_id in self.mf.friends or from_id in self.mf.accepting:
             return
 
         self.mf.accepting.append(from_id)
         self.mf.save()
 
+        if from_id in self.mf.pending:
+            # 对方要加我，但我也给要加对方，那就直接成为好友
+            self.accept(from_id)
+            return
+
         self.send_new_friend_notify(from_id, status=FRIEND_APPLY)
-        # self.send_friends_amount_notify()
 
 
     def terminate(self, target_id):
@@ -320,14 +320,26 @@ class Friend(object):
                 "character {0} not in accept list".format(target_id)
             )
 
-        # 检查对方好友是否已满
+
+        def _clean_target_pending(target_id):
+            target = Friend(target_id)
+            if self.char_id in target.mf.pending:
+                target.mf.pending.remove(self.char_id)
+                target.mf.save()
+                target.send_remove_friend_notify([self.char_id])
+
         target_char_friend = Friend(target_id)
+
+        # 检查对方好友是否已满
         if not target_char_friend.check_max_amount("Friend Accept By Other", raise_exception=False):
             # 对方满了
             # 并且删除此人的申请
             self.mf.accepting.remove(target_id)
             self.mf.save()
             self.send_remove_friend_notify([target_id])
+
+            _clean_target_pending(target_id)
+
             raise SanguoException(
                 errormsg.FRIEND_OTHER_SIDE_IS_FULL,
                 self.char_id,
@@ -342,8 +354,12 @@ class Friend(object):
         except SanguoException as e:
             # 满了就清空所有申请
             self.send_remove_friend_notify(self.mf.accepting)
+            _accepting = self.mf.accepting
             self.mf.accepting = []
             self.mf.save()
+
+            for _acc in _accepting:
+                _clean_target_pending(_acc)
             raise e
 
         self.mf.accepting.remove(target_id)
@@ -418,7 +434,7 @@ class Friend(object):
         mail = Mail(self.char_id)
         mail.add(
             MAIL_FRIEND_REFUSE_TITLE,
-            MAIL_PURCHASE_FIRST_CONTENT.format(from_char.mc.name)
+            MAIL_FRIEND_REFUSE_CONTENT.format(from_char.mc.name)
         )
 
         self.send_remove_friend_notify([from_id])
