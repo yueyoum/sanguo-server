@@ -174,8 +174,8 @@ class ActivityTriggerMail(object):
 
             mail = Mail(char_id)
             mail.add(
-                self.get_mail_title(value),
-                self.get_mail_content(value),
+                self.get_mail_title(p),
+                self.get_mail_content(p),
                 attachment=self.get_mail_attachment(p)
             )
 
@@ -187,14 +187,14 @@ class ActivityTriggerMail(object):
         return passed
 
 
-    def get_mail_title(self, value):
-        return self.activity_data.mail_title.format(value)
+    def get_mail_title(self, p):
+        return self.activity_data.mail_title.format(p.condition_value)
 
-    def get_mail_content(self, value):
-        return self.activity_data.mail_content.format(value)
+    def get_mail_content(self, p):
+        return self.activity_data.mail_content.format(p.condition_value)
 
     def get_mail_attachment(self, p):
-        drop = get_drop(ACTIVITY_STATIC_CONDITIONS[p].package)
+        drop = get_drop([ACTIVITY_STATIC_CONDITIONS[p].package])
         return json.dumps(drop)
 
 
