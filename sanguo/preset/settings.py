@@ -270,9 +270,7 @@ MAIL_PURCHASE_FIRST_CONTENT = u'为了感谢您的充值，特为您送首充大
 # 好友申请被拒绝后的邮件
 MAIL_FRIEND_REFUSE_TITLE = u'好友系统'
 MAIL_FRIEND_REFUSE_CONTENT = u'{0} 拒绝了您的好友申请'
-# 活动比武大会
-MAIL_ACTIVITY_ARENA_TITLE = u'比武大会第{0}名奖励'
-MAIL_ACTIVITY_ARENA_CONTENT = u'恭喜您在比武大会，勇夺第一活动中获得第{0}名，奖励将通过附件发送给您，请注意查收'
+
 # 工会站每周奖励
 MAIL_UNION_BATTLE_REWARD_TITLE = u'工会战周奖励'
 MAIL_UNION_BATTLE_REWARD_CONTENT = u'工会战周奖励'

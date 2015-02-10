@@ -20,7 +20,6 @@ from core.resource import Resource
 from utils import pack_msg
 
 from preset.data import ACTIVITY_STATIC, ACTIVITY_STATIC_CONDITIONS
-from preset.settings import MAIL_ACTIVITY_ARENA_TITLE, MAIL_ACTIVITY_ARENA_CONTENT
 from preset import errormsg
 
 from protomsg import ActivityNotify, ActivityUpdateNotify, ActivityEntry as ActivityEntryMsg
