@@ -6,9 +6,8 @@ __date__ = '15-2-10'
 from core.signals import heropanel_open_hero_signal
 
 from core.activity import ActivityEntry
-from core.attachment import is_empty_drop, standard_drop_to_attachment_protomsg
-from core.msgpipe import publish_to_char
-from utils import pack_msg
+from core.attachment import is_empty_drop
+from core.resource import Resource
 
 
 def _open_hero(char_id, hero_oid, **kwargs):
@@ -16,7 +15,8 @@ def _open_hero(char_id, hero_oid, **kwargs):
     if is_empty_drop(drop):
         return
 
-    publish_to_char(char_id, pack_msg(standard_drop_to_attachment_protomsg(drop)))
+    resource = Resource(char_id, "HeroPanel open")
+    resource.add(**drop)
 
 
 
