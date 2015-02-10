@@ -429,7 +429,13 @@ class ActivityStatic(object):
 
 
     def get_reward(self, condition_id):
-        if condition_id != 7001:
+        activity_id = ACTIVITY_STATIC_CONDITIONS[condition_id].activity_id
+
+        if condition_id == 7001:
+            value = ACTIVITY_STATIC_CONDITIONS[condition_id].condition_value
+            resource = Resource(self.char_id, "Activity Get Reward 7001")
+            resource.check_and_remove(stuffs=[(3003, value)])
+        else:
             if str(condition_id) in self.mongo_ac.reward_times or str(condition_id) in self.mongo_ac.send_times:
                 raise SanguoException(
                     errormsg.ACTIVITY_ALREADY_GOT_REWARD,
@@ -446,7 +452,7 @@ class ActivityStatic(object):
                     "condition {0} can not get".format(condition_id)
                 )
 
-            activity_id = ACTIVITY_STATIC_CONDITIONS[condition_id].activity_id
+
             if ACTIVITY_STATIC[activity_id].mode != 1:
                 # 发邮件，不能主动领取
                 raise SanguoException(
@@ -460,7 +466,7 @@ class ActivityStatic(object):
             self.mongo_ac.reward_times[str(condition_id)] = 1
             self.mongo_ac.save()
 
-            self.send_update_notify([activity_id])
+        self.send_update_notify([activity_id])
 
         standard_drop = get_drop([ACTIVITY_STATIC_CONDITIONS[condition_id].package])
         resource = Resource(self.char_id, "Activity Get Reward", "get condition id {0}".format(condition_id))
