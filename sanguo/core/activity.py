@@ -284,7 +284,7 @@ class Activity4001(ActivityBase, ActivityTriggerMail):
     def get_activity_time(self):
         # 如果是周六，周日开服，那么就当成下周一开服
         # 并且肯定是continued到周日24：00
-        t = super(Activity4001, self).get_activity_time()
+        t = ActivityBase.get_activity_time(self)
         weekday = t.init_date.weekday()
         if weekday == 5 or weekday == 6:
             days = 7 - weekday
@@ -387,8 +387,7 @@ class Activity10001(ActivityBase, ActivityTriggerAdditionalDrop):
     def get_additional_drop(self, stuff_id):
         if stuff_id != 33:
             return make_standard_drop_from_template()
-        return super(Activity10001, self).get_additional_drop()
-
+        return ActivityTriggerAdditionalDrop.get_additional_drop(self)
 
 
 @activities.register(11001)
