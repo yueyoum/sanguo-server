@@ -17,7 +17,7 @@ def _new_purchase(char_id, new_got, total_got, **kwargs):
     plog = MongoPurchaseLog()
     plog.char_id = char_id
     plog.sycee = new_got
-    plog.purchase_at = arrow.utcnow()
+    plog.purchase_at = arrow.utcnow().timestamp
     plog.save()
 
     ActivityStatic(char_id).trig(5001)

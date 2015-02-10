@@ -323,7 +323,7 @@ class Activity5001(ActivityBase, ActivityTriggerMail):
         if not self.is_valid():
             return 0
 
-        condition = Q(char_id=char_id) & Q(purchase_at__gte=self.activity_time.nearest_open_date) & Q(purchase_at__lte=self.activity_time.nearest_close_date)
+        condition = Q(char_id=char_id) & Q(purchase_at__gte=self.activity_time.nearest_open_date.timestamp) & Q(purchase_at__lte=self.activity_time.nearest_close_date.timestamp)
         logs = MongoPurchaseLog.objects.filter(condition)
 
         value = 0
@@ -339,7 +339,7 @@ class Activity6001(ActivityBase, ActivityTriggerMail):
         if not self.is_valid():
             return 0
 
-        condition = Q(char_id=char_id) & Q(cost_at__gte=self.activity_time.nearest_open_date) & Q(cost_at__lte=self.activity_time.nearest_close_date)
+        condition = Q(char_id=char_id) & Q(cost_at__gte=self.activity_time.nearest_open_date.timestamp) & Q(cost_at__lte=self.activity_time.nearest_close_date.timestamp)
         logs = MongoCostSyceeLog.objects.filter(condition)
 
         value = 0
@@ -420,7 +420,7 @@ class ActivityStatic(object):
         if not entry.is_valid():
             return
 
-        entry.trig()
+        entry.trig(self.char_id)
 
         self.send_update_notify([activity_id])
 

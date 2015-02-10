@@ -8,7 +8,7 @@ class MongoPurchaseLog(Document):
     char_id = IntField()
     # 充值获得元宝
     sycee = IntField()
-    purchase_at = DateTimeField()
+    purchase_at = IntField()  # UTC timestamp
 
     meta = {
         'collection': 'purchase_log',
@@ -21,10 +21,10 @@ MongoPurchaseLog.ensure_indexes()
 class MongoCostSyceeLog(Document):
     char_id = IntField()
     sycee = IntField()
-    cost_at = DateTimeField()
+    cost_at = IntField() # UTC timestamp
 
     meta = {
-        'collection': 'purchase_log',
+        'collection': 'cost_sycee_log',
         'indexes': ['char_id', 'cost_at']
     }
 

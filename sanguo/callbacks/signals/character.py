@@ -58,7 +58,7 @@ def _char_sycee_changed(char_id, now_value, cost_value, add_value, **kwargs):
         cslog = MongoCostSyceeLog()
         cslog.char_id = char_id
         cslog.sycee = cost_value
-        cslog.cost_at = arrow.utcnow()
+        cslog.cost_at = arrow.utcnow().timestamp
         cslog.save()
 
         ActivityStatic(char_id).trig(6001)
