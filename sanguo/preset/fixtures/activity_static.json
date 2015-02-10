@@ -145,5 +145,89 @@
         "conditions": "7001,7002,7003,7004", 
         "interval_days": 0
     }
+},
+{
+    "pk": 8001, 
+    "model": "activity.activitystatic", 
+    "fields": {
+        "category": 2, 
+        "name": "\u6536\u96c6\u4e94\u864e\u4e0a\u5c06", 
+        "continued_days": 8, 
+        "current_des": "\u5f53\u524d\u5df2\u6536\u96c6${0}\u4e2a", 
+        "start_time": "2015-02-05T16:00:00Z", 
+        "des": "", 
+        "interval_times": 0, 
+        "tp": 14, 
+        "package": null, 
+        "trigger_action_condition_ids": "", 
+        "condition_type": 3, 
+        "mode": 2, 
+        "trigger_action_name": "", 
+        "conditions": "8001,8002,8003,8004,8005", 
+        "interval_days": 0
+    }
+},
+{
+    "pk": 9001, 
+    "model": "activity.activitystatic", 
+    "fields": {
+        "category": 2, 
+        "name": "\u70b9\u5c06\u5f97\u9a6c\u8d85\u9b42", 
+        "continued_days": 8, 
+        "current_des": "\u5f53\u524d\u62e5\u6709\u9a6c\u8d85\u9b42${0}", 
+        "start_time": "2015-02-05T16:00:00Z", 
+        "des": "", 
+        "interval_times": 0, 
+        "tp": 21, 
+        "package": 40001, 
+        "trigger_action_condition_ids": "", 
+        "condition_type": 4, 
+        "mode": 1, 
+        "trigger_action_name": "get_hero", 
+        "conditions": "", 
+        "interval_days": 0
+    }
+},
+{
+    "pk": 10001, 
+    "model": "activity.activitystatic", 
+    "fields": {
+        "category": 2, 
+        "name": "\u9ec4\u5fe0\u5361\u9b42\u60ca\u73b0\u5c0f\u8d21\u54c1\u7bb1", 
+        "continued_days": 8, 
+        "current_des": "\u5f53\u524d\u62e5\u6709\u9ec4\u5fe0\u9b42${0}\u4e2a", 
+        "start_time": "2015-02-05T16:00:00Z", 
+        "des": "", 
+        "interval_times": 0, 
+        "tp": 21, 
+        "package": 40001, 
+        "trigger_action_condition_ids": "3003", 
+        "condition_type": 4, 
+        "mode": 1, 
+        "trigger_action_name": "open_box", 
+        "conditions": "", 
+        "interval_days": 0
+    }
+},
+{
+    "pk": 11001, 
+    "model": "activity.activitystatic", 
+    "fields": {
+        "category": 2, 
+        "name": "\u7cbe\u82f1\u526f\u672c\u843d\u6c64\u5706", 
+        "continued_days": 8, 
+        "current_des": "\u5f53\u524d\u62e5\u6709\u6c64\u5706${0}\u4e2a", 
+        "start_time": "2015-02-05T16:00:00Z", 
+        "des": "", 
+        "interval_times": 0, 
+        "tp": 21, 
+        "package": 40001, 
+        "trigger_action_condition_ids": "", 
+        "condition_type": 4, 
+        "mode": 1, 
+        "trigger_action_name": "elite_stage_battle", 
+        "conditions": "", 
+        "interval_days": 0
+    }
 }
 ]

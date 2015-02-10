@@ -33,7 +33,7 @@ def pve_finish(char_id, stage_id, win, star, **kwargs):
 
     # 判断活动
     if win:
-        ActivityStatic(char_id).trig(3)
+        ActivityStatic(char_id).trig(3001)
 
 
 pve_finished_signal.connect(

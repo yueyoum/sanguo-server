@@ -34,7 +34,11 @@ hero_add_signal = Signal(providing_args=['char_id', 'hero_ids', 'hero_original_i
 hero_del_signal = Signal(providing_args=['char_id', 'hero_ids'])
 hero_to_soul_signal = Signal(providing_args=['char_id', 'souls'])
 
+heropanel_open_hero_signal = Signal(providing_args=['char_id', 'hero_oid'])
+
 equip_changed_signal = Signal(providing_args=['char_id', 'equip_obj'])
+gem_add_signal = Signal(providing_args=['char_id', 'gem_id', 'add_amount', 'new_amount'])
+stuff_add_signal = Signal(providing_args=['char_id', 'stuff_id', 'add_amount', 'new_amount'])
 
 func_opened_signal = Signal(providing_args=['char_id', 'func_ids'])
 
@@ -44,3 +48,5 @@ vip_changed_signal = Signal(providing_args=['char_id', 'old_vip', 'new_vip'])
 new_friend_got_signal = Signal(providing_args=['char_id', 'new_friend_id', 'total_friends_amount'])
 
 global_buff_changed_signal = Signal(providing_args=['char_id'])
+
+activity_trig_signal = Signal(providing_args=['char_id', 'activity_id'])

@@ -327,15 +327,19 @@ for v in PURCHASE.values():
 
 # ACTIVITY
 for v in ACTIVITY_STATIC.values():
-    condition_ids = [int(i) for i in v.conditions.split(',')]
+    if v.conditions:
+        condition_ids = [int(i) for i in v.conditions.split(',')]
 
-    condition_objs = []
-    for i in condition_ids:
-        _ac_con_obj = ACTIVITY_STATIC_CONDITIONS[i]
-        _ac_con_obj.activity_id = v.id
-        condition_objs.append(_ac_con_obj)
+        condition_objs = []
+        for i in condition_ids:
+            _ac_con_obj = ACTIVITY_STATIC_CONDITIONS[i]
+            _ac_con_obj.activity_id = v.id
+            condition_objs.append(_ac_con_obj)
 
-    v.condition_objs = condition_objs
+        v.condition_objs = condition_objs
+    else:
+        v.condition_objs = []
+
 
 # WUXING
 for v in WUXING.values():

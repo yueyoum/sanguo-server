@@ -530,5 +530,100 @@
         "icon_two_amount": 1, 
         "icon_three_type": null
     }
+},
+{
+    "pk": 8001, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": null, 
+        "icon_one_id": 1, 
+        "package": 40001, 
+        "des": "", 
+        "condition_ids": "12,13,15,16,17", 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": null, 
+        "icon_one_type": 4, 
+        "condition_value": 1, 
+        "icon_two_id": null, 
+        "icon_two_amount": 1, 
+        "icon_three_type": null
+    }
+},
+{
+    "pk": 8002, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": null, 
+        "icon_one_id": 1, 
+        "package": 40001, 
+        "des": "", 
+        "condition_ids": "12,13,15,16,17", 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": null, 
+        "icon_one_type": 4, 
+        "condition_value": 2, 
+        "icon_two_id": null, 
+        "icon_two_amount": 1, 
+        "icon_three_type": null
+    }
+},
+{
+    "pk": 8003, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": null, 
+        "icon_one_id": 1, 
+        "package": 40001, 
+        "des": "", 
+        "condition_ids": "12,13,15,16,17", 
+        "icon_one_amount": 5, 
+        "icon_three_amount": 1, 
+        "icon_two_type": null, 
+        "icon_one_type": 4, 
+        "condition_value": 3, 
+        "icon_two_id": null, 
+        "icon_two_amount": 1, 
+        "icon_three_type": null
+    }
+},
+{
+    "pk": 8004, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": null, 
+        "icon_one_id": 1, 
+        "package": 40001, 
+        "des": "", 
+        "condition_ids": "12,13,15,16,17", 
+        "icon_one_amount": 200, 
+        "icon_three_amount": 1, 
+        "icon_two_type": null, 
+        "icon_one_type": 4, 
+        "condition_value": 4, 
+        "icon_two_id": null, 
+        "icon_two_amount": 1, 
+        "icon_three_type": null
+    }
+},
+{
+    "pk": 8005, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 3, 
+        "icon_one_id": 1, 
+        "package": 40001, 
+        "des": "", 
+        "condition_ids": "12,13,15,16,17", 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 5, 
+        "icon_two_id": 2, 
+        "icon_two_amount": 1, 
+        "icon_three_type": 7
+    }
 }
 ]

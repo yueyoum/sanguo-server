@@ -3,6 +3,34 @@
 import core.drives
 from mongoengine import *
 
+# 充值记录
+class MongoPurchaseLog(Document):
+    char_id = IntField()
+    # 充值获得元宝
+    sycee = IntField()
+    purchase_at = DateTimeField()
+
+    meta = {
+        'collection': 'purchase_log',
+        'indexes': ['char_id', 'purchase_at']
+    }
+
+MongoPurchaseLog.ensure_indexes()
+
+# 消费元宝记录
+class MongoCostSyceeLog(Document):
+    char_id = IntField()
+    sycee = IntField()
+    cost_at = DateTimeField()
+
+    meta = {
+        'collection': 'purchase_log',
+        'indexes': ['char_id', 'cost_at']
+    }
+
+MongoCostSyceeLog.ensure_indexes()
+
+
 class MongoPurchaseRecord(Document):
     id = IntField(primary_key=True)
     # times 记录每个商品购买的次数, key为商品ID, value为购买次数

@@ -96,4 +96,4 @@ def reset(signum):
     for index, data in enumerate(rank_data):
         char_id = data[0]
 
-        ActivityStatic(char_id).send_mail()
+        ActivityStatic(char_id).trig(4001)

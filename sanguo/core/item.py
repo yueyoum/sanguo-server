@@ -10,11 +10,12 @@ from core.mongoscheme import MongoItem, MongoEmbeddedEquipment
 from core.exception import SanguoException
 from core.msgpipe import publish_to_char
 from core.character import Char
-from core.signals import equip_changed_signal
+from core.signals import equip_changed_signal, gem_add_signal, stuff_add_signal
 from core.formation import Formation
 from core.achievement import Achievement
 from core.task import Task
 from core.resource import Resource
+from core.activity import ActivityEntry
 from utils import pack_msg
 from utils.functional import id_generator
 import protomsg
@@ -332,10 +333,16 @@ class Item(MessageEquipmentMixin):
         return str(equip_id) in self.item.equipments
 
     def has_gem(self, gem_id, amount=1):
-        return self.item.gems.get(str(gem_id), 0) >= amount
+        return self.gem_amount(gem_id) >= amount
 
     def has_stuff(self, stuff_id, amount=1):
-        return self.item.stuffs.get(str(stuff_id), 0) >= amount
+        return self.stuff_amount(stuff_id) >= amount
+
+    def gem_amount(self, gem_id):
+        return self.item.gems.get(str(gem_id), 0)
+
+    def stuff_amount(self, stuff_id):
+        return self.item.stuffs.get(str(stuff_id), 0)
 
     def equip_add(self, oid, level=1, notify=True):
         try:
@@ -532,6 +539,15 @@ class Item(MessageEquipmentMixin):
         self.item.gems = gems
         self.item.save()
 
+        for gid, amount in add_gems_dict.iteritems():
+            gem_add_signal.send(
+                sender=None,
+                char_id=self.char_id,
+                gem_id=gid,
+                add_amount=amount,
+                new_amount=gems[str(gid)]
+            )
+
         if not send_notify:
             return
         if new_gems:
@@ -686,6 +702,15 @@ class Item(MessageEquipmentMixin):
         self.item.stuffs = stuffs
         self.item.save()
 
+        for _id, _amount in add_stuffs_dict.iteritems():
+            stuff_add_signal.send(
+                sender=None,
+                char_id=self.char_id,
+                stuff_id=_id,
+                add_amount=_amount,
+                new_amount=stuffs[str(_id)]
+            )
+
         if not send_notify:
             return
         if new_stuffs:
@@ -780,12 +805,12 @@ class Item(MessageEquipmentMixin):
     @classmethod
     def get_sutff_drop(cls, _id):
         # 获得宝箱中的 drop
-        from core.attachment import get_drop, is_empty_drop
+        from core.attachment import get_drop, is_empty_drop, make_standard_drop_from_template
 
         s = STUFFS[_id]
         packages = s.packages
         if not packages:
-            return None
+            return make_standard_drop_from_template()
 
         package_ids = [int(i) for i in packages.split(',')]
         prepare_drop = get_drop(package_ids)
@@ -797,7 +822,7 @@ class Item(MessageEquipmentMixin):
 
 
     def stuff_use(self, _id, amount):
-        from core.attachment import get_drop, standard_drop_to_attachment_protomsg, is_empty_drop
+        from core.attachment import standard_drop_to_attachment_protomsg, is_empty_drop, merge_drop
         from core.resource import Resource
         try:
             s = STUFFS[_id]
@@ -821,8 +846,12 @@ class Item(MessageEquipmentMixin):
         # XXX 忽略amount，只能一个一个用
         self.stuff_remove(_id, amount)
 
+        # 活动 10001
+        additional_drop = ActivityEntry(10001).get_additional_drop(33)
+
         prepare_drop = self.get_sutff_drop(_id)
-        if not prepare_drop:
+        drop = merge_drop([prepare_drop, additional_drop])
+        if is_empty_drop(drop):
             return None
 
         resource = Resource(self.char_id, "Stuff Use", "use {0}".format(_id))
