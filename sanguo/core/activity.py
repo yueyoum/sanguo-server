@@ -379,7 +379,8 @@ class Activity8001(ActivityBase, ActivityTriggerMail):
 
 @activities.register(9001)
 class Activity9001(ActivityBase, ActivityTriggerAdditionalDrop):
-    pass
+    def get_current_value(self, char_id):
+        return 0
 
 
 @activities.register(10001)
@@ -389,10 +390,14 @@ class Activity10001(ActivityBase, ActivityTriggerAdditionalDrop):
             return make_standard_drop_from_template()
         return ActivityTriggerAdditionalDrop.get_additional_drop(self)
 
+    def get_current_value(self, char_id):
+        return 0
+
 
 @activities.register(11001)
 class Activity11001(ActivityBase, ActivityTriggerAdditionalDrop):
-    pass
+    def get_current_value(self, char_id):
+        return 0
 
 
 
