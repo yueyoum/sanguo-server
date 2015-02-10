@@ -188,10 +188,10 @@ class ActivityTriggerMail(object):
 
 
     def get_mail_title(self, p):
-        return self.activity_data.mail_title.format(p.condition_value)
+        return self.activity_data.mail_title.format(ACTIVITY_STATIC_CONDITIONS[p].condition_value)
 
     def get_mail_content(self, p):
-        return self.activity_data.mail_content.format(p.condition_value)
+        return self.activity_data.mail_content.format(ACTIVITY_STATIC_CONDITIONS[p].condition_value)
 
     def get_mail_attachment(self, p):
         drop = get_drop([ACTIVITY_STATIC_CONDITIONS[p].package])
