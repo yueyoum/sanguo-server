@@ -403,7 +403,7 @@ class Activity7001(ActivityBase, ActivityTriggerManually):
 
 
 @activities.register(8001)
-class Activity8001(ActivityBase, ActivityTriggerMail):
+class Activity8001(ActivityBase, ActivityTriggerManually):
     # 收集五虎上将
     def get_current_value(self, char_id):
         from core.hero import char_heros_dict
