@@ -443,8 +443,6 @@ MongoAffairs.ensure_indexes()
 class MongoActivityStatic(Document):
     id = IntField(primary_key=True)
 
-    # 可以领奖的条件
-    can_get = ListField(IntField())
     # 用来标识对应活动领奖次数
     # condition_id: times
     # 现在一个条件只能领奖一次，但还是记录了领的次数，

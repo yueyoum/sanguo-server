@@ -108,7 +108,6 @@ def get_mongo_activity_instance(char_id):
         mongo_ac = MongoActivityStatic.objects.get(id=char_id)
     except DoesNotExist:
         mongo_ac = MongoActivityStatic(id=char_id)
-        mongo_ac.can_get = []
         mongo_ac.reward_times = {}
         mongo_ac.send_times = {}
         mongo_ac.save()
@@ -140,20 +139,43 @@ activities = _Activities()
 class ActivityTriggerManually(object):
     # 需要手动领奖的
     def trig(self, char_id):
-        value = self.get_current_value(char_id)
-        passed, not_passed = self.select_conditions(value)
+        pass
 
-        if not passed:
-            return
+    def get_reward(self, char_id, condition_id):
+        # 领取奖励
+        self.get_reward_check(char_id, condition_id)
+        return self.get_reward_done(char_id, condition_id)
+
+
+    def get_reward_check(self, char_id, condition_id):
+        is_passed = self.condition_is_passed(char_id, condition_id)
+        if not is_passed:
+            raise SanguoException(
+                errormsg.ACTIVITY_CAN_NOT_GET_REWARD,
+                char_id,
+                "Activity Get Reward",
+                "condition {0} can not get".format(condition_id)
+            )
 
         mongo_ac = get_mongo_activity_instance(char_id)
-        for p in passed:
-            if p in mongo_ac.can_get or str(p) in mongo_ac.reward_times:
-                continue
+        if str(condition_id) in mongo_ac.send_times:
+            raise SanguoException(
+                errormsg.ACTIVITY_ALREADY_GOT_REWARD,
+                char_id,
+                "Activity Get Reward",
+                "condition {0} already got".format(condition_id)
+            )
 
-            mongo_ac.can_get.append(p)
-
+        mongo_ac.reward_times[str(condition_id)] = 1
         mongo_ac.save()
+
+
+    def get_reward_done(self, char_id, condition_id):
+        standard_drop = get_drop([ACTIVITY_STATIC_CONDITIONS[condition_id].package])
+        resource = Resource(char_id, "Activity Get Reward", "get condition id {0}".format(condition_id))
+        standard_drop = resource.add(**standard_drop)
+
+        return standard_drop_to_attachment_protomsg(standard_drop)
 
 
 class ActivityTriggerMail(object):
@@ -196,6 +218,15 @@ class ActivityTriggerMail(object):
     def get_mail_attachment(self, p):
         drop = get_drop([ACTIVITY_STATIC_CONDITIONS[p].package])
         return json.dumps(drop)
+
+
+    def get_reward(self, char_id, condition_id):
+        raise SanguoException(
+            errormsg.ACTIVITY_GET_REWARD_TP_ERROR,
+            char_id,
+            "Activity Get Reward",
+            "condition {0} can not get".format(condition_id)
+        )
 
 
 class ActivityTriggerAdditionalDrop(object):
@@ -250,6 +281,12 @@ class ActivityBase(object):
                 not_passed.append(c.id)
 
         return passed, not_passed
+
+    def condition_is_passed(self, char_id, condition_id):
+        value = self.get_current_value(char_id)
+        passed, not_passed = self.select_conditions(value)
+        return condition_id in passed
+
 
     def get_current_value(self, char_id):
         raise NotImplementedError()
@@ -352,13 +389,17 @@ class Activity6001(ActivityBase, ActivityTriggerMail):
 @activities.register(7001)
 class Activity7001(ActivityBase, ActivityTriggerManually):
     # 累计汤圆 stuff_id = 3003
+    STUFF_ID = 3003
     def get_current_value(self, char_id):
         from core.item import Item
         item = Item(char_id)
-        return item.stuff_amount(3003)
+        return item.stuff_amount(self.STUFF_ID)
 
-    def trig(self, char_id):
-        pass
+
+    def get_reward_check(self, char_id, condition_id):
+        value = ACTIVITY_STATIC_CONDITIONS[condition_id].condition_value
+        resource = Resource(char_id, "Activity Get Reward 7001")
+        resource.check_and_remove(stuffs=[(self.STUFF_ID, value)])
 
 
 @activities.register(8001)
@@ -411,7 +452,6 @@ class ActivityEntry(object):
         return activities[activity_id]()
 
 
-
 class ActivityStatic(object):
     def __init__(self, char_id):
         self.char_id = char_id
@@ -430,49 +470,11 @@ class ActivityStatic(object):
 
     def get_reward(self, condition_id):
         activity_id = ACTIVITY_STATIC_CONDITIONS[condition_id].activity_id
-
-        if condition_id == 7001:
-            value = ACTIVITY_STATIC_CONDITIONS[condition_id].condition_value
-            resource = Resource(self.char_id, "Activity Get Reward 7001")
-            resource.check_and_remove(stuffs=[(3003, value)])
-        else:
-            if str(condition_id) in self.mongo_ac.reward_times or str(condition_id) in self.mongo_ac.send_times:
-                raise SanguoException(
-                    errormsg.ACTIVITY_ALREADY_GOT_REWARD,
-                    self.char_id,
-                    "Activity Get Reward",
-                    "condition {0} already got".format(condition_id)
-                )
-
-            if condition_id not in self.mongo_ac.can_get:
-                raise SanguoException(
-                    errormsg.ACTIVITY_CAN_NOT_GET_REWARD,
-                    self.char_id,
-                    "Activity Get Reward",
-                    "condition {0} can not get".format(condition_id)
-                )
-
-
-            if ACTIVITY_STATIC[activity_id].mode != 1:
-                # 发邮件，不能主动领取
-                raise SanguoException(
-                    errormsg.ACTIVITY_GET_REWARD_TP_ERROR,
-                    self.char_id,
-                    "Activity Get Reward",
-                    "condition {0} can not get".format(condition_id)
-                )
-
-            self.mongo_ac.can_get.remove(condition_id)
-            self.mongo_ac.reward_times[str(condition_id)] = 1
-            self.mongo_ac.save()
+        entry = ActivityEntry(activity_id)
+        msg = entry.get_reward(self.char_id, condition_id)
 
         self.send_update_notify([activity_id])
-
-        standard_drop = get_drop([ACTIVITY_STATIC_CONDITIONS[condition_id].package])
-        resource = Resource(self.char_id, "Activity Get Reward", "get condition id {0}".format(condition_id))
-        standard_drop = resource.add(**standard_drop)
-
-        return standard_drop_to_attachment_protomsg(standard_drop)
+        return msg
 
 
     def is_show(self, activity_id):
@@ -494,12 +496,11 @@ class ActivityStatic(object):
         if entry.activity_data.mode == 1:
             # 手动领取奖励
             for _con_id in condition_ids:
-                if _con_id in self.mongo_ac.can_get:
-                    # 还有没领的奖励
+                if str(_con_id) not in self.mongo_ac.reward_times and entry.condition_is_passed(self.char_id, _con_id):
+                    # 还有已经完成，但是没领的奖励
                     return True
 
         return False
-
 
 
     def _msg_activity(self, msg, activity_id):
@@ -509,32 +510,18 @@ class ActivityStatic(object):
         msg.current_value = entry.get_current_value(self.char_id)
         msg.left_time = entry.left_time
 
-        if activity_id == 7001:
-            # 可以反复领奖的特殊处理
-            for i in entry.get_condition_ids():
-                msg_condition = msg.conditions.add()
-                msg_condition.id = i
+        for i in entry.get_condition_ids():
+            msg_condition = msg.conditions.add()
+            msg_condition.id = i
 
-                if msg.current_value >= ACTIVITY_STATIC_CONDITIONS[i].condition_value:
-                    status = ActivityEntryMsg.ActivityCondition.CAN_GET
-                else:
-                    status = ActivityEntryMsg.ActivityCondition.CAN_NOT
+            if str(i) in self.mongo_ac.reward_times:
+                status = ActivityEntryMsg.ActivityCondition.HAS_GOT
+            elif entry.condition_is_passed(self.char_id, i):
+                status = ActivityEntryMsg.ActivityCondition.CAN_GET
+            else:
+                status = ActivityEntryMsg.ActivityCondition.CAN_NOT
 
-                msg_condition.status = status
-        else:
-            for i in entry.get_condition_ids():
-
-                msg_condition = msg.conditions.add()
-                msg_condition.id = i
-
-                if i in self.mongo_ac.can_get:
-                    status = ActivityEntryMsg.ActivityCondition.CAN_GET
-                elif str(i) in self.mongo_ac.reward_times:
-                    status = ActivityEntryMsg.ActivityCondition.HAS_GOT
-                else:
-                    status = ActivityEntryMsg.ActivityCondition.CAN_NOT
-
-                msg_condition.status = status
+            msg_condition.status = status
 
 
     def send_update_notify(self, activity_ids):
