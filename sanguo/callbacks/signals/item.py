@@ -32,7 +32,7 @@ def _stuff_add(char_id, stuff_id, add_amount, new_amount, **kwargs):
 def _stuff_remove(char_id, stuff_id, rm_amount, new_amount, **kwargs):
     if stuff_id != 3003:
         return
-    
+
     ActivityStatic(char_id).send_update_notify([7001])
 
 

@@ -517,10 +517,13 @@ class ActivityStatic(object):
             msg_condition = msg.conditions.add()
             msg_condition.id = i
 
-            if str(i) in mongo_ac.reward_times:
-                status = ActivityEntryMsg.ActivityCondition.HAS_GOT
-            elif entry.condition_is_passed(self.char_id, i):
-                status = ActivityEntryMsg.ActivityCondition.CAN_GET
+            if entry.activity_data.mode == 1:
+                if str(i) in mongo_ac.reward_times:
+                    status = ActivityEntryMsg.ActivityCondition.HAS_GOT
+                elif entry.condition_is_passed(self.char_id, i):
+                    status = ActivityEntryMsg.ActivityCondition.CAN_GET
+                else:
+                    status = ActivityEntryMsg.ActivityCondition.CAN_NOT
             else:
                 status = ActivityEntryMsg.ActivityCondition.CAN_NOT
 
