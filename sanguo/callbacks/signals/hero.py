@@ -61,8 +61,9 @@ def _hero_add(char_id, hero_ids, hero_original_ids, send_notify, **kwargs):
     ActivityStatic(char_id).trig(2001)
     ActivityStatic(char_id).trig(8001)
 
-def _hero_del(char_id, hero_ids, **kwargs):
-    remove_hero_notify(char_id, hero_ids)
+def _hero_del(char_id, hero_id, hero_oid, **kwargs):
+    remove_hero_notify(char_id, [hero_id])
+    ActivityStatic(char_id).trig(8001)
 
 
 def _hero_change(hero_id, **kwargs):

@@ -611,7 +611,8 @@ def break_hero(char_id, _id):
     hero_del_signal.send(
         sender=None,
         char_id=char_id,
-        hero_ids=[_id]
+        hero_id=_id,
+        hero_oid=oid
     )
 
     HeroSoul(char_id).add_soul([(oid, souls_amount)])
