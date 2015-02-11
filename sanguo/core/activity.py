@@ -409,13 +409,14 @@ class Activity8001(ActivityBase, ActivityTriggerManually):
         from core.hero import char_heros_dict
 
         heros = char_heros_dict(char_id)
+        hero_oids = [h.oid for h in heros.values()]
 
         condition_ids = self.activity_data.condition_objs[0].condition_ids
         need_hero_ids = [int(i) for i in condition_ids.split(',')]
 
         value = 0
         for hid in need_hero_ids:
-            if hid in heros:
+            if hid in hero_oids:
                 value += 1
 
         return value
@@ -455,7 +456,6 @@ class ActivityEntry(object):
 class ActivityStatic(object):
     def __init__(self, char_id):
         self.char_id = char_id
-        self.mongo_ac = get_mongo_activity_instance(char_id)
 
 
     def trig(self, activity_id):
@@ -495,8 +495,9 @@ class ActivityStatic(object):
 
         if entry.activity_data.mode == 1:
             # 手动领取奖励
+            mongo_ac = get_mongo_activity_instance(self.char_id)
             for _con_id in condition_ids:
-                if str(_con_id) not in self.mongo_ac.reward_times and entry.condition_is_passed(self.char_id, _con_id):
+                if str(_con_id) not in mongo_ac.reward_times and entry.condition_is_passed(self.char_id, _con_id):
                     # 还有已经完成，但是没领的奖励
                     return True
 
@@ -504,6 +505,8 @@ class ActivityStatic(object):
 
 
     def _msg_activity(self, msg, activity_id):
+        mongo_ac = get_mongo_activity_instance(self.char_id)
+
         entry = ActivityEntry(activity_id)
 
         msg.id = activity_id
@@ -514,7 +517,7 @@ class ActivityStatic(object):
             msg_condition = msg.conditions.add()
             msg_condition.id = i
 
-            if str(i) in self.mongo_ac.reward_times:
+            if str(i) in mongo_ac.reward_times:
                 status = ActivityEntryMsg.ActivityCondition.HAS_GOT
             elif entry.condition_is_passed(self.char_id, i):
                 status = ActivityEntryMsg.ActivityCondition.CAN_GET
