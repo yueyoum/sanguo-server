@@ -12,7 +12,7 @@ from core.activity import ActivityEntry
 from preset.data import ACTIVITY_STATIC
 
 
-# 每零点清理过期活动
+# 每天零点清理过期活动
 @uwsgidecorators.cron(0, 0, -1, -1, -1)
 def clean_expired_activity(signum):
     logger = Logger("clean_expired_activity.log")
@@ -29,8 +29,6 @@ def clean_expired_activity(signum):
             # 过期的常规活动，删除记录
             condition_ids = entry.get_condition_ids()
             for cid in condition_ids:
-                if cid in mongo_ac.can_get:
-                    mongo_ac.can_get.remove(cid)
                 if str(cid) in mongo_ac.reward_times:
                     mongo_ac.reward_times.pop(str(cid))
                 if str(cid) in mongo_ac.send_times:
