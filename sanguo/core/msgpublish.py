@@ -28,7 +28,7 @@ class GlobalChatQueue(object):
         while redis_client.llen(cls.REDIS_KEY) >= cls.QUEUE_SIZE:
             redis_client.lpop(cls.REDIS_KEY)
 
-        redis_client.rpush(data)
+        redis_client.rpush(cls.REDIS_KEY, data)
 
     @classmethod
     def get(cls):
