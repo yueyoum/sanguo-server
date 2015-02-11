@@ -3,6 +3,34 @@
 import core.drives
 from mongoengine import *
 
+# 充值记录
+class MongoPurchaseLog(Document):
+    char_id = IntField()
+    # 充值获得元宝
+    sycee = IntField()
+    purchase_at = IntField()  # UTC timestamp
+
+    meta = {
+        'collection': 'purchase_log',
+        'indexes': ['char_id', 'purchase_at']
+    }
+
+MongoPurchaseLog.ensure_indexes()
+
+# 消费元宝记录
+class MongoCostSyceeLog(Document):
+    char_id = IntField()
+    sycee = IntField()
+    cost_at = IntField() # UTC timestamp
+
+    meta = {
+        'collection': 'cost_sycee_log',
+        'indexes': ['char_id', 'cost_at']
+    }
+
+MongoCostSyceeLog.ensure_indexes()
+
+
 class MongoPurchaseRecord(Document):
     id = IntField(primary_key=True)
     # times 记录每个商品购买的次数, key为商品ID, value为购买次数
@@ -139,6 +167,11 @@ class MongoHeroPanel(Document):
     }
 
 
+class MongoEmbeddedHeroWuxing(EmbeddedDocument):
+    level = IntField(default=1)
+    # 当前经验
+    exp = IntField(default=0)
+
 
 class MongoHero(Document):
     id = IntField(primary_key=True)
@@ -147,6 +180,8 @@ class MongoHero(Document):
     step = IntField(required=True)
     # 升阶是一点一点来的，而不是一下升上去的，progress记录了当前进度
     progress = IntField(required=True)
+
+    wuxings = MapField(EmbeddedDocumentField(MongoEmbeddedHeroWuxing))
 
     meta = {
         'collection': 'hero',
@@ -408,8 +443,6 @@ MongoAffairs.ensure_indexes()
 class MongoActivityStatic(Document):
     id = IntField(primary_key=True)
 
-    # 可以领奖的条件
-    can_get = ListField(IntField())
     # 用来标识对应活动领奖次数
     # condition_id: times
     # 现在一个条件只能领奖一次，但还是记录了领的次数，

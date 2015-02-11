@@ -6,8 +6,7 @@ from collections import defaultdict
 
 from core.hero import FightPowerMixin, Hero, cal_monster_property
 from mixins import ActiveEffectMixin, StepHeroNotifyMixin
-from preset.settings import DEMAGE_VALUE_ADJUST
-from preset.data import HEROS, MONSTERS, SKILLS
+from preset.data import HEROS, MONSTERS, SKILLS, WUXING
 
 logger = logging.getLogger('battle')
 
@@ -250,24 +249,31 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
 
         damage_reduce = min(0.015 * target.using_defense / (self.level + 9) + m * (target.level - self.level), 0.75)
         damage_reduce = max(damage_reduce, -0.15)
-        value = damage * (1 - damage_reduce)
+        value = damage * (1 - damage_reduce) * 0.7
 
-        # 攻击修正
-        if self.HERO_TYPE == 1:
-            self_tp = HEROS[self.original_id].tp
-        else:
-            self_tp = MONSTERS[self.original_id].tp
-
-        if target.HERO_TYPE == 1:
-            target_tp = HEROS[target.original_id].tp
-        else:
-            target_tp = MONSTERS[target.original_id].tp
-
-        modulus = DEMAGE_VALUE_ADJUST[self_tp][target_tp]
-
-        value += value * modulus
-
+        # 五行
+        wuxing_value = self.wuxing_addition(target)
+        value = value - wuxing_value * (1 - damage_reduce)
         return value
+
+
+    def wuxing_addition(self, target):
+        if self.HERO_TYPE not in [1,2] or target.HERO_TYPE not in [1,2]:
+            return 0
+
+        def _wuxing_damage(self_wuxing, self_level, target_wuxing):
+            damage = WUXING[self_wuxing].levels[self_level]
+            damage = damage * WUXING[self_wuxing].to[target_wuxing] / 100.0
+            return damage
+
+        damages = []
+        for self_wuxing, self_level in self.wuxings:
+            for target_wuxing, target_level in target.wuxings:
+                damage = _wuxing_damage(self_wuxing, self_level, target_wuxing)
+                damages.append(damage)
+
+        return max(damages)
+
 
 
     def _one_action(self, target, value, msg, eff):
@@ -449,6 +455,7 @@ class BattleHero(InBattleHero):
         self.skills = hero.skills
 
         self.default_skill = hero.default_skill
+        self.wuxings = [(int(k), v.level) for k, v in hero.hero.wuxings.iteritems()]
 
         super(BattleHero, self).__init__()
 
@@ -478,5 +485,6 @@ class BattleMonster(InBattleHero):
         self.level = level
 
         self.default_skill = info.default_skill
+        self.wuxings = [(i, 1) for i in info.wuxings]
 
         super(BattleMonster, self).__init__()

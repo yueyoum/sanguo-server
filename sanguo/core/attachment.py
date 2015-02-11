@@ -69,6 +69,23 @@ def is_empty_drop(drop):
     return True
 
 
+def merge_drop(drops):
+    drop = make_standard_drop_from_template()
+    for d in drops:
+        drop['gold'] += d['gold']
+        drop['sycee'] += d['sycee']
+        drop['exp'] += d['exp']
+        drop['official_exp'] += d['official_exp']
+
+        drop['heros'].extend(d['heros'])
+        drop['souls'].extend(d['souls'])
+        drop['equipments'].extend(d['equipments'])
+        drop['gems'].extend(d['gems'])
+        drop['stuffs'].extend(d['stuffs'])
+        drop['horses'].extend(d['horses'])
+
+    return drop
+
 
 def standard_drop_to_attachment_protomsg(data):
     # data is dict, {

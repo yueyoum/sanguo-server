@@ -5,7 +5,7 @@ import random
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoStage
 from core.msgpipe import publish_to_char
-from core.attachment import make_standard_drop_from_template, get_drop
+from core.attachment import make_standard_drop_from_template, get_drop, merge_drop
 from core.exception import SanguoException
 from core.battle import PVE, ElitePVE, ActivityPVE
 from core.character import Char
@@ -13,6 +13,7 @@ from core.functionopen import FunctionOpen
 from core.signals import pve_finished_signal
 from core.counter import Counter, ActivityStageCount
 from core.resource import Resource
+from core.activity import ActivityEntry
 from core.task import Task
 from utils import pack_msg
 from utils.decorate import operate_guard
@@ -489,8 +490,11 @@ class EliteStage(object):
                 _drop_id = random.choice([int(i) for i in drop_hero_ids.split(',')])
                 prepare_drop['heros'].append((_drop_id, 1))
 
+        additional_drop = ActivityEntry(11001).get_additional_drop()
+        drop = merge_drop([prepare_drop, additional_drop])
+
         resource = Resource(self.char_id, "EliteStage Drop", "stage {0}".format(this_stage.id))
-        standard_drop = resource.add(**prepare_drop)
+        standard_drop = resource.add(**drop)
 
         return standard_drop
 

@@ -34,6 +34,8 @@ def clean(signum):
 
         if len(char_mail.mail.mails) == 0:
             m.delete()
+        else:
+            m.save()
 
     logger.write("Clean Mail Complete. Cleaned Amount: {0}".format(amount))
     logger.close()

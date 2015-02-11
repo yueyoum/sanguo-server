@@ -5,21 +5,21 @@ __date__ = '12/30/13'
 
 
 from mongoengine import DoesNotExist
-from core.mongoscheme import MongoHero, MongoAchievement, MongoHeroSoul, MongoCharacter
-from core.signals import hero_add_signal, hero_changed_signal, hero_step_up_signal, hero_to_soul_signal
+from core.mongoscheme import MongoHero, MongoAchievement, MongoHeroSoul, MongoCharacter, MongoEmbeddedHeroWuxing
+from core.signals import hero_add_signal, hero_changed_signal, hero_step_up_signal, hero_to_soul_signal, hero_del_signal
 from core.formation import Formation
 from core.exception import SanguoException
 from core.resource import Resource
 from core.horse import Horse
 from core.msgpipe import publish_to_char
-from core.common import FightPowerMixin
+from core.common import FightPowerMixin, level_up
 
 from utils import cache
 from utils import pack_msg
 from utils.functional import id_generator
 
 from preset.settings import HERO_MAX_STEP, HERO_START_STEP, HERO_STEP_UP_SOCKET_AMOUNT
-from preset.data import HEROS, ACHIEVEMENTS, MONSTERS, HORSE
+from preset.data import HEROS, ACHIEVEMENTS, MONSTERS, HORSE, WUXING, WUXING_LEVEL, WUXING_MAX_LEVEL
 from preset import errormsg
 import protomsg
 
@@ -76,6 +76,37 @@ def cal_monster_property(oid, level):
     return attack, defense, hp
 
 
+class HeroWuXing(object):
+    __slots__ = ['id', 'level', 'exp', 'obj']
+    def __init__(self, _id, level, exp):
+        self.id = _id
+        self.level = level
+        self.exp = exp
+        self.obj = WUXING[_id]
+
+
+    @staticmethod
+    def update_need_exp(level):
+        try:
+            return WUXING_LEVEL[level].exp
+        except KeyError:
+            return 0
+
+    @property
+    def max_exp(self):
+        return HeroWuXing.update_need_exp(self.level)
+
+
+    def update(self, add_exp):
+        self.level, self.exp = level_up(self.level, self.exp, add_exp, HeroWuXing.update_need_exp)
+
+
+    def to_proto(self):
+        msg = protomsg.Hero.WuXing()
+        msg.id = self.id
+        msg.level = self.level
+        msg.cur_exp = self.exp
+        return msg
 
 
 class Hero(FightPowerMixin):
@@ -103,7 +134,6 @@ class Hero(FightPowerMixin):
         self.skills = [int(i) for i in self.model_hero.skills.split(',')]
 
         self._add_equip_attrs()
-        self._add_achievement_buffs()
         self._add_global_buffs()
 
 
@@ -178,31 +208,6 @@ class Hero(FightPowerMixin):
             self.defense += horse.defense
             self.hp += horse.hp
             self.crit += int(HORSE[horse.oid].crit / 10)
-
-
-    def _add_achievement_buffs(self):
-        try:
-            mongo_ach = MongoAchievement.objects.get(id=self.char_id)
-        except DoesNotExist:
-            return
-
-        buffs = {}
-        for i in mongo_ach.complete:
-            ach = ACHIEVEMENTS[i]
-            if not ach.buff_used_for:
-                continue
-
-            buffs[ach.buff_used_for] = buffs.get(ach.buff_used_for, 0) + ach.buff_value
-
-        for k, v in buffs.iteritems():
-            value = getattr(self, k)
-            if k == 'crit':
-                new_value = value + v / 100
-            else:
-                new_value = value * (1 + v / 10000.0)
-
-            new_value = int(new_value)
-            setattr(self, k, new_value)
 
 
     def _add_global_buffs(self):
@@ -309,6 +314,45 @@ class Hero(FightPowerMixin):
         )
 
 
+    def wuxing_update(self, wuxing_id, souls):
+        # 五行升级
+        str_id = str(wuxing_id)
+        if str_id not in self.hero.wuxings:
+            raise SanguoException(
+                errormsg.WUXING_NOT_FOR_THIS_HERO,
+                self.char_id,
+                "Hero WuXing Update",
+                "hero {0} has no wuxing {1}".format(self.id, wuxing_id)
+            )
+
+        hs = HeroSoul(self.char_id)
+        add_exp = 0
+        for soul_id, soul_amount in souls:
+            if not hs.has_soul(soul_id, soul_amount):
+                raise SanguoException(
+                    errormsg.SOUL_NOT_ENOUGH,
+                    self.char_id,
+                    "Hero WuXing Update",
+                    "soul not enough. {0}: {1}".format(soul_id, soul_amount)
+                )
+
+            add_exp += HEROS[soul_id].wuxing_exp * soul_amount
+
+        wx = HeroWuXing(wuxing_id, self.hero.wuxings[str_id].level, self.hero.wuxings[str_id].exp)
+        wx.update(add_exp)
+
+        hs.remove_soul(souls)
+
+        self.hero.wuxings[str_id].level = wx.level
+        self.hero.wuxings[str_id].exp = wx.exp
+        self.hero.save()
+        hero_changed_signal.send(
+            sender=None,
+            hero_id=self.id
+        )
+
+
+
 class HeroSoul(object):
     def __init__(self, char_id):
         self.char_id = char_id
@@ -328,6 +372,11 @@ class HeroSoul(object):
     def add_soul(self, souls):
         new_souls = []
         update_souls = []
+
+        for _id, _ in souls:
+            if _id not in HEROS:
+                raise RuntimeError("soul {0} not exist".format(_id))
+
         for _id, amount in souls:
             str_id = str(_id)
             if str_id in self.mongo_hs.souls:
@@ -478,7 +527,18 @@ def save_hero(char_id, hero_original_ids, add_notify=True):
         length = len(hero_original_ids)
         id_range = id_generator('charhero', length)
         for i, _id in enumerate(id_range):
-            MongoHero(id=_id, char=char_id, oid=hero_original_ids[i], step=HERO_START_STEP, progress=0).save()
+            mh = MongoHero(id=_id)
+            mh.char = char_id
+            mh.oid = hero_original_ids[i]
+            mh.step = HERO_START_STEP
+            mh.progress = 0
+
+            wuxing = {
+                str( HEROS[mh.oid].wuxings[0] ): MongoEmbeddedHeroWuxing(level=1, exp=0)
+            }
+
+            mh.wuxings = wuxing
+            mh.save()
 
         hero_add_signal.send(
             sender=None,
@@ -519,4 +579,41 @@ def recruit_hero(char_id, _id):
     hs.remove_soul([(_id, soul_amount)])
 
     save_hero(char_id, [_id])
+
+
+def break_hero(char_id, _id):
+    # 主动将武将转为卡魂
+    try:
+        h = char_heros_dict(char_id)[_id]
+    except KeyError:
+        raise SanguoException(
+            errormsg.HERO_NOT_EXSIT,
+            char_id,
+            "Hero Break",
+            "hero {0} not exist".format(_id)
+        )
+
+    formation = Formation(char_id)
+    if _id in formation.in_formation_hero_ids():
+        raise SanguoException(
+            errormsg.HERO_CANNOT_BREAK_IN_FORMATION,
+            char_id,
+            "Hero Break",
+            "hero {0} in formation, cannot break".format(_id)
+        )
+
+    oid = h.oid
+    quality = HEROS[oid].quality
+    souls_amount = SAVE_HERO_TO_SOUL_TABLE[quality]
+
+    MongoHero.objects.get(id=_id).delete()
+
+    hero_del_signal.send(
+        sender=None,
+        char_id=char_id,
+        hero_id=_id,
+        hero_oid=oid
+    )
+
+    HeroSoul(char_id).add_soul([(oid, souls_amount)])
 

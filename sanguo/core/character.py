@@ -18,6 +18,8 @@ from core.signals import (
     SignalHeroWeGo,
 )
 
+from core.common import level_up
+
 
 from utils import pack_msg
 
@@ -42,17 +44,9 @@ def official_update_exp(level):
 
 
 
-def char_level_up(current_exp, current_level, add_exp):
-    new_exp = current_exp + add_exp
-    while True:
-        need_exp = level_update_exp(current_level)
-        if new_exp < need_exp:
-            break
+def char_level_up(current_level, current_exp, add_exp):
+    return level_up(current_level, current_exp, add_exp, level_update_exp)
 
-        current_level += 1
-        new_exp -= need_exp
-
-    return new_exp, current_level
 
 def char_official_up(current_official_exp, current_official, add_official_exp):
     new_official_exp = current_official_exp + add_official_exp
@@ -122,21 +116,31 @@ class Char(object):
                 change_value=gold
             )
 
-        sycee += purchase_actual_got
-        if sycee:
-            char.sycee += sycee
+        # 这里加上_cost_sycee是因为防止同时出现purchase_actual_got和消费的update
+        # 虽然逻辑上不可能，但是代码是可以这样调用的
+        # 所以为了清晰，这里加上_cost_sycee表示消费了多少元宝
+        _cost_sycee = 0
+        _add_sycee = 0
+        if sycee < 0:
+            _cost_sycee = abs(sycee)
+        else:
+            _add_sycee = sycee
+
+        if sycee or purchase_actual_got:
+            char.sycee += sycee + purchase_actual_got
             signal_go.add(
                 char_sycee_changed_signal,
                 sender=None,
                 char_id=self.id,
                 now_value=char.sycee,
-                change_value=sycee
+                cost_value=_cost_sycee,
+                add_value=_add_sycee+purchase_actual_got,
             )
 
         if not CHARACTER_MAX_LEVEL or char.level < CHARACTER_MAX_LEVEL:
             if exp:
                 old_level = char.level
-                char.exp, char.level = char_level_up(char.exp, char.level, exp)
+                char.level, char.exp = char_level_up(char.level, char.exp, exp)
 
                 if char.level != old_level:
                     signal_go.add(

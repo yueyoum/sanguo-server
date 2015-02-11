@@ -14,3 +14,20 @@ class FightPowerMixin(object):
         return int(a + b)
 
 
+def level_up(current_level, current_exp, add_exp, up_needs_exp_func):
+    new_exp = current_exp + add_exp
+    while True:
+        need_exp = up_needs_exp_func(current_level)
+        if not need_exp:
+            # 满级了
+            new_exp = 0
+            break
+
+        if new_exp < need_exp:
+            # 经验不够升级了
+            break
+
+        current_level += 1
+        new_exp -= need_exp
+
+    return current_level, new_exp

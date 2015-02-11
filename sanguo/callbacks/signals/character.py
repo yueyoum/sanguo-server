@@ -1,3 +1,6 @@
+
+import arrow
+
 from core.signals import (
     char_level_up_signal,
     char_official_up_signal,
@@ -12,6 +15,7 @@ from core.hero import char_heros_obj
 from core.achievement import Achievement
 from core.stage import ActivityStage
 from core.activity import ActivityStatic
+from core.mongoscheme import MongoCostSyceeLog
 
 
 def _all_hero_changed(char_id):
@@ -31,7 +35,7 @@ def _char_level_up(char_id, new_level, **kwargs):
     activity_stage = ActivityStage(char_id)
     activity_stage.check(new_level)
 
-    ActivityStatic(char_id).trig(1)
+    ActivityStatic(char_id).trig(1001)
 
 
 def _char_official_up(char_id, new_official, **kwargs):
@@ -45,10 +49,19 @@ def _char_gold_changed(char_id, now_value, change_value, **kwargs):
         achievement.trig(32, abs(change_value))
 
 
-def _char_sycee_changed(char_id, now_value, change_value, **kwargs):
-    if change_value < 0:
+def _char_sycee_changed(char_id, now_value, cost_value, add_value, **kwargs):
+    if cost_value:
+        cost_value = abs(cost_value)
         achievement = Achievement(char_id)
-        achievement.trig(31, abs(change_value))
+        achievement.trig(31, cost_value)
+
+        cslog = MongoCostSyceeLog()
+        cslog.char_id = char_id
+        cslog.sycee = cost_value
+        cslog.cost_at = arrow.utcnow().timestamp
+        cslog.save()
+
+        ActivityStatic(char_id).trig(6001)
 
 
 char_level_up_signal.connect(

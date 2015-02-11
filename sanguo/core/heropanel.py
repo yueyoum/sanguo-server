@@ -14,6 +14,7 @@ from core.hero import save_hero
 from core.resource import Resource
 from core.task import Task
 from core.msgpipe import publish_to_char
+from core.signals import heropanel_open_hero_signal
 from utils import pack_msg
 from preset import errormsg
 import protomsg
@@ -178,9 +179,16 @@ class HeroPanel(object):
             self.panel.save()
             save_hero(self.char_id, hero.oid)
 
+            Task(self.char_id).trig(7)
+
+            heropanel_open_hero_signal.send(
+                sender=None,
+                char_id=self.char_id,
+                hero_oid=hero.oid
+            )
+
         self.send_notify()
 
-        Task(self.char_id).trig(7)
         return hero.oid
 
 

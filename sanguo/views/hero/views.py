@@ -5,7 +5,7 @@ __date__ = '4/9/14'
 
 
 from utils.decorate import message_response, function_check
-from core.hero import Hero, char_heros_dict, recruit_hero
+from core.hero import Hero, char_heros_dict, recruit_hero, break_hero
 from core.exception import SanguoException
 from preset import errormsg
 from utils import pack_msg
@@ -43,5 +43,26 @@ def step_up(request):
 @message_response("HeroRecruitResponse")
 def recruit(request):
     recruit_hero(request._char_id, request._proto.id)
+    return None
+
+
+@message_response("HeroWuxingUpdateResponse")
+def wuxing_update(request):
+    req = request._proto
+
+    hero_id = req.hero_id
+    wuxing_id = req.wuxing_id
+    souls = [(s.id, s.amount) for s in req.souls]
+
+    h = Hero(hero_id)
+    h.wuxing_update(wuxing_id, souls)
+    return None
+
+@message_response("HeroBreakResponse")
+def hero_break(request):
+    char_id = request._char_id
+    hero_id = request._proto.hero_id
+
+    break_hero(char_id, hero_id)
     return None
 

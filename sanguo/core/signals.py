@@ -26,15 +26,21 @@ plunder_finished_signal = Signal(providing_args=['from_char_id', 'to_char_id', '
 char_level_up_signal = Signal(providing_args=['char_id', 'new_level'])
 char_official_up_signal = Signal(providing_args=['char_id', 'new_official'])
 char_gold_changed_signal = Signal(providing_args=['char_id', 'now_value', 'change_value'])
-char_sycee_changed_signal = Signal(providing_args=['char_id', 'now_value', 'change_value'])
+char_sycee_changed_signal = Signal(providing_args=['char_id', 'now_value', 'cost_value', 'add_value'])
 
 hero_step_up_signal = Signal(providing_args=['char_id', 'hero_id', 'new_step'])
 hero_changed_signal = Signal(providing_args=['hero_id'])
 hero_add_signal = Signal(providing_args=['char_id', 'hero_ids', 'hero_original_ids', 'send_notify'])
-hero_del_signal = Signal(providing_args=['char_id', 'hero_ids'])
+hero_del_signal = Signal(providing_args=['char_id', 'hero_id', 'hero_oid'])
 hero_to_soul_signal = Signal(providing_args=['char_id', 'souls'])
 
+heropanel_open_hero_signal = Signal(providing_args=['char_id', 'hero_oid'])
+
 equip_changed_signal = Signal(providing_args=['char_id', 'equip_obj'])
+gem_add_signal = Signal(providing_args=['char_id', 'gem_id', 'add_amount', 'new_amount'])
+stuff_add_signal = Signal(providing_args=['char_id', 'stuff_id', 'add_amount', 'new_amount'])
+gem_remove_signal = Signal(providing_args=['char_id', 'gem_id', 'rm_amount', 'new_amount'])
+stuff_remove_signal = Signal(providing_args=['char_id', 'stuff_id', 'rm_amount', 'new_amount'])
 
 func_opened_signal = Signal(providing_args=['char_id', 'func_ids'])
 
@@ -44,3 +50,5 @@ vip_changed_signal = Signal(providing_args=['char_id', 'old_vip', 'new_vip'])
 new_friend_got_signal = Signal(providing_args=['char_id', 'new_friend_id', 'total_friends_amount'])
 
 global_buff_changed_signal = Signal(providing_args=['char_id'])
+
+activity_trig_signal = Signal(providing_args=['char_id', 'activity_id'])

@@ -3,7 +3,7 @@
 __author__ = 'Wang Chao'
 __date__ = '4/10/14'
 
-
+import traceback
 from hashlib import md5
 from django.http import HttpResponse
 
@@ -36,8 +36,15 @@ class RequestFilter(object):
 
         data = request.body
 
-        num_of_msgs = NUM_FIELD.unpack(data[:4])[0]
+        try:
+            num_of_msgs = NUM_FIELD.unpack(data[:4])[0]
+        except:
+            print "==== ERROR ===="
+            traceback.print_exc()
+            return HttpResponse(status=403)
+
         if num_of_msgs > MAX_NUM_FIELD_AMOUNT:
+            print "==== ERROR ===="
             print "NUM_OF_MSGS TOO BIG! {0} > {1}".format(num_of_msgs, MAX_NUM_FIELD_AMOUNT)
             return HttpResponse(status=403)
 
