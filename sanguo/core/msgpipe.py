@@ -1,6 +1,6 @@
 from core.drives import redis_client
 
-EXPIRE = 3600
+EXPIRE = 3600 * 2
 
 keygen = lambda char_id: 'noti:{0}'.format(char_id)
 

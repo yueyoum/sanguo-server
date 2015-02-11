@@ -108,7 +108,7 @@ class Hero(FightPowerMixin):
 
 
     def save_cache(self):
-        cache.set('hero:{0}'.format(self.id), self)
+        cache.set('hero:{0}'.format(self.id), self, expire=3600*3)
 
 
     @staticmethod
