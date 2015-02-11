@@ -10,6 +10,7 @@ from core.mongoscheme import MongoCharacter
 from core.character import Char
 from core.msgpipe import publish_to_char
 from core.exception import SanguoException
+from core.server import server
 
 from utils import pack_msg
 from utils.api import api_system_broadcast_get, APIFailure
@@ -19,9 +20,23 @@ from preset import errormsg
 from protomsg import ChatMessageNotify, BroadcastNotify, ChatMessage
 
 
+class GlobalChatQueue(object):
+    REDIS_KEY = 'global_chat_queue:{0}'.format(server.id)
+    QUEUE_SIZE = 20
+    @classmethod
+    def put(cls, data):
+        while redis_client.llen(cls.REDIS_KEY) >= cls.QUEUE_SIZE:
+            redis_client.lpop(cls.REDIS_KEY)
+
+        redis_client.rpush(data)
+
+    @classmethod
+    def get(cls):
+        return redis_client.lrange(cls.REDIS_KEY, 0, -1)
+
+
+
 class ChatMessagePublish(object):
-    __slots__ = ['char_id', 'cache_char', 'redis_key']
-    REDIS_KEY_TEMPLATE = 'chat_queue:{0}'
     def __init__(self, char_id):
         self.char_id = char_id
         self.cache_char = Char(char_id).mc
@@ -35,8 +50,9 @@ class ChatMessagePublish(object):
                 "message too long"
             )
 
+
     def send_notify(self):
-        msgs = redis_client.lrange(self.REDIS_KEY_TEMPLATE.format(self.char_id), 0, -1)
+        msgs = GlobalChatQueue.get()
         if not msgs:
             return
 
@@ -47,37 +63,30 @@ class ChatMessagePublish(object):
 
         publish_to_char(self.char_id, pack_msg(msg))
 
+
     def send_to_char(self, target_char_id, msg_bin):
         msg = ChatMessageNotify()
         msg_x = msg.msgs.add()
         msg_x.MergeFromString(msg_bin)
-
         publish_to_char(target_char_id, pack_msg(msg))
 
-    def put_in_char_msg_queue(self, target_char_id, text, check=True):
-        if check:
-            self.check(text)
+
+    def to_server(self, text):
+        self.check(text)
+
         msg = ChatMessage()
         msg.char.id = self.cache_char.id
         msg.char.name = self.cache_char.name
         msg.char.vip = self.cache_char.vip
         msg.msg = text
 
-        redis_key = self.REDIS_KEY_TEMPLATE.format(target_char_id)
+        data = msg.SerializeToString()
 
-        while redis_client.llen(redis_key) >= 20:
-            redis_client.lpop(redis_key)
+        GlobalChatQueue.put(data)
 
-        msg_bin = msg.SerializeToString()
-        redis_client.rpush(redis_key, msg_bin)
-        self.send_to_char(target_char_id, msg_bin)
-
-
-    def to_server(self, text):
-        self.check(text)
         chars = MongoCharacter.objects.all()
         for c in chars:
-            self.put_in_char_msg_queue(c.id, text, check=False)
+            self.send_to_char(c, data)
 
 
 class SystemBroadcast(object):
