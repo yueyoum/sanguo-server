@@ -2,6 +2,7 @@ from core.signals import (
     equip_changed_signal,
     socket_changed_signal,
     stuff_add_signal,
+    stuff_remove_signal,
     )
 
 from core.formation import Formation
@@ -28,6 +29,12 @@ def _stuff_add(char_id, stuff_id, add_amount, new_amount, **kwargs):
     ActivityStatic(char_id).trig(7001)
 
 
+def _stuff_remove(char_id, stuff_id, rm_amount, new_amount, **kwargs):
+    if stuff_id != 3003:
+        return
+    
+    ActivityStatic(char_id).send_update_notify([7001])
+
 
 equip_changed_signal.connect(
     _equip_changed,
@@ -37,4 +44,9 @@ equip_changed_signal.connect(
 stuff_add_signal.connect(
     _stuff_add,
     dispatch_uid='callbacks.signal.item._stuff_add'
+)
+
+stuff_remove_signal.connect(
+    _stuff_remove,
+    dispatch_uid='callbacks.signal.item._stuff_remove'
 )

@@ -10,7 +10,7 @@ from core.mongoscheme import MongoItem, MongoEmbeddedEquipment
 from core.exception import SanguoException
 from core.msgpipe import publish_to_char
 from core.character import Char
-from core.signals import equip_changed_signal, gem_add_signal, stuff_add_signal
+from core.signals import equip_changed_signal, gem_add_signal, stuff_add_signal, gem_remove_signal, stuff_remove_signal
 from core.formation import Formation
 from core.achievement import Achievement
 from core.task import Task
@@ -601,6 +601,14 @@ class Item(MessageEquipmentMixin):
 
             publish_to_char(self.char_id, pack_msg(msg))
 
+        gem_remove_signal.send(
+            sender=None,
+            char_id=self.char_id,
+            gem_id=_id,
+            rm_amount=amount,
+            new_amount=self.item.gems.get(str(_id), 0)
+        )
+
 
     def gem_check_sell(self, _id, _amount):
         if not self.has_gem(_id, _amount):
@@ -773,6 +781,15 @@ class Item(MessageEquipmentMixin):
             g.id, g.amount = _id, new_amount
 
             publish_to_char(self.char_id, pack_msg(msg))
+
+        stuff_remove_signal.send(
+            sender=None,
+            char_id=self.char_id,
+            stuff_id=_id,
+            rm_amount=amount,
+            new_amount=self.item.stuffs.get(str(_id), 0)
+        )
+
 
     def stuff_check_sell(self, _id, amount):
         if not self.has_stuff(_id, amount):

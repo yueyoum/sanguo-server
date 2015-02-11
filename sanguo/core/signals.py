@@ -39,6 +39,8 @@ heropanel_open_hero_signal = Signal(providing_args=['char_id', 'hero_oid'])
 equip_changed_signal = Signal(providing_args=['char_id', 'equip_obj'])
 gem_add_signal = Signal(providing_args=['char_id', 'gem_id', 'add_amount', 'new_amount'])
 stuff_add_signal = Signal(providing_args=['char_id', 'stuff_id', 'add_amount', 'new_amount'])
+gem_remove_signal = Signal(providing_args=['char_id', 'gem_id', 'rm_amount', 'new_amount'])
+stuff_remove_signal = Signal(providing_args=['char_id', 'stuff_id', 'rm_amount', 'new_amount'])
 
 func_opened_signal = Signal(providing_args=['char_id', 'func_ids'])
 
