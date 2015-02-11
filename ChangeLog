@@ -1,3 +1,11 @@
+*   2015-02-11
+
+    优化聊天缓存，从每个角色单独保存，改成只缓存一个全局队列
+
+    redis-cli keys "chat_queue:*" | xargs redis-cli del
+
+
+
 *   2015-02-03
 
     去掉 redis_persistence
