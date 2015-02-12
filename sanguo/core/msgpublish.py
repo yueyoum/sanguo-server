@@ -86,7 +86,7 @@ class ChatMessagePublish(object):
 
         chars = MongoCharacter.objects.all()
         for c in chars:
-            self.send_to_char(c, data)
+            self.send_to_char(c.id, data)
 
 
 class SystemBroadcast(object):
