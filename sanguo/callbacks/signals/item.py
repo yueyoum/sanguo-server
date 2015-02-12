@@ -33,7 +33,7 @@ def _stuff_remove(char_id, stuff_id, rm_amount, new_amount, **kwargs):
     if stuff_id != 3003:
         return
 
-    ActivityStatic(char_id).trig([7001])
+    ActivityStatic(char_id).trig(7001)
 
 
 equip_changed_signal.connect(
