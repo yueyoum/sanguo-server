@@ -107,6 +107,11 @@ class RequestFilter(object):
 
                 print "CHAR ID =", request._char_id
 
+        if getattr(request, '_proto', None) is None:
+            print "==== ERROR ===="
+            print "requests has no proto"
+            return HttpResponse(status=403)
+
 
 class RequestFilterWrapperForVersionCheck(RequestFilter):
     def process_request(self, request):
