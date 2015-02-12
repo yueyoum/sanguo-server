@@ -872,7 +872,7 @@ class Item(MessageEquipmentMixin):
             return None
 
         resource = Resource(self.char_id, "Stuff Use", "use {0}".format(_id))
-        standard_drop = resource.add(**prepare_drop)
+        standard_drop = resource.add(**drop)
         return standard_drop_to_attachment_protomsg(standard_drop)
 
 
