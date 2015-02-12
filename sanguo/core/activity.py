@@ -56,18 +56,17 @@ class ActivityTime(object):
     def get_init_date(self):
         if self.start_time:
             if isinstance(self.start_time, arrow.Arrow):
-                x = self.start_time
+                init_date = self.start_time
             else:
                 x = arrow.get(self.start_time)
-            init_date = arrow.Arrow(
-                year=x.year,
-                month=x.month,
-                day=x.day,
-                hour=x.hour,
-                minute=0,
-                second=0,
-                tzinfo=x.tzinfo,
-            )
+                init_date = arrow.Arrow(
+                    year=x.year,
+                    month=x.month,
+                    day=x.day,
+                    hour=0,
+                    minute=0,
+                    second=0,
+                ).replace(tzinfo=settings.TIME_ZONE)
         else:
             init_date = server.opened_date.replace(tzinfo=settings.TIME_ZONE)
 
