@@ -17,6 +17,11 @@ class APIFailure(Exception):
 class APIClient(object):
     def back(self, req):
         if not req.ok:
+            print "==== REQUESTS ERROR ===="
+            print req
+            print req.status_code
+            print req.reason
+            print req.content
             raise APIFailure()
         return req.json()
 
