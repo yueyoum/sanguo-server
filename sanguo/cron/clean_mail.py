@@ -14,9 +14,9 @@ from core.mail import Mail
 from preset.settings import MAIL_KEEP_DAYS
 
 
-# 每天0点清理过期邮件
+# 每天3点清理过期邮件
 
-@uwsgidecorators.cron(0, 0, -1, -1, -1)
+@uwsgidecorators.cron(0, 3, -1, -1, -1)
 def clean(signum):
     logger = Logger("clean_mail.log")
     logger.write("Clean Mail Start.")
