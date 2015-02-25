@@ -551,6 +551,14 @@ class Friend(object):
                 "{0} try to get plunder times, buy already got from {1}".format(self.char_id, sender_id)
             )
 
+        if len(self.mf.plunder_gots) >= self.max_amount:
+            raise SanguoException(
+                errormsg.PLUNDER_GET_TIMES_FULL,
+                self.char_id,
+                "Friend Get Plunder Times",
+                "{0} try to get plunder times, buy already reach max friends amount".format(self.char_id)
+            )
+
 
         self.mf.plunder_senders.remove(sender_id)
         self.mf.plunder_gots.append(sender_id)
