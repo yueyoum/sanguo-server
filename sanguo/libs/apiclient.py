@@ -19,8 +19,8 @@ class APIClient(object):
         if not req.ok:
             print "==== REQUESTS ERROR ===="
             print req
+            print req.url
             print req.status_code
-            print req.reason
             print req.content
             raise APIFailure()
         return req.json()
