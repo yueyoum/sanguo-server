@@ -913,6 +913,17 @@
     }
 },
 {
+    "pk": 1107, 
+    "model": "errormsg.errormsg", 
+    "fields": {
+        "error_index": "PLUNDER_GET_TIMES_FULL", 
+        "text_zh": "\u9886\u53d6\u884c\u519b\u4ee4\u6b21\u6570\u5df2\u8fbe\u5230\u597d\u53cb\u4e0a\u9650\uff0c\u4eca\u65e5\u65e0\u6cd5\u518d\u9886\u53d6", 
+        "link_to": null, 
+        "des": "", 
+        "area": ""
+    }
+},
+{
     "pk": 1200, 
     "model": "errormsg.errormsg", 
     "fields": {
