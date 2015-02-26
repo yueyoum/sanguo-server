@@ -108,7 +108,7 @@ def deploy_internal(target='all'):
         abort("wrong target!")
 
 
-@hosts("developer@114.215.129.77")
+@hosts("developer@114.215.129.77:292")
 def deploy_testing(target='all'):
     hub = Hub("/opt/sanguo/hub")
     server = Server("/opt/sanguo", ["server"])
@@ -124,7 +124,7 @@ def deploy_testing(target='all'):
         abort("wrong target!")
 
 
-@hosts("developer@115.28.201.238")
+@hosts("developer@115.28.201.238:292")
 def deploy_91_ios(target='all'):
     hub = Hub("/opt/sanguo/hub")
     server = Server("/opt/sanguo", ["server", "server2",])
@@ -140,7 +140,7 @@ def deploy_91_ios(target='all'):
         abort("wrong target!")
 
 
-@hosts("developer@120.27.28.159")
+@hosts("developer@120.27.28.159:292")
 def deploy_wp(target='all'):
     hub = Hub("/opt/sanguo/hub")
     server = Server("/opt/sanguo", ["server1", "server2", "server3"])
@@ -196,7 +196,7 @@ def upload_cfgdata_to_internal(version):
     ).restart()
 
 
-@hosts("developer@114.215.129.77")
+@hosts("developer@114.215.129.77:292")
 def upload_cfgdata_to_testing(version):
     Version("/opt/sanguo/update/config").run(version)
     sleep(1)
@@ -208,7 +208,7 @@ def upload_cfgdata_to_testing(version):
     ).restart()
 
 
-@hosts("developer@120.27.28.159")
+@hosts("developer@120.27.28.159:292")
 def upload_cfgdata_to_wp(version):
     Version("/opt/sanguo/update/config").run(version)
     sleep(1)
@@ -227,7 +227,7 @@ def upload_cfgdata_to_wp(version):
 def upload_to_internal(f):
     put(f, "/tmp")
 
-@hosts("developer@115.28.201.238")
+@hosts("developer@115.28.201.238:292")
 def upload_to_91_ios(f):
     put(f, "/tmp")
 
@@ -240,7 +240,7 @@ def hotfix_on_internal(f):
     s.patch(remote_f)
     s.restart()
 
-@hosts("developer@115.28.201.238")
+@hosts("developer@115.28.201.238:292")
 def hotfix_on_91_ios(f):
     remote_f = "/tmp/{0}".format(os.path.basename(f))
     put(f, remote_f)
