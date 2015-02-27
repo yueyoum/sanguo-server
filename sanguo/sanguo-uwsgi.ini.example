@@ -1,5 +1,5 @@
 [uwsgi]
-chdir = /PATH
+chdir = %d
 pythonpath = ..
 virtualenv = ../env
 env = DJANGO_SETTINGS_MODULE=sanguo.settings
@@ -7,10 +7,10 @@ module = sanguo.wsgi:application
 socket = 127.0.0.1:7999
 listen = 2048
 max-requests = 50000
-reload-on-as = 512
+reload-on-rss = 256
 master = true
 processes = 2
-threads = 2
+threads = 4
 enable-threads = true
 thunder-lock = true
 buffer-size = 32768
