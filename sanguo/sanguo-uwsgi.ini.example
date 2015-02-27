@@ -12,6 +12,7 @@ master = true
 processes = 2
 threads = 2
 enable-threads = true
+thunder-lock = true
 buffer-size = 32768
 daemonize = run/uwsgi.log
 pidfile = run/uwsgi.pid
