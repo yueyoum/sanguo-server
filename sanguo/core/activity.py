@@ -479,28 +479,29 @@ class ActivityStatic(object):
     def is_show(self, activity_id):
         # 是否显示
         entry = ActivityEntry(activity_id)
-        if entry.is_valid():
-            # 此活动还在进行中
-            return True
-
-        if entry.activity_data.category != 1:
-            # 非开服活动，只要过期就算还有奖励没领，也不再显示
-            return False
-
-        condition_ids = entry.get_condition_ids()
-        if not condition_ids:
-            # 过期，并且只是介绍性质的活动
-            return False
-
-        if entry.activity_data.mode == 1:
-            # 手动领取奖励
-            mongo_ac = get_mongo_activity_instance(self.char_id)
-            for _con_id in condition_ids:
-                if str(_con_id) not in mongo_ac.reward_times and entry.condition_is_passed(self.char_id, _con_id):
-                    # 还有已经完成，但是没领的奖励
-                    return True
-
-        return False
+        return entry.is_valid()
+        # if entry.is_valid():
+        #     # 此活动还在进行中
+        #     return True
+        #
+        # if entry.activity_data.category != 1:
+        #     # 非开服活动，只要过期就算还有奖励没领，也不再显示
+        #     return False
+        #
+        # condition_ids = entry.get_condition_ids()
+        # if not condition_ids:
+        #     # 过期，并且只是介绍性质的活动
+        #     return False
+        #
+        # if entry.activity_data.mode == 1:
+        #     # 手动领取奖励
+        #     mongo_ac = get_mongo_activity_instance(self.char_id)
+        #     for _con_id in condition_ids:
+        #         if str(_con_id) not in mongo_ac.reward_times and entry.condition_is_passed(self.char_id, _con_id):
+        #             # 还有已经完成，但是没领的奖励
+        #             return True
+        #
+        # return False
 
 
     def _msg_activity(self, msg, activity_id):
