@@ -69,9 +69,6 @@ def reset(signum):
         if score < ARENA_RANK_LINE:
             continue
 
-        achievement = Achievement(char_id)
-        achievement.trig(10, rank)
-
         reward = _get_reward_by_rank(rank)
         if not reward:
             continue
@@ -84,6 +81,16 @@ def reset(signum):
 
     logger.write("Reset Arena Week: Complete")
     logger.close()
+
+    # 成就
+    rank_data = get_rank_data(None)
+    for index, data in enumerate(rank_data):
+        rank = index + 1
+        char_id = data[0]
+
+        achievement = Achievement(char_id)
+        achievement.trig(10, rank)
+
 
     # 开服比武奖励
     _activity_anera_values = []
