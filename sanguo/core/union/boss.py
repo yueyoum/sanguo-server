@@ -391,7 +391,6 @@ class UnionBossBattle(PVE):
 
     def start(self):
         msgs = [self.msg.first_ground, self.msg.second_ground, self.msg.third_ground]
-        win_count = 0
 
         def _recover_hp(i):
             boss = self.rival_heros[i]
@@ -414,14 +413,10 @@ class UnionBossBattle(PVE):
 
             g = Ground(my_heros, rival_heros, msgs[index])
             g.index = index + 1
-            win = g.start()
-            if win:
-                win_count += 1
+            g.start()
 
-        if win_count > 2:
-            self.msg.self_win = True
-        else:
-            self.msg.self_win = False
+        # BOSS 只要最后一场赢了，整场战斗就是赢了
+        self.msg.self_win = self.msg.third_ground.self_win
 
         if self.msg.self_win:
             return 0
