@@ -613,7 +613,7 @@
     "fields": {
         "icon_three_id": null, 
         "icon_one_id": 1, 
-        "package": 50021, 
+        "package": 50024, 
         "des": "\u6536\u96c6\u5f20\u8fbd\u3001\u4e50\u8fdb\u3001\u4e8e\u7981\u3001\u5f90\u6643\u3001\u5f20\u90c3", 
         "condition_ids": "56,43,5,28,44", 
         "icon_one_amount": 1000, 
