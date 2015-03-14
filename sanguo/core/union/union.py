@@ -204,7 +204,8 @@ class UnionOwner(UnionBase):
             return None
 
         members = self.member_list
-        members.remove(self.char_id)
+        if self.char_id in members:
+            members.remove(self.char_id)
         if members:
             return random.choice(members)
 
@@ -278,18 +279,22 @@ class UnionOwner(UnionBase):
         Union(member_id, self.union_id).send_notify()
 
 
-    def quit(self, find_all=False):
+    def quit(self):
         # 主动退出
         super(UnionOwner, self).quit()
 
         owner = self.mongo_union.owner
 
-        next_owner = self.find_next_owner(find_all=find_all)
+        next_owner = self.find_next_owner(find_all=False)
         if not next_owner:
-            self.mongo_union.delete()
-        else:
-            self.mongo_union.owner = next_owner
-            self.mongo_union.save()
+            next_owner = self.find_next_owner(find_all=True)
+            if not next_owner:
+                self.mongo_union.delete()
+                Union(owner).send_notify()
+                return
+
+        self.mongo_union.owner = next_owner
+        self.mongo_union.save()
 
         Union(owner).send_notify()
 
