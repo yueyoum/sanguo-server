@@ -18,7 +18,11 @@ def main(signum):
     chars = MongoCharacter.objects.all()
     for char in chars:
         plunder = Plunder(char.id)
-        plunder.change_current_plunder_times(change_value=1, allow_overflow=False)
+        try:
+            plunder.change_current_plunder_times(change_value=1, allow_overflow=False)
+        except Exception as e:
+            logger.write("==== ERROR ====")
+            logger.write(e)
 
     logger.write("add done")
     logger.close()

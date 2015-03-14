@@ -569,7 +569,7 @@ def purge_char(char_id):
     if isinstance(u, UnionOwner):
         # 要删除的人是会长
         print "process union"
-        u.quit(find_all=True)
+        u.quit()
 
     char_field_records = {'MongoHero'}
 
