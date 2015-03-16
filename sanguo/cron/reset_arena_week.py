@@ -95,7 +95,7 @@ def reset(signum):
     # 开服比武奖励
     _activity_anera_values = []
     for _ac in ACTIVITY_STATIC_CONDITIONS.values():
-        if ACTIVITY_STATIC[_ac.activity_id].tp == 4:
+        if _ac.activity_id == 4001:
             _activity_anera_values.append(_ac.condition_value)
 
     LOWEST_RANK = max(_activity_anera_values)
