@@ -4,13 +4,13 @@ __author__ = 'Wang Chao'
 __date__ = '14-6-30'
 
 from core.server import server
-from core.purchase import PurchaseAction91, PurchaseActionIOS, PurchaseActioinAiyingyong
+from core.purchase import PurchaseAction91, PurchaseActionIOS, PurchaseActioinAiyingyong, PurchaseActionAllSDk
 from core.exception import SanguoException
 from utils.decorate import message_response
 from utils.api import api_purchase91_get_order_id
 
 from libs import pack_msg
-from protomsg import Purchase91GetOrderIdResponse, PurchaseIOSVerifyResponse
+from protomsg import Purchase91GetOrderIdResponse, PurchaseIOSVerifyResponse, PurchaseAllSDKVerifyResponse
 from preset import errormsg
 
 from preset.data import PURCHASE
@@ -24,6 +24,18 @@ def purchase_ios_verify(request):
     goods_id = p.check_verify(req.receipt)
 
     response = PurchaseIOSVerifyResponse()
+    response.ret = 0
+    response.goods_id = goods_id
+    return pack_msg(response)
+
+@message_response("PurchaseAllSDKVerifyResponse")
+def purchase_allsdk_verify(request):
+    req = request._proto
+
+    p = PurchaseActionAllSDk(request._char_id)
+    goods_id = p.check_verify(req.sn, req.goods_id)
+
+    response = PurchaseAllSDKVerifyResponse()
     response.ret = 0
     response.goods_id = goods_id
     return pack_msg(response)

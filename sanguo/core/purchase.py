@@ -14,7 +14,7 @@ from core.msgpipe import publish_to_char
 from core.exception import SanguoException
 from core.mail import Mail
 from core.attachment import get_drop
-from utils.api import api_purchase_verify, api_purchase91_confirm, api_purchase_aiyingyong_confirm
+from utils.api import api_purchase_verify, api_purchase91_confirm, api_purchase_aiyingyong_confirm, api_purchase_allsdk_verify
 from utils import pack_msg
 from protomsg import PurchaseStatusNotify, PurchaseConfirmResponse
 from preset.data import PURCHASE
@@ -211,3 +211,29 @@ class PurchaseActionIOS(BasePurchaseAction):
         self.send_reward(goods_id)
 
         return goods_id
+
+class PurchaseActionAllSDk(BasePurchaseAction):
+    def check_verify(self, sn, goods_id):
+        data = {
+            'server_id': server.id,
+            'char_id': self.char_id,
+            'sn': sn,
+            'goods_id': goods_id
+        }
+
+        res = api_purchase_allsdk_verify(data)
+
+        if res['ret'] == errormsg.PURCHASE_ALREADY_VERIFIED:
+            return 0
+
+        if res['ret'] != 0:
+            raise SanguoException(
+                res['ret'],
+                self.char_id,
+                "Purchase AllSDK Verify",
+                "api_purchase_allsdk_verify, ret = {0}".format(res['ret'])
+            )
+
+        goods_id_returned = res['data']['goods_id']
+        self.send_reward(goods_id_returned)
+        return goods_id_returned
