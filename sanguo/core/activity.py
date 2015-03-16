@@ -348,7 +348,7 @@ class Activity4001(ActivityBase, ActivityTriggerMail):
         passed_conditions.sort(key=lambda item: item.condition_value)
 
         p = passed_conditions[0]
-        return [p]
+        return [p.id]
 
 
 
