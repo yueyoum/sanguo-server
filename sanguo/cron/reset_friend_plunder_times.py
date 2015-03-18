@@ -6,7 +6,6 @@ __date__ = '1/6/14'
 import uwsgidecorators
 
 from cron.log import Logger
-from core.mongoscheme import MongoFriend
 from core.friend import Friend
 
 # 每天0点清理好友赠送掠夺次数
@@ -14,9 +13,8 @@ from core.friend import Friend
 @uwsgidecorators.cron(0, 0, -1, -1, -1)
 def reset(signum):
     logger = Logger('reset_friend_plunder_times.log')
-    for f in MongoFriend.objects.all():
-        friend = Friend(f.id)
-        friend.daily_plunder_times_reset()
+
+    Friend.cron_job()
 
     logger.write("Friend Plunder Times Reset Done")
     logger.close()

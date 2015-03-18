@@ -570,6 +570,16 @@ class Friend(object):
         self.send_update_friend_notify(sender_id)
 
 
+    @staticmethod
+    def cron_job():
+        condition = {"$or": [
+            {"plunder_gives.0": {"$exists": True}},
+            {"plunder_gots.0": {"$exists": True}}
+        ]}
+
+        for f in MongoFriend.objects.filter(__raw__=condition):
+            Friend(f.id).daily_plunder_times_reset()
+
     def daily_plunder_times_reset(self):
         self.mf.plunder_gives = []
         self.mf.plunder_gots = []
