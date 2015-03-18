@@ -365,6 +365,9 @@ def get_drop(drop_ids, multi=1, gaussian=False):
     return drop
 
 
+
+NEED_RESET_PRIZE_IDS = [4, 5]
+
 class Attachment(object):
     def __init__(self, char_id):
         self.char_id = char_id
@@ -375,6 +378,18 @@ class Attachment(object):
             self.attachment.prize_ids = []
             self.attachment.attachments = {}
             self.attachment.save()
+
+
+    @staticmethod
+    def cron_job():
+        # collection = MongoAttachment._get_collection().find({'prize_ids': {'$in': NEED_RESET_PRIZE_IDS}})
+
+        for a in MongoAttachment.objects.filter(prize_ids__in=NEED_RESET_PRIZE_IDS):
+            for i in NEED_RESET_PRIZE_IDS:
+                if i in a.prize_ids:
+                    a.prize_ids.remove(i)
+
+            a.save()
 
     def save_to_prize(self, prize_id):
         if prize_id not in self.attachment.prize_ids:
