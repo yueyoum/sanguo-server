@@ -9,14 +9,12 @@ from core.mongoscheme import MongoStage
 def reset(signum):
     logger = Logger('reset_stage_elite.log')
     logger.write("Reset Stage Elite Times Start")
-    for ms in MongoStage.objects.all():
+    for ms in MongoStage.objects.filter(elite_changed=True):
         for k in ms.elites.keys():
             ms.elites[k] = 0
 
-        for k in ms.elites_buy.keys():
-            ms.elites_buy[k] = 0
-
         ms.elites_buy = {}
+        ms.elite_changed = False
         ms.save()
 
     logger.write("Done")

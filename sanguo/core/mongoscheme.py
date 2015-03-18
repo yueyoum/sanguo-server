@@ -143,8 +143,16 @@ class MongoStage(Document):
     # 开启的活动关卡
     activities = ListField(IntField())
 
+    # 精英关卡有每天刷新的定时任务，为了避免每次无意义的刷死号
+    # 这里用一个标志来表示当前这个人的是否需要刷新
+    # 代码里如果精英关卡相关功能做过，就要设置elite_changed = True
+    # 定时任务只去处理 elite_changed == True 的这些集合
+    # 处理完后再把 elite_changed 设置为 False
+    elite_changed = BooleanField(default=True)
+
     meta = {
-        'collection': 'stage'
+        'collection': 'stage',
+        'indexes': ['elite_changed',]
     }
 
 class MongoEmbeddedHeroPanelHero(EmbeddedDocument):

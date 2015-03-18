@@ -257,8 +257,10 @@ class EliteStage(object):
             self.stage.elites_buy = {}
             self.stage.elites_times = 0
             self.stage.activities = []
+            self.stage.elite_changed = True
             self.stage.save()
 
+        self.stage.elite_changed = True
         self.enable(STAGE_ELITE[STAGE_ELITE_FIRST_ID])
 
         self.is_circle_reward = False
