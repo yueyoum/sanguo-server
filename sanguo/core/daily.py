@@ -86,6 +86,10 @@ class CheckIn(object):
         self.send_update_notify(day)
         return msg
 
+    @staticmethod
+    def cron_job():
+        for c in MongoCheckIn.objects.filter(has_checked=True):
+            CheckIn(c.id).daily_reset()
 
     def daily_reset(self):
         # 每日可签到标志重置

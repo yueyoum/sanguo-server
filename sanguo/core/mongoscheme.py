@@ -316,12 +316,13 @@ class MongoMail(Document):
 class MongoCheckIn(Document):
     id = IntField(primary_key=True)
     # 当天是否已经签过。 次标志用定时任务修改
-    has_checked = BooleanField()
+    has_checked = BooleanField(default=False)
     # 目前签到天数
     day = IntField()
 
     meta = {
-        'collection': 'checkin'
+        'collection': 'checkin',
+        'indexes': ['has_checked',]
     }
 
 
