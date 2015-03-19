@@ -11,10 +11,8 @@ from core.mongoscheme import MongoUnionBoss
 @uwsgidecorators.cron(0, 0, -1, -1, -1)
 def reset(signum):
     logger = Logger("reset_union_boss.log")
-    logger.write("Start.")
+    MongoUnionBoss.drop_collection()
 
-    for mb in MongoUnionBoss.objects.all():
-        mb.opened = {}
-        mb.save()
+    logger.write("Rest Complete.")
+    logger.close()
 
-    logger.write("Complete.")
