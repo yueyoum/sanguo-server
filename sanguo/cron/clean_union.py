@@ -9,17 +9,14 @@ from cron.log import Logger
 
 from core.union.battle import UnionBattle
 from core.union.member import Member
-from core.mongoscheme import MongoUnion, MongoUnionMember
 
 # 每天0点清理
 @uwsgidecorators.cron(0, 0, -1, -1, -1)
 def clean(signum):
     logger = Logger("clean_union.log")
-    for x in MongoUnion.objects.all():
-        UnionBattle(x.owner).cron_job()
 
-    for x in MongoUnionMember.objects.all():
-        Member(x.id).cron_job()
+    UnionBattle.cron_job()
+    Member.cron_job()
 
     logger.write("Clean Union Complete.")
     logger.close()

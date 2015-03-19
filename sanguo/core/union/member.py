@@ -245,14 +245,18 @@ class Member(object):
         if send_notify:
             self.send_personal_notify()
 
+    @staticmethod
+    def cron_job():
+        condition = {"$or": [
+            {"checkin_times": {"$gt": 0}},
+            {"boss_times": {"$gt": 0}}
+        ]}
 
-    def cron_job(self):
+        for m in MongoUnionMember.objects.filter(__raw__=condition):
+            Member(m.id)._run_cron_job()
+
+    def _run_cron_job(self):
         self.mongo_union_member.checkin_times = 0
         self.mongo_union_member.boss_times = 0
         self.mongo_union_member.save()
         self.send_personal_notify()
-
-
-
-
-

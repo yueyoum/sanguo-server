@@ -133,10 +133,6 @@ class UnionBattle(UnionLoadBase):
         return self.union.mongo_union.battle_records
 
 
-    def cron_job(self):
-        self.union.mongo_union.battle_times = 0
-        self.union.mongo_union.save()
-        self.send_notify()
 
     @union_instance_check(UnionBase, errormsg.UNION_NOT_EXIST, "UnionBattle Get Order", "has no union")
     def get_order(self):
@@ -173,6 +169,15 @@ class UnionBattle(UnionLoadBase):
         return msg
 
 
+    @staticmethod
+    def cron_job():
+        for u in MongoUnion.objects.filter(battle_times__gt=0):
+            UnionBattle(u.owner)._run_cron_job()
+
+    def _run_cron_job(self):
+        self.union.mongo_union.battle_times = 0
+        self.union.mongo_union.save()
+        self.send_notify()
 
 
 class UnionBattleRecord(object):
