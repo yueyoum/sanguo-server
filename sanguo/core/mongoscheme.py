@@ -44,7 +44,8 @@ class MongoPurchaseRecord(Document):
     yueka_lock = BooleanField(default=False)
 
     meta = {
-        'collection': 'purchase_record'
+        'collection': 'purchase_record',
+        'indexes': ['yueka_remained_days',]
     }
 
 
