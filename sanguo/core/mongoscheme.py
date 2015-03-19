@@ -48,6 +48,7 @@ class MongoPurchaseRecord(Document):
         'indexes': ['yueka_remained_days',]
     }
 
+MongoPurchaseRecord.ensure_indexes()
 
 
 class MongoFunctionOpen(Document):
@@ -155,6 +156,8 @@ class MongoStage(Document):
         'collection': 'stage',
         'indexes': ['elite_changed',]
     }
+
+MongoStage.ensure_indexes()
 
 class MongoEmbeddedHeroPanelHero(EmbeddedDocument):
     oid = IntField()
@@ -326,6 +329,7 @@ class MongoCheckIn(Document):
         'indexes': ['has_checked',]
     }
 
+MongoCheckIn.ensure_indexes()
 
 
 class MongoTask(Document):
