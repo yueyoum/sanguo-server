@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='purchase.proto',
   package='Sanguo.protocol.purchase',
-  serialized_pb='\n\x0epurchase.proto\x12\x18Sanguo.protocol.purchase\"\xc0\x01\n\x14PurchaseStatusNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12M\n\x06status\x18\x02 \x03(\x0b\x32=.Sanguo.protocol.purchase.PurchaseStatusNotify.PurchaseStatus\x12\x1b\n\x13yueka_remained_days\x18\x03 \x02(\x05\x1a+\n\x0ePurchaseStatus\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05\x66irst\x18\x02 \x02(\x08\"<\n\x18PurchaseIOSVerifyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07receipt\x18\x02 \x02(\t\"K\n\x19PurchaseIOSVerifyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08goods_id\x18\x03 \x01(\x05\"L\n\x1bPurchaseAllSDKVerifyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02sn\x18\x02 \x02(\t\x12\x10\n\x08goods_id\x18\x03 \x02(\x05\"N\n\x1cPurchaseAllSDKVerifyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08goods_id\x18\x03 \x01(\x05\"@\n\x1bPurchase91GetOrderIdRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08goods_id\x18\x02 \x02(\x05\"N\n\x1cPurchase91GetOrderIdResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08order_id\x18\x03 \x01(\t\";\n\x16PurchaseConfirmRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08platform\x18\x02 \x02(\t\"\xd5\x01\n\x17PurchaseConfirmResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12W\n\x06reason\x18\x03 \x01(\x0e\x32G.Sanguo.protocol.purchase.PurchaseConfirmResponse.PurchaseFailureReason\x12\x10\n\x08goods_id\x18\x04 \x01(\x05\"1\n\x15PurchaseFailureReason\x12\x0b\n\x07WAITING\x10\x01\x12\x0b\n\x07\x46\x41ILURE\x10\x02')
+  serialized_pb='\n\x0epurchase.proto\x12\x18Sanguo.protocol.purchase\"\xc0\x01\n\x14PurchaseStatusNotify\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12M\n\x06status\x18\x02 \x03(\x0b\x32=.Sanguo.protocol.purchase.PurchaseStatusNotify.PurchaseStatus\x12\x1b\n\x13yueka_remained_days\x18\x03 \x02(\x05\x1a+\n\x0ePurchaseStatus\x12\n\n\x02id\x18\x01 \x02(\x05\x12\r\n\x05\x66irst\x18\x02 \x02(\x08\"<\n\x18PurchaseIOSVerifyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x0f\n\x07receipt\x18\x02 \x02(\t\"K\n\x19PurchaseIOSVerifyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08goods_id\x18\x03 \x01(\x05\"^\n\x1bPurchaseAllSDKVerifyRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\n\n\x02sn\x18\x02 \x02(\t\x12\x10\n\x08goods_id\x18\x03 \x02(\x05\x12\x10\n\x08platform\x18\x04 \x02(\t\"N\n\x1cPurchaseAllSDKVerifyResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08goods_id\x18\x03 \x01(\x05\"@\n\x1bPurchase91GetOrderIdRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08goods_id\x18\x02 \x02(\x05\"N\n\x1cPurchase91GetOrderIdResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12\x10\n\x08order_id\x18\x03 \x01(\t\";\n\x16PurchaseConfirmRequest\x12\x0f\n\x07session\x18\x01 \x02(\x0c\x12\x10\n\x08platform\x18\x02 \x02(\t\"\xd5\x01\n\x17PurchaseConfirmResponse\x12\x0b\n\x03ret\x18\x01 \x02(\x05\x12\x0f\n\x07session\x18\x02 \x02(\x0c\x12W\n\x06reason\x18\x03 \x01(\x0e\x32G.Sanguo.protocol.purchase.PurchaseConfirmResponse.PurchaseFailureReason\x12\x10\n\x08goods_id\x18\x04 \x01(\x05\"1\n\x15PurchaseFailureReason\x12\x0b\n\x07WAITING\x10\x01\x12\x0b\n\x07\x46\x41ILURE\x10\x02')
 
 
 
@@ -34,8 +34,8 @@ _PURCHASECONFIRMRESPONSE_PURCHASEFAILUREREASON = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=908,
-  serialized_end=957,
+  serialized_start=926,
+  serialized_end=975,
 )
 
 
@@ -220,6 +220,13 @@ _PURCHASEALLSDKVERIFYREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='platform', full_name='Sanguo.protocol.purchase.PurchaseAllSDKVerifyRequest.platform', index=3,
+      number=4, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -230,7 +237,7 @@ _PURCHASEALLSDKVERIFYREQUEST = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=378,
-  serialized_end=454,
+  serialized_end=472,
 )
 
 
@@ -271,8 +278,8 @@ _PURCHASEALLSDKVERIFYRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=456,
-  serialized_end=534,
+  serialized_start=474,
+  serialized_end=552,
 )
 
 
@@ -306,8 +313,8 @@ _PURCHASE91GETORDERIDREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=536,
-  serialized_end=600,
+  serialized_start=554,
+  serialized_end=618,
 )
 
 
@@ -348,8 +355,8 @@ _PURCHASE91GETORDERIDRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=602,
-  serialized_end=680,
+  serialized_start=620,
+  serialized_end=698,
 )
 
 
@@ -383,8 +390,8 @@ _PURCHASECONFIRMREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=682,
-  serialized_end=741,
+  serialized_start=700,
+  serialized_end=759,
 )
 
 
@@ -433,8 +440,8 @@ _PURCHASECONFIRMRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=744,
-  serialized_end=957,
+  serialized_start=762,
+  serialized_end=975,
 )
 
 _PURCHASESTATUSNOTIFY_PURCHASESTATUS.containing_type = _PURCHASESTATUSNOTIFY;

@@ -33,7 +33,7 @@ def purchase_allsdk_verify(request):
     req = request._proto
 
     p = PurchaseActionAllSDk(request._char_id)
-    goods_id = p.check_verify(req.sn, req.goods_id)
+    goods_id = p.check_verify(req.sn, req.goods_id, req.platform)
 
     response = PurchaseAllSDKVerifyResponse()
     response.ret = 0

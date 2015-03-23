@@ -212,13 +212,15 @@ class PurchaseActionIOS(BasePurchaseAction):
 
         return goods_id
 
+
 class PurchaseActionAllSDk(BasePurchaseAction):
-    def check_verify(self, sn, goods_id):
+    def check_verify(self, sn, goods_id, platform):
         data = {
             'server_id': server.id,
             'char_id': self.char_id,
             'sn': sn,
-            'goods_id': goods_id
+            'goods_id': goods_id,
+            'platform': platform
         }
 
         res = api_purchase_allsdk_verify(data)
