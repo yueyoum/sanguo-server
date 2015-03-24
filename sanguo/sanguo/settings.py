@@ -173,11 +173,6 @@ LOGGING = {
             'level': 'DEBUG',
             'formatter': 'verbose'
         },
-        'logman': {
-            'class': 'utils.log.LogManHandler',
-            'level': 'DEBUG',
-            'formatter': 'simple',
-        }
     },
     'loggers': {
         'django.request': {
@@ -187,7 +182,7 @@ LOGGING = {
         },
 
         'sanguo': {
-            'handlers': ['console', 'logman'],
+            'handlers': ['console',],
             'level': 'DEBUG'
         }
     }
