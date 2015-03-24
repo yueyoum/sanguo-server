@@ -81,7 +81,10 @@ urlpatterns = patterns('',
                        url(r'^char/create/$', 'views.character.views.create_character'),
                        url(r'^activatecode/use/$', 'views.world.views.activatecode_use'),
 
+                        # ios
                        url(r'^purchase/verify/$', 'views.purchase.views.purchase_ios_verify'),
+                       # allsdk
+                       url(r'^purchase/allsdk/verify/$', 'views.purchase.views.purchase_allsdk_verify'),
 
                        #91
                        url(r'^purchase91/orderid/$', 'views.purchase.views.get_91_order_id'),

@@ -27,6 +27,7 @@ api_activatecode_use = partial(apicall, cmd=HUB_URL + '/api/activatecode/use/')
 api_get_checkin_data = partial(apicall, cmd=HUB_URL + '/api/checkin/get/')
 
 api_purchase_verify = partial(apicall, cmd=HUB_URL + '/api/purchase/verify/')
+api_purchase_allsdk_verify = partial(apicall, cmd=HUB_URL + '/api/purchase/allsdk/verify/')
 
 api_purchase91_get_order_id = partial(apicall, cmd=HUB_URL + '/api/purchase/91/orderid/')
 api_purchase91_confirm = partial(apicall, cmd=HUB_URL + '/api/purchase/91/confirm/')
