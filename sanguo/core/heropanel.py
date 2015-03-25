@@ -4,7 +4,6 @@ __author__ = 'Wang Chao'
 __date__ = '1/23/14'
 
 import random
-import arrow
 
 from mongoengine import DoesNotExist
 from core.mongoscheme import MongoHeroPanel, MongoEmbeddedHeroPanelHero
@@ -24,7 +23,6 @@ from preset.settings import (
     GET_HERO_QUALITY_THREE_POOL,
     GET_HERO_TWO_QUALITY_ONE_HEROS,
     GET_HERO_COST,
-    GET_HERO_REFRESH,
     GET_HERO_FORCE_REFRESH_COST,
     GET_HERO_QUALITY_ONE_PROB,
 )
@@ -42,21 +40,6 @@ class HeroPanel(object):
         except DoesNotExist:
             self.panel = self.make_new_panel(is_first_time=True)
 
-
-    @property
-    def refresh_seconds(self):
-        # 还有多少秒可以免费刷新
-        if self.all_opended():
-            # 如果全部翻开了，就可以立即刷新
-            return 0
-
-        last_refresh = self.panel.last_refresh
-
-        time_passed = arrow.utcnow().timestamp - last_refresh
-        seconds = GET_HERO_REFRESH - time_passed
-        if seconds < 0:
-            seconds = 0
-        return seconds
 
     @property
     def free_times(self):
@@ -176,6 +159,7 @@ class HeroPanel(object):
             self.panel.panel[str(_id)], self.panel.panel[socket_id] = self.panel.panel[socket_id], self.panel.panel[str(_id)]
 
             self.panel.panel[str(_id)].opened = True
+            self.panel.has_opened = True
             self.panel.save()
             save_hero(self.char_id, hero.oid)
 
@@ -199,27 +183,28 @@ class HeroPanel(object):
             self.send_notify()
             return
 
-        if self.refresh_seconds > 0:
-            # 免费刷新还在冷却，只能用元宝刷新，不重置免费刷新时间
-            resouce = Resource(self.char_id, "HeroPanel Refresh")
-            with resouce.check(sycee=-GET_HERO_FORCE_REFRESH_COST):
-                self.panel = self.make_new_panel(reset_time=False)
-            self.send_notify()
-            return
+        resouce = Resource(self.char_id, "HeroPanel Refresh")
+        with resouce.check(sycee=-GET_HERO_FORCE_REFRESH_COST):
+            self.panel = self.make_new_panel()
+        self.send_notify()
 
+
+    @staticmethod
+    def cron_job():
+        records = MongoHeroPanel.objects.filter(has_opened=True)
+        for r in records:
+            HeroPanel(r.id)._run_cron_job()
+
+
+    def _run_cron_job(self):
         # 可以用免费刷新
         self.panel = self.make_new_panel()
         self.send_notify()
 
 
-    def make_new_panel(self, reset_time=True, is_first_time=False):
+    def make_new_panel(self, is_first_time=False):
         panel = MongoHeroPanel()
         panel.id = self.char_id
-
-        if reset_time:
-            panel.last_refresh = arrow.utcnow().timestamp
-        else:
-            panel.last_refresh = self.panel.last_refresh
 
         if is_first_time:
             panel.refresh_times = 0
@@ -237,6 +222,7 @@ class HeroPanel(object):
         for index, i in enumerate(embedded_hero_objs):
             panel.panel[str(index+1)] = i
 
+        panel.has_opened = False
         panel.save()
         return panel
 
@@ -288,7 +274,6 @@ class HeroPanel(object):
 
     def send_notify(self):
         msg = protomsg.GetHeroPanelNotify()
-        msg.refresh_seconds = self.refresh_seconds
         msg.free_times = self.free_times
         msg.open_sycee = self.get_hero_cost(incr=False)
         msg.refresh_sycee = GET_HERO_FORCE_REFRESH_COST

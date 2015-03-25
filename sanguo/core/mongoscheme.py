@@ -169,14 +169,16 @@ class MongoEmbeddedHeroPanelHero(EmbeddedDocument):
 class MongoHeroPanel(Document):
     id = IntField(primary_key=True)
     panel = MapField(EmbeddedDocumentField(MongoEmbeddedHeroPanelHero))
-    # 上次刷新的时间戳
-    last_refresh = IntField()
     # 刷新次数，0表示刚刚初始化
     refresh_times = IntField(default=0)
+    has_opened = BooleanField(default=False)
 
     meta = {
-        'collection': 'heropanel'
+        'collection': 'heropanel',
+        'indexes': ['has_opened',]
     }
+
+MongoHeroPanel.ensure_indexes()
 
 
 class MongoEmbeddedHeroWuxing(EmbeddedDocument):
