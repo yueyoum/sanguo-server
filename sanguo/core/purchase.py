@@ -14,7 +14,7 @@ from core.msgpipe import publish_to_char
 from core.exception import SanguoException
 from core.mail import Mail
 from core.attachment import get_drop
-from utils.api import api_purchase_verify, api_purchase91_confirm, api_purchase_aiyingyong_confirm, api_purchase_allsdk_verify
+from utils.api import api_purchase_verify, api_purchase91_confirm, api_purchase_aiyingyong_confirm, api_purchase_allsdk_verify, api_purchase_jodoplay_confirm
 from utils import pack_msg
 from protomsg import PurchaseStatusNotify, PurchaseConfirmResponse
 from preset.data import PURCHASE
@@ -184,6 +184,44 @@ class PurchaseAction91(BasePurchaseAction):
 class PurchaseActioinAiyingyong(BasePurchaseAction):
     def get_confirm_api(self):
         return api_purchase_aiyingyong_confirm
+
+
+class PurchaseActionJodoplay(BasePurchaseAction):
+    def get_confirm_api(self):
+        return api_purchase_jodoplay_confirm
+
+    def send_reward_with_custom_price(self, goods_id, price):
+        
+        p = PURCHASE[goods_id]
+
+        first = len(self.mongo_record.times) == 0
+
+        buy_times = self.mongo_record.times.get(str(goods_id), 0)
+        is_first = buy_times == 0
+
+        if p.tp_obj.continued_days > 0:
+            self.send_reward_yueka(goods_id, is_first)
+        else:
+            self.send_reward_sycee(goods_id, is_first)
+
+        self.mongo_record.times[str(goods_id)] = buy_times + 1
+        self.mongo_record.save()
+
+        self.send_notify()
+
+        title = u'充值成功'
+        content = u'获得了: {0}'.format(p.first_des if is_first else p.des)
+        mail = Mail(self.char_id)
+        mail.add(title, content)
+
+        # 首冲奖励
+        if first:
+            self.send_first_reward()
+
+
+
+
+
 
 
 class PurchaseActionIOS(BasePurchaseAction):

@@ -5,7 +5,7 @@ __date__ = '14-7-30'
 
 
 from utils.decorate import json_return
-from core.purchase import PurchaseAction91, PurchaseActioinAiyingyong
+from core.purchase import PurchaseAction91, PurchaseActioinAiyingyong, PurchaseActionJodoplay
 
 @json_return
 def purchase91_done(request):
@@ -32,3 +32,15 @@ def purchase_aiyingyong_done(request):
     p.send_reward(goods_id)
 
     return {'ret': 0}
+
+@json_return
+def purchase_jodoplay_done(request):
+    try:
+        char_id = int(request.POST['char_id'])
+        goods_id = int(request.POST['goods_id'])
+        price = int(request.POST['price'])
+    except:
+        return {'ret': 1}
+
+    p = PurchaseActionJodoplay(char_id)
+    p.send_reward(goods_id, price)

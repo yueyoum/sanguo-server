@@ -87,7 +87,7 @@ urlpatterns = patterns('',
                        url(r'^purchase/allsdk/verify/$', 'views.purchase.views.purchase_allsdk_verify'),
 
                        #91
-                       url(r'^purchase91/orderid/$', 'views.purchase.views.get_91_order_id'),
+                       url(r'^purchase/orderid/$', 'views.purchase.views.get_order_id'),
                        url(r'^purchase/confirm/$', 'views.purchase.views.purchase_confirm'),
 
 
@@ -142,6 +142,7 @@ urlpatterns += patterns('',
 
                         url(r'^api/purchase/91/done/$', 'views.api.purchase.views.purchase91_done'),
                         url(r'^api/purchase/aiyingyong/done/$', 'views.api.purchase.views.purchase_aiyingyong_done'),
+                        url(r'^api/purchase/jodoplay/done/$', 'views.api.purchase.views.purchase_jodoplay_done'),
 
 
 )
