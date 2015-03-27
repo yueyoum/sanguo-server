@@ -191,34 +191,27 @@ class PurchaseActionJodoplay(BasePurchaseAction):
         return api_purchase_jodoplay_confirm
 
     def send_reward_with_custom_price(self, goods_id, price):
-        
+        # 这里 price 是新台币，而且不一定是这个goods_id所对应的价格
+        # 所以这里按照比例给东西
         p = PURCHASE[goods_id]
 
-        first = len(self.mongo_record.times) == 0
+        xintaibi = p.rmb * 5
 
-        buy_times = self.mongo_record.times.get(str(goods_id), 0)
-        is_first = buy_times == 0
+        buy_div, buy_mod = divmod(price, xintaibi)
+        for i in xrange(buy_div):
+            self.send_reward(goods_id)
 
-        if p.tp_obj.continued_days > 0:
-            self.send_reward_yueka(goods_id, is_first)
-        else:
-            self.send_reward_sycee(goods_id, is_first)
+        if buy_mod:
+            # 换算成对应的元宝
+            sycee = buy_mod * 2
 
-        self.mongo_record.times[str(goods_id)] = buy_times + 1
-        self.mongo_record.save()
+            resource = Resource(self.char_id, "Purchase With Custom Price")
+            resource.add(purchase_got=sycee, purchase_actual_got=sycee)
 
-        self.send_notify()
-
-        title = u'充值成功'
-        content = u'获得了: {0}'.format(p.first_des if is_first else p.des)
-        mail = Mail(self.char_id)
-        mail.add(title, content)
-
-        # 首冲奖励
-        if first:
-            self.send_first_reward()
-
-
+            title = u'充值成功'
+            content = u'獲得了 {0} 元寶'.format(sycee)
+            mail = Mail(self.char_id)
+            mail.add(title, content)
 
 
 

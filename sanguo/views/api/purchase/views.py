@@ -43,4 +43,5 @@ def purchase_jodoplay_done(request):
         return {'ret': 1}
 
     p = PurchaseActionJodoplay(char_id)
-    p.send_reward(goods_id, price)
+    p.send_reward_with_custom_price(goods_id, price)
+    return {'ret': 0}
