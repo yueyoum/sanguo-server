@@ -60,11 +60,14 @@ def reset(signum):
 
     # 每周奖励
     rank_data = get_rank_data(ARENA_WEEK_REWARD_LOWEST_RANK)
+    rank_info_log = []
 
     for index, data in enumerate(rank_data):
         rank = index + 1
         char_id = data[0]
         score = data[1]
+
+        _info_text = "Rank: {0}, Char: {1}, Score: {2}".format(rank, char_id, score)
 
         if score < ARENA_RANK_LINE:
             continue
@@ -79,6 +82,10 @@ def reset(signum):
             MAIL_ARENA_WEEK_REWARD_CONTENT,
             attachment=json.dumps(reward))
 
+        _info_text = "{0}. Send Mail: True".format(_info_text)
+        rank_info_log.append(_info_text)
+
+    logger.write("\n".join(rank_info_log))
     logger.write("Reset Arena Week: Complete")
     logger.close()
 
