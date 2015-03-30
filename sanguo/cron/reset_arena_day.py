@@ -27,8 +27,8 @@ def _get_reward_by_score(score):
 
     return None
 
-# 周一到周六21：30比武积分奖励
-
+# 每天21：30比武积分奖励
+@uwsgidecorators.cron(30, 21, -1, -1, -1)
 def main(signum):
     logger = Logger('reset_arena_day.log')
 
@@ -48,9 +48,3 @@ def main(signum):
     logger.write("Reset Arena Day: Complete")
     logger.close()
 
-uwsgidecorators.cron(30, 21, -1, -1, 1)(main)
-uwsgidecorators.cron(30, 21, -1, -1, 2)(main)
-uwsgidecorators.cron(30, 21, -1, -1, 3)(main)
-uwsgidecorators.cron(30, 21, -1, -1, 4)(main)
-uwsgidecorators.cron(30, 21, -1, -1, 5)(main)
-uwsgidecorators.cron(30, 21, -1, -1, 6)(main)
