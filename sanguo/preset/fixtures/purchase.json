@@ -3,7 +3,6 @@
     "pk": 1, 
     "model": "purchase.purchase", 
     "fields": {
-        "xintaibi": 140, 
         "sycee": 300, 
         "name": "\u6708\u5361", 
         "first_addition_sycee": 0, 
@@ -21,7 +20,6 @@
     "pk": 2, 
     "model": "purchase.purchase", 
     "fields": {
-        "xintaibi": 3240, 
         "sycee": 6480, 
         "name": "6480\u5143\u5b9d", 
         "first_addition_sycee": 6480, 
@@ -39,7 +37,6 @@
     "pk": 3, 
     "model": "purchase.purchase", 
     "fields": {
-        "xintaibi": 1640, 
         "sycee": 3280, 
         "name": "3280\u5143\u5b9d", 
         "first_addition_sycee": 3280, 
@@ -57,7 +54,6 @@
     "pk": 4, 
     "model": "purchase.purchase", 
     "fields": {
-        "xintaibi": 490, 
         "sycee": 980, 
         "name": "980\u5143\u5b9d", 
         "first_addition_sycee": 980, 
@@ -75,7 +71,6 @@
     "pk": 5, 
     "model": "purchase.purchase", 
     "fields": {
-        "xintaibi": 150, 
         "sycee": 300, 
         "name": "300\u5143\u5b9d", 
         "first_addition_sycee": 300, 
@@ -93,7 +88,6 @@
     "pk": 6, 
     "model": "purchase.purchase", 
     "fields": {
-        "xintaibi": 30, 
         "sycee": 60, 
         "name": "60\u5143\u5b9d", 
         "first_addition_sycee": 60, 
