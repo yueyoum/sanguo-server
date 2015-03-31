@@ -47,7 +47,6 @@ class BasePurchaseAction(object):
         return {int(k): v for k, v in self.mongo_record.times.iteritems()}
 
 
-
     def send_reward(self, goods_id):
         p = PURCHASE[goods_id]
 

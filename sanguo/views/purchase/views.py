@@ -99,7 +99,7 @@ def purchase_confirm(request):
     elif platform == 'aiyingyong':
         p = PurchaseActioinAiyingyong(char_id)
         response = p.check_confirm()
-    elif platform == 'jodoplay':
+    elif platform == 'jodo' or platform == 'jodoplay':
         p = PurchaseActionJodoplay(char_id)
         response = p.check_confirm()
     else:

@@ -42,6 +42,8 @@ def purchase_jodoplay_done(request):
     except:
         return {'ret': 1}
 
+    print "char_id: {0}, goods_id: {1}, price: {2}".format(char_id, goods_id, price)
+
     p = PurchaseActionJodoplay(char_id)
     p.send_reward_with_custom_price(goods_id, price)
     return {'ret': 0}
