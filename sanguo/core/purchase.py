@@ -208,7 +208,7 @@ class PurchaseActionJodoplay(BasePurchaseAction):
             resource.add(purchase_got=sycee, purchase_actual_got=sycee)
 
             title = u'充值成功'
-            content = u'獲得了 {0} 元寶'.format(sycee)
+            content = u'获得了 {0} 元宝'.format(sycee)
             mail = Mail(self.char_id)
             mail.add(title, content)
 
