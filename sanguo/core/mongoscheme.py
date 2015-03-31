@@ -226,6 +226,9 @@ class MongoPlunder(Document):
     # 用来设置次数的锁
     current_times_lock = BooleanField(default=False)
 
+    # wocao
+    plunder_times = IntField(default=0)
+
     # 刷新出的对手
     char_id = IntField(default=0)
     char_name = StringField(default="")

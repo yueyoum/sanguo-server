@@ -3397,5 +3397,38 @@
         "special_equip_cls": "0,0,14", 
         "wuxing_exp": 1
     }
+},
+{
+    "pk": 104, 
+    "model": "hero.hero", 
+    "fields": {
+        "defense_growing": 15.0, 
+        "grade": 2, 
+        "image": "\u5e9e\u7edf", 
+        "tip_des": "\u653b\u51fb\u6210\u957f\uff1a[00ff02]\u4f18\u79c0[-]\r\n\u9632\u5fa1\u6210\u957f\uff1a[4795ff]\u6770\u51fa[-]\r\n\u751f\u547d\u6210\u957f\uff1a[ffb902]\u65e0\u53cc[-]", 
+        "anger": 50, 
+        "crit": 0, 
+        "quality": 1, 
+        "des_prof": "[ffb902]\u5251\u4e13\u7cbe[-]:\u88c5\u5907\u5251\u7c7b\u6b66\u5668\u63d0\u5347\u653b\u51fb\u603b\u503c7%\r\n[ffb902]\u7532\u4e13\u7cbe[-]:\u88c5\u5907\u7532\u7c7b\u9632\u5177\u63d0\u5347\u9632\u5fa1\u603b\u503c5%\r\n[ffb902]\u4e66\u4e13\u7cbe[-]:\u88c5\u5907\u4e66\u7c7b\u9970\u54c1\u63d0\u5347\u751f\u547d\u603b\u503c14%", 
+        "special_addition": "10,10,10", 
+        "tp": "1", 
+        "country_name": "\u8700", 
+        "tip_type": "\u91d1\u5c5e\u6027\u6b66\u5c06", 
+        "dodge": 0, 
+        "default_skill": 0, 
+        "quality_name": "\u7532", 
+        "contribution": 300, 
+        "attack_growing": 30.0, 
+        "name": "\u5e9e\u7edf", 
+        "skills": "28,41", 
+        "country": 2, 
+        "des": "\u53f7\u51e4\u96cf\uff0c\u4e0e\u8bf8\u845b\u4eae\u9f50\u540d\u7684\u9876\u7ea7\u8c0b\u58eb", 
+        "gender_name": "\u7537", 
+        "hp_growing": 50.0, 
+        "avatar": "\u5e9e\u7edf", 
+        "gender": 1, 
+        "special_equip_cls": "2,11,12", 
+        "wuxing_exp": 1
+    }
 }
 ]

@@ -28,6 +28,9 @@ from preset.settings import (
     PLUNDER_GOT_GOLD_PARAM_BASE_ADJUST,
     PLUNDER_GET_DROPS_MINUTES,
     PLUNDER_GET_PRISONER_PROB,
+    PLUNDER_GET_DROPS_TIMES,
+    PLUNDER_DROP_DECREASE_FACTOR,
+    PLUNDER_DROP_MIN_FACTOR,
 )
 from preset import errormsg
 from preset.data import VIP_FUNCTION, BATTLES
@@ -284,6 +287,7 @@ class Plunder(object):
         else:
             standard_drop = make_standard_drop_from_template()
 
+        self.mongo_plunder.plunder_times += 1
         self.mongo_plunder.save()
         self.send_notify()
 
@@ -333,7 +337,12 @@ class Plunder(object):
         city = BATTLES[city_id]
         if city.normal_drop:
             drop_ids = [int(i) for i in city.normal_drop.split(',')]
-            drop = get_drop(drop_ids, multi=int(4 * PLUNDER_GET_DROPS_MINUTES * 60 / 15))
+            drop_prob = max(
+                PLUNDER_GET_DROPS_TIMES - (self.mongo_plunder.plunder_times - 1) * PLUNDER_DROP_DECREASE_FACTOR,
+                PLUNDER_GET_DROPS_TIMES * PLUNDER_DROP_MIN_FACTOR
+            )
+
+            drop = get_drop(drop_ids, multi=int(drop_prob))
             drop.pop('gold')
             standard_drop.update(drop)
 
@@ -355,6 +364,10 @@ class Plunder(object):
         msg.success_times_weekly = PlunderLeaderboardWeekly.get_char_times(self.char_id)
         publish_to_char(self.char_id, pack_msg(msg))
 
+
+    @staticmethod
+    def cron_job():
+        MongoPlunder._get_collection().update({}, {'$set': {'plunder_times': 0}}, multi=True)
 
 
 class PlunderLeaderboardWeekly(object):
