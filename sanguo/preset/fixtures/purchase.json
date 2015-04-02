@@ -9,8 +9,8 @@
         "addition_sycee": 0, 
         "des": "\u8d60\u9001300\u5143\u5b9d\u6bcf\u5929\u989d\u5916\u9886\u53d6100\u5143\u5b9d", 
         "tp": 2, 
-        "rmb": 28, 
-        "rate": 10, 
+        "rmb": 140, 
+        "rate": 2, 
         "first_des": "\u8d60\u9001300\u5143\u5b9d\u6bcf\u5929\u989d\u5916\u9886\u53d6100\u5143\u5b9d", 
         "ios_id": "com.mztimes.sanguo.international.30daysgold", 
         "icon": ""
@@ -20,15 +20,15 @@
     "pk": 2, 
     "model": "purchase.purchase", 
     "fields": {
-        "sycee": 6480, 
-        "name": "6480\u5143\u5b9d", 
-        "first_addition_sycee": 6480, 
+        "sycee": 20000, 
+        "name": "20000\u5143\u5b9d", 
+        "first_addition_sycee": 20000, 
         "addition_sycee": 1200, 
         "des": "\u989d\u5916\u8d60\u90011200\u5143\u5b9d", 
         "tp": 1, 
-        "rmb": 648, 
-        "rate": 10, 
-        "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u90016480\u5143\u5b9d", 
+        "rmb": 10000, 
+        "rate": 2, 
+        "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u900120000\u5143\u5b9d", 
         "ios_id": "com.mztimes.sanguo.international.6480gold", 
         "icon": ""
     }
@@ -37,15 +37,15 @@
     "pk": 3, 
     "model": "purchase.purchase", 
     "fields": {
-        "sycee": 3280, 
-        "name": "3280\u5143\u5b9d", 
-        "first_addition_sycee": 3280, 
+        "sycee": 10000, 
+        "name": "10000\u5143\u5b9d", 
+        "first_addition_sycee": 10000, 
         "addition_sycee": 600, 
         "des": "\u989d\u5916\u8d60\u9001600\u5143\u5b9d", 
         "tp": 1, 
-        "rmb": 328, 
-        "rate": 10, 
-        "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u90013280\u5143\u5b9d", 
+        "rmb": 5000, 
+        "rate": 2, 
+        "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u900110000\u5143\u5b9d", 
         "ios_id": "com.mztimes.sanguo.international.3280gold", 
         "icon": ""
     }
@@ -54,15 +54,15 @@
     "pk": 4, 
     "model": "purchase.purchase", 
     "fields": {
-        "sycee": 980, 
-        "name": "980\u5143\u5b9d", 
-        "first_addition_sycee": 980, 
+        "sycee": 6000, 
+        "name": "6000\u5143\u5b9d", 
+        "first_addition_sycee": 6000, 
         "addition_sycee": 200, 
         "des": "\u989d\u5916\u8d60\u9001200\u5143\u5b9d", 
         "tp": 1, 
-        "rmb": 98, 
-        "rate": 10, 
-        "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u9001980\u5143\u5b9d", 
+        "rmb": 3000, 
+        "rate": 2, 
+        "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u90016000\u5143\u5b9d", 
         "ios_id": "com.mztimes.sanguo.international.980gold", 
         "icon": ""
     }
@@ -71,15 +71,15 @@
     "pk": 5, 
     "model": "purchase.purchase", 
     "fields": {
-        "sycee": 300, 
-        "name": "300\u5143\u5b9d", 
-        "first_addition_sycee": 300, 
-        "addition_sycee": 30, 
-        "des": "\u989d\u5916\u8d60\u900130\u5143\u5b9d", 
+        "sycee": 4000, 
+        "name": "4000\u5143\u5b9d", 
+        "first_addition_sycee": 4000, 
+        "addition_sycee": 50, 
+        "des": "\u989d\u5916\u8d60\u900150\u5143\u5b9d", 
         "tp": 1, 
-        "rmb": 30, 
-        "rate": 10, 
-        "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u9001300\u5143\u5b9d", 
+        "rmb": 2000, 
+        "rate": 2, 
+        "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u90014000\u5143\u5b9d", 
         "ios_id": "com.mztimes.sanguo.international.300gold", 
         "icon": ""
     }
@@ -88,16 +88,118 @@
     "pk": 6, 
     "model": "purchase.purchase", 
     "fields": {
-        "sycee": 60, 
-        "name": "60\u5143\u5b9d", 
-        "first_addition_sycee": 60, 
-        "addition_sycee": 0, 
-        "des": "60\u5143\u5b9d", 
+        "sycee": 3000, 
+        "name": "3000\u5143\u5b9d", 
+        "first_addition_sycee": 3000, 
+        "addition_sycee": 30, 
+        "des": "\u989d\u5916\u8d60\u900130\u5143\u5b9d", 
         "tp": 1, 
-        "rmb": 6, 
-        "rate": 10, 
-        "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u900160\u5143\u5b9d", 
+        "rmb": 1500, 
+        "rate": 2, 
+        "first_des": "\u9996\u51b2\u989d\u5916\u8d60\u90013000\u5143\u5b9d", 
         "ios_id": "com.mztimes.sanguo.international.60gold", 
+        "icon": ""
+    }
+},
+{
+    "pk": 7, 
+    "model": "purchase.purchase", 
+    "fields": {
+        "sycee": 2300, 
+        "name": "2300\u5143\u5b9d", 
+        "first_addition_sycee": 2300, 
+        "addition_sycee": 25, 
+        "des": "\u989d\u5916\u8d60\u900125\u5143\u5b9d", 
+        "tp": 1, 
+        "rmb": 1150, 
+        "rate": 2, 
+        "first_des": "\u9996\u5145\u989d\u5916\u8d60\u90012300\u5143\u5b9d", 
+        "ios_id": "1", 
+        "icon": ""
+    }
+},
+{
+    "pk": 8, 
+    "model": "purchase.purchase", 
+    "fields": {
+        "sycee": 2000, 
+        "name": "2000\u5143\u5b9d", 
+        "first_addition_sycee": 2000, 
+        "addition_sycee": 20, 
+        "des": "\u989d\u5916\u8d60\u900120\u6e0a\u535a", 
+        "tp": 1, 
+        "rmb": 1000, 
+        "rate": 2, 
+        "first_des": "\u9996\u5145\u989d\u5916\u8d60\u90012000\u5143\u5b9d", 
+        "ios_id": "2", 
+        "icon": ""
+    }
+},
+{
+    "pk": 9, 
+    "model": "purchase.purchase", 
+    "fields": {
+        "sycee": 1000, 
+        "name": "1000\u5143\u5b9d", 
+        "first_addition_sycee": 1000, 
+        "addition_sycee": 10, 
+        "des": "\u989d\u5916\u8d60\u900110\u5143\u5b9d", 
+        "tp": 1, 
+        "rmb": 500, 
+        "rate": 2, 
+        "first_des": "\u9996\u5145\u989d\u5916\u8d60\u90011000\u5143\u5b9d", 
+        "ios_id": "3", 
+        "icon": ""
+    }
+},
+{
+    "pk": 10, 
+    "model": "purchase.purchase", 
+    "fields": {
+        "sycee": 600, 
+        "name": "600\u5143\u5b9d", 
+        "first_addition_sycee": 600, 
+        "addition_sycee": 6, 
+        "des": "\u989d\u5916\u8d60\u90016\u5143\u5b9d", 
+        "tp": 1, 
+        "rmb": 300, 
+        "rate": 2, 
+        "first_des": "\u9996\u5145\u989d\u5916\u8d60\u9001600\u5143\u5b9d", 
+        "ios_id": "4", 
+        "icon": ""
+    }
+},
+{
+    "pk": 11, 
+    "model": "purchase.purchase", 
+    "fields": {
+        "sycee": 300, 
+        "name": "300\u5143\u5b9d", 
+        "first_addition_sycee": 300, 
+        "addition_sycee": 3, 
+        "des": "\u989d\u5916\u8d60\u90013\u5143\u5b9d", 
+        "tp": 1, 
+        "rmb": 150, 
+        "rate": 2, 
+        "first_des": "\u9996\u5145\u989d\u5916\u8d60\u9001300\u5143\u5b9d", 
+        "ios_id": "5", 
+        "icon": ""
+    }
+},
+{
+    "pk": 12, 
+    "model": "purchase.purchase", 
+    "fields": {
+        "sycee": 100, 
+        "name": "100\u5143\u5b9d", 
+        "first_addition_sycee": 100, 
+        "addition_sycee": 1, 
+        "des": "\u989d\u5916\u8d60\u90011\u5143\u5b9d", 
+        "tp": 1, 
+        "rmb": 50, 
+        "rate": 2, 
+        "first_des": "\u9996\u5145\u989d\u5916\u8d60\u9001100\u5143\u5b9d", 
+        "ios_id": "6", 
         "icon": ""
     }
 }
