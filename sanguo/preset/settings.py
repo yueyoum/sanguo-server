@@ -74,7 +74,7 @@ COUNTER = {
 #      角色              #
 #########################
 # 角色最大等级，0为不限制
-CHARACTER_MAX_LEVEL = 75
+CHARACTER_MAX_LEVEL = 80
 
 
 
