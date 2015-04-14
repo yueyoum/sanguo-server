@@ -11,7 +11,7 @@ from core.resource import Resource
 
 
 def _open_hero(char_id, hero_oid, **kwargs):
-    drop = ActivityEntry(9001).get_additional_drop()
+    drop = ActivityEntry(char_id, 9001).get_additional_drop()
     if is_empty_drop(drop):
         return
 

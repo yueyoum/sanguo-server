@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import arrow
 from mongoengine import Q
 
 from core.hero import save_hero, Hero, HeroSoul
@@ -35,7 +36,12 @@ import protomsg
 
 def level_update_exp(level):
     exp = pow(level, 2.5) + level * 20
-    return int(round(exp * 10, -1))
+    exp = int(round(exp * 10, -1))
+    # 75等级后升级需要10倍经验
+    if exp >= 75:
+        exp *= 10
+
+    return exp
 
 
 def official_update_exp(level):
@@ -231,6 +237,7 @@ def char_initialize(account_id, server_id, char_id, name):
     mc.name = name
     mc.gold = CHARACTER_INIT['gold']
     mc.sycee = CHARACTER_INIT['sycee']
+    mc.create_at = arrow.utcnow().format("YYYY-MM-DD HH:mm:ss")
     mc.save()
 
     from core.item import Item

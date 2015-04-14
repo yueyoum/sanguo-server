@@ -18,7 +18,7 @@ def clean_expired_activity(signum):
     logger = Logger("clean_expired_activity.log")
     for mongo_ac in MongoActivityStatic.objects.all():
         for aid in ACTIVITY_STATIC.keys():
-            entry = ActivityEntry(aid)
+            entry = ActivityEntry(mongo_ac.id, aid)
             if entry.activity_data.category == 1:
                 # 开服活动
                 continue

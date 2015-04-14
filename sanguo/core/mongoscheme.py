@@ -80,6 +80,9 @@ class MongoCharacter(Document):
     # 用来标识已经领取的VIP奖励
     vip_has_reward = ListField(IntField())
 
+    # 创建角色时间
+    create_at = DateTimeField()
+
     meta = {
         'collection': 'character',
         'indexes': ['level', 'name'],
