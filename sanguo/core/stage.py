@@ -492,7 +492,7 @@ class EliteStage(object):
                 _drop_id = random.choice([int(i) for i in drop_hero_ids.split(',')])
                 prepare_drop['heros'].append((_drop_id, 1))
 
-        additional_drop = ActivityEntry(11001).get_additional_drop()
+        additional_drop = ActivityEntry(self.char_id, 11001).get_additional_drop()
         drop = merge_drop([prepare_drop, additional_drop])
 
         resource = Resource(self.char_id, "EliteStage Drop", "stage {0}".format(this_stage.id))

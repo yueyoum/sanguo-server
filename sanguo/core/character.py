@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import arrow
 from mongoengine import Q
 
 from core.hero import save_hero, Hero, HeroSoul
@@ -236,6 +237,7 @@ def char_initialize(account_id, server_id, char_id, name):
     mc.name = name
     mc.gold = CHARACTER_INIT['gold']
     mc.sycee = CHARACTER_INIT['sycee']
+    mc.create_at = arrow.utcnow().format("YYYY-MM-DD HH:mm:ss")
     mc.save()
 
     from core.item import Item

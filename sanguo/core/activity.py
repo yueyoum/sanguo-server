@@ -11,7 +11,7 @@ import arrow
 from django.conf import settings
 from mongoengine import DoesNotExist, Q
 from core.exception import SanguoException
-from core.mongoscheme import MongoActivityStatic, MongoPurchaseLog, MongoCostSyceeLog
+from core.mongoscheme import MongoActivityStatic, MongoPurchaseLog, MongoCostSyceeLog, MongoCharacter
 from core.server import server
 from core.msgpipe import publish_to_char
 from core.mail import Mail
@@ -123,13 +123,13 @@ class _Activities(object):
 
     def register(self, activity_id):
         if activity_id in self.items:
-            raise RuntimeError("{0} already registed!".format(activity_id))
+            raise RuntimeError("{0} already registered!".format(activity_id))
 
         def deco(cls):
             cls.ACTIVITY_ID = activity_id
             self.items[activity_id] = cls
-            def wrap():
-                return cls()
+            def wrap(*args, **kwargs):
+                return cls(*args, **kwargs)
             return wrap
         return deco
 
@@ -243,15 +243,31 @@ class ActivityBase(object):
     OPERATOR = operator.ge
     ACTIVITY_ID = 0
 
-    def __init__(self):
+    def __init__(self, char_id):
+        self.char_id = char_id
         self.activity_id = self.ACTIVITY_ID
         self.activity_data = ACTIVITY_STATIC[self.activity_id]
 
         self.activity_time = self.get_activity_time()
 
     def get_activity_time(self):
+        def _find_start_time():
+            start_time = self.activity_data.start_time
+            if start_time:
+                return start_time
+
+            # 开服活动，初始时间由开服时间改成角色创建时间
+            # 由于这是后加的，对于老玩家，还是按照开服时间算
+            mc = MongoCharacter.objects.get(id=self.char_id)
+            if not mc.create_at:
+                return start_time
+
+            return arrow.get(mc.create_at)
+
+        start_time = _find_start_time()
+
         return ActivityTime(
-            self.activity_data.start_time,
+            start_time,
             self.activity_data.continued_days,
             self.activity_data.interval_days,
             self.activity_data.interval_times,
@@ -448,8 +464,8 @@ class Activity11001(ActivityBase, ActivityTriggerAdditionalDrop):
 
 # 活动类的统一入口
 class ActivityEntry(object):
-    def __new__(cls, activity_id):
-        return activities[activity_id]()
+    def __new__(cls, char_id, activity_id):
+        return activities[activity_id](char_id)
 
 
 class ActivityStatic(object):
@@ -458,7 +474,7 @@ class ActivityStatic(object):
 
 
     def trig(self, activity_id):
-        entry = ActivityEntry(activity_id)
+        entry = ActivityEntry(self.char_id, activity_id)
         if not entry.is_valid():
             return
 
@@ -469,7 +485,7 @@ class ActivityStatic(object):
 
     def get_reward(self, condition_id):
         activity_id = ACTIVITY_STATIC_CONDITIONS[condition_id].activity_id
-        entry = ActivityEntry(activity_id)
+        entry = ActivityEntry(self.char_id, activity_id)
         msg = entry.get_reward(self.char_id, condition_id)
 
         self.send_update_notify([activity_id])
@@ -478,7 +494,7 @@ class ActivityStatic(object):
 
     def is_show(self, activity_id):
         # 是否显示
-        entry = ActivityEntry(activity_id)
+        entry = ActivityEntry(self.char_id, activity_id)
         return entry.is_valid()
         # if entry.is_valid():
         #     # 此活动还在进行中
@@ -507,7 +523,7 @@ class ActivityStatic(object):
     def _msg_activity(self, msg, activity_id):
         mongo_ac = get_mongo_activity_instance(self.char_id)
 
-        entry = ActivityEntry(activity_id)
+        entry = ActivityEntry(self.char_id, activity_id)
 
         msg.id = activity_id
         msg.current_value = entry.get_current_value(self.char_id)
