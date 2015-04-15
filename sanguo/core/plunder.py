@@ -6,8 +6,8 @@ __date__ = '1/22/14'
 
 import time
 import random
-import pickle
 import base64
+import dill
 
 from mongoscheme import DoesNotExist
 from core.character import Char
@@ -67,7 +67,7 @@ class PlunderRival(object):
         if not return_dumps:
             return obj
 
-        return base64.b64encode(pickle.dumps(obj))
+        return base64.b64encode(dill.dumps(obj))
 
 
     @classmethod
@@ -91,7 +91,7 @@ class PlunderRival(object):
 
         res = apicall(data=data, cmd=url)
         target = res['data']
-        obj = pickle.loads(base64.b64decode(target))
+        obj = dill.loads(base64.b64decode(target))
         obj.server_url = "https://{0}:{1}".format(s['host'], s['port_https'])
 
         return obj
@@ -124,7 +124,7 @@ class PlunderRival(object):
                 else:
                     battle_heros.append(BattleHero(hid))
 
-            self.battle_heros = base64.b64encode(pickle.dumps(battle_heros))
+            self.battle_heros = base64.b64encode(dill.dumps(battle_heros))
 
         else:
             self.char_id = 0
@@ -137,7 +137,7 @@ class PlunderRival(object):
 
             self.gold = 0
             self.msg_char_information = ""
-            self.battle_heros = base64.b64encode(pickle.dumps([None] * 9))
+            self.battle_heros = base64.b64encode(dill.dumps([None] * 9))
 
 
     def get_plunder_gold(self, level):
@@ -276,8 +276,6 @@ class Plunder(object):
 
 
     def plunder(self):
-        from core.battle.hero import BattleHero
-
         if not self.mongo_plunder.char_id:
             raise SanguoException(
                 errormsg.PLUNDER_NO_RIVAL,
@@ -296,7 +294,7 @@ class Plunder(object):
 
         self.change_current_plunder_times(change_value=-1)
 
-        rival_battle_heros = pickle.loads(base64.b64decode(self.mongo_plunder.battle_heros))
+        rival_battle_heros = dill.loads(base64.b64decode(self.mongo_plunder.battle_heros))
 
         msg = MsgBattle()
         pvp = PlunderBattle(
