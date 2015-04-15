@@ -284,10 +284,7 @@ class Affairs(_GetRealGoldMixin):
         return standard_drop_to_attachment_protomsg(standard_drop)
 
 
-    def got_plundered(self, from_char_id, from_win, standard_drop):
-        from_char = Char(from_char_id)
-        from_name = from_char.mc.name
-
+    def got_plundered(self, from_char_id, from_char_name, from_win, standard_drop):
         if from_win:
             tp = 1
         else:
@@ -299,7 +296,7 @@ class Affairs(_GetRealGoldMixin):
         log = MongoEmbeddedHangLog()
         log.timestamp = arrow.utcnow().timestamp
         log.tp = tp
-        log.who =from_name
+        log.who = from_char_name
         log.gold = gold
         log.item_text = item_text
 

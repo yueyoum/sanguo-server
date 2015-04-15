@@ -6,11 +6,13 @@ __date__ = '1/22/14'
 
 import time
 import random
+import pickle
+import base64
 
 from mongoscheme import DoesNotExist
 from core.character import Char
-from core.battle import PVPFromRivalCache
-from core.mongoscheme import MongoPlunder, MongoAffairs, MongoCharacter, MongoPlunderBoard
+from core.battle import PlunderBattle
+from core.mongoscheme import MongoPlunder, MongoAffairs, MongoPlunderBoard
 from core.exception import SanguoException
 from core.task import Task
 from core.prison import Prison
@@ -22,6 +24,7 @@ from core.signals import plunder_finished_signal
 from core.msgpipe import publish_to_char
 from core.msgfactory import create_character_infomation_message
 
+from utils.api import apicall, api_server_list
 from utils import pack_msg
 from preset.settings import (
     PRISONER_POOL,
@@ -46,10 +49,8 @@ class PlunderCurrentTimeOut(Exception):
 
 
 class PlunderRival(object):
-    __slots__ = ['char_id', 'name', 'level', 'power', 'leader', 'formation', 'hero_original_ids', 'city_id']
-
     @classmethod
-    def search(cls, city_id, exclude_char_id=None):
+    def search(cls, city_id, exclude_char_id=None, return_dumps=False):
         affairs = MongoAffairs.objects.filter(hang_city_id=city_id)
         affair_ids = [a.id for a in affairs]
 
@@ -62,9 +63,44 @@ class PlunderRival(object):
             affair_ids.remove(rival_id)
             rival_id = 0
 
-        return cls(rival_id, city_id)
+        obj = cls(rival_id, city_id)
+        if not return_dumps:
+            return obj
+
+        return base64.b64encode(pickle.dumps(obj))
+
+
+    @classmethod
+    def search_all_servers(cls, city_id, exclude_char_id=None):
+        # 跨服掠夺
+        # 流程
+        # 1. 向HUB取到所有的servers
+        # 2. random choice一个 server，并且调用其API，获得目标玩家数据
+        # 3. 开打
+        # 4. 调用HUB 打完的API
+        # 5. HUB收到请求后，根据target_char_id所在的server，并调用其对于API
+
+        servers = api_server_list(data={})
+        s = random.choice(servers['data'])
+        url = "https://{0}:{1}/api/plunder/search/".format(s['host'], s['port_https'])
+
+        data = {
+            'city_id': city_id,
+            'exclude_char_id': exclude_char_id,
+        }
+
+        res = apicall(data=data, cmd=url)
+        target = res['data']
+        obj = pickle.loads(base64.b64decode(target))
+        obj.server_url = "https://{0}:{1}".format(s['host'], s['port_https'])
+
+        return obj
+
 
     def __init__(self, char_id, city_id):
+        from core.affairs import Affairs
+        from core.battle.hero import BattleHero
+
         self.city_id = city_id
         if char_id:
             char = Char(char_id)
@@ -77,6 +113,19 @@ class PlunderRival(object):
             f = Formation(char_id)
             self.formation = f.in_formation_hero_ids()
             self.hero_original_ids = f.in_formation_hero_original_ids()
+
+            self.gold = Affairs(self.char_id).get_drop()['gold']
+            self.msg_char_information = create_character_infomation_message(self.char_id).SerializeToString()
+
+            battle_heros = []
+            for hid in self.formation:
+                if hid == 0:
+                    battle_heros.append(None)
+                else:
+                    battle_heros.append(BattleHero(hid))
+
+            self.battle_heros = base64.b64encode(pickle.dumps(battle_heros))
+
         else:
             self.char_id = 0
             self.name = ""
@@ -86,14 +135,12 @@ class PlunderRival(object):
             self.formation = []
             self.hero_original_ids = []
 
+            self.gold = 0
+            self.msg_char_information = ""
+            self.battle_heros = base64.b64encode(pickle.dumps([None] * 9))
+
+
     def get_plunder_gold(self, level):
-        from core.affairs import Affairs
-        if not self.char_id:
-            return 0
-
-        affairs = Affairs(self.char_id)
-        gold = affairs.get_drop()['gold']
-
         level_diff = self.level - level
         if level_diff > 8:
             level_diff = 8
@@ -101,12 +148,12 @@ class PlunderRival(object):
             level_diff = -8
 
         result = level_diff * 0.025 + PLUNDER_GOT_GOLD_PARAM_BASE_ADJUST
-        return int(result * gold)
+        return int(result * self.gold)
 
 
     def make_plunder_msg(self, level):
         msg = MsgPlunder()
-        msg.char.MergeFrom(create_character_infomation_message(self.char_id))
+        msg.char.MergeFromString(self.msg_char_information)
         msg.gold = self.get_plunder_gold(level)
         return msg
 
@@ -158,7 +205,7 @@ class Plunder(object):
         @:rtype: PlunderRival
         """
 
-        target = PlunderRival.search(city_id, exclude_char_id=self.char_id)
+        target = PlunderRival.search_all_servers(city_id, exclude_char_id=self.char_id)
         self.mongo_plunder.char_id = target.char_id
         self.mongo_plunder.char_name = target.name
         self.mongo_plunder.char_gold = target.get_plunder_gold(Char(self.char_id).mc.level)
@@ -167,6 +214,8 @@ class Plunder(object):
         self.mongo_plunder.char_formation = target.formation
         self.mongo_plunder.char_hero_original_ids = target.hero_original_ids
         self.mongo_plunder.char_city_id = target.city_id
+        self.mongo_plunder.battle_heros = target.battle_heros
+        self.mongo_plunder.server_url = target.server_url
         self.mongo_plunder.save()
 
         if target:
@@ -190,6 +239,8 @@ class Plunder(object):
         self.mongo_plunder.char_formation = []
         self.mongo_plunder.char_hero_original_ids = []
         self.mongo_plunder.char_city_id = 0
+        self.mongo_plunder.battle_heros = ""
+        self.mongo_plunder.server_url = ""
         self.mongo_plunder.save()
 
 
@@ -225,19 +276,9 @@ class Plunder(object):
 
 
     def plunder(self):
-        if not self.mongo_plunder.char_id:
-            raise SanguoException(
-                errormsg.PLUNDER_NO_RIVAL,
-                self.char_id,
-                "Plunder Battle",
-                "no rival target"
-            )
+        from core.battle.hero import BattleHero
 
-        # for delete characters
-        try:
-            MongoCharacter.objects.get(id=self.mongo_plunder.char_id)
-        except DoesNotExist:
-            self.clean_plunder_target()
+        if not self.mongo_plunder.char_id:
             raise SanguoException(
                 errormsg.PLUNDER_NO_RIVAL,
                 self.char_id,
@@ -255,14 +296,15 @@ class Plunder(object):
 
         self.change_current_plunder_times(change_value=-1)
 
+        rival_battle_heros = pickle.loads(base64.b64decode(self.mongo_plunder.battle_heros))
 
         msg = MsgBattle()
-        pvp = PVPFromRivalCache(
+        pvp = PlunderBattle(
             self.char_id,
             self.mongo_plunder.char_id,
             msg,
             self.mongo_plunder.char_name,
-            self.mongo_plunder.char_formation
+            rival_battle_heros,
         )
         pvp.start()
 
@@ -270,6 +312,7 @@ class Plunder(object):
         t.trig(3)
 
         to_char_id = self.mongo_plunder.char_id
+        target_server_url = self.mongo_plunder.server_url
 
         if msg.self_win:
             standard_drop = self._get_plunder_reward(
@@ -294,9 +337,11 @@ class Plunder(object):
         plunder_finished_signal.send(
             sender=None,
             from_char_id=self.char_id,
+            from_char_name=Char(self.char_id).mc.name,
             to_char_id=to_char_id,
             from_win=msg.self_win,
-            standard_drop=standard_drop
+            standard_drop=standard_drop,
+            target_server_url=target_server_url,
         )
 
         return (msg, standard_drop)
