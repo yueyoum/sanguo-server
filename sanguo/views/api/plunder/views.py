@@ -33,3 +33,7 @@ def finish(request):
 
     affairs = Affairs(to_char_id)
     affairs.got_plundered(from_char_id, from_char_name, from_win, standard_drop)
+
+    return {
+        'ret': 0,
+    }
