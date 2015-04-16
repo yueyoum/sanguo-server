@@ -38,7 +38,7 @@ def level_update_exp(level):
     exp = pow(level, 2.5) + level * 20
     exp = int(round(exp * 10, -1))
     # 75等级后升级需要10倍经验
-    if exp >= 75:
+    if level >= 75:
         exp *= 10
 
     return exp
