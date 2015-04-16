@@ -144,5 +144,6 @@ urlpatterns += patterns('',
                         url(r'^api/purchase/aiyingyong/done/$', 'views.api.purchase.views.purchase_aiyingyong_done'),
                         url(r'^api/purchase/jodoplay/done/$', 'views.api.purchase.views.purchase_jodoplay_done'),
 
-
+                        url(r'^api/plunder/search/$', 'views.api.plunder.views.search'),
+                        url(r'^api/plunder/finish/$', 'views.api.plunder.views.finish'),
 )

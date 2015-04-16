@@ -3,13 +3,23 @@
 __author__ = 'Wang Chao'
 __date__ = '14-9-18'
 
+import json
 
 from core.signals import plunder_finished_signal
-from core.affairs import Affairs
 
-def _plunder_finished(from_char_id, to_char_id, from_win, standard_drop, **kwargs):
-    affairs = Affairs(to_char_id)
-    affairs.got_plundered(from_char_id, from_win, standard_drop)
+from utils.api import apicall
+
+def _plunder_finished(from_char_id, from_char_name, to_char_id, from_win, standard_drop, target_server_url, **kwargs):
+    data = {
+        'from_char_id': from_char_id,
+        'from_char_name': from_char_name,
+        'to_char_id': to_char_id,
+        'from_win': 1 if from_win else 0,
+        'standard_drop': json.dumps(standard_drop)
+    }
+
+    cmd = target_server_url + "/api/plunder/finish/"
+    apicall(data=data, cmd=cmd)
 
 
 plunder_finished_signal.connect(

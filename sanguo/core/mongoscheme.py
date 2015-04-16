@@ -241,6 +241,9 @@ class MongoPlunder(Document):
     char_formation = ListField(IntField())
     char_hero_original_ids =ListField(IntField())
     char_city_id = IntField(default=0)
+    # 为了支持跨服，将对手的InBattleHero信息也保持下来
+    battle_heros = StringField()
+    server_url = StringField()
 
     meta = {
         'collection': 'plunder'

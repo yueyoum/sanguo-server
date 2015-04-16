@@ -105,21 +105,14 @@ class PVP(PVE):
         return self.get_my_name(my_id=self.rival_id)
 
 
-class PVPFromRivalCache(PVP):
-    def __init__(self, my_id, rival_id, msg, rival_name, rival_formation):
+class PlunderBattle(PVP):
+    def __init__(self, my_id, rival_id, msg, rival_name, rival_battle_heros):
         self.rival_name = rival_name
-        self.rival_formation = rival_formation
-        super(PVPFromRivalCache, self).__init__(my_id, rival_id, msg)
+        self.rival_battle_heros = rival_battle_heros
+        super(PlunderBattle, self).__init__(my_id, rival_id, msg)
 
     def load_rival_heros(self):
-        rival_heros = []
-        for hid in self.rival_formation:
-            if hid == 0:
-                rival_heros.append(None)
-            else:
-                rival_heros.append(BattleHero(hid))
-
-        return rival_heros
+        return self.rival_battle_heros
 
     def get_rival_name(self):
         return self.rival_name
