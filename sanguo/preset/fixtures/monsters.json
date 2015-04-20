@@ -2266,5 +2266,23 @@
         "quality": 3, 
         "hp": 52.0
     }
+},
+{
+    "pk": 204, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5e9e\u7edf", 
+        "skills": "53,69", 
+        "image": "\u5e9e\u7edf", 
+        "tp": "1", 
+        "anger": 50, 
+        "default_skill": 3, 
+        "attack": 21.0, 
+        "defense": 9.0, 
+        "crit": 0, 
+        "quality": 1, 
+        "hp": 47.0
+    }
 }
 ]
