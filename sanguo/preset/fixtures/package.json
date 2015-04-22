@@ -6614,7 +6614,7 @@
         "gold": 0, 
         "souls": [
             {
-                "amount": 4, 
+                "amount": 5, 
                 "id": 8, 
                 "prob": 100000
             }
@@ -6633,7 +6633,7 @@
         "gold": 0, 
         "souls": [
             {
-                "amount": 6, 
+                "amount": 10, 
                 "id": 8, 
                 "prob": 100000
             }
