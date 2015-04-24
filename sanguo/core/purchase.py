@@ -47,12 +47,17 @@ class BasePurchaseAction(object):
         return {int(k): v for k, v in self.mongo_record.times.iteritems()}
 
 
+    def buy_times_of_this_goods(self, goods_id):
+        times = self.mongo_record.times.get(str(goods_id), 0)
+        return times
+
+
     def send_reward(self, goods_id):
         p = PURCHASE[goods_id]
 
         first = len(self.mongo_record.times) == 0
 
-        buy_times = self.mongo_record.times.get(str(goods_id), 0)
+        buy_times = self.buy_times_of_this_goods(goods_id)
         is_first = buy_times == 0
 
         if p.tp_obj.continued_days > 0:
@@ -204,11 +209,22 @@ class PurchaseActionJodoplay(BasePurchaseAction):
             # 换算成对应的元宝
             sycee = buy_mod * 2
 
+            # 任意金额也要双倍！！！
+            buy_times = self.buy_times_of_this_goods(goods_id)
+            if buy_times == 0:
+                actual_sycee = sycee * 2
+            else:
+                actual_sycee = sycee
+
             resource = Resource(self.char_id, "Purchase With Custom Price")
-            resource.add(purchase_got=sycee, purchase_actual_got=sycee)
+            resource.add(purchase_got=sycee, purchase_actual_got=actual_sycee)
+
+            self.mongo_record.times[str(goods_id)] = buy_times + 1
+            self.mongo_record.save()
+            self.send_notify()
 
             title = u'充值成功'
-            content = u'获得了 {0} 元宝'.format(sycee)
+            content = u'获得了 {0} 元宝'.format(actual_sycee)
             mail = Mail(self.char_id)
             mail.add(title, content)
 
