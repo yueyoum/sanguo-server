@@ -864,10 +864,11 @@ class Item(MessageEquipmentMixin):
         self.stuff_remove(_id, amount)
 
         # 活动 10001
-        additional_drop = ActivityEntry(self.char_id, 10001).get_additional_drop(_id)
+        additional_drop_1 = ActivityEntry(self.char_id, 10001).get_additional_drop(_id)
+        additional_drop_2 = ActivityEntry(self.char_id, 12001).get_additional_drop(_id)
 
         prepare_drop = self.get_sutff_drop(_id)
-        drop = merge_drop([prepare_drop, additional_drop])
+        drop = merge_drop([prepare_drop, additional_drop_1, additional_drop_2])
         if is_empty_drop(drop):
             return None
 

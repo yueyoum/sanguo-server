@@ -6,12 +6,16 @@ __date__ = '15-2-10'
 from core.signals import heropanel_open_hero_signal
 
 from core.activity import ActivityEntry
-from core.attachment import is_empty_drop
+from core.attachment import is_empty_drop, merge_drop
 from core.resource import Resource
 
 
 def _open_hero(char_id, hero_oid, **kwargs):
-    drop = ActivityEntry(char_id, 9001).get_additional_drop()
+    drop1 = ActivityEntry(char_id, 9001).get_additional_drop()
+    drop2 = ActivityEntry(char_id, 13001).get_additional_drop()
+    drop3 = ActivityEntry(char_id, 15001).get_additional_drop()
+
+    drop = merge_drop([drop1, drop2, drop3])
     if is_empty_drop(drop):
         return
 

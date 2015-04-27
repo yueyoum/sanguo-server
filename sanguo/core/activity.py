@@ -460,6 +460,38 @@ class Activity11001(ActivityBase, ActivityTriggerAdditionalDrop):
         return 0
 
 
+@activities.register(12001)
+class Activity12001(ActivityBase, ActivityTriggerAdditionalDrop):
+    def get_current_value(self, char_id):
+        return 0
+
+
+@activities.register(13001)
+class Activity13001(ActivityBase, ActivityTriggerAdditionalDrop):
+    def get_current_value(self, char_id):
+        return 0
+
+
+@activities.register(14001)
+class Activity14001(ActivityBase, ActivityTriggerMail):
+    def get_current_value(self, char_id):
+        if not self.is_valid():
+            return 0
+
+        condition = Q(char_id=char_id) & Q(purchase_at__gte=self.activity_time.nearest_open_date.timestamp) & Q(purchase_at__lte=self.activity_time.nearest_close_date.timestamp)
+        logs = MongoPurchaseLog.objects.filter(condition)
+
+        value = 0
+        for log in logs:
+            value += log.sycee
+
+        return value
+
+
+@activities.register(15001)
+class Activity15001(ActivityBase, ActivityTriggerAdditionalDrop):
+    def get_current_value(self, char_id):
+        return 0
 
 
 # 活动类的统一入口

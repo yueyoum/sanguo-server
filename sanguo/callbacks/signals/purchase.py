@@ -21,6 +21,7 @@ def _new_purchase(char_id, new_got, total_got, **kwargs):
     plog.save()
 
     ActivityStatic(char_id).trig(5001)
+    ActivityStatic(char_id).trig(14001)
 
 
 
