@@ -200,13 +200,13 @@ def deploy_wp(target='all'):
 
 
 # GET CFGDATA
-def get_cfgdata(name=None):
+def get_cfgdata(name):
     dir = "/tmp/smb"
     local("mkdir -p {0}".format(dir))
     with settings(warn_only=True):
         local("sudo mount -t cifs -o user=wang //192.168.1.100/public {0}".format(dir))
 
-    if name is None:
+    if name == 'None':
         pattern = os.path.join(dir, "cfgdata", "cfgdata*.zip")
 
         fs = glob.glob(pattern)
@@ -221,9 +221,9 @@ class Version(object):
     def __init__(self, config_path):
         self.config_path = config_path
 
-    def run(self, version):
+    def run(self, name, version):
         with cd(self.config_path):
-            put(get_cfgdata(), "cfgdata-{0}.zip".format(version))
+            put(get_cfgdata(name=name), "cfgdata-{0}.zip".format(version))
             run("rm -f cfgdata.zip")
             run("ln -s cfgdata-{0}.zip cfgdata.zip".format(version))
             run('echo "{0}" > version.txt'.format(version))
@@ -256,8 +256,8 @@ def upload_cfgdata_to_testing(version):
 
 # OK TO USE
 @hosts("developer@120.27.28.159:292")
-def upload_cfgdata_to_wp(version):
-    Version("/opt/sanguo/update/config").run(version)
+def upload_cfgdata_to_wp(name, version):
+    Version("/opt/sanguo/update/config").run(name, version)
     sleep(1)
     Hub("/opt/sanguo/hub").run()
     sleep(1)
@@ -265,8 +265,8 @@ def upload_cfgdata_to_wp(version):
 
 # OK TO USE
 @hosts("developer@203.88.160.14:292")
-def upload_cfgdata_to_jodo(version):
-    Version("/opt/sanguo/update/config").run(version)
+def upload_cfgdata_to_jodo(name, version):
+    Version("/opt/sanguo/update/config").run(name, version)
     sleep(1)
     Hub("/opt/sanguo/hub").run()
     sleep(1)
