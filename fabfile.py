@@ -37,10 +37,10 @@ def push_hub(remote):
 
 
 class Server(object):
-    def __init__(self, parent_path, dirs):
+    PARENT_PATH = None
+    DIRS = None
+    def __init__(self):
         self.local_branch = get_local_server_branch()
-        self.parent_path = parent_path
-        self.dirs = dirs
 
     def run(self):
         self.pull()
@@ -48,24 +48,49 @@ class Server(object):
 
 
     def pull(self):
-        for d in self.dirs:
-            with cd(os.path.join(self.parent_path, d)):
+        for d in self.DIRS:
+            folder = os.path.join(self.PARENT_PATH, d)
+            with cd(folder):
                 result = run(CMD_GIT_BRANCH)
                 remote_branch = result.stdout
                 if self.local_branch != remote_branch:
                     abort("local branch: {0} != remote branch: {1}".format(self.local_branch, remote_branch))
 
+                self.before_pull(folder)
                 run("git pull")
+                self.after_pull(folder)
 
     def patch(self, f):
-        for d in self.dirs:
-            with cd(os.path.join(self.parent_path, d)):
+        for d in self.DIRS:
+            with cd(os.path.join(self.PARENT_PATH, d)):
                 run("git apply {0}".format(f))
 
     def restart(self):
-        for d in self.dirs:
-            with cd(os.path.join(self.parent_path, d)):
+        for d in self.DIRS:
+            folder = os.path.join(self.PARENT_PATH, d)
+            with cd(folder):
+                self.before_restart(folder)
                 run("./restart.sh")
+                self.after_restart(folder)
+
+
+    def before_pull(self, folder):
+        # called before run git pull
+        pass
+
+    def after_pull(self, folder):
+        # called after run git pull
+        pass
+
+    def before_restart(self, folder):
+        # called before restart
+        pass
+
+    def after_restart(self, folder):
+        # called after restart
+        pass
+
+
 
 class Hub(object):
     def __init__(self, path):
@@ -89,6 +114,24 @@ class Hub(object):
         with cd(self.path):
             run("./restart.sh")
             run("./restart_admin.sh")
+
+
+
+
+class ServerAiYingYong(Server):
+    PARENT_PATH = "/opt/sanguo"
+    DIRS = ["server%d" % i for i in range(1, 5+1)]
+
+    def before_pull(self, folder):
+        run("git checkout sanguo/preset/fixtures/purchase.json")
+
+    def after_pull(self, folder):
+        run("cp /home/developer/backup/purchase.json sanguo/preset/fixtures/")
+
+
+class ServerJodo(Server):
+    PARENT_PATH = "/opt/sanguo"
+    DIRS = ["server%d" % i for i in range(1, 2+1)]
 
 
 
@@ -143,7 +186,7 @@ def deploy_91_ios(target='all'):
 @hosts("developer@120.27.28.159:292")
 def deploy_wp(target='all'):
     hub = Hub("/opt/sanguo/hub")
-    server = Server("/opt/sanguo", ["server1", "server2", "server3", "server4"])
+    server = ServerAiYingYong()
 
     if target == 'hub':
         hub.run()
@@ -156,20 +199,23 @@ def deploy_wp(target='all'):
         abort("wrong target!")
 
 
-
-
 # GET CFGDATA
-def get_cfgdata():
+def get_cfgdata(name=None):
     dir = "/tmp/smb"
     local("mkdir -p {0}".format(dir))
     with settings(warn_only=True):
         local("sudo mount -t cifs -o user=wang //192.168.1.100/public {0}".format(dir))
 
-    pattern = os.path.join(dir, "cfgdata", "cfgdata*.zip")
+    if name is None:
+        pattern = os.path.join(dir, "cfgdata", "cfgdata*.zip")
 
-    fs = glob.glob(pattern)
-    fs.sort(key=lambda x: -os.path.getmtime(x))
-    return os.path.abspath(fs[0])
+        fs = glob.glob(pattern)
+        fs.sort(key=lambda x: -os.path.getmtime(x))
+        return os.path.abspath(fs[0])
+
+    f = os.path.join(dir, "cfgdata", name)
+    return f
+
 
 class Version(object):
     def __init__(self, config_path):
@@ -208,18 +254,23 @@ def upload_cfgdata_to_testing(version):
     ).restart()
 
 
+# OK TO USE
 @hosts("developer@120.27.28.159:292")
 def upload_cfgdata_to_wp(version):
     Version("/opt/sanguo/update/config").run(version)
     sleep(1)
-    Hub("/opt/sanguo/hub").restart()
+    Hub("/opt/sanguo/hub").run()
     sleep(1)
-    Server(
-        "/opt/sanguo",
-        ["server1", "server2", "server3", "server4"]
-    ).restart()
+    ServerAiYingYong().run()
 
-
+# OK TO USE
+@hosts("developer@203.88.160.14:292")
+def upload_cfgdata_to_jodo(version):
+    Version("/opt/sanguo/update/config").run(version)
+    sleep(1)
+    Hub("/opt/sanguo/hub").run()
+    sleep(1)
+    ServerJodo().run()
 
 
 
