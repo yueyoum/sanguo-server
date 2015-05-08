@@ -595,7 +595,7 @@
         "icon_three_id": null, 
         "icon_one_id": 1, 
         "package": 50020, 
-        "des": "\u6536\u96c6\u5173\u7fbd\u3001\u5f20\u98de\u3001\u8d75\u4e91\u3001\u9a6c\u8d85\u3001\u9ec4\u5fe0\u5176\u4e2d\u4e4b\u56db", 
+        "des": "\u6536\u96c6\u8d3e\u8be9\u3001\u8bf8\u845b\u4eae\u3001\u53f8\u9a6c\u61ff\u3001\u5f90\u5eb6\u3001\u8340\u5f67\u5176\u4e2d\u4e4b\u56db", 
         "condition_ids": "20,14,30,7,83", 
         "icon_one_amount": 800, 
         "icon_three_amount": 1, 
