@@ -317,7 +317,7 @@
         "total_hours": 8, 
         "refresh_cost_gold": 3600, 
         "city_name": "\u6c49\u4e2d", 
-        "level_limit": 80, 
+        "level_limit": 75, 
         "normal_exp": 41, 
         "normal_gold": 39
     }
@@ -334,7 +334,7 @@
         "total_hours": 8, 
         "refresh_cost_gold": 3600, 
         "city_name": "\u5408\u80a5", 
-        "level_limit": 80, 
+        "level_limit": 75, 
         "normal_exp": 41, 
         "normal_gold": 39
     }
@@ -351,7 +351,7 @@
         "total_hours": 8, 
         "refresh_cost_gold": 3600, 
         "city_name": "\u8346\u5dde", 
-        "level_limit": 80, 
+        "level_limit": 75, 
         "normal_exp": 41, 
         "normal_gold": 39
     }
