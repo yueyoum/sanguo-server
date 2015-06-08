@@ -222,8 +222,15 @@ class Version(object):
         self.config_path = config_path
 
     def run(self, name, version):
+        if name.startswith('/'):
+            # local file
+            f = name
+        else:
+            # remote file
+            f = get_cfgdata(name)
+
         with cd(self.config_path):
-            put(get_cfgdata(name=name), "cfgdata-{0}.zip".format(version))
+            put(f, "cfgdata-{0}.zip".format(version))
             run("rm -f cfgdata.zip")
             run("ln -s cfgdata-{0}.zip cfgdata.zip".format(version))
             run('echo "{0}" > version.txt'.format(version))
