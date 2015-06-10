@@ -61,11 +61,12 @@ def unembed(request):
 def merge(request):
     req = request._proto
     item = Item(request._char_id)
-    new_id = item.gem_merge(req.id)
+    new_id, new_amount = item.gem_merge(req.id, req.method)
 
     response = MergeGemResponse()
     response.ret = 0
     response.new_id = new_id
+    response.amount = new_amount
     return pack_msg(response)
 
 

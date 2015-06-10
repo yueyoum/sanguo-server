@@ -24,6 +24,8 @@ from preset.data import EQUIPMENTS, GEMS, STUFFS
 from preset import errormsg
 from dll import external_calculate
 
+from protomsg import MergeGemRequest
+
 
 def equip_updated(func):
     def deco(self, *args, **kwargs):
@@ -637,7 +639,7 @@ class Item(MessageEquipmentMixin):
         resource.add(gold=gold)
 
 
-    def gem_merge(self, _id):
+    def gem_merge(self, _id, method):
         this_gem_amount = self.item.gems.get(str(_id), 0)
         if this_gem_amount == 0:
             raise SanguoException(
@@ -664,16 +666,25 @@ class Item(MessageEquipmentMixin):
                 "Gem {0} can not merge".format(_id)
             )
 
-        self.gem_remove(_id, 4)
-        self.gem_add([(to_id, 1)])
+        if method == MergeGemRequest.SIMPLE:
+            # 单次合成
+            to_amount = 1
+        else:
+            # 自动全部合成
+            to_amount, _ = divmod(this_gem_amount, 4)
+
+        remove_amount = to_amount * 4
+
+        self.gem_remove(_id, remove_amount)
+        self.gem_add([(to_id, to_amount)])
 
         to_gem_obj = GEMS[to_id]
 
         achievement = Achievement(self.char_id)
-        achievement.trig(25, 1)
+        achievement.trig(25, to_amount)
         achievement.trig(26, to_gem_obj.level)
 
-        return to_id
+        return to_id, to_amount
 
 
     def stuff_add(self, add_stuffs, send_notify=True):
