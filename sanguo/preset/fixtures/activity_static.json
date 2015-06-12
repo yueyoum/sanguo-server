@@ -156,7 +156,7 @@
     "model": "activity.activitystatic", 
     "fields": {
         "category": 2, 
-        "name": "\u70b9\u5c06\u5f97\u9a6c\u8d85\u9b42", 
+        "name": "\u70b9\u5c06\u5f97\u53f8\u9a6c\u61ff\u9b42", 
         "continued_days": 3, 
         "current_des": "\u5f53\u524d\u62e5\u6709\u53f8\u9a6c\u61ff\u9b42${0}", 
         "start_time": "2015-06-12", 
