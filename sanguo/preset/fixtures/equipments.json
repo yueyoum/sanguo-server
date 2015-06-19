@@ -4,7 +4,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 2, 
-        "stuff_needs": "2:2,1:2", 
+        "stuff_needs": "2:5,1:10", 
         "gem_addition": 0, 
         "name": "\u94a2\u5200", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a32\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a7\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u767e\u6218\u5200[-]\u201d", 
@@ -31,7 +31,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 3, 
-        "stuff_needs": "4:3,3:10", 
+        "stuff_needs": "4:10,3:15", 
         "gem_addition": 30, 
         "name": "\u767e\u6218\u5200", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a40\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a11\n\u6536\u96c6\u201c[00ff02]\u9752\u94dc[-]\u201d\u3001\u201c[00ff02]\u7425\u73c0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[4795ff]\u767e\u8f9f\u5b9d\u5200[-]\u201d", 
@@ -58,7 +58,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 4, 
-        "stuff_needs": "6:4,5:15", 
+        "stuff_needs": "6:15,5:25", 
         "gem_addition": 60, 
         "name": "\u767e\u8f9f\u5b9d\u5200", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a48\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a15\n\u6536\u96c6\u201c[4795ff]\u751f\u94c1[-]\u201d\u3001\u201c[4795ff]\u7802\u91d1[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[fff569]\u601d\u53ec\u5200[-]\u201d", 
@@ -85,7 +85,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 5, 
-        "stuff_needs": "8:5,7:25", 
+        "stuff_needs": "8:20,7:35", 
         "gem_addition": 100, 
         "name": "\u601d\u53ec\u5200", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a56\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a19\n\u6536\u96c6\u201c[fff569]\u94a2\u94c1[-]\u201d\u3001\u201c[fff569]\u6c34\u6676[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ffb902]\u4e03\u5b9d\u5200[-]\u201d", 
@@ -112,7 +112,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 6, 
-        "stuff_needs": "10:5,9:50", 
+        "stuff_needs": "10:25,9:50", 
         "gem_addition": 150, 
         "name": "\u4e03\u5b9d\u5200", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a64\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a23\n\u6536\u96c6\u201c[ffb902]\u94a8\u94c1[-]\u201d\u3001\u201c[ffb902]\u7fe1\u7fe0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[bb3ae9]\u9752\u9f99\u5043\u6708\u5200[-]\u201d", 
@@ -139,7 +139,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 7, 
-        "stuff_needs": "12:5,11:100", 
+        "stuff_needs": "12:30,11:100", 
         "gem_addition": 200, 
         "name": "\u9752\u9f99\u5043\u6708\u5200", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a72\r\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a26\r\n\u6536\u96c6\u201c[bb3ae9]\u9ed1\u94c1[-]\u201d\u3001\u201c[ff7900]\u51dd\u795e\u77f3[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ff7900]\u9f99\u708e\u5200[-]\u201d", 
@@ -193,7 +193,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 9, 
-        "stuff_needs": "2:2,1:2", 
+        "stuff_needs": "2:5,1:10", 
         "gem_addition": 0, 
         "name": "\u94c1\u5251", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a32\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a7\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u53cc\u80a1\u5251[-]\u201d", 
@@ -220,7 +220,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 10, 
-        "stuff_needs": "4:3,3:10", 
+        "stuff_needs": "4:10,3:15", 
         "gem_addition": 30, 
         "name": "\u53cc\u80a1\u5251", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a40\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a11\n\u6536\u96c6\u201c[00ff02]\u9752\u94dc[-]\u201d\u3001\u201c[00ff02]\u7425\u73c0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[4795ff]\u4e03\u661f\u5251[-]\u201d", 
@@ -247,7 +247,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 11, 
-        "stuff_needs": "6:4,5:15", 
+        "stuff_needs": "6:15,5:25", 
         "gem_addition": 60, 
         "name": "\u4e03\u661f\u5251", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a48\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a15\n\u6536\u96c6\u201c[4795ff]\u751f\u94c1[-]\u201d\u3001\u201c[4795ff]\u7802\u91d1[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[fff569]\u5b5f\u5fb7\u5251[-]\u201d", 
@@ -274,7 +274,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 12, 
-        "stuff_needs": "8:5,7:25", 
+        "stuff_needs": "8:20,7:35", 
         "gem_addition": 100, 
         "name": "\u5b5f\u5fb7\u5251", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a56\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a19\n\u6536\u96c6\u201c[fff569]\u94a2\u94c1[-]\u201d\u3001\u201c[fff569]\u6c34\u6676[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ffb902]\u9752\u91ed\u5251[-]\u201d", 
@@ -301,7 +301,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 13, 
-        "stuff_needs": "10:5,9:50", 
+        "stuff_needs": "10:25,9:50", 
         "gem_addition": 150, 
         "name": "\u9752\u91ed\u5251", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a64\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a23\n\u6536\u96c6\u201c[ffb902]\u94a8\u94c1[-]\u201d\u3001\u201c[ffb902]\u7fe1\u7fe0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[bb3ae9]\u9738\u738b\u501a\u5929\u5251[-]\u201d", 
@@ -328,7 +328,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 14, 
-        "stuff_needs": "12:5,11:100", 
+        "stuff_needs": "12:30,11:100", 
         "gem_addition": 200, 
         "name": "\u9738\u738b\u501a\u5929\u5251", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a72\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a26\n\u6536\u96c6\u201c[bb3ae9]\u9ed1\u94c1[-]\u201d\u3001\u201c[ff7900]\u51dd\u795e\u77f3[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ff7900]\u9f99\u541f\u5251[-]\u201d", 
@@ -382,7 +382,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 16, 
-        "stuff_needs": "2:2,1:2", 
+        "stuff_needs": "2:5,1:10", 
         "gem_addition": 0, 
         "name": "\u957f\u77db", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a32\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a7\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u53cc\u6781\u77db[-]\u201d", 
@@ -409,7 +409,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 17, 
-        "stuff_needs": "4:3,3:10", 
+        "stuff_needs": "4:10,3:15", 
         "gem_addition": 30, 
         "name": "\u53cc\u6781\u77db", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a40\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a11\n\u6536\u96c6\u201c[00ff02]\u9752\u94dc[-]\u201d\u3001\u201c[00ff02]\u7425\u73c0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[4795ff]\u7709\u5c16\u77db[-]\u201d", 
@@ -436,7 +436,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 18, 
-        "stuff_needs": "6:4,5:15", 
+        "stuff_needs": "6:15,5:25", 
         "gem_addition": 60, 
         "name": "\u7709\u5c16\u77db", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a48\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a15\n\u6536\u96c6\u201c[4795ff]\u751f\u94c1[-]\u201d\u3001\u201c[4795ff]\u7802\u91d1[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[fff569]\u4e09\u5c16\u53cc\u5203\u77db[-]\u201d", 
@@ -463,7 +463,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 19, 
-        "stuff_needs": "8:5,7:25", 
+        "stuff_needs": "8:20,7:35", 
         "gem_addition": 100, 
         "name": "\u4e09\u5c16\u53cc\u5203\u77db", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a56\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a19\n\u6536\u96c6\u201c[fff569]\u94a2\u94c1[-]\u201d\u3001\u201c[fff569]\u6c34\u6676[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ffb902]\u94c1\u810a\u86c7\u77db[-]\u201d", 
@@ -490,7 +490,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 20, 
-        "stuff_needs": "10:5,9:50", 
+        "stuff_needs": "10:25,9:50", 
         "gem_addition": 150, 
         "name": "\u94c1\u810a\u86c7\u77db", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a64\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a23\n\u6536\u96c6\u201c[ffb902]\u94a8\u94c1[-]\u201d\u3001\u201c[ffb902]\u7fe1\u7fe0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[bb3ae9]\u4e08\u516b\u86c7\u77db[-]\u201d", 
@@ -517,7 +517,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 21, 
-        "stuff_needs": "13:5,11:100", 
+        "stuff_needs": "13:30,11:100", 
         "gem_addition": 200, 
         "name": "\u4e08\u516b\u86c7\u77db", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a72\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a26\n\u6536\u96c6\u201c[bb3ae9]\u9ed1\u94c1[-]\u201d\u3001\u201c[ff7900]\u8d64\u8102\u77f3[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ff7900]\u9f99\u7259\u77db[-]\u201d", 
@@ -571,7 +571,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 23, 
-        "stuff_needs": "2:2,1:2", 
+        "stuff_needs": "2:5,1:10", 
         "gem_addition": 0, 
         "name": "\u94f6\u67aa", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a32\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a7\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u5bd2\u94c1\u67aa[-]\u201d", 
@@ -598,7 +598,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 24, 
-        "stuff_needs": "4:3,3:10", 
+        "stuff_needs": "4:10,3:15", 
         "gem_addition": 30, 
         "name": "\u5bd2\u94c1\u67aa", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a40\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a11\n\u6536\u96c6\u201c[00ff02]\u9752\u94dc[-]\u201d\u3001\u201c[00ff02]\u7425\u73c0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[4795ff]\u7eff\u6c89\u67aa[-]\u201d", 
@@ -625,7 +625,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 25, 
-        "stuff_needs": "6:4,5:15", 
+        "stuff_needs": "6:15,5:25", 
         "gem_addition": 60, 
         "name": "\u7eff\u6c89\u67aa", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a48\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a15\n\u6536\u96c6\u201c[4795ff]\u751f\u94c1[-]\u201d\u3001\u201c[4795ff]\u7802\u91d1[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[fff569]\u864e\u5934\u6e5b\u91d1\u67aa[-]\u201d", 
@@ -652,7 +652,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 26, 
-        "stuff_needs": "8:5,7:25", 
+        "stuff_needs": "8:20,7:35", 
         "gem_addition": 100, 
         "name": "\u864e\u5934\u6e5b\u91d1\u67aa", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a56\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a19\n\u6536\u96c6\u201c[fff569]\u94a2\u94c1[-]\u201d\u3001\u201c[fff569]\u6c34\u6676[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ffb902]\u9738\u738b\u67aa[-]\u201d", 
@@ -679,7 +679,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 27, 
-        "stuff_needs": "10:5,9:50", 
+        "stuff_needs": "10:25,9:50", 
         "gem_addition": 150, 
         "name": "\u9738\u738b\u67aa", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a64\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a23\n\u6536\u96c6\u201c[ffb902]\u94a8\u94c1[-]\u201d\u3001\u201c[ffb902]\u7fe1\u7fe0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[bb3ae9]\u9f99\u80c6\u4eae\u94f6\u67aa[-]\u201d", 
@@ -706,7 +706,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 28, 
-        "stuff_needs": "13:5,11:100", 
+        "stuff_needs": "13:30,11:100", 
         "gem_addition": 200, 
         "name": "\u9f99\u80c6\u4eae\u94f6\u67aa", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a72\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a26\n\u6536\u96c6\u201c[bb3ae9]\u9ed1\u94c1[-]\u201d\u3001\u201c[ff7900]\u8d64\u8102\u77f3[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ff7900]\u9f99\u5578\u67aa[-]\u201d", 
@@ -760,7 +760,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 30, 
-        "stuff_needs": "2:2,1:2", 
+        "stuff_needs": "2:5,1:10", 
         "gem_addition": 0, 
         "name": "\u94c1\u621f", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a32\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a7\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u6218\u621f[-]\u201d", 
@@ -787,7 +787,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 31, 
-        "stuff_needs": "4:3,3:10", 
+        "stuff_needs": "4:10,3:15", 
         "gem_addition": 30, 
         "name": "\u6218\u621f", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a40\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a11\n\u6536\u96c6\u201c[00ff02]\u9752\u94dc[-]\u201d\u3001\u201c[00ff02]\u7425\u73c0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[4795ff]\u6708\u7259\u621f[-]\u201d", 
@@ -814,7 +814,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 32, 
-        "stuff_needs": "6:4,5:15", 
+        "stuff_needs": "6:15,5:25", 
         "gem_addition": 60, 
         "name": "\u6708\u7259\u621f", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a48\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a15\n\u6536\u96c6\u201c[4795ff]\u751f\u94c1[-]\u201d\u3001\u201c[4795ff]\u7802\u91d1[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[fff569]\u6076\u6765\u94c1\u621f[-]\u201d", 
@@ -841,7 +841,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 33, 
-        "stuff_needs": "8:5,7:25", 
+        "stuff_needs": "8:20,7:35", 
         "gem_addition": 100, 
         "name": "\u6076\u6765\u94c1\u621f", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a56\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a19\n\u6536\u96c6\u201c[fff569]\u94a2\u94c1[-]\u201d\u3001\u201c[fff569]\u6c34\u6676[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ffb902]\u9738\u738b\u621f[-]\u201d", 
@@ -868,7 +868,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 34, 
-        "stuff_needs": "10:5,9:50", 
+        "stuff_needs": "10:25,9:50", 
         "gem_addition": 150, 
         "name": "\u9738\u738b\u621f", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a64\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a23\n\u6536\u96c6\u201c[ffb902]\u94a8\u94c1[-]\u201d\u3001\u201c[ffb902]\u7fe1\u7fe0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[bb3ae9]\u65b9\u5929\u753b\u621f[-]\u201d", 
@@ -895,7 +895,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 35, 
-        "stuff_needs": "14:5,11:100", 
+        "stuff_needs": "14:30,11:100", 
         "gem_addition": 200, 
         "name": "\u65b9\u5929\u753b\u621f", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a72\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a26\n\u6536\u96c6\u201c[bb3ae9]\u9ed1\u94c1[-]\u201d\u3001\u201c[ff7900]\u8840\u708e\u77f3[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ff7900]\u9f99\u9738\u621f[-]\u201d", 
@@ -949,7 +949,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 37, 
-        "stuff_needs": "2:2,1:2", 
+        "stuff_needs": "2:5,1:10", 
         "gem_addition": 0, 
         "name": "\u7fbd\u6247", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a32\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a7\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u6a80\u9999\u7fbd\u6247[-]\u201d", 
@@ -976,7 +976,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 38, 
-        "stuff_needs": "4:3,3:10", 
+        "stuff_needs": "4:10,3:15", 
         "gem_addition": 30, 
         "name": "\u6a80\u9999\u7fbd\u6247", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a40\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a11\n\u6536\u96c6\u201c[00ff02]\u9752\u94dc[-]\u201d\u3001\u201c[00ff02]\u7425\u73c0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[4795ff]\u53e4\u7fbd\u6247[-]\u201d", 
@@ -1003,7 +1003,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 39, 
-        "stuff_needs": "6:4,5:15", 
+        "stuff_needs": "6:15,5:25", 
         "gem_addition": 60, 
         "name": "\u53e4\u7fbd\u6247", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a48\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a15\n\u6536\u96c6\u201c[4795ff]\u751f\u94c1[-]\u201d\u3001\u201c[4795ff]\u7802\u91d1[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[fff569]\u98de\u971e\u6247[-]\u201d", 
@@ -1030,7 +1030,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 40, 
-        "stuff_needs": "8:5,7:25", 
+        "stuff_needs": "8:20,7:35", 
         "gem_addition": 100, 
         "name": "\u98de\u971e\u6247", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a56\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a19\n\u6536\u96c6\u201c[fff569]\u94a2\u94c1[-]\u201d\u3001\u201c[fff569]\u6c34\u6676[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ffb902]\u4e94\u795e\u6247[-]\u201d", 
@@ -1057,7 +1057,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 41, 
-        "stuff_needs": "10:5,9:50", 
+        "stuff_needs": "10:25,9:50", 
         "gem_addition": 150, 
         "name": "\u4e94\u795e\u6247", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a64\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a23\n\u6536\u96c6\u201c[ffb902]\u94a8\u94c1[-]\u201d\u3001\u201c[ffb902]\u7fe1\u7fe0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[bb3ae9]\u5929\u821e\u6247[-]\u201d", 
@@ -1084,7 +1084,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 42, 
-        "stuff_needs": "20:5,11:100", 
+        "stuff_needs": "20:30,11:100", 
         "gem_addition": 200, 
         "name": "\u5929\u821e\u6247", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a72\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a26\n\u6536\u96c6\u201c[bb3ae9]\u9ed1\u94c1[-]\u201d\u3001\u201c[ff7900]\u9ed1\u6a80\u6728\u7247[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ff7900]\u9f99\u7075\u6247[-]\u201d", 
@@ -1138,7 +1138,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 44, 
-        "stuff_needs": "2:2,1:2", 
+        "stuff_needs": "2:5,1:10", 
         "gem_addition": 0, 
         "name": "\u957f\u5f13", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a32\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a7\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u6218\u5f13[-]\u201d", 
@@ -1165,7 +1165,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 45, 
-        "stuff_needs": "4:3,3:10", 
+        "stuff_needs": "4:10,3:15", 
         "gem_addition": 30, 
         "name": "\u6218\u5f13", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a40\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a11\n\u6536\u96c6\u201c[00ff02]\u9752\u94dc[-]\u201d\u3001\u201c[00ff02]\u7425\u73c0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[4795ff]\u843d\u65e5\u5f13[-]\u201d", 
@@ -1192,7 +1192,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 46, 
-        "stuff_needs": "6:4,5:15", 
+        "stuff_needs": "6:15,5:25", 
         "gem_addition": 60, 
         "name": "\u843d\u65e5\u5f13", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a48\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a15\n\u6536\u96c6\u201c[4795ff]\u751f\u94c1[-]\u201d\u3001\u201c[4795ff]\u7802\u91d1[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[fff569]\u4e07\u77f3\u5f13[-]\u201d", 
@@ -1219,7 +1219,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 47, 
-        "stuff_needs": "8:5,7:25", 
+        "stuff_needs": "8:20,7:35", 
         "gem_addition": 100, 
         "name": "\u4e07\u77f3\u5f13", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a56\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a19\n\u6536\u96c6\u201c[fff569]\u94a2\u94c1[-]\u201d\u3001\u201c[fff569]\u6c34\u6676[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ffb902]\u9738\u738b\u5f13[-]\u201d", 
@@ -1246,7 +1246,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 48, 
-        "stuff_needs": "10:5,9:50", 
+        "stuff_needs": "10:25,9:50", 
         "gem_addition": 150, 
         "name": "\u9738\u738b\u5f13", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a64\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a23\n\u6536\u96c6\u201c[ffb902]\u94a8\u94c1[-]\u201d\u3001\u201c[ffb902]\u7fe1\u7fe0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[bb3ae9]\u8bf8\u845b\u8fde\u5f29[-]\u201d", 
@@ -1273,7 +1273,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 49, 
-        "stuff_needs": "14:5,11:100", 
+        "stuff_needs": "14:30,11:100", 
         "gem_addition": 200, 
         "name": "\u8bf8\u845b\u8fde\u5f29", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a72\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a26\n\u6536\u96c6\u201c[bb3ae9]\u9ed1\u94c1[-]\u201d\u3001\u201c[ff7900]\u8840\u708e\u77f3[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ff7900]\u9f99\u7b4b\u5f13[-]\u201d", 
@@ -1327,7 +1327,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 51, 
-        "stuff_needs": "2:2,1:2", 
+        "stuff_needs": "2:5,1:10", 
         "gem_addition": 0, 
         "name": "\u957f\u7b1b", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a32\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a7\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u94a2\u7b1b[-]\u201d", 
@@ -1354,7 +1354,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 52, 
-        "stuff_needs": "4:3,3:10", 
+        "stuff_needs": "4:10,3:15", 
         "gem_addition": 30, 
         "name": "\u94a2\u7b1b", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a40\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a11\n\u6536\u96c6\u201c[00ff02]\u9752\u94dc[-]\u201d\u3001\u201c[00ff02]\u7425\u73c0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[4795ff]\u661f\u8292\u7b1b[-]\u201d", 
@@ -1381,7 +1381,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 53, 
-        "stuff_needs": "6:4,5:15", 
+        "stuff_needs": "6:15,5:25", 
         "gem_addition": 60, 
         "name": "\u661f\u8292\u7b1b", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a48\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a15\n\u6536\u96c6\u201c[4795ff]\u751f\u94c1[-]\u201d\u3001\u201c[4795ff]\u7802\u91d1[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[fff569]\u9e23\u714c\u7b1b[-]\u201d", 
@@ -1408,7 +1408,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 54, 
-        "stuff_needs": "8:5,7:25", 
+        "stuff_needs": "8:20,7:35", 
         "gem_addition": 100, 
         "name": "\u9e23\u714c\u7b1b", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a56\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a19\n\u6536\u96c6\u201c[fff569]\u94a2\u94c1[-]\u201d\u3001\u201c[fff569]\u6c34\u6676[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ffb902]\u5996\u65cb\u7b1b[-]\u201d", 
@@ -1435,7 +1435,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 55, 
-        "stuff_needs": "10:5,9:50", 
+        "stuff_needs": "10:25,9:50", 
         "gem_addition": 150, 
         "name": "\u5996\u65cb\u7b1b", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a64\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a23\n\u6536\u96c6\u201c[ffb902]\u94a8\u94c1[-]\u201d\u3001\u201c[ffb902]\u7fe1\u7fe0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[bb3ae9]\u6e38\u6708\u7b1b[-]\u201d", 
@@ -1462,7 +1462,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 56, 
-        "stuff_needs": "20:5,11:100", 
+        "stuff_needs": "20:30,11:100", 
         "gem_addition": 200, 
         "name": "\u6e38\u6708\u7b1b", 
         "tip_des": "\u57fa\u7840\u653b\u51fb\uff1a72\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a26\n\u6536\u96c6\u201c[bb3ae9]\u9ed1\u94c1[-]\u201d\u3001\u201c[ff7900]\u9ed1\u6a80\u6728\u7247[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ff7900]\u9f99\u9e23\u7b1b[-]\u201d", 
@@ -1516,7 +1516,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 58, 
-        "stuff_needs": "2:2,1:2", 
+        "stuff_needs": "2:5,1:10", 
         "gem_addition": 0, 
         "name": "\u94c1\u94e0", 
         "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a16\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a4\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u94dc\u955c\u94e0[-]\u201d", 
@@ -1543,7 +1543,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 59, 
-        "stuff_needs": "4:3,3:10", 
+        "stuff_needs": "4:10,3:15", 
         "gem_addition": 30, 
         "name": "\u94dc\u955c\u94e0", 
         "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a20\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a7\n\u6536\u96c6\u201c[00ff02]\u9752\u94dc[-]\u201d\u3001\u201c[00ff02]\u7425\u73c0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[4795ff]\u79e6\u5c06\u519b\u94e0[-]\u201d", 
@@ -1570,7 +1570,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 60, 
-        "stuff_needs": "6:4,5:15", 
+        "stuff_needs": "6:15,5:25", 
         "gem_addition": 60, 
         "name": "\u79e6\u5c06\u519b\u94e0", 
         "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a24\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a10\n\u6536\u96c6\u201c[4795ff]\u751f\u94c1[-]\u201d\u3001\u201c[4795ff]\u7802\u91d1[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[fff569]\u9ed1\u5149\u94e0[-]\u201d", 
@@ -1597,7 +1597,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 61, 
-        "stuff_needs": "8:5,7:25", 
+        "stuff_needs": "8:20,7:35", 
         "gem_addition": 100, 
         "name": "\u9ed1\u5149\u94e0", 
         "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a28\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a13\n\u6536\u96c6\u201c[fff569]\u94a2\u94c1[-]\u201d\u3001\u201c[fff569]\u6c34\u6676[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ffb902]\u4eae\u94f6\u94e0[-]\u201d", 
@@ -1624,7 +1624,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 62, 
-        "stuff_needs": "10:5,9:50", 
+        "stuff_needs": "10:25,9:50", 
         "gem_addition": 150, 
         "name": "\u4eae\u94f6\u94e0", 
         "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a32\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a15\n\u6536\u96c6\u201c[ffb902]\u94a8\u94c1[-]\u201d\u3001\u201c[ffb902]\u7fe1\u7fe0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[bb3ae9]\u7384\u5929\u8fde\u73af\u94e0[-]\u201d", 
@@ -1651,7 +1651,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 63, 
-        "stuff_needs": "16:5,11:100", 
+        "stuff_needs": "16:30,11:100", 
         "gem_addition": 200, 
         "name": "\u7384\u5929\u8fde\u73af\u94e0", 
         "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a36\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a18\n\u6536\u96c6\u201c[bb3ae9]\u9ed1\u94c1[-]\u201d\u3001\u201c[ff7900]\u5f02\u517d\u5de8\u9aa8[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ff7900]\u9f99\u9cde\u94e0[-]\u201d", 
@@ -1705,10 +1705,10 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 65, 
-        "stuff_needs": "2:2,1:2", 
+        "stuff_needs": "2:5,1:10", 
         "gem_addition": 0, 
         "name": "\u9526\u888d", 
-        "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a16\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a4\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u8c0b\u58eb\u888d[-]\u201d", 
+        "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a16\r\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a4\r\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u8c0b\u58eb\u888d[-]\u201d", 
         "tp_name": "\u9632\u5177", 
         "hp": 0, 
         "des": "\u5bfb\u5e38\u957f\u888d\uff0c\u5df2\u7ecf\u7565\u663e\u8001\u65e7", 
@@ -1732,7 +1732,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 66, 
-        "stuff_needs": "4:3,3:10", 
+        "stuff_needs": "4:10,3:15", 
         "gem_addition": 30, 
         "name": "\u8c0b\u58eb\u888d", 
         "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a20\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a7\n\u6536\u96c6\u201c[00ff02]\u9752\u94dc[-]\u201d\u3001\u201c[00ff02]\u7425\u73c0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[4795ff]\u592a\u5e73\u9053\u888d[-]\u201d", 
@@ -1759,7 +1759,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 67, 
-        "stuff_needs": "6:4,5:15", 
+        "stuff_needs": "6:15,5:25", 
         "gem_addition": 60, 
         "name": "\u592a\u5e73\u9053\u888d", 
         "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a24\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a10\n\u6536\u96c6\u201c[4795ff]\u751f\u94c1[-]\u201d\u3001\u201c[4795ff]\u7802\u91d1[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[fff569]\u9b3c\u624d\u519b\u5e08\u888d[-]\u201d", 
@@ -1786,7 +1786,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 68, 
-        "stuff_needs": "8:5,7:25", 
+        "stuff_needs": "8:20,7:35", 
         "gem_addition": 100, 
         "name": "\u9b3c\u624d\u519b\u5e08\u888d", 
         "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a28\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a13\n\u6536\u96c6\u201c[fff569]\u94a2\u94c1[-]\u201d\u3001\u201c[fff569]\u6c34\u6676[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ffb902]\u51a2\u864e\u9e64\u6c05\u888d[-]\u201d", 
@@ -1813,7 +1813,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 69, 
-        "stuff_needs": "10:5,9:50", 
+        "stuff_needs": "10:25,9:50", 
         "gem_addition": 150, 
         "name": "\u51a2\u864e\u9e64\u6c05\u888d", 
         "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a32\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a15\n\u6536\u96c6\u201c[ffb902]\u94a8\u94c1[-]\u201d\u3001\u201c[ffb902]\u7fe1\u7fe0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[bb3ae9]\u5367\u9f99\u516b\u5366\u888d[-]\u201d", 
@@ -1840,7 +1840,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 70, 
-        "stuff_needs": "18:5,11:100", 
+        "stuff_needs": "18:30,11:100", 
         "gem_addition": 200, 
         "name": "\u5367\u9f99\u516b\u5366\u888d", 
         "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a36\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a18\n\u6536\u96c6\u201c[bb3ae9]\u9ed1\u94c1[-]\u201d\u3001\u201c[ff7900]\u5f02\u517d\u67d4\u76ae[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ff7900]\u9f99\u9cde\u51e4\u7fbd\u888d[-]\u201d", 
@@ -1894,10 +1894,10 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 72, 
-        "stuff_needs": "2:2,1:2", 
+        "stuff_needs": "2:5,1:10", 
         "gem_addition": 0, 
         "name": "\u8f7b\u7532", 
-        "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a16\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a4\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u786c\u76ae\u7532[-]\u201d", 
+        "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a16\r\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a4\r\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u786c\u76ae\u7532[-]\u201d", 
         "tp_name": "\u9632\u5177", 
         "hp": 0, 
         "des": "\u591a\u4e3a\u5bfb\u5e38\u6b66\u5e08\u6240\u7a7f\uff0c\u7528\u6765\u62b5\u6321\u62f3\u811a\u6548\u679c\u4e0d\u9519", 
@@ -1921,7 +1921,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 73, 
-        "stuff_needs": "4:3,3:10", 
+        "stuff_needs": "4:10,3:15", 
         "gem_addition": 30, 
         "name": "\u786c\u76ae\u7532", 
         "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a20\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a7\n\u6536\u96c6\u201c[00ff02]\u9752\u94dc[-]\u201d\u3001\u201c[00ff02]\u7425\u73c0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[4795ff]\u4e4c\u6cb9\u85e4\u7532[-]\u201d", 
@@ -1948,7 +1948,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 74, 
-        "stuff_needs": "6:4,5:15", 
+        "stuff_needs": "6:15,5:25", 
         "gem_addition": 60, 
         "name": "\u4e4c\u6cb9\u85e4\u7532", 
         "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a24\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a10\n\u6536\u96c6\u201c[4795ff]\u751f\u94c1[-]\u201d\u3001\u201c[4795ff]\u7802\u91d1[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[fff569]\u4e4c\u6728\u7532[-]\u201d", 
@@ -1975,7 +1975,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 75, 
-        "stuff_needs": "8:5,7:25", 
+        "stuff_needs": "8:20,7:35", 
         "gem_addition": 100, 
         "name": "\u4e4c\u6728\u7532", 
         "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a28\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a13\n\u6536\u96c6\u201c[fff569]\u94a2\u94c1[-]\u201d\u3001\u201c[fff569]\u6c34\u6676[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ffb902]\u91d1\u4e1d\u7532[-]\u201d", 
@@ -2002,7 +2002,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 76, 
-        "stuff_needs": "10:5,9:50", 
+        "stuff_needs": "10:25,9:50", 
         "gem_addition": 150, 
         "name": "\u91d1\u4e1d\u7532", 
         "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a32\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a15\n\u6536\u96c6\u201c[ffb902]\u94a8\u94c1[-]\u201d\u3001\u201c[ffb902]\u7fe1\u7fe0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[bb3ae9]\u98de\u5c06\u7532[-]\u201d", 
@@ -2029,7 +2029,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 77, 
-        "stuff_needs": "17:5,11:100", 
+        "stuff_needs": "17:30,11:100", 
         "gem_addition": 200, 
         "name": "\u98de\u5c06\u7532", 
         "tip_des": "\u57fa\u7840\u9632\u5fa1\uff1a36\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a18\n\u6536\u96c6\u201c[bb3ae9]\u9ed1\u94c1[-]\u201d\u3001\u201c[ff7900]\u5f02\u517d\u9cde\u7532[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ff7900]\u9f99\u9cde\u7532[-]\u201d", 
@@ -2083,10 +2083,10 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 79, 
-        "stuff_needs": "2:2,1:2", 
+        "stuff_needs": "2:5,1:10", 
         "gem_addition": 0, 
         "name": "\u8bf4\u6587\u89e3\u5b57", 
-        "tip_des": "\u57fa\u7840\u751f\u547d\uff1a80\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a18\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u9752\u56ca\u4e66[-]\u201d", 
+        "tip_des": "\u57fa\u7840\u751f\u547d\uff1a80\r\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a18\r\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u9752\u56ca\u4e66[-]\u201d", 
         "tp_name": "\u9970\u54c1", 
         "hp": 80, 
         "des": "\u5bfb\u5e38\u767e\u59d3\u5bb6\u7686\u53ef\u89c1\u5230\uff0c\u5b57\u5178\u7684\u9f3b\u7956", 
@@ -2110,7 +2110,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 80, 
-        "stuff_needs": "4:3,3:10", 
+        "stuff_needs": "4:10,3:15", 
         "gem_addition": 30, 
         "name": "\u9752\u56ca\u4e66", 
         "tip_des": "\u57fa\u7840\u751f\u547d\uff1a100\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a25\n\u6536\u96c6\u201c[00ff02]\u9752\u94dc[-]\u201d\u3001\u201c[00ff02]\u7425\u73c0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[4795ff]\u592a\u5e73\u8981\u672f[-]\u201d", 
@@ -2137,7 +2137,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 81, 
-        "stuff_needs": "6:4,5:15", 
+        "stuff_needs": "6:15,5:25", 
         "gem_addition": 60, 
         "name": "\u592a\u5e73\u8981\u672f", 
         "tip_des": "\u57fa\u7840\u751f\u547d\uff1a120\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a31\n\u6536\u96c6\u201c[4795ff]\u751f\u94c1[-]\u201d\u3001\u201c[4795ff]\u7802\u91d1[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[fff569]\u5b5f\u5fb7\u65b0\u4e66[-]\u201d", 
@@ -2164,7 +2164,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 82, 
-        "stuff_needs": "8:5,7:25", 
+        "stuff_needs": "8:20,7:35", 
         "gem_addition": 100, 
         "name": "\u5b5f\u5fb7\u65b0\u4e66", 
         "tip_des": "\u57fa\u7840\u751f\u547d\uff1a140\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a38\n\u6536\u96c6\u201c[fff569]\u94a2\u94c1[-]\u201d\u3001\u201c[fff569]\u6c34\u6676[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ffb902]\u5b59\u5b50\u5175\u6cd5[-]\u201d", 
@@ -2191,7 +2191,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 83, 
-        "stuff_needs": "10:5,9:50", 
+        "stuff_needs": "10:25,9:50", 
         "gem_addition": 150, 
         "name": "\u5b59\u5b50\u5175\u6cd5", 
         "tip_des": "\u57fa\u7840\u751f\u547d\uff1a160\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a44\n\u6536\u96c6\u201c[ffb902]\u94a8\u94c1[-]\u201d\u3001\u201c[ffb902]\u7fe1\u7fe0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[bb3ae9]\u9041\u7532\u5929\u4e66[-]\u201d", 
@@ -2218,7 +2218,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 84, 
-        "stuff_needs": "19:5,11:100", 
+        "stuff_needs": "19:30,11:100", 
         "gem_addition": 200, 
         "name": "\u9041\u7532\u5929\u4e66", 
         "tip_des": "\u57fa\u7840\u751f\u547d\uff1a180\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a51\n\u6536\u96c6\u201c[bb3ae9]\u9ed1\u94c1[-]\u201d\u3001\u201c[ff7900]\u58a8\u5bb6\u5320\u4e66[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ff7900]\u9f99\u7eb9\u5929\u4e66[-]\u201d", 
@@ -2272,10 +2272,10 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 86, 
-        "stuff_needs": "2:2,1:2", 
+        "stuff_needs": "2:5,1:10", 
         "gem_addition": 0, 
         "name": "\u7389\u956f", 
-        "tip_des": "\u57fa\u7840\u751f\u547d\uff1a80\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a18\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u739b\u7459\u956f[-]\u201d", 
+        "tip_des": "\u57fa\u7840\u751f\u547d\uff1a80\r\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a18\r\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u739b\u7459\u956f[-]\u201d", 
         "tp_name": "\u9970\u54c1", 
         "hp": 80, 
         "des": "\u7531\u666e\u901a\u7684\u6c49\u767d\u7389\u5236\u6210\uff0c\u5bfb\u5e38\u4eba\u5bb6\u5e38\u53ef\u770b\u5230", 
@@ -2299,7 +2299,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 87, 
-        "stuff_needs": "4:3,3:10", 
+        "stuff_needs": "4:10,3:15", 
         "gem_addition": 30, 
         "name": "\u739b\u7459\u956f", 
         "tip_des": "\u57fa\u7840\u751f\u547d\uff1a100\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a25\n\u6536\u96c6\u201c[00ff02]\u9752\u94dc[-]\u201d\u3001\u201c[00ff02]\u7425\u73c0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[4795ff]\u91d1\u8749\u7389\u956f[-]\u201d", 
@@ -2326,7 +2326,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 88, 
-        "stuff_needs": "6:4,5:15", 
+        "stuff_needs": "6:15,5:25", 
         "gem_addition": 60, 
         "name": "\u91d1\u8749\u7389\u956f", 
         "tip_des": "\u57fa\u7840\u751f\u547d\uff1a120\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a31\n\u6536\u96c6\u201c[4795ff]\u751f\u94c1[-]\u201d\u3001\u201c[4795ff]\u7802\u91d1[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[fff569]\u5357\u73e0\u956f[-]\u201d", 
@@ -2353,7 +2353,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 89, 
-        "stuff_needs": "8:5,7:25", 
+        "stuff_needs": "8:20,7:35", 
         "gem_addition": 100, 
         "name": "\u5357\u73e0\u956f", 
         "tip_des": "\u57fa\u7840\u751f\u547d\uff1a140\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a38\n\u6536\u96c6\u201c[fff569]\u94a2\u94c1[-]\u201d\u3001\u201c[fff569]\u6c34\u6676[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ffb902]\u51e4\u51f0\u624b\u956f[-]\u201d", 
@@ -2407,7 +2407,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 91, 
-        "stuff_needs": "21:5,11:100", 
+        "stuff_needs": "21:30,11:100", 
         "gem_addition": 200, 
         "name": "\u767d\u7389\u54cd\u94c3\u956f", 
         "tip_des": "\u57fa\u7840\u751f\u547d\uff1a180\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a51\n\u6536\u96c6\u201c[bb3ae9]\u9ed1\u94c1[-]\u201d\u3001\u201c[ff7900]\u5357\u6d77\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ff7900]\u9f99\u7075\u956f[-]\u201d", 
@@ -2461,10 +2461,10 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 93, 
-        "stuff_needs": "2:2,1:2", 
+        "stuff_needs": "2:5,1:10", 
         "gem_addition": 0, 
         "name": "\u5c06\u5370", 
-        "tip_des": "\u57fa\u7840\u751f\u547d\uff1a80\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a18\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u731b\u864e\u5c06\u5370[-]\u201d", 
+        "tip_des": "\u57fa\u7840\u751f\u547d\uff1a80\r\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a18\r\n\u6536\u96c6\u201c[ffffff]\u9ec4\u94dc[-]\u201d\u3001\u201c[ffffff]\u73cd\u73e0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[00ff02]\u731b\u864e\u5c06\u5370[-]\u201d", 
         "tp_name": "\u9970\u54c1", 
         "hp": 80, 
         "des": "\u8c03\u52a8\u519b\u961f\u6240\u7528\u7684\u5175\u7b26\uff0c\u591a\u4e3a\u5927\u5c06\u6240\u4f69\u6234", 
@@ -2488,7 +2488,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 94, 
-        "stuff_needs": "4:3,3:10", 
+        "stuff_needs": "4:10,3:15", 
         "gem_addition": 30, 
         "name": "\u731b\u864e\u5c06\u5370", 
         "tip_des": "\u57fa\u7840\u751f\u547d\uff1a100\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a25\n\u6536\u96c6\u201c[00ff02]\u9752\u94dc[-]\u201d\u3001\u201c[00ff02]\u7425\u73c0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[4795ff]\u6012\u72ee\u5c06\u5370[-]\u201d", 
@@ -2515,7 +2515,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 95, 
-        "stuff_needs": "6:4,5:15", 
+        "stuff_needs": "6:15,5:25", 
         "gem_addition": 60, 
         "name": "\u6012\u72ee\u5c06\u5370", 
         "tip_des": "\u57fa\u7840\u751f\u547d\uff1a120\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a31\n\u6536\u96c6\u201c[4795ff]\u751f\u94c1[-]\u201d\u3001\u201c[4795ff]\u7802\u91d1[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[fff569]\u7384\u6b66\u5c06\u5370[-]\u201d", 
@@ -2542,7 +2542,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 96, 
-        "stuff_needs": "8:5,7:25", 
+        "stuff_needs": "8:20,7:35", 
         "gem_addition": 100, 
         "name": "\u7384\u6b66\u5c06\u5370", 
         "tip_des": "\u57fa\u7840\u751f\u547d\uff1a140\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a38\n\u6536\u96c6\u201c[fff569]\u94a2\u94c1[-]\u201d\u3001\u201c[fff569]\u6c34\u6676[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ffb902]\u9e92\u9e9f\u5c06\u5370[-]\u201d", 
@@ -2569,7 +2569,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 97, 
-        "stuff_needs": "10:5,9:50", 
+        "stuff_needs": "10:25,9:50", 
         "gem_addition": 150, 
         "name": "\u9e92\u9e9f\u5c06\u5370", 
         "tip_des": "\u57fa\u7840\u751f\u547d\uff1a160\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a44\n\u6536\u96c6\u201c[ffb902]\u94a8\u94c1[-]\u201d\u3001\u201c[ffb902]\u7fe1\u7fe0[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[bb3ae9]\u9752\u9f99\u5370[-]\u201d", 
@@ -2596,7 +2596,7 @@
     "model": "item.equipment", 
     "fields": {
         "upgrade_to": 98, 
-        "stuff_needs": "15:5,11:100", 
+        "stuff_needs": "15:30,11:100", 
         "gem_addition": 200, 
         "name": "\u9752\u9f99\u5370", 
         "tip_des": "\u57fa\u7840\u751f\u547d\uff1a180\n\u6bcf\u7ea7\u5f3a\u5316\u6210\u957f\uff1a51\n\u6536\u96c6\u201c[bb3ae9]\u9ed1\u94c1[-]\u201d\u3001\u201c[ff7900]\u6708\u5bd2\u77f3[-]\u201d\u53ef\u6253\u9020\u4e3a\u201c[ff7900]\u9f99\u795e\u5370[-]\u201d", 
