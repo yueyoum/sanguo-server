@@ -462,6 +462,12 @@ class Activity11001(ActivityBase, ActivityTriggerAdditionalDrop):
 
 @activities.register(12001)
 class Activity12001(ActivityBase, ActivityTriggerAdditionalDrop):
+    def get_additional_drop(self, stuff_id):
+        if stuff_id != 33:
+            return make_standard_drop_from_template()
+        return ActivityTriggerAdditionalDrop.get_additional_drop(self)
+
+
     def get_current_value(self, char_id):
         return 0
 
