@@ -10,6 +10,7 @@ import base64
 import dill
 
 from mongoscheme import DoesNotExist
+from core.server import server
 from core.character import Char
 from core.battle import PlunderBattle
 from core.mongoscheme import MongoPlunder, MongoAffairs, MongoPlunderBoard
@@ -79,8 +80,11 @@ class PlunderRival(object):
         # 3. 开打
         # 4. 调用HUB 打完的API
         # 5. HUB收到请求后，根据target_char_id所在的server，并调用其对于API
+        data = {
+            'is_test': 1 if server.test else 0
+        }
 
-        servers = api_server_list(data={})
+        servers = api_server_list(data=data)
         s = random.choice(servers['data'])
         url = "https://{0}:{1}/api/plunder/search/".format(s['host'], s['port_https'])
 
