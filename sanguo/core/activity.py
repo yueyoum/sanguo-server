@@ -553,7 +553,7 @@ class Activity17001(ActivityBase):
             # 只有当天第一次充值的时候，才给额外的东西
             return
 
-        attachment = get_drop(self.activity_data.package)
+        attachment = get_drop([self.activity_data.package])
 
         mail = Mail(self.char_id)
         mail.add(
