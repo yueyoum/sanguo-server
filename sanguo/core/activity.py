@@ -503,6 +503,9 @@ class Activity15001(ActivityBase, ActivityTriggerAdditionalDrop):
 # 这里特殊处理
 @activities.register(16001)
 class Activity16001(ActivityBase):
+    def get_current_value(self, char_id):
+        return 0
+
     def trig(self, extra_sycee):
         if not self.is_valid():
             return
@@ -517,8 +520,23 @@ class Activity16001(ActivityBase):
             attachment=json.dumps(attachment)
         )
 
+
+
 @activities.register(17001)
 class Activity17001(ActivityBase):
+    def get_current_value(self, char_id):
+        now = arrow.utcnow()
+        now_begin = arrow.Arrow(now.year, now.month, now.day)
+        condition = Q(char_id=self.char_id) & Q(purchase_at__gt=now_begin.timestamp) & Q(purchase_at__lte=now.timestamp)
+        logs = MongoPurchaseLog.objects.filter(condition)
+
+        value = 0
+        for log in logs:
+            value += log.sycee
+
+        return value
+
+    
     def trig(self):
         if not self.is_valid():
             return
