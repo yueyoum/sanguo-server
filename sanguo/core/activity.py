@@ -544,10 +544,9 @@ class Activity17001(ActivityBase):
             return
 
         now = arrow.utcnow()
-        now_date = arrow.Arrow(now.year, now.month, now.day)
-        last_date = now_date.replace(days=-1)
+        now_begin = arrow.Arrow(now.year, now.month, now.day)
 
-        condition = Q(char_id=self.char_id) & Q(purchase_at__gt=last_date.timestamp) & Q(purchase_at__lte=now_date.timestamp)
+        condition = Q(char_id=self.char_id) & Q(purchase_at__gt=now_begin.timestamp) & Q(purchase_at__lte=now.timestamp)
         logs = MongoPurchaseLog.objects.filter(condition)
         if logs.count() == 0 or logs.count() > 1:
             # 没有充值，或者充值次数大于1,都返回
