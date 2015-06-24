@@ -499,6 +499,53 @@ class Activity15001(ActivityBase, ActivityTriggerAdditionalDrop):
     def get_current_value(self, char_id):
         return 0
 
+# 16001, 17001 没有条件，只要达到就触发
+# 这里特殊处理
+@activities.register(16001)
+class Activity16001(ActivityBase):
+    def trig(self, extra_sycee):
+        if not self.is_valid():
+            return
+
+        attachment = make_standard_drop_from_template()
+        attachment['sycee'] = extra_sycee
+
+        mail = Mail(self.char_id)
+        mail.add(
+            self.activity_data.mail_title,
+            self.activity_data.mail_content,
+            attachment=json.dumps(attachment)
+        )
+
+@activities.register(17001)
+class Activity17001(ActivityBase):
+    def trig(self):
+        if not self.is_valid():
+            return
+
+        now = arrow.utcnow()
+        now_date = arrow.Arrow(now.year, now.month, now.day)
+        last_date = now_date.replace(days=-1)
+
+        condition = Q(char_id=self.char_id) & Q(purchase_at__gt=last_date.timestamp) & Q(purchase_at__lte=now_date.timestamp)
+        logs = MongoPurchaseLog.objects.filter(condition)
+
+        value = 0
+        for log in logs:
+            value += log.sycee
+
+        if value == 0:
+            return
+
+        attachment = get_drop(self.activity_data.package)
+
+        mail = Mail(self.char_id)
+        mail.add(
+            self.activity_data.mail_title,
+            self.activity_data.mail_content,
+            attachment=json.dumps(attachment)
+        )
+
 
 # 活动类的统一入口
 class ActivityEntry(object):

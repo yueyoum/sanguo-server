@@ -8,7 +8,7 @@ import arrow
 from core.signals import new_purchase_signal
 from core.vip import VIP
 from core.mongoscheme import MongoPurchaseLog
-from core.activity import ActivityStatic
+from core.activity import ActivityStatic, ActivityEntry
 
 
 def _new_purchase(char_id, new_got, total_got, **kwargs):
@@ -22,6 +22,7 @@ def _new_purchase(char_id, new_got, total_got, **kwargs):
 
     ActivityStatic(char_id).trig(5001)
     ActivityStatic(char_id).trig(14001)
+    ActivityEntry(char_id, 16001).trig(new_got/2)
 
 
 
