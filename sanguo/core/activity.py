@@ -503,6 +503,7 @@ class Activity15001(ActivityBase, ActivityTriggerAdditionalDrop):
 # 这里特殊处理
 @activities.register(16001)
 class Activity16001(ActivityBase):
+    # 充值给额外元宝
     def get_current_value(self, char_id):
         return 0
 
@@ -524,6 +525,7 @@ class Activity16001(ActivityBase):
 
 @activities.register(17001)
 class Activity17001(ActivityBase):
+    # 每天第一次任意额度的充值，给额外东西
     def get_current_value(self, char_id):
         now = arrow.utcnow()
         now_begin = arrow.Arrow(now.year, now.month, now.day)
@@ -536,7 +538,7 @@ class Activity17001(ActivityBase):
 
         return value
 
-    
+
     def trig(self):
         if not self.is_valid():
             return
@@ -547,12 +549,9 @@ class Activity17001(ActivityBase):
 
         condition = Q(char_id=self.char_id) & Q(purchase_at__gt=last_date.timestamp) & Q(purchase_at__lte=now_date.timestamp)
         logs = MongoPurchaseLog.objects.filter(condition)
-
-        value = 0
-        for log in logs:
-            value += log.sycee
-
-        if value == 0:
+        if logs.count() == 0 or logs.count() > 1:
+            # 没有充值，或者充值次数大于1,都返回
+            # 只有当天第一次充值的时候，才给额外的东西
             return
 
         attachment = get_drop(self.activity_data.package)
