@@ -118,7 +118,7 @@
     "model": "activity.activitystatic", 
     "fields": {
         "category": 2, 
-        "name": "\u6536\u96c6\u7cbe\u56ca\u6362\u5956\u52b1", 
+        "name": "\u6536\u96c6\u9526\u56ca\u6362\u5956\u52b1", 
         "continued_days": 3, 
         "current_des": "\u5f53\u524d\u62e5\u6709\u9526\u56ca${0}\u4e2a", 
         "start_time": "2015-06-25", 
@@ -312,7 +312,7 @@
         "continued_days": 3, 
         "current_des": "\u5f53\u524d\u5df2\u5145\u503c", 
         "start_time": "2015-06-24", 
-        "des": "\u6bcf\u65e5\u5145\u503c60\u5143\u5b9d\u4ee5\u4e0a\u989d\u5916\u83b7\u5f97\u5b9d\u7bb1\u5956\u52b1", 
+        "des": "\u6bcf\u65e5\u5145\u503c60\u5143\u5b9d\u4ee5\u4e0a\u5c06\u5fc5\u5b9a\u989d\u5916\u83b7\u5f97\u4e24\u4e2a\u5e9e\u7edf\u9b42\u548c\u4e00\u4e2a\u968f\u673a\u6750\u6599\u5b9d\u7bb1\u5956\u52b1", 
         "interval_times": 0, 
         "package": 50100, 
         "mail_title": "\u6bcf\u65e5\u5145\u503c\u5956\u52b1", 
