@@ -9,7 +9,7 @@ from cron.log import Logger
 from core.activeplayers import ActivePlayers
 
 
-@uwsgidecorators.timer(300)
+@uwsgidecorators.timer(300, target="spooler")
 def clean(signum):
     logger = Logger("clean_active_players.log")
     logger.write("Start.")

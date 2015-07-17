@@ -10,7 +10,7 @@ from core.friend import Friend
 
 # 每天0点清理好友赠送掠夺次数
 
-@uwsgidecorators.cron(0, 0, -1, -1, -1)
+@uwsgidecorators.cron(0, 0, -1, -1, -1, target="spooler")
 def reset(signum):
     logger = Logger('reset_friend_plunder_times.log')
 

@@ -7,7 +7,7 @@ import uwsgidecorators
 from cron.log import Logger
 from core.mongoscheme import MongoTask
 
-@uwsgidecorators.cron(0, 0, -1, -1, -1)
+@uwsgidecorators.cron(0, 0, -1, -1, -1, target="worker")
 def reset(signum):
     MongoTask.objects.delete()
 

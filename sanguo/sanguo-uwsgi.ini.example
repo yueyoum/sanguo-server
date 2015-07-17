@@ -10,9 +10,12 @@ max-requests = 50000
 reload-on-rss = 256
 master = true
 processes = 2
-threads = 4
+threads = 2
 enable-threads = true
 thunder-lock = true
 buffer-size = 32768
 daemonize = run/uwsgi.log
 pidfile = run/uwsgi.pid
+
+spooler = .
+spooler-processes = 4

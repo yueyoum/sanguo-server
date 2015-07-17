@@ -8,7 +8,7 @@ from cron.log import Logger
 
 from core.heropanel import HeroPanel
 
-@uwsgidecorators.cron(0, 0, -1, -1, -1)
+@uwsgidecorators.cron(0, 0, -1, -1, -1, target="spooler")
 def reset(signum):
     logger = Logger("reset_hero_panel.log")
     HeroPanel.cron_job()

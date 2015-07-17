@@ -13,7 +13,7 @@ from preset.data import ACTIVITY_STATIC
 
 
 # 每天零点清理过期活动
-@uwsgidecorators.cron(0, 0, -1, -1, -1)
+@uwsgidecorators.cron(0, 0, -1, -1, -1, target="spooler")
 def clean_expired_activity(signum):
     logger = Logger("clean_expired_activity.log")
     for mongo_ac in MongoActivityStatic.objects.all():
