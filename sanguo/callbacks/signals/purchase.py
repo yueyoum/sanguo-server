@@ -24,7 +24,7 @@ def _new_purchase(char_id, new_got, total_got, **kwargs):
     ActivityStatic(char_id).trig(14001)
     ActivityEntry(char_id, 16001).trig(new_got/2)
     ActivityEntry(char_id, 17001).trig()
-
+    ActivityEntry(char_id, 17002).trig()
 
 
 new_purchase_signal.connect(

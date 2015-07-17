@@ -17,6 +17,9 @@ from core.msgpipe import publish_to_char
 from core.mail import Mail
 from core.attachment import get_drop, standard_drop_to_attachment_protomsg, make_standard_drop_from_template
 from core.resource import Resource
+
+from core.purchase import BasePurchaseAction
+
 from utils import pack_msg
 
 from preset.data import ACTIVITY_STATIC, ACTIVITY_STATIC_CONDITIONS
@@ -561,6 +564,55 @@ class Activity17001(ActivityBase):
             self.activity_data.mail_content,
             attachment=json.dumps(attachment)
         )
+
+
+@activities.register(17002)
+class Activity17002(ActivityBase):
+    # 累计充值领月卡
+    CONDITION_ID = -17002
+    CONDITION_VALUE = 300
+
+    def get_current_value(self, char_id):
+        if not self.is_valid():
+            return 0
+
+        condition = Q(char_id=char_id) & Q(purchase_at__gte=self.activity_time.nearest_open_date.timestamp) & Q(purchase_at__lte=self.activity_time.nearest_close_date.timestamp)
+        logs = MongoPurchaseLog.objects.filter(condition)
+
+        value = 0
+        for log in logs:
+            value += log.sycee
+
+        return value
+
+
+    def trig(self):
+        mongo_ac = get_mongo_activity_instance(self.char_id)
+        if str(self.ACTIVITY_ID) in mongo_ac.send_times:
+            return
+
+        value = self.get_current_value(self.char_id)
+        if value < self.CONDITION_VALUE:
+            return
+
+        p = BasePurchaseAction(self.char_id)
+        p.send_reward_yueka(1, is_first=False)
+
+        m = Mail(self.char_id)
+        m.add(
+            "活动月卡奖励",
+            "恭喜获得了活动月卡奖励"
+        )
+
+
+@activities.register(17003)
+class Activity17003(ActivityBase):
+    def get_current_value(self, char_id):
+        return 0
+
+    def trig(self, char_id):
+        pass
+
 
 
 # 活动类的统一入口
