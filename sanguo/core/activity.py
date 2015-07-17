@@ -604,6 +604,9 @@ class Activity17002(ActivityBase):
             "您的累积充值已经达到了300元宝，获得了活动月卡奖励，300元宝的额外奖励已经放入您的帐号之中，请注意查收。从明天开始，接下来的30天，您将会每天获得100元宝。"
         )
 
+        mongo_ac.send_times[str(self.ACTIVITY_ID)] = 1
+        mongo_ac.save()
+
 
 @activities.register(17003)
 class Activity17003(ActivityBase):
