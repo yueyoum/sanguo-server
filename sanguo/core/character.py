@@ -100,13 +100,20 @@ class Char(object):
         return Formation(self.id).get_leader_oid()
 
 
-    def update(self, gold=0, sycee=0, exp=0, official_exp=0, purchase_got=0, purchase_actual_got=0):
+    def update(self, gold=0, sycee=0, exp=0, official_exp=0, purchase_got=0, purchase_actual_got=0, notify_settings=None):
         # purchase_got 充值获得元宝
         # purchase_actual_got 充值实际获得元宝
         # 比如 有个 商品 是 充1元，得1元宝，但现在做活动，买一送一，也就是充1元，得2元宝
         # 这里的 purchase_got = 1, purchase_actual_got = 2
         # 用户的 元宝 多2, 但是记录 purchase_got 还是加1
         # VIP 也是用 累加的 purchase_got来计算的
+
+        def get_send_notify_settings(key):
+            if not notify_settings:
+                return True
+            return notify_settings.get(key, True)
+
+
         opended_funcs = []
         char = MongoCharacter.objects.get(id=self.id)
 
@@ -193,7 +200,7 @@ class Char(object):
 
         self.send_notify(char=char, opended_funcs=opended_funcs)
 
-        if purchase_got > 0:
+        if purchase_got > 0 and get_send_notify_settings('purchase_notify'):
             signal_go.add(
                 new_purchase_signal,
                 sender=None,

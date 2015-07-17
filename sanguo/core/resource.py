@@ -195,6 +195,9 @@ class Resource(object):
         from core.horse import Horse
         from core.union.member import Member
 
+        notify_settings = {}
+        notify_settings['purchase_notify'] = kwargs.get('purchase_notify', True)
+
         data = _get_resource_data(**kwargs)
         purchase_got = kwargs.get('purchase_got', 0)
         purchase_actual_got = kwargs.get('purchase_actual_got', 0)
@@ -204,6 +207,7 @@ class Resource(object):
             char.update(gold=data['gold'], sycee=data['sycee'], exp=data['exp'], official_exp=data['official_exp'],
                         purchase_got=purchase_got,
                         purchase_actual_got=purchase_actual_got,
+                        notify_settings=notify_settings
                         )
 
         union_coin = kwargs.get('union_coin', 0)

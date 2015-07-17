@@ -91,11 +91,11 @@ class BasePurchaseAction(object):
         )
 
 
-    def send_reward_yueka(self, goods_id, is_first):
+    def send_reward_yueka(self, goods_id, is_first, **kwargs):
         # 月卡
         # XXX NOTE
         # 系统只支持一种类型的月卡
-        self.send_reward_sycee(goods_id, is_first)
+        self.send_reward_sycee(goods_id, is_first, **kwargs)
 
         p = PURCHASE[goods_id]
 
@@ -133,7 +133,7 @@ class BasePurchaseAction(object):
         self.mongo_record.save()
 
 
-    def send_reward_sycee(self, goods_id, is_first):
+    def send_reward_sycee(self, goods_id, is_first, **kwargs):
         # 元宝
         p = PURCHASE[goods_id]
         addition = p.first_addition_sycee if is_first else p.addition_sycee
@@ -141,8 +141,12 @@ class BasePurchaseAction(object):
         purchase_got = p.sycee
         purchase_actual_got = purchase_got + addition
 
+        data = kwargs
+        data['purchase_got'] = purchase_got
+        data['purchase_actual_got'] = purchase_actual_got
+
         resource = Resource(self.char_id, "Purchase")
-        resource.add(purchase_got=purchase_got, purchase_actual_got=purchase_actual_got)
+        resource.add(**data)
 
 
     def send_notify(self):
