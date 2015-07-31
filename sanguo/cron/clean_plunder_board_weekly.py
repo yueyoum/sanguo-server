@@ -12,7 +12,7 @@ from core.plunder import PlunderLeaderboardWeekly
 
 # 每周清理掠夺榜单
 
-@uwsgidecorators.cron(0, 0, -1, -1, 1, target="spooler")
+@uwsgidecorators.cron(0, 0, -1, -1, 1, target="mule")
 def clean(signum):
     logger = Logger("clean_plunder_board_weekly.log")
     PlunderLeaderboardWeekly.clean()

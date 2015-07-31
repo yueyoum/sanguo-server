@@ -24,7 +24,7 @@ def send_yueka_reward(char_id, sycee, remained_days):
 
     Mail(char_id).add(MAIL_YUEKA_TITLE, content, attachment=json.dumps(standard_drop), only_one=True)
 
-@uwsgidecorators.cron(0, 0, -1, -1, -1, target="spooler")
+@uwsgidecorators.cron(0, 0, -1, -1, -1, target="mule")
 def set_yueka(signum):
     records = MongoPurchaseRecord.objects.filter(yueka_remained_days__gt=0)
     logger = Logger('set_yueka.log')

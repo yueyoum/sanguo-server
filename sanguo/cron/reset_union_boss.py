@@ -8,7 +8,7 @@ from cron.log import Logger
 
 from core.mongoscheme import MongoUnionBoss
 
-@uwsgidecorators.cron(0, 0, -1, -1, -1, target="worker")
+@uwsgidecorators.cron(0, 0, -1, -1, -1, target="mule")
 def reset(signum):
     logger = Logger("reset_union_boss.log")
     MongoUnionBoss.drop_collection()

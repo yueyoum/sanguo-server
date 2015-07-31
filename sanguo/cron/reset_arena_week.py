@@ -54,7 +54,7 @@ def get_rank_data(lowest_rank):
 
 
 
-@uwsgidecorators.cron(30, 21, -1, -1, 0, target="spooler")
+@uwsgidecorators.cron(30, 21, -1, -1, 0, target="mule")
 def reset(signum):
     logger = Logger("reset_arena_week.log")
 

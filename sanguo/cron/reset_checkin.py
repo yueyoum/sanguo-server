@@ -10,7 +10,7 @@ from core.daily import CheckIn
 
 # 每天0点清理签到
 
-@uwsgidecorators.cron(0, 0, -1, -1, -1, target="spooler")
+@uwsgidecorators.cron(0, 0, -1, -1, -1, target="mule")
 def reset(signum):
     CheckIn.cron_job()
 
