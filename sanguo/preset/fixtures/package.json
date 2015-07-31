@@ -2263,7 +2263,7 @@
         "stuffs": [], 
         "official_exp": 0
     }, 
-    "5011": {
+    "3096": {
         "gems": [], 
         "horses": [], 
         "sycee": 0, 
@@ -2271,28 +2271,13 @@
         "gold": 0, 
         "souls": [
             {
-                "amount": 2, 
-                "id": 5, 
-                "prob": 100000
-            }, 
-            {
-                "amount": 3, 
-                "id": 5, 
-                "prob": 100000
-            }, 
-            {
-                "amount": 4, 
-                "id": 5, 
-                "prob": 100000
-            }, 
-            {
-                "amount": 5, 
-                "id": 5, 
+                "amount": 1, 
+                "id": 96, 
                 "prob": 100000
             }
         ], 
         "equipments": [], 
-        "mode": 2, 
+        "mode": 1, 
         "exp": 0, 
         "stuffs": [], 
         "official_exp": 0
@@ -2593,8 +2578,14 @@
         ], 
         "official_exp": 0
     }, 
-    "205": {
-        "gems": [], 
+    "915": {
+        "gems": [
+            {
+                "amount": 1, 
+                "id": 15, 
+                "prob": 100000
+            }
+        ], 
         "horses": [], 
         "sycee": 0, 
         "heros": [], 
@@ -2603,43 +2594,7 @@
         "equipments": [], 
         "mode": 1, 
         "exp": 0, 
-        "stuffs": [
-            {
-                "amount": 1, 
-                "id": 10, 
-                "prob": 60000
-            }, 
-            {
-                "amount": 1, 
-                "id": 10, 
-                "prob": 60000
-            }, 
-            {
-                "amount": 2, 
-                "id": 9, 
-                "prob": 100000
-            }, 
-            {
-                "amount": 1, 
-                "id": 9, 
-                "prob": 70000
-            }, 
-            {
-                "amount": 1, 
-                "id": 9, 
-                "prob": 70000
-            }, 
-            {
-                "amount": 1, 
-                "id": 9, 
-                "prob": 70000
-            }, 
-            {
-                "amount": 1, 
-                "id": 9, 
-                "prob": 70000
-            }
-        ], 
+        "stuffs": [], 
         "official_exp": 0
     }, 
     "206": {
@@ -2781,25 +2736,6 @@
                 "prob": 15000
             }
         ], 
-        "official_exp": 0
-    }, 
-    "50066": {
-        "gems": [], 
-        "horses": [], 
-        "sycee": 0, 
-        "heros": [], 
-        "gold": 0, 
-        "souls": [
-            {
-                "amount": 10, 
-                "id": 19, 
-                "prob": 100000
-            }
-        ], 
-        "equipments": [], 
-        "mode": 1, 
-        "exp": 0, 
-        "stuffs": [], 
         "official_exp": 0
     }, 
     "2": {
@@ -6256,6 +6192,25 @@
         ], 
         "official_exp": 0
     }, 
+    "914": {
+        "gems": [
+            {
+                "amount": 1, 
+                "id": 14, 
+                "prob": 100000
+            }
+        ], 
+        "horses": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
     "50001": {
         "gems": [
             {
@@ -6685,30 +6640,11 @@
     "50021": {
         "gems": [], 
         "horses": [], 
-        "sycee": 0, 
+        "sycee": 1000, 
         "heros": [], 
         "gold": 0, 
         "souls": [], 
-        "equipments": [
-            {
-                "prob": 100000, 
-                "amount": 1, 
-                "id": 5, 
-                "level": 1
-            }, 
-            {
-                "prob": 100000, 
-                "amount": 1, 
-                "id": 19, 
-                "level": 1
-            }, 
-            {
-                "prob": 100000, 
-                "amount": 1, 
-                "id": 47, 
-                "level": 1
-            }
-        ], 
+        "equipments": [], 
         "mode": 1, 
         "exp": 0, 
         "stuffs": [], 
@@ -8084,19 +8020,19 @@
         "stuffs": [], 
         "official_exp": 0
     }, 
-    "915": {
-        "gems": [
-            {
-                "amount": 1, 
-                "id": 15, 
-                "prob": 100000
-            }
-        ], 
+    "50067": {
+        "gems": [], 
         "horses": [], 
         "sycee": 0, 
         "heros": [], 
         "gold": 0, 
-        "souls": [], 
+        "souls": [
+            {
+                "amount": 1, 
+                "id": 22, 
+                "prob": 100000
+            }
+        ], 
         "equipments": [], 
         "mode": 1, 
         "exp": 0, 
@@ -8238,57 +8174,57 @@
         "stuffs": [], 
         "official_exp": 0
     }, 
-    "921": {
-        "gems": [
-            {
-                "amount": 1, 
-                "id": 21, 
-                "prob": 100000
-            }
-        ], 
+    "50073": {
+        "gems": [], 
         "horses": [], 
         "sycee": 0, 
         "heros": [], 
         "gold": 0, 
-        "souls": [], 
+        "souls": [
+            {
+                "amount": 1, 
+                "id": 39, 
+                "prob": 100000
+            }
+        ], 
         "equipments": [], 
         "mode": 1, 
         "exp": 0, 
         "stuffs": [], 
         "official_exp": 0
     }, 
-    "922": {
-        "gems": [
-            {
-                "amount": 1, 
-                "id": 22, 
-                "prob": 100000
-            }
-        ], 
+    "50074": {
+        "gems": [], 
         "horses": [], 
         "sycee": 0, 
         "heros": [], 
         "gold": 0, 
-        "souls": [], 
+        "souls": [
+            {
+                "amount": 1, 
+                "id": 6, 
+                "prob": 100000
+            }
+        ], 
         "equipments": [], 
         "mode": 1, 
         "exp": 0, 
         "stuffs": [], 
         "official_exp": 0
     }, 
-    "923": {
-        "gems": [
-            {
-                "amount": 1, 
-                "id": 23, 
-                "prob": 100000
-            }
-        ], 
+    "50075": {
+        "gems": [], 
         "horses": [], 
         "sycee": 0, 
         "heros": [], 
         "gold": 0, 
-        "souls": [], 
+        "souls": [
+            {
+                "amount": 3, 
+                "id": 6, 
+                "prob": 100000
+            }
+        ], 
         "equipments": [], 
         "mode": 1, 
         "exp": 0, 
@@ -10398,7 +10334,7 @@
         "stuffs": [], 
         "official_exp": 0
     }, 
-    "3096": {
+    "50200": {
         "gems": [], 
         "horses": [], 
         "sycee": 0, 
@@ -10406,8 +10342,8 @@
         "gold": 0, 
         "souls": [
             {
-                "amount": 1, 
-                "id": 96, 
+                "amount": 2, 
+                "id": 11, 
                 "prob": 100000
             }
         ], 
@@ -10493,6 +10429,82 @@
         "stuffs": [], 
         "official_exp": 0
     }, 
+    "50211": {
+        "gems": [], 
+        "horses": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [
+            {
+                "amount": 6, 
+                "id": 11, 
+                "prob": 100000
+            }
+        ], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "50212": {
+        "gems": [], 
+        "horses": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [
+            {
+                "amount": 10, 
+                "id": 11, 
+                "prob": 100000
+            }
+        ], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "50213": {
+        "gems": [], 
+        "horses": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [
+            {
+                "amount": 20, 
+                "id": 11, 
+                "prob": 100000
+            }
+        ], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "50214": {
+        "gems": [], 
+        "horses": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [
+            {
+                "amount": 45, 
+                "id": 11, 
+                "prob": 100000
+            }
+        ], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
     "40001": {
         "gems": [], 
         "horses": [], 
@@ -10560,6 +10572,55 @@
                 "amount": 2, 
                 "id": 31, 
                 "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
+    "205": {
+        "gems": [], 
+        "horses": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 10, 
+                "prob": 60000
+            }, 
+            {
+                "amount": 1, 
+                "id": 10, 
+                "prob": 60000
+            }, 
+            {
+                "amount": 2, 
+                "id": 9, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 1, 
+                "id": 9, 
+                "prob": 70000
+            }, 
+            {
+                "amount": 1, 
+                "id": 9, 
+                "prob": 70000
+            }, 
+            {
+                "amount": 1, 
+                "id": 9, 
+                "prob": 70000
+            }, 
+            {
+                "amount": 1, 
+                "id": 9, 
+                "prob": 70000
             }
         ], 
         "official_exp": 0
@@ -11136,26 +11197,7 @@
         ], 
         "official_exp": 0
     }, 
-    "914": {
-        "gems": [
-            {
-                "amount": 1, 
-                "id": 14, 
-                "prob": 100000
-            }
-        ], 
-        "horses": [], 
-        "sycee": 0, 
-        "heros": [], 
-        "gold": 0, 
-        "souls": [], 
-        "equipments": [], 
-        "mode": 1, 
-        "exp": 0, 
-        "stuffs": [], 
-        "official_exp": 0
-    }, 
-    "50067": {
+    "50066": {
         "gems": [], 
         "horses": [], 
         "sycee": 0, 
@@ -11163,13 +11205,47 @@
         "gold": 0, 
         "souls": [
             {
-                "amount": 1, 
-                "id": 22, 
+                "amount": 10, 
+                "id": 19, 
                 "prob": 100000
             }
         ], 
         "equipments": [], 
         "mode": 1, 
+        "exp": 0, 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "5011": {
+        "gems": [], 
+        "horses": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [
+            {
+                "amount": 2, 
+                "id": 5, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 3, 
+                "id": 5, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 4, 
+                "id": 5, 
+                "prob": 100000
+            }, 
+            {
+                "amount": 5, 
+                "id": 5, 
+                "prob": 100000
+            }
+        ], 
+        "equipments": [], 
+        "mode": 2, 
         "exp": 0, 
         "stuffs": [], 
         "official_exp": 0
@@ -11227,57 +11303,57 @@
         "stuffs": [], 
         "official_exp": 0
     }, 
-    "50073": {
-        "gems": [], 
+    "921": {
+        "gems": [
+            {
+                "amount": 1, 
+                "id": 21, 
+                "prob": 100000
+            }
+        ], 
         "horses": [], 
         "sycee": 0, 
         "heros": [], 
         "gold": 0, 
-        "souls": [
-            {
-                "amount": 1, 
-                "id": 39, 
-                "prob": 100000
-            }
-        ], 
+        "souls": [], 
         "equipments": [], 
         "mode": 1, 
         "exp": 0, 
         "stuffs": [], 
         "official_exp": 0
     }, 
-    "50074": {
-        "gems": [], 
+    "922": {
+        "gems": [
+            {
+                "amount": 1, 
+                "id": 22, 
+                "prob": 100000
+            }
+        ], 
         "horses": [], 
         "sycee": 0, 
         "heros": [], 
         "gold": 0, 
-        "souls": [
-            {
-                "amount": 1, 
-                "id": 6, 
-                "prob": 100000
-            }
-        ], 
+        "souls": [], 
         "equipments": [], 
         "mode": 1, 
         "exp": 0, 
         "stuffs": [], 
         "official_exp": 0
     }, 
-    "50075": {
-        "gems": [], 
+    "923": {
+        "gems": [
+            {
+                "amount": 1, 
+                "id": 23, 
+                "prob": 100000
+            }
+        ], 
         "horses": [], 
         "sycee": 0, 
         "heros": [], 
         "gold": 0, 
-        "souls": [
-            {
-                "amount": 3, 
-                "id": 6, 
-                "prob": 100000
-            }
-        ], 
+        "souls": [], 
         "equipments": [], 
         "mode": 1, 
         "exp": 0, 
@@ -11859,6 +11935,19 @@
                 "prob": 100000
             }
         ], 
+        "official_exp": 0
+    }, 
+    "50121": {
+        "gems": [], 
+        "horses": [], 
+        "sycee": 1500, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [], 
         "official_exp": 0
     }, 
     "55000": {
