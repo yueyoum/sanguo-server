@@ -1,22 +1,5 @@
 [
 {
-    "pk": 1, 
-    "model": "purchase.purchase", 
-    "fields": {
-        "sycee": 300, 
-        "name": "\u6708\u5361", 
-        "first_addition_sycee": 0, 
-        "addition_sycee": 0, 
-        "des": "\u8d60\u9001300\u5143\u5b9d\u6bcf\u5929\u989d\u5916\u9886\u53d6100\u5143\u5b9d", 
-        "tp": 2, 
-        "rmb": 28, 
-        "rate": 10, 
-        "first_des": "\u8d60\u9001300\u5143\u5b9d\u6bcf\u5929\u989d\u5916\u9886\u53d6100\u5143\u5b9d", 
-        "ios_id": "com.mztimes.sanguo.international.cmonthgold", 
-        "icon": ""
-    }
-},
-{
     "pk": 2, 
     "model": "purchase.purchase", 
     "fields": {
