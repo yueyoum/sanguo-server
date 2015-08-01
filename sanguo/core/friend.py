@@ -580,11 +580,20 @@ class Friend(object):
             {"plunder_gots.0": {"$exists": True}}
         ]}
 
-        for f in MongoFriend.objects.filter(__raw__=condition):
-            Friend(f.id).daily_plunder_times_reset()
+        friends = MongoFriend._get_collection().find(condition, {'_id': 1})
 
-    def daily_plunder_times_reset(self):
-        self.mf.plunder_gives = []
-        self.mf.plunder_gots = []
-        self.mf.save()
-        self.send_friends_notify()
+        updater = {
+            'plunder_gives': [],
+            'plunder_gots': []
+        }
+
+        MongoFriend._get_collection().update({}, {'$set': updater}, multi=True)
+
+        for f in friends:
+            Friend(f['_id']).send_friends_notify()
+
+    # def daily_plunder_times_reset(self):
+    #     self.mf.plunder_gives = []
+    #     self.mf.plunder_gots = []
+    #     # self.mf.save()
+    #     self.send_friends_notify()
