@@ -20,8 +20,8 @@ def clean_expired_activity(signum):
     logger = Logger("clean_expired_activity.log")
     logger.write("Start")
 
-    try:
-        for mongo_ac in MongoActivityStatic.objects.all():
+    for mongo_ac in MongoActivityStatic.objects.all():
+        try:
             for aid in ACTIVITY_STATIC.keys():
                 entry = ActivityEntry(mongo_ac.id, aid)
                 if entry.activity_data.category == 1:
@@ -40,10 +40,9 @@ def clean_expired_activity(signum):
                         mongo_ac.send_times.pop(str(cid))
 
             mongo_ac.save()
-    except:
-        logger.error(traceback.format_exc())
-    else:
-        logger.write("Done")
-    finally:
-        logger.close()
+        except:
+            logger.error(traceback.format_exc())
+
+    logger.write("Done")
+    logger.close()
 
