@@ -3,6 +3,8 @@
 __author__ = 'Wang Chao'
 __date__ = '2/27/14'
 
+import traceback
+
 import uwsgidecorators
 
 from cron.log import Logger
@@ -15,6 +17,13 @@ from core.plunder import PlunderLeaderboardWeekly
 @uwsgidecorators.cron(0, 0, -1, -1, 1, target="mule")
 def clean(signum):
     logger = Logger("clean_plunder_board_weekly.log")
-    PlunderLeaderboardWeekly.clean()
-    logger.write("Clean Complete.")
-    logger.close()
+    logger.write("Start")
+
+    try:
+        PlunderLeaderboardWeekly.clean()
+    except:
+        logger.error(traceback.format_exc())
+    else:
+        logger.write("Done")
+    finally:
+        logger.close()

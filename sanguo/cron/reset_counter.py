@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import uwsgidecorators
+import traceback
 
 from cron.log import Logger
 
@@ -10,7 +11,13 @@ from core.mongoscheme import MongoCounter
 
 @uwsgidecorators.cron(0, 0, -1, -1 ,-1, target="mule")
 def reset(signum):
-    MongoCounter.objects.delete()
     logger = Logger('reset_counter.log')
-    logger.write("MongoCounter Clean Done")
-    logger.close()
+    logger.write("Start")
+    try:
+        MongoCounter.objects.delete()
+    except:
+        logger.error(traceback.format_exc())
+    else:
+        logger.write("MongoCounter Clean Done")
+    finally:
+        logger.close()

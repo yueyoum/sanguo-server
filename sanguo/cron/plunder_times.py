@@ -3,6 +3,8 @@
 __author__ = 'Wang Chao'
 __date__ = '2/19/14'
 
+import traceback
+
 import uwsgidecorators
 
 from cron.log import Logger
@@ -14,22 +16,35 @@ from core.plunder import Plunder
 
 def add_times(signum):
     logger = Logger('add_plunder_times.log')
-    logger.write("start")
+    logger.write("Start")
+
+
     chars = MongoCharacter.objects.all()
     for char in chars:
         plunder = Plunder(char.id)
         try:
             plunder.change_current_plunder_times(change_value=1, allow_overflow=False)
-        except Exception as e:
-            logger.write("==== ERROR ====")
-            logger.write(e)
+        except:
+            logger.error(traceback.format_exc())
 
     logger.write("add done")
     logger.close()
 
+
+
 @uwsgidecorators.cron(0, 0, -1, -1, -1, target="mule")
 def reset_times(signum):
-    Plunder.cron_job()
+    logger = Logger("plunder_reset_times.log")
+    logger.write("Start")
+
+    try:
+        Plunder.cron_job()
+    except:
+        logger.error(traceback.format_exc())
+    else:
+        logger.write("done")
+    finally:
+        logger.close()
 
 
 # 00:00 / 00:30

@@ -3,6 +3,8 @@
 __author__ = 'Wang Chao'
 __date__ = '2/20/14'
 
+import traceback
+
 import uwsgidecorators
 
 from cron.log import Logger
@@ -26,9 +28,10 @@ def send_yueka_reward(char_id, sycee, remained_days):
 
 @uwsgidecorators.cron(0, 0, -1, -1, -1, target="mule")
 def set_yueka(signum):
-    records = MongoPurchaseRecord.objects.filter(yueka_remained_days__gt=0)
     logger = Logger('set_yueka.log')
-    logger.write("start")
+    logger.write("Start")
+
+    records = MongoPurchaseRecord.objects.filter(yueka_remained_days__gt=0)
 
     for record in records:
         if record.yueka_remained_days > 0:
@@ -39,7 +42,7 @@ def set_yueka(signum):
             try:
                 pa.set_yueka_remained_days(-1)
             except YuekaLockTimeOut:
-                logger.write(traceback.format_exc())
+                logger.error(traceback.format_exc())
 
-    logger.write("finish")
+    logger.write("Done")
     logger.close()

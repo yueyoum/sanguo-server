@@ -123,30 +123,33 @@ class Friend(object):
         """
         res = []
         for i in self.mf.friends[:]:
-            try:
-                MongoCharacter.objects.get(id=i)
-            except DoesNotExist:
-                self.mf.friends.remove(i)
-            else:
-                res.append((i, FRIEND_OK))
+            # try:
+            #     MongoCharacter.objects.get(id=i)
+            # except DoesNotExist:
+            #     self.mf.friends.remove(i)
+            # else:
+            #     res.append((i, FRIEND_OK))
+            res.append((i, FRIEND_OK))
 
         for i in self.mf.pending[:]:
-            try:
-                MongoCharacter.objects.get(id=i)
-            except DoesNotExist:
-                self.mf.pending.remove(i)
-            else:
-                res.append((i, FRIEND_ACK))
+            # try:
+            #     MongoCharacter.objects.get(id=i)
+            # except DoesNotExist:
+            #     self.mf.pending.remove(i)
+            # else:
+            #     res.append((i, FRIEND_ACK))
+            res.append((i, FRIEND_ACK))
 
         for i in self.mf.accepting[:]:
-            try:
-                MongoCharacter.objects.get(id=i)
-            except DoesNotExist:
-                self.mf.accepting.remove(i)
-            else:
-                res.append((i, FRIEND_APPLY))
+            # try:
+            #     MongoCharacter.objects.get(id=i)
+            # except DoesNotExist:
+            #     self.mf.accepting.remove(i)
+            # else:
+            #     res.append((i, FRIEND_APPLY))
+            res.append((i, FRIEND_APPLY))
 
-        self.mf.save()
+        # self.mf.save()
         return res
 
     def check_max_amount(self, func_name, raise_exception=True):

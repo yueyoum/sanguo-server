@@ -4,6 +4,7 @@ __author__ = 'Wang Chao'
 __date__ = '2/19/14'
 
 import json
+import traceback
 
 import uwsgidecorators
 
@@ -36,15 +37,19 @@ def main(signum):
     amount = len(arena_scores)
     logger.write("Reset Arena Day: Start. chars amount: {0}".format(amount))
 
-    for char_id, score in arena_scores:
-        attachment = _get_reward_by_score(score)
-        if not attachment:
-            continue
+    try:
+        for char_id, score in arena_scores:
+            attachment = _get_reward_by_score(score)
+            if not attachment:
+                continue
 
-        char_id = int(char_id)
-        mail = Mail(char_id)
-        mail.add(MAIL_ARENA_DAY_REWARD_TITLE, MAIL_ARENA_DAY_REWARD_CONTENT, attachment=attachment)
-
-    logger.write("Reset Arena Day: Complete")
-    logger.close()
+            char_id = int(char_id)
+            mail = Mail(char_id)
+            mail.add(MAIL_ARENA_DAY_REWARD_TITLE, MAIL_ARENA_DAY_REWARD_CONTENT, attachment=attachment)
+    except:
+        logger.error(traceback.format_exc())
+    else:
+        logger.write("Reset Arena Day: Complete")
+    finally:
+        logger.close()
 

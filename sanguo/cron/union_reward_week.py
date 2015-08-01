@@ -4,6 +4,7 @@ __author__ = 'Wang Chao'
 __date__ = '2/19/14'
 
 import json
+import traceback
 
 import uwsgidecorators
 
@@ -53,16 +54,20 @@ def _send_reward(rank, mongo_union):
 @uwsgidecorators.cron(0, 0, -1, -1, 1, target="mule")
 def reset(signum):
     logger = Logger("union_reward_week.log")
+    logger.write("Start")
 
-    unions = MongoUnion.objects.all().order_by('-score')
-    rank = 1
-    for u in unions:
-        if rank > LOWEST_UNION_BATTLE_RANK:
-            break
+    try:
+        unions = MongoUnion.objects.all().order_by('-score')
+        rank = 1
+        for u in unions:
+            if rank > LOWEST_UNION_BATTLE_RANK:
+                break
 
-        _send_reward(rank, u)
-        rank+=1
-
-
-    logger.write("Union Reward Week: Complete")
-    logger.close()
+            _send_reward(rank, u)
+            rank+=1
+    except:
+        logger.error(traceback.format_exc())
+    else:
+        logger.write("Done")
+    finally:
+        logger.close()

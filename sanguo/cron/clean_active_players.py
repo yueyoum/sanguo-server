@@ -3,6 +3,8 @@
 __author__ = 'Wang Chao'
 __date__ = '2/27/14'
 
+import traceback
+
 import uwsgidecorators
 
 from cron.log import Logger
@@ -14,7 +16,11 @@ def clean(signum):
     logger = Logger("clean_active_players.log")
     logger.write("Start.")
 
-    result = ActivePlayers().clean()
-
-    logger.write("Complete. {0}".format(result))
-    logger.close()
+    try:
+        result = ActivePlayers().clean()
+    except:
+        logger.error(traceback.format_exc())
+    else:
+        logger.write("Complete. {0}".format(result))
+    finally:
+        logger.close()

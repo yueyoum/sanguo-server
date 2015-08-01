@@ -4,6 +4,7 @@ __author__ = 'Wang Chao'
 __date__ = '2/19/14'
 
 import json
+import traceback
 
 import uwsgidecorators
 
@@ -57,37 +58,43 @@ def get_rank_data(lowest_rank):
 @uwsgidecorators.cron(30, 21, -1, -1, 0, target="mule")
 def reset(signum):
     logger = Logger("reset_arena_week.log")
+    logger.write("Start")
 
-    # 每周奖励
-    rank_data = get_rank_data(ARENA_WEEK_REWARD_LOWEST_RANK)
-    rank_info_log = []
+    try:
+        # 每周奖励
+        rank_data = get_rank_data(ARENA_WEEK_REWARD_LOWEST_RANK)
+        rank_info_log = []
 
-    for index, data in enumerate(rank_data):
-        rank = index + 1
-        char_id = data[0]
-        score = data[1]
+        for index, data in enumerate(rank_data):
+            rank = index + 1
+            char_id = data[0]
+            score = data[1]
 
-        _info_text = "Rank: {0}, Char: {1}, Score: {2}".format(rank, char_id, score)
+            _info_text = "Rank: {0}, Char: {1}, Score: {2}".format(rank, char_id, score)
 
-        if score < ARENA_RANK_LINE:
-            continue
+            if score < ARENA_RANK_LINE:
+                continue
 
-        reward = _get_reward_by_rank(rank)
-        if not reward:
-            continue
+            reward = _get_reward_by_rank(rank)
+            if not reward:
+                continue
 
-        mail = Mail(char_id)
-        mail.add(
-            MAIL_ARENA_WEEK_REWARD_TITLE,
-            MAIL_ARENA_WEEK_REWARD_CONTENT,
-            attachment=json.dumps(reward))
+            mail = Mail(char_id)
+            mail.add(
+                MAIL_ARENA_WEEK_REWARD_TITLE,
+                MAIL_ARENA_WEEK_REWARD_CONTENT,
+                attachment=json.dumps(reward))
 
-        _info_text = "{0}. Send Mail: True".format(_info_text)
-        rank_info_log.append(_info_text)
+            _info_text = "{0}. Send Mail: True".format(_info_text)
+            rank_info_log.append(_info_text)
+    except:
+        logger.error(traceback.format_exc())
+    else:
+        logger.write("\n".join(rank_info_log))
+        logger.write("Reset Arena Week: Complete")
+    finally:
+        logger.close()
 
-    logger.write("\n".join(rank_info_log))
-    logger.write("Reset Arena Week: Complete")
-    logger.close()
 
     # 成就
     rank_data = get_rank_data(None)

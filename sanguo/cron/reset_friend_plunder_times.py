@@ -3,6 +3,8 @@
 __author__ = 'Wang Chao'
 __date__ = '1/6/14'
 
+import traceback
+
 import uwsgidecorators
 
 from cron.log import Logger
@@ -13,8 +15,14 @@ from core.friend import Friend
 @uwsgidecorators.cron(0, 0, -1, -1, -1, target="mule")
 def reset(signum):
     logger = Logger('reset_friend_plunder_times.log')
+    logger.write("Start")
 
-    Friend.cron_job()
+    try:
+        Friend.cron_job()
+    except:
+        logger.error(traceback.format_exc())
+    else:
+        logger.write("Done")
+    finally:
+        logger.close()
 
-    logger.write("Friend Plunder Times Reset Done")
-    logger.close()
