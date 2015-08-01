@@ -191,9 +191,10 @@ class HeroPanel(object):
 
     @staticmethod
     def cron_job():
-        records = MongoHeroPanel.objects.filter(has_opened=True)
+        # records = MongoHeroPanel.objects.filter(has_opened=True)
+        records = MongoHeroPanel._get_collection().find({'has_opened': True}, {'_id': 1})
         for r in records:
-            HeroPanel(r.id)._run_cron_job()
+            HeroPanel(r['_id'])._run_cron_job()
 
 
     def _run_cron_job(self):

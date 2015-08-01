@@ -171,13 +171,15 @@ class UnionBattle(UnionLoadBase):
 
     @staticmethod
     def cron_job():
-        for u in MongoUnion.objects.filter(battle_times__gt=0):
-            UnionBattle(u.owner)._run_cron_job()
+        unions = MongoUnion._get_collection().find({'battle_times': {'$gt': 0}}, {'owner': 1})
+        MongoUnion._get_collection().update({}, {'$set': {'battle_times': 0}}, multi=True)
+        for u in unions:
+            UnionBattle(u['owner']).send_notify()
 
-    def _run_cron_job(self):
-        self.union.mongo_union.battle_times = 0
-        self.union.mongo_union.save()
-        self.send_notify()
+    # def _run_cron_job(self):
+    #     self.union.mongo_union.battle_times = 0
+    #     self.union.mongo_union.save()
+    #     self.send_notify()
 
 
 class UnionBattleRecord(object):

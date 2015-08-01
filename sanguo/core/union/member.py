@@ -252,11 +252,19 @@ class Member(object):
             {"boss_times": {"$gt": 0}}
         ]}
 
-        for m in MongoUnionMember.objects.filter(__raw__=condition):
-            Member(m.id)._run_cron_job()
+        updater = {
+            'checkin_times': 0,
+            'boss_times': 0
+        }
 
-    def _run_cron_job(self):
-        self.mongo_union_member.checkin_times = 0
-        self.mongo_union_member.boss_times = 0
-        self.mongo_union_member.save()
-        self.send_personal_notify()
+        members = MongoUnionMember._get_collection().find(condition, {'_id': 1})
+        MongoUnionMember._get_collection().update({}, {'$set': updater}, multi=True)
+
+        for m in members:
+            Member(m['_id']).send_personal_notify()
+
+    # def _run_cron_job(self):
+    #     self.mongo_union_member.checkin_times = 0
+    #     self.mongo_union_member.boss_times = 0
+    #     self.mongo_union_member.save()
+    #     self.send_personal_notify()
