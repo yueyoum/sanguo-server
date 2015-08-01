@@ -225,6 +225,13 @@ def upload_cfgdata_to_wp(name, version):
     sleep(1)
     ServerAiYingYong().run()
 
+
+@hosts("developer@120.27.28.159:292")
+def update_wp_server():
+    ServerAiYingYong().run()
+
+
+
 # OK TO USE
 @hosts("developer@203.88.160.14:292")
 def upload_cfgdata_to_jodo(name, version):
