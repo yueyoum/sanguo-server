@@ -596,7 +596,7 @@ class Activity17002(ActivityBase):
             return
 
         p = BasePurchaseAction(self.char_id)
-        p.send_reward_yueka(1, is_first=False, purchase_notify=False)
+        p.send_reward_yueka(purchase_notify=False)
 
         m = Mail(self.char_id)
         m.add(

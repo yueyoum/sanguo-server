@@ -6,6 +6,8 @@ __date__ = '14-6-30'
 import time
 import json
 
+from django.core.mail import mail_admins
+
 from mongoengine import DoesNotExist
 from core.server import server
 from core.resource import Resource
@@ -24,6 +26,14 @@ from preset import errormsg
 
 class YuekaLockTimeOut(Exception):
     pass
+
+class _YueKa(object):
+    def __init__(self):
+        self.reward_sycee = 300
+        self.day_sycee = 100
+        self.continue_days = 30
+
+YueKa = _YueKa()
 
 
 class BasePurchaseAction(object):
@@ -53,6 +63,13 @@ class BasePurchaseAction(object):
 
 
     def send_reward(self, goods_id):
+        if goods_id == 1:
+            # 不再有月卡
+            mail_message = "char {0} try to buy goods: {1}".format(self.char_id, goods_id)
+            mail_admins(mail_message, mail_message, fail_silently=True)
+            return
+
+
         p = PURCHASE[goods_id]
 
         first = len(self.mongo_record.times) == 0
@@ -60,10 +77,12 @@ class BasePurchaseAction(object):
         buy_times = self.buy_times_of_this_goods(goods_id)
         is_first = buy_times == 0
 
-        if p.tp_obj.continued_days > 0:
-            self.send_reward_yueka(goods_id, is_first)
-        else:
-            self.send_reward_sycee(goods_id, is_first)
+        # if p.tp_obj.continued_days > 0:
+        #     self.send_reward_yueka(goods_id, is_first)
+        # else:
+        #     self.send_reward_sycee(goods_id, is_first)
+
+        self.send_reward_sycee(goods_id, is_first)
 
         self.mongo_record.times[str(goods_id)] = buy_times + 1
         self.mongo_record.save()
@@ -91,16 +110,14 @@ class BasePurchaseAction(object):
         )
 
 
-    def send_reward_yueka(self, goods_id, is_first, **kwargs):
+    def send_reward_yueka(self, **kwargs):
         # 月卡
         # XXX NOTE
         # 系统只支持一种类型的月卡
-        self.send_reward_sycee(goods_id, is_first, **kwargs)
-
-        p = PURCHASE[goods_id]
+        self.add_to_resource(YueKa.reward_sycee, 0, **kwargs)
 
         try:
-            self.set_yueka_remained_days(p.tp_obj.continued_days)
+            self.set_yueka_remained_days(YueKa.continue_days)
         except YuekaLockTimeOut:
             raise SanguoException(
                 errormsg.PURCHASE_91_FAILURE,
@@ -109,7 +126,7 @@ class BasePurchaseAction(object):
                 "get yueka lock timeout..."
             )
 
-        self.mongo_record.yueka_sycee = p.tp_obj.day_sycee
+        self.mongo_record.yueka_sycee = YueKa.day_sycee
         self.mongo_record.save()
 
 
@@ -138,7 +155,11 @@ class BasePurchaseAction(object):
         p = PURCHASE[goods_id]
         addition = p.first_addition_sycee if is_first else p.addition_sycee
 
-        purchase_got = p.sycee
+        self.add_to_resource(p.sycee, addition, **kwargs)
+
+
+    def add_to_resource(self, sycee, addition, **kwargs):
+        purchase_got = sycee
         purchase_actual_got = purchase_got + addition
 
         data = kwargs
