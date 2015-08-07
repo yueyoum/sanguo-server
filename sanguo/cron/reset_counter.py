@@ -18,6 +18,6 @@ def reset(signum):
     except:
         logger.error(traceback.format_exc())
     else:
-        logger.write("MongoCounter Clean Done")
+        logger.write("Done")
     finally:
         logger.close()
