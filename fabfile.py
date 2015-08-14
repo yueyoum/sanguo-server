@@ -128,7 +128,7 @@ class Hub(object):
 
 class ServerAiYingYong(Server):
     PARENT_PATH = "/opt/sanguo"
-    DIRS = ["server%d" % i for i in range(1, 7+1)]
+    DIRS = ["server%d" % i for i in range(1, 8+1)]
 
 
 class ServerJodo(Server):
