@@ -10,7 +10,7 @@ from cron.log import Logger
 
 from core.mongoscheme import MongoUnionBoss
 
-@uwsgidecorators.cron(0, 0, -1, -1, -1, target="mule")
+@uwsgidecorators.cron(0, 0, -1, -1, -1, target="spooler")
 def reset(signum):
     logger = Logger("reset_union_boss.log")
     logger.write("Start")

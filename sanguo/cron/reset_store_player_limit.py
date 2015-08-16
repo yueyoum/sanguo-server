@@ -7,7 +7,7 @@ from cron.log import Logger
 
 from core.mongoscheme import MongoStoreCharLimit
 
-@uwsgidecorators.cron(0, 0, -1, -1, -1, target="mule")
+@uwsgidecorators.cron(0, 0, -1, -1, -1, target="spooler")
 def reset(signum):
     logger = Logger('reset_store_player_limit.log')
     logger.write("Start")

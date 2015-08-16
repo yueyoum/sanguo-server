@@ -13,7 +13,7 @@ from core.union.battle import UnionBattle
 from core.union.member import Member
 
 # 每天0点清理
-@uwsgidecorators.cron(0, 0, -1, -1, -1, target="mule")
+@uwsgidecorators.cron(0, 0, -1, -1, -1, target="spooler")
 def clean(signum):
     logger = Logger("clean_union.log")
     logger.write("Start")

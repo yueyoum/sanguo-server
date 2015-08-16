@@ -6,10 +6,10 @@ env = DJANGO_SETTINGS_MODULE=sanguo.settings
 module = sanguo.wsgi:application
 socket = 127.0.0.1:7999
 listen = 2048
-max-requests = 50000
+max-requests = 10000
 reload-on-rss = 256
 master = true
-processes = 2
+processes = 4
 threads = 1
 enable-threads = true
 thunder-lock = true
@@ -17,4 +17,6 @@ buffer-size = 32768
 daemonize = run/uwsgi.log
 pidfile = run/uwsgi.pid
 
-mules = 4
+spooler = .
+spooler-processes = 4
+spooler-max-tasks = 50

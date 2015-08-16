@@ -10,7 +10,7 @@ from cron.log import Logger
 from core.attachment import Attachment
 
 
-@uwsgidecorators.cron(0, 0, -1, -1, -1, target="mule")
+@uwsgidecorators.cron(0, 0, -1, -1, -1, target="spooler")
 def reset(signum):
     logger = Logger('reset_prize.log')
     logger.write("Start")

@@ -26,7 +26,7 @@ def send_yueka_reward(char_id, sycee, remained_days):
 
     Mail(char_id).add(MAIL_YUEKA_TITLE, content, attachment=json.dumps(standard_drop), only_one=True)
 
-@uwsgidecorators.cron(0, 0, -1, -1, -1, target="mule")
+@uwsgidecorators.cron(0, 0, -1, -1, -1, target="spooler")
 def set_yueka(signum):
     logger = Logger('set_yueka.log')
     logger.write("Start")
