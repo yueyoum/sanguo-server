@@ -16,6 +16,11 @@ def send_mail(request):
     data = request.body
     data = json.loads(data)
 
+    mode = data.get('mode', None)
+    if mode == 'test':
+        print "GOT TEST MAIL"
+        return {'ret': 0}
+
     char_ids = data.get('char_id', None)
     if char_ids:
         cids = char_ids
