@@ -34,7 +34,11 @@ def send_mail(request):
         )
 
     mail.send_mail(
-        mail_name, mail_content, mail_send_at, attachment, char_ids=char_ids
+        name=mail_name,
+        content=mail_content,
+        create_at=mail_send_at,
+        attachment=attachment,
+        char_ids=json.dumps(char_ids)
     )
 
     return {'ret': 0}
