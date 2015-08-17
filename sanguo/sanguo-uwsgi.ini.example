@@ -6,8 +6,8 @@ env = DJANGO_SETTINGS_MODULE=sanguo.settings
 module = sanguo.wsgi:application
 socket = 127.0.0.1:7999
 listen = 2048
-max-requests = 10000
-reload-on-rss = 256
+max-requests = 20000
+reload-on-rss = 128
 master = true
 processes = 4
 threads = 1
@@ -19,4 +19,4 @@ pidfile = run/uwsgi.pid
 
 spooler = .
 spooler-processes = 4
-spooler-max-tasks = 50
+spooler-max-tasks = 5
