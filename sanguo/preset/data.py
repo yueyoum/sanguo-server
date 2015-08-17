@@ -326,6 +326,9 @@ for v in PURCHASE.values():
 
 
 # ACTIVITY
+for v in ACTIVITY_STATIC_CONDITIONS.values():
+    v.activity_id = None
+
 for v in ACTIVITY_STATIC.values():
     if v.conditions:
         condition_ids = [int(i) for i in v.conditions.split(',')]
