@@ -14,11 +14,13 @@ def send_mail(args):
     from core.mongoscheme import MongoCharacter
     from core.mail import Mail
 
-    name = args['name']
-    content = args['content']
-    create_at = args['create_at']
-    attachment = args['attachment']
-    char_ids = json.loads(args['char_ids'])
+    data = json.loads(args['data'])
+
+    name = data['name']
+    content = data['content']
+    create_at = data['create_at']
+    attachment = data['attachment']
+    char_ids = data['char_ids']
 
     if not char_ids:
         char_ids = [c.id for c in MongoCharacter.objects.all()]

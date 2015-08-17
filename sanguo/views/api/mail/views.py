@@ -33,12 +33,13 @@ def send_mail(request):
             get_drop_from_raw_package(data['mail']['attachment'])
         )
 
-    mail.send_mail(
-        name=mail_name,
-        content=mail_content,
-        create_at=mail_send_at,
-        attachment=attachment,
-        char_ids=json.dumps(char_ids)
-    )
+    arg = {
+        'name': mail_name,
+        'content': mail_content,
+        'create_at': mail_send_at,
+        'attachment': attachment,
+        'char_ids': char_ids
+    }
 
+    mail.send_mail(data=json.dumps(arg))
     return {'ret': 0}
