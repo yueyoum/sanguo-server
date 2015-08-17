@@ -20,3 +20,4 @@ pidfile = run/uwsgi.pid
 spooler = .
 spooler-processes = 4
 spooler-max-tasks = 5
+import = tasks
