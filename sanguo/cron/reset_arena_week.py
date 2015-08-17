@@ -16,7 +16,7 @@ from core.mail import Mail
 from core.achievement import Achievement
 from core.attachment import make_standard_drop_from_template
 from core.activity import ActivityStatic
-from preset.data import ARENA_WEEK_REWARD, ACTIVITY_STATIC, ACTIVITY_STATIC_CONDITIONS
+from preset.data import ARENA_WEEK_REWARD, ACTIVITY_STATIC
 from preset.settings import (
     MAIL_ARENA_WEEK_REWARD_CONTENT,
     MAIL_ARENA_WEEK_REWARD_TITLE,
@@ -58,12 +58,12 @@ def get_rank_data(lowest_rank):
 @uwsgidecorators.cron(30, 21, -1, -1, 0, target="spooler")
 def reset(signum):
     logger = Logger("reset_arena_week.log")
-    logger.write("Start")
+    logger.write("Start Arena Week")
 
     try:
         # 每周奖励
         rank_data = get_rank_data(ARENA_WEEK_REWARD_LOWEST_RANK)
-        rank_info_log = []
+        rank_info_log = ["\n",]
 
         for index, data in enumerate(rank_data):
             rank = index + 1
@@ -91,29 +91,49 @@ def reset(signum):
         logger.error(traceback.format_exc())
     else:
         logger.write("\n".join(rank_info_log))
-        logger.write("Reset Arena Week: Complete")
+        logger.write("Done  Arena Week")
     finally:
         logger.close()
 
 
-    # 成就
-    rank_data = get_rank_data(None)
-    for index, data in enumerate(rank_data):
-        rank = index + 1
-        char_id = data[0]
+    logger = Logger("reset_arena_week.log")
+    logger.write("Start Arena Achievement")
 
-        achievement = Achievement(char_id)
-        achievement.trig(10, rank)
+    try:
+        # 成就
+        rank_data = get_rank_data(None)
+        for index, data in enumerate(rank_data):
+            rank = index + 1
+            char_id = data[0]
+
+            achievement = Achievement(char_id)
+            achievement.trig(10, rank)
+    except:
+        logger.error(traceback.format_exc())
+    else:
+        logger.write("Done  Arena Achievement")
+    finally:
+        logger.close()
 
 
-    # 开服比武奖励
-    _activity_anera_values = []
-    for _c in ACTIVITY_STATIC[4001].condition_objs:
-        _activity_anera_values.append(_c.condition_value)
+    logger = Logger("reset_arena_week.log")
+    logger.write("Start Arena Activity 4001")
 
-    LOWEST_RANK = max(_activity_anera_values)
-    rank_data = get_rank_data(LOWEST_RANK)
-    for index, data in enumerate(rank_data):
-        char_id = data[0]
+    try:
+        # 开服比武奖励
+        _activity_anera_values = []
+        for _c in ACTIVITY_STATIC[4001].condition_objs:
+            _activity_anera_values.append(_c.condition_value)
 
-        ActivityStatic(char_id).trig(4001)
+        LOWEST_RANK = max(_activity_anera_values)
+        rank_data = get_rank_data(LOWEST_RANK)
+        for index, data in enumerate(rank_data):
+            char_id = data[0]
+
+            ActivityStatic(char_id).trig(4001)
+    except:
+        logger.error(traceback.format_exc())
+    else:
+        logger.write("Done  Arena Activity 4001")
+    finally:
+        logger.close()
