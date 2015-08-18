@@ -2762,6 +2762,25 @@
         ], 
         "official_exp": 0
     }, 
+    "52114": {
+        "gems": [], 
+        "horses": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [
+            {
+                "amount": 1, 
+                "id": 35, 
+                "prob": 100000
+            }
+        ], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
     "16": {
         "gems": [], 
         "horses": [], 

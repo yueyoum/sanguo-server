@@ -53,7 +53,7 @@
     "fields": {
         "target": 3, 
         "effect": 2, 
-        "value": 160, 
+        "value": 190, 
         "skill": 22, 
         "is_hit_target": true, 
         "rounds": 0

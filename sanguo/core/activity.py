@@ -28,25 +28,106 @@ from preset import errormsg
 from protomsg import ActivityNotify, ActivityUpdateNotify, ActivityEntry as ActivityEntryMsg
 
 
+class ActivityConditionRecord(object):
+    # 记录活动领取/发放了哪些奖励，避免重复领取/发放
+    # 注意：现在活动可以不间断循环开启，
+    # 也就是A活动的一个周期结束后，新一轮活动会立即开启
+    # 这样以前的 cron/clean_expired_activites就没法用了
+    # 因为这个定时任务会一直判断这个A活动是正在进行的
+    # 当新一轮活动开始后，玩家将无法领奖
+    # 已经判断到已经发过了（上一轮发的）
+    # 所以这里处理，把条件ID加上loop id作为唯一标识
+    def __init__(self, char_id, condition_id, loop_times):
+        self.char_id = char_id
+        self.condition_id = str(condition_id)
+        self.loop_times = loop_times
+
+        self.key = "{0}-{1}".format(self.condition_id, self.loop_times)
+
+        try:
+            self.mongo = MongoActivityStatic.objects.get(id=char_id)
+        except DoesNotExist:
+            self.mongo = MongoActivityStatic(id=char_id)
+            self.mongo.reward_times = {}
+            self.mongo.send_times = {}
+            self.mongo.save()
+
+        self.clean()
+
+
+    def in_send(self):
+        return self.key in self.mongo.send_times
+
+    def in_reward(self):
+        return self.key in self.mongo.reward_times
+
+    def add_send(self):
+        self.mongo.send_times[self.key] = 1
+        self.mongo.save()
+
+    def add_reward(self):
+        self.mongo.reward_times[self.key] = 1
+        self.mongo.save()
+
+
+    def clean(self):
+        # 清理过期的记录
+        for k, v in self.mongo.send_times.items():
+            key = k.rsplit('-', 1)
+            if len(key) == 0:
+                # 以前的情况，没有记录loop times的
+                new_key = "{0}-{1}".format(k, self.loop_times)
+                self.mongo.send_times.pop(k)
+                self.mongo.send_times[new_key] = v
+            else:
+                # 现在记录了loop times的
+                oid, loop_times = key
+                if oid == self.condition_id:
+                    # 找到这个ID的条件，然后比较loop times,
+                    # 不一样的就删除
+                    if int(loop_times) != self.loop_times:
+                        self.mongo.send_times.pop(k)
+
+
+        for k, v in self.mongo.reward_times.items():
+            key = k.rsplit('-', 1)
+            if len(key) == 0:
+                # 以前的情况，没有记录loop times的
+                new_key = "{0}-{1}".format(k, self.loop_times)
+                self.mongo.reward_times.pop(k)
+                self.mongo.reward_times[new_key] = v
+            else:
+                # 现在记录了loop times的
+                oid, loop_times = key
+                if oid == self.condition_id:
+                    # 找到这个ID的条件，然后比较loop times,
+                    # 不一样的就删除
+                    if int(loop_times) != self.loop_times:
+                        self.mongo.reward_times.pop(k)
+
+        self.mongo.save()
+
+
 
 class ActivityTime(object):
-    def __init__(self, start_time, continued_days, interval_days, interval_times, now=None):
+    def __init__(self, start_time, continued_days, is_loop, interval_days, interval_times):
         self.start_time = start_time
         self.continued_days = continued_days
+        self.is_loop = is_loop
         self.interval_days = interval_days
         self.interval_times = interval_times
 
-        if not now:
-            self.now = arrow.utcnow()
-        else:
-            self.now = arrow.get(now)
+        self.now = arrow.utcnow().to(settings.TIME_ZONE)
 
+        # 循环开启次数
+        self.loop_times = 0
         # 首次开始日期
         self.init_date = self.get_init_date()
         # 最近一次的开始日期
         self.nearest_open_date = self.find_nearest_open_date()
         # 最近一次的关闭日期
         self.nearest_close_date = self.find_nearest_close_date()
+
 
         # 距离最近一次活动关闭的剩余秒数
         left_time = self.nearest_close_date.timestamp - self.now.timestamp
@@ -71,13 +152,13 @@ class ActivityTime(object):
                     second=0,
                 ).replace(tzinfo=settings.TIME_ZONE)
         else:
-            init_date = server.opened_date.replace(tzinfo=settings.TIME_ZONE)
+            init_date = server.opened_date
 
         return init_date
 
 
     def find_nearest_open_date(self):
-        if not self.interval_days:
+        if not self.is_loop:
             return self.init_date
 
         # 目前超过初始日期的天数
@@ -86,14 +167,14 @@ class ActivityTime(object):
         total_days = self.continued_days + self.interval_days
 
         # 和目前最近的开启日期，需要此活动开启的次数
-        open_times, _rest = divmod(beyond_days, total_days)
+        self.loop_times, _rest = divmod(beyond_days, total_days)
 
         if not self.interval_times:
             # 此活动无限重复
-            really_open_times = open_times
+            really_open_times = self.loop_times
         else:
-            if self.interval_times >= open_times:
-                really_open_times = open_times
+            if self.interval_times >= self.loop_times:
+                really_open_times = self.loop_times
             else:
                 really_open_times = self.interval_times
 
@@ -103,18 +184,6 @@ class ActivityTime(object):
     def find_nearest_close_date(self):
         return self.nearest_open_date.replace(days=self.continued_days)
 
-
-def get_mongo_activity_instance(char_id):
-    # 获取mongodb中的 记录
-    try:
-        mongo_ac = MongoActivityStatic.objects.get(id=char_id)
-    except DoesNotExist:
-        mongo_ac = MongoActivityStatic(id=char_id)
-        mongo_ac.reward_times = {}
-        mongo_ac.send_times = {}
-        mongo_ac.save()
-
-    return mongo_ac
 
 
 class _Activities(object):
@@ -159,8 +228,8 @@ class ActivityTriggerManually(object):
                 "condition {0} can not get".format(condition_id)
             )
 
-        mongo_ac = get_mongo_activity_instance(char_id)
-        if str(condition_id) in mongo_ac.send_times:
+        ac_record = ActivityConditionRecord(char_id, condition_id, self.activity_time.loop_times)
+        if ac_record.in_reward():
             raise SanguoException(
                 errormsg.ACTIVITY_ALREADY_GOT_REWARD,
                 char_id,
@@ -168,8 +237,7 @@ class ActivityTriggerManually(object):
                 "condition {0} already got".format(condition_id)
             )
 
-        mongo_ac.reward_times[str(condition_id)] = 1
-        mongo_ac.save()
+        ac_record.add_reward()
 
 
     def get_reward_done(self, char_id, condition_id):
@@ -190,10 +258,10 @@ class ActivityTriggerMail(object):
             return
 
         passed = self.get_passed_for_send_mail(passed)
-        mongo_ac = get_mongo_activity_instance(char_id)
 
         for p in passed:
-            if str(p) in mongo_ac.send_times:
+            ac_record = ActivityConditionRecord(char_id, p, self.activity_times.loop_times)
+            if ac_record.in_send():
                 continue
 
             mail = Mail(char_id)
@@ -203,9 +271,8 @@ class ActivityTriggerMail(object):
                 attachment=self.get_mail_attachment(p)
             )
 
-            mongo_ac.send_times[str(p)] = 1
+            ac_record.add_send()
 
-        mongo_ac.save()
 
     def get_passed_for_send_mail(self, passed):
         return passed
@@ -261,17 +328,22 @@ class ActivityBase(object):
 
             # 开服活动，初始时间由开服时间改成角色创建时间
             # 由于这是后加的，对于老玩家，还是按照开服时间算
-            mc = MongoCharacter.objects.get(id=self.char_id)
+            try:
+                mc = MongoCharacter.objects.get(id=self.char_id)
+            except DoesNotExist:
+                return start_time
+
             if not mc.create_at:
                 return start_time
 
-            return arrow.get(mc.create_at)
+            return arrow.get(mc.create_at).to(settings.TIME_ZONE)
 
         start_time = _find_start_time()
 
         return ActivityTime(
             start_time,
             self.activity_data.continued_days,
+            self.activity_data.is_loop,
             self.activity_data.interval_days,
             self.activity_data.interval_times,
         )
@@ -342,8 +414,9 @@ class Activity4001(ActivityBase, ActivityTriggerMail):
         t = ActivityBase.get_activity_time(self)
         weekday = t.init_date.weekday()
         if weekday == 5 or weekday == 6:
+            # 周六 或 周日
             days = 7 - weekday
-            new_start_time = t.init_date.replace(days=days).replace(tzinfo=settings.TIME_ZONE).to('UTC')
+            new_start_time = t.init_date.replace(days=days)
             continued_days = 7
         else:
             new_start_time = t.init_date
@@ -352,6 +425,7 @@ class Activity4001(ActivityBase, ActivityTriggerMail):
         t = ActivityTime(
             new_start_time,
             continued_days,
+            self.activity_data.is_loop,
             self.activity_data.interval_days,
             self.activity_data.interval_times
         )
@@ -587,8 +661,8 @@ class Activity17002(ActivityBase):
 
 
     def trig(self):
-        mongo_ac = get_mongo_activity_instance(self.char_id)
-        if str(self.CONDITION_ID) in mongo_ac.send_times:
+        ac_record = ActivityConditionRecord(self.char_id, self.CONDITION_ID, self.activity_time.loop_times)
+        if ac_record.in_send():
             return
 
         value = self.get_current_value(self.char_id)
@@ -604,8 +678,8 @@ class Activity17002(ActivityBase):
             "您的累积充值已经达到了300元宝，获得了活动月卡奖励，300元宝的额外奖励已经放入您的帐号之中，请注意查收。从明天开始，接下来的30天，您将会每天获得100元宝。"
         )
 
-        mongo_ac.send_times[str(self.CONDITION_ID)] = 1
-        mongo_ac.save()
+        ac_record.add_send()
+
 
 
 @activities.register(17003)
@@ -621,6 +695,10 @@ class Activity17003(ActivityBase):
 # 活动类的统一入口
 class ActivityEntry(object):
     def __new__(cls, char_id, activity_id):
+        """
+
+        :rtype : ActivityBase
+        """
         return activities[activity_id](char_id)
 
 
@@ -652,33 +730,9 @@ class ActivityStatic(object):
         # 是否显示
         entry = ActivityEntry(self.char_id, activity_id)
         return entry.is_valid()
-        # if entry.is_valid():
-        #     # 此活动还在进行中
-        #     return True
-        #
-        # if entry.activity_data.category != 1:
-        #     # 非开服活动，只要过期就算还有奖励没领，也不再显示
-        #     return False
-        #
-        # condition_ids = entry.get_condition_ids()
-        # if not condition_ids:
-        #     # 过期，并且只是介绍性质的活动
-        #     return False
-        #
-        # if entry.activity_data.mode == 1:
-        #     # 手动领取奖励
-        #     mongo_ac = get_mongo_activity_instance(self.char_id)
-        #     for _con_id in condition_ids:
-        #         if str(_con_id) not in mongo_ac.reward_times and entry.condition_is_passed(self.char_id, _con_id):
-        #             # 还有已经完成，但是没领的奖励
-        #             return True
-        #
-        # return False
 
 
     def _msg_activity(self, msg, activity_id):
-        mongo_ac = get_mongo_activity_instance(self.char_id)
-
         entry = ActivityEntry(self.char_id, activity_id)
 
         msg.id = activity_id
@@ -686,11 +740,13 @@ class ActivityStatic(object):
         msg.left_time = entry.left_time
 
         for i in entry.get_condition_ids():
+            ac_record = ActivityConditionRecord(self.char_id, i, entry.activity_time.loop_times)
+
             msg_condition = msg.conditions.add()
             msg_condition.id = i
 
             if entry.activity_data.mode == 1:
-                if str(i) in mongo_ac.reward_times:
+                if ac_record.in_reward():
                     status = ActivityEntryMsg.ActivityCondition.HAS_GOT
                 elif entry.condition_is_passed(self.char_id, i):
                     status = ActivityEntryMsg.ActivityCondition.CAN_GET
