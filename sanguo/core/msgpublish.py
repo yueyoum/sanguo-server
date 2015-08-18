@@ -4,9 +4,9 @@ __author__ = 'Wang Chao'
 __date__ = '2/25/14'
 
 import sys
+import cPickle
 
 from core.drives import redis_client
-from core.mongoscheme import MongoCharacter
 from core.character import Char
 from core.msgpipe import publish_to_char
 from core.exception import SanguoException
@@ -16,6 +16,8 @@ from utils import pack_msg
 from utils.api import api_system_broadcast_get, APIFailure
 from preset.settings import CHAT_MESSAGE_MAX_LENGTH
 from preset import errormsg
+
+from tasks import world
 
 from protomsg import ChatMessageNotify, BroadcastNotify, ChatMessage
 
@@ -39,7 +41,6 @@ class GlobalChatQueue(object):
 class ChatMessagePublish(object):
     def __init__(self, char_id):
         self.char_id = char_id
-        self.cache_char = Char(char_id).mc
 
     def check(self, text):
         if len(text) > CHAT_MESSAGE_MAX_LENGTH:
@@ -64,29 +65,31 @@ class ChatMessagePublish(object):
         publish_to_char(self.char_id, pack_msg(msg))
 
 
-    def send_to_char(self, target_char_id, msg_bin):
-        msg = ChatMessageNotify()
-        msg_x = msg.msgs.add()
-        msg_x.MergeFromString(msg_bin)
-        publish_to_char(target_char_id, pack_msg(msg))
-
 
     def to_server(self, text):
         self.check(text)
 
+        cache_char = Char(self.char_id).mc
+
         msg = ChatMessage()
-        msg.char.id = self.cache_char.id
-        msg.char.name = self.cache_char.name
-        msg.char.vip = self.cache_char.vip
+        msg.char.id = cache_char.id
+        msg.char.name = cache_char.name
+        msg.char.vip = cache_char.vip
         msg.msg = text
 
         data = msg.SerializeToString()
-
         GlobalChatQueue.put(data)
 
-        chars = MongoCharacter.objects.all()
-        for c in chars:
-            self.send_to_char(c.id, data)
+        # broadcast to all characters
+        notify = ChatMessageNotify()
+        notify_msg = notify.msgs.add()
+        notify_msg.MergeFrom(msg)
+
+        notify_bin = pack_msg(notify_msg)
+
+        arg = {'msg': notify_bin}
+        data = cPickle.dumps(arg)
+        world.broadcast(data=data)
 
 
 class SystemBroadcast(object):
