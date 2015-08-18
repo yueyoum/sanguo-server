@@ -90,6 +90,9 @@ class ActivityConditionRecord(object):
         for k, v in self.mongo.send_times.items():
             key = k.rsplit('#', 2)
             if len(key) == 1:
+                if k != self.condition_id:
+                    continue
+
                 # 以前的情况，没有记录loop times的
                 new_key = "{0}#{1}#{2}".format(k, self.loop_times, self.open_time)
                 self.mongo.send_times.pop(k)
@@ -97,24 +100,31 @@ class ActivityConditionRecord(object):
             else:
                 # 现在记录了loop times的
                 oid, loop_times, open_time = key
-                if oid == self.condition_id:
-                    # 找到这个ID的条件，然后比较open time,
-                    # 不一样的就删除
-                    if int(open_time) != self.open_time:
-                        self.mongo.send_times.pop(k)
+                if oid != self.condition_id:
+                    continue
+
+                # 找到这个ID的条件，然后比较open time,
+                # 不一样的就删除
+                if int(open_time) != self.open_time:
+                    self.mongo.send_times.pop(k)
 
 
         for k, v in self.mongo.reward_times.items():
             key = k.rsplit('#', 2)
             if len(key) == 1:
+                if k != self.condition_id:
+                    continue
+
                 new_key = "{0}#{1}#{2}".format(k, self.loop_times, self.open_time)
                 self.mongo.reward_times.pop(k)
                 self.mongo.reward_times[new_key] = v
             else:
                 oid, loop_times, open_time = key
-                if oid == self.condition_id:
-                    if int(open_time) != self.open_time:
-                        self.mongo.reward_times.pop(k)
+                if oid != self.condition_id:
+                    continue
+
+                if int(open_time) != self.open_time:
+                    self.mongo.reward_times.pop(k)
 
         self.mongo.save()
 
