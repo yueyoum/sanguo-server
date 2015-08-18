@@ -42,7 +42,7 @@ class ActivityConditionRecord(object):
         self.condition_id = str(condition_id)
         self.loop_times = loop_times
 
-        self.key = "{0}-{1}".format(self.condition_id, self.loop_times)
+        self.key = "{0}#{1}".format(self.condition_id, self.loop_times)
 
         try:
             self.mongo = MongoActivityStatic.objects.get(id=char_id)
@@ -83,10 +83,10 @@ class ActivityConditionRecord(object):
     def clean(self):
         # 清理过期的记录
         for k, v in self.mongo.send_times.items():
-            key = k.rsplit('-', 1)
+            key = k.rsplit('#', 1)
             if len(key) == 1:
                 # 以前的情况，没有记录loop times的
-                new_key = "{0}-{1}".format(k, self.loop_times)
+                new_key = "{0}#{1}".format(k, self.loop_times)
                 self.mongo.send_times.pop(k)
                 self.mongo.send_times[new_key] = v
             else:
@@ -100,10 +100,10 @@ class ActivityConditionRecord(object):
 
 
         for k, v in self.mongo.reward_times.items():
-            key = k.rsplit('-', 1)
+            key = k.rsplit('#', 1)
             if len(key) == 1:
                 # 以前的情况，没有记录loop times的
-                new_key = "{0}-{1}".format(k, self.loop_times)
+                new_key = "{0}#{1}".format(k, self.loop_times)
                 self.mongo.reward_times.pop(k)
                 self.mongo.reward_times[new_key] = v
             else:
