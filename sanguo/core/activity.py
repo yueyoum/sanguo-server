@@ -55,6 +55,16 @@ class ActivityConditionRecord(object):
         self.clean()
 
 
+    @classmethod
+    def fix(cls, char_id):
+        for k, v in ACTIVITY_STATIC.iteritems():
+            if v.condition_objs:
+                ae = ActivityEntry(char_id, k)
+
+                for c in v.condition_objs:
+                    cls(char_id, c.id, ae.activity_time.loop_times)
+
+
     def in_send(self):
         return self.key in self.mongo.send_times
 
@@ -74,7 +84,7 @@ class ActivityConditionRecord(object):
         # 清理过期的记录
         for k, v in self.mongo.send_times.items():
             key = k.rsplit('-', 1)
-            if len(key) == 0:
+            if len(key) == 1:
                 # 以前的情况，没有记录loop times的
                 new_key = "{0}-{1}".format(k, self.loop_times)
                 self.mongo.send_times.pop(k)
@@ -91,7 +101,7 @@ class ActivityConditionRecord(object):
 
         for k, v in self.mongo.reward_times.items():
             key = k.rsplit('-', 1)
-            if len(key) == 0:
+            if len(key) == 1:
                 # 以前的情况，没有记录loop times的
                 new_key = "{0}-{1}".format(k, self.loop_times)
                 self.mongo.reward_times.pop(k)
@@ -705,6 +715,7 @@ class ActivityEntry(object):
 class ActivityStatic(object):
     def __init__(self, char_id):
         self.char_id = char_id
+        ActivityConditionRecord.fix(char_id)
 
 
     def trig(self, activity_id):
