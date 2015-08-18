@@ -69,6 +69,11 @@ class ActivityConditionRecord(object):
                 for c in v.condition_objs:
                     cls(char_id, c.id, ae.activity_time)
 
+        # NOTE FUCK
+        # 17002 累计充值送月卡是特殊处理的
+        x = ActivityEntry(char_id, 17002)
+        cls(char_id, x.ACTIVITY_ID, x.activity_time)
+
 
     def in_send(self):
         return self.key in self.mongo.send_times
