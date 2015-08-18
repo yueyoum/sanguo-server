@@ -71,8 +71,8 @@ class ActivityConditionRecord(object):
 
         # NOTE FUCK
         # 17002 累计充值送月卡是特殊处理的
-        x = ActivityEntry(char_id, 17002)
-        cls(char_id, x.ACTIVITY_ID, x.activity_time)
+        x = Activity17002(char_id)
+        cls(char_id, x.CONDITION_ID, x.activity_time)
 
 
     def in_send(self):
