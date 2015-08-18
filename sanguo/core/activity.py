@@ -260,7 +260,7 @@ class ActivityTriggerMail(object):
         passed = self.get_passed_for_send_mail(passed)
 
         for p in passed:
-            ac_record = ActivityConditionRecord(char_id, p, self.activity_times.loop_times)
+            ac_record = ActivityConditionRecord(char_id, p, self.activity_time.loop_times)
             if ac_record.in_send():
                 continue
 
