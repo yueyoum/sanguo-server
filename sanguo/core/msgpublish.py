@@ -85,7 +85,7 @@ class ChatMessagePublish(object):
         notify_msg = notify.msgs.add()
         notify_msg.MergeFrom(msg)
 
-        notify_bin = pack_msg(notify_msg)
+        notify_bin = pack_msg(notify)
 
         arg = {'msg': notify_bin}
         data = cPickle.dumps(arg)
