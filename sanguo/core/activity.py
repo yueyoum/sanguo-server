@@ -37,12 +37,17 @@ class ActivityConditionRecord(object):
     # 当新一轮活动开始后，玩家将无法领奖
     # 已经判断到已经发过了（上一轮发的）
     # 所以这里处理，把条件ID加上loop id作为唯一标识
-    def __init__(self, char_id, condition_id, loop_times):
+    def __init__(self, char_id, condition_id, active_time):
+        """
+
+        :type active_time: ActivityTime
+        """
         self.char_id = char_id
         self.condition_id = str(condition_id)
-        self.loop_times = loop_times
+        self.loop_times = active_time.loop_times
+        self.open_time = active_time.nearest_open_date.timestamp
 
-        self.key = "{0}#{1}".format(self.condition_id, self.loop_times)
+        self.key = "{0}#{1}#{2}".format(self.condition_id, self.loop_times, self.open_time)
 
         try:
             self.mongo = MongoActivityStatic.objects.get(id=char_id)
@@ -62,7 +67,7 @@ class ActivityConditionRecord(object):
                 ae = ActivityEntry(char_id, k)
 
                 for c in v.condition_objs:
-                    cls(char_id, c.id, ae.activity_time.loop_times)
+                    cls(char_id, c.id, ae.activity_time)
 
 
     def in_send(self):
@@ -83,36 +88,32 @@ class ActivityConditionRecord(object):
     def clean(self):
         # 清理过期的记录
         for k, v in self.mongo.send_times.items():
-            key = k.rsplit('#', 1)
+            key = k.rsplit('#', 2)
             if len(key) == 1:
                 # 以前的情况，没有记录loop times的
-                new_key = "{0}#{1}".format(k, self.loop_times)
+                new_key = "{0}#{1}#{2}".format(k, self.loop_times, self.open_time)
                 self.mongo.send_times.pop(k)
                 self.mongo.send_times[new_key] = v
             else:
                 # 现在记录了loop times的
-                oid, loop_times = key
+                oid, loop_times, open_time = key
                 if oid == self.condition_id:
-                    # 找到这个ID的条件，然后比较loop times,
+                    # 找到这个ID的条件，然后比较open time,
                     # 不一样的就删除
-                    if int(loop_times) != self.loop_times:
+                    if int(open_time) != self.open_time:
                         self.mongo.send_times.pop(k)
 
 
         for k, v in self.mongo.reward_times.items():
-            key = k.rsplit('#', 1)
+            key = k.rsplit('#', 2)
             if len(key) == 1:
-                # 以前的情况，没有记录loop times的
-                new_key = "{0}#{1}".format(k, self.loop_times)
+                new_key = "{0}#{1}#{2}".format(k, self.loop_times, self.open_time)
                 self.mongo.reward_times.pop(k)
                 self.mongo.reward_times[new_key] = v
             else:
-                # 现在记录了loop times的
-                oid, loop_times = key
+                oid, loop_times, open_time = key
                 if oid == self.condition_id:
-                    # 找到这个ID的条件，然后比较loop times,
-                    # 不一样的就删除
-                    if int(loop_times) != self.loop_times:
+                    if int(open_time) != self.open_time:
                         self.mongo.reward_times.pop(k)
 
         self.mongo.save()
@@ -238,7 +239,7 @@ class ActivityTriggerManually(object):
                 "condition {0} can not get".format(condition_id)
             )
 
-        ac_record = ActivityConditionRecord(char_id, condition_id, self.activity_time.loop_times)
+        ac_record = ActivityConditionRecord(char_id, condition_id, self.activity_time)
         if ac_record.in_reward():
             raise SanguoException(
                 errormsg.ACTIVITY_ALREADY_GOT_REWARD,
@@ -270,7 +271,7 @@ class ActivityTriggerMail(object):
         passed = self.get_passed_for_send_mail(passed)
 
         for p in passed:
-            ac_record = ActivityConditionRecord(char_id, p, self.activity_time.loop_times)
+            ac_record = ActivityConditionRecord(char_id, p, self.activity_time)
             if ac_record.in_send():
                 continue
 
@@ -671,7 +672,7 @@ class Activity17002(ActivityBase):
 
 
     def trig(self):
-        ac_record = ActivityConditionRecord(self.char_id, self.CONDITION_ID, self.activity_time.loop_times)
+        ac_record = ActivityConditionRecord(self.char_id, self.CONDITION_ID, self.activity_time)
         if ac_record.in_send():
             return
 
@@ -751,7 +752,7 @@ class ActivityStatic(object):
         msg.left_time = entry.left_time
 
         for i in entry.get_condition_ids():
-            ac_record = ActivityConditionRecord(self.char_id, i, entry.activity_time.loop_times)
+            ac_record = ActivityConditionRecord(self.char_id, i, entry.activity_time)
 
             msg_condition = msg.conditions.add()
             msg_condition.id = i
