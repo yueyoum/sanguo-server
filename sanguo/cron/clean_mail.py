@@ -6,8 +6,6 @@ __date__ = '2/27/14'
 import traceback
 
 from cron.log import Logger
-import pytz
-import arrow
 
 import uwsgidecorators
 
@@ -24,21 +22,15 @@ def clean(signum):
     logger.write("Start")
 
     try:
-        DIFF = arrow.utcnow().replace(days=-MAIL_KEEP_DAYS)
-        mails = MongoMail.objects.all()
         amount = 0
-        for m in mails:
-            char_mail = Mail(m.id, mailobj=m)
-            for k, v in m.mails.items():
-                create_at = arrow.get(v.create_at, 'YYYY-MM-DD HH:mm:ss').replace(tzinfo=pytz.utc)
-                if create_at < DIFF:
-                    char_mail.delete(k)
-                    amount += 1
 
-            if len(char_mail.mail.mails) == 0:
-                m.delete()
-            else:
-                m.save()
+        mails = MongoMail._get_collection().find({}, {'_id': 1})
+        for m in mails:
+            char_id = m['_id']
+
+            char_mail = Mail(char_id)
+            cleaned = char_mail.delete_expired(MAIL_KEEP_DAYS)
+            amount += cleaned
     except:
         logger.error(traceback.format_exc())
     else:

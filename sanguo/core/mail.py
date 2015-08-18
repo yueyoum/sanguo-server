@@ -17,19 +17,18 @@ from utils import pack_msg
 import protomsg
 from preset import errormsg
 
+MAIL_ARROW_FORMAT = "YYYY-MM-DD HH:mm:ss"
 
 class Mail(object):
-    def __init__(self, char_id, mailobj=None):
+    def __init__(self, char_id):
         self.char_id = char_id
-        if mailobj:
-            self.mail = mailobj
-        else:
-            try:
-                self.mail = MongoMail.objects.get(id=self.char_id)
-            except DoesNotExist:
-                self.mail = MongoMail(id=self.char_id)
-                self.mail.mails = {}
-                self.mail.save()
+
+        try:
+            self.mail = MongoMail.objects.get(id=self.char_id)
+        except DoesNotExist:
+            self.mail = MongoMail(id=self.char_id)
+            self.mail.mails = {}
+            self.mail.save()
 
     def count(self):
         return len(self.mail.mails)
@@ -69,7 +68,7 @@ class Mail(object):
         m.content = content
         m.attachment = attachment
         m.has_read = False
-        m.create_at = arrow.utcnow().format('YYYY-MM-DD HH:mm:ss')
+        m.create_at = arrow.utcnow().format(MAIL_ARROW_FORMAT)
 
 
         self.mail.mails[str(mail_id)] = m
@@ -92,6 +91,30 @@ class Mail(object):
 
         self.mail.save()
         self.send_notify()
+
+
+    def delete_expired(self, mail_keep_days, send_notify=True):
+        delete_ids = []
+        day = arrow.utcnow().replace(days=-mail_keep_days)
+
+        for k, v in self.mail.mails.iteritems():
+            create_at = arrow.get(v.create_at, MAIL_ARROW_FORMAT)
+            if create_at < day:
+                delete_ids.append(k)
+
+        for i in delete_ids:
+            self.mail.mails.pop(i)
+
+        if len(self.mail.mails) == 0:
+            self.mail.delete()
+        else:
+            self.mail.save()
+
+        if send_notify:
+            self.send_notify()
+
+        return len(delete_ids)
+
 
     def open(self, mail_id):
         try:
