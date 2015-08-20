@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import datetime
 import arrow
 from mongoengine import Q
 
@@ -238,13 +239,15 @@ class Char(object):
 
 def char_initialize(account_id, server_id, char_id, name):
     print "CHAR INIT", account_id, server_id, char_id, name.encode('utf-8')
+    now = arrow.utcnow().format("YYYY-MM-DD HH:mm:ss")
     mc = MongoCharacter(id=char_id)
     mc.account_id = account_id
     mc.server_id = server_id
     mc.name = name
     mc.gold = CHARACTER_INIT['gold']
     mc.sycee = CHARACTER_INIT['sycee']
-    mc.create_at = arrow.utcnow().format("YYYY-MM-DD HH:mm:ss")
+    mc.create_at = now
+    mc.last_login = now
     mc.save()
 
     from core.item import Item
@@ -315,3 +318,19 @@ def get_char_ids_by_level_range(min_level, max_level, exclude_char_ids=None):
     chars = MongoCharacter.objects.filter(Q(level__gte=min_level) & Q(level__lte=max_level))
     excluded = exclude_char_ids or []
     return [c.id for c in chars if c.id not in excluded]
+
+
+def get_char_ids_by_last_login(limit=7):
+    date = arrow.utcnow().replace(days=-limit)
+
+    dt = datetime.datetime(
+        date.year,
+        date.month,
+        date.day,
+        date.hour,
+        date.minute,
+        date.second
+    )
+
+    chars = MongoCharacter._get_collection().find({'last_login': {'$get': dt}}, {'_id': 1})
+    return chars

@@ -82,10 +82,11 @@ class MongoCharacter(Document):
 
     # 创建角色时间
     create_at = DateTimeField()
+    last_login = DateTimeField()
 
     meta = {
         'collection': 'character',
-        'indexes': ['level', 'name'],
+        'indexes': ['level', 'name', 'last_login'],
     }
 
 MongoCharacter.ensure_indexes()
