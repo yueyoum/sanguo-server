@@ -23,7 +23,8 @@ def send_mail(args):
     char_ids = data['char_ids']
 
     if not char_ids:
-        char_ids = [c.id for c in MongoCharacter.objects.all()]
+        chars = MongoCharacter._get_collection().find({}, {'_id': 1})
+        char_ids = [c['_id'] for c in chars]
 
     for cid in char_ids:
         m = Mail(cid)

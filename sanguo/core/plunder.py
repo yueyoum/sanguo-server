@@ -196,12 +196,16 @@ class Plunder(object):
             'char_city_id': 0
         }
 
+        changed = False
+
         record = self.mongo_plunder._get_collection().find_one({'_id': self.char_id})
         for k, v in data.iteritems():
             if k not in record:
                 setattr(self.mongo_plunder, k, v)
+                changed = True
 
-        self.mongo_plunder.save()
+        if changed:
+            self.mongo_plunder.save()
 
 
     def get_plunder_target(self, city_id):
@@ -249,34 +253,57 @@ class Plunder(object):
 
 
     def change_current_plunder_times(self, change_value, allow_overflow=False):
-        max_times = self.max_plunder_times()
-        if change_value > 0 and not allow_overflow and self.mongo_plunder.current_times > max_times:
-            return
+        # max_times = self.max_plunder_times()
+        # if change_value > 0 and not allow_overflow and self.mongo_plunder.current_times > max_times:
+        #     return
+        #
+        # for i in range(10):
+        #     self.load_mongo_record()
+        #     if not self.mongo_plunder.current_times_lock:
+        #         self.mongo_plunder.current_times_lock = True
+        #         self.mongo_plunder.save()
+        #         break
+        #     else:
+        #         time.sleep(0.2)
+        # else:
+        #     raise PlunderCurrentTimeOut()
+        #
+        # try:
+        #     self.mongo_plunder.current_times += change_value
+        #     if self.mongo_plunder.current_times < 0:
+        #         self.mongo_plunder.current_times = 0
+        #
+        #     if not allow_overflow and change_value > 0:
+        #         if self.mongo_plunder.current_times > max_times:
+        #             self.mongo_plunder.current_times = max_times
+        # finally:
+        #     self.mongo_plunder.current_times_lock = False
+        #     self.mongo_plunder.save()
+        #     self.send_notify()
 
-        for i in range(10):
-            self.load_mongo_record()
-            if not self.mongo_plunder.current_times_lock:
-                self.mongo_plunder.current_times_lock = True
-                self.mongo_plunder.save()
-                break
-            else:
-                time.sleep(0.2)
-        else:
-            raise PlunderCurrentTimeOut()
+        MongoPlunder._get_collection().update(
+            {'_id': self.char_id},
+            {'$inc': {'current_times': change_value}}
+        )
 
-        try:
-            self.mongo_plunder.current_times += change_value
-            if self.mongo_plunder.current_times < 0:
-                self.mongo_plunder.current_times = 0
+        self.load_mongo_record()
+        if self.mongo_plunder.current_times < 0:
+            MongoPlunder._get_collection().update(
+                {'_id': self.char_id},
+                {'$set': {'current_times': 0}}
+            )
 
-            if not allow_overflow and change_value > 0:
-                max_times = self.max_plunder_times()
-                if self.mongo_plunder.current_times > max_times:
-                    self.mongo_plunder.current_times = max_times
-        finally:
-            self.mongo_plunder.current_times_lock = False
-            self.mongo_plunder.save()
-            self.send_notify()
+
+        if not allow_overflow:
+            max_times = self.max_plunder_times()
+            if self.mongo_plunder.current_times > max_times:
+                MongoPlunder._get_collection().update(
+                    {'_id': self.char_id},
+                    {'$set': {'current_times': max_times}}
+                )
+
+        self.send_notify()
+
 
 
     def plunder(self):
