@@ -602,6 +602,12 @@ class Activity15001(ActivityBase, ActivityTriggerAdditionalDrop):
     def get_current_value(self, char_id):
         return 0
 
+    def get_additional_drop(self, stuff_id):
+        if stuff_id != 33:
+            return make_standard_drop_from_template()
+        return ActivityTriggerAdditionalDrop.get_additional_drop(self)
+
+
 # 16001, 17001 没有条件，只要达到就触发
 # 这里特殊处理
 @activities.register(16001)

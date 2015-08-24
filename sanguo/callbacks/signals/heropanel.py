@@ -13,9 +13,8 @@ from core.resource import Resource
 def _open_hero(char_id, hero_oid, **kwargs):
     drop1 = ActivityEntry(char_id, 9001).get_additional_drop()
     drop2 = ActivityEntry(char_id, 13001).get_additional_drop()
-    drop3 = ActivityEntry(char_id, 15001).get_additional_drop()
 
-    drop = merge_drop([drop1, drop2, drop3])
+    drop = merge_drop([drop1, drop2])
     if is_empty_drop(drop):
         return
 

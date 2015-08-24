@@ -877,9 +877,10 @@ class Item(MessageEquipmentMixin):
         # 活动 10001
         additional_drop_1 = ActivityEntry(self.char_id, 10001).get_additional_drop(_id)
         additional_drop_2 = ActivityEntry(self.char_id, 12001).get_additional_drop(_id)
+        additional_drop_3 = ActivityEntry(self.char_id, 15001).get_additional_drop(_id)
 
         prepare_drop = self.get_sutff_drop(_id)
-        drop = merge_drop([prepare_drop, additional_drop_1, additional_drop_2])
+        drop = merge_drop([prepare_drop, additional_drop_1, additional_drop_2, additional_drop_3])
         if is_empty_drop(drop):
             return None
 
