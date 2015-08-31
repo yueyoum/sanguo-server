@@ -11,7 +11,7 @@ import uwsgidecorators
 
 @uwsgidecorators.spool
 def send_mail(args):
-    from core.mongoscheme import MongoCharacter
+    from core.character import get_char_ids_by_last_login
     from core.mail import Mail
 
     data = json.loads(args['data'])
@@ -23,8 +23,7 @@ def send_mail(args):
     char_ids = data['char_ids']
 
     if not char_ids:
-        chars = MongoCharacter._get_collection().find({}, {'_id': 1})
-        char_ids = [c['_id'] for c in chars]
+        char_ids = get_char_ids_by_last_login(limit=14)
 
     for cid in char_ids:
         m = Mail(cid)

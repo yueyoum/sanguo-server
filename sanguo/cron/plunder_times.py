@@ -10,7 +10,7 @@ import arrow
 from django.conf import settings
 
 from cron.log import Logger
-from core.mongoscheme import MongoCharacter
+from core.character import get_char_ids_by_last_login
 from core.plunder import Plunder
 
 
@@ -24,9 +24,9 @@ def add_times(signum):
     logger = Logger('add_plunder_times.log')
     logger.write("Start")
 
-    chars = MongoCharacter._get_collection().find({}, {'_id': 1})
-    for char in chars:
-        plunder = Plunder(char['_id'])
+    char_ids = get_char_ids_by_last_login(limit=3)
+    for char_id in char_ids:
+        plunder = Plunder(char_id)
         try:
             plunder.change_current_plunder_times(change_value=1, allow_overflow=False)
         except:

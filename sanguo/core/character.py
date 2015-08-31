@@ -332,5 +332,5 @@ def get_char_ids_by_last_login(limit=7):
         date.second
     )
 
-    chars = MongoCharacter._get_collection().find({'last_login': {'$get': dt}}, {'_id': 1})
-    return chars
+    chars = MongoCharacter._get_collection().find({'last_login': {'$gte': dt}}, {'_id': 1})
+    return [c['_id'] for c in chars]
