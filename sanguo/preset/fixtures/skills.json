@@ -1211,7 +1211,7 @@
         "anger_self_team": 0, 
         "war_cry": false, 
         "skill_range": 2, 
-        "des": "[4795ff]\u7834\u91dc\u6c89\u821f[-]\uff1a\u964d\u4f4e\u5c11\u91cf\u9632\u5fa1\uff0c\u5927\u91cf\u63d0\u5347\u653b\u51fb\uff0c\u63d0\u5347\u6012\u6c14", 
+        "des": "[4795ff]\u7834\u91dc\u6c89\u821f[-]\uff1a\u964d\u4f4e\u9632\u5fa1\uff0c\u5e76\u5927\u91cf\u63d0\u5347\u653b\u51fb\uff0c\u63d0\u5347\u6012\u6c14", 
         "anger_self": 25, 
         "prob": 100, 
         "trig_start": 1, 
