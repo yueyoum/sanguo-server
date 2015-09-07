@@ -1096,5 +1096,23 @@
         "quality": 4, 
         "icon": "\u6b66\u5c06\u5c06\u9b42\u5b9d\u7bb1\uff08\u91d1\uff09"
     }
+},
+{
+    "pk": 3013, 
+    "model": "item.stuff", 
+    "fields": {
+        "name": "\u6d4b\u8bd5\u7528\u9526\u56ca", 
+        "tip_des": "\u6d4b\u8bd5\u7528\u9526\u56ca", 
+        "tip_type": "\u6d4b\u8bd5\u7528\u9526\u56ca", 
+        "des": "\u5185\u542b\u6d4b\u8bd5\u6389\u843d\u9526\u56ca1000\u4e2a", 
+        "buy_sycee": 0, 
+        "tp": 3, 
+        "default_package": null, 
+        "sell_gold": 0, 
+        "value": null, 
+        "packages": "70030", 
+        "quality": 1, 
+        "icon": "\u6b66\u5c06\u5c06\u9b42\u5b9d\u7bb1\uff08\u91d1\uff09"
+    }
 }
 ]

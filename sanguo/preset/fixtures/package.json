@@ -3233,6 +3233,25 @@
         "stuffs": [], 
         "official_exp": 0
     }, 
+    "70030": {
+        "gems": [], 
+        "horses": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [
+            {
+                "amount": 1000, 
+                "id": 3003, 
+                "prob": 100000
+            }
+        ], 
+        "official_exp": 0
+    }, 
     "5008": {
         "gems": [], 
         "horses": [], 
