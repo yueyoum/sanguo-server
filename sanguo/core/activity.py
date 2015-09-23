@@ -636,9 +636,9 @@ class Activity16001(ActivityBase):
 class Activity17001(ActivityBase):
     # 每天第一次任意额度的充值，给额外东西
     def get_current_value(self, char_id):
-        now = arrow.utcnow()
-        now_begin = arrow.Arrow(now.year, now.month, now.day)
-        condition = Q(char_id=self.char_id) & Q(purchase_at__gt=now_begin.timestamp) & Q(purchase_at__lte=now.timestamp)
+        now = arrow.utcnow().to(settings.TIME_ZONE)
+        now_begin = arrow.Arrow(now.year, now.month, now.day).replace(tzinfo=now.tzinfo)
+        condition = Q(char_id=self.char_id) & Q(purchase_at__gte=now_begin.timestamp) & Q(purchase_at__lte=now.timestamp)
         logs = MongoPurchaseLog.objects.filter(condition)
 
         value = 0
@@ -652,10 +652,10 @@ class Activity17001(ActivityBase):
         if not self.is_valid():
             return
 
-        now = arrow.utcnow()
-        now_begin = arrow.Arrow(now.year, now.month, now.day)
+        now = arrow.utcnow().to(settings.TIME_ZONE)
+        now_begin = arrow.Arrow(now.year, now.month, now.day).replace(tzinfo=now.tzinfo)
 
-        condition = Q(char_id=self.char_id) & Q(purchase_at__gt=now_begin.timestamp) & Q(purchase_at__lte=now.timestamp)
+        condition = Q(char_id=self.char_id) & Q(purchase_at__gte=now_begin.timestamp) & Q(purchase_at__lte=now.timestamp)
         logs = MongoPurchaseLog.objects.filter(condition)
         if logs.count() == 0 or logs.count() > 1:
             # 没有充值，或者充值次数大于1,都返回
