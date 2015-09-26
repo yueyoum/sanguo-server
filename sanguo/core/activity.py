@@ -74,6 +74,11 @@ class ActivityConditionRecord(object):
         x = Activity17002(char_id)
         cls(char_id, x.CONDITION_ID, x.activity_time)
 
+    def send_times(self):
+        return self.mongo.send_times.get(self.key, 0)
+
+    def reward_times(self):
+        return self.mongo.reward_times.get(self.key, 0)
 
     def in_send(self):
         return self.key in self.mongo.send_times
@@ -81,12 +86,12 @@ class ActivityConditionRecord(object):
     def in_reward(self):
         return self.key in self.mongo.reward_times
 
-    def add_send(self):
-        self.mongo.send_times[self.key] = 1
+    def add_send(self, times=1):
+        self.mongo.send_times[self.key] = self.send_times() + times
         self.mongo.save()
 
-    def add_reward(self):
-        self.mongo.reward_times[self.key] = 1
+    def add_reward(self, times=1):
+        self.mongo.reward_times[self.key] = self.reward_times() + times
         self.mongo.save()
 
 
@@ -694,23 +699,24 @@ class Activity17002(ActivityBase):
 
     def trig(self):
         ac_record = ActivityConditionRecord(self.char_id, self.CONDITION_ID, self.activity_time)
-        if ac_record.in_send():
-            return
+        send_times = ac_record.send_times()
 
         value = self.get_current_value(self.char_id)
-        if value < self.CONDITION_VALUE:
+        times, _ = divmod(value, self.CONDITION_VALUE)
+        if times <= send_times:
             return
 
-        p = BasePurchaseAction(self.char_id)
-        p.send_reward_yueka(purchase_notify=False)
+        for i in range(times - send_times):
+            p = BasePurchaseAction(self.char_id)
+            p.send_reward_yueka(purchase_notify=False)
 
-        m = Mail(self.char_id)
-        m.add(
-            "获得月卡",
-            "您的累积充值已经达到了300元宝，获得了活动月卡奖励，300元宝的额外奖励已经放入您的帐号之中，请注意查收。从明天开始，接下来的30天，您将会每天获得100元宝。"
-        )
+            m = Mail(self.char_id)
+            m.add(
+                "获得月卡",
+                "您的累积充值已经达到了300元宝，获得了活动月卡奖励，300元宝的额外奖励已经放入您的帐号之中，请注意查收。从明天开始，接下来的30天，您将会每天获得100元宝。"
+            )
 
-        ac_record.add_send()
+        ac_record.add_send(times=times-send_times)
 
 
 
