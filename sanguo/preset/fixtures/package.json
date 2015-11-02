@@ -11466,6 +11466,25 @@
         "stuffs": [], 
         "official_exp": 0
     }, 
+    "922": {
+        "gems": [
+            {
+                "amount": 1, 
+                "id": 22, 
+                "prob": 100000
+            }
+        ], 
+        "horses": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
     "40001": {
         "gems": [], 
         "horses": [], 
@@ -12364,19 +12383,19 @@
         "stuffs": [], 
         "official_exp": 0
     }, 
-    "922": {
-        "gems": [
-            {
-                "amount": 1, 
-                "id": 22, 
-                "prob": 100000
-            }
-        ], 
+    "52122": {
+        "gems": [], 
         "horses": [], 
         "sycee": 0, 
         "heros": [], 
         "gold": 0, 
-        "souls": [], 
+        "souls": [
+            {
+                "amount": 1, 
+                "id": 18, 
+                "prob": 100000
+            }
+        ], 
         "equipments": [], 
         "mode": 1, 
         "exp": 0, 
