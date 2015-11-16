@@ -11556,6 +11556,25 @@
         ], 
         "official_exp": 0
     }, 
+    "923": {
+        "gems": [
+            {
+                "amount": 1, 
+                "id": 23, 
+                "prob": 100000
+            }
+        ], 
+        "horses": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
     "921": {
         "gems": [
             {
@@ -11590,6 +11609,25 @@
                 "level": 1
             }
         ], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "924": {
+        "gems": [
+            {
+                "amount": 1, 
+                "id": 24, 
+                "prob": 100000
+            }
+        ], 
+        "horses": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [], 
+        "equipments": [], 
         "mode": 1, 
         "exp": 0, 
         "stuffs": [], 
@@ -12402,11 +12440,11 @@
         "stuffs": [], 
         "official_exp": 0
     }, 
-    "923": {
+    "52123": {
         "gems": [
             {
                 "amount": 1, 
-                "id": 23, 
+                "id": 32, 
                 "prob": 100000
             }
         ], 
@@ -12421,14 +12459,8 @@
         "stuffs": [], 
         "official_exp": 0
     }, 
-    "924": {
-        "gems": [
-            {
-                "amount": 1, 
-                "id": 24, 
-                "prob": 100000
-            }
-        ], 
+    "52124": {
+        "gems": [], 
         "horses": [], 
         "sycee": 0, 
         "heros": [], 
@@ -12437,7 +12469,13 @@
         "equipments": [], 
         "mode": 1, 
         "exp": 0, 
-        "stuffs": [], 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 5, 
+                "prob": 100000
+            }
+        ], 
         "official_exp": 0
     }, 
     "925": {
