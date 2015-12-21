@@ -7361,7 +7361,7 @@
         "stuffs": [
             {
                 "amount": 1, 
-                "id": 3010, 
+                "id": 3004, 
                 "prob": 100000
             }
         ], 
@@ -7380,7 +7380,7 @@
         "stuffs": [
             {
                 "amount": 1, 
-                "id": 3011, 
+                "id": 3005, 
                 "prob": 100000
             }
         ], 
@@ -7399,7 +7399,7 @@
         "stuffs": [
             {
                 "amount": 1, 
-                "id": 3012, 
+                "id": 3006, 
                 "prob": 100000
             }
         ], 
@@ -7417,8 +7417,8 @@
         "exp": 0, 
         "stuffs": [
             {
-                "amount": 3, 
-                "id": 3012, 
+                "amount": 5, 
+                "id": 3006, 
                 "prob": 100000
             }
         ], 
@@ -9284,6 +9284,44 @@
         "stuffs": [], 
         "official_exp": 0
     }, 
+    "52127": {
+        "gems": [], 
+        "horses": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [
+            {
+                "amount": 1, 
+                "id": 43, 
+                "prob": 100000
+            }
+        ], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "52128": {
+        "gems": [], 
+        "horses": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [
+            {
+                "amount": 1, 
+                "id": 44, 
+                "prob": 100000
+            }
+        ], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [], 
+        "official_exp": 0
+    }, 
     "931": {
         "gems": [
             {
@@ -9557,7 +9595,7 @@
         "stuffs": [], 
         "official_exp": 0
     }, 
-    "3003": {
+    "50107": {
         "gems": [], 
         "horses": [], 
         "sycee": 0, 
@@ -9565,8 +9603,8 @@
         "gold": 0, 
         "souls": [
             {
-                "amount": 1, 
-                "id": 3, 
+                "amount": 30, 
+                "id": 12, 
                 "prob": 100000
             }
         ], 
@@ -13032,7 +13070,7 @@
         "stuffs": [], 
         "official_exp": 0
     }, 
-    "50107": {
+    "3003": {
         "gems": [], 
         "horses": [], 
         "sycee": 0, 
@@ -13040,8 +13078,8 @@
         "gold": 0, 
         "souls": [
             {
-                "amount": 30, 
-                "id": 12, 
+                "amount": 1, 
+                "id": 3, 
                 "prob": 100000
             }
         ], 
