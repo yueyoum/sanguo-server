@@ -179,13 +179,14 @@ class Char(object):
                     new_official=char.official
                 )
 
-
-        # VIP
         total_purchase_got = char.purchase_got + purchase_got
         char.purchase_got = total_purchase_got
+        # VIP
+        # 2016.1.1 - 2016.1.31 活动， 4倍VIP经验
+        char.vip_exp += purchase_got * 4
 
         old_vip = char.vip
-        new_vip = get_vip_level(total_purchase_got)
+        new_vip = get_vip_level(char.vip_exp)
         if new_vip > old_vip:
             char.vip = new_vip
 

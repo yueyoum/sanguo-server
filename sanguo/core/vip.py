@@ -24,9 +24,9 @@ VIP_DEFINE_REVERSED.sort(reverse=True)
 VIP_REWARD_IDS = VIP_REWARD.keys()
 VIP_REWARD_IDS.sort()
 
-def get_vip_level(total_purchase_got):
+def get_vip_level(vip_exp):
     for k, v in VIP_DEFINE_REVERSED:
-        if total_purchase_got >= k:
+        if vip_exp >= k:
             return v
 
 
