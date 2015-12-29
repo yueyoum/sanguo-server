@@ -86,5 +86,5 @@ class VIP(object):
         msg = VIPNotify()
         msg.vip = self.mc.vip
         msg.reward_vips.extend(self.can_reward_vips())
-        msg.purchase_got = self.mc.purchase_got
+        msg.purchase_got = self.mc.vip_exp
         publish_to_char(self.char_id, pack_msg(msg))
