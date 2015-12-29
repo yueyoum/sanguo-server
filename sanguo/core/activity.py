@@ -781,6 +781,9 @@ class Activity1000(ActivityBase):
         logs = MongoPurchaseLog.objects.filter(condition)
 
         sycee_list = [log.sycee for log in logs]
+        if not sycee_list:
+            return 0
+        
         return max(sycee_list)
 
 
