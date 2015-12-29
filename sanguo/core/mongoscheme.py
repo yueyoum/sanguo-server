@@ -77,6 +77,10 @@ class MongoCharacter(Document):
     # 充值真实获得
     purchase_got = IntField(default=0)
     vip = IntField(default=0)
+    # vip 经验， 2016.1.1 新增
+    # 以前是直接用purchase_got 判断，现在改成用vip_exp
+    # 方便做VIP充值活动，vip经验翻倍这样的，不用改变本来的purchase_got
+    vip_exp = IntField(default=0)
     # 用来标识已经领取的VIP奖励
     vip_has_reward = ListField(IntField())
 

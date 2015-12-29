@@ -387,9 +387,11 @@ class Plunder(object):
                     prison = hid
                     break
 
-            if random.randint(1, 100) <= PLUNDER_GET_PRISONER_PROB:
-                return prison
-            return 0
+            # if random.randint(1, 100) <= PLUNDER_GET_PRISONER_PROB:
+            #     return prison
+            # return 0
+            # 2016.1.1 - 2016.1.30 活动  必掉将
+            return prison
 
         char = Char(self.char_id).mc
         vip_plus = VIP_FUNCTION[char.vip].plunder_addition

@@ -1,5 +1,45 @@
 [
 {
+    "pk": 999, 
+    "model": "activity.activitystatic", 
+    "fields": {
+        "category": 2, 
+        "interval_days": 0, 
+        "name": "\u9f99\u5c06\u7f8e\u5973\u4e3b\u9898\u8db4", 
+        "continued_days": 31, 
+        "current_des": "\u5145\u503c\u7acb\u8d60\u5973\u5c06\u3002", 
+        "start_time": "2015-12-29", 
+        "des": "\u7acb\u5373\u5145\u503c\u989d\u5916\u8d60\u9001\u968f\u673a\u5973\u5c06\u3002", 
+        "interval_times": 0, 
+        "package": 1002, 
+        "mail_title": "\u7f8e\u5973", 
+        "mail_content": "\u7f8e\u5973", 
+        "mode": 2, 
+        "conditions": "", 
+        "is_loop": false
+    }
+},
+{
+    "pk": 1000, 
+    "model": "activity.activitystatic", 
+    "fields": {
+        "category": 2, 
+        "interval_days": 0, 
+        "name": "\u5145\u503c\u6ee1\u989d\u9001\u5b9d\u77f3", 
+        "continued_days": 31, 
+        "current_des": "\u5143\u65e6\u6d3b\u52a8\u5145\u503c\u6ee11000\u5143\u5b9d\u83b7\u5f97\u5b9d\u77f3\u8d60\u9001", 
+        "start_time": "2015-12-29", 
+        "des": "\u6d3b\u52a8\u671f\u95f4\uff0c\u5355\u6b21\u5145\u503c1000\u5143\u5b9d\u53ca\u4ee5\u4e0a\u83b7\u5f97\u968f\u673a\u5927\u5b9d\u77f3\u7bb1", 
+        "interval_times": 0, 
+        "package": 1003, 
+        "mail_title": "\u5b9d\u77f3", 
+        "mail_content": "\u5b9d\u77f3", 
+        "mode": 2, 
+        "conditions": "", 
+        "is_loop": false
+    }
+},
+{
     "pk": 1001, 
     "model": "activity.activitystatic", 
     "fields": {

@@ -729,6 +729,88 @@ class Activity17003(ActivityBase):
         pass
 
 
+@activities.register(999)
+class Activity999(ActivityBase):
+    CONDITION_ID = -999
+
+    def get_current_value(self, char_id):
+        if not self.is_valid():
+            return 0
+
+        condition = Q(char_id=char_id) & Q(purchase_at__gte=self.activity_time.nearest_open_date.timestamp) & Q(purchase_at__lte=self.activity_time.nearest_close_date.timestamp)
+        logs = MongoPurchaseLog.objects.filter(condition)
+
+        value = 0
+        for log in logs:
+            value += log.sycee
+
+        return value
+
+    def trig(self):
+        ac_record = ActivityConditionRecord(self.char_id, self.CONDITION_ID, self.activity_time)
+        send_times = ac_record.send_times()
+
+        if send_times:
+            return
+
+        value = self.get_current_value(self.char_id)
+        if not value:
+            return
+
+        attachment = get_drop([self.activity_data.package])
+
+        mail = Mail(self.char_id)
+        mail.add(
+            self.activity_data.mail_title,
+            self.activity_data.mail_content,
+            attachment=json.dumps(attachment)
+        )
+
+        ac_record.add_send(1)
+
+@activities.register(1000)
+class Activity1000(ActivityBase):
+    CONDITION_ID = -1000
+    CONDITION_VALUE = 1000
+
+    def get_current_value(self, char_id):
+        if not self.is_valid():
+            return 0
+
+        condition = Q(char_id=char_id) & Q(purchase_at__gte=self.activity_time.nearest_open_date.timestamp) & Q(purchase_at__lte=self.activity_time.nearest_close_date.timestamp)
+        logs = MongoPurchaseLog.objects.filter(condition)
+
+        sycee_list = [log.sycee for log in logs]
+        return max(sycee_list)
+
+
+    def trig(self):
+        ac_record = ActivityConditionRecord(self.char_id, self.CONDITION_ID, self.activity_time)
+        send_times = ac_record.send_times()
+
+        condition = Q(char_id=self.char_id) & Q(purchase_at__gte=self.activity_time.nearest_open_date.timestamp) & Q(purchase_at__lte=self.activity_time.nearest_close_date.timestamp)
+        logs = MongoPurchaseLog.objects.filter(condition)
+
+        reached_times = 0
+        for log in logs:
+            if log.sycee >= self.CONDITION_VALUE:
+                reached_times += 1
+
+        if reached_times <= send_times:
+            return
+
+        for i in range(reached_times - send_times):
+            attachment = get_drop([self.activity_data.package])
+            mail = Mail(self.char_id)
+            mail.add(
+                self.activity_data.mail_title,
+                self.activity_data.mail_content,
+                attachment=json.dumps(attachment)
+            )
+
+        ac_record.add_send(times=reached_times-send_times)
+
+
 
 # 活动类的统一入口
 class ActivityEntry(object):
