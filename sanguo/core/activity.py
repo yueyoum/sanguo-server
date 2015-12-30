@@ -771,7 +771,7 @@ class Activity999(ActivityBase):
 @activities.register(1000)
 class Activity1000(ActivityBase):
     CONDITION_ID = -1000
-    CONDITION_VALUE = 1000
+    CONDITION_VALUE = 980
 
     def get_current_value(self, char_id):
         if not self.is_valid():
@@ -783,7 +783,7 @@ class Activity1000(ActivityBase):
         sycee_list = [log.sycee for log in logs]
         if not sycee_list:
             return 0
-        
+
         return max(sycee_list)
 
 
