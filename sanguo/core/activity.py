@@ -708,7 +708,7 @@ class Activity17002(ActivityBase):
 
         for i in range(times - send_times):
             p = BasePurchaseAction(self.char_id)
-            p.send_reward_yueka(purchase_notify=False)
+            p.send_reward_yueka(purchase_notify=False, as_vip_exp=False)
 
             m = Mail(self.char_id)
             m.add(
@@ -791,28 +791,22 @@ class Activity1000(ActivityBase):
         ac_record = ActivityConditionRecord(self.char_id, self.CONDITION_ID, self.activity_time)
         send_times = ac_record.send_times()
 
-        condition = Q(char_id=self.char_id) & Q(purchase_at__gte=self.activity_time.nearest_open_date.timestamp) & Q(purchase_at__lte=self.activity_time.nearest_close_date.timestamp)
-        logs = MongoPurchaseLog.objects.filter(condition)
-
-        reached_times = 0
-        for log in logs:
-            if log.sycee >= self.CONDITION_VALUE:
-                reached_times += 1
-
-        if reached_times <= send_times:
+        if send_times:
             return
 
-        for i in range(reached_times - send_times):
-            attachment = get_drop([self.activity_data.package])
-            mail = Mail(self.char_id)
-            mail.add(
-                self.activity_data.mail_title,
-                self.activity_data.mail_content,
-                attachment=json.dumps(attachment)
-            )
+        value = self.get_current_value(self.char_id)
+        if value < self.CONDITION_VALUE:
+            return
 
-        ac_record.add_send(times=reached_times-send_times)
+        attachment = get_drop([self.activity_data.package])
+        mail = Mail(self.char_id)
+        mail.add(
+            self.activity_data.mail_title,
+            self.activity_data.mail_content,
+            attachment=json.dumps(attachment)
+        )
 
+        ac_record.add_send(1)
 
 
 # 活动类的统一入口

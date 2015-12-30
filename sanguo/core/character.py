@@ -101,7 +101,7 @@ class Char(object):
         return Formation(self.id).get_leader_oid()
 
 
-    def update(self, gold=0, sycee=0, exp=0, official_exp=0, purchase_got=0, purchase_actual_got=0, notify_settings=None):
+    def update(self, gold=0, sycee=0, exp=0, official_exp=0, purchase_got=0, purchase_actual_got=0, update_settings=None):
         # purchase_got 充值获得元宝
         # purchase_actual_got 充值实际获得元宝
         # 比如 有个 商品 是 充1元，得1元宝，但现在做活动，买一送一，也就是充1元，得2元宝
@@ -109,10 +109,10 @@ class Char(object):
         # 用户的 元宝 多2, 但是记录 purchase_got 还是加1
         # VIP 也是用 累加的 purchase_got来计算的
 
-        def get_send_notify_settings(key):
-            if not notify_settings:
+        def get_settings(key):
+            if not update_settings:
                 return True
-            return notify_settings.get(key, True)
+            return update_settings.get(key, True)
 
 
         opended_funcs = []
@@ -183,7 +183,8 @@ class Char(object):
         char.purchase_got = total_purchase_got
         # VIP
         # 2016.1.1 - 2016.1.31 活动， 4倍VIP经验
-        char.vip_exp += purchase_got * 4
+        if get_settings('as_vip_exp'):
+            char.vip_exp += purchase_got * 4
 
         old_vip = char.vip
         new_vip = get_vip_level(char.vip_exp)
@@ -202,7 +203,7 @@ class Char(object):
 
         self.send_notify(char=char, opended_funcs=opended_funcs)
 
-        if purchase_got > 0 and get_send_notify_settings('purchase_notify'):
+        if purchase_got > 0 and get_settings('purchase_notify'):
             signal_go.add(
                 new_purchase_signal,
                 sender=None,
