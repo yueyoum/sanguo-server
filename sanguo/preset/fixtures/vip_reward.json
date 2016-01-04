@@ -84,14 +84,14 @@
     "model": "vip.vipreward", 
     "fields": {
         "item_two_type": 9, 
-        "item_three_type": 9, 
-        "item_three_amount": 10, 
+        "item_three_type": 10, 
+        "item_three_amount": 1, 
         "item_one_id": 21, 
         "package": 12017, 
         "item_two_id": 9, 
         "item_one_amount": 1, 
         "item_two_amount": 30, 
-        "item_three_id": 10, 
+        "item_three_id": 1, 
         "item_one_type": 7
     }
 },
