@@ -24,27 +24,33 @@ from preset import errormsg
 MAX_DAYS = 7
 
 
-CHECKIN_DATA = {}
-# {
-#   index_number: {
-#     'icons': [(icon_one_type, icon_one_id, icon_one_amount), ...],
-#     'package': package
-#   },
-#   ...
-# }
-
-def get_checkin_data():
-    global CHECKIN_DATA
-    res = api_get_checkin_data(data={})
-    CHECKIN_DATA = res['data']['checkin']
-
-get_checkin_data()
-
-
-def receive_checkin_data(data):
-    global CHECKIN_DATA
-    CHECKIN_DATA = data
-
+# CHECKIN_DATA = {}
+# # {
+# #   index_number: {
+# #     'icons': [(icon_one_type, icon_one_id, icon_one_amount), ...],
+# #     'package': package
+# #   },
+# #   ...
+# # }
+#
+# def get_checkin_data():
+#     global CHECKIN_DATA
+#     res = api_get_checkin_data(data={})
+#     CHECKIN_DATA = res['data']['checkin']
+#
+# get_checkin_data()
+#
+#
+# def receive_checkin_data(data):
+#     global CHECKIN_DATA
+#     CHECKIN_DATA = data
+#
+# 以前的获取最新签到方式有问题
+# 是靠hub每天把最新数据通过api发来的
+# 问题就在于server处理api请求的只是一个进程
+# 这个进程可以得到最新数据，其他进程仍然是旧数据
+# 现在改成hub不再发通过api发送签到数据
+# 而是每次签到，server都通过API向hub获取最新数据
 
 
 class CheckIn(object):
@@ -57,6 +63,9 @@ class CheckIn(object):
             self.c.has_checked = False
             self.c.day = 1
             self.c.save()
+
+        res = api_get_checkin_data(data={})
+        self.checkin_data = res['data']['checkin']
 
 
     def checkin(self):
@@ -74,7 +83,7 @@ class CheckIn(object):
         self.c.save()
 
         resource = Resource(self.char_id, "Daily Checkin", 'checkin reward. day {0}'.format(day))
-        resource_add = CHECKIN_DATA[str(day)]['package']
+        resource_add = self.checkin_data[str(day)]['package']
         resource_add = get_drop_from_raw_package(resource_add)
 
         standard_drop = resource.add(**resource_add)
@@ -122,7 +131,7 @@ class CheckIn(object):
 
         item.status = status
 
-        for _tp, _id, _amount in CHECKIN_DATA[str(k)]['icons']:
+        for _tp, _id, _amount in self.checkin_data[str(k)]['icons']:
             obj = item.objs.add()
             obj.tp, obj.id, obj.amount = _tp, _id, _amount
 
@@ -135,7 +144,7 @@ class CheckIn(object):
 
     def send_notify(self):
         msg = CheckInNotify()
-        for k in CHECKIN_DATA.keys():
+        for k in self.checkin_data.keys():
             item = msg.items.add()
             self._fill_up_one_item(item, k)
 

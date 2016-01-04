@@ -135,7 +135,7 @@ urlpatterns += patterns('',
                         url(r'^api/character/union/$', 'views.api.character.views.get_joined_union'),
 
                         url(r'^api/mail/send/$', 'views.api.mail.views.send_mail'),
-                        url(r'^api/checkin/send/$', 'views.api.checkin.views.recv_checkin_data'),
+                        # url(r'^api/checkin/send/$', 'views.api.checkin.views.recv_checkin_data'),
 
                         url(r'^api/ping/$', 'views.api.ping.views.ping'),
                         url(r'^api/server/feedback/$', 'views.api.server.views.feedback'),
