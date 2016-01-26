@@ -22,6 +22,8 @@ from core.battle.hero import InBattleHero
 from core.battle.battle import Ground
 from core.battle import PVE
 
+from utils.lock import Lock, LockTimeOut
+
 from preset import errormsg
 from preset.data import UNION_BOSS, UNION_BOSS_REWARD, UNION_LEVEL
 
@@ -63,6 +65,9 @@ class UnionBoss(UnionLoadBase):
 
     @union_instance_check(UnionOwner, errormsg.UNION_BOSS_ONLY_OPENED_BY_OWNER, "UnionBoss Start", "not owner")
     def start(self, boss_id):
+        if str(boss_id) in self.mongo_boss.opened:
+            return
+
         try:
             boss = UNION_BOSS[boss_id]
         except KeyError:
@@ -93,75 +98,60 @@ class UnionBoss(UnionLoadBase):
     @union_instance_check(UnionBase, errormsg.UNION_NOT_EXIST, "UnionBoss Battle", "has no union")
     def battle(self, boss_id):
         try:
-            this_boss = self.mongo_boss.opened[str(boss_id)]
-        except KeyError:
-            raise SanguoException(
-                errormsg.UNION_BOSS_NOT_STARTED,
-                self.char_id,
-                "UnionBoss Battle",
-                "boss not started {0}".format(boss_id)
-            )
+            with Lock('union_boss_battle').lock():
+                self.load_data()
+                try:
+                    this_boss = self.mongo_boss.opened[str(boss_id)]
+                except KeyError:
+                    raise SanguoException(
+                        errormsg.UNION_BOSS_NOT_STARTED,
+                        self.char_id,
+                        "UnionBoss Battle",
+                        "boss not started {0}".format(boss_id)
+                    )
 
-        if self.cur_times >= self.max_times:
-            raise SanguoException(
-                errormsg.UNION_BOSS_NO_TIMES,
-                self.char_id,
-                "UnionBoss Battle",
-                "no times"
-            )
+                if this_boss.hp <= 0:
+                    raise SanguoException(
+                        errormsg.UNION_BOSS_DEAD,
+                        self.char_id,
+                        "UnionBoss Battle",
+                        "boss dead {0}".format(boss_id)
+                    )
 
-        for i in range(5):
-            self.load_data()
-            this_boss = self.mongo_boss.opened[str(boss_id)]
-            if this_boss.lock:
-                time.sleep(0.2)
-            else:
-                this_boss.lock = True
+                if self.cur_times >= self.max_times:
+                    raise SanguoException(
+                        errormsg.UNION_BOSS_NO_TIMES,
+                        self.char_id,
+                        "UnionBoss Battle",
+                        "no times"
+                    )
+
+                msg = protomsg.Battle()
+
+                battle = UnionBossBattle(self.char_id, boss_id, msg, this_boss.hp)
+                remained_hp = battle.start()
+                damage = battle.get_total_damage()
+
+                this_boss.hp = remained_hp
+                if remained_hp <= 0:
+                    this_boss.killer = self.char_id
+
+                self.save_battle_log(this_boss, damage)
+                self.incr_battle_times()
+                drop_msg = self.after_battle(boss_id, damage, remained_hp<=0)
+
+                if remained_hp <= 0:
+                    self.boss_has_been_killed(boss_id)
+
                 self.mongo_boss.save()
-                break
-        else:
+                return msg, drop_msg
+        except LockTimeOut:
             raise SanguoException(
                 errormsg.UNION_BOSS_LOCKED,
                 self.char_id,
                 "UnionBoss Battle",
                 "boss locked {0}".format(boss_id)
             )
-
-
-        if this_boss.hp <= 0:
-            this_boss.lock = False
-            self.mongo_boss.save()
-            raise SanguoException(
-                errormsg.UNION_BOSS_DEAD,
-                self.char_id,
-                "UnionBoss Battle",
-                "boss dead {0}".format(boss_id)
-            )
-
-
-        msg = protomsg.Battle()
-
-        try:
-            battle = UnionBossBattle(self.char_id, boss_id, msg, this_boss.hp)
-            remained_hp = battle.start()
-            damage = battle.get_total_damage()
-
-            this_boss.hp = remained_hp
-            if remained_hp <= 0:
-                this_boss.killer = self.char_id
-        finally:
-            this_boss.lock = False
-            self.mongo_boss.save()
-
-        self.save_battle_log(this_boss, damage)
-        self.incr_battle_times()
-        drop_msg = self.after_battle(boss_id, damage, remained_hp<=0)
-
-        if remained_hp <= 0:
-            self.boss_has_been_killed(boss_id)
-
-        self.mongo_boss.save()
-        return msg, drop_msg
 
 
     def save_battle_log(self, this_boss, damage):

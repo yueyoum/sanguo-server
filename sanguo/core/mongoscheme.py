@@ -573,7 +573,6 @@ class MongoEmbeddedUnionBoss(EmbeddedDocument):
     hp = IntField()         # 每被挑战一次后剩余hp
     killer = IntField(default=0)
     logs = ListField(EmbeddedDocumentField(MongoEmbeddedUnionBossLog))
-    lock = BooleanField(default=False)  # 防止多人同时打BOSS
 
 
 class MongoUnionBoss(Document):
