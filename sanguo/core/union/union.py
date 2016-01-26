@@ -52,7 +52,11 @@ class Union(object):
             return UnionOwner(char_id, union_id)
         return UnionMember(char_id, union_id)
 
-
+    @classmethod
+    def cronjob_auto_transfer_union(cls):
+        timestamp = arrow.utcnow().timestamp - 3600 * 24 * 3
+        members = MongoUnionMember.objects.filter(last_checkin_timestamp__gte=timestamp)
+        # TODO
 
 class UnionBase(object):
     def __init__(self, char_id, union_id):
@@ -193,24 +197,28 @@ class UnionOwner(UnionBase):
         return char_id in self.member_list
 
 
-    def find_next_owner(self, find_all=False):
-        timestamp = arrow.utcnow().timestamp - 3600 * 24 * 3
-        condition = Q(id__ne=self.char_id) & Q(joined=self.union_id) & Q(last_checkin_timestamp__gte=timestamp)
-        members = MongoUnionMember.objects.filter(condition).order_by('-position')
-        if members:
-            return members[0].id
+    def find_next_owner(self):
+        def find(find_recent):
+            condition = Q(id__ne=self.char_id) & Q(joined=self.union_id)
+            if find_recent:
+                timestamp = arrow.utcnow().timestamp - 3600 * 24 * 3
+                condition &= Q(last_checkin_timestamp__gte=timestamp)
 
-        if not find_all:
+            members = MongoUnionMember.objects.filter(condition).order_by('-position')
+            if members:
+                return members[0].id
+
             return None
 
-        members = self.member_list
-        if self.char_id in members:
-            members.remove(self.char_id)
-        if members:
-            return random.choice(members)
+        owner = find(True)
+        if owner:
+            return owner
+
+        owner = find(False)
+        if owner:
+            return owner
 
         return None
-
 
 
     def agree_join(self, char_id):
@@ -285,13 +293,11 @@ class UnionOwner(UnionBase):
 
         owner = self.mongo_union.owner
 
-        next_owner = self.find_next_owner(find_all=False)
+        next_owner = self.find_next_owner()
         if not next_owner:
-            next_owner = self.find_next_owner(find_all=True)
-            if not next_owner:
-                self.mongo_union.delete()
-                Union(owner).send_notify()
-                return
+            self.mongo_union.delete()
+            Union(owner).send_notify()
+            return
 
         self.mongo_union.owner = next_owner
         self.mongo_union.save()

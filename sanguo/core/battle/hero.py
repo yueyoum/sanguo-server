@@ -275,13 +275,13 @@ class InBattleHero(ActiveEffectMixin, FightPowerMixin, DotEffectMixin):
         return max(damages)
 
 
-
     def _one_action(self, target, value, msg, eff):
 
         is_crit = False
-        if self.using_crit >= uniform(1, 100):
+        prob = min(self.using_crit / 10, 75)
+        if prob >= uniform(1, 100):
             is_crit = True
-            value *= 2
+            value = value * max(2+(self.using_crit-750)/1000, 2)
 
         text = "{0} => {1}, Eff: {2}, Crit: {3}".format(self.id, target.id, eff.id if eff else 'None', is_crit)
         logger.debug(text)

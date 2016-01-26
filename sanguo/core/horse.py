@@ -32,7 +32,7 @@ from protomsg import (
 
 class HorseStrengthFactory(object):
     X = 5
-    Y = 0.54
+    Y = 0.34
     Z = 2
 
     @classmethod

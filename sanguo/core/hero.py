@@ -246,9 +246,9 @@ class Hero(FightPowerMixin):
         if self.model_hero.quality == 1:
             return 100
         if self.model_hero.quality == 2:
-            return 60
+            return 75
         if self.model_hero.quality == 3:
-            return 30
+            return 40
 
         raise RuntimeError("Invalid Hero Quality: {0}".format(self.model_hero.quality))
 
