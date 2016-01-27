@@ -9,11 +9,14 @@ __date__ = '14-12-10'
 
 import random
 import arrow
+
+from django.conf import settings
 from mongoengine import DoesNotExist, Q
 from core.mongoscheme import MongoUnion, MongoUnionMember
-
+from core.character import get_char_property
 from core.exception import SanguoException
 from core.msgpipe import publish_to_char
+from core.mail import Mail
 
 from core.msgfactory import create_character_infomation_message
 
@@ -23,6 +26,12 @@ from preset import errormsg
 from preset.data import (
     UNION_LEVEL,
 )
+from preset.settings import (
+    MAIL_UNION_OWNER_TRANSFER_NOTIFY_TITLE,
+    MAIL_UNION_OWNER_TRANSFER_NOTIFY_CONTENT,
+    MAIL_UNION_OWNER_TRANSFER_DONE_TITLE,
+    MAIL_UNION_OWNER_TRANSFER_DONE_CONTENT,
+)
 
 import protomsg
 
@@ -31,11 +40,15 @@ MAX_UNION_LEVEL = max(UNION_LEVEL.keys())
 
 class Union(object):
     def __new__(cls, char_id, union_id=None):
-        try:
-            char_union_id = MongoUnionMember.objects.get(id=char_id).joined
-            if not char_union_id and not union_id:
-                return UnionDummy(char_id)
-        except DoesNotExist:
+        mongo_member = MongoUnionMember._get_collection().find_one(
+                {'_id': char_id},
+                {'joined': 1}
+        )
+        if not mongo_member:
+            return UnionDummy(char_id)
+
+        char_union_id = mongo_member['joined']
+        if not char_union_id and not union_id:
             return UnionDummy(char_id)
 
         if not union_id:
@@ -47,16 +60,79 @@ class Union(object):
         # if char_union_id != union_id:
         #     return UnionDummy(char_id)
 
-        mongo_union = MongoUnion.objects.get(id=union_id)
-        if char_id == mongo_union.owner:
+        mongo_union = MongoUnion._get_collection().find_one(
+                {'_id': union_id},
+                {'owner': 1}
+        )
+
+        if char_id == mongo_union['owner']:
             return UnionOwner(char_id, union_id)
         return UnionMember(char_id, union_id)
 
     @classmethod
     def cronjob_auto_transfer_union(cls):
-        timestamp = arrow.utcnow().timestamp - 3600 * 24 * 3
-        members = MongoUnionMember.objects.filter(last_checkin_timestamp__gte=timestamp)
-        # TODO
+        transfer_dict = {}
+
+        now = arrow.utcnow()
+        local_date = now.to(settings.TIME_ZONE).date()
+        timestamp = now.timestamp - 3600 * 24 * 3
+
+        unions = MongoUnion._get_collection().find({}, {'owner': 1})
+        owner_union_id_dict = {doc['owner']: doc['_id'] for doc in unions}
+
+        conditions = {
+            '$and': [
+                {'_id': {'$in': owner_union_id_dict.keys()}},
+                {'last_checkin_timestamp': {'$lte': timestamp}}
+            ]
+        }
+
+        members = MongoUnionMember._get_collection().find(
+                conditions,
+                {'last_checkin_timestamp':1}
+        )
+
+        for m in members:
+            char_id = m['_id']
+            union_id = owner_union_id_dict[char_id]
+
+            last_checkin_date = arrow.get(m['last_checkin_timestamp']).to(settings.TIME_ZONE).date()
+            days = (local_date - last_checkin_date).days
+            # 昨天签到了，今天检测的时候， days 就是1
+            # 但是从逻辑上看，应该是连续签到的，
+            # 前天签到，昨天没有，今天检测的时候，days是2
+            # 逻辑看来是已经 一天 没有签到了
+            # 所以 days 在这里 -1
+            days -= 1
+
+            if days < 3:
+                continue
+
+            u = Union(char_id, union_id)
+            if days >= 7:
+                # transfer
+                next_owner = u.find_next_owner()
+
+                transfer_dict[union_id] = (char_id, next_owner)
+                if next_owner:
+                    u.transfer(next_owner)
+
+                    m = Mail(char_id)
+                    m.add(
+                        MAIL_UNION_OWNER_TRANSFER_DONE_TITLE,
+                        MAIL_UNION_OWNER_TRANSFER_DONE_CONTENT.format(get_char_property(char_id, 'name'))
+                    )
+            else:
+                members = u.member_list
+                for mid in members:
+                    m = Mail(mid)
+                    m.add(
+                        MAIL_UNION_OWNER_TRANSFER_NOTIFY_TITLE,
+                        MAIL_UNION_OWNER_TRANSFER_NOTIFY_CONTENT.format(days)
+                    )
+
+        return transfer_dict
+
 
 class UnionBase(object):
     def __init__(self, char_id, union_id):
@@ -67,14 +143,14 @@ class UnionBase(object):
     @property
     def applied_list(self):
         # 申请者ID列表
-        mongo_members = MongoUnionMember.objects.filter(applied=self.union_id)
-        return [i.id for i in mongo_members]
+        members = MongoUnionMember.get_collection().find({'applied': self.union_id}, {'_id': 1})
+        return [i['_id'] for i in members]
 
     @property
     def member_list(self):
         # 成员ID列表
-        members = MongoUnionMember.objects.filter(joined=self.union_id)
-        return [i.id for i in members]
+        members = MongoUnionMember._get_collection().find({'joined': self.union_id}, {'_id': 1})
+        return [i['_id'] for i in members]
 
     @property
     def max_member_amount(self):

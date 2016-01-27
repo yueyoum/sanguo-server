@@ -262,9 +262,3 @@ class Member(object):
 
         for m in members:
             Member(m['_id']).send_personal_notify()
-
-    # def _run_cron_job(self):
-    #     self.mongo_union_member.checkin_times = 0
-    #     self.mongo_union_member.boss_times = 0
-    #     self.mongo_union_member.save()
-    #     self.send_personal_notify()

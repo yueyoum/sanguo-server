@@ -176,11 +176,6 @@ class UnionBattle(UnionLoadBase):
         for u in unions:
             UnionBattle(u['owner']).send_notify()
 
-    # def _run_cron_job(self):
-    #     self.union.mongo_union.battle_times = 0
-    #     self.union.mongo_union.save()
-    #     self.send_notify()
-
 
 class UnionBattleRecord(object):
     # 战斗记录

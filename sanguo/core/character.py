@@ -67,7 +67,13 @@ def char_official_up(current_official_exp, current_official, add_official_exp):
     return new_official_exp, current_official
 
 
+def get_char_property(char_id, key):
+    doc = MongoCharacter._get_collection().find_one(
+            {'_id': char_id},
+            {'key': 1}
+    )
 
+    return doc['key']
 
 class Char(object):
     def __init__(self, char_id):

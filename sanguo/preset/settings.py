@@ -279,7 +279,11 @@ MAIL_UNION_BATTLE_REWARD_CONTENT = u'工会战周奖励'
 # VIP
 MAIL_VIP_CHANGED_TITLE = u'VIP变更通知'
 MAIL_VIP_CHANGED_CONTENT = u'恭喜您获得VIP{0}特权，快去VIP界面领取奖励吧'
-
+# 工会会长自动转移
+MAIL_UNION_OWNER_TRANSFER_NOTIFY_TITLE = u'本工会会长准备转移'
+MAIL_UNION_OWNER_TRANSFER_NOTIFY_CONTENT = u'本工会会长已经连续{0}天没有工会签到，连续7天不签到，会长将自动转移到职位最高的成员'
+MAIL_UNION_OWNER_TRANSFER_DONE_TITLE = u'本工会会长已经转移'
+MAIL_UNION_OWNER_TRANSFER_DONE_CONTENT = u'本工会会长已经自动转移至{0}'
 
 #########################
 #      激活码           #
