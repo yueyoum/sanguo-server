@@ -19,6 +19,7 @@ api_server_register = partial(apicall, cmd=HUB_URL + '/api/server-list/register/
 api_account_login = partial(apicall, cmd=HUB_URL + '/api/account/login/')
 api_account_bind = partial(apicall, cmd=HUB_URL + '/api/account/bind/')
 api_character_create = partial(apicall, cmd=HUB_URL + '/api/character/create/')
+api_character_failure = partial(apicall, cmd=HUB_URL + '/api/character/failure/')
 
 api_store_get = partial(apicall, cmd=HUB_URL + '/api/store/get/')
 api_store_buy = partial(apicall, cmd=HUB_URL + '/api/store/buy/')

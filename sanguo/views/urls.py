@@ -129,7 +129,6 @@ if settings.ENABLE_TEST_MODE:
 
 # API
 urlpatterns += patterns('',
-                        url(r'^api/character/initialize/$', 'views.api.character.views.character_initialize'),
                         url(r'^api/character/information/$', 'views.api.character.views.character_information'),
                         url(r'^api/character/modify/$', 'views.api.character.views.character_modify'),
                         url(r'^api/character/union/$', 'views.api.character.views.get_joined_union'),

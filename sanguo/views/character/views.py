@@ -7,15 +7,15 @@ __date__ = '4/9/14'
 from core.exception import SanguoException
 from core.signals import login_signal
 from core.server import server
+from core.character import char_initialize
 from core.activeplayers import Player
 from protomsg import CreateCharacterResponse
 from libs import crypto, pack_msg
 from libs.session import session_dumps
 
 from utils.decorate import message_response
-from utils.api import api_character_create, APIFailure
+from utils.api import api_character_create, api_character_failure
 
-from preset import errormsg
 
 @message_response("CreateCharacterResponse")
 def create_character(request):
@@ -27,16 +27,7 @@ def create_character(request):
         'name': req.name
     }
 
-    try:
-        res = api_character_create(data)
-    except APIFailure:
-        raise SanguoException(
-            errormsg.SERVER_FAULT,
-            0,
-            'Character Create',
-            'APIFailure, api_character_create'
-        )
-
+    res = api_character_create(data)
     if res['ret'] != 0:
         raise SanguoException(
             res['ret'],
@@ -46,6 +37,14 @@ def create_character(request):
         )
 
     char_id = res['data']['char_id']
+    try:
+        char_initialize(request._account_id, server.id, char_id, req.name)
+    except Exception as e:
+        data = {
+            'char_id': char_id,
+        }
+        api_character_failure(data)
+        raise e
 
     login_signal.send(
         sender=None,
