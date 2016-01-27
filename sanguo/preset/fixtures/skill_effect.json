@@ -137,7 +137,7 @@
     "fields": {
         "target": 2, 
         "effect": 5, 
-        "value": 280, 
+        "value": 300, 
         "skill": 29, 
         "is_hit_target": false, 
         "rounds": 3
@@ -931,6 +931,114 @@
         "effect": 2, 
         "value": 100, 
         "skill": 1001, 
+        "is_hit_target": true, 
+        "rounds": 0
+    }
+},
+{
+    "pk": 107, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "target": 2, 
+        "effect": 9, 
+        "value": 100, 
+        "skill": 76, 
+        "is_hit_target": false, 
+        "rounds": 1
+    }
+},
+{
+    "pk": 108, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "target": 2, 
+        "effect": 3, 
+        "value": 80, 
+        "skill": 76, 
+        "is_hit_target": false, 
+        "rounds": 99
+    }
+},
+{
+    "pk": 109, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "target": 2, 
+        "effect": 5, 
+        "value": 200, 
+        "skill": 76, 
+        "is_hit_target": false, 
+        "rounds": 99
+    }
+},
+{
+    "pk": 110, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "target": 2, 
+        "effect": 3, 
+        "value": 30, 
+        "skill": 29, 
+        "is_hit_target": false, 
+        "rounds": 3
+    }
+},
+{
+    "pk": 111, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "target": 1, 
+        "effect": 2, 
+        "value": 100, 
+        "skill": 10, 
+        "is_hit_target": true, 
+        "rounds": 0
+    }
+},
+{
+    "pk": 112, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "target": 1, 
+        "effect": 6, 
+        "value": 20, 
+        "skill": 10, 
+        "is_hit_target": false, 
+        "rounds": 3
+    }
+},
+{
+    "pk": 113, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "target": 2, 
+        "effect": 5, 
+        "value": 30, 
+        "skill": 77, 
+        "is_hit_target": false, 
+        "rounds": 99
+    }
+},
+{
+    "pk": 114, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "target": 1, 
+        "effect": 2, 
+        "value": 120, 
+        "skill": 78, 
+        "is_hit_target": true, 
+        "rounds": 0
+    }
+},
+{
+    "pk": 115, 
+    "model": "skill.skilleffect", 
+    "fields": {
+        "target": 3, 
+        "effect": 2, 
+        "value": 120, 
+        "skill": 78, 
         "is_hit_target": true, 
         "rounds": 0
     }

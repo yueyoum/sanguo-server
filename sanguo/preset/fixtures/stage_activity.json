@@ -85,6 +85,23 @@
     }
 },
 {
+    "pk": 106, 
+    "model": "stage.activelystage", 
+    "fields": {
+        "normal_drop": "0", 
+        "normal_gold": 40000, 
+        "bg": "\u519b\u8425\u573a\u666f", 
+        "strength_modulus": 3.0, 
+        "level": 52, 
+        "tp": 1, 
+        "battle_name": "\u4e4c\u5de2\u52ab\u7cae", 
+        "char_level": 70, 
+        "normal_exp": 3000, 
+        "monsters": "8,13,8,5,15,5,12,20,12", 
+        "name": "\u96be\u5ea6\u516d"
+    }
+},
+{
     "pk": 201, 
     "model": "stage.activelystage", 
     "fields": {
@@ -170,6 +187,23 @@
     }
 },
 {
+    "pk": 206, 
+    "model": "stage.activelystage", 
+    "fields": {
+        "normal_drop": "303,115", 
+        "normal_gold": 0, 
+        "bg": "\u5c71\u8def\u573a\u666f", 
+        "strength_modulus": 3.0, 
+        "level": 52, 
+        "tp": 2, 
+        "battle_name": "\u6218\u5357\u86ee", 
+        "char_level": 70, 
+        "normal_exp": 3000, 
+        "monsters": "8,174,8,5,118,5,12,150,12", 
+        "name": "\u96be\u5ea6\u516d"
+    }
+},
+{
     "pk": 301, 
     "model": "stage.activelystage", 
     "fields": {
@@ -252,6 +286,23 @@
         "normal_exp": 2500, 
         "monsters": "5,198,5,11,173,11,18,168,18", 
         "name": "\u96be\u5ea6\u4e94"
+    }
+},
+{
+    "pk": 306, 
+    "model": "stage.activelystage", 
+    "fields": {
+        "normal_drop": "205,207", 
+        "normal_gold": 0, 
+        "bg": "\u57ce\u4e0b", 
+        "strength_modulus": 3.0, 
+        "level": 52, 
+        "tp": 3, 
+        "battle_name": "\u6d1b\u9633\u4e4b\u6218", 
+        "char_level": 70, 
+        "normal_exp": 3000, 
+        "monsters": "5,198,5,11,173,11,18,168,18", 
+        "name": "\u96be\u5ea6\u516d"
     }
 }
 ]

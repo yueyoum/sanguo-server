@@ -355,5 +355,22 @@
         "normal_exp": 41, 
         "normal_gold": 39
     }
+},
+{
+    "pk": 21, 
+    "model": "stage.battle", 
+    "fields": {
+        "normal_drop": "6,7", 
+        "city_tp": 3, 
+        "name": "\u9646\u900a\u706b\u70e7\u8fde\u8425", 
+        "open_condition_des": "\u901a\u5173\u9646\u900a\u706b\u70e7\u8fde\u8425\u540e\u5f00\u542f", 
+        "des": "\u5173\u7fbd\u521a\u635f\uff0c\u53c8\u6298\u5f20\u98de\uff0c\u5218\u519b\u594b\u8d77\u4f10\u5434\uff0c\u88ab\u9646\u900a\u8425\u70e7\u516b\u767e\u91cc\uff0c\u5de7\u7834\u4e4b\u3002", 
+        "total_hours": 8, 
+        "refresh_cost_gold": 3600, 
+        "city_name": "\u5937\u9675", 
+        "level_limit": 75, 
+        "normal_exp": 41, 
+        "normal_gold": 39
+    }
 }
 ]

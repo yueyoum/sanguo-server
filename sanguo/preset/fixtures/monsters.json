@@ -414,6 +414,60 @@
     }
 },
 {
+    "pk": 24, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u66f9\u4e15", 
+        "skills": "36", 
+        "image": "\u66f9\u4e15", 
+        "tp": "2", 
+        "anger": 50, 
+        "default_skill": 2, 
+        "attack": 14.0, 
+        "defense": 5.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 56.0
+    }
+},
+{
+    "pk": 25, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u5f20\u82de", 
+        "skills": "24", 
+        "image": "\u5f20\u82de", 
+        "tp": "4", 
+        "anger": 50, 
+        "default_skill": 0, 
+        "attack": 14.0, 
+        "defense": 6.0, 
+        "crit": 0, 
+        "quality": 2, 
+        "hp": 58.0
+    }
+},
+{
+    "pk": 100, 
+    "model": "hero.monster", 
+    "fields": {
+        "dodge": 0, 
+        "name": "\u9646\u900a", 
+        "skills": "38", 
+        "image": "\u9646\u900a", 
+        "tp": "4", 
+        "anger": 100, 
+        "default_skill": 0, 
+        "attack": 16.0, 
+        "defense": 7.0, 
+        "crit": 10, 
+        "quality": 2, 
+        "hp": 45.0
+    }
+},
+{
     "pk": 101, 
     "model": "hero.monster", 
     "fields": {
