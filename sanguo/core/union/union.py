@@ -3,15 +3,10 @@
 __author__ = 'Wang Chao'
 __date__ = '14-12-10'
 
-"""
-工会自身
-"""
-
-import random
 import arrow
 
 from django.conf import settings
-from mongoengine import DoesNotExist, Q
+from mongoengine import Q
 from core.mongoscheme import MongoUnion, MongoUnionMember
 from core.character import get_char_property
 from core.exception import SanguoException
@@ -87,16 +82,16 @@ class Union(object):
             ]
         }
 
-        members = MongoUnionMember._get_collection().find(
+        member_docs = MongoUnionMember._get_collection().find(
                 conditions,
                 {'last_checkin_timestamp':1}
         )
 
-        for m in members:
-            char_id = m['_id']
+        for doc in member_docs:
+            char_id = doc['_id']
             union_id = owner_union_id_dict[char_id]
 
-            last_checkin_date = arrow.get(m['last_checkin_timestamp']).to(settings.TIME_ZONE).date()
+            last_checkin_date = arrow.get(doc['last_checkin_timestamp']).to(settings.TIME_ZONE).date()
             days = (local_date - last_checkin_date).days
             # 昨天签到了，今天检测的时候， days 就是1
             # 但是从逻辑上看，应该是连续签到的，
@@ -143,7 +138,7 @@ class UnionBase(object):
     @property
     def applied_list(self):
         # 申请者ID列表
-        members = MongoUnionMember.get_collection().find({'applied': self.union_id}, {'_id': 1})
+        members = MongoUnionMember._get_collection().find({'applied': self.union_id}, {'_id': 1})
         return [i['_id'] for i in members]
 
     @property
