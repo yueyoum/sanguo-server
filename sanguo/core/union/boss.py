@@ -4,7 +4,6 @@ __author__ = 'Wang Chao'
 __date__ = '14-12-10'
 
 import json
-import time
 import arrow
 
 from mongoengine import DoesNotExist
@@ -16,7 +15,7 @@ from core.union.member import Member
 
 from core.attachment import make_standard_drop_from_template, standard_drop_to_attachment_protomsg
 from core.mail import Mail
-from core.character import Char
+from core.character import get_char_property
 
 from core.battle.hero import InBattleHero
 from core.battle.battle import Ground
@@ -262,7 +261,7 @@ class UnionBoss(UnionLoadBase):
         for log in self.get_battle_members_in_ordered(boss_id):
             msg_log = protomsg.UnionBossGetLogResponse.BossLog()
             msg_log.char_id = log.char_id
-            msg_log.char_name = Char(log.char_id).mc.name
+            msg_log.char_name = get_char_property(log.char_id, 'name')
             msg_log.damage = log.damage
             msg_log.precent = int(log.damage/hp * 100)
 

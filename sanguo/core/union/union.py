@@ -175,12 +175,15 @@ class UnionBase(object):
         hours24 = 24 * 3600
         checkin_limit = now - hours24
 
-        members = []
-        for m in MongoUnionMember.objects.filter(joined=self.union_id):
-            if m.last_checkin_timestamp >= checkin_limit:
-                members.append(m.id)
+        condition = {
+            '$and': [
+                {'joined': self.union_id},
+                {'last_checkin_timestamp': {'$gte': checkin_limit}}
+            ]
+        }
+        docs = MongoUnionMember._get_collection().find(condition, {'_id': 1})
+        return [doc['_id'] for doc in docs]
 
-        return members
 
     def add_contribute_points(self, point):
         self.mongo_union.contribute_points += point

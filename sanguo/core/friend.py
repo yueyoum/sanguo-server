@@ -8,7 +8,7 @@ import random
 from mongoengine import DoesNotExist
 
 from core.mongoscheme import MongoFriend, MongoCharacter
-from core.character import Char, get_char_ids_by_level_range
+from core.character import Char, get_char_ids_by_level_range, get_char_property
 from core.msgpipe import publish_to_char
 from core.exception import SanguoException
 from core.signals import new_friend_got_signal
@@ -186,9 +186,8 @@ class Friend(object):
             )
 
         if target_id:
-            try:
-                c = MongoCharacter.objects.get(id=target_id)
-            except DoesNotExist:
+            doc = MongoCharacter._get_collection().find_one({'_id': target_id}, {'_id': 1})
+            if not doc:
                 raise SanguoException(
                     errormsg.CHARACTER_NOT_FOUND,
                     self.char_id,
@@ -196,9 +195,8 @@ class Friend(object):
                     "character id {0} not found".format(target_id)
                 )
         else:
-            try:
-                c = MongoCharacter.objects.get(name=target_name)
-            except DoesNotExist:
+            doc = MongoCharacter._get_collection().find_one({'name': target_name}, {'_id': 1})
+            if not doc:
                 raise SanguoException(
                     errormsg.CHARACTER_NOT_FOUND,
                     self.char_id,
@@ -206,28 +204,30 @@ class Friend(object):
                     u"can not found character {0} in server {1}".format(target_name, self.char.mc.server_id)
                 )
 
-        if c.id in self.mf.friends:
+        cid = doc['_id']
+
+        if cid in self.mf.friends:
             raise SanguoException(
                 errormsg.FRIEND_ALREADY_ADD,
                 self.char_id,
                 "Friend Add",
-                "character {0} already has beed added".format(c.id)
+                "character {0} already has beed added".format(cid)
             )
 
         self.check_max_amount("Friend Add")
 
-        if c.id in self.mf.accepting:
+        if cid in self.mf.accepting:
             # 如果要加的好友以前已经给我发过好友申请，那么就是直接接受
-            self.accept(c.id)
+            self.accept(cid)
             return
 
-        if c.id not in self.mf.pending:
-            self.mf.pending.append(c.id)
-            self.send_new_friend_notify(c.id, status=FRIEND_ACK)
+        if cid not in self.mf.pending:
+            self.mf.pending.append(cid)
+            self.send_new_friend_notify(cid, status=FRIEND_ACK)
 
         self.mf.save()
 
-        target_char_friend = Friend(c.id)
+        target_char_friend = Friend(cid)
         target_char_friend.someone_add_me(self.char_id)
 
 
@@ -432,12 +432,12 @@ class Friend(object):
             self.mf.pending.remove(from_id)
         self.mf.save()
 
-        from_char = Char(from_id)
+        from_char_name = get_char_property(from_id, 'name')
 
         mail = Mail(self.char_id)
         mail.add(
             MAIL_FRIEND_REFUSE_TITLE,
-            MAIL_FRIEND_REFUSE_CONTENT.format(from_char.mc.name)
+            MAIL_FRIEND_REFUSE_CONTENT.format(from_char_name)
         )
 
         self.send_remove_friend_notify([from_id])

@@ -7,7 +7,7 @@ import random
 
 from mongoengine import DoesNotExist, Q
 from core.drives import redis_client
-from core.character import Char
+from core.character import Char, get_char_property
 from core.battle import PVP
 from core.counter import Counter
 from core.mongoscheme import MongoArena, MongoEmbeddedArenaBeatenRecord
@@ -58,58 +58,68 @@ class ArenaScoreManager(object):
     @staticmethod
     def get_init_score():
         # 获得初始积分
-        lowest = MongoArena.objects.order_by('score').limit(1)
-        if not lowest:
+        lowest_doc = MongoArena._get_collection().find({}, {'score':1}).sort('score', 1).limit(1)
+        if lowest_doc.count() == 0:
             return ARENA_INITIAL_SCORE
 
-        lowest = lowest[0]
-        score = int(lowest.score)
+        doc = lowest_doc[0]
+        score = int(doc['score'])
         if score < ARENA_LOWEST_SCORE:
             score = ARENA_LOWEST_SCORE
         return score
 
     @staticmethod
     def get_all():
-        chars = MongoArena.objects.order_by('score')
-        return [(c.id, c.score) for c in chars]
+        docs = MongoArena._get_collection().find(
+                {},
+                {'score': 1}
+        ).sort('score', 1)
+
+        return [(doc['_id'], doc['score']) for doc in docs]
 
     @staticmethod
     def get_all_desc(amount=None):
         if amount is None:
-            chars = MongoArena.objects.order_by('-score')
+            docs = MongoArena._get_collection().find({}, {'score': 1}).sort('score', -1)
         else:
-            chars = MongoArena.objects.order_by('-score').limit(amount)
+            docs = MongoArena._get_collection().find({}, {'score': 1}).sort('score', -1).limit(amount)
 
-        return [(c.id, c.score) for c in chars]
+        return [(doc['_id'], doc['score']) for doc in docs]
 
     @staticmethod
     def get_char_score(char_id):
-        return MongoArena.objects.get(id=char_id).score
+        doc = MongoArena._get_collection().find_one(
+                {'_id': char_id},
+                {'score': 1}
+        )
+        return doc['score']
 
     @staticmethod
     def get_char_rank(char_score):
-        rank = MongoArena.objects.filter(score__gt=char_score).count()
+        docs = MongoArena._get_collection().find({'score': {'$gt': char_score}}, {'_id': 1})
+        rank = docs.count()
         return rank + 1
 
     @staticmethod
     def get_top_ranks(amount=10):
-        ranks = MongoArena.objects.order_by('-score').limit(amount)
-        return [(r.id, r.score) for r in ranks]
+        docs = MongoArena._get_collection().find({}, {'score': 1}).sort('score', -1).limit(amount)
+        return [(doc['_id'], doc['score']) for doc in docs]
 
     @staticmethod
     def get_chars_by_score(low_score=None, high_score=None):
-        condition = None
+        conditions = []
         if low_score:
-            condition = Q(score__gte=low_score)
+            conditions.append( {'score': {'$gte': low_score}} )
         if high_score:
-            condition = condition & Q(score__lte=high_score)
+            conditions.append( {'score': {'$lte': high_score}} )
 
-        if condition is None:
-            chars = MongoArena.objects.all()
-        else:
-            chars = MongoArena.objects.filter(condition)
+        if len(conditions) == 1:
+            conditions = conditions[0]
+        elif len(conditions) == 2:
+            conditions = {'$and': conditions}
 
-        return [c.id for c in chars]
+        docs = MongoArena._get_collection().find(conditions, {'_id': 1})
+        return [doc['_id'] for doc in docs]
 
 
 class Arena(object):
@@ -308,7 +318,7 @@ class Arena(object):
         score = calculate_score(self_score, rival_score, win)
         self.set_score(score)
 
-        rival_name = Char(rival_id).mc.name
+        rival_name = get_char_property(rival_id, 'name')
 
         record = MongoEmbeddedArenaBeatenRecord()
         record.name = rival_name

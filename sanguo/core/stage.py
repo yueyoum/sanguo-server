@@ -45,8 +45,11 @@ STAGE_ELITE_RESET_COST.sort(key=lambda item: -item[0])
 
 
 def max_star_stage_id(char_id):
-    s = MongoStage.objects.get(id=char_id)
-    return s.max_star_stage
+    doc = MongoStage._get_collection().find_one(
+            {'_id': char_id},
+            {'max_star_stage': 1}
+    )
+    return doc['max_star_stage']
 
 
 def drop_after_stage_type(stage_id, drop):

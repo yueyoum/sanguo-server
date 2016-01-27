@@ -100,7 +100,11 @@ class Member(object):
         Union(self.char_id).add_contribute_points(c.got_contributes)
 
         UnionBattle(self.char_id).send_notify()
-        owner = MongoUnion.objects.get(id=self.mongo_union_member.joined).owner
+        doc = MongoUnion._get_collection().find_one(
+                {'_id': self.mongo_union_member.joined},
+                {'owner': 1}
+        )
+        owner = doc['owner']
         UnionBattle(owner).send_notify()
 
         drop = make_standard_drop_from_template()
@@ -133,9 +137,12 @@ class Member(object):
         # 申请加入工会
         from core.union.union import Union, UnionList
 
-        try:
-            mongo_union = MongoUnion.objects.get(id=union_id)
-        except DoesNotExist:
+        doc = MongoUnion._get_collection().find_one(
+                {'_id': union_id},
+                {'owner': 1}
+        )
+
+        if not doc:
             raise SanguoException(
                 errormsg.UNION_NOT_EXIST,
                 self.char_id,
@@ -159,12 +166,11 @@ class Member(object):
                 "apply list too long"
             )
 
-
         if union_id not in self.mongo_union_member.applied:
             self.mongo_union_member.applied.append(union_id)
             self.mongo_union_member.save()
 
-            Union(mongo_union.owner).send_apply_list_notify()
+            Union(doc['owner']).send_apply_list_notify()
 
 
         UnionList.send_list_notify(self.char_id)
@@ -172,9 +178,8 @@ class Member(object):
 
     def join_union(self, union_id):
         # 加入工会 - 由Union调用
-        try:
-            MongoUnion.objects.get(id=union_id)
-        except DoesNotExist:
+        doc = MongoUnion._get_collection().find_one({'_id': union_id}, {'_id': 1})
+        if not doc:
             raise SanguoException(
                     errormsg.UNION_NOT_EXIST,
                     self.char_id,

@@ -52,8 +52,11 @@ class PlunderCurrentTimeOut(Exception):
 class PlunderRival(object):
     @classmethod
     def search(cls, city_id, exclude_char_id=None, return_dumps=False):
-        affairs = MongoAffairs.objects.filter(hang_city_id=city_id)
-        affair_ids = [a.id for a in affairs]
+        docs = MongoAffairs._get_collection().find(
+                {'hang_city_id': city_id},
+                {'_id': 1}
+        )
+        affair_ids = [doc['_id'] for doc in docs]
 
         rival_id = 0
         while affair_ids:
@@ -462,7 +465,6 @@ class PlunderLeaderboardWeekly(object):
     def get_leaderboard(length=10):
         boards = MongoPlunderBoard.objects.order_by('-times').limit(length)
         return [(b.id, b.times) for b in boards]
-
 
     @staticmethod
     def get_char_times(char_id):

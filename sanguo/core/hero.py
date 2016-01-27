@@ -480,10 +480,13 @@ class _FakeSaveHeroResult(object):
 FakeSaveHeroResult = _FakeSaveHeroResult()
 
 
-
 def get_char_hero_oids(char_id):
-    heros = MongoHero.objects.filter(char=char_id)
-    return [h.oid for h in heros]
+    docs = MongoHero._get_collection().find(
+            {'char': char_id},
+            {'oid': 1}
+    )
+    return [doc['oid'] for doc in docs]
+
 
 SAVE_HERO_TO_SOUL_TABLE = {
     1: 40,
