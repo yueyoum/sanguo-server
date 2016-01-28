@@ -188,9 +188,8 @@ class Char(object):
         total_purchase_got = char.purchase_got + purchase_got
         char.purchase_got = total_purchase_got
         # VIP
-        # 2016.1.1 - 2016.1.31 活动， 4倍VIP经验
         if get_settings('as_vip_exp'):
-            char.vip_exp += purchase_got * 4
+            char.vip_exp += purchase_got
 
         old_vip = char.vip
         new_vip = get_vip_level(char.vip_exp)
