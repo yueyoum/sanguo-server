@@ -26,6 +26,6 @@ def clean(signum):
     except:
         logger.error(traceback.format_exc())
     else:
-        logger.write("Transfer: {0}".format(json.dump(result)))
+        logger.write("Transfer: {0}".format(json.dumps(result)))
     finally:
         logger.close()
