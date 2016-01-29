@@ -5638,7 +5638,7 @@
         "tp": 1, 
         "monsters": "12,12,13,111,23,23,19,20,20", 
         "star_gold": 7650, 
-        "bg": "\u519b\u8425\u573a\u666f ", 
+        "bg": "\u519b\u8425\u573a\u666f", 
         "first_drop": "935", 
         "normal_gold": 32, 
         "star_exp": 0, 
