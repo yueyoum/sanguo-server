@@ -118,6 +118,7 @@ def login_notify(char_id):
     stage_elite.send_times_notify()
 
     stage_activity = ActivityStage(char_id)
+    stage_activity.check(send_notify=False)
     stage_activity.send_notify()
     stage_activity.send_remained_times_notify()
 

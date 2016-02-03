@@ -558,8 +558,6 @@ class ActivityStage(object):
             self.stage.activities = []
             self.stage.save()
 
-        self.check(send_notify=False)
-
     def check(self, char_level=None, send_notify=True):
         if not char_level:
             char = Char(self.char_id)
