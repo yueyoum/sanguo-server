@@ -558,8 +558,9 @@ class ActivityStage(object):
             self.stage.activities = []
             self.stage.save()
 
+        self.check(send_notify=False)
 
-    def check(self, char_level=None):
+    def check(self, char_level=None, send_notify=True):
         if not char_level:
             char = Char(self.char_id)
             char_level = char.mc.level
@@ -572,16 +573,16 @@ class ActivityStage(object):
                         enabled.append(_v)
 
         if enabled:
-            self.enable(enabled)
+            self.enable(enabled, send_notify=send_notify)
 
-
-    def enable(self, enabled):
+    def enable(self, enabled, send_notify=True):
         self.stage.activities.extend(enabled)
         self.stage.save()
 
-        msg = protomsg.NewActivityStageNotify()
-        msg.ids.extend(enabled)
-        publish_to_char(self.char_id, pack_msg(msg))
+        if send_notify:
+            msg = protomsg.NewActivityStageNotify()
+            msg.ids.extend(enabled)
+            publish_to_char(self.char_id, pack_msg(msg))
 
 
     # @passport(not_hang_going, errormsg.HANG_GOING, "Activate Stage Battle")
