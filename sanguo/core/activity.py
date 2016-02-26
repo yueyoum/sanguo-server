@@ -897,7 +897,6 @@ class Activity19001(ActivityBase):
         if send_times >= 10:
             return
 
-
         condition = Q(char_id=self.char_id) & Q(purchase_at__gte=self.activity_time.nearest_open_date.timestamp) & Q(purchase_at__lte=self.activity_time.nearest_close_date.timestamp)
         logs = MongoPurchaseLog.objects.filter(condition)
 
@@ -947,12 +946,6 @@ class Activity22001(ActivityBase):
             self.activity_data.mail_content,
             attachment=json.dumps(attachment)
         )
-
-
-# 组合活动
-# 这个就是把活动A，B，C ... 完成了，再给个什么奖励
-class CombineActivity(object):
-    ACTIVITIES = []
 
 
 # 活动类的统一入口
@@ -1031,6 +1024,8 @@ class ActivityStatic(object):
 
         if not activity_ids:
             activity_ids = ACTIVITY_STATIC.keys()
+
+        activity_ids.sort()
 
         for i in activity_ids:
             if not force_send and not self.is_show(i):
