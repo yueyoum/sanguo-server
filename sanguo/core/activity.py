@@ -502,7 +502,7 @@ class Activity4001(ActivityBase, ActivityTriggerMail):
 
 
 @activities.register(5001)
-class Activity5001(ActivityBase, PurchaseCurrentValue, ActivityTriggerMail):
+class Activity5001(PurchaseCurrentValue, ActivityBase, ActivityTriggerMail):
     # 累计充值
     pass
 
@@ -601,7 +601,7 @@ class Activity13001(ActivityBase, ActivityTriggerAdditionalDrop):
 
 
 @activities.register(14001)
-class Activity14001(ActivityBase, PurchaseCurrentValue, ActivityTriggerMail):
+class Activity14001(PurchaseCurrentValue, ActivityBase, ActivityTriggerMail):
     pass
 
 
@@ -681,7 +681,7 @@ class Activity17001(ActivityBase):
 
 
 @activities.register(17002)
-class Activity17002(ActivityBase, PurchaseCurrentValue):
+class Activity17002(PurchaseCurrentValue, ActivityBase):
     # 累计充值领月卡
     CONDITION_ID = -17002
     CONDITION_VALUE = 300
@@ -719,7 +719,7 @@ class Activity17003(ActivityBase):
 
 
 @activities.register(999)
-class Activity999(ActivityBase, PurchaseCurrentValue):
+class Activity999(PurchaseCurrentValue, ActivityBase):
     CONDITION_ID = -999
 
     def trig(self):
@@ -834,7 +834,7 @@ class Activity18005(ActivityBase, ActivityTriggerManually):
         )
 
 @activities.register(18006)
-class Activity18006(ActivityBase, PurchaseCurrentValue, ActivityTriggerManually):
+class Activity18006(PurchaseCurrentValue, ActivityBase, ActivityTriggerManually):
     # 累计充值
     pass
 
@@ -917,7 +917,7 @@ class Activity19001(ActivityBase):
 
 
 @activities.register(20001)
-class Activity20001(ActivityBase, PurchaseCurrentValue, ActivityTriggerMail):
+class Activity20001(PurchaseCurrentValue, ActivityBase, ActivityTriggerMail):
     pass
 
 

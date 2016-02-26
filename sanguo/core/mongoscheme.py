@@ -98,7 +98,7 @@ MongoCharacter.ensure_indexes()
 
 class MongoTimesLog(Document):
     # 次数记录
-    id = StringField()  # uuid
+    id = StringField(primary_key=True)  # uuid
     key = StringField() # function:char_id
     timestamp = IntField()
 
