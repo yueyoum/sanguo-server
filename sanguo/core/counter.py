@@ -4,8 +4,9 @@ from mongoengine import DoesNotExist
 from core.mongoscheme import MongoCounter
 from core.exception import CounterOverFlow
 from core.vip import VIP
+from core.activity import Activity21001
 
-from preset.settings import COUNTER, ACTIVITY_STAGE_MAX_TIMES
+from preset.settings import COUNTER
 
 
 class Counter(object):
@@ -61,5 +62,6 @@ class ActivityStageCount(Counter):
 
     @property
     def max_value(self):
-        return ACTIVITY_STAGE_MAX_TIMES
+        ac = Activity21001(self.char_id)
+        return ac.get_max_times()
 

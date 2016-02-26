@@ -1,12 +1,14 @@
+# -*- coding: utf-8 -*-
 import datetime
 
 from core.signals import login_signal
 
 from core.notify import login_notify
 from core.mongoscheme import MongoCharacter
+from core.times_log import TimesLogLogin
 # from core.daily import OfficialDailyReward
 
-def login(char_id, **kwargs):
+def login(char_id, real_login, **kwargs):
     if char_id:
         # od = OfficialDailyReward(char_id)
         # od.check()
@@ -17,8 +19,10 @@ def login(char_id, **kwargs):
             {'$set': {'last_login': now}}
         )
 
-        login_notify(char_id)
+        if real_login:
+            TimesLogLogin(char_id).inc()
 
+        login_notify(char_id)
 
 login_signal.connect(
     login,

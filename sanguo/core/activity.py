@@ -13,16 +13,26 @@ from mongoengine import DoesNotExist, Q
 from core.exception import SanguoException
 from core.mongoscheme import MongoActivityStatic, MongoPurchaseLog, MongoCostSyceeLog, MongoCharacter
 from core.server import server
+from core.character import get_char_property
 from core.msgpipe import publish_to_char
 from core.mail import Mail
 from core.attachment import get_drop, standard_drop_to_attachment_protomsg, make_standard_drop_from_template
 from core.resource import Resource
+from core.times_log import (
+    TimesLogLogin,
+    TimesLogEliteStage,
+    TimesLogEquipStepUp,
+    TimesLogGetHeroBySycee,
+    TimesLogHeroStepUp,
+    TimesLogPlunder,
+)
 
 from core.purchase import BasePurchaseAction
 
 from utils import pack_msg
 
 from preset.data import ACTIVITY_STATIC, ACTIVITY_STATIC_CONDITIONS
+from preset.settings import ACTIVITY_STAGE_MAX_TIMES
 from preset import errormsg
 
 from protomsg import ActivityNotify, ActivityUpdateNotify, ActivityEntry as ActivityEntryMsg
@@ -340,6 +350,21 @@ class ActivityTriggerAdditionalDrop(object):
 
 
 
+class PurchaseCurrentValue(object):
+    def get_current_value(self, char_id):
+        if not self.is_valid():
+            return 0
+
+        condition = Q(char_id=char_id) & Q(purchase_at__gte=self.activity_time.nearest_open_date.timestamp) & Q(purchase_at__lte=self.activity_time.nearest_close_date.timestamp)
+        logs = MongoPurchaseLog.objects.filter(condition)
+
+        value = 0
+        for log in logs:
+            value += log.sycee
+
+        return value
+
+
 class ActivityBase(object):
     OPERATOR = operator.ge
     ACTIVITY_ID = 0
@@ -477,20 +502,9 @@ class Activity4001(ActivityBase, ActivityTriggerMail):
 
 
 @activities.register(5001)
-class Activity5001(ActivityBase, ActivityTriggerMail):
+class Activity5001(ActivityBase, PurchaseCurrentValue, ActivityTriggerMail):
     # 累计充值
-    def get_current_value(self, char_id):
-        if not self.is_valid():
-            return 0
-
-        condition = Q(char_id=char_id) & Q(purchase_at__gte=self.activity_time.nearest_open_date.timestamp) & Q(purchase_at__lte=self.activity_time.nearest_close_date.timestamp)
-        logs = MongoPurchaseLog.objects.filter(condition)
-
-        value = 0
-        for log in logs:
-            value += log.sycee
-
-        return value
+    pass
 
 @activities.register(6001)
 class Activity6001(ActivityBase, ActivityTriggerMail):
@@ -587,19 +601,8 @@ class Activity13001(ActivityBase, ActivityTriggerAdditionalDrop):
 
 
 @activities.register(14001)
-class Activity14001(ActivityBase, ActivityTriggerMail):
-    def get_current_value(self, char_id):
-        if not self.is_valid():
-            return 0
-
-        condition = Q(char_id=char_id) & Q(purchase_at__gte=self.activity_time.nearest_open_date.timestamp) & Q(purchase_at__lte=self.activity_time.nearest_close_date.timestamp)
-        logs = MongoPurchaseLog.objects.filter(condition)
-
-        value = 0
-        for log in logs:
-            value += log.sycee
-
-        return value
+class Activity14001(ActivityBase, PurchaseCurrentValue, ActivityTriggerMail):
+    pass
 
 
 @activities.register(15001)
@@ -678,24 +681,10 @@ class Activity17001(ActivityBase):
 
 
 @activities.register(17002)
-class Activity17002(ActivityBase):
+class Activity17002(ActivityBase, PurchaseCurrentValue):
     # 累计充值领月卡
     CONDITION_ID = -17002
     CONDITION_VALUE = 300
-
-    def get_current_value(self, char_id):
-        if not self.is_valid():
-            return 0
-
-        condition = Q(char_id=char_id) & Q(purchase_at__gte=self.activity_time.nearest_open_date.timestamp) & Q(purchase_at__lte=self.activity_time.nearest_close_date.timestamp)
-        logs = MongoPurchaseLog.objects.filter(condition)
-
-        value = 0
-        for log in logs:
-            value += log.sycee
-
-        return value
-
 
     def trig(self):
         ac_record = ActivityConditionRecord(self.char_id, self.CONDITION_ID, self.activity_time)
@@ -730,21 +719,8 @@ class Activity17003(ActivityBase):
 
 
 @activities.register(999)
-class Activity999(ActivityBase):
+class Activity999(ActivityBase, PurchaseCurrentValue):
     CONDITION_ID = -999
-
-    def get_current_value(self, char_id):
-        if not self.is_valid():
-            return 0
-
-        condition = Q(char_id=char_id) & Q(purchase_at__gte=self.activity_time.nearest_open_date.timestamp) & Q(purchase_at__lte=self.activity_time.nearest_close_date.timestamp)
-        logs = MongoPurchaseLog.objects.filter(condition)
-
-        value = 0
-        for log in logs:
-            value += log.sycee
-
-        return value
 
     def trig(self):
         ac_record = ActivityConditionRecord(self.char_id, self.CONDITION_ID, self.activity_time)
@@ -807,6 +783,176 @@ class Activity1000(ActivityBase):
         )
 
         ac_record.add_send(1)
+
+
+@activities.register(18001)
+class Activity18001(ActivityBase, ActivityTriggerManually):
+    # 累计登录5天
+    def get_current_value(self, char_id):
+        if not self.is_valid():
+            return 0
+
+        return TimesLogLogin(char_id).days(
+            start_at=self.activity_time.nearest_open_date.timestamp,
+            end_at=self.activity_time.nearest_close_date.timestamp
+        )
+
+@activities.register(18002)
+class Activity18002(ActivityBase, ActivityTriggerManually):
+    # 装备进阶20次
+    def get_current_value(self, char_id):
+        if not self.is_valid():
+            return 0
+
+        return TimesLogEquipStepUp(char_id).count(
+            start_at=self.activity_time.nearest_open_date.timestamp,
+            end_at=self.activity_time.nearest_close_date.timestamp
+        )
+
+@activities.register(18004)
+class Activity18004(ActivityBase, ActivityTriggerManually):
+    # 武将进阶8次
+    def get_current_value(self, char_id):
+        if not self.is_valid():
+            return 0
+
+        return TimesLogHeroStepUp(char_id).count(
+            start_at=self.activity_time.nearest_open_date.timestamp,
+            end_at=self.activity_time.nearest_close_date.timestamp
+        )
+
+@activities.register(18005)
+class Activity18005(ActivityBase, ActivityTriggerManually):
+    # 精英副本通关50次
+    def get_current_value(self, char_id):
+        if not self.is_valid():
+            return 0
+
+        return TimesLogEliteStage(char_id).count(
+            start_at=self.activity_time.nearest_open_date.timestamp,
+            end_at=self.activity_time.nearest_close_date.timestamp
+        )
+
+@activities.register(18006)
+class Activity18006(ActivityBase, PurchaseCurrentValue, ActivityTriggerManually):
+    # 累计充值
+    pass
+
+
+@activities.register(18007)
+class Activity18007(ActivityBase, ActivityTriggerManually):
+    # 成功掠夺50次
+    def get_current_value(self, char_id):
+        if not self.is_valid():
+            return 0
+
+        return TimesLogPlunder(char_id).count(
+            start_at=self.activity_time.nearest_open_date.timestamp,
+            end_at=self.activity_time.nearest_close_date.timestamp
+        )
+
+@activities.register(18008)
+class Activity18008(ActivityBase, ActivityTriggerManually):
+    # 成功掠夺50次
+    def get_current_value(self, char_id):
+        if not self.is_valid():
+            return 0
+
+        return TimesLogGetHeroBySycee(char_id).count(
+            start_at=self.activity_time.nearest_open_date.timestamp,
+            end_at=self.activity_time.nearest_close_date.timestamp
+        )
+
+@activities.register(18009)
+class Activity18009(ActivityBase, ActivityTriggerManually):
+    # 累计武将挑战书 stuff_id = 3014
+    STUFF_ID = 3014
+    def get_current_value(self, char_id):
+        from core.item import Item
+        item = Item(char_id)
+        return item.stuff_amount(self.STUFF_ID)
+
+    def get_reward_check(self, char_id, condition_id):
+        value = ACTIVITY_STATIC_CONDITIONS[condition_id].condition_value
+        resource = Resource(char_id, "Activity Get Reward 18009")
+        resource.check_and_remove(stuffs=[(self.STUFF_ID, value)])
+
+
+@activities.register(19001)
+class Activity19001(ActivityBase):
+    CONDITION_ID = -19001
+    CONDITION_VALUE = 198
+
+    def get_current_value(self, char_id):
+        ac_record = ActivityConditionRecord(self.char_id, self.CONDITION_ID, self.activity_time)
+        return ac_record.send_times()
+
+    def trig(self):
+        if not self.is_valid():
+            return
+
+        ac_record = ActivityConditionRecord(self.char_id, self.CONDITION_ID, self.activity_time)
+        send_times = ac_record.send_times()
+
+        if send_times >= 10:
+            return
+
+
+        condition = Q(char_id=self.char_id) & Q(purchase_at__gte=self.activity_time.nearest_open_date.timestamp) & Q(purchase_at__lte=self.activity_time.nearest_close_date.timestamp)
+        logs = MongoPurchaseLog.objects.filter(condition)
+
+        sycee_list = [log.sycee for log in logs if log.sycee >= self.CONDITION_VALUE]
+
+        if len(sycee_list) > send_times:
+            for i in range(len(sycee_list) - send_times):
+                attachment = get_drop([self.activity_data.package])
+                mail = Mail(self.char_id)
+                mail.add(
+                    self.activity_data.mail_title,
+                    self.activity_data.mail_content,
+                    attachment=json.dumps(attachment)
+                )
+
+                ac_record.add_send(1)
+
+
+@activities.register(20001)
+class Activity20001(ActivityBase, PurchaseCurrentValue, ActivityTriggerMail):
+    pass
+
+
+@activities.register(21001)
+class Activity21001(ActivityBase):
+    # 活动副本次数
+    def get_current_value(self, char_id):
+        return 0
+
+    def get_max_times(self):
+        if not self.is_valid():
+            return ACTIVITY_STAGE_MAX_TIMES
+
+        return ACTIVITY_STAGE_MAX_TIMES * 2
+
+@activities.register(22001)
+class Activity22001(ActivityBase):
+    # VIP
+    def get_current_value(self, char_id):
+        return get_char_property(char_id, 'vip')
+
+    def send_mail(self):
+        attachment = get_drop([self.activity_data.package])
+        mail = Mail(self.char_id)
+        mail.add(
+            self.activity_data.mail_title,
+            self.activity_data.mail_content,
+            attachment=json.dumps(attachment)
+        )
+
+
+# 组合活动
+# 这个就是把活动A，B，C ... 完成了，再给个什么奖励
+class CombineActivity(object):
+    ACTIVITIES = []
 
 
 # 活动类的统一入口

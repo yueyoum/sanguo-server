@@ -48,7 +48,8 @@ def create_character(request):
 
     login_signal.send(
         sender=None,
-        char_id=char_id
+        char_id=char_id,
+        real_login=True,
     )
 
     request._char_id = char_id

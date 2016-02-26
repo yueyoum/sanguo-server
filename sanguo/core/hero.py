@@ -13,6 +13,7 @@ from core.resource import Resource
 from core.horse import Horse
 from core.msgpipe import publish_to_char
 from core.common import FightPowerMixin, level_up
+from core.times_log import TimesLogHeroStepUp
 
 from utils import cache
 from utils import pack_msg
@@ -312,6 +313,8 @@ class Hero(FightPowerMixin):
             sender=None,
             hero_id=self.id
         )
+
+        TimesLogHeroStepUp(self.char_id).inc()
 
 
     def wuxing_update(self, wuxing_id, souls):

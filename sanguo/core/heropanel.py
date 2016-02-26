@@ -168,7 +168,8 @@ class HeroPanel(object):
             heropanel_open_hero_signal.send(
                 sender=None,
                 char_id=self.char_id,
-                hero_oid=hero.oid
+                hero_oid=hero.oid,
+                sycee=using_sycee,
             )
 
         self.send_notify()

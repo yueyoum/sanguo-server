@@ -96,6 +96,18 @@ class MongoCharacter(Document):
 MongoCharacter.ensure_indexes()
 
 
+class MongoTimesLog(Document):
+    # 次数记录
+    id = StringField()  # uuid
+    key = StringField() # function:char_id
+    timestamp = IntField()
+
+    meta = {
+        'collection': 'times_log',
+        'indexes': ['key', 'timestamp']
+    }
+
+
 class MongoEmbeddedEquipment(EmbeddedDocument):
     oid = IntField()
     level = IntField()

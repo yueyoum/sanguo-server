@@ -44,6 +44,7 @@ def resume(request):
     login_signal.send(
         sender=None,
         char_id=request._char_id,
+        real_login=False,
     )
 
     new_session = GameSession(request._account_id, request._server_id, request._char_id)

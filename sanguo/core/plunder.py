@@ -24,6 +24,7 @@ from core.formation import Formation
 from core.signals import plunder_finished_signal
 from core.msgpipe import publish_to_char
 from core.msgfactory import create_character_infomation_message
+from core.times_log import TimesLogPlunder
 
 from utils.api import apicall, api_server_list
 from utils import pack_msg
@@ -358,6 +359,7 @@ class Plunder(object):
             achievement.trig(12, 1)
 
             PlunderLeaderboardWeekly.incr(self.char_id)
+            TimesLogPlunder(self.char_id).inc()
         else:
             standard_drop = make_standard_drop_from_template()
 

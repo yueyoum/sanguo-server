@@ -245,7 +245,7 @@ class Char(object):
 
 
 def char_initialize(account_id, server_id, char_id, name):
-    print "CHAR INIT", account_id, server_id, char_id, name.encode('utf-8')
+    # print "CHAR INIT", account_id, server_id, char_id, name.encode('utf-8')
     now = arrow.utcnow().format("YYYY-MM-DD HH:mm:ss")
     mc = MongoCharacter(id=char_id)
     mc.account_id = account_id
@@ -318,7 +318,7 @@ def char_initialize(account_id, server_id, char_id, name):
                     break
 
     f.save_formation(socket_ids, send_notify=False)
-    print "CHAR INIT DONE"
+    # print "CHAR INIT DONE"
 
 
 def get_char_ids_by_level_range(min_level, max_level, exclude_char_ids=None):

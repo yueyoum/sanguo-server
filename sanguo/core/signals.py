@@ -15,7 +15,7 @@ class SignalHeroWeGo(object):
 
 
 register_signal = Signal(providing_args=['account_id'])
-login_signal = Signal(providing_args=['char_id'])
+login_signal = Signal(providing_args=['char_id', 'real_login'])
 
 socket_changed_signal = Signal(providing_args=['socket_obj'])
 socket_hero_changed_signal = Signal(providing_args=['char_id', 'socket_id', 'hero_id'])
@@ -34,7 +34,7 @@ hero_add_signal = Signal(providing_args=['char_id', 'hero_ids', 'hero_original_i
 hero_del_signal = Signal(providing_args=['char_id', 'hero_id', 'hero_oid'])
 hero_to_soul_signal = Signal(providing_args=['char_id', 'souls'])
 
-heropanel_open_hero_signal = Signal(providing_args=['char_id', 'hero_oid'])
+heropanel_open_hero_signal = Signal(providing_args=['char_id', 'hero_oid', 'sycee'])
 
 equip_changed_signal = Signal(providing_args=['char_id', 'equip_obj'])
 gem_add_signal = Signal(providing_args=['char_id', 'gem_id', 'add_amount', 'new_amount'])

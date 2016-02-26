@@ -16,6 +16,8 @@ from core.achievement import Achievement
 from core.task import Task
 from core.resource import Resource
 from core.activity import ActivityEntry
+from core.times_log import TimesLogEquipStepUp
+
 from utils import pack_msg
 from utils.functional import id_generator
 import protomsg
@@ -201,6 +203,7 @@ class Equipment(MessageEquipmentMixin):
         if not self.equip.upgrade_to:
             achievement.trig(23, 1)
 
+        TimesLogEquipStepUp(self.char_id).inc()
         return stuff_needs
 
 

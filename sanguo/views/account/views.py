@@ -61,7 +61,8 @@ def login(request):
 
     login_signal.send(
         sender=None,
-        char_id=char_id
+        char_id=char_id,
+        real_login=True,
     )
 
     if char_id:

@@ -15,6 +15,7 @@ from core.counter import Counter, ActivityStageCount
 from core.resource import Resource
 from core.activity import ActivityEntry
 from core.task import Task
+from core.times_log import TimesLogEliteStage
 from utils import pack_msg
 from utils.decorate import operate_guard
 from preset.settings import (
@@ -462,6 +463,7 @@ class EliteStage(object):
             self.enable_next_elite_stage(_id)
 
             Task(self.char_id).trig(6)
+            TimesLogEliteStage(self.char_id).inc()
 
         return battle_msg
 
