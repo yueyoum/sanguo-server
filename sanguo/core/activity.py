@@ -250,7 +250,7 @@ activities = _Activities()
 
 class ActivityTriggerManually(object):
     # 需要手动领奖的
-    def trig(self, char_id):
+    def trig(self, *args):
         pass
 
     def get_reward(self, char_id, condition_id):
@@ -656,7 +656,7 @@ class Activity17001(ActivityBase):
         return value
 
 
-    def trig(self):
+    def trig(self, *args):
         if not self.is_valid():
             return
 
@@ -686,7 +686,7 @@ class Activity17002(PurchaseCurrentValue, ActivityBase):
     CONDITION_ID = -17002
     CONDITION_VALUE = 300
 
-    def trig(self):
+    def trig(self, *args):
         ac_record = ActivityConditionRecord(self.char_id, self.CONDITION_ID, self.activity_time)
         send_times = ac_record.send_times()
 
@@ -722,7 +722,7 @@ class Activity17003(ActivityBase):
 class Activity999(PurchaseCurrentValue, ActivityBase):
     CONDITION_ID = -999
 
-    def trig(self):
+    def trig(self, *args):
         ac_record = ActivityConditionRecord(self.char_id, self.CONDITION_ID, self.activity_time)
         send_times = ac_record.send_times()
 
@@ -763,7 +763,7 @@ class Activity1000(ActivityBase):
         return max(sycee_list)
 
 
-    def trig(self):
+    def trig(self, *args):
         ac_record = ActivityConditionRecord(self.char_id, self.CONDITION_ID, self.activity_time)
         send_times = ac_record.send_times()
 
@@ -887,7 +887,7 @@ class Activity19001(ActivityBase):
         ac_record = ActivityConditionRecord(self.char_id, self.CONDITION_ID, self.activity_time)
         return ac_record.send_times()
 
-    def trig(self):
+    def trig(self, *args):
         if not self.is_valid():
             return
 
