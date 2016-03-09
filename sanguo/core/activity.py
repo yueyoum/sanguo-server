@@ -916,7 +916,7 @@ class Activity19001(ActivityBase):
 
 
 @activities.register(20001)
-class Activity20001(PurchaseCurrentValue, ActivityBase, ActivityTriggerMail):
+class Activity20001(PurchaseCurrentValue, ActivityBase, ActivityTriggerManually):
     pass
 
 

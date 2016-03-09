@@ -29,7 +29,10 @@ def send_vip_reward(signum):
 
         for doc in docs:
             char_id = doc['_id']
-            Activity22001(char_id).send_mail()
+
+            ac = Activity22001(char_id)
+            if ac.is_valid():
+                ac.send_mail()
     except:
         logger.error(traceback.format_exc())
     else:
