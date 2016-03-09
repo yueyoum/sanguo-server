@@ -1156,7 +1156,7 @@
     "model": "item.stuff", 
     "fields": {
         "name": "\u6b66\u5c06\u6311\u6218\u4e66", 
-        "tip_des": "\u6d3b\u52a8\u671f\u95f4\u96c6\u9f50\u76f8\u5e94\u6570\u91cf\u53ef\u4ee5\u5151\u6362\u4e94\u661f\u6b66\u5c06", 
+        "tip_des": "\u6d3b\u52a8\u671f\u95f4\u96c6\u9f50\u76f8\u5e94\u6570\u91cf\u53ef\u4ee5\u5151\u6362\u91d1\u8272\u6b66\u5c06\u5b9d\u7bb1", 
         "tip_type": "\u6b66\u5c06\u6311\u6218\u4e66", 
         "des": "\u9526\u56ca", 
         "buy_sycee": 0, 
