@@ -20,12 +20,14 @@ def _new_purchase(char_id, new_got, total_got, **kwargs):
     plog.purchase_at = arrow.utcnow().timestamp
     plog.save()
 
+    # 需要发送活动通知的， 就必须用 ActivityStatic trig
     ActivityStatic(char_id).trig(5001)
     ActivityStatic(char_id).trig(14001)
     ActivityEntry(char_id, 16001).trig(new_got/2)
     ActivityEntry(char_id, 17001).trig()
     ActivityEntry(char_id, 17002).trig()
-    ActivityEntry(char_id, 18006).trig()
+
+    ActivityStatic(char_id).trig(18006)
 
     ActivityEntry(char_id, 999).trig()
     ActivityEntry(char_id, 1000).trig()
