@@ -25,6 +25,7 @@ def _new_purchase(char_id, new_got, total_got, **kwargs):
     ActivityEntry(char_id, 16001).trig(new_got/2)
     ActivityEntry(char_id, 17001).trig()
     ActivityEntry(char_id, 17002).trig()
+    ActivityEntry(char_id, 18006).trig()
 
     ActivityEntry(char_id, 999).trig()
     ActivityEntry(char_id, 1000).trig()

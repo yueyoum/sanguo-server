@@ -23,17 +23,17 @@ def _equip_changed(char_id, equip_obj, **kwargs):
 
 
 def _stuff_add(char_id, stuff_id, add_amount, new_amount, **kwargs):
-    if stuff_id != 3003:
-        return
-
-    ActivityStatic(char_id).trig(7001)
+    if stuff_id == 3003:
+        ActivityStatic(char_id).trig(7001)
+    elif stuff_id == 3014:
+        ActivityStatic(char_id).trig(18009)
 
 
 def _stuff_remove(char_id, stuff_id, rm_amount, new_amount, **kwargs):
-    if stuff_id != 3003:
-        return
-
-    ActivityStatic(char_id).trig(7001)
+    if stuff_id == 3003:
+        ActivityStatic(char_id).trig(7001)
+    elif stuff_id == 3014:
+        ActivityStatic(char_id).trig(18009)
 
 
 equip_changed_signal.connect(
