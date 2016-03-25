@@ -16,6 +16,7 @@ from core.character import Char
 from core.achievement import Achievement
 
 from core.msgpipe import publish_to_char
+from core.activity import ActivityEntry
 
 from utils import pack_msg
 
@@ -269,6 +270,9 @@ class Affairs(_GetRealGoldMixin):
         #     )
 
         drops = self.get_drop()
+        ac = ActivityEntry(self.char_id, 30004)
+        if ac and ac.is_valid():
+            drops['gold'] *= 2
 
         resource = Resource(self.char_id, "Hang Reward")
         standard_drop = resource.add(**drops)

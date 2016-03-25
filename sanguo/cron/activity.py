@@ -13,7 +13,7 @@ from cron.log import Logger
 
 from core.mongoscheme import MongoCharacter
 
-from core.activity import Activity22001
+from core.activity import ActivityEntry
 
 
 @uwsgidecorators.cron(0, 0, -1, -1, -1, target='spooler')
@@ -30,8 +30,8 @@ def send_vip_reward(signum):
         for doc in docs:
             char_id = doc['_id']
 
-            ac = Activity22001(char_id)
-            if ac.is_valid():
+            ac = ActivityEntry(char_id, 22001)
+            if ac and ac.is_valid():
                 ac.send_mail()
     except:
         logger.error(traceback.format_exc())

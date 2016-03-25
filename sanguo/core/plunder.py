@@ -25,13 +25,13 @@ from core.signals import plunder_finished_signal
 from core.msgpipe import publish_to_char
 from core.msgfactory import create_character_infomation_message
 from core.times_log import TimesLogPlunder
+from core.activity import ActivityEntry
 
 from utils.api import apicall, api_server_list
 from utils import pack_msg
 from preset.settings import (
     PRISONER_POOL,
     PLUNDER_GOT_GOLD_PARAM_BASE_ADJUST,
-    PLUNDER_GET_DROPS_MINUTES,
     PLUNDER_GET_PRISONER_PROB,
     PLUNDER_GET_DROPS_TIMES,
     PLUNDER_DROP_DECREASE_FACTOR,
@@ -391,6 +391,10 @@ class Plunder(object):
                 if hid in PRISONER_POOL:
                     prison = hid
                     break
+
+            ac = ActivityEntry(self.char_id, 30005)
+            if ac and ac.is_valid():
+                return prison
 
             if random.randint(1, 100) <= PLUNDER_GET_PRISONER_PROB:
                 return prison

@@ -11,7 +11,7 @@ import arrow
 from django.conf import settings
 from mongoengine import DoesNotExist, Q
 from core.exception import SanguoException
-from core.mongoscheme import MongoActivityStatic, MongoPurchaseLog, MongoCostSyceeLog, MongoCharacter
+from core.mongoscheme import MongoActivityStatic, MongoPurchaseLog, MongoCostSyceeLog, MongoCharacter, MongoKeyRecord
 from core.server import server
 from core.character import get_char_property
 from core.msgpipe import publish_to_char
@@ -25,6 +25,8 @@ from core.times_log import (
     TimesLogGetHeroBySycee,
     TimesLogHeroStepUp,
     TimesLogPlunder,
+    TimesLogArena,
+    TimesLogGemMerge,
 )
 
 from core.purchase import BasePurchaseAction
@@ -248,6 +250,11 @@ class _Activities(object):
 
 activities = _Activities()
 
+
+def has_activity(activity_id):
+    return activity_id in ACTIVITY_STATIC
+
+
 class ActivityTriggerManually(object):
     # 需要手动领奖的
     def trig(self, *args):
@@ -436,6 +443,25 @@ class ActivityBase(object):
 
     def get_current_value(self, char_id):
         raise NotImplementedError()
+
+    def get_max_times(self):
+        # 这个只有一个和次数相关活动才会调用
+        # 比如 活动期间次数翻倍什么的
+        raise NotImplementedError()
+
+
+    def get_condition_status(self, condition_id):
+        # 条件是否可以领奖
+        ac_record = ActivityConditionRecord(self.char_id, condition_id, self.activity_time)
+
+        if self.activity_data.mode == 1:
+            if ac_record.in_reward():
+                return ActivityEntryMsg.ActivityCondition.HAS_GOT
+            if self.condition_is_passed(self.char_id, condition_id):
+                return ActivityEntryMsg.ActivityCondition.CAN_GET
+            return ActivityEntryMsg.ActivityCondition.CAN_NOT
+
+        return ActivityEntryMsg.ActivityCondition.CAN_NOT
 
 
 @activities.register(1001)
@@ -853,7 +879,7 @@ class Activity18007(ActivityBase, ActivityTriggerManually):
 
 @activities.register(18008)
 class Activity18008(ActivityBase, ActivityTriggerManually):
-    # 成功掠夺50次
+    # 元宝点将15次
     def get_current_value(self, char_id):
         if not self.is_valid():
             return 0
@@ -948,13 +974,154 @@ class Activity22001(ActivityBase):
         )
 
 
+#######################################################
+#######################################################
+#######################################################
+
+@activities.register(30001)
+class Activity30001(ActivityBase, ActivityTriggerManually):
+    # 竞技场比武50次
+    def get_current_value(self, char_id):
+        if not self.is_valid():
+            return 0
+
+        return TimesLogArena(char_id).count(
+            start_at=self.activity_time.nearest_open_date.timestamp,
+            end_at=self.activity_time.nearest_close_date.timestamp
+        )
+
+@activities.register(30002)
+class Activity30001(ActivityBase, ActivityTriggerManually):
+    # 宝石合成40次
+    def get_current_value(self, char_id):
+        if not self.is_valid():
+            return 0
+
+        return TimesLogGemMerge(char_id).count(
+            start_at=self.activity_time.nearest_open_date.timestamp,
+            end_at=self.activity_time.nearest_close_date.timestamp
+        )
+
+@activities.register(30003)
+class Activity30003(ActivityBase, ActivityTriggerManually):
+    # 获得50名武将
+    def get_current_value(self, char_id):
+        from core.hero import char_heros_amount
+        return char_heros_amount(char_id)
+
+
+@activities.register(30004)
+class Activity30004(ActivityBase):
+    # 内政银两翻倍
+    def get_current_value(self, char_id):
+        return 0
+
+
+@activities.register(30005)
+class Activity30005(ActivityBase):
+    # VIP6掠夺必掉将
+    def get_current_value(self, char_id):
+        return get_char_property(char_id, 'vip')
+
+
+@activities.register(30006)
+class Activity30006(ActivityBase):
+    # 每天只能一次！！！ 特殊处理
+    def get_current_value(self, char_id):
+        return 0
+
+    def make_key(self, condition_id):
+        now = arrow.utcnow().to(settings.TIME_ZONE)
+        date_str = now.format('YYYY-MM-DD')
+
+        key = 'activity30006#{0}#{1}#{2}'.format(
+            condition_id, date_str, self.char_id
+        )
+
+        return key
+
+    def get_mk_instance(self, condition_id):
+        """
+
+        @rtype: MongoKeyRecord | None
+        """
+        key = self.make_key(condition_id)
+        try:
+            mk = MongoKeyRecord.objects.get(id=key)
+        except DoesNotExist:
+            return None
+
+        return mk
+
+    def can_get_reward(self, condition_id):
+        mk = self.get_mk_instance(condition_id)
+        if not mk:
+            return False
+
+        return mk.value == 0
+
+    def get_reward(self, char_id, condition_id):
+        mk = self.get_mk_instance(condition_id)
+        if not mk:
+            raise SanguoException(
+                errormsg.ACTIVITY_CAN_NOT_GET_REWARD,
+                self.char_id,
+                "Activity Get Reward",
+                "condition {0} can not get".format(condition_id)
+            )
+
+        if mk.value == 1:
+            raise SanguoException(
+                errormsg.ACTIVITY_ALREADY_GOT_REWARD,
+                self.char_id,
+                "Activity Get Reward",
+                "condition {0} already got".format(condition_id)
+            )
+
+        standard_drop = get_drop([ACTIVITY_STATIC_CONDITIONS[condition_id].package])
+        resource = Resource(self.char_id, "Activity Get Reward", "get condition id {0}".format(condition_id))
+        standard_drop = resource.add(**standard_drop)
+
+        mk.value = 1
+        mk.save()
+
+        return standard_drop_to_attachment_protomsg(standard_drop)
+
+    def trig(self, sycee):
+        for c in self.activity_data.condition_objs:
+            if c.condition_value == sycee:
+                key = self.make_key(c.id)
+                try:
+                    MongoKeyRecord.objects.get(id=key)
+                except DoesNotExist:
+                    mk = MongoKeyRecord(id=key)
+                    mk.value = 0
+                    mk.save()
+
+                break
+
+    def get_condition_status(self, condition_id):
+        mk = self.get_mk_instance(condition_id)
+        if not mk:
+            return ActivityEntryMsg.ActivityCondition.CAN_NOT
+        if mk.value == 0:
+            return ActivityEntryMsg.ActivityCondition.CAN_GET
+
+        return ActivityEntryMsg.ActivityCondition.HAS_GOT
+
 # 活动类的统一入口
 class ActivityEntry(object):
     def __new__(cls, char_id, activity_id):
         """
 
-        :rtype : ActivityBase
+        :rtype : ActivityBase|None
         """
+        if not has_activity(activity_id):
+            # 现在活动分了平台， 不同平台的活动可能会不一样
+            # 但是同一套代码用了不同配置文件
+            # 所以这里就要分开处理
+            return None
+
         return activities[activity_id](char_id)
 
 
@@ -966,7 +1133,7 @@ class ActivityStatic(object):
 
     def trig(self, activity_id):
         entry = ActivityEntry(self.char_id, activity_id)
-        if not entry.is_valid():
+        if not entry or not entry.is_valid():
             return
 
         entry.trig(self.char_id)
@@ -997,22 +1164,9 @@ class ActivityStatic(object):
         msg.left_time = entry.left_time
 
         for i in entry.get_condition_ids():
-            ac_record = ActivityConditionRecord(self.char_id, i, entry.activity_time)
-
             msg_condition = msg.conditions.add()
             msg_condition.id = i
-
-            if entry.activity_data.mode == 1:
-                if ac_record.in_reward():
-                    status = ActivityEntryMsg.ActivityCondition.HAS_GOT
-                elif entry.condition_is_passed(self.char_id, i):
-                    status = ActivityEntryMsg.ActivityCondition.CAN_GET
-                else:
-                    status = ActivityEntryMsg.ActivityCondition.CAN_NOT
-            else:
-                status = ActivityEntryMsg.ActivityCondition.CAN_NOT
-
-            msg_condition.status = status
+            msg_condition.status = entry.get_condition_status(i)
 
 
     def send_update_notify(self, activity_ids):

@@ -500,6 +500,18 @@ class MongoActivityStatic(Document):
     }
 
 
+# 活动记录
+class MongoKeyRecord(Document):
+    # 这里记录一些需求特殊记录
+    # 比如活动期间还要求每天只能搞一次的!
+    id = StringField(primary_key=True)
+    value = IntField()
+
+    meta = {
+        'collection': 'key_record'
+    }
+
+
 # 坐骑
 class MongoEmbeddedHorse(EmbeddedDocument):
     oid = IntField()

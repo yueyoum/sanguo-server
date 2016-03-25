@@ -5,7 +5,7 @@ __date__ = '1/22/14'
 
 import random
 
-from mongoengine import DoesNotExist, Q
+from mongoengine import DoesNotExist
 from core.drives import redis_client
 from core.character import Char, get_char_property
 from core.battle import PVP
@@ -17,6 +17,8 @@ from core.task import Task
 from core.resource import Resource
 from core.msgfactory import create_character_infomation_message
 from core.msgpipe import publish_to_char
+from core.times_log import TimesLogArena
+
 from preset.data import VIP_MAX_LEVEL
 from utils.checkers import func_opened
 from utils import pack_msg
@@ -309,6 +311,8 @@ class Arena(object):
             adding_score = new_score - self_score
 
             rival_arena.be_beaten(rival_score, self_score, not msg.self_win, self.char_id)
+
+        TimesLogArena(self.char_id).inc()
 
         self.send_notify()
         return msg, adding_score

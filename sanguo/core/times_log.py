@@ -13,6 +13,7 @@ from mongoengine import Q
 
 from django.conf import settings
 from core.mongoscheme import MongoTimesLog
+from core.activity import has_activity
 
 class TimesLog(object):
     KEY = None
@@ -30,7 +31,7 @@ class TimesLog(object):
         log.timestamp = arrow.utcnow().timestamp
         log.save()
 
-        if self.ACTIVITY_ID:
+        if self.ACTIVITY_ID and has_activity(self.ACTIVITY_ID):
             ActivityStatic(self.char_id).trig(self.ACTIVITY_ID)
 
     def count(self, start_at=None, end_at=None):
@@ -51,27 +52,42 @@ class TimesLog(object):
 
         return len(dates)
 
-
+#登录次数
 class TimesLogLogin(TimesLog):
     KEY = 'login'
     ACTIVITY_ID = 18001
 
+#装备进阶
 class TimesLogEquipStepUp(TimesLog):
     KEY = 'equip_step_up'
     ACTIVITY_ID = 18002
 
+#武将进阶
 class TimesLogHeroStepUp(TimesLog):
     KEY = 'hero_step_up'
     ACTIVITY_ID = 18004
 
+#精英关卡
 class TimesLogEliteStage(TimesLog):
     KEY = 'elite_stage'
     ACTIVITY_ID = 18005
 
+#掠夺次数
 class TimesLogPlunder(TimesLog):
     KEY = 'plunder'
     ACTIVITY_ID = 18007
 
+#元宝点将
 class TimesLogGetHeroBySycee(TimesLog):
     KEY = 'get_hero_sycee'
     ACTIVITY_ID = 18008
+
+#竞技场比武
+class TimesLogArena(TimesLog):
+    KEY = 'arena'
+    ACTIVITY_ID = 30001
+
+#宝石合成
+class TimesLogGemMerge(TimesLog):
+    KEY = 'gem_merge'
+    ACTIVITY_ID = 30002

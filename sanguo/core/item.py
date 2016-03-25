@@ -16,7 +16,7 @@ from core.achievement import Achievement
 from core.task import Task
 from core.resource import Resource
 from core.activity import ActivityEntry
-from core.times_log import TimesLogEquipStepUp
+from core.times_log import TimesLogEquipStepUp, TimesLogGemMerge
 
 from utils import pack_msg
 from utils.functional import id_generator
@@ -686,6 +686,10 @@ class Item(MessageEquipmentMixin):
         achievement = Achievement(self.char_id)
         achievement.trig(25, to_amount)
         achievement.trig(26, to_gem_obj.level)
+
+        tl = TimesLogGemMerge(self.char_id)
+        for i in range(to_amount):
+            tl.inc()
 
         return to_id, to_amount
 
