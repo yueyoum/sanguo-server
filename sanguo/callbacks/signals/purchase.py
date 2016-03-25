@@ -36,7 +36,7 @@ def _new_purchase(char_id, new_got, total_got, **kwargs):
     acs.trig(19001)
     acs.trig(20001)
 
-    if ActivityEntry(char_id, 30006).trig(30006):
+    if ActivityEntry(char_id, 30006).trig(new_got):
         acs.send_update_notify(activity_ids=[30006])
 
 
