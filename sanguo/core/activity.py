@@ -891,8 +891,8 @@ class Activity18008(ActivityBase, ActivityTriggerManually):
 
 @activities.register(18009)
 class Activity18009(ActivityBase, ActivityTriggerManually):
-    # 累计武将挑战书 stuff_id = 3014
-    STUFF_ID = 3014
+    # 累计武将挑战书 stuff_id = 3017
+    STUFF_ID = 3017
     def get_current_value(self, char_id):
         from core.item import Item
         item = Item(char_id)

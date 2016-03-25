@@ -6,7 +6,7 @@ from core.signals import (
     )
 
 from core.formation import Formation
-from core.activity import ActivityStatic
+from core.activity import ActivityStatic, Activity7001, Activity18009
 
 
 def _equip_changed(char_id, equip_obj, **kwargs):
@@ -23,18 +23,17 @@ def _equip_changed(char_id, equip_obj, **kwargs):
 
 
 def _stuff_add(char_id, stuff_id, add_amount, new_amount, **kwargs):
-    if stuff_id == 3003:
+    if stuff_id == Activity7001.STUFF_ID:
         ActivityStatic(char_id).trig(7001)
-    elif stuff_id == 3014:
+    elif stuff_id == Activity18009.STUFF_ID:
         ActivityStatic(char_id).trig(18009)
 
 
 def _stuff_remove(char_id, stuff_id, rm_amount, new_amount, **kwargs):
-    if stuff_id == 3003:
+    if stuff_id == Activity7001.STUFF_ID:
         ActivityStatic(char_id).trig(7001)
-    elif stuff_id == 3014:
+    elif stuff_id == Activity18009.STUFF_ID:
         ActivityStatic(char_id).trig(18009)
-
 
 equip_changed_signal.connect(
     _equip_changed,

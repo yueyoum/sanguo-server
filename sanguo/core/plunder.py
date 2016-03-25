@@ -393,7 +393,7 @@ class Plunder(object):
                     break
 
             ac = ActivityEntry(self.char_id, 30005)
-            if ac and ac.is_valid():
+            if ac and ac.is_valid() and ac.get_current_value(self.char_id) >= 6:
                 return prison
 
             if random.randint(1, 100) <= PLUNDER_GET_PRISONER_PROB:
