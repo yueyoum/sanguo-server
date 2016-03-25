@@ -21,21 +21,23 @@ def _new_purchase(char_id, new_got, total_got, **kwargs):
     plog.save()
 
     # 需要发送活动通知的， 就必须用 ActivityStatic trig
-    ActivityStatic(char_id).trig(5001)
-    ActivityStatic(char_id).trig(14001)
+    acs = ActivityStatic(char_id)
+    acs.trig(5001)
+    acs.trig(14001)
     ActivityEntry(char_id, 16001).trig(new_got/2)
     ActivityEntry(char_id, 17001).trig()
     ActivityEntry(char_id, 17002).trig()
 
-    ActivityStatic(char_id).trig(18006)
+    acs.trig(18006)
 
     ActivityEntry(char_id, 999).trig()
     ActivityEntry(char_id, 1000).trig()
 
-    ActivityStatic(char_id).trig(19001)
-    ActivityStatic(char_id).trig(20001)
+    acs.trig(19001)
+    acs.trig(20001)
 
-    ActivityStatic(char_id).trig(30006)
+    if ActivityEntry(char_id, 30006).trig(30006):
+        acs.send_update_notify(activity_ids=[30006])
 
 
 new_purchase_signal.connect(

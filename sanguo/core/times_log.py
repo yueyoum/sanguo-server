@@ -13,7 +13,6 @@ from mongoengine import Q
 
 from django.conf import settings
 from core.mongoscheme import MongoTimesLog
-from core.activity import has_activity
 
 class TimesLog(object):
     KEY = None
@@ -24,7 +23,7 @@ class TimesLog(object):
         self.key = "{0}:{1}".format(self.KEY, char_id)
 
     def inc(self):
-        from core.activity import ActivityStatic
+        from core.activity import has_activity, ActivityStatic
 
         log = MongoTimesLog(id=str(uuid.uuid4()))
         log.key = self.key

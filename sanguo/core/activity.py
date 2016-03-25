@@ -1087,6 +1087,7 @@ class Activity30006(ActivityBase):
 
         return standard_drop_to_attachment_protomsg(standard_drop)
 
+
     def trig(self, sycee):
         for c in self.activity_data.condition_objs:
             if c.condition_value == sycee:
@@ -1097,8 +1098,10 @@ class Activity30006(ActivityBase):
                     mk = MongoKeyRecord(id=key)
                     mk.value = 0
                     mk.save()
+                    return True
 
-                break
+        return False
+
 
     def get_condition_status(self, condition_id):
         mk = self.get_mk_instance(condition_id)
