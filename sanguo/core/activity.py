@@ -34,7 +34,7 @@ from core.purchase import BasePurchaseAction
 from utils import pack_msg
 
 from preset.data import ACTIVITY_STATIC, ACTIVITY_STATIC_CONDITIONS
-from preset.settings import ACTIVITY_STAGE_MAX_TIMES
+from preset.settings import ACTIVITY_STAGE_MAX_TIMES, PLUNDER_GET_PRISONER_PROB
 from preset import errormsg
 
 from protomsg import ActivityNotify, ActivityUpdateNotify, ActivityEntry as ActivityEntryMsg
@@ -1023,6 +1023,19 @@ class Activity30005(ActivityBase):
     def get_current_value(self, char_id):
         return get_char_property(char_id, 'vip')
 
+    def get_prisoner_prob(self):
+        if not self.is_valid():
+            return PLUNDER_GET_PRISONER_PROB
+
+        vip = self.get_current_value(self.char_id)
+        if vip < 4:
+            return PLUNDER_GET_PRISONER_PROB
+        elif vip == 4:
+            return 40
+        elif vip == 5:
+            return 60
+        else:
+            return 100
 
 @activities.register(30006)
 class Activity30006(ActivityBase):
