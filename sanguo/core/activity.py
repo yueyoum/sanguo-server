@@ -1040,12 +1040,14 @@ class Activity30005(ActivityBase):
 @activities.register(30006)
 class Activity30006(ActivityBase):
     # 每天只能一次！！！ 特殊处理
+    # NOTE: 如果当天没有领取，后面一样可以领取
     def get_current_value(self, char_id):
         return 0
 
-    def make_key(self, condition_id):
-        now = arrow.utcnow().to(settings.TIME_ZONE)
-        date_str = now.format('YYYY-MM-DD')
+    def make_key(self, condition_id, date_str=None):
+        if not date_str:
+            now = arrow.utcnow().to(settings.TIME_ZONE)
+            date_str = now.format('YYYY-MM-DD')
 
         key = 'activity30006#{0}#{1}#{2}'.format(
             condition_id, date_str, self.char_id
@@ -1053,29 +1055,33 @@ class Activity30006(ActivityBase):
 
         return key
 
-    def get_mk_instance(self, condition_id):
-        """
+    def make_range_keys(self, condition_id):
+        now_date = arrow.utcnow().to(settings.TIME_ZONE).date()
+        keys = []
+        start_at = arrow.get(self.activity_time.nearest_open_date)
 
-        @rtype: MongoKeyRecord | None
-        """
-        key = self.make_key(condition_id)
-        try:
-            mk = MongoKeyRecord.objects.get(id=key)
-        except DoesNotExist:
-            return None
+        while start_at.date() <= now_date:
+            key = self.make_key(condition_id, date_str=start_at.format('YYYY-MM-DD'))
+            keys.append(key)
 
-        return mk
+            start_at = start_at.replace(days=1)
 
-    def can_get_reward(self, condition_id):
-        mk = self.get_mk_instance(condition_id)
-        if not mk:
-            return False
+        return keys
 
-        return mk.value == 0
+
+    def reward_key(self, condition_id):
+        keys = self.make_range_keys(condition_id)
+        docs = MongoKeyRecord._get_collection().find({'_id': {'$in': keys}})
+        for d in docs:
+            if d['value'] == 0:
+                return d['_id']
+
+        return None
+
 
     def get_reward(self, char_id, condition_id):
-        mk = self.get_mk_instance(condition_id)
-        if not mk:
+        key = self.reward_key(condition_id)
+        if not key:
             raise SanguoException(
                 errormsg.ACTIVITY_CAN_NOT_GET_REWARD,
                 self.char_id,
@@ -1083,20 +1089,14 @@ class Activity30006(ActivityBase):
                 "condition {0} can not get".format(condition_id)
             )
 
-        if mk.value == 1:
-            raise SanguoException(
-                errormsg.ACTIVITY_ALREADY_GOT_REWARD,
-                self.char_id,
-                "Activity Get Reward",
-                "condition {0} already got".format(condition_id)
-            )
-
         standard_drop = get_drop([ACTIVITY_STATIC_CONDITIONS[condition_id].package])
         resource = Resource(self.char_id, "Activity Get Reward", "get condition id {0}".format(condition_id))
         standard_drop = resource.add(**standard_drop)
 
-        mk.value = 1
-        mk.save()
+        MongoKeyRecord._get_collection().update(
+            {'_id': key},
+            {'$set': {'value': 1}}
+        )
 
         return standard_drop_to_attachment_protomsg(standard_drop)
 
@@ -1115,15 +1115,11 @@ class Activity30006(ActivityBase):
 
         return False
 
-
     def get_condition_status(self, condition_id):
-        mk = self.get_mk_instance(condition_id)
-        if not mk:
-            return ActivityEntryMsg.ActivityCondition.CAN_NOT
-        if mk.value == 0:
+        key = self.reward_key(condition_id)
+        if key:
             return ActivityEntryMsg.ActivityCondition.CAN_GET
-
-        return ActivityEntryMsg.ActivityCondition.HAS_GOT
+        return ActivityEntryMsg.ActivityCondition.CAN_NOT
 
 # 活动类的统一入口
 class ActivityEntry(object):
@@ -1205,5 +1201,3 @@ class ActivityStatic(object):
             self._msg_activity(msg_activity, i)
 
         publish_to_char(self.char_id, pack_msg(msg))
-
-
