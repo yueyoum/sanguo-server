@@ -183,12 +183,12 @@ class BasePurchaseAction(object):
         times = self.all_times()
 
         for _id in PURCHASE.keys():
-            s = msg.status.add()
-            s.id = _id
-            s.first = _id not in times
+            if _id in times:
+                s = msg.status.add()
+                s.id = _id
+                s.first = False
 
         msg.yueka_remained_days = self.mongo_record.yueka_remained_days
-
         publish_to_char(self.char_id, pack_msg(msg))
 
 
