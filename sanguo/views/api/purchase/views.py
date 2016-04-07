@@ -6,6 +6,7 @@ __date__ = '14-7-30'
 
 from utils.decorate import json_return
 from core.purchase import PurchaseAction91, PurchaseActioinAiyingyong, PurchaseActionJodoplay, BasePurchaseAction
+from preset.data import PURCHASE
 
 @json_return
 def purchase91_done(request):
@@ -54,10 +55,17 @@ def purchase_self(request):
     try:
         char_id = int(request.POST['char_id'])
         goods_id = int(request.POST['goods_id'])
+        amount = int(request.POST['amount'])
     except:
         return {'ret': 1}
 
+    for i in range(amount):
+        p = BasePurchaseAction(char_id)
+        p.send_reward(goods_id)
+
+    # 额外赠送30%
+    addition_sycee = PURCHASE[goods_id].sycee * amount * 0.3
     p = BasePurchaseAction(char_id)
-    p.send_reward(goods_id)
+    p.send_addition_sycee_via_mail(int(addition_sycee))
 
     return {'ret': 0}

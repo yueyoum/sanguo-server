@@ -15,7 +15,7 @@ from core.mongoscheme import MongoPurchaseRecord
 from core.msgpipe import publish_to_char
 from core.exception import SanguoException
 from core.mail import Mail
-from core.attachment import get_drop
+from core.attachment import get_drop, make_standard_drop_from_template
 from utils.api import api_purchase_verify, api_purchase91_confirm, api_purchase_aiyingyong_confirm, api_purchase_allsdk_verify, api_purchase_jodoplay_confirm
 from utils import pack_msg
 from protomsg import PurchaseStatusNotify, PurchaseConfirmResponse
@@ -168,6 +168,14 @@ class BasePurchaseAction(object):
 
         resource = Resource(self.char_id, "Purchase")
         resource.add(**data)
+
+    def send_addition_sycee_via_mail(self, sycee):
+        # XXX 充值额外赠送通过邮件发送
+        drop = make_standard_drop_from_template()
+        drop['sycee'] = sycee
+
+        m = Mail(self.char_id)
+        m.add(u"充值额外赠送", u"感谢您的充值，请领取额外赠送", attachment=json.dumps(drop))
 
 
     def send_notify(self):
