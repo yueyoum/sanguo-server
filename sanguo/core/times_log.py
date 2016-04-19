@@ -90,3 +90,13 @@ class TimesLogArena(TimesLog):
 class TimesLogGemMerge(TimesLog):
     KEY = 'gem_merge'
     ACTIVITY_ID = 30002
+
+#乌巢阶粮胜利次数
+class TimesLogActivityStageWuChaoJieLiang(TimesLog):
+    KEY = 'as_wuchaojieliang'
+    ACTIVITY_ID = 40001
+
+#竞技场比武获胜
+class TimesLogArenaWin(TimesLog):
+    KEY = 'arena_win'
+    ACTIVITY_ID = 40002

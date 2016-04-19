@@ -1105,37 +1105,37 @@
     "pk": 18007, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": null, 
-        "icon_one_id": 1, 
-        "package": 18007, 
+        "icon_three_id": 25, 
+        "icon_one_id": 99, 
+        "package": 400002, 
         "des": "\u6210\u529f\u63a0\u593a50\u6b21", 
         "condition_ids": "", 
-        "icon_one_amount": 38888, 
+        "icon_one_amount": 30, 
         "icon_three_amount": 1, 
         "icon_two_type": 9, 
-        "icon_one_type": 3, 
+        "icon_one_type": 6, 
         "condition_value": 50, 
-        "icon_two_id": 3014, 
+        "icon_two_id": 3018, 
         "icon_two_amount": 1, 
-        "icon_three_type": null
+        "icon_three_type": 9
     }
 },
 {
     "pk": 18008, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 3017, 
-        "icon_one_id": 1, 
-        "package": 18008, 
-        "des": "\u5143\u5b9d\u70b9\u5c0615\u6b21", 
+        "icon_three_id": 3018, 
+        "icon_one_id": 28, 
+        "package": 400003, 
+        "des": "\u5143\u5b9d\u70b9\u5c0618\u6b21", 
         "condition_ids": "", 
-        "icon_one_amount": 388, 
+        "icon_one_amount": 2, 
         "icon_three_amount": 1, 
         "icon_two_type": 3, 
-        "icon_one_type": 4, 
-        "condition_value": 15, 
+        "icon_one_type": 9, 
+        "condition_value": 18, 
         "icon_two_id": null, 
-        "icon_two_amount": 28888, 
+        "icon_two_amount": 18888, 
         "icon_three_type": 9
     }
 },
@@ -1202,16 +1202,16 @@
     "fields": {
         "icon_three_id": 0, 
         "icon_one_id": 31, 
-        "package": 17003, 
+        "package": 400004, 
         "des": "\u7d2f\u79ef\u5145\u503c1000\u5143\u5b9d", 
         "condition_ids": "", 
-        "icon_one_amount": 5, 
+        "icon_one_amount": 2, 
         "icon_three_amount": 1, 
-        "icon_two_type": null, 
+        "icon_two_type": 4, 
         "icon_one_type": 9, 
         "condition_value": 1000, 
         "icon_two_id": 0, 
-        "icon_two_amount": 1, 
+        "icon_two_amount": 300, 
         "icon_three_type": null
     }
 },
@@ -1220,18 +1220,18 @@
     "model": "activity.activitystaticcondition", 
     "fields": {
         "icon_three_id": 0, 
-        "icon_one_id": 6, 
-        "package": 17004, 
+        "icon_one_id": 76, 
+        "package": 400005, 
         "des": "\u7d2f\u79ef\u5145\u503c3000\u5143\u5b9d", 
         "condition_ids": "", 
         "icon_one_amount": 1, 
-        "icon_three_amount": 0, 
+        "icon_three_amount": 500, 
         "icon_two_type": 9, 
         "icon_one_type": 7, 
         "condition_value": 3000, 
         "icon_two_id": 31, 
-        "icon_two_amount": 10, 
-        "icon_three_type": null
+        "icon_two_amount": 5, 
+        "icon_three_type": 4
     }
 },
 {
@@ -1239,17 +1239,17 @@
     "model": "activity.activitystaticcondition", 
     "fields": {
         "icon_three_id": 3, 
-        "icon_one_id": 5, 
-        "package": 17005, 
+        "icon_one_id": 19, 
+        "package": 400006, 
         "des": "\u7d2f\u79ef\u5145\u503c5000\u5143\u5b9d", 
         "condition_ids": "", 
         "icon_one_amount": 1, 
         "icon_three_amount": 1, 
-        "icon_two_type": 9, 
+        "icon_two_type": 4, 
         "icon_one_type": 5, 
         "condition_value": 5000, 
         "icon_two_id": 31, 
-        "icon_two_amount": 15, 
+        "icon_two_amount": 800, 
         "icon_three_type": 10
     }
 },
@@ -1257,18 +1257,18 @@
     "pk": 20004, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 7, 
-        "icon_one_id": 23, 
-        "package": 17006, 
+        "icon_three_id": 37, 
+        "icon_one_id": 97, 
+        "package": 400007, 
         "des": "\u7d2f\u79ef\u5145\u503c10000\u5143\u5b9d", 
         "condition_ids": "", 
-        "icon_one_amount": 80, 
+        "icon_one_amount": 130, 
         "icon_three_amount": 3, 
-        "icon_two_type": 7, 
+        "icon_two_type": 9, 
         "icon_one_type": 6, 
         "condition_value": 10000, 
-        "icon_two_id": 82, 
-        "icon_two_amount": 1, 
+        "icon_two_id": 33, 
+        "icon_two_amount": 10, 
         "icon_three_type": 8
     }
 },
@@ -1276,38 +1276,38 @@
     "pk": 20005, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 31, 
-        "icon_one_id": 29, 
-        "package": 17007, 
+        "icon_three_id": 47, 
+        "icon_one_id": 12, 
+        "package": 400008, 
         "des": "\u7d2f\u79ef\u5145\u503c3\u4e07\u5143\u5b9d", 
         "condition_ids": "", 
         "icon_one_amount": 150, 
-        "icon_three_amount": 10, 
-        "icon_two_type": 8, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 6, 
         "icon_one_type": 6, 
         "condition_value": 30000, 
-        "icon_two_id": 8, 
-        "icon_two_amount": 3, 
-        "icon_three_type": 9
+        "icon_two_id": 93, 
+        "icon_two_amount": 288, 
+        "icon_three_type": 7
     }
 },
 {
     "pk": 20006, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 31, 
-        "icon_one_id": 23, 
-        "package": 17008, 
+        "icon_three_id": 4, 
+        "icon_one_id": 14, 
+        "package": 400009, 
         "des": "\u7d2f\u79ef\u5145\u503c5\u4e07\u5143\u5b9d", 
         "condition_ids": "", 
-        "icon_one_amount": 200, 
-        "icon_three_amount": 15, 
-        "icon_two_type": 7, 
-        "icon_one_type": 6, 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 6, 
+        "icon_one_type": 5, 
         "condition_value": 50000, 
-        "icon_two_id": 47, 
-        "icon_two_amount": 1, 
-        "icon_three_type": 9
+        "icon_two_id": 14, 
+        "icon_two_amount": 288, 
+        "icon_three_type": 10
     }
 },
 {
@@ -1403,6 +1403,101 @@
         "icon_two_id": null, 
         "icon_two_amount": 1, 
         "icon_three_type": null
+    }
+},
+{
+    "pk": 40001, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 3018, 
+        "icon_one_id": 1, 
+        "package": 400001, 
+        "des": "\u6d3b\u52a8\u526f\u672c\u4e4c\u5de2\u4e4b\u6218\u80dc\u522920\u6b21", 
+        "condition_ids": "", 
+        "icon_one_amount": 18888, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 8, 
+        "icon_one_type": 3, 
+        "condition_value": 20, 
+        "icon_two_id": 12, 
+        "icon_two_amount": 4, 
+        "icon_three_type": 9
+    }
+},
+{
+    "pk": 40002, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 3018, 
+        "icon_one_id": null, 
+        "package": 400011, 
+        "des": "\u7ade\u6280\u573a\u6bd4\u6b66\u83b7\u80dc30\u6b21", 
+        "condition_ids": "", 
+        "icon_one_amount": 18888, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 9, 
+        "icon_one_type": 3, 
+        "condition_value": 30, 
+        "icon_two_id": 33, 
+        "icon_two_amount": 2, 
+        "icon_three_type": 9
+    }
+},
+{
+    "pk": 40003, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 3018, 
+        "icon_one_id": null, 
+        "package": 400012, 
+        "des": "\u4e94\u884c\u5c5e\u6027\u5f3a\u5316\u52305\u7ea7", 
+        "condition_ids": "", 
+        "icon_one_amount": 28888, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 6, 
+        "icon_one_type": 3, 
+        "condition_value": 5, 
+        "icon_two_id": 97, 
+        "icon_two_amount": 50, 
+        "icon_three_type": 9
+    }
+},
+{
+    "pk": 40004, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 3018, 
+        "icon_one_id": null, 
+        "package": 400013, 
+        "des": "\u6d3b\u52a8\u671f\u95f4\u5c06\u4e00\u4e2a\u6b66\u5c06\u8fdb\u9636\u52305\u661f", 
+        "condition_ids": "", 
+        "icon_one_amount": 18888, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 9, 
+        "icon_one_type": 3, 
+        "condition_value": 5, 
+        "icon_two_id": 28, 
+        "icon_two_amount": 2, 
+        "icon_three_type": 9
+    }
+},
+{
+    "pk": 40005, 
+    "model": "activity.activitystaticcondition", 
+    "fields": {
+        "icon_three_id": 69, 
+        "icon_one_id": 98, 
+        "package": 400014, 
+        "des": "\u6536\u96c67\u4e2a\u6b66\u5c06\u5982\u610f\u5151\u6362\u88c5\u5907", 
+        "condition_ids": "", 
+        "icon_one_amount": 1, 
+        "icon_three_amount": 1, 
+        "icon_two_type": 7, 
+        "icon_one_type": 7, 
+        "condition_value": 7, 
+        "icon_two_id": 6, 
+        "icon_two_amount": 1, 
+        "icon_three_type": 7
     }
 },
 {

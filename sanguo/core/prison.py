@@ -11,6 +11,8 @@ from core.task import Task
 from core.resource import Resource
 from core.attachment import standard_drop_to_attachment_protomsg
 from core.achievement import Achievement
+from core.activity import ActivityEntry
+
 from utils import pack_msg
 from preset.settings import (
     PRISONER_START_PROB,
@@ -114,6 +116,11 @@ class Prison(object):
         def _get():
             got = False
             prob = self.p.prisoners[str_id].prob + treasures_prob
+
+            ae = ActivityEntry(self.char_id, 40008)
+            if ae and ae.is_ok():
+                prob += 80
+
             if prob >= random.randint(1, 100):
                 # got it
                 save_hero(self.char_id, self.p.prisoners[str_id].oid)

@@ -239,7 +239,16 @@ class Plunder(object):
 
     def max_plunder_times(self):
         char = Char(self.char_id)
-        return VIP_FUNCTION[char.mc.vip].plunder
+        times = VIP_FUNCTION[char.mc.vip].plunder
+
+        ae = ActivityEntry(self.char_id, 40007)
+        if not ae or not ae.is_ok():
+            return times
+
+        if times > 10:
+            return times
+
+        return 10
 
 
     def clean_plunder_target(self):

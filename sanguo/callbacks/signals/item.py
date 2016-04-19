@@ -31,6 +31,10 @@ def _stuff_add(char_id, stuff_id, add_amount, new_amount, **kwargs):
     if ae and stuff_id == ae.STUFF_ID:
         ActivityStatic(char_id).trig(18009)
 
+    ae = ActivityEntry(char_id, 40005)
+    if ae and stuff_id == ae.STUFF_ID:
+        ActivityStatic(char_id).trig(40005)
+
 
 def _stuff_remove(char_id, stuff_id, rm_amount, new_amount, **kwargs):
     ae = ActivityEntry(char_id, 7001)
@@ -41,6 +45,9 @@ def _stuff_remove(char_id, stuff_id, rm_amount, new_amount, **kwargs):
     if ae and stuff_id == ae.STUFF_ID:
         ActivityStatic(char_id).trig(18009)
 
+    ae = ActivityEntry(char_id, 40005)
+    if ae and stuff_id == ae.STUFF_ID:
+        ActivityStatic(char_id).trig(40005)
 
 equip_changed_signal.connect(
     _equip_changed,

@@ -11,7 +11,15 @@ import arrow
 from django.conf import settings
 from mongoengine import DoesNotExist, Q
 from core.exception import SanguoException
-from core.mongoscheme import MongoActivityStatic, MongoPurchaseLog, MongoCostSyceeLog, MongoCharacter, MongoKeyRecord
+from core.mongoscheme import (
+    MongoActivityStatic,
+    MongoPurchaseLog,
+    MongoCostSyceeLog,
+    MongoCharacter,
+    MongoKeyRecord,
+    MongoActivityEnabledCondition,
+)
+
 from core.server import server
 from core.character import get_char_property
 from core.msgpipe import publish_to_char
@@ -27,6 +35,8 @@ from core.times_log import (
     TimesLogPlunder,
     TimesLogArena,
     TimesLogGemMerge,
+    TimesLogActivityStageWuChaoJieLiang,
+    TimesLogArenaWin,
 )
 
 from core.purchase import BasePurchaseAction
@@ -253,6 +263,69 @@ activities = _Activities()
 
 def has_activity(activity_id):
     return activity_id in ACTIVITY_STATIC
+
+
+class ActivityEnableCondition(object):
+    # 直接设置可领取状态
+    def make_key(self, condition_id):
+        loop_times = self.active_time.loop_times
+        open_time = self.active_time.nearest_open_date.timestamp
+
+        self.key = "{0}#{1}#{2}#{3}".format(self.char_id, condition_id, loop_times, open_time)
+
+    def enable(self, value):
+        passed, _ = self.select_conditions(value)
+
+        for p in passed:
+            key = self.make_key(p)
+            try:
+                doc = MongoActivityEnabledCondition.objects.get(id=key)
+            except DoesNotExist:
+                doc = MongoActivityEnabledCondition(id=key)
+                doc.value = 0
+                doc.save()
+
+    def get_reward(self, char_id, condition_id):
+        key = self.make_key(condition_id)
+        try:
+            doc = MongoActivityEnabledCondition.objects.get(id=key)
+        except DoesNotExist:
+            raise SanguoException(
+                errormsg.ACTIVITY_CAN_NOT_GET_REWARD,
+                char_id,
+                "Activity Get Reward",
+                "condition {0} can not get".format(condition_id)
+            )
+
+        if doc.value == 1:
+            raise SanguoException(
+                errormsg.ACTIVITY_ALREADY_GOT_REWARD,
+                char_id,
+                "Activity Get Reward",
+                "condition {0} already got".format(condition_id)
+            )
+
+        doc.value = 1
+        doc.save()
+
+        standard_drop = get_drop([ACTIVITY_STATIC_CONDITIONS[condition_id].package])
+        resource = Resource(char_id, "Activity Get Reward", "get condition id {0}".format(condition_id))
+        standard_drop = resource.add(**standard_drop)
+
+        return standard_drop_to_attachment_protomsg(standard_drop)
+
+
+    def get_condition_status(self, condition_id):
+        key = self.make_key(condition_id)
+        try:
+            doc = MongoActivityEnabledCondition.objects.get(id=key)
+        except DoesNotExist:
+            return ActivityEntryMsg.ActivityCondition.CAN_NOT
+
+        if doc.value == 0:
+            return ActivityEntryMsg.ActivityCondition.CAN_GET
+
+        return ActivityEntryMsg.ActivityCondition.HAS_GOT
 
 
 class ActivityTriggerManually(object):
@@ -1120,6 +1193,141 @@ class Activity30006(ActivityBase):
         if key:
             return ActivityEntryMsg.ActivityCondition.CAN_GET
         return ActivityEntryMsg.ActivityCondition.CAN_NOT
+
+
+#######################################################
+#######################################################
+#######################################################
+# 2016-04-19 for ios2
+
+@activities.register(40000)
+class Activity40000(ActivityBase):
+    # 任意充值
+    def get_current_value(self, char_id):
+        return 0
+
+    def trig(self, *args):
+        if not self.is_valid():
+            return
+
+        ac_record = ActivityConditionRecord(self.char_id, self.CONDITION_ID, self.activity_time)
+        send_times = ac_record.send_times()
+
+        if send_times > 0:
+            return
+
+        attachment = get_drop([self.activity_data.package])
+        mail = Mail(self.char_id)
+        mail.add(
+            self.activity_data.mail_title,
+            self.activity_data.mail_content,
+            attachment=json.dumps(attachment)
+        )
+
+        ac_record.add_send(1)
+
+
+@activities.register(40001)
+class Activity40001(ActivityBase, ActivityTriggerManually):
+    # 活动副本
+    def get_current_value(self, char_id):
+        if not self.is_valid():
+            return 0
+
+        return TimesLogActivityStageWuChaoJieLiang(char_id).count(
+            start_at=self.activity_time.nearest_open_date.timestamp,
+            end_at=self.activity_time.nearest_close_date.timestamp
+        )
+
+@activities.register(40002)
+class Activity40002(ActivityBase, ActivityTriggerManually):
+    # 竞技场比武50次
+    def get_current_value(self, char_id):
+        if not self.is_valid():
+            return 0
+
+        return TimesLogArenaWin(char_id).count(
+            start_at=self.activity_time.nearest_open_date.timestamp,
+            end_at=self.activity_time.nearest_close_date.timestamp
+        )
+
+@activities.register(40003)
+class Activity40003(ActivityEnableCondition, ActivityBase):
+    # 升级五行属性
+    def get_current_value(self, char_id):
+        return 0
+
+@activities.register(40004)
+class Activity40004(ActivityEnableCondition, ActivityBase):
+    # 进阶五星
+    def get_current_value(self, char_id):
+        return 0
+
+
+@activities.register(40005)
+class Activity40005(ActivityBase, ActivityTriggerManually):
+    # 道具 武将如意  stuff_id = 3018
+    STUFF_ID = 3018
+
+    def get_current_value(self, char_id):
+        from core.item import Item
+        item = Item(char_id)
+        return item.stuff_amount(self.STUFF_ID)
+
+    def get_reward_check(self, char_id, condition_id):
+        value = ACTIVITY_STATIC_CONDITIONS[condition_id].condition_value
+        resource = Resource(char_id, "Activity Get Reward 40005")
+        resource.check_and_remove(stuffs=[(self.STUFF_ID, value)])
+
+
+@activities.register(40006)
+class Activity40006(ActivityBase):
+    def get_current_value(self, char_id):
+        return 0
+
+    def trig(self):
+        if not self.is_valid():
+            return
+
+        now = arrow.utcnow().to(settings.TIME_ZONE)
+        if now.hour != 20:
+            return
+
+        date_str = now.format('YYYY-MM-DD')
+        key = 'activity40006#{0)#{1}'.format(
+            date_str, self.char_id
+        )
+
+        try:
+            MongoKeyRecord.objects.get(id=key)
+        except DoesNotExist:
+            kr = MongoKeyRecord(id=key)
+            kr.value = 1
+            kr.save()
+
+            m = Mail(self.char_id)
+            m.add(
+                self.activity_data.mail_title,
+                self.activity_data.mail_content,
+                attachment=json.dumps(get_drop([self.activity_data.package]))
+            )
+
+@activities.register(40007)
+class Activity40007(ActivityBase):
+    def get_current_value(self, char_id):
+        return get_char_property(char_id, 'vip')
+
+    def is_ok(self):
+        return self.is_valid() and self.get_current_value(self.char_id) >= 3
+
+@activities.register(40008)
+class Activity40008(ActivityBase):
+    def get_current_value(self, char_id):
+        return get_char_property(char_id, 'vip')
+
+    def is_ok(self):
+        return self.is_valid() and self.get_current_value(self.char_id) >= 6
+
 
 # 活动类的统一入口
 class ActivityEntry(object):

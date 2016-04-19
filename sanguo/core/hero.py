@@ -14,6 +14,7 @@ from core.horse import Horse
 from core.msgpipe import publish_to_char
 from core.common import FightPowerMixin, level_up
 from core.times_log import TimesLogHeroStepUp
+from core.activity import ActivityEntry, ActivityStatic
 
 from utils import cache
 from utils import pack_msg
@@ -315,6 +316,11 @@ class Hero(FightPowerMixin):
         )
 
         TimesLogHeroStepUp(self.char_id).inc()
+        if self.step >= 5:
+            ae  =ActivityEntry(self.char_id, 40004)
+            if ae:
+                ae.enable(self.step)
+                ActivityStatic(self.char_id).send_notify(activity_ids=[40004])
 
 
     def wuxing_update(self, wuxing_id, souls):
@@ -354,6 +360,12 @@ class Hero(FightPowerMixin):
             hero_id=self.id
         )
 
+        if wx.level >= 5:
+            ae = ActivityEntry(self.char_id, 40003)
+            if ae:
+                ae.enable(wx.level)
+
+                ActivityStatic(self.char_id).send_notify(activity_ids=[40003])
 
 
 class HeroSoul(object):

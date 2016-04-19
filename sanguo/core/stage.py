@@ -15,7 +15,7 @@ from core.counter import Counter, ActivityStageCount
 from core.resource import Resource
 from core.activity import ActivityEntry
 from core.task import Task
-from core.times_log import TimesLogEliteStage
+from core.times_log import TimesLogEliteStage, TimesLogActivityStageWuChaoJieLiang
 from utils import pack_msg
 from utils.decorate import operate_guard
 from preset.settings import (
@@ -626,6 +626,7 @@ class ActivityStage(object):
             self.send_remained_times_notify()
 
             Task(self.char_id).trig(9)
+            TimesLogActivityStageWuChaoJieLiang(self.char_id).inc()
 
         return battle_msg
 

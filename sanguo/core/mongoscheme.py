@@ -512,6 +512,16 @@ class MongoKeyRecord(Document):
     }
 
 
+# 直接设定的活动条件状态
+class MongoActivityEnabledCondition(Document):
+    id = StringField(primary_key=True)
+    value = IntField()
+
+    meta = {
+        'collection': 'enabled_condition'
+    }
+
+
 # 坐骑
 class MongoEmbeddedHorse(EmbeddedDocument):
     oid = IntField()

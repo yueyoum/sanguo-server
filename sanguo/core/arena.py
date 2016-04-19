@@ -17,7 +17,8 @@ from core.task import Task
 from core.resource import Resource
 from core.msgfactory import create_character_infomation_message
 from core.msgpipe import publish_to_char
-from core.times_log import TimesLogArena
+from core.times_log import TimesLogArena, TimesLogArenaWin
+from core.activity import ActivityEntry
 
 from preset.data import VIP_MAX_LEVEL
 from utils.checkers import func_opened
@@ -312,7 +313,12 @@ class Arena(object):
 
             rival_arena.be_beaten(rival_score, self_score, not msg.self_win, self.char_id)
 
+            TimesLogArenaWin(self.char_id).inc()
+
         TimesLogArena(self.char_id).inc()
+        ae = ActivityEntry(self.char_id, 40006)
+        if ae:
+            ae.trig()
 
         self.send_notify()
         return msg, adding_score
