@@ -21,7 +21,6 @@ from core.mongoscheme import (
 )
 
 from core.server import server
-from core.character import get_char_property
 from core.msgpipe import publish_to_char
 from core.mail import Mail
 from core.attachment import get_drop, standard_drop_to_attachment_protomsg, make_standard_drop_from_template
@@ -268,8 +267,8 @@ def has_activity(activity_id):
 class ActivityEnableCondition(object):
     # 直接设置可领取状态
     def make_key(self, condition_id):
-        loop_times = self.active_time.loop_times
-        open_time = self.active_time.nearest_open_date.timestamp
+        loop_times = self.activity_time.loop_times
+        open_time = self.activity_time.nearest_open_date.timestamp
 
         self.key = "{0}#{1}#{2}#{3}".format(self.char_id, condition_id, loop_times, open_time)
 
@@ -1035,6 +1034,7 @@ class Activity21001(ActivityBase):
 class Activity22001(ActivityBase):
     # VIP
     def get_current_value(self, char_id):
+        from core.character import get_char_property
         return get_char_property(char_id, 'vip')
 
     def send_mail(self):
@@ -1094,6 +1094,7 @@ class Activity30004(ActivityBase):
 class Activity30005(ActivityBase):
     # VIP6掠夺必掉将
     def get_current_value(self, char_id):
+        from core.character import get_char_property
         return get_char_property(char_id, 'vip')
 
     def get_prisoner_prob(self):
@@ -1254,12 +1255,19 @@ class Activity40002(ActivityBase, ActivityTriggerManually):
 @activities.register(40003)
 class Activity40003(ActivityEnableCondition, ActivityBase):
     # 升级五行属性
+    def __init__(self, *args):
+        ActivityBase.__init__(self, *args)
+
     def get_current_value(self, char_id):
         return 0
+
 
 @activities.register(40004)
 class Activity40004(ActivityEnableCondition, ActivityBase):
     # 进阶五星
+    def __init__(self, *args):
+        ActivityBase.__init__(self, *args)
+
     def get_current_value(self, char_id):
         return 0
 
@@ -1315,6 +1323,7 @@ class Activity40006(ActivityBase):
 @activities.register(40007)
 class Activity40007(ActivityBase):
     def get_current_value(self, char_id):
+        from core.character import get_char_property
         return get_char_property(char_id, 'vip')
 
     def is_ok(self):
@@ -1323,6 +1332,7 @@ class Activity40007(ActivityBase):
 @activities.register(40008)
 class Activity40008(ActivityBase):
     def get_current_value(self, char_id):
+        from core.character import get_char_property
         return get_char_property(char_id, 'vip')
 
     def is_ok(self):
