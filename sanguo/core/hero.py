@@ -320,7 +320,7 @@ class Hero(FightPowerMixin):
             ae  =ActivityEntry(self.char_id, 40004)
             if ae:
                 ae.enable(self.step)
-                ActivityStatic(self.char_id).send_notify(activity_ids=[40004])
+                ActivityStatic(self.char_id).send_update_notify(activity_ids=[40004])
 
 
     def wuxing_update(self, wuxing_id, souls):
@@ -365,7 +365,7 @@ class Hero(FightPowerMixin):
             if ae:
                 ae.enable(wx.level)
 
-                ActivityStatic(self.char_id).send_notify(activity_ids=[40003])
+                ActivityStatic(self.char_id).send_update_notify(activity_ids=[40003])
 
 
 class HeroSoul(object):

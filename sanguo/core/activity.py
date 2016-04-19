@@ -270,7 +270,8 @@ class ActivityEnableCondition(object):
         loop_times = self.activity_time.loop_times
         open_time = self.activity_time.nearest_open_date.timestamp
 
-        self.key = "{0}#{1}#{2}#{3}".format(self.char_id, condition_id, loop_times, open_time)
+        key = "{0}#{1}#{2}#{3}".format(self.char_id, condition_id, loop_times, open_time)
+        return key
 
     def enable(self, value):
         passed, _ = self.select_conditions(value)

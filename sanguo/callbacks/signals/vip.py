@@ -32,7 +32,7 @@ def _vip_change(char_id, old_vip, new_vip, **kwargs):
         vip_activies.append(40008)
 
     if vip_activies:
-        ActivityStatic(char_id).send_notify(activity_ids=vip_activies)
+        ActivityStatic(char_id).send_update_notify(activity_ids=vip_activies)
 
 vip_changed_signal.connect(
     _vip_change,
