@@ -1205,6 +1205,7 @@ class Activity30006(ActivityBase):
 @activities.register(40000)
 class Activity40000(ActivityBase):
     # 任意充值
+    CONDITION_ID = -40000
     def get_current_value(self, char_id):
         return 0
 
@@ -1303,7 +1304,7 @@ class Activity40006(ActivityBase):
             return
 
         date_str = now.format('YYYY-MM-DD')
-        key = 'activity40006#{0)#{1}'.format(
+        key = 'activity40006#{0}#{1}'.format(
             date_str, self.char_id
         )
 

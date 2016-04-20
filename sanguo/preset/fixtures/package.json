@@ -7383,7 +7383,7 @@
         "stuffs": [
             {
                 "amount": 2, 
-                "id": 30, 
+                "id": 33, 
                 "prob": 100000
             }, 
             {
@@ -7479,6 +7479,25 @@
         "mode": 1, 
         "exp": 0, 
         "stuffs": [], 
+        "official_exp": 0
+    }, 
+    "400015": {
+        "gems": [], 
+        "horses": [], 
+        "sycee": 0, 
+        "heros": [], 
+        "gold": 0, 
+        "souls": [], 
+        "equipments": [], 
+        "mode": 1, 
+        "exp": 0, 
+        "stuffs": [
+            {
+                "amount": 1, 
+                "id": 31, 
+                "prob": 100000
+            }
+        ], 
         "official_exp": 0
     }, 
     "102": {

@@ -219,9 +219,15 @@ class Prison(object):
 
 
     def send_prisoners_notify(self):
+        ae = ActivityEntry(self.char_id, 40008)
+        if ae and ae.is_ok():
+            _add_prob = 80
+        else:
+            _add_prob = 0
+
         msg = protomsg.PrisonerListNotify()
         for k, v in self.p.prisoners.iteritems():
             p = msg.prisoner.add()
-            self._fill_up_prisoner_msg(p, int(k), v.oid, v.prob, v.active)
+            self._fill_up_prisoner_msg(p, int(k), v.oid, v.prob + _add_prob, v.active)
 
         publish_to_char(self.char_id, pack_msg(msg))
