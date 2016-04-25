@@ -946,7 +946,7 @@
         "category": 2, 
         "interval_days": 0, 
         "name": "VIP\u73a9\u5bb6\u798f\u5229\u4e8c", 
-        "continued_days": 10, 
+        "continued_days": 25, 
         "current_des": "\u5f53\u524dVIP\u7b49\u7ea7\uff1a${0}", 
         "start_time": "2016-04-19", 
         "des": "VIP6\u4ee5\u4e0a\u73a9\u5bb6\u5728\u76d1\u72f1\u62db\u964d\u6b66\u5c06\u5fe0\u8bda\u5ea6+80", 
