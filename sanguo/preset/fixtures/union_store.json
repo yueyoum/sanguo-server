@@ -46,7 +46,7 @@
         "des": "", 
         "value": 39, 
         "tp": 9, 
-        "union_coin": 750
+        "union_coin": 5000
     }
 },
 {
@@ -56,7 +56,7 @@
         "des": "", 
         "value": 40, 
         "tp": 9, 
-        "union_coin": 1500
+        "union_coin": 5000
     }
 },
 {
@@ -66,7 +66,7 @@
         "des": "", 
         "value": 41, 
         "tp": 9, 
-        "union_coin": 2500
+        "union_coin": 5000
     }
 },
 {
