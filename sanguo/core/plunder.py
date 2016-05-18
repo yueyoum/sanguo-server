@@ -408,6 +408,14 @@ class Plunder(object):
             else:
                 _prob = ac.get_prisoner_prob()
 
+            ae = ActivityEntry(self.char_id, 50005)
+            if ae and ae.is_valid():
+                _vip = ae.get_current_value(self.char_id)
+                if _vip == 6:
+                    _prob = 50
+                elif _vip >= 7:
+                    _prob = 100
+
             if random.randint(1, 100) <= _prob:
                 return prison
             return 0

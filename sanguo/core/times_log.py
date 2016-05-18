@@ -100,3 +100,14 @@ class TimesLogActivityStageWuChaoJieLiang(TimesLog):
 class TimesLogArenaWin(TimesLog):
     KEY = 'arena_win'
     ACTIVITY_ID = 40002
+
+
+#活动副本次数
+class TimesLogActivityStage(TimesLog):
+    KEY = 'activity_stage'
+    ACTIVITY_ID = 50000
+
+#招降次数
+class TimesLogPrisonGetSuccess(TimesLog):
+    KEY = 'prison_get_success'
+    ACTIVITY_ID = 50002

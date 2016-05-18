@@ -36,6 +36,8 @@ from core.times_log import (
     TimesLogGemMerge,
     TimesLogActivityStageWuChaoJieLiang,
     TimesLogArenaWin,
+    TimesLogActivityStage,
+    TimesLogPrisonGetSuccess,
 )
 
 from core.purchase import BasePurchaseAction
@@ -1339,6 +1341,75 @@ class Activity40008(ActivityBase):
 
     def is_ok(self):
         return self.is_valid() and self.get_current_value(self.char_id) >= 6
+
+
+##############################
+@activities.register(50000)
+class Activity50000(ActivityBase, ActivityTriggerManually):
+    # 活动副本
+    def get_current_value(self, char_id):
+        if not self.is_valid():
+            return 0
+
+        return TimesLogActivityStage(char_id).count(
+            start_at=self.activity_time.nearest_open_date.timestamp,
+            end_at=self.activity_time.nearest_close_date.timestamp
+        )
+
+
+@activities.register(50001)
+class Activity50001(ActivityEnableCondition, ActivityBase):
+    # 获得四阶武器
+    def __init__(self, *args):
+        ActivityBase.__init__(self, *args)
+
+    def get_current_value(self, char_id):
+        return 0
+
+
+@activities.register(50002)
+class Activity50002(ActivityBase, ActivityTriggerManually):
+    # 累计招降成功
+    def get_current_value(self, char_id):
+        if not self.is_valid():
+            return 0
+
+        return TimesLogPrisonGetSuccess(char_id).count(
+            start_at=self.activity_time.nearest_open_date.timestamp,
+            end_at=self.activity_time.nearest_close_date.timestamp
+        )
+
+@activities.register(50003)
+class Activity50003(ActivityBase, ActivityTriggerManually):
+    # 道具 金将之卷  stuff_id = 3019
+    STUFF_ID = 3019
+
+    def get_current_value(self, char_id):
+        from core.item import Item
+        item = Item(char_id)
+        return item.stuff_amount(self.STUFF_ID)
+
+    def get_reward_check(self, char_id, condition_id):
+        value = ACTIVITY_STATIC_CONDITIONS[condition_id].condition_value
+        resource = Resource(char_id, "Activity Get Reward 50003")
+        resource.check_and_remove(stuffs=[(self.STUFF_ID, value)])
+
+@activities.register(50005)
+class Activity50005(ActivityBase):
+    # vip 大杂烩 1
+    def get_current_value(self, char_id):
+        from core.character import get_char_property
+        return get_char_property(char_id, 'vip')
+
+@activities.register(50006)
+class Activity50006(ActivityEnableCondition, ActivityBase):
+    # vip 大杂烩 2
+    def __init__(self, *args):
+        ActivityBase.__init__(self, *args)
+
+    def get_current_value(self, char_id):
+        from core.character import get_char_property
+        return get_char_property(char_id, 'vip')
 
 
 # 活动类的统一入口

@@ -15,7 +15,7 @@ from core.formation import Formation
 from core.achievement import Achievement
 from core.task import Task
 from core.resource import Resource
-from core.activity import ActivityEntry
+from core.activity import ActivityEntry, ActivityStatic
 from core.times_log import TimesLogEquipStepUp, TimesLogGemMerge
 
 from utils import pack_msg
@@ -204,6 +204,13 @@ class Equipment(MessageEquipmentMixin):
             achievement.trig(23, 1)
 
         TimesLogEquipStepUp(self.char_id).inc()
+
+        if self.equip.step == 4:
+            ae  =ActivityEntry(self.char_id, 50001)
+            if ae:
+                ae.enable(self.step)
+                ActivityStatic(self.char_id).send_update_notify(activity_ids=[50001])
+
         return stuff_needs
 
 

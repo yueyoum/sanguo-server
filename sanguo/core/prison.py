@@ -12,6 +12,7 @@ from core.resource import Resource
 from core.attachment import standard_drop_to_attachment_protomsg
 from core.achievement import Achievement
 from core.activity import ActivityEntry
+from core.times_log import TimesLogPrisonGetSuccess
 
 from utils import pack_msg
 from preset.settings import (
@@ -121,6 +122,18 @@ class Prison(object):
             if ae and ae.is_ok():
                 prob += 80
 
+            ae = ActivityEntry(self.char_id, 50005)
+            if ae and ae.is_valid():
+                _vip = ae.get_current_value(self.char_id)
+                if _vip == 4:
+                    prob += 30
+                elif _vip == 5:
+                    prob += 50
+                elif _vip == 6:
+                    prob += 60
+                elif _vip >= 7:
+                    prob += 100
+
             if prob >= random.randint(1, 100):
                 # got it
                 save_hero(self.char_id, self.p.prisoners[str_id].oid)
@@ -158,6 +171,8 @@ class Prison(object):
         if got:
             achievement = Achievement(self.char_id)
             achievement.trig(14, 1)
+
+            TimesLogPrisonGetSuccess(self.char_id).inc()
 
         return got
 

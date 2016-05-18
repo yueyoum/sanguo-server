@@ -1240,5 +1240,95 @@
         "quality": 5, 
         "icon": "\u5b9d\u7269-\u5982\u610f"
     }
+},
+{
+    "pk": 3019, 
+    "model": "item.stuff", 
+    "fields": {
+        "name": "\u91d1\u5c06\u4e4b\u5377", 
+        "tip_des": "\u91d1\u5c06\u6d3e\u9001\u6d3b\u52a8\u4e2d\u7528\u4e8e\u5151\u6362\u968f\u673a\u91d1\u5c06\u5b9d\u7bb1", 
+        "tip_type": "\u91d1\u5c06\u4e4b\u5377", 
+        "des": "\u91d1\u5c06\u6d3e\u9001\u6d3b\u52a8\u4e2d\u7528\u4e8e\u5151\u6362\u968f\u673a\u91d1\u5c06\u5b9d\u7bb1", 
+        "buy_sycee": 0, 
+        "tp": 1, 
+        "default_package": null, 
+        "sell_gold": 0, 
+        "value": null, 
+        "packages": "", 
+        "quality": 5, 
+        "icon": "\u732e\u5e1d\u8bcf\u4e66"
+    }
+},
+{
+    "pk": 3020, 
+    "model": "item.stuff", 
+    "fields": {
+        "name": "\u56db\u7ea7\u5b9d\u77f3\u7bb1", 
+        "tip_des": "\u5f00\u542f\u540e\u53ef\u83b7\u5f97\u56db\u7ea7\u5b9d\u77f3X2", 
+        "tip_type": "\u56db\u7ea7\u5b9d\u77f3\u7bb1", 
+        "des": "\u5f00\u542f\u540e\u83b7\u5f97\u56db\u7ea7\u5b9d\u77f3X2", 
+        "buy_sycee": 0, 
+        "tp": 3, 
+        "default_package": null, 
+        "sell_gold": 0, 
+        "value": null, 
+        "packages": "400018", 
+        "quality": 5, 
+        "icon": "\u8d22\u5b9d\u7bb1"
+    }
+},
+{
+    "pk": 3021, 
+    "model": "item.stuff", 
+    "fields": {
+        "name": "\u4e09\u7ea7\u5b9d\u77f3\u7bb1", 
+        "tip_des": "\u5f00\u542f\u540e\u53ef\u83b7\u5f97\u4e09\u7ea7\u5b9d\u77f3X2", 
+        "tip_type": "\u4e09\u7ea7\u5b9d\u77f3\u7bb1", 
+        "des": "\u5f00\u542f\u540e\u53ef\u83b7\u5f97\u4e09\u7ea7\u5b9d\u77f3X2", 
+        "buy_sycee": 0, 
+        "tp": 3, 
+        "default_package": null, 
+        "sell_gold": 0, 
+        "value": null, 
+        "packages": "400025", 
+        "quality": 5, 
+        "icon": "\u94f6\u4e24\u888b"
+    }
+},
+{
+    "pk": 3022, 
+    "model": "item.stuff", 
+    "fields": {
+        "name": "\u516d\u7ea7\u5b9d\u77f3\u7bb1", 
+        "tip_des": "\u5f00\u542f\u540e\u8774\u8776\u516d\u7ea7\u5b9d\u77f3X2", 
+        "tip_type": "\u516d\u7ea7\u5b9d\u77f3\u7bb1", 
+        "des": "\u5f00\u540e\u83b7\u5f97\u516d\u7ea7\u5b9d\u77f3X2", 
+        "buy_sycee": 0, 
+        "tp": 3, 
+        "default_package": null, 
+        "sell_gold": 0, 
+        "value": null, 
+        "packages": "400028", 
+        "quality": 5, 
+        "icon": "\u94f6\u4e24\u7bb1"
+    }
+},
+{
+    "pk": 3023, 
+    "model": "item.stuff", 
+    "fields": {
+        "name": "\u4e03\u7ea7\u5b9d\u77f3\u7bb1", 
+        "tip_des": "\u5f00\u542f\u540e\u83b7\u5f97\u4e03\u7ea7\u5b9d\u77f3X2", 
+        "tip_type": "\u4e03\u7ea7\u5b9d\u77f3\u7bb1", 
+        "des": "\u5f00\u542f\u540e\u83b7\u5f97\u4e03\u7ea7\u5b9d\u77f3X2", 
+        "buy_sycee": 0, 
+        "tp": 3, 
+        "default_package": null, 
+        "sell_gold": 0, 
+        "value": null, 
+        "packages": "400030", 
+        "quality": 5, 
+        "icon": "\u6b66\u5c06\u5c06\u9b42\u5b9d\u7bb1\uff08\u91d1\uff09"
+    }
 }
 ]

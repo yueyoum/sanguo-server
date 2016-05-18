@@ -7,7 +7,7 @@ from core.signals import vip_changed_signal
 from core.prison import Prison
 from core.mail import Mail
 from core.plunder import Plunder
-from core.activity import ActivityStatic, has_activity
+from core.activity import ActivityStatic, has_activity, ActivityEntry
 from preset.settings import MAIL_VIP_CHANGED_CONTENT, MAIL_VIP_CHANGED_TITLE
 from preset.data import VIP_FUNCTION
 
@@ -30,9 +30,16 @@ def _vip_change(char_id, old_vip, new_vip, **kwargs):
         vip_activies.append(40007)
     if has_activity(40008):
         vip_activies.append(40008)
+    if has_activity(50006):
+        vip_activies.append(50006)
 
     if vip_activies:
         ActivityStatic(char_id).send_update_notify(activity_ids=vip_activies)
+
+    ae = ActivityEntry(char_id, 50006)
+    if ae and ae.is_valid():
+        ae.enable(new_vip)
+        ActivityStatic(char_id).send_update_notify(activity_ids=[50006])
 
 vip_changed_signal.connect(
     _vip_change,
