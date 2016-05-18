@@ -27,7 +27,7 @@ from core.functionopen import FunctionOpen
 from core.levy import Levy
 from core.attachment import Attachment
 from core.purchase import BasePurchaseAction
-from core.activity import ActivityStatic
+from core.activity import ActivityStatic, ActivityEntry
 
 from core.horse import HorseFreeTimesManager, Horse
 
@@ -138,13 +138,17 @@ def login_notify(char_id):
     affairs.send_city_notify()
     affairs.send_hang_notify()
 
-    ActivityStatic(char_id).send_notify()
-
     HorseFreeTimesManager(char_id).send_notify()
     Horse(char_id).send_notify()
 
     union.send_notify(char_id)
 
+
+    ae = ActivityEntry(char_id, 50006)
+    if ae.is_valid():
+        ae.enable(ae.get_current_value(char_id))
+
+    ActivityStatic(char_id).send_notify()
+
     # mail notify 要放在最后，因为 其他功能初始化时可能会产生登录邮件
     Mail(char_id).send_notify()
-
