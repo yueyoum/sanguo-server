@@ -19,6 +19,7 @@ from core.msgfactory import create_character_infomation_message
 from core.msgpipe import publish_to_char
 from core.times_log import TimesLogArena, TimesLogArenaWin
 from core.activity import ActivityEntry
+from core.attachment import make_standard_drop_from_template
 
 from preset.data import VIP_MAX_LEVEL
 from utils.checkers import func_opened
@@ -297,6 +298,7 @@ class Arena(object):
         t = Task(self.char_id)
         t.trig(2)
 
+        drop = make_standard_drop_from_template()
         adding_score = 0
         if msg.self_win:
             achievement = Achievement(self.char_id)
@@ -315,13 +317,19 @@ class Arena(object):
 
             TimesLogArenaWin(self.char_id).inc()
 
+            ae = ActivityEntry(self.char_id, 50004)
+            if ae and ae.is_valid():
+                drop = ae.get_additional_drop()
+                Resource(self.char_id, "Arena Win").add(**drop)
+
         TimesLogArena(self.char_id).inc()
         ae = ActivityEntry(self.char_id, 40006)
         if ae:
             ae.trig()
 
         self.send_notify()
-        return msg, adding_score
+        drop['stuffs'].append((1001, adding_score))
+        return msg, drop
 
 
     def be_beaten(self, self_score, rival_score, win, rival_id):

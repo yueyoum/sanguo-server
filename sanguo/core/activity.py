@@ -1394,6 +1394,12 @@ class Activity50003(ActivityBase, ActivityTriggerManually):
         resource = Resource(char_id, "Activity Get Reward 50003")
         resource.check_and_remove(stuffs=[(self.STUFF_ID, value)])
 
+
+@activities.register(50004)
+class Activity50004(ActivityBase, ActivityTriggerAdditionalDrop):
+    def get_current_value(self, char_id):
+        return 0
+
 @activities.register(50005)
 class Activity50005(ActivityBase):
     # vip 大杂烩 1

@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from core.arena import Arena
-from core.attachment import make_standard_drop_from_template, standard_drop_to_attachment_protomsg
+from core.attachment import standard_drop_to_attachment_protomsg
 from utils.decorate import message_response, operate_guard, function_check
 from preset.settings import OPERATE_INTERVAL_ARENA_PANEL
 
 from libs import pack_msg
-from protomsg import ArenaPanelResponse, ArenaResponse
+from protomsg import ArenaResponse
 
 
 __author__ = 'Wang Chao'
@@ -27,14 +27,10 @@ def arena_battle(request):
     char_id = request._char_id
 
     arena = Arena(char_id)
-    msg, adding_score = arena.battle()
+    msg, drop = arena.battle()
 
     response = ArenaResponse()
     response.ret = 0
     response.battle.MergeFrom(msg)
-
-    drop = make_standard_drop_from_template()
-    drop['stuffs'] = [(1001, adding_score)]
-
     response.drop.MergeFrom(standard_drop_to_attachment_protomsg(drop))
     return pack_msg(response)
