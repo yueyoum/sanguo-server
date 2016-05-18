@@ -206,9 +206,9 @@ class Equipment(MessageEquipmentMixin):
         TimesLogEquipStepUp(self.char_id).inc()
 
         if self.equip.step == 4:
-            ae  =ActivityEntry(self.char_id, 50001)
+            ae = ActivityEntry(self.char_id, 50001)
             if ae:
-                ae.enable(self.step)
+                ae.enable(self.equip.step)
                 ActivityStatic(self.char_id).send_update_notify(activity_ids=[50001])
 
         return stuff_needs

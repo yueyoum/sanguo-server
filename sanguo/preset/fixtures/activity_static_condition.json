@@ -1210,8 +1210,8 @@
         "icon_two_type": 9, 
         "icon_one_type": 3, 
         "condition_value": 1000, 
-        "icon_two_id": 0, 
-        "icon_two_amount": 3021, 
+        "icon_two_id": 3021, 
+        "icon_two_amount": 1, 
         "icon_three_type": null
     }
 },
@@ -1542,7 +1542,7 @@
     "pk": 50002, 
     "model": "activity.activitystaticcondition", 
     "fields": {
-        "icon_three_id": 3015, 
+        "icon_three_id": 3019, 
         "icon_one_id": 1, 
         "package": 400016, 
         "des": "\u6210\u529f\u62db\u964d15\u6b21", 
@@ -1591,7 +1591,7 @@
         "icon_one_type": 4, 
         "condition_value": 4, 
         "icon_two_id": 92, 
-        "icon_two_amount": 1, 
+        "icon_two_amount": 100, 
         "icon_three_type": null
     }
 },

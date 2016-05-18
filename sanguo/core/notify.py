@@ -145,7 +145,7 @@ def login_notify(char_id):
 
 
     ae = ActivityEntry(char_id, 50006)
-    if ae.is_valid():
+    if ae and ae.is_valid():
         ae.enable(ae.get_current_value(char_id))
 
     ActivityStatic(char_id).send_notify()
