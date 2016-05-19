@@ -8147,9 +8147,9 @@
     "400041": {
         "gems": [], 
         "horses": [], 
-        "sycee": 0, 
+        "sycee": 1000, 
         "heros": [], 
-        "gold": 1000, 
+        "gold": 0, 
         "souls": [
             {
                 "amount": 100, 
@@ -8166,9 +8166,9 @@
     "400042": {
         "gems": [], 
         "horses": [], 
-        "sycee": 0, 
+        "sycee": 2000, 
         "heros": [], 
-        "gold": 2000, 
+        "gold": 0, 
         "souls": [
             {
                 "amount": 180, 
