@@ -216,6 +216,8 @@ class Affairs(_GetRealGoldMixin):
         return HangObject(self.mongo_affairs.hang_city_id, self.mongo_affairs.hang_start_at, self.mongo_affairs.logs)
 
     def get_drop(self, passed_time=None, multi=1):
+        ae = ActivityEntry(self.char_id, 60001)
+
         ho = self.get_hang_obj()
         battle_data = BATTLES[self.mongo_affairs.hang_city_id]
 
@@ -238,6 +240,9 @@ class Affairs(_GetRealGoldMixin):
         reward_gold = passed_time / 15 * battle_data.normal_gold
         reward_gold = self.get_real_gold(reward_gold, self.mongo_affairs.logs)
 
+        if ae and ae.is_valid():
+            reward_gold *= 2
+
         reward_exp = passed_time / 15 * battle_data.normal_exp
 
         if battle_data.normal_drop:
@@ -250,6 +255,8 @@ class Affairs(_GetRealGoldMixin):
             drop_time_adjusted = max(int(passed_time * 0.25), drop_time)
 
             multi = int(drop_time_adjusted/15*multi)
+            if ae and ae.is_valid():
+                multi *= 2
             drops = get_drop([int(i) for i in battle_data.normal_drop.split(',')], multi=multi)
         else:
             drops = make_standard_drop_from_template()

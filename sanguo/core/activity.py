@@ -1418,6 +1418,29 @@ class Activity50006(ActivityEnableCondition, ActivityBase):
         return get_char_property(char_id, 'vip')
 
 
+#################################
+@activities.register(60000)
+class Activity60000(ActivityBase, ActivityTriggerManually):
+    # 道具 丹书铁卷  stuff_id = 3027
+    STUFF_ID = 3027
+
+    def get_current_value(self, char_id):
+        from core.item import Item
+        item = Item(char_id)
+        return item.stuff_amount(self.STUFF_ID)
+
+    def get_reward_check(self, char_id, condition_id):
+        value = ACTIVITY_STATIC_CONDITIONS[condition_id].condition_value
+        resource = Resource(char_id, "Activity Get Reward 60000")
+        resource.check_and_remove(stuffs=[(self.STUFF_ID, value)])
+
+
+@activities.register(60001)
+class Activity60001(ActivityBase):
+    def get_current_value(self, char_id):
+        return 0
+
+
 # 活动类的统一入口
 class ActivityEntry(object):
     def __new__(cls, char_id, activity_id):
