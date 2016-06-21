@@ -665,7 +665,7 @@
     "fields": {
         "category": 2, 
         "interval_days": 0, 
-        "name": "\u7ade\u6280\u573a\u6bd4\u6b6650\u6b21", 
+        "name": "\u7ade\u6280\u573a\u6bd4\u6b6630\u6b21", 
         "continued_days": 15, 
         "current_des": "\u5f53\u524d\u5df2\u6bd4\u6b66\uff1a${0}", 
         "start_time": "2016-06-21", 
